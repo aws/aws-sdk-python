@@ -1,0 +1,88 @@
+---
+name: 🚀 Feature Request
+description: Suggest an idea for this project
+title: "(short issue description)"
+labels: [feature-request, needs-triage]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This SDK is in **Developer Preview**, and feedback on what it should
+        support before general availability is especially welcome.
+
+        Requests to add a service client are tracked separately from feature
+        requests — please say which service you need and we will route it.
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the feature
+      description: A clear and concise description of the feature you are proposing.
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: |
+        Why do you need this feature? For example: "I'm always frustrated when..."
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: |
+        Suggest how to implement the addition or change. Please include prototype/workaround/sketch/reference implementation.
+    validations:
+      required: false
+  - type: textarea
+    id: other
+    attributes:
+      label: Other Information
+      description: |
+        Any alternative solutions or features you considered, a more detailed explanation, tracebacks, related issues, links for context, etc.
+    validations:
+      required: false
+  - type: checkboxes
+    id: ack
+    attributes:
+      label: Acknowledgements
+      options:
+        - label: I may be able to implement this feature request
+          required: false
+        - label: This feature might incur a breaking change
+          required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      description: Which part of the SDK would this feature apply to? Select all that apply.
+      multiple: true
+      options:
+        - service client (generated client under clients/)
+        - new service client (a service not yet supported)
+        - credentials / authentication
+        - installation or packaging
+        - code generation
+        - documentation
+        - other / not sure
+    validations:
+      required: true
+
+  - type: input
+    id: packages
+    attributes:
+      label: Relevant package(s)
+      description: 'Which packages this applies to, if any. For example: `aws-sdk-dynamodb`, `aws-credentials-sts`.'
+    validations:
+      required: false
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python version used
+      description: Output of `python --version`
+    validations:
+      required: false

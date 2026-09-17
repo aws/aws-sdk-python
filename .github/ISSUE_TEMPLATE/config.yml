@@ -1,0 +1,12 @@
+---
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 General Question
+    url: https://github.com/aws/aws-sdk-python/discussions/categories/q-a
+    about: Please ask and answer questions as a discussion thread
+  - name: 💡 Developer Preview Feedback
+    url: https://github.com/aws/aws-sdk-python/discussions/categories/ideas
+    about: Open-ended feedback and design discussion to help shape the GA release
+  - name: 🐍 Boto3 Issue
+    url: https://github.com/boto/boto3/issues
+    about: For issues with Boto3, the generally available AWS SDK for Python

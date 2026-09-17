@@ -1,0 +1,117 @@
+---
+name: "🐛 Bug Report"
+description: Report a bug
+title: "(short issue description)"
+labels: [bug, needs-triage]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This SDK is in **Developer Preview** and is not intended for production
+        use. Please confirm you are on the latest version of the affected
+        package before filing.
+
+        If your question is about Boto3 rather than this SDK, please file it in
+        [boto/boto3](https://github.com/boto/boto3/issues) instead.
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: What is the problem? A clear and concise description of the bug.
+    validations:
+      required: true
+  - type: checkboxes
+    id: regression
+    attributes:
+      label: Regression Issue
+      description: What is a regression? If it worked in a previous version but doesn't in the latest version, it's considered a regression. In this case, please provide specific version numbers in the report.
+      options:
+        - label: Select this option if this issue appears to be a regression.
+          required: false
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: |
+        What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current Behavior
+      description: |
+        What actually happened?
+
+        Please include full errors, uncaught exceptions, tracebacks, and relevant logs.
+        If service responses are relevant, please include the HTTP request and
+        response with any credentials, account IDs, or other sensitive data redacted.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      description: |
+        Provide a self-contained, concise snippet of code that can be used to reproduce the issue.
+        For more complex issues, provide a repo with the smallest sample that reproduces the bug.
+
+        Avoid including business logic or unrelated code, it makes diagnosis more difficult.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Possible Solution
+      description: |
+        Suggest a fix/reason for the bug
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Information/Context
+      description: |
+        Anything else that might be relevant for troubleshooting this bug. Providing context helps us come up with a solution that is most useful in the real world.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      description: Which part of the SDK is affected? Select all that apply.
+      multiple: true
+      options:
+        - service client (generated client under clients/)
+        - credentials / authentication
+        - installation or packaging
+        - code generation
+        - documentation
+        - other / not sure
+    validations:
+      required: true
+
+  - type: input
+    id: packages
+    attributes:
+      label: Affected package(s)
+      description: 'Which packages are involved, with versions. For example: `aws-sdk-dynamodb 0.1.0`, `aws-credentials-sts 0.1.0`.'
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python version used
+      description: Output of `python --version`
+    validations:
+      required: true
+
+  - type: input
+    id: operating-system
+    attributes:
+      label: Operating System and version
+    validations:
+      required: true
