@@ -30,6 +30,7 @@ body:
       multiple: true
       options:
         - API Reference (https://docs.aws.amazon.com/sdk-for-python/v1/reference/)
+        - Developer Guide (https://docs.aws.amazon.com/sdk-for-python/v1/guide/)
         - README or CONTRIBUTING
         - docstrings in generated client code
         - other / not sure
