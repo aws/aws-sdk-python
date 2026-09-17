@@ -1,4 +1,4 @@
-## AWS SDK for Python (Developer Preview)
+## AWS SDK for Python (Version 4)
 [![Apache 2 licensed][apache-badge]][apache-url]
 
 [apache-badge]: https://img.shields.io/badge/license-APACHE2-blue.svg
@@ -7,11 +7,11 @@
 > [!WARNING]
 > **Developer Preview — Not for production use**
 >
-> This SDK is in **Developer Preview** and is intended for evaluation and testing in pre-production environments only. Do not use it for production workloads. APIs and behavior might change before general availability.
+> The SDK for Python (Version 4) is in **Developer Preview** and is intended for evaluation and testing in pre-production environments only. Do not use it for production workloads. APIs and behavior might change before general availability.
 >
 > **For production deployments, use [Boto3](https://github.com/boto/boto3)** — the established, generally available AWS SDK for Python with full coverage of all AWS services.
 
-This repository contains the next-generation AWS SDK for Python, rebuilt from
+This repository contains the next-generation AWS SDK for Python (Version 4), rebuilt from
 the ground up with an async-first, modular architecture. These new clients allow
 you to interact with select AWS services using Python's native `async`/`await`
 functionality. Unlike Boto3, these clients are distributed per-service, leaving
@@ -26,16 +26,16 @@ you the option to install only what fits your needs.
 
 ### When to use this SDK vs. Boto3
 
-| | **This SDK (Developer Preview)** | **[Boto3](https://github.com/boto/boto3) (GA — Production Ready)** |
+| | **AWS SDK for Python (Version 4)** | **[Boto3](https://github.com/boto/boto3)** |
 | --- | --- | --- |
-| Release status | Developer Preview | General Availability |
+| Release status | Developer Preview | General Availability (Production ready) |
 | Production use | Not recommended | Yes |
 | Architecture | Async-first, modular per-service packages | Synchronous, monolithic package |
 | Service coverage | 24 services (expanding) | All AWS services |
 
 **Choose [Boto3](https://github.com/boto/boto3) if you** need production stability, full AWS service coverage, synchronous workloads, or features like paginators, waiters, and presigned URLs.
 
-**Choose this SDK if you** are evaluating native async capabilities, building high-throughput async prototypes, working with streaming services in test environments, or want to provide feedback to shape the GA release.
+**Choose this AWS SDK for Python (Version 4) if you** are evaluating native async capabilities, building high-throughput async prototypes, working with streaming services in test environments, or want to provide feedback to shape the GA release.
 
 ## Installation
 
@@ -88,7 +88,7 @@ aws_session_token = YOUR_SESSION_TOKEN
 ```
 
 For the credential sources that the Developer Preview supports, see
-[Credential providers](https://docs.aws.amazon.com/sdk-for-python/v1/guide/credential-providers.html)
+[Credential providers](https://docs.aws.amazon.com/sdk-for-python/v4/guide/credential-providers.html)
 in the developer guide.
 
 Then, set up a default Region (in e.g. `~/.aws/config`):
@@ -146,8 +146,8 @@ async def create_client() -> AsyncBedrockRuntimeClient:
 ## Resources
 
 + [SDK Homepage](https://aws.amazon.com/sdk-for-python/)
-+ [Developer Guide](https://docs.aws.amazon.com/sdk-for-python/v1/guide/welcome.html)
-+ [API Reference](https://docs.aws.amazon.com/sdk-for-python/v1/reference/)
++ [Developer Guide](https://docs.aws.amazon.com/sdk-for-python/v4/guide/welcome.html)
++ [API Reference](https://docs.aws.amazon.com/sdk-for-python/v4/reference/)
 
 ## Feedback
 
