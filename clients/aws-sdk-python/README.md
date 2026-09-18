@@ -28,7 +28,7 @@ python -m pip install "aws-sdk-python[all]"
 
 ## Documentation
 
-- [API Reference](https://docs.aws.amazon.com/sdk-for-python/v1/reference/clients/) -
+- [API Reference](https://docs.aws.amazon.com/sdk-for-python/v4/reference/clients/) -
   the available clients, operations, and types.
-- [Developer Guide](https://docs.aws.amazon.com/sdk-for-python/v1/guide/) -
+- [Developer Guide](https://docs.aws.amazon.com/sdk-for-python/v4/guide/) -
   configuration, authentication, and usage of the AWS SDK for Python v4.
