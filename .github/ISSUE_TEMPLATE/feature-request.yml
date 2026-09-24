@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        This SDK is in **Developer Preview**, and feedback on what it should
+        This SDK is **experimental**, and feedback on what it should
         support before general availability is especially welcome.
 
         Requests to add a service client are tracked separately from feature

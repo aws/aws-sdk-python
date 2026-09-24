@@ -3,7 +3,7 @@
 The AWS SDK for Python v4 provides asynchronous clients for supported AWS services.
 Each service has its own package.
 
-!!! warning "Developer Preview: Not for production use"
+!!! warning "Experimental: Not for production use"
 
     Use this SDK for evaluation and pre-production testing. Interfaces and
     behavior may change before general availability. Use

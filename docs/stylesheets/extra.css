@@ -13,7 +13,7 @@ p:has(span.breadcrumb) {
   content: url('../assets/aws-logo-dark.svg');
 }
 
-/* Keep the Developer Preview announcement prominent across the docs site. */
+/* Keep the experimental status announcement prominent across the docs site. */
 .md-banner {
   background-color: #ffe0a3;
   border-bottom: 1px solid #d98b00;

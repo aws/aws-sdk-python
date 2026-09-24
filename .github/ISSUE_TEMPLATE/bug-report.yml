@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        This SDK is in **Developer Preview** and is not intended for production
+        This SDK is **experimental** and is not intended for production
         use. Please confirm you are on the latest version of the affected
         package before filing.
 
