@@ -1,7 +1,24 @@
 DOCS_PORT ?= 8000
 PYTHON_VERSION := 3.12
 
-.PHONY: docs docs-serve docs-clean docs-install docs-lock venv
+# Colocated smithy-python checkout that provides the codegen jars.
+SMITHY_PYTHON ?= ../smithy-python
+
+.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen publish-codegen
+
+# Publishes the smithy-python codegen jars to the local Maven cache so `gen`
+# can resolve them. Run once, and again whenever the generator changes.
+publish-codegen:
+	cd $(SMITHY_PYTHON)/codegen && ./gradlew :core:publishToMavenLocal :aws:core:publishToMavenLocal
+
+# Regenerate one client from its service model: `make gen s3`.
+# Accepts s3, aws_sdk_s3, aws-sdk-s3, or a hyphenated model name.
+gen:
+	SMITHY_PYTHON=$(SMITHY_PYTHON) uv run python codegen/gen_client.py $(filter-out gen,$(MAKECMDGOALS))
+
+# Swallow the client-name argument so make does not treat it as a target.
+%:
+	@:
 
 venv:
 	uv venv --python $(PYTHON_VERSION)
