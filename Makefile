@@ -1,7 +1,26 @@
 DOCS_PORT ?= 8000
 PYTHON_VERSION := 3.12
 
-.PHONY: docs docs-serve docs-clean docs-install docs-lock venv
+# Colocated smithy-python checkout that provides the codegen jars.
+SMITHY_PYTHON ?= ../smithy-python
+
+.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen publish-codegen
+
+# Publishes the smithy-python codegen jars to the local Maven cache so `gen`
+# can resolve them. Run once, and again whenever the generator changes.
+publish-codegen:
+	cd $(SMITHY_PYTHON)/codegen && ./gradlew :core:publishToMavenLocal :aws:core:publishToMavenLocal
+
+# Regenerate one client from its service model: `make gen dynamodb`.
+# Accepts dynamodb, aws_sdk_dynamodb, aws-sdk-dynamodb, or a hyphenated model name.
+gen:
+	SMITHY_PYTHON=$(SMITHY_PYTHON) uv run python codegen/gen_client.py $(filter-out gen,$(MAKECMDGOALS))
+
+# Swallow the client-name argument so make does not treat it as a target.
+# Scoped to `gen` so it does not mask typos in unrelated commands.
+ifeq (gen,$(firstword $(MAKECMDGOALS)))
+$(eval $(filter-out gen,$(MAKECMDGOALS)):;@:)
+endif
 
 venv:
 	uv venv --python $(PYTHON_VERSION)

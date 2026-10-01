@@ -1,0 +1,4 @@
+.gradle/
+build/
+smithy-build.json
+__pycache__/
