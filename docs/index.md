@@ -85,14 +85,13 @@ import asyncio
 
 from aws_sdk_dynamodb.client import AsyncDynamoDBClient
 from aws_sdk_dynamodb.config import AsyncDynamoDBConfig
-from aws_sdk_dynamodb.models import ListTablesInput
 
 
 async def main():
     config = await AsyncDynamoDBConfig.resolve(region="us-east-1")
 
     async with AsyncDynamoDBClient(config=config) as client:
-        response = await client.list_tables(input=ListTablesInput(limit=10))
+        response = await client.list_tables(limit=10)
         for table in response.table_names or []:
             print(table)
 

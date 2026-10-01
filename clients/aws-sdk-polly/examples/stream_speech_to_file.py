@@ -48,7 +48,6 @@ from aws_sdk_polly.models import (
     StartSpeechSynthesisStreamActionStreamTextEvent,
     StartSpeechSynthesisStreamEventStream,
     StartSpeechSynthesisStreamEventStreamAudioEvent,
-    StartSpeechSynthesisStreamInput,
     TextEvent,
 )
 
@@ -145,12 +144,10 @@ async def main():
         )
     ) as client:
         stream = await client.start_speech_synthesis_stream(
-            input=StartSpeechSynthesisStreamInput(
-                engine="generative",
-                output_format="mp3",
-                sample_rate=str(SAMPLE_RATE),
-                voice_id=args.voice,
-            )
+            engine="generative",
+            output_format="mp3",
+            sample_rate=str(SAMPLE_RATE),
+            voice_id=args.voice,
         )
 
         _, output_stream = await stream.await_output()

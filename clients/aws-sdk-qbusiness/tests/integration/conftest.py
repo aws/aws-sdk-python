@@ -15,13 +15,6 @@ import pytest
 
 from aws_sdk_qbusiness.models import (
     ApplicationStatus,
-    CreateApplicationInput,
-    CreateIndexInput,
-    CreateRetrieverInput,
-    DeleteApplicationInput,
-    GetApplicationInput,
-    GetIndexInput,
-    GetRetrieverInput,
     IndexStatus,
     NativeIndexConfiguration,
     RetrieverConfigurationNativeIndexConfiguration,
@@ -55,9 +48,7 @@ async def _wait_for_application_active(client, application_id: str) -> None:
     """
     deadline = asyncio.get_running_loop().time() + _POLL_TIMEOUT_SECONDS
     while asyncio.get_running_loop().time() < deadline:
-        response = await client.get_application(
-            input=GetApplicationInput(application_id=application_id)
-        )
+        response = await client.get_application(application_id=application_id)
         if response.status == ApplicationStatus.ACTIVE:
             return
         if response.status in {ApplicationStatus.FAILED, ApplicationStatus.DELETING}:
@@ -79,7 +70,7 @@ async def _wait_for_index_active(client, application_id: str, index_id: str) -> 
     deadline = asyncio.get_running_loop().time() + _POLL_TIMEOUT_SECONDS
     while asyncio.get_running_loop().time() < deadline:
         response = await client.get_index(
-            input=GetIndexInput(application_id=application_id, index_id=index_id)
+            application_id=application_id, index_id=index_id
         )
         if response.status == IndexStatus.ACTIVE:
             return
@@ -104,9 +95,7 @@ async def _wait_for_retriever_active(
     deadline = asyncio.get_running_loop().time() + _POLL_TIMEOUT_SECONDS
     while asyncio.get_running_loop().time() < deadline:
         response = await client.get_retriever(
-            input=GetRetrieverInput(
-                application_id=application_id, retriever_id=retriever_id
-            )
+            application_id=application_id, retriever_id=retriever_id
         )
         if response.status == RetrieverStatus.ACTIVE:
             return
@@ -138,12 +127,10 @@ async def _create_qbusiness_app(
     while True:
         try:
             response = await client.create_application(
-                input=CreateApplicationInput(
-                    display_name=app_name,
-                    identity_type="ANONYMOUS",
-                    tags=_TAGS,
-                    client_token=str(uuid.uuid4()),
-                )
+                display_name=app_name,
+                identity_type="ANONYMOUS",
+                tags=_TAGS,
+                client_token=str(uuid.uuid4()),
             )
             break
         except ThrottlingException:
@@ -155,28 +142,24 @@ async def _create_qbusiness_app(
     await _wait_for_application_active(client, application_id)
 
     response = await client.create_index(
-        input=CreateIndexInput(
-            application_id=application_id,
-            display_name=index_name,
-            tags=_TAGS,
-            client_token=str(uuid.uuid4()),
-        )
+        application_id=application_id,
+        display_name=index_name,
+        tags=_TAGS,
+        client_token=str(uuid.uuid4()),
     )
     index_id = response.index_id
     assert index_id is not None
     await _wait_for_index_active(client, application_id, index_id)
 
     response = await client.create_retriever(
-        input=CreateRetrieverInput(
-            application_id=application_id,
-            display_name=retriever_name,
-            type=RetrieverType.NATIVE_INDEX,
-            configuration=RetrieverConfigurationNativeIndexConfiguration(
-                value=NativeIndexConfiguration(index_id=index_id)
-            ),
-            tags=_TAGS,
-            client_token=str(uuid.uuid4()),
-        )
+        application_id=application_id,
+        display_name=retriever_name,
+        type=RetrieverType.NATIVE_INDEX,
+        configuration=RetrieverConfigurationNativeIndexConfiguration(
+            value=NativeIndexConfiguration(index_id=index_id)
+        ),
+        tags=_TAGS,
+        client_token=str(uuid.uuid4()),
     )
     retriever_id = response.retriever_id
     assert retriever_id is not None
@@ -194,9 +177,7 @@ async def _delete_qbusiness_app(client, application_id: str | None) -> None:
     """
     if not application_id:
         return
-    await client.delete_application(
-        input=DeleteApplicationInput(application_id=application_id)
-    )
+    await client.delete_application(application_id=application_id)
 
 
 @pytest.fixture(scope="session")

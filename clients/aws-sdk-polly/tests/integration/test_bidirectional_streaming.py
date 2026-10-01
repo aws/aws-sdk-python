@@ -21,7 +21,6 @@ from aws_sdk_polly.models import (
     StartSpeechSynthesisStreamEventStreamThrottlingException,
     StartSpeechSynthesisStreamEventStreamUnknown,
     StartSpeechSynthesisStreamEventStreamValidationException,
-    StartSpeechSynthesisStreamInput,
     StartSpeechSynthesisStreamOutput,
     TextEvent,
 )
@@ -101,12 +100,10 @@ async def test_start_speech_synthesis_stream() -> None:
         REGION, transport=AWSCRTHTTPClient()
     ) as client:
         stream = await client.start_speech_synthesis_stream(
-            input=StartSpeechSynthesisStreamInput(
-                engine=ENGINE,
-                output_format=OUTPUT_FORMAT,
-                sample_rate=SAMPLE_RATE,
-                voice_id=VOICE_ID,
-            )
+            engine=ENGINE,
+            output_format=OUTPUT_FORMAT,
+            sample_rate=SAMPLE_RATE,
+            voice_id=VOICE_ID,
         )
 
         results = await asyncio.gather(_send_text(stream), _receive_audio(stream))

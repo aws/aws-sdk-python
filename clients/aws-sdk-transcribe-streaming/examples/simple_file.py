@@ -34,10 +34,7 @@ from smithy_aws_core.identity import EnvironmentCredentialsResolver
 from smithy_core.aio.interfaces.eventstream import EventPublisher, EventReceiver
 from smithy_http.aio.crt import AWSCRTHTTPClient
 
-from aws_sdk_transcribe_streaming.client import (
-    AsyncTranscribeStreamingClient,
-    StartStreamTranscriptionInput,
-)
+from aws_sdk_transcribe_streaming.client import AsyncTranscribeStreamingClient
 from aws_sdk_transcribe_streaming.config import AsyncTranscribeStreamingConfig
 from aws_sdk_transcribe_streaming.models import (
     AudioEvent,
@@ -130,11 +127,9 @@ async def main():
     ) as client:
         # Start a streaming transcription session
         stream = await client.start_stream_transcription(
-            input=StartStreamTranscriptionInput(
-                language_code="en-US",
-                media_sample_rate_hertz=SAMPLE_RATE,
-                media_encoding="pcm",
-            )
+            language_code="en-US",
+            media_sample_rate_hertz=SAMPLE_RATE,
+            media_encoding="pcm",
         )
 
         # Get the output stream for receiving transcription results

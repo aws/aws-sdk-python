@@ -231,9 +231,9 @@ async def test_assume_role_request_uses_role_arn() -> None:
 
     await resolver.get_identity(properties={})
 
-    request = sts_client.assume_role.call_args.args[0]
-    assert request.role_arn == ROLE_ARN
-    assert request.role_session_name == "test-session-name"
+    request = sts_client.assume_role.call_args.kwargs
+    assert request["role_arn"] == ROLE_ARN
+    assert request["role_session_name"] == "test-session-name"
 
 
 async def test_assume_role_request_forwards_external_id() -> None:
@@ -246,8 +246,8 @@ async def test_assume_role_request_forwards_external_id() -> None:
 
     await resolver.get_identity(properties={})
 
-    request = sts_client.assume_role.call_args.args[0]
-    assert request.external_id == "my-external-id"
+    request = sts_client.assume_role.call_args.kwargs
+    assert request["external_id"] == "my-external-id"
 
 
 async def test_assume_role_request_forwards_duration_seconds() -> None:
@@ -260,8 +260,8 @@ async def test_assume_role_request_forwards_duration_seconds() -> None:
 
     await resolver.get_identity(properties={})
 
-    request = sts_client.assume_role.call_args.args[0]
-    assert request.duration_seconds == 3600
+    request = sts_client.assume_role.call_args.kwargs
+    assert request["duration_seconds"] == 3600
 
 
 async def test_role_session_name_generated_when_unset() -> None:
@@ -272,8 +272,8 @@ async def test_role_session_name_generated_when_unset() -> None:
 
     await resolver.get_identity(properties={})
 
-    request = sts_client.assume_role.call_args.args[0]
-    assert request.role_session_name.startswith("aws-sdk-python-")
+    request = sts_client.assume_role.call_args.kwargs
+    assert request["role_session_name"].startswith("aws-sdk-python-")
 
 
 async def test_role_session_name_stable_across_refreshes() -> None:
@@ -290,7 +290,7 @@ async def test_role_session_name_stable_across_refreshes() -> None:
     await resolver.get_identity(properties={})
 
     first, second = sts_client.assume_role.call_args_list
-    assert first.args[0].role_session_name == second.args[0].role_session_name
+    assert first.kwargs["role_session_name"] == second.kwargs["role_session_name"]
 
 
 # ---------------------------------------------------------------------------

@@ -5,7 +5,6 @@
 
 from aws_sdk_bedrock_runtime.models import (
     ContentBlockText,
-    ConverseInput,
     ConverseOperationOutput,
     ConverseOutputMessage,
     Message,
@@ -18,7 +17,7 @@ async def test_converse() -> None:
     async with await create_bedrock_client("us-west-2") as bedrock_client:
         input_message = Message(role="user", content=[ContentBlockText(value=MESSAGE)])
         response = await bedrock_client.converse(
-            ConverseInput(model_id=MODEL_ID, messages=[input_message])
+            model_id=MODEL_ID, messages=[input_message]
         )
 
         assert isinstance(response, ConverseOperationOutput)

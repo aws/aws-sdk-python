@@ -103,12 +103,11 @@ to verify your setup:
 import asyncio
 
 from aws_sdk_sts.client import AsyncSTSClient
-from aws_sdk_sts.models import GetCallerIdentityInput
 
 
 async def main():
     async with AsyncSTSClient() as client:
-        response = await client.get_caller_identity(GetCallerIdentityInput())
+        response = await client.get_caller_identity()
         print(f"Account: {response.account}")
         print(f"Arn: {response.arn}")
 

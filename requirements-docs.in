@@ -1,2 +1,4 @@
 mkdocstrings[python]~=1.0.4
 zensical~=0.0.53
+# mkdocstrings uses ruff to wrap long operation signatures.
+ruff~=0.16.9
