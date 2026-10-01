@@ -11,14 +11,16 @@ SMITHY_PYTHON ?= ../smithy-python
 publish-codegen:
 	cd $(SMITHY_PYTHON)/codegen && ./gradlew :core:publishToMavenLocal :aws:core:publishToMavenLocal
 
-# Regenerate one client from its service model: `make gen s3`.
-# Accepts s3, aws_sdk_s3, aws-sdk-s3, or a hyphenated model name.
+# Regenerate one client from its service model: `make gen dynamodb`.
+# Accepts dynamodb, aws_sdk_dynamodb, aws-sdk-dynamodb, or a hyphenated model name.
 gen:
 	SMITHY_PYTHON=$(SMITHY_PYTHON) uv run python codegen/gen_client.py $(filter-out gen,$(MAKECMDGOALS))
 
 # Swallow the client-name argument so make does not treat it as a target.
-%:
-	@:
+# Scoped to `gen` so it does not mask typos in unrelated commands.
+ifeq (gen,$(firstword $(MAKECMDGOALS)))
+$(eval $(filter-out gen,$(MAKECMDGOALS)):;@:)
+endif
 
 venv:
 	uv venv --python $(PYTHON_VERSION)

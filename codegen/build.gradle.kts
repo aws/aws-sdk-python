@@ -13,8 +13,29 @@ repositories {
     mavenCentral()
 }
 
-val smithyVersion = "1.73.0"
-val codegenVersion = "0.5.1"
+// Read the codegen and smithy versions from the colocated smithy-python
+// checkout so this harness tracks whatever generator you build against,
+// rather than a literal that silently rots when smithy-python bumps.
+// Falls back to the last-known values if the checkout can't be read.
+val smithyPython = file(System.getenv("SMITHY_PYTHON") ?: "../smithy-python")
+
+fun readVersion(file: File, regex: Regex, fallback: String): String =
+    if (file.exists()) {
+        file.readLines().firstNotNullOfOrNull { regex.find(it)?.groupValues?.get(1) } ?: fallback
+    } else {
+        fallback
+    }
+
+val codegenVersion = readVersion(
+    smithyPython.resolve("codegen/build.gradle.kts"),
+    Regex("""version\s*=\s*"([^"]+)""""),
+    "0.5.1",
+)
+val smithyVersion = readVersion(
+    smithyPython.resolve("codegen/gradle/libs.versions.toml"),
+    Regex("""^smithy\s*=\s*"([^"]+)""""),
+    "1.73.0",
+)
 
 dependencies {
     // The build plugin (`python-client-codegen`) and AWS customizations must be

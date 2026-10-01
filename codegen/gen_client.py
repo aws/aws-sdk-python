@@ -2,7 +2,7 @@
 """Generate one aws-sdk-python client from its service model via smithy-python codegen.
 
 Usage: python codegen/gen_client.py <name>
-  <name> accepts s3, aws_sdk_s3, aws-sdk-s3, or bedrock-runtime forms.
+  <name> accepts dynamodb, aws_sdk_dynamodb, aws-sdk-dynamodb, or bedrock-runtime forms.
 """
 
 import json
