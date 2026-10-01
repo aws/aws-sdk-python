@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "Amazon GuardDuty now supports custom detection rules, including APIs to manage rule associations and organization-level configurations."
+}

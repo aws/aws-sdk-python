@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "Adding support for Sequence Activities in GuardDuty Findings."
+}
