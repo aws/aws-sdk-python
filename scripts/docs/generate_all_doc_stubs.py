@@ -134,6 +134,8 @@ def _generate_doc_stub(
             str(client_dir / "src" / client_dir.name.replace("-", "_")),
             "--output-dir",
             str(output_dir),
+            "--service-name",
+            service_name,
         ],
         cwd=client_dir,
     )
