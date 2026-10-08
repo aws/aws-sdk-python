@@ -1,7 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 import json
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, patch
 
 import pytest
 from aws_credentials_http.client import HttpCredentialsClient
@@ -113,7 +113,11 @@ async def test_client_retries() -> None:
     uri = URI(scheme="http", host="169.254.170.2", path="/task")
     http_client.send.side_effect = Exception()
 
-    with pytest.raises(SmithyIdentityError):
-        await client.get_credentials(uri, Fields())
+    with patch(
+        "aws_credentials_http.client.asyncio.sleep", new_callable=AsyncMock
+    ) as sleep:
+        with pytest.raises(SmithyIdentityError):
+            await client.get_credentials(uri, Fields())
 
     assert http_client.send.call_count == 2
+    assert sleep.await_count == 1
