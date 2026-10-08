@@ -62,7 +62,7 @@ TEXT_CHUNK_SIZE = 160
 # A few sentences delivered as separate events to demonstrate incremental
 # input — Polly will start producing audio as soon as the first event arrives.
 DEFAULT_TEXT_CHUNKS = [
-    "Hello! This audio was synthesized using the AWS SDK for Python.",
+    "Hello! This audio was synthesized using the AWS SDK for Python v4.",
     "Polly's bidirectional streaming API returns audio as it is generated, ",
     "which makes it well suited for piping output from a streaming language model.",
 ]

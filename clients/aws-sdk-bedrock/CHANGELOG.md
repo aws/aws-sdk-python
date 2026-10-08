@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.12.0
+
+### API Changes
+* Amazon Bedrock Automated Reasoning policies now accept Unicode letters in identifier names such as type names, type value names, and variable names. You can now author policies in non-English languages using accented or non-Latin characters.
+* New AWS REVIEW mode as supported data retention mode for Bedrock models.
+
+### Enhancements
+* Re-generated with smithy-python 0.6.0
+
+### Dependencies
+* Bump `smithy-core` from `~=0.8.0` to `~=0.9.0`.
+* Bump `smithy-aws-core` from `~=0.11.0` to `~=0.12.0`.
+* Bump `smithy-http` from `~=0.5.0` to `~=0.6.0`.
+
 ## v0.11.0
 
 ### API Changes

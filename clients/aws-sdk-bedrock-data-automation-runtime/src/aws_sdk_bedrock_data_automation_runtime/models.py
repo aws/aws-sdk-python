@@ -9,6 +9,7 @@ from typing import Any, Literal, Self, Union
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import TypeRegistry
 from smithy_core.exceptions import ModeledError, SerializationError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -202,7 +203,7 @@ class AutomationJobStatus(UnknownEnumMixin, StrEnum):
 class GetDataAutomationStatusOutput:
     """Response of GetDataAutomationStatus API."""
 
-    status: AutomationJobStatus | None = None
+    status: str | None = None
     """Job Status."""
 
     error_type: str | None = None
@@ -222,6 +223,16 @@ class GetDataAutomationStatusOutput:
 
     job_duration_in_seconds: int | None = None
     """Job duration in seconds."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_DATA_AUTOMATION_STATUS_OUTPUT, self)
@@ -540,7 +551,7 @@ class Blueprint:
     version: str | None = None
     """Version of blueprint."""
 
-    stage: BlueprintStage | None = None
+    stage: str | None = None
     """Stage of blueprint."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -629,7 +640,7 @@ class DataAutomationConfiguration:
     data_automation_project_arn: str
     """Data automation project arn."""
 
-    stage: DataAutomationStage | None = None
+    stage: str | None = None
     """Data automation stage."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -1365,6 +1376,16 @@ class InvokeDataAutomationAsyncOutput:
     invocation_arn: str
     """ARN of the automation job"""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_INVOKE_DATA_AUTOMATION_ASYNC_OUTPUT, self)
 
@@ -1656,7 +1677,7 @@ class CustomOutputStatus(UnknownEnumMixin, StrEnum):
 class OutputSegment:
     """Results for an output segment"""
 
-    custom_output_status: CustomOutputStatus | None = None
+    custom_output_status: str | None = None
     """Status of blueprint match"""
 
     custom_output: str | None = None
@@ -1757,7 +1778,7 @@ class SemanticModality(UnknownEnumMixin, StrEnum):
 class InvokeDataAutomationOutput:
     """Invoke Data Automation Response"""
 
-    semantic_modality: SemanticModality
+    semantic_modality: str
     """Detected semantic modality"""
 
     output_configuration: OutputConfiguration | None = None
@@ -1765,6 +1786,16 @@ class InvokeDataAutomationOutput:
 
     output_segments: list[OutputSegment] = field(default_factory=list[OutputSegment])
     """List of outputs for each logical sub-doc"""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_INVOKE_DATA_AUTOMATION_OUTPUT, self)
@@ -1948,6 +1979,16 @@ class ListTagsForResourceOutput:
     tags: list[Tag] | None = None
     """List of tags"""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_TAGS_FOR_RESOURCE_OUTPUT, self)
 
@@ -2073,6 +2114,16 @@ class TagResourceInput:
 @dataclass(kw_only=True)
 class TagResourceOutput:
     """Dataclass for TagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TAG_RESOURCE_OUTPUT, self)
@@ -2219,6 +2270,16 @@ class UntagResourceInput:
 @dataclass(kw_only=True)
 class UntagResourceOutput:
     """Dataclass for UntagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNTAG_RESOURCE_OUTPUT, self)

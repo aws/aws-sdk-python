@@ -13,14 +13,7 @@ STRING = Schema(
 )
 
 DETECTOR_ID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DetectorId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#DetectorId"), shape_type=ShapeType.STRING
 )
 
 ACCEPT_ADMINISTRATOR_INVITATION_INPUT = Schema.collection(
@@ -29,8 +22,7 @@ ACCEPT_ADMINISTRATOR_INVITATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#AcceptAdministratorInvitationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -43,7 +35,6 @@ ACCEPT_ADMINISTRATOR_INVITATION_INPUT = Schema.collection(
         "AdministratorId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="administratorId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -51,7 +42,6 @@ ACCEPT_ADMINISTRATOR_INVITATION_INPUT = Schema.collection(
         "InvitationId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitationId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -65,8 +55,7 @@ ACCEPT_ADMINISTRATOR_INVITATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#AcceptAdministratorInvitationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -127,18 +116,9 @@ ACCEPT_INVITATION_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#AcceptInvitationInput"),
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#deprecated"),
-            value=MappingProxyType(
-                {
-                    "message": "This input is deprecated, use AcceptAdministratorInvitationRequest instead"
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#AcceptInvitationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -151,7 +131,6 @@ ACCEPT_INVITATION_INPUT = Schema.collection(
         "MasterId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="masterId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -159,7 +138,6 @@ ACCEPT_INVITATION_INPUT = Schema.collection(
         "InvitationId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitationId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -171,18 +149,9 @@ ACCEPT_INVITATION_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#AcceptInvitationOutput"),
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#deprecated"),
-            value=MappingProxyType(
-                {
-                    "message": "This output is deprecated, use AcceptAdministratorInvitationResponse instead"
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#AcceptInvitationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -191,26 +160,16 @@ ACCEPT_INVITATION = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#deprecated"),
-            value=MappingProxyType(
-                {
-                    "message": "This operation is deprecated, use AcceptAdministratorInvitation instead"
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "POST", "uri": "/detector/{DetectorId}/master", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
 BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Boolean"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
+    id=ShapeID("com.amazonaws.guardduty#Boolean"), shape_type=ShapeType.BOOLEAN
 )
 
 ACCESS_CONTROL_LIST = Schema.collection(
@@ -305,7 +264,6 @@ ACCOUNT = Schema.collection(
         "Uid": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -318,26 +276,13 @@ ACCOUNT = Schema.collection(
 )
 
 ACCOUNT_ID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#AccountId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 12, "max": 12}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#AccountId"), shape_type=ShapeType.STRING
 )
 
 EMAIL = Schema(
     id=ShapeID("com.amazonaws.guardduty#Email"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 64}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 ACCOUNT_DETAIL = Schema.collection(
@@ -346,7 +291,6 @@ ACCOUNT_DETAIL = Schema.collection(
         "AccountId": {
             "target": ACCOUNT_ID,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -354,7 +298,6 @@ ACCOUNT_DETAIL = Schema.collection(
         "Email": {
             "target": EMAIL,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="email"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -365,19 +308,11 @@ ACCOUNT_DETAIL = Schema.collection(
 ACCOUNT_DETAILS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#AccountDetails"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        )
-    ],
     members={"member": {"target": ACCOUNT_DETAIL}},
 )
 
 INTEGER = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Integer"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
+    id=ShapeID("com.amazonaws.guardduty#Integer"), shape_type=ShapeType.INTEGER
 )
 
 DATA_SOURCE_FREE_TRIAL = Schema.collection(
@@ -459,87 +394,18 @@ FREE_TRIAL_FEATURE_RESULT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FreeTrialFeatureResult"),
     shape_type=ShapeType.ENUM,
     members={
-        "FLOW_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="FLOW_LOGS")
-            ],
-        },
-        "CLOUD_TRAIL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CLOUD_TRAIL")
-            ],
-        },
-        "DNS_LOGS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DNS_LOGS")],
-        },
-        "S3_DATA_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3_DATA_EVENTS")
-            ],
-        },
-        "EKS_AUDIT_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EKS_AUDIT_LOGS")
-            ],
-        },
-        "EBS_MALWARE_PROTECTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EBS_MALWARE_PROTECTION"
-                )
-            ],
-        },
-        "RDS_LOGIN_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RDS_LOGIN_EVENTS")
-            ],
-        },
-        "LAMBDA_NETWORK_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="LAMBDA_NETWORK_LOGS"
-                )
-            ],
-        },
-        "EKS_RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EKS_RUNTIME_MONITORING"
-                )
-            ],
-        },
-        "EC2_RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EC2_RUNTIME_MONITORING"
-                )
-            ],
-        },
-        "FARGATE_RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="FARGATE_RUNTIME_MONITORING",
-                )
-            ],
-        },
-        "AI_PROTECTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AI_PROTECTION")
-            ],
-        },
+        "FLOW_LOGS": {"target": UNIT},
+        "CLOUD_TRAIL": {"target": UNIT},
+        "DNS_LOGS": {"target": UNIT},
+        "S3_DATA_EVENTS": {"target": UNIT},
+        "EKS_AUDIT_LOGS": {"target": UNIT},
+        "EBS_MALWARE_PROTECTION": {"target": UNIT},
+        "RDS_LOGIN_EVENTS": {"target": UNIT},
+        "LAMBDA_NETWORK_LOGS": {"target": UNIT},
+        "EKS_RUNTIME_MONITORING": {"target": UNIT},
+        "EC2_RUNTIME_MONITORING": {"target": UNIT},
+        "FARGATE_RUNTIME_MONITORING": {"target": UNIT},
+        "AI_PROTECTION": {"target": UNIT},
     },
 )
 
@@ -577,15 +443,7 @@ ACCOUNT_FREE_TRIAL_INFO = Schema.collection(
         "DataSources": {
             "target": DATA_SOURCES_FREE_TRIAL,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This parameter is deprecated, use Features instead"
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources"),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
             ],
         },
         "Features": {
@@ -604,12 +462,6 @@ ACCOUNT_FREE_TRIAL_INFOS = Schema.collection(
 ACCOUNT_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#AccountIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        )
-    ],
     members={"member": {"target": ACCOUNT_ID}},
 )
 
@@ -712,6 +564,12 @@ REMOTE_ACCOUNT_DETAILS = Schema.collection(
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="affiliated")
             ],
         },
+        "AwsServiceName": {
+            "target": STRING,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="awsServiceName")
+            ],
+        },
     },
 )
 
@@ -744,9 +602,7 @@ COUNTRY = Schema.collection(
 )
 
 DOUBLE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Double"),
-    shape_type=ShapeType.DOUBLE,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
+    id=ShapeID("com.amazonaws.guardduty#Double"), shape_type=ShapeType.DOUBLE
 )
 
 GEO_LOCATION = Schema.collection(
@@ -1330,37 +1186,67 @@ ACTION = Schema.collection(
     },
 )
 
+API_CALL = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#ApiCall"),
+    members={
+        "Operation": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="operation")],
+        },
+        "Service": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="service")],
+        },
+        "Error": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="error")],
+        },
+        "UserAgent": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="userAgent")],
+        },
+    },
+)
+
+ACTIVITY_TYPE = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#ActivityType"),
+    shape_type=ShapeType.ENUM,
+    members={"API_CALL": {"target": UNIT}},
+)
+
+ACTIVITY = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#Activity"),
+    members={
+        "Type": {
+            "target": ACTIVITY_TYPE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="type"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Api": {
+            "target": API_CALL,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="api")],
+        },
+    },
+)
+
+ACTIVITIES = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#Activities"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": ACTIVITY}},
+)
+
 PROCESS_NAME = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ProcessName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 4096}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#ProcessName"), shape_type=ShapeType.STRING
 )
 
 PROCESS_PATH = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ProcessPath"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 4096}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#ProcessPath"), shape_type=ShapeType.STRING
 )
 
 PROCESS_SHA256 = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ProcessSha256"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1024}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#ProcessSha256"), shape_type=ShapeType.STRING
 )
 
 ACTOR_PROCESS = Schema.collection(
@@ -1369,7 +1255,6 @@ ACTOR_PROCESS = Schema.collection(
         "Name": {
             "target": PROCESS_NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -1377,7 +1262,6 @@ ACTOR_PROCESS = Schema.collection(
         "Path": {
             "target": PROCESS_PATH,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="path"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -1392,16 +1276,7 @@ ACTOR_PROCESS = Schema.collection(
 MFA_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#MfaStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 SESSION = Schema.collection(
@@ -1434,7 +1309,6 @@ USER = Schema.collection(
         "Name": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -1442,7 +1316,6 @@ USER = Schema.collection(
         "Uid": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -1450,7 +1323,6 @@ USER = Schema.collection(
         "Type": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="type"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -1474,7 +1346,6 @@ ACTOR = Schema.collection(
         "Id": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="id"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -1497,36 +1368,17 @@ ACTOR = Schema.collection(
 ACTOR_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ActorIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 400}),
-        )
-    ],
     members={"member": {"target": STRING}},
 )
 
 ACTORS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Actors"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 400}),
-        )
-    ],
     members={"member": {"target": ACTOR}},
 )
 
 NON_EMPTY_STRING = Schema(
-    id=ShapeID("com.amazonaws.guardduty#NonEmptyString"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 200}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#NonEmptyString"), shape_type=ShapeType.STRING
 )
 
 ADDITIONAL_INFO = Schema.collection(
@@ -1546,14 +1398,7 @@ ADDITIONAL_INFO = Schema.collection(
 )
 
 FINDING_TYPE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FindingType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#FindingType"), shape_type=ShapeType.STRING
 )
 
 ADDITIONAL_SEQUENCE_TYPES = Schema.collection(
@@ -1583,26 +1428,7 @@ ADDON_DETAILS = Schema.collection(
 ADMIN_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#AdminStatus"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLE_IN_PROGRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="DISABLE_IN_PROGRESS"
-                )
-            ],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLE_IN_PROGRESS": {"target": UNIT}},
 )
 
 ADMIN_ACCOUNT = Schema.collection(
@@ -1626,12 +1452,6 @@ ADMIN_ACCOUNT = Schema.collection(
 ADMIN_ACCOUNTS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#AdminAccounts"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1}),
-        )
-    ],
     members={"member": {"target": ADMIN_ACCOUNT}},
 )
 
@@ -1671,11 +1491,7 @@ AGENT_DETAILS = Schema.collection(
     },
 )
 
-LONG = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Long"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
-)
+LONG = Schema(id=ShapeID("com.amazonaws.guardduty#Long"), shape_type=ShapeType.LONG)
 
 OBSERVATION_NUMBERS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ObservationNumbers"),
@@ -1707,50 +1523,19 @@ PROFILE_SUBTYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ProfileSubtype"),
     shape_type=ShapeType.ENUM,
     members={
-        "FREQUENT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FREQUENT")],
-        },
-        "INFREQUENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="INFREQUENT")
-            ],
-        },
-        "UNSEEN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="UNSEEN")],
-        },
-        "RARE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="RARE")],
-        },
-        "COUNT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="COUNT")],
-        },
-        "AVERAGE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="AVERAGE")],
-        },
+        "FREQUENT": {"target": UNIT},
+        "INFREQUENT": {"target": UNIT},
+        "UNSEEN": {"target": UNIT},
+        "RARE": {"target": UNIT},
+        "COUNT": {"target": UNIT},
+        "AVERAGE": {"target": UNIT},
     },
 )
 
 PROFILE_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ProfileType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "FREQUENCY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="FREQUENCY")
-            ],
-        },
-        "VOLUME": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="VOLUME")],
-        },
-    },
+    members={"FREQUENCY": {"target": UNIT}, "VOLUME": {"target": UNIT}},
 )
 
 ANOMALY_OBJECT = Schema.collection(
@@ -1838,25 +1623,12 @@ ANOMALY = Schema.collection(
 )
 
 FINDING_ID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FindingId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#FindingId"), shape_type=ShapeType.STRING
 )
 
 FINDING_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FindingIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": FINDING_ID}},
 )
 
@@ -1866,8 +1638,7 @@ ARCHIVE_FINDINGS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ArchiveFindingsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -1880,7 +1651,6 @@ ARCHIVE_FINDINGS_INPUT = Schema.collection(
         "FindingIds": {
             "target": FINDING_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -1894,8 +1664,7 @@ ARCHIVE_FINDINGS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ArchiveFindingsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -1916,22 +1685,148 @@ ARCHIVE_FINDINGS = Schema(
     ],
 )
 
+DETECTION_RULE_ARN = Schema(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleArn"), shape_type=ShapeType.STRING
+)
+
+ASSOCIATION_ID = Schema(
+    id=ShapeID("com.amazonaws.guardduty#AssociationId"), shape_type=ShapeType.STRING
+)
+
+ASSOCIATION_MODE = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#AssociationMode"),
+    shape_type=ShapeType.ENUM,
+    members={"LIVE": {"target": UNIT}, "DRY_RUN": {"target": UNIT}},
+)
+
+RULE_ID = Schema(
+    id=ShapeID("com.amazonaws.guardduty#RuleId"), shape_type=ShapeType.STRING
+)
+
+ASSOCIATION_DETAIL = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#AssociationDetail"),
+    members={
+        "AssociationId": {
+            "target": ASSOCIATION_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="associationId"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Arn": {
+            "target": DETECTION_RULE_ARN,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "AccountId": {
+            "target": ACCOUNT_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Mode": {
+            "target": ASSOCIATION_MODE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "CreatedAt": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "UpdatedAt": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "ExpiresAt": {
+            "target": TIMESTAMP,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="expiresAt")],
+        },
+    },
+)
+
+ASSOCIATION_SUMMARY = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#AssociationSummary"),
+    members={
+        "AssociationId": {
+            "target": ASSOCIATION_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="associationId"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Arn": {
+            "target": DETECTION_RULE_ARN,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Mode": {
+            "target": ASSOCIATION_MODE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "CreatedAt": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "UpdatedAt": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "ExpiresAt": {
+            "target": TIMESTAMP,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="expiresAt")],
+        },
+    },
+)
+
+ASSOCIATION_SUMMARY_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#AssociationSummaryList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": ASSOCIATION_SUMMARY}},
+)
+
 AUTO_ENABLE_MEMBERS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#AutoEnableMembers"),
     shape_type=ShapeType.ENUM,
     members={
-        "NEW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NEW")],
-        },
-        "ALL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ALL")],
-        },
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
+        "NEW": {"target": UNIT},
+        "ALL": {"target": UNIT},
+        "NONE": {"target": UNIT},
     },
 )
 
@@ -1941,7 +1836,6 @@ AUTONOMOUS_SYSTEM = Schema.collection(
         "Name": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -1949,7 +1843,6 @@ AUTONOMOUS_SYSTEM = Schema.collection(
         "Number": {
             "target": INTEGER,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="number"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -1958,25 +1851,12 @@ AUTONOMOUS_SYSTEM = Schema.collection(
 )
 
 EC2_INSTANCE_UID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Ec2InstanceUid"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#Ec2InstanceUid"), shape_type=ShapeType.STRING
 )
 
 EC2_INSTANCE_UIDS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Ec2InstanceUids"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 25}),
-        )
-    ],
     members={"member": {"target": EC2_INSTANCE_UID}},
 )
 
@@ -1997,31 +1877,11 @@ BEDROCK_GUARDRAIL = Schema.collection(
     members={
         "Arn": {
             "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn"),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 0, "max": 2048}),
-                ),
-                Trait.new(
-                    id=ShapeID("smithy.api#pattern"),
-                    value="^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+$",
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn")],
         },
         "Version": {
             "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="version"),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 8}),
-                ),
-                Trait.new(
-                    id=ShapeID("smithy.api#pattern"),
-                    value="^(([1-9][0-9]{0,7})|(DRAFT)|(ENFORCED))$",
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="version")],
         },
     },
 )
@@ -2029,38 +1889,17 @@ BEDROCK_GUARDRAIL = Schema.collection(
 CONTENT_POLICY_FILTER_ACTION = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ContentPolicyFilterAction"),
     shape_type=ShapeType.ENUM,
-    members={
-        "BLOCKED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="BLOCKED")],
-        },
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
-    },
+    members={"BLOCKED": {"target": UNIT}, "NONE": {"target": UNIT}},
 )
 
 CONFIDENCE_LEVEL = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ConfidenceLevel"),
     shape_type=ShapeType.ENUM,
     members={
-        "HIGH": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HIGH")],
-        },
-        "MEDIUM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="MEDIUM")],
-        },
-        "LOW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="LOW")],
-        },
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
+        "HIGH": {"target": UNIT},
+        "MEDIUM": {"target": UNIT},
+        "LOW": {"target": UNIT},
+        "NONE": {"target": UNIT},
     },
 )
 
@@ -2068,40 +1907,13 @@ CONTENT_POLICY_FILTER_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ContentPolicyFilterType"),
     shape_type=ShapeType.ENUM,
     members={
-        "PROMPT_ATTACK": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROMPT_ATTACK")
-            ],
-        },
-        "JAILBREAK": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="JAILBREAK")
-            ],
-        },
-        "HATE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HATE")],
-        },
-        "INSULTS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INSULTS")],
-        },
-        "SEXUAL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SEXUAL")],
-        },
-        "VIOLENCE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="VIOLENCE")],
-        },
-        "MISCONDUCT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MISCONDUCT")
-            ],
-        },
+        "PROMPT_ATTACK": {"target": UNIT},
+        "JAILBREAK": {"target": UNIT},
+        "HATE": {"target": UNIT},
+        "INSULTS": {"target": UNIT},
+        "SEXUAL": {"target": UNIT},
+        "VIOLENCE": {"target": UNIT},
+        "MISCONDUCT": {"target": UNIT},
     },
 )
 
@@ -2128,53 +1940,25 @@ CONTENT_POLICY_FILTER = Schema.collection(
 CONTENT_POLICY_FILTERS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ContentPolicyFilters"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 10}))
-    ],
     members={"member": {"target": CONTENT_POLICY_FILTER}},
 )
 
 GUARDRAIL_ACTION = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#GuardrailAction"),
     shape_type=ShapeType.ENUM,
-    members={
-        "GUARDRAIL_INTERVENED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="GUARDRAIL_INTERVENED"
-                )
-            ],
-        },
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
-    },
+    members={"GUARDRAIL_INTERVENED": {"target": UNIT}, "NONE": {"target": UNIT}},
 )
 
 BEDROCK_GUARDRAILS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#BedrockGuardrails"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 10}))
-    ],
     members={"member": {"target": BEDROCK_GUARDRAIL}},
 )
 
 GUARDRAIL_SOURCE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#GuardrailSource"),
     shape_type=ShapeType.ENUM,
-    members={
-        "INPUT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INPUT")],
-        },
-        "OUTPUT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="OUTPUT")],
-        },
-    },
+    members={"INPUT": {"target": UNIT}, "OUTPUT": {"target": UNIT}},
 )
 
 BEDROCK_GUARDRAIL_DETAILS = Schema.collection(
@@ -2183,47 +1967,13 @@ BEDROCK_GUARDRAIL_DETAILS = Schema.collection(
         "GuardrailArn": {
             "target": STRING,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "Use guardrails list instead",
-                            "since": "2026-07-13",
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailArn"),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 0, "max": 2048}),
-                ),
-                Trait.new(
-                    id=ShapeID("smithy.api#pattern"),
-                    value="^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+$",
-                ),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailArn")
             ],
         },
         "GuardrailVersion": {
             "target": STRING,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "Use guardrails list instead",
-                            "since": "2026-07-13",
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailVersion"),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 8}),
-                ),
-                Trait.new(
-                    id=ShapeID("smithy.api#pattern"),
-                    value="^(([1-9][0-9]{0,7})|(DRAFT))$",
-                ),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailVersion")
             ],
         },
         "Guardrails": {
@@ -2250,6 +2000,28 @@ BEDROCK_GUARDRAIL_DETAILS = Schema.collection(
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="contentPolicyFilters"
                 )
+            ],
+        },
+    },
+)
+
+BEDROCK_GUARDRAIL_RESOURCE = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#BedrockGuardrailResource"),
+    members={
+        "Version": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="version")],
+        },
+        "GuardrailAction": {
+            "target": GUARDRAIL_ACTION,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailAction")
+            ],
+        },
+        "GuardrailSource": {
+            "target": GUARDRAIL_SOURCE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailSource")
             ],
         },
     },
@@ -2302,31 +2074,13 @@ BUCKET_LEVEL_PERMISSIONS = Schema.collection(
 )
 
 CLIENT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ClientToken"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 64}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#ClientToken"), shape_type=ShapeType.STRING
 )
 
 CLOUD_PROVIDER = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#CloudProvider"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        )
-    ],
-    members={
-        "AWS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="AWS")],
-        }
-    },
+    members={"AWS": {"target": UNIT}},
 )
 
 CLOUD_DETAILS = Schema.collection(
@@ -2335,7 +2089,6 @@ CLOUD_DETAILS = Schema.collection(
         "Provider": {
             "target": CLOUD_PROVIDER,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="provider"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -2343,7 +2096,6 @@ CLOUD_DETAILS = Schema.collection(
         "Region": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="region"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -2351,7 +2103,6 @@ CLOUD_DETAILS = Schema.collection(
         "Account": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="account"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -2374,22 +2125,7 @@ CLOUDFORMATION_STACK = Schema.collection(
 DATA_SOURCE_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#DataSourceStatus"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 CLOUD_TRAIL_CONFIGURATION_RESULT = Schema.collection(
@@ -2398,7 +2134,6 @@ CLOUD_TRAIL_CONFIGURATION_RESULT = Schema.collection(
         "Status": {
             "target": DATA_SOURCE_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -2410,30 +2145,12 @@ CLUSTER_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ClusterStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "CREATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATING")],
-        },
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "DELETING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETING")],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "UPDATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="UPDATING")],
-        },
-        "PENDING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PENDING")],
-        },
+        "CREATING": {"target": UNIT},
+        "ACTIVE": {"target": UNIT},
+        "DELETING": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "UPDATING": {"target": UNIT},
+        "PENDING": {"target": UNIT},
     },
 )
 
@@ -2449,26 +2166,11 @@ EQUALS = Schema.collection(
     members={"member": {"target": STRING}},
 )
 
-MATCH = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Match"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 512}),
-        )
-    ],
-)
+MATCH = Schema(id=ShapeID("com.amazonaws.guardduty#Match"), shape_type=ShapeType.STRING)
 
 MATCHES = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Matches"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 5}),
-        )
-    ],
     members={"member": {"target": MATCH}},
 )
 
@@ -2485,25 +2187,12 @@ NOT_EQUALS = Schema.collection(
 )
 
 NOT_MATCH = Schema(
-    id=ShapeID("com.amazonaws.guardduty#NotMatch"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 512}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#NotMatch"), shape_type=ShapeType.STRING
 )
 
 NOT_MATCHES = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#NotMatches"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 5}),
-        )
-    ],
     members={"member": {"target": NOT_MATCH}},
 )
 
@@ -2512,45 +2201,27 @@ CONDITION = Schema.collection(
     members={
         "Eq": {
             "target": EQ,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#deprecated")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="eq"),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="eq")],
         },
         "Neq": {
             "target": NEQ,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#deprecated")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="neq"),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="neq")],
         },
         "Gt": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#deprecated")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="gt"),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="gt")],
         },
         "Gte": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#deprecated")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="gte"),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="gte")],
         },
         "Lt": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#deprecated")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lt"),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="lt")],
         },
         "Lte": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#deprecated")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lte"),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="lte")],
         },
         "Equals": {
             "target": EQUALS,
@@ -2598,29 +2269,11 @@ CONDITION = Schema.collection(
 CONFIDENCE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Confidence"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        )
-    ],
     members={
-        "UNKNOWN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Unknown")],
-        },
-        "LOW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Low")],
-        },
-        "MEDIUM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Medium")],
-        },
-        "HIGH": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="High")],
-        },
+        "UNKNOWN": {"target": UNIT},
+        "LOW": {"target": UNIT},
+        "MEDIUM": {"target": UNIT},
+        "HIGH": {"target": UNIT},
     },
 )
 
@@ -2725,14 +2378,7 @@ CONTAINER = Schema.collection(
 )
 
 CONTAINER_IMAGE_UID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ContainerImageUid"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1024}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#ContainerImageUid"), shape_type=ShapeType.STRING
 )
 
 CONTAINER_FINDING_RESOURCE = Schema.collection(
@@ -2741,7 +2387,6 @@ CONTAINER_FINDING_RESOURCE = Schema.collection(
         "Image": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="image"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -2783,14 +2428,7 @@ CONTAINERS = Schema.collection(
 )
 
 CONTAINER_UID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ContainerUid"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#ContainerUid"), shape_type=ShapeType.STRING
 )
 
 CONTAINER_UIDS = Schema.collection(
@@ -2819,18 +2457,7 @@ CONTINUOUS_SCAN_DETAILS = Schema.collection(
 COVERAGE_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#CoverageStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "HEALTHY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HEALTHY")],
-        },
-        "UNHEALTHY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="UNHEALTHY")
-            ],
-        },
-    },
+    members={"HEALTHY": {"target": UNIT}, "UNHEALTHY": {"target": UNIT}},
 )
 
 COUNT_BY_COVERAGE_STATUS = Schema.collection(
@@ -2842,20 +2469,7 @@ COUNT_BY_COVERAGE_STATUS = Schema.collection(
 RESOURCE_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ResourceType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "EKS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="EKS")],
-        },
-        "ECS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ECS")],
-        },
-        "EC2": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="EC2")],
-        },
-    },
+    members={"EKS": {"target": UNIT}, "ECS": {"target": UNIT}, "EC2": {"target": UNIT}},
 )
 
 COUNT_BY_RESOURCE_TYPE = Schema.collection(
@@ -2874,20 +2488,9 @@ MANAGEMENT_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ManagementType"),
     shape_type=ShapeType.ENUM,
     members={
-        "AUTO_MANAGED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AUTO_MANAGED")
-            ],
-        },
-        "MANUAL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="MANUAL")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
+        "AUTO_MANAGED": {"target": UNIT},
+        "MANUAL": {"target": UNIT},
+        "DISABLED": {"target": UNIT},
     },
 )
 
@@ -2930,12 +2533,6 @@ COVERAGE_EC2_INSTANCE_DETAILS = Schema.collection(
 ISSUES = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Issues"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": STRING}},
 )
 
@@ -3035,72 +2632,17 @@ COVERAGE_FILTER_CRITERION_KEY = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#CoverageFilterCriterionKey"),
     shape_type=ShapeType.ENUM,
     members={
-        "ACCOUNT_ID": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACCOUNT_ID")
-            ],
-        },
-        "RESOURCE_TYPE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RESOURCE_TYPE")
-            ],
-        },
-        "COVERAGE_STATUS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="COVERAGE_STATUS")
-            ],
-        },
-        "ADDON_VERSION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ADDON_VERSION")
-            ],
-        },
-        "CLUSTER_NAME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CLUSTER_NAME")
-            ],
-        },
-        "ECS_CLUSTER_NAME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ECS_CLUSTER_NAME")
-            ],
-        },
-        "MANAGEMENT_TYPE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MANAGEMENT_TYPE")
-            ],
-        },
-        "EKS_CLUSTER_NAME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EKS_CLUSTER_NAME")
-            ],
-        },
-        "AGENT_VERSION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AGENT_VERSION")
-            ],
-        },
-        "INSTANCE_ID": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="INSTANCE_ID")
-            ],
-        },
-        "CLUSTER_ARN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CLUSTER_ARN")
-            ],
-        },
+        "ACCOUNT_ID": {"target": UNIT},
+        "RESOURCE_TYPE": {"target": UNIT},
+        "COVERAGE_STATUS": {"target": UNIT},
+        "ADDON_VERSION": {"target": UNIT},
+        "CLUSTER_NAME": {"target": UNIT},
+        "ECS_CLUSTER_NAME": {"target": UNIT},
+        "MANAGEMENT_TYPE": {"target": UNIT},
+        "EKS_CLUSTER_NAME": {"target": UNIT},
+        "AGENT_VERSION": {"target": UNIT},
+        "INSTANCE_ID": {"target": UNIT},
+        "CLUSTER_ARN": {"target": UNIT},
     },
 )
 
@@ -3125,12 +2667,6 @@ COVERAGE_FILTER_CRITERION = Schema.collection(
 COVERAGE_FILTER_CRITERION_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#CoverageFilterCriterionList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": COVERAGE_FILTER_CRITERION}},
 )
 
@@ -3228,74 +2764,22 @@ COVERAGE_SORT_KEY = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#CoverageSortKey"),
     shape_type=ShapeType.ENUM,
     members={
-        "ACCOUNT_ID": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACCOUNT_ID")
-            ],
-        },
-        "COVERAGE_STATUS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="COVERAGE_STATUS")
-            ],
-        },
-        "ISSUE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ISSUE")],
-        },
-        "ADDON_VERSION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ADDON_VERSION")
-            ],
-        },
-        "UPDATED_AT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="UPDATED_AT")
-            ],
-        },
-        "CLUSTER_NAME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CLUSTER_NAME")
-            ],
-        },
-        "EKS_CLUSTER_NAME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EKS_CLUSTER_NAME")
-            ],
-        },
-        "ECS_CLUSTER_NAME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ECS_CLUSTER_NAME")
-            ],
-        },
-        "INSTANCE_ID": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="INSTANCE_ID")
-            ],
-        },
+        "ACCOUNT_ID": {"target": UNIT},
+        "COVERAGE_STATUS": {"target": UNIT},
+        "ISSUE": {"target": UNIT},
+        "ADDON_VERSION": {"target": UNIT},
+        "UPDATED_AT": {"target": UNIT},
+        "CLUSTER_NAME": {"target": UNIT},
+        "EKS_CLUSTER_NAME": {"target": UNIT},
+        "ECS_CLUSTER_NAME": {"target": UNIT},
+        "INSTANCE_ID": {"target": UNIT},
     },
 )
 
 ORDER_BY = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#OrderBy"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ASC": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ASC")],
-        },
-        "DESC": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DESC")],
-        },
-    },
+    members={"ASC": {"target": UNIT}, "DESC": {"target": UNIT}},
 )
 
 COVERAGE_SORT_CRITERIA = Schema.collection(
@@ -3340,22 +2824,8 @@ COVERAGE_STATISTICS_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#CoverageStatisticsType"),
     shape_type=ShapeType.ENUM,
     members={
-        "COUNT_BY_RESOURCE_TYPE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="COUNT_BY_RESOURCE_TYPE"
-                )
-            ],
-        },
-        "COUNT_BY_COVERAGE_STATUS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="COUNT_BY_COVERAGE_STATUS"
-                )
-            ],
-        },
+        "COUNT_BY_RESOURCE_TYPE": {"target": UNIT},
+        "COUNT_BY_COVERAGE_STATUS": {"target": UNIT},
     },
 )
 
@@ -3365,13 +2835,199 @@ COVERAGE_STATISTICS_TYPE_LIST = Schema.collection(
     members={"member": {"target": COVERAGE_STATISTICS_TYPE}},
 )
 
+TAG_KEY = Schema(
+    id=ShapeID("com.amazonaws.guardduty#TagKey"), shape_type=ShapeType.STRING
+)
+
+TAG_VALUE = Schema(
+    id=ShapeID("com.amazonaws.guardduty#TagValue"), shape_type=ShapeType.STRING
+)
+
+TAG_MAP = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#TagMap"),
+    shape_type=ShapeType.MAP,
+    members={"key": {"target": TAG_KEY}, "value": {"target": TAG_VALUE}},
+)
+
+CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationRequest",
+        )
+    ],
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Mode": {
+            "target": ASSOCIATION_MODE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "ClientToken": {
+            "target": CLIENT_TOKEN,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
+            ],
+        },
+        "Tags": {
+            "target": TAG_MAP,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
+        },
+    },
+)
+
+CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationResponse",
+        )
+    ],
+    members={
+        "RuleAssociation": {
+            "target": ASSOCIATION_DETAIL,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleAssociation"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        }
+    },
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#ResourceNotFoundException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
+    ],
+    members={
+        "Message": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="message")],
+        },
+        "Type": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
+        },
+    },
+)
+
+CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION = Schema(
+    id=ShapeID("com.amazonaws.guardduty#CreateCustomDetectionRuleAssociation"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "method": "POST",
+                    "uri": "/custom-detection-rule/association",
+                    "code": 200,
+                }
+            ),
+        )
+    ],
+)
+
+DETECTION_RULE_ACCOUNT_IDS = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleAccountIds"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": ACCOUNT_ID}},
+)
+
+CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationInput"
+    ),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationRequest",
+        )
+    ],
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Mode": {
+            "target": ASSOCIATION_MODE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "IncludeAccountIds": {
+            "target": DETECTION_RULE_ACCOUNT_IDS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="includeAccountIds")
+            ],
+        },
+        "ExcludeAccountIds": {
+            "target": DETECTION_RULE_ACCOUNT_IDS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="excludeAccountIds")
+            ],
+        },
+        "ClientToken": {
+            "target": CLIENT_TOKEN,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
+            ],
+        },
+    },
+)
+
+CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationOutput"
+    ),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationResponse",
+        )
+    ],
+)
+
+CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = Schema(
+    id=ShapeID("com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfiguration"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "method": "POST",
+                    "uri": "/custom-detection-rule/org-configuration",
+                    "code": 200,
+                }
+            ),
+        )
+    ],
+)
+
 KUBERNETES_AUDIT_LOGS_CONFIGURATION = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#KubernetesAuditLogsConfiguration"),
     members={
         "Enable": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="enable"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -3385,7 +3041,6 @@ KUBERNETES_CONFIGURATION = Schema.collection(
         "AuditLogs": {
             "target": KUBERNETES_AUDIT_LOGS_CONFIGURATION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="auditLogs"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -3426,7 +3081,6 @@ S3_LOGS_CONFIGURATION = Schema.collection(
         "Enable": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="enable"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -3460,47 +3114,16 @@ FEATURE_ADDITIONAL_CONFIGURATION = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FeatureAdditionalConfiguration"),
     shape_type=ShapeType.ENUM,
     members={
-        "EKS_ADDON_MANAGEMENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EKS_ADDON_MANAGEMENT"
-                )
-            ],
-        },
-        "ECS_FARGATE_AGENT_MANAGEMENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="ECS_FARGATE_AGENT_MANAGEMENT",
-                )
-            ],
-        },
-        "EC2_AGENT_MANAGEMENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EC2_AGENT_MANAGEMENT"
-                )
-            ],
-        },
+        "EKS_ADDON_MANAGEMENT": {"target": UNIT},
+        "ECS_FARGATE_AGENT_MANAGEMENT": {"target": UNIT},
+        "EC2_AGENT_MANAGEMENT": {"target": UNIT},
     },
 )
 
 FEATURE_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FeatureStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 DETECTOR_ADDITIONAL_CONFIGURATION = Schema.collection(
@@ -3527,68 +3150,15 @@ DETECTOR_FEATURE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#DetectorFeature"),
     shape_type=ShapeType.ENUM,
     members={
-        "S3_DATA_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3_DATA_EVENTS")
-            ],
-        },
-        "EKS_AUDIT_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EKS_AUDIT_LOGS")
-            ],
-        },
-        "EBS_MALWARE_PROTECTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EBS_MALWARE_PROTECTION"
-                )
-            ],
-        },
-        "RDS_LOGIN_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RDS_LOGIN_EVENTS")
-            ],
-        },
-        "LAMBDA_NETWORK_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="LAMBDA_NETWORK_LOGS"
-                )
-            ],
-        },
-        "EKS_RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EKS_RUNTIME_MONITORING"
-                )
-            ],
-        },
-        "RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="RUNTIME_MONITORING"
-                )
-            ],
-        },
-        "AI_PROTECTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AI_PROTECTION")
-            ],
-        },
-        "AI_ANALYST": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AI_ANALYST")
-            ],
-        },
+        "S3_DATA_EVENTS": {"target": UNIT},
+        "EKS_AUDIT_LOGS": {"target": UNIT},
+        "EBS_MALWARE_PROTECTION": {"target": UNIT},
+        "RDS_LOGIN_EVENTS": {"target": UNIT},
+        "LAMBDA_NETWORK_LOGS": {"target": UNIT},
+        "EKS_RUNTIME_MONITORING": {"target": UNIT},
+        "RUNTIME_MONITORING": {"target": UNIT},
+        "AI_PROTECTION": {"target": UNIT},
+        "AI_ANALYST": {"target": UNIT},
     },
 )
 
@@ -3624,58 +3194,10 @@ FINDING_PUBLISHING_FREQUENCY = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FindingPublishingFrequency"),
     shape_type=ShapeType.ENUM,
     members={
-        "FIFTEEN_MINUTES": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="FIFTEEN_MINUTES")
-            ],
-        },
-        "ONE_HOUR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ONE_HOUR")],
-        },
-        "SIX_HOURS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SIX_HOURS")
-            ],
-        },
+        "FIFTEEN_MINUTES": {"target": UNIT},
+        "ONE_HOUR": {"target": UNIT},
+        "SIX_HOURS": {"target": UNIT},
     },
-)
-
-TAG_KEY = Schema(
-    id=ShapeID("com.amazonaws.guardduty#TagKey"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^(?!aws:)[a-zA-Z+-=._:/]+$"),
-    ],
-)
-
-TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#TagValue"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        )
-    ],
-)
-
-TAG_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#TagMap"),
-    shape_type=ShapeType.MAP,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 200}),
-        )
-    ],
-    members={"key": {"target": TAG_KEY}, "value": {"target": TAG_VALUE}},
 )
 
 CREATE_DETECTOR_INPUT = Schema.collection(
@@ -3684,14 +3206,12 @@ CREATE_DETECTOR_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateDetectorRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Enable": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="enable"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -3715,15 +3235,7 @@ CREATE_DETECTOR_INPUT = Schema.collection(
         "DataSources": {
             "target": DATA_SOURCE_CONFIGURATIONS,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This parameter is deprecated, use Features instead"
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources"),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
             ],
         },
         "Tags": {
@@ -3802,8 +3314,7 @@ CREATE_DETECTOR_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateDetectorResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "DetectorId": {
@@ -3837,33 +3348,11 @@ CREATE_DETECTOR = Schema(
 FILTER_ACTION = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FilterAction"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
-    members={
-        "NOOP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOOP")],
-        },
-        "ARCHIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ARCHIVE")],
-        },
-    },
+    members={"NOOP": {"target": UNIT}, "ARCHIVE": {"target": UNIT}},
 )
 
 FILTER_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FilterDescription"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 512}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#FilterDescription"), shape_type=ShapeType.STRING
 )
 
 CRITERION = Schema.collection(
@@ -3883,26 +3372,11 @@ FINDING_CRITERIA = Schema.collection(
 )
 
 FILTER_NAME = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FilterName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 64}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#FilterName"), shape_type=ShapeType.STRING
 )
 
 FILTER_RANK = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FilterRank"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.guardduty#FilterRank"), shape_type=ShapeType.INTEGER
 )
 
 CREATE_FILTER_INPUT = Schema.collection(
@@ -3911,8 +3385,7 @@ CREATE_FILTER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateFilterRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -3925,7 +3398,6 @@ CREATE_FILTER_INPUT = Schema.collection(
         "Name": {
             "target": FILTER_NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -3947,7 +3419,6 @@ CREATE_FILTER_INPUT = Schema.collection(
         "FindingCriteria": {
             "target": FINDING_CRITERIA,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingCriteria"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -3972,14 +3443,12 @@ CREATE_FILTER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateFilterResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Name": {
             "target": FILTER_NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4001,14 +3470,7 @@ CREATE_FILTER = Schema(
 )
 
 TRIGGER_PROMPT = Schema(
-    id=ShapeID("com.amazonaws.guardduty#TriggerPrompt"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#TriggerPrompt"), shape_type=ShapeType.STRING
 )
 
 CREATE_INVESTIGATION_INPUT = Schema.collection(
@@ -4017,8 +3479,7 @@ CREATE_INVESTIGATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateInvestigationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -4031,7 +3492,6 @@ CREATE_INVESTIGATION_INPUT = Schema.collection(
         "TriggerPrompt": {
             "target": TRIGGER_PROMPT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggerPrompt"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4047,15 +3507,7 @@ CREATE_INVESTIGATION_INPUT = Schema.collection(
 )
 
 INVESTIGATION_ID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#InvestigationId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 64}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-fA-F0-9\\-]+$"),
-    ],
+    id=ShapeID("com.amazonaws.guardduty#InvestigationId"), shape_type=ShapeType.STRING
 )
 
 CREATE_INVESTIGATION_OUTPUT = Schema.collection(
@@ -4064,14 +3516,12 @@ CREATE_INVESTIGATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateInvestigationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "InvestigationId": {
             "target": INVESTIGATION_ID,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="investigationId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4099,65 +3549,21 @@ CREATE_INVESTIGATION = Schema(
 IP_SET_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#IpSetFormat"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
     members={
-        "TXT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="TXT")],
-        },
-        "STIX": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="STIX")],
-        },
-        "OTX_CSV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="OTX_CSV")],
-        },
-        "ALIEN_VAULT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ALIEN_VAULT")
-            ],
-        },
-        "PROOF_POINT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROOF_POINT")
-            ],
-        },
-        "FIRE_EYE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FIRE_EYE")],
-        },
+        "TXT": {"target": UNIT},
+        "STIX": {"target": UNIT},
+        "OTX_CSV": {"target": UNIT},
+        "ALIEN_VAULT": {"target": UNIT},
+        "PROOF_POINT": {"target": UNIT},
+        "FIRE_EYE": {"target": UNIT},
     },
 )
 
 LOCATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Location"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#Location"), shape_type=ShapeType.STRING
 )
 
-NAME = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Name"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
-)
+NAME = Schema(id=ShapeID("com.amazonaws.guardduty#Name"), shape_type=ShapeType.STRING)
 
 CREATE_IP_SET_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#CreateIPSetInput"),
@@ -4165,8 +3571,7 @@ CREATE_IP_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateIPSetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -4179,7 +3584,6 @@ CREATE_IP_SET_INPUT = Schema.collection(
         "Name": {
             "target": NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4187,7 +3591,6 @@ CREATE_IP_SET_INPUT = Schema.collection(
         "Format": {
             "target": IP_SET_FORMAT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4195,7 +3598,6 @@ CREATE_IP_SET_INPUT = Schema.collection(
         "Location": {
             "target": LOCATION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4203,7 +3605,6 @@ CREATE_IP_SET_INPUT = Schema.collection(
         "Activate": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4236,14 +3637,12 @@ CREATE_IP_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateIPSetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IpSetId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="ipSetId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4267,16 +3666,7 @@ CREATE_IP_SET = Schema(
 MALWARE_PROTECTION_PLAN_TAGGING_ACTION_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanTaggingActionStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 MALWARE_PROTECTION_PLAN_TAGGING_ACTION = Schema.collection(
@@ -4302,12 +3692,6 @@ MALWARE_PROTECTION_PLAN_ACTIONS = Schema.collection(
 MALWARE_PROTECTION_PLAN_OBJECT_PREFIXES_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanObjectPrefixesList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 5}),
-        )
-    ],
     members={"member": {"target": STRING}},
 )
 
@@ -4345,8 +3729,7 @@ CREATE_MALWARE_PROTECTION_PLAN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateMalwareProtectionPlanRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ClientToken": {
@@ -4359,7 +3742,6 @@ CREATE_MALWARE_PROTECTION_PLAN_INPUT = Schema.collection(
         "Role": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="role"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4367,7 +3749,6 @@ CREATE_MALWARE_PROTECTION_PLAN_INPUT = Schema.collection(
         "ProtectedResource": {
             "target": CREATE_PROTECTED_RESOURCE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="protectedResource"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4389,8 +3770,7 @@ CREATE_MALWARE_PROTECTION_PLAN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateMalwareProtectionPlanResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "MalwareProtectionPlanId": {
@@ -4423,8 +3803,7 @@ CREATE_MEMBERS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateMembersRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -4437,7 +3816,6 @@ CREATE_MEMBERS_INPUT = Schema.collection(
         "AccountDetails": {
             "target": ACCOUNT_DETAILS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountDetails"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4451,7 +3829,6 @@ UNPROCESSED_ACCOUNT = Schema.collection(
         "AccountId": {
             "target": ACCOUNT_ID,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4459,7 +3836,6 @@ UNPROCESSED_ACCOUNT = Schema.collection(
         "Result": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="result"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4470,12 +3846,6 @@ UNPROCESSED_ACCOUNT = Schema.collection(
 UNPROCESSED_ACCOUNTS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#UnprocessedAccounts"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": UNPROCESSED_ACCOUNT}},
 )
 
@@ -4485,14 +3855,12 @@ CREATE_MEMBERS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateMembersResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "UnprocessedAccounts": {
             "target": UNPROCESSED_ACCOUNTS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
                 ),
@@ -4534,18 +3902,7 @@ DESTINATION_PROPERTIES = Schema.collection(
 DESTINATION_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#DestinationType"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
-    members={
-        "S3": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3")],
-        }
-    },
+    members={"S3": {"target": UNIT}},
 )
 
 CREATE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
@@ -4554,8 +3911,7 @@ CREATE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreatePublishingDestinationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -4568,7 +3924,6 @@ CREATE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
         "DestinationType": {
             "target": DESTINATION_TYPE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationType"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4576,7 +3931,6 @@ CREATE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
         "DestinationProperties": {
             "target": DESTINATION_PROPERTIES,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="destinationProperties"
                 ),
@@ -4603,14 +3957,12 @@ CREATE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreatePublishingDestinationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "DestinationId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4638,12 +3990,6 @@ CREATE_PUBLISHING_DESTINATION = Schema(
 FINDING_TYPES = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FindingTypes"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": FINDING_TYPE}},
 )
 
@@ -4653,8 +3999,7 @@ CREATE_SAMPLE_FINDINGS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateSampleFindingsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -4679,8 +4024,7 @@ CREATE_SAMPLE_FINDINGS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateSampleFindingsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -4704,53 +4048,18 @@ CREATE_SAMPLE_FINDINGS = Schema(
 EXPECTED_BUCKET_OWNER = Schema(
     id=ShapeID("com.amazonaws.guardduty#ExpectedBucketOwner"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 12, "max": 12}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[0-9]+$"),
-    ],
 )
 
 THREAT_ENTITY_SET_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ThreatEntitySetFormat"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
     members={
-        "TXT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="TXT")],
-        },
-        "STIX": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="STIX")],
-        },
-        "OTX_CSV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="OTX_CSV")],
-        },
-        "ALIEN_VAULT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ALIEN_VAULT")
-            ],
-        },
-        "PROOF_POINT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROOF_POINT")
-            ],
-        },
-        "FIRE_EYE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FIRE_EYE")],
-        },
+        "TXT": {"target": UNIT},
+        "STIX": {"target": UNIT},
+        "OTX_CSV": {"target": UNIT},
+        "ALIEN_VAULT": {"target": UNIT},
+        "PROOF_POINT": {"target": UNIT},
+        "FIRE_EYE": {"target": UNIT},
     },
 )
 
@@ -4760,8 +4069,7 @@ CREATE_THREAT_ENTITY_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateThreatEntitySetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -4774,7 +4082,6 @@ CREATE_THREAT_ENTITY_SET_INPUT = Schema.collection(
         "Name": {
             "target": NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4782,7 +4089,6 @@ CREATE_THREAT_ENTITY_SET_INPUT = Schema.collection(
         "Format": {
             "target": THREAT_ENTITY_SET_FORMAT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4790,7 +4096,6 @@ CREATE_THREAT_ENTITY_SET_INPUT = Schema.collection(
         "Location": {
             "target": LOCATION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4806,7 +4111,6 @@ CREATE_THREAT_ENTITY_SET_INPUT = Schema.collection(
         "Activate": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4831,14 +4135,12 @@ CREATE_THREAT_ENTITY_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateThreatEntitySetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ThreatEntitySetId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatEntitySetId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4866,41 +4168,13 @@ CREATE_THREAT_ENTITY_SET = Schema(
 THREAT_INTEL_SET_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ThreatIntelSetFormat"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
     members={
-        "TXT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="TXT")],
-        },
-        "STIX": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="STIX")],
-        },
-        "OTX_CSV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="OTX_CSV")],
-        },
-        "ALIEN_VAULT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ALIEN_VAULT")
-            ],
-        },
-        "PROOF_POINT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROOF_POINT")
-            ],
-        },
-        "FIRE_EYE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FIRE_EYE")],
-        },
+        "TXT": {"target": UNIT},
+        "STIX": {"target": UNIT},
+        "OTX_CSV": {"target": UNIT},
+        "ALIEN_VAULT": {"target": UNIT},
+        "PROOF_POINT": {"target": UNIT},
+        "FIRE_EYE": {"target": UNIT},
     },
 )
 
@@ -4910,8 +4184,7 @@ CREATE_THREAT_INTEL_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateThreatIntelSetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -4924,7 +4197,6 @@ CREATE_THREAT_INTEL_SET_INPUT = Schema.collection(
         "Name": {
             "target": NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4932,7 +4204,6 @@ CREATE_THREAT_INTEL_SET_INPUT = Schema.collection(
         "Format": {
             "target": THREAT_INTEL_SET_FORMAT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4940,7 +4211,6 @@ CREATE_THREAT_INTEL_SET_INPUT = Schema.collection(
         "Location": {
             "target": LOCATION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4948,7 +4218,6 @@ CREATE_THREAT_INTEL_SET_INPUT = Schema.collection(
         "Activate": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -4981,14 +4250,12 @@ CREATE_THREAT_INTEL_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateThreatIntelSetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ThreatIntelSetId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatIntelSetId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5016,41 +4283,13 @@ CREATE_THREAT_INTEL_SET = Schema(
 TRUSTED_ENTITY_SET_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#TrustedEntitySetFormat"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
     members={
-        "TXT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="TXT")],
-        },
-        "STIX": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="STIX")],
-        },
-        "OTX_CSV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="OTX_CSV")],
-        },
-        "ALIEN_VAULT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ALIEN_VAULT")
-            ],
-        },
-        "PROOF_POINT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROOF_POINT")
-            ],
-        },
-        "FIRE_EYE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FIRE_EYE")],
-        },
+        "TXT": {"target": UNIT},
+        "STIX": {"target": UNIT},
+        "OTX_CSV": {"target": UNIT},
+        "ALIEN_VAULT": {"target": UNIT},
+        "PROOF_POINT": {"target": UNIT},
+        "FIRE_EYE": {"target": UNIT},
     },
 )
 
@@ -5060,8 +4299,7 @@ CREATE_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateTrustedEntitySetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -5074,7 +4312,6 @@ CREATE_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
         "Name": {
             "target": NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5082,7 +4319,6 @@ CREATE_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
         "Format": {
             "target": TRUSTED_ENTITY_SET_FORMAT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5090,7 +4326,6 @@ CREATE_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
         "Location": {
             "target": LOCATION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5106,7 +4341,6 @@ CREATE_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
         "Activate": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5131,14 +4365,12 @@ CREATE_TRUSTED_ENTITY_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#CreateTrustedEntitySetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "TrustedEntitySetId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="trustedEntitySetId"
                 ),
@@ -5169,48 +4401,13 @@ CRITERION_KEY = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#CriterionKey"),
     shape_type=ShapeType.ENUM,
     members={
-        "EC2_INSTANCE_ARN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EC2_INSTANCE_ARN")
-            ],
-        },
-        "SCAN_ID": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SCAN_ID")],
-        },
-        "ACCOUNT_ID": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACCOUNT_ID")
-            ],
-        },
-        "GUARDDUTY_FINDING_ID": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="GUARDDUTY_FINDING_ID"
-                )
-            ],
-        },
-        "SCAN_START_TIME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SCAN_START_TIME")
-            ],
-        },
-        "SCAN_STATUS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SCAN_STATUS")
-            ],
-        },
-        "SCAN_TYPE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SCAN_TYPE")
-            ],
-        },
+        "EC2_INSTANCE_ARN": {"target": UNIT},
+        "SCAN_ID": {"target": UNIT},
+        "ACCOUNT_ID": {"target": UNIT},
+        "GUARDDUTY_FINDING_ID": {"target": UNIT},
+        "SCAN_START_TIME": {"target": UNIT},
+        "SCAN_STATUS": {"target": UNIT},
+        "SCAN_TYPE": {"target": UNIT},
     },
 )
 
@@ -5218,40 +4415,12 @@ DATA_SOURCE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#DataSource"),
     shape_type=ShapeType.ENUM,
     members={
-        "FLOW_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="FLOW_LOGS")
-            ],
-        },
-        "CLOUD_TRAIL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CLOUD_TRAIL")
-            ],
-        },
-        "DNS_LOGS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DNS_LOGS")],
-        },
-        "S3_LOGS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3_LOGS")],
-        },
-        "KUBERNETES_AUDIT_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="KUBERNETES_AUDIT_LOGS"
-                )
-            ],
-        },
-        "EC2_MALWARE_SCAN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EC2_MALWARE_SCAN")
-            ],
-        },
+        "FLOW_LOGS": {"target": UNIT},
+        "CLOUD_TRAIL": {"target": UNIT},
+        "DNS_LOGS": {"target": UNIT},
+        "S3_LOGS": {"target": UNIT},
+        "KUBERNETES_AUDIT_LOGS": {"target": UNIT},
+        "EC2_MALWARE_SCAN": {"target": UNIT},
     },
 )
 
@@ -5261,7 +4430,6 @@ DNS_LOGS_CONFIGURATION_RESULT = Schema.collection(
         "Status": {
             "target": DATA_SOURCE_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5275,7 +4443,6 @@ FLOW_LOGS_CONFIGURATION_RESULT = Schema.collection(
         "Status": {
             "target": DATA_SOURCE_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5289,7 +4456,6 @@ KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT = Schema.collection(
         "Status": {
             "target": DATA_SOURCE_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5303,7 +4469,6 @@ KUBERNETES_CONFIGURATION_RESULT = Schema.collection(
         "AuditLogs": {
             "target": KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="auditLogs"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5317,7 +4482,6 @@ S3_LOGS_CONFIGURATION_RESULT = Schema.collection(
         "Status": {
             "target": DATA_SOURCE_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5331,7 +4495,6 @@ DATA_SOURCE_CONFIGURATIONS_RESULT = Schema.collection(
         "CloudTrail": {
             "target": CLOUD_TRAIL_CONFIGURATION_RESULT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="cloudTrail"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5339,7 +4502,6 @@ DATA_SOURCE_CONFIGURATIONS_RESULT = Schema.collection(
         "DNSLogs": {
             "target": DNS_LOGS_CONFIGURATION_RESULT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="dnsLogs"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5347,7 +4509,6 @@ DATA_SOURCE_CONFIGURATIONS_RESULT = Schema.collection(
         "FlowLogs": {
             "target": FLOW_LOGS_CONFIGURATION_RESULT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="flowLogs"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5355,7 +4516,6 @@ DATA_SOURCE_CONFIGURATIONS_RESULT = Schema.collection(
         "S3Logs": {
             "target": S3_LOGS_CONFIGURATION_RESULT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Logs"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5413,14 +4573,12 @@ DECLINE_INVITATIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeclineInvitationsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "AccountIds": {
             "target": ACCOUNT_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5434,14 +4592,12 @@ DECLINE_INVITATIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeclineInvitationsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "UnprocessedAccounts": {
             "target": UNPROCESSED_ACCOUNTS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
                 ),
@@ -5482,14 +4638,123 @@ DEFAULT_SERVER_SIDE_ENCRYPTION = Schema.collection(
     },
 )
 
+DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationRequest",
+        )
+    ],
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "AssociationId": {
+            "target": ASSOCIATION_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+    },
+)
+
+DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationResponse",
+        )
+    ],
+)
+
+DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION = Schema(
+    id=ShapeID("com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociation"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "method": "DELETE",
+                    "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
+                    "code": 200,
+                }
+            ),
+        )
+    ],
+)
+
+DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationInput"
+    ),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationRequest",
+        )
+    ],
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "Mode": {
+            "target": ASSOCIATION_MODE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="mode"),
+            ],
+        },
+    },
+)
+
+DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationOutput"
+    ),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationResponse",
+        )
+    ],
+)
+
+DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = Schema(
+    id=ShapeID("com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfiguration"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "method": "DELETE",
+                    "uri": "/custom-detection-rule/org-configuration/{RuleId}",
+                    "code": 200,
+                }
+            ),
+        )
+    ],
+)
+
 DELETE_DETECTOR_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#DeleteDetectorInput"),
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteDetectorRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -5508,8 +4773,7 @@ DELETE_DETECTOR_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteDetectorResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -5532,8 +4796,7 @@ DELETE_FILTER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteFilterRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -5559,8 +4822,7 @@ DELETE_FILTER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteFilterResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -5587,14 +4849,12 @@ DELETE_INVITATIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteInvitationsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "AccountIds": {
             "target": ACCOUNT_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5608,14 +4868,12 @@ DELETE_INVITATIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteInvitationsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "UnprocessedAccounts": {
             "target": UNPROCESSED_ACCOUNTS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
                 ),
@@ -5644,8 +4902,7 @@ DELETE_IP_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteIPSetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -5658,7 +4915,6 @@ DELETE_IP_SET_INPUT = Schema.collection(
         "IpSetId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -5672,8 +4928,7 @@ DELETE_IP_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteIPSetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -5700,14 +4955,12 @@ DELETE_MALWARE_PROTECTION_PLAN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteMalwareProtectionPlanRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "MalwareProtectionPlanId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -5720,27 +4973,8 @@ DELETE_MALWARE_PROTECTION_PLAN_OUTPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={
-        "Message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="message")],
-        },
-        "Type": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
-        },
-    },
 )
 
 DELETE_MALWARE_PROTECTION_PLAN = Schema(
@@ -5766,8 +5000,7 @@ DELETE_MEMBERS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteMembersRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -5780,7 +5013,6 @@ DELETE_MEMBERS_INPUT = Schema.collection(
         "AccountIds": {
             "target": ACCOUNT_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -5794,14 +5026,12 @@ DELETE_MEMBERS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteMembersResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "UnprocessedAccounts": {
             "target": UNPROCESSED_ACCOUNTS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
                 ),
@@ -5834,8 +5064,7 @@ DELETE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeletePublishingDestinationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -5861,8 +5090,7 @@ DELETE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeletePublishingDestinationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -5889,8 +5117,7 @@ DELETE_THREAT_ENTITY_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteThreatEntitySetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -5903,7 +5130,6 @@ DELETE_THREAT_ENTITY_SET_INPUT = Schema.collection(
         "ThreatEntitySetId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -5917,8 +5143,7 @@ DELETE_THREAT_ENTITY_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteThreatEntitySetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -5945,8 +5170,7 @@ DELETE_THREAT_INTEL_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteThreatIntelSetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -5972,8 +5196,7 @@ DELETE_THREAT_INTEL_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteThreatIntelSetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -6000,8 +5223,7 @@ DELETE_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteTrustedEntitySetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -6027,8 +5249,7 @@ DELETE_TRUSTED_ENTITY_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DeleteTrustedEntitySetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -6050,9 +5271,7 @@ DELETE_TRUSTED_ENTITY_SET = Schema(
 )
 
 LONG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#LongValue"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
+    id=ShapeID("com.amazonaws.guardduty#LongValue"), shape_type=ShapeType.LONG
 )
 
 FILTER_CONDITION = Schema.collection(
@@ -6098,12 +5317,6 @@ FILTER_CRITERION = Schema.collection(
 FILTER_CRITERION_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FilterCriterionList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1}),
-        )
-    ],
     members={"member": {"target": FILTER_CRITERION}},
 )
 
@@ -6122,13 +5335,6 @@ FILTER_CRITERIA = Schema.collection(
 INTEGER_VALUE_WITH_MAX = Schema(
     id=ShapeID("com.amazonaws.guardduty#IntegerValueWithMax"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        ),
-    ],
 )
 
 SORT_CRITERIA = Schema.collection(
@@ -6153,8 +5359,7 @@ DESCRIBE_MALWARE_SCANS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DescribeMalwareScansRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -6240,23 +5445,11 @@ VOLUME_DETAILS = Schema.collection(
 )
 
 POSITIVE_LONG = Schema(
-    id=ShapeID("com.amazonaws.guardduty#PositiveLong"),
-    shape_type=ShapeType.LONG,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})),
-    ],
+    id=ShapeID("com.amazonaws.guardduty#PositiveLong"), shape_type=ShapeType.LONG
 )
 
 INSTANCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#InstanceArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:(aws|aws-cn|aws-us-gov):[a-z]+:[a-z]+(-[0-9]+|-[a-z]+)+:([0-9]{12}):[a-z\\-]+\\/[a-zA-Z0-9]*$",
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#InstanceArn"), shape_type=ShapeType.STRING
 )
 
 RESOURCE_DETAILS = Schema.collection(
@@ -6274,16 +5467,7 @@ RESOURCE_DETAILS = Schema.collection(
 SCAN_RESULT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ScanResult"),
     shape_type=ShapeType.ENUM,
-    members={
-        "CLEAN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CLEAN")],
-        },
-        "INFECTED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INFECTED")],
-        },
-    },
+    members={"CLEAN": {"target": UNIT}, "INFECTED": {"target": UNIT}},
 )
 
 SCAN_RESULT_DETAILS = Schema.collection(
@@ -6302,63 +5486,23 @@ SCAN_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ScanStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "RUNNING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="RUNNING")],
-        },
-        "COMPLETED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="COMPLETED")
-            ],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "SKIPPED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SKIPPED")],
-        },
+        "RUNNING": {"target": UNIT},
+        "COMPLETED": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "SKIPPED": {"target": UNIT},
     },
 )
 
 SCAN_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ScanType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "GUARDDUTY_INITIATED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="GUARDDUTY_INITIATED"
-                )
-            ],
-        },
-        "ON_DEMAND": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ON_DEMAND")
-            ],
-        },
-    },
+    members={"GUARDDUTY_INITIATED": {"target": UNIT}, "ON_DEMAND": {"target": UNIT}},
 )
 
 TRIGGER_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#TriggerType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "BACKUP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="BACKUP")],
-        },
-        "GUARDDUTY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="GUARDDUTY")
-            ],
-        },
-    },
+    members={"BACKUP": {"target": UNIT}, "GUARDDUTY": {"target": UNIT}},
 )
 
 TRIGGER_DETAILS = Schema.collection(
@@ -6485,14 +5629,12 @@ DESCRIBE_MALWARE_SCANS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DescribeMalwareScansResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Scans": {
             "target": SCANS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="scans"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -6509,17 +5651,6 @@ DESCRIBE_MALWARE_SCANS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Scans",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -6528,20 +5659,12 @@ DESCRIBE_MALWARE_SCANS = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
 MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#MaxResults"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.guardduty#MaxResults"), shape_type=ShapeType.INTEGER
 )
 
 DESCRIBE_ORGANIZATION_CONFIGURATION_INPUT = Schema.collection(
@@ -6550,8 +5673,7 @@ DESCRIBE_ORGANIZATION_CONFIGURATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DescribeOrganizationConfigurationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -6584,7 +5706,6 @@ ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT = Schema.collection(
         "AutoEnable": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -6598,7 +5719,6 @@ ORGANIZATION_KUBERNETES_CONFIGURATION_RESULT = Schema.collection(
         "AuditLogs": {
             "target": ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="auditLogs"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -6653,7 +5773,6 @@ ORGANIZATION_S3_LOGS_CONFIGURATION_RESULT = Schema.collection(
         "AutoEnable": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -6667,7 +5786,6 @@ ORGANIZATION_DATA_SOURCE_CONFIGURATIONS_RESULT = Schema.collection(
         "S3Logs": {
             "target": ORGANIZATION_S3_LOGS_CONFIGURATION_RESULT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Logs"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -6691,18 +5809,9 @@ ORG_FEATURE_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#OrgFeatureStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "NEW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NEW")],
-        },
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
-        "ALL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ALL")],
-        },
+        "NEW": {"target": UNIT},
+        "NONE": {"target": UNIT},
+        "ALL": {"target": UNIT},
     },
 )
 
@@ -6710,31 +5819,9 @@ ORG_FEATURE_ADDITIONAL_CONFIGURATION = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#OrgFeatureAdditionalConfiguration"),
     shape_type=ShapeType.ENUM,
     members={
-        "EKS_ADDON_MANAGEMENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EKS_ADDON_MANAGEMENT"
-                )
-            ],
-        },
-        "ECS_FARGATE_AGENT_MANAGEMENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="ECS_FARGATE_AGENT_MANAGEMENT",
-                )
-            ],
-        },
-        "EC2_AGENT_MANAGEMENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EC2_AGENT_MANAGEMENT"
-                )
-            ],
-        },
+        "EKS_ADDON_MANAGEMENT": {"target": UNIT},
+        "ECS_FARGATE_AGENT_MANAGEMENT": {"target": UNIT},
+        "EC2_AGENT_MANAGEMENT": {"target": UNIT},
     },
 )
 
@@ -6764,62 +5851,14 @@ ORG_FEATURE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#OrgFeature"),
     shape_type=ShapeType.ENUM,
     members={
-        "S3_DATA_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3_DATA_EVENTS")
-            ],
-        },
-        "EKS_AUDIT_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EKS_AUDIT_LOGS")
-            ],
-        },
-        "EBS_MALWARE_PROTECTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EBS_MALWARE_PROTECTION"
-                )
-            ],
-        },
-        "RDS_LOGIN_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RDS_LOGIN_EVENTS")
-            ],
-        },
-        "LAMBDA_NETWORK_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="LAMBDA_NETWORK_LOGS"
-                )
-            ],
-        },
-        "EKS_RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EKS_RUNTIME_MONITORING"
-                )
-            ],
-        },
-        "RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="RUNTIME_MONITORING"
-                )
-            ],
-        },
-        "AI_PROTECTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AI_PROTECTION")
-            ],
-        },
+        "S3_DATA_EVENTS": {"target": UNIT},
+        "EKS_AUDIT_LOGS": {"target": UNIT},
+        "EBS_MALWARE_PROTECTION": {"target": UNIT},
+        "RDS_LOGIN_EVENTS": {"target": UNIT},
+        "LAMBDA_NETWORK_LOGS": {"target": UNIT},
+        "EKS_RUNTIME_MONITORING": {"target": UNIT},
+        "RUNTIME_MONITORING": {"target": UNIT},
+        "AI_PROTECTION": {"target": UNIT},
     },
 )
 
@@ -6859,28 +5898,18 @@ DESCRIBE_ORGANIZATION_CONFIGURATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DescribeOrganizationConfigurationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "AutoEnable": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This field is deprecated, use AutoEnableOrganizationMembers instead"
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable"),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable")
             ],
         },
         "MemberAccountLimitReached": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="memberAccountLimitReached"
                 ),
@@ -6890,15 +5919,7 @@ DESCRIBE_ORGANIZATION_CONFIGURATION_OUTPUT = Schema.collection(
         "DataSources": {
             "target": ORGANIZATION_DATA_SOURCE_CONFIGURATIONS_RESULT,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This parameter is deprecated, use Features instead"
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources"),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
             ],
         },
         "Features": {
@@ -6926,21 +5947,11 @@ DESCRIBE_ORGANIZATION_CONFIGURATION = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/detector/{DetectorId}/admin", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
@@ -6950,8 +5961,7 @@ DESCRIBE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DescribePublishingDestinationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -6974,40 +5984,11 @@ DESCRIBE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
 PUBLISHING_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#PublishingStatus"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
     members={
-        "PENDING_VERIFICATION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="PENDING_VERIFICATION"
-                )
-            ],
-        },
-        "PUBLISHING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PUBLISHING")
-            ],
-        },
-        "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY",
-                )
-            ],
-        },
-        "STOPPED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="STOPPED")],
-        },
+        "PENDING_VERIFICATION": {"target": UNIT},
+        "PUBLISHING": {"target": UNIT},
+        "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY": {"target": UNIT},
+        "STOPPED": {"target": UNIT},
     },
 )
 
@@ -7017,14 +5998,12 @@ DESCRIBE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DescribePublishingDestinationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "DestinationId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7032,7 +6011,6 @@ DESCRIBE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
         "DestinationType": {
             "target": DESTINATION_TYPE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationType"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7040,7 +6018,6 @@ DESCRIBE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
         "Status": {
             "target": PUBLISHING_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7048,7 +6025,6 @@ DESCRIBE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
         "PublishingFailureStartTimestamp": {
             "target": LONG,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"),
                     value="publishingFailureStartTimestamp",
@@ -7059,7 +6035,6 @@ DESCRIBE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
         "DestinationProperties": {
             "target": DESTINATION_PROPERTIES,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="destinationProperties"
                 ),
@@ -7096,7 +6071,6 @@ DESTINATION = Schema.collection(
         "DestinationId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7104,7 +6078,6 @@ DESTINATION = Schema.collection(
         "DestinationType": {
             "target": DESTINATION_TYPE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationType"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7112,7 +6085,6 @@ DESTINATION = Schema.collection(
         "Status": {
             "target": PUBLISHING_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7129,27 +6101,12 @@ DESTINATIONS = Schema.collection(
 SEQUENCE_DESCRIPTION = Schema(
     id=ShapeID("com.amazonaws.guardduty#SequenceDescription"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 4096}),
-        )
-    ],
 )
 
 NETWORK_DIRECTION = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#NetworkDirection"),
     shape_type=ShapeType.ENUM,
-    members={
-        "INBOUND": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INBOUND")],
-        },
-        "OUTBOUND": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="OUTBOUND")],
-        },
-    },
+    members={"INBOUND": {"target": UNIT}, "OUTBOUND": {"target": UNIT}},
 )
 
 NETWORK_CONNECTION = Schema.collection(
@@ -7158,7 +6115,6 @@ NETWORK_CONNECTION = Schema.collection(
         "Direction": {
             "target": NETWORK_DIRECTION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="direction"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7172,7 +6128,6 @@ NETWORK_GEO_LOCATION = Schema.collection(
         "City": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="city"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7180,7 +6135,6 @@ NETWORK_GEO_LOCATION = Schema.collection(
         "Country": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="country"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7188,7 +6142,6 @@ NETWORK_GEO_LOCATION = Schema.collection(
         "Latitude": {
             "target": DOUBLE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="lat"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7196,7 +6149,6 @@ NETWORK_GEO_LOCATION = Schema.collection(
         "Longitude": {
             "target": DOUBLE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="lon"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7210,7 +6162,6 @@ NETWORK_ENDPOINT = Schema.collection(
         "Id": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="id"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -7249,12 +6200,6 @@ NETWORK_ENDPOINT = Schema.collection(
 NETWORK_ENDPOINTS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#NetworkEndpoints"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 400}),
-        )
-    ],
     members={"member": {"target": NETWORK_ENDPOINT}},
 )
 
@@ -7372,9 +6317,6 @@ EC2_INSTANCE = Schema.collection(
 LAUNCH_TEMPLATE_VERSION = Schema(
     id=ShapeID("com.amazonaws.guardduty#LaunchTemplateVersion"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 256}))
-    ],
 )
 
 EC2_LAUNCH_TEMPLATE = Schema.collection(
@@ -7495,30 +6437,11 @@ ECS_CLUSTER_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#EcsClusterStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "PROVISIONING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROVISIONING")
-            ],
-        },
-        "DEPROVISIONING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DEPROVISIONING")
-            ],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "INACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INACTIVE")],
-        },
+        "ACTIVE": {"target": UNIT},
+        "PROVISIONING": {"target": UNIT},
+        "DEPROVISIONING": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "INACTIVE": {"target": UNIT},
     },
 )
 
@@ -7541,16 +6464,7 @@ ECS_CLUSTER = Schema.collection(
 ECS_LAUNCH_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#EcsLaunchType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "FARGATE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FARGATE")],
-        },
-        "EC2": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="EC2")],
-        },
-    },
+    members={"FARGATE": {"target": UNIT}, "EC2": {"target": UNIT}},
 )
 
 ECS_TASK = Schema.collection(
@@ -7625,50 +6539,14 @@ KUBERNETES_RESOURCES_TYPES = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#KubernetesResourcesTypes"),
     shape_type=ShapeType.ENUM,
     members={
-        "PODS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PODS")],
-        },
-        "JOBS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="JOBS")],
-        },
-        "CRONJOBS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CRONJOBS")],
-        },
-        "DEPLOYMENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DEPLOYMENTS")
-            ],
-        },
-        "DAEMONSETS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DAEMONSETS")
-            ],
-        },
-        "STATEFULSETS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="STATEFULSETS")
-            ],
-        },
-        "REPLICASETS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="REPLICASETS")
-            ],
-        },
-        "REPLICATIONCONTROLLERS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="REPLICATIONCONTROLLERS"
-                )
-            ],
-        },
+        "PODS": {"target": UNIT},
+        "JOBS": {"target": UNIT},
+        "CRONJOBS": {"target": UNIT},
+        "DEPLOYMENTS": {"target": UNIT},
+        "DAEMONSETS": {"target": UNIT},
+        "STATEFULSETS": {"target": UNIT},
+        "REPLICASETS": {"target": UNIT},
+        "REPLICATIONCONTROLLERS": {"target": UNIT},
     },
 )
 
@@ -7695,52 +6573,19 @@ KUBERNETES_WORKLOAD = Schema.collection(
 PUBLIC_ACCESS_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#PublicAccessStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "BLOCKED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="BLOCKED")],
-        },
-        "ALLOWED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ALLOWED")],
-        },
-    },
+    members={"BLOCKED": {"target": UNIT}, "ALLOWED": {"target": UNIT}},
 )
 
 PUBLIC_ACL_IGNORE_BEHAVIOR = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#PublicAclIgnoreBehavior"),
     shape_type=ShapeType.ENUM,
-    members={
-        "IGNORED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="IGNORED")],
-        },
-        "NOT_IGNORED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOT_IGNORED")
-            ],
-        },
-    },
+    members={"IGNORED": {"target": UNIT}, "NOT_IGNORED": {"target": UNIT}},
 )
 
 PUBLIC_BUCKET_RESTRICT_BEHAVIOR = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#PublicBucketRestrictBehavior"),
     shape_type=ShapeType.ENUM,
-    members={
-        "RESTRICTED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RESTRICTED")
-            ],
-        },
-        "NOT_RESTRICTED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOT_RESTRICTED")
-            ],
-        },
-    },
+    members={"RESTRICTED": {"target": UNIT}, "NOT_RESTRICTED": {"target": UNIT}},
 )
 
 PUBLIC_ACCESS_CONFIGURATION = Schema.collection(
@@ -7960,6 +6805,12 @@ RESOURCE_DATA = Schema.collection(
                 )
             ],
         },
+        "BedrockGuardrail": {
+            "target": BEDROCK_GUARDRAIL_RESOURCE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="bedrockGuardrail")
+            ],
+        },
     },
 )
 
@@ -7967,111 +6818,32 @@ FINDING_RESOURCE_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FindingResourceType"),
     shape_type=ShapeType.ENUM,
     members={
-        "EC2_INSTANCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EC2_INSTANCE")
-            ],
-        },
-        "EC2_NETWORK_INTERFACE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EC2_NETWORK_INTERFACE"
-                )
-            ],
-        },
-        "S3_BUCKET": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3_BUCKET")
-            ],
-        },
-        "S3_OBJECT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3_OBJECT")
-            ],
-        },
-        "ACCESS_KEY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACCESS_KEY")
-            ],
-        },
-        "EKS_CLUSTER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EKS_CLUSTER")
-            ],
-        },
-        "KUBERNETES_WORKLOAD": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="KUBERNETES_WORKLOAD"
-                )
-            ],
-        },
-        "CONTAINER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CONTAINER")
-            ],
-        },
-        "ECS_CLUSTER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ECS_CLUSTER")
-            ],
-        },
-        "ECS_TASK": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ECS_TASK")],
-        },
-        "AUTOSCALING_AUTO_SCALING_GROUP": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="AUTOSCALING_AUTO_SCALING_GROUP",
-                )
-            ],
-        },
-        "IAM_INSTANCE_PROFILE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="IAM_INSTANCE_PROFILE"
-                )
-            ],
-        },
-        "CLOUDFORMATION_STACK": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CLOUDFORMATION_STACK"
-                )
-            ],
-        },
-        "EC2_LAUNCH_TEMPLATE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EC2_LAUNCH_TEMPLATE"
-                )
-            ],
-        },
-        "EC2_VPC": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="EC2_VPC")],
-        },
-        "EC2_IMAGE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EC2_IMAGE")
-            ],
-        },
+        "EC2_INSTANCE": {"target": UNIT},
+        "EC2_NETWORK_INTERFACE": {"target": UNIT},
+        "S3_BUCKET": {"target": UNIT},
+        "S3_OBJECT": {"target": UNIT},
+        "ACCESS_KEY": {"target": UNIT},
+        "EKS_CLUSTER": {"target": UNIT},
+        "KUBERNETES_WORKLOAD": {"target": UNIT},
+        "CONTAINER": {"target": UNIT},
+        "ECS_CLUSTER": {"target": UNIT},
+        "ECS_TASK": {"target": UNIT},
+        "AUTOSCALING_AUTO_SCALING_GROUP": {"target": UNIT},
+        "IAM_INSTANCE_PROFILE": {"target": UNIT},
+        "CLOUDFORMATION_STACK": {"target": UNIT},
+        "EC2_LAUNCH_TEMPLATE": {"target": UNIT},
+        "EC2_VPC": {"target": UNIT},
+        "EC2_IMAGE": {"target": UNIT},
+        "BEDROCK_CUSTOM_MODEL": {"target": UNIT},
+        "BEDROCK_IMPORTED_MODEL": {"target": UNIT},
+        "BEDROCK_PROVISIONED_MODEL": {"target": UNIT},
+        "BEDROCK_CUSTOM_MODEL_DEPLOYMENT": {"target": UNIT},
+        "BEDROCK_INFERENCE_PROFILE": {"target": UNIT},
+        "BEDROCK_APPLICATION_INFERENCE_PROFILE": {"target": UNIT},
+        "BEDROCK_PROMPT": {"target": UNIT},
+        "BEDROCK_PROMPT_ROUTER": {"target": UNIT},
+        "BEDROCK_GUARDRAIL": {"target": UNIT},
+        "SAGEMAKER_ENDPOINT": {"target": UNIT},
     },
 )
 
@@ -8101,7 +6873,6 @@ RESOURCE_V2 = Schema.collection(
         "Uid": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8117,7 +6888,6 @@ RESOURCE_V2 = Schema.collection(
         "ResourceType": {
             "target": FINDING_RESOURCE_TYPE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceType"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8150,12 +6920,6 @@ RESOURCE_V2 = Schema.collection(
 RESOURCES = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Resources"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 400}),
-        )
-    ],
     members={"member": {"target": RESOURCE_V2}},
 )
 
@@ -8163,186 +6927,43 @@ INDICATOR_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#IndicatorType"),
     shape_type=ShapeType.ENUM,
     members={
-        "SUSPICIOUS_USER_AGENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="SUSPICIOUS_USER_AGENT"
-                )
-            ],
-        },
-        "SUSPICIOUS_NETWORK": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="SUSPICIOUS_NETWORK"
-                )
-            ],
-        },
-        "MALICIOUS_IP": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MALICIOUS_IP")
-            ],
-        },
-        "TOR_IP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="TOR_IP")],
-        },
-        "ATTACK_TACTIC": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ATTACK_TACTIC")
-            ],
-        },
-        "HIGH_RISK_API": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="HIGH_RISK_API")
-            ],
-        },
-        "ATTACK_TECHNIQUE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ATTACK_TECHNIQUE")
-            ],
-        },
-        "UNUSUAL_API_FOR_ACCOUNT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="UNUSUAL_API_FOR_ACCOUNT"
-                )
-            ],
-        },
-        "UNUSUAL_ASN_FOR_ACCOUNT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="UNUSUAL_ASN_FOR_ACCOUNT"
-                )
-            ],
-        },
-        "UNUSUAL_ASN_FOR_USER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="UNUSUAL_ASN_FOR_USER"
-                )
-            ],
-        },
-        "SUSPICIOUS_PROCESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="SUSPICIOUS_PROCESS"
-                )
-            ],
-        },
-        "MALICIOUS_DOMAIN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MALICIOUS_DOMAIN")
-            ],
-        },
-        "MALICIOUS_PROCESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MALICIOUS_PROCESS")
-            ],
-        },
-        "CRYPTOMINING_IP": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CRYPTOMINING_IP")
-            ],
-        },
-        "CRYPTOMINING_DOMAIN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CRYPTOMINING_DOMAIN"
-                )
-            ],
-        },
-        "CRYPTOMINING_PROCESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CRYPTOMINING_PROCESS"
-                )
-            ],
-        },
-        "MALICIOUS_FILE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MALICIOUS_FILE")
-            ],
-        },
-        "VULNERABILITY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="VULNERABILITY")
-            ],
-        },
-        "MALICIOUS_PACKAGE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MALICIOUS_PACKAGE")
-            ],
-        },
-        "MISCONFIGURATION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MISCONFIGURATION")
-            ],
-        },
-        "REACHABILITY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="REACHABILITY")
-            ],
-        },
-        "SENSITIVE_DATA": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SENSITIVE_DATA")
-            ],
-        },
+        "SUSPICIOUS_USER_AGENT": {"target": UNIT},
+        "SUSPICIOUS_NETWORK": {"target": UNIT},
+        "MALICIOUS_IP": {"target": UNIT},
+        "TOR_IP": {"target": UNIT},
+        "ATTACK_TACTIC": {"target": UNIT},
+        "HIGH_RISK_API": {"target": UNIT},
+        "ATTACK_TECHNIQUE": {"target": UNIT},
+        "UNUSUAL_API_FOR_ACCOUNT": {"target": UNIT},
+        "UNUSUAL_ASN_FOR_ACCOUNT": {"target": UNIT},
+        "UNUSUAL_ASN_FOR_USER": {"target": UNIT},
+        "SUSPICIOUS_PROCESS": {"target": UNIT},
+        "MALICIOUS_DOMAIN": {"target": UNIT},
+        "MALICIOUS_PROCESS": {"target": UNIT},
+        "CRYPTOMINING_IP": {"target": UNIT},
+        "CRYPTOMINING_DOMAIN": {"target": UNIT},
+        "CRYPTOMINING_PROCESS": {"target": UNIT},
+        "MALICIOUS_FILE": {"target": UNIT},
+        "VULNERABILITY": {"target": UNIT},
+        "MALICIOUS_PACKAGE": {"target": UNIT},
+        "MISCONFIGURATION": {"target": UNIT},
+        "REACHABILITY": {"target": UNIT},
+        "SENSITIVE_DATA": {"target": UNIT},
     },
 )
 
 INDICATOR_TITLE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#IndicatorTitle"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#IndicatorTitle"), shape_type=ShapeType.STRING
 )
 
 INDICATOR_VALUE_STRING = Schema(
     id=ShapeID("com.amazonaws.guardduty#IndicatorValueString"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        )
-    ],
 )
 
 INDICATOR_VALUES = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#IndicatorValues"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 400}),
-        )
-    ],
     members={"member": {"target": INDICATOR_VALUE_STRING}},
 )
 
@@ -8352,7 +6973,6 @@ INDICATOR = Schema.collection(
         "Key": {
             "target": INDICATOR_TYPE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="key"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8371,47 +6991,22 @@ INDICATOR = Schema.collection(
 INDICATORS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Indicators"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 400}),
-        )
-    ],
     members={"member": {"target": INDICATOR}},
 )
 
 SIGNAL_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#SignalDescription"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 2000}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#SignalDescription"), shape_type=ShapeType.STRING
 )
 
 ENDPOINT_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#EndpointIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 400}),
-        )
-    ],
     members={"member": {"target": STRING}},
 )
 
 RESOURCE_UIDS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ResourceUids"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 400}),
-        )
-    ],
     members={"member": {"target": STRING}},
 )
 
@@ -8419,46 +7014,13 @@ SIGNAL_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#SignalType"),
     shape_type=ShapeType.ENUM,
     members={
-        "FINDING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FINDING")],
-        },
-        "CLOUD_TRAIL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CLOUD_TRAIL")
-            ],
-        },
-        "S3_DATA_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3_DATA_EVENTS")
-            ],
-        },
-        "EKS_AUDIT_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EKS_AUDIT_LOGS")
-            ],
-        },
-        "FLOW_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="FLOW_LOGS")
-            ],
-        },
-        "DNS_LOGS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DNS_LOGS")],
-        },
-        "RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="RUNTIME_MONITORING"
-                )
-            ],
-        },
+        "FINDING": {"target": UNIT},
+        "CLOUD_TRAIL": {"target": UNIT},
+        "S3_DATA_EVENTS": {"target": UNIT},
+        "EKS_AUDIT_LOGS": {"target": UNIT},
+        "FLOW_LOGS": {"target": UNIT},
+        "DNS_LOGS": {"target": UNIT},
+        "RUNTIME_MONITORING": {"target": UNIT},
     },
 )
 
@@ -8468,7 +7030,6 @@ SIGNAL = Schema.collection(
         "Uid": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8476,7 +7037,6 @@ SIGNAL = Schema.collection(
         "Type": {
             "target": SIGNAL_TYPE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="type"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8490,7 +7050,6 @@ SIGNAL = Schema.collection(
         "Name": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8498,7 +7057,6 @@ SIGNAL = Schema.collection(
         "CreatedAt": {
             "target": TIMESTAMP,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8506,7 +7064,6 @@ SIGNAL = Schema.collection(
         "UpdatedAt": {
             "target": TIMESTAMP,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8514,7 +7071,6 @@ SIGNAL = Schema.collection(
         "FirstSeenAt": {
             "target": TIMESTAMP,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="firstSeenAt"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8522,7 +7078,6 @@ SIGNAL = Schema.collection(
         "LastSeenAt": {
             "target": TIMESTAMP,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="lastSeenAt"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8534,7 +7089,6 @@ SIGNAL = Schema.collection(
         "Count": {
             "target": INTEGER,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="count"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8561,18 +7115,18 @@ SIGNAL = Schema.collection(
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="signalIndicators")
             ],
         },
+        "Activities": {
+            "target": ACTIVITIES,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="activities")
+            ],
+        },
     },
 )
 
 SIGNALS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Signals"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        )
-    ],
     members={"member": {"target": SIGNAL}},
 )
 
@@ -8582,7 +7136,6 @@ SEQUENCE = Schema.collection(
         "Uid": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8590,7 +7143,6 @@ SEQUENCE = Schema.collection(
         "Description": {
             "target": SEQUENCE_DESCRIPTION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="description"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8610,7 +7162,6 @@ SEQUENCE = Schema.collection(
         "Signals": {
             "target": SIGNALS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="signals"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8646,21 +7197,241 @@ DETECTION = Schema.collection(
     },
 )
 
+DETECTION_RULE_CONFIGURATION_STATUS = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleConfigurationStatus"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "ACTIVE": {"target": UNIT},
+        "PROCESSING": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+    },
+)
+
+DETECTION_RULE_DATA_SOURCE = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleDataSource"),
+    shape_type=ShapeType.ENUM,
+    members={"CLOUDTRAIL_MANAGEMENT_EVENT": {"target": UNIT}},
+)
+
+DETECTION_RULE_DESCRIPTION = Schema(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleDescription"),
+    shape_type=ShapeType.STRING,
+)
+
+DETECTION_RULE_FILTER_CONDITION = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleFilterCondition"),
+    shape_type=ShapeType.ENUM,
+    members={"EQUALS": {"target": UNIT}, "CONTAINS": {"target": UNIT}},
+)
+
+FILTER_FIELD_NAME = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#FilterFieldName"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "NAME": {"target": UNIT},
+        "DESCRIPTION": {"target": UNIT},
+        "DATA_SOURCE": {"target": UNIT},
+        "SEVERITY": {"target": UNIT},
+        "TACTIC": {"target": UNIT},
+        "TECHNIQUE": {"target": UNIT},
+        "SERVICE": {"target": UNIT},
+    },
+)
+
+DETECTION_RULE_FILTER_VALUE = Schema(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleFilterValue"),
+    shape_type=ShapeType.STRING,
+)
+
+DETECTION_RULE_FILTER_VALUES = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleFilterValues"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": DETECTION_RULE_FILTER_VALUE}},
+)
+
+DETECTION_RULE_FILTER = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleFilter"),
+    members={
+        "Name": {
+            "target": FILTER_FIELD_NAME,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Values": {
+            "target": DETECTION_RULE_FILTER_VALUES,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="values"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Condition": {
+            "target": DETECTION_RULE_FILTER_CONDITION,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="condition")],
+        },
+    },
+)
+
+DETECTION_RULE_FILTER_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleFilterList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": DETECTION_RULE_FILTER}},
+)
+
+DETECTION_RULE_MAX_RESULTS = Schema(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleMaxResults"),
+    shape_type=ShapeType.INTEGER,
+)
+
+DETECTION_RULE_ORG_CONFIGURATION = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleOrgConfiguration"),
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Mode": {
+            "target": ASSOCIATION_MODE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Status": {
+            "target": DETECTION_RULE_CONFIGURATION_STATUS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "StatusReason": {
+            "target": STRING,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="statusReason")
+            ],
+        },
+        "IncludeAccountIds": {
+            "target": DETECTION_RULE_ACCOUNT_IDS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="includeAccountIds"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "ExcludeAccountIds": {
+            "target": DETECTION_RULE_ACCOUNT_IDS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="excludeAccountIds"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "CreatedAt": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "UpdatedAt": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "ExpiresAt": {
+            "target": TIMESTAMP,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="expiresAt")],
+        },
+    },
+)
+
+DETECTION_RULE_ORG_CONFIGURATION_SUMMARY = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleOrgConfigurationSummary"),
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Mode": {
+            "target": ASSOCIATION_MODE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Status": {
+            "target": DETECTION_RULE_CONFIGURATION_STATUS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "StatusReason": {
+            "target": STRING,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="statusReason")
+            ],
+        },
+        "CreatedAt": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "UpdatedAt": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "ExpiresAt": {
+            "target": TIMESTAMP,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="expiresAt")],
+        },
+    },
+)
+
+DETECTION_RULE_ORG_CONFIGURATION_SUMMARY_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleOrgConfigurationSummaryList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": DETECTION_RULE_ORG_CONFIGURATION_SUMMARY}},
+)
+
+DETECTION_RULE_SERVICE_NAME = Schema(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleServiceName"),
+    shape_type=ShapeType.STRING,
+)
+
+DETECTION_RULE_SEVERITY = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#DetectionRuleSeverity"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "CRITICAL": {"target": UNIT},
+        "HIGH": {"target": UNIT},
+        "MEDIUM": {"target": UNIT},
+        "LOW": {"target": UNIT},
+    },
+)
+
 DETECTION_SOURCE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#DetectionSource"),
     shape_type=ShapeType.ENUM,
-    members={
-        "AMAZON": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="AMAZON")],
-        },
-        "BITDEFENDER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="BITDEFENDER")
-            ],
-        },
-    },
+    members={"AMAZON": {"target": UNIT}, "BITDEFENDER": {"target": UNIT}},
+)
+
+MANAGED_BY = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#ManagedBy"),
+    shape_type=ShapeType.ENUM,
+    members={"GUARDDUTY_POLICY": {"target": UNIT}},
 )
 
 DETECTOR_ADDITIONAL_CONFIGURATION_RESULT = Schema.collection(
@@ -8678,6 +7449,10 @@ DETECTOR_ADDITIONAL_CONFIGURATION_RESULT = Schema.collection(
             "target": TIMESTAMP,
             "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
         },
+        "ManagedBy": {
+            "target": MANAGED_BY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="managedBy")],
+        },
     },
 )
 
@@ -8691,84 +7466,18 @@ DETECTOR_FEATURE_RESULT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#DetectorFeatureResult"),
     shape_type=ShapeType.ENUM,
     members={
-        "FLOW_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="FLOW_LOGS")
-            ],
-        },
-        "CLOUD_TRAIL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CLOUD_TRAIL")
-            ],
-        },
-        "DNS_LOGS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DNS_LOGS")],
-        },
-        "S3_DATA_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3_DATA_EVENTS")
-            ],
-        },
-        "EKS_AUDIT_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EKS_AUDIT_LOGS")
-            ],
-        },
-        "EBS_MALWARE_PROTECTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EBS_MALWARE_PROTECTION"
-                )
-            ],
-        },
-        "RDS_LOGIN_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RDS_LOGIN_EVENTS")
-            ],
-        },
-        "LAMBDA_NETWORK_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="LAMBDA_NETWORK_LOGS"
-                )
-            ],
-        },
-        "EKS_RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EKS_RUNTIME_MONITORING"
-                )
-            ],
-        },
-        "RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="RUNTIME_MONITORING"
-                )
-            ],
-        },
-        "AI_PROTECTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AI_PROTECTION")
-            ],
-        },
-        "AI_ANALYST": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AI_ANALYST")
-            ],
-        },
+        "FLOW_LOGS": {"target": UNIT},
+        "CLOUD_TRAIL": {"target": UNIT},
+        "DNS_LOGS": {"target": UNIT},
+        "S3_DATA_EVENTS": {"target": UNIT},
+        "EKS_AUDIT_LOGS": {"target": UNIT},
+        "EBS_MALWARE_PROTECTION": {"target": UNIT},
+        "RDS_LOGIN_EVENTS": {"target": UNIT},
+        "LAMBDA_NETWORK_LOGS": {"target": UNIT},
+        "EKS_RUNTIME_MONITORING": {"target": UNIT},
+        "RUNTIME_MONITORING": {"target": UNIT},
+        "AI_PROTECTION": {"target": UNIT},
+        "AI_ANALYST": {"target": UNIT},
     },
 )
 
@@ -8795,6 +7504,10 @@ DETECTOR_FEATURE_CONFIGURATION_RESULT = Schema.collection(
                 )
             ],
         },
+        "ManagedBy": {
+            "target": MANAGED_BY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="managedBy")],
+        },
     },
 )
 
@@ -8807,34 +7520,13 @@ DETECTOR_FEATURE_CONFIGURATIONS_RESULTS = Schema.collection(
 DETECTOR_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#DetectorIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": DETECTOR_ID}},
 )
 
 DETECTOR_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#DetectorStatus"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 DISABLE_ORGANIZATION_ADMIN_ACCOUNT_INPUT = Schema.collection(
@@ -8843,14 +7535,12 @@ DISABLE_ORGANIZATION_ADMIN_ACCOUNT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DisableOrganizationAdminAccountRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "AdminAccountId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="adminAccountId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -8864,8 +7554,7 @@ DISABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DisableOrganizationAdminAccountResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -8888,8 +7577,7 @@ DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DisassociateFromAdministratorAccountRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -8908,8 +7596,7 @@ DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DisassociateFromAdministratorAccountResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -8934,18 +7621,9 @@ DISASSOCIATE_FROM_MASTER_ACCOUNT_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#DisassociateFromMasterAccountInput"),
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#deprecated"),
-            value=MappingProxyType(
-                {
-                    "message": "This input is deprecated, use DisassociateFromAdministratorAccountRequest instead"
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DisassociateFromMasterAccountRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -8962,18 +7640,9 @@ DISASSOCIATE_FROM_MASTER_ACCOUNT_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#DisassociateFromMasterAccountOutput"),
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#deprecated"),
-            value=MappingProxyType(
-                {
-                    "message": "This output is deprecated, use DisassociateFromAdministratorAccountResponse instead"
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DisassociateFromMasterAccountResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -8981,14 +7650,6 @@ DISASSOCIATE_FROM_MASTER_ACCOUNT = Schema(
     id=ShapeID("com.amazonaws.guardduty#DisassociateFromMasterAccount"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#deprecated"),
-            value=MappingProxyType(
-                {
-                    "message": "This operation is deprecated, use DisassociateFromAdministratorAccount instead"
-                }
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -8998,7 +7659,7 @@ DISASSOCIATE_FROM_MASTER_ACCOUNT = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -9008,8 +7669,7 @@ DISASSOCIATE_MEMBERS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DisassociateMembersRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -9022,7 +7682,6 @@ DISASSOCIATE_MEMBERS_INPUT = Schema.collection(
         "AccountIds": {
             "target": ACCOUNT_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -9036,14 +7695,12 @@ DISASSOCIATE_MEMBERS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#DisassociateMembersResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "UnprocessedAccounts": {
             "target": UNPROCESSED_ACCOUNTS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
                 ),
@@ -9098,20 +7755,8 @@ EBS_SNAPSHOT_PRESERVATION = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#EbsSnapshotPreservation"),
     shape_type=ShapeType.ENUM,
     members={
-        "NO_RETENTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NO_RETENTION")
-            ],
-        },
-        "RETENTION_WITH_FINDING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="RETENTION_WITH_FINDING"
-                )
-            ],
-        },
+        "NO_RETENTION": {"target": UNIT},
+        "RETENTION_WITH_FINDING": {"target": UNIT},
     },
 )
 
@@ -9537,14 +8182,12 @@ ENABLE_ORGANIZATION_ADMIN_ACCOUNT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#EnableOrganizationAdminAccountRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "AdminAccountId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="adminAccountId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -9558,8 +8201,7 @@ ENABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#EnableOrganizationAdminAccountResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -9629,39 +8271,17 @@ EVIDENCE = Schema.collection(
 FEEDBACK = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Feedback"),
     shape_type=ShapeType.ENUM,
-    members={
-        "USEFUL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="USEFUL")],
-        },
-        "NOT_USEFUL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOT_USEFUL")
-            ],
-        },
-    },
+    members={"USEFUL": {"target": UNIT}, "NOT_USEFUL": {"target": UNIT}},
 )
 
 FILTER_NAMES = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FilterNames"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": FILTER_NAME}},
 )
 
 FILTER_VERSION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FilterVersion"),
-    shape_type=ShapeType.LONG,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 1})),
-    ],
+    id=ShapeID("com.amazonaws.guardduty#FilterVersion"), shape_type=ShapeType.LONG
 )
 
 NETWORK_INTERFACE = Schema.collection(
@@ -10023,13 +8643,7 @@ MODEL_DETAIL = Schema.collection(
     members={
         "ModelId": {
             "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="modelId"),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 2048}),
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="modelId")],
         }
     },
 )
@@ -10493,20 +9107,7 @@ SERVICE_ADDITIONAL_INFO = Schema.collection(
 SCAN_CATEGORY = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ScanCategory"),
     shape_type=ShapeType.ENUM,
-    members={
-        "FULL_SCAN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="FULL_SCAN")
-            ],
-        },
-        "INCREMENTAL_SCAN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="INCREMENTAL_SCAN")
-            ],
-        },
-    },
+    members={"FULL_SCAN": {"target": UNIT}, "INCREMENTAL_SCAN": {"target": UNIT}},
 )
 
 INCREMENTAL_SCAN_DETAILS = Schema.collection(
@@ -10515,7 +9116,6 @@ INCREMENTAL_SCAN_DETAILS = Schema.collection(
         "BaselineResourceArn": {
             "target": NON_EMPTY_STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="baselineResourceArn"
                 ),
@@ -10549,26 +9149,9 @@ MALWARE_PROTECTION_SCAN_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#MalwareProtectionScanType"),
     shape_type=ShapeType.ENUM,
     members={
-        "BACKUP_INITIATED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="BACKUP_INITIATED")
-            ],
-        },
-        "ON_DEMAND": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ON_DEMAND")
-            ],
-        },
-        "GUARDDUTY_INITIATED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="GUARDDUTY_INITIATED"
-                )
-            ],
-        },
+        "BACKUP_INITIATED": {"target": UNIT},
+        "ON_DEMAND": {"target": UNIT},
+        "GUARDDUTY_INITIATED": {"target": UNIT},
     },
 )
 
@@ -10835,12 +9418,6 @@ PROCESS_DETAILS = Schema.collection(
 RELATED_FILE_PATHS_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#RelatedFilePathsList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 25}),
-        )
-    ],
     members={"member": {"target": STRING}},
 )
 
@@ -11128,7 +9705,6 @@ FINDING = Schema.collection(
         "AccountId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11136,7 +9712,6 @@ FINDING = Schema.collection(
         "Arn": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11150,7 +9725,6 @@ FINDING = Schema.collection(
         "CreatedAt": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11164,7 +9738,6 @@ FINDING = Schema.collection(
         "Id": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="id"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11176,7 +9749,6 @@ FINDING = Schema.collection(
         "Region": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="region"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11184,7 +9756,6 @@ FINDING = Schema.collection(
         "Resource": {
             "target": RESOURCE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="resource"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11192,7 +9763,6 @@ FINDING = Schema.collection(
         "SchemaVersion": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="schemaVersion"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11204,7 +9774,6 @@ FINDING = Schema.collection(
         "Severity": {
             "target": DOUBLE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="severity"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11216,7 +9785,6 @@ FINDING = Schema.collection(
         "Type": {
             "target": FINDING_TYPE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="type"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11224,7 +9792,6 @@ FINDING = Schema.collection(
         "UpdatedAt": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11244,12 +9811,6 @@ FINDING = Schema.collection(
 FINDINGS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Findings"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": FINDING}},
 )
 
@@ -11369,15 +9930,7 @@ FINDING_STATISTICS = Schema.collection(
         "CountBySeverity": {
             "target": COUNT_BY_SEVERITY,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This parameter is deprecated. Please set GroupBy to 'SEVERITY' to return GroupedBySeverity instead."
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="countBySeverity"),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="countBySeverity")
             ],
         },
         "GroupedByAccount": {
@@ -11418,25 +9971,12 @@ FINDING_STATISTICS = Schema.collection(
 FINDING_STATISTIC_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FindingStatisticType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "COUNT_BY_SEVERITY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="COUNT_BY_SEVERITY")
-            ],
-        }
-    },
+    members={"COUNT_BY_SEVERITY": {"target": UNIT}},
 )
 
 FINDING_STATISTIC_TYPES = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#FindingStatisticTypes"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 10}),
-        )
-    ],
     members={"member": {"target": FINDING_STATISTIC_TYPE}},
 )
 
@@ -11446,8 +9986,7 @@ GET_ADMINISTRATOR_ACCOUNT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetAdministratorAccountRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -11466,14 +10005,12 @@ GET_ADMINISTRATOR_ACCOUNT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetAdministratorAccountResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Administrator": {
             "target": ADMINISTRATOR,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="administrator"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11504,8 +10041,7 @@ GET_COVERAGE_STATISTICS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetCoverageStatisticsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -11524,7 +10060,6 @@ GET_COVERAGE_STATISTICS_INPUT = Schema.collection(
         "StatisticsType": {
             "target": COVERAGE_STATISTICS_TYPE_LIST,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="statisticsType"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11538,8 +10073,7 @@ GET_COVERAGE_STATISTICS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetCoverageStatisticsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "CoverageStatistics": {
@@ -11568,14 +10102,332 @@ GET_COVERAGE_STATISTICS = Schema(
     ],
 )
 
+GET_CUSTOM_DETECTION_RULE_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#GetCustomDetectionRuleRequest",
+        )
+    ],
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        }
+    },
+)
+
+RULE_EXPRESSION = Schema(
+    id=ShapeID("com.amazonaws.guardduty#RuleExpression"), shape_type=ShapeType.STRING
+)
+
+RULE_DEFINITION = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#RuleDefinition"),
+    members={
+        "Expression": {
+            "target": RULE_EXPRESSION,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="expression"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        }
+    },
+)
+
+RULE_LANGUAGE = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#RuleLanguage"),
+    shape_type=ShapeType.ENUM,
+    members={"SQL": {"target": UNIT}},
+)
+
+RULE_NAME = Schema(
+    id=ShapeID("com.amazonaws.guardduty#RuleName"), shape_type=ShapeType.STRING
+)
+
+RULE_SCHEMA = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#RuleSchema"),
+    shape_type=ShapeType.ENUM,
+    members={"CLOUD_TRAIL": {"target": UNIT}},
+)
+
+MITRE_TACTIC = Schema(
+    id=ShapeID("com.amazonaws.guardduty#MitreTactic"), shape_type=ShapeType.STRING
+)
+
+MITRE_TECHNIQUE = Schema(
+    id=ShapeID("com.amazonaws.guardduty#MitreTechnique"), shape_type=ShapeType.STRING
+)
+
+RULE_DETAIL = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#RuleDetail"),
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Arn": {
+            "target": DETECTION_RULE_ARN,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Name": {
+            "target": RULE_NAME,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Description": {
+            "target": DETECTION_RULE_DESCRIPTION,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Severity": {
+            "target": DETECTION_RULE_SEVERITY,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="severity"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "DataSource": {
+            "target": DETECTION_RULE_DATA_SOURCE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSource"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Tactic": {
+            "target": MITRE_TACTIC,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="tactic"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Technique": {
+            "target": MITRE_TECHNIQUE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="technique"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Service": {
+            "target": DETECTION_RULE_SERVICE_NAME,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="service"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Definition": {
+            "target": RULE_DEFINITION,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="definition"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Language": {
+            "target": RULE_LANGUAGE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="language")],
+        },
+        "Schema": {
+            "target": RULE_SCHEMA,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="schema")],
+        },
+        "CreatedAt": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "UpdatedAt": {
+            "target": TIMESTAMP,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
+        },
+    },
+)
+
+GET_CUSTOM_DETECTION_RULE_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#GetCustomDetectionRuleResponse",
+        )
+    ],
+    members={
+        "Rule": {
+            "target": RULE_DETAIL,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="rule"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        }
+    },
+)
+
+GET_CUSTOM_DETECTION_RULE = Schema(
+    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRule"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "method": "GET",
+                    "uri": "/custom-detection-rule/rule/{RuleId}",
+                    "code": 200,
+                }
+            ),
+        )
+    ],
+)
+
+GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleAssociationInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#GetCustomDetectionRuleAssociationRequest",
+        )
+    ],
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "AssociationId": {
+            "target": ASSOCIATION_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+    },
+)
+
+GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleAssociationOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#GetCustomDetectionRuleAssociationResponse",
+        )
+    ],
+    members={
+        "RuleAssociation": {
+            "target": ASSOCIATION_DETAIL,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleAssociation"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Tags": {
+            "target": TAG_MAP,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
+        },
+    },
+)
+
+GET_CUSTOM_DETECTION_RULE_ASSOCIATION = Schema(
+    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleAssociation"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "method": "GET",
+                    "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
+                    "code": 200,
+                }
+            ),
+        )
+    ],
+)
+
+GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationRequest",
+        )
+    ],
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "Mode": {
+            "target": ASSOCIATION_MODE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="mode"),
+            ],
+        },
+    },
+)
+
+GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationResponse",
+        )
+    ],
+    members={
+        "Configuration": {
+            "target": DETECTION_RULE_ORG_CONFIGURATION,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="configuration"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        }
+    },
+)
+
+GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = Schema(
+    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfiguration"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "method": "GET",
+                    "uri": "/custom-detection-rule/org-configuration/{RuleId}",
+                    "code": 200,
+                }
+            ),
+        )
+    ],
+)
+
 GET_DETECTOR_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#GetDetectorInput"),
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetDetectorRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -11594,8 +10446,7 @@ GET_DETECTOR_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetDetectorResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "CreatedAt": {
@@ -11614,7 +10465,6 @@ GET_DETECTOR_OUTPUT = Schema.collection(
         "ServiceRole": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="serviceRole"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11622,7 +10472,6 @@ GET_DETECTOR_OUTPUT = Schema.collection(
         "Status": {
             "target": DETECTOR_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11634,15 +10483,7 @@ GET_DETECTOR_OUTPUT = Schema.collection(
         "DataSources": {
             "target": DATA_SOURCE_CONFIGURATIONS_RESULT,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This parameter is deprecated, use Features instead"
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources"),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
             ],
         },
         "Tags": {
@@ -11675,8 +10516,7 @@ GET_FILTER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetFilterRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -11702,14 +10542,12 @@ GET_FILTER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetFilterResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Name": {
             "target": FILTER_NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11723,7 +10561,6 @@ GET_FILTER_OUTPUT = Schema.collection(
         "Action": {
             "target": FILTER_ACTION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="action"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11735,7 +10572,6 @@ GET_FILTER_OUTPUT = Schema.collection(
         "FindingCriteria": {
             "target": FINDING_CRITERIA,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingCriteria"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11782,8 +10618,7 @@ GET_FINDINGS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetFindingsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -11796,7 +10631,6 @@ GET_FINDINGS_INPUT = Schema.collection(
         "FindingIds": {
             "target": FINDING_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11816,14 +10650,12 @@ GET_FINDINGS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetFindingsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Findings": {
             "target": FINDINGS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="findings"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11852,41 +10684,16 @@ GROUP_BY_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#GroupByType"),
     shape_type=ShapeType.ENUM,
     members={
-        "ACCOUNT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACCOUNT")],
-        },
-        "DATE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DATE")],
-        },
-        "FINDING_TYPE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="FINDING_TYPE")
-            ],
-        },
-        "RESOURCE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="RESOURCE")],
-        },
-        "SEVERITY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SEVERITY")],
-        },
+        "ACCOUNT": {"target": UNIT},
+        "DATE": {"target": UNIT},
+        "FINDING_TYPE": {"target": UNIT},
+        "RESOURCE": {"target": UNIT},
+        "SEVERITY": {"target": UNIT},
     },
 )
 
 MAX_RESULTS100 = Schema(
-    id=ShapeID("com.amazonaws.guardduty#MaxResults100"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.guardduty#MaxResults100"), shape_type=ShapeType.INTEGER
 )
 
 GET_FINDINGS_STATISTICS_INPUT = Schema.collection(
@@ -11895,8 +10702,7 @@ GET_FINDINGS_STATISTICS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetFindingsStatisticsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -11910,16 +10716,8 @@ GET_FINDINGS_STATISTICS_INPUT = Schema.collection(
             "target": FINDING_STATISTIC_TYPES,
             "traits": [
                 Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This parameter is deprecated, please use GroupBy instead"
-                        }
-                    ),
-                ),
-                Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="findingStatisticTypes"
-                ),
+                )
             ],
         },
         "FindingCriteria": {
@@ -11951,14 +10749,12 @@ GET_FINDINGS_STATISTICS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetFindingsStatisticsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "FindingStatistics": {
             "target": FINDING_STATISTICS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingStatistics"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -11993,8 +10789,7 @@ GET_INVESTIGATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetInvestigationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -12017,12 +10812,6 @@ GET_INVESTIGATION_INPUT = Schema.collection(
 INVESTIGATION_ERROR_DETAILS = Schema(
     id=ShapeID("com.amazonaws.guardduty#InvestigationErrorDetails"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 2048}),
-        )
-    ],
 )
 
 PRODUCT = Schema.collection(
@@ -12031,7 +10820,6 @@ PRODUCT = Schema.collection(
         "Name": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12049,7 +10837,6 @@ INVESTIGATION_METADATA = Schema.collection(
         "Version": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="version"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12057,7 +10844,6 @@ INVESTIGATION_METADATA = Schema.collection(
         "Product": {
             "target": PRODUCT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="product"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12066,85 +10852,33 @@ INVESTIGATION_METADATA = Schema.collection(
 )
 
 RISK_DETAILS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#RiskDetails"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1024}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#RiskDetails"), shape_type=ShapeType.STRING
 )
 
 RISK_LEVEL = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#RiskLevel"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
     members={
-        "INFO": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Info")],
-        },
-        "LOW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Low")],
-        },
-        "MEDIUM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Medium")],
-        },
-        "HIGH": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="High")],
-        },
-        "CRITICAL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Critical")],
-        },
+        "INFO": {"target": UNIT},
+        "LOW": {"target": UNIT},
+        "MEDIUM": {"target": UNIT},
+        "HIGH": {"target": UNIT},
+        "CRITICAL": {"target": UNIT},
     },
 )
 
 INVESTIGATION_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#InvestigationStatus"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
     members={
-        "RUNNING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="RUNNING")],
-        },
-        "COMPLETED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="COMPLETED")
-            ],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
+        "RUNNING": {"target": UNIT},
+        "COMPLETED": {"target": UNIT},
+        "FAILED": {"target": UNIT},
     },
 )
 
 TRIGGERED_BY = Schema(
-    id=ShapeID("com.amazonaws.guardduty#TriggeredBy"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#TriggeredBy"), shape_type=ShapeType.STRING
 )
 
 INVESTIGATION = Schema.collection(
@@ -12153,7 +10887,6 @@ INVESTIGATION = Schema.collection(
         "InvestigationId": {
             "target": INVESTIGATION_ID,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="investigationId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12161,7 +10894,6 @@ INVESTIGATION = Schema.collection(
         "Status": {
             "target": INVESTIGATION_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12169,7 +10901,6 @@ INVESTIGATION = Schema.collection(
         "TriggerPrompt": {
             "target": TRIGGER_PROMPT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggerPrompt"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12177,7 +10908,6 @@ INVESTIGATION = Schema.collection(
         "TriggeredBy": {
             "target": TRIGGERED_BY,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggeredBy"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12229,14 +10959,12 @@ GET_INVESTIGATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetInvestigationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Investigation": {
             "target": INVESTIGATION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="investigation"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12267,8 +10995,7 @@ GET_INVITATIONS_COUNT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetInvitationsCountRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
 )
 
@@ -12278,8 +11005,7 @@ GET_INVITATIONS_COUNT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetInvitationsCountResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "InvitationsCount": {
@@ -12310,8 +11036,7 @@ GET_IP_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetIPSetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -12324,7 +11049,6 @@ GET_IP_SET_INPUT = Schema.collection(
         "IpSetId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -12335,47 +11059,14 @@ GET_IP_SET_INPUT = Schema.collection(
 IP_SET_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#IpSetStatus"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
     members={
-        "INACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INACTIVE")],
-        },
-        "ACTIVATING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVATING")
-            ],
-        },
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "DEACTIVATING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DEACTIVATING")
-            ],
-        },
-        "ERROR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ERROR")],
-        },
-        "DELETE_PENDING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETE_PENDING")
-            ],
-        },
-        "DELETED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETED")],
-        },
+        "INACTIVE": {"target": UNIT},
+        "ACTIVATING": {"target": UNIT},
+        "ACTIVE": {"target": UNIT},
+        "DEACTIVATING": {"target": UNIT},
+        "ERROR": {"target": UNIT},
+        "DELETE_PENDING": {"target": UNIT},
+        "DELETED": {"target": UNIT},
     },
 )
 
@@ -12385,14 +11076,12 @@ GET_IP_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetIPSetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Name": {
             "target": NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12400,7 +11089,6 @@ GET_IP_SET_OUTPUT = Schema.collection(
         "Format": {
             "target": IP_SET_FORMAT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12408,7 +11096,6 @@ GET_IP_SET_OUTPUT = Schema.collection(
         "Location": {
             "target": LOCATION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12416,7 +11103,6 @@ GET_IP_SET_OUTPUT = Schema.collection(
         "Status": {
             "target": IP_SET_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -12459,14 +11145,12 @@ GET_MALWARE_PROTECTION_PLAN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMalwareProtectionPlanRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "MalwareProtectionPlanId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -12478,18 +11162,9 @@ MALWARE_PROTECTION_PLAN_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "WARNING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="WARNING")],
-        },
-        "ERROR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ERROR")],
-        },
+        "ACTIVE": {"target": UNIT},
+        "WARNING": {"target": UNIT},
+        "ERROR": {"target": UNIT},
     },
 )
 
@@ -12510,12 +11185,6 @@ MALWARE_PROTECTION_PLAN_STATUS_REASON = Schema.collection(
 MALWARE_PROTECTION_PLAN_STATUS_REASONS_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanStatusReasonsList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": MALWARE_PROTECTION_PLAN_STATUS_REASON}},
 )
 
@@ -12525,8 +11194,7 @@ GET_MALWARE_PROTECTION_PLAN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMalwareProtectionPlanResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Arn": {
@@ -12591,14 +11259,12 @@ GET_MALWARE_SCAN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMalwareScanRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ScanId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -12609,75 +11275,21 @@ GET_MALWARE_SCAN_INPUT = Schema.collection(
 NON_NEGATIVE_INTEGER = Schema(
     id=ShapeID("com.amazonaws.guardduty#NonNegativeInteger"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})),
-    ],
 )
 
 MALWARE_PROTECTION_RESOURCE_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#MalwareProtectionResourceType"),
     shape_type=ShapeType.ENUM,
     members={
-        "EBS_RECOVERY_POINT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EBS_RECOVERY_POINT"
-                )
-            ],
-        },
-        "EBS_SNAPSHOT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EBS_SNAPSHOT")
-            ],
-        },
-        "EBS_VOLUME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EBS_VOLUME")
-            ],
-        },
-        "EC2_AMI": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="EC2_AMI")],
-        },
-        "EC2_INSTANCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EC2_INSTANCE")
-            ],
-        },
-        "EC2_RECOVERY_POINT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EC2_RECOVERY_POINT"
-                )
-            ],
-        },
-        "S3_RECOVERY_POINT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3_RECOVERY_POINT")
-            ],
-        },
-        "S3_BUCKET": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3_BUCKET")
-            ],
-        },
-        "S3_POINT_IN_TIME_RECOVERY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="S3_POINT_IN_TIME_RECOVERY",
-                )
-            ],
-        },
+        "EBS_RECOVERY_POINT": {"target": UNIT},
+        "EBS_SNAPSHOT": {"target": UNIT},
+        "EBS_VOLUME": {"target": UNIT},
+        "EC2_AMI": {"target": UNIT},
+        "EC2_INSTANCE": {"target": UNIT},
+        "EC2_RECOVERY_POINT": {"target": UNIT},
+        "S3_RECOVERY_POINT": {"target": UNIT},
+        "S3_BUCKET": {"target": UNIT},
+        "S3_POINT_IN_TIME_RECOVERY": {"target": UNIT},
     },
 )
 
@@ -12751,32 +11363,11 @@ MALWARE_PROTECTION_SCAN_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#MalwareProtectionScanStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "RUNNING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="RUNNING")],
-        },
-        "COMPLETED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="COMPLETED")
-            ],
-        },
-        "COMPLETED_WITH_ISSUES": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="COMPLETED_WITH_ISSUES"
-                )
-            ],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "SKIPPED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SKIPPED")],
-        },
+        "RUNNING": {"target": UNIT},
+        "COMPLETED": {"target": UNIT},
+        "COMPLETED_WITH_ISSUES": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "SKIPPED": {"target": UNIT},
     },
 )
 
@@ -12784,147 +11375,23 @@ SCAN_STATUS_REASON = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ScanStatusReason"),
     shape_type=ShapeType.ENUM,
     members={
-        "ACCESS_DENIED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACCESS_DENIED")
-            ],
-        },
-        "RESOURCE_NOT_FOUND": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="RESOURCE_NOT_FOUND"
-                )
-            ],
-        },
-        "SNAPSHOT_SIZE_LIMIT_EXCEEDED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="SNAPSHOT_SIZE_LIMIT_EXCEEDED",
-                )
-            ],
-        },
-        "RESOURCE_UNAVAILABLE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="RESOURCE_UNAVAILABLE"
-                )
-            ],
-        },
-        "INCONSISTENT_SOURCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="INCONSISTENT_SOURCE"
-                )
-            ],
-        },
-        "INCREMENTAL_NO_DIFFERENCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="INCREMENTAL_NO_DIFFERENCE",
-                )
-            ],
-        },
-        "NO_EBS_VOLUMES_FOUND": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="NO_EBS_VOLUMES_FOUND"
-                )
-            ],
-        },
-        "UNSUPPORTED_PRODUCT_CODE_TYPE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="UNSUPPORTED_PRODUCT_CODE_TYPE",
-                )
-            ],
-        },
-        "AMI_SNAPSHOT_LIMIT_EXCEEDED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="AMI_SNAPSHOT_LIMIT_EXCEEDED",
-                )
-            ],
-        },
-        "UNRELATED_RESOURCES": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="UNRELATED_RESOURCES"
-                )
-            ],
-        },
-        "BASE_RESOURCE_NOT_SCANNED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="BASE_RESOURCE_NOT_SCANNED",
-                )
-            ],
-        },
-        "BASE_CREATED_AFTER_TARGET": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="BASE_CREATED_AFTER_TARGET",
-                )
-            ],
-        },
-        "UNSUPPORTED_FOR_INCREMENTAL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="UNSUPPORTED_FOR_INCREMENTAL",
-                )
-            ],
-        },
-        "UNSUPPORTED_AMI": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="UNSUPPORTED_AMI")
-            ],
-        },
-        "UNSUPPORTED_SNAPSHOT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="UNSUPPORTED_SNAPSHOT"
-                )
-            ],
-        },
-        "UNSUPPORTED_COMPOSITE_RECOVERY_POINT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="UNSUPPORTED_COMPOSITE_RECOVERY_POINT",
-                )
-            ],
-        },
-        "ALL_FILES_SKIPPED_OR_FAILED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="ALL_FILES_SKIPPED_OR_FAILED",
-                )
-            ],
-        },
+        "ACCESS_DENIED": {"target": UNIT},
+        "RESOURCE_NOT_FOUND": {"target": UNIT},
+        "SNAPSHOT_SIZE_LIMIT_EXCEEDED": {"target": UNIT},
+        "RESOURCE_UNAVAILABLE": {"target": UNIT},
+        "INCONSISTENT_SOURCE": {"target": UNIT},
+        "INCREMENTAL_NO_DIFFERENCE": {"target": UNIT},
+        "NO_EBS_VOLUMES_FOUND": {"target": UNIT},
+        "UNSUPPORTED_PRODUCT_CODE_TYPE": {"target": UNIT},
+        "AMI_SNAPSHOT_LIMIT_EXCEEDED": {"target": UNIT},
+        "UNRELATED_RESOURCES": {"target": UNIT},
+        "BASE_RESOURCE_NOT_SCANNED": {"target": UNIT},
+        "BASE_CREATED_AFTER_TARGET": {"target": UNIT},
+        "UNSUPPORTED_FOR_INCREMENTAL": {"target": UNIT},
+        "UNSUPPORTED_AMI": {"target": UNIT},
+        "UNSUPPORTED_SNAPSHOT": {"target": UNIT},
+        "UNSUPPORTED_COMPOSITE_RECOVERY_POINT": {"target": UNIT},
+        "ALL_FILES_SKIPPED_OR_FAILED": {"target": UNIT},
     },
 )
 
@@ -12977,20 +11444,7 @@ SCANNED_RESOURCES = Schema.collection(
 SCAN_RESULT_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ScanResultStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "NO_THREATS_FOUND": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NO_THREATS_FOUND")
-            ],
-        },
-        "THREATS_FOUND": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="THREATS_FOUND")
-            ],
-        },
-    },
+    members={"NO_THREATS_FOUND": {"target": UNIT}, "THREATS_FOUND": {"target": UNIT}},
 )
 
 SCAN_RESULT_THREAT = Schema.collection(
@@ -13087,8 +11541,7 @@ GET_MALWARE_SCAN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMalwareScanResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ScanId": {
@@ -13217,8 +11670,7 @@ GET_MALWARE_SCAN_SETTINGS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMalwareScanSettingsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -13234,14 +11686,7 @@ GET_MALWARE_SCAN_SETTINGS_INPUT = Schema.collection(
 SCAN_CRITERION_KEY = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ScanCriterionKey"),
     shape_type=ShapeType.ENUM,
-    members={
-        "EC2_INSTANCE_TAG": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EC2_INSTANCE_TAG")
-            ],
-        }
-    },
+    members={"EC2_INSTANCE_TAG": {"target": UNIT}},
 )
 
 SCAN_CONDITION_PAIR = Schema.collection(
@@ -13250,7 +11695,6 @@ SCAN_CONDITION_PAIR = Schema.collection(
         "Key": {
             "target": TAG_KEY,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="key"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13274,7 +11718,6 @@ SCAN_CONDITION = Schema.collection(
         "MapEquals": {
             "target": MAP_EQUALS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="mapEquals"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13311,8 +11754,7 @@ GET_MALWARE_SCAN_SETTINGS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMalwareScanSettingsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ScanResourceCriteria": {
@@ -13355,18 +11797,9 @@ GET_MASTER_ACCOUNT_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#GetMasterAccountInput"),
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#deprecated"),
-            value=MappingProxyType(
-                {
-                    "message": "This input is deprecated, use GetAdministratorAccountRequest instead"
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMasterAccountRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -13409,24 +11842,14 @@ GET_MASTER_ACCOUNT_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#GetMasterAccountOutput"),
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#deprecated"),
-            value=MappingProxyType(
-                {
-                    "message": "This output is deprecated, use GetAdministratorAccountResponse instead"
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMasterAccountResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Master": {
             "target": MASTER,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="master"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13439,19 +11862,11 @@ GET_MASTER_ACCOUNT = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#deprecated"),
-            value=MappingProxyType(
-                {
-                    "message": "This operation is deprecated, use GetAdministratorAccount instead"
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/detector/{DetectorId}/master", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
@@ -13461,8 +11876,7 @@ GET_MEMBER_DETECTORS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMemberDetectorsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -13475,7 +11889,6 @@ GET_MEMBER_DETECTORS_INPUT = Schema.collection(
         "AccountIds": {
             "target": ACCOUNT_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13497,6 +11910,10 @@ MEMBER_ADDITIONAL_CONFIGURATION_RESULT = Schema.collection(
         "UpdatedAt": {
             "target": TIMESTAMP,
             "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
+        },
+        "ManagedBy": {
+            "target": MANAGED_BY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="managedBy")],
         },
     },
 )
@@ -13530,6 +11947,10 @@ MEMBER_FEATURES_CONFIGURATION_RESULT = Schema.collection(
                 )
             ],
         },
+        "ManagedBy": {
+            "target": MANAGED_BY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="managedBy")],
+        },
     },
 )
 
@@ -13545,7 +11966,6 @@ MEMBER_DATA_SOURCE_CONFIGURATION = Schema.collection(
         "AccountId": {
             "target": ACCOUNT_ID,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13553,15 +11973,6 @@ MEMBER_DATA_SOURCE_CONFIGURATION = Schema.collection(
         "DataSources": {
             "target": DATA_SOURCE_CONFIGURATIONS_RESULT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This parameter is deprecated, use Features instead"
-                        }
-                    ),
-                ),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13576,12 +11987,6 @@ MEMBER_DATA_SOURCE_CONFIGURATION = Schema.collection(
 MEMBER_DATA_SOURCE_CONFIGURATIONS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#MemberDataSourceConfigurations"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        )
-    ],
     members={"member": {"target": MEMBER_DATA_SOURCE_CONFIGURATION}},
 )
 
@@ -13591,14 +11996,12 @@ GET_MEMBER_DETECTORS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMemberDetectorsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "MemberDataSourceConfigurations": {
             "target": MEMBER_DATA_SOURCE_CONFIGURATIONS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="members"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13606,7 +12009,6 @@ GET_MEMBER_DETECTORS_OUTPUT = Schema.collection(
         "UnprocessedAccounts": {
             "target": UNPROCESSED_ACCOUNTS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
                 ),
@@ -13639,8 +12041,7 @@ GET_MEMBERS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMembersRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -13653,7 +12054,6 @@ GET_MEMBERS_INPUT = Schema.collection(
         "AccountIds": {
             "target": ACCOUNT_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13667,7 +12067,6 @@ MEMBER = Schema.collection(
         "AccountId": {
             "target": ACCOUNT_ID,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13681,7 +12080,6 @@ MEMBER = Schema.collection(
         "MasterId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="masterId"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13689,7 +12087,6 @@ MEMBER = Schema.collection(
         "Email": {
             "target": EMAIL,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="email"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13697,7 +12094,6 @@ MEMBER = Schema.collection(
         "RelationshipStatus": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="relationshipStatus"
                 ),
@@ -13711,7 +12107,6 @@ MEMBER = Schema.collection(
         "UpdatedAt": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13728,12 +12123,6 @@ MEMBER = Schema.collection(
 MEMBERS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Members"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": MEMBER}},
 )
 
@@ -13743,14 +12132,12 @@ GET_MEMBERS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetMembersResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Members": {
             "target": MEMBERS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="members"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -13758,7 +12145,6 @@ GET_MEMBERS_OUTPUT = Schema.collection(
         "UnprocessedAccounts": {
             "target": UNPROCESSED_ACCOUNTS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
                 ),
@@ -13790,8 +12176,7 @@ GET_ORGANIZATION_STATISTICS_INPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
 )
 
@@ -13923,8 +12308,7 @@ GET_ORGANIZATION_STATISTICS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetOrganizationStatisticsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "OrganizationDetails": {
@@ -13957,8 +12341,7 @@ GET_REMAINING_FREE_TRIAL_DAYS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetRemainingFreeTrialDaysRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -13984,8 +12367,7 @@ GET_REMAINING_FREE_TRIAL_DAYS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetRemainingFreeTrialDaysResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Accounts": {
@@ -14026,8 +12408,7 @@ GET_THREAT_ENTITY_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetThreatEntitySetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -14040,7 +12421,6 @@ GET_THREAT_ENTITY_SET_INPUT = Schema.collection(
         "ThreatEntitySetId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -14051,47 +12431,14 @@ GET_THREAT_ENTITY_SET_INPUT = Schema.collection(
 THREAT_ENTITY_SET_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ThreatEntitySetStatus"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
     members={
-        "INACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INACTIVE")],
-        },
-        "ACTIVATING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVATING")
-            ],
-        },
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "DEACTIVATING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DEACTIVATING")
-            ],
-        },
-        "ERROR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ERROR")],
-        },
-        "DELETE_PENDING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETE_PENDING")
-            ],
-        },
-        "DELETED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETED")],
-        },
+        "INACTIVE": {"target": UNIT},
+        "ACTIVATING": {"target": UNIT},
+        "ACTIVE": {"target": UNIT},
+        "DEACTIVATING": {"target": UNIT},
+        "ERROR": {"target": UNIT},
+        "DELETE_PENDING": {"target": UNIT},
+        "DELETED": {"target": UNIT},
     },
 )
 
@@ -14101,14 +12448,12 @@ GET_THREAT_ENTITY_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetThreatEntitySetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Name": {
             "target": NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14116,7 +12461,6 @@ GET_THREAT_ENTITY_SET_OUTPUT = Schema.collection(
         "Format": {
             "target": THREAT_ENTITY_SET_FORMAT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14124,7 +12468,6 @@ GET_THREAT_ENTITY_SET_OUTPUT = Schema.collection(
         "Location": {
             "target": LOCATION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14140,7 +12483,6 @@ GET_THREAT_ENTITY_SET_OUTPUT = Schema.collection(
         "Status": {
             "target": THREAT_ENTITY_SET_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14189,8 +12531,7 @@ GET_THREAT_INTEL_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetThreatIntelSetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -14213,47 +12554,14 @@ GET_THREAT_INTEL_SET_INPUT = Schema.collection(
 THREAT_INTEL_SET_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ThreatIntelSetStatus"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
     members={
-        "INACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INACTIVE")],
-        },
-        "ACTIVATING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVATING")
-            ],
-        },
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "DEACTIVATING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DEACTIVATING")
-            ],
-        },
-        "ERROR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ERROR")],
-        },
-        "DELETE_PENDING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETE_PENDING")
-            ],
-        },
-        "DELETED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETED")],
-        },
+        "INACTIVE": {"target": UNIT},
+        "ACTIVATING": {"target": UNIT},
+        "ACTIVE": {"target": UNIT},
+        "DEACTIVATING": {"target": UNIT},
+        "ERROR": {"target": UNIT},
+        "DELETE_PENDING": {"target": UNIT},
+        "DELETED": {"target": UNIT},
     },
 )
 
@@ -14263,14 +12571,12 @@ GET_THREAT_INTEL_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetThreatIntelSetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Name": {
             "target": NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14278,7 +12584,6 @@ GET_THREAT_INTEL_SET_OUTPUT = Schema.collection(
         "Format": {
             "target": THREAT_INTEL_SET_FORMAT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14286,7 +12591,6 @@ GET_THREAT_INTEL_SET_OUTPUT = Schema.collection(
         "Location": {
             "target": LOCATION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14294,7 +12598,6 @@ GET_THREAT_INTEL_SET_OUTPUT = Schema.collection(
         "Status": {
             "target": THREAT_INTEL_SET_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14337,8 +12640,7 @@ GET_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetTrustedEntitySetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -14361,47 +12663,14 @@ GET_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
 TRUSTED_ENTITY_SET_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#TrustedEntitySetStatus"),
     shape_type=ShapeType.ENUM,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 300}),
-        )
-    ],
     members={
-        "INACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INACTIVE")],
-        },
-        "ACTIVATING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVATING")
-            ],
-        },
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "DEACTIVATING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DEACTIVATING")
-            ],
-        },
-        "ERROR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ERROR")],
-        },
-        "DELETE_PENDING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETE_PENDING")
-            ],
-        },
-        "DELETED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETED")],
-        },
+        "INACTIVE": {"target": UNIT},
+        "ACTIVATING": {"target": UNIT},
+        "ACTIVE": {"target": UNIT},
+        "DEACTIVATING": {"target": UNIT},
+        "ERROR": {"target": UNIT},
+        "DELETE_PENDING": {"target": UNIT},
+        "DELETED": {"target": UNIT},
     },
 )
 
@@ -14411,14 +12680,12 @@ GET_TRUSTED_ENTITY_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetTrustedEntitySetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Name": {
             "target": NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14426,7 +12693,6 @@ GET_TRUSTED_ENTITY_SET_OUTPUT = Schema.collection(
         "Format": {
             "target": TRUSTED_ENTITY_SET_FORMAT,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14434,7 +12700,6 @@ GET_TRUSTED_ENTITY_SET_OUTPUT = Schema.collection(
         "Location": {
             "target": LOCATION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14450,7 +12715,6 @@ GET_TRUSTED_ENTITY_SET_OUTPUT = Schema.collection(
         "Status": {
             "target": TRUSTED_ENTITY_SET_STATUS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14497,105 +12761,20 @@ USAGE_FEATURE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#UsageFeature"),
     shape_type=ShapeType.ENUM,
     members={
-        "FLOW_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="FLOW_LOGS")
-            ],
-        },
-        "CLOUD_TRAIL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CLOUD_TRAIL")
-            ],
-        },
-        "DNS_LOGS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DNS_LOGS")],
-        },
-        "S3_DATA_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="S3_DATA_EVENTS")
-            ],
-        },
-        "EKS_AUDIT_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EKS_AUDIT_LOGS")
-            ],
-        },
-        "EBS_MALWARE_PROTECTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EBS_MALWARE_PROTECTION"
-                )
-            ],
-        },
-        "RDS_LOGIN_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RDS_LOGIN_EVENTS")
-            ],
-        },
-        "LAMBDA_NETWORK_LOGS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="LAMBDA_NETWORK_LOGS"
-                )
-            ],
-        },
-        "EKS_RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EKS_RUNTIME_MONITORING"
-                )
-            ],
-        },
-        "EC2_RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="EC2_RUNTIME_MONITORING"
-                )
-            ],
-        },
-        "FARGATE_RUNTIME_MONITORING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="FARGATE_RUNTIME_MONITORING",
-                )
-            ],
-        },
-        "RDS_DBI_PROTECTION_PROVISIONED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="RDS_DBI_PROTECTION_PROVISIONED",
-                )
-            ],
-        },
-        "RDS_DBI_PROTECTION_SERVERLESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="RDS_DBI_PROTECTION_SERVERLESS",
-                )
-            ],
-        },
-        "AI_PROTECTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AI_PROTECTION")
-            ],
-        },
+        "FLOW_LOGS": {"target": UNIT},
+        "CLOUD_TRAIL": {"target": UNIT},
+        "DNS_LOGS": {"target": UNIT},
+        "S3_DATA_EVENTS": {"target": UNIT},
+        "EKS_AUDIT_LOGS": {"target": UNIT},
+        "EBS_MALWARE_PROTECTION": {"target": UNIT},
+        "RDS_LOGIN_EVENTS": {"target": UNIT},
+        "LAMBDA_NETWORK_LOGS": {"target": UNIT},
+        "EKS_RUNTIME_MONITORING": {"target": UNIT},
+        "EC2_RUNTIME_MONITORING": {"target": UNIT},
+        "FARGATE_RUNTIME_MONITORING": {"target": UNIT},
+        "RDS_DBI_PROTECTION_PROVISIONED": {"target": UNIT},
+        "RDS_DBI_PROTECTION_SERVERLESS": {"target": UNIT},
+        "AI_PROTECTION": {"target": UNIT},
     },
 )
 
@@ -14623,15 +12802,7 @@ USAGE_CRITERIA = Schema.collection(
         "DataSources": {
             "target": DATA_SOURCE_LIST,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This parameter is deprecated, use Features instead"
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources"),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
             ],
         },
         "Resources": {
@@ -14649,46 +12820,12 @@ USAGE_STATISTIC_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#UsageStatisticType"),
     shape_type=ShapeType.ENUM,
     members={
-        "SUM_BY_ACCOUNT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUM_BY_ACCOUNT")
-            ],
-        },
-        "SUM_BY_DATA_SOURCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="SUM_BY_DATA_SOURCE"
-                )
-            ],
-        },
-        "SUM_BY_RESOURCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUM_BY_RESOURCE")
-            ],
-        },
-        "TOP_RESOURCES": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="TOP_RESOURCES")
-            ],
-        },
-        "SUM_BY_FEATURES": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUM_BY_FEATURES")
-            ],
-        },
-        "TOP_ACCOUNTS_BY_FEATURE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="TOP_ACCOUNTS_BY_FEATURE"
-                )
-            ],
-        },
+        "SUM_BY_ACCOUNT": {"target": UNIT},
+        "SUM_BY_DATA_SOURCE": {"target": UNIT},
+        "SUM_BY_RESOURCE": {"target": UNIT},
+        "TOP_RESOURCES": {"target": UNIT},
+        "SUM_BY_FEATURES": {"target": UNIT},
+        "TOP_ACCOUNTS_BY_FEATURE": {"target": UNIT},
     },
 )
 
@@ -14698,8 +12835,7 @@ GET_USAGE_STATISTICS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetUsageStatisticsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -14712,7 +12848,6 @@ GET_USAGE_STATISTICS_INPUT = Schema.collection(
         "UsageStatisticType": {
             "target": USAGE_STATISTIC_TYPE,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="usageStatisticsType"
                 ),
@@ -14722,7 +12857,6 @@ GET_USAGE_STATISTICS_INPUT = Schema.collection(
         "UsageCriteria": {
             "target": USAGE_CRITERIA,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="usageCriteria"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -14930,8 +13064,7 @@ GET_USAGE_STATISTICS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#GetUsageStatisticsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "UsageStatistics": {
@@ -14952,16 +13085,6 @@ GET_USAGE_STATISTICS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -14970,7 +13093,7 @@ GET_USAGE_STATISTICS = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -14980,8 +13103,7 @@ INVITE_MEMBERS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#InviteMembersRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -14994,7 +13116,6 @@ INVITE_MEMBERS_INPUT = Schema.collection(
         "AccountIds": {
             "target": ACCOUNT_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -15020,14 +13141,12 @@ INVITE_MEMBERS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#InviteMembersResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "UnprocessedAccounts": {
             "target": UNPROCESSED_ACCOUNTS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
                 ),
@@ -15060,8 +13179,7 @@ LIST_COVERAGE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListCoverageRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -15102,14 +13220,12 @@ LIST_COVERAGE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListCoverageResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Resources": {
             "target": COVERAGE_RESOURCES,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="resources"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -15126,17 +13242,6 @@ LIST_COVERAGE = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Resources",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -15145,7 +13250,305 @@ LIST_COVERAGE = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
+    ],
+)
+
+LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsRequest",
+        )
+    ],
+    members={
+        "MaxResults": {
+            "target": DETECTION_RULE_MAX_RESULTS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
+            ],
+        },
+        "NextToken": {
+            "target": STRING,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
+            ],
+        },
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="ruleId")],
+        },
+        "Mode": {
+            "target": ASSOCIATION_MODE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="mode")],
+        },
+    },
+)
+
+LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsResponse",
+        )
+    ],
+    members={
+        "RuleAssociations": {
+            "target": ASSOCIATION_SUMMARY_LIST,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleAssociations"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "NextToken": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
+        },
+    },
+)
+
+LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS = Schema(
+    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRuleAssociations"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "method": "GET",
+                    "uri": "/custom-detection-rule/association",
+                    "code": 200,
+                }
+            ),
+        )
+    ],
+)
+
+LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsRequest",
+        )
+    ],
+    members={
+        "MaxResults": {
+            "target": DETECTION_RULE_MAX_RESULTS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
+            ],
+        },
+        "NextToken": {
+            "target": STRING,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
+            ],
+        },
+        "Status": {
+            "target": DETECTION_RULE_CONFIGURATION_STATUS,
+            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="status")],
+        },
+    },
+)
+
+LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsOutput"
+    ),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsResponse",
+        )
+    ],
+    members={
+        "Configurations": {
+            "target": DETECTION_RULE_ORG_CONFIGURATION_SUMMARY_LIST,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="configurations"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "NextToken": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
+        },
+    },
+)
+
+LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS = Schema(
+    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurations"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "method": "GET",
+                    "uri": "/custom-detection-rule/org-configuration",
+                    "code": 200,
+                }
+            ),
+        )
+    ],
+)
+
+LIST_CUSTOM_DETECTION_RULES_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRulesInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#ListCustomDetectionRulesRequest",
+        )
+    ],
+    members={
+        "MaxResults": {
+            "target": DETECTION_RULE_MAX_RESULTS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="maxResults")
+            ],
+        },
+        "NextToken": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
+        },
+        "Filters": {
+            "target": DETECTION_RULE_FILTER_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="filters")],
+        },
+    },
+)
+
+RULE_SUMMARY = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#RuleSummary"),
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Arn": {
+            "target": DETECTION_RULE_ARN,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Name": {
+            "target": RULE_NAME,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Description": {
+            "target": DETECTION_RULE_DESCRIPTION,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Severity": {
+            "target": DETECTION_RULE_SEVERITY,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="severity"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "DataSource": {
+            "target": DETECTION_RULE_DATA_SOURCE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSource"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Tactic": {
+            "target": MITRE_TACTIC,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="tactic"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Technique": {
+            "target": MITRE_TECHNIQUE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="technique"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Service": {
+            "target": DETECTION_RULE_SERVICE_NAME,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="service"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "Language": {
+            "target": RULE_LANGUAGE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="language")],
+        },
+        "Schema": {
+            "target": RULE_SCHEMA,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="schema")],
+        },
+        "CreatedAt": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "UpdatedAt": {
+            "target": TIMESTAMP,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
+        },
+    },
+)
+
+RULE_SUMMARY_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#RuleSummaryList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": RULE_SUMMARY}},
+)
+
+LIST_CUSTOM_DETECTION_RULES_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRulesOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#ListCustomDetectionRulesResponse",
+        )
+    ],
+    members={
+        "Rules": {
+            "target": RULE_SUMMARY_LIST,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="rules"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "NextToken": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
+        },
+    },
+)
+
+LIST_CUSTOM_DETECTION_RULES = Schema(
+    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRules"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {"method": "POST", "uri": "/custom-detection-rule/rule", "code": 200}
+            ),
+        )
     ],
 )
 
@@ -15155,8 +13558,7 @@ LIST_DETECTORS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListDetectorsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "MaxResults": {
@@ -15180,14 +13582,12 @@ LIST_DETECTORS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListDetectorsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "DetectorIds": {
             "target": DETECTOR_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="detectorIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -15204,20 +13604,9 @@ LIST_DETECTORS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "DetectorIds",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"method": "GET", "uri": "/detector", "code": 200}),
-        ),
+        )
     ],
 )
 
@@ -15227,8 +13616,7 @@ LIST_FILTERS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListFiltersRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -15259,14 +13647,12 @@ LIST_FILTERS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListFiltersResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "FilterNames": {
             "target": FILTER_NAMES,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterNames"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -15283,22 +13669,11 @@ LIST_FILTERS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "FilterNames",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/detector/{DetectorId}/filter", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
@@ -15308,8 +13683,7 @@ LIST_FINDINGS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListFindingsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -15350,14 +13724,12 @@ LIST_FINDINGS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListFindingsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "FindingIds": {
             "target": FINDING_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -15374,17 +13746,6 @@ LIST_FINDINGS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "FindingIds",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -15393,52 +13754,23 @@ LIST_FINDINGS = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
 NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#NextToken"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9+/=_\\-]+$"),
-    ],
+    id=ShapeID("com.amazonaws.guardduty#NextToken"), shape_type=ShapeType.STRING
 )
 
 INVESTIGATION_SORT_FIELD = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#InvestigationSortField"),
     shape_type=ShapeType.ENUM,
     members={
-        "START_TIME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="START_TIME")
-            ],
-        },
-        "END_TIME": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="END_TIME")],
-        },
-        "STATUS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="STATUS")],
-        },
-        "RISK_LEVEL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RISK_LEVEL")
-            ],
-        },
-        "CONFIDENCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CONFIDENCE")
-            ],
-        },
+        "START_TIME": {"target": UNIT},
+        "END_TIME": {"target": UNIT},
+        "STATUS": {"target": UNIT},
+        "RISK_LEVEL": {"target": UNIT},
+        "CONFIDENCE": {"target": UNIT},
     },
 )
 
@@ -15464,8 +13796,7 @@ LIST_INVESTIGATIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListInvestigationsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -15497,12 +13828,6 @@ LIST_INVESTIGATIONS_INPUT = Schema.collection(
 INVESTIGATION_TITLE = Schema(
     id=ShapeID("com.amazonaws.guardduty#InvestigationTitle"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1024}),
-        )
-    ],
 )
 
 INVESTIGATION_SUMMARY = Schema.collection(
@@ -15556,12 +13881,6 @@ INVESTIGATION_SUMMARY = Schema.collection(
 INVESTIGATION_SUMMARIES = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#InvestigationSummaries"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": INVESTIGATION_SUMMARY}},
 )
 
@@ -15571,14 +13890,12 @@ LIST_INVESTIGATIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListInvestigationsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Investigations": {
             "target": INVESTIGATION_SUMMARIES,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="investigations"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -15595,17 +13912,6 @@ LIST_INVESTIGATIONS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Investigations",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -15614,7 +13920,7 @@ LIST_INVESTIGATIONS = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -15624,8 +13930,7 @@ LIST_INVITATIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListInvitationsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "MaxResults": {
@@ -15672,12 +13977,6 @@ INVITATION = Schema.collection(
 INVITATIONS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#Invitations"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": INVITATION}},
 )
 
@@ -15687,8 +13986,7 @@ LIST_INVITATIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListInvitationsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Invitations": {
@@ -15709,22 +14007,11 @@ LIST_INVITATIONS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Invitations",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/invitation", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
@@ -15734,8 +14021,7 @@ LIST_IP_SETS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListIPSetsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -15763,12 +14049,6 @@ LIST_IP_SETS_INPUT = Schema.collection(
 IP_SET_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#IpSetIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": STRING}},
 )
 
@@ -15778,14 +14058,12 @@ LIST_IP_SETS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListIPSetsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IpSetIds": {
             "target": IP_SET_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="ipSetIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -15802,22 +14080,11 @@ LIST_IP_SETS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "IpSetIds",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/detector/{DetectorId}/ipset", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
@@ -15827,8 +14094,7 @@ LIST_MALWARE_PROTECTION_PLANS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListMalwareProtectionPlansRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "NextToken": {
@@ -15866,8 +14132,7 @@ LIST_MALWARE_PROTECTION_PLANS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListMalwareProtectionPlansResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "MalwareProtectionPlans": {
@@ -15902,54 +14167,14 @@ LIST_MALWARE_SCANS_CRITERION_KEY = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ListMalwareScansCriterionKey"),
     shape_type=ShapeType.ENUM,
     members={
-        "RESOURCE_ARN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RESOURCE_ARN")
-            ],
-        },
-        "SCAN_ID": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SCAN_ID")],
-        },
-        "ACCOUNT_ID": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACCOUNT_ID")
-            ],
-        },
-        "GUARDDUTY_FINDING_ID": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="GUARDDUTY_FINDING_ID"
-                )
-            ],
-        },
-        "RESOURCE_TYPE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RESOURCE_TYPE")
-            ],
-        },
-        "SCAN_START_TIME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SCAN_START_TIME")
-            ],
-        },
-        "SCAN_STATUS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SCAN_STATUS")
-            ],
-        },
-        "SCAN_TYPE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SCAN_TYPE")
-            ],
-        },
+        "RESOURCE_ARN": {"target": UNIT},
+        "SCAN_ID": {"target": UNIT},
+        "ACCOUNT_ID": {"target": UNIT},
+        "GUARDDUTY_FINDING_ID": {"target": UNIT},
+        "RESOURCE_TYPE": {"target": UNIT},
+        "SCAN_START_TIME": {"target": UNIT},
+        "SCAN_STATUS": {"target": UNIT},
+        "SCAN_TYPE": {"target": UNIT},
     },
 )
 
@@ -15974,12 +14199,6 @@ LIST_MALWARE_SCANS_FILTER_CRITERION = Schema.collection(
 LIST_MALWARE_SCANS_FILTER_CRITERION_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ListMalwareScansFilterCriterionList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1}),
-        )
-    ],
     members={"member": {"target": LIST_MALWARE_SCANS_FILTER_CRITERION}},
 )
 
@@ -16001,8 +14220,7 @@ LIST_MALWARE_SCANS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListMalwareScansRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "MaxResults": {
@@ -16094,14 +14312,12 @@ LIST_MALWARE_SCANS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListMalwareScansResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Scans": {
             "target": MALWARE_SCANS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="scans"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -16118,22 +14334,11 @@ LIST_MALWARE_SCANS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Scans",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "POST", "uri": "/malware-scan", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
@@ -16143,8 +14348,7 @@ LIST_MEMBERS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListMembersRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -16181,8 +14385,7 @@ LIST_MEMBERS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListMembersResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Members": {
@@ -16201,22 +14404,11 @@ LIST_MEMBERS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Members",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/detector/{DetectorId}/member", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
@@ -16226,8 +14418,7 @@ LIST_ORGANIZATION_ADMIN_ACCOUNTS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListOrganizationAdminAccountsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "MaxResults": {
@@ -16251,8 +14442,7 @@ LIST_ORGANIZATION_ADMIN_ACCOUNTS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListOrganizationAdminAccountsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "AdminAccounts": {
@@ -16273,20 +14463,9 @@ LIST_ORGANIZATION_ADMIN_ACCOUNTS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "AdminAccounts",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"method": "GET", "uri": "/admin", "code": 200}),
-        ),
+        )
     ],
 )
 
@@ -16296,8 +14475,7 @@ LIST_PUBLISHING_DESTINATIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListPublishingDestinationsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -16328,14 +14506,12 @@ LIST_PUBLISHING_DESTINATIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListPublishingDestinationsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Destinations": {
             "target": DESTINATIONS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinations"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -16352,16 +14528,6 @@ LIST_PUBLISHING_DESTINATIONS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -16370,19 +14536,12 @@ LIST_PUBLISHING_DESTINATIONS = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
 GUARD_DUTY_ARN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GuardDutyArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[A-Za-z_.-]{1,20}:guardduty:[A-Za-z0-9_/.-]{0,63}:\\d+:detector/[A-Za-z0-9_/.-]{32,264}$",
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#GuardDutyArn"), shape_type=ShapeType.STRING
 )
 
 LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
@@ -16391,8 +14550,7 @@ LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListTagsForResourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ResourceArn": {
@@ -16411,8 +14569,7 @@ LIST_TAGS_FOR_RESOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListTagsForResourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Tags": {
@@ -16441,8 +14598,7 @@ LIST_THREAT_ENTITY_SETS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListThreatEntitySetsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -16470,12 +14626,6 @@ LIST_THREAT_ENTITY_SETS_INPUT = Schema.collection(
 THREAT_ENTITY_SET_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ThreatEntitySetIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": STRING}},
 )
 
@@ -16485,14 +14635,12 @@ LIST_THREAT_ENTITY_SETS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListThreatEntitySetsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ThreatEntitySetIds": {
             "target": THREAT_ENTITY_SET_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="threatEntitySetIds"
                 ),
@@ -16511,17 +14659,6 @@ LIST_THREAT_ENTITY_SETS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "ThreatEntitySetIds",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -16530,7 +14667,7 @@ LIST_THREAT_ENTITY_SETS = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -16540,8 +14677,7 @@ LIST_THREAT_INTEL_SETS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListThreatIntelSetsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -16569,12 +14705,6 @@ LIST_THREAT_INTEL_SETS_INPUT = Schema.collection(
 THREAT_INTEL_SET_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#ThreatIntelSetIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": STRING}},
 )
 
@@ -16584,14 +14714,12 @@ LIST_THREAT_INTEL_SETS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListThreatIntelSetsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ThreatIntelSetIds": {
             "target": THREAT_INTEL_SET_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatIntelSetIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -16608,17 +14736,6 @@ LIST_THREAT_INTEL_SETS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "ThreatIntelSetIds",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -16627,7 +14744,7 @@ LIST_THREAT_INTEL_SETS = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -16637,8 +14754,7 @@ LIST_TRUSTED_ENTITY_SETS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListTrustedEntitySetsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -16666,12 +14782,6 @@ LIST_TRUSTED_ENTITY_SETS_INPUT = Schema.collection(
 TRUSTED_ENTITY_SET_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#TrustedEntitySetIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": STRING}},
 )
 
@@ -16681,14 +14791,12 @@ LIST_TRUSTED_ENTITY_SETS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#ListTrustedEntitySetsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "TrustedEntitySetIds": {
             "target": TRUSTED_ENTITY_SET_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="trustedEntitySetIds"
                 ),
@@ -16707,17 +14815,6 @@ LIST_TRUSTED_ENTITY_SETS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "TrustedEntitySetIds",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -16726,7 +14823,7 @@ LIST_TRUSTED_ENTITY_SETS = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -16754,8 +14851,7 @@ SEND_OBJECT_MALWARE_SCAN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#SendObjectMalwareScanRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "S3Object": {
@@ -16771,8 +14867,7 @@ SEND_OBJECT_MALWARE_SCAN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#SendObjectMalwareScanResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -16790,14 +14885,7 @@ SEND_OBJECT_MALWARE_SCAN = Schema(
 )
 
 RESOURCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ResourceArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[A-Za-z-]+:[A-Za-z0-9]+:[A-Za-z0-9-]+:\\d+:(([A-Za-z0-9-]+)[:\\/])?[A-Za-z0-9:-]*$",
-        )
-    ],
+    id=ShapeID("com.amazonaws.guardduty#ResourceArn"), shape_type=ShapeType.STRING
 )
 
 RECOVERY_POINT = Schema.collection(
@@ -16806,7 +14894,6 @@ RECOVERY_POINT = Schema.collection(
         "BackupVaultName": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="backupVaultName"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -16828,7 +14915,6 @@ START_MALWARE_SCAN_CONFIGURATION = Schema.collection(
         "Role": {
             "target": NON_EMPTY_STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="role"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -16856,14 +14942,12 @@ START_MALWARE_SCAN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#StartMalwareScanRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ResourceArn": {
             "target": RESOURCE_ARN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceArn"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -16890,8 +14974,7 @@ START_MALWARE_SCAN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#StartMalwareScanResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ScanId": {
@@ -16920,8 +15003,7 @@ START_MONITORING_MEMBERS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#StartMonitoringMembersRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -16934,7 +15016,6 @@ START_MONITORING_MEMBERS_INPUT = Schema.collection(
         "AccountIds": {
             "target": ACCOUNT_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -16948,14 +15029,12 @@ START_MONITORING_MEMBERS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#StartMonitoringMembersResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "UnprocessedAccounts": {
             "target": UNPROCESSED_ACCOUNTS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
                 ),
@@ -16988,8 +15067,7 @@ STOP_MONITORING_MEMBERS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#StopMonitoringMembersRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -17002,7 +15080,6 @@ STOP_MONITORING_MEMBERS_INPUT = Schema.collection(
         "AccountIds": {
             "target": ACCOUNT_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -17016,14 +15093,12 @@ STOP_MONITORING_MEMBERS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#StopMonitoringMembersResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "UnprocessedAccounts": {
             "target": UNPROCESSED_ACCOUNTS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
                 ),
@@ -17056,14 +15131,12 @@ TAG_RESOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#TagResourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ResourceArn": {
             "target": GUARD_DUTY_ARN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -17084,8 +15157,7 @@ TAG_RESOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#TagResourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -17108,8 +15180,7 @@ UNARCHIVE_FINDINGS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UnarchiveFindingsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -17122,7 +15193,6 @@ UNARCHIVE_FINDINGS_INPUT = Schema.collection(
         "FindingIds": {
             "target": FINDING_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -17136,8 +15206,7 @@ UNARCHIVE_FINDINGS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UnarchiveFindingsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -17161,12 +15230,6 @@ UNARCHIVE_FINDINGS = Schema(
 TAG_KEY_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#TagKeyList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 200}),
-        )
-    ],
     members={"member": {"target": TAG_KEY}},
 )
 
@@ -17176,8 +15239,7 @@ UNTAG_RESOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UntagResourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ResourceArn": {
@@ -17190,7 +15252,6 @@ UNTAG_RESOURCE_INPUT = Schema.collection(
         "TagKeys": {
             "target": TAG_KEY_LIST,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpQuery"), value="tagKeys"),
             ],
@@ -17204,8 +15265,7 @@ UNTAG_RESOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UntagResourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -17222,14 +15282,142 @@ UNTAG_RESOURCE = Schema(
     ],
 )
 
+UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationRequest",
+        )
+    ],
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "AssociationId": {
+            "target": ASSOCIATION_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "Mode": {
+            "target": ASSOCIATION_MODE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+    },
+)
+
+UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationResponse",
+        )
+    ],
+)
+
+UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION = Schema(
+    id=ShapeID("com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociation"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "method": "PUT",
+                    "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
+                    "code": 200,
+                }
+            ),
+        )
+    ],
+)
+
+UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationInput"
+    ),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationRequest",
+        )
+    ],
+    members={
+        "RuleId": {
+            "target": RULE_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "Mode": {
+            "target": ASSOCIATION_MODE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "IncludeAccountIds": {
+            "target": DETECTION_RULE_ACCOUNT_IDS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="includeAccountIds")
+            ],
+        },
+        "ExcludeAccountIds": {
+            "target": DETECTION_RULE_ACCOUNT_IDS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="excludeAccountIds")
+            ],
+        },
+    },
+)
+
+UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationOutput"
+    ),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationResponse",
+        )
+    ],
+)
+
+UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = Schema(
+    id=ShapeID("com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfiguration"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "method": "PUT",
+                    "uri": "/custom-detection-rule/org-configuration/{RuleId}",
+                    "code": 200,
+                }
+            ),
+        )
+    ],
+)
+
 UPDATE_DETECTOR_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.guardduty#UpdateDetectorInput"),
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateDetectorRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -17255,15 +15443,7 @@ UPDATE_DETECTOR_INPUT = Schema.collection(
         "DataSources": {
             "target": DATA_SOURCE_CONFIGURATIONS,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This parameter is deprecated, use Features instead"
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources"),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
             ],
         },
         "Features": {
@@ -17279,8 +15459,7 @@ UPDATE_DETECTOR_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateDetectorResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -17303,8 +15482,7 @@ UPDATE_FILTER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateFilterRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -17350,14 +15528,12 @@ UPDATE_FILTER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateFilterResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Name": {
             "target": FILTER_NAME,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -17388,8 +15564,7 @@ UPDATE_FINDINGS_FEEDBACK_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateFindingsFeedbackRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -17402,7 +15577,6 @@ UPDATE_FINDINGS_FEEDBACK_INPUT = Schema.collection(
         "FindingIds": {
             "target": FINDING_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -17410,7 +15584,6 @@ UPDATE_FINDINGS_FEEDBACK_INPUT = Schema.collection(
         "Feedback": {
             "target": FEEDBACK,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="feedback"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -17428,8 +15601,7 @@ UPDATE_FINDINGS_FEEDBACK_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateFindingsFeedbackResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -17456,8 +15628,7 @@ UPDATE_IP_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateIPSetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -17470,7 +15641,6 @@ UPDATE_IP_SET_INPUT = Schema.collection(
         "IpSetId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -17504,8 +15674,7 @@ UPDATE_IP_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateIPSetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -17554,8 +15723,7 @@ UPDATE_MALWARE_PROTECTION_PLAN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateMalwareProtectionPlanRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "MalwareProtectionPlanId": {
@@ -17587,8 +15755,7 @@ UPDATE_MALWARE_PROTECTION_PLAN_OUTPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -17615,8 +15782,7 @@ UPDATE_MALWARE_SCAN_SETTINGS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateMalwareScanSettingsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -17651,8 +15817,7 @@ UPDATE_MALWARE_SCAN_SETTINGS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateMalwareScanSettingsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -17727,8 +15892,7 @@ UPDATE_MEMBER_DETECTORS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateMemberDetectorsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -17741,7 +15905,6 @@ UPDATE_MEMBER_DETECTORS_INPUT = Schema.collection(
         "AccountIds": {
             "target": ACCOUNT_IDS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -17749,15 +15912,7 @@ UPDATE_MEMBER_DETECTORS_INPUT = Schema.collection(
         "DataSources": {
             "target": DATA_SOURCE_CONFIGURATIONS,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This parameter is deprecated, use Features instead"
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources"),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
             ],
         },
         "Features": {
@@ -17773,14 +15928,12 @@ UPDATE_MEMBER_DETECTORS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateMemberDetectorsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "UnprocessedAccounts": {
             "target": UNPROCESSED_ACCOUNTS,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(
                     id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
                 ),
@@ -17813,7 +15966,6 @@ ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION = Schema.collection(
         "AutoEnable": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -17827,7 +15979,6 @@ ORGANIZATION_KUBERNETES_CONFIGURATION = Schema.collection(
         "AuditLogs": {
             "target": ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="auditLogs"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -17880,7 +16031,6 @@ ORGANIZATION_S3_LOGS_CONFIGURATION = Schema.collection(
         "AutoEnable": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable"),
                 Trait.new(id=ShapeID("smithy.api#required")),
             ],
@@ -17968,8 +16118,7 @@ UPDATE_ORGANIZATION_CONFIGURATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateOrganizationConfigurationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -17982,29 +16131,13 @@ UPDATE_ORGANIZATION_CONFIGURATION_INPUT = Schema.collection(
         "AutoEnable": {
             "target": BOOLEAN,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This field is deprecated, use AutoEnableOrganizationMembers instead"
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable"),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable")
             ],
         },
         "DataSources": {
             "target": ORGANIZATION_DATA_SOURCE_CONFIGURATIONS,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "This parameter is deprecated, use Features instead"
-                        }
-                    ),
-                ),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources"),
+                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
             ],
         },
         "Features": {
@@ -18029,8 +16162,7 @@ UPDATE_ORGANIZATION_CONFIGURATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateOrganizationConfigurationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -18053,8 +16185,7 @@ UPDATE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdatePublishingDestinationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -18088,8 +16219,7 @@ UPDATE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdatePublishingDestinationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -18116,8 +16246,7 @@ UPDATE_THREAT_ENTITY_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateThreatEntitySetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -18130,7 +16259,6 @@ UPDATE_THREAT_ENTITY_SET_INPUT = Schema.collection(
         "ThreatEntitySetId": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#clientOptional")),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -18164,8 +16292,7 @@ UPDATE_THREAT_ENTITY_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateThreatEntitySetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -18192,8 +16319,7 @@ UPDATE_THREAT_INTEL_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateThreatIntelSetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -18239,8 +16365,7 @@ UPDATE_THREAT_INTEL_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateThreatIntelSetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -18267,8 +16392,7 @@ UPDATE_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateTrustedEntitySetRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DetectorId": {
@@ -18314,8 +16438,7 @@ UPDATE_TRUSTED_ENTITY_SET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.guardduty#UpdateTrustedEntitySetResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -18342,1483 +16465,6 @@ GUARD_DUTY_API_SERVICE = Schema(
     traits=[
         Trait.new(
             id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "guardduty"})
-        ),
-        Trait.new(id=ShapeID("smithy.api#title"), value="Amazon GuardDuty"),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointTests"),
-            value=MappingProxyType(
-                {
-                    "testCases": (
-                        MappingProxyType(
-                            {
-                                "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.af-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "af-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.ap-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.ap-northeast-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.ap-northeast-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.ap-northeast-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.ap-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.ap-southeast-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.ap-southeast-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.ap-southeast-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.ca-central-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ca-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.eu-central-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.eu-north-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.eu-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.eu-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.eu-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.eu-west-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.me-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "me-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.sa-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "sa-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty-fips.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty-fips.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty-fips.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty-fips.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty-fips.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.cn-northwest-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-northwest-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty-fips.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty-fips.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty-fips.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty-fips.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://guardduty.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "Missing region",
-                                "expect": MappingProxyType(
-                                    {"error": "Invalid Configuration: Missing Region"}
-                                ),
-                            }
-                        ),
-                    ),
-                    "version": "1.0",
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointRuleSet"),
-            value=MappingProxyType(
-                {
-                    "version": "1.0",
-                    "parameters": MappingProxyType(
-                        {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                        }
-                    ),
-                    "rules": (
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Endpoint"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseFIPS"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseDualStack"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": MappingProxyType(
-                                                        {"ref": "Endpoint"}
-                                                    ),
-                                                    "properties": MappingProxyType({}),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Region"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "aws.partition",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                        ),
-                                                        "assign": "PartitionResult",
-                                                    }
-                                                ),
-                                            ),
-                                            "rules": (
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://guardduty-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "name",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                                "aws-us-gov",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://guardduty.{Region}.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://guardduty-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://guardduty.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (),
-                                                        "endpoint": MappingProxyType(
-                                                            {
-                                                                "url": "https://guardduty.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                                "headers": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                            }
-                                                        ),
-                                                        "type": "endpoint",
-                                                    }
-                                                ),
-                                            ),
-                                            "type": "tree",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
-                    ),
-                }
-            ),
         ),
         Trait.new(
             id=ShapeID("smithy.rules#endpointBdd"),

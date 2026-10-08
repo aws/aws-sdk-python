@@ -71,8 +71,9 @@ class HttpCredentialsClient:
                     ) from error
             except Exception as error:
                 last_exc = error
-                await asyncio.sleep(_SLEEP_SECONDS)
                 attempts += 1
+                if attempts < self._retries:
+                    await asyncio.sleep(_SLEEP_SECONDS)
 
         raise SmithyIdentityError(
             f"Failed to retrieve container metadata after {self._retries} attempt(s)"

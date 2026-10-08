@@ -9,6 +9,7 @@ from typing import Any, Literal, Self, Union
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import Document, TypeRegistry
 from smithy_core.exceptions import ModeledError, SerializationError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -518,7 +519,7 @@ class GetAsyncInvokeOutput:
     model_arn: str
     """The invocation's model ARN."""
 
-    status: AsyncInvokeStatus
+    status: str
     """The invocation's status."""
 
     submit_time: datetime
@@ -538,6 +539,16 @@ class GetAsyncInvokeOutput:
 
     end_time: datetime | None = None
     """When the invocation ended."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_ASYNC_INVOKE_OUTPUT, self)
@@ -837,7 +848,7 @@ class ListAsyncInvokesInput:
     submit_time_before: datetime | None = None
     """Include invocations submitted before this time."""
 
-    status_equals: AsyncInvokeStatus | None = None
+    status_equals: str | None = None
     """Filter invocations by status."""
 
     max_results: int | None = None
@@ -849,10 +860,10 @@ class ListAsyncInvokesInput:
     next page of results.
     """
 
-    sort_by: SortAsyncInvocationBy = SortAsyncInvocationBy("SubmissionTime")
+    sort_by: str = SortAsyncInvocationBy("SubmissionTime")
     """How to sort the response."""
 
-    sort_order: SortOrder = SortOrder("Descending")
+    sort_order: str = SortOrder("Descending")
     """The sorting order for the response."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -974,7 +985,7 @@ class AsyncInvokeSummary:
     client_request_token: str | None = None
     """The invocation's idempotency token."""
 
-    status: AsyncInvokeStatus | None = None
+    status: str | None = None
     """The invocation's status."""
 
     failure_message: str | None = field(repr=False, default=None)
@@ -1139,6 +1150,16 @@ class ListAsyncInvokesOutput:
 
     async_invoke_summaries: list[AsyncInvokeSummary] | None = None
     """A list of invocation summaries."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_ASYNC_INVOKES_OUTPUT, self)
@@ -1559,6 +1580,16 @@ class StartAsyncInvokeOutput:
     invocation_arn: str
     """The ARN of the invocation."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_START_ASYNC_INVOKE_OUTPUT, self)
 
@@ -1744,7 +1775,7 @@ class GuardrailImageBlock:
     guardrails independent API.
     """
 
-    format: GuardrailImageFormat
+    format: str
     """
     The format details for the file type of the image blocked by the
     guardrail.
@@ -1805,7 +1836,7 @@ class GuardrailContentQualifier(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_guardrail_content_qualifier_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[GuardrailContentQualifier]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -1815,8 +1846,8 @@ def _serialize_guardrail_content_qualifier_list(
 
 def _deserialize_guardrail_content_qualifier_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[GuardrailContentQualifier]:
-    result: list[GuardrailContentQualifier] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -1837,7 +1868,7 @@ class GuardrailTextBlock:
     text: str
     """The input text details to be evaluated by the guardrail."""
 
-    qualifiers: list[GuardrailContentQualifier] | None = None
+    qualifiers: list[str] | None = None
     """The qualifiers describing the text block."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -2033,13 +2064,13 @@ class ApplyGuardrailInput:
     guardrail_version: str | None = None
     """The guardrail version used in the request to apply the guardrail."""
 
-    source: GuardrailContentSource | None = None
+    source: str | None = None
     """The source of data used in the request to apply the guardrail."""
 
     content: list[GuardrailContentBlock] | None = None
     """The content details used in the request to apply the guardrail."""
 
-    output_scope: GuardrailOutputScope | None = None
+    output_scope: str | None = None
     """
     Specifies the scope of the output that you get in the response. Set to
     `FULL` to return the entire output, including any detected and
@@ -2140,7 +2171,7 @@ class GuardrailOrigin(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_guardrail_origin_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[GuardrailOrigin]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -2150,8 +2181,8 @@ def _serialize_guardrail_origin_list(
 
 def _deserialize_guardrail_origin_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[GuardrailOrigin]:
-    result: list[GuardrailOrigin] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -2187,14 +2218,14 @@ class AppliedGuardrailDetails:
     guardrail_arn: str | None = None
     """The ARN of the guardrail that was applied."""
 
-    guardrail_origin: list[GuardrailOrigin] | None = None
+    guardrail_origin: list[str] | None = None
     """
     The origin of how the guardrail was applied. This can be either
     requested at the API level or enforced at the account or organization
     level as a default guardrail.
     """
 
-    guardrail_ownership: GuardrailOwnership | None = None
+    guardrail_ownership: str | None = None
     """
     The ownership type of the guardrail, indicating whether it is owned by
     the requesting account or is a cross-account guardrail shared from
@@ -2474,7 +2505,7 @@ class GuardrailAutomatedReasoningLogicWarning:
     or always false.
     """
 
-    type: GuardrailAutomatedReasoningLogicWarningType | None = None
+    type: str | None = None
     """
     The category of the detected logical issue, such as statements that are
     always true or always false.
@@ -3952,16 +3983,16 @@ class GuardrailContentFilterType(UnknownEnumMixin, StrEnum):
 class GuardrailContentFilter:
     """The content filter for a guardrail."""
 
-    type: GuardrailContentFilterType
+    type: str
     """The guardrail type."""
 
-    confidence: GuardrailContentFilterConfidence
+    confidence: str
     """The guardrail confidence."""
 
-    action: GuardrailContentPolicyAction
+    action: str
     """The guardrail action."""
 
-    filter_strength: GuardrailContentFilterStrength | None = None
+    filter_strength: str | None = None
     """The filter strength setting for the guardrail content filter."""
 
     detected: bool | None = None
@@ -4131,7 +4162,7 @@ class GuardrailContextualGroundingFilterType(UnknownEnumMixin, StrEnum):
 class GuardrailContextualGroundingFilter:
     """The details for the guardrails contextual grounding filter."""
 
-    type: GuardrailContextualGroundingFilterType
+    type: str
     """The contextual grounding filter type."""
 
     threshold: float
@@ -4143,7 +4174,7 @@ class GuardrailContextualGroundingFilter:
     score: float
     """The score generated by contextual grounding filter."""
 
-    action: GuardrailContextualGroundingPolicyAction
+    action: str
     """The action performed by the guardrails contextual grounding filter."""
 
     detected: bool | None = None
@@ -4769,10 +4800,10 @@ class GuardrailPiiEntityFilter:
     match: str
     """The PII entity filter match."""
 
-    type: GuardrailPiiEntityType
+    type: str
     """The PII entity filter type."""
 
-    action: GuardrailSensitiveInformationPolicyAction
+    action: str
     """The PII entity filter action."""
 
     detected: bool | None = None
@@ -4877,7 +4908,7 @@ def _deserialize_guardrail_pii_entity_filter_list(
 class GuardrailRegexFilter:
     """A Regex filter configured in a guardrail."""
 
-    action: GuardrailSensitiveInformationPolicyAction
+    action: str
     """The region filter action."""
 
     name: str | None = None
@@ -5080,13 +5111,13 @@ class GuardrailTopic:
     name: str
     """The name for the guardrail."""
 
-    type: GuardrailTopicType
+    type: str
     """
     The type behavior that the guardrail should perform when the model
     detects the topic.
     """
 
-    action: GuardrailTopicPolicyAction
+    action: str
     """The action the guardrail should take when it intervenes on a topic."""
 
     detected: bool | None = None
@@ -5230,7 +5261,7 @@ class GuardrailCustomWord:
     match: str
     """The match for the custom word."""
 
-    action: GuardrailWordPolicyAction
+    action: str
     """The action for the custom word."""
 
     detected: bool | None = None
@@ -5326,10 +5357,10 @@ class GuardrailManagedWord:
     match: str
     """The match for the managed word."""
 
-    type: GuardrailManagedWordType
+    type: str
     """The type for the managed word."""
 
-    action: GuardrailWordPolicyAction
+    action: str
     """The action for the managed word."""
 
     detected: bool | None = None
@@ -5734,7 +5765,7 @@ class ApplyGuardrailOutput:
     usage: GuardrailUsage
     """The usage details in the response from the guardrail."""
 
-    action: GuardrailAction
+    action: str
     """The action taken in the response from the guardrail."""
 
     outputs: list[GuardrailOutputContent]
@@ -5748,6 +5779,16 @@ class ApplyGuardrailOutput:
 
     guardrail_coverage: GuardrailCoverage | None = None
     """The guardrail coverage details in the apply guardrail response."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_APPLY_GUARDRAIL_OUTPUT, self)
@@ -5891,7 +5932,7 @@ class GuardrailChecksContentFilterCategory(UnknownEnumMixin, StrEnum):
 class GuardrailChecksContentFilterCategoryConfig:
     """The configuration for a single content filter category to evaluate."""
 
-    category: GuardrailChecksContentFilterCategory
+    category: str
     """The content filter category to evaluate."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -6025,7 +6066,7 @@ class GuardrailChecksPromptAttackCategory(UnknownEnumMixin, StrEnum):
 class GuardrailChecksPromptAttackCategoryConfig:
     """The configuration for a single prompt attack category to evaluate."""
 
-    category: GuardrailChecksPromptAttackCategory
+    category: str
     """The prompt attack category to evaluate."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -6190,7 +6231,7 @@ class GuardrailChecksSensitiveInformationEntityConfig:
     detect.
     """
 
-    type: GuardrailChecksSensitiveInformationEntityType
+    type: str
     """The PII entity type to detect."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -6520,7 +6561,7 @@ class GuardrailChecksMessage:
     content blocks.
     """
 
-    role: GuardrailChecksRole
+    role: str
     """The role of the message sender."""
 
     content: list[GuardrailChecksContentBlock]
@@ -6660,7 +6701,7 @@ class InvokeGuardrailChecksInput:
 class GuardrailChecksContentFilterResultEntry:
     """The evaluation result for a single content filter category."""
 
-    category: GuardrailChecksContentFilterCategory
+    category: str
     """The content filter category that was evaluated."""
 
     severity_score: float
@@ -6804,7 +6845,7 @@ class GuardrailChecksContentFilterResult:
 class GuardrailChecksPromptAttackResultEntry:
     """The evaluation result for a single prompt attack category."""
 
-    category: GuardrailChecksPromptAttackCategory
+    category: str
     """The prompt attack category that was evaluated."""
 
     severity_score: float
@@ -6951,7 +6992,7 @@ class GuardrailChecksSensitiveInformationResultEntry:
     the evaluated messages.
     """
 
-    type: GuardrailChecksSensitiveInformationEntityType
+    type: str
     """The PII entity type that was detected."""
 
     confidence_score: float
@@ -7494,6 +7535,16 @@ class InvokeGuardrailChecksOutput:
     usage: GuardrailChecksUsageResults
     """The per-check text unit consumption for the guardrail evaluation."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_INVOKE_GUARDRAIL_CHECKS_OUTPUT, self)
 
@@ -7593,7 +7644,7 @@ class GuardrailConfiguration:
     guardrail_version: str = ""
     """The version of the guardrail."""
 
-    trace: GuardrailTrace = GuardrailTrace("disabled")
+    trace: str = GuardrailTrace("disabled")
     """The trace behavior for the guardrail."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -8005,7 +8056,7 @@ class AudioBlock:
     formats.
     """
 
-    format: AudioFormat
+    format: str
     """
     The format of the audio data, such as MP3, WAV, FLAC, or other supported
     audio formats.
@@ -8082,10 +8133,10 @@ class CachePointBlock:
     calls.
     """
 
-    type: CachePointType
+    type: str
     """Specifies the type of cache point within the CachePointBlock."""
 
-    ttl: CacheTTL | None = None
+    ttl: str | None = None
     """
     Optional TTL duration for cache entries. When specified, enables
     extended TTL caching with the specified duration. When omitted, uses
@@ -9429,7 +9480,7 @@ class DocumentBlock:
     source: DocumentSource
     """Contains the content of the document."""
 
-    format: DocumentFormat = DocumentFormat("txt")
+    format: str = DocumentFormat("txt")
     """The format of a document, or its extension."""
 
     context: str | None = None
@@ -9604,7 +9655,7 @@ class GuardrailConverseImageBlock:
     guardrail.
     """
 
-    format: GuardrailConverseImageFormat
+    format: str
     """
     The format details for the image type of the guardrail converse image
     block.
@@ -9666,9 +9717,7 @@ class GuardrailConverseContentQualifier(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_guardrail_converse_content_qualifier_list(
-    serializer: ShapeSerializer,
-    schema: Schema,
-    value: list[GuardrailConverseContentQualifier],
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -9678,8 +9727,8 @@ def _serialize_guardrail_converse_content_qualifier_list(
 
 def _deserialize_guardrail_converse_content_qualifier_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[GuardrailConverseContentQualifier]:
-    result: list[GuardrailConverseContentQualifier] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -9706,7 +9755,7 @@ class GuardrailConverseTextBlock:
     text: str
     """The text that you want to guard."""
 
-    qualifiers: list[GuardrailConverseContentQualifier] | None = None
+    qualifiers: list[str] | None = None
     """The qualifier details for the guardrails contextual grounding filter."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -9987,7 +10036,7 @@ class _ImageSourceDeserializer:
 class ImageBlock:
     """Image content for a message."""
 
-    format: ImageFormat
+    format: str
     """The format of the image."""
 
     source: ImageSource = field(repr=False)
@@ -10632,7 +10681,7 @@ class _VideoSourceDeserializer:
 class VideoBlock:
     """A video block."""
 
-    format: VideoFormat
+    format: str
     """The block's format."""
 
     source: VideoSource
@@ -10936,7 +10985,7 @@ class ToolResultBlock:
     content: list[ToolResultContentBlock]
     """The content for tool result content block."""
 
-    status: ToolResultStatus | None = None
+    status: str | None = None
     """
     The status for the tool result content block.
 
@@ -11033,7 +11082,7 @@ class ToolUseBlock:
     input: Document
     """The input to pass to the tool."""
 
-    type: ToolUseType | None = None
+    type: str | None = None
     """The type for the tool request."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -11535,7 +11584,7 @@ class Message:
     [ConverseStream](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html).
     """
 
-    role: ConversationRole
+    role: str
     """The role that the message plays in the message."""
 
     content: list[ContentBlock]
@@ -11781,7 +11830,7 @@ class OutputFormatType(UnknownEnumMixin, StrEnum):
 class OutputFormat:
     """Structured output parameters to control the model's response."""
 
-    type: OutputFormatType
+    type: str
     """The type of structured output format."""
 
     structure: OutputFormatStructure = field(repr=False)
@@ -11900,7 +11949,7 @@ class PerformanceConfigLatency(UnknownEnumMixin, StrEnum):
 class PerformanceConfiguration:
     """Performance settings for a model."""
 
-    latency: PerformanceConfigLatency = PerformanceConfigLatency("standard")
+    latency: str = PerformanceConfigLatency("standard")
     """To use a latency-optimized version of the model, set to `optimized`."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -12089,7 +12138,7 @@ class ServiceTier:
     request.
     """
 
-    type: ServiceTierType
+    type: str
     """Specifies the processing tier type used for serving the request."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -13625,7 +13674,7 @@ class ConverseTrace:
 class CacheDetail:
     """Cache creation metrics for a specific TTL duration"""
 
-    ttl: CacheTTL
+    ttl: str
     """TTL duration for these cached tokens"""
 
     input_tokens: int
@@ -13817,7 +13866,7 @@ class ConverseOperationOutput:
     output: ConverseOutput
     """The result from the call to `Converse`."""
 
-    stop_reason: StopReason
+    stop_reason: str
     """The reason why the model stopped generating output."""
 
     usage: TokenUsage
@@ -13843,6 +13892,16 @@ class ConverseOperationOutput:
     """
     Specifies the processing tier configuration used for serving the
     request.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -14168,12 +14227,10 @@ class GuardrailStreamConfiguration:
     guardrail_version: str = ""
     """The version of the guardrail."""
 
-    trace: GuardrailTrace = GuardrailTrace("disabled")
+    trace: str = GuardrailTrace("disabled")
     """The trace behavior for the guardrail."""
 
-    stream_processing_mode: GuardrailStreamProcessingMode = (
-        GuardrailStreamProcessingMode("sync")
-    )
+    stream_processing_mode: str = GuardrailStreamProcessingMode("sync")
     """
     The processing mode.
 
@@ -15368,7 +15425,7 @@ class ImageBlockStart:
     image content.
     """
 
-    format: ImageFormat
+    format: str
     """
     The format of the image data that will be streamed in subsequent delta
     events.
@@ -15421,7 +15478,7 @@ class ToolResultBlockStart:
     type: str | None = None
     """The type for the tool that was used to generate this tool result block."""
 
-    status: ToolResultStatus | None = None
+    status: str | None = None
     """The status of the tool result block."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -15492,7 +15549,7 @@ class ToolUseBlockStart:
     name: str
     """The name of the tool that the model is requesting to use."""
 
-    type: ToolUseType | None = None
+    type: str | None = None
     """The type for the tool request."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -15767,7 +15824,7 @@ class ContentBlockStopEvent:
 class MessageStartEvent:
     """The start of a message."""
 
-    role: ConversationRole
+    role: str
     """The role for the message."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -15804,7 +15861,7 @@ class MessageStartEvent:
 class MessageStopEvent:
     """The stop event for a message."""
 
-    stop_reason: StopReason
+    stop_reason: str
     """The reason why the model stopped generating output."""
 
     additional_model_response_fields: Document | None = None
@@ -16457,6 +16514,16 @@ class _ConverseStreamOutputDeserializer:
 class ConverseStreamOperationOutput:
     """Dataclass for ConverseStreamOperationOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CONVERSE_STREAM_OPERATION_OUTPUT, self)
 
@@ -16611,7 +16678,7 @@ class InvokeModelInput:
       or from the Imported models page in the Amazon Bedrock console.
     """
 
-    trace: Trace | None = None
+    trace: str | None = None
     """
     Specifies whether to enable or disable the Bedrock trace. If enabled,
     you can see the full Bedrock trace.
@@ -16637,12 +16704,10 @@ class InvokeModelInput:
     guardrail_version: str | None = None
     """The version number for the guardrail. The value can also be `DRAFT`."""
 
-    performance_config_latency: PerformanceConfigLatency = PerformanceConfigLatency(
-        "standard"
-    )
+    performance_config_latency: str = PerformanceConfigLatency("standard")
     """Model performance settings for the request."""
 
-    service_tier: ServiceTierType | None = None
+    service_tier: str | None = None
     """Specifies the processing tier type used for serving the request."""
 
     request_metadata: str | None = field(repr=False, default=None)
@@ -16792,11 +16857,21 @@ class InvokeModelOutput:
     content_type: str
     """The MIME type of the inference result."""
 
-    performance_config_latency: PerformanceConfigLatency | None = None
+    performance_config_latency: str | None = None
     """Model performance settings for the request."""
 
-    service_tier: ServiceTierType | None = None
+    service_tier: str | None = None
     """Specifies the processing tier type used for serving the request."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_INVOKE_MODEL_OUTPUT, self)
@@ -17457,6 +17532,16 @@ class InvokeModelWithBidirectionalStreamOperationOutput:
     structure.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OPERATION_OUTPUT, self
@@ -17616,7 +17701,7 @@ class InvokeModelWithResponseStreamInput:
       or from the Imported models page in the Amazon Bedrock console.
     """
 
-    trace: Trace | None = None
+    trace: str | None = None
     """
     Specifies whether to enable or disable the Bedrock trace. If enabled,
     you can see the full Bedrock trace.
@@ -17642,12 +17727,10 @@ class InvokeModelWithResponseStreamInput:
     guardrail_version: str | None = None
     """The version number for the guardrail. The value can also be `DRAFT`."""
 
-    performance_config_latency: PerformanceConfigLatency = PerformanceConfigLatency(
-        "standard"
-    )
+    performance_config_latency: str = PerformanceConfigLatency("standard")
     """Model performance settings for the request."""
 
-    service_tier: ServiceTierType | None = None
+    service_tier: str | None = None
     """Specifies the processing tier type used for serving the request."""
 
     request_metadata: str | None = field(repr=False, default=None)
@@ -18093,11 +18176,21 @@ class InvokeModelWithResponseStreamOutput:
     content_type: str
     """The MIME type of the inference result."""
 
-    performance_config_latency: PerformanceConfigLatency | None = None
+    performance_config_latency: str | None = None
     """Model performance settings for the request."""
 
-    service_tier: ServiceTierType | None = None
+    service_tier: str | None = None
     """Specifies the processing tier type used for serving the request."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_INVOKE_MODEL_WITH_RESPONSE_STREAM_OUTPUT, self)
@@ -18572,6 +18665,16 @@ class CountTokensOutput:
     tokens that would be processed if the same input were sent to the model
     in an inference request. Use this value to estimate costs and ensure
     your inputs stay within model token limits.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):

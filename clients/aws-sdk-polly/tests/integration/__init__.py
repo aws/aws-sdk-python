@@ -13,7 +13,7 @@ VOICE_ID = "Matthew"
 ENGINE = "generative"
 OUTPUT_FORMAT = "mp3"
 SAMPLE_RATE = "24000"
-TEST_TEXT = "Hello from the AWS SDK for Python Polly integration tests."
+TEST_TEXT = "Hello from the AWS SDK for Python v4 Polly integration tests."
 
 
 async def create_polly_client(

@@ -2,7 +2,7 @@
 
 [project]
 name = "aws_sdk_polly"
-version = "0.11.0"
+version = "0.12.0"
 description = "aws_sdk_polly client"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -23,14 +23,14 @@ classifiers = [
 ]
 
 dependencies = [
-    "smithy_aws_core[eventstream, json]~=0.11.0",
-    "smithy_core~=0.8.0",
-    "smithy_http[aiohttp]~=0.5.0"
+    "smithy_aws_core[eventstream, json]~=0.12.0",
+    "smithy_core~=0.9.0",
+    "smithy_http[aiohttp]~=0.6.0"
 ]
 
 [project.optional-dependencies]
 awscrt = [
-    "smithy_http[awscrt]~=0.5.0"
+    "smithy_http[awscrt]~=0.6.0"
 ]
 
 [dependency-groups]

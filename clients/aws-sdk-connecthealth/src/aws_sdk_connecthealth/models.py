@@ -9,6 +9,7 @@ from typing import Any, Literal, Self, Union
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import TypeRegistry
 from smithy_core.exceptions import ModeledError, SerializationError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -237,7 +238,7 @@ class SubscriptionDescription:
     arn: str
     """"""
 
-    status: SubscriptionStatus
+    status: str
     """"""
 
     created_at: datetime
@@ -365,6 +366,16 @@ class ActivateSubscriptionOutput:
 
     subscription: SubscriptionDescription | None = None
     """"""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ACTIVATE_SUBSCRIPTION_OUTPUT, self)
@@ -557,7 +568,7 @@ class ArtifactDetails:
     output_location: str | None = None
     """"""
 
-    status: PostStreamArtifactGenerationStatus | None = None
+    status: str | None = None
     """The generation status of the artifact"""
 
     failure_reason: str | None = None
@@ -783,7 +794,7 @@ class CustomTemplate:
     instructions
     """
 
-    template_type: CustomTemplateBase
+    template_type: str
     """The base template type to customize"""
 
     template_instructions: list[TemplateSectionInstruction]
@@ -849,7 +860,7 @@ class ManagedNoteTemplate(UnknownEnumMixin, StrEnum):
 class ManagedTemplate:
     """Configuration for using a managed note template"""
 
-    template_type: ManagedNoteTemplate
+    template_type: str
     """The type of managed template to use"""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -1039,7 +1050,7 @@ class ClinicalNoteGenerationSettings:
 class CustomTemplateResponse:
     """Response containing custom template information"""
 
-    template_type: CustomTemplateBase | None = None
+    template_type: str | None = None
     """The base template type that was customized"""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -1080,7 +1091,7 @@ class CustomTemplateResponse:
 class ManagedTemplateResponse:
     """Response containing managed template information"""
 
-    template_type: ManagedNoteTemplate | None = None
+    template_type: str | None = None
     """The type of managed template used"""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -1508,7 +1519,7 @@ class EncryptionType(UnknownEnumMixin, StrEnum):
 class EncryptionContext:
     """Encryption context for a Domain."""
 
-    encryption_type: EncryptionType
+    encryption_type: str
     """The type of encryption key used."""
 
     kms_key_arn: str | None = None
@@ -1648,7 +1659,7 @@ class CreateDomainOutput:
     name: str
     """"""
 
-    status: DomainStatus
+    status: str
     """"""
 
     created_at: datetime
@@ -1665,6 +1676,16 @@ class CreateDomainOutput:
 
     web_app_configuration: WebAppConfiguration | None = None
     """"""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_DOMAIN_OUTPUT, self)
@@ -1883,7 +1904,7 @@ class CreateSubscriptionOutput:
     arn: str
     """"""
 
-    status: SubscriptionStatus
+    status: str
     """"""
 
     created_at: datetime
@@ -1897,6 +1918,16 @@ class CreateSubscriptionOutput:
 
     deactivated_at: datetime | None = None
     """"""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_SUBSCRIPTION_OUTPUT, self)
@@ -2103,6 +2134,16 @@ class DeactivateSubscriptionOutput:
     subscription: SubscriptionDescription | None = None
     """"""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DEACTIVATE_SUBSCRIPTION_OUTPUT, self)
 
@@ -2215,8 +2256,18 @@ class DeleteDomainOutput:
     arn: str
     """The ARN of the Domain that was requested for deletion"""
 
-    status: DomainStatus
+    status: str
     """Current status of Domain"""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_DOMAIN_OUTPUT, self)
@@ -2337,7 +2388,7 @@ class GetDomainOutput:
     name: str
     """"""
 
-    status: DomainStatus
+    status: str
     """"""
 
     created_at: datetime
@@ -2357,6 +2408,16 @@ class GetDomainOutput:
 
     tags: dict[str, str] | None = None
     """Tags associated with the Domain"""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_DOMAIN_OUTPUT, self)
@@ -2584,7 +2645,7 @@ class MedicalScribeChannelDefinition:
     channel_id: int
     """The channel identifier"""
 
-    participant_role: MedicalScribeParticipantRole
+    participant_role: str
     """The role of the participant on this channel"""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -2666,6 +2727,7 @@ def _deserialize_medical_scribe_channel_definitions(
 
 class MedicalScribeLanguageCode(UnknownEnumMixin, StrEnum):
     EN_US = "en-US"
+    MULTI = "multi"
 
 
 class MedicalScribeMediaEncoding(UnknownEnumMixin, StrEnum):
@@ -2803,13 +2865,13 @@ class MedicalScribeListeningSessionDetails:
     subscription_id: str | None = None
     """The Subscription identifier"""
 
-    language_code: MedicalScribeLanguageCode | None = None
+    language_code: str | None = None
     """The Language Code for the audio in the session"""
 
     media_sample_rate_hertz: int | None = None
     """The sample rate of the input audio"""
 
-    media_encoding: MedicalScribeMediaEncoding | None = None
+    media_encoding: str | None = None
     """The encoding for the input audio"""
 
     channel_definitions: list[MedicalScribeChannelDefinition] | None = None
@@ -2826,7 +2888,7 @@ class MedicalScribeListeningSessionDetails:
     encounter_context_provided: bool | None = None
     """Indicates whether encounter context was provided"""
 
-    stream_status: MedicalScribeStreamStatus | None = None
+    stream_status: str | None = None
     """The current status of the stream"""
 
     stream_creation_time: datetime | None = None
@@ -3063,6 +3125,16 @@ class GetMedicalScribeListeningSessionOutput:
         MedicalScribeListeningSessionDetails | None
     ) = None
     """Details about the Medical Scribe listening session"""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -3453,7 +3525,7 @@ class InsightsType(UnknownEnumMixin, StrEnum):
 class InsightsContext:
     """Details for insights that user wants to generate"""
 
-    insights_type: InsightsType
+    insights_type: str
     """"""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3595,7 +3667,7 @@ class PatientInsightsPatientContext:
     date_of_birth: str | None = field(repr=False, default=None)
     """Date of birth of the patient."""
 
-    pronouns: Pronouns | None = field(repr=False, default=None)
+    pronouns: str | None = field(repr=False, default=None)
     """Pronouns preferred by the patient."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3672,13 +3744,13 @@ class Specialty(UnknownEnumMixin, StrEnum):
 class UserContext:
     """Details for user initiating insights job"""
 
-    role: ProviderRole
+    role: str
     """"""
 
     user_id: str = field(repr=False)
     """Unique identifier of the user"""
 
-    specialty: Specialty | None = None
+    specialty: str | None = None
     """"""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3742,7 +3814,7 @@ class GetPatientInsightsJobOutput:
     job_arn: str
     """"""
 
-    job_status: JobStatus
+    job_status: str
     """"""
 
     patient_context: PatientInsightsPatientContext
@@ -3774,6 +3846,16 @@ class GetPatientInsightsJobOutput:
 
     status_details: str | None = None
     """Contains information about the status of a job."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_PATIENT_INSIGHTS_JOB_OUTPUT, self)
@@ -4029,6 +4111,16 @@ class GetSubscriptionOutput:
     subscription: SubscriptionDescription | None = None
     """"""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_SUBSCRIPTION_OUTPUT, self)
 
@@ -4095,7 +4187,7 @@ GET_SUBSCRIPTION = APIOperation(
 class ListDomainsInput:
     """Dataclass for ListDomainsInput structure."""
 
-    status: DomainStatus | None = None
+    status: str | None = None
     """Filter by Domain status."""
 
     max_results: int | None = None
@@ -4168,7 +4260,7 @@ class DomainSummary:
     name: str
     """"""
 
-    status: DomainStatus
+    status: str
     """"""
 
     created_at: datetime
@@ -4274,6 +4366,16 @@ class ListDomainsOutput:
 
     next_token: str | None = None
     """Token for the next page of results."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_DOMAINS_OUTPUT, self)
@@ -4427,6 +4529,16 @@ class ListSubscriptionsOutput:
     next_token: str | None = None
     """Token for the next page of results."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_SUBSCRIPTIONS_OUTPUT, self)
 
@@ -4549,6 +4661,16 @@ class ListTagsForResourceOutput:
 
     tags: dict[str, str] | None = None
     """The tags associated with the resource"""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_TAGS_FOR_RESOURCE_OUTPUT, self)
@@ -4879,7 +5001,7 @@ class MedicalScribeSessionControlEventType(UnknownEnumMixin, StrEnum):
 class MedicalScribeSessionControlEvent:
     """An event for controlling the Medical Scribe session"""
 
-    type: MedicalScribeSessionControlEventType | None = None
+    type: str | None = None
     """The type of session control event"""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -5096,13 +5218,13 @@ class StartMedicalScribeListeningSessionInput:
     subscription_id: str | None = None
     """The Subscription identifier"""
 
-    language_code: MedicalScribeLanguageCode | None = None
+    language_code: str | None = None
     """The Language Code for the audio in the session"""
 
     media_sample_rate_hertz: int | None = None
     """The sample rate of the input audio"""
 
-    media_encoding: MedicalScribeMediaEncoding | None = None
+    media_encoding: str | None = None
     """The encoding for the input audio"""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -5535,14 +5657,24 @@ class StartMedicalScribeListeningSessionOutput:
     request_id: str | None = None
     """The Request identifier"""
 
-    language_code: MedicalScribeLanguageCode | None = None
+    language_code: str | None = None
     """The Language Code for the audio in the session"""
 
     media_sample_rate_hertz: int | None = None
     """The sample rate of the input audio"""
 
-    media_encoding: MedicalScribeMediaEncoding | None = None
+    media_encoding: str | None = None
     """The encoding for the input audio"""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -5865,6 +5997,16 @@ class StartPatientInsightsJobOutput:
     creation_time: datetime | None = None
     """Date and time the patient insights job was submitted."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_START_PATIENT_INSIGHTS_JOB_OUTPUT, self)
 
@@ -6014,6 +6156,16 @@ class TagResourceInput:
 class TagResourceOutput:
     """Dataclass for TagResourceOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TAG_RESOURCE_OUTPUT, self)
 
@@ -6131,6 +6283,16 @@ class UntagResourceInput:
 @dataclass(kw_only=True)
 class UntagResourceOutput:
     """Dataclass for UntagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNTAG_RESOURCE_OUTPUT, self)

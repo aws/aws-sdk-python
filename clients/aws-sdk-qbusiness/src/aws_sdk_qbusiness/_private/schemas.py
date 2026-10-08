@@ -11,60 +11,23 @@ from smithy_core.traits import Trait
 MEMBER_RELATION = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#MemberRelation"),
     shape_type=ShapeType.ENUM,
-    members={
-        "AND": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="AND")],
-        },
-        "OR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="OR")],
-        },
-    },
+    members={"AND": {"target": UNIT}, "OR": {"target": UNIT}},
 )
 
 READ_ACCESS_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ReadAccessType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ALLOW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ALLOW")],
-        },
-        "DENY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DENY")],
-        },
-    },
+    members={"ALLOW": {"target": UNIT}, "DENY": {"target": UNIT}},
 )
 
 MEMBERSHIP_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#MembershipType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "INDEX": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INDEX")],
-        },
-        "DATASOURCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DATASOURCE")
-            ],
-        },
-    },
+    members={"INDEX": {"target": UNIT}, "DATASOURCE": {"target": UNIT}},
 )
 
 GROUP_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GroupName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1024}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\P{C}*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#GroupName"), shape_type=ShapeType.STRING
 )
 
 PRINCIPAL_GROUP = Schema.collection(
@@ -80,15 +43,7 @@ PRINCIPAL_GROUP = Schema.collection(
 )
 
 USER_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UserId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1024}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\P{C}*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#UserId"), shape_type=ShapeType.STRING
 )
 
 PRINCIPAL_USER = Schema.collection(
@@ -144,15 +99,7 @@ ACCESS_CONFIGURATION = Schema.collection(
 )
 
 ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ErrorMessage"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\s\\S]*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#ErrorMessage"), shape_type=ShapeType.STRING
 )
 
 ACCESS_DENIED_EXCEPTION = Schema.collection(
@@ -170,44 +117,22 @@ ACCESS_DENIED_EXCEPTION = Schema.collection(
 )
 
 Q_IAM_ACTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#QIamAction"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#pattern"), value="^qbusiness:[a-zA-Z]+$")],
+    id=ShapeID("com.amazonaws.qbusiness#QIamAction"), shape_type=ShapeType.STRING
 )
 
 DOCUMENT_ATTRIBUTE_KEY = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeKey"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 200}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9_][a-zA-Z0-9_-]*$"
-        ),
-    ],
 )
 
 TIMESTAMP = Schema(
     id=ShapeID("com.amazonaws.qbusiness#Timestamp"), shape_type=ShapeType.TIMESTAMP
 )
 
-LONG = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Long"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
-)
+LONG = Schema(id=ShapeID("com.amazonaws.qbusiness#Long"), shape_type=ShapeType.LONG)
 
 STRING = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#String"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#String"), shape_type=ShapeType.STRING
 )
 
 DOCUMENT_ATTRIBUTE_STRING_LIST_VALUE = Schema.collection(
@@ -219,26 +144,13 @@ DOCUMENT_ATTRIBUTE_STRING_LIST_VALUE = Schema.collection(
 DOCUMENT_ATTRIBUTE_STRING_VALUE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeStringValue"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 2048})
-        )
-    ],
 )
 
 DOCUMENT_ATTRIBUTE_VALUE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeValue"),
     shape_type=ShapeType.UNION,
     members={
-        "stringValue": {
-            "target": DOCUMENT_ATTRIBUTE_STRING_VALUE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"max": 2048}),
-                )
-            ],
-        },
+        "stringValue": {"target": DOCUMENT_ATTRIBUTE_STRING_VALUE},
         "stringListValue": {"target": DOCUMENT_ATTRIBUTE_STRING_LIST_VALUE},
         "longValue": {"target": LONG},
         "dateValue": {"target": TIMESTAMP},
@@ -262,9 +174,6 @@ DOCUMENT_ATTRIBUTE = Schema.collection(
 ACTION_PAYLOAD_FIELD_KEY = Schema(
     id=ShapeID("com.amazonaws.qbusiness#ActionPayloadFieldKey"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1}))
-    ],
 )
 
 ACTION_PAYLOAD_FIELD_VALUE = Schema(
@@ -294,27 +203,10 @@ ACTION_EXECUTION_PAYLOAD = Schema.collection(
 ACTION_PAYLOAD_FIELD_NAME_SEPARATOR = Schema(
     id=ShapeID("com.amazonaws.qbusiness#ActionPayloadFieldNameSeparator"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1}),
-        )
-    ],
 )
 
 PLUGIN_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PluginId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#PluginId"), shape_type=ShapeType.STRING
 )
 
 ACTION_EXECUTION = Schema.collection(
@@ -357,22 +249,10 @@ ACTION_PAYLOAD_FIELD_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ActionPayloadFieldType"),
     shape_type=ShapeType.ENUM,
     members={
-        "STRING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="STRING")],
-        },
-        "NUMBER": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NUMBER")],
-        },
-        "ARRAY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ARRAY")],
-        },
-        "BOOLEAN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="BOOLEAN")],
-        },
+        "STRING": {"target": UNIT},
+        "NUMBER": {"target": UNIT},
+        "ARRAY": {"target": UNIT},
+        "BOOLEAN": {"target": UNIT},
     },
 )
 
@@ -396,9 +276,7 @@ ACTION_REVIEW_PAYLOAD_FIELD_ARRAY_ITEM_JSON_SCHEMA = Schema(
 )
 
 INTEGER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Integer"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
+    id=ShapeID("com.amazonaws.qbusiness#Integer"), shape_type=ShapeType.INTEGER
 )
 
 ACTION_REVIEW_PAYLOAD_FIELD = Schema.collection(
@@ -431,106 +309,23 @@ PLUGIN_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#PluginType"),
     shape_type=ShapeType.ENUM,
     members={
-        "SERVICE_NOW": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SERVICE_NOW")
-            ],
-        },
-        "SALESFORCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SALESFORCE")
-            ],
-        },
-        "JIRA": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="JIRA")],
-        },
-        "ZENDESK": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ZENDESK")],
-        },
-        "CUSTOM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CUSTOM")],
-        },
-        "QUICKSIGHT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="QUICKSIGHT")
-            ],
-        },
-        "SERVICENOW_NOW_PLATFORM": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="SERVICENOW_NOW_PLATFORM"
-                )
-            ],
-        },
-        "JIRA_CLOUD": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="JIRA_CLOUD")
-            ],
-        },
-        "SALESFORCE_CRM": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SALESFORCE_CRM")
-            ],
-        },
-        "ZENDESK_SUITE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ZENDESK_SUITE")
-            ],
-        },
-        "ATLASSIAN_CONFLUENCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="ATLASSIAN_CONFLUENCE"
-                )
-            ],
-        },
-        "GOOGLE_CALENDAR": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="GOOGLE_CALENDAR")
-            ],
-        },
-        "MICROSOFT_TEAMS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MICROSOFT_TEAMS")
-            ],
-        },
-        "MICROSOFT_EXCHANGE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="MICROSOFT_EXCHANGE"
-                )
-            ],
-        },
-        "PAGERDUTY_ADVANCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PAGERDUTY_ADVANCE")
-            ],
-        },
-        "SMARTSHEET": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SMARTSHEET")
-            ],
-        },
-        "ASANA": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ASANA")],
-        },
+        "SERVICE_NOW": {"target": UNIT},
+        "SALESFORCE": {"target": UNIT},
+        "JIRA": {"target": UNIT},
+        "ZENDESK": {"target": UNIT},
+        "CUSTOM": {"target": UNIT},
+        "QUICKSIGHT": {"target": UNIT},
+        "SERVICENOW_NOW_PLATFORM": {"target": UNIT},
+        "JIRA_CLOUD": {"target": UNIT},
+        "SALESFORCE_CRM": {"target": UNIT},
+        "ZENDESK_SUITE": {"target": UNIT},
+        "ATLASSIAN_CONFLUENCE": {"target": UNIT},
+        "GOOGLE_CALENDAR": {"target": UNIT},
+        "MICROSOFT_TEAMS": {"target": UNIT},
+        "MICROSOFT_EXCHANGE": {"target": UNIT},
+        "PAGERDUTY_ADVANCE": {"target": UNIT},
+        "SMARTSHEET": {"target": UNIT},
+        "ASANA": {"target": UNIT},
     },
 )
 
@@ -545,31 +340,11 @@ ACTION_REVIEW = Schema.collection(
 )
 
 CONVERSATION_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ConversationId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#ConversationId"), shape_type=ShapeType.STRING
 )
 
 MESSAGE_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MessageId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#MessageId"), shape_type=ShapeType.STRING
 )
 
 ACTION_REVIEW_EVENT = Schema.collection(
@@ -604,12 +379,6 @@ ACTIONS = Schema.collection(
 AMAZON_RESOURCE_NAME = Schema(
     id=ShapeID("com.amazonaws.qbusiness#AmazonResourceName"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1011}),
-        )
-    ],
 )
 
 PAYLOAD = Schema(
@@ -619,29 +388,11 @@ PAYLOAD = Schema(
 )
 
 S3_BUCKET_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#S3BucketName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 63}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#S3BucketName"), shape_type=ShapeType.STRING
 )
 
 S3_OBJECT_KEY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#S3ObjectKey"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1024}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#S3ObjectKey"), shape_type=ShapeType.STRING
 )
 
 S3 = Schema.collection(
@@ -667,93 +418,31 @@ API_SCHEMA = Schema.collection(
 API_SCHEMA_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#APISchemaType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "OPEN_API_V3": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="OPEN_API_V3")
-            ],
-        }
-    },
+    members={"OPEN_API_V3": {"target": UNIT}},
 )
 
 APPLICATION_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ApplicationId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#ApplicationId"), shape_type=ShapeType.STRING
 )
 
 APPLICATION_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ApplicationName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#ApplicationName"), shape_type=ShapeType.STRING
 )
 
 IDENTITY_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#IdentityType"),
     shape_type=ShapeType.ENUM,
     members={
-        "AWS_IAM_IDP_SAML": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AWS_IAM_IDP_SAML")
-            ],
-        },
-        "AWS_IAM_IDP_OIDC": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AWS_IAM_IDP_OIDC")
-            ],
-        },
-        "AWS_IAM_IDC": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AWS_IAM_IDC")
-            ],
-        },
-        "AWS_QUICKSIGHT_IDP": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="AWS_QUICKSIGHT_IDP"
-                )
-            ],
-        },
-        "ANONYMOUS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ANONYMOUS")
-            ],
-        },
+        "AWS_IAM_IDP_SAML": {"target": UNIT},
+        "AWS_IAM_IDP_OIDC": {"target": UNIT},
+        "AWS_IAM_IDC": {"target": UNIT},
+        "AWS_QUICKSIGHT_IDP": {"target": UNIT},
+        "ANONYMOUS": {"target": UNIT},
     },
 )
 
 CLIENT_NAMESPACE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ClientNamespace"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 64}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#ClientNamespace"), shape_type=ShapeType.STRING
 )
 
 QUICK_SIGHT_CONFIGURATION = Schema.collection(
@@ -770,26 +459,11 @@ APPLICATION_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ApplicationStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "CREATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATING")],
-        },
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "DELETING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETING")],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "UPDATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="UPDATING")],
-        },
+        "CREATING": {"target": UNIT},
+        "ACTIVE": {"target": UNIT},
+        "DELETING": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "UPDATING": {"target": UNIT},
     },
 )
 
@@ -807,18 +481,7 @@ APPLICATION = Schema.collection(
 )
 
 APPLICATION_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ApplicationArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#ApplicationArn"), shape_type=ShapeType.STRING
 )
 
 CONFLICT_EXCEPTION = Schema.collection(
@@ -846,16 +509,7 @@ CONFLICT_EXCEPTION = Schema.collection(
 ATTACHMENTS_CONTROL_MODE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#AttachmentsControlMode"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 ATTACHMENTS_CONFIGURATION = Schema.collection(
@@ -869,15 +523,7 @@ ATTACHMENTS_CONFIGURATION = Schema.collection(
 )
 
 CLIENT_ID_FOR_OIDC = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ClientIdForOIDC"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 255}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9_.:/()*?=-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#ClientIdForOIDC"), shape_type=ShapeType.STRING
 )
 
 CLIENT_IDS_FOR_OIDC = Schema.collection(
@@ -887,38 +533,17 @@ CLIENT_IDS_FOR_OIDC = Schema.collection(
 )
 
 CLIENT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ClientToken"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#ClientToken"), shape_type=ShapeType.STRING
 )
 
 DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Description"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\s\\S]*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#Description"), shape_type=ShapeType.STRING
 )
 
 KMS_KEY_ID = Schema(
     id=ShapeID("com.amazonaws.qbusiness#KmsKeyId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 ENCRYPTION_CONFIGURATION = Schema.collection(
@@ -929,46 +554,16 @@ ENCRYPTION_CONFIGURATION = Schema.collection(
 IAM_IDENTITY_PROVIDER_ARN = Schema(
     id=ShapeID("com.amazonaws.qbusiness#IAMIdentityProviderArn"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 20, "max": 2048}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+$",
-        ),
-    ],
 )
 
 INSTANCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#InstanceArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 10, "max": 1224}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#InstanceArn"), shape_type=ShapeType.STRING
 )
 
 PERSONALIZATION_CONTROL_MODE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#PersonalizationControlMode"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 PERSONALIZATION_CONFIGURATION = Schema.collection(
@@ -984,16 +579,7 @@ PERSONALIZATION_CONFIGURATION = Schema.collection(
 Q_APPS_CONTROL_MODE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#QAppsControlMode"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 Q_APPS_CONFIGURATION = Schema.collection(
@@ -1007,40 +593,15 @@ Q_APPS_CONFIGURATION = Schema.collection(
 )
 
 ROLE_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#RoleArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#RoleArn"), shape_type=ShapeType.STRING
 )
 
 TAG_KEY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#TagKey"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#TagKey"), shape_type=ShapeType.STRING
 )
 
 TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#TagValue"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#TagValue"), shape_type=ShapeType.STRING
 )
 
 TAG = Schema.collection(
@@ -1060,12 +621,6 @@ TAG = Schema.collection(
 TAGS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#Tags"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 200}),
-        )
-    ],
     members={"member": {"target": TAG}},
 )
 
@@ -1075,8 +630,7 @@ CREATE_APPLICATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateApplicationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "displayName": {
@@ -1090,22 +644,12 @@ CREATE_APPLICATION_INPUT = Schema.collection(
         "clientIdsForOIDC": {"target": CLIENT_IDS_FOR_OIDC},
         "description": {"target": DESCRIPTION},
         "encryptionConfiguration": {"target": ENCRYPTION_CONFIGURATION},
-        "tags": {
-            "target": TAGS,
-            "traits": [
-                Trait.new(id=ShapeID("aws.cloudformation#cfnMutability"), value="full")
-            ],
-        },
+        "tags": {"target": TAGS},
         "clientToken": {
             "target": CLIENT_TOKEN,
             "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
         },
-        "attachmentsConfiguration": {
-            "target": ATTACHMENTS_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("aws.cloudformation#cfnMutability"), value="full")
-            ],
-        },
+        "attachmentsConfiguration": {"target": ATTACHMENTS_CONFIGURATION},
         "qAppsConfiguration": {"target": Q_APPS_CONFIGURATION},
         "personalizationConfiguration": {"target": PERSONALIZATION_CONFIGURATION},
         "quickSightConfiguration": {"target": QUICK_SIGHT_CONFIGURATION},
@@ -1118,8 +662,7 @@ CREATE_APPLICATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateApplicationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "applicationId": {"target": APPLICATION_ID},
@@ -1223,26 +766,9 @@ VALIDATION_EXCEPTION_REASON = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ValidationExceptionReason"),
     shape_type=ShapeType.ENUM,
     members={
-        "CANNOT_PARSE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CANNOT_PARSE")
-            ],
-        },
-        "FIELD_VALIDATION_FAILED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="FIELD_VALIDATION_FAILED"
-                )
-            ],
-        },
-        "UNKNOWN_OPERATION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="UNKNOWN_OPERATION")
-            ],
-        },
+        "CANNOT_PARSE": {"target": UNIT},
+        "FIELD_VALIDATION_FAILED": {"target": UNIT},
+        "UNKNOWN_OPERATION": {"target": UNIT},
     },
 )
 
@@ -1270,51 +796,15 @@ CREATE_APPLICATION = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#conditionKeys"),
-            value=("aws:RequestTag/${TagKey}", "aws:TagKeys"),
-        ),
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetApplication",
-                "qbusiness:UpdateApplication",
-                "qbusiness:TagResource",
-                "qbusiness:ListTagsForResource",
-                "iam:PassRole",
-                "kms:DescribeKey",
-                "kms:CreateGrant",
-                "sso:CreateApplication",
-                "sso:PutApplicationAuthenticationMethod",
-                "sso:PutApplicationAccessScope",
-                "sso:PutApplicationGrant",
-                "sso:DeleteApplication",
-                "sso:DescribeInstance",
-                "iam:GetSAMLProvider",
-                "quicksight:DescribeAccountSubscription",
-                "quicksight:ListNamespaces",
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"uri": "/applications", "method": "POST"}),
-        ),
+        )
     ],
 )
 
 IDC_TRUSTED_TOKEN_ISSUER_ARN = Schema(
     id=ShapeID("com.amazonaws.qbusiness#IdcTrustedTokenIssuerArn"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:sso::[0-9]{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-        ),
-    ],
 )
 
 DATA_ACCESSOR_IDC_TRUSTED_TOKEN_ISSUER_CONFIGURATION = Schema.collection(
@@ -1343,46 +833,19 @@ DATA_ACCESSOR_AUTHENTICATION_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DataAccessorAuthenticationType"),
     shape_type=ShapeType.ENUM,
     members={
-        "AWS_IAM_IDC_TTI": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AWS_IAM_IDC_TTI")
-            ],
-        },
-        "AWS_IAM_IDC_AUTH_CODE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="AWS_IAM_IDC_AUTH_CODE"
-                )
-            ],
-        },
+        "AWS_IAM_IDC_TTI": {"target": UNIT},
+        "AWS_IAM_IDC_AUTH_CODE": {"target": UNIT},
     },
 )
 
 DATA_ACCESSOR_EXTERNAL_ID = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DataAccessorExternalId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-        ),
-    ],
 )
 
 DATA_ACCESSOR_EXTERNAL_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DataAccessorExternalIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1}),
-        )
-    ],
     members={"member": {"target": DATA_ACCESSOR_EXTERNAL_ID}},
 )
 
@@ -1403,75 +866,23 @@ DATA_ACCESSOR_AUTHENTICATION_DETAIL = Schema.collection(
 DATA_ACCESSOR_NAME = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DataAccessorName"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 PRINCIPAL_ROLE_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PrincipalRoleArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:iam::[0-9]{12}:role/[a-zA-Z0-9_/+=,.@-]+$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#PrincipalRoleArn"), shape_type=ShapeType.STRING
 )
 
 DATA_ACCESSOR_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessorArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#DataAccessorArn"), shape_type=ShapeType.STRING
 )
 
 DATA_ACCESSOR_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessorId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#DataAccessorId"), shape_type=ShapeType.STRING
 )
 
 IDC_APPLICATION_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IdcApplicationArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 10, "max": 1224}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#IdcApplicationArn"), shape_type=ShapeType.STRING
 )
 
 CREATE_DATA_ACCESSOR_OUTPUT = Schema.collection(
@@ -1480,8 +891,7 @@ CREATE_DATA_ACCESSOR_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateDataAccessorResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "dataAccessorId": {
@@ -1505,8 +915,7 @@ DELETE_DATA_ACCESSOR_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteDataAccessorRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -1532,8 +941,7 @@ DELETE_DATA_ACCESSOR_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteDataAccessorResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -1541,10 +949,6 @@ DELETE_DATA_ACCESSOR = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteDataAccessor"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"), value=("qbusiness:GetDataAccessor",)
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -1553,7 +957,7 @@ DELETE_DATA_ACCESSOR = Schema(
                     "method": "DELETE",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -1563,8 +967,7 @@ GET_DATA_ACCESSOR_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetDataAccessorRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -1587,24 +990,10 @@ GET_DATA_ACCESSOR_INPUT = Schema.collection(
 MAX_RESULTS_INTEGER_FOR_LIST_DATA_ACCESSORS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListDataAccessors"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        ),
-    ],
 )
 
 NEXT_TOKEN1500 = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#NextToken1500"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1500}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#NextToken1500"), shape_type=ShapeType.STRING
 )
 
 LIST_DATA_ACCESSORS_INPUT = Schema.collection(
@@ -1613,8 +1002,7 @@ LIST_DATA_ACCESSORS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListDataAccessorsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -1665,8 +1053,7 @@ LIST_DATA_ACCESSORS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListDataAccessorsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "dataAccessors": {"target": DATA_ACCESSORS},
@@ -1679,23 +1066,11 @@ LIST_DATA_ACCESSORS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "dataAccessors",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}/dataaccessors", "method": "GET"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -1705,8 +1080,7 @@ UPDATE_DATA_ACCESSOR_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateDataAccessorResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -1716,8 +1090,7 @@ DELETE_APPLICATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteApplicationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -1736,8 +1109,7 @@ DELETE_APPLICATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteApplicationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -1745,21 +1117,12 @@ DELETE_APPLICATION = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteApplication"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetApplication",
-                "kms:RetireGrant",
-                "sso:DeleteApplication",
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}", "method": "DELETE"}
             ),
-        ),
+        )
     ],
 )
 
@@ -1769,8 +1132,7 @@ GET_APPLICATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetApplicationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -1791,33 +1153,13 @@ APPLIED_ATTACHMENTS_CONFIGURATION = Schema.collection(
 AUTO_SUBSCRIPTION_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#AutoSubscriptionStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 SUBSCRIPTION_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#SubscriptionType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "Q_LITE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Q_LITE")],
-        },
-        "Q_BUSINESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="Q_BUSINESS")
-            ],
-        },
-    },
+    members={"Q_LITE": {"target": UNIT}, "Q_BUSINESS": {"target": UNIT}},
 )
 
 AUTO_SUBSCRIPTION_CONFIGURATION = Schema.collection(
@@ -1835,30 +1177,10 @@ ERROR_CODE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ErrorCode"),
     shape_type=ShapeType.ENUM,
     members={
-        "INTERNAL_ERROR": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="InternalError")
-            ],
-        },
-        "INVALID_REQUEST": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="InvalidRequest")
-            ],
-        },
-        "RESOURCE_INACTIVE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ResourceInactive")
-            ],
-        },
-        "RESOURCE_NOT_FOUND": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ResourceNotFound")
-            ],
-        },
+        "INTERNAL_ERROR": {"target": UNIT},
+        "INVALID_REQUEST": {"target": UNIT},
+        "RESOURCE_INACTIVE": {"target": UNIT},
+        "RESOURCE_NOT_FOUND": {"target": UNIT},
     },
 )
 
@@ -1876,8 +1198,7 @@ GET_APPLICATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetApplicationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "displayName": {"target": APPLICATION_NAME},
@@ -1889,25 +1210,11 @@ GET_APPLICATION_OUTPUT = Schema.collection(
         "roleArn": {"target": ROLE_ARN},
         "status": {"target": APPLICATION_STATUS},
         "description": {"target": DESCRIPTION},
-        "encryptionConfiguration": {
-            "target": ENCRYPTION_CONFIGURATION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("aws.cloudformation#cfnMutability"),
-                    value="create-and-read",
-                )
-            ],
-        },
+        "encryptionConfiguration": {"target": ENCRYPTION_CONFIGURATION},
         "createdAt": {"target": TIMESTAMP},
         "updatedAt": {"target": TIMESTAMP},
-        "error": {
-            "target": ERROR_DETAIL,
-            "traits": [Trait.new(id=ShapeID("aws.cloudformation#cfnExcludeProperty"))],
-        },
-        "attachmentsConfiguration": {
-            "target": APPLIED_ATTACHMENTS_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("aws.cloudformation#cfnExcludeProperty"))],
-        },
+        "error": {"target": ERROR_DETAIL},
+        "attachmentsConfiguration": {"target": APPLIED_ATTACHMENTS_CONFIGURATION},
         "qAppsConfiguration": {"target": Q_APPS_CONFIGURATION},
         "personalizationConfiguration": {"target": PERSONALIZATION_CONFIGURATION},
         "autoSubscriptionConfiguration": {"target": AUTO_SUBSCRIPTION_CONFIGURATION},
@@ -1921,26 +1228,17 @@ GET_APPLICATION = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=("qbusiness:ListTagsForResource",),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}", "method": "GET"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 INDEX_CAPACITY_INTEGER = Schema(
     id=ShapeID("com.amazonaws.qbusiness#IndexCapacityInteger"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 1})),
-    ],
 )
 
 INDEX_CAPACITY_CONFIGURATION = Schema.collection(
@@ -1949,34 +1247,13 @@ INDEX_CAPACITY_CONFIGURATION = Schema.collection(
 )
 
 INDEX_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IndexName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#IndexName"), shape_type=ShapeType.STRING
 )
 
 INDEX_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#IndexType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENTERPRISE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENTERPRISE")
-            ],
-        },
-        "STARTER": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="STARTER")],
-        },
-    },
+    members={"ENTERPRISE": {"target": UNIT}, "STARTER": {"target": UNIT}},
 )
 
 CREATE_INDEX_INPUT = Schema.collection(
@@ -1985,8 +1262,7 @@ CREATE_INDEX_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateIndexRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -1998,19 +1274,11 @@ CREATE_INDEX_INPUT = Schema.collection(
         },
         "displayName": {
             "target": INDEX_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("aws.cloudformation#cfnMutability"), value="full"),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "description": {"target": DESCRIPTION},
         "type": {"target": INDEX_TYPE},
-        "tags": {
-            "target": TAGS,
-            "traits": [
-                Trait.new(id=ShapeID("aws.cloudformation#cfnMutability"), value="full")
-            ],
-        },
+        "tags": {"target": TAGS},
         "capacityConfiguration": {"target": INDEX_CAPACITY_CONFIGURATION},
         "clientToken": {
             "target": CLIENT_TOKEN,
@@ -2020,32 +1288,11 @@ CREATE_INDEX_INPUT = Schema.collection(
 )
 
 INDEX_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IndexArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#IndexArn"), shape_type=ShapeType.STRING
 )
 
 INDEX_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IndexId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#IndexId"), shape_type=ShapeType.STRING
 )
 
 CREATE_INDEX_OUTPUT = Schema.collection(
@@ -2054,8 +1301,7 @@ CREATE_INDEX_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateIndexResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"indexId": {"target": INDEX_ID}, "indexArn": {"target": INDEX_ARN}},
 )
@@ -2065,23 +1311,11 @@ CREATE_INDEX = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#conditionKeys"),
-            value=("aws:RequestTag/${TagKey}", "aws:TagKeys"),
-        ),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetIndex",
-                "qbusiness:TagResource",
-                "qbusiness:ListTagsForResource",
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}/indices", "method": "POST"}
             ),
-        ),
+        )
     ],
 )
 
@@ -2091,87 +1325,24 @@ DATA_SOURCE_CONFIGURATION = Schema(
 )
 
 DATA_SOURCE_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#DataSourceName"), shape_type=ShapeType.STRING
 )
 
 DOCUMENT_ENRICHMENT_CONDITION_OPERATOR = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DocumentEnrichmentConditionOperator"),
     shape_type=ShapeType.ENUM,
     members={
-        "GREATER_THAN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="GREATER_THAN")
-            ],
-        },
-        "GREATER_THAN_OR_EQUALS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="GREATER_THAN_OR_EQUALS"
-                )
-            ],
-        },
-        "LESS_THAN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="LESS_THAN")
-            ],
-        },
-        "LESS_THAN_OR_EQUALS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="LESS_THAN_OR_EQUALS"
-                )
-            ],
-        },
-        "EQUALS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="EQUALS")],
-        },
-        "NOT_EQUALS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOT_EQUALS")
-            ],
-        },
-        "CONTAINS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CONTAINS")],
-        },
-        "NOT_CONTAINS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOT_CONTAINS")
-            ],
-        },
-        "EXISTS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="EXISTS")],
-        },
-        "NOT_EXISTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOT_EXISTS")
-            ],
-        },
-        "BEGINS_WITH": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="BEGINS_WITH")
-            ],
-        },
+        "GREATER_THAN": {"target": UNIT},
+        "GREATER_THAN_OR_EQUALS": {"target": UNIT},
+        "LESS_THAN": {"target": UNIT},
+        "LESS_THAN_OR_EQUALS": {"target": UNIT},
+        "EQUALS": {"target": UNIT},
+        "NOT_EQUALS": {"target": UNIT},
+        "CONTAINS": {"target": UNIT},
+        "NOT_CONTAINS": {"target": UNIT},
+        "EXISTS": {"target": UNIT},
+        "NOT_EXISTS": {"target": UNIT},
+        "BEGINS_WITH": {"target": UNIT},
     },
 )
 
@@ -2193,23 +1364,13 @@ DOCUMENT_ATTRIBUTE_CONDITION = Schema.collection(
 DOCUMENT_CONTENT_OPERATOR = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DocumentContentOperator"),
     shape_type=ShapeType.ENUM,
-    members={
-        "DELETE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETE")],
-        }
-    },
+    members={"DELETE": {"target": UNIT}},
 )
 
 ATTRIBUTE_VALUE_OPERATOR = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#AttributeValueOperator"),
     shape_type=ShapeType.ENUM,
-    members={
-        "DELETE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETE")],
-        }
-    },
+    members={"DELETE": {"target": UNIT}},
 )
 
 DOCUMENT_ATTRIBUTE_TARGET = Schema.collection(
@@ -2236,28 +1397,11 @@ INLINE_DOCUMENT_ENRICHMENT_CONFIGURATION = Schema.collection(
 INLINE_DOCUMENT_ENRICHMENT_CONFIGURATIONS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#InlineDocumentEnrichmentConfigurations"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        )
-    ],
     members={"member": {"target": INLINE_DOCUMENT_ENRICHMENT_CONFIGURATION}},
 )
 
 LAMBDA_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#LambdaArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:lambda:[a-z-]*-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#LambdaArn"), shape_type=ShapeType.STRING
 )
 
 HOOK_CONFIGURATION = Schema.collection(
@@ -2282,16 +1426,7 @@ DOCUMENT_ENRICHMENT_CONFIGURATION = Schema.collection(
 AUDIO_EXTRACTION_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#AudioExtractionStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 AUDIO_EXTRACTION_CONFIGURATION = Schema.collection(
@@ -2307,16 +1442,7 @@ AUDIO_EXTRACTION_CONFIGURATION = Schema.collection(
 IMAGE_EXTRACTION_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ImageExtractionStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 IMAGE_EXTRACTION_CONFIGURATION = Schema.collection(
@@ -2332,16 +1458,7 @@ IMAGE_EXTRACTION_CONFIGURATION = Schema.collection(
 VIDEO_EXTRACTION_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#VideoExtractionStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 VIDEO_EXTRACTION_CONFIGURATION = Schema.collection(
@@ -2364,50 +1481,21 @@ MEDIA_EXTRACTION_CONFIGURATION = Schema.collection(
 )
 
 SYNC_SCHEDULE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SyncSchedule"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 998})
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\s\\S]*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#SyncSchedule"), shape_type=ShapeType.STRING
 )
 
 SECURITY_GROUP_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SecurityGroupId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 200}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[-0-9a-zA-Z]+$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#SecurityGroupId"), shape_type=ShapeType.STRING
 )
 
 SECURITY_GROUP_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#SecurityGroupIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        )
-    ],
     members={"member": {"target": SECURITY_GROUP_ID}},
 )
 
 SUBNET_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SubnetId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 200}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[-0-9a-zA-Z]+$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#SubnetId"), shape_type=ShapeType.STRING
 )
 
 SUBNET_IDS = Schema.collection(
@@ -2436,8 +1524,7 @@ CREATE_DATA_SOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateDataSourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -2456,10 +1543,7 @@ CREATE_DATA_SOURCE_INPUT = Schema.collection(
         },
         "displayName": {
             "target": DATA_SOURCE_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("aws.cloudformation#cfnMutability"), value="full"),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "configuration": {
             "target": DATA_SOURCE_CONFIGURATION,
@@ -2467,12 +1551,7 @@ CREATE_DATA_SOURCE_INPUT = Schema.collection(
         },
         "vpcConfiguration": {"target": DATA_SOURCE_VPC_CONFIGURATION},
         "description": {"target": DESCRIPTION},
-        "tags": {
-            "target": TAGS,
-            "traits": [
-                Trait.new(id=ShapeID("aws.cloudformation#cfnMutability"), value="full")
-            ],
-        },
+        "tags": {"target": TAGS},
         "syncSchedule": {"target": SYNC_SCHEDULE},
         "roleArn": {"target": ROLE_ARN},
         "clientToken": {
@@ -2487,32 +1566,11 @@ CREATE_DATA_SOURCE_INPUT = Schema.collection(
 )
 
 DATA_SOURCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#DataSourceArn"), shape_type=ShapeType.STRING
 )
 
 DATA_SOURCE_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#DataSourceId"), shape_type=ShapeType.STRING
 )
 
 CREATE_DATA_SOURCE_OUTPUT = Schema.collection(
@@ -2521,8 +1579,7 @@ CREATE_DATA_SOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateDataSourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "dataSourceId": {"target": DATA_SOURCE_ID},
@@ -2535,20 +1592,6 @@ CREATE_DATA_SOURCE = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#conditionKeys"),
-            value=("aws:RequestTag/${TagKey}", "aws:TagKeys"),
-        ),
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetDataSource",
-                "qbusiness:TagResource",
-                "qbusiness:ListTagsForResource",
-                "iam:PassRole",
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -2556,7 +1599,7 @@ CREATE_DATA_SOURCE = Schema(
                     "method": "POST",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -2566,8 +1609,7 @@ DELETE_DATA_SOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteDataSourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -2600,8 +1642,7 @@ DELETE_DATA_SOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteDataSourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -2609,10 +1650,6 @@ DELETE_DATA_SOURCE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteDataSource"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"), value=("qbusiness:GetDataSource",)
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -2621,7 +1658,7 @@ DELETE_DATA_SOURCE = Schema(
                     "method": "DELETE",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -2631,8 +1668,7 @@ GET_DATA_SOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetDataSourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -2663,32 +1699,12 @@ DATA_SOURCE_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DataSourceStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "PENDING_CREATION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PENDING_CREATION")
-            ],
-        },
-        "CREATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATING")],
-        },
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "DELETING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETING")],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "UPDATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="UPDATING")],
-        },
+        "PENDING_CREATION": {"target": UNIT},
+        "CREATING": {"target": UNIT},
+        "ACTIVE": {"target": UNIT},
+        "DELETING": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "UPDATING": {"target": UNIT},
     },
 )
 
@@ -2698,8 +1714,7 @@ GET_DATA_SOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetDataSourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "applicationId": {"target": APPLICATION_ID},
@@ -2716,10 +1731,7 @@ GET_DATA_SOURCE_OUTPUT = Schema.collection(
         "status": {"target": DATA_SOURCE_STATUS},
         "syncSchedule": {"target": SYNC_SCHEDULE},
         "roleArn": {"target": ROLE_ARN},
-        "error": {
-            "target": ERROR_DETAIL,
-            "traits": [Trait.new(id=ShapeID("aws.cloudformation#cfnExcludeProperty"))],
-        },
+        "error": {"target": ERROR_DETAIL},
         "documentEnrichmentConfiguration": {
             "target": DOCUMENT_ENRICHMENT_CONFIGURATION
         },
@@ -2732,10 +1744,6 @@ GET_DATA_SOURCE = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=("qbusiness:ListTagsForResource",),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -2743,32 +1751,17 @@ GET_DATA_SOURCE = Schema(
                     "method": "GET",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_DATA_SOURCES = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListDataSources"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        ),
-    ],
 )
 
 NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#NextToken"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 800}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#NextToken"), shape_type=ShapeType.STRING
 )
 
 LIST_DATA_SOURCES_INPUT = Schema.collection(
@@ -2777,8 +1770,7 @@ LIST_DATA_SOURCES_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListDataSourcesRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -2834,8 +1826,7 @@ LIST_DATA_SOURCES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListDataSourcesResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "dataSources": {"target": DATA_SOURCES},
@@ -2848,17 +1839,6 @@ LIST_DATA_SOURCES = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "dataSources",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -2866,8 +1846,7 @@ LIST_DATA_SOURCES = Schema(
                     "method": "GET",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -2877,8 +1856,7 @@ UPDATE_DATA_SOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateDataSourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -2921,8 +1899,7 @@ UPDATE_DATA_SOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateDataSourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -2930,17 +1907,6 @@ UPDATE_DATA_SOURCE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UpdateDataSource"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetDataSource",
-                "qbusiness:TagResource",
-                "qbusiness:UntagResource",
-                "qbusiness:ListTagsForResource",
-                "iam:PassRole",
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -2949,7 +1915,7 @@ UPDATE_DATA_SOURCE = Schema(
                     "method": "PUT",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -2959,8 +1925,7 @@ DELETE_INDEX_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteIndexRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -2986,8 +1951,7 @@ DELETE_INDEX_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteIndexResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -2995,8 +1959,6 @@ DELETE_INDEX = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteIndex"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(id=ShapeID("aws.iam#requiredActions"), value=("qbusiness:GetIndex",)),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -3005,7 +1967,7 @@ DELETE_INDEX = Schema(
                     "method": "DELETE",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -3015,8 +1977,7 @@ GET_INDEX_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetIndexRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -3039,54 +2000,22 @@ GET_INDEX_INPUT = Schema.collection(
 DOCUMENT_METADATA_CONFIGURATION_NAME = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DocumentMetadataConfigurationName"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 30}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9_][a-zA-Z0-9_-]*$"
-        ),
-    ],
 )
 
 STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#Status"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 ATTRIBUTE_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#AttributeType"),
     shape_type=ShapeType.ENUM,
     members={
-        "STRING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="STRING")],
-        },
-        "STRING_LIST": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="STRING_LIST")
-            ],
-        },
-        "NUMBER": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NUMBER")],
-        },
-        "DATE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DATE")],
-        },
+        "STRING": {"target": UNIT},
+        "STRING_LIST": {"target": UNIT},
+        "NUMBER": {"target": UNIT},
+        "DATE": {"target": UNIT},
     },
 )
 
@@ -3102,31 +2031,16 @@ DOCUMENT_ATTRIBUTE_CONFIGURATION = Schema.collection(
 DOCUMENT_ATTRIBUTE_CONFIGURATIONS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeConfigurations"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 500}),
-        )
-    ],
     members={"member": {"target": DOCUMENT_ATTRIBUTE_CONFIGURATION}},
 )
 
 INDEXED_TEXT_BYTES = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IndexedTextBytes"),
-    shape_type=ShapeType.LONG,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#IndexedTextBytes"), shape_type=ShapeType.LONG
 )
 
 INDEXED_TEXT_DOCUMENT = Schema(
     id=ShapeID("com.amazonaws.qbusiness#IndexedTextDocument"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})),
-    ],
 )
 
 TEXT_DOCUMENT_STATISTICS = Schema.collection(
@@ -3146,26 +2060,11 @@ INDEX_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#IndexStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "CREATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATING")],
-        },
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "DELETING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETING")],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "UPDATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="UPDATING")],
-        },
+        "CREATING": {"target": UNIT},
+        "ACTIVE": {"target": UNIT},
+        "DELETING": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "UPDATING": {"target": UNIT},
     },
 )
 
@@ -3175,8 +2074,7 @@ GET_INDEX_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetIndexResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "applicationId": {"target": APPLICATION_ID},
@@ -3192,10 +2090,7 @@ GET_INDEX_OUTPUT = Schema.collection(
         "documentAttributeConfigurations": {
             "target": DOCUMENT_ATTRIBUTE_CONFIGURATIONS
         },
-        "error": {
-            "target": ERROR_DETAIL,
-            "traits": [Trait.new(id=ShapeID("aws.cloudformation#cfnExcludeProperty"))],
-        },
+        "error": {"target": ERROR_DETAIL},
         "indexStatistics": {"target": INDEX_STATISTICS},
     },
 )
@@ -3205,10 +2100,6 @@ GET_INDEX = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=("qbusiness:ListTagsForResource",),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -3216,21 +2107,13 @@ GET_INDEX = Schema(
                     "method": "GET",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_INDICES = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListIndices"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
 )
 
 LIST_INDICES_INPUT = Schema.collection(
@@ -3239,8 +2122,7 @@ LIST_INDICES_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListIndicesRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -3288,8 +2170,7 @@ LIST_INDICES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListIndicesResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"nextToken": {"target": NEXT_TOKEN}, "indices": {"target": INDICES}},
 )
@@ -3299,23 +2180,11 @@ LIST_INDICES = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "indices",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}/indices", "method": "GET"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -3325,8 +2194,7 @@ UPDATE_INDEX_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateIndexRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -3358,8 +2226,7 @@ UPDATE_INDEX_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateIndexResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -3367,16 +2234,6 @@ UPDATE_INDEX = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UpdateIndex"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetIndex",
-                "qbusiness:TagResource",
-                "qbusiness:UntagResource",
-                "qbusiness:ListTagsForResource",
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -3385,32 +2242,17 @@ UPDATE_INDEX = Schema(
                     "method": "PUT",
                 }
             ),
-        ),
+        )
     ],
 )
 
 INTEGRATION_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IntegrationId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#IntegrationId"), shape_type=ShapeType.STRING
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_APPLICATIONS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListApplications"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
 )
 
 LIST_APPLICATIONS_INPUT = Schema.collection(
@@ -3419,8 +2261,7 @@ LIST_APPLICATIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListApplicationsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "nextToken": {
@@ -3450,8 +2291,7 @@ LIST_APPLICATIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListApplicationsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "nextToken": {"target": NEXT_TOKEN},
@@ -3464,37 +2304,14 @@ LIST_APPLICATIONS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "applications",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"uri": "/applications", "method": "GET"}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 SECRET_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SecretArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#SecretArn"), shape_type=ShapeType.STRING
 )
 
 BASIC_AUTH_CONFIGURATION = Schema.collection(
@@ -3529,19 +2346,7 @@ NO_AUTH_CONFIGURATION = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#NoAuthConfiguration")
 )
 
-URL = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Url"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^(https?|ftp|file)://([^\\s]*)$"
-        ),
-    ],
-)
+URL = Schema(id=ShapeID("com.amazonaws.qbusiness#Url"), shape_type=ShapeType.STRING)
 
 O_AUTH2_CLIENT_CREDENTIAL_CONFIGURATION = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#OAuth2ClientCredentialConfiguration"),
@@ -3573,14 +2378,7 @@ PLUGIN_AUTH_CONFIGURATION = Schema.collection(
 )
 
 PLUGIN_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PluginDescription"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 200}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#PluginDescription"), shape_type=ShapeType.STRING
 )
 
 CUSTOM_PLUGIN_CONFIGURATION = Schema.collection(
@@ -3599,17 +2397,7 @@ CUSTOM_PLUGIN_CONFIGURATION = Schema.collection(
 )
 
 PLUGIN_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PluginName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#PluginName"), shape_type=ShapeType.STRING
 )
 
 CREATE_PLUGIN_INPUT = Schema.collection(
@@ -3618,8 +2406,7 @@ CREATE_PLUGIN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreatePluginRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -3643,12 +2430,7 @@ CREATE_PLUGIN_INPUT = Schema.collection(
         },
         "serverUrl": {"target": URL},
         "customPluginConfiguration": {"target": CUSTOM_PLUGIN_CONFIGURATION},
-        "tags": {
-            "target": TAGS,
-            "traits": [
-                Trait.new(id=ShapeID("aws.cloudformation#cfnMutability"), value="full")
-            ],
-        },
+        "tags": {"target": TAGS},
         "clientToken": {
             "target": CLIENT_TOKEN,
             "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
@@ -3660,68 +2442,18 @@ PLUGIN_BUILD_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#PluginBuildStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "READY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="READY")],
-        },
-        "CREATE_IN_PROGRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CREATE_IN_PROGRESS"
-                )
-            ],
-        },
-        "CREATE_FAILED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATE_FAILED")
-            ],
-        },
-        "UPDATE_IN_PROGRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="UPDATE_IN_PROGRESS"
-                )
-            ],
-        },
-        "UPDATE_FAILED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="UPDATE_FAILED")
-            ],
-        },
-        "DELETE_IN_PROGRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="DELETE_IN_PROGRESS"
-                )
-            ],
-        },
-        "DELETE_FAILED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETE_FAILED")
-            ],
-        },
+        "READY": {"target": UNIT},
+        "CREATE_IN_PROGRESS": {"target": UNIT},
+        "CREATE_FAILED": {"target": UNIT},
+        "UPDATE_IN_PROGRESS": {"target": UNIT},
+        "UPDATE_FAILED": {"target": UNIT},
+        "DELETE_IN_PROGRESS": {"target": UNIT},
+        "DELETE_FAILED": {"target": UNIT},
     },
 )
 
 PLUGIN_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PluginArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#PluginArn"), shape_type=ShapeType.STRING
 )
 
 CREATE_PLUGIN_OUTPUT = Schema.collection(
@@ -3730,8 +2462,7 @@ CREATE_PLUGIN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreatePluginResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "pluginId": {"target": PLUGIN_ID},
@@ -3745,25 +2476,11 @@ CREATE_PLUGIN = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#conditionKeys"),
-            value=("aws:RequestTag/${TagKey}", "aws:TagKeys"),
-        ),
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetPlugin",
-                "qbusiness:TagResource",
-                "qbusiness:ListTagsForResource",
-                "iam:PassRole",
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "POST", "uri": "/applications/{applicationId}/plugins"}
             ),
-        ),
+        )
     ],
 )
 
@@ -3773,8 +2490,7 @@ DELETE_PLUGIN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeletePluginRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -3800,8 +2516,7 @@ DELETE_PLUGIN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeletePluginResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -3809,10 +2524,6 @@ DELETE_PLUGIN = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeletePlugin"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"), value=("qbusiness:GetPlugin",)
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -3821,7 +2532,7 @@ DELETE_PLUGIN = Schema(
                     "uri": "/applications/{applicationId}/plugins/{pluginId}",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -3831,8 +2542,7 @@ GET_PLUGIN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetPluginRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -3855,16 +2565,7 @@ GET_PLUGIN_INPUT = Schema.collection(
 PLUGIN_STATE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#PluginState"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 GET_PLUGIN_OUTPUT = Schema.collection(
@@ -3873,8 +2574,7 @@ GET_PLUGIN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetPluginResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "applicationId": {"target": APPLICATION_ID},
@@ -3897,10 +2597,6 @@ GET_PLUGIN = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=("qbusiness:ListTagsForResource",),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -3908,21 +2604,13 @@ GET_PLUGIN = Schema(
                     "uri": "/applications/{applicationId}/plugins/{pluginId}",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_PLUGINS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListPlugins"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        ),
-    ],
 )
 
 LIST_PLUGINS_INPUT = Schema.collection(
@@ -3931,8 +2619,7 @@ LIST_PLUGINS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListPluginsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -3983,8 +2670,7 @@ LIST_PLUGINS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListPluginsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"nextToken": {"target": NEXT_TOKEN}, "plugins": {"target": PLUGINS}},
 )
@@ -3994,23 +2680,11 @@ LIST_PLUGINS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "plugins",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/applications/{applicationId}/plugins"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -4020,8 +2694,7 @@ UPDATE_PLUGIN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdatePluginRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -4052,8 +2725,7 @@ UPDATE_PLUGIN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdatePluginResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -4061,17 +2733,6 @@ UPDATE_PLUGIN = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UpdatePlugin"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetPlugin",
-                "qbusiness:TagResource",
-                "qbusiness:UntagResource",
-                "qbusiness:ListTagsForResource",
-                "iam:PassRole",
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -4080,22 +2741,12 @@ UPDATE_PLUGIN = Schema(
                     "uri": "/applications/{applicationId}/plugins/{pluginId}",
                 }
             ),
-        ),
+        )
     ],
 )
 
 KENDRA_INDEX_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#KendraIndexId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#KendraIndexId"), shape_type=ShapeType.STRING
 )
 
 KENDRA_INDEX_CONFIGURATION = Schema.collection(
@@ -4111,49 +2762,19 @@ KENDRA_INDEX_CONFIGURATION = Schema.collection(
 BOOSTING_DURATION_IN_SECONDS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#BoostingDurationInSeconds"),
     shape_type=ShapeType.LONG,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 0, "max": 999999999}),
-        ),
-    ],
 )
 
 DOCUMENT_ATTRIBUTE_BOOSTING_LEVEL = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeBoostingLevel"),
     shape_type=ShapeType.ENUM,
     members={
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
-        "LOW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="LOW")],
-        },
-        "MEDIUM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="MEDIUM")],
-        },
-        "HIGH": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HIGH")],
-        },
-        "VERY_HIGH": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="VERY_HIGH")
-            ],
-        },
-        "ONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ONE")],
-        },
-        "TWO": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="TWO")],
-        },
+        "NONE": {"target": UNIT},
+        "LOW": {"target": UNIT},
+        "MEDIUM": {"target": UNIT},
+        "HIGH": {"target": UNIT},
+        "VERY_HIGH": {"target": UNIT},
+        "ONE": {"target": UNIT},
+        "TWO": {"target": UNIT},
     },
 )
 
@@ -4172,23 +2793,8 @@ NUMBER_ATTRIBUTE_BOOSTING_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#NumberAttributeBoostingType"),
     shape_type=ShapeType.ENUM,
     members={
-        "PRIORITIZE_LARGER_VALUES": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="PRIORITIZE_LARGER_VALUES"
-                )
-            ],
-        },
-        "PRIORITIZE_SMALLER_VALUES": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="PRIORITIZE_SMALLER_VALUES",
-                )
-            ],
-        },
+        "PRIORITIZE_LARGER_VALUES": {"target": UNIT},
+        "PRIORITIZE_SMALLER_VALUES": {"target": UNIT},
     },
 )
 
@@ -4207,56 +2813,21 @@ STRING_ATTRIBUTE_VALUE_BOOSTING_LEVEL = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#StringAttributeValueBoostingLevel"),
     shape_type=ShapeType.ENUM,
     members={
-        "LOW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="LOW")],
-        },
-        "MEDIUM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="MEDIUM")],
-        },
-        "HIGH": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HIGH")],
-        },
-        "VERY_HIGH": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="VERY_HIGH")
-            ],
-        },
-        "ONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ONE")],
-        },
-        "TWO": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="TWO")],
-        },
-        "THREE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="THREE")],
-        },
-        "FOUR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FOUR")],
-        },
-        "FIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FIVE")],
-        },
+        "LOW": {"target": UNIT},
+        "MEDIUM": {"target": UNIT},
+        "HIGH": {"target": UNIT},
+        "VERY_HIGH": {"target": UNIT},
+        "ONE": {"target": UNIT},
+        "TWO": {"target": UNIT},
+        "THREE": {"target": UNIT},
+        "FOUR": {"target": UNIT},
+        "FIVE": {"target": UNIT},
     },
 )
 
 STRING_ATTRIBUTE_VALUE_BOOSTING = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#StringAttributeValueBoosting"),
     shape_type=ShapeType.MAP,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        )
-    ],
     members={
         "key": {"target": STRING},
         "value": {"target": STRING_ATTRIBUTE_VALUE_BOOSTING_LEVEL},
@@ -4300,9 +2871,6 @@ DOCUMENT_ATTRIBUTE_BOOSTING_CONFIGURATION = Schema.collection(
 DOCUMENT_ATTRIBUTE_BOOSTING_OVERRIDE_MAP = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeBoostingOverrideMap"),
     shape_type=ShapeType.MAP,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1}))
-    ],
     members={
         "key": {"target": DOCUMENT_ATTRIBUTE_KEY},
         "value": {"target": DOCUMENT_ATTRIBUTE_BOOSTING_CONFIGURATION},
@@ -4331,36 +2899,13 @@ RETRIEVER_CONFIGURATION = Schema.collection(
 )
 
 RETRIEVER_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#RetrieverName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#RetrieverName"), shape_type=ShapeType.STRING
 )
 
 RETRIEVER_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#RetrieverType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "NATIVE_INDEX": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NATIVE_INDEX")
-            ],
-        },
-        "KENDRA_INDEX": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="KENDRA_INDEX")
-            ],
-        },
-    },
+    members={"NATIVE_INDEX": {"target": UNIT}, "KENDRA_INDEX": {"target": UNIT}},
 )
 
 CREATE_RETRIEVER_INPUT = Schema.collection(
@@ -4369,8 +2914,7 @@ CREATE_RETRIEVER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateRetrieverRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -4382,13 +2926,7 @@ CREATE_RETRIEVER_INPUT = Schema.collection(
         },
         "type": {
             "target": RETRIEVER_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("aws.cloudformation#cfnMutability"),
-                    value="create-and-read",
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "displayName": {
             "target": RETRIEVER_NAME,
@@ -4403,42 +2941,16 @@ CREATE_RETRIEVER_INPUT = Schema.collection(
             "target": CLIENT_TOKEN,
             "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
         },
-        "tags": {
-            "target": TAGS,
-            "traits": [
-                Trait.new(id=ShapeID("aws.cloudformation#cfnMutability"), value="full")
-            ],
-        },
+        "tags": {"target": TAGS},
     },
 )
 
 RETRIEVER_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#RetrieverArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#RetrieverArn"), shape_type=ShapeType.STRING
 )
 
 RETRIEVER_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#RetrieverId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#RetrieverId"), shape_type=ShapeType.STRING
 )
 
 CREATE_RETRIEVER_OUTPUT = Schema.collection(
@@ -4447,8 +2959,7 @@ CREATE_RETRIEVER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateRetrieverResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "retrieverId": {"target": RETRIEVER_ID},
@@ -4461,24 +2972,11 @@ CREATE_RETRIEVER = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#conditionKeys"),
-            value=("aws:RequestTag/${TagKey}", "aws:TagKeys"),
-        ),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:TagResource",
-                "qbusiness:ListTagsForResource",
-                "qbusiness:GetRetriever",
-                "iam:PassRole",
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "POST", "uri": "/applications/{applicationId}/retrievers"}
             ),
-        ),
+        )
     ],
 )
 
@@ -4488,8 +2986,7 @@ DELETE_RETRIEVER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteRetrieverRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -4515,8 +3012,7 @@ DELETE_RETRIEVER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteRetrieverResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -4524,10 +3020,6 @@ DELETE_RETRIEVER = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteRetriever"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"), value=("qbusiness:GetRetriever",)
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -4536,7 +3028,7 @@ DELETE_RETRIEVER = Schema(
                     "uri": "/applications/{applicationId}/retrievers/{retrieverId}",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -4546,8 +3038,7 @@ GET_RETRIEVER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetRetrieverRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -4571,18 +3062,9 @@ RETRIEVER_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#RetrieverStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "CREATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATING")],
-        },
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
+        "CREATING": {"target": UNIT},
+        "ACTIVE": {"target": UNIT},
+        "FAILED": {"target": UNIT},
     },
 )
 
@@ -4592,8 +3074,7 @@ GET_RETRIEVER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetRetrieverResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "applicationId": {"target": APPLICATION_ID},
@@ -4614,10 +3095,6 @@ GET_RETRIEVER = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=("qbusiness:ListTagsForResource",),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -4625,21 +3102,13 @@ GET_RETRIEVER = Schema(
                     "uri": "/applications/{applicationId}/retrievers/{retrieverId}",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_RETRIEVERS_REQUEST = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListRetrieversRequest"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        ),
-    ],
 )
 
 LIST_RETRIEVERS_INPUT = Schema.collection(
@@ -4648,8 +3117,7 @@ LIST_RETRIEVERS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListRetrieversRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -4697,8 +3165,7 @@ LIST_RETRIEVERS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListRetrieversResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"retrievers": {"target": RETRIEVERS}, "nextToken": {"target": NEXT_TOKEN}},
 )
@@ -4708,23 +3175,11 @@ LIST_RETRIEVERS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "retrievers",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}/retrievers", "method": "GET"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -4734,8 +3189,7 @@ UPDATE_RETRIEVER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateRetrieverRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -4764,8 +3218,7 @@ UPDATE_RETRIEVER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateRetrieverResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -4773,17 +3226,6 @@ UPDATE_RETRIEVER = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UpdateRetriever"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:TagResource",
-                "qbusiness:UntagResource",
-                "qbusiness:ListTagsForResource",
-                "qbusiness:GetRetriever",
-                "iam:PassRole",
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -4792,7 +3234,7 @@ UPDATE_RETRIEVER = Schema(
                     "uri": "/applications/{applicationId}/retrievers/{retrieverId}",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -4802,8 +3244,7 @@ UPDATE_APPLICATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateApplicationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -4830,8 +3271,7 @@ UPDATE_APPLICATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateApplicationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -4839,29 +3279,12 @@ UPDATE_APPLICATION = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UpdateApplication"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetApplication",
-                "qbusiness:TagResource",
-                "qbusiness:UntagResource",
-                "qbusiness:ListTagsForResource",
-                "iam:PassRole",
-                "sso:CreateApplication",
-                "sso:PutApplicationAuthenticationMethod",
-                "sso:PutApplicationAccessScope",
-                "sso:PutApplicationGrant",
-                "sso:DeleteApplication",
-                "sso:DescribeInstance",
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}", "method": "PUT"}
             ),
-        ),
+        )
     ],
 )
 
@@ -4872,13 +3295,6 @@ BROWSER_EXTENSION = Schema(
 BROWSER_EXTENSION_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#BrowserExtensionList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#uniqueItems")),
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 2}),
-        ),
-    ],
     members={"member": {"target": BROWSER_EXTENSION}},
 )
 
@@ -4893,63 +3309,19 @@ BROWSER_EXTENSION_CONFIGURATION = Schema.collection(
 )
 
 CUSTOM_CSS_URL = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CustomCSSUrl"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^(https?://[a-zA-Z0-9-_.+%/]+\\.css)?$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#CustomCSSUrl"), shape_type=ShapeType.STRING
 )
 
 FAVICON_URL = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#FaviconUrl"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^(https?://[a-zA-Z0-9-_.+%/]+\\.(svg|ico))?$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#FaviconUrl"), shape_type=ShapeType.STRING
 )
 
 FONT_URL = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#FontUrl"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^(https?://[a-zA-Z0-9-_.+%/]+\\.(ttf|woff|woff2|otf))?$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#FontUrl"), shape_type=ShapeType.STRING
 )
 
 LOGO_URL = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#LogoUrl"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^(https?://[a-zA-Z0-9-_.+%/]+\\.(svg|png))?$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#LogoUrl"), shape_type=ShapeType.STRING
 )
 
 CUSTOMIZATION_CONFIGURATION = Schema.collection(
@@ -4979,13 +3351,6 @@ OPEN_ID_CONNECT_PROVIDER_CONFIGURATION = Schema.collection(
 SAML_AUTHENTICATION_URL = Schema(
     id=ShapeID("com.amazonaws.qbusiness#SamlAuthenticationUrl"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1284}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^https://.*$"),
-    ],
 )
 
 SAML_PROVIDER_CONFIGURATION = Schema.collection(
@@ -5010,80 +3375,34 @@ IDENTITY_PROVIDER_CONFIGURATION = Schema.collection(
 )
 
 ORIGIN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Origin"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^(http://|https://)[a-zA-Z0-9-_.]+(?::[0-9]{1,5})?$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#Origin"), shape_type=ShapeType.STRING
 )
 
 WEB_EXPERIENCE_ORIGINS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#WebExperienceOrigins"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 10}),
-        )
-    ],
     members={"member": {"target": ORIGIN}},
 )
 
 WEB_EXPERIENCE_SAMPLE_PROMPTS_CONTROL_MODE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#WebExperienceSamplePromptsControlMode"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 WEB_EXPERIENCE_SUBTITLE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#WebExperienceSubtitle"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 500}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\s\\S]*$"),
-    ],
 )
 
 WEB_EXPERIENCE_TITLE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#WebExperienceTitle"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 500}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\s\\S]*$"),
-    ],
 )
 
 WEB_EXPERIENCE_WELCOME_MESSAGE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#WebExperienceWelcomeMessage"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 300}),
-        )
-    ],
 )
 
 CREATE_WEB_EXPERIENCE_INPUT = Schema.collection(
@@ -5092,8 +3411,7 @@ CREATE_WEB_EXPERIENCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateWebExperienceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -5111,12 +3429,7 @@ CREATE_WEB_EXPERIENCE_INPUT = Schema.collection(
         },
         "origins": {"target": WEB_EXPERIENCE_ORIGINS},
         "roleArn": {"target": ROLE_ARN},
-        "tags": {
-            "target": TAGS,
-            "traits": [
-                Trait.new(id=ShapeID("aws.cloudformation#cfnMutability"), value="full")
-            ],
-        },
+        "tags": {"target": TAGS},
         "clientToken": {
             "target": CLIENT_TOKEN,
             "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
@@ -5128,30 +3441,11 @@ CREATE_WEB_EXPERIENCE_INPUT = Schema.collection(
 )
 
 WEB_EXPERIENCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperienceArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#WebExperienceArn"), shape_type=ShapeType.STRING
 )
 
 WEB_EXPERIENCE_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperienceId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#WebExperienceId"), shape_type=ShapeType.STRING
 )
 
 CREATE_WEB_EXPERIENCE_OUTPUT = Schema.collection(
@@ -5160,8 +3454,7 @@ CREATE_WEB_EXPERIENCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateWebExperienceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "webExperienceId": {"target": WEB_EXPERIENCE_ID},
@@ -5174,26 +3467,11 @@ CREATE_WEB_EXPERIENCE = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#conditionKeys"),
-            value=("aws:RequestTag/${TagKey}", "aws:TagKeys"),
-        ),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetWebExperience",
-                "qbusiness:TagResource",
-                "qbusiness:ListTagsForResource",
-                "iam:PassRole",
-                "sso:PutApplicationGrant",
-                "sso:UpdateApplication",
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}/experiences", "method": "POST"}
             ),
-        ),
+        )
     ],
 )
 
@@ -5203,8 +3481,7 @@ DELETE_WEB_EXPERIENCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteWebExperienceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -5230,8 +3507,7 @@ DELETE_WEB_EXPERIENCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteWebExperienceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -5239,10 +3515,6 @@ DELETE_WEB_EXPERIENCE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteWebExperience"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"), value=("qbusiness:GetWebExperience",)
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -5251,7 +3523,7 @@ DELETE_WEB_EXPERIENCE = Schema(
                     "method": "DELETE",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -5261,8 +3533,7 @@ GET_WEB_EXPERIENCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetWebExperienceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -5283,26 +3554,11 @@ GET_WEB_EXPERIENCE_INPUT = Schema.collection(
 )
 
 SAML_METADATA_XML = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SamlMetadataXML"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1000, "max": 10000000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^.*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#SamlMetadataXML"), shape_type=ShapeType.STRING
 )
 
 SAML_ATTRIBUTE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SamlAttribute"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#SamlAttribute"), shape_type=ShapeType.STRING
 )
 
 SAML_CONFIGURATION = Schema.collection(
@@ -5334,30 +3590,11 @@ WEB_EXPERIENCE_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#WebExperienceStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "CREATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATING")],
-        },
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "DELETING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETING")],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "PENDING_AUTH_CONFIG": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="PENDING_AUTH_CONFIG"
-                )
-            ],
-        },
+        "CREATING": {"target": UNIT},
+        "ACTIVE": {"target": UNIT},
+        "DELETING": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "PENDING_AUTH_CONFIG": {"target": UNIT},
     },
 )
 
@@ -5367,8 +3604,7 @@ GET_WEB_EXPERIENCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetWebExperienceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "applicationId": {"target": APPLICATION_ID},
@@ -5387,23 +3623,8 @@ GET_WEB_EXPERIENCE_OUTPUT = Schema.collection(
         "origins": {"target": WEB_EXPERIENCE_ORIGINS},
         "roleArn": {"target": ROLE_ARN},
         "identityProviderConfiguration": {"target": IDENTITY_PROVIDER_CONFIGURATION},
-        "authenticationConfiguration": {
-            "target": WEB_EXPERIENCE_AUTH_CONFIGURATION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "Property associated with legacy SAML IdP flow. Deprecated in favor of using AWS IAM Identity Center for user management."
-                        }
-                    ),
-                )
-            ],
-        },
-        "error": {
-            "target": ERROR_DETAIL,
-            "traits": [Trait.new(id=ShapeID("aws.cloudformation#cfnExcludeProperty"))],
-        },
+        "authenticationConfiguration": {"target": WEB_EXPERIENCE_AUTH_CONFIGURATION},
+        "error": {"target": ERROR_DETAIL},
         "browserExtensionConfiguration": {"target": BROWSER_EXTENSION_CONFIGURATION},
         "customizationConfiguration": {"target": CUSTOMIZATION_CONFIGURATION},
     },
@@ -5414,10 +3635,6 @@ GET_WEB_EXPERIENCE = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=("qbusiness:ListTagsForResource",),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -5425,21 +3642,13 @@ GET_WEB_EXPERIENCE = Schema(
                     "method": "GET",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_WEB_EXPERIENCES_REQUEST = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListWebExperiencesRequest"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
 )
 
 LIST_WEB_EXPERIENCES_INPUT = Schema.collection(
@@ -5448,8 +3657,7 @@ LIST_WEB_EXPERIENCES_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListWebExperiencesRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -5497,8 +3705,7 @@ LIST_WEB_EXPERIENCES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListWebExperiencesResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "webExperiences": {"target": WEB_EXPERIENCES},
@@ -5511,23 +3718,11 @@ LIST_WEB_EXPERIENCES = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "webExperiences",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}/experiences", "method": "GET"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -5537,8 +3732,7 @@ UPDATE_WEB_EXPERIENCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateWebExperienceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -5556,19 +3750,7 @@ UPDATE_WEB_EXPERIENCE_INPUT = Schema.collection(
             ],
         },
         "roleArn": {"target": ROLE_ARN},
-        "authenticationConfiguration": {
-            "target": WEB_EXPERIENCE_AUTH_CONFIGURATION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "Property associated with legacy SAML IdP flow. Deprecated in favor of using AWS IAM Identity Center for user management."
-                        }
-                    ),
-                )
-            ],
-        },
+        "authenticationConfiguration": {"target": WEB_EXPERIENCE_AUTH_CONFIGURATION},
         "title": {"target": WEB_EXPERIENCE_TITLE},
         "subtitle": {"target": WEB_EXPERIENCE_SUBTITLE},
         "welcomeMessage": {"target": WEB_EXPERIENCE_WELCOME_MESSAGE},
@@ -5588,8 +3770,7 @@ UPDATE_WEB_EXPERIENCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateWebExperienceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -5597,19 +3778,6 @@ UPDATE_WEB_EXPERIENCE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UpdateWebExperience"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetWebExperience",
-                "qbusiness:TagResource",
-                "qbusiness:UntagResource",
-                "qbusiness:ListTagsForResource",
-                "iam:PassRole",
-                "sso:PutApplicationGrant",
-                "sso:UpdateApplication",
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -5618,23 +3786,14 @@ UPDATE_WEB_EXPERIENCE = Schema(
                     "method": "PUT",
                 }
             ),
-        ),
+        )
     ],
 )
 
 CREATOR_MODE_CONTROL = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#CreatorModeControl"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 APPLIED_CREATOR_MODE_CONFIGURATION = Schema.collection(
@@ -5650,16 +3809,7 @@ APPLIED_CREATOR_MODE_CONFIGURATION = Schema.collection(
 ORCHESTRATION_CONTROL = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#OrchestrationControl"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 APPLIED_ORCHESTRATION_CONFIGURATION = Schema.collection(
@@ -5697,61 +3847,28 @@ ASSOCIATED_USERS = Schema.collection(
 Q_IAM_ACTIONS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#QIamActions"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        )
-    ],
     members={"member": {"target": Q_IAM_ACTION}},
 )
 
 PERMISSION_CONDITION_KEY = Schema(
     id=ShapeID("com.amazonaws.qbusiness#PermissionConditionKey"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^aws:[a-zA-Z][a-zA-Z0-9-/:]*$"
-        )
-    ],
 )
 
 PERMISSION_CONDITION_OPERATOR = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#PermissionConditionOperator"),
     shape_type=ShapeType.ENUM,
-    members={
-        "STRING_EQUALS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="StringEquals")
-            ],
-        }
-    },
+    members={"STRING_EQUALS": {"target": UNIT}},
 )
 
 PERMISSION_CONDITION_VALUE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#PermissionConditionValue"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
-        ),
-    ],
 )
 
 PERMISSION_CONDITION_VALUES = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#PermissionConditionValues"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1}),
-        )
-    ],
     members={"member": {"target": PERMISSION_CONDITION_VALUE}},
 )
 
@@ -5776,25 +3893,11 @@ PERMISSION_CONDITION = Schema.collection(
 PERMISSION_CONDITIONS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#PermissionConditions"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        )
-    ],
     members={"member": {"target": PERMISSION_CONDITION}},
 )
 
 STATEMENT_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#StatementId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9_-]+$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#StatementId"), shape_type=ShapeType.STRING
 )
 
 ASSOCIATE_PERMISSION_INPUT = Schema.collection(
@@ -5803,8 +3906,7 @@ ASSOCIATE_PERMISSION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#AssociatePermissionRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -5836,8 +3938,7 @@ ASSOCIATE_PERMISSION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#AssociatePermissionResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"statement": {"target": STRING}},
 )
@@ -5856,14 +3957,7 @@ ASSOCIATE_PERMISSION = Schema(
 )
 
 ATTACHMENT_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#AttachmentId"), shape_type=ShapeType.STRING
 )
 
 CONVERSATION_SOURCE = Schema.collection(
@@ -5887,30 +3981,13 @@ COPY_FROM_SOURCE = Schema.collection(
 )
 
 ATTACHMENT_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\P{C}*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#AttachmentName"), shape_type=ShapeType.STRING
 )
 
 ATTACHMENT_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#AttachmentStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "SUCCESS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUCCESS")],
-        },
-    },
+    members={"FAILED": {"target": UNIT}, "SUCCESS": {"target": UNIT}},
 )
 
 ATTACHMENT = Schema.collection(
@@ -5965,9 +4042,6 @@ ATTACHMENT_OUTPUT = Schema.collection(
 ATTACHMENTS_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#AttachmentsInput"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1}))
-    ],
     members={"member": {"target": ATTACHMENT_INPUT}},
 )
 
@@ -5980,32 +4054,11 @@ ATTACHMENTS_OUTPUT = Schema.collection(
 AUDIO_EXTRACTION_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#AudioExtractionType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "TRANSCRIPT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="TRANSCRIPT")
-            ],
-        },
-        "SUMMARY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUMMARY")],
-        },
-    },
+    members={"TRANSCRIPT": {"target": UNIT}, "SUMMARY": {"target": UNIT}},
 )
 
 MEDIA_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MediaId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#MediaId"), shape_type=ShapeType.STRING
 )
 
 AUDIO_SOURCE_DETAILS = Schema.collection(
@@ -6040,25 +4093,11 @@ AUTH_CHALLENGE_REQUEST_EVENT = Schema.collection(
 )
 
 AUTH_RESPONSE_KEY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#AuthResponseKey"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#AuthResponseKey"), shape_type=ShapeType.STRING
 )
 
 AUTH_RESPONSE_VALUE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#AuthResponseValue"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#AuthResponseValue"), shape_type=ShapeType.STRING
 )
 
 AUTHORIZATION_RESPONSE_MAP = Schema.collection(
@@ -6091,29 +4130,11 @@ AUTH_CHALLENGE_RESPONSE_EVENT = Schema.collection(
 )
 
 EXECUTION_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ExecutionId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#ExecutionId"), shape_type=ShapeType.STRING
 )
 
 DOCUMENT_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1825}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\P{C}*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#DocumentId"), shape_type=ShapeType.STRING
 )
 
 DELETE_DOCUMENT = Schema.collection(
@@ -6138,8 +4159,7 @@ BATCH_DELETE_DOCUMENT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#BatchDeleteDocumentRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -6185,8 +4205,7 @@ BATCH_DELETE_DOCUMENT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#BatchDeleteDocumentResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"failedDocuments": {"target": FAILED_DOCUMENTS}},
 )
@@ -6210,12 +4229,6 @@ BATCH_DELETE_DOCUMENT = Schema(
 DOCUMENT_ATTRIBUTES = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DocumentAttributes"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 500}),
-        )
-    ],
     members={"member": {"target": DOCUMENT_ATTRIBUTE}},
 )
 
@@ -6229,69 +4242,22 @@ CONTENT_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ContentType"),
     shape_type=ShapeType.ENUM,
     members={
-        "PDF": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PDF")],
-        },
-        "HTML": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HTML")],
-        },
-        "MS_WORD": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="MS_WORD")],
-        },
-        "PLAIN_TEXT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PLAIN_TEXT")
-            ],
-        },
-        "PPT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PPT")],
-        },
-        "RTF": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="RTF")],
-        },
-        "XML": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="XML")],
-        },
-        "XSLT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="XSLT")],
-        },
-        "MS_EXCEL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="MS_EXCEL")],
-        },
-        "CSV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CSV")],
-        },
-        "JSON": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="JSON")],
-        },
-        "MD": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="MD")],
-        },
+        "PDF": {"target": UNIT},
+        "HTML": {"target": UNIT},
+        "MS_WORD": {"target": UNIT},
+        "PLAIN_TEXT": {"target": UNIT},
+        "PPT": {"target": UNIT},
+        "RTF": {"target": UNIT},
+        "XML": {"target": UNIT},
+        "XSLT": {"target": UNIT},
+        "MS_EXCEL": {"target": UNIT},
+        "CSV": {"target": UNIT},
+        "JSON": {"target": UNIT},
+        "MD": {"target": UNIT},
     },
 )
 
-TITLE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Title"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1024}),
-        )
-    ],
-)
+TITLE = Schema(id=ShapeID("com.amazonaws.qbusiness#Title"), shape_type=ShapeType.STRING)
 
 DOCUMENT = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#Document"),
@@ -6315,12 +4281,6 @@ DOCUMENT = Schema.collection(
 DOCUMENTS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#Documents"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        )
-    ],
     members={"member": {"target": DOCUMENT}},
 )
 
@@ -6330,8 +4290,7 @@ BATCH_PUT_DOCUMENT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#BatchPutDocumentRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -6363,8 +4322,7 @@ BATCH_PUT_DOCUMENT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#BatchPutDocumentResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"failedDocuments": {"target": FAILED_DOCUMENTS}},
 )
@@ -6386,12 +4344,7 @@ BATCH_PUT_DOCUMENT = Schema(
 )
 
 BLOCKED_PHRASE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#BlockedPhrase"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 36})),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\P{C}*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#BlockedPhrase"), shape_type=ShapeType.STRING
 )
 
 BLOCKED_PHRASES = Schema.collection(
@@ -6403,12 +4356,6 @@ BLOCKED_PHRASES = Schema.collection(
 SYSTEM_MESSAGE_OVERRIDE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#SystemMessageOverride"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 350})
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\P{C}*$"),
-    ],
 )
 
 BLOCKED_PHRASES_CONFIGURATION = Schema.collection(
@@ -6429,14 +4376,7 @@ BLOCKED_PHRASES_CONFIGURATION_UPDATE = Schema.collection(
 )
 
 SUBSCRIPTION_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SubscriptionId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1224}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#SubscriptionId"), shape_type=ShapeType.STRING
 )
 
 CANCEL_SUBSCRIPTION_INPUT = Schema.collection(
@@ -6445,8 +4385,7 @@ CANCEL_SUBSCRIPTION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CancelSubscriptionRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -6472,18 +4411,7 @@ SUBSCRIPTION_DETAILS = Schema.collection(
 )
 
 SUBSCRIPTION_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SubscriptionArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 10, "max": 1224}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#SubscriptionArn"), shape_type=ShapeType.STRING
 )
 
 CANCEL_SUBSCRIPTION_OUTPUT = Schema.collection(
@@ -6492,8 +4420,7 @@ CANCEL_SUBSCRIPTION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CancelSubscriptionResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "subscriptionArn": {"target": SUBSCRIPTION_ARN},
@@ -6506,7 +4433,6 @@ CANCEL_SUBSCRIPTION = Schema(
     id=ShapeID("com.amazonaws.qbusiness#CancelSubscription"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -6515,7 +4441,7 @@ CANCEL_SUBSCRIPTION = Schema(
                     "uri": "/applications/{applicationId}/subscriptions/{subscriptionId}",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -6523,24 +4449,9 @@ CHAT_MODE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ChatMode"),
     shape_type=ShapeType.ENUM,
     members={
-        "RETRIEVAL_MODE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RETRIEVAL_MODE")
-            ],
-        },
-        "CREATOR_MODE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATOR_MODE")
-            ],
-        },
-        "PLUGIN_MODE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PLUGIN_MODE")
-            ],
-        },
+        "RETRIEVAL_MODE": {"target": UNIT},
+        "CREATOR_MODE": {"target": UNIT},
+        "PLUGIN_MODE": {"target": UNIT},
     },
 )
 
@@ -6597,15 +4508,6 @@ FAILED_ATTACHMENT_EVENT = Schema.collection(
 SOURCE_ATTRIBUTION_MEDIA_ID = Schema(
     id=ShapeID("com.amazonaws.qbusiness#SourceAttributionMediaId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
 )
 
 SNIPPET_EXCERPT_TEXT = Schema(
@@ -6626,18 +4528,7 @@ IMAGE_SOURCE_DETAILS = Schema.collection(
 VIDEO_EXTRACTION_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#VideoExtractionType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "TRANSCRIPT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="TRANSCRIPT")
-            ],
-        },
-        "SUMMARY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUMMARY")],
-        },
-    },
+    members={"TRANSCRIPT": {"target": UNIT}, "SUMMARY": {"target": UNIT}},
 )
 
 VIDEO_SOURCE_DETAILS = Schema.collection(
@@ -6667,34 +4558,8 @@ TEXT_SEGMENT = Schema.collection(
         "beginOffset": {"target": INTEGER},
         "endOffset": {"target": INTEGER},
         "snippetExcerpt": {"target": SNIPPET_EXCERPT},
-        "mediaId": {
-            "target": SOURCE_ATTRIBUTION_MEDIA_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "since": "2025-02-28",
-                            "message": "Deprecated in favor of using mediaId within the respective sourceDetails field.",
-                        }
-                    ),
-                )
-            ],
-        },
-        "mediaMimeType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "since": "2025-02-28",
-                            "message": "Deprecated in favor of using mediaMimeType within the respective sourceDetails field.",
-                        }
-                    ),
-                )
-            ],
-        },
+        "mediaId": {"target": SOURCE_ATTRIBUTION_MEDIA_ID},
+        "mediaMimeType": {"target": STRING},
         "sourceDetails": {"target": SOURCE_DETAILS},
     },
 )
@@ -6741,18 +4606,7 @@ METADATA_EVENT = Schema.collection(
 SYSTEM_MESSAGE_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#SystemMessageType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "RESPONSE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="RESPONSE")],
-        },
-        "GROUNDED_RESPONSE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="GROUNDED_RESPONSE")
-            ],
-        },
-    },
+    members={"RESPONSE": {"target": UNIT}, "GROUNDED_RESPONSE": {"target": UNIT}},
 )
 
 TEXT_OUTPUT_EVENT = Schema.collection(
@@ -6781,7 +4635,6 @@ CHAT_OUTPUT_STREAM = Schema.collection(
 
 CHAT_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ChatOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "outputStream": {
             "target": CHAT_OUTPUT_STREAM,
@@ -6821,74 +4674,30 @@ LICENSE_NOT_FOUND_EXCEPTION = Schema.collection(
 CHAT_RESPONSE_CONFIGURATION_ARN = Schema(
     id=ShapeID("com.amazonaws.qbusiness#ChatResponseConfigurationArn"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1284}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$",
-        ),
-    ],
 )
 
 CHAT_RESPONSE_CONFIGURATION_ID = Schema(
     id=ShapeID("com.amazonaws.qbusiness#ChatResponseConfigurationId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
 )
 
 DISPLAY_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DisplayName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#DisplayName"), shape_type=ShapeType.STRING
 )
 
 RESPONSE_CONFIGURATION_SUMMARY = Schema(
     id=ShapeID("com.amazonaws.qbusiness#ResponseConfigurationSummary"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        )
-    ],
 )
 
 CHAT_RESPONSE_CONFIGURATION_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ChatResponseConfigurationStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "CREATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATING")],
-        },
-        "UPDATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="UPDATING")],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
+        "CREATING": {"target": UNIT},
+        "UPDATING": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "ACTIVE": {"target": UNIT},
     },
 )
 
@@ -6920,24 +4729,11 @@ CHAT_RESPONSE_CONFIGURATION = Schema.collection(
 RESPONSE_CONFIGURATION_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ResponseConfigurationType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ALL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ALL")],
-        }
-    },
+    members={"ALL": {"target": UNIT}},
 )
 
 INSTRUCTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Instruction"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 5, "max": 1000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\s\\S]*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#Instruction"), shape_type=ShapeType.STRING
 )
 
 INSTRUCTION_COLLECTION = Schema.collection(
@@ -6962,12 +4758,6 @@ RESPONSE_CONFIGURATION = Schema.collection(
 RESPONSE_CONFIGURATIONS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ResponseConfigurations"),
     shape_type=ShapeType.MAP,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1}),
-        )
-    ],
     members={
         "key": {"target": RESPONSE_CONFIGURATION_TYPE},
         "value": {"target": RESPONSE_CONFIGURATION},
@@ -6993,7 +4783,6 @@ CHAT_RESPONSE_CONFIGURATIONS = Schema.collection(
 
 CHAT_SYNC_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ChatSyncOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "conversationId": {"target": CONVERSATION_ID},
         "systemMessage": {"target": STRING},
@@ -7012,8 +4801,7 @@ CHECK_DOCUMENT_ACCESS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CheckDocumentAccessRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -7112,8 +4900,7 @@ CHECK_DOCUMENT_ACCESS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CheckDocumentAccessResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "userGroups": {"target": ASSOCIATED_GROUPS},
@@ -7135,8 +4922,7 @@ CHECK_DOCUMENT_ACCESS = Schema(
                     "uri": "/applications/{applicationId}/index/{indexId}/users/{userId}/documents/{documentId}/check-document-access",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -7156,9 +4942,6 @@ ELIGIBLE_DATA_SOURCE = Schema.collection(
 ELIGIBLE_DATA_SOURCES = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#EligibleDataSources"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 5}))
-    ],
     members={"member": {"target": ELIGIBLE_DATA_SOURCE}},
 )
 
@@ -7205,13 +4988,6 @@ CONVERSATIONS = Schema.collection(
 SESSION_DURATION_IN_MINUTES = Schema(
     id=ShapeID("com.amazonaws.qbusiness#SessionDurationInMinutes"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 15, "max": 60}),
-        ),
-    ],
 )
 
 CREATE_ANONYMOUS_WEB_EXPERIENCE_URL_INPUT = Schema.collection(
@@ -7220,8 +4996,7 @@ CREATE_ANONYMOUS_WEB_EXPERIENCE_URL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -7248,8 +5023,7 @@ CREATE_ANONYMOUS_WEB_EXPERIENCE_URL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"anonymousUrl": {"target": URL}},
 )
@@ -7276,8 +5050,7 @@ CREATE_CHAT_RESPONSE_CONFIGURATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateChatResponseConfigurationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -7299,12 +5072,7 @@ CREATE_CHAT_RESPONSE_CONFIGURATION_INPUT = Schema.collection(
             "target": RESPONSE_CONFIGURATIONS,
             "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
-        "tags": {
-            "target": TAGS,
-            "traits": [
-                Trait.new(id=ShapeID("aws.cloudformation#cfnMutability"), value="full")
-            ],
-        },
+        "tags": {"target": TAGS},
     },
 )
 
@@ -7314,8 +5082,7 @@ CREATE_CHAT_RESPONSE_CONFIGURATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateChatResponseConfigurationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "chatResponseConfigurationId": {
@@ -7334,23 +5101,6 @@ CREATE_CHAT_RESPONSE_CONFIGURATION = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#conditionKeys"),
-            value=("aws:RequestTag/${TagKey}", "aws:TagKeys"),
-        ),
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#iamAction"),
-            value=MappingProxyType(
-                {
-                    "requiredActions": (
-                        "qbusiness:GetChatResponseConfiguration",
-                        "qbusiness:TagResource",
-                        "qbusiness:ListTagsForResource",
-                    )
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -7358,38 +5108,16 @@ CREATE_CHAT_RESPONSE_CONFIGURATION = Schema(
                     "uri": "/applications/{applicationId}/chatresponseconfigurations",
                 }
             ),
-        ),
+        )
     ],
 )
 
 GROUP_IDENTIFIER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GroupIdentifier"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 47}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#GroupIdentifier"), shape_type=ShapeType.STRING
 )
 
 USER_IDENTIFIER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UserIdentifier"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 47}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#UserIdentifier"), shape_type=ShapeType.STRING
 )
 
 SUBSCRIPTION_PRINCIPAL = Schema.collection(
@@ -7407,8 +5135,7 @@ CREATE_SUBSCRIPTION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateSubscriptionRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -7439,8 +5166,7 @@ CREATE_SUBSCRIPTION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateSubscriptionResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "subscriptionId": {"target": SUBSCRIPTION_ID},
@@ -7454,13 +5180,12 @@ CREATE_SUBSCRIPTION = Schema(
     id=ShapeID("com.amazonaws.qbusiness#CreateSubscription"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "POST", "uri": "/applications/{applicationId}/subscriptions"}
             ),
-        ),
+        )
     ],
 )
 
@@ -7488,8 +5213,7 @@ CREATE_USER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateUserRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -7503,15 +5227,7 @@ CREATE_USER_INPUT = Schema.collection(
             "target": STRING,
             "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
-        "userAliases": {
-            "target": USER_ALIASES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 0, "max": 100}),
-                )
-            ],
-        },
+        "userAliases": {"target": USER_ALIASES},
         "clientToken": {
             "target": CLIENT_TOKEN,
             "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
@@ -7525,8 +5241,7 @@ CREATE_USER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateUserResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -7534,13 +5249,12 @@ CREATE_USER = Schema(
     id=ShapeID("com.amazonaws.qbusiness#CreateUser"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "POST", "uri": "/applications/{applicationId}/users"}
             ),
-        ),
+        )
     ],
 )
 
@@ -7557,19 +5271,11 @@ CREATOR_MODE_CONFIGURATION = Schema.collection(
 DATA_SOURCE_IDS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DataSourceIds"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1}),
-        )
-    ],
     members={"member": {"target": DATA_SOURCE_ID}},
 )
 
 METRIC_VALUE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MetricValue"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#pattern"), value="^(([1-9][0-9]*)|0)$")],
+    id=ShapeID("com.amazonaws.qbusiness#MetricValue"), shape_type=ShapeType.STRING
 )
 
 DATA_SOURCE_SYNC_JOB_METRICS = Schema.collection(
@@ -7587,40 +5293,13 @@ DATA_SOURCE_SYNC_JOB_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DataSourceSyncJobStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "SUCCEEDED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUCCEEDED")
-            ],
-        },
-        "SYNCING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SYNCING")],
-        },
-        "INCOMPLETE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="INCOMPLETE")
-            ],
-        },
-        "STOPPING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="STOPPING")],
-        },
-        "ABORTED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ABORTED")],
-        },
-        "SYNCING_INDEXING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SYNCING_INDEXING")
-            ],
-        },
+        "FAILED": {"target": UNIT},
+        "SUCCEEDED": {"target": UNIT},
+        "SYNCING": {"target": UNIT},
+        "INCOMPLETE": {"target": UNIT},
+        "STOPPING": {"target": UNIT},
+        "ABORTED": {"target": UNIT},
+        "SYNCING_INDEXING": {"target": UNIT},
     },
 )
 
@@ -7644,15 +5323,7 @@ DATA_SOURCE_SYNC_JOBS = Schema.collection(
 )
 
 DATA_SOURCE_USER_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceUserId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1024}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\P{C}*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#DataSourceUserId"), shape_type=ShapeType.STRING
 )
 
 DELETE_ATTACHMENT_INPUT = Schema.collection(
@@ -7661,8 +5332,7 @@ DELETE_ATTACHMENT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteAttachmentRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -7699,8 +5369,7 @@ DELETE_ATTACHMENT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteAttachmentResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -7708,7 +5377,6 @@ DELETE_ATTACHMENT = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteAttachment"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -7717,7 +5385,7 @@ DELETE_ATTACHMENT = Schema(
                     "method": "DELETE",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -7727,8 +5395,7 @@ DELETE_CHAT_CONTROLS_CONFIGURATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteChatControlsConfigurationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -7747,8 +5414,7 @@ DELETE_CHAT_CONTROLS_CONFIGURATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteChatControlsConfigurationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -7756,7 +5422,6 @@ DELETE_CHAT_CONTROLS_CONFIGURATION = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteChatControlsConfiguration"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -7766,7 +5431,7 @@ DELETE_CHAT_CONTROLS_CONFIGURATION = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -7776,8 +5441,7 @@ DELETE_CHAT_RESPONSE_CONFIGURATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteChatResponseConfigurationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -7803,8 +5467,7 @@ DELETE_CHAT_RESPONSE_CONFIGURATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteChatResponseConfigurationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -7812,13 +5475,6 @@ DELETE_CHAT_RESPONSE_CONFIGURATION = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteChatResponseConfiguration"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#iamAction"),
-            value=MappingProxyType(
-                {"requiredActions": ("qbusiness:GetChatResponseConfiguration",)}
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -7827,7 +5483,7 @@ DELETE_CHAT_RESPONSE_CONFIGURATION = Schema(
                     "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -7837,8 +5493,7 @@ DELETE_CONVERSATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteConversationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "conversationId": {
@@ -7868,8 +5523,7 @@ DELETE_CONVERSATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteConversationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -7877,7 +5531,6 @@ DELETE_CONVERSATION = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteConversation"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -7886,7 +5539,7 @@ DELETE_CONVERSATION = Schema(
                     "method": "DELETE",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -7896,8 +5549,7 @@ DELETE_GROUP_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteGroupRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -7936,8 +5588,7 @@ DELETE_GROUP_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteGroupResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -7945,7 +5596,6 @@ DELETE_GROUP = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteGroup"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -7954,7 +5604,7 @@ DELETE_GROUP = Schema(
                     "uri": "/applications/{applicationId}/indices/{indexId}/groups/{groupName}",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -7964,8 +5614,7 @@ DELETE_USER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteUserRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -7991,8 +5640,7 @@ DELETE_USER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DeleteUserResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -8000,7 +5648,6 @@ DELETE_USER = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DeleteUser"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -8009,7 +5656,7 @@ DELETE_USER = Schema(
                     "uri": "/applications/{applicationId}/users/{userId}",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -8019,8 +5666,7 @@ DISASSOCIATE_PERMISSION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DisassociatePermissionRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -8046,8 +5692,7 @@ DISASSOCIATE_PERMISSION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#DisassociatePermissionResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -8055,7 +5700,6 @@ DISASSOCIATE_PERMISSION = Schema(
     id=ShapeID("com.amazonaws.qbusiness#DisassociatePermission"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -8064,7 +5708,7 @@ DISASSOCIATE_PERMISSION = Schema(
                     "method": "DELETE",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -8072,44 +5716,14 @@ DOCUMENT_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#DocumentStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "RECEIVED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="RECEIVED")],
-        },
-        "PROCESSING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROCESSING")
-            ],
-        },
-        "INDEXED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INDEXED")],
-        },
-        "UPDATED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="UPDATED")],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "DELETING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETING")],
-        },
-        "DELETED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETED")],
-        },
-        "DOCUMENT_FAILED_TO_INDEX": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="DOCUMENT_FAILED_TO_INDEX"
-                )
-            ],
-        },
+        "RECEIVED": {"target": UNIT},
+        "PROCESSING": {"target": UNIT},
+        "INDEXED": {"target": UNIT},
+        "UPDATED": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "DELETING": {"target": UNIT},
+        "DELETED": {"target": UNIT},
+        "DOCUMENT_FAILED_TO_INDEX": {"target": UNIT},
     },
 )
 
@@ -8133,33 +5747,17 @@ DOCUMENT_DETAIL_LIST = Schema.collection(
 EXAMPLE_CHAT_MESSAGE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#ExampleChatMessage"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 350})
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\P{C}*$"),
-    ],
 )
 
 EXAMPLE_CHAT_MESSAGES = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ExampleChatMessages"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 5}))
-    ],
     members={"member": {"target": EXAMPLE_CHAT_MESSAGE}},
 )
 
 MAX_RESULTS_INTEGER_FOR_GET_TOPIC_CONFIGURATIONS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForGetTopicConfigurations"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        ),
-    ],
 )
 
 GET_CHAT_CONTROLS_CONFIGURATION_INPUT = Schema.collection(
@@ -8168,8 +5766,7 @@ GET_CHAT_CONTROLS_CONFIGURATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetChatControlsConfigurationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -8197,16 +5794,7 @@ GET_CHAT_CONTROLS_CONFIGURATION_INPUT = Schema.collection(
 HALLUCINATION_REDUCTION_CONTROL = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#HallucinationReductionControl"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 HALLUCINATION_REDUCTION_CONFIGURATION = Schema.collection(
@@ -8220,50 +5808,18 @@ RESPONSE_SCOPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ResponseScope"),
     shape_type=ShapeType.ENUM,
     members={
-        "ENTERPRISE_CONTENT_ONLY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="ENTERPRISE_CONTENT_ONLY"
-                )
-            ],
-        },
-        "EXTENDED_KNOWLEDGE_ENABLED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="EXTENDED_KNOWLEDGE_ENABLED",
-                )
-            ],
-        },
+        "ENTERPRISE_CONTENT_ONLY": {"target": UNIT},
+        "EXTENDED_KNOWLEDGE_ENABLED": {"target": UNIT},
     },
 )
 
 TOPIC_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#TopicDescription"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 350}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\P{C}*$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#TopicDescription"), shape_type=ShapeType.STRING
 )
 
 TOPIC_CONFIGURATION_NAME = Schema(
     id=ShapeID("com.amazonaws.qbusiness#TopicConfigurationName"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{0,35}$"
-        ),
-    ],
 )
 
 USER_IDS = Schema.collection(
@@ -8290,22 +5846,8 @@ RULE_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#RuleType"),
     shape_type=ShapeType.ENUM,
     members={
-        "CONTENT_BLOCKER_RULE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CONTENT_BLOCKER_RULE"
-                )
-            ],
-        },
-        "CONTENT_RETRIEVAL_RULE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CONTENT_RETRIEVAL_RULE"
-                )
-            ],
-        },
+        "CONTENT_BLOCKER_RULE": {"target": UNIT},
+        "CONTENT_RETRIEVAL_RULE": {"target": UNIT},
     },
 )
 
@@ -8325,9 +5867,6 @@ RULE = Schema.collection(
 RULES = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#Rules"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 10}))
-    ],
     members={"member": {"target": RULE}},
 )
 
@@ -8350,9 +5889,6 @@ TOPIC_CONFIGURATION = Schema.collection(
 TOPIC_CONFIGURATIONS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#TopicConfigurations"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 10}))
-    ],
     members={"member": {"target": TOPIC_CONFIGURATION}},
 )
 
@@ -8362,8 +5898,7 @@ GET_CHAT_CONTROLS_CONFIGURATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetChatControlsConfigurationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "responseScope": {"target": RESPONSE_SCOPE},
@@ -8383,17 +5918,6 @@ GET_CHAT_CONTROLS_CONFIGURATION = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "topicConfigurations",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -8402,8 +5926,7 @@ GET_CHAT_CONTROLS_CONFIGURATION = Schema(
                     "code": 200,
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -8413,8 +5936,7 @@ GET_CHAT_RESPONSE_CONFIGURATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetChatResponseConfigurationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -8440,8 +5962,7 @@ GET_CHAT_RESPONSE_CONFIGURATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetChatResponseConfigurationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "chatResponseConfigurationId": {"target": CHAT_RESPONSE_CONFIGURATION_ID},
@@ -8458,12 +5979,6 @@ GET_CHAT_RESPONSE_CONFIGURATION = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#iamAction"),
-            value=MappingProxyType(
-                {"requiredActions": ("qbusiness:ListTagsForResource",)}
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -8471,26 +5986,14 @@ GET_CHAT_RESPONSE_CONFIGURATION = Schema(
                     "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 OUTPUT_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#OutputFormat"),
     shape_type=ShapeType.ENUM,
-    members={
-        "RAW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="RAW")],
-        },
-        "EXTRACTED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EXTRACTED")
-            ],
-        },
-    },
+    members={"RAW": {"target": UNIT}, "EXTRACTED": {"target": UNIT}},
 )
 
 GET_DOCUMENT_CONTENT_INPUT = Schema.collection(
@@ -8499,8 +6002,7 @@ GET_DOCUMENT_CONTENT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetDocumentContentRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -8545,8 +6047,7 @@ GET_DOCUMENT_CONTENT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetDocumentContentResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "presignedUrl": {
@@ -8572,8 +6073,7 @@ GET_DOCUMENT_CONTENT = Schema(
                     "method": "GET",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -8583,8 +6083,7 @@ GET_GROUP_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetGroupRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -8621,30 +6120,11 @@ GROUP_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#GroupStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "SUCCEEDED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUCCEEDED")
-            ],
-        },
-        "PROCESSING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROCESSING")
-            ],
-        },
-        "DELETING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETING")],
-        },
-        "DELETED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETED")],
-        },
+        "FAILED": {"target": UNIT},
+        "SUCCEEDED": {"target": UNIT},
+        "PROCESSING": {"target": UNIT},
+        "DELETING": {"target": UNIT},
+        "DELETED": {"target": UNIT},
     },
 )
 
@@ -8669,8 +6149,7 @@ GET_GROUP_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetGroupResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "status": {"target": GROUP_STATUS_DETAIL},
@@ -8690,8 +6169,7 @@ GET_GROUP = Schema(
                     "uri": "/applications/{applicationId}/indices/{indexId}/groups/{groupName}",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -8701,8 +6179,7 @@ GET_MEDIA_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetMediaRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -8742,8 +6219,7 @@ GET_MEDIA_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetMediaResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"mediaBytes": {"target": BLOB}, "mediaMimeType": {"target": STRING}},
 )
@@ -8774,8 +6250,7 @@ GET_MEDIA = Schema(
                     "uri": "/applications/{applicationId}/conversations/{conversationId}/messages/{messageId}/media/{mediaId}",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -8785,8 +6260,7 @@ GET_POLICY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetPolicyRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -8805,8 +6279,7 @@ GET_POLICY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetPolicyResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"policy": {"target": STRING}},
 )
@@ -8820,8 +6293,7 @@ GET_POLICY = Schema(
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}/policy", "method": "GET"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -8831,8 +6303,7 @@ GET_USER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetUserRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -8858,8 +6329,7 @@ GET_USER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetUserResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"userAliases": {"target": USER_ALIASES}},
 )
@@ -8873,21 +6343,13 @@ GET_USER = Schema(
             value=MappingProxyType(
                 {"method": "GET", "uri": "/applications/{applicationId}/users/{userId}"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_ATTACHMENTS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListAttachments"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
 )
 
 LIST_ATTACHMENTS_INPUT = Schema.collection(
@@ -8896,8 +6358,7 @@ LIST_ATTACHMENTS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListAttachmentsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -8938,8 +6399,7 @@ LIST_ATTACHMENTS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListAttachmentsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "attachments": {"target": ATTACHMENT_LIST},
@@ -8952,23 +6412,11 @@ LIST_ATTACHMENTS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "attachments",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}/attachments", "method": "GET"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -8978,8 +6426,7 @@ LIST_CHAT_RESPONSE_CONFIGURATIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListChatResponseConfigurationsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -9010,8 +6457,7 @@ LIST_CHAT_RESPONSE_CONFIGURATIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListChatResponseConfigurationsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "chatResponseConfigurations": {"target": CHAT_RESPONSE_CONFIGURATIONS},
@@ -9024,17 +6470,6 @@ LIST_CHAT_RESPONSE_CONFIGURATIONS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "chatResponseConfigurations",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -9042,21 +6477,13 @@ LIST_CHAT_RESPONSE_CONFIGURATIONS = Schema(
                     "uri": "/applications/{applicationId}/chatresponseconfigurations",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_CONVERSATIONS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListConversations"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
 )
 
 LIST_CONVERSATIONS_INPUT = Schema.collection(
@@ -9065,8 +6492,7 @@ LIST_CONVERSATIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListConversationsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -9101,8 +6527,7 @@ LIST_CONVERSATIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListConversationsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "nextToken": {"target": NEXT_TOKEN},
@@ -9115,36 +6540,17 @@ LIST_CONVERSATIONS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "conversations",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}/conversations", "method": "GET"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_DATA_SOURCES_SYNC_JOBS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListDataSourcesSyncJobs"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        ),
-    ],
 )
 
 LIST_DATA_SOURCE_SYNC_JOBS_INPUT = Schema.collection(
@@ -9153,8 +6559,7 @@ LIST_DATA_SOURCE_SYNC_JOBS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListDataSourceSyncJobsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "dataSourceId": {
@@ -9215,8 +6620,7 @@ LIST_DATA_SOURCE_SYNC_JOBS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListDataSourceSyncJobsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "history": {"target": DATA_SOURCE_SYNC_JOBS},
@@ -9229,17 +6633,6 @@ LIST_DATA_SOURCE_SYNC_JOBS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "history",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -9247,21 +6640,13 @@ LIST_DATA_SOURCE_SYNC_JOBS = Schema(
                     "method": "GET",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_DOCUMENTS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListDocuments"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
 )
 
 LIST_DOCUMENTS_INPUT = Schema.collection(
@@ -9270,8 +6655,7 @@ LIST_DOCUMENTS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListDocumentsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -9315,8 +6699,7 @@ LIST_DOCUMENTS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListDocumentsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "documentDetailList": {"target": DOCUMENT_DETAIL_LIST},
@@ -9329,17 +6712,6 @@ LIST_DOCUMENTS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "documentDetailList",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -9347,21 +6719,13 @@ LIST_DOCUMENTS = Schema(
                     "method": "GET",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_GROUPS_REQUEST = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListGroupsRequest"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        ),
-    ],
 )
 
 LIST_GROUPS_INPUT = Schema.collection(
@@ -9370,8 +6734,7 @@ LIST_GROUPS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListGroupsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -9435,8 +6798,7 @@ LIST_GROUPS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListGroupsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "nextToken": {"target": NEXT_TOKEN},
@@ -9449,17 +6811,6 @@ LIST_GROUPS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "items",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -9467,21 +6818,13 @@ LIST_GROUPS = Schema(
                     "uri": "/applications/{applicationId}/indices/{indexId}/groups",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_MESSAGES = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListMessages"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
 )
 
 LIST_MESSAGES_INPUT = Schema.collection(
@@ -9490,8 +6833,7 @@ LIST_MESSAGES_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListMessagesRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "conversationId": {
@@ -9528,30 +6870,13 @@ LIST_MESSAGES_INPUT = Schema.collection(
 )
 
 MESSAGE_BODY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MessageBody"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\P{C}*$}$"),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#MessageBody"), shape_type=ShapeType.STRING
 )
 
 MESSAGE_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#MessageType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "USER": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="USER")],
-        },
-        "SYSTEM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SYSTEM")],
-        },
-    },
+    members={"USER": {"target": UNIT}, "SYSTEM": {"target": UNIT}},
 )
 
 MESSAGE = Schema.collection(
@@ -9580,8 +6905,7 @@ LIST_MESSAGES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListMessagesResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"messages": {"target": MESSAGES}, "nextToken": {"target": NEXT_TOKEN}},
 )
@@ -9591,17 +6915,6 @@ LIST_MESSAGES = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "messages",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -9609,21 +6922,13 @@ LIST_MESSAGES = Schema(
                     "method": "GET",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_ACTIONS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListPluginActions"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        ),
-    ],
 )
 
 LIST_PLUGIN_ACTIONS_INPUT = Schema.collection(
@@ -9632,8 +6937,7 @@ LIST_PLUGIN_ACTIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListPluginActionsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -9671,8 +6975,7 @@ LIST_PLUGIN_ACTIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListPluginActionsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"nextToken": {"target": NEXT_TOKEN}, "items": {"target": ACTIONS}},
 )
@@ -9682,17 +6985,6 @@ LIST_PLUGIN_ACTIONS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "items",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -9700,21 +6992,13 @@ LIST_PLUGIN_ACTIONS = Schema(
                     "uri": "/applications/{applicationId}/plugins/{pluginId}/actions",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_TYPE_ACTIONS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListPluginTypeActions"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        ),
-    ],
 )
 
 LIST_PLUGIN_TYPE_ACTIONS_INPUT = Schema.collection(
@@ -9723,8 +7007,7 @@ LIST_PLUGIN_TYPE_ACTIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListPluginTypeActionsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "pluginType": {
@@ -9755,8 +7038,7 @@ LIST_PLUGIN_TYPE_ACTIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListPluginTypeActionsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"nextToken": {"target": NEXT_TOKEN}, "items": {"target": ACTIONS}},
 )
@@ -9766,36 +7048,17 @@ LIST_PLUGIN_TYPE_ACTIONS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "items",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/pluginTypes/{pluginType}/actions"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_TYPE_METADATA = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListPluginTypeMetadata"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        ),
-    ],
 )
 
 LIST_PLUGIN_TYPE_METADATA_INPUT = Schema.collection(
@@ -9804,8 +7067,7 @@ LIST_PLUGIN_TYPE_METADATA_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListPluginTypeMetadataRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "nextToken": {
@@ -9827,44 +7089,11 @@ PLUGIN_TYPE_CATEGORY = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#PluginTypeCategory"),
     shape_type=ShapeType.ENUM,
     members={
-        "CRM": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="Customer relationship management (CRM)",
-                )
-            ],
-        },
-        "PROJECT_MANAGEMENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="Project management"
-                )
-            ],
-        },
-        "COMMUNICATION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="Communication")
-            ],
-        },
-        "PRODUCTIVITY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="Productivity")
-            ],
-        },
-        "TICKETING_MANAGEMENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="Ticketing and incident management",
-                )
-            ],
-        },
+        "CRM": {"target": UNIT},
+        "PROJECT_MANAGEMENT": {"target": UNIT},
+        "COMMUNICATION": {"target": UNIT},
+        "PRODUCTIVITY": {"target": UNIT},
+        "TICKETING_MANAGEMENT": {"target": UNIT},
     },
 )
 
@@ -9889,8 +7118,7 @@ LIST_PLUGIN_TYPE_METADATA_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListPluginTypeMetadataResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "nextToken": {"target": NEXT_TOKEN},
@@ -9903,34 +7131,15 @@ LIST_PLUGIN_TYPE_METADATA = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "items",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"method": "GET", "uri": "/pluginTypeMetadata"}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS_INTEGER_FOR_LIST_SUBSCRIPTIONS = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListSubscriptions"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
 )
 
 LIST_SUBSCRIPTIONS_INPUT = Schema.collection(
@@ -9939,8 +7148,7 @@ LIST_SUBSCRIPTIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListSubscriptionsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -9988,8 +7196,7 @@ LIST_SUBSCRIPTIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListSubscriptionsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "nextToken": {"target": NEXT_TOKEN},
@@ -10002,23 +7209,11 @@ LIST_SUBSCRIPTIONS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "subscriptions",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/applications/{applicationId}/subscriptions"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -10028,8 +7223,7 @@ LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListTagsForResourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "resourceARN": {
@@ -10048,8 +7242,7 @@ LIST_TAGS_FOR_RESOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#ListTagsForResourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"tags": {"target": TAGS}},
 )
@@ -10061,132 +7254,42 @@ LIST_TAGS_FOR_RESOURCE = Schema(
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"uri": "/v1/tags/{resourceARN}", "method": "GET"}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 SYSTEM_MESSAGE_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SystemMessageId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#SystemMessageId"), shape_type=ShapeType.STRING
 )
 
 MESSAGE_USEFULNESS_COMMENT = Schema(
     id=ShapeID("com.amazonaws.qbusiness#MessageUsefulnessComment"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\P{C}*$"),
-    ],
 )
 
 MESSAGE_USEFULNESS_REASON = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#MessageUsefulnessReason"),
     shape_type=ShapeType.ENUM,
     members={
-        "NOT_FACTUALLY_CORRECT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="NOT_FACTUALLY_CORRECT"
-                )
-            ],
-        },
-        "HARMFUL_OR_UNSAFE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="HARMFUL_OR_UNSAFE")
-            ],
-        },
-        "INCORRECT_OR_MISSING_SOURCES": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="INCORRECT_OR_MISSING_SOURCES",
-                )
-            ],
-        },
-        "NOT_HELPFUL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOT_HELPFUL")
-            ],
-        },
-        "FACTUALLY_CORRECT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="FACTUALLY_CORRECT")
-            ],
-        },
-        "COMPLETE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="COMPLETE")],
-        },
-        "RELEVANT_SOURCES": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RELEVANT_SOURCES")
-            ],
-        },
-        "HELPFUL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HELPFUL")],
-        },
-        "NOT_BASED_ON_DOCUMENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="NOT_BASED_ON_DOCUMENTS"
-                )
-            ],
-        },
-        "NOT_COMPLETE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOT_COMPLETE")
-            ],
-        },
-        "NOT_CONCISE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOT_CONCISE")
-            ],
-        },
-        "OTHER": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="OTHER")],
-        },
+        "NOT_FACTUALLY_CORRECT": {"target": UNIT},
+        "HARMFUL_OR_UNSAFE": {"target": UNIT},
+        "INCORRECT_OR_MISSING_SOURCES": {"target": UNIT},
+        "NOT_HELPFUL": {"target": UNIT},
+        "FACTUALLY_CORRECT": {"target": UNIT},
+        "COMPLETE": {"target": UNIT},
+        "RELEVANT_SOURCES": {"target": UNIT},
+        "HELPFUL": {"target": UNIT},
+        "NOT_BASED_ON_DOCUMENTS": {"target": UNIT},
+        "NOT_COMPLETE": {"target": UNIT},
+        "NOT_CONCISE": {"target": UNIT},
+        "OTHER": {"target": UNIT},
     },
 )
 
 MESSAGE_USEFULNESS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#MessageUsefulness"),
     shape_type=ShapeType.ENUM,
-    members={
-        "USEFUL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="USEFUL")],
-        },
-        "NOT_USEFUL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOT_USEFUL")
-            ],
-        },
-    },
+    members={"USEFUL": {"target": UNIT}, "NOT_USEFUL": {"target": UNIT}},
 )
 
 MESSAGE_USEFULNESS_FEEDBACK = Schema.collection(
@@ -10211,8 +7314,7 @@ PUT_FEEDBACK_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#PutFeedbackRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -10250,8 +7352,7 @@ PUT_FEEDBACK_OUTPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -10320,8 +7421,7 @@ PUT_GROUP_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#PutGroupRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -10361,8 +7461,7 @@ PUT_GROUP_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#PutGroupResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -10370,7 +7469,6 @@ PUT_GROUP = Schema(
     id=ShapeID("com.amazonaws.qbusiness#PutGroup"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -10379,20 +7477,12 @@ PUT_GROUP = Schema(
                     "uri": "/applications/{applicationId}/indices/{indexId}/groups",
                 }
             ),
-        ),
+        )
     ],
 )
 
 MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResults"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.qbusiness#MaxResults"), shape_type=ShapeType.INTEGER
 )
 
 QUERY_TEXT = Schema(
@@ -10403,30 +7493,11 @@ SCORE_CONFIDENCE = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ScoreConfidence"),
     shape_type=ShapeType.ENUM,
     members={
-        "VERY_HIGH": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="VERY_HIGH")
-            ],
-        },
-        "HIGH": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HIGH")],
-        },
-        "MEDIUM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="MEDIUM")],
-        },
-        "LOW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="LOW")],
-        },
-        "NOT_AVAILABLE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NOT_AVAILABLE")
-            ],
-        },
+        "VERY_HIGH": {"target": UNIT},
+        "HIGH": {"target": UNIT},
+        "MEDIUM": {"target": UNIT},
+        "LOW": {"target": UNIT},
+        "NOT_AVAILABLE": {"target": UNIT},
     },
 )
 
@@ -10459,8 +7530,7 @@ SEARCH_RELEVANT_CONTENT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#SearchRelevantContentResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "relevantContent": {"target": RELEVANT_CONTENT_LIST},
@@ -10474,8 +7544,7 @@ START_DATA_SOURCE_SYNC_JOB_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#StartDataSourceSyncJobRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "dataSourceId": {
@@ -10508,8 +7577,7 @@ START_DATA_SOURCE_SYNC_JOB_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#StartDataSourceSyncJobResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"executionId": {"target": EXECUTION_ID}},
 )
@@ -10536,8 +7604,7 @@ STOP_DATA_SOURCE_SYNC_JOB_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#StopDataSourceSyncJobRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "dataSourceId": {
@@ -10570,8 +7637,7 @@ STOP_DATA_SOURCE_SYNC_JOB_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#StopDataSourceSyncJobResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -10597,8 +7663,7 @@ TAG_RESOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#TagResourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "resourceARN": {
@@ -10621,8 +7686,7 @@ TAG_RESOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#TagResourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -10631,26 +7695,15 @@ TAG_RESOURCE = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#conditionKeys"),
-            value=("aws:RequestTag/${TagKey}", "aws:TagKeys"),
-        ),
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"uri": "/v1/tags/{resourceARN}", "method": "POST"}),
-        ),
+        )
     ],
 )
 
 TAG_KEYS = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#TagKeys"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 200}),
-        )
-    ],
     members={"member": {"target": TAG_KEY}},
 )
 
@@ -10660,8 +7713,7 @@ UNTAG_RESOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UntagResourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "resourceARN": {
@@ -10687,8 +7739,7 @@ UNTAG_RESOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UntagResourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -10696,14 +7747,12 @@ UNTAG_RESOURCE = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UntagResource"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("aws.iam#conditionKeys"), value=("aws:TagKeys",)),
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/v1/tags/{resourceARN}", "method": "DELETE"}
             ),
-        ),
+        )
     ],
 )
 
@@ -10723,8 +7772,7 @@ UPDATE_CHAT_CONTROLS_CONFIGURATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateChatControlsConfigurationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -10758,8 +7806,7 @@ UPDATE_CHAT_CONTROLS_CONFIGURATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateChatControlsConfigurationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -10767,7 +7814,6 @@ UPDATE_CHAT_CONTROLS_CONFIGURATION = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UpdateChatControlsConfiguration"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -10777,7 +7823,7 @@ UPDATE_CHAT_CONTROLS_CONFIGURATION = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -10787,8 +7833,7 @@ UPDATE_CHAT_RESPONSE_CONFIGURATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateChatResponseConfigurationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -10823,8 +7868,7 @@ UPDATE_CHAT_RESPONSE_CONFIGURATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateChatResponseConfigurationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -10832,20 +7876,6 @@ UPDATE_CHAT_RESPONSE_CONFIGURATION = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UpdateChatResponseConfiguration"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#iamAction"),
-            value=MappingProxyType(
-                {
-                    "requiredActions": (
-                        "qbusiness:GetChatResponseConfiguration",
-                        "qbusiness:TagResource",
-                        "qbusiness:UntagResource",
-                        "qbusiness:ListTagsForResource",
-                    )
-                }
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -10854,7 +7884,7 @@ UPDATE_CHAT_RESPONSE_CONFIGURATION = Schema(
                     "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -10864,8 +7894,7 @@ UPDATE_SUBSCRIPTION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateSubscriptionRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -10895,8 +7924,7 @@ UPDATE_SUBSCRIPTION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateSubscriptionResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "subscriptionArn": {"target": SUBSCRIPTION_ARN},
@@ -10909,7 +7937,6 @@ UPDATE_SUBSCRIPTION = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UpdateSubscription"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -10918,7 +7945,7 @@ UPDATE_SUBSCRIPTION = Schema(
                     "uri": "/applications/{applicationId}/subscriptions/{subscriptionId}",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -10928,8 +7955,7 @@ UPDATE_USER_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateUserRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -10957,8 +7983,7 @@ UPDATE_USER_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateUserResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "userAliasesAdded": {"target": USER_ALIASES},
@@ -10971,13 +7996,12 @@ UPDATE_USER = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UpdateUser"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "PUT", "uri": "/applications/{applicationId}/users/{userId}"}
             ),
-        ),
+        )
     ],
 )
 
@@ -11021,7 +8045,6 @@ ACTION_FILTER_CONFIGURATION = Schema.collection(
 
 CHAT_SYNC_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ChatSyncInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "applicationId": {
             "target": APPLICATION_ID,
@@ -11071,8 +8094,7 @@ SEARCH_RELEVANT_CONTENT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#SearchRelevantContentRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -11093,10 +8115,7 @@ SEARCH_RELEVANT_CONTENT_INPUT = Schema.collection(
         "attributeFilter": {"target": ATTRIBUTE_FILTER},
         "maxResults": {
             "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=10),
-                Trait.new(id=ShapeID("smithy.api#addedDefault")),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=10)],
         },
         "nextToken": {"target": NEXT_TOKEN},
     },
@@ -11123,17 +8142,6 @@ SEARCH_RELEVANT_CONTENT = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "relevantContent",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -11141,7 +8149,7 @@ SEARCH_RELEVANT_CONTENT = Schema(
                     "method": "POST",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -11173,18 +8181,11 @@ CHAT_INPUT_STREAM = Schema.collection(
 ACTION_CONFIGURATION_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ActionConfigurationList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        )
-    ],
     members={"member": {"target": ACTION_CONFIGURATION}},
 )
 
 CHAT_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.qbusiness#ChatInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "applicationId": {
             "target": APPLICATION_ID,
@@ -11248,8 +8249,7 @@ CREATE_DATA_ACCESSOR_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#CreateDataAccessorRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -11276,12 +8276,7 @@ CREATE_DATA_ACCESSOR_INPUT = Schema.collection(
             "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "authenticationDetail": {"target": DATA_ACCESSOR_AUTHENTICATION_DETAIL},
-        "tags": {
-            "target": TAGS,
-            "traits": [
-                Trait.new(id=ShapeID("aws.cloudformation#cfnMutability"), value="full")
-            ],
-        },
+        "tags": {"target": TAGS},
     },
 )
 
@@ -11291,8 +8286,7 @@ GET_DATA_ACCESSOR_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#GetDataAccessorResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "displayName": {"target": DATA_ACCESSOR_NAME},
@@ -11314,8 +8308,7 @@ UPDATE_DATA_ACCESSOR_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.qbusiness#UpdateDataAccessorRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "applicationId": {
@@ -11346,24 +8339,11 @@ CREATE_DATA_ACCESSOR = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#conditionKeys"),
-            value=("aws:RequestTag/${TagKey}", "aws:TagKeys"),
-        ),
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetDataAccessor",
-                "qbusiness:TagResource",
-                "qbusiness:ListTagsForResource",
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/applications/{applicationId}/dataaccessors", "method": "POST"}
             ),
-        ),
+        )
     ],
 )
 
@@ -11372,10 +8352,6 @@ GET_DATA_ACCESSOR = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=("qbusiness:ListTagsForResource",),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {
@@ -11383,8 +8359,7 @@ GET_DATA_ACCESSOR = Schema(
                     "method": "GET",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -11392,16 +8367,6 @@ UPDATE_DATA_ACCESSOR = Schema(
     id=ShapeID("com.amazonaws.qbusiness#UpdateDataAccessor"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=(
-                "qbusiness:GetDataAccessor",
-                "qbusiness:TagResource",
-                "qbusiness:UntagResource",
-                "qbusiness:ListTagsForResource",
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -11410,7 +8375,7 @@ UPDATE_DATA_ACCESSOR = Schema(
                     "method": "PUT",
                 }
             ),
-        ),
+        )
     ],
 )
 
@@ -11420,531 +8385,6 @@ EXPERT_Q = Schema(
     traits=[
         Trait.new(
             id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "qbusiness"})
-        ),
-        Trait.new(id=ShapeID("smithy.api#title"), value="QBusiness"),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointTests"),
-            value=MappingProxyType(
-                {
-                    "testCases": (
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://qbusiness-fips.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "us-east-1", "UseFIPS": True}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://qbusiness.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "us-east-1", "UseFIPS": False}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://qbusiness-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "cn-north-1", "UseFIPS": True}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://qbusiness.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "cn-north-1", "UseFIPS": False}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://qbusiness-fips.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "us-gov-east-1", "UseFIPS": True}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://qbusiness.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "us-gov-east-1", "UseFIPS": False}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "UseFIPS": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "Missing region",
-                                "expect": MappingProxyType(
-                                    {"error": "Invalid Configuration: Missing Region"}
-                                ),
-                            }
-                        ),
-                    ),
-                    "version": "1.0",
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointRuleSet"),
-            value=MappingProxyType(
-                {
-                    "version": "1.0",
-                    "parameters": MappingProxyType(
-                        {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                        }
-                    ),
-                    "rules": (
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Endpoint"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseFIPS"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": MappingProxyType(
-                                                        {"ref": "Endpoint"}
-                                                    ),
-                                                    "properties": MappingProxyType({}),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Region"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "aws.partition",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                        ),
-                                                        "assign": "PartitionResult",
-                                                    }
-                                                ),
-                                            ),
-                                            "rules": (
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        True,
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "getAttr",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "ref": "PartitionResult"
-                                                                                        }
-                                                                                    ),
-                                                                                    "supportsDualStack",
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "ref": "UseFIPS"
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "booleanEquals",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "supportsFIPS",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                                True,
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "rules": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "conditions": (),
-                                                                                            "endpoint": MappingProxyType(
-                                                                                                {
-                                                                                                    "url": "https://qbusiness-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                                    "properties": MappingProxyType(
-                                                                                                        {}
-                                                                                                    ),
-                                                                                                    "headers": MappingProxyType(
-                                                                                                        {}
-                                                                                                    ),
-                                                                                                }
-                                                                                            ),
-                                                                                            "type": "endpoint",
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "type": "tree",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                                "type": "error",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "endpoint": MappingProxyType(
-                                                                        {
-                                                                            "url": "https://qbusiness.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                            "properties": MappingProxyType(
-                                                                                {}
-                                                                            ),
-                                                                            "headers": MappingProxyType(
-                                                                                {}
-                                                                            ),
-                                                                        }
-                                                                    ),
-                                                                    "type": "endpoint",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://qbusiness-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (),
-                                                        "endpoint": MappingProxyType(
-                                                            {
-                                                                "url": "https://qbusiness.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                                "headers": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                            }
-                                                        ),
-                                                        "type": "endpoint",
-                                                    }
-                                                ),
-                                            ),
-                                            "type": "tree",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
-                    ),
-                }
-            ),
         ),
         Trait.new(
             id=ShapeID("smithy.rules#endpointBdd"),
@@ -12159,18 +8599,18 @@ EXPERT_Q = Schema(
     ],
 )
 
-ATTRIBUTE_FILTER.members["orAllFilters"] = Schema.member(
-    id=ATTRIBUTE_FILTER.id.with_member("orAllFilters"),
+ATTRIBUTE_FILTER.members["andAllFilters"] = Schema.member(
+    id=ATTRIBUTE_FILTER.id.with_member("andAllFilters"),
     target=ATTRIBUTE_FILTERS,
-    index=1,
+    index=0,
 )
 
 ATTRIBUTE_FILTER.members["notFilter"] = Schema.member(
     id=ATTRIBUTE_FILTER.id.with_member("notFilter"), target=ATTRIBUTE_FILTER, index=2
 )
 
-ATTRIBUTE_FILTER.members["andAllFilters"] = Schema.member(
-    id=ATTRIBUTE_FILTER.id.with_member("andAllFilters"),
+ATTRIBUTE_FILTER.members["orAllFilters"] = Schema.member(
+    id=ATTRIBUTE_FILTER.id.with_member("orAllFilters"),
     target=ATTRIBUTE_FILTERS,
-    index=0,
+    index=1,
 )

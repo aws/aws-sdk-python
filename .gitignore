@@ -20,3 +20,6 @@ uv.lock
 
 # Distribution / packaging
 dist/
+
+# scratch workspace
+/workspace

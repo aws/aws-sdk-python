@@ -10,6 +10,7 @@ from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import Document, TypeRegistry
 from smithy_core.exceptions import ModeledError, SerializationError
 from smithy_core.prelude import UNIT as _SCHEMA_UNIT
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -60,6 +61,7 @@ from ._private.schemas import (
     CATEGORICAL_SCALE_DEFINITION as _SCHEMA_CATEGORICAL_SCALE_DEFINITION,
     CEDAR_POLICY as _SCHEMA_CEDAR_POLICY,
     CERTIFICATE as _SCHEMA_CERTIFICATE,
+    CERTIFICATE_CONFIGURATION as _SCHEMA_CERTIFICATE_CONFIGURATION,
     CERTIFICATE_LOCATION as _SCHEMA_CERTIFICATE_LOCATION,
     CLAIM_MATCH_VALUE_TYPE as _SCHEMA_CLAIM_MATCH_VALUE_TYPE,
     CLOUD_WATCH_LOGS_INPUT_CONFIG as _SCHEMA_CLOUD_WATCH_LOGS_INPUT_CONFIG,
@@ -72,6 +74,7 @@ from ._private.schemas import (
     CODE_INTERPRETER_SUMMARY as _SCHEMA_CODE_INTERPRETER_SUMMARY,
     COINBASE_CDP_CONFIGURATION_INPUT as _SCHEMA_COINBASE_CDP_CONFIGURATION_INPUT,
     COINBASE_CDP_CONFIGURATION_OUTPUT as _SCHEMA_COINBASE_CDP_CONFIGURATION_OUTPUT,
+    COINBASE_CDP_ROTATION_TARGETS as _SCHEMA_COINBASE_CDP_ROTATION_TARGETS,
     COMPONENT_CONFIGURATION as _SCHEMA_COMPONENT_CONFIGURATION,
     COMPUTE_CONFIGURATION as _SCHEMA_COMPUTE_CONFIGURATION,
     CONCURRENT_MODIFICATION_EXCEPTION as _SCHEMA_CONCURRENT_MODIFICATION_EXCEPTION,
@@ -85,6 +88,9 @@ from ._private.schemas import (
     CONNECTOR_PARAMETER_OVERRIDE as _SCHEMA_CONNECTOR_PARAMETER_OVERRIDE,
     CONNECTOR_SOURCE as _SCHEMA_CONNECTOR_SOURCE,
     CONNECTOR_TARGET_CONFIGURATION as _SCHEMA_CONNECTOR_TARGET_CONFIGURATION,
+    CONSENT_PORTAL_IDP_CONFIG as _SCHEMA_CONSENT_PORTAL_IDP_CONFIG,
+    CONSENT_PORTAL_SOURCE as _SCHEMA_CONSENT_PORTAL_SOURCE,
+    CONSENT_PORTAL_SUMMARY as _SCHEMA_CONSENT_PORTAL_SUMMARY,
     CONSOLIDATION_CONFIGURATION as _SCHEMA_CONSOLIDATION_CONFIGURATION,
     CONTAINER_CONFIGURATION as _SCHEMA_CONTAINER_CONFIGURATION,
     CONTENT as _SCHEMA_CONTENT,
@@ -113,6 +119,9 @@ from ._private.schemas import (
     CREATE_CONFIGURATION_BUNDLE as _SCHEMA_CREATE_CONFIGURATION_BUNDLE,
     CREATE_CONFIGURATION_BUNDLE_INPUT as _SCHEMA_CREATE_CONFIGURATION_BUNDLE_INPUT,
     CREATE_CONFIGURATION_BUNDLE_OUTPUT as _SCHEMA_CREATE_CONFIGURATION_BUNDLE_OUTPUT,
+    CREATE_CONSENT_PORTAL as _SCHEMA_CREATE_CONSENT_PORTAL,
+    CREATE_CONSENT_PORTAL_INPUT as _SCHEMA_CREATE_CONSENT_PORTAL_INPUT,
+    CREATE_CONSENT_PORTAL_OUTPUT as _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT,
     CREATE_DATASET as _SCHEMA_CREATE_DATASET,
     CREATE_DATASET_INPUT as _SCHEMA_CREATE_DATASET_INPUT,
     CREATE_DATASET_OUTPUT as _SCHEMA_CREATE_DATASET_OUTPUT,
@@ -176,6 +185,7 @@ from ._private.schemas import (
     CREDENTIALS_PROVIDER_CONFIGURATION as _SCHEMA_CREDENTIALS_PROVIDER_CONFIGURATION,
     CREDENTIAL_PROVIDER as _SCHEMA_CREDENTIAL_PROVIDER,
     CREDENTIAL_PROVIDER_CONFIGURATION as _SCHEMA_CREDENTIAL_PROVIDER_CONFIGURATION,
+    CREDENTIAL_ROTATION_CONFIG as _SCHEMA_CREDENTIAL_ROTATION_CONFIG,
     CUSTOM_CLAIM_VALIDATION_TYPE as _SCHEMA_CUSTOM_CLAIM_VALIDATION_TYPE,
     CUSTOM_CONFIGURATION_INPUT as _SCHEMA_CUSTOM_CONFIGURATION_INPUT,
     CUSTOM_CONSOLIDATION_CONFIGURATION as _SCHEMA_CUSTOM_CONSOLIDATION_CONFIGURATION,
@@ -219,6 +229,9 @@ from ._private.schemas import (
     DELETE_CONFIGURATION_BUNDLE as _SCHEMA_DELETE_CONFIGURATION_BUNDLE,
     DELETE_CONFIGURATION_BUNDLE_INPUT as _SCHEMA_DELETE_CONFIGURATION_BUNDLE_INPUT,
     DELETE_CONFIGURATION_BUNDLE_OUTPUT as _SCHEMA_DELETE_CONFIGURATION_BUNDLE_OUTPUT,
+    DELETE_CONSENT_PORTAL as _SCHEMA_DELETE_CONSENT_PORTAL,
+    DELETE_CONSENT_PORTAL_INPUT as _SCHEMA_DELETE_CONSENT_PORTAL_INPUT,
+    DELETE_CONSENT_PORTAL_OUTPUT as _SCHEMA_DELETE_CONSENT_PORTAL_OUTPUT,
     DELETE_DATASET as _SCHEMA_DELETE_DATASET,
     DELETE_DATASET_EXAMPLES as _SCHEMA_DELETE_DATASET_EXAMPLES,
     DELETE_DATASET_EXAMPLES_INPUT as _SCHEMA_DELETE_DATASET_EXAMPLES_INPUT,
@@ -348,6 +361,9 @@ from ._private.schemas import (
     GET_CONFIGURATION_BUNDLE_VERSION as _SCHEMA_GET_CONFIGURATION_BUNDLE_VERSION,
     GET_CONFIGURATION_BUNDLE_VERSION_INPUT as _SCHEMA_GET_CONFIGURATION_BUNDLE_VERSION_INPUT,
     GET_CONFIGURATION_BUNDLE_VERSION_OUTPUT as _SCHEMA_GET_CONFIGURATION_BUNDLE_VERSION_OUTPUT,
+    GET_CONSENT_PORTAL as _SCHEMA_GET_CONSENT_PORTAL,
+    GET_CONSENT_PORTAL_INPUT as _SCHEMA_GET_CONSENT_PORTAL_INPUT,
+    GET_CONSENT_PORTAL_OUTPUT as _SCHEMA_GET_CONSENT_PORTAL_OUTPUT,
     GET_DATASET as _SCHEMA_GET_DATASET,
     GET_DATASET_INPUT as _SCHEMA_GET_DATASET_INPUT,
     GET_DATASET_OUTPUT as _SCHEMA_GET_DATASET_OUTPUT,
@@ -428,6 +444,8 @@ from ._private.schemas import (
     GOOGLE_OAUTH2_PROVIDER_CONFIG_INPUT as _SCHEMA_GOOGLE_OAUTH2_PROVIDER_CONFIG_INPUT,
     GOOGLE_OAUTH2_PROVIDER_CONFIG_OUTPUT as _SCHEMA_GOOGLE_OAUTH2_PROVIDER_CONFIG_OUTPUT,
     HARNESS as _SCHEMA_HARNESS,
+    HARNESS_AFTER_INVOCATION_HOOK as _SCHEMA_HARNESS_AFTER_INVOCATION_HOOK,
+    HARNESS_AFTER_TOOL_CALL_HOOK as _SCHEMA_HARNESS_AFTER_TOOL_CALL_HOOK,
     HARNESS_AGENT_CORE_BROWSER_CONFIG as _SCHEMA_HARNESS_AGENT_CORE_BROWSER_CONFIG,
     HARNESS_AGENT_CORE_CODE_INTERPRETER_CONFIG as _SCHEMA_HARNESS_AGENT_CORE_CODE_INTERPRETER_CONFIG,
     HARNESS_AGENT_CORE_GATEWAY_CONFIG as _SCHEMA_HARNESS_AGENT_CORE_GATEWAY_CONFIG,
@@ -436,6 +454,8 @@ from ._private.schemas import (
     HARNESS_AGENT_CORE_RUNTIME_ENVIRONMENT as _SCHEMA_HARNESS_AGENT_CORE_RUNTIME_ENVIRONMENT,
     HARNESS_AGENT_CORE_RUNTIME_ENVIRONMENT_REQUEST as _SCHEMA_HARNESS_AGENT_CORE_RUNTIME_ENVIRONMENT_REQUEST,
     HARNESS_BEDROCK_MODEL_CONFIG as _SCHEMA_HARNESS_BEDROCK_MODEL_CONFIG,
+    HARNESS_BEFORE_INVOCATION_HOOK as _SCHEMA_HARNESS_BEFORE_INVOCATION_HOOK,
+    HARNESS_BEFORE_TOOL_CALL_HOOK as _SCHEMA_HARNESS_BEFORE_TOOL_CALL_HOOK,
     HARNESS_DISABLED_MEMORY_CONFIGURATION as _SCHEMA_HARNESS_DISABLED_MEMORY_CONFIGURATION,
     HARNESS_ENDPOINT as _SCHEMA_HARNESS_ENDPOINT,
     HARNESS_ENVIRONMENT_ARTIFACT as _SCHEMA_HARNESS_ENVIRONMENT_ARTIFACT,
@@ -443,6 +463,11 @@ from ._private.schemas import (
     HARNESS_ENVIRONMENT_PROVIDER_REQUEST as _SCHEMA_HARNESS_ENVIRONMENT_PROVIDER_REQUEST,
     HARNESS_GATEWAY_OUTBOUND_AUTH as _SCHEMA_HARNESS_GATEWAY_OUTBOUND_AUTH,
     HARNESS_GEMINI_MODEL_CONFIG as _SCHEMA_HARNESS_GEMINI_MODEL_CONFIG,
+    HARNESS_HOOK as _SCHEMA_HARNESS_HOOK,
+    HARNESS_HOOK_EVENT_BRIDGE_TARGET as _SCHEMA_HARNESS_HOOK_EVENT_BRIDGE_TARGET,
+    HARNESS_HOOK_LAMBDA_TARGET as _SCHEMA_HARNESS_HOOK_LAMBDA_TARGET,
+    HARNESS_HOOK_SNS_TARGET as _SCHEMA_HARNESS_HOOK_SNS_TARGET,
+    HARNESS_HOOK_TARGET as _SCHEMA_HARNESS_HOOK_TARGET,
     HARNESS_INLINE_FUNCTION_CONFIG as _SCHEMA_HARNESS_INLINE_FUNCTION_CONFIG,
     HARNESS_LITE_LLM_MODEL_CONFIG as _SCHEMA_HARNESS_LITE_LLM_MODEL_CONFIG,
     HARNESS_MANAGED_MEMORY_CONFIGURATION as _SCHEMA_HARNESS_MANAGED_MEMORY_CONFIGURATION,
@@ -537,6 +562,9 @@ from ._private.schemas import (
     LIST_CONFIGURATION_BUNDLE_VERSIONS as _SCHEMA_LIST_CONFIGURATION_BUNDLE_VERSIONS,
     LIST_CONFIGURATION_BUNDLE_VERSIONS_INPUT as _SCHEMA_LIST_CONFIGURATION_BUNDLE_VERSIONS_INPUT,
     LIST_CONFIGURATION_BUNDLE_VERSIONS_OUTPUT as _SCHEMA_LIST_CONFIGURATION_BUNDLE_VERSIONS_OUTPUT,
+    LIST_CONSENT_PORTALS as _SCHEMA_LIST_CONSENT_PORTALS,
+    LIST_CONSENT_PORTALS_INPUT as _SCHEMA_LIST_CONSENT_PORTALS_INPUT,
+    LIST_CONSENT_PORTALS_OUTPUT as _SCHEMA_LIST_CONSENT_PORTALS_OUTPUT,
     LIST_DATASETS as _SCHEMA_LIST_DATASETS,
     LIST_DATASETS_INPUT as _SCHEMA_LIST_DATASETS_INPUT,
     LIST_DATASETS_OUTPUT as _SCHEMA_LIST_DATASETS_OUTPUT,
@@ -716,10 +744,14 @@ from ._private.schemas import (
     RESOURCE_NOT_FOUND_EXCEPTION as _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
     RETRYABLE_CONFLICT_EXCEPTION as _SCHEMA_RETRYABLE_CONFLICT_EXCEPTION,
     ROOT_VOLUME_CONFIGURATION as _SCHEMA_ROOT_VOLUME_CONFIGURATION,
+    ROTATE_PAYMENT_CONNECTOR_CREDENTIALS as _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS,
+    ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT as _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT,
+    ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT as _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT,
     ROUTE_TO_TARGET_ACTION as _SCHEMA_ROUTE_TO_TARGET_ACTION,
     RULE as _SCHEMA_RULE,
     RUNTIME_METADATA_CONFIGURATION as _SCHEMA_RUNTIME_METADATA_CONFIGURATION,
     RUNTIME_TARGET_CONFIGURATION as _SCHEMA_RUNTIME_TARGET_CONFIGURATION,
+    S3_CERTIFICATE_CONFIGURATION as _SCHEMA_S3_CERTIFICATE_CONFIGURATION,
     S3_CONFIGURATION as _SCHEMA_S3_CONFIGURATION,
     S3_FILES_ACCESS_POINT_CONFIGURATION as _SCHEMA_S3_FILES_ACCESS_POINT_CONFIGURATION,
     S3_FILES_CONFIGURATION as _SCHEMA_S3_FILES_CONFIGURATION,
@@ -730,6 +762,7 @@ from ._private.schemas import (
     SAMPLING_CONFIG as _SCHEMA_SAMPLING_CONFIG,
     SCHEMA_DEFINITION as _SCHEMA_SCHEMA_DEFINITION,
     SECRET as _SCHEMA_SECRET,
+    SECRETS_MANAGER_CERTIFICATE_CONFIGURATION as _SCHEMA_SECRETS_MANAGER_CERTIFICATE_CONFIGURATION,
     SECRETS_MANAGER_LOCATION as _SCHEMA_SECRETS_MANAGER_LOCATION,
     SECRET_REFERENCE as _SCHEMA_SECRET_REFERENCE,
     SELF_MANAGED_CONFIGURATION as _SCHEMA_SELF_MANAGED_CONFIGURATION,
@@ -839,6 +872,9 @@ from ._private.schemas import (
     UPDATE_CONFIGURATION_BUNDLE as _SCHEMA_UPDATE_CONFIGURATION_BUNDLE,
     UPDATE_CONFIGURATION_BUNDLE_INPUT as _SCHEMA_UPDATE_CONFIGURATION_BUNDLE_INPUT,
     UPDATE_CONFIGURATION_BUNDLE_OUTPUT as _SCHEMA_UPDATE_CONFIGURATION_BUNDLE_OUTPUT,
+    UPDATE_CONSENT_PORTAL as _SCHEMA_UPDATE_CONSENT_PORTAL,
+    UPDATE_CONSENT_PORTAL_INPUT as _SCHEMA_UPDATE_CONSENT_PORTAL_INPUT,
+    UPDATE_CONSENT_PORTAL_OUTPUT as _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT,
     UPDATE_DATASET as _SCHEMA_UPDATE_DATASET,
     UPDATE_DATASET_EXAMPLES as _SCHEMA_UPDATE_DATASET_EXAMPLES,
     UPDATE_DATASET_EXAMPLES_INPUT as _SCHEMA_UPDATE_DATASET_EXAMPLES_INPUT,
@@ -2322,7 +2358,7 @@ class AddDatasetExamplesOutput:
     dataset_id: str
     """The unique identifier of the dataset."""
 
-    status: DatasetStatus
+    status: str
     """The current status of the dataset."""
 
     added_count: int
@@ -2333,6 +2369,16 @@ class AddDatasetExamplesOutput:
 
     example_ids: list[str]
     """IDs of all added examples (auto-generated UUIDs)."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ADD_DATASET_EXAMPLES_OUTPUT, self)
@@ -2715,7 +2761,7 @@ class ValidationException(ServiceError):
 
     fault: Literal["client", "server"] | None = "client"
 
-    reason: ValidationExceptionReason
+    reason: str
 
     field_list: list[ValidationExceptionField] | None = None
 
@@ -3030,6 +3076,7 @@ class AgentRuntimeEndpointStatus(UnknownEnumMixin, StrEnum):
     UPDATE_FAILED = "UPDATE_FAILED"
     READY = "READY"
     DELETING = "DELETING"
+    DELETE_FAILED = "DELETE_FAILED"
 
 
 @dataclass(kw_only=True)
@@ -3045,7 +3092,7 @@ class CreateAgentRuntimeEndpointOutput:
     agent_runtime_arn: str
     """The Amazon Resource Name (ARN) of the AgentCore Runtime."""
 
-    status: AgentRuntimeEndpointStatus
+    status: str
     """The current status of the AgentCore Runtime endpoint."""
 
     created_at: datetime
@@ -3056,6 +3103,16 @@ class CreateAgentRuntimeEndpointOutput:
 
     endpoint_name: str | None = field(repr=False, default=None)
     """The name of the AgentCore Runtime endpoint."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_AGENT_RUNTIME_ENDPOINT_OUTPUT, self)
@@ -3304,7 +3361,7 @@ class DeleteAgentRuntimeEndpointInput:
 class DeleteAgentRuntimeEndpointOutput:
     """Dataclass for DeleteAgentRuntimeEndpointOutput structure."""
 
-    status: AgentRuntimeEndpointStatus
+    status: str
     """The current status of the AgentCore Runtime endpoint deletion."""
 
     agent_runtime_id: str | None = None
@@ -3312,6 +3369,16 @@ class DeleteAgentRuntimeEndpointOutput:
 
     endpoint_name: str | None = field(repr=False, default=None)
     """The name of the AgentCore Runtime endpoint."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_AGENT_RUNTIME_ENDPOINT_OUTPUT, self)
@@ -3482,7 +3549,7 @@ class GetAgentRuntimeEndpointOutput:
     agent_runtime_arn: str
     """The Amazon Resource Name (ARN) of the AgentCore Runtime."""
 
-    status: AgentRuntimeEndpointStatus
+    status: str
     """The current status of the AgentCore Runtime endpoint."""
 
     created_at: datetime
@@ -3510,6 +3577,16 @@ class GetAgentRuntimeEndpointOutput:
     """
     The reason for failure if the AgentCore Runtime endpoint is in a failed
     state.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3794,7 +3871,7 @@ class AgentRuntimeEndpoint:
     endpoint.
     """
 
-    status: AgentRuntimeEndpointStatus
+    status: str
     """The current status of the agent runtime endpoint."""
 
     id: str
@@ -3981,6 +4058,16 @@ class ListAgentRuntimeEndpointsOutput:
 
     next_token: str | None = None
     """A token to retrieve the next page of results."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_AGENT_RUNTIME_ENDPOINTS_OUTPUT, self)
@@ -4188,7 +4275,7 @@ class UpdateAgentRuntimeEndpointOutput:
     agent_runtime_arn: str
     """The Amazon Resource Name (ARN) of the AgentCore Runtime."""
 
-    status: AgentRuntimeEndpointStatus
+    status: str
     """The current status of the updated AgentCore Runtime endpoint."""
 
     created_at: datetime
@@ -4202,6 +4289,16 @@ class UpdateAgentRuntimeEndpointOutput:
 
     target_version: str | None = None
     """The target version of the AgentCore Runtime for the endpoint."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_AGENT_RUNTIME_ENDPOINT_OUTPUT, self)
@@ -4561,7 +4658,7 @@ class CodeConfiguration:
     code: Code
     """The source code location and configuration details."""
 
-    runtime: AgentManagedRuntimeType
+    runtime: str
     """
     The runtime environment for executing the agent code. Specify the
     programming language and version to use for the agent runtime. For valid
@@ -5193,7 +5290,7 @@ class AuthorizingClaimMatchValueType:
     claim_match_value: ClaimMatchValueType
     """The value or values to match for."""
 
-    claim_match_operator: ClaimMatchOperatorType
+    claim_match_operator: str
     """
     Defines the relationship between the claim field value and the value or
     values you're matching for.
@@ -5271,7 +5368,7 @@ class CustomClaimValidationType:
     inbound_token_claim_name: str
     """The name of the custom claim field to check."""
 
-    inbound_token_claim_value_type: InboundTokenClaimValueType
+    inbound_token_claim_value_type: str
     """
     The data type of the claim value to check for.
 
@@ -5456,7 +5553,7 @@ class ManagedVpcResource:
     placed.
     """
 
-    endpoint_ip_address_type: EndpointIpAddressType
+    endpoint_ip_address_type: str
     """The IP address type for the resource configuration endpoint."""
 
     security_group_ids: list[str] | None = None
@@ -6941,7 +7038,7 @@ class VpcConfig:
 class NetworkConfiguration:
     """SecurityConfig for the Agent."""
 
-    network_mode: NetworkMode
+    network_mode: str
     """The network mode for the AgentCore Runtime."""
 
     network_mode_config: VpcConfig | None = None
@@ -7007,7 +7104,7 @@ class ProtocolConfiguration:
     how the agent runtime communicates with clients.
     """
 
-    server_protocol: ServerProtocol
+    server_protocol: str
     """
     The server protocol for the agent runtime. This field specifies which
     protocol the agent runtime uses to communicate with clients.
@@ -7240,6 +7337,9 @@ class CreateAgentRuntimeInput:
     purpose, owner, or environment.
     """
 
+    platform_version: str | None = None
+    """The version of the runtime platform to use for the AgentCore Runtime."""
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_AGENT_RUNTIME_INPUT, self)
 
@@ -7334,6 +7434,12 @@ class CreateAgentRuntimeInput:
                 self.tags,
             )
 
+        if self.platform_version is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_AGENT_RUNTIME_INPUT.members["platformVersion"],
+                self.platform_version,
+            )
+
     @classmethod
     def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
         return cls(**cls.deserialize_kwargs(deserializer))
@@ -7424,6 +7530,11 @@ class CreateAgentRuntimeInput:
                         de, _SCHEMA_CREATE_AGENT_RUNTIME_INPUT.members["tags"]
                     )
 
+                case 14:
+                    kwargs["platform_version"] = de.read_string(
+                        _SCHEMA_CREATE_AGENT_RUNTIME_INPUT.members["platformVersion"]
+                    )
+
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
 
@@ -7438,6 +7549,7 @@ class AgentRuntimeStatus(UnknownEnumMixin, StrEnum):
     UPDATE_FAILED = "UPDATE_FAILED"
     READY = "READY"
     DELETING = "DELETING"
+    DELETE_FAILED = "DELETE_FAILED"
 
 
 @dataclass(kw_only=True)
@@ -7496,11 +7608,21 @@ class CreateAgentRuntimeOutput:
     created_at: datetime
     """The timestamp when the AgentCore Runtime was created."""
 
-    status: AgentRuntimeStatus
+    status: str
     """The current status of the AgentCore Runtime."""
 
     workload_identity_details: WorkloadIdentityDetails | None = None
     """The workload identity details for the AgentCore Runtime."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_AGENT_RUNTIME_OUTPUT, self)
@@ -7715,7 +7837,7 @@ class DeleteAgentRuntimeInput:
 class DeleteAgentRuntimeOutput:
     """Dataclass for DeleteAgentRuntimeOutput structure."""
 
-    status: AgentRuntimeStatus
+    status: str
     """The current status of the AgentCore Runtime deletion."""
 
     agent_runtime_id: str | None = None
@@ -7725,6 +7847,16 @@ class DeleteAgentRuntimeOutput:
     """
     The version of the AgentCore Runtime that was deleted. This value is
     present only when you delete a single version.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -7946,7 +8078,7 @@ class GetAgentRuntimeOutput:
     role_arn: str
     """The IAM role ARN that provides permissions for the AgentCore Runtime."""
 
-    status: AgentRuntimeStatus
+    status: str
     """The current status of the AgentCore Runtime."""
 
     lifecycle_configuration: LifecycleConfiguration
@@ -7996,6 +8128,19 @@ class GetAgentRuntimeOutput:
 
     capacity_provider_configuration: CapacityProviderConfiguration | None = None
     """The capacity provider configuration for the AgentCore Runtime."""
+
+    platform_version: str | None = None
+    """The version of the runtime platform used by the AgentCore Runtime."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_AGENT_RUNTIME_OUTPUT, self)
@@ -8108,6 +8253,12 @@ class GetAgentRuntimeOutput:
                     "capacityProviderConfiguration"
                 ],
                 self.capacity_provider_configuration,
+            )
+
+        if self.platform_version is not None:
+            serializer.write_string(
+                _SCHEMA_GET_AGENT_RUNTIME_OUTPUT.members["platformVersion"],
+                self.platform_version,
             )
 
     @classmethod
@@ -8235,6 +8386,11 @@ class GetAgentRuntimeOutput:
                 case 20:
                     kwargs["capacity_provider_configuration"] = (
                         CapacityProviderConfiguration.deserialize(de)
+                    )
+
+                case 21:
+                    kwargs["platform_version"] = de.read_string(
+                        _SCHEMA_GET_AGENT_RUNTIME_OUTPUT.members["platformVersion"]
                     )
 
                 case _:
@@ -8375,7 +8531,7 @@ class AgentRuntime:
     last_updated_at: datetime
     """The timestamp when the agent runtime was last updated."""
 
-    status: AgentRuntimeStatus
+    status: str
     """The current status of the agent runtime."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -8503,6 +8659,16 @@ class ListAgentRuntimesOutput:
 
     next_token: str | None = None
     """A token to retrieve the next page of results."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_AGENT_RUNTIMES_OUTPUT, self)
@@ -8660,6 +8826,16 @@ class ListAgentRuntimeVersionsOutput:
     next_token: str | None = None
     """A token to retrieve the next page of results."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_AGENT_RUNTIME_VERSIONS_OUTPUT, self)
 
@@ -8806,6 +8982,12 @@ class UpdateAgentRuntimeInput:
     capacity_provider_configuration: CapacityProviderConfiguration | None = None
     """The updated capacity provider configuration for the AgentCore Runtime."""
 
+    platform_version: str | None = None
+    """
+    The updated version of the runtime platform to use for the AgentCore
+    Runtime.
+    """
+
     client_token: str | None = None
     """
     A unique, case-sensitive identifier to ensure idempotency of the
@@ -8897,6 +9079,12 @@ class UpdateAgentRuntimeInput:
                     "capacityProviderConfiguration"
                 ],
                 self.capacity_provider_configuration,
+            )
+
+        if self.platform_version is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_AGENT_RUNTIME_INPUT.members["platformVersion"],
+                self.platform_version,
             )
 
         if self.client_token is not None:
@@ -8991,6 +9179,11 @@ class UpdateAgentRuntimeInput:
                     )
 
                 case 13:
+                    kwargs["platform_version"] = de.read_string(
+                        _SCHEMA_UPDATE_AGENT_RUNTIME_INPUT.members["platformVersion"]
+                    )
+
+                case 14:
                     kwargs["client_token"] = de.read_string(
                         _SCHEMA_UPDATE_AGENT_RUNTIME_INPUT.members["clientToken"]
                     )
@@ -9021,11 +9214,21 @@ class UpdateAgentRuntimeOutput:
     last_updated_at: datetime
     """The timestamp when the AgentCore Runtime was last updated."""
 
-    status: AgentRuntimeStatus
+    status: str
     """The current status of the updated AgentCore Runtime."""
 
     workload_identity_details: WorkloadIdentityDetails | None = None
     """The workload identity details for the updated AgentCore Runtime."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_AGENT_RUNTIME_OUTPUT, self)
@@ -9188,7 +9391,7 @@ class AgentRuntimeVersionSummary:
     agent_runtime_version: str
     """The version of the agent runtime."""
 
-    status: AgentRuntimeStatus
+    status: str
     """The current status of the agent runtime version."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -9644,7 +9847,7 @@ class CreateApiKeyCredentialProviderInput:
     `apiKeySecretSource` is set to `EXTERNAL`.
     """
 
-    api_key_secret_source: SecretSourceType | None = None
+    api_key_secret_source: str | None = None
     """
     The source type of the API key secret. Use `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if you manage the secret yourself
@@ -9817,11 +10020,21 @@ class CreateApiKeyCredentialProviderOutput:
     Services Secrets Manager secret.
     """
 
-    api_key_secret_source: SecretSourceType | None = None
+    api_key_secret_source: str | None = None
     """
     The source type of the API key secret. Either `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if managed by the user in Amazon
     Web Services Secrets Manager.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -10175,6 +10388,16 @@ class DeleteApiKeyCredentialProviderInput:
 class DeleteApiKeyCredentialProviderOutput:
     """Dataclass for DeleteApiKeyCredentialProviderOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_API_KEY_CREDENTIAL_PROVIDER_OUTPUT, self)
 
@@ -10308,11 +10531,21 @@ class GetApiKeyCredentialProviderOutput:
     Services Secrets Manager secret.
     """
 
-    api_key_secret_source: SecretSourceType | None = None
+    api_key_secret_source: str | None = None
     """
     The source type of the API key secret. Either `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if managed by the user in Amazon
     Web Services Secrets Manager.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -10658,6 +10891,16 @@ class ListApiKeyCredentialProvidersOutput:
     next_token: str | None = None
     """Pagination token for the next page of results."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_API_KEY_CREDENTIAL_PROVIDERS_OUTPUT, self)
 
@@ -10774,7 +11017,7 @@ class UpdateApiKeyCredentialProviderInput:
     `apiKeySecretSource` is set to `EXTERNAL`.
     """
 
-    api_key_secret_source: SecretSourceType | None = None
+    api_key_secret_source: str | None = None
     """
     The source type of the API key secret. Use `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if you manage the secret yourself
@@ -10884,11 +11127,21 @@ class UpdateApiKeyCredentialProviderOutput:
     Services Secrets Manager secret.
     """
 
-    api_key_secret_source: SecretSourceType | None = None
+    api_key_secret_source: str | None = None
     """
     The source type of the API key secret. Either `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if managed by the user in Amazon
     Web Services Secrets Manager.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -11189,8 +11442,18 @@ class CreateBrowserProfileOutput:
     created_at: datetime
     """The timestamp when the browser profile was created."""
 
-    status: BrowserProfileStatus
+    status: str
     """The current status of the browser profile."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_BROWSER_PROFILE_OUTPUT, self)
@@ -11367,7 +11630,7 @@ class DeleteBrowserProfileOutput:
     profile_arn: str
     """The Amazon Resource Name (ARN) of the deleted browser profile."""
 
-    status: BrowserProfileStatus
+    status: str
     """The current status of the browser profile deletion."""
 
     last_updated_at: datetime
@@ -11377,6 +11640,16 @@ class DeleteBrowserProfileOutput:
     """
     The timestamp when browser session data was last saved to this profile
     before deletion.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -11548,7 +11821,7 @@ class GetBrowserProfileOutput:
     name: str
     """The name of the browser profile."""
 
-    status: BrowserProfileStatus
+    status: str
     """The current status of the browser profile."""
 
     created_at: datetime
@@ -11573,6 +11846,16 @@ class GetBrowserProfileOutput:
     """
     The identifier of the browser from which data was last saved to this
     profile.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -11826,7 +12109,7 @@ class BrowserProfileSummary:
     name: str
     """The name of the browser profile."""
 
-    status: BrowserProfileStatus
+    status: str
     """
     The current status of the browser profile. Possible values include
     READY, SAVING, DELETING, and DELETED.
@@ -12019,6 +12302,16 @@ class ListBrowserProfilesOutput:
 
     next_token: str | None = None
     """A token to retrieve the next page of results."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_BROWSER_PROFILES_OUTPUT, self)
@@ -12427,7 +12720,7 @@ class BrowserEnterprisePolicy:
     location: ResourceLocation
     """The location of the enterprise policy file."""
 
-    type: BrowserEnterprisePolicyType | None = None
+    type: str | None = None
     """
     The type of browser enterprise policy. Available values are `MANAGED`
     and `RECOMMENDED`.
@@ -12826,7 +13119,7 @@ class BrowserNetworkConfiguration:
     browser connects to the network.
     """
 
-    network_mode: BrowserNetworkMode = BrowserNetworkMode("PUBLIC")
+    network_mode: str = BrowserNetworkMode("PUBLIC")
     """
     The network mode for the browser. This field specifies how the browser
     connects to the network.
@@ -13173,8 +13466,18 @@ class CreateBrowserOutput:
     created_at: datetime
     """The timestamp when the browser was created."""
 
-    status: BrowserStatus
+    status: str
     """The current status of the browser."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_BROWSER_OUTPUT, self)
@@ -13339,11 +13642,21 @@ class DeleteBrowserOutput:
     browser_id: str
     """The unique identifier of the deleted browser."""
 
-    status: BrowserStatus
+    status: str
     """The current status of the browser deletion."""
 
     last_updated_at: datetime
     """The timestamp when the browser was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_BROWSER_OUTPUT, self)
@@ -13544,7 +13857,7 @@ class GetBrowserOutput:
     browser connects to the network.
     """
 
-    status: BrowserStatus
+    status: str
     """The current status of the browser."""
 
     created_at: datetime
@@ -13585,6 +13898,16 @@ class GetBrowserOutput:
 
     failure_reason: str | None = None
     """The reason for failure if the browser is in a failed state."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_BROWSER_OUTPUT, self)
@@ -13830,7 +14153,7 @@ class ListBrowsersInput:
     results.
     """
 
-    type: ResourceType | None = None
+    type: str | None = None
     """
     The type of browsers to list. If not specified, all browser types are
     returned.
@@ -13900,7 +14223,7 @@ class BrowserSummary:
     browser_arn: str
     """The Amazon Resource Name (ARN) of the browser."""
 
-    status: BrowserStatus
+    status: str
     """The current status of the browser."""
 
     created_at: datetime
@@ -14036,6 +14359,16 @@ class ListBrowsersOutput:
 
     next_token: str | None = None
     """A token to retrieve the next page of results."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_BROWSERS_OUTPUT, self)
@@ -14189,7 +14522,7 @@ class CapacityReservationTarget:
 class CapacityReservationSpecification:
     """The Capacity Reservation targeting option for the instances."""
 
-    capacity_reservation_preference: CapacityReservationPreference | None = None
+    capacity_reservation_preference: str | None = None
     """The Capacity Reservation preference for the instances."""
 
     capacity_reservation_target: CapacityReservationTarget | None = None
@@ -14273,7 +14606,7 @@ class EphemeralEBSVolumeConfiguration:
     configurations for a capacity provider.
     """
 
-    volume_type: EbsVolumeType = EbsVolumeType("gp3")
+    volume_type: str = EbsVolumeType("gp3")
     """
     The Amazon EBS volume type. If you do not specify a type, the default is
     `gp3`.
@@ -14723,7 +15056,7 @@ class LaunchParameters:
     provider.
     """
 
-    operating_system: OperatingSystem
+    operating_system: str
     """The operating system and CPU architecture for the instances."""
 
     instance_requirements: InstanceRequirements
@@ -14735,7 +15068,7 @@ class LaunchParameters:
     can specify up to five mappings.
     """
 
-    monitoring: Monitoring | None = None
+    monitoring: str | None = None
     """The monitoring level for the instances."""
 
     license_specifications: list[LicenseSpecification] | None = None
@@ -15056,7 +15389,7 @@ class RootVolumeConfiguration:
     changed.
     """
 
-    volume_type: EbsVolumeType = EbsVolumeType("gp3")
+    volume_type: str = EbsVolumeType("gp3")
     """
     The Amazon EBS volume type. If you do not specify a type, the default is
     `gp3`.
@@ -15196,7 +15529,7 @@ class EbsVolumeConfiguration:
     size_gi_b: int
     """The size of the volume, in GiB."""
 
-    volume_type: EbsVolumeType = EbsVolumeType("gp3")
+    volume_type: str = EbsVolumeType("gp3")
     """
     The Amazon EBS volume type. If you do not specify a type, the default is
     `gp3`.
@@ -15988,10 +16321,20 @@ class CreateCapacityProviderOutput:
     name: str
     """The name of the capacity provider."""
 
-    status: CapacityProviderStatus
+    status: str
     """
     The current status of the capacity provider. For possible values, see
     `CapacityProviderStatus`.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -16227,10 +16570,20 @@ class DeleteCapacityProviderOutput:
     capacity_provider_id: str
     """The unique identifier of the deleted capacity provider."""
 
-    status: CapacityProviderStatus
+    status: str
     """
     The current status of the capacity provider. For possible values, see
     `CapacityProviderStatus`.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -16405,7 +16758,7 @@ class GetCapacityProviderOutput:
     name: str
     """The name of the capacity provider."""
 
-    status: CapacityProviderStatus
+    status: str
     """
     The current status of the capacity provider. For possible values, see
     `CapacityProviderStatus`.
@@ -16426,7 +16779,7 @@ class GetCapacityProviderOutput:
     description: str | None = field(repr=False, default=None)
     """The description of the capacity provider, if one was provided."""
 
-    status_code: CapacityProviderStatusCode | None = None
+    status_code: str | None = None
     """
     A reason code for a capacity provider that is not in the `READY` state.
     Use this code for programmatic error handling.
@@ -16437,6 +16790,16 @@ class GetCapacityProviderOutput:
     A human-readable message that describes why the capacity provider is not
     in the `READY` state. Because these messages can change, use
     `statusCode` for programmatic error handling.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -16740,6 +17103,16 @@ class ListAgentRuntimeVersionsByCapacityProviderOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_LIST_AGENT_RUNTIME_VERSIONS_BY_CAPACITY_PROVIDER_OUTPUT, self
@@ -16914,7 +17287,7 @@ class CapacityProviderSummary:
     name: str
     """The name of the capacity provider."""
 
-    status: CapacityProviderStatus
+    status: str
     """
     The current status of the capacity provider. For possible values, see
     `CapacityProviderStatus`.
@@ -17037,6 +17410,16 @@ class ListCapacityProvidersOutput:
     If the total number of results is greater than the `maxResults` value
     provided in the request, use this token when making another request in
     the `nextToken` field to return the next batch of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -17257,7 +17640,7 @@ class UpdateCapacityProviderOutput:
     name: str
     """The name of the capacity provider."""
 
-    status: CapacityProviderStatus
+    status: str
     """
     The current status of the capacity provider. For possible values, see
     `CapacityProviderStatus`.
@@ -17268,6 +17651,16 @@ class UpdateCapacityProviderOutput:
 
     last_updated_at: datetime
     """The timestamp when the capacity provider was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_CAPACITY_PROVIDER_OUTPUT, self)
@@ -17420,7 +17813,7 @@ class CodeInterpreterNetworkConfiguration:
     how the code interpreter connects to the network.
     """
 
-    network_mode: CodeInterpreterNetworkMode = CodeInterpreterNetworkMode("SANDBOX")
+    network_mode: str = CodeInterpreterNetworkMode("SANDBOX")
     """
     The network mode for the code interpreter. This field specifies how the
     code interpreter connects to the network.
@@ -17678,8 +18071,18 @@ class CreateCodeInterpreterOutput:
     created_at: datetime
     """The timestamp when the code interpreter was created."""
 
-    status: CodeInterpreterStatus
+    status: str
     """The current status of the code interpreter."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_CODE_INTERPRETER_OUTPUT, self)
@@ -17860,11 +18263,21 @@ class DeleteCodeInterpreterOutput:
     code_interpreter_id: str
     """The unique identifier of the deleted code interpreter."""
 
-    status: CodeInterpreterStatus
+    status: str
     """The current status of the code interpreter deletion."""
 
     last_updated_at: datetime
     """The timestamp when the code interpreter was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_CODE_INTERPRETER_OUTPUT, self)
@@ -18028,7 +18441,7 @@ class GetCodeInterpreterOutput:
     how the code interpreter connects to the network.
     """
 
-    status: CodeInterpreterStatus
+    status: str
     """The current status of the code interpreter."""
 
     created_at: datetime
@@ -18054,6 +18467,16 @@ class GetCodeInterpreterOutput:
 
     failure_reason: str | None = None
     """The reason for failure if the code interpreter is in a failed state."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_CODE_INTERPRETER_OUTPUT, self)
@@ -18267,7 +18690,7 @@ class ListCodeInterpretersInput:
     next_token: str | None = None
     """A token to retrieve the next page of results."""
 
-    type: ResourceType | None = None
+    type: str | None = None
     """The type of code interpreters to list."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -18340,7 +18763,7 @@ class CodeInterpreterSummary:
     code_interpreter_arn: str
     """The Amazon Resource Name (ARN) of the code interpreter."""
 
-    status: CodeInterpreterStatus
+    status: str
     """The current status of the code interpreter."""
 
     created_at: datetime
@@ -18486,6 +18909,16 @@ class ListCodeInterpretersOutput:
 
     next_token: str | None = None
     """A token to retrieve the next page of results."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_CODE_INTERPRETERS_OUTPUT, self)
@@ -18895,6 +19328,16 @@ class CreateConfigurationBundleOutput:
     created_at: datetime
     """The timestamp when the configuration bundle was created."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_CONFIGURATION_BUNDLE_OUTPUT, self)
 
@@ -19061,13 +19504,32 @@ class DeleteConfigurationBundleOutput:
     bundle_id: str
     """The unique identifier of the deleted configuration bundle."""
 
-    status: ConfigurationBundleStatus
+    status: str
     """The status of the configuration bundle deletion operation."""
+
+    bundle_arn: str | None = None
+    """The Amazon Resource Name (ARN) of the deleted configuration bundle."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_CONFIGURATION_BUNDLE_OUTPUT, self)
 
     def serialize_members(self, serializer: ShapeSerializer):
+        if self.bundle_arn is not None:
+            serializer.write_string(
+                _SCHEMA_DELETE_CONFIGURATION_BUNDLE_OUTPUT.members["bundleArn"],
+                self.bundle_arn,
+            )
+
         serializer.write_string(
             _SCHEMA_DELETE_CONFIGURATION_BUNDLE_OUTPUT.members["bundleId"],
             self.bundle_id,
@@ -19087,11 +19549,16 @@ class DeleteConfigurationBundleOutput:
         def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
             match schema.expect_member_index():
                 case 0:
+                    kwargs["bundle_arn"] = de.read_string(
+                        _SCHEMA_DELETE_CONFIGURATION_BUNDLE_OUTPUT.members["bundleArn"]
+                    )
+
+                case 1:
                     kwargs["bundle_id"] = de.read_string(
                         _SCHEMA_DELETE_CONFIGURATION_BUNDLE_OUTPUT.members["bundleId"]
                     )
 
-                case 1:
+                case 2:
                     kwargs["status"] = ConfigurationBundleStatus(
                         de.read_string(
                             _SCHEMA_DELETE_CONFIGURATION_BUNDLE_OUTPUT.members["status"]
@@ -19368,6 +19835,16 @@ class GetConfigurationBundleOutput:
     provided.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_CONFIGURATION_BUNDLE_OUTPUT, self)
 
@@ -19633,6 +20110,16 @@ class GetConfigurationBundleVersionOutput:
     """
     KMS key ARN used to encrypt component configurations, if CMK was
     provided.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -20019,6 +20506,16 @@ class ListConfigurationBundlesOutput:
     If the total number of results is greater than the `maxResults` value
     provided in the request, use this token when making another request in
     the `nextToken` field to return the next batch of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -20413,6 +20910,16 @@ class ListConfigurationBundleVersionsOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_CONFIGURATION_BUNDLE_VERSIONS_OUTPUT, self)
 
@@ -20718,6 +21225,16 @@ class UpdateConfigurationBundleOutput:
     updated_at: datetime
     """The timestamp when the configuration bundle was updated."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_CONFIGURATION_BUNDLE_OUTPUT, self)
 
@@ -20826,6 +21343,1673 @@ UPDATE_CONFIGURATION_BUNDLE = APIOperation(
 )
 
 
+@dataclass(kw_only=True)
+class ConsentPortalIdpConfig:
+    """
+    The identity provider configuration used to authenticate end users to
+    the consent portal.
+    """
+
+    credential_provider_arn: str
+    """
+    The Amazon Resource Name (ARN) of the OAuth2 credential provider used to
+    authenticate end users to the consent portal.
+    """
+
+    scopes: list[str]
+    """
+    The OAuth2 scopes that the consent portal requests when authenticating
+    end users.
+    """
+
+    audience: str | None = None
+    """
+    The audience value that the consent portal includes when requesting
+    tokens from the identity provider.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_CONSENT_PORTAL_IDP_CONFIG, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_CONSENT_PORTAL_IDP_CONFIG.members["credentialProviderArn"],
+            self.credential_provider_arn,
+        )
+        _serialize_allowed_scopes_type(
+            serializer, _SCHEMA_CONSENT_PORTAL_IDP_CONFIG.members["scopes"], self.scopes
+        )
+        if self.audience is not None:
+            serializer.write_string(
+                _SCHEMA_CONSENT_PORTAL_IDP_CONFIG.members["audience"], self.audience
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["credential_provider_arn"] = de.read_string(
+                        _SCHEMA_CONSENT_PORTAL_IDP_CONFIG.members[
+                            "credentialProviderArn"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["scopes"] = _deserialize_allowed_scopes_type(
+                        de, _SCHEMA_CONSENT_PORTAL_IDP_CONFIG.members["scopes"]
+                    )
+
+                case 2:
+                    kwargs["audience"] = de.read_string(
+                        _SCHEMA_CONSENT_PORTAL_IDP_CONFIG.members["audience"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_CONSENT_PORTAL_IDP_CONFIG, consumer=_consumer)
+        if "credential_provider_arn" not in kwargs:
+            kwargs["credential_provider_arn"] = ""
+        if "scopes" not in kwargs:
+            kwargs["scopes"] = []
+        return kwargs
+
+    @classmethod
+    def _smithy_default(cls) -> Self:
+        return cls(credential_provider_arn="", scopes=[])
+
+
+class ConsentPortalSourceType(UnknownEnumMixin, StrEnum):
+    """
+    The type of a consent portal source. Currently, we only support type
+    `agentcore-gateway`.
+    """
+
+    AGENTCORE_GATEWAY = "agentcore-gateway"
+
+
+@dataclass(kw_only=True)
+class ConsentPortalSource:
+    """A resource served by the consent portal."""
+
+    identifier: str
+    """
+    The identifier of the source resource. For an `agentcore-gateway`
+    source, this is the gateway ID or its Amazon Resource Name (ARN).
+    """
+
+    type: str
+    """The type of the source resource."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_CONSENT_PORTAL_SOURCE, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_CONSENT_PORTAL_SOURCE.members["identifier"], self.identifier
+        )
+        serializer.write_string(
+            _SCHEMA_CONSENT_PORTAL_SOURCE.members["type"], self.type
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["identifier"] = de.read_string(
+                        _SCHEMA_CONSENT_PORTAL_SOURCE.members["identifier"]
+                    )
+
+                case 1:
+                    kwargs["type"] = ConsentPortalSourceType(
+                        de.read_string(_SCHEMA_CONSENT_PORTAL_SOURCE.members["type"])
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_CONSENT_PORTAL_SOURCE, consumer=_consumer)
+        if "identifier" not in kwargs:
+            kwargs["identifier"] = ""
+        if "type" not in kwargs:
+            kwargs["type"] = ConsentPortalSourceType._corrected("")
+        return kwargs
+
+
+def _serialize_consent_portal_sources(
+    serializer: ShapeSerializer, schema: Schema, value: list[ConsentPortalSource]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_struct(member_schema, e)
+
+
+def _deserialize_consent_portal_sources(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[ConsentPortalSource]:
+    result: list[ConsentPortalSource] = []
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(ConsentPortalSource.deserialize(d))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+class ConsentPortalStatus(UnknownEnumMixin, StrEnum):
+    """The lifecycle status of a consent portal."""
+
+    CREATING = "CREATING"
+    ACTIVE = "ACTIVE"
+    UPDATING = "UPDATING"
+    UPDATE_FAILED = "UPDATE_FAILED"
+    DELETING = "DELETING"
+    FAILED = "FAILED"
+
+
+@dataclass(kw_only=True)
+class CreateConsentPortalInput:
+    """Dataclass for CreateConsentPortalInput structure."""
+
+    execution_role_arn: str | None = None
+    """
+    The Amazon Resource Name (ARN) of the IAM role that the consent portal
+    assumes to access the resources defined in its sources.
+    """
+
+    idp_config: ConsentPortalIdpConfig | None = None
+    """
+    The identity provider configuration that the consent portal uses to
+    authenticate end users.
+    """
+
+    name: str | None = None
+    """
+    The name of the consent portal. The name must be unique within your
+    account.
+    """
+
+    sources: list[ConsentPortalSource] | None = None
+    """
+    The resources served by the consent portal. Currently, we only support
+    type `agentcore-gateway`.
+    """
+
+    description: str | None = None
+    """The description of the consent portal."""
+
+    tags: dict[str, str] | None = None
+    """
+    A map of tag keys and values to assign to the consent portal. Tags
+    enable you to categorize your resources in different ways, for example,
+    by purpose, owner, or environment.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_CREATE_CONSENT_PORTAL_INPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.execution_role_arn is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CONSENT_PORTAL_INPUT.members["executionRoleArn"],
+                self.execution_role_arn,
+            )
+
+        if self.idp_config is not None:
+            serializer.write_struct(
+                _SCHEMA_CREATE_CONSENT_PORTAL_INPUT.members["idpConfig"],
+                self.idp_config,
+            )
+
+        if self.name is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CONSENT_PORTAL_INPUT.members["name"], self.name
+            )
+
+        if self.sources is not None:
+            _serialize_consent_portal_sources(
+                serializer,
+                _SCHEMA_CREATE_CONSENT_PORTAL_INPUT.members["sources"],
+                self.sources,
+            )
+
+        if self.description is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CONSENT_PORTAL_INPUT.members["description"],
+                self.description,
+            )
+
+        if self.tags is not None:
+            _serialize_tags_map(
+                serializer,
+                _SCHEMA_CREATE_CONSENT_PORTAL_INPUT.members["tags"],
+                self.tags,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["execution_role_arn"] = de.read_string(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_INPUT.members["executionRoleArn"]
+                    )
+
+                case 1:
+                    kwargs["idp_config"] = ConsentPortalIdpConfig.deserialize(de)
+
+                case 2:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_INPUT.members["name"]
+                    )
+
+                case 3:
+                    kwargs["sources"] = _deserialize_consent_portal_sources(
+                        de, _SCHEMA_CREATE_CONSENT_PORTAL_INPUT.members["sources"]
+                    )
+
+                case 4:
+                    kwargs["description"] = de.read_string(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_INPUT.members["description"]
+                    )
+
+                case 5:
+                    kwargs["tags"] = _deserialize_tags_map(
+                        de, _SCHEMA_CREATE_CONSENT_PORTAL_INPUT.members["tags"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_CREATE_CONSENT_PORTAL_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class CreateConsentPortalOutput:
+    """Dataclass for CreateConsentPortalOutput structure."""
+
+    sources: list[ConsentPortalSource]
+    """The resources served by the consent portal."""
+
+    consent_portal_arn: str
+    """The Amazon Resource Name (ARN) of the consent portal."""
+
+    consent_portal_id: str
+    """The unique identifier of the consent portal."""
+
+    created_at: datetime
+    """The timestamp for when the consent portal was created."""
+
+    execution_role_arn: str
+    """
+    The Amazon Resource Name (ARN) of the IAM role that the consent portal
+    assumes to access the resources defined in its sources.
+    """
+
+    idp_config: ConsentPortalIdpConfig
+    """
+    The identity provider configuration that the consent portal uses to
+    authenticate end users.
+    """
+
+    name: str
+    """The name of the consent portal."""
+
+    status: str
+    """The current status of the consent portal."""
+
+    updated_at: datetime
+    """The timestamp for when the consent portal was last updated."""
+
+    description: str | None = None
+    """The description of the consent portal."""
+
+    portal_url: str | None = None
+    """The URL used to access the consent portal."""
+
+    status_reason: str | None = None
+    """
+    A message that provides additional information about the current status
+    of the consent portal.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        _serialize_consent_portal_sources(
+            serializer,
+            _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["sources"],
+            self.sources,
+        )
+        serializer.write_string(
+            _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["consentPortalArn"],
+            self.consent_portal_arn,
+        )
+        serializer.write_string(
+            _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["consentPortalId"],
+            self.consent_portal_id,
+        )
+        serializer.write_timestamp(
+            _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["createdAt"], self.created_at
+        )
+        if self.description is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["description"],
+                self.description,
+            )
+
+        serializer.write_string(
+            _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["executionRoleArn"],
+            self.execution_role_arn,
+        )
+        serializer.write_struct(
+            _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["idpConfig"], self.idp_config
+        )
+        serializer.write_string(
+            _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["name"], self.name
+        )
+        if self.portal_url is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["portalUrl"],
+                self.portal_url,
+            )
+
+        serializer.write_string(
+            _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["status"], self.status
+        )
+        if self.status_reason is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["statusReason"],
+                self.status_reason,
+            )
+
+        serializer.write_timestamp(
+            _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["updatedAt"], self.updated_at
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["sources"] = _deserialize_consent_portal_sources(
+                        de, _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["sources"]
+                    )
+
+                case 1:
+                    kwargs["consent_portal_arn"] = de.read_string(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["consentPortalArn"]
+                    )
+
+                case 2:
+                    kwargs["consent_portal_id"] = de.read_string(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["consentPortalId"]
+                    )
+
+                case 3:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["createdAt"]
+                    )
+
+                case 4:
+                    kwargs["description"] = de.read_string(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["description"]
+                    )
+
+                case 5:
+                    kwargs["execution_role_arn"] = de.read_string(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["executionRoleArn"]
+                    )
+
+                case 6:
+                    kwargs["idp_config"] = ConsentPortalIdpConfig.deserialize(de)
+
+                case 7:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["name"]
+                    )
+
+                case 8:
+                    kwargs["portal_url"] = de.read_string(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["portalUrl"]
+                    )
+
+                case 9:
+                    kwargs["status"] = ConsentPortalStatus(
+                        de.read_string(
+                            _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["status"]
+                        )
+                    )
+
+                case 10:
+                    kwargs["status_reason"] = de.read_string(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["statusReason"]
+                    )
+
+                case 11:
+                    kwargs["updated_at"] = de.read_timestamp(
+                        _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT.members["updatedAt"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT, consumer=_consumer
+        )
+        if "sources" not in kwargs:
+            kwargs["sources"] = []
+        if "consent_portal_arn" not in kwargs:
+            kwargs["consent_portal_arn"] = ""
+        if "consent_portal_id" not in kwargs:
+            kwargs["consent_portal_id"] = ""
+        if "created_at" not in kwargs:
+            kwargs["created_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        if "execution_role_arn" not in kwargs:
+            kwargs["execution_role_arn"] = ""
+        if "idp_config" not in kwargs:
+            kwargs["idp_config"] = ConsentPortalIdpConfig._smithy_default()
+        if "name" not in kwargs:
+            kwargs["name"] = ""
+        if "status" not in kwargs:
+            kwargs["status"] = ConsentPortalStatus._corrected("")
+        if "updated_at" not in kwargs:
+            kwargs["updated_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        return kwargs
+
+
+CREATE_CONSENT_PORTAL = APIOperation(
+    input=CreateConsentPortalInput,
+    output=CreateConsentPortalOutput,
+    schema=_SCHEMA_CREATE_CONSENT_PORTAL,
+    input_schema=_SCHEMA_CREATE_CONSENT_PORTAL_INPUT,
+    output_schema=_SCHEMA_CREATE_CONSENT_PORTAL_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+            ): ConflictException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+            ): InternalServerException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+            ): ServiceQuotaExceededException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+            ): ThrottlingException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#UnauthorizedException"
+            ): UnauthorizedException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+            ): ValidationException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+        _SCHEMA_SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        _SCHEMA_THROTTLING_EXCEPTION,
+        _SCHEMA_UNAUTHORIZED_EXCEPTION,
+        _SCHEMA_VALIDATION_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class DeleteConsentPortalInput:
+    """Dataclass for DeleteConsentPortalInput structure."""
+
+    consent_portal_identifier: str | None = None
+    """
+    The identifier of the consent portal. You can specify either the consent
+    portal ID or its Amazon Resource Name (ARN).
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_DELETE_CONSENT_PORTAL_INPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.consent_portal_identifier is not None:
+            serializer.write_string(
+                _SCHEMA_DELETE_CONSENT_PORTAL_INPUT.members["consentPortalIdentifier"],
+                self.consent_portal_identifier,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["consent_portal_identifier"] = de.read_string(
+                        _SCHEMA_DELETE_CONSENT_PORTAL_INPUT.members[
+                            "consentPortalIdentifier"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_DELETE_CONSENT_PORTAL_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class DeleteConsentPortalOutput:
+    """Dataclass for DeleteConsentPortalOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_DELETE_CONSENT_PORTAL_OUTPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        pass
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_DELETE_CONSENT_PORTAL_OUTPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+DELETE_CONSENT_PORTAL = APIOperation(
+    input=DeleteConsentPortalInput,
+    output=DeleteConsentPortalOutput,
+    schema=_SCHEMA_DELETE_CONSENT_PORTAL,
+    input_schema=_SCHEMA_DELETE_CONSENT_PORTAL_INPUT,
+    output_schema=_SCHEMA_DELETE_CONSENT_PORTAL_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+            ): ConflictException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+            ): InternalServerException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+            ): ThrottlingException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#UnauthorizedException"
+            ): UnauthorizedException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+            ): ValidationException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+        _SCHEMA_THROTTLING_EXCEPTION,
+        _SCHEMA_UNAUTHORIZED_EXCEPTION,
+        _SCHEMA_VALIDATION_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class GetConsentPortalInput:
+    """Dataclass for GetConsentPortalInput structure."""
+
+    consent_portal_identifier: str | None = None
+    """
+    The identifier of the consent portal. You can specify either the consent
+    portal ID or its Amazon Resource Name (ARN).
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_GET_CONSENT_PORTAL_INPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.consent_portal_identifier is not None:
+            serializer.write_string(
+                _SCHEMA_GET_CONSENT_PORTAL_INPUT.members["consentPortalIdentifier"],
+                self.consent_portal_identifier,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["consent_portal_identifier"] = de.read_string(
+                        _SCHEMA_GET_CONSENT_PORTAL_INPUT.members[
+                            "consentPortalIdentifier"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_GET_CONSENT_PORTAL_INPUT, consumer=_consumer)
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class GetConsentPortalOutput:
+    """Dataclass for GetConsentPortalOutput structure."""
+
+    sources: list[ConsentPortalSource]
+    """The resources served by the consent portal."""
+
+    consent_portal_arn: str
+    """The Amazon Resource Name (ARN) of the consent portal."""
+
+    consent_portal_id: str
+    """The unique identifier of the consent portal."""
+
+    created_at: datetime
+    """The timestamp for when the consent portal was created."""
+
+    execution_role_arn: str
+    """
+    The Amazon Resource Name (ARN) of the IAM role that the consent portal
+    assumes to access the resources defined in its sources.
+    """
+
+    idp_config: ConsentPortalIdpConfig
+    """
+    The identity provider configuration that the consent portal uses to
+    authenticate end users.
+    """
+
+    name: str
+    """The name of the consent portal."""
+
+    status: str
+    """The current status of the consent portal."""
+
+    updated_at: datetime
+    """The timestamp for when the consent portal was last updated."""
+
+    description: str | None = None
+    """The description of the consent portal."""
+
+    portal_url: str | None = None
+    """The URL used to access the consent portal."""
+
+    status_reason: str | None = None
+    """
+    A message that provides additional information about the current status
+    of the consent portal.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_GET_CONSENT_PORTAL_OUTPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        _serialize_consent_portal_sources(
+            serializer,
+            _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["sources"],
+            self.sources,
+        )
+        serializer.write_string(
+            _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["consentPortalArn"],
+            self.consent_portal_arn,
+        )
+        serializer.write_string(
+            _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["consentPortalId"],
+            self.consent_portal_id,
+        )
+        serializer.write_timestamp(
+            _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["createdAt"], self.created_at
+        )
+        if self.description is not None:
+            serializer.write_string(
+                _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["description"],
+                self.description,
+            )
+
+        serializer.write_string(
+            _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["executionRoleArn"],
+            self.execution_role_arn,
+        )
+        serializer.write_struct(
+            _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["idpConfig"], self.idp_config
+        )
+        serializer.write_string(
+            _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["name"], self.name
+        )
+        if self.portal_url is not None:
+            serializer.write_string(
+                _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["portalUrl"], self.portal_url
+            )
+
+        serializer.write_string(
+            _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["status"], self.status
+        )
+        if self.status_reason is not None:
+            serializer.write_string(
+                _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["statusReason"],
+                self.status_reason,
+            )
+
+        serializer.write_timestamp(
+            _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["updatedAt"], self.updated_at
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["sources"] = _deserialize_consent_portal_sources(
+                        de, _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["sources"]
+                    )
+
+                case 1:
+                    kwargs["consent_portal_arn"] = de.read_string(
+                        _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["consentPortalArn"]
+                    )
+
+                case 2:
+                    kwargs["consent_portal_id"] = de.read_string(
+                        _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["consentPortalId"]
+                    )
+
+                case 3:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["createdAt"]
+                    )
+
+                case 4:
+                    kwargs["description"] = de.read_string(
+                        _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["description"]
+                    )
+
+                case 5:
+                    kwargs["execution_role_arn"] = de.read_string(
+                        _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["executionRoleArn"]
+                    )
+
+                case 6:
+                    kwargs["idp_config"] = ConsentPortalIdpConfig.deserialize(de)
+
+                case 7:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["name"]
+                    )
+
+                case 8:
+                    kwargs["portal_url"] = de.read_string(
+                        _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["portalUrl"]
+                    )
+
+                case 9:
+                    kwargs["status"] = ConsentPortalStatus(
+                        de.read_string(
+                            _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["status"]
+                        )
+                    )
+
+                case 10:
+                    kwargs["status_reason"] = de.read_string(
+                        _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["statusReason"]
+                    )
+
+                case 11:
+                    kwargs["updated_at"] = de.read_timestamp(
+                        _SCHEMA_GET_CONSENT_PORTAL_OUTPUT.members["updatedAt"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_GET_CONSENT_PORTAL_OUTPUT, consumer=_consumer)
+        if "sources" not in kwargs:
+            kwargs["sources"] = []
+        if "consent_portal_arn" not in kwargs:
+            kwargs["consent_portal_arn"] = ""
+        if "consent_portal_id" not in kwargs:
+            kwargs["consent_portal_id"] = ""
+        if "created_at" not in kwargs:
+            kwargs["created_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        if "execution_role_arn" not in kwargs:
+            kwargs["execution_role_arn"] = ""
+        if "idp_config" not in kwargs:
+            kwargs["idp_config"] = ConsentPortalIdpConfig._smithy_default()
+        if "name" not in kwargs:
+            kwargs["name"] = ""
+        if "status" not in kwargs:
+            kwargs["status"] = ConsentPortalStatus._corrected("")
+        if "updated_at" not in kwargs:
+            kwargs["updated_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        return kwargs
+
+
+GET_CONSENT_PORTAL = APIOperation(
+    input=GetConsentPortalInput,
+    output=GetConsentPortalOutput,
+    schema=_SCHEMA_GET_CONSENT_PORTAL,
+    input_schema=_SCHEMA_GET_CONSENT_PORTAL_INPUT,
+    output_schema=_SCHEMA_GET_CONSENT_PORTAL_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+            ): InternalServerException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+            ): ThrottlingException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#UnauthorizedException"
+            ): UnauthorizedException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+            ): ValidationException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+        _SCHEMA_THROTTLING_EXCEPTION,
+        _SCHEMA_UNAUTHORIZED_EXCEPTION,
+        _SCHEMA_VALIDATION_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class ListConsentPortalsInput:
+    """Dataclass for ListConsentPortalsInput structure."""
+
+    max_results: int | None = None
+    """The maximum number of consent portals to return in a single call."""
+
+    next_token: str | None = None
+    """
+    A token to retrieve the next page of results. Use the value returned in
+    a previous response to request the next page.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_LIST_CONSENT_PORTALS_INPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.max_results is not None:
+            serializer.write_integer(
+                _SCHEMA_LIST_CONSENT_PORTALS_INPUT.members["maxResults"],
+                self.max_results,
+            )
+
+        if self.next_token is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_CONSENT_PORTALS_INPUT.members["nextToken"], self.next_token
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["max_results"] = de.read_integer(
+                        _SCHEMA_LIST_CONSENT_PORTALS_INPUT.members["maxResults"]
+                    )
+
+                case 1:
+                    kwargs["next_token"] = de.read_string(
+                        _SCHEMA_LIST_CONSENT_PORTALS_INPUT.members["nextToken"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_LIST_CONSENT_PORTALS_INPUT, consumer=_consumer)
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class ConsentPortalSummary:
+    """Summary information about a consent portal."""
+
+    sources: list[ConsentPortalSource]
+    """The resources served by the consent portal."""
+
+    consent_portal_arn: str
+    """The Amazon Resource Name (ARN) of the consent portal."""
+
+    consent_portal_id: str
+    """The unique identifier of the consent portal."""
+
+    created_at: datetime
+    """The timestamp for when the consent portal was created."""
+
+    name: str
+    """The name of the consent portal."""
+
+    status: str
+    """The current status of the consent portal."""
+
+    updated_at: datetime
+    """The timestamp for when the consent portal was last updated."""
+
+    description: str | None = None
+    """The description of the consent portal."""
+
+    portal_url: str | None = None
+    """The URL used to access the consent portal."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_CONSENT_PORTAL_SUMMARY, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        _serialize_consent_portal_sources(
+            serializer, _SCHEMA_CONSENT_PORTAL_SUMMARY.members["sources"], self.sources
+        )
+        serializer.write_string(
+            _SCHEMA_CONSENT_PORTAL_SUMMARY.members["consentPortalArn"],
+            self.consent_portal_arn,
+        )
+        serializer.write_string(
+            _SCHEMA_CONSENT_PORTAL_SUMMARY.members["consentPortalId"],
+            self.consent_portal_id,
+        )
+        serializer.write_timestamp(
+            _SCHEMA_CONSENT_PORTAL_SUMMARY.members["createdAt"], self.created_at
+        )
+        if self.description is not None:
+            serializer.write_string(
+                _SCHEMA_CONSENT_PORTAL_SUMMARY.members["description"], self.description
+            )
+
+        serializer.write_string(
+            _SCHEMA_CONSENT_PORTAL_SUMMARY.members["name"], self.name
+        )
+        if self.portal_url is not None:
+            serializer.write_string(
+                _SCHEMA_CONSENT_PORTAL_SUMMARY.members["portalUrl"], self.portal_url
+            )
+
+        serializer.write_string(
+            _SCHEMA_CONSENT_PORTAL_SUMMARY.members["status"], self.status
+        )
+        serializer.write_timestamp(
+            _SCHEMA_CONSENT_PORTAL_SUMMARY.members["updatedAt"], self.updated_at
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["sources"] = _deserialize_consent_portal_sources(
+                        de, _SCHEMA_CONSENT_PORTAL_SUMMARY.members["sources"]
+                    )
+
+                case 1:
+                    kwargs["consent_portal_arn"] = de.read_string(
+                        _SCHEMA_CONSENT_PORTAL_SUMMARY.members["consentPortalArn"]
+                    )
+
+                case 2:
+                    kwargs["consent_portal_id"] = de.read_string(
+                        _SCHEMA_CONSENT_PORTAL_SUMMARY.members["consentPortalId"]
+                    )
+
+                case 3:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_CONSENT_PORTAL_SUMMARY.members["createdAt"]
+                    )
+
+                case 4:
+                    kwargs["description"] = de.read_string(
+                        _SCHEMA_CONSENT_PORTAL_SUMMARY.members["description"]
+                    )
+
+                case 5:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_CONSENT_PORTAL_SUMMARY.members["name"]
+                    )
+
+                case 6:
+                    kwargs["portal_url"] = de.read_string(
+                        _SCHEMA_CONSENT_PORTAL_SUMMARY.members["portalUrl"]
+                    )
+
+                case 7:
+                    kwargs["status"] = ConsentPortalStatus(
+                        de.read_string(_SCHEMA_CONSENT_PORTAL_SUMMARY.members["status"])
+                    )
+
+                case 8:
+                    kwargs["updated_at"] = de.read_timestamp(
+                        _SCHEMA_CONSENT_PORTAL_SUMMARY.members["updatedAt"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_CONSENT_PORTAL_SUMMARY, consumer=_consumer)
+        if "sources" not in kwargs:
+            kwargs["sources"] = []
+        if "consent_portal_arn" not in kwargs:
+            kwargs["consent_portal_arn"] = ""
+        if "consent_portal_id" not in kwargs:
+            kwargs["consent_portal_id"] = ""
+        if "created_at" not in kwargs:
+            kwargs["created_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        if "name" not in kwargs:
+            kwargs["name"] = ""
+        if "status" not in kwargs:
+            kwargs["status"] = ConsentPortalStatus._corrected("")
+        if "updated_at" not in kwargs:
+            kwargs["updated_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        return kwargs
+
+
+def _serialize_consent_portal_summaries(
+    serializer: ShapeSerializer, schema: Schema, value: list[ConsentPortalSummary]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_struct(member_schema, e)
+
+
+def _deserialize_consent_portal_summaries(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[ConsentPortalSummary]:
+    result: list[ConsentPortalSummary] = []
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(ConsentPortalSummary.deserialize(d))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
+class ListConsentPortalsOutput:
+    """Dataclass for ListConsentPortalsOutput structure."""
+
+    consent_portals: list[ConsentPortalSummary]
+    """The list of consent portals."""
+
+    next_token: str | None = None
+    """
+    The token to use in a subsequent request to retrieve the next page of
+    results. This value is null when there are no more results to return.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_LIST_CONSENT_PORTALS_OUTPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        _serialize_consent_portal_summaries(
+            serializer,
+            _SCHEMA_LIST_CONSENT_PORTALS_OUTPUT.members["consentPortals"],
+            self.consent_portals,
+        )
+        if self.next_token is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_CONSENT_PORTALS_OUTPUT.members["nextToken"],
+                self.next_token,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["consent_portals"] = _deserialize_consent_portal_summaries(
+                        de,
+                        _SCHEMA_LIST_CONSENT_PORTALS_OUTPUT.members["consentPortals"],
+                    )
+
+                case 1:
+                    kwargs["next_token"] = de.read_string(
+                        _SCHEMA_LIST_CONSENT_PORTALS_OUTPUT.members["nextToken"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_LIST_CONSENT_PORTALS_OUTPUT, consumer=_consumer
+        )
+        if "consent_portals" not in kwargs:
+            kwargs["consent_portals"] = []
+        return kwargs
+
+
+LIST_CONSENT_PORTALS = APIOperation(
+    input=ListConsentPortalsInput,
+    output=ListConsentPortalsOutput,
+    schema=_SCHEMA_LIST_CONSENT_PORTALS,
+    input_schema=_SCHEMA_LIST_CONSENT_PORTALS_INPUT,
+    output_schema=_SCHEMA_LIST_CONSENT_PORTALS_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+            ): InternalServerException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+            ): ThrottlingException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#UnauthorizedException"
+            ): UnauthorizedException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+            ): ValidationException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_EXCEPTION,
+        _SCHEMA_THROTTLING_EXCEPTION,
+        _SCHEMA_UNAUTHORIZED_EXCEPTION,
+        _SCHEMA_VALIDATION_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class UpdateConsentPortalInput:
+    """Dataclass for UpdateConsentPortalInput structure."""
+
+    consent_portal_identifier: str | None = None
+    """
+    The identifier of the consent portal. You can specify either the consent
+    portal ID or its Amazon Resource Name (ARN).
+    """
+
+    execution_role_arn: str | None = None
+    """
+    The Amazon Resource Name (ARN) of the IAM role that the consent portal
+    assumes to access the resources defined in its sources.
+    """
+
+    idp_config: ConsentPortalIdpConfig | None = None
+    """
+    The identity provider configuration that the consent portal uses to
+    authenticate end users.
+    """
+
+    description: str | None = None
+    """The description of the consent portal."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_UPDATE_CONSENT_PORTAL_INPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.consent_portal_identifier is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_CONSENT_PORTAL_INPUT.members["consentPortalIdentifier"],
+                self.consent_portal_identifier,
+            )
+
+        if self.execution_role_arn is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_CONSENT_PORTAL_INPUT.members["executionRoleArn"],
+                self.execution_role_arn,
+            )
+
+        if self.idp_config is not None:
+            serializer.write_struct(
+                _SCHEMA_UPDATE_CONSENT_PORTAL_INPUT.members["idpConfig"],
+                self.idp_config,
+            )
+
+        if self.description is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_CONSENT_PORTAL_INPUT.members["description"],
+                self.description,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["consent_portal_identifier"] = de.read_string(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_INPUT.members[
+                            "consentPortalIdentifier"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["execution_role_arn"] = de.read_string(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_INPUT.members["executionRoleArn"]
+                    )
+
+                case 2:
+                    kwargs["idp_config"] = ConsentPortalIdpConfig.deserialize(de)
+
+                case 3:
+                    kwargs["description"] = de.read_string(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_INPUT.members["description"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_UPDATE_CONSENT_PORTAL_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class UpdateConsentPortalOutput:
+    """Dataclass for UpdateConsentPortalOutput structure."""
+
+    sources: list[ConsentPortalSource]
+    """The resources served by the consent portal."""
+
+    consent_portal_arn: str
+    """The Amazon Resource Name (ARN) of the consent portal."""
+
+    consent_portal_id: str
+    """The unique identifier of the consent portal."""
+
+    created_at: datetime
+    """The timestamp for when the consent portal was created."""
+
+    execution_role_arn: str
+    """
+    The Amazon Resource Name (ARN) of the IAM role that the consent portal
+    assumes to access the resources defined in its sources.
+    """
+
+    idp_config: ConsentPortalIdpConfig
+    """
+    The identity provider configuration that the consent portal uses to
+    authenticate end users.
+    """
+
+    name: str
+    """The name of the consent portal."""
+
+    status: str
+    """The current status of the consent portal."""
+
+    updated_at: datetime
+    """The timestamp for when the consent portal was last updated."""
+
+    description: str | None = None
+    """The description of the consent portal."""
+
+    portal_url: str | None = None
+    """The URL used to access the consent portal."""
+
+    status_reason: str | None = None
+    """
+    A message that provides additional information about the current status
+    of the consent portal.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        _serialize_consent_portal_sources(
+            serializer,
+            _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["sources"],
+            self.sources,
+        )
+        serializer.write_string(
+            _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["consentPortalArn"],
+            self.consent_portal_arn,
+        )
+        serializer.write_string(
+            _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["consentPortalId"],
+            self.consent_portal_id,
+        )
+        serializer.write_timestamp(
+            _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["createdAt"], self.created_at
+        )
+        if self.description is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["description"],
+                self.description,
+            )
+
+        serializer.write_string(
+            _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["executionRoleArn"],
+            self.execution_role_arn,
+        )
+        serializer.write_struct(
+            _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["idpConfig"], self.idp_config
+        )
+        serializer.write_string(
+            _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["name"], self.name
+        )
+        if self.portal_url is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["portalUrl"],
+                self.portal_url,
+            )
+
+        serializer.write_string(
+            _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["status"], self.status
+        )
+        if self.status_reason is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["statusReason"],
+                self.status_reason,
+            )
+
+        serializer.write_timestamp(
+            _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["updatedAt"], self.updated_at
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["sources"] = _deserialize_consent_portal_sources(
+                        de, _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["sources"]
+                    )
+
+                case 1:
+                    kwargs["consent_portal_arn"] = de.read_string(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["consentPortalArn"]
+                    )
+
+                case 2:
+                    kwargs["consent_portal_id"] = de.read_string(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["consentPortalId"]
+                    )
+
+                case 3:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["createdAt"]
+                    )
+
+                case 4:
+                    kwargs["description"] = de.read_string(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["description"]
+                    )
+
+                case 5:
+                    kwargs["execution_role_arn"] = de.read_string(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["executionRoleArn"]
+                    )
+
+                case 6:
+                    kwargs["idp_config"] = ConsentPortalIdpConfig.deserialize(de)
+
+                case 7:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["name"]
+                    )
+
+                case 8:
+                    kwargs["portal_url"] = de.read_string(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["portalUrl"]
+                    )
+
+                case 9:
+                    kwargs["status"] = ConsentPortalStatus(
+                        de.read_string(
+                            _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["status"]
+                        )
+                    )
+
+                case 10:
+                    kwargs["status_reason"] = de.read_string(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["statusReason"]
+                    )
+
+                case 11:
+                    kwargs["updated_at"] = de.read_timestamp(
+                        _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT.members["updatedAt"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT, consumer=_consumer
+        )
+        if "sources" not in kwargs:
+            kwargs["sources"] = []
+        if "consent_portal_arn" not in kwargs:
+            kwargs["consent_portal_arn"] = ""
+        if "consent_portal_id" not in kwargs:
+            kwargs["consent_portal_id"] = ""
+        if "created_at" not in kwargs:
+            kwargs["created_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        if "execution_role_arn" not in kwargs:
+            kwargs["execution_role_arn"] = ""
+        if "idp_config" not in kwargs:
+            kwargs["idp_config"] = ConsentPortalIdpConfig._smithy_default()
+        if "name" not in kwargs:
+            kwargs["name"] = ""
+        if "status" not in kwargs:
+            kwargs["status"] = ConsentPortalStatus._corrected("")
+        if "updated_at" not in kwargs:
+            kwargs["updated_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        return kwargs
+
+
+UPDATE_CONSENT_PORTAL = APIOperation(
+    input=UpdateConsentPortalInput,
+    output=UpdateConsentPortalOutput,
+    schema=_SCHEMA_UPDATE_CONSENT_PORTAL,
+    input_schema=_SCHEMA_UPDATE_CONSENT_PORTAL_INPUT,
+    output_schema=_SCHEMA_UPDATE_CONSENT_PORTAL_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+            ): ConflictException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+            ): InternalServerException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+            ): ThrottlingException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#UnauthorizedException"
+            ): UnauthorizedException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+            ): ValidationException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+        _SCHEMA_THROTTLING_EXCEPTION,
+        _SCHEMA_UNAUTHORIZED_EXCEPTION,
+        _SCHEMA_VALIDATION_EXCEPTION,
+    ],
+)
+
+
 class DatasetSchemaType(UnknownEnumMixin, StrEnum):
     """
     Versioned schema type for dataset examples. Each value identifies both
@@ -20880,7 +23064,7 @@ class CreateDatasetInput:
     pointing to a JSONL file.
     """
 
-    schema_type: DatasetSchemaType | None = None
+    schema_type: str | None = None
     """
     Versioned schema type governing the structure of examples. Immutable
     after creation.
@@ -20996,7 +23180,7 @@ class CreateDatasetOutput:
     dataset_id: str
     """The unique identifier of the created dataset."""
 
-    status: DatasetStatus
+    status: str
     """
     Always CREATING immediately after this call. Poll `GetDataset` until
     status transitions to ACTIVE or CREATE_FAILED.
@@ -21004,6 +23188,16 @@ class CreateDatasetOutput:
 
     created_at: datetime
     """The timestamp when the dataset was created."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_DATASET_OUTPUT, self)
@@ -21179,7 +23373,7 @@ class CreateDatasetVersionOutput:
     dataset_id: str
     """The unique identifier of the dataset."""
 
-    status: DatasetStatus
+    status: str
     """
     Always UPDATING immediately after this call. Poll `GetDataset` until
     status transitions to ACTIVE or UPDATE_FAILED.
@@ -21190,6 +23384,16 @@ class CreateDatasetVersionOutput:
 
     created_at: datetime
     """The timestamp when the version creation was initiated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_DATASET_VERSION_OUTPUT, self)
@@ -21378,7 +23582,7 @@ class DeleteDatasetOutput:
     dataset_id: str
     """The unique identifier of the dataset."""
 
-    status: DatasetStatus
+    status: str
     """The current status of the dataset after the delete request."""
 
     dataset_version: str
@@ -21386,6 +23590,16 @@ class DeleteDatasetOutput:
 
     updated_at: datetime
     """The timestamp when the delete was initiated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_DATASET_OUTPUT, self)
@@ -21587,7 +23801,7 @@ class DeleteDatasetExamplesOutput:
     dataset_id: str
     """The unique identifier of the dataset."""
 
-    status: DatasetStatus
+    status: str
     """The current status of the dataset."""
 
     deleted_count: int
@@ -21595,6 +23809,16 @@ class DeleteDatasetExamplesOutput:
 
     updated_at: datetime
     """The timestamp when the examples were deleted."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_DATASET_EXAMPLES_OUTPUT, self)
@@ -21800,10 +24024,10 @@ class GetDatasetOutput:
     dataset_name: str
     """The name of the dataset."""
 
-    status: DatasetStatus
+    status: str
     """The current status of the dataset."""
 
-    schema_type: DatasetSchemaType
+    schema_type: str
     """The schema type declared at create time. Immutable after creation."""
 
     example_count: int
@@ -21818,7 +24042,7 @@ class GetDatasetOutput:
     description: str | None = None
     """The description of the dataset."""
 
-    draft_status: DraftStatus | None = None
+    draft_status: str | None = None
     """
     Publish synchronization state. Only authoritative when status is ACTIVE.
     MODIFIED indicates DRAFT has unpublished changes. UNMODIFIED indicates
@@ -21849,6 +24073,16 @@ class GetDatasetOutput:
 
     tags: dict[str, str] | None = None
     """The tags associated with the dataset."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_DATASET_OUTPUT, self)
@@ -22186,6 +24420,16 @@ class ListDatasetExamplesOutput:
     results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_DATASET_EXAMPLES_OUTPUT, self)
 
@@ -22367,10 +24611,10 @@ class DatasetSummary:
     dataset_name: str
     """The name of the dataset."""
 
-    status: DatasetStatus
+    status: str
     """The current status of the dataset."""
 
-    schema_type: DatasetSchemaType
+    schema_type: str
     """The schema type of the dataset."""
 
     example_count: int
@@ -22385,7 +24629,7 @@ class DatasetSummary:
     description: str | None = None
     """The description of the dataset."""
 
-    draft_status: DraftStatus | None = None
+    draft_status: str | None = None
     """Publish synchronization state. Only authoritative when status is ACTIVE."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -22544,6 +24788,16 @@ class ListDatasetsOutput:
     """
     The token for the next page of results, or null if there are no more
     results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -22792,6 +25046,16 @@ class ListDatasetVersionsOutput:
     results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_DATASET_VERSIONS_OUTPUT, self)
 
@@ -22957,6 +25221,16 @@ class UpdateDatasetOutput:
 
     updated_at: datetime
     """The timestamp when the dataset was updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_DATASET_OUTPUT, self)
@@ -23141,7 +25415,7 @@ class UpdateDatasetExamplesOutput:
     dataset_id: str
     """The unique identifier of the dataset."""
 
-    status: DatasetStatus
+    status: str
     """The current status of the dataset."""
 
     updated_count: int
@@ -23149,6 +25423,16 @@ class UpdateDatasetExamplesOutput:
 
     updated_at: datetime
     """The timestamp when the examples were updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_DATASET_EXAMPLES_OUTPUT, self)
@@ -23319,6 +25603,16 @@ class DeleteResourcePolicyInput:
 @dataclass(kw_only=True)
 class DeleteResourcePolicyOutput:
     """Dataclass for DeleteResourcePolicyOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_RESOURCE_POLICY_OUTPUT, self)
@@ -24617,7 +26911,7 @@ class CreateEvaluatorInput:
     code-based settings with a customer-managed Lambda function.
     """
 
-    level: EvaluatorLevel | None = None
+    level: str | None = None
     """
     The evaluation level that determines the scope of evaluation. Valid
     values are `TOOL_CALL` for individual tool invocations, `TRACE` for
@@ -24758,8 +27052,18 @@ class CreateEvaluatorOutput:
     created_at: datetime
     """The timestamp when the evaluator was created."""
 
-    status: EvaluatorStatus
+    status: str
     """The status of the evaluator creation operation."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_EVALUATOR_OUTPUT, self)
@@ -24913,8 +27217,18 @@ class DeleteEvaluatorOutput:
     evaluator_id: str
     """The unique identifier of the deleted evaluator."""
 
-    status: EvaluatorStatus
+    status: str
     """The status of the evaluator deletion operation."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_EVALUATOR_OUTPUT, self)
@@ -25025,7 +27339,7 @@ class GetEvaluatorInput:
     evaluator ID (e.g., Builtin.Helpfulness) or a custom evaluator ID.
     """
 
-    included_data: IncludedData | None = None
+    included_data: str | None = None
     """
     Controls which data is returned in the response. `ALL_DATA` (default)
     returns the full evaluator including decrypted instructions and rating
@@ -25112,13 +27426,13 @@ class GetEvaluatorOutput:
     code-based settings.
     """
 
-    level: EvaluatorLevel
+    level: str
     """
     The evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that
     determines the scope of evaluation.
     """
 
-    status: EvaluatorStatus
+    status: str
     """The current status of the evaluator."""
 
     created_at: datetime
@@ -25130,7 +27444,7 @@ class GetEvaluatorOutput:
     description: str | None = field(repr=False, default=None)
     """The description of the evaluator."""
 
-    evaluator_type: EvaluatorType | None = None
+    evaluator_type: str | None = None
     """
     The kind of evaluator resource. Valid values:
 
@@ -25147,7 +27461,7 @@ class GetEvaluatorOutput:
       existing base evaluator.
     """
 
-    provider: Provider | None = None
+    provider: str | None = None
     """
     The source of the evaluator's logic: Amazon Web Services, a third-party
     library, or you.
@@ -25164,6 +27478,16 @@ class GetEvaluatorOutput:
     The Amazon Resource Name (ARN) of the customer managed KMS key used to
     encrypt the evaluator's sensitive data. This field is only present for
     evaluators encrypted with a customer managed key.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -25428,13 +27752,13 @@ class EvaluatorSummary:
     evaluator_name: str
     """The name of the evaluator."""
 
-    evaluator_type: EvaluatorType
+    evaluator_type: str
     """
     The type of evaluator, indicating whether it is a built-in evaluator
     provided by the service or a custom evaluator created by the user.
     """
 
-    status: EvaluatorStatus
+    status: str
     """The current status of the evaluator."""
 
     created_at: datetime
@@ -25446,13 +27770,13 @@ class EvaluatorSummary:
     description: str | None = field(repr=False, default=None)
     """The description of the evaluator."""
 
-    provider: Provider | None = None
+    provider: str | None = None
     """
     The source of the evaluator's logic: Amazon Web Services, a third-party
     library, or you.
     """
 
-    level: EvaluatorLevel | None = None
+    level: str | None = None
     """
     The evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that
     determines the scope of evaluation.
@@ -25656,6 +27980,16 @@ class ListEvaluatorsOutput:
     page of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_EVALUATORS_OUTPUT, self)
 
@@ -25759,7 +28093,7 @@ class UpdateEvaluatorInput:
     function.
     """
 
-    level: EvaluatorLevel | None = None
+    level: str | None = None
     """
     The updated evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that
     determines the scope of evaluation.
@@ -25872,8 +28206,18 @@ class UpdateEvaluatorOutput:
     updated_at: datetime
     """The timestamp when the evaluator was last updated."""
 
-    status: EvaluatorStatus
+    status: str
     """The status of the evaluator update operation."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_EVALUATOR_OUTPUT, self)
@@ -26031,7 +28375,7 @@ class RateConfig:
     concurrent connections allowed.
     """
 
-    period: Period
+    period: str
     """
     The time period for the rate limit. Valid values:
 
@@ -26492,7 +28836,7 @@ class GatewayRateLimitDetail:
     configurations.
     """
 
-    status: GatewayRateLimitStatus
+    status: str
     """The current status of the rate limit."""
 
     created_at: datetime
@@ -26645,6 +28989,16 @@ class BatchPutGatewayRateLimitsOutput:
 
     rate_limits: list[GatewayRateLimitDetail]
     """The resulting set of rate limits after the batch operation."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_BATCH_PUT_GATEWAY_RATE_LIMITS_OUTPUT, self)
@@ -26886,7 +29240,7 @@ class CreateGatewayRateLimitOutput:
     configurations.
     """
 
-    status: GatewayRateLimitStatus
+    status: str
     """The current status of the rate limit."""
 
     created_at: datetime
@@ -26897,6 +29251,16 @@ class CreateGatewayRateLimitOutput:
 
     description: str | None = None
     """The human-readable description of the rate limit."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_GATEWAY_RATE_LIMIT_OUTPUT, self)
@@ -27126,8 +29490,18 @@ class DeleteGatewayRateLimitOutput:
     rate_limit_id: str
     """The unique identifier of the deleted rate limit."""
 
-    status: GatewayRateLimitStatus
+    status: str
     """The current status of the rate limit deletion."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_GATEWAY_RATE_LIMIT_OUTPUT, self)
@@ -27295,7 +29669,7 @@ class GetGatewayRateLimitOutput:
     configurations.
     """
 
-    status: GatewayRateLimitStatus
+    status: str
     """The current status of the rate limit."""
 
     created_at: datetime
@@ -27306,6 +29680,16 @@ class GetGatewayRateLimitOutput:
 
     description: str | None = None
     """The human-readable description of the rate limit."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_GATEWAY_RATE_LIMIT_OUTPUT, self)
@@ -27551,6 +29935,16 @@ class ListGatewayRateLimitsOutput:
     are no more results to retrieve.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_GATEWAY_RATE_LIMITS_OUTPUT, self)
 
@@ -27745,7 +30139,7 @@ class UpdateGatewayRateLimitOutput:
     configurations.
     """
 
-    status: GatewayRateLimitStatus
+    status: str
     """The current status of the rate limit."""
 
     created_at: datetime
@@ -27756,6 +30150,16 @@ class UpdateGatewayRateLimitOutput:
 
     description: str | None = None
     """The human-readable description of the rate limit."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_GATEWAY_RATE_LIMIT_OUTPUT, self)
@@ -27936,7 +30340,7 @@ class InterceptorPayloadExclusion(UnknownEnumMixin, StrEnum):
 class InterceptorPayloadExclusionSelectorField:
     """The field to exclude from the interceptor input."""
 
-    value: InterceptorPayloadExclusion
+    value: str
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_INTERCEPTOR_PAYLOAD_EXCLUSION_SELECTOR, self)
@@ -28176,7 +30580,7 @@ class GatewayInterceptionPoint(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_gateway_interception_points(
-    serializer: ShapeSerializer, schema: Schema, value: list[GatewayInterceptionPoint]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -28186,8 +30590,8 @@ def _serialize_gateway_interception_points(
 
 def _deserialize_gateway_interception_points(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[GatewayInterceptionPoint]:
-    result: list[GatewayInterceptionPoint] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -28337,7 +30741,7 @@ class GatewayInterceptorConfiguration:
     structure defines how the interceptor can be invoked.
     """
 
-    interception_points: list[GatewayInterceptionPoint]
+    interception_points: list[str]
     """
     The supported points of interception. This field specifies which points
     during the gateway invocation to invoke the interceptor
@@ -28455,12 +30859,13 @@ class GatewayPolicyEngineConfiguration:
 
     arn: str
     """
-    The ARN of the policy engine. The policy engine contains Cedar policies
-    that define fine-grained authorization rules specifying who can perform
-    what actions on which resources as agents interact through the gateway.
+    The ARN of the policy engine. The policy engine contains Cedar or
+    Dogwood policies that define fine-grained authorization rules specifying
+    who can perform what actions on which resources as agents interact
+    through the gateway.
     """
 
-    mode: GatewayPolicyEngineMode
+    mode: str
     """
     The enforcement mode for the policy engine. Valid values include:
 
@@ -28665,7 +31070,7 @@ class MCPGatewayConfiguration:
     instructions provide guidance on how to interact with the gateway.
     """
 
-    search_type: SearchType | None = None
+    search_type: str | None = None
     """
     The search type for the Model Context Protocol gateway. This field
     specifies how the gateway handles search operations.
@@ -28681,6 +31086,15 @@ class MCPGatewayConfiguration:
     """
     The streaming configuration for the MCP gateway. This configuration
     controls whether response streaming is enabled for the gateway.
+    """
+
+    disable_mcp_list_tools_pagination: bool | None = None
+    """
+    Specifies whether pagination is disabled for the Model Context Protocol
+    (MCP) `tools/list` operation. When set to `true`, the gateway returns
+    the complete list of tools in a single response without a pagination
+    cursor. When set to `false` or omitted, the gateway returns tools in
+    paginated responses.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -28716,6 +31130,14 @@ class MCPGatewayConfiguration:
             serializer.write_struct(
                 _SCHEMA_MCP_GATEWAY_CONFIGURATION.members["streamingConfiguration"],
                 self.streaming_configuration,
+            )
+
+        if self.disable_mcp_list_tools_pagination is not None:
+            serializer.write_boolean(
+                _SCHEMA_MCP_GATEWAY_CONFIGURATION.members[
+                    "disableMcpListToolsPagination"
+                ],
+                self.disable_mcp_list_tools_pagination,
             )
 
     @classmethod
@@ -28754,6 +31176,13 @@ class MCPGatewayConfiguration:
                 case 4:
                     kwargs["streaming_configuration"] = (
                         StreamingConfiguration.deserialize(de)
+                    )
+
+                case 5:
+                    kwargs["disable_mcp_list_tools_pagination"] = de.read_boolean(
+                        _SCHEMA_MCP_GATEWAY_CONFIGURATION.members[
+                            "disableMcpListToolsPagination"
+                        ]
                     )
 
                 case _:
@@ -28882,7 +31311,7 @@ class CreateGatewayInput:
     for the gateway to access Amazon Web Services services.
     """
 
-    protocol_type: GatewayProtocolType = GatewayProtocolType("MCP")
+    protocol_type: str = GatewayProtocolType("MCP")
     """The protocol type for the gateway."""
 
     protocol_configuration: GatewayProtocolConfiguration | None = None
@@ -28891,7 +31320,7 @@ class CreateGatewayInput:
     `protocolType` parameter.
     """
 
-    authorizer_type: AuthorizerType | None = None
+    authorizer_type: str | None = None
     """
     The type of authorizer to use for the gateway.
 
@@ -28929,7 +31358,7 @@ class CreateGatewayInput:
     the defined policies.
     """
 
-    exception_level: ExceptionLevel | None = None
+    exception_level: str | None = None
     """
     The level of detail in error messages returned when invoking the
     gateway.
@@ -29252,7 +31681,7 @@ class WafConfiguration:
     ACL cannot be evaluated.
     """
 
-    failure_mode: WafFailureMode | None = None
+    failure_mode: str | None = None
     """
     The failure mode that determines how the gateway handles requests when
     Amazon Web Services WAF is unreachable or times out. Valid values
@@ -29312,13 +31741,13 @@ class CreateGatewayOutput:
     updated_at: datetime
     """The timestamp when the gateway was last updated."""
 
-    status: GatewayStatus
+    status: str
     """The current status of the gateway."""
 
     name: str
     """The name of the gateway."""
 
-    authorizer_type: AuthorizerType
+    authorizer_type: str
     """The type of authorizer used by the gateway."""
 
     gateway_url: str | None = None
@@ -29336,7 +31765,7 @@ class CreateGatewayOutput:
     gateway.
     """
 
-    protocol_type: GatewayProtocolType = GatewayProtocolType("MCP")
+    protocol_type: str = GatewayProtocolType("MCP")
     """The protocol type of the gateway."""
 
     protocol_configuration: GatewayProtocolConfiguration | None = None
@@ -29366,7 +31795,7 @@ class CreateGatewayOutput:
     workload_identity_details: WorkloadIdentityDetails | None = None
     """The workload identity details for the created gateway."""
 
-    exception_level: ExceptionLevel | None = None
+    exception_level: str | None = None
     """
     The level of detail in error messages returned when invoking the
     gateway.
@@ -29386,6 +31815,16 @@ class CreateGatewayOutput:
 
     waf_configuration: WafConfiguration | None = None
     """The Amazon Web Services WAF configuration for the gateway."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_GATEWAY_OUTPUT, self)
@@ -29733,11 +32172,21 @@ class DeleteGatewayOutput:
     gateway_id: str
     """The unique identifier of the deleted gateway."""
 
-    status: GatewayStatus
+    status: str
     """The current status of the gateway deletion."""
 
     status_reasons: list[str] | None = None
     """The reasons for the current status of the gateway deletion."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_GATEWAY_OUTPUT, self)
@@ -29887,13 +32336,13 @@ class GetGatewayOutput:
     updated_at: datetime
     """The timestamp when the gateway was last updated."""
 
-    status: GatewayStatus
+    status: str
     """The current status of the gateway."""
 
     name: str
     """The name of the gateway."""
 
-    authorizer_type: AuthorizerType
+    authorizer_type: str
     """Authorizer type for the gateway."""
 
     gateway_url: str | None = None
@@ -29908,7 +32357,7 @@ class GetGatewayOutput:
     role_arn: str | None = None
     """The IAM role ARN that provides permissions for the gateway."""
 
-    protocol_type: GatewayProtocolType = GatewayProtocolType("MCP")
+    protocol_type: str = GatewayProtocolType("MCP")
     """Protocol applied to a gateway."""
 
     protocol_configuration: GatewayProtocolConfiguration | None = None
@@ -29941,7 +32390,7 @@ class GetGatewayOutput:
     workload_identity_details: WorkloadIdentityDetails | None = None
     """The workload identity details for the gateway."""
 
-    exception_level: ExceptionLevel | None = None
+    exception_level: str | None = None
     """
     The level of detail in error messages returned when invoking the
     gateway.
@@ -29961,6 +32410,16 @@ class GetGatewayOutput:
 
     waf_configuration: WafConfiguration | None = None
     """The Amazon Web Services WAF configuration for the gateway."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_GATEWAY_OUTPUT, self)
@@ -30325,7 +32784,7 @@ class GatewaySummary:
     name: str
     """The name of the gateway."""
 
-    status: GatewayStatus
+    status: str
     """The current status of the gateway."""
 
     created_at: datetime
@@ -30334,13 +32793,13 @@ class GatewaySummary:
     updated_at: datetime
     """The timestamp when the gateway was last updated."""
 
-    authorizer_type: AuthorizerType
+    authorizer_type: str
     """The type of authorizer used by the gateway."""
 
     description: str | None = field(repr=False, default=None)
     """The description of the gateway."""
 
-    protocol_type: GatewayProtocolType = GatewayProtocolType("MCP")
+    protocol_type: str = GatewayProtocolType("MCP")
     """The protocol type used by the gateway."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -30480,6 +32939,16 @@ class ListGatewaysOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_GATEWAYS_OUTPUT, self)
 
@@ -30572,7 +33041,7 @@ class UpdateGatewayInput:
     role_arn: str | None = None
     """The updated IAM role ARN that provides permissions for the gateway."""
 
-    protocol_type: GatewayProtocolType = GatewayProtocolType("MCP")
+    protocol_type: str = GatewayProtocolType("MCP")
     """The updated protocol type for the gateway."""
 
     protocol_configuration: GatewayProtocolConfiguration | None = None
@@ -30581,7 +33050,7 @@ class UpdateGatewayInput:
     gateway communicates with external services.
     """
 
-    authorizer_type: AuthorizerType | None = None
+    authorizer_type: str | None = None
     """The updated authorizer type for the gateway."""
 
     authorizer_configuration: AuthorizerConfiguration | None = None
@@ -30608,7 +33077,7 @@ class UpdateGatewayInput:
     on the defined policies.
     """
 
-    exception_level: ExceptionLevel | None = None
+    exception_level: str | None = None
     """
     The level of detail in error messages returned when invoking the
     gateway.
@@ -30819,13 +33288,13 @@ class UpdateGatewayOutput:
     updated_at: datetime
     """The timestamp when the gateway was last updated."""
 
-    status: GatewayStatus
+    status: str
     """The current status of the updated gateway."""
 
     name: str
     """The name of the gateway."""
 
-    authorizer_type: AuthorizerType
+    authorizer_type: str
     """The updated authorizer type for the gateway."""
 
     gateway_url: str | None = None
@@ -30840,7 +33309,7 @@ class UpdateGatewayOutput:
     role_arn: str | None = None
     """The updated IAM role ARN that provides permissions for the gateway."""
 
-    protocol_type: GatewayProtocolType = GatewayProtocolType("MCP")
+    protocol_type: str = GatewayProtocolType("MCP")
     """The updated protocol type for the gateway."""
 
     protocol_configuration: GatewayProtocolConfiguration | None = None
@@ -30870,7 +33339,7 @@ class UpdateGatewayOutput:
     workload_identity_details: WorkloadIdentityDetails | None = None
     """The workload identity details for the updated gateway."""
 
-    exception_level: ExceptionLevel | None = None
+    exception_level: str | None = None
     """
     The level of detail in error messages returned when invoking the
     gateway.
@@ -30890,6 +33359,16 @@ class UpdateGatewayOutput:
 
     waf_configuration: WafConfiguration | None = None
     """The Amazon Web Services WAF configuration for the gateway."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_GATEWAY_OUTPUT, self)
@@ -31279,7 +33758,7 @@ class IamPrincipal:
     operator.
     """
 
-    operator: PrincipalMatchOperator | None = None
+    operator: str | None = None
     """
     The match operator. `StringEquals` requires an exact match. `StringLike`
     supports wildcard patterns using `*` and `?`.
@@ -31798,7 +34277,7 @@ class CreateGatewayRuleOutput:
     created_at: datetime
     """The timestamp when the rule was created."""
 
-    status: GatewayRuleStatus
+    status: str
     """The current status of the rule."""
 
     conditions: list[Condition] | None = None
@@ -31809,6 +34288,16 @@ class CreateGatewayRuleOutput:
 
     system: SystemManagedBlock | None = None
     """System-managed metadata for rules created by automated processes."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_GATEWAY_RULE_OUTPUT, self)
@@ -32029,8 +34518,18 @@ class DeleteGatewayRuleOutput:
     rule_id: str
     """The unique identifier of the deleted rule."""
 
-    status: GatewayRuleStatus
+    status: str
     """The status of the rule deletion operation."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_GATEWAY_RULE_OUTPUT, self)
@@ -32193,7 +34692,7 @@ class GetGatewayRuleOutput:
     created_at: datetime
     """The timestamp when the rule was created."""
 
-    status: GatewayRuleStatus
+    status: str
     """The current status of the rule."""
 
     conditions: list[Condition] | None = None
@@ -32207,6 +34706,16 @@ class GetGatewayRuleOutput:
 
     updated_at: datetime | None = None
     """The timestamp when the rule was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_GATEWAY_RULE_OUTPUT, self)
@@ -32459,7 +34968,7 @@ class GatewayRuleDetail:
     created_at: datetime
     """The timestamp when the rule was created."""
 
-    status: GatewayRuleStatus
+    status: str
     """The current status of the rule."""
 
     conditions: list[Condition] | None = None
@@ -32629,6 +35138,16 @@ class ListGatewayRulesOutput:
 
     next_token: str | None = None
     """The pagination token to use in a subsequent request."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_GATEWAY_RULES_OUTPUT, self)
@@ -32843,7 +35362,7 @@ class UpdateGatewayRuleOutput:
     created_at: datetime
     """The timestamp when the rule was created."""
 
-    status: GatewayRuleStatus
+    status: str
     """The current status of the rule."""
 
     conditions: list[Condition] | None = None
@@ -32857,6 +35376,16 @@ class UpdateGatewayRuleOutput:
 
     updated_at: datetime | None = None
     """The timestamp when the rule was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_GATEWAY_RULE_OUTPUT, self)
@@ -33024,6 +35553,263 @@ UPDATE_GATEWAY_RULE = APIOperation(
 )
 
 
+@dataclass(kw_only=True)
+class S3CertificateConfiguration:
+    """
+    A reference to a PEM-encoded private CA certificate stored as an Amazon
+    S3 object.
+    """
+
+    uri: str
+    """
+    The URI of the Amazon S3 object that contains the PEM-encoded
+    certificate.
+    """
+
+    bucket_owner_account_id: str | None = None
+    """
+    The account ID of the Amazon S3 bucket owner. This ID is used for
+    cross-account access to the bucket.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_S3_CERTIFICATE_CONFIGURATION, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_S3_CERTIFICATE_CONFIGURATION.members["uri"], self.uri
+        )
+        if self.bucket_owner_account_id is not None:
+            serializer.write_string(
+                _SCHEMA_S3_CERTIFICATE_CONFIGURATION.members["bucketOwnerAccountId"],
+                self.bucket_owner_account_id,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["uri"] = de.read_string(
+                        _SCHEMA_S3_CERTIFICATE_CONFIGURATION.members["uri"]
+                    )
+
+                case 1:
+                    kwargs["bucket_owner_account_id"] = de.read_string(
+                        _SCHEMA_S3_CERTIFICATE_CONFIGURATION.members[
+                            "bucketOwnerAccountId"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_S3_CERTIFICATE_CONFIGURATION, consumer=_consumer
+        )
+        if "uri" not in kwargs:
+            kwargs["uri"] = ""
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class SecretsManagerCertificateConfiguration:
+    """
+    A reference to a PEM-encoded private CA certificate stored in an Amazon
+    Web Services Secrets Manager secret.
+    """
+
+    secret_arn: str
+    """
+    The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    Manager secret that contains the PEM-encoded certificate.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_SECRETS_MANAGER_CERTIFICATE_CONFIGURATION, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_SECRETS_MANAGER_CERTIFICATE_CONFIGURATION.members["secretArn"],
+            self.secret_arn,
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["secret_arn"] = de.read_string(
+                        _SCHEMA_SECRETS_MANAGER_CERTIFICATE_CONFIGURATION.members[
+                            "secretArn"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_SECRETS_MANAGER_CERTIFICATE_CONFIGURATION, consumer=_consumer
+        )
+        if "secret_arn" not in kwargs:
+            kwargs["secret_arn"] = ""
+        return kwargs
+
+
+@dataclass
+class CertificateConfigurationS3:
+    """The Amazon S3 location of the PEM-encoded private CA certificate."""
+
+    value: S3CertificateConfiguration
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_CERTIFICATE_CONFIGURATION, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_CERTIFICATE_CONFIGURATION.members["s3"], self.value
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=S3CertificateConfiguration.deserialize(deserializer))
+
+
+@dataclass
+class CertificateConfigurationSecretsManager:
+    """
+    The Amazon Web Services Secrets Manager location of the PEM-encoded
+    private CA certificate.
+    """
+
+    value: SecretsManagerCertificateConfiguration
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_CERTIFICATE_CONFIGURATION, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_CERTIFICATE_CONFIGURATION.members["secretsManager"], self.value
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(
+            value=SecretsManagerCertificateConfiguration.deserialize(deserializer)
+        )
+
+
+@dataclass
+class CertificateConfigurationUnknown:
+    """
+    Represents an unknown variant.
+
+    If you receive this value, you will need to update your library to receive the
+    parsed value.
+
+    This value may not be deliberately sent.
+    """
+
+    tag: str
+
+    def serialize(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        raise NotImplementedError()
+
+
+CertificateConfiguration = Union[
+    CertificateConfigurationS3
+    | CertificateConfigurationSecretsManager
+    | CertificateConfigurationUnknown
+]
+"""
+A reference to a private certificate authority (CA) certificate that the
+gateway uses to verify TLS connections to the target endpoint. Use this
+when the target presents a certificate issued by a private CA that is
+not trusted by default. Specify exactly one certificate source. The
+configuration is a reference only and never contains the certificate
+content.
+"""
+
+
+class _CertificateConfigurationDeserializer:
+    _result: CertificateConfiguration | None = None
+
+    def deserialize(self, deserializer: ShapeDeserializer) -> CertificateConfiguration:
+        self._result = None
+        deserializer.read_struct(_SCHEMA_CERTIFICATE_CONFIGURATION, self._consumer)
+
+        if self._result is None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found none."
+            )
+
+        return self._result
+
+    def _consumer(self, schema: Schema, de: ShapeDeserializer) -> None:
+        match schema.expect_member_index():
+            case 0:
+                self._set_result(CertificateConfigurationS3.deserialize(de))
+
+            case 1:
+                self._set_result(CertificateConfigurationSecretsManager.deserialize(de))
+
+            case _:
+                self._set_result(
+                    CertificateConfigurationUnknown(tag=schema.expect_member_name())
+                )
+
+    def _set_result(self, value: CertificateConfiguration) -> None:
+        if self._result is not None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found more than one."
+            )
+        self._result = value
+
+
+def _serialize_certificate_configuration_list(
+    serializer: ShapeSerializer, schema: Schema, value: list[CertificateConfiguration]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_struct(member_schema, e)
+
+
+def _deserialize_certificate_configuration_list(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[CertificateConfiguration]:
+    result: list[CertificateConfiguration] = []
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(_CertificateConfigurationDeserializer().deserialize(d))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
 class ApiKeyCredentialLocation(UnknownEnumMixin, StrEnum):
     HEADER = "HEADER"
     QUERY_PARAMETER = "QUERY_PARAMETER"
@@ -33055,7 +35841,7 @@ class GatewayApiKeyCredentialProvider:
     key when sending it to the target endpoint.
     """
 
-    credential_location: ApiKeyCredentialLocation | None = None
+    credential_location: str | None = None
     """
     The location of the API key credential. This field specifies where in
     the request the API key should be placed.
@@ -33289,7 +36075,7 @@ class OAuthCredentialProvider:
     process.
     """
 
-    grant_type: OAuthGrantType = OAuthGrantType("CLIENT_CREDENTIALS")
+    grant_type: str = OAuthGrantType("CLIENT_CREDENTIALS")
     """
     Specifies the kind of credentials to use for authorization:
 
@@ -33547,7 +36333,7 @@ class CredentialProviderConfiguration:
     the gateway authenticates with the target endpoint.
     """
 
-    credential_provider_type: CredentialProviderType
+    credential_provider_type: str
     """
     The type of credential provider. This field specifies which
     authentication method the gateway uses.
@@ -34330,7 +37116,7 @@ class PassthroughTargetConfiguration:
     passthrough target.
     """
 
-    protocol_type: PassthroughProtocolType
+    protocol_type: str
     """
     The application protocol that the passthrough target implements. This
     value is required for passthrough targets:
@@ -34366,9 +37152,7 @@ class PassthroughTargetConfiguration:
     parameters, is enforced by the service.
     """
 
-    static_query_parameter_conflict_resolution: (
-        StaticQueryParameterConflictResolution | None
-    ) = None
+    static_query_parameter_conflict_resolution: str | None = None
     """
     Controls precedence when a client request supplies a query parameter
     whose name matches a configured static query parameter. If not set,
@@ -35213,7 +37997,7 @@ class RestApiMethod(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_rest_api_methods(
-    serializer: ShapeSerializer, schema: Schema, value: list[RestApiMethod]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -35223,8 +38007,8 @@ def _serialize_rest_api_methods(
 
 def _deserialize_rest_api_methods(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[RestApiMethod]:
-    result: list[RestApiMethod] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -35253,7 +38037,7 @@ class ApiGatewayToolFilter:
     paths under `/pets`). Must match existing paths in the REST API.
     """
 
-    methods: list[RestApiMethod]
+    methods: list[str]
     """The methods to filter for."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -35336,7 +38120,7 @@ class ApiGatewayToolOverride:
     existing path in the REST API.
     """
 
-    method: RestApiMethod
+    method: str
     """The HTTP method to expose for the specified path."""
 
     description: str | None = None
@@ -36135,13 +38919,12 @@ class McpServerTargetConfiguration:
 
     mcp_tool_schema: McpToolSchemaConfiguration | None = None
     """
-    The tool schema configuration for the MCP server target. Supported only
-    when the credential provider is configured with an authorization code
-    grant type. Dynamic tool discovery/synchronization will be disabled when
-    target is configured with mcpToolSchema.
+    A static tool list for the MCP server target. It is supported for all
+    credential providers. Dynamic tool discovery/synchronization will be
+    disabled when a target is configured with mcpToolSchema.
     """
 
-    listing_mode: ListingMode | None = None
+    listing_mode: str | None = None
     """
     The listing mode for the MCP server target configuration. MCP resources
     for default targets are cached at the control plane for faster access.
@@ -36550,11 +39333,21 @@ class DeleteGatewayTargetOutput:
     target_id: str
     """The unique identifier of the deleted gateway target."""
 
-    status: TargetStatus
+    status: str
     """The current status of the gateway target deletion."""
 
     status_reasons: list[str] | None = None
     """The reasons for the current status of the gateway target deletion."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_GATEWAY_TARGET_OUTPUT, self)
@@ -36817,7 +39610,7 @@ class TargetSummary:
     name: str = field(repr=False)
     """The name of the target."""
 
-    status: TargetStatus
+    status: str
     """The current status of the target."""
 
     created_at: datetime
@@ -36845,10 +39638,10 @@ class TargetSummary:
     type and requires user federation.
     """
 
-    target_type: TargetType | None = None
+    target_type: str | None = None
     """The type of the target."""
 
-    listing_mode: ListingMode | None = None
+    listing_mode: str | None = None
     """
     The listing mode for the target. MCP resources for `DEFAULT` targets are
     cached at the control plane for faster access. MCP resources for
@@ -37022,6 +39815,16 @@ class ListGatewayTargetsOutput:
     If the total number of results is greater than the `maxResults` value
     provided in the request, use this token when making another request in
     the `nextToken` field to return the next batch of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -37240,6 +40043,16 @@ class GetResourcePolicyOutput:
     policy: str | None = None
     """The resource policy associated with the specified resource."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_RESOURCE_POLICY_OUTPUT, self)
 
@@ -37355,7 +40168,7 @@ class KeyType(UnknownEnumMixin, StrEnum):
 class KmsConfiguration:
     """Contains the KMS configuration for a resource."""
 
-    key_type: KeyType
+    key_type: str
     """The type of KMS key (CustomerManagedKey or ServiceManagedKey)."""
 
     kms_key_arn: str | None = None
@@ -37418,6 +40231,16 @@ class GetTokenVaultOutput:
 
     last_modified_date: datetime
     """The timestamp when the token vault was last modified."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_TOKEN_VAULT_OUTPUT, self)
@@ -37663,7 +40486,7 @@ class HarnessEndpoint:
     arn: str
     """The ARN of the endpoint."""
 
-    status: HarnessEndpointStatus
+    status: str
     """The status of the endpoint."""
 
     created_at: datetime
@@ -37834,6 +40657,16 @@ class CreateHarnessEndpointOutput:
     endpoint: HarnessEndpoint
     """The endpoint that was created."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_HARNESS_ENDPOINT_OUTPUT, self)
 
@@ -37989,6 +40822,16 @@ class DeleteHarnessEndpointOutput:
     endpoint: HarnessEndpoint
     """The endpoint that was deleted."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_HARNESS_ENDPOINT_OUTPUT, self)
 
@@ -38119,6 +40962,16 @@ class GetHarnessEndpointOutput:
 
     endpoint: HarnessEndpoint
     """The endpoint resource."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_HARNESS_ENDPOINT_OUTPUT, self)
@@ -38291,6 +41144,16 @@ class ListHarnessEndpointsOutput:
 
     next_token: str | None = None
     """The token for the next set of results."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_HARNESS_ENDPOINTS_OUTPUT, self)
@@ -38486,6 +41349,16 @@ class UpdateHarnessEndpointOutput:
 
     endpoint: HarnessEndpoint
     """The updated endpoint."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_HARNESS_ENDPOINT_OUTPUT, self)
@@ -38864,6 +41737,685 @@ class _HarnessEnvironmentArtifactDeserializer:
 
 
 @dataclass(kw_only=True)
+class HarnessHookEventBridgeTarget:
+    """The configuration for an Amazon EventBridge hook target."""
+
+    arn: str
+    """The ARN of the Amazon EventBridge event bus to send hook events to."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_HOOK_EVENT_BRIDGE_TARGET, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_HARNESS_HOOK_EVENT_BRIDGE_TARGET.members["arn"], self.arn
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["arn"] = de.read_string(
+                        _SCHEMA_HARNESS_HOOK_EVENT_BRIDGE_TARGET.members["arn"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_HARNESS_HOOK_EVENT_BRIDGE_TARGET, consumer=_consumer
+        )
+        if "arn" not in kwargs:
+            kwargs["arn"] = ""
+        return kwargs
+
+
+class HarnessHookFailureMode(UnknownEnumMixin, StrEnum):
+    """The behavior when a synchronous hook target fails."""
+
+    ALLOW = "allow"
+    """Specifies that the current action continues when the hook target fails."""
+    DENY = "deny"
+    """
+    Specifies that the service denies the current action when the hook
+    target fails.
+    """
+
+
+@dataclass(kw_only=True)
+class HarnessHookLambdaTarget:
+    """The configuration for an AWS Lambda hook target."""
+
+    arn: str
+    """The ARN of the Lambda function to invoke."""
+
+    timeout_seconds: int = 60
+    """
+    The maximum number of seconds to wait for the Lambda function response.
+    The default is 60 seconds.
+    """
+
+    failure_mode: str = HarnessHookFailureMode("deny")
+    """
+    The behavior when the Lambda function times out, returns an error, or
+    returns an invalid response. The default is `DENY`.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_HOOK_LAMBDA_TARGET, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_HARNESS_HOOK_LAMBDA_TARGET.members["arn"], self.arn
+        )
+        serializer.write_integer(
+            _SCHEMA_HARNESS_HOOK_LAMBDA_TARGET.members["timeoutSeconds"],
+            self.timeout_seconds,
+        )
+        serializer.write_string(
+            _SCHEMA_HARNESS_HOOK_LAMBDA_TARGET.members["failureMode"], self.failure_mode
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["arn"] = de.read_string(
+                        _SCHEMA_HARNESS_HOOK_LAMBDA_TARGET.members["arn"]
+                    )
+
+                case 1:
+                    kwargs["timeout_seconds"] = de.read_integer(
+                        _SCHEMA_HARNESS_HOOK_LAMBDA_TARGET.members["timeoutSeconds"]
+                    )
+
+                case 2:
+                    kwargs["failure_mode"] = HarnessHookFailureMode(
+                        de.read_string(
+                            _SCHEMA_HARNESS_HOOK_LAMBDA_TARGET.members["failureMode"]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_HARNESS_HOOK_LAMBDA_TARGET, consumer=_consumer)
+        if "arn" not in kwargs:
+            kwargs["arn"] = ""
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class HarnessHookSnsTarget:
+    """The configuration for an Amazon SNS hook target."""
+
+    arn: str
+    """The ARN of the Amazon SNS topic to publish hook events to."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_HOOK_SNS_TARGET, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_HARNESS_HOOK_SNS_TARGET.members["arn"], self.arn
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["arn"] = de.read_string(
+                        _SCHEMA_HARNESS_HOOK_SNS_TARGET.members["arn"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_HARNESS_HOOK_SNS_TARGET, consumer=_consumer)
+        if "arn" not in kwargs:
+            kwargs["arn"] = ""
+        return kwargs
+
+
+@dataclass
+class HarnessHookTargetLambda:
+    """
+    A Lambda hook target that invokes an AWS Lambda function synchronously
+    and waits for its response.
+    """
+
+    value: HarnessHookLambdaTarget
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_HOOK_TARGET, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_HARNESS_HOOK_TARGET.members["lambda"], self.value
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=HarnessHookLambdaTarget.deserialize(deserializer))
+
+
+@dataclass
+class HarnessHookTargetSns:
+    """
+    An Amazon SNS hook target that publishes the hook event without waiting
+    for a response.
+    """
+
+    value: HarnessHookSnsTarget
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_HOOK_TARGET, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_HOOK_TARGET.members["sns"], self.value)
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=HarnessHookSnsTarget.deserialize(deserializer))
+
+
+@dataclass
+class HarnessHookTargetEventBridge:
+    """
+    An Amazon EventBridge hook target that sends the hook event without
+    waiting for a response.
+    """
+
+    value: HarnessHookEventBridgeTarget
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_HOOK_TARGET, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_HARNESS_HOOK_TARGET.members["eventBridge"], self.value
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=HarnessHookEventBridgeTarget.deserialize(deserializer))
+
+
+@dataclass
+class HarnessHookTargetUnknown:
+    """
+    Represents an unknown variant.
+
+    If you receive this value, you will need to update your library to receive the
+    parsed value.
+
+    This value may not be deliberately sent.
+    """
+
+    tag: str
+
+    def serialize(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        raise NotImplementedError()
+
+
+HarnessHookTarget = Union[
+    HarnessHookTargetLambda
+    | HarnessHookTargetSns
+    | HarnessHookTargetEventBridge
+    | HarnessHookTargetUnknown
+]
+"""The target that receives lifecycle hook events. Specify one target type."""
+
+
+class _HarnessHookTargetDeserializer:
+    _result: HarnessHookTarget | None = None
+
+    def deserialize(self, deserializer: ShapeDeserializer) -> HarnessHookTarget:
+        self._result = None
+        deserializer.read_struct(_SCHEMA_HARNESS_HOOK_TARGET, self._consumer)
+
+        if self._result is None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found none."
+            )
+
+        return self._result
+
+    def _consumer(self, schema: Schema, de: ShapeDeserializer) -> None:
+        match schema.expect_member_index():
+            case 0:
+                self._set_result(HarnessHookTargetLambda.deserialize(de))
+
+            case 1:
+                self._set_result(HarnessHookTargetSns.deserialize(de))
+
+            case 2:
+                self._set_result(HarnessHookTargetEventBridge.deserialize(de))
+
+            case _:
+                self._set_result(
+                    HarnessHookTargetUnknown(tag=schema.expect_member_name())
+                )
+
+    def _set_result(self, value: HarnessHookTarget) -> None:
+        if self._result is not None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found more than one."
+            )
+        self._result = value
+
+
+@dataclass(kw_only=True)
+class HarnessAfterInvocationHook:
+    """The configuration for a hook that runs after an invocation completes."""
+
+    name: str
+    """The name of the hook."""
+
+    target: HarnessHookTarget
+    """The target that receives the hook event."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_AFTER_INVOCATION_HOOK, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_HARNESS_AFTER_INVOCATION_HOOK.members["name"], self.name
+        )
+        serializer.write_struct(
+            _SCHEMA_HARNESS_AFTER_INVOCATION_HOOK.members["target"], self.target
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_HARNESS_AFTER_INVOCATION_HOOK.members["name"]
+                    )
+
+                case 1:
+                    kwargs["target"] = _HarnessHookTargetDeserializer().deserialize(de)
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_HARNESS_AFTER_INVOCATION_HOOK, consumer=_consumer
+        )
+        if "name" not in kwargs:
+            kwargs["name"] = ""
+        if "target" not in kwargs:
+            kwargs["target"] = HarnessHookTargetUnknown(tag="")
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class HarnessAfterToolCallHook:
+    """The configuration for a hook that runs after a tool call completes."""
+
+    name: str
+    """The name of the hook."""
+
+    target: HarnessHookTarget
+    """The target that receives the hook event."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_AFTER_TOOL_CALL_HOOK, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_HARNESS_AFTER_TOOL_CALL_HOOK.members["name"], self.name
+        )
+        serializer.write_struct(
+            _SCHEMA_HARNESS_AFTER_TOOL_CALL_HOOK.members["target"], self.target
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_HARNESS_AFTER_TOOL_CALL_HOOK.members["name"]
+                    )
+
+                case 1:
+                    kwargs["target"] = _HarnessHookTargetDeserializer().deserialize(de)
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_HARNESS_AFTER_TOOL_CALL_HOOK, consumer=_consumer
+        )
+        if "name" not in kwargs:
+            kwargs["name"] = ""
+        if "target" not in kwargs:
+            kwargs["target"] = HarnessHookTargetUnknown(tag="")
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class HarnessBeforeInvocationHook:
+    """The configuration for a hook that runs before an invocation begins."""
+
+    name: str
+    """The name of the hook."""
+
+    target: HarnessHookTarget
+    """The target that receives the hook event."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_BEFORE_INVOCATION_HOOK, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_HARNESS_BEFORE_INVOCATION_HOOK.members["name"], self.name
+        )
+        serializer.write_struct(
+            _SCHEMA_HARNESS_BEFORE_INVOCATION_HOOK.members["target"], self.target
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_HARNESS_BEFORE_INVOCATION_HOOK.members["name"]
+                    )
+
+                case 1:
+                    kwargs["target"] = _HarnessHookTargetDeserializer().deserialize(de)
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_HARNESS_BEFORE_INVOCATION_HOOK, consumer=_consumer
+        )
+        if "name" not in kwargs:
+            kwargs["name"] = ""
+        if "target" not in kwargs:
+            kwargs["target"] = HarnessHookTargetUnknown(tag="")
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class HarnessBeforeToolCallHook:
+    """The configuration for a hook that runs before the agent calls a tool."""
+
+    name: str
+    """The name of the hook."""
+
+    target: HarnessHookTarget
+    """The target that receives the hook event."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_BEFORE_TOOL_CALL_HOOK, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_HARNESS_BEFORE_TOOL_CALL_HOOK.members["name"], self.name
+        )
+        serializer.write_struct(
+            _SCHEMA_HARNESS_BEFORE_TOOL_CALL_HOOK.members["target"], self.target
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_HARNESS_BEFORE_TOOL_CALL_HOOK.members["name"]
+                    )
+
+                case 1:
+                    kwargs["target"] = _HarnessHookTargetDeserializer().deserialize(de)
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_HARNESS_BEFORE_TOOL_CALL_HOOK, consumer=_consumer
+        )
+        if "name" not in kwargs:
+            kwargs["name"] = ""
+        if "target" not in kwargs:
+            kwargs["target"] = HarnessHookTargetUnknown(tag="")
+        return kwargs
+
+
+@dataclass
+class HarnessHookBeforeInvocation:
+    """A hook that runs before an invocation begins."""
+
+    value: HarnessBeforeInvocationHook
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_HOOK, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_HARNESS_HOOK.members["beforeInvocation"], self.value
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=HarnessBeforeInvocationHook.deserialize(deserializer))
+
+
+@dataclass
+class HarnessHookAfterInvocation:
+    """A hook that runs after an invocation completes."""
+
+    value: HarnessAfterInvocationHook
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_HOOK, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_HARNESS_HOOK.members["afterInvocation"], self.value
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=HarnessAfterInvocationHook.deserialize(deserializer))
+
+
+@dataclass
+class HarnessHookBeforeToolCall:
+    """A hook that runs before the agent calls a tool."""
+
+    value: HarnessBeforeToolCallHook
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_HOOK, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_HARNESS_HOOK.members["beforeToolCall"], self.value
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=HarnessBeforeToolCallHook.deserialize(deserializer))
+
+
+@dataclass
+class HarnessHookAfterToolCall:
+    """A hook that runs after a tool call completes."""
+
+    value: HarnessAfterToolCallHook
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_HARNESS_HOOK, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_HARNESS_HOOK.members["afterToolCall"], self.value
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=HarnessAfterToolCallHook.deserialize(deserializer))
+
+
+@dataclass
+class HarnessHookUnknown:
+    """
+    Represents an unknown variant.
+
+    If you receive this value, you will need to update your library to receive the
+    parsed value.
+
+    This value may not be deliberately sent.
+    """
+
+    tag: str
+
+    def serialize(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        raise NotImplementedError()
+
+
+HarnessHook = Union[
+    HarnessHookBeforeInvocation
+    | HarnessHookAfterInvocation
+    | HarnessHookBeforeToolCall
+    | HarnessHookAfterToolCall
+    | HarnessHookUnknown
+]
+"""A lifecycle hook configuration. Specify one hook type."""
+
+
+class _HarnessHookDeserializer:
+    _result: HarnessHook | None = None
+
+    def deserialize(self, deserializer: ShapeDeserializer) -> HarnessHook:
+        self._result = None
+        deserializer.read_struct(_SCHEMA_HARNESS_HOOK, self._consumer)
+
+        if self._result is None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found none."
+            )
+
+        return self._result
+
+    def _consumer(self, schema: Schema, de: ShapeDeserializer) -> None:
+        match schema.expect_member_index():
+            case 0:
+                self._set_result(HarnessHookBeforeInvocation.deserialize(de))
+
+            case 1:
+                self._set_result(HarnessHookAfterInvocation.deserialize(de))
+
+            case 2:
+                self._set_result(HarnessHookBeforeToolCall.deserialize(de))
+
+            case 3:
+                self._set_result(HarnessHookAfterToolCall.deserialize(de))
+
+            case _:
+                self._set_result(HarnessHookUnknown(tag=schema.expect_member_name()))
+
+    def _set_result(self, value: HarnessHook) -> None:
+        if self._result is not None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found more than one."
+            )
+        self._result = value
+
+
+def _serialize_harness_hooks(
+    serializer: ShapeSerializer, schema: Schema, value: list[HarnessHook]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_struct(member_schema, e)
+
+
+def _deserialize_harness_hooks(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[HarnessHook]:
+    result: list[HarnessHook] = []
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(_HarnessHookDeserializer().deserialize(d))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
 class HarnessAgentCoreMemoryRetrievalConfig:
     """Configuration for memory retrieval within a namespace."""
 
@@ -39108,9 +42660,7 @@ class HarnessManagedMemoryStrategyType(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_harness_managed_memory_strategy_list(
-    serializer: ShapeSerializer,
-    schema: Schema,
-    value: list[HarnessManagedMemoryStrategyType],
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -39120,8 +42670,8 @@ def _serialize_harness_managed_memory_strategy_list(
 
 def _deserialize_harness_managed_memory_strategy_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[HarnessManagedMemoryStrategyType]:
-    result: list[HarnessManagedMemoryStrategyType] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -39147,7 +42697,7 @@ class HarnessManagedMemoryConfiguration:
     ignored on Create/Update input.
     """
 
-    strategies: list[HarnessManagedMemoryStrategyType] | None = None
+    strategies: list[str] | None = None
     """Strategy types to enable. Defaults to [SEMANTIC, SUMMARIZATION]."""
 
     event_expiry_duration: int | None = None
@@ -39410,7 +42960,7 @@ class HarnessBedrockModelConfig:
     top_p: float | None = None
     """The topP set when calling the model."""
 
-    api_format: HarnessBedrockApiFormat | None = None
+    api_format: str | None = None
     """The API format to use when calling the Bedrock provider."""
 
     additional_params: Document | None = None
@@ -39794,6 +43344,9 @@ class HarnessOpenAiModelConfig:
     api_key_arn: str
     """The ARN of your OpenAI API key on AgentCore Identity."""
 
+    api_base: str | None = field(repr=False, default=None)
+    """Optional custom endpoint URL for an OpenAI-compatible endpoint."""
+
     max_tokens: int | None = None
     """
     The maximum number of tokens to allow in the generated response per
@@ -39806,7 +43359,7 @@ class HarnessOpenAiModelConfig:
     top_p: float | None = None
     """The topP set when calling the model."""
 
-    api_format: HarnessOpenAiApiFormat | None = None
+    api_format: str | None = None
     """The API format to use when calling the OpenAI provider."""
 
     additional_params: Document | None = None
@@ -39825,6 +43378,11 @@ class HarnessOpenAiModelConfig:
         serializer.write_string(
             _SCHEMA_HARNESS_OPEN_AI_MODEL_CONFIG.members["apiKeyArn"], self.api_key_arn
         )
+        if self.api_base is not None:
+            serializer.write_string(
+                _SCHEMA_HARNESS_OPEN_AI_MODEL_CONFIG.members["apiBase"], self.api_base
+            )
+
         if self.max_tokens is not None:
             serializer.write_integer(
                 _SCHEMA_HARNESS_OPEN_AI_MODEL_CONFIG.members["maxTokens"],
@@ -39875,28 +43433,33 @@ class HarnessOpenAiModelConfig:
                     )
 
                 case 2:
+                    kwargs["api_base"] = de.read_string(
+                        _SCHEMA_HARNESS_OPEN_AI_MODEL_CONFIG.members["apiBase"]
+                    )
+
+                case 3:
                     kwargs["max_tokens"] = de.read_integer(
                         _SCHEMA_HARNESS_OPEN_AI_MODEL_CONFIG.members["maxTokens"]
                     )
 
-                case 3:
+                case 4:
                     kwargs["temperature"] = de.read_float(
                         _SCHEMA_HARNESS_OPEN_AI_MODEL_CONFIG.members["temperature"]
                     )
 
-                case 4:
+                case 5:
                     kwargs["top_p"] = de.read_float(
                         _SCHEMA_HARNESS_OPEN_AI_MODEL_CONFIG.members["topP"]
                     )
 
-                case 5:
+                case 6:
                     kwargs["api_format"] = HarnessOpenAiApiFormat(
                         de.read_string(
                             _SCHEMA_HARNESS_OPEN_AI_MODEL_CONFIG.members["apiFormat"]
                         )
                     )
 
-                case 6:
+                case 7:
                     kwargs["additional_params"] = de.read_document(
                         _SCHEMA_HARNESS_OPEN_AI_MODEL_CONFIG.members["additionalParams"]
                     )
@@ -41194,7 +44757,7 @@ class HarnessToolType(UnknownEnumMixin, StrEnum):
 class HarnessTool:
     """A tool available to the agent loop."""
 
-    type: HarnessToolType
+    type: str
     """The type of tool."""
 
     name: str | None = None
@@ -41528,7 +45091,7 @@ class HarnessTruncationConfiguration:
     limits.
     """
 
-    strategy: HarnessTruncationStrategy
+    strategy: str
     """The truncation strategy to use."""
 
     config: HarnessTruncationStrategyConfiguration | None = None
@@ -41669,6 +45232,9 @@ class CreateHarnessInput:
     exceeds model limits.
     """
 
+    hooks: list[HarnessHook] | None = None
+    """The lifecycle hooks to run at defined points in the agent loop."""
+
     max_iterations: int | None = None
     """
     The maximum number of iterations the agent loop can execute per
@@ -41771,6 +45337,11 @@ class CreateHarnessInput:
         if self.truncation is not None:
             serializer.write_struct(
                 _SCHEMA_CREATE_HARNESS_INPUT.members["truncation"], self.truncation
+            )
+
+        if self.hooks is not None:
+            _serialize_harness_hooks(
+                serializer, _SCHEMA_CREATE_HARNESS_INPUT.members["hooks"], self.hooks
             )
 
         if self.max_iterations is not None:
@@ -41881,21 +45452,26 @@ class CreateHarnessInput:
                     )
 
                 case 14:
+                    kwargs["hooks"] = _deserialize_harness_hooks(
+                        de, _SCHEMA_CREATE_HARNESS_INPUT.members["hooks"]
+                    )
+
+                case 15:
                     kwargs["max_iterations"] = de.read_integer(
                         _SCHEMA_CREATE_HARNESS_INPUT.members["maxIterations"]
                     )
 
-                case 15:
+                case 16:
                     kwargs["max_tokens"] = de.read_integer(
                         _SCHEMA_CREATE_HARNESS_INPUT.members["maxTokens"]
                     )
 
-                case 16:
+                case 17:
                     kwargs["timeout_seconds"] = de.read_integer(
                         _SCHEMA_CREATE_HARNESS_INPUT.members["timeoutSeconds"]
                     )
 
-                case 17:
+                case 18:
                     kwargs["tags"] = _deserialize_tags_map(
                         de, _SCHEMA_CREATE_HARNESS_INPUT.members["tags"]
                     )
@@ -42153,7 +45729,7 @@ class Harness:
     arn: str
     """The ARN of the harness."""
 
-    status: HarnessStatus
+    status: str
     """The status of the harness."""
 
     execution_role_arn: str
@@ -42212,6 +45788,9 @@ class Harness:
 
     memory: HarnessMemoryConfiguration | None = None
     """AgentCore Memory instance configuration for short and long term memory."""
+
+    hooks: list[HarnessHook] | None = None
+    """The lifecycle hooks configured for the harness."""
 
     max_iterations: int | None = None
     """
@@ -42293,6 +45872,11 @@ class Harness:
 
         if self.memory is not None:
             serializer.write_struct(_SCHEMA_HARNESS.members["memory"], self.memory)
+
+        if self.hooks is not None:
+            _serialize_harness_hooks(
+                serializer, _SCHEMA_HARNESS.members["hooks"], self.hooks
+            )
 
         if self.max_iterations is not None:
             serializer.write_integer(
@@ -42420,21 +46004,26 @@ class Harness:
                     )
 
                 case 19:
+                    kwargs["hooks"] = _deserialize_harness_hooks(
+                        de, _SCHEMA_HARNESS.members["hooks"]
+                    )
+
+                case 20:
                     kwargs["max_iterations"] = de.read_integer(
                         _SCHEMA_HARNESS.members["maxIterations"]
                     )
 
-                case 20:
+                case 21:
                     kwargs["max_tokens"] = de.read_integer(
                         _SCHEMA_HARNESS.members["maxTokens"]
                     )
 
-                case 21:
+                case 22:
                     kwargs["timeout_seconds"] = de.read_integer(
                         _SCHEMA_HARNESS.members["timeoutSeconds"]
                     )
 
-                case 22:
+                case 23:
                     kwargs["failure_reason"] = de.read_string(
                         _SCHEMA_HARNESS.members["failureReason"]
                     )
@@ -42499,6 +46088,16 @@ class CreateHarnessOutput:
 
     harness: Harness
     """The harness that was created."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_HARNESS_OUTPUT, self)
@@ -42649,6 +46248,16 @@ class DeleteHarnessOutput:
     harness: Harness | None = None
     """The harness that was deleted."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_HARNESS_OUTPUT, self)
 
@@ -42780,6 +46389,16 @@ class GetHarnessOutput:
     harness: Harness
     """The harness resource."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_HARNESS_OUTPUT, self)
 
@@ -42910,7 +46529,7 @@ class HarnessSummary:
     arn: str
     """The ARN of the harness."""
 
-    status: HarnessStatus
+    status: str
     """The current status of the harness."""
 
     created_at: datetime
@@ -43043,6 +46662,16 @@ class ListHarnessesOutput:
 
     next_token: str | None = None
     """The token for the next set of results."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_HARNESSES_OUTPUT, self)
@@ -43204,7 +46833,7 @@ class HarnessVersionSummary:
     harness_version: str
     """The version of the harness that this summary describes."""
 
-    status: HarnessStatus
+    status: str
     """The status of this harness version."""
 
     created_at: datetime
@@ -43358,6 +46987,16 @@ class ListHarnessVersionsOutput:
 
     next_token: str | None = None
     """The token for the next set of results."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_HARNESS_VERSIONS_OUTPUT, self)
@@ -43671,6 +47310,13 @@ class UpdateHarnessInput:
     specified, the existing value is retained.
     """
 
+    hooks: list[HarnessHook] | None = None
+    """
+    The lifecycle hooks to run at defined points in the agent loop. If
+    specified, this replaces all existing hooks. If not specified, the
+    existing hooks are retained.
+    """
+
     max_iterations: int | None = None
     """
     The maximum number of iterations the agent loop can execute per
@@ -43771,6 +47417,11 @@ class UpdateHarnessInput:
         if self.truncation is not None:
             serializer.write_struct(
                 _SCHEMA_UPDATE_HARNESS_INPUT.members["truncation"], self.truncation
+            )
+
+        if self.hooks is not None:
+            _serialize_harness_hooks(
+                serializer, _SCHEMA_UPDATE_HARNESS_INPUT.members["hooks"], self.hooks
             )
 
         if self.max_iterations is not None:
@@ -43874,16 +47525,21 @@ class UpdateHarnessInput:
                     )
 
                 case 14:
+                    kwargs["hooks"] = _deserialize_harness_hooks(
+                        de, _SCHEMA_UPDATE_HARNESS_INPUT.members["hooks"]
+                    )
+
+                case 15:
                     kwargs["max_iterations"] = de.read_integer(
                         _SCHEMA_UPDATE_HARNESS_INPUT.members["maxIterations"]
                     )
 
-                case 15:
+                case 16:
                     kwargs["max_tokens"] = de.read_integer(
                         _SCHEMA_UPDATE_HARNESS_INPUT.members["maxTokens"]
                     )
 
-                case 16:
+                case 17:
                     kwargs["timeout_seconds"] = de.read_integer(
                         _SCHEMA_UPDATE_HARNESS_INPUT.members["timeoutSeconds"]
                     )
@@ -43901,6 +47557,16 @@ class UpdateHarnessOutput:
 
     harness: Harness
     """The updated harness."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_HARNESS_OUTPUT, self)
@@ -43953,6 +47619,9 @@ UPDATE_HARNESS = APIOperation(
                 "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
             ): ResourceNotFoundException,
             ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+            ): ServiceQuotaExceededException,
+            ShapeID(
                 "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
             ): ThrottlingException,
             ShapeID(
@@ -43966,6 +47635,7 @@ UPDATE_HARNESS = APIOperation(
         _SCHEMA_CONFLICT_EXCEPTION,
         _SCHEMA_INTERNAL_SERVER_EXCEPTION,
         _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+        _SCHEMA_SERVICE_QUOTA_EXCEEDED_EXCEPTION,
         _SCHEMA_THROTTLING_EXCEPTION,
         _SCHEMA_VALIDATION_EXCEPTION,
     ],
@@ -44022,6 +47692,16 @@ class ListTagsForResourceOutput:
 
     tags: dict[str, str] | None = None
     """The tags associated with the resource."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_TAGS_FOR_RESOURCE_OUTPUT, self)
@@ -44107,7 +47787,7 @@ class IndexedKey:
     key: str
     """The metadata key name to index."""
 
-    type: MetadataValueType
+    type: str
     """The data type of the indexed key."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -44763,10 +48443,10 @@ class MetadataSchemaEntry:
     metadata filters.
     """
 
-    type: MetadataValueType | None = None
+    type: str | None = None
     """The MetadataValueType."""
 
-    extraction_type: ExtractionType | None = None
+    extraction_type: str | None = None
     """
     Specifies whether the metadata value is extracted by the LLM or passed
     through deterministically from the event.
@@ -47288,10 +50968,10 @@ class ContentType(UnknownEnumMixin, StrEnum):
 class ContentConfiguration:
     """Defines what content to stream and at what level of detail."""
 
-    type: ContentType
+    type: str
     """Type of content to stream."""
 
-    level: ContentLevel = ContentLevel("METADATA_ONLY")
+    level: str = ContentLevel("METADATA_ONLY")
     """Level of detail for streamed content."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -49549,7 +53229,7 @@ class OverrideType(UnknownEnumMixin, StrEnum):
 class StrategyConfiguration:
     """Contains configuration information for a memory strategy."""
 
-    type: OverrideType | None = None
+    type: str | None = None
     """The type of override for the strategy configuration."""
 
     extraction: ExtractionConfiguration | None = None
@@ -49662,7 +53342,7 @@ class MemoryStrategy:
     name: str
     """The name of the memory strategy."""
 
-    type: MemoryStrategyType
+    type: str
     """The type of the memory strategy."""
 
     namespaces: list[str]
@@ -49686,7 +53366,7 @@ class MemoryStrategy:
     updated_at: datetime | None = None
     """The timestamp when the memory strategy was last updated."""
 
-    status: MemoryStrategyStatus | None = None
+    status: str | None = None
     """The current status of the memory strategy."""
 
     memory_record_schema: MemoryRecordSchema | None = None
@@ -49859,7 +53539,7 @@ class Memory:
     event_expiry_duration: int
     """The number of days after which memory events will expire."""
 
-    status: MemoryStatus
+    status: str
     """The current status of the memory."""
 
     created_at: datetime
@@ -50094,6 +53774,16 @@ class CreateMemoryOutput:
     description, and configuration settings.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_MEMORY_OUTPUT, self)
 
@@ -50305,8 +53995,18 @@ class DeleteMemoryOutput:
     memory_id: str
     """The unique identifier of the deleted AgentCore Memory resource."""
 
-    status: MemoryStatus | None = None
+    status: str | None = None
     """The current status of the AgentCore Memory resource deletion."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_MEMORY_OUTPUT, self)
@@ -50401,7 +54101,7 @@ class GetMemoryInput:
     memory_id: str | None = None
     """The unique identifier of the memory to retrieve."""
 
-    view: MemoryView = MemoryView("full")
+    view: str = MemoryView("full")
     """The level of detail to return for the memory."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -50449,6 +54149,16 @@ class GetMemoryOutput:
 
     memory: Memory
     """The retrieved AgentCore Memory resource details."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MEMORY_OUTPUT, self)
@@ -50590,7 +54300,7 @@ class MemorySummary:
     id: str | None = None
     """The unique identifier of the memory."""
 
-    status: MemoryStatus | None = None
+    status: str | None = None
     """The current status of the memory."""
 
     managed_by_resource_arn: str | None = None
@@ -50709,6 +54419,16 @@ class ListMemoriesOutput:
 
     next_token: str | None = None
     """A token to retrieve the next page of results."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_MEMORIES_OUTPUT, self)
@@ -52278,6 +55998,16 @@ class UpdateMemoryOutput:
     memory: Memory | None = None
     """The updated AgentCore Memory resource details."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_MEMORY_OUTPUT, self)
 
@@ -52408,7 +56138,7 @@ class AtlassianOauth2ProviderConfigInput:
     `clientSecretSource` is set to `EXTERNAL`.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret for the Atlassian OAuth2 provider.
     Use `MANAGED` if the secret is managed by the service, or `EXTERNAL` if
@@ -52818,7 +56548,7 @@ def _deserialize_scopes_list_type(
 class TokenExchangeGrantTypeConfigType:
     """Configuration for RFC 8693 token exchange."""
 
-    actor_token_content: ActorTokenContentType
+    actor_token_content: str
     """The content type for the actor token in the token exchange."""
 
     actor_token_scopes: list[str] | None = None
@@ -52886,7 +56616,7 @@ class TokenExchangeGrantTypeConfigType:
 class OnBehalfOfTokenExchangeConfigType:
     """Configuration for on-behalf-of token exchange."""
 
-    grant_type: OnBehalfOfTokenExchangeGrantTypeType
+    grant_type: str
     """The grant type for the on-behalf-of token exchange."""
 
     token_exchange_grant_type_config: TokenExchangeGrantTypeConfigType | None = None
@@ -53082,7 +56812,7 @@ class PrivateKeyJwtConfig:
     private_key_source: PrivateKeySource | None = None
     """The private key source for the JWT client assertion."""
 
-    signing_algorithm: SigningAlgorithm | None = None
+    signing_algorithm: str | None = None
     """
     The algorithm used to sign the JWT client assertion. Valid values are
     `RS256`, `PS256`, and `ES256`.
@@ -53199,7 +56929,7 @@ class CustomOauth2ProviderConfigInput:
     `clientSecretSource` is set to `EXTERNAL`.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret. Use `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if you manage the secret yourself
@@ -53213,7 +56943,7 @@ class CustomOauth2ProviderConfigInput:
     authorization grants.
     """
 
-    client_authentication_method: ClientAuthenticationMethodType | None = None
+    client_authentication_method: str | None = None
     """
     The client authentication method to use when authenticating with the
     token endpoint.
@@ -53413,7 +57143,7 @@ class GithubOauth2ProviderConfigInput:
     `clientSecretSource` is set to `EXTERNAL`.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret. Use `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if you manage the secret yourself
@@ -53511,7 +57241,7 @@ class GoogleOauth2ProviderConfigInput:
     `clientSecretSource` is set to `EXTERNAL`.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret. Use `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if you manage the secret yourself
@@ -53620,7 +57350,7 @@ class IncludedOauth2ProviderConfigInput:
     `clientSecretSource` is set to `EXTERNAL`.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret. Use `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if you manage the secret yourself
@@ -53790,7 +57520,7 @@ class LinkedinOauth2ProviderConfigInput:
     `clientSecretSource` is set to `EXTERNAL`.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret. Use `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if you manage the secret yourself
@@ -53890,7 +57620,7 @@ class MicrosoftOauth2ProviderConfigInput:
     `clientSecretSource` is set to `EXTERNAL`.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret. Use `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if you manage the secret yourself
@@ -54010,7 +57740,7 @@ class SalesforceOauth2ProviderConfigInput:
     `clientSecretSource` is set to `EXTERNAL`.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret. Use `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if you manage the secret yourself
@@ -54110,7 +57840,7 @@ class SlackOauth2ProviderConfigInput:
     `clientSecretSource` is set to `EXTERNAL`.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret. Use `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if you manage the secret yourself
@@ -54517,7 +58247,7 @@ class CreateOauth2CredentialProviderInput:
     within your account.
     """
 
-    credential_provider_vendor: CredentialProviderVendorType | None = None
+    credential_provider_vendor: str | None = None
     """
     The vendor of the OAuth2 credential provider. This specifies which
     OAuth2 implementation to use.
@@ -54686,7 +58416,7 @@ class CustomOauth2ProviderConfigOutput:
     on_behalf_of_token_exchange_config: OnBehalfOfTokenExchangeConfigType | None = None
     """The configuration for on-behalf-of token exchange."""
 
-    client_authentication_method: ClientAuthenticationMethodType | None = None
+    client_authentication_method: str | None = None
     """
     The client authentication method used when authenticating with the token
     endpoint.
@@ -55580,7 +59310,7 @@ class CreateOauth2CredentialProviderOutput:
     Services Secrets Manager secret.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret. Either `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if managed by the user in Amazon
@@ -55597,8 +59327,18 @@ class CreateOauth2CredentialProviderOutput:
     oauth2_provider_config_output: Oauth2ProviderConfigOutput | None = None
     """Contains the output configuration for an OAuth2 provider."""
 
-    status: Status | None = None
+    status: str | None = None
     """The current status of the OAuth2 credential provider."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_OAUTH2_CREDENTIAL_PROVIDER_OUTPUT, self)
@@ -55835,6 +59575,16 @@ class DeleteOauth2CredentialProviderInput:
 class DeleteOauth2CredentialProviderOutput:
     """Dataclass for DeleteOauth2CredentialProviderOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_OAUTH2_CREDENTIAL_PROVIDER_OUTPUT, self)
 
@@ -55960,7 +59710,7 @@ class GetOauth2CredentialProviderOutput:
     credential_provider_arn: str
     """ARN of the credential provider requested."""
 
-    credential_provider_vendor: CredentialProviderVendorType
+    credential_provider_vendor: str
     """The vendor of the OAuth2 credential provider."""
 
     oauth2_provider_config_output: Oauth2ProviderConfigOutput
@@ -55978,7 +59728,7 @@ class GetOauth2CredentialProviderOutput:
     Services Secrets Manager secret.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret. Either `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if managed by the user in Amazon
@@ -55992,13 +59742,23 @@ class GetOauth2CredentialProviderOutput:
     redirects users after they complete the authorization flow.
     """
 
-    status: Status | None = None
+    status: str | None = None
     """The current status of the OAuth2 credential provider."""
 
     failure_reason: str | None = None
     """
     The reason for failure if the OAuth2 credential provider is in a failed
     state.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -56301,7 +60061,7 @@ class Oauth2CredentialProviderItem:
     name: str
     """The name of the OAuth2 credential provider."""
 
-    credential_provider_vendor: CredentialProviderVendorType
+    credential_provider_vendor: str
     """The vendor of the OAuth2 credential provider."""
 
     credential_provider_arn: str
@@ -56438,6 +60198,16 @@ class ListOauth2CredentialProvidersOutput:
     next_token: str | None = None
     """Pagination token for the next page of results."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_OAUTH2_CREDENTIAL_PROVIDERS_OUTPUT, self)
 
@@ -56540,7 +60310,7 @@ class UpdateOauth2CredentialProviderInput:
     name: str | None = None
     """The name of the OAuth2 credential provider to update."""
 
-    credential_provider_vendor: CredentialProviderVendorType | None = None
+    credential_provider_vendor: str | None = None
     """The vendor of the OAuth2 credential provider."""
 
     oauth2_provider_config_input: Oauth2ProviderConfigInput | None = None
@@ -56623,7 +60393,7 @@ class UpdateOauth2CredentialProviderOutput:
     name: str
     """The name of the OAuth2 credential provider."""
 
-    credential_provider_vendor: CredentialProviderVendorType
+    credential_provider_vendor: str
     """The vendor of the OAuth2 credential provider."""
 
     credential_provider_arn: str
@@ -56644,7 +60414,7 @@ class UpdateOauth2CredentialProviderOutput:
     Services Secrets Manager secret.
     """
 
-    client_secret_source: SecretSourceType | None = None
+    client_secret_source: str | None = None
     """
     The source type of the client secret. Either `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if managed by the user in Amazon
@@ -56658,8 +60428,18 @@ class UpdateOauth2CredentialProviderOutput:
     redirects users after they complete the authorization flow.
     """
 
-    status: Status | None = None
+    status: str | None = None
     """The current status of the updated OAuth2 credential provider."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_OAUTH2_CREDENTIAL_PROVIDER_OUTPUT, self)
@@ -56901,7 +60681,7 @@ class ClusteringFrequency(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_clustering_frequency_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[ClusteringFrequency]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -56911,8 +60691,8 @@ def _serialize_clustering_frequency_list(
 
 def _deserialize_clustering_frequency_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[ClusteringFrequency]:
-    result: list[ClusteringFrequency] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -56933,7 +60713,7 @@ class ClusteringConfig:
     often clustering jobs run.
     """
 
-    frequencies: list[ClusteringFrequency]
+    frequencies: list[str]
     """
     The list of frequencies at which clustering batch evaluations are
     triggered.
@@ -56971,6 +60751,32 @@ class ClusteringConfig:
         if "frequencies" not in kwargs:
             kwargs["frequencies"] = []
         return kwargs
+
+
+def _serialize_log_group_name_prefix_list(
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_string(member_schema, e)
+
+
+def _deserialize_log_group_name_prefix_list(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[str]:
+    result: list[str] = []
+    member_schema = schema.members["member"]
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(d.read_string(member_schema))
+
+    deserializer.read_list(schema, _read_value)
+    return result
 
 
 def _serialize_log_group_names_list(
@@ -57032,13 +60838,21 @@ class CloudWatchLogsInputConfig:
     for online evaluation.
     """
 
-    log_group_names: list[str]
-    """The list of CloudWatch log group names to monitor for agent traces."""
-
     service_names: list[str]
     """
     The list of service names to filter traces within the specified log
     groups. Used to identify relevant agent sessions.
+    """
+
+    log_group_names: list[str] = field(default_factory=list[str])
+    """The list of CloudWatch log group names to monitor for agent traces."""
+
+    log_group_name_prefixes: list[str] | None = None
+    """
+    The list of CloudWatch log group name prefixes to monitor for agent
+    traces. Specify this instead of `logGroupNames` to match log groups by
+    prefix. Specify either `logGroupNames` or `logGroupNamePrefixes`, not
+    both. One of the two is required.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -57050,6 +60864,13 @@ class CloudWatchLogsInputConfig:
             _SCHEMA_CLOUD_WATCH_LOGS_INPUT_CONFIG.members["logGroupNames"],
             self.log_group_names,
         )
+        if self.log_group_name_prefixes is not None:
+            _serialize_log_group_name_prefix_list(
+                serializer,
+                _SCHEMA_CLOUD_WATCH_LOGS_INPUT_CONFIG.members["logGroupNamePrefixes"],
+                self.log_group_name_prefixes,
+            )
+
         _serialize_service_names_list(
             serializer,
             _SCHEMA_CLOUD_WATCH_LOGS_INPUT_CONFIG.members["serviceNames"],
@@ -57073,6 +60894,16 @@ class CloudWatchLogsInputConfig:
                     )
 
                 case 1:
+                    kwargs["log_group_name_prefixes"] = (
+                        _deserialize_log_group_name_prefix_list(
+                            de,
+                            _SCHEMA_CLOUD_WATCH_LOGS_INPUT_CONFIG.members[
+                                "logGroupNamePrefixes"
+                            ],
+                        )
+                    )
+
+                case 2:
                     kwargs["service_names"] = _deserialize_service_names_list(
                         de,
                         _SCHEMA_CLOUD_WATCH_LOGS_INPUT_CONFIG.members["serviceNames"],
@@ -57084,8 +60915,6 @@ class CloudWatchLogsInputConfig:
         deserializer.read_struct(
             _SCHEMA_CLOUD_WATCH_LOGS_INPUT_CONFIG, consumer=_consumer
         )
-        if "log_group_names" not in kwargs:
-            kwargs["log_group_names"] = []
         if "service_names" not in kwargs:
             kwargs["service_names"] = []
         return kwargs
@@ -57357,6 +61186,157 @@ def _deserialize_insight_list(
     return result
 
 
+class ResultDestination(UnknownEnumMixin, StrEnum):
+    """
+    Where evaluation results are written: dedicated results log group
+    (default) or the source log group.
+    """
+
+    DEDICATED_LOG_GROUP = "DEDICATED_LOG_GROUP"
+    SOURCE_LOG_GROUP = "SOURCE_LOG_GROUP"
+
+
+@dataclass(kw_only=True)
+class CloudWatchOutputConfig:
+    """
+    The configuration for writing evaluation results to CloudWatch logs with
+    embedded metric format (EMF) for monitoring.
+    """
+
+    log_group_name: str = ""
+    """
+    The name of the CloudWatch log group where evaluation results will be
+    written. An existing log group is used as-is; otherwise the service
+    creates it, which requires the evaluation execution role to grant
+    `logs:CreateLogGroup` on the log group. Don't specify this value when
+    `resultDestination` is `SOURCE_LOG_GROUP`. The name can't be under the
+    service-reserved `/aws/bedrock-agentcore/evaluations/` namespace, apart
+    from this configuration's own service-managed default group.
+    """
+
+    metrics_namespace: str | None = None
+    """
+    The CloudWatch metrics namespace where evaluation result metrics are
+    published. If you omit this value, the service publishes metrics to
+    `Bedrock-AgentCore/Evaluations`. This value can't begin with `AWS/`.
+    """
+
+    result_destination: str = ResultDestination("DEDICATED_LOG_GROUP")
+    """
+    The destination where evaluation results are written. Valid values:
+
+    - `DEDICATED_LOG_GROUP` (default) -- Writes results to a dedicated
+      result log group.
+
+    - `SOURCE_LOG_GROUP` -- Writes results back to the log group that the
+      agent traces were read from. If you use this value, don't specify
+      `logGroupName`.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG.members["logGroupName"],
+            self.log_group_name,
+        )
+        if self.metrics_namespace is not None:
+            serializer.write_string(
+                _SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG.members["metricsNamespace"],
+                self.metrics_namespace,
+            )
+
+        serializer.write_string(
+            _SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG.members["resultDestination"],
+            self.result_destination,
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["log_group_name"] = de.read_string(
+                        _SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG.members["logGroupName"]
+                    )
+
+                case 1:
+                    kwargs["metrics_namespace"] = de.read_string(
+                        _SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG.members["metricsNamespace"]
+                    )
+
+                case 2:
+                    kwargs["result_destination"] = ResultDestination(
+                        de.read_string(
+                            _SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG.members[
+                                "resultDestination"
+                            ]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG, consumer=_consumer)
+        return kwargs
+
+    @classmethod
+    def _smithy_default(cls) -> Self:
+        return cls()
+
+
+@dataclass(kw_only=True)
+class OutputConfig:
+    """
+    The configuration that specifies where evaluation results should be
+    written for monitoring and analysis.
+    """
+
+    cloud_watch_config: CloudWatchOutputConfig
+    """
+    The CloudWatch configuration for writing evaluation results to
+    CloudWatch logs with embedded metric format.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_OUTPUT_CONFIG, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_OUTPUT_CONFIG.members["cloudWatchConfig"], self.cloud_watch_config
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["cloud_watch_config"] = CloudWatchOutputConfig.deserialize(
+                        de
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_OUTPUT_CONFIG, consumer=_consumer)
+        if "cloud_watch_config" not in kwargs:
+            kwargs["cloud_watch_config"] = CloudWatchOutputConfig._smithy_default()
+        return kwargs
+
+
 class FilterOperator(UnknownEnumMixin, StrEnum):
     EQUALS = "Equals"
     NOT_EQUALS = "NotEquals"
@@ -57511,7 +61491,7 @@ class Filter:
     key: str
     """The key or field name to filter on within the agent trace data."""
 
-    operator: FilterOperator
+    operator: str
     """The comparison operator to use for filtering."""
 
     value: FilterValue
@@ -57810,6 +61790,12 @@ class CreateOnlineEvaluationConfigInput:
     results.
     """
 
+    output_config: OutputConfig | None = None
+    """
+    The configuration that specifies where evaluation results should be
+    written for monitoring and analysis.
+    """
+
     evaluation_execution_role_arn: str | None = None
     """
     The Amazon Resource Name (ARN) of the IAM role that grants permissions
@@ -57894,6 +61880,12 @@ class CreateOnlineEvaluationConfigInput:
                 self.clustering_config,
             )
 
+        if self.output_config is not None:
+            serializer.write_struct(
+                _SCHEMA_CREATE_ONLINE_EVALUATION_CONFIG_INPUT.members["outputConfig"],
+                self.output_config,
+            )
+
         if self.evaluation_execution_role_arn is not None:
             serializer.write_string(
                 _SCHEMA_CREATE_ONLINE_EVALUATION_CONFIG_INPUT.members[
@@ -57974,20 +61966,23 @@ class CreateOnlineEvaluationConfigInput:
                     kwargs["clustering_config"] = ClusteringConfig.deserialize(de)
 
                 case 8:
+                    kwargs["output_config"] = OutputConfig.deserialize(de)
+
+                case 9:
                     kwargs["evaluation_execution_role_arn"] = de.read_string(
                         _SCHEMA_CREATE_ONLINE_EVALUATION_CONFIG_INPUT.members[
                             "evaluationExecutionRoleArn"
                         ]
                     )
 
-                case 9:
+                case 10:
                     kwargs["enable_on_create"] = de.read_boolean(
                         _SCHEMA_CREATE_ONLINE_EVALUATION_CONFIG_INPUT.members[
                             "enableOnCreate"
                         ]
                     )
 
-                case 10:
+                case 11:
                     kwargs["tags"] = _deserialize_tags_map(
                         de,
                         _SCHEMA_CREATE_ONLINE_EVALUATION_CONFIG_INPUT.members["tags"],
@@ -58005,101 +62000,6 @@ class CreateOnlineEvaluationConfigInput:
 class OnlineEvaluationExecutionStatus(UnknownEnumMixin, StrEnum):
     ENABLED = "ENABLED"
     DISABLED = "DISABLED"
-
-
-@dataclass(kw_only=True)
-class CloudWatchOutputConfig:
-    """
-    The configuration for writing evaluation results to CloudWatch logs with
-    embedded metric format (EMF) for monitoring.
-    """
-
-    log_group_name: str
-    """
-    The name of the CloudWatch log group where evaluation results will be
-    written. The log group will be created if it doesn't exist.
-    """
-
-    def serialize(self, serializer: ShapeSerializer):
-        serializer.write_struct(_SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG, self)
-
-    def serialize_members(self, serializer: ShapeSerializer):
-        serializer.write_string(
-            _SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG.members["logGroupName"],
-            self.log_group_name,
-        )
-
-    @classmethod
-    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
-        return cls(**cls.deserialize_kwargs(deserializer))
-
-    @classmethod
-    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
-        kwargs: dict[str, Any] = {}
-
-        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
-            match schema.expect_member_index():
-                case 0:
-                    kwargs["log_group_name"] = de.read_string(
-                        _SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG.members["logGroupName"]
-                    )
-
-                case _:
-                    logger.debug("Unexpected member schema: %s", schema)
-
-        deserializer.read_struct(_SCHEMA_CLOUD_WATCH_OUTPUT_CONFIG, consumer=_consumer)
-        if "log_group_name" not in kwargs:
-            kwargs["log_group_name"] = ""
-        return kwargs
-
-    @classmethod
-    def _smithy_default(cls) -> Self:
-        return cls(log_group_name="")
-
-
-@dataclass(kw_only=True)
-class OutputConfig:
-    """
-    The configuration that specifies where evaluation results should be
-    written for monitoring and analysis.
-    """
-
-    cloud_watch_config: CloudWatchOutputConfig
-    """
-    The CloudWatch configuration for writing evaluation results to
-    CloudWatch logs with embedded metric format.
-    """
-
-    def serialize(self, serializer: ShapeSerializer):
-        serializer.write_struct(_SCHEMA_OUTPUT_CONFIG, self)
-
-    def serialize_members(self, serializer: ShapeSerializer):
-        serializer.write_struct(
-            _SCHEMA_OUTPUT_CONFIG.members["cloudWatchConfig"], self.cloud_watch_config
-        )
-
-    @classmethod
-    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
-        return cls(**cls.deserialize_kwargs(deserializer))
-
-    @classmethod
-    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
-        kwargs: dict[str, Any] = {}
-
-        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
-            match schema.expect_member_index():
-                case 0:
-                    kwargs["cloud_watch_config"] = CloudWatchOutputConfig.deserialize(
-                        de
-                    )
-
-                case _:
-                    logger.debug("Unexpected member schema: %s", schema)
-
-        deserializer.read_struct(_SCHEMA_OUTPUT_CONFIG, consumer=_consumer)
-        if "cloud_watch_config" not in kwargs:
-            kwargs["cloud_watch_config"] = CloudWatchOutputConfig._smithy_default()
-        return kwargs
 
 
 class OnlineEvaluationConfigStatus(UnknownEnumMixin, StrEnum):
@@ -58128,10 +62028,10 @@ class CreateOnlineEvaluationConfigOutput:
     created_at: datetime
     """The timestamp when the online evaluation configuration was created."""
 
-    status: OnlineEvaluationConfigStatus
+    status: str
     """The status of the online evaluation configuration."""
 
-    execution_status: OnlineEvaluationExecutionStatus
+    execution_status: str
     """
     The execution status indicating whether the online evaluation is
     currently running.
@@ -58147,6 +62047,16 @@ class CreateOnlineEvaluationConfigOutput:
     """
     The reason for failure if the online evaluation configuration creation
     or execution failed.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -58365,8 +62275,18 @@ class DeleteOnlineEvaluationConfigOutput:
     online_evaluation_config_id: str
     """The unique identifier of the deleted online evaluation configuration."""
 
-    status: OnlineEvaluationConfigStatus
+    status: str
     """The status of the online evaluation configuration deletion operation."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_ONLINE_EVALUATION_CONFIG_OUTPUT, self)
@@ -58550,10 +62470,10 @@ class GetOnlineEvaluationConfigOutput:
     service names to monitor.
     """
 
-    status: OnlineEvaluationConfigStatus
+    status: str
     """The status of the online evaluation configuration."""
 
-    execution_status: OnlineEvaluationExecutionStatus
+    execution_status: str
     """
     The execution status indicating whether the online evaluation is
     currently running.
@@ -58595,6 +62515,16 @@ class GetOnlineEvaluationConfigOutput:
     """
     The reason for failure if the online evaluation configuration execution
     failed.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -58937,10 +62867,10 @@ class OnlineEvaluationConfigSummary:
     online_evaluation_config_name: str
     """The name of the online evaluation configuration."""
 
-    status: OnlineEvaluationConfigStatus
+    status: str
     """The status of the online evaluation configuration."""
 
-    execution_status: OnlineEvaluationExecutionStatus
+    execution_status: str
     """
     The execution status indicating whether the online evaluation is
     currently running.
@@ -59172,6 +63102,16 @@ class ListOnlineEvaluationConfigsOutput:
     page of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_ONLINE_EVALUATION_CONFIGS_OUTPUT, self)
 
@@ -59300,13 +63240,19 @@ class UpdateOnlineEvaluationConfigInput:
     clustering_config: ClusteringConfig | None = None
     """The updated clustering configuration for periodic batch evaluation."""
 
+    output_config: OutputConfig | None = None
+    """
+    The configuration that specifies where evaluation results should be
+    written for monitoring and analysis.
+    """
+
     evaluation_execution_role_arn: str | None = None
     """
     The updated Amazon Resource Name (ARN) of the IAM role used for
     evaluation execution.
     """
 
-    execution_status: OnlineEvaluationExecutionStatus | None = None
+    execution_status: str | None = None
     """The updated execution status to enable or disable the online evaluation."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -59366,6 +63312,12 @@ class UpdateOnlineEvaluationConfigInput:
                     "clusteringConfig"
                 ],
                 self.clustering_config,
+            )
+
+        if self.output_config is not None:
+            serializer.write_struct(
+                _SCHEMA_UPDATE_ONLINE_EVALUATION_CONFIG_INPUT.members["outputConfig"],
+                self.output_config,
             )
 
         if self.evaluation_execution_role_arn is not None:
@@ -59443,13 +63395,16 @@ class UpdateOnlineEvaluationConfigInput:
                     kwargs["clustering_config"] = ClusteringConfig.deserialize(de)
 
                 case 8:
+                    kwargs["output_config"] = OutputConfig.deserialize(de)
+
+                case 9:
                     kwargs["evaluation_execution_role_arn"] = de.read_string(
                         _SCHEMA_UPDATE_ONLINE_EVALUATION_CONFIG_INPUT.members[
                             "evaluationExecutionRoleArn"
                         ]
                     )
 
-                case 9:
+                case 10:
                     kwargs["execution_status"] = OnlineEvaluationExecutionStatus(
                         de.read_string(
                             _SCHEMA_UPDATE_ONLINE_EVALUATION_CONFIG_INPUT.members[
@@ -59483,10 +63438,10 @@ class UpdateOnlineEvaluationConfigOutput:
     updated_at: datetime
     """The timestamp when the online evaluation configuration was last updated."""
 
-    status: OnlineEvaluationConfigStatus
+    status: str
     """The status of the online evaluation configuration."""
 
-    execution_status: OnlineEvaluationExecutionStatus
+    execution_status: str
     """
     The execution status indicating whether the online evaluation is
     currently running.
@@ -59496,6 +63451,16 @@ class UpdateOnlineEvaluationConfigOutput:
     """
     The reason for failure if the online evaluation configuration update or
     execution failed.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -59676,7 +63641,7 @@ class CoinbaseCdpConfigurationInput:
     api_key_secret: str = field(repr=False, default="")
     """The API key secret provided by Coinbase Developer Platform."""
 
-    api_key_secret_source: SecretSourceType | None = None
+    api_key_secret_source: str | None = None
     """
     The source type of the API key secret for the Coinbase Developer
     Platform. Use `MANAGED` if the secret is managed by the service, or
@@ -59695,7 +63660,7 @@ class CoinbaseCdpConfigurationInput:
     wallet_secret: str = field(repr=False, default="")
     """The wallet secret provided by Coinbase Developer Platform."""
 
-    wallet_secret_source: SecretSourceType | None = None
+    wallet_secret_source: str | None = None
     """
     The source type of the wallet secret for the Coinbase Developer
     Platform. Use `MANAGED` if the secret is managed by the service, or
@@ -59824,7 +63789,7 @@ class StripePrivyConfigurationInput:
     app_secret: str = field(repr=False, default="")
     """The app secret provided by Privy."""
 
-    app_secret_source: SecretSourceType | None = None
+    app_secret_source: str | None = None
     """
     The source type of the app secret. Use `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if you manage the secret yourself
@@ -59842,7 +63807,7 @@ class StripePrivyConfigurationInput:
     authorization_private_key: str = field(repr=False, default="")
     """The authorization private key for the Stripe Privy integration."""
 
-    authorization_private_key_source: SecretSourceType | None = None
+    authorization_private_key_source: str | None = None
     """
     The source type of the authorization private key. Use `MANAGED` if the
     secret is managed by the service, or `EXTERNAL` if you manage the secret
@@ -60114,7 +64079,7 @@ class CreatePaymentCredentialProviderInput:
     name: str | None = None
     """Unique name for the payment credential provider."""
 
-    credential_provider_vendor: PaymentCredentialProviderVendorType | None = None
+    credential_provider_vendor: str | None = None
     """
     The vendor type for the payment credential provider (e.g., CoinbaseCDP,
     StripePrivy).
@@ -60232,7 +64197,7 @@ class CoinbaseCdpConfigurationOutput:
     Web Services Secrets Manager secret.
     """
 
-    api_key_secret_source: SecretSourceType | None = None
+    api_key_secret_source: str | None = None
     """
     The source type of the API key secret. Either `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if managed by the user in Amazon
@@ -60245,7 +64210,7 @@ class CoinbaseCdpConfigurationOutput:
     Services Secrets Manager secret.
     """
 
-    wallet_secret_source: SecretSourceType | None = None
+    wallet_secret_source: str | None = None
     """
     The source type of the wallet secret. Either `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if managed by the user in Amazon
@@ -60392,7 +64357,7 @@ class StripePrivyConfigurationOutput:
     Services Secrets Manager secret.
     """
 
-    app_secret_source: SecretSourceType | None = None
+    app_secret_source: str | None = None
     """
     The source type of the app secret. Either `MANAGED` if the secret is
     managed by the service, or `EXTERNAL` if managed by the user in Amazon
@@ -60405,7 +64370,7 @@ class StripePrivyConfigurationOutput:
     the Amazon Web Services Secrets Manager secret.
     """
 
-    authorization_private_key_source: SecretSourceType | None = None
+    authorization_private_key_source: str | None = None
     """
     The source type of the authorization private key. Either `MANAGED` if
     the secret is managed by the service, or `EXTERNAL` if managed by the
@@ -60674,7 +64639,7 @@ class CreatePaymentCredentialProviderOutput:
     name: str
     """The name of the created payment credential provider."""
 
-    credential_provider_vendor: PaymentCredentialProviderVendorType
+    credential_provider_vendor: str
     """The vendor type for the created payment credential provider."""
 
     credential_provider_arn: str
@@ -60687,6 +64652,16 @@ class CreatePaymentCredentialProviderOutput:
     """
     Output configuration (contains secret ARNs, excludes actual secret
     values).
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -60883,6 +64858,16 @@ class DeletePaymentCredentialProviderInput:
 class DeletePaymentCredentialProviderOutput:
     """Dataclass for DeletePaymentCredentialProviderOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_PAYMENT_CREDENTIAL_PROVIDER_OUTPUT, self)
 
@@ -60998,7 +64983,7 @@ class GetPaymentCredentialProviderOutput:
     credential_provider_arn: str
     """The Amazon Resource Name (ARN) of the payment credential provider."""
 
-    credential_provider_vendor: PaymentCredentialProviderVendorType
+    credential_provider_vendor: str
     """The vendor type for the payment credential provider."""
 
     provider_configuration_output: PaymentProviderConfigurationOutput
@@ -61015,6 +65000,16 @@ class GetPaymentCredentialProviderOutput:
 
     tags: dict[str, str] | None = None
     """The tags associated with the payment credential provider."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_PAYMENT_CREDENTIAL_PROVIDER_OUTPUT, self)
@@ -61251,7 +65246,7 @@ class PaymentCredentialProviderItem:
     name: str
     """The name of the payment credential provider."""
 
-    credential_provider_vendor: PaymentCredentialProviderVendorType
+    credential_provider_vendor: str
     """The vendor type for the payment credential provider."""
 
     credential_provider_arn: str
@@ -61392,6 +65387,16 @@ class ListPaymentCredentialProvidersOutput:
     next_token: str | None = None
     """Pagination token for the next page of results."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_PAYMENT_CREDENTIAL_PROVIDERS_OUTPUT, self)
 
@@ -61494,7 +65499,7 @@ class UpdatePaymentCredentialProviderInput:
     name: str | None = None
     """The name of the payment credential provider to update."""
 
-    credential_provider_vendor: PaymentCredentialProviderVendorType | None = None
+    credential_provider_vendor: str | None = None
     """
     The vendor type for the payment credential provider (e.g., CoinbaseCDP,
     StripePrivy).
@@ -61576,7 +65581,7 @@ class UpdatePaymentCredentialProviderOutput:
     name: str
     """The name of the updated payment credential provider."""
 
-    credential_provider_vendor: PaymentCredentialProviderVendorType
+    credential_provider_vendor: str
     """The vendor type for the updated payment credential provider."""
 
     credential_provider_arn: str
@@ -61596,6 +65601,16 @@ class UpdatePaymentCredentialProviderOutput:
 
     last_updated_time: datetime
     """The timestamp when the payment credential provider was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_PAYMENT_CREDENTIAL_PROVIDER_OUTPUT, self)
@@ -61785,7 +65800,7 @@ class CreatePaymentManagerInput:
     description: str | None = None
     """A description of the payment manager."""
 
-    authorizer_type: PaymentsAuthorizerType | None = None
+    authorizer_type: str | None = None
     """
     The type of authorizer to use for the payment manager.
 
@@ -61961,7 +65976,7 @@ class CreatePaymentManagerOutput:
     name: str
     """The name of the created payment manager."""
 
-    authorizer_type: PaymentsAuthorizerType
+    authorizer_type: str
     """The type of authorizer for the created payment manager."""
 
     role_arn: str
@@ -61973,7 +65988,7 @@ class CreatePaymentManagerOutput:
     created_at: datetime
     """The timestamp when the payment manager was created."""
 
-    status: PaymentManagerStatus
+    status: str
     """
     The current status of the payment manager. Possible values include
     `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
@@ -61996,6 +66011,16 @@ class CreatePaymentManagerOutput:
     """
     The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive
     payment manager data at rest, if configured.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -62259,7 +66284,7 @@ class DeletePaymentManagerInput:
 class DeletePaymentManagerOutput:
     """Dataclass for DeletePaymentManagerOutput structure."""
 
-    status: PaymentManagerStatus
+    status: str
     """
     The current status of the payment manager, set to `DELETING` when
     deletion is initiated. Possible values include `CREATING`, `READY`,
@@ -62269,6 +66294,16 @@ class DeletePaymentManagerOutput:
 
     payment_manager_id: str | None = None
     """The unique identifier of the deleted payment manager."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_PAYMENT_MANAGER_OUTPUT, self)
@@ -62406,7 +66441,7 @@ class GetPaymentManagerOutput:
     name: str
     """The name of the payment manager."""
 
-    authorizer_type: PaymentsAuthorizerType
+    authorizer_type: str
     """
     The type of authorizer used by the payment manager.
 
@@ -62427,7 +66462,7 @@ class GetPaymentManagerOutput:
     last_updated_at: datetime
     """The timestamp when the payment manager was last updated."""
 
-    status: PaymentManagerStatus
+    status: str
     """
     The current status of the payment manager. Possible values include
     `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
@@ -62453,6 +66488,16 @@ class GetPaymentManagerOutput:
     """
     The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive
     payment manager data at rest, if configured.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -62733,7 +66778,7 @@ class PaymentManagerSummary:
     name: str
     """The name of the payment manager."""
 
-    authorizer_type: PaymentsAuthorizerType
+    authorizer_type: str
     """
     The type of authorizer used by the payment manager.
 
@@ -62748,7 +66793,7 @@ class PaymentManagerSummary:
     payment manager.
     """
 
-    status: PaymentManagerStatus
+    status: str
     """
     The current status of the payment manager. Possible values include
     `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
@@ -62939,6 +66984,16 @@ class ListPaymentManagersOutput:
     If the total number of results is greater than the `maxResults` value
     provided in the request, use this token when making another request in
     the `nextToken` field to return the next batch of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -63257,7 +67312,7 @@ class CreatePaymentConnectorInput:
     description: str | None = None
     """A description of the payment connector."""
 
-    type: PaymentConnectorType | None = None
+    type: str | None = None
     """
     The type of payment connector, which determines the payment provider
     integration.
@@ -63272,7 +67327,7 @@ class CreatePaymentConnectorInput:
     provider.
     """
 
-    provision_mode: PaymentConnectorProvisionMode | None = None
+    provision_mode: str | None = None
     """
     The provision mode for creating the payment connector. If you don't
     specify a value, the default is `MANUAL`.
@@ -63436,7 +67491,7 @@ class CreatePaymentConnectorOutput:
     name: str
     """The name of the created payment connector."""
 
-    type: PaymentConnectorType
+    type: str
     """The type of the created payment connector."""
 
     credential_provider_configurations: list[CredentialsProviderConfiguration]
@@ -63448,7 +67503,7 @@ class CreatePaymentConnectorOutput:
     created_at: datetime
     """The timestamp when the payment connector was created."""
 
-    status: PaymentConnectorStatus
+    status: str
     """
     The current status of the payment connector. Possible values include
     `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
@@ -63460,6 +67515,16 @@ class CreatePaymentConnectorOutput:
     The URL that the user must open to complete OAuth consent. This field is
     only present when the payment connector status is
     `PENDING_AUTHENTICATION`.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -63791,7 +67856,7 @@ class DeletePaymentConnectorInput:
 class DeletePaymentConnectorOutput:
     """Dataclass for DeletePaymentConnectorOutput structure."""
 
-    status: PaymentConnectorStatus
+    status: str
     """
     The current status of the payment connector, set to `DELETING` when
     deletion is initiated. Possible values include `CREATING`, `READY`,
@@ -63801,6 +67866,16 @@ class DeletePaymentConnectorOutput:
 
     payment_connector_id: str | None = None
     """The unique identifier of the deleted payment connector."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_PAYMENT_CONNECTOR_OUTPUT, self)
@@ -63953,7 +68028,7 @@ class GetPaymentConnectorOutput:
     name: str
     """The name of the payment connector."""
 
-    type: PaymentConnectorType
+    type: str
     """
     The type of the payment connector, which determines the payment provider
     integration.
@@ -63968,7 +68043,7 @@ class GetPaymentConnectorOutput:
     last_updated_at: datetime
     """The timestamp when the payment connector was last updated."""
 
-    status: PaymentConnectorStatus
+    status: str
     """
     The current status of the payment connector. Possible values include
     `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
@@ -63978,11 +68053,43 @@ class GetPaymentConnectorOutput:
     description: str | None = None
     """The description of the payment connector."""
 
+    provision_mode: str | None = None
+    """
+    Specifies how the payment connector was provisioned. Payment connectors
+    that were created before this field was available return `MANUAL`.
+
+    - `MANUAL` - You provided the credential provider configurations, so you
+      own the credentials. Rotate them with the payment provider, then call
+      `UpdatePaymentCredentialProvider`.
+
+    - `QUICK_CREATE` - AgentCore provisioned the credential provider for
+      you, so the credentials are service-managed. You can rotate them with
+      `RotatePaymentConnectorCredentials`.
+    """
+
     authorization_url: str | None = None
     """
     The URL that the user must open to complete OAuth consent. This field is
     only present when the payment connector status is
     `PENDING_AUTHENTICATION`.
+    """
+
+    credentials_updated_at: datetime | None = None
+    """
+    The timestamp when the payment connector's current service-managed
+    credentials took effect. It is first set when the credentials are
+    provisioned and is updated by each rotation. This field is present only
+    for payment connectors with a `provisionMode` of `QUICK_CREATE`.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -64005,6 +68112,12 @@ class GetPaymentConnectorOutput:
         serializer.write_string(
             _SCHEMA_GET_PAYMENT_CONNECTOR_OUTPUT.members["type"], self.type
         )
+        if self.provision_mode is not None:
+            serializer.write_string(
+                _SCHEMA_GET_PAYMENT_CONNECTOR_OUTPUT.members["provisionMode"],
+                self.provision_mode,
+            )
+
         _serialize_credentials_provider_configurations(
             serializer,
             _SCHEMA_GET_PAYMENT_CONNECTOR_OUTPUT.members[
@@ -64026,6 +68139,12 @@ class GetPaymentConnectorOutput:
             serializer.write_string(
                 _SCHEMA_GET_PAYMENT_CONNECTOR_OUTPUT.members["authorizationUrl"],
                 self.authorization_url,
+            )
+
+        if self.credentials_updated_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_GET_PAYMENT_CONNECTOR_OUTPUT.members["credentialsUpdatedAt"],
+                self.credentials_updated_at,
             )
 
     @classmethod
@@ -64063,6 +68182,15 @@ class GetPaymentConnectorOutput:
                     )
 
                 case 4:
+                    kwargs["provision_mode"] = PaymentConnectorProvisionMode(
+                        de.read_string(
+                            _SCHEMA_GET_PAYMENT_CONNECTOR_OUTPUT.members[
+                                "provisionMode"
+                            ]
+                        )
+                    )
+
+                case 5:
                     kwargs["credential_provider_configurations"] = (
                         _deserialize_credentials_provider_configurations(
                             de,
@@ -64072,26 +68200,33 @@ class GetPaymentConnectorOutput:
                         )
                     )
 
-                case 5:
+                case 6:
                     kwargs["created_at"] = de.read_timestamp(
                         _SCHEMA_GET_PAYMENT_CONNECTOR_OUTPUT.members["createdAt"]
                     )
 
-                case 6:
+                case 7:
                     kwargs["last_updated_at"] = de.read_timestamp(
                         _SCHEMA_GET_PAYMENT_CONNECTOR_OUTPUT.members["lastUpdatedAt"]
                     )
 
-                case 7:
+                case 8:
                     kwargs["status"] = PaymentConnectorStatus(
                         de.read_string(
                             _SCHEMA_GET_PAYMENT_CONNECTOR_OUTPUT.members["status"]
                         )
                     )
 
-                case 8:
+                case 9:
                     kwargs["authorization_url"] = de.read_string(
                         _SCHEMA_GET_PAYMENT_CONNECTOR_OUTPUT.members["authorizationUrl"]
+                    )
+
+                case 10:
+                    kwargs["credentials_updated_at"] = de.read_timestamp(
+                        _SCHEMA_GET_PAYMENT_CONNECTOR_OUTPUT.members[
+                            "credentialsUpdatedAt"
+                        ]
                     )
 
                 case _:
@@ -64243,13 +68378,13 @@ class PaymentConnectorSummary:
     name: str
     """The name of the payment connector."""
 
-    type: PaymentConnectorType
+    type: str
     """
     The type of the payment connector, which determines the payment provider
     integration.
     """
 
-    status: PaymentConnectorStatus
+    status: str
     """
     The current status of the payment connector. Possible values include
     `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
@@ -64258,6 +68393,19 @@ class PaymentConnectorSummary:
 
     last_updated_at: datetime
     """The timestamp when the payment connector was last updated."""
+
+    provision_mode: str | None = None
+    """
+    Specifies how the payment connector was provisioned. Payment connectors
+    that were created before this field was available return `MANUAL`.
+
+    - `MANUAL` - You provided the credential provider configurations, so you
+      own the credentials.
+
+    - `QUICK_CREATE` - AgentCore provisioned the credential provider for
+      you, so the credentials are service-managed and you can rotate them
+      with `RotatePaymentConnectorCredentials`.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PAYMENT_CONNECTOR_SUMMARY, self)
@@ -64273,6 +68421,12 @@ class PaymentConnectorSummary:
         serializer.write_string(
             _SCHEMA_PAYMENT_CONNECTOR_SUMMARY.members["type"], self.type
         )
+        if self.provision_mode is not None:
+            serializer.write_string(
+                _SCHEMA_PAYMENT_CONNECTOR_SUMMARY.members["provisionMode"],
+                self.provision_mode,
+            )
+
         serializer.write_string(
             _SCHEMA_PAYMENT_CONNECTOR_SUMMARY.members["status"], self.status
         )
@@ -64309,13 +68463,20 @@ class PaymentConnectorSummary:
                     )
 
                 case 3:
+                    kwargs["provision_mode"] = PaymentConnectorProvisionMode(
+                        de.read_string(
+                            _SCHEMA_PAYMENT_CONNECTOR_SUMMARY.members["provisionMode"]
+                        )
+                    )
+
+                case 4:
                     kwargs["status"] = PaymentConnectorStatus(
                         de.read_string(
                             _SCHEMA_PAYMENT_CONNECTOR_SUMMARY.members["status"]
                         )
                     )
 
-                case 4:
+                case 5:
                     kwargs["last_updated_at"] = de.read_timestamp(
                         _SCHEMA_PAYMENT_CONNECTOR_SUMMARY.members["lastUpdatedAt"]
                     )
@@ -64377,6 +68538,16 @@ class ListPaymentConnectorsOutput:
     If the total number of results is greater than the `maxResults` value
     provided in the request, use this token when making another request in
     the `nextToken` field to return the next batch of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -64462,6 +68633,447 @@ LIST_PAYMENT_CONNECTORS = APIOperation(
 )
 
 
+class CoinbaseCdpSecret(UnknownEnumMixin, StrEnum):
+    API_KEY = "API_KEY"
+    WALLET_SECRET = "WALLET_SECRET"
+
+
+def _serialize_coinbase_cdp_secrets(
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_string(member_schema, e)
+
+
+def _deserialize_coinbase_cdp_secrets(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[str]:
+    result: list[str] = []
+    member_schema = schema.members["member"]
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(CoinbaseCdpSecret(d.read_string(member_schema)))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
+class CoinbaseCdpRotationTargets:
+    """Specifies the service-managed Coinbase CDP secrets to rotate."""
+
+    secrets: list[str]
+    """
+    The secrets to rotate. Specify at least one value. Each secret that you
+    specify is rotated independently.
+
+    - `API_KEY` - The API key that the payment connector uses to call
+      Coinbase CDP. Rotate it as routine maintenance, or if you suspect that
+      it is compromised.
+
+    - `WALLET_SECRET` - The wallet secret that signs transactions. Rotate it
+      only if it is lost or compromised. Coinbase CDP allows one wallet
+      secret per project, so it is replaced in place and signing can be
+      briefly interrupted.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_COINBASE_CDP_ROTATION_TARGETS, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        _serialize_coinbase_cdp_secrets(
+            serializer,
+            _SCHEMA_COINBASE_CDP_ROTATION_TARGETS.members["secrets"],
+            self.secrets,
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["secrets"] = _deserialize_coinbase_cdp_secrets(
+                        de, _SCHEMA_COINBASE_CDP_ROTATION_TARGETS.members["secrets"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_COINBASE_CDP_ROTATION_TARGETS, consumer=_consumer
+        )
+        if "secrets" not in kwargs:
+            kwargs["secrets"] = []
+        return kwargs
+
+
+@dataclass
+class CredentialRotationConfigCoinbaseCDP:
+    """The credentials to rotate for a Coinbase CDP payment connector."""
+
+    value: CoinbaseCdpRotationTargets
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_CREDENTIAL_ROTATION_CONFIG, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_CREDENTIAL_ROTATION_CONFIG.members["coinbaseCDP"], self.value
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=CoinbaseCdpRotationTargets.deserialize(deserializer))
+
+
+@dataclass
+class CredentialRotationConfigUnknown:
+    """
+    Represents an unknown variant.
+
+    If you receive this value, you will need to update your library to receive the
+    parsed value.
+
+    This value may not be deliberately sent.
+    """
+
+    tag: str
+
+    def serialize(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        raise NotImplementedError()
+
+
+CredentialRotationConfig = Union[
+    CredentialRotationConfigCoinbaseCDP | CredentialRotationConfigUnknown
+]
+"""
+Specifies the service-managed credentials to rotate. Provide the member
+that matches the payment connector's `type`.
+"""
+
+
+class _CredentialRotationConfigDeserializer:
+    _result: CredentialRotationConfig | None = None
+
+    def deserialize(self, deserializer: ShapeDeserializer) -> CredentialRotationConfig:
+        self._result = None
+        deserializer.read_struct(_SCHEMA_CREDENTIAL_ROTATION_CONFIG, self._consumer)
+
+        if self._result is None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found none."
+            )
+
+        return self._result
+
+    def _consumer(self, schema: Schema, de: ShapeDeserializer) -> None:
+        match schema.expect_member_index():
+            case 0:
+                self._set_result(CredentialRotationConfigCoinbaseCDP.deserialize(de))
+
+            case _:
+                self._set_result(
+                    CredentialRotationConfigUnknown(tag=schema.expect_member_name())
+                )
+
+    def _set_result(self, value: CredentialRotationConfig) -> None:
+        if self._result is not None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found more than one."
+            )
+        self._result = value
+
+
+@dataclass(kw_only=True)
+class RotatePaymentConnectorCredentialsInput:
+    """Dataclass for RotatePaymentConnectorCredentialsInput structure."""
+
+    payment_manager_id: str | None = None
+    """The unique identifier of the parent payment manager."""
+
+    payment_connector_id: str | None = None
+    """
+    The unique identifier of the payment connector whose credentials you
+    want to rotate.
+    """
+
+    credentials_to_rotate: CredentialRotationConfig | None = None
+    """
+    The credentials to rotate. Specify the member that matches the payment
+    connector's `type`. Each credential that you select is rotated
+    independently.
+    """
+
+    client_token: str | None = None
+    """
+    A unique, case-sensitive identifier to ensure that the API request
+    completes no more than one time. If you don't specify this field, a
+    value is randomly generated for you. If this token matches a previous
+    request, the service ignores the request, but doesn't return an error.
+    For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.payment_manager_id is not None:
+            serializer.write_string(
+                _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT.members[
+                    "paymentManagerId"
+                ],
+                self.payment_manager_id,
+            )
+
+        if self.payment_connector_id is not None:
+            serializer.write_string(
+                _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT.members[
+                    "paymentConnectorId"
+                ],
+                self.payment_connector_id,
+            )
+
+        if self.credentials_to_rotate is not None:
+            serializer.write_struct(
+                _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT.members[
+                    "credentialsToRotate"
+                ],
+                self.credentials_to_rotate,
+            )
+
+        if self.client_token is not None:
+            serializer.write_string(
+                _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT.members[
+                    "clientToken"
+                ],
+                self.client_token,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["payment_manager_id"] = de.read_string(
+                        _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT.members[
+                            "paymentManagerId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["payment_connector_id"] = de.read_string(
+                        _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT.members[
+                            "paymentConnectorId"
+                        ]
+                    )
+
+                case 2:
+                    kwargs["credentials_to_rotate"] = (
+                        _CredentialRotationConfigDeserializer().deserialize(de)
+                    )
+
+                case 3:
+                    kwargs["client_token"] = de.read_string(
+                        _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT.members[
+                            "clientToken"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class RotatePaymentConnectorCredentialsOutput:
+    """Dataclass for RotatePaymentConnectorCredentialsOutput structure."""
+
+    payment_connector_id: str
+    """The unique identifier of the payment connector."""
+
+    payment_manager_id: str
+    """The unique identifier of the parent payment manager."""
+
+    last_updated_at: datetime
+    """
+    The timestamp when the payment connector was last updated, which is when
+    the rotation completed.
+    """
+
+    status: str
+    """
+    The current status of the payment connector, which is `READY` after a
+    successful rotation.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT.members[
+                "paymentConnectorId"
+            ],
+            self.payment_connector_id,
+        )
+        serializer.write_string(
+            _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT.members[
+                "paymentManagerId"
+            ],
+            self.payment_manager_id,
+        )
+        serializer.write_timestamp(
+            _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT.members[
+                "lastUpdatedAt"
+            ],
+            self.last_updated_at,
+        )
+        serializer.write_string(
+            _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT.members["status"],
+            self.status,
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["payment_connector_id"] = de.read_string(
+                        _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT.members[
+                            "paymentConnectorId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["payment_manager_id"] = de.read_string(
+                        _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT.members[
+                            "paymentManagerId"
+                        ]
+                    )
+
+                case 2:
+                    kwargs["last_updated_at"] = de.read_timestamp(
+                        _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT.members[
+                            "lastUpdatedAt"
+                        ]
+                    )
+
+                case 3:
+                    kwargs["status"] = PaymentConnectorStatus(
+                        de.read_string(
+                            _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT.members[
+                                "status"
+                            ]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT, consumer=_consumer
+        )
+        if "payment_connector_id" not in kwargs:
+            kwargs["payment_connector_id"] = ""
+        if "payment_manager_id" not in kwargs:
+            kwargs["payment_manager_id"] = ""
+        if "last_updated_at" not in kwargs:
+            kwargs["last_updated_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        if "status" not in kwargs:
+            kwargs["status"] = PaymentConnectorStatus._corrected("")
+        return kwargs
+
+
+ROTATE_PAYMENT_CONNECTOR_CREDENTIALS = APIOperation(
+    input=RotatePaymentConnectorCredentialsInput,
+    output=RotatePaymentConnectorCredentialsOutput,
+    schema=_SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS,
+    input_schema=_SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT,
+    output_schema=_SCHEMA_ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+            ): ConflictException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+            ): InternalServerException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+            ): ThrottlingException,
+            ShapeID(
+                "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+            ): ValidationException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+        _SCHEMA_THROTTLING_EXCEPTION,
+        _SCHEMA_VALIDATION_EXCEPTION,
+    ],
+)
+
+
 @dataclass(kw_only=True)
 class UpdatePaymentConnectorInput:
     """Dataclass for UpdatePaymentConnectorInput structure."""
@@ -64475,7 +69087,7 @@ class UpdatePaymentConnectorInput:
     description: str | None = None
     """The updated description of the payment connector."""
 
-    type: PaymentConnectorType | None = None
+    type: str | None = None
     """The updated type of the payment connector."""
 
     credential_provider_configurations: (
@@ -64611,7 +69223,7 @@ class UpdatePaymentConnectorOutput:
     name: str
     """The name of the updated payment connector."""
 
-    type: PaymentConnectorType
+    type: str
     """The type of the updated payment connector."""
 
     credential_provider_configurations: list[CredentialsProviderConfiguration]
@@ -64623,7 +69235,7 @@ class UpdatePaymentConnectorOutput:
     last_updated_at: datetime
     """The timestamp when the payment connector was last updated."""
 
-    status: PaymentConnectorStatus
+    status: str
     """
     The current status of the updated payment connector. Possible values
     include `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
@@ -64635,6 +69247,16 @@ class UpdatePaymentConnectorOutput:
     The URL that the user must open to complete OAuth consent. This field is
     only present when the payment connector status is
     `PENDING_AUTHENTICATION`.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -64821,7 +69443,7 @@ class UpdatePaymentManagerInput:
     description: str | None = None
     """The updated description of the payment manager."""
 
-    authorizer_type: PaymentsAuthorizerType | None = None
+    authorizer_type: str | None = None
     """The updated authorizer type for the payment manager."""
 
     authorizer_configuration: AuthorizerConfiguration | None = None
@@ -64965,7 +69587,7 @@ class UpdatePaymentManagerOutput:
     name: str
     """The name of the updated payment manager."""
 
-    authorizer_type: PaymentsAuthorizerType
+    authorizer_type: str
     """The type of authorizer for the updated payment manager."""
 
     role_arn: str
@@ -64977,7 +69599,7 @@ class UpdatePaymentManagerOutput:
     last_updated_at: datetime
     """The timestamp when the payment manager was last updated."""
 
-    status: PaymentManagerStatus
+    status: str
     """
     The current status of the updated payment manager. Possible values
     include `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
@@ -64991,6 +69613,16 @@ class UpdatePaymentManagerOutput:
     """
     The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive
     payment manager data at rest, if configured.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -65360,7 +69992,7 @@ class CreatePolicyEngineOutput:
     IAM policy statements.
     """
 
-    status: PolicyEngineStatus
+    status: str
     """
     The current status of the policy engine. A status of `ACTIVE` indicates
     the policy engine is ready for use.
@@ -65381,6 +70013,16 @@ class CreatePolicyEngineOutput:
 
     description: str | None = field(repr=False, default=None)
     """A human-readable description of the policy engine's purpose."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_POLICY_ENGINE_OUTPUT, self)
@@ -65616,7 +70258,7 @@ class DeletePolicyEngineOutput:
     successfully removed.
     """
 
-    status: PolicyEngineStatus
+    status: str
     """
     The status of the policy engine deletion operation. This provides status
     about any issues that occurred during the deletion process.
@@ -65636,6 +70278,16 @@ class DeletePolicyEngineOutput:
 
     description: str | None = field(repr=False, default=None)
     """The human-readable description of the deleted policy engine."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_POLICY_ENGINE_OUTPUT, self)
@@ -65875,7 +70527,7 @@ class GetPolicyEngineOutput:
     policy statements.
     """
 
-    status: PolicyEngineStatus
+    status: str
     """The current status of the policy engine."""
 
     status_reasons: list[str]
@@ -65895,6 +70547,16 @@ class GetPolicyEngineOutput:
     The human-readable description of the policy engine's purpose and
     scope. This helps administrators understand the policy engine's role in
     governance.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -66118,13 +70780,23 @@ class GetPolicyEngineSummaryOutput:
     policy_engine_arn: str
     """The Amazon Resource Name (ARN) of the policy engine."""
 
-    status: PolicyEngineStatus
+    status: str
     """The current status of the policy engine."""
 
     encryption_key_arn: str | None = None
     """
     The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy
     engine data.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -66381,7 +71053,7 @@ class PolicyEngine:
     policy statements.
     """
 
-    status: PolicyEngineStatus
+    status: str
     """The current status of the policy engine."""
 
     status_reasons: list[str]
@@ -66559,6 +71231,16 @@ class ListPolicyEnginesOutput:
     there are more results available.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_POLICY_ENGINES_OUTPUT, self)
 
@@ -66722,7 +71404,7 @@ class PolicyEngineSummary:
     policy_engine_arn: str
     """The Amazon Resource Name (ARN) of the policy engine."""
 
-    status: PolicyEngineStatus
+    status: str
     """The current status of the policy engine."""
 
     encryption_key_arn: str | None = None
@@ -66867,6 +71549,16 @@ class ListPolicyEngineSummariesOutput:
     [ListPolicyEngineSummaries](https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyEngineSummaries.html)
     calls to retrieve additional results. This token is only present when
     there are more results available.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -67020,7 +71712,7 @@ class UpdatePolicyEngineOutput:
     policy_engine_arn: str
     """The ARN of the updated policy engine."""
 
-    status: PolicyEngineStatus
+    status: str
     """The current status of the updated policy engine."""
 
     status_reasons: list[str]
@@ -67034,6 +71726,16 @@ class UpdatePolicyEngineOutput:
 
     description: str | None = field(repr=False, default=None)
     """The updated description of the policy engine."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_POLICY_ENGINE_OUTPUT, self)
@@ -67404,7 +72106,7 @@ class GetPolicyGenerationOutput:
     the progress of the generation process and any status changes.
     """
 
-    status: PolicyGenerationStatus
+    status: str
     """
     The current status of the policy generation. This indicates whether the
     generation is in progress, completed successfully, or failed during
@@ -67423,6 +72125,16 @@ class GetPolicyGenerationOutput:
     The findings and results from the policy generation process. This
     includes any issues, recommendations, validation results, or insights
     from the generated policies.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -67690,11 +72402,21 @@ class GetPolicyGenerationSummaryOutput:
     updated_at: datetime
     """The timestamp when the policy generation was last updated."""
 
-    status: PolicyGenerationStatus
+    status: str
     """The current status of the policy generation request."""
 
     findings: str | None = None
     """The findings from the policy generation process, if available."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_POLICY_GENERATION_SUMMARY_OUTPUT, self)
@@ -68027,14 +72749,15 @@ class CedarPolicy:
 @dataclass(kw_only=True)
 class PolicyStatement:
     """
-    An AgentCore policy statement, which supports plain Cedar policies as
-    well as guardrails definitions.
+    An AgentCore Cedar or Dogwood policy statement, which supports plain
+    Cedar policies, temporal policies, and guardrails definitions.
     """
 
     statement: str
     """
-    The body of the AgentCore policy statement. Contains the policy logic,
-    which can be a Cedar policy or a guardrails definition.
+    The body of the AgentCore Cedar or Dogwood policy statement. Contains
+    the policy logic, which can be a Cedar policy, a temporal policy, or a
+    guardrails definition.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -68074,7 +72797,7 @@ class PolicyGenerationDetails:
     """
     Represents the information identifying a generated policy asset from the
     AI-powered policy generation process within the AgentCore Policy system.
-    Each asset contains a Cedar policy statement generated from natural
+    Each asset contains a Dogwood policy statement generated from natural
     language input, along with associated metadata and analysis findings to
     help users evaluate and select the most appropriate policy option.
     """
@@ -68168,7 +72891,7 @@ class PolicyDefinitionPolicyGeneration:
     The generated policy asset information within the policy definition
     structure. This contains information identifying a generated policy
     asset from the AI-powered policy generation process within the AgentCore
-    Policy system. Each asset contains a Cedar policy statement generated
+    Policy system. Each asset contains a Dogwood policy statement generated
     from natural language input, along with associated metadata and analysis
     findings to help users evaluate and select the most appropriate policy
     option.
@@ -68192,8 +72915,9 @@ class PolicyDefinitionPolicyGeneration:
 @dataclass
 class PolicyDefinitionPolicy:
     """
-    An AgentCore policy statement that defines the access control rules. The
-    statement can be a Cedar policy or a guardrails definition.
+    The Dogwood policy statement that defines the access control rules. This
+    policy definition can include Dogwood policies and supports temporal
+    conditions and information providers such as guardrails.
     """
 
     value: PolicyStatement
@@ -68310,7 +73034,7 @@ class Finding:
     ensure they match your security requirements.
     """
 
-    type: FindingType | None = None
+    type: str | None = None
     """
     The type or category of the finding. This classifies the finding as an
     error, warning, recommendation, or informational message to help users
@@ -68393,9 +73117,9 @@ class PolicyGenerationAsset:
     """
     Represents a generated policy asset from the AI-powered policy
     generation process within the AgentCore Policy system. Each asset
-    contains a Cedar policy statement generated from natural language input,
-    along with associated metadata and analysis findings to help users
-    evaluate and select the most appropriate policy option.
+    contains a Dogwood policy statement generated from natural language
+    input, along with associated metadata and analysis findings to help
+    users evaluate and select the most appropriate policy option.
     """
 
     policy_generation_asset_id: str
@@ -68410,13 +73134,13 @@ class PolicyGenerationAsset:
     """
     The portion of the original natural language input that this generated
     policy asset addresses. This helps users understand which part of their
-    policy description was translated into this specific Cedar policy
+    policy description was translated into this specific Dogwood policy
     statement, enabling better policy selection and refinement. When a
     single natural language input describes multiple authorization
     requirements, the generation process creates separate policy assets for
     each requirement, with each asset's rawTextFragment showing which
     requirement it addresses. Use this mapping to verify that all parts of
-    your natural language input were correctly translated into Cedar
+    your natural language input were correctly translated into Dogwood
     policies.
     """
 
@@ -68534,10 +73258,10 @@ class ListPolicyGenerationAssetsOutput:
 
     policy_generation_assets: list[PolicyGenerationAsset] | None = None
     """
-    An array of generated policy assets including Cedar policies and related
-    artifacts from the AI-powered policy generation process. Each asset
-    represents a different policy option or variation generated from the
-    original natural language input.
+    An array of generated policy assets including Dogwood policies and
+    related artifacts from the AI-powered policy generation process. Each
+    asset represents a different policy option or variation generated from
+    the original natural language input.
     """
 
     next_token: str | None = None
@@ -68547,6 +73271,16 @@ class ListPolicyGenerationAssetsOutput:
     calls to retrieve additional assets. This token is only present when
     there are more generated policy assets available beyond the current
     response.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -68720,7 +73454,7 @@ class PolicyGeneration:
     """
     Represents a policy generation request within the AgentCore Policy
     system. Tracks the AI-powered conversion of natural language
-    descriptions into Cedar policy statements, enabling users to author
+    descriptions into Dogwood policy statements, enabling users to author
     policies by describing authorization requirements in plain English. The
     generation process analyzes the natural language input along with the
     Gateway's tool context and Cedar schema to produce one or more
@@ -68755,7 +73489,7 @@ class PolicyGeneration:
     updated_at: datetime
     """The timestamp when this policy generation was last updated."""
 
-    status: PolicyGenerationStatus
+    status: str
     """The current status of this policy generation request."""
 
     status_reasons: list[str]
@@ -68922,6 +73656,16 @@ class ListPolicyGenerationsOutput:
     """
     A pagination token for retrieving additional policy generations if more
     results are available.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -69131,7 +73875,7 @@ class PolicyGenerationSummary:
     updated_at: datetime
     """The timestamp when this policy generation was last updated."""
 
-    status: PolicyGenerationStatus
+    status: str
     """The current status of this policy generation request."""
 
     findings: str | None = None
@@ -69295,6 +74039,16 @@ class ListPolicyGenerationSummariesOutput:
     there are more results available.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_POLICY_GENERATION_SUMMARIES_OUTPUT, self)
 
@@ -69391,7 +74145,7 @@ class ContentRawText:
     """
     The raw text content containing natural language descriptions of desired
     policy behavior. This text is processed by AI to generate corresponding
-    Cedar policy statements that match the described intent.
+    Dogwood policy statements that match the described intent.
     """
 
     value: str
@@ -69490,7 +74244,7 @@ class StartPolicyGenerationInput:
     content: Content | None = None
     """
     The natural language description of the desired policy behavior. This
-    content is processed by AI to generate corresponding Cedar policy
+    content is processed by AI to generate corresponding Dogwood policy
     statements that match the described intent.
     """
 
@@ -69612,7 +74366,7 @@ class StartPolicyGenerationOutput:
     updated_at: datetime
     """The timestamp when the policy generation was last updated."""
 
-    status: PolicyGenerationStatus
+    status: str
     """The initial status of the policy generation request."""
 
     status_reasons: list[str]
@@ -69620,6 +74374,16 @@ class StartPolicyGenerationOutput:
 
     findings: str | None = None
     """Initial findings from the policy generation process."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_START_POLICY_GENERATION_OUTPUT, self)
@@ -69829,10 +74593,10 @@ class CreatePolicyInput:
 
     definition: PolicyDefinition | None = None
     """
-    The Cedar policy statement that defines the access control rules. This
-    contains the actual policy logic written in Cedar policy language,
-    specifying effect (permit or forbid), principals, actions, resources,
-    and conditions for agent behavior control.
+    The Cedar or Dogwood policy statement that defines the access control
+    rules. This contains the actual policy logic written in Cedar or
+    Dogwood, specifying effect (permit or forbid), principals, actions,
+    resources, and conditions for agent behavior control.
     """
 
     description: str | None = field(repr=False, default=None)
@@ -69846,7 +74610,7 @@ class CreatePolicyInput:
     troubleshooting.
     """
 
-    validation_mode: PolicyValidationMode = PolicyValidationMode("FAIL_ON_ANY_FINDINGS")
+    validation_mode: str = PolicyValidationMode("FAIL_ON_ANY_FINDINGS")
     """
     The validation mode for the policy creation. Determines how Cedar
     analyzer validation results are handled during policy creation.
@@ -69860,7 +74624,7 @@ class CreatePolicyInput:
     understand and accept the analyzer findings.
     """
 
-    enforcement_mode: EnforcementMode = EnforcementMode("ACTIVE")
+    enforcement_mode: str = EnforcementMode("ACTIVE")
     """
     The enforcement mode for the policy. Run this policy in `LOG_ONLY` mode
     to collect data on how it affects your application. Once you are
@@ -70036,7 +74800,7 @@ class CreatePolicyOutput:
     policy statements.
     """
 
-    status: PolicyStatus
+    status: str
     """
     The current status of the policy. A status of `ACTIVE` indicates the
     policy is ready for use.
@@ -70044,9 +74808,9 @@ class CreatePolicyOutput:
 
     definition: PolicyDefinition
     """
-    The Cedar policy statement that was created. This is the validated
-    policy definition that will be used for agent behavior control and
-    access decisions.
+    The Cedar or Dogwood policy statement that was created. This is the
+    validated policy definition that will be used for agent behavior control
+    and access decisions.
     """
 
     status_reasons: list[str]
@@ -70055,7 +74819,7 @@ class CreatePolicyOutput:
     about any failures or the current state of the policy creation process.
     """
 
-    enforcement_mode: EnforcementMode = EnforcementMode("ACTIVE")
+    enforcement_mode: str = EnforcementMode("ACTIVE")
     """The enforcement mode of the created policy."""
 
     description: str | None = field(repr=False, default=None)
@@ -70063,6 +74827,16 @@ class CreatePolicyOutput:
     The human-readable description of the policy's purpose and
     functionality. This helps administrators understand and manage the
     policy.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -70342,7 +75116,7 @@ class DeletePolicyOutput:
     removed.
     """
 
-    status: PolicyStatus
+    status: str
     """
     The status of the policy deletion operation. This provides information
     about any issues that occurred during the deletion process.
@@ -70361,11 +75135,21 @@ class DeletePolicyOutput:
     about the deletion process or any issues that may have occurred.
     """
 
-    enforcement_mode: EnforcementMode = EnforcementMode("ACTIVE")
+    enforcement_mode: str = EnforcementMode("ACTIVE")
     """The enforcement mode of the deleted policy."""
 
     description: str | None = field(repr=False, default=None)
     """The human-readable description of the deleted policy."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_POLICY_OUTPUT, self)
@@ -70638,14 +75422,14 @@ class GetPolicyOutput:
     statements.
     """
 
-    status: PolicyStatus
+    status: str
     """The current status of the policy."""
 
     definition: PolicyDefinition
     """
-    The Cedar policy statement that defines the access control rules. This
-    contains the actual policy logic used for agent behavior control and
-    access decisions.
+    The Cedar or Dogwood policy statement that defines the access control
+    rules. This contains the actual policy logic used for agent behavior
+    control and access decisions.
     """
 
     status_reasons: list[str]
@@ -70654,7 +75438,7 @@ class GetPolicyOutput:
     about any failures or the current state of the policy.
     """
 
-    enforcement_mode: EnforcementMode = EnforcementMode("ACTIVE")
+    enforcement_mode: str = EnforcementMode("ACTIVE")
     """The current enforcement mode of the policy."""
 
     description: str | None = field(repr=False, default=None)
@@ -70662,6 +75446,16 @@ class GetPolicyOutput:
     The human-readable description of the policy's purpose and
     functionality. This helps administrators understand and manage the
     policy.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -70913,11 +75707,21 @@ class GetPolicySummaryOutput:
     policy_arn: str
     """The Amazon Resource Name (ARN) of the policy."""
 
-    status: PolicyStatus
+    status: str
     """The current status of the policy."""
 
-    enforcement_mode: EnforcementMode = EnforcementMode("ACTIVE")
+    enforcement_mode: str = EnforcementMode("ACTIVE")
     """The current enforcement mode of the policy."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_POLICY_SUMMARY_OUTPUT, self)
@@ -71158,17 +75962,17 @@ class ListPoliciesInput:
 class Policy:
     """
     Represents a complete policy resource within the AgentCore Policy
-    system. Policies are ARN-able resources that contain Cedar policy
-    statements and associated metadata for controlling agent behavior and
-    access decisions. Each policy belongs to a policy engine and defines
+    system. Policies are ARN-able resources that contain Cedar or Dogwood
+    policy statements and associated metadata for controlling agent behavior
+    and access decisions. Each policy belongs to a policy engine and defines
     fine-grained authorization rules that are evaluated in real-time as
-    agents interact with tools through Gateway. Policies use the Cedar
-    policy language to specify who (principals based on OAuth claims like
-    username, role, or scope) can perform what actions (tool calls) on which
-    resources (Gateways), with optional conditions for attribute-based
-    access control. Multiple policies can apply to a single request, with
-    Cedar's forbid-wins semantics ensuring that security restrictions are
-    never accidentally overridden.
+    agents interact with tools through Gateway. Policies use Cedar or
+    Dogwood to specify who (principals based on OAuth claims like username,
+    role, or scope) can perform what actions (tool calls) on which resources
+    (Gateways), with optional conditions for attribute-based access control.
+    Multiple policies can apply to a single request, with forbid-wins
+    semantics ensuring that security restrictions are never accidentally
+    overridden.
     """
 
     policy_id: str
@@ -71212,14 +76016,14 @@ class Policy:
     statements.
     """
 
-    status: PolicyStatus
+    status: str
     """The current status of the policy."""
 
     definition: PolicyDefinition
     """
-    The Cedar policy statement that defines the access control rules. This
-    contains the actual policy logic used for agent behavior control and
-    access decisions.
+    The Cedar or Dogwood policy statement that defines the access control
+    rules. This contains the actual policy logic used for agent behavior
+    control and access decisions.
     """
 
     status_reasons: list[str]
@@ -71228,7 +76032,7 @@ class Policy:
     about any failures or the current state of the policy lifecycle.
     """
 
-    enforcement_mode: EnforcementMode = EnforcementMode("ACTIVE")
+    enforcement_mode: str = EnforcementMode("ACTIVE")
     """The current enforcement mode of the policy."""
 
     description: str | None = field(repr=False, default=None)
@@ -71393,6 +76197,16 @@ class ListPoliciesOutput:
     A pagination token that can be used in subsequent ListPolicies calls to
     retrieve additional results. This token is only present when there are
     more results available.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -71595,10 +76409,10 @@ class PolicySummary:
     policy_arn: str
     """The Amazon Resource Name (ARN) of the policy."""
 
-    status: PolicyStatus
+    status: str
     """The current status of the policy."""
 
-    enforcement_mode: EnforcementMode = EnforcementMode("ACTIVE")
+    enforcement_mode: str = EnforcementMode("ACTIVE")
     """The current enforcement mode of the policy."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -71743,6 +76557,16 @@ class ListPolicySummariesOutput:
     there are more results available.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_POLICY_SUMMARIES_OUTPUT, self)
 
@@ -71851,12 +76675,12 @@ class UpdatePolicyInput:
 
     definition: PolicyDefinition | None = None
     """
-    The new Cedar policy statement that defines the access control rules.
-    This replaces the existing policy definition with new logic while
-    maintaining the policy's identity.
+    The new Cedar or Dogwood policy statement that defines the access
+    control rules. This replaces the existing policy definition with new
+    logic while maintaining the policy's identity.
     """
 
-    validation_mode: PolicyValidationMode = PolicyValidationMode("FAIL_ON_ANY_FINDINGS")
+    validation_mode: str = PolicyValidationMode("FAIL_ON_ANY_FINDINGS")
     """
     The validation mode for the policy update. Determines how Cedar analyzer
     validation results are handled during policy updates.
@@ -71868,7 +76692,7 @@ class UpdatePolicyInput:
     especially when modifying policy logic or conditions.
     """
 
-    enforcement_mode: EnforcementMode | None = None
+    enforcement_mode: str | None = None
     """
     The enforcement mode for the policy. Run this policy in `LOG_ONLY` mode
     to collect data on how it affects your application. Once you are
@@ -71984,20 +76808,30 @@ class UpdatePolicyOutput:
     policy_arn: str
     """The ARN of the updated policy."""
 
-    status: PolicyStatus
+    status: str
     """The current status of the updated policy."""
 
     definition: PolicyDefinition
-    """The updated Cedar policy statement."""
+    """The updated Cedar or Dogwood policy statement."""
 
     status_reasons: list[str]
     """Additional information about the update status."""
 
-    enforcement_mode: EnforcementMode = EnforcementMode("ACTIVE")
+    enforcement_mode: str = EnforcementMode("ACTIVE")
     """The current enforcement mode of the updated policy."""
 
     description: str | None = field(repr=False, default=None)
     """The updated description of the policy."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_POLICY_OUTPUT, self)
@@ -72238,6 +77072,16 @@ class PutResourcePolicyOutput:
 
     policy: str
     """The resource policy that was created or updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_RESOURCE_POLICY_OUTPUT, self)
@@ -72778,7 +77622,7 @@ class RegistryRecordOAuthCredentialProvider:
     resource.
     """
 
-    grant_type: RegistryRecordOAuthGrantType | None = None
+    grant_type: str | None = None
     """The OAuth grant type. Currently only `CLIENT_CREDENTIALS` is supported."""
 
     scopes: list[str] | None = None
@@ -73020,7 +77864,7 @@ class RegistryRecordCredentialProviderConfiguration:
     details for authenticating with external sources.
     """
 
-    credential_provider_type: RegistryRecordCredentialProviderType
+    credential_provider_type: str
     """
     The type of credential provider.
 
@@ -73259,7 +78103,7 @@ class CreateRegistryRecordInput:
     description: str | None = field(repr=False, default=None)
     """A description of the registry record."""
 
-    descriptor_type: DescriptorType | None = None
+    descriptor_type: str | None = None
     """
     The descriptor type of the registry record.
 
@@ -73288,7 +78132,7 @@ class CreateRegistryRecordInput:
     of the record's content.
     """
 
-    synchronization_type: SynchronizationType | None = None
+    synchronization_type: str | None = None
     """
     The type of synchronization to use for keeping the record metadata up to
     date from an external source. Possible values include `FROM_URL` and
@@ -73459,10 +78303,20 @@ class CreateRegistryRecordOutput:
     record_arn: str
     """The Amazon Resource Name (ARN) of the created registry record."""
 
-    status: RegistryRecordStatus
+    status: str
     """
     The status of the registry record. Set to `CREATING` while the
     asynchronous workflow is in progress.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -73619,6 +78473,16 @@ class DeleteRegistryRecordInput:
 class DeleteRegistryRecordOutput:
     """Dataclass for DeleteRegistryRecordOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_REGISTRY_RECORD_OUTPUT, self)
 
@@ -73758,7 +78622,7 @@ class GetRegistryRecordOutput:
     name: str
     """The name of the registry record."""
 
-    descriptor_type: DescriptorType
+    descriptor_type: str
     """
     The descriptor type of the registry record. Possible values are `MCP`,
     `A2A`, `CUSTOM`, and `AGENT_SKILLS`.
@@ -73770,7 +78634,7 @@ class GetRegistryRecordOutput:
     schema and metadata. For details, see the `Descriptors` data type.
     """
 
-    status: RegistryRecordStatus
+    status: str
     """
     The current status of the registry record. Possible values include
     `CREATING`, `DRAFT`, `APPROVED`, `PENDING_APPROVAL`, `REJECTED`,
@@ -73798,13 +78662,23 @@ class GetRegistryRecordOutput:
     failure state.
     """
 
-    synchronization_type: SynchronizationType | None = None
+    synchronization_type: str | None = None
     """The type of synchronization used for this record."""
 
     synchronization_configuration: SynchronizationConfiguration | None = None
     """
     The configuration for synchronizing registry record metadata from an
     external source.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -74050,14 +78924,14 @@ class ListRegistryRecordsInput:
     name: str | None = None
     """Filter registry records by name."""
 
-    status: RegistryRecordStatus | None = None
+    status: str | None = None
     """
     Filter registry records by their current status. Possible values include
     `CREATING`, `DRAFT`, `APPROVED`, `PENDING_APPROVAL`, `REJECTED`,
     `DEPRECATED`, `UPDATING`, `CREATE_FAILED`, and `UPDATE_FAILED`.
     """
 
-    descriptor_type: DescriptorType | None = None
+    descriptor_type: str | None = None
     """
     Filter registry records by their descriptor type. Possible values are
     `MCP`, `A2A`, `CUSTOM`, and `AGENT_SKILLS`.
@@ -74172,7 +79046,7 @@ class RegistryRecordSummary:
     name: str
     """The name of the registry record."""
 
-    descriptor_type: DescriptorType
+    descriptor_type: str
     """
     The descriptor type of the registry record. Possible values are `MCP`,
     `A2A`, `CUSTOM`, and `AGENT_SKILLS`.
@@ -74181,7 +79055,7 @@ class RegistryRecordSummary:
     record_version: str
     """The version of the registry record."""
 
-    status: RegistryRecordStatus
+    status: str
     """
     The current status of the registry record. Possible values include
     `CREATING`, `DRAFT`, `APPROVED`, `PENDING_APPROVAL`, `REJECTED`,
@@ -74367,6 +79241,16 @@ class ListRegistryRecordsOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_REGISTRY_RECORDS_OUTPUT, self)
 
@@ -74536,11 +79420,21 @@ class SubmitRegistryRecordForApprovalOutput:
     record_id: str
     """The unique identifier of the registry record."""
 
-    status: RegistryRecordStatus
+    status: str
     """The resulting status of the registry record after submission."""
 
     updated_at: datetime
     """The timestamp when the record was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -75286,7 +80180,7 @@ class UpdatedSynchronizationType:
     be matched with `UpdatedSynchronizationConfiguration`.
     """
 
-    optional_value: SynchronizationType | None = None
+    optional_value: str | None = None
     """The updated synchronization type value."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -75353,7 +80247,7 @@ class UpdateRegistryRecordInput:
     `optionalValue` not specified.
     """
 
-    descriptor_type: DescriptorType | None = None
+    descriptor_type: str | None = None
     """
     The updated descriptor type for the registry record. Changing the
     descriptor type may require updating the `descriptors` field to match
@@ -75541,7 +80435,7 @@ class UpdateRegistryRecordOutput:
     name: str
     """The name of the updated registry record."""
 
-    descriptor_type: DescriptorType
+    descriptor_type: str
     """
     The descriptor type of the updated registry record. Possible values are
     `MCP`, `A2A`, `CUSTOM`, and `AGENT_SKILLS`.
@@ -75553,7 +80447,7 @@ class UpdateRegistryRecordOutput:
     record. For details, see the `Descriptors` data type.
     """
 
-    status: RegistryRecordStatus
+    status: str
     """
     The current status of the updated registry record. Possible values
     include `CREATING`, `DRAFT`, `APPROVED`, `PENDING_APPROVAL`, `REJECTED`,
@@ -75575,11 +80469,21 @@ class UpdateRegistryRecordOutput:
     status_reason: str | None = None
     """The reason for the current status of the updated registry record."""
 
-    synchronization_type: SynchronizationType | None = None
+    synchronization_type: str | None = None
     """The synchronization type of the updated registry record."""
 
     synchronization_configuration: SynchronizationConfiguration | None = None
     """The synchronization configuration of the updated registry record."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_REGISTRY_RECORD_OUTPUT, self)
@@ -75818,7 +80722,7 @@ class UpdateRegistryRecordStatusInput:
     specify either the Amazon Resource Name (ARN) or the ID of the record.
     """
 
-    status: RegistryRecordStatus | None = None
+    status: str | None = None
     """The target status for the registry record."""
 
     status_reason: str | None = None
@@ -75915,7 +80819,7 @@ class UpdateRegistryRecordStatusOutput:
     record_id: str
     """The unique identifier of the registry record."""
 
-    status: RegistryRecordStatus
+    status: str
     """The resulting status of the registry record."""
 
     status_reason: str
@@ -75923,6 +80827,16 @@ class UpdateRegistryRecordStatusOutput:
 
     updated_at: datetime
     """The timestamp when the record was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_REGISTRY_RECORD_STATUS_OUTPUT, self)
@@ -76128,7 +81042,7 @@ class CreateRegistryInput:
     description: str | None = field(repr=False, default=None)
     """A description of the registry."""
 
-    authorizer_type: RegistryAuthorizerType | None = None
+    authorizer_type: str | None = None
     """
     The type of authorizer to use for the registry. This controls the
     authorization method for the Search and Invoke APIs used by consumers,
@@ -76257,6 +81171,16 @@ class CreateRegistryOutput:
     registry_arn: str
     """The Amazon Resource Name (ARN) of the created registry."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_REGISTRY_OUTPUT, self)
 
@@ -76384,11 +81308,21 @@ class RegistryStatus(UnknownEnumMixin, StrEnum):
 class DeleteRegistryOutput:
     """Dataclass for DeleteRegistryOutput structure."""
 
-    status: RegistryStatus
+    status: str
     """
     The current status of the registry, set to `DELETING` when deletion is
     initiated. For a list of all possible registry statuses, see the
     `RegistryStatus` data type.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -76517,7 +81451,7 @@ class GetRegistryOutput:
     registry_arn: str
     """The Amazon Resource Name (ARN) of the registry."""
 
-    status: RegistryStatus
+    status: str
     """
     The current status of the registry. Possible values include `CREATING`,
     `READY`, `UPDATING`, `CREATE_FAILED`, `UPDATE_FAILED`, `DELETING`, and
@@ -76533,7 +81467,7 @@ class GetRegistryOutput:
     description: str | None = field(repr=False, default=None)
     """The description of the registry."""
 
-    authorizer_type: RegistryAuthorizerType | None = None
+    authorizer_type: str | None = None
     """
     The type of authorizer used by the registry. This controls the
     authorization method for the Search and Invoke APIs used by consumers.
@@ -76559,6 +81493,16 @@ class GetRegistryOutput:
     """
     The reason for the current status, typically set when the status is a
     failure state.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -76751,14 +81695,14 @@ class ListRegistriesInput:
     field in the response in this field to return the next batch of results.
     """
 
-    status: RegistryStatus | None = None
+    status: str | None = None
     """
     Filter registries by their current status. Possible values include
     `CREATING`, `READY`, `UPDATING`, `CREATE_FAILED`, `UPDATE_FAILED`,
     `DELETING`, and `DELETE_FAILED`.
     """
 
-    authorizer_type: RegistryAuthorizerType | None = None
+    authorizer_type: str | None = None
     """
     Filter registries by their authorizer type. Possible values are
     `CUSTOM_JWT` and `AWS_IAM`. For more information about authorizer types,
@@ -76842,7 +81786,7 @@ class RegistrySummary:
     registry_arn: str
     """The Amazon Resource Name (ARN) of the registry."""
 
-    status: RegistryStatus
+    status: str
     """
     The current status of the registry. Possible values include `CREATING`,
     `READY`, `UPDATING`, `CREATE_FAILED`, `UPDATE_FAILED`, `DELETING`, and
@@ -76858,7 +81802,7 @@ class RegistrySummary:
     description: str | None = field(repr=False, default=None)
     """The description of the registry."""
 
-    authorizer_type: RegistryAuthorizerType | None = None
+    authorizer_type: str | None = None
     """
     The type of authorizer used by the registry. This controls the
     authorization method for the Search and Invoke APIs used by consumers.
@@ -77024,6 +81968,16 @@ class ListRegistriesOutput:
     If the total number of results is greater than the `maxResults` value
     provided in the request, use this token when making another request in
     the `nextToken` field to return the next batch of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -77267,7 +82221,7 @@ class UpdateRegistryOutput:
     registry_arn: str
     """The Amazon Resource Name (ARN) of the updated registry."""
 
-    status: RegistryStatus
+    status: str
     """
     The current status of the updated registry. Possible values include
     `CREATING`, `READY`, `UPDATING`, `CREATE_FAILED`, `UPDATE_FAILED`,
@@ -77283,7 +82237,7 @@ class UpdateRegistryOutput:
     description: str | None = field(repr=False, default=None)
     """The description of the updated registry."""
 
-    authorizer_type: RegistryAuthorizerType | None = None
+    authorizer_type: str | None = None
     """
     The type of authorizer used by the updated registry. This controls the
     authorization method for the Search and Invoke APIs used by consumers.
@@ -77307,6 +82261,16 @@ class UpdateRegistryOutput:
 
     status_reason: str | None = None
     """The reason for the current status of the updated registry."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_REGISTRY_OUTPUT, self)
@@ -77598,6 +82562,16 @@ class SetTokenVaultCMKOutput:
     last_modified_date: datetime
     """The timestamp when the token vault was last modified."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SET_TOKEN_VAULT_CMK_OUTPUT, self)
 
@@ -77750,6 +82724,16 @@ class TagResourceInput:
 class TagResourceOutput:
     """Dataclass for TagResourceOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TAG_RESOURCE_OUTPUT, self)
 
@@ -77895,6 +82879,16 @@ class UntagResourceInput:
 @dataclass(kw_only=True)
 class UntagResourceOutput:
     """Dataclass for UntagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNTAG_RESOURCE_OUTPUT, self)
@@ -78084,6 +83078,16 @@ class CreateWorkloadIdentityOutput:
     this workload identity.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_WORKLOAD_IDENTITY_OUTPUT, self)
 
@@ -78233,6 +83237,16 @@ class DeleteWorkloadIdentityInput:
 class DeleteWorkloadIdentityOutput:
     """Dataclass for DeleteWorkloadIdentityOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_WORKLOAD_IDENTITY_OUTPUT, self)
 
@@ -78358,6 +83372,16 @@ class GetWorkloadIdentityOutput:
     """
     The list of allowed OAuth2 return URLs for resources associated with
     this workload identity.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -78631,6 +83655,16 @@ class ListWorkloadIdentitiesOutput:
     next_token: str | None = None
     """Pagination token for the next page of results."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_WORKLOAD_IDENTITIES_OUTPUT, self)
 
@@ -78807,6 +83841,16 @@ class UpdateWorkloadIdentityOutput:
     this workload identity.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_WORKLOAD_IDENTITY_OUTPUT, self)
 
@@ -78944,7 +83988,7 @@ class SchemaDefinition:
     structure of the API that the target exposes.
     """
 
-    type: SchemaType
+    type: str
     """
     The type of the schema definition. This field specifies the data type of
     the schema.
@@ -79775,6 +84819,16 @@ class CreateGatewayTargetInput:
     connect the gateway to private resources in your VPC.
     """
 
+    certificate_configurations: list[CertificateConfiguration] | None = None
+    """
+    The private certificate authority (CA) configurations for the gateway
+    target. Use this to have the gateway trust a private CA when it
+    establishes TLS connections to the target endpoint. Provide each
+    certificate by reference to an Amazon S3 object or an Amazon Web
+    Services Secrets Manager secret. You can specify only one certificate
+    authority configuration in this list.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_GATEWAY_TARGET_INPUT, self)
 
@@ -79827,6 +84881,15 @@ class CreateGatewayTargetInput:
             serializer.write_struct(
                 _SCHEMA_CREATE_GATEWAY_TARGET_INPUT.members["privateEndpoint"],
                 self.private_endpoint,
+            )
+
+        if self.certificate_configurations is not None:
+            _serialize_certificate_configuration_list(
+                serializer,
+                _SCHEMA_CREATE_GATEWAY_TARGET_INPUT.members[
+                    "certificateConfigurations"
+                ],
+                self.certificate_configurations,
             )
 
     @classmethod
@@ -79884,6 +84947,16 @@ class CreateGatewayTargetInput:
                         _PrivateEndpointDeserializer().deserialize(de)
                     )
 
+                case 8:
+                    kwargs["certificate_configurations"] = (
+                        _deserialize_certificate_configuration_list(
+                            de,
+                            _SCHEMA_CREATE_GATEWAY_TARGET_INPUT.members[
+                                "certificateConfigurations"
+                            ],
+                        )
+                    )
+
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
 
@@ -79909,7 +84982,7 @@ class CreateGatewayTargetOutput:
     updated_at: datetime
     """The timestamp when the target was last updated."""
 
-    status: TargetStatus
+    status: str
     """The current status of the target."""
 
     name: str = field(repr=False)
@@ -79952,8 +85025,24 @@ class CreateGatewayTargetOutput:
     authorization code grant type and requires user federation.
     """
 
-    protocol_type: TargetProtocolType | None = None
+    protocol_type: str | None = None
     """The protocol type of the created gateway target."""
+
+    certificate_configurations: list[CertificateConfiguration] | None = None
+    """
+    The private certificate authority (CA) configurations for the gateway
+    target.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_GATEWAY_TARGET_OUTPUT, self)
@@ -80038,6 +85127,15 @@ class CreateGatewayTargetOutput:
             serializer.write_string(
                 _SCHEMA_CREATE_GATEWAY_TARGET_OUTPUT.members["protocolType"],
                 self.protocol_type,
+            )
+
+        if self.certificate_configurations is not None:
+            _serialize_certificate_configuration_list(
+                serializer,
+                _SCHEMA_CREATE_GATEWAY_TARGET_OUTPUT.members[
+                    "certificateConfigurations"
+                ],
+                self.certificate_configurations,
             )
 
     @classmethod
@@ -80147,6 +85245,16 @@ class CreateGatewayTargetOutput:
                         )
                     )
 
+                case 16:
+                    kwargs["certificate_configurations"] = (
+                        _deserialize_certificate_configuration_list(
+                            de,
+                            _SCHEMA_CREATE_GATEWAY_TARGET_OUTPUT.members[
+                                "certificateConfigurations"
+                            ],
+                        )
+                    )
+
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
 
@@ -80188,7 +85296,7 @@ class GatewayTarget:
     updated_at: datetime
     """The date and time at which the target was updated."""
 
-    status: TargetStatus
+    status: str
     """The status of the gateway target."""
 
     name: str = field(repr=False)
@@ -80238,8 +85346,14 @@ class GatewayTarget:
     authorization code grant type and requires user federation.
     """
 
-    protocol_type: TargetProtocolType | None = None
+    protocol_type: str | None = None
     """The protocol type of the gateway target."""
+
+    certificate_configurations: list[CertificateConfiguration] | None = None
+    """
+    The private certificate authority (CA) configurations for the gateway
+    target.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GATEWAY_TARGET, self)
@@ -80313,6 +85427,13 @@ class GatewayTarget:
         if self.protocol_type is not None:
             serializer.write_string(
                 _SCHEMA_GATEWAY_TARGET.members["protocolType"], self.protocol_type
+            )
+
+        if self.certificate_configurations is not None:
+            _serialize_certificate_configuration_list(
+                serializer,
+                _SCHEMA_GATEWAY_TARGET.members["certificateConfigurations"],
+                self.certificate_configurations,
             )
 
     @classmethod
@@ -80415,6 +85536,14 @@ class GatewayTarget:
                         de.read_string(_SCHEMA_GATEWAY_TARGET.members["protocolType"])
                     )
 
+                case 16:
+                    kwargs["certificate_configurations"] = (
+                        _deserialize_certificate_configuration_list(
+                            de,
+                            _SCHEMA_GATEWAY_TARGET.members["certificateConfigurations"],
+                        )
+                    )
+
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
 
@@ -80454,7 +85583,7 @@ class GetGatewayTargetOutput:
     updated_at: datetime
     """The timestamp when the gateway target was last updated."""
 
-    status: TargetStatus
+    status: str
     """The current status of the gateway target."""
 
     name: str = field(repr=False)
@@ -80500,8 +85629,24 @@ class GetGatewayTargetOutput:
     authorization code grant type and requires user federation.
     """
 
-    protocol_type: TargetProtocolType | None = None
+    protocol_type: str | None = None
     """The protocol type of the gateway target."""
+
+    certificate_configurations: list[CertificateConfiguration] | None = None
+    """
+    The private certificate authority (CA) configurations for the gateway
+    target.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_GATEWAY_TARGET_OUTPUT, self)
@@ -80586,6 +85731,13 @@ class GetGatewayTargetOutput:
             serializer.write_string(
                 _SCHEMA_GET_GATEWAY_TARGET_OUTPUT.members["protocolType"],
                 self.protocol_type,
+            )
+
+        if self.certificate_configurations is not None:
+            _serialize_certificate_configuration_list(
+                serializer,
+                _SCHEMA_GET_GATEWAY_TARGET_OUTPUT.members["certificateConfigurations"],
+                self.certificate_configurations,
             )
 
     @classmethod
@@ -80692,6 +85844,16 @@ class GetGatewayTargetOutput:
                         )
                     )
 
+                case 16:
+                    kwargs["certificate_configurations"] = (
+                        _deserialize_certificate_configuration_list(
+                            de,
+                            _SCHEMA_GET_GATEWAY_TARGET_OUTPUT.members[
+                                "certificateConfigurations"
+                            ],
+                        )
+                    )
+
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
 
@@ -80754,6 +85916,17 @@ class UpdateGatewayTargetInput:
     connect the gateway to private resources in your VPC.
     """
 
+    certificate_configurations: list[CertificateConfiguration] | None = None
+    """
+    The private certificate authority (CA) configurations for the gateway
+    target. Use this to have the gateway trust a private CA when it
+    establishes TLS connections to the target endpoint. Provide each
+    certificate by reference to an Amazon S3 object or an Amazon Web
+    Services Secrets Manager secret. You can specify only one certificate
+    authority configuration in this list. To remove a previously configured
+    certificate authority, omit this field on update.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_GATEWAY_TARGET_INPUT, self)
 
@@ -80805,6 +85978,15 @@ class UpdateGatewayTargetInput:
             serializer.write_struct(
                 _SCHEMA_UPDATE_GATEWAY_TARGET_INPUT.members["privateEndpoint"],
                 self.private_endpoint,
+            )
+
+        if self.certificate_configurations is not None:
+            _serialize_certificate_configuration_list(
+                serializer,
+                _SCHEMA_UPDATE_GATEWAY_TARGET_INPUT.members[
+                    "certificateConfigurations"
+                ],
+                self.certificate_configurations,
             )
 
     @classmethod
@@ -80862,6 +86044,16 @@ class UpdateGatewayTargetInput:
                         _PrivateEndpointDeserializer().deserialize(de)
                     )
 
+                case 8:
+                    kwargs["certificate_configurations"] = (
+                        _deserialize_certificate_configuration_list(
+                            de,
+                            _SCHEMA_UPDATE_GATEWAY_TARGET_INPUT.members[
+                                "certificateConfigurations"
+                            ],
+                        )
+                    )
+
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
 
@@ -80887,7 +86079,7 @@ class UpdateGatewayTargetOutput:
     updated_at: datetime
     """The timestamp when the gateway target was last updated."""
 
-    status: TargetStatus
+    status: str
     """The current status of the updated gateway target."""
 
     name: str = field(repr=False)
@@ -80930,8 +86122,24 @@ class UpdateGatewayTargetOutput:
     authorization code grant type and requires user federation.
     """
 
-    protocol_type: TargetProtocolType | None = None
+    protocol_type: str | None = None
     """The protocol type of the updated gateway target."""
+
+    certificate_configurations: list[CertificateConfiguration] | None = None
+    """
+    The private certificate authority (CA) configurations for the gateway
+    target.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_GATEWAY_TARGET_OUTPUT, self)
@@ -81016,6 +86224,15 @@ class UpdateGatewayTargetOutput:
             serializer.write_string(
                 _SCHEMA_UPDATE_GATEWAY_TARGET_OUTPUT.members["protocolType"],
                 self.protocol_type,
+            )
+
+        if self.certificate_configurations is not None:
+            _serialize_certificate_configuration_list(
+                serializer,
+                _SCHEMA_UPDATE_GATEWAY_TARGET_OUTPUT.members[
+                    "certificateConfigurations"
+                ],
+                self.certificate_configurations,
             )
 
     @classmethod
@@ -81125,6 +86342,16 @@ class UpdateGatewayTargetOutput:
                         )
                     )
 
+                case 16:
+                    kwargs["certificate_configurations"] = (
+                        _deserialize_certificate_configuration_list(
+                            de,
+                            _SCHEMA_UPDATE_GATEWAY_TARGET_OUTPUT.members[
+                                "certificateConfigurations"
+                            ],
+                        )
+                    )
+
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
 
@@ -81217,6 +86444,16 @@ class SynchronizeGatewayTargetsOutput:
 
     targets: "list[GatewayTarget] | None" = None
     """The gateway targets for synchronization."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SYNCHRONIZE_GATEWAY_TARGETS_OUTPUT, self)

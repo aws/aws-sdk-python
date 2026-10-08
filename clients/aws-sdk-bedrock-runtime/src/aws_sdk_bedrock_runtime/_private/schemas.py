@@ -21,7 +21,6 @@ from smithy_core.traits import Trait
 NON_BLANK_STRING = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#NonBlankString"),
     shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\s\\S]*$")],
 )
 
 ACCESS_DENIED_EXCEPTION = Schema.collection(
@@ -34,43 +33,18 @@ ACCESS_DENIED_EXCEPTION = Schema.collection(
 )
 
 ACCOUNT_ID = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#AccountId"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#pattern"), value="^[0-9]{12}$")],
+    id=ShapeID("com.amazonaws.bedrockruntime#AccountId"), shape_type=ShapeType.STRING
 )
 
 ADDITIONAL_MODEL_RESPONSE_FIELD_PATHS = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#AdditionalModelResponseFieldPaths"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 10}))
-    ],
-    members={
-        "member": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 256}),
-                )
-            ],
-        }
-    },
+    members={"member": {"target": STRING}},
 )
 
 INVOCATION_ARN = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#InvocationArn"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:async-invoke/[a-z0-9]{12}$",
-        ),
-    ],
 )
 
 GET_ASYNC_INVOKE_INPUT = Schema.collection(
@@ -79,8 +53,7 @@ GET_ASYNC_INVOKE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#GetAsyncInvokeRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "invocationArn": {
@@ -96,13 +69,6 @@ GET_ASYNC_INVOKE_INPUT = Schema.collection(
 ASYNC_INVOKE_IDEMPOTENCY_TOKEN = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeIdempotencyToken"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[!-~]*$"),
-    ],
 )
 
 TIMESTAMP = Schema(
@@ -114,57 +80,20 @@ TIMESTAMP = Schema(
 ASYNC_INVOKE_MESSAGE = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeMessage"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 2048})
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 ASYNC_INVOKE_ARN = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeArn"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:[a-z0-9\\-]+:bedrock:[a-z0-9\\-]*:[0-9]*:(provisioned-model|foundation-model)/.+$",
-        ),
-    ],
 )
 
 KMS_KEY_ID = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#KmsKeyId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+))$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.bedrockruntime#KmsKeyId"), shape_type=ShapeType.STRING
 )
 
 S3_URI = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#S3Uri"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1024}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.bedrockruntime#S3Uri"), shape_type=ShapeType.STRING
 )
 
 ASYNC_INVOKE_S3_OUTPUT_DATA_CONFIG = Schema.collection(
@@ -189,22 +118,9 @@ ASYNC_INVOKE_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "IN_PROGRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="InProgress")
-            ],
-        },
-        "COMPLETED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="Completed")
-            ],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Failed")],
-        },
+        "IN_PROGRESS": {"target": UNIT},
+        "COMPLETED": {"target": UNIT},
+        "FAILED": {"target": UNIT},
     },
 )
 
@@ -214,8 +130,7 @@ GET_ASYNC_INVOKE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#GetAsyncInvokeResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "invocationArn": {
@@ -281,65 +196,29 @@ GET_ASYNC_INVOKE = Schema(
             value=MappingProxyType(
                 {"code": 200, "method": "GET", "uri": "/async-invoke/{invocationArn}"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#MaxResults"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.bedrockruntime#MaxResults"), shape_type=ShapeType.INTEGER
 )
 
 PAGINATION_TOKEN = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#PaginationToken"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\S*$"),
-    ],
 )
 
 SORT_ASYNC_INVOCATION_BY = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#SortAsyncInvocationBy"),
     shape_type=ShapeType.ENUM,
-    members={
-        "SUBMISSION_TIME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SubmissionTime")
-            ],
-        }
-    },
+    members={"SUBMISSION_TIME": {"target": UNIT}},
 )
 
 SORT_ORDER = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#SortOrder"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ASCENDING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="Ascending")
-            ],
-        },
-        "DESCENDING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="Descending")
-            ],
-        },
-    },
+    members={"ASCENDING": {"target": UNIT}, "DESCENDING": {"target": UNIT}},
 )
 
 LIST_ASYNC_INVOKES_INPUT = Schema.collection(
@@ -348,8 +227,7 @@ LIST_ASYNC_INVOKES_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#ListAsyncInvokesRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "submitTimeAfter": {
@@ -438,8 +316,7 @@ LIST_ASYNC_INVOKES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#ListAsyncInvokesResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "nextToken": {"target": PAGINATION_TOKEN},
@@ -452,23 +329,11 @@ LIST_ASYNC_INVOKES = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "asyncInvokeSummaries",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"code": 200, "method": "GET", "uri": "/async-invoke"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -511,13 +376,6 @@ SERVICE_UNAVAILABLE_EXCEPTION = Schema.collection(
 ASYNC_INVOKE_IDENTIFIER = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeIdentifier"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z_\\.\\-/0-9:]+$"),
-    ],
 )
 
 MODEL_INPUT_PAYLOAD = Schema(
@@ -527,27 +385,11 @@ MODEL_INPUT_PAYLOAD = Schema(
 )
 
 TAG_KEY = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#TagKey"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9\\s._:/=+@-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.bedrockruntime#TagKey"), shape_type=ShapeType.STRING
 )
 
 TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#TagValue"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9\\s._:/=+@-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.bedrockruntime#TagValue"), shape_type=ShapeType.STRING
 )
 
 TAG = Schema.collection(
@@ -567,12 +409,6 @@ TAG = Schema.collection(
 TAG_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#TagList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 200}),
-        )
-    ],
     members={"member": {"target": TAG}},
 )
 
@@ -582,8 +418,7 @@ START_ASYNC_INVOKE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#StartAsyncInvokeRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "clientRequestToken": {
@@ -612,8 +447,7 @@ START_ASYNC_INVOKE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#StartAsyncInvokeResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "invocationArn": {
@@ -627,45 +461,26 @@ START_ASYNC_INVOKE = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#StartAsyncInvoke"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"code": 200, "method": "POST", "uri": "/async-invoke"}
             ),
-        ),
+        )
     ],
 )
 
 GUARDRAIL_IMAGE_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailImageFormat"),
     shape_type=ShapeType.ENUM,
-    members={
-        "PNG": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="png")],
-        },
-        "JPEG": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="jpeg")],
-        },
-    },
+    members={"PNG": {"target": UNIT}, "JPEG": {"target": UNIT}},
 )
 
 GUARDRAIL_IMAGE_SOURCE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailImageSource"),
     shape_type=ShapeType.UNION,
     traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-    members={
-        "bytes": {
-            "target": BLOB,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1})
-                )
-            ],
-        }
-    },
+    members={"bytes": {"target": BLOB}},
 )
 
 GUARDRAIL_IMAGE_BLOCK = Schema.collection(
@@ -687,22 +502,9 @@ GUARDRAIL_CONTENT_QUALIFIER = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentQualifier"),
     shape_type=ShapeType.ENUM,
     members={
-        "GROUNDING_SOURCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="grounding_source")
-            ],
-        },
-        "QUERY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="query")],
-        },
-        "GUARD_CONTENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="guard_content")
-            ],
-        },
+        "GROUNDING_SOURCE": {"target": UNIT},
+        "QUERY": {"target": UNIT},
+        "GUARD_CONTENT": {"target": UNIT},
     },
 )
 
@@ -741,57 +543,23 @@ GUARDRAIL_CONTENT_BLOCK_LIST = Schema.collection(
 GUARDRAIL_IDENTIFIER = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailIdentifier"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 2048})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^(|([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$",
-        ),
-    ],
 )
 
 GUARDRAIL_VERSION = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailVersion"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^(|([1-9][0-9]{0,7})|(DRAFT))$"
-        )
-    ],
 )
 
 GUARDRAIL_OUTPUT_SCOPE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailOutputScope"),
     shape_type=ShapeType.ENUM,
-    members={
-        "INTERVENTIONS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="INTERVENTIONS")
-            ],
-        },
-        "FULL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FULL")],
-        },
-    },
+    members={"INTERVENTIONS": {"target": UNIT}, "FULL": {"target": UNIT}},
 )
 
 GUARDRAIL_CONTENT_SOURCE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentSource"),
     shape_type=ShapeType.ENUM,
-    members={
-        "INPUT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INPUT")],
-        },
-        "OUTPUT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="OUTPUT")],
-        },
-    },
+    members={"INPUT": {"target": UNIT}, "OUTPUT": {"target": UNIT}},
 )
 
 APPLY_GUARDRAIL_INPUT = Schema.collection(
@@ -800,8 +568,7 @@ APPLY_GUARDRAIL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#ApplyGuardrailRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "guardrailIdentifier": {
@@ -833,69 +600,24 @@ APPLY_GUARDRAIL_INPUT = Schema.collection(
 GUARDRAIL_ACTION = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAction"),
     shape_type=ShapeType.ENUM,
-    members={
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
-        "GUARDRAIL_INTERVENED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="GUARDRAIL_INTERVENED"
-                )
-            ],
-        },
-    },
+    members={"NONE": {"target": UNIT}, "GUARDRAIL_INTERVENED": {"target": UNIT}},
 )
 
 GUARDRAIL_ARN = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 2048})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+)$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailArn"), shape_type=ShapeType.STRING
 )
 
 GUARDRAIL_ID = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 2048})
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^([a-z0-9]+)$"),
-    ],
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailId"), shape_type=ShapeType.STRING
 )
 
 GUARDRAIL_ORIGIN = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailOrigin"),
     shape_type=ShapeType.ENUM,
     members={
-        "REQUEST": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="REQUEST")],
-        },
-        "ACCOUNT_ENFORCED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACCOUNT_ENFORCED")
-            ],
-        },
-        "ORGANIZATION_ENFORCED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="ORGANIZATION_ENFORCED"
-                )
-            ],
-        },
+        "REQUEST": {"target": UNIT},
+        "ACCOUNT_ENFORCED": {"target": UNIT},
+        "ORGANIZATION_ENFORCED": {"target": UNIT},
     },
 )
 
@@ -908,18 +630,7 @@ GUARDRAIL_ORIGIN_LIST = Schema.collection(
 GUARDRAIL_OWNERSHIP = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailOwnership"),
     shape_type=ShapeType.ENUM,
-    members={
-        "SELF": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SELF")],
-        },
-        "CROSS_ACCOUNT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CROSS_ACCOUNT")
-            ],
-        },
-    },
+    members={"SELF": {"target": UNIT}, "CROSS_ACCOUNT": {"target": UNIT}},
 )
 
 APPLIED_GUARDRAIL_DETAILS = Schema.collection(
@@ -936,10 +647,6 @@ APPLIED_GUARDRAIL_DETAILS = Schema.collection(
 AUTOMATED_REASONING_RULE_IDENTIFIER = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#AutomatedReasoningRuleIdentifier"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 12})),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-z0-9]{12}$"),
-    ],
 )
 
 GUARDRAIL_AUTOMATED_REASONING_POLICY_VERSION_ARN = Schema(
@@ -947,15 +654,6 @@ GUARDRAIL_AUTOMATED_REASONING_POLICY_VERSION_ARN = Schema(
         "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningPolicyVersionArn"
     ),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 2048})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:automated-reasoning-policy/[a-z0-9]{12}(:([1-9][0-9]{0,11}))?$",
-        ),
-    ],
 )
 
 GUARDRAIL_AUTOMATED_REASONING_RULE = Schema.collection(
@@ -979,12 +677,7 @@ GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LOGIC_CONTENT = Schema(
         "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningStatementLogicContent"
     ),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 1000})
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 GUARDRAIL_AUTOMATED_REASONING_STATEMENT_NATURAL_LANGUAGE_CONTENT = Schema(
@@ -992,12 +685,7 @@ GUARDRAIL_AUTOMATED_REASONING_STATEMENT_NATURAL_LANGUAGE_CONTENT = Schema(
         "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningStatementNaturalLanguageContent"
     ),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 1000})
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 GUARDRAIL_AUTOMATED_REASONING_STATEMENT = Schema.collection(
@@ -1021,20 +709,7 @@ GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING_TYPE = Schema.collection(
         "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningLogicWarningType"
     ),
     shape_type=ShapeType.ENUM,
-    members={
-        "ALWAYS_FALSE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ALWAYS_FALSE")
-            ],
-        },
-        "ALWAYS_TRUE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ALWAYS_TRUE")
-            ],
-        },
-    },
+    members={"ALWAYS_FALSE": {"target": UNIT}, "ALWAYS_TRUE": {"target": UNIT}},
 )
 
 GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING = Schema.collection(
@@ -1051,12 +726,6 @@ GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_CONFIDENCE = Schema(
         "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslationConfidence"
     ),
     shape_type=ShapeType.DOUBLE,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0, "max": 1})
-        ),
-    ],
 )
 
 GUARDRAIL_AUTOMATED_REASONING_INPUT_TEXT_REFERENCE = Schema.collection(
@@ -1149,9 +818,6 @@ GUARDRAIL_AUTOMATED_REASONING_DIFFERENCE_SCENARIO_LIST = Schema.collection(
         "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningDifferenceScenarioList"
     ),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 2}))
-    ],
     members={"member": {"target": GUARDRAIL_AUTOMATED_REASONING_SCENARIO}},
 )
 
@@ -1177,9 +843,6 @@ GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_OPTION_LIST = Schema.collection(
         "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslationOptionList"
     ),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 2}))
-    ],
     members={"member": {"target": GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_OPTION}},
 )
 
@@ -1239,38 +902,17 @@ GUARDRAIL_AUTOMATED_REASONING_POLICY_ASSESSMENT = Schema.collection(
 GUARDRAIL_CONTENT_POLICY_ACTION = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentPolicyAction"),
     shape_type=ShapeType.ENUM,
-    members={
-        "BLOCKED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="BLOCKED")],
-        },
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
-    },
+    members={"BLOCKED": {"target": UNIT}, "NONE": {"target": UNIT}},
 )
 
 GUARDRAIL_CONTENT_FILTER_CONFIDENCE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentFilterConfidence"),
     shape_type=ShapeType.ENUM,
     members={
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
-        "LOW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="LOW")],
-        },
-        "MEDIUM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="MEDIUM")],
-        },
-        "HIGH": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HIGH")],
-        },
+        "NONE": {"target": UNIT},
+        "LOW": {"target": UNIT},
+        "MEDIUM": {"target": UNIT},
+        "HIGH": {"target": UNIT},
     },
 )
 
@@ -1278,22 +920,10 @@ GUARDRAIL_CONTENT_FILTER_STRENGTH = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentFilterStrength"),
     shape_type=ShapeType.ENUM,
     members={
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
-        "LOW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="LOW")],
-        },
-        "MEDIUM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="MEDIUM")],
-        },
-        "HIGH": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HIGH")],
-        },
+        "NONE": {"target": UNIT},
+        "LOW": {"target": UNIT},
+        "MEDIUM": {"target": UNIT},
+        "HIGH": {"target": UNIT},
     },
 )
 
@@ -1301,34 +931,12 @@ GUARDRAIL_CONTENT_FILTER_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentFilterType"),
     shape_type=ShapeType.ENUM,
     members={
-        "INSULTS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INSULTS")],
-        },
-        "HATE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HATE")],
-        },
-        "SEXUAL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SEXUAL")],
-        },
-        "VIOLENCE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="VIOLENCE")],
-        },
-        "MISCONDUCT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MISCONDUCT")
-            ],
-        },
-        "PROMPT_ATTACK": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROMPT_ATTACK")
-            ],
-        },
+        "INSULTS": {"target": UNIT},
+        "HATE": {"target": UNIT},
+        "SEXUAL": {"target": UNIT},
+        "VIOLENCE": {"target": UNIT},
+        "MISCONDUCT": {"target": UNIT},
+        "PROMPT_ATTACK": {"target": UNIT},
     },
 )
 
@@ -1371,35 +979,13 @@ GUARDRAIL_CONTENT_POLICY_ASSESSMENT = Schema.collection(
 GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_ACTION = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContextualGroundingPolicyAction"),
     shape_type=ShapeType.ENUM,
-    members={
-        "BLOCKED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="BLOCKED")],
-        },
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
-    },
+    members={"BLOCKED": {"target": UNIT}, "NONE": {"target": UNIT}},
 )
 
 GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContextualGroundingFilterType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "GROUNDING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="GROUNDING")
-            ],
-        },
-        "RELEVANCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RELEVANCE")
-            ],
-        },
-    },
+    members={"GROUNDING": {"target": UNIT}, "RELEVANCE": {"target": UNIT}},
 )
 
 GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER = Schema.collection(
@@ -1411,23 +997,11 @@ GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER = Schema.collection(
         },
         "threshold": {
             "target": DOUBLE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"),
-                    value=MappingProxyType({"min": 0, "max": 1}),
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "score": {
             "target": DOUBLE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"),
-                    value=MappingProxyType({"min": 0, "max": 1}),
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "action": {
             "target": GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_ACTION,
@@ -1453,13 +1027,10 @@ GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_ASSESSMENT = Schema.collection(
 IMAGES_GUARDED = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#ImagesGuarded"),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 IMAGES_TOTAL = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#ImagesTotal"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
+    id=ShapeID("com.amazonaws.bedrockruntime#ImagesTotal"), shape_type=ShapeType.INTEGER
 )
 
 GUARDRAIL_IMAGE_COVERAGE = Schema.collection(
@@ -1470,13 +1041,11 @@ GUARDRAIL_IMAGE_COVERAGE = Schema.collection(
 TEXT_CHARACTERS_GUARDED = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#TextCharactersGuarded"),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 TEXT_CHARACTERS_TOTAL = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#TextCharactersTotal"),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GUARDRAIL_TEXT_CHARACTERS_COVERAGE = Schema.collection(
@@ -1498,7 +1067,6 @@ GUARDRAIL_COVERAGE = Schema.collection(
 GUARDRAIL_PROCESSING_LATENCY = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailProcessingLatency"),
     shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GUARDRAIL_AUTOMATED_REASONING_POLICIES_PROCESSED = Schema(
@@ -1506,7 +1074,6 @@ GUARDRAIL_AUTOMATED_REASONING_POLICIES_PROCESSED = Schema(
         "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningPoliciesProcessed"
     ),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GUARDRAIL_AUTOMATED_REASONING_POLICY_UNITS_PROCESSED = Schema(
@@ -1514,7 +1081,6 @@ GUARDRAIL_AUTOMATED_REASONING_POLICY_UNITS_PROCESSED = Schema(
         "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningPolicyUnitsProcessed"
     ),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GUARDRAIL_CONTENT_POLICY_IMAGE_UNITS_PROCESSED = Schema(
@@ -1522,13 +1088,11 @@ GUARDRAIL_CONTENT_POLICY_IMAGE_UNITS_PROCESSED = Schema(
         "com.amazonaws.bedrockruntime#GuardrailContentPolicyImageUnitsProcessed"
     ),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GUARDRAIL_CONTENT_POLICY_UNITS_PROCESSED = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentPolicyUnitsProcessed"),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_UNITS_PROCESSED = Schema(
@@ -1536,7 +1100,6 @@ GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_UNITS_PROCESSED = Schema(
         "com.amazonaws.bedrockruntime#GuardrailContextualGroundingPolicyUnitsProcessed"
     ),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GUARDRAIL_SENSITIVE_INFORMATION_POLICY_FREE_UNITS_PROCESSED = Schema(
@@ -1544,7 +1107,6 @@ GUARDRAIL_SENSITIVE_INFORMATION_POLICY_FREE_UNITS_PROCESSED = Schema(
         "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyFreeUnitsProcessed"
     ),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GUARDRAIL_SENSITIVE_INFORMATION_POLICY_UNITS_PROCESSED = Schema(
@@ -1552,19 +1114,16 @@ GUARDRAIL_SENSITIVE_INFORMATION_POLICY_UNITS_PROCESSED = Schema(
         "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyUnitsProcessed"
     ),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GUARDRAIL_TOPIC_POLICY_UNITS_PROCESSED = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTopicPolicyUnitsProcessed"),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GUARDRAIL_WORD_POLICY_UNITS_PROCESSED = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailWordPolicyUnitsProcessed"),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GUARDRAIL_USAGE = Schema.collection(
@@ -1621,20 +1180,9 @@ GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ACTION = Schema.collection(
     ),
     shape_type=ShapeType.ENUM,
     members={
-        "ANONYMIZED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ANONYMIZED")
-            ],
-        },
-        "BLOCKED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="BLOCKED")],
-        },
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
+        "ANONYMIZED": {"target": UNIT},
+        "BLOCKED": {"target": UNIT},
+        "NONE": {"target": UNIT},
     },
 )
 
@@ -1642,210 +1190,37 @@ GUARDRAIL_PII_ENTITY_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailPiiEntityType"),
     shape_type=ShapeType.ENUM,
     members={
-        "ADDRESS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ADDRESS")],
-        },
-        "AGE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="AGE")],
-        },
-        "AWS_ACCESS_KEY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AWS_ACCESS_KEY")
-            ],
-        },
-        "AWS_SECRET_KEY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AWS_SECRET_KEY")
-            ],
-        },
-        "CA_HEALTH_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CA_HEALTH_NUMBER")
-            ],
-        },
-        "CA_SOCIAL_INSURANCE_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="CA_SOCIAL_INSURANCE_NUMBER",
-                )
-            ],
-        },
-        "CREDIT_DEBIT_CARD_CVV": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CREDIT_DEBIT_CARD_CVV"
-                )
-            ],
-        },
-        "CREDIT_DEBIT_CARD_EXPIRY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CREDIT_DEBIT_CARD_EXPIRY"
-                )
-            ],
-        },
-        "CREDIT_DEBIT_CARD_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CREDIT_DEBIT_CARD_NUMBER"
-                )
-            ],
-        },
-        "DRIVER_ID": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DRIVER_ID")
-            ],
-        },
-        "EMAIL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="EMAIL")],
-        },
-        "INTERNATIONAL_BANK_ACCOUNT_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="INTERNATIONAL_BANK_ACCOUNT_NUMBER",
-                )
-            ],
-        },
-        "IP_ADDRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="IP_ADDRESS")
-            ],
-        },
-        "LICENSE_PLATE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="LICENSE_PLATE")
-            ],
-        },
-        "MAC_ADDRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MAC_ADDRESS")
-            ],
-        },
-        "NAME": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NAME")],
-        },
-        "PASSWORD": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PASSWORD")],
-        },
-        "PHONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PHONE")],
-        },
-        "PIN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PIN")],
-        },
-        "SWIFT_CODE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SWIFT_CODE")
-            ],
-        },
-        "UK_NATIONAL_HEALTH_SERVICE_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="UK_NATIONAL_HEALTH_SERVICE_NUMBER",
-                )
-            ],
-        },
-        "UK_NATIONAL_INSURANCE_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="UK_NATIONAL_INSURANCE_NUMBER",
-                )
-            ],
-        },
-        "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
-                )
-            ],
-        },
-        "URL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="URL")],
-        },
-        "USERNAME": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="USERNAME")],
-        },
-        "US_BANK_ACCOUNT_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="US_BANK_ACCOUNT_NUMBER"
-                )
-            ],
-        },
-        "US_BANK_ROUTING_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="US_BANK_ROUTING_NUMBER"
-                )
-            ],
-        },
-        "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
-                )
-            ],
-        },
-        "US_PASSPORT_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="US_PASSPORT_NUMBER"
-                )
-            ],
-        },
-        "US_SOCIAL_SECURITY_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="US_SOCIAL_SECURITY_NUMBER",
-                )
-            ],
-        },
-        "VEHICLE_IDENTIFICATION_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="VEHICLE_IDENTIFICATION_NUMBER",
-                )
-            ],
-        },
+        "ADDRESS": {"target": UNIT},
+        "AGE": {"target": UNIT},
+        "AWS_ACCESS_KEY": {"target": UNIT},
+        "AWS_SECRET_KEY": {"target": UNIT},
+        "CA_HEALTH_NUMBER": {"target": UNIT},
+        "CA_SOCIAL_INSURANCE_NUMBER": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_CVV": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_EXPIRY": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_NUMBER": {"target": UNIT},
+        "DRIVER_ID": {"target": UNIT},
+        "EMAIL": {"target": UNIT},
+        "INTERNATIONAL_BANK_ACCOUNT_NUMBER": {"target": UNIT},
+        "IP_ADDRESS": {"target": UNIT},
+        "LICENSE_PLATE": {"target": UNIT},
+        "MAC_ADDRESS": {"target": UNIT},
+        "NAME": {"target": UNIT},
+        "PASSWORD": {"target": UNIT},
+        "PHONE": {"target": UNIT},
+        "PIN": {"target": UNIT},
+        "SWIFT_CODE": {"target": UNIT},
+        "UK_NATIONAL_HEALTH_SERVICE_NUMBER": {"target": UNIT},
+        "UK_NATIONAL_INSURANCE_NUMBER": {"target": UNIT},
+        "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER": {"target": UNIT},
+        "URL": {"target": UNIT},
+        "USERNAME": {"target": UNIT},
+        "US_BANK_ACCOUNT_NUMBER": {"target": UNIT},
+        "US_BANK_ROUTING_NUMBER": {"target": UNIT},
+        "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER": {"target": UNIT},
+        "US_PASSPORT_NUMBER": {"target": UNIT},
+        "US_SOCIAL_SECURITY_NUMBER": {"target": UNIT},
+        "VEHICLE_IDENTIFICATION_NUMBER": {"target": UNIT},
     },
 )
 
@@ -1913,27 +1288,13 @@ GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ASSESSMENT = Schema.collection(
 GUARDRAIL_TOPIC_POLICY_ACTION = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTopicPolicyAction"),
     shape_type=ShapeType.ENUM,
-    members={
-        "BLOCKED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="BLOCKED")],
-        },
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
-    },
+    members={"BLOCKED": {"target": UNIT}, "NONE": {"target": UNIT}},
 )
 
 GUARDRAIL_TOPIC_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTopicType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "DENY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DENY")],
-        }
-    },
+    members={"DENY": {"target": UNIT}},
 )
 
 GUARDRAIL_TOPIC = Schema.collection(
@@ -1974,16 +1335,7 @@ GUARDRAIL_TOPIC_POLICY_ASSESSMENT = Schema.collection(
 GUARDRAIL_WORD_POLICY_ACTION = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailWordPolicyAction"),
     shape_type=ShapeType.ENUM,
-    members={
-        "BLOCKED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="BLOCKED")],
-        },
-        "NONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NONE")],
-        },
-    },
+    members={"BLOCKED": {"target": UNIT}, "NONE": {"target": UNIT}},
 )
 
 GUARDRAIL_CUSTOM_WORD = Schema.collection(
@@ -2010,14 +1362,7 @@ GUARDRAIL_CUSTOM_WORD_LIST = Schema.collection(
 GUARDRAIL_MANAGED_WORD_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailManagedWordType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "PROFANITY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROFANITY")
-            ],
-        }
-    },
+    members={"PROFANITY": {"target": UNIT}},
 )
 
 GUARDRAIL_MANAGED_WORD = Schema.collection(
@@ -2107,8 +1452,7 @@ APPLY_GUARDRAIL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#ApplyGuardrailResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "usage": {
@@ -2153,28 +1497,11 @@ GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksContentFilterCategory"),
     shape_type=ShapeType.ENUM,
     members={
-        "VIOLENCE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="VIOLENCE")],
-        },
-        "HATE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HATE")],
-        },
-        "SEXUAL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SEXUAL")],
-        },
-        "MISCONDUCT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MISCONDUCT")
-            ],
-        },
-        "INSULTS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INSULTS")],
-        },
+        "VIOLENCE": {"target": UNIT},
+        "HATE": {"target": UNIT},
+        "SEXUAL": {"target": UNIT},
+        "MISCONDUCT": {"target": UNIT},
+        "INSULTS": {"target": UNIT},
     },
 )
 
@@ -2195,12 +1522,6 @@ GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY_CONFIG_LIST = Schema.collection(
         "com.amazonaws.bedrockruntime#GuardrailChecksContentFilterCategoryConfigList"
     ),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 5}),
-        )
-    ],
     members={"member": {"target": GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY_CONFIG}},
 )
 
@@ -2218,24 +1539,9 @@ GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackCategory"),
     shape_type=ShapeType.ENUM,
     members={
-        "JAILBREAK": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="JAILBREAK")
-            ],
-        },
-        "PROMPT_INJECTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROMPT_INJECTION")
-            ],
-        },
-        "PROMPT_LEAKAGE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PROMPT_LEAKAGE")
-            ],
-        },
+        "JAILBREAK": {"target": UNIT},
+        "PROMPT_INJECTION": {"target": UNIT},
+        "PROMPT_LEAKAGE": {"target": UNIT},
     },
 )
 
@@ -2256,12 +1562,6 @@ GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY_CONFIG_LIST = Schema.collection(
         "com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackCategoryConfigList"
     ),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 3}),
-        )
-    ],
     members={"member": {"target": GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY_CONFIG}},
 )
 
@@ -2281,210 +1581,37 @@ GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_TYPE = Schema.collection(
     ),
     shape_type=ShapeType.ENUM,
     members={
-        "ADDRESS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ADDRESS")],
-        },
-        "AGE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="AGE")],
-        },
-        "AWS_ACCESS_KEY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AWS_ACCESS_KEY")
-            ],
-        },
-        "AWS_SECRET_KEY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AWS_SECRET_KEY")
-            ],
-        },
-        "CA_HEALTH_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CA_HEALTH_NUMBER")
-            ],
-        },
-        "CA_SOCIAL_INSURANCE_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="CA_SOCIAL_INSURANCE_NUMBER",
-                )
-            ],
-        },
-        "CREDIT_DEBIT_CARD_CVV": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CREDIT_DEBIT_CARD_CVV"
-                )
-            ],
-        },
-        "CREDIT_DEBIT_CARD_EXPIRY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CREDIT_DEBIT_CARD_EXPIRY"
-                )
-            ],
-        },
-        "CREDIT_DEBIT_CARD_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CREDIT_DEBIT_CARD_NUMBER"
-                )
-            ],
-        },
-        "DRIVER_ID": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DRIVER_ID")
-            ],
-        },
-        "EMAIL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="EMAIL")],
-        },
-        "INTERNATIONAL_BANK_ACCOUNT_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="INTERNATIONAL_BANK_ACCOUNT_NUMBER",
-                )
-            ],
-        },
-        "IP_ADDRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="IP_ADDRESS")
-            ],
-        },
-        "LICENSE_PLATE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="LICENSE_PLATE")
-            ],
-        },
-        "MAC_ADDRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="MAC_ADDRESS")
-            ],
-        },
-        "NAME": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NAME")],
-        },
-        "PASSWORD": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PASSWORD")],
-        },
-        "PHONE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PHONE")],
-        },
-        "PIN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PIN")],
-        },
-        "SWIFT_CODE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SWIFT_CODE")
-            ],
-        },
-        "UK_NATIONAL_HEALTH_SERVICE_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="UK_NATIONAL_HEALTH_SERVICE_NUMBER",
-                )
-            ],
-        },
-        "UK_NATIONAL_INSURANCE_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="UK_NATIONAL_INSURANCE_NUMBER",
-                )
-            ],
-        },
-        "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
-                )
-            ],
-        },
-        "URL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="URL")],
-        },
-        "USERNAME": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="USERNAME")],
-        },
-        "US_BANK_ACCOUNT_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="US_BANK_ACCOUNT_NUMBER"
-                )
-            ],
-        },
-        "US_BANK_ROUTING_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="US_BANK_ROUTING_NUMBER"
-                )
-            ],
-        },
-        "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
-                )
-            ],
-        },
-        "US_PASSPORT_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="US_PASSPORT_NUMBER"
-                )
-            ],
-        },
-        "US_SOCIAL_SECURITY_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="US_SOCIAL_SECURITY_NUMBER",
-                )
-            ],
-        },
-        "VEHICLE_IDENTIFICATION_NUMBER": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="VEHICLE_IDENTIFICATION_NUMBER",
-                )
-            ],
-        },
+        "ADDRESS": {"target": UNIT},
+        "AGE": {"target": UNIT},
+        "AWS_ACCESS_KEY": {"target": UNIT},
+        "AWS_SECRET_KEY": {"target": UNIT},
+        "CA_HEALTH_NUMBER": {"target": UNIT},
+        "CA_SOCIAL_INSURANCE_NUMBER": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_CVV": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_EXPIRY": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_NUMBER": {"target": UNIT},
+        "DRIVER_ID": {"target": UNIT},
+        "EMAIL": {"target": UNIT},
+        "INTERNATIONAL_BANK_ACCOUNT_NUMBER": {"target": UNIT},
+        "IP_ADDRESS": {"target": UNIT},
+        "LICENSE_PLATE": {"target": UNIT},
+        "MAC_ADDRESS": {"target": UNIT},
+        "NAME": {"target": UNIT},
+        "PASSWORD": {"target": UNIT},
+        "PHONE": {"target": UNIT},
+        "PIN": {"target": UNIT},
+        "SWIFT_CODE": {"target": UNIT},
+        "UK_NATIONAL_HEALTH_SERVICE_NUMBER": {"target": UNIT},
+        "UK_NATIONAL_INSURANCE_NUMBER": {"target": UNIT},
+        "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER": {"target": UNIT},
+        "URL": {"target": UNIT},
+        "USERNAME": {"target": UNIT},
+        "US_BANK_ACCOUNT_NUMBER": {"target": UNIT},
+        "US_BANK_ROUTING_NUMBER": {"target": UNIT},
+        "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER": {"target": UNIT},
+        "US_PASSPORT_NUMBER": {"target": UNIT},
+        "US_SOCIAL_SECURITY_NUMBER": {"target": UNIT},
+        "VEHICLE_IDENTIFICATION_NUMBER": {"target": UNIT},
     },
 )
 
@@ -2505,12 +1632,6 @@ GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_CONFIG_LIST = Schema.collection(
         "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationEntityConfigList"
     ),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 31}),
-        )
-    ],
     members={
         "member": {"target": GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_CONFIG}
     },
@@ -2542,10 +1663,7 @@ GUARDRAIL_CHECKS_CONFIG = Schema.collection(
 GUARDRAIL_CHECKS_TEXT_CONTENT = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksTextContent"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1})),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 GUARDRAIL_CHECKS_CONTENT_BLOCK = Schema.collection(
@@ -2557,9 +1675,6 @@ GUARDRAIL_CHECKS_CONTENT_BLOCK = Schema.collection(
 GUARDRAIL_CHECKS_CONTENT_BLOCK_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksContentBlockList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1}))
-    ],
     members={"member": {"target": GUARDRAIL_CHECKS_CONTENT_BLOCK}},
 )
 
@@ -2567,20 +1682,9 @@ GUARDRAIL_CHECKS_ROLE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksRole"),
     shape_type=ShapeType.ENUM,
     members={
-        "USER": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="user")],
-        },
-        "ASSISTANT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="assistant")
-            ],
-        },
-        "SYSTEM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="system")],
-        },
+        "USER": {"target": UNIT},
+        "ASSISTANT": {"target": UNIT},
+        "SYSTEM": {"target": UNIT},
     },
 )
 
@@ -2601,9 +1705,6 @@ GUARDRAIL_CHECKS_MESSAGE = Schema.collection(
 GUARDRAIL_CHECKS_MESSAGE_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksMessageList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1}))
-    ],
     members={"member": {"target": GUARDRAIL_CHECKS_MESSAGE}},
 )
 
@@ -2613,8 +1714,7 @@ INVOKE_GUARDRAIL_CHECKS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#InvokeGuardrailChecksRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "messages": {
@@ -2637,13 +1737,7 @@ GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT_ENTRY = Schema.collection(
         },
         "severityScore": {
             "target": DOUBLE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"),
-                    value=MappingProxyType({"min": 0.0, "max": 1.0}),
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
     },
 )
@@ -2673,13 +1767,7 @@ GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT_ENTRY = Schema.collection(
         },
         "severityScore": {
             "target": DOUBLE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"),
-                    value=MappingProxyType({"min": 0.0, "max": 1.0}),
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
     },
 )
@@ -2711,49 +1799,23 @@ GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT_ENTRY = Schema.collection(
         },
         "confidenceScore": {
             "target": DOUBLE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"),
-                    value=MappingProxyType({"min": 0.0, "max": 1.0}),
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "beginOffset": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "endOffset": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "messageIndex": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "contentIndex": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
     },
 )
@@ -2837,8 +1899,7 @@ INVOKE_GUARDRAIL_CHECKS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#InvokeGuardrailChecksResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "results": {
@@ -2869,20 +1930,9 @@ GUARDRAIL_TRACE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTrace"),
     shape_type=ShapeType.ENUM,
     members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="enabled")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="disabled")],
-        },
-        "ENABLED_FULL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="enabled_full")
-            ],
-        },
+        "ENABLED": {"target": UNIT},
+        "DISABLED": {"target": UNIT},
+        "ENABLED_FULL": {"target": UNIT},
     },
 )
 
@@ -2891,17 +1941,11 @@ GUARDRAIL_CONFIGURATION = Schema.collection(
     members={
         "guardrailIdentifier": {
             "target": GUARDRAIL_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=""),
-                Trait.new(id=ShapeID("smithy.api#addedDefault")),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="")],
         },
         "guardrailVersion": {
             "target": GUARDRAIL_VERSION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=""),
-                Trait.new(id=ShapeID("smithy.api#addedDefault")),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="")],
         },
         "trace": {
             "target": GUARDRAIL_TRACE,
@@ -2913,9 +1957,6 @@ GUARDRAIL_CONFIGURATION = Schema.collection(
 NON_EMPTY_STRING = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#NonEmptyString"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1}))
-    ],
 )
 
 NON_EMPTY_STRING_LIST = Schema.collection(
@@ -2927,41 +1968,10 @@ NON_EMPTY_STRING_LIST = Schema.collection(
 INFERENCE_CONFIGURATION = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#InferenceConfiguration"),
     members={
-        "maxTokens": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 1})
-                )
-            ],
-        },
-        "temperature": {
-            "target": FLOAT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"),
-                    value=MappingProxyType({"min": 0, "max": 1}),
-                )
-            ],
-        },
-        "topP": {
-            "target": FLOAT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"),
-                    value=MappingProxyType({"min": 0, "max": 1}),
-                )
-            ],
-        },
-        "stopSequences": {
-            "target": NON_EMPTY_STRING_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"max": 2500}),
-                )
-            ],
-        },
+        "maxTokens": {"target": INTEGER},
+        "temperature": {"target": FLOAT},
+        "topP": {"target": FLOAT},
+        "stopSequences": {"target": NON_EMPTY_STRING_LIST},
     },
 )
 
@@ -2975,66 +1985,21 @@ AUDIO_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#AudioFormat"),
     shape_type=ShapeType.ENUM,
     members={
-        "MP3": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mp3")],
-        },
-        "OPUS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="opus")],
-        },
-        "WAV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="wav")],
-        },
-        "AAC": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="aac")],
-        },
-        "FLAC": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="flac")],
-        },
-        "MP4": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mp4")],
-        },
-        "OGG": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ogg")],
-        },
-        "MKV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mkv")],
-        },
-        "MKA": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mka")],
-        },
-        "X_AAC": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="x-aac")],
-        },
-        "M4A": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="m4a")],
-        },
-        "MPEG": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mpeg")],
-        },
-        "MPGA": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mpga")],
-        },
-        "PCM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="pcm")],
-        },
-        "WEBM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="webm")],
-        },
+        "MP3": {"target": UNIT},
+        "OPUS": {"target": UNIT},
+        "WAV": {"target": UNIT},
+        "AAC": {"target": UNIT},
+        "FLAC": {"target": UNIT},
+        "MP4": {"target": UNIT},
+        "OGG": {"target": UNIT},
+        "MKV": {"target": UNIT},
+        "MKA": {"target": UNIT},
+        "X_AAC": {"target": UNIT},
+        "M4A": {"target": UNIT},
+        "MPEG": {"target": UNIT},
+        "MPGA": {"target": UNIT},
+        "PCM": {"target": UNIT},
+        "WEBM": {"target": UNIT},
     },
 )
 
@@ -3053,17 +2018,7 @@ AUDIO_SOURCE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#AudioSource"),
     shape_type=ShapeType.UNION,
     traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-    members={
-        "bytes": {
-            "target": BLOB,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1})
-                )
-            ],
-        },
-        "s3Location": {"target": S3_LOCATION},
-    },
+    members={"bytes": {"target": BLOB}, "s3Location": {"target": S3_LOCATION}},
 )
 
 AUDIO_BLOCK = Schema.collection(
@@ -3084,27 +2039,13 @@ AUDIO_BLOCK = Schema.collection(
 CACHE_TTL = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#CacheTTL"),
     shape_type=ShapeType.ENUM,
-    members={
-        "FIVE_MINUTES": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="5m")],
-        },
-        "ONE_HOUR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="1h")],
-        },
-    },
+    members={"FIVE_MINUTES": {"target": UNIT}, "ONE_HOUR": {"target": UNIT}},
 )
 
 CACHE_POINT_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#CachePointType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "DEFAULT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="default")],
-        }
-    },
+    members={"DEFAULT": {"target": UNIT}},
 )
 
 CACHE_POINT_BLOCK = Schema.collection(
@@ -3121,120 +2062,36 @@ CACHE_POINT_BLOCK = Schema.collection(
 DOCUMENT_CHAR_LOCATION = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#DocumentCharLocation"),
     members={
-        "documentIndex": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
-        "start": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
-        "end": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
+        "documentIndex": {"target": INTEGER},
+        "start": {"target": INTEGER},
+        "end": {"target": INTEGER},
     },
 )
 
 DOCUMENT_CHUNK_LOCATION = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#DocumentChunkLocation"),
     members={
-        "documentIndex": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
-        "start": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
-        "end": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
+        "documentIndex": {"target": INTEGER},
+        "start": {"target": INTEGER},
+        "end": {"target": INTEGER},
     },
 )
 
 DOCUMENT_PAGE_LOCATION = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#DocumentPageLocation"),
     members={
-        "documentIndex": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
-        "start": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
-        "end": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
+        "documentIndex": {"target": INTEGER},
+        "start": {"target": INTEGER},
+        "end": {"target": INTEGER},
     },
 )
 
 SEARCH_RESULT_LOCATION = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#SearchResultLocation"),
     members={
-        "searchResultIndex": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
-        "start": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
-        "end": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
+        "searchResultIndex": {"target": INTEGER},
+        "start": {"target": INTEGER},
+        "end": {"target": INTEGER},
     },
 )
 
@@ -3317,42 +2174,15 @@ DOCUMENT_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#DocumentFormat"),
     shape_type=ShapeType.ENUM,
     members={
-        "PDF": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="pdf")],
-        },
-        "CSV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="csv")],
-        },
-        "DOC": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="doc")],
-        },
-        "DOCX": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="docx")],
-        },
-        "XLS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="xls")],
-        },
-        "XLSX": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="xlsx")],
-        },
-        "HTML": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="html")],
-        },
-        "TXT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="txt")],
-        },
-        "MD": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="md")],
-        },
+        "PDF": {"target": UNIT},
+        "CSV": {"target": UNIT},
+        "DOC": {"target": UNIT},
+        "DOCX": {"target": UNIT},
+        "XLS": {"target": UNIT},
+        "XLSX": {"target": UNIT},
+        "HTML": {"target": UNIT},
+        "TXT": {"target": UNIT},
+        "MD": {"target": UNIT},
     },
 )
 
@@ -3372,14 +2202,7 @@ DOCUMENT_SOURCE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#DocumentSource"),
     shape_type=ShapeType.UNION,
     members={
-        "bytes": {
-            "target": BLOB,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1})
-                )
-            ],
-        },
+        "bytes": {"target": BLOB},
         "s3Location": {"target": S3_LOCATION},
         "text": {"target": STRING},
         "content": {"target": DOCUMENT_CONTENT_BLOCKS},
@@ -3391,20 +2214,11 @@ DOCUMENT_BLOCK = Schema.collection(
     members={
         "format": {
             "target": DOCUMENT_FORMAT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value="txt"),
-                Trait.new(id=ShapeID("smithy.api#addedDefault")),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="txt")],
         },
         "name": {
             "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 200}),
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "source": {
             "target": DOCUMENT_SOURCE,
@@ -3418,32 +2232,14 @@ DOCUMENT_BLOCK = Schema.collection(
 GUARDRAIL_CONVERSE_IMAGE_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailConverseImageFormat"),
     shape_type=ShapeType.ENUM,
-    members={
-        "PNG": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="png")],
-        },
-        "JPEG": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="jpeg")],
-        },
-    },
+    members={"PNG": {"target": UNIT}, "JPEG": {"target": UNIT}},
 )
 
 GUARDRAIL_CONVERSE_IMAGE_SOURCE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailConverseImageSource"),
     shape_type=ShapeType.UNION,
     traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-    members={
-        "bytes": {
-            "target": BLOB,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1})
-                )
-            ],
-        }
-    },
+    members={"bytes": {"target": BLOB}},
 )
 
 GUARDRAIL_CONVERSE_IMAGE_BLOCK = Schema.collection(
@@ -3465,22 +2261,9 @@ GUARDRAIL_CONVERSE_CONTENT_QUALIFIER = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailConverseContentQualifier"),
     shape_type=ShapeType.ENUM,
     members={
-        "GROUNDING_SOURCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="grounding_source")
-            ],
-        },
-        "QUERY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="query")],
-        },
-        "GUARD_CONTENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="guard_content")
-            ],
-        },
+        "GROUNDING_SOURCE": {"target": UNIT},
+        "QUERY": {"target": UNIT},
+        "GUARD_CONTENT": {"target": UNIT},
     },
 )
 
@@ -3514,22 +2297,10 @@ IMAGE_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#ImageFormat"),
     shape_type=ShapeType.ENUM,
     members={
-        "PNG": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="png")],
-        },
-        "JPEG": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="jpeg")],
-        },
-        "GIF": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="gif")],
-        },
-        "WEBP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="webp")],
-        },
+        "PNG": {"target": UNIT},
+        "JPEG": {"target": UNIT},
+        "GIF": {"target": UNIT},
+        "WEBP": {"target": UNIT},
     },
 )
 
@@ -3537,17 +2308,7 @@ IMAGE_SOURCE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#ImageSource"),
     shape_type=ShapeType.UNION,
     traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-    members={
-        "bytes": {
-            "target": BLOB,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1})
-                )
-            ],
-        },
-        "s3Location": {"target": S3_LOCATION},
-    },
+    members={"bytes": {"target": BLOB}, "s3Location": {"target": S3_LOCATION}},
 )
 
 IMAGE_BLOCK = Schema.collection(
@@ -3625,33 +2386,9 @@ SEARCH_RESULT_BLOCK = Schema.collection(
 TOOL_REFERENCE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#ToolReference"),
     members={
-        "type": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 64}),
-                )
-            ],
-        },
-        "name": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 128}),
-                )
-            ],
-        },
-        "serverName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 128}),
-                )
-            ],
-        },
+        "type": {"target": STRING},
+        "name": {"target": STRING},
+        "serverName": {"target": STRING},
     },
 )
 
@@ -3679,59 +2416,22 @@ VIDEO_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#VideoFormat"),
     shape_type=ShapeType.ENUM,
     members={
-        "MKV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mkv")],
-        },
-        "MOV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mov")],
-        },
-        "MP4": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mp4")],
-        },
-        "WEBM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="webm")],
-        },
-        "FLV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="flv")],
-        },
-        "MPEG": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mpeg")],
-        },
-        "MPG": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mpg")],
-        },
-        "WMV": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="wmv")],
-        },
-        "THREE_GP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="three_gp")],
-        },
+        "MKV": {"target": UNIT},
+        "MOV": {"target": UNIT},
+        "MP4": {"target": UNIT},
+        "WEBM": {"target": UNIT},
+        "FLV": {"target": UNIT},
+        "MPEG": {"target": UNIT},
+        "MPG": {"target": UNIT},
+        "WMV": {"target": UNIT},
+        "THREE_GP": {"target": UNIT},
     },
 )
 
 VIDEO_SOURCE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#VideoSource"),
     shape_type=ShapeType.UNION,
-    members={
-        "bytes": {
-            "target": BLOB,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1})
-                )
-            ],
-        },
-        "s3Location": {"target": S3_LOCATION},
-    },
+    members={"bytes": {"target": BLOB}, "s3Location": {"target": S3_LOCATION}},
 )
 
 VIDEO_BLOCK = Schema.collection(
@@ -3770,28 +2470,11 @@ TOOL_RESULT_CONTENT_BLOCKS = Schema.collection(
 TOOL_RESULT_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#ToolResultStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "SUCCESS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="success")],
-        },
-        "ERROR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="error")],
-        },
-    },
+    members={"SUCCESS": {"target": UNIT}, "ERROR": {"target": UNIT}},
 )
 
 TOOL_USE_ID = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#ToolUseId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 64}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9_.:-]+$"),
-    ],
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolUseId"), shape_type=ShapeType.STRING
 )
 
 TOOL_RESULT_BLOCK = Schema.collection(
@@ -3811,28 +2494,13 @@ TOOL_RESULT_BLOCK = Schema.collection(
 )
 
 TOOL_NAME = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#ToolName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 64}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9_-]+$"),
-    ],
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolName"), shape_type=ShapeType.STRING
 )
 
 TOOL_USE_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#ToolUseType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "SERVER_TOOL_USE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="server_tool_use")
-            ],
-        }
-    },
+    members={"SERVER_TOOL_USE": {"target": UNIT}},
 )
 
 TOOL_USE_BLOCK = Schema.collection(
@@ -3885,20 +2553,9 @@ CONVERSATION_ROLE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#ConversationRole"),
     shape_type=ShapeType.ENUM,
     members={
-        "USER": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="user")],
-        },
-        "ASSISTANT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="assistant")
-            ],
-        },
-        "SYSTEM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="system")],
-        },
+        "USER": {"target": UNIT},
+        "ASSISTANT": {"target": UNIT},
+        "SYSTEM": {"target": UNIT},
     },
 )
 
@@ -3925,16 +2582,6 @@ MESSAGES = Schema.collection(
 CONVERSATIONAL_MODEL_ID = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#ConversationalModelId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:custom-model-deployment/[a-z0-9]{12})|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|([a-zA-Z0-9-:.]+)|(^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}(?::[0-9]{1,5})?))$|(^arn:aws:sagemaker:[a-z0-9-]+:[0-9]{12}:endpoint/[a-zA-Z0-9-]+$)|(^arn:aws(-[^:]+)?:bedrock:([0-9a-z-]{1,20}):([0-9]{12}):(default-)?prompt-router/[a-zA-Z0-9-:.]+$)$",
-        ),
-    ],
 )
 
 JSON_SCHEMA_DEFINITION = Schema.collection(
@@ -3959,14 +2606,7 @@ OUTPUT_FORMAT_STRUCTURE = Schema.collection(
 OUTPUT_FORMAT_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#OutputFormatType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "JSON_SCHEMA": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="json_schema")
-            ],
-        }
-    },
+    members={"JSON_SCHEMA": {"target": UNIT}},
 )
 
 OUTPUT_FORMAT = Schema.collection(
@@ -3985,34 +2625,13 @@ OUTPUT_FORMAT = Schema.collection(
 
 OUTPUT_CONFIG = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#OutputConfig"),
-    members={
-        "textFormat": {"target": OUTPUT_FORMAT},
-        "effort": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 16})
-                )
-            ],
-        },
-    },
+    members={"textFormat": {"target": OUTPUT_FORMAT}, "effort": {"target": STRING}},
 )
 
 PERFORMANCE_CONFIG_LATENCY = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#PerformanceConfigLatency"),
     shape_type=ShapeType.ENUM,
-    members={
-        "STANDARD": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="standard")],
-        },
-        "OPTIMIZED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="optimized")
-            ],
-        },
-    },
+    members={"STANDARD": {"target": UNIT}, "OPTIMIZED": {"target": UNIT}},
 )
 
 PERFORMANCE_CONFIGURATION = Schema.collection(
@@ -4041,63 +2660,18 @@ PROMPT_VARIABLE_MAP = Schema.collection(
 REQUEST_METADATA = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#RequestMetadata"),
     shape_type=ShapeType.MAP,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 16}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
-    members={
-        "key": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 256}),
-                ),
-                Trait.new(
-                    id=ShapeID("smithy.api#pattern"),
-                    value="^[a-zA-Z0-9\\s:_@$#=/+,-.]{1,256}$",
-                ),
-            ],
-        },
-        "value": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 0, "max": 256}),
-                ),
-                Trait.new(
-                    id=ShapeID("smithy.api#pattern"),
-                    value="^[a-zA-Z0-9\\s:_@$#=/+,-.]{0,256}$",
-                ),
-            ],
-        },
-    },
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"key": {"target": STRING}, "value": {"target": STRING}},
 )
 
 SERVICE_TIER_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#ServiceTierType"),
     shape_type=ShapeType.ENUM,
     members={
-        "PRIORITY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="priority")],
-        },
-        "DEFAULT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="default")],
-        },
-        "FLEX": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="flex")],
-        },
-        "RESERVED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="reserved")],
-        },
+        "PRIORITY": {"target": UNIT},
+        "DEFAULT": {"target": UNIT},
+        "FLEX": {"target": UNIT},
+        "RESERVED": {"target": UNIT},
     },
 )
 
@@ -4208,12 +2782,7 @@ TOOL_CONFIGURATION = Schema.collection(
     members={
         "tools": {
             "target": TOOLS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1})
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "toolChoice": {"target": TOOL_CHOICE},
     },
@@ -4225,8 +2794,7 @@ CONVERSE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#ConverseRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "modelId": {
@@ -4244,12 +2812,7 @@ CONVERSE_INPUT = Schema.collection(
         "additionalModelRequestFields": {"target": DOCUMENT},
         "promptVariables": {"target": PROMPT_VARIABLE_MAP},
         "additionalModelResponseFieldPaths": {
-            "target": ADDITIONAL_MODEL_RESPONSE_FIELD_PATHS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 10})
-                )
-            ],
+            "target": ADDITIONAL_MODEL_RESPONSE_FIELD_PATHS
         },
         "requestMetadata": {"target": REQUEST_METADATA},
         "performanceConfig": {"target": PERFORMANCE_CONFIGURATION},
@@ -4278,65 +2841,15 @@ STOP_REASON = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#StopReason"),
     shape_type=ShapeType.ENUM,
     members={
-        "END_TURN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="end_turn")],
-        },
-        "TOOL_USE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="tool_use")],
-        },
-        "MAX_TOKENS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="max_tokens")
-            ],
-        },
-        "STOP_SEQUENCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="stop_sequence")
-            ],
-        },
-        "GUARDRAIL_INTERVENED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="guardrail_intervened"
-                )
-            ],
-        },
-        "CONTENT_FILTERED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="content_filtered")
-            ],
-        },
-        "MALFORMED_MODEL_OUTPUT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="malformed_model_output"
-                )
-            ],
-        },
-        "MALFORMED_TOOL_USE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="malformed_tool_use"
-                )
-            ],
-        },
-        "MODEL_CONTEXT_WINDOW_EXCEEDED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="model_context_window_exceeded",
-                )
-            ],
-        },
+        "END_TURN": {"target": UNIT},
+        "TOOL_USE": {"target": UNIT},
+        "MAX_TOKENS": {"target": UNIT},
+        "STOP_SEQUENCE": {"target": UNIT},
+        "GUARDRAIL_INTERVENED": {"target": UNIT},
+        "CONTENT_FILTERED": {"target": UNIT},
+        "MALFORMED_MODEL_OUTPUT": {"target": UNIT},
+        "MALFORMED_TOOL_USE": {"target": UNIT},
+        "MODEL_CONTEXT_WINDOW_EXCEEDED": {"target": UNIT},
     },
 )
 
@@ -4371,12 +2884,6 @@ GUARDRAIL_TRACE_ASSESSMENT = Schema.collection(
 INVOKED_MODEL_ID = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#InvokedModelId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):inference-profile/[a-zA-Z0-9-:.]+)$",
-        )
-    ],
 )
 
 PROMPT_ROUTER_TRACE = Schema.collection(
@@ -4401,12 +2908,7 @@ CACHE_DETAIL = Schema.collection(
         },
         "inputTokens": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
     },
 )
@@ -4422,47 +2924,18 @@ TOKEN_USAGE = Schema.collection(
     members={
         "inputTokens": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "outputTokens": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "totalTokens": {
             "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
-        "cacheReadInputTokens": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
-        "cacheWriteInputTokens": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})
-                )
-            ],
-        },
+        "cacheReadInputTokens": {"target": INTEGER},
+        "cacheWriteInputTokens": {"target": INTEGER},
         "cacheDetails": {"target": CACHE_DETAILS_LIST},
     },
 )
@@ -4473,8 +2946,7 @@ CONVERSE_OPERATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#ConverseResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "output": {
@@ -4501,15 +2973,7 @@ CONVERSE_OPERATION_OUTPUT = Schema.collection(
 )
 
 STATUS_CODE = Schema(
-    id=ShapeID("com.amazonaws.bedrockruntime#StatusCode"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 100, "max": 599}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.bedrockruntime#StatusCode"), shape_type=ShapeType.INTEGER
 )
 
 MODEL_ERROR_EXCEPTION = Schema.collection(
@@ -4530,7 +2994,6 @@ MODEL_NOT_READY_EXCEPTION = Schema.collection(
     traits=[
         Trait.new(id=ShapeID("smithy.api#error"), value="client"),
         Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-        Trait.new(id=ShapeID("smithy.api#retryable")),
     ],
     members={"message": {"target": NON_BLANK_STRING}},
 )
@@ -4560,16 +3023,7 @@ CONVERSE = Schema(
 GUARDRAIL_STREAM_PROCESSING_MODE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#GuardrailStreamProcessingMode"),
     shape_type=ShapeType.ENUM,
-    members={
-        "SYNC": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="sync")],
-        },
-        "ASYNC": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="async")],
-        },
-    },
+    members={"SYNC": {"target": UNIT}, "ASYNC": {"target": UNIT}},
 )
 
 GUARDRAIL_STREAM_CONFIGURATION = Schema.collection(
@@ -4577,17 +3031,11 @@ GUARDRAIL_STREAM_CONFIGURATION = Schema.collection(
     members={
         "guardrailIdentifier": {
             "target": GUARDRAIL_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=""),
-                Trait.new(id=ShapeID("smithy.api#addedDefault")),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="")],
         },
         "guardrailVersion": {
             "target": GUARDRAIL_VERSION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=""),
-                Trait.new(id=ShapeID("smithy.api#addedDefault")),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="")],
         },
         "trace": {
             "target": GUARDRAIL_TRACE,
@@ -4606,8 +3054,7 @@ CONVERSE_STREAM_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#ConverseStreamRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "modelId": {
@@ -4625,12 +3072,7 @@ CONVERSE_STREAM_INPUT = Schema.collection(
         "additionalModelRequestFields": {"target": DOCUMENT},
         "promptVariables": {"target": PROMPT_VARIABLE_MAP},
         "additionalModelResponseFieldPaths": {
-            "target": ADDITIONAL_MODEL_RESPONSE_FIELD_PATHS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 10})
-                )
-            ],
+            "target": ADDITIONAL_MODEL_RESPONSE_FIELD_PATHS
         },
         "requestMetadata": {"target": REQUEST_METADATA},
         "performanceConfig": {"target": PERFORMANCE_CONFIGURATION},
@@ -4642,10 +3084,6 @@ CONVERSE_STREAM_INPUT = Schema.collection(
 NON_NEGATIVE_INTEGER = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#NonNegativeInteger"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})),
-    ],
 )
 
 CITATION_SOURCE_CONTENT_DELTA = Schema.collection(
@@ -4899,8 +3337,7 @@ CONVERSE_STREAM_OPERATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#ConverseStreamResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "stream": {
@@ -4934,58 +3371,27 @@ MIME_TYPE = Schema(
 BODY = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#Body"),
     shape_type=ShapeType.BLOB,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 25000000})
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 INVOKE_MODEL_IDENTIFIER = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#InvokeModelIdentifier"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:custom-model-deployment/[a-z0-9]{12})|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|([a-zA-Z0-9-:.]+)$|(^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}(?::[0-9]{1,5})?))$|(^arn:aws:sagemaker:[a-z0-9-]+:[0-9]{12}:endpoint/[a-zA-Z0-9-]+$)|(^arn:aws(-[^:]+)?:bedrock:([0-9a-z-]{1,20}):([0-9]{12}):(default-)?prompt-router/[a-zA-Z0-9-:.]+$)$",
-        ),
-    ],
 )
 
 REQUEST_METADATA_JSON = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#RequestMetadataJson"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 8500})
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 TRACE = Schema.collection(
     id=ShapeID("com.amazonaws.bedrockruntime#Trace"),
     shape_type=ShapeType.ENUM,
     members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-        "ENABLED_FULL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED_FULL")
-            ],
-        },
+        "ENABLED": {"target": UNIT},
+        "DISABLED": {"target": UNIT},
+        "ENABLED_FULL": {"target": UNIT},
     },
 )
 
@@ -4995,8 +3401,7 @@ INVOKE_MODEL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#InvokeModelRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "body": {
@@ -5083,8 +3488,7 @@ INVOKE_MODEL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#InvokeModelResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "body": {
@@ -5138,12 +3542,7 @@ INVOKE_MODEL = Schema(
 PART_BODY = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#PartBody"),
     shape_type=ShapeType.BLOB,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 1000000})
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 BIDIRECTIONAL_INPUT_PAYLOAD_PART = Schema.collection(
@@ -5167,8 +3566,7 @@ INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OPERATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "modelId": {
@@ -5217,8 +3615,7 @@ INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OPERATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "body": {
@@ -5254,8 +3651,7 @@ INVOKE_MODEL_WITH_RESPONSE_STREAM_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#InvokeModelWithResponseStreamRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "body": {
@@ -5367,8 +3763,7 @@ INVOKE_MODEL_WITH_RESPONSE_STREAM_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#InvokeModelWithResponseStreamResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "body": {
@@ -5458,13 +3853,6 @@ COUNT_TOKENS_INPUT = Schema.collection(
 FOUNDATION_MODEL_VERSION_IDENTIFIER = Schema(
     id=ShapeID("com.amazonaws.bedrockruntime#FoundationModelVersionIdentifier"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z_\\.\\-/0-9:]+$"),
-    ],
 )
 
 COUNT_TOKENS_OPERATION_INPUT = Schema.collection(
@@ -5473,8 +3861,7 @@ COUNT_TOKENS_OPERATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#CountTokensRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "modelId": {
@@ -5497,8 +3884,7 @@ COUNT_TOKENS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.bedrockruntime#CountTokensResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "inputTokens": {
@@ -5517,8 +3903,7 @@ COUNT_TOKENS = Schema(
             value=MappingProxyType(
                 {"code": 200, "method": "POST", "uri": "/model/{modelId}/count-tokens"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -5528,939 +3913,6 @@ AMAZON_BEDROCK_FRONTEND_SERVICE = Schema(
     traits=[
         Trait.new(
             id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "bedrock"})
-        ),
-        Trait.new(id=ShapeID("smithy.api#title"), value="Amazon Bedrock Runtime"),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointTests"),
-            value=MappingProxyType(
-                {
-                    "testCases": (
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime-fips.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime-fips.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime-fips.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime-fips.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime-fips.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime-fips.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime-fips.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://bedrock-runtime.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "Missing region",
-                                "expect": MappingProxyType(
-                                    {"error": "Invalid Configuration: Missing Region"}
-                                ),
-                            }
-                        ),
-                    ),
-                    "version": "1.0",
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointRuleSet"),
-            value=MappingProxyType(
-                {
-                    "version": "1.0",
-                    "parameters": MappingProxyType(
-                        {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                        }
-                    ),
-                    "rules": (
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Endpoint"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseFIPS"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "rules": (
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                                        "type": "error",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (),
-                                                        "endpoint": MappingProxyType(
-                                                            {
-                                                                "url": MappingProxyType(
-                                                                    {"ref": "Endpoint"}
-                                                                ),
-                                                                "properties": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                                "headers": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                            }
-                                                        ),
-                                                        "type": "endpoint",
-                                                    }
-                                                ),
-                                            ),
-                                            "type": "tree",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "isSet",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "rules": (
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "aws.partition",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "Region"
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "assign": "PartitionResult",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "ref": "UseFIPS"
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "ref": "UseDualStack"
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "booleanEquals",
-                                                                                            "argv": (
-                                                                                                True,
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "supportsFIPS",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "booleanEquals",
-                                                                                            "argv": (
-                                                                                                True,
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "supportsDualStack",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "rules": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "conditions": (),
-                                                                                            "rules": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "conditions": (),
-                                                                                                        "endpoint": MappingProxyType(
-                                                                                                            {
-                                                                                                                "url": "https://bedrock-runtime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                                                "properties": MappingProxyType(
-                                                                                                                    {}
-                                                                                                                ),
-                                                                                                                "headers": MappingProxyType(
-                                                                                                                    {}
-                                                                                                                ),
-                                                                                                            }
-                                                                                                        ),
-                                                                                                        "type": "endpoint",
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                            "type": "tree",
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "type": "tree",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                                "type": "error",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "ref": "UseFIPS"
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "booleanEquals",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "supportsFIPS",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                                True,
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "rules": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "conditions": (),
-                                                                                            "rules": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "conditions": (),
-                                                                                                        "endpoint": MappingProxyType(
-                                                                                                            {
-                                                                                                                "url": "https://bedrock-runtime-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                                                "properties": MappingProxyType(
-                                                                                                                    {}
-                                                                                                                ),
-                                                                                                                "headers": MappingProxyType(
-                                                                                                                    {}
-                                                                                                                ),
-                                                                                                            }
-                                                                                                        ),
-                                                                                                        "type": "endpoint",
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                            "type": "tree",
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "type": "tree",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                                "type": "error",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "ref": "UseDualStack"
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "booleanEquals",
-                                                                                            "argv": (
-                                                                                                True,
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "supportsDualStack",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "rules": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "conditions": (),
-                                                                                            "rules": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "conditions": (),
-                                                                                                        "endpoint": MappingProxyType(
-                                                                                                            {
-                                                                                                                "url": "https://bedrock-runtime.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                                                "properties": MappingProxyType(
-                                                                                                                    {}
-                                                                                                                ),
-                                                                                                                "headers": MappingProxyType(
-                                                                                                                    {}
-                                                                                                                ),
-                                                                                                            }
-                                                                                                        ),
-                                                                                                        "type": "endpoint",
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                            "type": "tree",
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "type": "tree",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                                "type": "error",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://bedrock-runtime.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                            ),
-                                            "type": "tree",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "error": "Invalid Configuration: Missing Region",
-                                            "type": "error",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                    ),
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#auth"),
-            value=("aws.auth#sigv4", "smithy.api#httpBearerAuth"),
         ),
         Trait.new(
             id=ShapeID("smithy.rules#endpointBdd"),

@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Sqs"
+site_name = "AWS SDK for Python v4 - Sqs"
 site_description = "Documentation for AWS Sqs Client"
 site_author = "Amazon Web Services"
 

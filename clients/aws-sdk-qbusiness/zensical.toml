@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Qbusiness"
+site_name = "AWS SDK for Python v4 - Qbusiness"
 site_description = "Documentation for AWS Qbusiness Client"
 site_author = "Amazon Web Services"
 

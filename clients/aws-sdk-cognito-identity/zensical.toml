@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Cognito Identity"
+site_name = "AWS SDK for Python v4 - Cognito Identity"
 site_description = "Documentation for AWS Cognito Identity Client"
 site_author = "Amazon Web Services"
 

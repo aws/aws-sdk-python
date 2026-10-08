@@ -9,6 +9,7 @@ from typing import Any, Literal, Self, Union
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import Document, TypeRegistry
 from smithy_core.exceptions import ModeledError, SerializationError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -92,6 +93,9 @@ from ._private.schemas import (
     CREATE_PROMPT_VERSION as _SCHEMA_CREATE_PROMPT_VERSION,
     CREATE_PROMPT_VERSION_INPUT as _SCHEMA_CREATE_PROMPT_VERSION_INPUT,
     CREATE_PROMPT_VERSION_OUTPUT as _SCHEMA_CREATE_PROMPT_VERSION_OUTPUT,
+    CREATE_VPC_CONFIGURATION as _SCHEMA_CREATE_VPC_CONFIGURATION,
+    CREATE_VPC_CONFIGURATION_INPUT as _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT,
+    CREATE_VPC_CONFIGURATION_OUTPUT as _SCHEMA_CREATE_VPC_CONFIGURATION_OUTPUT,
     CURATED_QUERY as _SCHEMA_CURATED_QUERY,
     CUSTOM_CONTENT as _SCHEMA_CUSTOM_CONTENT,
     CUSTOM_DOCUMENT_IDENTIFIER as _SCHEMA_CUSTOM_DOCUMENT_IDENTIFIER,
@@ -99,9 +103,11 @@ from ._private.schemas import (
     CUSTOM_S3_LOCATION as _SCHEMA_CUSTOM_S3_LOCATION,
     CUSTOM_TRANSFORMATION_CONFIGURATION as _SCHEMA_CUSTOM_TRANSFORMATION_CONFIGURATION,
     CYCLIC_CONNECTION_FLOW_VALIDATION_DETAILS as _SCHEMA_CYCLIC_CONNECTION_FLOW_VALIDATION_DETAILS,
+    DAILY_SCHEDULE as _SCHEMA_DAILY_SCHEDULE,
     DATA_SOURCE as _SCHEMA_DATA_SOURCE,
     DATA_SOURCE_CONFIGURATION as _SCHEMA_DATA_SOURCE_CONFIGURATION,
     DATA_SOURCE_SUMMARY as _SCHEMA_DATA_SOURCE_SUMMARY,
+    DAY_OF_MONTH as _SCHEMA_DAY_OF_MONTH,
     DELETE_AGENT as _SCHEMA_DELETE_AGENT,
     DELETE_AGENT_ACTION_GROUP as _SCHEMA_DELETE_AGENT_ACTION_GROUP,
     DELETE_AGENT_ACTION_GROUP_INPUT as _SCHEMA_DELETE_AGENT_ACTION_GROUP_INPUT,
@@ -138,6 +144,9 @@ from ._private.schemas import (
     DELETE_RESOURCE_POLICY as _SCHEMA_DELETE_RESOURCE_POLICY,
     DELETE_RESOURCE_POLICY_INPUT as _SCHEMA_DELETE_RESOURCE_POLICY_INPUT,
     DELETE_RESOURCE_POLICY_OUTPUT as _SCHEMA_DELETE_RESOURCE_POLICY_OUTPUT,
+    DELETE_VPC_CONFIGURATION as _SCHEMA_DELETE_VPC_CONFIGURATION,
+    DELETE_VPC_CONFIGURATION_INPUT as _SCHEMA_DELETE_VPC_CONFIGURATION_INPUT,
+    DELETE_VPC_CONFIGURATION_OUTPUT as _SCHEMA_DELETE_VPC_CONFIGURATION_OUTPUT,
     DELETION_PROTECTION_CONFIGURATION as _SCHEMA_DELETION_PROTECTION_CONFIGURATION,
     DISASSOCIATE_AGENT_COLLABORATOR as _SCHEMA_DISASSOCIATE_AGENT_COLLABORATOR,
     DISASSOCIATE_AGENT_COLLABORATOR_INPUT as _SCHEMA_DISASSOCIATE_AGENT_COLLABORATOR_INPUT,
@@ -219,6 +228,9 @@ from ._private.schemas import (
     GET_RESOURCE_POLICY as _SCHEMA_GET_RESOURCE_POLICY,
     GET_RESOURCE_POLICY_INPUT as _SCHEMA_GET_RESOURCE_POLICY_INPUT,
     GET_RESOURCE_POLICY_OUTPUT as _SCHEMA_GET_RESOURCE_POLICY_OUTPUT,
+    GET_VPC_CONFIGURATION as _SCHEMA_GET_VPC_CONFIGURATION,
+    GET_VPC_CONFIGURATION_INPUT as _SCHEMA_GET_VPC_CONFIGURATION_INPUT,
+    GET_VPC_CONFIGURATION_OUTPUT as _SCHEMA_GET_VPC_CONFIGURATION_OUTPUT,
     GUARDRAIL_CONFIGURATION as _SCHEMA_GUARDRAIL_CONFIGURATION,
     HIERARCHICAL_CHUNKING_CONFIGURATION as _SCHEMA_HIERARCHICAL_CHUNKING_CONFIGURATION,
     HIERARCHICAL_CHUNKING_LEVEL_CONFIGURATION as _SCHEMA_HIERARCHICAL_CHUNKING_LEVEL_CONFIGURATION,
@@ -250,6 +262,7 @@ from ._private.schemas import (
     KNOWLEDGE_BASE_PROMPT_TEMPLATE as _SCHEMA_KNOWLEDGE_BASE_PROMPT_TEMPLATE,
     KNOWLEDGE_BASE_SUMMARY as _SCHEMA_KNOWLEDGE_BASE_SUMMARY,
     LAMBDA_FUNCTION_FLOW_NODE_CONFIGURATION as _SCHEMA_LAMBDA_FUNCTION_FLOW_NODE_CONFIGURATION,
+    LAST_DAY_OF_MONTH as _SCHEMA_LAST_DAY_OF_MONTH,
     LEX_FLOW_NODE_CONFIGURATION as _SCHEMA_LEX_FLOW_NODE_CONFIGURATION,
     LIST_AGENTS as _SCHEMA_LIST_AGENTS,
     LIST_AGENTS_INPUT as _SCHEMA_LIST_AGENTS_INPUT,
@@ -296,6 +309,9 @@ from ._private.schemas import (
     LIST_TAGS_FOR_RESOURCE as _SCHEMA_LIST_TAGS_FOR_RESOURCE,
     LIST_TAGS_FOR_RESOURCE_INPUT as _SCHEMA_LIST_TAGS_FOR_RESOURCE_INPUT,
     LIST_TAGS_FOR_RESOURCE_OUTPUT as _SCHEMA_LIST_TAGS_FOR_RESOURCE_OUTPUT,
+    LIST_VPC_CONFIGURATIONS as _SCHEMA_LIST_VPC_CONFIGURATIONS,
+    LIST_VPC_CONFIGURATIONS_INPUT as _SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT,
+    LIST_VPC_CONFIGURATIONS_OUTPUT as _SCHEMA_LIST_VPC_CONFIGURATIONS_OUTPUT,
     LOOP_CONTROLLER_FLOW_NODE_CONFIGURATION as _SCHEMA_LOOP_CONTROLLER_FLOW_NODE_CONFIGURATION,
     LOOP_FLOW_NODE_CONFIGURATION as _SCHEMA_LOOP_FLOW_NODE_CONFIGURATION,
     LOOP_INCOMPATIBLE_NODE_TYPE_FLOW_VALIDATION_DETAILS as _SCHEMA_LOOP_INCOMPATIBLE_NODE_TYPE_FLOW_VALIDATION_DETAILS,
@@ -323,6 +339,7 @@ from ._private.schemas import (
     MISSING_STARTING_NODES_FLOW_VALIDATION_DETAILS as _SCHEMA_MISSING_STARTING_NODES_FLOW_VALIDATION_DETAILS,
     MONGO_DB_ATLAS_CONFIGURATION as _SCHEMA_MONGO_DB_ATLAS_CONFIGURATION,
     MONGO_DB_ATLAS_FIELD_MAPPING as _SCHEMA_MONGO_DB_ATLAS_FIELD_MAPPING,
+    MONTHLY_SCHEDULE as _SCHEMA_MONTHLY_SCHEDULE,
     MULTIPLE_LOOP_CONTROLLER_NODES_FLOW_VALIDATION_DETAILS as _SCHEMA_MULTIPLE_LOOP_CONTROLLER_NODES_FLOW_VALIDATION_DETAILS,
     MULTIPLE_LOOP_INPUT_NODES_FLOW_VALIDATION_DETAILS as _SCHEMA_MULTIPLE_LOOP_INPUT_NODES_FLOW_VALIDATION_DETAILS,
     MULTIPLE_NODE_INPUT_CONNECTIONS_FLOW_VALIDATION_DETAILS as _SCHEMA_MULTIPLE_NODE_INPUT_CONNECTIONS_FLOW_VALIDATION_DETAILS,
@@ -418,6 +435,7 @@ from ._private.schemas import (
     STORAGE_FLOW_NODE_SERVICE_CONFIGURATION as _SCHEMA_STORAGE_FLOW_NODE_SERVICE_CONFIGURATION,
     SUPPLEMENTAL_DATA_STORAGE_CONFIGURATION as _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_CONFIGURATION,
     SUPPLEMENTAL_DATA_STORAGE_LOCATION as _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_LOCATION,
+    SYNC_SCHEDULE as _SCHEMA_SYNC_SCHEDULE,
     SYSTEM_CONTENT_BLOCK as _SCHEMA_SYSTEM_CONTENT_BLOCK,
     TAG_RESOURCE as _SCHEMA_TAG_RESOURCE,
     TAG_RESOURCE_INPUT as _SCHEMA_TAG_RESOURCE_INPUT,
@@ -491,10 +509,13 @@ from ._private.schemas import (
     VIDEO_CONFIGURATION as _SCHEMA_VIDEO_CONFIGURATION,
     VIDEO_EXTRACTION_CONFIGURATION as _SCHEMA_VIDEO_EXTRACTION_CONFIGURATION,
     VIDEO_SEGMENTATION_CONFIGURATION as _SCHEMA_VIDEO_SEGMENTATION_CONFIGURATION,
+    VPC_CONFIGURATION as _SCHEMA_VPC_CONFIGURATION,
+    VPC_CONFIGURATION_SUMMARY as _SCHEMA_VPC_CONFIGURATION_SUMMARY,
     WEB_CRAWLER_CONFIGURATION as _SCHEMA_WEB_CRAWLER_CONFIGURATION,
     WEB_CRAWLER_LIMITS as _SCHEMA_WEB_CRAWLER_LIMITS,
     WEB_DATA_SOURCE_CONFIGURATION as _SCHEMA_WEB_DATA_SOURCE_CONFIGURATION,
     WEB_SOURCE_CONFIGURATION as _SCHEMA_WEB_SOURCE_CONFIGURATION,
+    WEEKLY_SCHEDULE as _SCHEMA_WEEKLY_SCHEDULE,
 )
 
 
@@ -597,7 +618,7 @@ class ActionGroupExecutorCustomControl:
     `InvokeAgent` response, specify `RETURN_CONTROL`.
     """
 
-    value: CustomControlMethod
+    value: str
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ACTION_GROUP_EXECUTOR, self)
@@ -925,7 +946,7 @@ class ParameterDetail:
       response](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax)
     """
 
-    type: Type
+    type: str
     """The data type of the parameter."""
 
     description: str | None = None
@@ -1058,7 +1079,7 @@ class Function:
     function.
     """
 
-    require_confirmation: RequireConfirmation | None = None
+    require_confirmation: str | None = None
     """
     Contains information if user confirmation is required to invoke the
     function.
@@ -1308,7 +1329,7 @@ class CreateAgentActionGroupInput:
     description: str | None = None
     """A description of the action group."""
 
-    parent_action_group_signature: ActionGroupSignature | None = None
+    parent_action_group_signature: str | None = None
     """
     Specify a built-in or computer use action for this action group. If you
     specify a value, you must leave the `description`, `apiSchema`, and
@@ -1371,7 +1392,7 @@ class CreateAgentActionGroupInput:
     schemas](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html).
     """
 
-    action_group_state: ActionGroupState | None = None
+    action_group_state: str | None = None
     """
     Specifies whether the action group is available for the agent to invoke
     or not when sending an
@@ -1569,7 +1590,7 @@ class AgentActionGroup:
     updated_at: datetime
     """The time at which the action group was last updated."""
 
-    action_group_state: ActionGroupState
+    action_group_state: str
     """
     Specifies whether the action group is available for the agent to invoke
     or not when sending an
@@ -1589,7 +1610,7 @@ class AgentActionGroup:
     description: str | None = None
     """The description of the action group."""
 
-    parent_action_signature: ActionGroupSignature | None = None
+    parent_action_signature: str | None = None
     """
     If this field is set as `AMAZON.UserInput`, the agent can request the
     user for additional information when trying to complete a task. The
@@ -1832,6 +1853,16 @@ class CreateAgentActionGroupOutput:
 
     agent_action_group: AgentActionGroup
     """Contains details about the action group that was created."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_AGENT_ACTION_GROUP_OUTPUT, self)
@@ -2300,6 +2331,16 @@ class DeleteAgentActionGroupInput:
 class DeleteAgentActionGroupOutput:
     """Dataclass for DeleteAgentActionGroupOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_AGENT_ACTION_GROUP_OUTPUT, self)
 
@@ -2437,6 +2478,16 @@ class GetAgentActionGroupOutput:
 
     agent_action_group: AgentActionGroup
     """Contains details about the action group."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_AGENT_ACTION_GROUP_OUTPUT, self)
@@ -2608,7 +2659,7 @@ class ActionGroupSummary:
     action_group_name: str
     """The name of the action group."""
 
-    action_group_state: ActionGroupState
+    action_group_state: str
     """
     Specifies whether the action group is available for the agent to invoke
     or not when sending an
@@ -2740,6 +2791,16 @@ class ListAgentActionGroupsOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_AGENT_ACTION_GROUPS_OUTPUT, self)
 
@@ -2849,7 +2910,7 @@ class UpdateAgentActionGroupInput:
     description: str | None = None
     """Specifies a new name for the action group."""
 
-    parent_action_group_signature: ActionGroupSignature | None = None
+    parent_action_group_signature: str | None = None
     """
     Update the built-in or computer use action for this action group. If you
     specify a value, you must leave the `description`, `apiSchema`, and
@@ -2909,7 +2970,7 @@ class UpdateAgentActionGroupInput:
     business logic that is carried out upon invoking the action.
     """
 
-    action_group_state: ActionGroupState | None = None
+    action_group_state: str | None = None
     """
     Specifies whether the action group is available for the agent to invoke
     or not when sending an
@@ -3099,6 +3160,16 @@ class UpdateAgentActionGroupOutput:
 
     agent_action_group: AgentActionGroup
     """Contains details about the action group that was updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_AGENT_ACTION_GROUP_OUTPUT, self)
@@ -3434,7 +3505,7 @@ class MemoryType(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_enabled_memory_types(
-    serializer: ShapeSerializer, schema: Schema, value: list[MemoryType]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -3444,8 +3515,8 @@ def _serialize_enabled_memory_types(
 
 def _deserialize_enabled_memory_types(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[MemoryType]:
-    result: list[MemoryType] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -3509,7 +3580,7 @@ class SessionSummaryConfiguration:
 class MemoryConfiguration:
     """Details of the memory configuration."""
 
-    enabled_memory_types: list[MemoryType]
+    enabled_memory_types: list[str]
     """The type of memory that is stored."""
 
     storage_days: int = 30
@@ -3753,13 +3824,13 @@ class PromptConfiguration:
     prompts](https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html).
     """
 
-    prompt_type: PromptType | None = None
+    prompt_type: str | None = None
     """
     The step in the agent sequence that this prompt configuration applies
     to.
     """
 
-    prompt_creation_mode: CreationMode | None = None
+    prompt_creation_mode: str | None = None
     """
     Specifies whether to override the default prompt template for this
     `promptType`. Set this value to `OVERRIDDEN` to use the prompt that you
@@ -3767,7 +3838,7 @@ class PromptConfiguration:
     agent uses a default prompt template.
     """
 
-    prompt_state: PromptState | None = None
+    prompt_state: str | None = None
     """
     Specifies whether to allow the agent to carry out the step specified in
     the `promptType`. If you set this value to `DISABLED`, the agent skips
@@ -3801,7 +3872,7 @@ class PromptConfiguration:
     models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html).
     """
 
-    parser_mode: CreationMode | None = None
+    parser_mode: str | None = None
     """
     Specifies whether to override the default parser Lambda function when
     parsing the raw foundation model output in the part of the agent
@@ -4084,7 +4155,7 @@ class Agent:
     agent_version: str
     """The version of the agent."""
 
-    agent_status: AgentStatus
+    agent_status: str
     """
     The status of the agent and whether it is ready for use. The following
     statuses are possible:
@@ -4147,7 +4218,7 @@ class Agent:
     description: str | None = None
     """The description of the agent."""
 
-    orchestration_type: OrchestrationType | None = None
+    orchestration_type: str | None = None
     """Specifies the orchestration strategy for the agent."""
 
     custom_orchestration: CustomOrchestration | None = None
@@ -4183,7 +4254,7 @@ class Agent:
     memory_configuration: MemoryConfiguration | None = None
     """Contains memory configuration for the agent."""
 
-    agent_collaboration: AgentCollaboration | None = None
+    agent_collaboration: str | None = None
     """The agent's collaboration settings."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -4683,7 +4754,7 @@ class AgentAlias:
     updated_at: datetime
     """The time at which the alias was last updated."""
 
-    agent_alias_status: AgentAliasStatus
+    agent_alias_status: str
     """
     The status of the alias of the agent and whether it is ready for use.
     The following statuses are possible:
@@ -4723,7 +4794,7 @@ class AgentAlias:
     agent alias.
     """
 
-    alias_invocation_state: AliasInvocationState | None = None
+    alias_invocation_state: str | None = None
     """
     The invocation state for the agent alias. If the agent alias is running,
     the value is `ACCEPT_INVOCATIONS`. If the agent alias is paused, the
@@ -4916,7 +4987,7 @@ class AgentAliasSummary:
     agent_alias_name: str
     """The name of the alias."""
 
-    agent_alias_status: AgentAliasStatus
+    agent_alias_status: str
     """The status of the alias."""
 
     created_at: datetime
@@ -4934,7 +5005,7 @@ class AgentAliasSummary:
     associated.
     """
 
-    alias_invocation_state: AliasInvocationState | None = None
+    alias_invocation_state: str | None = None
     """
     The invocation state for the agent alias. If the agent alias is running,
     the value is `ACCEPT_INVOCATIONS`. If the agent alias is paused, the
@@ -5154,7 +5225,7 @@ class AgentCollaborator:
     last_updated_at: datetime
     """When the collaborator was updated."""
 
-    relay_conversation_history: RelayConversationHistory | None = None
+    relay_conversation_history: str | None = None
     """The collaborator's relay conversation history."""
 
     client_token: str | None = None
@@ -5318,7 +5389,7 @@ class AssociateAgentCollaboratorInput:
     collaboration_instruction: str | None = field(repr=False, default=None)
     """Instruction for the collaborator."""
 
-    relay_conversation_history: RelayConversationHistory | None = None
+    relay_conversation_history: str | None = None
     """A relay conversation history for the collaborator."""
 
     client_token: str | None = None
@@ -5444,6 +5515,16 @@ class AssociateAgentCollaboratorOutput:
 
     agent_collaborator: AgentCollaborator
     """Details about the collaborator."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ASSOCIATE_AGENT_COLLABORATOR_OUTPUT, self)
@@ -5597,6 +5678,16 @@ class DisassociateAgentCollaboratorInput:
 class DisassociateAgentCollaboratorOutput:
     """Dataclass for DisassociateAgentCollaboratorOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DISASSOCIATE_AGENT_COLLABORATOR_OUTPUT, self)
 
@@ -5734,6 +5825,16 @@ class GetAgentCollaboratorOutput:
 
     agent_collaborator: AgentCollaborator
     """Details about the collaborator."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_AGENT_COLLABORATOR_OUTPUT, self)
@@ -5911,7 +6012,7 @@ class AgentCollaboratorSummary:
     collaboration_instruction: str = field(repr=False)
     """The collaborator's collaboration instruction."""
 
-    relay_conversation_history: RelayConversationHistory
+    relay_conversation_history: str
     """The collaborator's relay conversation history."""
 
     collaborator_name: str
@@ -6086,6 +6187,16 @@ class ListAgentCollaboratorsOutput:
     next page of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_AGENT_COLLABORATORS_OUTPUT, self)
 
@@ -6197,7 +6308,7 @@ class UpdateAgentCollaboratorInput:
     collaboration_instruction: str | None = field(repr=False, default=None)
     """Instruction for the collaborator."""
 
-    relay_conversation_history: RelayConversationHistory | None = None
+    relay_conversation_history: str | None = None
     """A relay conversation history for the collaborator."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -6318,6 +6429,16 @@ class UpdateAgentCollaboratorOutput:
 
     agent_collaborator: AgentCollaborator
     """Details about the collaborator."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_AGENT_COLLABORATOR_OUTPUT, self)
@@ -6484,7 +6605,7 @@ class AgentKnowledgeBase:
     base was last updated.
     """
 
-    knowledge_base_state: KnowledgeBaseState
+    knowledge_base_state: str
     """
     Specifies whether to use the knowledge base or not when sending an
     [InvokeAgent](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
@@ -6606,7 +6727,7 @@ class AgentKnowledgeBaseSummary:
     knowledge_base_id: str
     """The unique identifier of the knowledge base associated with an agent."""
 
-    knowledge_base_state: KnowledgeBaseState
+    knowledge_base_state: str
     """
     Specifies whether the agent uses the knowledge base or not when sending
     an
@@ -6810,7 +6931,7 @@ class CreateAgentInput:
     description: str | None = None
     """A description of the agent."""
 
-    orchestration_type: OrchestrationType | None = None
+    orchestration_type: str | None = None
     """
     Specifies the type of orchestration strategy for the agent. This is set
     to `DEFAULT` orchestration type, by default.
@@ -6862,7 +6983,7 @@ class CreateAgentInput:
     memory_configuration: MemoryConfiguration | None = None
     """Contains the details of the memory configured for the agent."""
 
-    agent_collaboration: AgentCollaboration | None = None
+    agent_collaboration: str | None = None
     """The agent's collaboration role."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -7053,6 +7174,16 @@ class CreateAgentOutput:
     agent: Agent
     """Contains details about the agent created."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_AGENT_OUTPUT, self)
 
@@ -7184,8 +7315,18 @@ class DeleteAgentOutput:
     agent_id: str
     """The unique identifier of the agent that was deleted."""
 
-    agent_status: AgentStatus
+    agent_status: str
     """The status of the agent."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_AGENT_OUTPUT, self)
@@ -7313,6 +7454,16 @@ class GetAgentOutput:
 
     agent: Agent
     """Contains details about the agent."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_AGENT_OUTPUT, self)
@@ -7448,7 +7599,7 @@ class AgentSummary:
     agent_name: str
     """The name of the agent."""
 
-    agent_status: AgentStatus
+    agent_status: str
     """The status of the agent."""
 
     updated_at: datetime
@@ -7593,6 +7744,16 @@ class ListAgentsOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_AGENTS_OUTPUT, self)
 
@@ -7719,7 +7880,7 @@ class PrepareAgentOutput:
     created.
     """
 
-    agent_status: AgentStatus
+    agent_status: str
     """The status of the `DRAFT` version and whether it is ready for use."""
 
     agent_version: str
@@ -7727,6 +7888,16 @@ class PrepareAgentOutput:
 
     prepared_at: datetime
     """The time at which the `DRAFT` version of the agent was last prepared."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PREPARE_AGENT_OUTPUT, self)
@@ -7893,7 +8064,7 @@ class UpdateAgentInput:
     description: str | None = None
     """Specifies a new description of the agent."""
 
-    orchestration_type: OrchestrationType | None = None
+    orchestration_type: str | None = None
     """
     Specifies the type of orchestration strategy for the agent. This is set
     to `DEFAULT` orchestration type, by default.
@@ -7942,7 +8113,7 @@ class UpdateAgentInput:
     memory_configuration: MemoryConfiguration | None = None
     """Specifies the new memory configuration for the agent."""
 
-    agent_collaboration: AgentCollaboration | None = None
+    agent_collaboration: str | None = None
     """The agent's collaboration role."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -8123,6 +8294,16 @@ class UpdateAgentOutput:
     agent: Agent
     """Contains details about the agent that was updated."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_AGENT_OUTPUT, self)
 
@@ -8211,7 +8392,7 @@ class AgentVersion:
     version: str
     """The version number."""
 
-    agent_status: AgentStatus
+    agent_status: str
     """The status of the agent that the version belongs to."""
 
     idle_session_ttl_in_seconds: int
@@ -8275,7 +8456,7 @@ class AgentVersion:
     agent.
     """
 
-    agent_collaboration: AgentCollaboration | None = None
+    agent_collaboration: str | None = None
     """The agent's collaboration settings."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -8517,7 +8698,7 @@ class AgentVersionSummary:
     agent_name: str
     """The name of the agent to which the version belongs."""
 
-    agent_status: AgentStatus
+    agent_status: str
     """The status of the agent to which the version belongs."""
 
     agent_version: str
@@ -8780,6 +8961,16 @@ class CreateAgentAliasOutput:
     agent_alias: AgentAlias
     """Contains details about the alias that was created."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_AGENT_ALIAS_OUTPUT, self)
 
@@ -8914,8 +9105,18 @@ class DeleteAgentAliasOutput:
     agent_alias_id: str
     """The unique identifier of the alias that was deleted."""
 
-    agent_alias_status: AgentAliasStatus
+    agent_alias_status: str
     """The status of the alias."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_AGENT_ALIAS_OUTPUT, self)
@@ -9073,6 +9274,16 @@ class GetAgentAliasOutput:
     agent_alias: AgentAlias
     """Contains information about the alias."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_AGENT_ALIAS_OUTPUT, self)
 
@@ -9229,6 +9440,16 @@ class ListAgentAliasesOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_AGENT_ALIASES_OUTPUT, self)
 
@@ -9332,7 +9553,7 @@ class UpdateAgentAliasInput:
     routing_configuration: list[AgentAliasRoutingConfigurationListItem] | None = None
     """Contains details about the routing configuration of the alias."""
 
-    alias_invocation_state: AliasInvocationState | None = None
+    alias_invocation_state: str | None = None
     """
     The invocation state for the agent alias. To pause the agent alias, set
     the value to `REJECT_INVOCATIONS`. To start the agent alias running
@@ -9444,6 +9665,16 @@ class UpdateAgentAliasOutput:
     agent_alias: AgentAlias
     """Contains details about the alias that was updated."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_AGENT_ALIAS_OUTPUT, self)
 
@@ -9480,6 +9711,470 @@ UPDATE_AGENT_ALIAS = APIOperation(
     schema=_SCHEMA_UPDATE_AGENT_ALIAS,
     input_schema=_SCHEMA_UPDATE_AGENT_ALIAS_INPUT,
     output_schema=_SCHEMA_UPDATE_AGENT_ALIAS_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.bedrockagent#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.bedrockagent#ConflictException"): ConflictException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#InternalServerException"
+            ): InternalServerException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ServiceQuotaExceededException"
+            ): ServiceQuotaExceededException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ThrottlingException"
+            ): ThrottlingException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ValidationException"
+            ): ValidationException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+        _SCHEMA_SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        _SCHEMA_THROTTLING_EXCEPTION,
+        _SCHEMA_VALIDATION_EXCEPTION,
+    ],
+)
+
+
+class VpcProtocol(UnknownEnumMixin, StrEnum):
+    """
+    The protocol used to connect to the resource. Valid values:
+
+    - `HTTP` -- Connect over plaintext HTTP.
+
+    - `HTTPS` -- Connect over TLS.
+    """
+
+    HTTP = "HTTP"
+    HTTPS = "HTTPS"
+
+
+class VpcResolutionMode(UnknownEnumMixin, StrEnum):
+    """
+    Controls how a domain-name resource target is resolved. This applies
+    only when the target is a domain name; it has no effect for IP-address
+    targets. In all cases the resolved address must be reachable from inside
+    the VPC. Valid values:
+
+    - `IN_VPC` (default, recommended) -- The target domain name is resolved
+      privately, using the DNS resolvers of the VPC.
+
+    - `PUBLIC` -- The target domain name is resolved against public DNS
+      resolvers, for the uncommon case where the name must resolve through
+      public DNS but the resulting address remains reachable from the VPC.
+    """
+
+    PUBLIC = "PUBLIC"
+    IN_VPC = "IN_VPC"
+
+
+def _serialize_subnet_id_list(
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_string(member_schema, e)
+
+
+def _deserialize_subnet_id_list(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[str]:
+    result: list[str] = []
+    member_schema = schema.members["member"]
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(d.read_string(member_schema))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
+class CreateVpcConfigurationInput:
+    """Dataclass for CreateVpcConfigurationInput structure."""
+
+    knowledge_base_id: str | None = None
+    """
+    The unique identifier of the knowledge base to associate this VPC
+    configuration with.
+    """
+
+    client_token: str | None = None
+    """
+    A unique, case-sensitive identifier to ensure that the operation
+    completes no more than one time. If this token matches a previous
+    request, the service ignores the request but does not return an error.
+    """
+
+    vpc_id: str | None = None
+    """
+    The identifier of the VPC that the knowledge base connects through to
+    reach the resource.
+    """
+
+    subnet_ids: list[str] | None = None
+    """
+    The subnets, in the VPC identified by `vpcId`, that the knowledge base
+    uses to connect to the resource.
+    """
+
+    resource_target: str | None = None
+    """
+    The private IPv4 address or DNS name of the resource you want the
+    knowledge base to reach. The target must be privately reachable from
+    inside your VPC, such as an internal load balancer or a private IP. The
+    following are not supported:
+
+    - Internet-facing endpoints
+
+    - Loopback addresses
+
+    - Link-local addresses
+
+    - Wildcard addresses
+
+    - Multicast addresses
+
+    - IPv6 literals
+    """
+
+    port: int | None = None
+    """The port on which to reach the resource."""
+
+    protocol: str | None = None
+    """
+    The protocol used to connect to the resource. Specify `HTTP` for
+    plaintext or `HTTPS` for TLS. When you specify `HTTPS`, you must also
+    provide `tlsServerName`.
+    """
+
+    resolution_mode: str | None = None
+    """
+    Controls how a domain-name `resourceTarget` is resolved. This applies
+    only when the target is a domain name; it has no effect for IP-address
+    targets, which have no name to resolve. In all cases the resolved
+    address must be reachable from inside your VPC. Valid values:
+
+    - `IN_VPC` (default, recommended) -- The target domain name is resolved
+      privately, using the DNS resolvers of the VPC, such as private Route
+      53 hosted zones or on-premises DNS reachable from the VPC. Use this
+      for targets that are private to your VPC, such as internal load
+      balancers, private hosted-zone names, or on-premises hosts.
+
+    - `PUBLIC` -- The target domain name is resolved against public DNS
+      resolvers. Select this only when the target's domain name must be
+      resolved through public DNS and the resulting address is still
+      reachable from the VPC, an uncommon split-horizon configuration. If
+      you are unsure, use `IN_VPC`.
+    """
+
+    host_header: str | None = None
+    """
+    An optional HTTP `Host` header value to send when invoking the resource.
+    Set this only if your resource (or an upstream router or ingress) routes
+    by the `Host` header and that host differs from the target. This setting
+    is independent of `tlsServerName`.
+    """
+
+    tls_server_name: str | None = None
+    """
+    The expected TLS server name. The service matches this value against the
+    Subject Alternative Names on your resource's TLS certificate during
+    invocation. This field is required when `protocol` is `HTTPS`. Set it to
+    a hostname on your certificate, such as `app.internal.example.com`. You
+    can use a single leftmost wildcard, such as `*.example.com`. The value
+    must be a hostname without a port.
+    """
+
+    name: str | None = None
+    """
+    An optional human-readable name for the VPC configuration. If you don't
+    specify a name, the VPC configuration has no name.
+    """
+
+    description: str | None = None
+    """
+    An optional description of the VPC configuration. If you don't specify
+    a description, the VPC configuration has no description.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_CREATE_VPC_CONFIGURATION_INPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.knowledge_base_id is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["knowledgeBaseId"],
+                self.knowledge_base_id,
+            )
+
+        if self.client_token is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["clientToken"],
+                self.client_token,
+            )
+
+        if self.vpc_id is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["vpcId"], self.vpc_id
+            )
+
+        if self.subnet_ids is not None:
+            _serialize_subnet_id_list(
+                serializer,
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["subnetIds"],
+                self.subnet_ids,
+            )
+
+        if self.resource_target is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["resourceTarget"],
+                self.resource_target,
+            )
+
+        if self.port is not None:
+            serializer.write_integer(
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["port"], self.port
+            )
+
+        if self.protocol is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["protocol"],
+                self.protocol,
+            )
+
+        if self.resolution_mode is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["resolutionMode"],
+                self.resolution_mode,
+            )
+
+        if self.host_header is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["hostHeader"],
+                self.host_header,
+            )
+
+        if self.tls_server_name is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["tlsServerName"],
+                self.tls_server_name,
+            )
+
+        if self.name is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["name"], self.name
+            )
+
+        if self.description is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["description"],
+                self.description,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["knowledge_base_id"] = de.read_string(
+                        _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members[
+                            "knowledgeBaseId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["client_token"] = de.read_string(
+                        _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["clientToken"]
+                    )
+
+                case 2:
+                    kwargs["vpc_id"] = de.read_string(
+                        _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["vpcId"]
+                    )
+
+                case 3:
+                    kwargs["subnet_ids"] = _deserialize_subnet_id_list(
+                        de, _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["subnetIds"]
+                    )
+
+                case 4:
+                    kwargs["resource_target"] = de.read_string(
+                        _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["resourceTarget"]
+                    )
+
+                case 5:
+                    kwargs["port"] = de.read_integer(
+                        _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["port"]
+                    )
+
+                case 6:
+                    kwargs["protocol"] = VpcProtocol(
+                        de.read_string(
+                            _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["protocol"]
+                        )
+                    )
+
+                case 7:
+                    kwargs["resolution_mode"] = VpcResolutionMode(
+                        de.read_string(
+                            _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members[
+                                "resolutionMode"
+                            ]
+                        )
+                    )
+
+                case 8:
+                    kwargs["host_header"] = de.read_string(
+                        _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["hostHeader"]
+                    )
+
+                case 9:
+                    kwargs["tls_server_name"] = de.read_string(
+                        _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["tlsServerName"]
+                    )
+
+                case 10:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["name"]
+                    )
+
+                case 11:
+                    kwargs["description"] = de.read_string(
+                        _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT.members["description"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_CREATE_VPC_CONFIGURATION_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+class VpcConfigurationStatus(UnknownEnumMixin, StrEnum):
+    """
+    The lifecycle status of a VPC configuration. Valid values:
+
+    - `CREATING` -- The configuration is being created.
+
+    - `CREATED` -- The configuration is ready to use.
+
+    - `DELETING` -- The configuration is being deleted.
+
+    - `CREATE_FAILED` -- Creation failed. See `statusMessage` for the cause.
+
+    - `DELETE_FAILED` -- Deletion failed. See `statusMessage` for the cause.
+    """
+
+    CREATING = "CREATING"
+    CREATED = "CREATED"
+    DELETING = "DELETING"
+    CREATE_FAILED = "CREATE_FAILED"
+    DELETE_FAILED = "DELETE_FAILED"
+
+
+@dataclass(kw_only=True)
+class CreateVpcConfigurationOutput:
+    """Dataclass for CreateVpcConfigurationOutput structure."""
+
+    vpc_configuration_id: str
+    """The unique identifier of the VPC configuration that was created."""
+
+    status: str
+    """
+    The current status of the VPC configuration. Immediately after creation
+    this is `CREATING`.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_CREATE_VPC_CONFIGURATION_OUTPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_CREATE_VPC_CONFIGURATION_OUTPUT.members["vpcConfigurationId"],
+            self.vpc_configuration_id,
+        )
+        serializer.write_string(
+            _SCHEMA_CREATE_VPC_CONFIGURATION_OUTPUT.members["status"], self.status
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["vpc_configuration_id"] = de.read_string(
+                        _SCHEMA_CREATE_VPC_CONFIGURATION_OUTPUT.members[
+                            "vpcConfigurationId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["status"] = VpcConfigurationStatus(
+                        de.read_string(
+                            _SCHEMA_CREATE_VPC_CONFIGURATION_OUTPUT.members["status"]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_CREATE_VPC_CONFIGURATION_OUTPUT, consumer=_consumer
+        )
+        if "vpc_configuration_id" not in kwargs:
+            kwargs["vpc_configuration_id"] = ""
+        if "status" not in kwargs:
+            kwargs["status"] = VpcConfigurationStatus._corrected("")
+        return kwargs
+
+
+CREATE_VPC_CONFIGURATION = APIOperation(
+    input=CreateVpcConfigurationInput,
+    output=CreateVpcConfigurationOutput,
+    schema=_SCHEMA_CREATE_VPC_CONFIGURATION,
+    input_schema=_SCHEMA_CREATE_VPC_CONFIGURATION_INPUT,
+    output_schema=_SCHEMA_CREATE_VPC_CONFIGURATION_OUTPUT,
     error_registry=TypeRegistry(
         {
             ShapeID(
@@ -9715,7 +10410,7 @@ class CrawlFilterConfiguration:
     content.
     """
 
-    type: CrawlFilterConfigurationType
+    type: str
     """
     The type of filtering that you want to apply to certain objects or
     content of the data source. For example, the `PATTERN` type is regular
@@ -9836,10 +10531,10 @@ class ConfluenceSourceConfiguration:
     host_url: str
     """The Confluence host URL or instance URL."""
 
-    host_type: ConfluenceHostType
+    host_type: str
     """The supported host type, whether online/cloud or server/on-premises."""
 
-    auth_type: ConfluenceAuthType
+    auth_type: str
     """
     The supported authentication type to authenticate and connect to your
     Confluence instance.
@@ -10008,7 +10703,7 @@ class EnabledOrDisabledState(UnknownEnumMixin, StrEnum):
 class DeletionProtectionConfiguration:
     """Configuration for deletion protection."""
 
-    deletion_protection_status: EnabledOrDisabledState
+    deletion_protection_status: str
     """Enable or disable deletion protection for the connector."""
 
     deletion_protection_threshold: int = 15
@@ -10077,7 +10772,7 @@ class DeletionProtectionConfiguration:
 class AudioExtractionConfiguration:
     """Configuration for audio extraction."""
 
-    audio_extraction_status: EnabledOrDisabledState
+    audio_extraction_status: str
     """Whether audio extraction is enabled or disabled."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -10123,7 +10818,7 @@ class AudioExtractionConfiguration:
 class ImageExtractionConfiguration:
     """Configuration for image extraction."""
 
-    image_extraction_status: EnabledOrDisabledState
+    image_extraction_status: str
     """Whether image extraction is enabled or disabled."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -10169,7 +10864,7 @@ class ImageExtractionConfiguration:
 class VideoExtractionConfiguration:
     """Configuration for video extraction."""
 
-    video_extraction_status: EnabledOrDisabledState
+    video_extraction_status: str
     """Whether video extraction is enabled or disabled."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -10287,6 +10982,389 @@ class MediaExtractionConfiguration:
 
 
 @dataclass(kw_only=True)
+class DailySchedule:
+    """
+    A daily sync. The run time is system-chosen (off-peak) and not
+    configurable.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_DAILY_SCHEDULE, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        pass
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_DAILY_SCHEDULE, consumer=_consumer)
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class LastDayOfMonth:
+    """
+    The option to run the monthly sync on the last calendar day of each
+    month.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_LAST_DAY_OF_MONTH, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        pass
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_LAST_DAY_OF_MONTH, consumer=_consumer)
+        return kwargs
+
+
+@dataclass
+class DayOfMonthDayNumber:
+    """
+    A specific day of the month, from 1 to 28. Values are capped at 28, so a
+    monthly sync runs in every month, including February.
+    """
+
+    value: int
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_DAY_OF_MONTH, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_integer(_SCHEMA_DAY_OF_MONTH.members["dayNumber"], self.value)
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(
+            value=deserializer.read_integer(_SCHEMA_DAY_OF_MONTH.members["dayNumber"])
+        )
+
+
+@dataclass
+class DayOfMonthLastDayOfMonth:
+    """
+    Set this option to run the monthly sync on the last calendar day of each
+    month.
+    """
+
+    value: LastDayOfMonth
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_DAY_OF_MONTH, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_DAY_OF_MONTH.members["lastDayOfMonth"], self.value
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=LastDayOfMonth.deserialize(deserializer))
+
+
+@dataclass
+class DayOfMonthUnknown:
+    """
+    Represents an unknown variant.
+
+    If you receive this value, you will need to update your library to receive the
+    parsed value.
+
+    This value may not be deliberately sent.
+    """
+
+    tag: str
+
+    def serialize(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        raise NotImplementedError()
+
+
+DayOfMonth = Union[DayOfMonthDayNumber | DayOfMonthLastDayOfMonth | DayOfMonthUnknown]
+"""
+The day of the month on which a monthly sync runs. Specify exactly one
+of `dayNumber` or `lastDayOfMonth`.
+"""
+
+
+class _DayOfMonthDeserializer:
+    _result: DayOfMonth | None = None
+
+    def deserialize(self, deserializer: ShapeDeserializer) -> DayOfMonth:
+        self._result = None
+        deserializer.read_struct(_SCHEMA_DAY_OF_MONTH, self._consumer)
+
+        if self._result is None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found none."
+            )
+
+        return self._result
+
+    def _consumer(self, schema: Schema, de: ShapeDeserializer) -> None:
+        match schema.expect_member_index():
+            case 0:
+                self._set_result(DayOfMonthDayNumber.deserialize(de))
+
+            case 1:
+                self._set_result(DayOfMonthLastDayOfMonth.deserialize(de))
+
+            case _:
+                self._set_result(DayOfMonthUnknown(tag=schema.expect_member_name()))
+
+    def _set_result(self, value: DayOfMonth) -> None:
+        if self._result is not None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found more than one."
+            )
+        self._result = value
+
+
+@dataclass(kw_only=True)
+class MonthlySchedule:
+    """A monthly sync on a specified day of the month."""
+
+    day_of_month: DayOfMonth
+    """The day of the month on which the monthly sync runs."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_MONTHLY_SCHEDULE, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_MONTHLY_SCHEDULE.members["dayOfMonth"], self.day_of_month
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["day_of_month"] = _DayOfMonthDeserializer().deserialize(de)
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_MONTHLY_SCHEDULE, consumer=_consumer)
+        if "day_of_month" not in kwargs:
+            kwargs["day_of_month"] = DayOfMonthUnknown(tag="")
+        return kwargs
+
+
+class DayOfWeek(UnknownEnumMixin, StrEnum):
+    """
+    The day of the week on which a weekly sync runs. Valid values are the
+    standard English day names, for example, MONDAY or TUESDAY.
+    """
+
+    SUNDAY = "SUNDAY"
+    MONDAY = "MONDAY"
+    TUESDAY = "TUESDAY"
+    WEDNESDAY = "WEDNESDAY"
+    THURSDAY = "THURSDAY"
+    FRIDAY = "FRIDAY"
+    SATURDAY = "SATURDAY"
+
+
+@dataclass(kw_only=True)
+class WeeklySchedule:
+    """A weekly sync on a specified day of the week."""
+
+    day_of_week: str
+    """The day of the week on which the weekly sync runs."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_WEEKLY_SCHEDULE, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_WEEKLY_SCHEDULE.members["dayOfWeek"], self.day_of_week
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["day_of_week"] = DayOfWeek(
+                        de.read_string(_SCHEMA_WEEKLY_SCHEDULE.members["dayOfWeek"])
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_WEEKLY_SCHEDULE, consumer=_consumer)
+        if "day_of_week" not in kwargs:
+            kwargs["day_of_week"] = DayOfWeek._corrected("")
+        return kwargs
+
+
+@dataclass
+class SyncScheduleDaily:
+    """
+    A daily sync that runs once a day at a system-chosen off-peak time. The
+    run time is not configurable.
+    """
+
+    value: DailySchedule
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_SYNC_SCHEDULE, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_SYNC_SCHEDULE.members["daily"], self.value)
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=DailySchedule.deserialize(deserializer))
+
+
+@dataclass
+class SyncScheduleWeekly:
+    """A weekly sync that runs once a week on the specified day of the week."""
+
+    value: WeeklySchedule
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_SYNC_SCHEDULE, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_SYNC_SCHEDULE.members["weekly"], self.value)
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=WeeklySchedule.deserialize(deserializer))
+
+
+@dataclass
+class SyncScheduleMonthly:
+    """A monthly sync that runs once a month on the specified day of the month."""
+
+    value: MonthlySchedule
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_SYNC_SCHEDULE, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_SYNC_SCHEDULE.members["monthly"], self.value)
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(value=MonthlySchedule.deserialize(deserializer))
+
+
+@dataclass
+class SyncScheduleUnknown:
+    """
+    Represents an unknown variant.
+
+    If you receive this value, you will need to update your library to receive the
+    parsed value.
+
+    This value may not be deliberately sent.
+    """
+
+    tag: str
+
+    def serialize(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        raise SerializationError("Unknown union variants may not be serialized.")
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        raise NotImplementedError()
+
+
+SyncSchedule = Union[
+    SyncScheduleDaily | SyncScheduleWeekly | SyncScheduleMonthly | SyncScheduleUnknown
+]
+"""
+The recurring schedule on which a managed knowledge base connector
+automatically syncs its data source. Specify exactly one of `daily`,
+`weekly`, or `monthly`.
+"""
+
+
+class _SyncScheduleDeserializer:
+    _result: SyncSchedule | None = None
+
+    def deserialize(self, deserializer: ShapeDeserializer) -> SyncSchedule:
+        self._result = None
+        deserializer.read_struct(_SCHEMA_SYNC_SCHEDULE, self._consumer)
+
+        if self._result is None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found none."
+            )
+
+        return self._result
+
+    def _consumer(self, schema: Schema, de: ShapeDeserializer) -> None:
+        match schema.expect_member_index():
+            case 0:
+                self._set_result(SyncScheduleDaily.deserialize(de))
+
+            case 1:
+                self._set_result(SyncScheduleWeekly.deserialize(de))
+
+            case 2:
+                self._set_result(SyncScheduleMonthly.deserialize(de))
+
+            case _:
+                self._set_result(SyncScheduleUnknown(tag=schema.expect_member_name()))
+
+    def _set_result(self, value: SyncSchedule) -> None:
+        if self._result is not None:
+            raise SerializationError(
+                "Unions must have exactly one value, but found more than one."
+            )
+        self._result = value
+
+
+@dataclass(kw_only=True)
 class ManagedKnowledgeBaseConnectorConfiguration:
     """Configuration for managed knowledge base connector data sources."""
 
@@ -10303,6 +11381,14 @@ class ManagedKnowledgeBaseConnectorConfiguration:
     """
     Connector-specific parameters. For more information, see [Connect a data
     source](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-connect-ds.html).
+    """
+
+    sync_schedule: SyncSchedule | None = None
+    """
+    The recurring schedule on which the connector automatically syncs this
+    data source. If not specified, the data source is not synced
+    automatically and you start each sync yourself. Not supported for the
+    Custom connector.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -10335,6 +11421,14 @@ class ManagedKnowledgeBaseConnectorConfiguration:
                 self.connector_parameters,
             )
 
+        if self.sync_schedule is not None:
+            serializer.write_struct(
+                _SCHEMA_MANAGED_KNOWLEDGE_BASE_CONNECTOR_CONFIGURATION.members[
+                    "syncSchedule"
+                ],
+                self.sync_schedule,
+            )
+
     @classmethod
     def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
         return cls(**cls.deserialize_kwargs(deserializer))
@@ -10360,6 +11454,11 @@ class ManagedKnowledgeBaseConnectorConfiguration:
                         _SCHEMA_MANAGED_KNOWLEDGE_BASE_CONNECTOR_CONFIGURATION.members[
                             "connectorParameters"
                         ]
+                    )
+
+                case 3:
+                    kwargs["sync_schedule"] = _SyncScheduleDeserializer().deserialize(
+                        de
                     )
 
                 case _:
@@ -10539,7 +11638,7 @@ class SalesforceSourceConfiguration:
     host_url: str
     """The Salesforce host URL or instance URL."""
 
-    auth_type: SalesforceAuthType
+    auth_type: str
     """
     The supported authentication type to authenticate and connect to your
     Salesforce instance.
@@ -10783,10 +11882,10 @@ class SharePointSourceConfiguration:
     site_urls: list[str]
     """A list of one or more SharePoint site URLs."""
 
-    host_type: SharePointHostType
+    host_type: str
     """The supported host type, whether online/cloud or server/on-premises."""
 
-    auth_type: SharePointAuthType
+    auth_type: str
     """
     The supported authentication type to authenticate and connect to your
     SharePoint site/sites.
@@ -11075,7 +12174,7 @@ class WebCrawlerConfiguration:
     content of the URL isn't crawled.
     """
 
-    scope: WebScopeType | None = None
+    scope: str | None = None
     """
     The scope of what is crawled for your URLs.
 
@@ -11402,7 +12501,7 @@ class WebDataSourceConfiguration:
 class DataSourceConfiguration:
     """The connection configuration for the data source."""
 
-    type: DataSourceType
+    type: str
     """The type of data source."""
 
     managed_knowledge_base_connector_configuration: (
@@ -11939,7 +13038,7 @@ class ChunkingConfiguration:
     knowledge base that it belongs to is queried.
     """
 
-    chunking_strategy: ChunkingStrategy
+    chunking_strategy: str
     """
     Knowledge base can split your source data into chunks. A *chunk* refers
     to an excerpt from a data source that is returned when the knowledge
@@ -12065,7 +13164,7 @@ class EnrichmentStrategyMethod(UnknownEnumMixin, StrEnum):
 class EnrichmentStrategyConfiguration:
     """The strategy used for performing context enrichment."""
 
-    method: EnrichmentStrategyMethod
+    method: str
     """The method used for the context enrichment strategy."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -12196,7 +13295,7 @@ class ContextEnrichmentConfiguration:
     to the RAG application.
     """
 
-    type: ContextEnrichmentType
+    type: str
     """
     The method used for context enrichment. It must be Amazon Bedrock
     foundation models.
@@ -12454,7 +13553,7 @@ class Transformation:
     transformation_function: TransformationFunction
     """A Lambda function that processes documents."""
 
-    step_to_apply: StepType
+    step_to_apply: str
     """When the service applies the transformation."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -12607,7 +13706,7 @@ class BedrockDataAutomationConfiguration:
     parser for ingesting your data sources.
     """
 
-    parsing_modality: ParsingModality | None = None
+    parsing_modality: str | None = None
     """
     Specifies whether to enable parsing of multimodal data, including both
     text and/or images.
@@ -12706,7 +13805,7 @@ class BedrockFoundationModelConfiguration:
     parsing_prompt: ParsingPrompt | None = None
     """Instructions for interpreting the contents of a document."""
 
-    parsing_modality: ParsingModality | None = None
+    parsing_modality: str | None = None
     """
     Specifies whether to enable parsing of multimodal data, including both
     text and/or images.
@@ -12778,6 +13877,7 @@ class ParsingStrategy(UnknownEnumMixin, StrEnum):
     BEDROCK_FOUNDATION_MODEL = "BEDROCK_FOUNDATION_MODEL"
     BEDROCK_DATA_AUTOMATION = "BEDROCK_DATA_AUTOMATION"
     SMART_PARSING = "SMART_PARSING"
+    MULTI_MODAL_EMBEDDINGS = "MULTI_MODAL_EMBEDDINGS"
 
 
 @dataclass(kw_only=True)
@@ -12797,11 +13897,21 @@ class ParsingConfiguration:
         used instead.
     """
 
-    parsing_strategy: ParsingStrategy
+    parsing_strategy: str
     """
-    The parsing strategy for the data source. Only `SMART_PARSING` can be
-    selected for managed knowledge bases. For more information, see
-    [Customize ingestion for managed knowledge
+    The parsing strategy for the data source.
+
+    For managed knowledge bases, the strategy that you can select depends on
+    the embedding model that your knowledge base uses:
+
+    - If your knowledge base uses a native multimodal embedding model,
+      specify `MULTI_MODAL_EMBEDDINGS`. With this strategy, files are sent
+      directly to the embedding model instead of being parsed into text.
+      This is the only strategy that is supported for these knowledge bases.
+
+    - Otherwise, specify `SMART_PARSING`.
+
+    For more information, see [Customize ingestion for managed knowledge
     bases](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-customize-ingestion.html).
     """
 
@@ -13008,7 +14118,7 @@ class CreateDataSourceInput:
     data_source_configuration: DataSourceConfiguration | None = None
     """The connection configuration for the data source."""
 
-    data_deletion_policy: DataDeletionPolicy | None = None
+    data_deletion_policy: str | None = None
     """
     The data deletion policy for the data source.
 
@@ -13179,7 +14289,7 @@ class DataSource:
     name: str
     """The name of the data source."""
 
-    status: DataSourceStatus
+    status: str
     """
     The status of the data source. The following statuses are possible:
 
@@ -13209,7 +14319,7 @@ class DataSource:
     vector_ingestion_configuration: VectorIngestionConfiguration | None = None
     """Contains details about how to ingest the documents in the data source."""
 
-    data_deletion_policy: DataDeletionPolicy | None = None
+    data_deletion_policy: str | None = None
     """The data deletion policy for the data source."""
 
     failure_reasons: list[str] | None = None
@@ -13379,6 +14489,16 @@ class CreateDataSourceOutput:
     data_source: DataSource
     """Contains details about the data source."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_DATA_SOURCE_OUTPUT, self)
 
@@ -13520,8 +14640,18 @@ class DeleteDataSourceOutput:
     data_source_id: str
     """The unique identifier of the data source that was deleted."""
 
-    status: DataSourceStatus
+    status: str
     """The status of the data source."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_DATA_SOURCE_OUTPUT, self)
@@ -13676,6 +14806,16 @@ class GetDataSourceOutput:
 
     data_source: DataSource
     """Contains details about the data source."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_DATA_SOURCE_OUTPUT, self)
@@ -13836,7 +14976,7 @@ class DataSourceSummary:
     name: str
     """The name of the data source."""
 
-    status: DataSourceStatus
+    status: str
     """The status of the data source."""
 
     updated_at: datetime
@@ -13968,6 +15108,16 @@ class ListDataSourcesOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_DATA_SOURCES_OUTPUT, self)
 
@@ -14074,7 +15224,7 @@ class UpdateDataSourceInput:
     update.
     """
 
-    data_deletion_policy: DataDeletionPolicy | None = None
+    data_deletion_policy: str | None = None
     """The data deletion policy for the data source that you want to update."""
 
     server_side_encryption_configuration: ServerSideEncryptionConfiguration | None = (
@@ -14207,6 +15357,16 @@ class UpdateDataSourceOutput:
 
     data_source: DataSource
     """Contains details about the data source."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_DATA_SOURCE_OUTPUT, self)
@@ -14350,6 +15510,16 @@ class DeleteResourcePolicyOutput:
     revision_id: str | None = None
     """The revision identifier after the resource policy was deleted."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_RESOURCE_POLICY_OUTPUT, self)
 
@@ -14401,6 +15571,178 @@ DELETE_RESOURCE_POLICY = APIOperation(
     schema=_SCHEMA_DELETE_RESOURCE_POLICY,
     input_schema=_SCHEMA_DELETE_RESOURCE_POLICY_INPUT,
     output_schema=_SCHEMA_DELETE_RESOURCE_POLICY_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.bedrockagent#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.bedrockagent#ConflictException"): ConflictException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#InternalServerException"
+            ): InternalServerException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ThrottlingException"
+            ): ThrottlingException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ValidationException"
+            ): ValidationException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+        _SCHEMA_THROTTLING_EXCEPTION,
+        _SCHEMA_VALIDATION_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class DeleteVpcConfigurationInput:
+    """Dataclass for DeleteVpcConfigurationInput structure."""
+
+    knowledge_base_id: str | None = None
+    """
+    The unique identifier of the knowledge base that owns the VPC
+    configuration.
+    """
+
+    vpc_configuration_id: str | None = None
+    """The unique identifier of the VPC configuration to delete."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_DELETE_VPC_CONFIGURATION_INPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.knowledge_base_id is not None:
+            serializer.write_string(
+                _SCHEMA_DELETE_VPC_CONFIGURATION_INPUT.members["knowledgeBaseId"],
+                self.knowledge_base_id,
+            )
+
+        if self.vpc_configuration_id is not None:
+            serializer.write_string(
+                _SCHEMA_DELETE_VPC_CONFIGURATION_INPUT.members["vpcConfigurationId"],
+                self.vpc_configuration_id,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["knowledge_base_id"] = de.read_string(
+                        _SCHEMA_DELETE_VPC_CONFIGURATION_INPUT.members[
+                            "knowledgeBaseId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["vpc_configuration_id"] = de.read_string(
+                        _SCHEMA_DELETE_VPC_CONFIGURATION_INPUT.members[
+                            "vpcConfigurationId"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_DELETE_VPC_CONFIGURATION_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class DeleteVpcConfigurationOutput:
+    """Dataclass for DeleteVpcConfigurationOutput structure."""
+
+    vpc_configuration_id: str
+    """The unique identifier of the VPC configuration being deleted."""
+
+    status: str
+    """
+    The current status of the VPC configuration. Immediately after a delete
+    request this is `DELETING`.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_DELETE_VPC_CONFIGURATION_OUTPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_DELETE_VPC_CONFIGURATION_OUTPUT.members["vpcConfigurationId"],
+            self.vpc_configuration_id,
+        )
+        serializer.write_string(
+            _SCHEMA_DELETE_VPC_CONFIGURATION_OUTPUT.members["status"], self.status
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["vpc_configuration_id"] = de.read_string(
+                        _SCHEMA_DELETE_VPC_CONFIGURATION_OUTPUT.members[
+                            "vpcConfigurationId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["status"] = VpcConfigurationStatus(
+                        de.read_string(
+                            _SCHEMA_DELETE_VPC_CONFIGURATION_OUTPUT.members["status"]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_DELETE_VPC_CONFIGURATION_OUTPUT, consumer=_consumer
+        )
+        if "vpc_configuration_id" not in kwargs:
+            kwargs["vpc_configuration_id"] = ""
+        if "status" not in kwargs:
+            kwargs["status"] = VpcConfigurationStatus._corrected("")
+        return kwargs
+
+
+DELETE_VPC_CONFIGURATION = APIOperation(
+    input=DeleteVpcConfigurationInput,
+    output=DeleteVpcConfigurationOutput,
+    schema=_SCHEMA_DELETE_VPC_CONFIGURATION,
+    input_schema=_SCHEMA_DELETE_VPC_CONFIGURATION_INPUT,
+    output_schema=_SCHEMA_DELETE_VPC_CONFIGURATION_OUTPUT,
     error_registry=TypeRegistry(
         {
             ShapeID(
@@ -14672,7 +16014,7 @@ class FlowConnectionType(UnknownEnumMixin, StrEnum):
 class FlowConnection:
     """Contains information about a connection between two nodes in the flow."""
 
-    type: FlowConnectionType
+    type: str
     """
     Whether the source node that the connection begins from is a condition
     node (`Conditional`) or not (`Data`).
@@ -14971,7 +16313,7 @@ class InlineCodeFlowNodeConfiguration:
     The code must be valid in the programming `language` that you specify.
     """
 
-    language: SupportedLanguages = SupportedLanguages("Python_3")
+    language: str = SupportedLanguages("Python_3")
     """
     The programming language used by your inline code node.
 
@@ -15293,7 +16635,7 @@ class PerformanceConfiguration:
     retrieval and generation process.
     """
 
-    latency: PerformanceConfigLatency = PerformanceConfigLatency("standard")
+    latency: str = PerformanceConfigLatency("standard")
     """The latency optimization setting."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -15713,7 +17055,7 @@ class MetadataConfigurationForReranking:
     process.
     """
 
-    selection_mode: RerankingMetadataSelectionMode
+    selection_mode: str
     """The mode for selecting metadata fields for reranking."""
 
     selective_mode_configuration: RerankingMetadataSelectiveModeConfiguration | None = (
@@ -15956,7 +17298,7 @@ class VectorSearchRerankingConfiguration:
     improve relevance.
     """
 
-    type: VectorSearchRerankingConfigurationType
+    type: str
     """
     Specifies the type of reranking model to use. Currently, the only
     supported value is `BEDROCK_RERANKING_MODEL`.
@@ -16510,7 +17852,7 @@ class CachePointBlock:
     this checkpoint is cached to be accessed on subsequent requests.
     """
 
-    type: CachePointType
+    type: str
     """Indicates that the CachePointBlock is of the default type"""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -16682,7 +18024,7 @@ class Message:
     management](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html).
     """
 
-    role: ConversationRole
+    role: str
     """The role that the message belongs to."""
 
     content: list[ContentBlock]
@@ -17227,7 +18569,7 @@ class ToolSpecification:
     """The description of the tool."""
 
     strict: bool | None = None
-    """Whether to enforce strict JSON schema adherence for the tool input"""
+    """Whether the tool schema is strictly enforced."""
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TOOL_SPECIFICATION, self)
@@ -17766,7 +19108,7 @@ class PromptFlowNodeInlineConfiguration:
     values at runtime.
     """
 
-    template_type: PromptTemplateType = PromptTemplateType("TEXT")
+    template_type: str = PromptTemplateType("TEXT")
     """The type of prompt template."""
 
     model_id: str = ""
@@ -18516,7 +19858,7 @@ class FlowNodeInput:
     name: str
     """Specifies a name for the input that you can reference."""
 
-    type: FlowNodeIODataType
+    type: str
     """
     Specifies the data type of the input. If the input doesn't match this
     type at runtime, a validation error will be thrown.
@@ -18529,7 +19871,7 @@ class FlowNodeInput:
     Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-expressions.html).
     """
 
-    category: FlowNodeInputCategory | None = None
+    category: str | None = None
     """
     Specifies how input data flows between iterations in a DoWhile loop.
 
@@ -18634,7 +19976,7 @@ class FlowNodeOutput:
     name: str
     """A name for the output that you can reference."""
 
-    type: FlowNodeIODataType
+    type: str
     """
     The data type of the output. If the output doesn't match this type at
     runtime, a validation error will be thrown.
@@ -18793,6 +20135,16 @@ class DeleteFlowOutput:
     id: str
     """The unique identifier of the flow."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_FLOW_OUTPUT, self)
 
@@ -18873,7 +20225,7 @@ class FlowAliasConcurrencyConfiguration:
     nodes concurrently can improve your flow's performance.
     """
 
-    type: ConcurrencyType
+    type: str
     """
     The type of concurrency to use for parallel node execution. Specify one
     of the following options:
@@ -19185,6 +20537,16 @@ class CreateFlowAliasOutput:
     parallel.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_FLOW_ALIAS_OUTPUT, self)
 
@@ -19409,6 +20771,16 @@ class DeleteFlowAliasOutput:
     id: str
     """The unique identifier of the flow."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_FLOW_ALIAS_OUTPUT, self)
 
@@ -19572,6 +20944,16 @@ class GetFlowAliasOutput:
     """
     The configuration that specifies how nodes in the flow are executed in
     parallel.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -19995,6 +21377,16 @@ class ListFlowAliasesOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_FLOW_ALIASES_OUTPUT, self)
 
@@ -20223,6 +21615,16 @@ class UpdateFlowAliasOutput:
     """
     The configuration that specifies how nodes in the flow are executed in
     parallel.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -20542,6 +21944,16 @@ class DeleteFlowVersionOutput:
     version: str
     """The version of the flow being deleted."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_FLOW_VERSION_OUTPUT, self)
 
@@ -20637,7 +22049,7 @@ class GetFlowVersionInput:
     flow_version: str | None = None
     """The version of the flow for which to get information."""
 
-    included_data: IncludedData | None = None
+    included_data: str | None = None
     """
     Controls the scope of data returned. Set to `METADATA_ONLY` to return
     only resource metadata. Set to `ALL_DATA` or omit this field to return
@@ -20790,7 +22202,7 @@ class FlowVersionSummary:
     arn: str
     """The Amazon Resource Name (ARN) of the flow that the version belongs to."""
 
-    status: FlowStatus
+    status: str
     """The status of the flow."""
 
     created_at: datetime
@@ -20906,6 +22318,16 @@ class ListFlowVersionsOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_FLOW_VERSIONS_OUTPUT, self)
 
@@ -20997,7 +22419,7 @@ class GetFlowInput:
     flow_identifier: str | None = None
     """The unique identifier of the flow."""
 
-    included_data: IncludedData | None = None
+    included_data: str | None = None
     """
     Controls the scope of data returned. Set to `METADATA_ONLY` to return
     only resource metadata. Set to `ALL_DATA` or omit this field to return
@@ -21371,7 +22793,7 @@ class LoopIncompatibleNodeTypeFlowValidationDetails:
     node: str
     """The `Loop` container node that contains an incompatible node."""
 
-    incompatible_node_type: IncompatibleLoopNodeType
+    incompatible_node_type: str
     """
     The node type of the incompatible node in the DoWhile loop. Some node
     types, like a condition node, aren't allowed in a DoWhile loop.
@@ -21632,7 +23054,7 @@ class MismatchedNodeInputTypeFlowValidationDetails:
     input: str
     """The name of the input with the mismatched data type."""
 
-    expected_type: FlowNodeIODataType
+    expected_type: str
     """The expected data type for the node input."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -21718,7 +23140,7 @@ class MismatchedNodeOutputTypeFlowValidationDetails:
     output: str
     """The name of the output with the mismatched data type."""
 
-    expected_type: FlowNodeIODataType
+    expected_type: str
     """The expected data type for the node output."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -24024,13 +25446,13 @@ class FlowValidation:
     message: str
     """A message describing the validation error."""
 
-    severity: FlowValidationSeverity
+    severity: str
     """The severity of the issue described in the message."""
 
     details: FlowValidationDetails | None = None
     """Specific details about the validation issue encountered in the flow."""
 
-    type: FlowValidationType | None = None
+    type: str | None = None
     """The type of validation issue encountered in the flow."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -24190,7 +25612,7 @@ class FlowSummary:
     arn: str
     """The Amazon Resource Name (ARN) of the flow."""
 
-    status: FlowStatus
+    status: str
     """
     The status of the flow. The following statuses are possible:
 
@@ -24352,6 +25774,16 @@ class ListFlowsOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_FLOWS_OUTPUT, self)
 
@@ -24473,11 +25905,21 @@ class PrepareFlowOutput:
     id: str
     """The unique identifier of the flow."""
 
-    status: FlowStatus
+    status: str
     """
     The status of the flow. When you submit this request, the status will be
     `NotPrepared`. If preparation succeeds, the status becomes `Prepared`.
     If it fails, the status becomes `FAILED`.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -24620,6 +26062,16 @@ class GetResourcePolicyOutput:
     revision_id: str
     """The revision identifier of the resource policy."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_RESOURCE_POLICY_OUTPUT, self)
 
@@ -24678,6 +26130,406 @@ GET_RESOURCE_POLICY = APIOperation(
     schema=_SCHEMA_GET_RESOURCE_POLICY,
     input_schema=_SCHEMA_GET_RESOURCE_POLICY_INPUT,
     output_schema=_SCHEMA_GET_RESOURCE_POLICY_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.bedrockagent#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#InternalServerException"
+            ): InternalServerException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ThrottlingException"
+            ): ThrottlingException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ValidationException"
+            ): ValidationException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+        _SCHEMA_THROTTLING_EXCEPTION,
+        _SCHEMA_VALIDATION_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class GetVpcConfigurationInput:
+    """Dataclass for GetVpcConfigurationInput structure."""
+
+    knowledge_base_id: str | None = None
+    """
+    The unique identifier of the knowledge base that owns the VPC
+    configuration.
+    """
+
+    vpc_configuration_id: str | None = None
+    """The unique identifier of the VPC configuration to retrieve."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_GET_VPC_CONFIGURATION_INPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.knowledge_base_id is not None:
+            serializer.write_string(
+                _SCHEMA_GET_VPC_CONFIGURATION_INPUT.members["knowledgeBaseId"],
+                self.knowledge_base_id,
+            )
+
+        if self.vpc_configuration_id is not None:
+            serializer.write_string(
+                _SCHEMA_GET_VPC_CONFIGURATION_INPUT.members["vpcConfigurationId"],
+                self.vpc_configuration_id,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["knowledge_base_id"] = de.read_string(
+                        _SCHEMA_GET_VPC_CONFIGURATION_INPUT.members["knowledgeBaseId"]
+                    )
+
+                case 1:
+                    kwargs["vpc_configuration_id"] = de.read_string(
+                        _SCHEMA_GET_VPC_CONFIGURATION_INPUT.members[
+                            "vpcConfigurationId"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_GET_VPC_CONFIGURATION_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class VpcConfiguration:
+    """
+    Contains the details of a VPC configuration, including its connection
+    settings, resolution mode, and current lifecycle status.
+    """
+
+    vpc_configuration_id: str
+    """The unique identifier of the VPC configuration."""
+
+    status: str
+    """The current lifecycle status of the VPC configuration."""
+
+    vpc_id: str
+    """
+    The identifier of the VPC that the knowledge base connects through to
+    reach the resource.
+    """
+
+    subnet_ids: list[str]
+    """The subnets that the knowledge base uses to connect to the resource."""
+
+    resource_target: str
+    """The private IPv4 address or DNS name of the resource."""
+
+    port: int
+    """The port on which the resource is reached."""
+
+    protocol: str
+    """The protocol used to connect to the resource."""
+
+    resolution_mode: str
+    """Specifies how the resource target is resolved."""
+
+    created_at: datetime
+    """The time at which the VPC configuration was created."""
+
+    updated_at: datetime
+    """The time at which the VPC configuration was last updated."""
+
+    status_message: str | None = None
+    """
+    Additional detail about the current status, such as the cause of a
+    `CREATE_FAILED` or `DELETE_FAILED` status.
+    """
+
+    host_header: str | None = None
+    """
+    The HTTP `Host` header value sent when invoking the resource, if
+    configured.
+    """
+
+    tls_server_name: str | None = None
+    """
+    The expected TLS server name that the service matches against the
+    Subject Alternative Names on the resource's TLS certificate. Present
+    when `protocol` is `HTTPS`.
+    """
+
+    name: str | None = None
+    """The human-readable name of the VPC configuration, if provided."""
+
+    description: str | None = None
+    """The description of the VPC configuration, if provided."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_VPC_CONFIGURATION, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_VPC_CONFIGURATION.members["vpcConfigurationId"],
+            self.vpc_configuration_id,
+        )
+        serializer.write_string(
+            _SCHEMA_VPC_CONFIGURATION.members["status"], self.status
+        )
+        if self.status_message is not None:
+            serializer.write_string(
+                _SCHEMA_VPC_CONFIGURATION.members["statusMessage"], self.status_message
+            )
+
+        serializer.write_string(_SCHEMA_VPC_CONFIGURATION.members["vpcId"], self.vpc_id)
+        _serialize_subnet_id_list(
+            serializer, _SCHEMA_VPC_CONFIGURATION.members["subnetIds"], self.subnet_ids
+        )
+        serializer.write_string(
+            _SCHEMA_VPC_CONFIGURATION.members["resourceTarget"], self.resource_target
+        )
+        serializer.write_integer(_SCHEMA_VPC_CONFIGURATION.members["port"], self.port)
+        serializer.write_string(
+            _SCHEMA_VPC_CONFIGURATION.members["protocol"], self.protocol
+        )
+        serializer.write_string(
+            _SCHEMA_VPC_CONFIGURATION.members["resolutionMode"], self.resolution_mode
+        )
+        if self.host_header is not None:
+            serializer.write_string(
+                _SCHEMA_VPC_CONFIGURATION.members["hostHeader"], self.host_header
+            )
+
+        if self.tls_server_name is not None:
+            serializer.write_string(
+                _SCHEMA_VPC_CONFIGURATION.members["tlsServerName"], self.tls_server_name
+            )
+
+        if self.name is not None:
+            serializer.write_string(
+                _SCHEMA_VPC_CONFIGURATION.members["name"], self.name
+            )
+
+        if self.description is not None:
+            serializer.write_string(
+                _SCHEMA_VPC_CONFIGURATION.members["description"], self.description
+            )
+
+        serializer.write_timestamp(
+            _SCHEMA_VPC_CONFIGURATION.members["createdAt"], self.created_at
+        )
+        serializer.write_timestamp(
+            _SCHEMA_VPC_CONFIGURATION.members["updatedAt"], self.updated_at
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["vpc_configuration_id"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION.members["vpcConfigurationId"]
+                    )
+
+                case 1:
+                    kwargs["status"] = VpcConfigurationStatus(
+                        de.read_string(_SCHEMA_VPC_CONFIGURATION.members["status"])
+                    )
+
+                case 2:
+                    kwargs["status_message"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION.members["statusMessage"]
+                    )
+
+                case 3:
+                    kwargs["vpc_id"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION.members["vpcId"]
+                    )
+
+                case 4:
+                    kwargs["subnet_ids"] = _deserialize_subnet_id_list(
+                        de, _SCHEMA_VPC_CONFIGURATION.members["subnetIds"]
+                    )
+
+                case 5:
+                    kwargs["resource_target"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION.members["resourceTarget"]
+                    )
+
+                case 6:
+                    kwargs["port"] = de.read_integer(
+                        _SCHEMA_VPC_CONFIGURATION.members["port"]
+                    )
+
+                case 7:
+                    kwargs["protocol"] = VpcProtocol(
+                        de.read_string(_SCHEMA_VPC_CONFIGURATION.members["protocol"])
+                    )
+
+                case 8:
+                    kwargs["resolution_mode"] = VpcResolutionMode(
+                        de.read_string(
+                            _SCHEMA_VPC_CONFIGURATION.members["resolutionMode"]
+                        )
+                    )
+
+                case 9:
+                    kwargs["host_header"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION.members["hostHeader"]
+                    )
+
+                case 10:
+                    kwargs["tls_server_name"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION.members["tlsServerName"]
+                    )
+
+                case 11:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION.members["name"]
+                    )
+
+                case 12:
+                    kwargs["description"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION.members["description"]
+                    )
+
+                case 13:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_VPC_CONFIGURATION.members["createdAt"]
+                    )
+
+                case 14:
+                    kwargs["updated_at"] = de.read_timestamp(
+                        _SCHEMA_VPC_CONFIGURATION.members["updatedAt"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_VPC_CONFIGURATION, consumer=_consumer)
+        if "vpc_configuration_id" not in kwargs:
+            kwargs["vpc_configuration_id"] = ""
+        if "status" not in kwargs:
+            kwargs["status"] = VpcConfigurationStatus._corrected("")
+        if "vpc_id" not in kwargs:
+            kwargs["vpc_id"] = ""
+        if "subnet_ids" not in kwargs:
+            kwargs["subnet_ids"] = []
+        if "resource_target" not in kwargs:
+            kwargs["resource_target"] = ""
+        if "port" not in kwargs:
+            kwargs["port"] = 0
+        if "protocol" not in kwargs:
+            kwargs["protocol"] = VpcProtocol._corrected("")
+        if "resolution_mode" not in kwargs:
+            kwargs["resolution_mode"] = VpcResolutionMode._corrected("")
+        if "created_at" not in kwargs:
+            kwargs["created_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        if "updated_at" not in kwargs:
+            kwargs["updated_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        return kwargs
+
+    @classmethod
+    def _smithy_default(cls) -> Self:
+        return cls(
+            vpc_configuration_id="",
+            status=VpcConfigurationStatus._corrected(""),
+            vpc_id="",
+            subnet_ids=[],
+            resource_target="",
+            port=0,
+            protocol=VpcProtocol._corrected(""),
+            resolution_mode=VpcResolutionMode._corrected(""),
+            created_at=datetime.fromtimestamp(0, tz=timezone.utc),
+            updated_at=datetime.fromtimestamp(0, tz=timezone.utc),
+        )
+
+
+@dataclass(kw_only=True)
+class GetVpcConfigurationOutput:
+    """Dataclass for GetVpcConfigurationOutput structure."""
+
+    vpc_configuration: VpcConfiguration
+    """
+    The VPC configuration, including its connection settings, resolution
+    mode, and current lifecycle status.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_GET_VPC_CONFIGURATION_OUTPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_GET_VPC_CONFIGURATION_OUTPUT.members["vpcConfiguration"],
+            self.vpc_configuration,
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["vpc_configuration"] = VpcConfiguration.deserialize(de)
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_GET_VPC_CONFIGURATION_OUTPUT, consumer=_consumer
+        )
+        if "vpc_configuration" not in kwargs:
+            kwargs["vpc_configuration"] = VpcConfiguration._smithy_default()
+        return kwargs
+
+
+GET_VPC_CONFIGURATION = APIOperation(
+    input=GetVpcConfigurationInput,
+    output=GetVpcConfigurationOutput,
+    schema=_SCHEMA_GET_VPC_CONFIGURATION,
+    input_schema=_SCHEMA_GET_VPC_CONFIGURATION_INPUT,
+    output_schema=_SCHEMA_GET_VPC_CONFIGURATION_OUTPUT,
     error_registry=TypeRegistry(
         {
             ShapeID(
@@ -24977,7 +26829,7 @@ class IngestionJob:
     ingestion_job_id: str
     """The unique identifier of the data ingestion job."""
 
-    status: IngestionJobStatus
+    status: str
     """The status of the data ingestion job."""
 
     started_at: datetime
@@ -25004,6 +26856,15 @@ class IngestionJob:
 
     failure_reasons: list[str] | None = None
     """A list of reasons that the data ingestion job failed."""
+
+    text_ready_at: datetime | None = None
+    """
+    The time at which all text content in the data ingestion job finished
+    extraction and became available to query.
+
+    This time isn't returned until text extraction is complete for all the
+    documents in the job.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_INGESTION_JOB, self)
@@ -25042,6 +26903,10 @@ class IngestionJob:
         serializer.write_timestamp(
             _SCHEMA_INGESTION_JOB.members["updatedAt"], self.updated_at
         )
+        if self.text_ready_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_INGESTION_JOB.members["textReadyAt"], self.text_ready_at
+            )
 
     @classmethod
     def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
@@ -25096,6 +26961,11 @@ class IngestionJob:
                         _SCHEMA_INGESTION_JOB.members["updatedAt"]
                     )
 
+                case 9:
+                    kwargs["text_ready_at"] = de.read_timestamp(
+                        _SCHEMA_INGESTION_JOB.members["textReadyAt"]
+                    )
+
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
 
@@ -25132,6 +27002,16 @@ class GetIngestionJobOutput:
 
     ingestion_job: IngestionJob
     """Contains details about the data ingestion job."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_INGESTION_JOB_OUTPUT, self)
@@ -25237,10 +27117,10 @@ def _deserialize_ingestion_job_filter_values(
 class IngestionJobFilter:
     """The definition of a filter to filter the data."""
 
-    attribute: IngestionJobFilterAttribute
+    attribute: str
     """The name of field or attribute to apply the filter."""
 
-    operator: IngestionJobFilterOperator
+    operator: str
     """The operation to apply to the field or attribute."""
 
     values: list[str]
@@ -25339,10 +27219,10 @@ class SortOrder(UnknownEnumMixin, StrEnum):
 class IngestionJobSortBy:
     """The parameters of sorting the data."""
 
-    attribute: IngestionJobSortByAttribute
+    attribute: str
     """The name of field or attribute to apply sorting of data."""
 
-    order: SortOrder
+    order: str
     """The order for sorting the data."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -25523,7 +27403,7 @@ class IngestionJobSummary:
     ingestion_job_id: str
     """The unique identifier of the data ingestion job."""
 
-    status: IngestionJobStatus
+    status: str
     """The status of the data ingestion job."""
 
     started_at: datetime
@@ -25534,6 +27414,15 @@ class IngestionJobSummary:
 
     description: str | None = None
     """The description of the data ingestion job."""
+
+    text_ready_at: datetime | None = None
+    """
+    The time at which all text content in the data ingestion job finished
+    extraction and became available to query.
+
+    This time isn't returned until text extraction is complete for all the
+    documents in the job.
+    """
 
     statistics: IngestionJobStatistics | None = None
     """Contains statistics for the data ingestion job."""
@@ -25567,6 +27456,11 @@ class IngestionJobSummary:
         serializer.write_timestamp(
             _SCHEMA_INGESTION_JOB_SUMMARY.members["updatedAt"], self.updated_at
         )
+        if self.text_ready_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_INGESTION_JOB_SUMMARY.members["textReadyAt"], self.text_ready_at
+            )
+
         if self.statistics is not None:
             serializer.write_struct(
                 _SCHEMA_INGESTION_JOB_SUMMARY.members["statistics"], self.statistics
@@ -25618,6 +27512,11 @@ class IngestionJobSummary:
                     )
 
                 case 7:
+                    kwargs["text_ready_at"] = de.read_timestamp(
+                        _SCHEMA_INGESTION_JOB_SUMMARY.members["textReadyAt"]
+                    )
+
+                case 8:
                     kwargs["statistics"] = IngestionJobStatistics.deserialize(de)
 
                 case _:
@@ -25676,6 +27575,16 @@ class ListIngestionJobsOutput:
     If the total number of results is greater than the `maxResults` value
     provided in the request, use this token when making another request in
     the `nextToken` field to return the next batch of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -25859,6 +27768,16 @@ class StartIngestionJobOutput:
     ingestion_job: IngestionJob
     """Contains information about the data ingestion job."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_START_INGESTION_JOB_OUTPUT, self)
 
@@ -26012,6 +27931,16 @@ class StopIngestionJobOutput:
     ingestion_job: IngestionJob
     """Contains information about the stopped data ingestion job."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_STOP_INGESTION_JOB_OUTPUT, self)
 
@@ -26136,7 +28065,7 @@ class ContentDataSourceType(UnknownEnumMixin, StrEnum):
 class DocumentIdentifier:
     """Contains information that identifies the document."""
 
-    data_source_type: ContentDataSourceType
+    data_source_type: str
     """
     The type of data source connected to the knowledge base that contains
     the document.
@@ -26367,7 +28296,7 @@ class KnowledgeBaseDocumentDetail:
     the document was ingested into or deleted from.
     """
 
-    status: DocumentStatus
+    status: str
     """
     The ingestion status of the document. The following statuses are
     possible:
@@ -26533,6 +28462,16 @@ class DeleteKnowledgeBaseDocumentsOutput:
     """
     A list of objects, each of which contains information about the
     documents that were deleted.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -26710,6 +28649,16 @@ class GetKnowledgeBaseDocumentsOutput:
     """
     A list of objects, each of which contains information about the
     documents that were retrieved.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -26935,7 +28884,7 @@ class InlineContent:
     source. Choose a `type` and include the field that corresponds to it.
     """
 
-    type: InlineContentType
+    type: str
     """The type of inline content to define."""
 
     byte_content: ByteContentDoc | None = None
@@ -27062,7 +29011,7 @@ class CustomContent:
     custom_document_identifier: CustomDocumentIdentifier
     """A unique identifier for the document."""
 
-    source_type: CustomSourceType
+    source_type: str
     """The source of the data to ingest."""
 
     s3_location: CustomS3Location | None = None
@@ -27184,7 +29133,7 @@ class DocumentContent:
     `dataSourceType` and include the field that corresponds to it.
     """
 
-    data_source_type: ContentDataSourceType
+    data_source_type: str
     """
     The type of data source that is connected to the knowledge base to which
     to ingest this document.
@@ -27260,10 +29209,10 @@ class DocumentAccessControlEntry:
     name: str
     """The user identifier."""
 
-    type: AccessControlPrincipalType
+    type: str
     """The type of principal."""
 
-    access: AccessControlAccess
+    access: str
     """Whether to allow or deny access."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -27389,7 +29338,7 @@ class MetadataAttributeValue:
     include the field that corresponds to it.
     """
 
-    type: MetadataValueType
+    type: str
     """The type of the metadata attribute."""
 
     number_value: float | None = field(repr=False, default=None)
@@ -27568,7 +29517,7 @@ class DocumentMetadata:
     corresponds to it.
     """
 
-    type: MetadataSourceType
+    type: str
     """The type of the source source from which to add metadata."""
 
     inline_attributes: list[MetadataAttribute] | None = None
@@ -27848,6 +29797,16 @@ class IngestKnowledgeBaseDocumentsOutput:
     documents that were ingested.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_INGEST_KNOWLEDGE_BASE_DOCUMENTS_OUTPUT, self)
 
@@ -28048,6 +30007,16 @@ class ListKnowledgeBaseDocumentsOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_KNOWLEDGE_BASE_DOCUMENTS_OUTPUT, self)
 
@@ -28163,7 +30132,7 @@ class AssociateAgentKnowledgeBaseInput:
     description: str | None = None
     """A description of what the agent should use the knowledge base for."""
 
-    knowledge_base_state: KnowledgeBaseState | None = None
+    knowledge_base_state: str | None = None
     """
     Specifies whether to use the knowledge base or not when sending an
     [InvokeAgent](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
@@ -28268,6 +30237,16 @@ class AssociateAgentKnowledgeBaseOutput:
     """
     Contains details about the knowledge base that has been associated with
     the agent.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -28656,7 +30635,7 @@ class BedrockEmbeddingModelConfiguration:
     embeddings model.
     """
 
-    embedding_data_type: EmbeddingDataType | None = None
+    embedding_data_type: str | None = None
     """
     The data type for the vectors when using a model to convert text into
     vector embeddings. The model must support the specified data type for
@@ -28671,12 +30650,38 @@ class BedrockEmbeddingModelConfiguration:
     """
     Configuration settings for processing audio content in multimodal
     knowledge bases.
+
+    Warning:
+        This field is deprecated. Use `modelConfiguration` instead.
     """
 
     video: list[VideoConfiguration] | None = None
     """
     Configuration settings for processing video content in multimodal
     knowledge bases.
+
+    Warning:
+        This field is deprecated. Use `modelConfiguration` instead.
+    """
+
+    model_configuration: Document | None = None
+    """
+    Model-specific configuration for the embedding model, provided as a JSON
+    object. Use this field to specify settings that apply to the embedding
+    model that you selected, such as how audio and video files are divided
+    into segments.
+
+    The fields that this object accepts depend on the embedding model. For
+    the settings that each model accepts, see the documentation for that
+    model.
+
+    For an example of a
+    [CreateKnowledgeBase](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html)
+    request that uses this field to configure a multimodal embedding model,
+    see the
+    [Examples](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html#API_agent_CreateKnowledgeBase_Examples)
+    section of
+    [CreateKnowledgeBase](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html).
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -28709,6 +30714,14 @@ class BedrockEmbeddingModelConfiguration:
                 serializer,
                 _SCHEMA_BEDROCK_EMBEDDING_MODEL_CONFIGURATION.members["video"],
                 self.video,
+            )
+
+        if self.model_configuration is not None:
+            serializer.write_document(
+                _SCHEMA_BEDROCK_EMBEDDING_MODEL_CONFIGURATION.members[
+                    "modelConfiguration"
+                ],
+                self.model_configuration,
             )
 
     @classmethod
@@ -28747,6 +30760,13 @@ class BedrockEmbeddingModelConfiguration:
                     kwargs["video"] = _deserialize_video_configurations(
                         de,
                         _SCHEMA_BEDROCK_EMBEDDING_MODEL_CONFIGURATION.members["video"],
+                    )
+
+                case 4:
+                    kwargs["model_configuration"] = de.read_document(
+                        _SCHEMA_BEDROCK_EMBEDDING_MODEL_CONFIGURATION.members[
+                            "modelConfiguration"
+                        ]
                     )
 
                 case _:
@@ -28815,23 +30835,173 @@ class EmbeddingModelType(UnknownEnumMixin, StrEnum):
     MANAGED = "MANAGED"
 
 
+class SupplementalDataStorageLocationType(UnknownEnumMixin, StrEnum):
+    S3 = "S3"
+
+
+@dataclass(kw_only=True)
+class SupplementalDataStorageLocation:
+    """
+    Contains information about a storage location for multimedia content
+    (images, audio, and video) extracted from multimodal documents in your
+    data source.
+    """
+
+    type: str
+    """Specifies the storage service used for this location."""
+
+    s3_location: S3Location | None = None
+    """
+    Contains information about the Amazon S3 location for the extracted
+    multimedia content.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_SUPPLEMENTAL_DATA_STORAGE_LOCATION, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_LOCATION.members["type"], self.type
+        )
+        if self.s3_location is not None:
+            serializer.write_struct(
+                _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_LOCATION.members["s3Location"],
+                self.s3_location,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["type"] = SupplementalDataStorageLocationType(
+                        de.read_string(
+                            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_LOCATION.members["type"]
+                        )
+                    )
+
+                case 1:
+                    kwargs["s3_location"] = S3Location.deserialize(de)
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_LOCATION, consumer=_consumer
+        )
+        if "type" not in kwargs:
+            kwargs["type"] = SupplementalDataStorageLocationType._corrected("")
+        return kwargs
+
+
+def _serialize_supplemental_data_storage_locations(
+    serializer: ShapeSerializer,
+    schema: Schema,
+    value: list[SupplementalDataStorageLocation],
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_struct(member_schema, e)
+
+
+def _deserialize_supplemental_data_storage_locations(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[SupplementalDataStorageLocation]:
+    result: list[SupplementalDataStorageLocation] = []
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(SupplementalDataStorageLocation.deserialize(d))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
+class SupplementalDataStorageConfiguration:
+    """
+    Specifies configurations for the storage location of multimedia content
+    (images, audio, and video) extracted from multimodal documents in your
+    data source. This content can be retrieved and returned to the end user
+    with timestamp references for audio and video segments.
+    """
+
+    storage_locations: list[SupplementalDataStorageLocation]
+    """
+    A list of objects specifying storage locations for multimedia content
+    (images, audio, and video) extracted from multimodal documents in your
+    data source.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_SUPPLEMENTAL_DATA_STORAGE_CONFIGURATION, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        _serialize_supplemental_data_storage_locations(
+            serializer,
+            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_CONFIGURATION.members["storageLocations"],
+            self.storage_locations,
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["storage_locations"] = (
+                        _deserialize_supplemental_data_storage_locations(
+                            de,
+                            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_CONFIGURATION.members[
+                                "storageLocations"
+                            ],
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_CONFIGURATION, consumer=_consumer
+        )
+        if "storage_locations" not in kwargs:
+            kwargs["storage_locations"] = []
+        return kwargs
+
+
 @dataclass(kw_only=True)
 class ManagedKnowledgeBaseConfiguration:
     """Configurations for a managed knowledge base."""
 
-    embedding_model_type: EmbeddingModelType | None = None
+    embedding_model_type: str | None = None
     """
-    Choose `CUSTOM` to provide your own Bedrock embedding model ARN. Choose
-    `MANAGED` to use a service-managed embedding model. For more
-    information, see [Embedding model
-    options](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-create.html#kb-managed-embedding-models).
+    Choose CUSTOM to provide your own Bedrock embedding model ARN. Choose
+    MANAGED to use a service-managed embedding model.
     """
 
     embedding_model_arn: str | None = None
     """The ARN for the embeddings model."""
 
     embedding_model_configuration: EmbeddingModelConfiguration | None = None
-    """The configuration details for the embeddings model."""
+    """
+    The configuration details for the embeddings model. Not required when
+    choosing the MANAGED embeddingModelType.
+    """
 
     server_side_encryption_configuration: ServerSideEncryptionConfiguration | None = (
         None
@@ -28839,6 +31009,15 @@ class ManagedKnowledgeBaseConfiguration:
     """
     Contains the configuration for server-side encryption for your managed
     knowledge base.
+    """
+
+    supplemental_data_storage_configuration: (
+        SupplementalDataStorageConfiguration | None
+    ) = None
+    """
+    Use this object to specify the Amazon S3 location that the knowledge
+    base uses to process and ingest multimodal content. This field is
+    required when you use a native multimodal embedding model.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -28877,6 +31056,14 @@ class ManagedKnowledgeBaseConfiguration:
                 self.server_side_encryption_configuration,
             )
 
+        if self.supplemental_data_storage_configuration is not None:
+            serializer.write_struct(
+                _SCHEMA_MANAGED_KNOWLEDGE_BASE_CONFIGURATION.members[
+                    "supplementalDataStorageConfiguration"
+                ],
+                self.supplemental_data_storage_configuration,
+            )
+
     @classmethod
     def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
         return cls(**cls.deserialize_kwargs(deserializer))
@@ -28913,6 +31100,11 @@ class ManagedKnowledgeBaseConfiguration:
                         ServerSideEncryptionConfiguration.deserialize(de)
                     )
 
+                case 4:
+                    kwargs["supplemental_data_storage_configuration"] = (
+                        SupplementalDataStorageConfiguration.deserialize(de)
+                    )
+
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
 
@@ -28937,7 +31129,7 @@ class RedshiftProvisionedAuthConfiguration:
     authentication, you don't need to include another field.
     """
 
-    type: RedshiftProvisionedAuthType
+    type: str
     """The type of authentication to use."""
 
     database_user: str | None = None
@@ -29092,7 +31284,7 @@ class RedshiftServerlessAuthConfiguration:
     don't need to include another field.
     """
 
-    type: RedshiftServerlessAuthType
+    type: str
     """The type of authentication to use."""
 
     username_password_secret_arn: str | None = None
@@ -29236,7 +31428,7 @@ class RedshiftQueryEngineConfiguration:
     in the Amazon Bedrock User Guide.
     """
 
-    type: RedshiftQueryEngineType
+    type: str
     """The type of query engine."""
 
     serverless_configuration: RedshiftServerlessConfiguration | None = None
@@ -29408,7 +31600,7 @@ class QueryGenerationColumn:
     contents of the column.
     """
 
-    inclusion: IncludeExclude | None = None
+    inclusion: str | None = None
     """
     Specifies whether to include or exclude the column during query
     generation. If you specify `EXCLUDE`, the column will be ignored. If you
@@ -29506,7 +31698,7 @@ class QueryGenerationTable:
     contents of the table.
     """
 
-    inclusion: IncludeExclude | None = None
+    inclusion: str | None = None
     """
     Specifies whether to include or exclude the table during query
     generation. If you specify `EXCLUDE`, the table will be ignored. If you
@@ -29876,7 +32068,7 @@ class RedshiftQueryEngineStorageConfiguration:
     in the Amazon Bedrock User Guide.
     """
 
-    type: RedshiftQueryEngineStorageType
+    type: str
     """The data storage service to use."""
 
     aws_data_catalog_configuration: (
@@ -30080,7 +32272,7 @@ class SqlKnowledgeBaseConfiguration:
     in the Amazon Bedrock User Guide.
     """
 
-    type: QueryEngineType
+    type: str
     """The type of SQL database to connect to the knowledge base."""
 
     redshift_configuration: RedshiftConfiguration | None = None
@@ -30144,155 +32336,6 @@ class KnowledgeBaseType(UnknownEnumMixin, StrEnum):
     KENDRA = "KENDRA"
     SQL = "SQL"
     MANAGED = "MANAGED"
-
-
-class SupplementalDataStorageLocationType(UnknownEnumMixin, StrEnum):
-    S3 = "S3"
-
-
-@dataclass(kw_only=True)
-class SupplementalDataStorageLocation:
-    """
-    Contains information about a storage location for multimedia content
-    (images, audio, and video) extracted from multimodal documents in your
-    data source.
-    """
-
-    type: SupplementalDataStorageLocationType
-    """Specifies the storage service used for this location."""
-
-    s3_location: S3Location | None = None
-    """
-    Contains information about the Amazon S3 location for the extracted
-    multimedia content.
-    """
-
-    def serialize(self, serializer: ShapeSerializer):
-        serializer.write_struct(_SCHEMA_SUPPLEMENTAL_DATA_STORAGE_LOCATION, self)
-
-    def serialize_members(self, serializer: ShapeSerializer):
-        serializer.write_string(
-            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_LOCATION.members["type"], self.type
-        )
-        if self.s3_location is not None:
-            serializer.write_struct(
-                _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_LOCATION.members["s3Location"],
-                self.s3_location,
-            )
-
-    @classmethod
-    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
-        return cls(**cls.deserialize_kwargs(deserializer))
-
-    @classmethod
-    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
-        kwargs: dict[str, Any] = {}
-
-        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
-            match schema.expect_member_index():
-                case 0:
-                    kwargs["type"] = SupplementalDataStorageLocationType(
-                        de.read_string(
-                            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_LOCATION.members["type"]
-                        )
-                    )
-
-                case 1:
-                    kwargs["s3_location"] = S3Location.deserialize(de)
-
-                case _:
-                    logger.debug("Unexpected member schema: %s", schema)
-
-        deserializer.read_struct(
-            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_LOCATION, consumer=_consumer
-        )
-        if "type" not in kwargs:
-            kwargs["type"] = SupplementalDataStorageLocationType._corrected("")
-        return kwargs
-
-
-def _serialize_supplemental_data_storage_locations(
-    serializer: ShapeSerializer,
-    schema: Schema,
-    value: list[SupplementalDataStorageLocation],
-) -> None:
-    member_schema = schema.members["member"]
-    with serializer.begin_list(schema, len(value)) as ls:
-        for e in value:
-            ls.write_struct(member_schema, e)
-
-
-def _deserialize_supplemental_data_storage_locations(
-    deserializer: ShapeDeserializer, schema: Schema
-) -> list[SupplementalDataStorageLocation]:
-    result: list[SupplementalDataStorageLocation] = []
-
-    def _read_value(d: ShapeDeserializer):
-        if d.is_null():
-            d.read_null()
-
-        else:
-            result.append(SupplementalDataStorageLocation.deserialize(d))
-
-    deserializer.read_list(schema, _read_value)
-    return result
-
-
-@dataclass(kw_only=True)
-class SupplementalDataStorageConfiguration:
-    """
-    Specifies configurations for the storage location of multimedia content
-    (images, audio, and video) extracted from multimodal documents in your
-    data source. This content can be retrieved and returned to the end user
-    with timestamp references for audio and video segments.
-    """
-
-    storage_locations: list[SupplementalDataStorageLocation]
-    """
-    A list of objects specifying storage locations for multimedia content
-    (images, audio, and video) extracted from multimodal documents in your
-    data source.
-    """
-
-    def serialize(self, serializer: ShapeSerializer):
-        serializer.write_struct(_SCHEMA_SUPPLEMENTAL_DATA_STORAGE_CONFIGURATION, self)
-
-    def serialize_members(self, serializer: ShapeSerializer):
-        _serialize_supplemental_data_storage_locations(
-            serializer,
-            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_CONFIGURATION.members["storageLocations"],
-            self.storage_locations,
-        )
-
-    @classmethod
-    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
-        return cls(**cls.deserialize_kwargs(deserializer))
-
-    @classmethod
-    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
-        kwargs: dict[str, Any] = {}
-
-        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
-            match schema.expect_member_index():
-                case 0:
-                    kwargs["storage_locations"] = (
-                        _deserialize_supplemental_data_storage_locations(
-                            de,
-                            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_CONFIGURATION.members[
-                                "storageLocations"
-                            ],
-                        )
-                    )
-
-                case _:
-                    logger.debug("Unexpected member schema: %s", schema)
-
-        deserializer.read_struct(
-            _SCHEMA_SUPPLEMENTAL_DATA_STORAGE_CONFIGURATION, consumer=_consumer
-        )
-        if "storage_locations" not in kwargs:
-            kwargs["storage_locations"] = []
-        return kwargs
 
 
 @dataclass(kw_only=True)
@@ -30394,7 +32437,7 @@ class KnowledgeBaseConfiguration:
     knowledge base.
     """
 
-    type: KnowledgeBaseType
+    type: str
     """
     The type of data that the data source is converted into for the
     knowledge base. Choose `MANAGED` to create a managed knowledge base.
@@ -30409,7 +32452,11 @@ class KnowledgeBaseConfiguration:
     managed_knowledge_base_configuration: ManagedKnowledgeBaseConfiguration | None = (
         None
     )
-    """Configurations for a managed knowledge base."""
+    """
+    Contains configuration details for a knowledge base that uses a vector
+    store fully managed by Amazon Bedrock. Specify this object when the
+    knowledge base type is MANAGED.
+    """
 
     kendra_knowledge_base_configuration: KendraKnowledgeBaseConfiguration | None = None
     """Settings for an Amazon Kendra knowledge base."""
@@ -31913,7 +33960,7 @@ class KnowledgeBaseStorageType(UnknownEnumMixin, StrEnum):
 class StorageConfiguration:
     """Contains the storage configuration of the knowledge base."""
 
-    type: KnowledgeBaseStorageType
+    type: str
     """The vector store service in which the knowledge base is stored."""
 
     opensearch_serverless_configuration: OpenSearchServerlessConfiguration | None = None
@@ -32271,7 +34318,7 @@ class KnowledgeBase:
     base.
     """
 
-    status: KnowledgeBaseStatus
+    status: str
     """
     The status of the knowledge base. The following statuses are possible:
 
@@ -32454,6 +34501,16 @@ class CreateKnowledgeBaseOutput:
     knowledge_base: KnowledgeBase
     """Contains details about the knowledge base."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_KNOWLEDGE_BASE_OUTPUT, self)
 
@@ -32573,10 +34630,20 @@ class DeleteKnowledgeBaseOutput:
     knowledge_base_id: str
     """The unique identifier of the knowledge base that was deleted."""
 
-    status: KnowledgeBaseStatus
+    status: str
     """
     The status of the knowledge base and whether it has been successfully
     deleted.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -32748,6 +34815,16 @@ class DisassociateAgentKnowledgeBaseInput:
 class DisassociateAgentKnowledgeBaseOutput:
     """Dataclass for DisassociateAgentKnowledgeBaseOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DISASSOCIATE_AGENT_KNOWLEDGE_BASE_OUTPUT, self)
 
@@ -32891,6 +34968,16 @@ class GetAgentKnowledgeBaseOutput:
     agent_knowledge_base: AgentKnowledgeBase
     """Contains details about a knowledge base attached to an agent."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_AGENT_KNOWLEDGE_BASE_OUTPUT, self)
 
@@ -33008,6 +35095,16 @@ class GetKnowledgeBaseOutput:
 
     knowledge_base: KnowledgeBase
     """Contains details about the knowledge base."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_KNOWLEDGE_BASE_OUTPUT, self)
@@ -33191,6 +35288,16 @@ class ListAgentKnowledgeBasesOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_AGENT_KNOWLEDGE_BASES_OUTPUT, self)
 
@@ -33351,7 +35458,7 @@ class KnowledgeBaseSummary:
     name: str
     """The name of the knowledge base."""
 
-    status: KnowledgeBaseStatus
+    status: str
     """The status of the knowledge base."""
 
     updated_at: datetime
@@ -33472,6 +35579,16 @@ class ListKnowledgeBasesOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_KNOWLEDGE_BASES_OUTPUT, self)
 
@@ -33583,7 +35700,7 @@ class UpdateAgentKnowledgeBaseInput:
     agent.
     """
 
-    knowledge_base_state: KnowledgeBaseState | None = None
+    knowledge_base_state: str | None = None
     """
     Specifies whether the agent uses the knowledge base or not when sending
     an
@@ -33685,6 +35802,16 @@ class UpdateAgentKnowledgeBaseOutput:
     """
     Contains details about the knowledge base that has been associated with
     an agent.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -33887,6 +36014,16 @@ class UpdateKnowledgeBaseOutput:
     knowledge_base: KnowledgeBase
     """Contains details about the knowledge base."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_KNOWLEDGE_BASE_OUTPUT, self)
 
@@ -33950,6 +36087,456 @@ UPDATE_KNOWLEDGE_BASE = APIOperation(
     error_schemas=[
         _SCHEMA_ACCESS_DENIED_EXCEPTION,
         _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+        _SCHEMA_THROTTLING_EXCEPTION,
+        _SCHEMA_VALIDATION_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class ListVpcConfigurationsInput:
+    """Dataclass for ListVpcConfigurationsInput structure."""
+
+    knowledge_base_id: str | None = None
+    """
+    The unique identifier of the knowledge base whose VPC configurations you
+    want to list.
+    """
+
+    status_filter: str | None = None
+    """
+    The status to filter the results by. Only VPC configurations with the
+    specified status are returned.
+    """
+
+    max_results: int | None = None
+    """
+    The maximum number of results to return in the response. If more results
+    are available, the response returns a `nextToken`.
+    """
+
+    next_token: str | None = None
+    """
+    A pagination token to retrieve the next page of results, returned in a
+    previous response when more results are available.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.knowledge_base_id is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT.members["knowledgeBaseId"],
+                self.knowledge_base_id,
+            )
+
+        if self.status_filter is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT.members["statusFilter"],
+                self.status_filter,
+            )
+
+        if self.max_results is not None:
+            serializer.write_integer(
+                _SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT.members["maxResults"],
+                self.max_results,
+            )
+
+        if self.next_token is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT.members["nextToken"],
+                self.next_token,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["knowledge_base_id"] = de.read_string(
+                        _SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT.members["knowledgeBaseId"]
+                    )
+
+                case 1:
+                    kwargs["status_filter"] = VpcConfigurationStatus(
+                        de.read_string(
+                            _SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT.members[
+                                "statusFilter"
+                            ]
+                        )
+                    )
+
+                case 2:
+                    kwargs["max_results"] = de.read_integer(
+                        _SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT.members["maxResults"]
+                    )
+
+                case 3:
+                    kwargs["next_token"] = de.read_string(
+                        _SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT.members["nextToken"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class VpcConfigurationSummary:
+    """A summary of a VPC configuration returned by `ListVpcConfigurations`."""
+
+    vpc_configuration_id: str
+    """The unique identifier of the VPC configuration."""
+
+    status: str
+    """The current lifecycle status of the VPC configuration."""
+
+    vpc_id: str
+    """
+    The identifier of the VPC that the knowledge base connects through to
+    reach the resource.
+    """
+
+    resource_target: str
+    """The private IPv4 address or DNS name of the resource."""
+
+    port: int
+    """The port on which the resource is reached."""
+
+    protocol: str
+    """The protocol used to connect to the resource."""
+
+    resolution_mode: str
+    """Specifies how the resource target is resolved."""
+
+    created_at: datetime
+    """The time at which the VPC configuration was created."""
+
+    status_message: str | None = None
+    """
+    Additional detail about the current status, such as the cause of a
+    failure.
+    """
+
+    host_header: str | None = None
+    """
+    The HTTP `Host` header value sent when invoking the resource, if
+    configured.
+    """
+
+    tls_server_name: str | None = None
+    """
+    The expected TLS server name that the service matches against the
+    Subject Alternative Names on the resource's TLS certificate. Present
+    when `protocol` is `HTTPS`.
+    """
+
+    name: str | None = None
+    """The human-readable name of the VPC configuration, if provided."""
+
+    description: str | None = None
+    """The description of the VPC configuration, if provided."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_VPC_CONFIGURATION_SUMMARY, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        serializer.write_string(
+            _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["vpcConfigurationId"],
+            self.vpc_configuration_id,
+        )
+        serializer.write_string(
+            _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["status"], self.status
+        )
+        if self.status_message is not None:
+            serializer.write_string(
+                _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["statusMessage"],
+                self.status_message,
+            )
+
+        serializer.write_string(
+            _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["vpcId"], self.vpc_id
+        )
+        serializer.write_string(
+            _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["resourceTarget"],
+            self.resource_target,
+        )
+        serializer.write_integer(
+            _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["port"], self.port
+        )
+        serializer.write_string(
+            _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["protocol"], self.protocol
+        )
+        serializer.write_string(
+            _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["resolutionMode"],
+            self.resolution_mode,
+        )
+        if self.host_header is not None:
+            serializer.write_string(
+                _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["hostHeader"],
+                self.host_header,
+            )
+
+        if self.tls_server_name is not None:
+            serializer.write_string(
+                _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["tlsServerName"],
+                self.tls_server_name,
+            )
+
+        if self.name is not None:
+            serializer.write_string(
+                _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["name"], self.name
+            )
+
+        if self.description is not None:
+            serializer.write_string(
+                _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["description"],
+                self.description,
+            )
+
+        serializer.write_timestamp(
+            _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["createdAt"], self.created_at
+        )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["vpc_configuration_id"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["vpcConfigurationId"]
+                    )
+
+                case 1:
+                    kwargs["status"] = VpcConfigurationStatus(
+                        de.read_string(
+                            _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["status"]
+                        )
+                    )
+
+                case 2:
+                    kwargs["status_message"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["statusMessage"]
+                    )
+
+                case 3:
+                    kwargs["vpc_id"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["vpcId"]
+                    )
+
+                case 4:
+                    kwargs["resource_target"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["resourceTarget"]
+                    )
+
+                case 5:
+                    kwargs["port"] = de.read_integer(
+                        _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["port"]
+                    )
+
+                case 6:
+                    kwargs["protocol"] = VpcProtocol(
+                        de.read_string(
+                            _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["protocol"]
+                        )
+                    )
+
+                case 7:
+                    kwargs["resolution_mode"] = VpcResolutionMode(
+                        de.read_string(
+                            _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["resolutionMode"]
+                        )
+                    )
+
+                case 8:
+                    kwargs["host_header"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["hostHeader"]
+                    )
+
+                case 9:
+                    kwargs["tls_server_name"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["tlsServerName"]
+                    )
+
+                case 10:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["name"]
+                    )
+
+                case 11:
+                    kwargs["description"] = de.read_string(
+                        _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["description"]
+                    )
+
+                case 12:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_VPC_CONFIGURATION_SUMMARY.members["createdAt"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_VPC_CONFIGURATION_SUMMARY, consumer=_consumer)
+        if "vpc_configuration_id" not in kwargs:
+            kwargs["vpc_configuration_id"] = ""
+        if "status" not in kwargs:
+            kwargs["status"] = VpcConfigurationStatus._corrected("")
+        if "vpc_id" not in kwargs:
+            kwargs["vpc_id"] = ""
+        if "resource_target" not in kwargs:
+            kwargs["resource_target"] = ""
+        if "port" not in kwargs:
+            kwargs["port"] = 0
+        if "protocol" not in kwargs:
+            kwargs["protocol"] = VpcProtocol._corrected("")
+        if "resolution_mode" not in kwargs:
+            kwargs["resolution_mode"] = VpcResolutionMode._corrected("")
+        if "created_at" not in kwargs:
+            kwargs["created_at"] = datetime.fromtimestamp(0, tz=timezone.utc)
+        return kwargs
+
+
+def _serialize_vpc_configuration_summary_list(
+    serializer: ShapeSerializer, schema: Schema, value: list[VpcConfigurationSummary]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_struct(member_schema, e)
+
+
+def _deserialize_vpc_configuration_summary_list(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[VpcConfigurationSummary]:
+    result: list[VpcConfigurationSummary] = []
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(VpcConfigurationSummary.deserialize(d))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
+class ListVpcConfigurationsOutput:
+    """Dataclass for ListVpcConfigurationsOutput structure."""
+
+    items: list[VpcConfigurationSummary]
+    """A list of VPC configuration summaries."""
+
+    next_token: str | None = None
+    """
+    A pagination token to retrieve the next page of results, present when
+    the total number of results exceeds the maximum number of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_LIST_VPC_CONFIGURATIONS_OUTPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        _serialize_vpc_configuration_summary_list(
+            serializer,
+            _SCHEMA_LIST_VPC_CONFIGURATIONS_OUTPUT.members["items"],
+            self.items,
+        )
+        if self.next_token is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_VPC_CONFIGURATIONS_OUTPUT.members["nextToken"],
+                self.next_token,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["items"] = _deserialize_vpc_configuration_summary_list(
+                        de, _SCHEMA_LIST_VPC_CONFIGURATIONS_OUTPUT.members["items"]
+                    )
+
+                case 1:
+                    kwargs["next_token"] = de.read_string(
+                        _SCHEMA_LIST_VPC_CONFIGURATIONS_OUTPUT.members["nextToken"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_LIST_VPC_CONFIGURATIONS_OUTPUT, consumer=_consumer
+        )
+        if "items" not in kwargs:
+            kwargs["items"] = []
+        return kwargs
+
+
+LIST_VPC_CONFIGURATIONS = APIOperation(
+    input=ListVpcConfigurationsInput,
+    output=ListVpcConfigurationsOutput,
+    schema=_SCHEMA_LIST_VPC_CONFIGURATIONS,
+    input_schema=_SCHEMA_LIST_VPC_CONFIGURATIONS_INPUT,
+    output_schema=_SCHEMA_LIST_VPC_CONFIGURATIONS_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.bedrockagent#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#InternalServerException"
+            ): InternalServerException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ThrottlingException"
+            ): ThrottlingException,
+            ShapeID(
+                "com.amazonaws.bedrockagent#ValidationException"
+            ): ValidationException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
         _SCHEMA_INTERNAL_SERVER_EXCEPTION,
         _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
         _SCHEMA_THROTTLING_EXCEPTION,
@@ -34174,7 +36761,7 @@ class PromptVariant:
     name: str
     """The name of the prompt variant."""
 
-    template_type: PromptTemplateType
+    template_type: str
     """The type of prompt template to use."""
 
     template_configuration: PromptTemplateConfiguration
@@ -34518,6 +37105,16 @@ class CreatePromptOutput:
     prompt.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_PROMPT_OUTPUT, self)
 
@@ -34821,6 +37418,16 @@ class CreatePromptVersionOutput:
     prompt.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_PROMPT_VERSION_OUTPUT, self)
 
@@ -35062,6 +37669,16 @@ class DeletePromptOutput:
     version: str | None = None
     """The version of the prompt that was deleted."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_PROMPT_OUTPUT, self)
 
@@ -35153,7 +37770,7 @@ class GetPromptInput:
     prompt.
     """
 
-    included_data: IncludedData | None = None
+    included_data: str | None = None
     """
     Controls the scope of data returned. Set to `METADATA_ONLY` to return
     only resource metadata. Set to `ALL_DATA` or omit this field to return
@@ -35258,6 +37875,16 @@ class GetPromptOutput:
     """
     A list of objects, each containing details about a variant of the
     prompt.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -35651,6 +38278,16 @@ class ListPromptsOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_PROMPTS_OUTPUT, self)
 
@@ -35889,6 +38526,16 @@ class UpdatePromptOutput:
     """
     A list of objects, each containing details about a variant of the
     prompt.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -36141,6 +38788,16 @@ class PutResourcePolicyOutput:
     `DeleteResourcePolicy` request.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_RESOURCE_POLICY_OUTPUT, self)
 
@@ -36268,6 +38925,16 @@ class ListTagsForResourceOutput:
 
     tags: dict[str, str] | None = None
     """The key-value pairs for the tags associated with the resource."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_TAGS_FOR_RESOURCE_OUTPUT, self)
@@ -36397,6 +39064,16 @@ class TagResourceInput:
 @dataclass(kw_only=True)
 class TagResourceOutput:
     """Dataclass for TagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TAG_RESOURCE_OUTPUT, self)
@@ -36547,6 +39224,16 @@ class UntagResourceInput:
 class UntagResourceOutput:
     """Dataclass for UntagResourceOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNTAG_RESOURCE_OUTPUT, self)
 
@@ -36614,6 +39301,16 @@ class ValidateFlowDefinitionOutput:
     """
     Contains an array of objects, each of which contains an error identified
     by validation.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -36735,8 +39432,18 @@ class DeleteAgentVersionOutput:
     agent_version: str
     """The version that was deleted."""
 
-    agent_status: AgentStatus
+    agent_status: str
     """The status of the agent version."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_AGENT_VERSION_OUTPUT, self)
@@ -36892,6 +39599,16 @@ class GetAgentVersionOutput:
 
     agent_version: AgentVersion
     """Contains details about the version of the agent."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_AGENT_VERSION_OUTPUT, self)
@@ -37050,6 +39767,16 @@ class ListAgentVersionsOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_AGENT_VERSIONS_OUTPUT, self)
 
@@ -37198,7 +39925,7 @@ class FlowNode:
     name: str
     """A name for the node."""
 
-    type: FlowNodeType
+    type: str
     """
     The type of node. This value must match the name of the key that you
     provide in the configuration you provide in the `FlowNodeConfiguration`
@@ -38011,7 +40738,7 @@ class CreateFlowOutput:
     arn: str
     """The Amazon Resource Name (ARN) of the flow."""
 
-    status: FlowStatus
+    status: str
     """
     The status of the flow. When you submit this request, the status will be
     `NotPrepared`. If creation fails, the status becomes `Failed`.
@@ -38040,6 +40767,16 @@ class CreateFlowOutput:
 
     definition: "FlowDefinition | None" = field(repr=False, default=None)
     """A definition of the nodes and connections between nodes in the flow."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_FLOW_OUTPUT, self)
@@ -38188,7 +40925,7 @@ class CreateFlowVersionOutput:
     arn: str
     """The Amazon Resource Name (ARN) of the flow."""
 
-    status: FlowStatus
+    status: str
     """The status of the flow."""
 
     created_at: datetime
@@ -38208,6 +40945,16 @@ class CreateFlowVersionOutput:
 
     definition: "FlowDefinition | None" = field(repr=False, default=None)
     """A definition of the nodes and connections in the flow."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_FLOW_VERSION_OUTPUT, self)
@@ -38357,7 +41104,7 @@ class GetFlowOutput:
     arn: str
     """The Amazon Resource Name (ARN) of the flow."""
 
-    status: FlowStatus
+    status: str
     """
     The status of the flow. The following statuses are possible:
 
@@ -38408,6 +41155,16 @@ class GetFlowOutput:
     """
     A list of validation error messages related to the last failed operation
     on the flow.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -38564,7 +41321,7 @@ class GetFlowVersionOutput:
     arn: str
     """The Amazon Resource Name (ARN) of the flow."""
 
-    status: FlowStatus
+    status: str
     """The status of the flow."""
 
     created_at: datetime
@@ -38584,6 +41341,16 @@ class GetFlowVersionOutput:
 
     definition: "FlowDefinition | None" = field(repr=False, default=None)
     """The definition of the nodes and connections between nodes in the flow."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_FLOW_VERSION_OUTPUT, self)
@@ -38843,7 +41610,7 @@ class UpdateFlowOutput:
     arn: str
     """The Amazon Resource Name (ARN) of the flow."""
 
-    status: FlowStatus
+    status: str
     """
     The status of the flow. When you submit this request, the status will be
     `NotPrepared`. If updating fails, the status becomes `Failed`.
@@ -38872,6 +41639,16 @@ class UpdateFlowOutput:
 
     definition: "FlowDefinition | None" = field(repr=False, default=None)
     """A definition of the nodes and the connections between nodes in the flow."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_FLOW_OUTPUT, self)

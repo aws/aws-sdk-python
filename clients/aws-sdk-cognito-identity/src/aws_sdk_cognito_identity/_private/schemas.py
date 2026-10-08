@@ -14,49 +14,22 @@ ACCESS_KEY_STRING = Schema(
 )
 
 ACCOUNT_ID = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#AccountId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 15}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\d+$"),
-    ],
+    id=ShapeID("com.amazonaws.cognitoidentity#AccountId"), shape_type=ShapeType.STRING
 )
 
 AMBIGUOUS_ROLE_RESOLUTION_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#AmbiguousRoleResolutionType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "AUTHENTICATED_ROLE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AuthenticatedRole")
-            ],
-        },
-        "DENY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Deny")],
-        },
-    },
+    members={"AUTHENTICATED_ROLE": {"target": UNIT}, "DENY": {"target": UNIT}},
 )
 
 ARN_STRING = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#ARNString"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 20, "max": 2048}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.cognitoidentity#ARNString"), shape_type=ShapeType.STRING
 )
 
 CLASSIC_FLOW = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#ClassicFlow"),
     shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 IDENTITY_POOL_UNAUTHENTICATED = Schema(
@@ -68,25 +41,11 @@ IDENTITY_POOL_UNAUTHENTICATED = Schema(
 COGNITO_IDENTITY_PROVIDER_CLIENT_ID = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#CognitoIdentityProviderClientId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w_]+$"),
-    ],
 )
 
 COGNITO_IDENTITY_PROVIDER_NAME = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#CognitoIdentityProviderName"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w._:/-]+$"),
-    ],
 )
 
 COGNITO_IDENTITY_PROVIDER_TOKEN_CHECK = Schema(
@@ -102,10 +61,7 @@ COGNITO_IDENTITY_PROVIDER = Schema.collection(
         "ClientId": {"target": COGNITO_IDENTITY_PROVIDER_CLIENT_ID},
         "ServerSideTokenCheck": {
             "target": COGNITO_IDENTITY_PROVIDER_TOKEN_CHECK,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
     },
 )
@@ -119,47 +75,20 @@ COGNITO_IDENTITY_PROVIDER_LIST = Schema.collection(
 DEVELOPER_PROVIDER_NAME = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#DeveloperProviderName"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w._-]+$"),
-    ],
 )
 
 IDENTITY_POOL_NAME = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#IdentityPoolName"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w\\s+=,.@-]+$"),
-    ],
 )
 
 TAG_KEYS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#TagKeysType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.cognitoidentity#TagKeysType"), shape_type=ShapeType.STRING
 )
 
 TAG_VALUE_TYPE = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#TagValueType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        )
-    ],
 )
 
 IDENTITY_POOL_TAGS_TYPE = Schema.collection(
@@ -183,35 +112,16 @@ SAML_PROVIDER_LIST = Schema.collection(
 IDENTITY_PROVIDER_NAME = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#IdentityProviderName"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        )
-    ],
 )
 
 IDENTITY_PROVIDER_ID = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#IdentityProviderId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w.;_/-]+$"),
-    ],
 )
 
 IDENTITY_PROVIDERS = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#IdentityProviders"),
     shape_type=ShapeType.MAP,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 10}),
-        )
-    ],
     members={
         "key": {"target": IDENTITY_PROVIDER_NAME},
         "value": {"target": IDENTITY_PROVIDER_ID},
@@ -220,7 +130,6 @@ IDENTITY_PROVIDERS = Schema.collection(
 
 CREATE_IDENTITY_POOL_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#CreateIdentityPoolInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityPoolName": {
             "target": IDENTITY_POOL_NAME,
@@ -246,13 +155,6 @@ CREATE_IDENTITY_POOL_INPUT = Schema.collection(
 IDENTITY_POOL_ID = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#IdentityPoolId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 55}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w-]+:[0-9a-f-]+$"),
-    ],
 )
 
 CREATE_IDENTITY_POOL_OUTPUT = Schema.collection(
@@ -261,8 +163,7 @@ CREATE_IDENTITY_POOL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#IdentityPool",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IdentityPoolId": {
@@ -351,32 +252,17 @@ CREATE_IDENTITY_POOL = Schema(
 )
 
 IDENTITY_ID = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 55}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w-]+:[0-9a-f-]+$"),
-    ],
+    id=ShapeID("com.amazonaws.cognitoidentity#IdentityId"), shape_type=ShapeType.STRING
 )
 
 IDENTITY_ID_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#IdentityIdList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 60}),
-        )
-    ],
     members={"member": {"target": IDENTITY_ID}},
 )
 
 DELETE_IDENTITIES_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#DeleteIdentitiesInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityIdsToDelete": {
             "target": IDENTITY_ID_LIST,
@@ -389,20 +275,8 @@ ERROR_CODE = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#ErrorCode"),
     shape_type=ShapeType.ENUM,
     members={
-        "ACCESS_DENIED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AccessDenied")
-            ],
-        },
-        "INTERNAL_SERVER_ERROR": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="InternalServerError"
-                )
-            ],
-        },
+        "ACCESS_DENIED": {"target": UNIT},
+        "INTERNAL_SERVER_ERROR": {"target": UNIT},
     },
 )
 
@@ -417,12 +291,6 @@ UNPROCESSED_IDENTITY_ID = Schema.collection(
 UNPROCESSED_IDENTITY_ID_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#UnprocessedIdentityIdList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 60}),
-        )
-    ],
     members={"member": {"target": UNPROCESSED_IDENTITY_ID}},
 )
 
@@ -432,8 +300,7 @@ DELETE_IDENTITIES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#DeleteIdentitiesResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"UnprocessedIdentityIds": {"target": UNPROCESSED_IDENTITY_ID_LIST}},
 )
@@ -445,7 +312,6 @@ DELETE_IDENTITIES = Schema(
 
 DELETE_IDENTITY_POOL_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#DeleteIdentityPoolInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityPoolId": {
             "target": IDENTITY_POOL_ID,
@@ -459,8 +325,7 @@ DELETE_IDENTITY_POOL_OUTPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -480,7 +345,6 @@ DELETE_IDENTITY_POOL = Schema(
 
 DESCRIBE_IDENTITY_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#DescribeIdentityInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityId": {
             "target": IDENTITY_ID,
@@ -505,8 +369,7 @@ DESCRIBE_IDENTITY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#IdentityDescription",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IdentityId": {"target": IDENTITY_ID},
@@ -523,7 +386,6 @@ DESCRIBE_IDENTITY = Schema(
 
 DESCRIBE_IDENTITY_POOL_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#DescribeIdentityPoolInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityPoolId": {
             "target": IDENTITY_POOL_ID,
@@ -538,8 +400,7 @@ DESCRIBE_IDENTITY_POOL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#IdentityPool",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IdentityPoolId": {
@@ -584,24 +445,12 @@ EXTERNAL_SERVICE_EXCEPTION = Schema.collection(
 IDENTITY_PROVIDER_TOKEN = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#IdentityProviderToken"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 50000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 LOGINS_MAP = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#LoginsMap"),
     shape_type=ShapeType.MAP,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 10}),
-        )
-    ],
     members={
         "key": {"target": IDENTITY_PROVIDER_NAME},
         "value": {"target": IDENTITY_PROVIDER_TOKEN},
@@ -610,7 +459,6 @@ LOGINS_MAP = Schema.collection(
 
 GET_CREDENTIALS_FOR_IDENTITY_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#GetCredentialsForIdentityInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityId": {
             "target": IDENTITY_ID,
@@ -648,8 +496,7 @@ GET_CREDENTIALS_FOR_IDENTITY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#GetCredentialsForIdentityResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IdentityId": {"target": IDENTITY_ID},
@@ -671,15 +518,10 @@ INVALID_IDENTITY_POOL_CONFIGURATION_EXCEPTION = Schema.collection(
 GET_CREDENTIALS_FOR_IDENTITY = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#GetCredentialsForIdentity"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#optionalAuth")),
-        Trait.new(id=ShapeID("smithy.api#auth"), value=()),
-    ],
 )
 
 GET_ID_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#GetIdInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "AccountId": {"target": ACCOUNT_ID},
         "IdentityPoolId": {
@@ -696,24 +538,17 @@ GET_ID_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#GetIdResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"IdentityId": {"target": IDENTITY_ID}},
 )
 
 GET_ID = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetId"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#optionalAuth")),
-        Trait.new(id=ShapeID("smithy.api#auth"), value=()),
-    ],
+    id=ShapeID("com.amazonaws.cognitoidentity#GetId"), shape_type=ShapeType.OPERATION
 )
 
 GET_IDENTITY_POOL_ROLES_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#GetIdentityPoolRolesInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityPoolId": {
             "target": IDENTITY_POOL_ID,
@@ -723,54 +558,22 @@ GET_IDENTITY_POOL_ROLES_INPUT = Schema.collection(
 )
 
 CLAIM_NAME = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#ClaimName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 64}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cognitoidentity#ClaimName"), shape_type=ShapeType.STRING
 )
 
 MAPPING_RULE_MATCH_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#MappingRuleMatchType"),
     shape_type=ShapeType.ENUM,
     members={
-        "EQUALS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Equals")],
-        },
-        "CONTAINS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Contains")],
-        },
-        "STARTS_WITH": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="StartsWith")
-            ],
-        },
-        "NOT_EQUAL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="NotEqual")],
-        },
+        "EQUALS": {"target": UNIT},
+        "CONTAINS": {"target": UNIT},
+        "STARTS_WITH": {"target": UNIT},
+        "NOT_EQUAL": {"target": UNIT},
     },
 )
 
 CLAIM_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#ClaimValue"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.cognitoidentity#ClaimValue"), shape_type=ShapeType.STRING
 )
 
 MAPPING_RULE = Schema.collection(
@@ -798,12 +601,6 @@ MAPPING_RULE = Schema.collection(
 MAPPING_RULES_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#MappingRulesList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 400}),
-        )
-    ],
     members={"member": {"target": MAPPING_RULE}},
 )
 
@@ -820,16 +617,7 @@ RULES_CONFIGURATION_TYPE = Schema.collection(
 ROLE_MAPPING_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#RoleMappingType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "TOKEN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Token")],
-        },
-        "RULES": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Rules")],
-        },
-    },
+    members={"TOKEN": {"target": UNIT}, "RULES": {"target": UNIT}},
 )
 
 ROLE_MAPPING = Schema.collection(
@@ -847,12 +635,6 @@ ROLE_MAPPING = Schema.collection(
 ROLE_MAPPING_MAP = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#RoleMappingMap"),
     shape_type=ShapeType.MAP,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 10}),
-        )
-    ],
     members={
         "key": {"target": IDENTITY_PROVIDER_NAME},
         "value": {"target": ROLE_MAPPING},
@@ -860,26 +642,12 @@ ROLE_MAPPING_MAP = Schema.collection(
 )
 
 ROLE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#RoleType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^(un)?authenticated$"),
-    ],
+    id=ShapeID("com.amazonaws.cognitoidentity#RoleType"), shape_type=ShapeType.STRING
 )
 
 ROLES_MAP = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#RolesMap"),
     shape_type=ShapeType.MAP,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 2}),
-        )
-    ],
     members={"key": {"target": ROLE_TYPE}, "value": {"target": ARN_STRING}},
 )
 
@@ -889,8 +657,7 @@ GET_IDENTITY_POOL_ROLES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#GetIdentityPoolRolesResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IdentityPoolId": {"target": IDENTITY_POOL_ID},
@@ -906,7 +673,6 @@ GET_IDENTITY_POOL_ROLES = Schema(
 
 GET_OPEN_ID_TOKEN_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#GetOpenIdTokenInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityId": {
             "target": IDENTITY_ID,
@@ -928,8 +694,7 @@ GET_OPEN_ID_TOKEN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#GetOpenIdTokenResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"IdentityId": {"target": IDENTITY_ID}, "Token": {"target": OIDC_TOKEN}},
 )
@@ -937,10 +702,6 @@ GET_OPEN_ID_TOKEN_OUTPUT = Schema.collection(
 GET_OPEN_ID_TOKEN = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#GetOpenIdToken"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#optionalAuth")),
-        Trait.new(id=ShapeID("smithy.api#auth"), value=()),
-    ],
 )
 
 DEVELOPER_USER_ALREADY_REGISTERED_EXCEPTION = Schema.collection(
@@ -955,34 +716,16 @@ DEVELOPER_USER_ALREADY_REGISTERED_EXCEPTION = Schema.collection(
 PRINCIPAL_TAG_ID = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#PrincipalTagID"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        )
-    ],
 )
 
 PRINCIPAL_TAG_VALUE = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#PrincipalTagValue"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        )
-    ],
 )
 
 PRINCIPAL_TAGS = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#PrincipalTags"),
     shape_type=ShapeType.MAP,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={
         "key": {"target": PRINCIPAL_TAG_ID},
         "value": {"target": PRINCIPAL_TAG_VALUE},
@@ -990,20 +733,11 @@ PRINCIPAL_TAGS = Schema.collection(
 )
 
 TOKEN_DURATION = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#TokenDuration"),
-    shape_type=ShapeType.LONG,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 86400}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cognitoidentity#TokenDuration"), shape_type=ShapeType.LONG
 )
 
 GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentityInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityPoolId": {
             "target": IDENTITY_POOL_ID,
@@ -1027,8 +761,7 @@ GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentityResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"IdentityId": {"target": IDENTITY_ID}, "Token": {"target": OIDC_TOKEN}},
 )
@@ -1040,7 +773,6 @@ GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY = Schema(
 
 GET_PRINCIPAL_TAG_ATTRIBUTE_MAP_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMapInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityPoolId": {
             "target": IDENTITY_POOL_ID,
@@ -1056,7 +788,6 @@ GET_PRINCIPAL_TAG_ATTRIBUTE_MAP_INPUT = Schema.collection(
 USE_DEFAULTS = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#UseDefaults"),
     shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 GET_PRINCIPAL_TAG_ATTRIBUTE_MAP_OUTPUT = Schema.collection(
@@ -1065,8 +796,7 @@ GET_PRINCIPAL_TAG_ATTRIBUTE_MAP_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMapResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IdentityPoolId": {"target": IDENTITY_POOL_ID},
@@ -1088,32 +818,16 @@ HIDE_DISABLED = Schema(
 )
 
 QUERY_LIMIT = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#QueryLimit"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 60}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cognitoidentity#QueryLimit"), shape_type=ShapeType.INTEGER
 )
 
 PAGINATION_KEY = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#PaginationKey"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 65535}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\S]+$"),
-    ],
 )
 
 LIST_IDENTITIES_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#ListIdentitiesInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityPoolId": {
             "target": IDENTITY_POOL_ID,
@@ -1153,8 +867,7 @@ LIST_IDENTITIES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#ListIdentitiesResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IdentityPoolId": {"target": IDENTITY_POOL_ID},
@@ -1170,7 +883,6 @@ LIST_IDENTITIES = Schema(
 
 LIST_IDENTITY_POOLS_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#ListIdentityPoolsInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "MaxResults": {
             "target": QUERY_LIMIT,
@@ -1200,8 +912,7 @@ LIST_IDENTITY_POOLS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#ListIdentityPoolsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IdentityPools": {"target": IDENTITY_POOLS_LIST},
@@ -1212,38 +923,10 @@ LIST_IDENTITY_POOLS_OUTPUT = Schema.collection(
 LIST_IDENTITY_POOLS = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#ListIdentityPools"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.test#smokeTests"),
-            value=(
-                MappingProxyType(
-                    {
-                        "id": "ListIdentityPoolsSuccess",
-                        "params": MappingProxyType({"MaxResults": 10}),
-                        "vendorParams": MappingProxyType({"region": "us-west-2"}),
-                        "vendorParamsShape": "aws.test#AwsVendorParams",
-                        "expect": MappingProxyType({"success": MappingProxyType({})}),
-                    }
-                ),
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "IdentityPools",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-    ],
 )
 
 LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#ListTagsForResourceInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "ResourceArn": {
             "target": ARN_STRING,
@@ -1258,8 +941,7 @@ LIST_TAGS_FOR_RESOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#ListTagsForResourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"Tags": {"target": IDENTITY_POOL_TAGS_TYPE}},
 )
@@ -1272,17 +954,10 @@ LIST_TAGS_FOR_RESOURCE = Schema(
 DEVELOPER_USER_IDENTIFIER = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#DeveloperUserIdentifier"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1024}),
-        )
-    ],
 )
 
 LOOKUP_DEVELOPER_IDENTITY_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#LookupDeveloperIdentityInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityPoolId": {
             "target": IDENTITY_POOL_ID,
@@ -1307,8 +982,7 @@ LOOKUP_DEVELOPER_IDENTITY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#LookupDeveloperIdentityResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IdentityId": {"target": IDENTITY_ID},
@@ -1324,7 +998,6 @@ LOOKUP_DEVELOPER_IDENTITY = Schema(
 
 MERGE_DEVELOPER_IDENTITIES_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#MergeDeveloperIdentitiesInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "SourceUserIdentifier": {
             "target": DEVELOPER_USER_IDENTIFIER,
@@ -1351,8 +1024,7 @@ MERGE_DEVELOPER_IDENTITIES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#MergeDeveloperIdentitiesResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"IdentityId": {"target": IDENTITY_ID}},
 )
@@ -1373,7 +1045,6 @@ CONCURRENT_MODIFICATION_EXCEPTION = Schema.collection(
 
 SET_IDENTITY_POOL_ROLES_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#SetIdentityPoolRolesInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityPoolId": {
             "target": IDENTITY_POOL_ID,
@@ -1392,8 +1063,7 @@ SET_IDENTITY_POOL_ROLES_OUTPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -1404,7 +1074,6 @@ SET_IDENTITY_POOL_ROLES = Schema(
 
 SET_PRINCIPAL_TAG_ATTRIBUTE_MAP_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMapInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityPoolId": {
             "target": IDENTITY_POOL_ID,
@@ -1425,8 +1094,7 @@ SET_PRINCIPAL_TAG_ATTRIBUTE_MAP_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMapResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IdentityPoolId": {"target": IDENTITY_POOL_ID},
@@ -1443,7 +1111,6 @@ SET_PRINCIPAL_TAG_ATTRIBUTE_MAP = Schema(
 
 TAG_RESOURCE_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#TagResourceInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "ResourceArn": {
             "target": ARN_STRING,
@@ -1462,8 +1129,7 @@ TAG_RESOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#TagResourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -1474,7 +1140,6 @@ TAG_RESOURCE = Schema(
 
 UNLINK_DEVELOPER_IDENTITY_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#UnlinkDeveloperIdentityInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityId": {
             "target": IDENTITY_ID,
@@ -1500,8 +1165,7 @@ UNLINK_DEVELOPER_IDENTITY_OUTPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -1512,7 +1176,6 @@ UNLINK_DEVELOPER_IDENTITY = Schema(
 
 UNLINK_IDENTITY_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#UnlinkIdentityInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "IdentityId": {
             "target": IDENTITY_ID,
@@ -1534,18 +1197,13 @@ UNLINK_IDENTITY_OUTPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
 UNLINK_IDENTITY = Schema(
     id=ShapeID("com.amazonaws.cognitoidentity#UnlinkIdentity"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#optionalAuth")),
-        Trait.new(id=ShapeID("smithy.api#auth"), value=()),
-    ],
 )
 
 IDENTITY_POOL_TAGS_LIST_TYPE = Schema.collection(
@@ -1556,7 +1214,6 @@ IDENTITY_POOL_TAGS_LIST_TYPE = Schema.collection(
 
 UNTAG_RESOURCE_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cognitoidentity#UntagResourceInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "ResourceArn": {
             "target": ARN_STRING,
@@ -1575,8 +1232,7 @@ UNTAG_RESOURCE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#UntagResourceResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -1591,8 +1247,7 @@ UPDATE_IDENTITY_POOL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#IdentityPool",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "IdentityPoolId": {
@@ -1626,8 +1281,7 @@ UPDATE_IDENTITY_POOL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cognitoidentity#IdentityPool",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IdentityPoolId": {
@@ -1668,1335 +1322,7 @@ AWS_COGNITO_IDENTITY_SERVICE = Schema(
             id=ShapeID("aws.auth#sigv4"),
             value=MappingProxyType({"name": "cognito-identity"}),
         ),
-        Trait.new(id=ShapeID("smithy.api#title"), value="Amazon Cognito Identity"),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointTests"),
-            value=MappingProxyType(
-                {
-                    "testCases": (
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity-fips.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cognito-identity.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "Missing region",
-                                "expect": MappingProxyType(
-                                    {"error": "Invalid Configuration: Missing Region"}
-                                ),
-                            }
-                        ),
-                    ),
-                    "version": "1.0",
-                }
-            ),
-        ),
         Trait.new(id=ShapeID("aws.protocols#awsJson1_1")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointRuleSet"),
-            value=MappingProxyType(
-                {
-                    "version": "1.0",
-                    "parameters": MappingProxyType(
-                        {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                        }
-                    ),
-                    "rules": (
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Endpoint"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseFIPS"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseDualStack"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": MappingProxyType(
-                                                        {"ref": "Endpoint"}
-                                                    ),
-                                                    "properties": MappingProxyType({}),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Region"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "aws.partition",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                        ),
-                                                        "assign": "PartitionResult",
-                                                    }
-                                                ),
-                                            ),
-                                            "rules": (
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "Region"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "us-east-1",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cognito-identity-fips.us-east-1.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "Region"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "us-east-2",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cognito-identity-fips.us-east-2.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "Region"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "us-west-1",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cognito-identity-fips.us-west-1.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "Region"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "us-west-2",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cognito-identity-fips.us-west-2.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cognito-identity-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cognito-identity-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                "aws",
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "name",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cognito-identity.{Region}.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cognito-identity.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (),
-                                                        "endpoint": MappingProxyType(
-                                                            {
-                                                                "url": "https://cognito-identity.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                                "headers": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                            }
-                                                        ),
-                                                        "type": "endpoint",
-                                                    }
-                                                ),
-                                            ),
-                                            "type": "tree",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
-                    ),
-                }
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.rules#endpointBdd"),
             value=MappingProxyType(

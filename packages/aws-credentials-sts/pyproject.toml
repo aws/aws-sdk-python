@@ -5,7 +5,7 @@ requires-python = ">=3.12"
 authors = [
   {name = "Amazon Web Services"},
 ]
-description = "STS-based credentials support for the AWS SDK for Python."
+description = "STS-based credentials support for the AWS SDK for Python v4."
 readme = "README.md"
 license = {text = "Apache License 2.0"}
 keywords = ["aws", "credentials", "sts", "sdk", "smithy"]
@@ -27,10 +27,10 @@ classifiers = [
   "Topic :: Software Development :: Libraries",
 ]
 dependencies = [
-  "aws-sdk-sts~=0.11.0",
-  "smithy-aws-core~=0.11.0",
-  "smithy-core~=0.8.0",
-  "smithy-http~=0.5.0",
+  "aws-sdk-sts~=0.12.0",
+  "smithy-aws-core~=0.12.0",
+  "smithy-core~=0.9.0",
+  "smithy-http~=0.6.0",
 ]
 
 [project.urls]

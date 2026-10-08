@@ -9,6 +9,7 @@ from typing import Any, Literal, Self
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import TypeRegistry
 from smithy_core.exceptions import ModeledError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -31,6 +32,7 @@ from ._private.schemas import (
     ACCOUNT_LEVEL_PERMISSIONS as _SCHEMA_ACCOUNT_LEVEL_PERMISSIONS,
     ACCOUNT_STATISTICS as _SCHEMA_ACCOUNT_STATISTICS,
     ACTION as _SCHEMA_ACTION,
+    ACTIVITY as _SCHEMA_ACTIVITY,
     ACTOR as _SCHEMA_ACTOR,
     ACTOR_PROCESS as _SCHEMA_ACTOR_PROCESS,
     ADDITIONAL_INFO as _SCHEMA_ADDITIONAL_INFO,
@@ -41,15 +43,19 @@ from ._private.schemas import (
     ANOMALY as _SCHEMA_ANOMALY,
     ANOMALY_OBJECT as _SCHEMA_ANOMALY_OBJECT,
     ANOMALY_UNUSUAL as _SCHEMA_ANOMALY_UNUSUAL,
+    API_CALL as _SCHEMA_API_CALL,
     ARCHIVE_FINDINGS as _SCHEMA_ARCHIVE_FINDINGS,
     ARCHIVE_FINDINGS_INPUT as _SCHEMA_ARCHIVE_FINDINGS_INPUT,
     ARCHIVE_FINDINGS_OUTPUT as _SCHEMA_ARCHIVE_FINDINGS_OUTPUT,
+    ASSOCIATION_DETAIL as _SCHEMA_ASSOCIATION_DETAIL,
+    ASSOCIATION_SUMMARY as _SCHEMA_ASSOCIATION_SUMMARY,
     AUTONOMOUS_SYSTEM as _SCHEMA_AUTONOMOUS_SYSTEM,
     AUTOSCALING_AUTO_SCALING_GROUP as _SCHEMA_AUTOSCALING_AUTO_SCALING_GROUP,
     AWS_API_CALL_ACTION as _SCHEMA_AWS_API_CALL_ACTION,
     BAD_REQUEST_EXCEPTION as _SCHEMA_BAD_REQUEST_EXCEPTION,
     BEDROCK_GUARDRAIL as _SCHEMA_BEDROCK_GUARDRAIL,
     BEDROCK_GUARDRAIL_DETAILS as _SCHEMA_BEDROCK_GUARDRAIL_DETAILS,
+    BEDROCK_GUARDRAIL_RESOURCE as _SCHEMA_BEDROCK_GUARDRAIL_RESOURCE,
     BLOCK_PUBLIC_ACCESS as _SCHEMA_BLOCK_PUBLIC_ACCESS,
     BUCKET_LEVEL_PERMISSIONS as _SCHEMA_BUCKET_LEVEL_PERMISSIONS,
     BUCKET_POLICY as _SCHEMA_BUCKET_POLICY,
@@ -75,6 +81,12 @@ from ._private.schemas import (
     COVERAGE_RESOURCE_DETAILS as _SCHEMA_COVERAGE_RESOURCE_DETAILS,
     COVERAGE_SORT_CRITERIA as _SCHEMA_COVERAGE_SORT_CRITERIA,
     COVERAGE_STATISTICS as _SCHEMA_COVERAGE_STATISTICS,
+    CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION as _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION,
+    CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT as _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT as _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION as _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+    CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT as _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT as _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
     CREATE_DETECTOR as _SCHEMA_CREATE_DETECTOR,
     CREATE_DETECTOR_INPUT as _SCHEMA_CREATE_DETECTOR_INPUT,
     CREATE_DETECTOR_OUTPUT as _SCHEMA_CREATE_DETECTOR_OUTPUT,
@@ -119,6 +131,12 @@ from ._private.schemas import (
     DECLINE_INVITATIONS_INPUT as _SCHEMA_DECLINE_INVITATIONS_INPUT,
     DECLINE_INVITATIONS_OUTPUT as _SCHEMA_DECLINE_INVITATIONS_OUTPUT,
     DEFAULT_SERVER_SIDE_ENCRYPTION as _SCHEMA_DEFAULT_SERVER_SIDE_ENCRYPTION,
+    DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION as _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION,
+    DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT as _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT as _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION as _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+    DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT as _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT as _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
     DELETE_DETECTOR as _SCHEMA_DELETE_DETECTOR,
     DELETE_DETECTOR_INPUT as _SCHEMA_DELETE_DETECTOR_INPUT,
     DELETE_DETECTOR_OUTPUT as _SCHEMA_DELETE_DETECTOR_OUTPUT,
@@ -161,6 +179,9 @@ from ._private.schemas import (
     DESTINATION as _SCHEMA_DESTINATION,
     DESTINATION_PROPERTIES as _SCHEMA_DESTINATION_PROPERTIES,
     DETECTION as _SCHEMA_DETECTION,
+    DETECTION_RULE_FILTER as _SCHEMA_DETECTION_RULE_FILTER,
+    DETECTION_RULE_ORG_CONFIGURATION as _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION,
+    DETECTION_RULE_ORG_CONFIGURATION_SUMMARY as _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY,
     DETECTOR_ADDITIONAL_CONFIGURATION as _SCHEMA_DETECTOR_ADDITIONAL_CONFIGURATION,
     DETECTOR_ADDITIONAL_CONFIGURATION_RESULT as _SCHEMA_DETECTOR_ADDITIONAL_CONFIGURATION_RESULT,
     DETECTOR_FEATURE_CONFIGURATION as _SCHEMA_DETECTOR_FEATURE_CONFIGURATION,
@@ -218,6 +239,15 @@ from ._private.schemas import (
     GET_COVERAGE_STATISTICS as _SCHEMA_GET_COVERAGE_STATISTICS,
     GET_COVERAGE_STATISTICS_INPUT as _SCHEMA_GET_COVERAGE_STATISTICS_INPUT,
     GET_COVERAGE_STATISTICS_OUTPUT as _SCHEMA_GET_COVERAGE_STATISTICS_OUTPUT,
+    GET_CUSTOM_DETECTION_RULE as _SCHEMA_GET_CUSTOM_DETECTION_RULE,
+    GET_CUSTOM_DETECTION_RULE_ASSOCIATION as _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION,
+    GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT as _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT as _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    GET_CUSTOM_DETECTION_RULE_INPUT as _SCHEMA_GET_CUSTOM_DETECTION_RULE_INPUT,
+    GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION as _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+    GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT as _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT as _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+    GET_CUSTOM_DETECTION_RULE_OUTPUT as _SCHEMA_GET_CUSTOM_DETECTION_RULE_OUTPUT,
     GET_DETECTOR as _SCHEMA_GET_DETECTOR,
     GET_DETECTOR_INPUT as _SCHEMA_GET_DETECTOR_INPUT,
     GET_DETECTOR_OUTPUT as _SCHEMA_GET_DETECTOR_OUTPUT,
@@ -313,6 +343,15 @@ from ._private.schemas import (
     LIST_COVERAGE as _SCHEMA_LIST_COVERAGE,
     LIST_COVERAGE_INPUT as _SCHEMA_LIST_COVERAGE_INPUT,
     LIST_COVERAGE_OUTPUT as _SCHEMA_LIST_COVERAGE_OUTPUT,
+    LIST_CUSTOM_DETECTION_RULES as _SCHEMA_LIST_CUSTOM_DETECTION_RULES,
+    LIST_CUSTOM_DETECTION_RULES_INPUT as _SCHEMA_LIST_CUSTOM_DETECTION_RULES_INPUT,
+    LIST_CUSTOM_DETECTION_RULES_OUTPUT as _SCHEMA_LIST_CUSTOM_DETECTION_RULES_OUTPUT,
+    LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS as _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS,
+    LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT as _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT,
+    LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT as _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT,
+    LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS as _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS,
+    LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT as _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT,
+    LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT as _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT,
     LIST_DETECTORS as _SCHEMA_LIST_DETECTORS,
     LIST_DETECTORS_INPUT as _SCHEMA_LIST_DETECTORS_INPUT,
     LIST_DETECTORS_OUTPUT as _SCHEMA_LIST_DETECTORS_OUTPUT,
@@ -435,6 +474,9 @@ from ._private.schemas import (
     RESOURCE_NOT_FOUND_EXCEPTION as _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
     RESOURCE_STATISTICS as _SCHEMA_RESOURCE_STATISTICS,
     RESOURCE_V2 as _SCHEMA_RESOURCE_V2,
+    RULE_DEFINITION as _SCHEMA_RULE_DEFINITION,
+    RULE_DETAIL as _SCHEMA_RULE_DETAIL,
+    RULE_SUMMARY as _SCHEMA_RULE_SUMMARY,
     RUNTIME_CONTEXT as _SCHEMA_RUNTIME_CONTEXT,
     RUNTIME_DETAILS as _SCHEMA_RUNTIME_DETAILS,
     S3_BUCKET as _SCHEMA_S3_BUCKET,
@@ -501,6 +543,12 @@ from ._private.schemas import (
     UNTAG_RESOURCE as _SCHEMA_UNTAG_RESOURCE,
     UNTAG_RESOURCE_INPUT as _SCHEMA_UNTAG_RESOURCE_INPUT,
     UNTAG_RESOURCE_OUTPUT as _SCHEMA_UNTAG_RESOURCE_OUTPUT,
+    UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION as _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION,
+    UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT as _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT as _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION as _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+    UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT as _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT as _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
     UPDATE_DETECTOR as _SCHEMA_UPDATE_DETECTOR,
     UPDATE_DETECTOR_INPUT as _SCHEMA_UPDATE_DETECTOR_INPUT,
     UPDATE_DETECTOR_OUTPUT as _SCHEMA_UPDATE_DETECTOR_OUTPUT,
@@ -653,6 +701,16 @@ class AcceptAdministratorInvitationInput:
 @dataclass(kw_only=True)
 class AcceptAdministratorInvitationOutput:
     """Dataclass for AcceptAdministratorInvitationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ACCEPT_ADMINISTRATOR_INVITATION_OUTPUT, self)
@@ -884,6 +942,16 @@ class AcceptInvitationInput:
 @dataclass(kw_only=True)
 class AcceptInvitationOutput:
     """Dataclass for AcceptInvitationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ACCEPT_INVITATION_OUTPUT, self)
@@ -1585,7 +1653,7 @@ class FreeTrialFeatureResult(UnknownEnumMixin, StrEnum):
 class FreeTrialFeatureConfigurationResult:
     """Contains information about the free trial period for a feature."""
 
-    name: FreeTrialFeatureResult | None = None
+    name: str | None = None
     """The name of the feature for which the free trial is configured."""
 
     free_trial_days_remaining: int | None = None
@@ -2071,6 +2139,12 @@ class RemoteAccountDetails:
     `False` the API caller is from outside your environment.
     """
 
+    aws_service_name: str | None = None
+    """
+    If the remote account belongs to an Amazon Web Services service, this
+    field indicates which service the remote account belongs to.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_REMOTE_ACCOUNT_DETAILS, self)
 
@@ -2083,6 +2157,12 @@ class RemoteAccountDetails:
         if self.affiliated is not None:
             serializer.write_boolean(
                 _SCHEMA_REMOTE_ACCOUNT_DETAILS.members["Affiliated"], self.affiliated
+            )
+
+        if self.aws_service_name is not None:
+            serializer.write_string(
+                _SCHEMA_REMOTE_ACCOUNT_DETAILS.members["AwsServiceName"],
+                self.aws_service_name,
             )
 
     @classmethod
@@ -2103,6 +2183,11 @@ class RemoteAccountDetails:
                 case 1:
                     kwargs["affiliated"] = de.read_boolean(
                         _SCHEMA_REMOTE_ACCOUNT_DETAILS.members["Affiliated"]
+                    )
+
+                case 2:
+                    kwargs["aws_service_name"] = de.read_string(
+                        _SCHEMA_REMOTE_ACCOUNT_DETAILS.members["AwsServiceName"]
                     )
 
                 case _:
@@ -3916,6 +4001,163 @@ class Action:
 
 
 @dataclass(kw_only=True)
+class ApiCall:
+    """
+    Contains information about an API call that was observed as part of an
+    activity.
+    """
+
+    operation: str | None = None
+    """The name of the API operation that was invoked."""
+
+    service: str | None = None
+    """The service that the API operation was invoked against."""
+
+    error: str | None = None
+    """The error code that was returned, if the API call failed."""
+
+    user_agent: str | None = None
+    """User agent in the request to the API operation"""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_API_CALL, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.operation is not None:
+            serializer.write_string(
+                _SCHEMA_API_CALL.members["Operation"], self.operation
+            )
+
+        if self.service is not None:
+            serializer.write_string(_SCHEMA_API_CALL.members["Service"], self.service)
+
+        if self.error is not None:
+            serializer.write_string(_SCHEMA_API_CALL.members["Error"], self.error)
+
+        if self.user_agent is not None:
+            serializer.write_string(
+                _SCHEMA_API_CALL.members["UserAgent"], self.user_agent
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["operation"] = de.read_string(
+                        _SCHEMA_API_CALL.members["Operation"]
+                    )
+
+                case 1:
+                    kwargs["service"] = de.read_string(
+                        _SCHEMA_API_CALL.members["Service"]
+                    )
+
+                case 2:
+                    kwargs["error"] = de.read_string(_SCHEMA_API_CALL.members["Error"])
+
+                case 3:
+                    kwargs["user_agent"] = de.read_string(
+                        _SCHEMA_API_CALL.members["UserAgent"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_API_CALL, consumer=_consumer)
+        return kwargs
+
+
+class ActivityType(UnknownEnumMixin, StrEnum):
+    """The type of an observed activity."""
+
+    API_CALL = "API_CALL"
+    """The observed activity is an API call."""
+
+
+@dataclass(kw_only=True)
+class Activity:
+    """
+    Contains information about an activity, such as an API call, that was
+    observed for a signal.
+    """
+
+    type: str | None = None
+    """The type of the observed activity."""
+
+    api: ApiCall | None = None
+    """
+    Contains information about the API call that was observed, when the
+    activity type is `API_CALL`.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_ACTIVITY, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.type is not None:
+            serializer.write_string(_SCHEMA_ACTIVITY.members["Type"], self.type)
+
+        if self.api is not None:
+            serializer.write_struct(_SCHEMA_ACTIVITY.members["Api"], self.api)
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["type"] = ActivityType(
+                        de.read_string(_SCHEMA_ACTIVITY.members["Type"])
+                    )
+
+                case 1:
+                    kwargs["api"] = ApiCall.deserialize(de)
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_ACTIVITY, consumer=_consumer)
+        return kwargs
+
+
+def _serialize_activities(
+    serializer: ShapeSerializer, schema: Schema, value: list[Activity]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_struct(member_schema, e)
+
+
+def _deserialize_activities(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[Activity]:
+    result: list[Activity] = []
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(Activity.deserialize(d))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
 class ActorProcess:
     """
     Contains information about a process involved in a GuardDuty finding,
@@ -3994,7 +4236,7 @@ class Session:
     uid: str | None = None
     """The unique identifier of the session."""
 
-    mfa_status: MfaStatus | None = None
+    mfa_status: str | None = None
     """
     Indicates whether or not multi-factor authencation (MFA) was used during
     authentication.
@@ -4414,7 +4656,7 @@ class AdminAccount:
     admin_account_id: str | None = None
     """The Amazon Web Services account ID for the account."""
 
-    admin_status: AdminStatus | None = None
+    admin_status: str | None = None
     """Indicates whether the account is enabled as the delegated administrator."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -4726,10 +4968,10 @@ class ProfileType(UnknownEnumMixin, StrEnum):
 class AnomalyObject:
     """Contains information about the unusual anomalies."""
 
-    profile_type: ProfileType | None = None
+    profile_type: str | None = None
     """The type of behavior of the profile."""
 
-    profile_subtype: ProfileSubtype | None = None
+    profile_subtype: str | None = None
     """The frequency of the anomaly."""
 
     observations: Observations | None = None
@@ -5111,6 +5353,16 @@ class ArchiveFindingsInput:
 class ArchiveFindingsOutput:
     """Dataclass for ArchiveFindingsOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ARCHIVE_FINDINGS_OUTPUT, self)
 
@@ -5154,6 +5406,283 @@ ARCHIVE_FINDINGS = APIOperation(
         _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
     ],
 )
+
+
+class AssociationMode(UnknownEnumMixin, StrEnum):
+    LIVE = "LIVE"
+    DRY_RUN = "DRY_RUN"
+
+
+@dataclass(kw_only=True)
+class AssociationDetail:
+    """Contains the full details of a custom detection rule association."""
+
+    association_id: str | None = None
+    """The unique identifier for the association."""
+
+    arn: str | None = None
+    """The Amazon Resource Name (ARN) of the association."""
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    account_id: str | None = None
+    """
+    The Amazon Web Services account ID associated with this rule
+    association.
+    """
+
+    mode: str | None = None
+    """The rule execution mode. Valid values: `LIVE` | `DRY_RUN`."""
+
+    created_at: datetime | None = None
+    """The timestamp when the association was created."""
+
+    updated_at: datetime | None = None
+    """The timestamp when the association was last updated."""
+
+    expires_at: datetime | None = None
+    """The timestamp when the association expires."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_ASSOCIATION_DETAIL, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.association_id is not None:
+            serializer.write_string(
+                _SCHEMA_ASSOCIATION_DETAIL.members["AssociationId"], self.association_id
+            )
+
+        if self.arn is not None:
+            serializer.write_string(_SCHEMA_ASSOCIATION_DETAIL.members["Arn"], self.arn)
+
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_ASSOCIATION_DETAIL.members["RuleId"], self.rule_id
+            )
+
+        if self.account_id is not None:
+            serializer.write_string(
+                _SCHEMA_ASSOCIATION_DETAIL.members["AccountId"], self.account_id
+            )
+
+        if self.mode is not None:
+            serializer.write_string(
+                _SCHEMA_ASSOCIATION_DETAIL.members["Mode"], self.mode
+            )
+
+        if self.created_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_ASSOCIATION_DETAIL.members["CreatedAt"], self.created_at
+            )
+
+        if self.updated_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_ASSOCIATION_DETAIL.members["UpdatedAt"], self.updated_at
+            )
+
+        if self.expires_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_ASSOCIATION_DETAIL.members["ExpiresAt"], self.expires_at
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["association_id"] = de.read_string(
+                        _SCHEMA_ASSOCIATION_DETAIL.members["AssociationId"]
+                    )
+
+                case 1:
+                    kwargs["arn"] = de.read_string(
+                        _SCHEMA_ASSOCIATION_DETAIL.members["Arn"]
+                    )
+
+                case 2:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_ASSOCIATION_DETAIL.members["RuleId"]
+                    )
+
+                case 3:
+                    kwargs["account_id"] = de.read_string(
+                        _SCHEMA_ASSOCIATION_DETAIL.members["AccountId"]
+                    )
+
+                case 4:
+                    kwargs["mode"] = AssociationMode(
+                        de.read_string(_SCHEMA_ASSOCIATION_DETAIL.members["Mode"])
+                    )
+
+                case 5:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_ASSOCIATION_DETAIL.members["CreatedAt"]
+                    )
+
+                case 6:
+                    kwargs["updated_at"] = de.read_timestamp(
+                        _SCHEMA_ASSOCIATION_DETAIL.members["UpdatedAt"]
+                    )
+
+                case 7:
+                    kwargs["expires_at"] = de.read_timestamp(
+                        _SCHEMA_ASSOCIATION_DETAIL.members["ExpiresAt"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_ASSOCIATION_DETAIL, consumer=_consumer)
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class AssociationSummary:
+    """Contains summary information about a custom detection rule association."""
+
+    association_id: str | None = None
+    """The unique identifier for the association."""
+
+    arn: str | None = None
+    """The Amazon Resource Name (ARN) of the association."""
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    mode: str | None = None
+    """The rule execution mode. Valid values: `LIVE` | `DRY_RUN`."""
+
+    created_at: datetime | None = None
+    """The timestamp when the association was created."""
+
+    updated_at: datetime | None = None
+    """The timestamp when the association was last updated."""
+
+    expires_at: datetime | None = None
+    """The timestamp when the association expires."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_ASSOCIATION_SUMMARY, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.association_id is not None:
+            serializer.write_string(
+                _SCHEMA_ASSOCIATION_SUMMARY.members["AssociationId"],
+                self.association_id,
+            )
+
+        if self.arn is not None:
+            serializer.write_string(
+                _SCHEMA_ASSOCIATION_SUMMARY.members["Arn"], self.arn
+            )
+
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_ASSOCIATION_SUMMARY.members["RuleId"], self.rule_id
+            )
+
+        if self.mode is not None:
+            serializer.write_string(
+                _SCHEMA_ASSOCIATION_SUMMARY.members["Mode"], self.mode
+            )
+
+        if self.created_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_ASSOCIATION_SUMMARY.members["CreatedAt"], self.created_at
+            )
+
+        if self.updated_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_ASSOCIATION_SUMMARY.members["UpdatedAt"], self.updated_at
+            )
+
+        if self.expires_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_ASSOCIATION_SUMMARY.members["ExpiresAt"], self.expires_at
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["association_id"] = de.read_string(
+                        _SCHEMA_ASSOCIATION_SUMMARY.members["AssociationId"]
+                    )
+
+                case 1:
+                    kwargs["arn"] = de.read_string(
+                        _SCHEMA_ASSOCIATION_SUMMARY.members["Arn"]
+                    )
+
+                case 2:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_ASSOCIATION_SUMMARY.members["RuleId"]
+                    )
+
+                case 3:
+                    kwargs["mode"] = AssociationMode(
+                        de.read_string(_SCHEMA_ASSOCIATION_SUMMARY.members["Mode"])
+                    )
+
+                case 4:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_ASSOCIATION_SUMMARY.members["CreatedAt"]
+                    )
+
+                case 5:
+                    kwargs["updated_at"] = de.read_timestamp(
+                        _SCHEMA_ASSOCIATION_SUMMARY.members["UpdatedAt"]
+                    )
+
+                case 6:
+                    kwargs["expires_at"] = de.read_timestamp(
+                        _SCHEMA_ASSOCIATION_SUMMARY.members["ExpiresAt"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_ASSOCIATION_SUMMARY, consumer=_consumer)
+        return kwargs
+
+
+def _serialize_association_summary_list(
+    serializer: ShapeSerializer, schema: Schema, value: list[AssociationSummary]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_struct(member_schema, e)
+
+
+def _deserialize_association_summary_list(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[AssociationSummary]:
+    result: list[AssociationSummary] = []
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(AssociationSummary.deserialize(d))
+
+    deserializer.read_list(schema, _read_value)
+    return result
 
 
 class AutoEnableMembers(UnknownEnumMixin, StrEnum):
@@ -5375,13 +5904,13 @@ class ContentPolicyFilter:
     guardrail evaluation.
     """
 
-    type: ContentPolicyFilterType | None = None
+    type: str | None = None
     """The type of content that was filtered by the guardrail."""
 
-    confidence: ConfidenceLevel | None = None
+    confidence: str | None = None
     """The confidence level that the content matched the filter."""
 
-    action: ContentPolicyFilterAction | None = None
+    action: str | None = None
     """The action taken by the guardrail filter."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -5519,10 +6048,10 @@ class BedrockGuardrailDetails:
     guardrails: list[BedrockGuardrail] | None = None
     """The list of Bedrock guardrails associated with the finding."""
 
-    guardrail_action: GuardrailAction | None = None
+    guardrail_action: str | None = None
     """Indicates whether the guardrail intervened or not."""
 
-    guardrail_source: GuardrailSource | None = None
+    guardrail_source: str | None = None
     """
     Indicates whether the guardrail was applied on the input or output of
     the model invocation.
@@ -5629,6 +6158,89 @@ class BedrockGuardrailDetails:
                     logger.debug("Unexpected member schema: %s", schema)
 
         deserializer.read_struct(_SCHEMA_BEDROCK_GUARDRAIL_DETAILS, consumer=_consumer)
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class BedrockGuardrailResource:
+    """
+    Contains details about an Amazon Bedrock guardrail evaluated during a
+    model invocation.
+    """
+
+    version: str | None = None
+    """
+    The version of the Amazon Bedrock guardrail. Valid values are a numeric
+    version, `DRAFT`, or `ENFORCED`.
+    """
+
+    guardrail_action: str | None = None
+    """Indicates whether the guardrail intervened during the model invocation."""
+
+    guardrail_source: str | None = None
+    """
+    Indicates whether the guardrail was applied on the input or output of
+    the model invocation.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_BEDROCK_GUARDRAIL_RESOURCE, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.version is not None:
+            serializer.write_string(
+                _SCHEMA_BEDROCK_GUARDRAIL_RESOURCE.members["Version"], self.version
+            )
+
+        if self.guardrail_action is not None:
+            serializer.write_string(
+                _SCHEMA_BEDROCK_GUARDRAIL_RESOURCE.members["GuardrailAction"],
+                self.guardrail_action,
+            )
+
+        if self.guardrail_source is not None:
+            serializer.write_string(
+                _SCHEMA_BEDROCK_GUARDRAIL_RESOURCE.members["GuardrailSource"],
+                self.guardrail_source,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["version"] = de.read_string(
+                        _SCHEMA_BEDROCK_GUARDRAIL_RESOURCE.members["Version"]
+                    )
+
+                case 1:
+                    kwargs["guardrail_action"] = GuardrailAction(
+                        de.read_string(
+                            _SCHEMA_BEDROCK_GUARDRAIL_RESOURCE.members[
+                                "GuardrailAction"
+                            ]
+                        )
+                    )
+
+                case 2:
+                    kwargs["guardrail_source"] = GuardrailSource(
+                        de.read_string(
+                            _SCHEMA_BEDROCK_GUARDRAIL_RESOURCE.members[
+                                "GuardrailSource"
+                            ]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_BEDROCK_GUARDRAIL_RESOURCE, consumer=_consumer)
         return kwargs
 
 
@@ -5772,7 +6384,7 @@ class CloudDetails:
     investigation.
     """
 
-    provider: CloudProvider | None = None
+    provider: str | None = None
     """The cloud provider. Currently, only `AWS` is supported."""
 
     region: str | None = None
@@ -5894,7 +6506,7 @@ class CloudTrailConfigurationResult:
     the detector.
     """
 
-    status: DataSourceStatus | None = None
+    status: str | None = None
     """
     Describes whether CloudTrail is enabled as a data source for the
     detector.
@@ -6982,7 +7594,7 @@ class CoverageEc2InstanceDetails:
     agent_details: AgentDetails | None = None
     """Information about the installed security agent."""
 
-    management_type: ManagementType | None = None
+    management_type: str | None = None
     """
     Indicates how the GuardDuty security agent is managed for this resource.
 
@@ -7114,7 +7726,7 @@ class FargateDetails:
     Web Services Fargate.
     """
 
-    management_type: ManagementType | None = None
+    management_type: str | None = None
     """
     Indicates how the GuardDuty security agent is managed for this resource.
 
@@ -7266,7 +7878,7 @@ class CoverageEksClusterDetails:
     addon_details: AddonDetails | None = None
     """Information about the installed EKS add-on."""
 
-    management_type: ManagementType | None = None
+    management_type: str | None = None
     """
     Indicates how the Amazon EKS add-on GuardDuty agent is managed for this
     EKS cluster.
@@ -7443,7 +8055,7 @@ class CoverageFilterCriterion:
     of the operation.
     """
 
-    criterion_key: CoverageFilterCriterionKey | None = None
+    criterion_key: str | None = None
     """
     An enum value representing possible filter fields.
 
@@ -7585,7 +8197,7 @@ class CoverageResourceDetails:
     ec2_instance_details: CoverageEc2InstanceDetails | None = None
     """Information about the Amazon EC2 instance assessed for runtime coverage."""
 
-    resource_type: ResourceType | None = None
+    resource_type: str | None = None
     """The type of Amazon Web Services resource."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -7674,7 +8286,7 @@ class CoverageResource:
     retrieved.
     """
 
-    coverage_status: CoverageStatus | None = None
+    coverage_status: str | None = None
     """Represents the status of the EKS cluster coverage."""
 
     issue: str | None = None
@@ -7828,7 +8440,7 @@ class OrderBy(UnknownEnumMixin, StrEnum):
 class CoverageSortCriteria:
     """Information about the sorting criteria used in the coverage statistics."""
 
-    attribute_name: CoverageSortKey | None = None
+    attribute_name: str | None = None
     """
     Represents the field name used to sort the coverage details.
 
@@ -7837,7 +8449,7 @@ class CoverageSortCriteria:
         `CLUSTER_NAME` has been deprecated.
     """
 
-    order_by: OrderBy | None = None
+    order_by: str | None = None
     """The order in which the sorted findings are to be displayed."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -7961,7 +8573,7 @@ class CoverageStatisticsType(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_coverage_statistics_type_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[CoverageStatisticsType]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -7971,8 +8583,8 @@ def _serialize_coverage_statistics_type_list(
 
 def _deserialize_coverage_statistics_type_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[CoverageStatisticsType]:
-    result: list[CoverageStatisticsType] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -7984,6 +8596,518 @@ def _deserialize_coverage_statistics_type_list(
 
     deserializer.read_list(schema, _read_value)
     return result
+
+
+def _serialize_tag_map(
+    serializer: ShapeSerializer, schema: Schema, value: dict[str, str]
+) -> None:
+    with serializer.begin_map(schema, len(value)) as m:
+        value_schema = schema.members["value"]
+        for k, v in value.items():
+            m.entry(k, lambda vs: vs.write_string(value_schema, v))
+
+
+def _deserialize_tag_map(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> dict[str, str]:
+    result: dict[str, str] = {}
+    value_schema = schema.members["value"]
+
+    def _read_value(k: str, d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result[k] = d.read_string(value_schema)
+
+    deserializer.read_map(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
+class CreateCustomDetectionRuleAssociationInput:
+    """Dataclass for CreateCustomDetectionRuleAssociationInput structure."""
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    mode: str | None = None
+    """The rule execution mode. Valid values: `LIVE` | `DRY_RUN`."""
+
+    client_token: str | None = None
+    """
+    A unique, case-sensitive identifier to ensure that the operation
+    completes no more than one time. Maximum 64 characters.
+    """
+
+    tags: dict[str, str] | None = None
+    """
+    The tags to be added to the new custom detection rule association
+    resource.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                    "RuleId"
+                ],
+                self.rule_id,
+            )
+
+        if self.mode is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members["Mode"],
+                self.mode,
+            )
+
+        if self.client_token is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                    "ClientToken"
+                ],
+                self.client_token,
+            )
+
+        if self.tags is not None:
+            _serialize_tag_map(
+                serializer,
+                _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members["Tags"],
+                self.tags,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                            "RuleId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["mode"] = AssociationMode(
+                        de.read_string(
+                            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                                "Mode"
+                            ]
+                        )
+                    )
+
+                case 2:
+                    kwargs["client_token"] = de.read_string(
+                        _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                            "ClientToken"
+                        ]
+                    )
+
+                case 3:
+                    kwargs["tags"] = _deserialize_tag_map(
+                        de,
+                        _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                            "Tags"
+                        ],
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class CreateCustomDetectionRuleAssociationOutput:
+    """Dataclass for CreateCustomDetectionRuleAssociationOutput structure."""
+
+    rule_association: AssociationDetail | None = None
+    """The details of the newly created custom detection rule association."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_association is not None:
+            serializer.write_struct(
+                _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT.members[
+                    "RuleAssociation"
+                ],
+                self.rule_association,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_association"] = AssociationDetail.deserialize(de)
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class ResourceNotFoundException(ServiceError):
+    """The requested resource can't be found."""
+
+    fault: Literal["client", "server"] | None = "client"
+
+    type: str | None = None
+    """The error type."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.message is not None:
+            serializer.write_string(
+                _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION.members["Message"], self.message
+            )
+
+        if self.type is not None:
+            serializer.write_string(
+                _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION.members["Type"], self.type
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["message"] = de.read_string(
+                        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION.members["Message"]
+                    )
+
+                case 1:
+                    kwargs["type"] = de.read_string(
+                        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION.members["Type"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION, consumer=_consumer
+        )
+        return kwargs
+
+
+CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION = APIOperation(
+    input=CreateCustomDetectionRuleAssociationInput,
+    output=CreateCustomDetectionRuleAssociationOutput,
+    schema=_SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION,
+    input_schema=_SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    output_schema=_SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID("com.amazonaws.guardduty#ConflictException"): ConflictException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+            ShapeID(
+                "com.amazonaws.guardduty#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+    ],
+)
+
+
+def _serialize_detection_rule_account_ids(
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_string(member_schema, e)
+
+
+def _deserialize_detection_rule_account_ids(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[str]:
+    result: list[str] = []
+    member_schema = schema.members["member"]
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(d.read_string(member_schema))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
+class CreateCustomDetectionRuleOrgConfigurationInput:
+    """Dataclass for CreateCustomDetectionRuleOrgConfigurationInput structure."""
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    mode: str | None = None
+    """
+    The execution mode of the organization configuration. Valid values:
+    `LIVE` | `DRY_RUN`.
+    """
+
+    include_account_ids: list[str] | None = None
+    """
+    The account IDs to include in the organization configuration. Mutually
+    exclusive with `ExcludeAccountIds`.
+    """
+
+    exclude_account_ids: list[str] | None = None
+    """
+    The account IDs to exclude from the organization configuration. Mutually
+    exclusive with `IncludeAccountIds`.
+    """
+
+    client_token: str | None = None
+    """
+    A unique, case-sensitive identifier to ensure that the operation
+    completes no more than one time.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "RuleId"
+                ],
+                self.rule_id,
+            )
+
+        if self.mode is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "Mode"
+                ],
+                self.mode,
+            )
+
+        if self.include_account_ids is not None:
+            _serialize_detection_rule_account_ids(
+                serializer,
+                _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "IncludeAccountIds"
+                ],
+                self.include_account_ids,
+            )
+
+        if self.exclude_account_ids is not None:
+            _serialize_detection_rule_account_ids(
+                serializer,
+                _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "ExcludeAccountIds"
+                ],
+                self.exclude_account_ids,
+            )
+
+        if self.client_token is not None:
+            serializer.write_string(
+                _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "ClientToken"
+                ],
+                self.client_token,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                            "RuleId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["mode"] = AssociationMode(
+                        de.read_string(
+                            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                                "Mode"
+                            ]
+                        )
+                    )
+
+                case 2:
+                    kwargs["include_account_ids"] = (
+                        _deserialize_detection_rule_account_ids(
+                            de,
+                            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                                "IncludeAccountIds"
+                            ],
+                        )
+                    )
+
+                case 3:
+                    kwargs["exclude_account_ids"] = (
+                        _deserialize_detection_rule_account_ids(
+                            de,
+                            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                                "ExcludeAccountIds"
+                            ],
+                        )
+                    )
+
+                case 4:
+                    kwargs["client_token"] = de.read_string(
+                        _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                            "ClientToken"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+            consumer=_consumer,
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class CreateCustomDetectionRuleOrgConfigurationOutput:
+    """Dataclass for CreateCustomDetectionRuleOrgConfigurationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        pass
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+            consumer=_consumer,
+        )
+        return kwargs
+
+
+CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = APIOperation(
+    input=CreateCustomDetectionRuleOrgConfigurationInput,
+    output=CreateCustomDetectionRuleOrgConfigurationOutput,
+    schema=_SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+    input_schema=_SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    output_schema=_SCHEMA_CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID("com.amazonaws.guardduty#ConflictException"): ConflictException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+            ShapeID(
+                "com.amazonaws.guardduty#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+    ],
+)
 
 
 @dataclass(kw_only=True)
@@ -8273,10 +9397,10 @@ class DetectorAdditionalConfiguration:
     GuardDuty account.
     """
 
-    name: FeatureAdditionalConfiguration | None = None
+    name: str | None = None
     """Name of the additional configuration."""
 
-    status: FeatureStatus | None = None
+    status: str | None = None
     """Status of the additional configuration."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -8378,10 +9502,10 @@ class DetectorFeatureConfiguration:
     Monitoring](https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html).
     """
 
-    name: DetectorFeature | None = None
+    name: str | None = None
     """The name of the feature."""
 
-    status: FeatureStatus | None = None
+    status: str | None = None
     """The status of the feature."""
 
     additional_configuration: list[DetectorAdditionalConfiguration] | None = None
@@ -8486,32 +9610,6 @@ class FindingPublishingFrequency(UnknownEnumMixin, StrEnum):
     SIX_HOURS = "SIX_HOURS"
 
 
-def _serialize_tag_map(
-    serializer: ShapeSerializer, schema: Schema, value: dict[str, str]
-) -> None:
-    with serializer.begin_map(schema, len(value)) as m:
-        value_schema = schema.members["value"]
-        for k, v in value.items():
-            m.entry(k, lambda vs: vs.write_string(value_schema, v))
-
-
-def _deserialize_tag_map(
-    deserializer: ShapeDeserializer, schema: Schema
-) -> dict[str, str]:
-    result: dict[str, str] = {}
-    value_schema = schema.members["value"]
-
-    def _read_value(k: str, d: ShapeDeserializer):
-        if d.is_null():
-            d.read_null()
-
-        else:
-            result[k] = d.read_string(value_schema)
-
-    deserializer.read_map(schema, _read_value)
-    return result
-
-
 @dataclass(kw_only=True)
 class CreateDetectorInput:
     """Dataclass for CreateDetectorInput structure."""
@@ -8522,7 +9620,7 @@ class CreateDetectorInput:
     client_token: str | None = None
     """The idempotency token for the create request."""
 
-    finding_publishing_frequency: FindingPublishingFrequency | None = None
+    finding_publishing_frequency: str | None = None
     """A value that specifies how frequently updated findings are exported."""
 
     data_sources: DataSourceConfigurations | None = None
@@ -8631,7 +9729,7 @@ class CreateDetectorInput:
 class EbsVolumesResult:
     """Describes the configuration of scanning EBS volumes as a data source."""
 
-    status: DataSourceStatus | None = None
+    status: str | None = None
     """Describes whether scanning EBS volumes is enabled as a data source."""
 
     reason: str | None = None
@@ -8846,6 +9944,16 @@ class CreateDetectorOutput:
     enabled for the first time.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_DETECTOR_OUTPUT, self)
 
@@ -9015,7 +10123,7 @@ class CreateFilterInput:
     whitespace.
     """
 
-    action: FilterAction | None = None
+    action: str | None = None
     """
     Specifies the action that is to be applied to the findings that match
     the filter.
@@ -10463,6 +11571,16 @@ class CreateFilterOutput:
     name: str | None = None
     """The name of the successfully created filter."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_FILTER_OUTPUT, self)
 
@@ -10606,6 +11724,16 @@ class CreateInvestigationOutput:
     investigation_id: str | None = None
     """The unique identifier of the newly created investigation."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_INVESTIGATION_OUTPUT, self)
 
@@ -10698,7 +11826,7 @@ class CreateIPSetInput:
     underscores (_).
     """
 
-    format: IpSetFormat | None = None
+    format: str | None = None
     """The format of the file that contains the IPSet."""
 
     location: str | None = None
@@ -10831,6 +11959,16 @@ class CreateIPSetOutput:
     ip_set_id: str | None = None
     """The ID of the IPSet resource."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_IP_SET_OUTPUT, self)
 
@@ -10900,7 +12038,7 @@ class MalwareProtectionPlanTaggingAction:
     result.
     """
 
-    status: MalwareProtectionPlanTaggingActionStatus | None = None
+    status: str | None = None
     """Indicates whether or not the tags will added."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -11232,6 +12370,16 @@ class CreateMalwareProtectionPlanOutput:
     resource.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_MALWARE_PROTECTION_PLAN_OUTPUT, self)
 
@@ -11448,6 +12596,16 @@ class CreateMembersOutput:
     accounts and a result string that explains why each was unprocessed.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_MEMBERS_OUTPUT, self)
 
@@ -11583,7 +12741,7 @@ class CreatePublishingDestinationInput:
     API.
     """
 
-    destination_type: DestinationType | None = None
+    destination_type: str | None = None
     """
     The type of resource for the publishing destination. Currently only
     Amazon S3 buckets are supported.
@@ -11696,6 +12854,16 @@ class CreatePublishingDestinationOutput:
 
     destination_id: str | None = None
     """The ID of the publishing destination that is created."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_PUBLISHING_DESTINATION_OUTPUT, self)
@@ -11848,6 +13016,16 @@ class CreateSampleFindingsInput:
 class CreateSampleFindingsOutput:
     """Dataclass for CreateSampleFindingsOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_SAMPLE_FINDINGS_OUTPUT, self)
 
@@ -11927,7 +13105,7 @@ class CreateThreatEntitySetInput:
     numbers, dash (-), and underscore (_).
     """
 
-    format: ThreatEntitySetFormat | None = None
+    format: str | None = None
     """The format of the file that contains the threat entity set."""
 
     location: str | None = None
@@ -12084,6 +13262,16 @@ class CreateThreatEntitySetOutput:
     resource.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_THREAT_ENTITY_SET_OUTPUT, self)
 
@@ -12173,7 +13361,7 @@ class CreateThreatIntelSetInput:
     ThreatIntelSet.
     """
 
-    format: ThreatIntelSetFormat | None = None
+    format: str | None = None
     """The format of the file that contains the ThreatIntelSet."""
 
     location: str | None = None
@@ -12316,6 +13504,16 @@ class CreateThreatIntelSetOutput:
     threat_intel_set_id: str | None = None
     """The ID of the ThreatIntelSet resource."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_THREAT_INTEL_SET_OUTPUT, self)
 
@@ -12410,7 +13608,7 @@ class CreateTrustedEntitySetInput:
     numbers, dash (-), and underscore (_).
     """
 
-    format: TrustedEntitySetFormat | None = None
+    format: str | None = None
     """The format of the file that contains the trusted entity set."""
 
     location: str | None = None
@@ -12567,6 +13765,16 @@ class CreateTrustedEntitySetOutput:
     resource.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_TRUSTED_ENTITY_SET_OUTPUT, self)
 
@@ -12648,7 +13856,7 @@ class DataSource(UnknownEnumMixin, StrEnum):
 class DNSLogsConfigurationResult:
     """Contains information on the status of DNS logs as a data source."""
 
-    status: DataSourceStatus | None = None
+    status: str | None = None
     """Denotes whether DNS logs is enabled as a data source."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -12690,7 +13898,7 @@ class DNSLogsConfigurationResult:
 class FlowLogsConfigurationResult:
     """Contains information on the status of VPC flow logs as a data source."""
 
-    status: DataSourceStatus | None = None
+    status: str | None = None
     """Denotes whether VPC flow logs is enabled as a data source."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -12732,7 +13940,7 @@ class FlowLogsConfigurationResult:
 class KubernetesAuditLogsConfigurationResult:
     """Describes whether Kubernetes audit logs are enabled as a data source."""
 
-    status: DataSourceStatus | None = None
+    status: str | None = None
     """
     A value that describes whether Kubernetes audit logs are enabled as a
     data source.
@@ -12823,7 +14031,7 @@ class KubernetesConfigurationResult:
 class S3LogsConfigurationResult:
     """Describes whether S3 data event logs will be enabled as a data source."""
 
-    status: DataSourceStatus | None = None
+    status: str | None = None
     """
     A value that describes whether S3 data event logs are automatically
     enabled for new members of the organization.
@@ -12983,7 +14191,7 @@ class DataSourceConfigurationsResult:
 
 
 def _serialize_data_source_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[DataSource]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -12993,8 +14201,8 @@ def _serialize_data_source_list(
 
 def _deserialize_data_source_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[DataSource]:
-    result: list[DataSource] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -13154,6 +14362,16 @@ class DeclineInvitationsOutput:
     string that explains why it was unprocessed.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DECLINE_INVITATIONS_OUTPUT, self)
 
@@ -13278,6 +14496,287 @@ class DefaultServerSideEncryption:
 
 
 @dataclass(kw_only=True)
+class DeleteCustomDetectionRuleAssociationInput:
+    """Dataclass for DeleteCustomDetectionRuleAssociationInput structure."""
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    association_id: str | None = None
+    """The unique identifier for the association to delete."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                    "RuleId"
+                ],
+                self.rule_id,
+            )
+
+        if self.association_id is not None:
+            serializer.write_string(
+                _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                    "AssociationId"
+                ],
+                self.association_id,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                            "RuleId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["association_id"] = de.read_string(
+                        _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                            "AssociationId"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class DeleteCustomDetectionRuleAssociationOutput:
+    """Dataclass for DeleteCustomDetectionRuleAssociationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        pass
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION = APIOperation(
+    input=DeleteCustomDetectionRuleAssociationInput,
+    output=DeleteCustomDetectionRuleAssociationOutput,
+    schema=_SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION,
+    input_schema=_SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    output_schema=_SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+            ShapeID(
+                "com.amazonaws.guardduty#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class DeleteCustomDetectionRuleOrgConfigurationInput:
+    """Dataclass for DeleteCustomDetectionRuleOrgConfigurationInput structure."""
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    mode: str | None = None
+    """
+    The execution mode of the organization configuration to delete. Valid
+    values: `LIVE` | `DRY_RUN`.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "RuleId"
+                ],
+                self.rule_id,
+            )
+
+        if self.mode is not None:
+            serializer.write_string(
+                _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "Mode"
+                ],
+                self.mode,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                            "RuleId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["mode"] = AssociationMode(
+                        de.read_string(
+                            _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                                "Mode"
+                            ]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+            consumer=_consumer,
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class DeleteCustomDetectionRuleOrgConfigurationOutput:
+    """Dataclass for DeleteCustomDetectionRuleOrgConfigurationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        pass
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+            consumer=_consumer,
+        )
+        return kwargs
+
+
+DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = APIOperation(
+    input=DeleteCustomDetectionRuleOrgConfigurationInput,
+    output=DeleteCustomDetectionRuleOrgConfigurationOutput,
+    schema=_SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+    input_schema=_SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    output_schema=_SCHEMA_DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID("com.amazonaws.guardduty#ConflictException"): ConflictException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+            ShapeID(
+                "com.amazonaws.guardduty#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
 class DeleteDetectorInput:
     """Dataclass for DeleteDetectorInput structure."""
 
@@ -13325,6 +14824,16 @@ class DeleteDetectorInput:
 @dataclass(kw_only=True)
 class DeleteDetectorOutput:
     """Dataclass for DeleteDetectorOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_DETECTOR_OUTPUT, self)
@@ -13433,6 +14942,16 @@ class DeleteFilterInput:
 class DeleteFilterOutput:
     """Dataclass for DeleteFilterOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_FILTER_OUTPUT, self)
 
@@ -13530,6 +15049,16 @@ class DeleteInvitationsOutput:
     """
     A list of objects that contain the unprocessed account and a result
     string that explains why it was unprocessed.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -13652,6 +15181,16 @@ class DeleteIPSetInput:
 class DeleteIPSetOutput:
     """Dataclass for DeleteIPSetOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_IP_SET_OUTPUT, self)
 
@@ -13746,6 +15285,16 @@ class DeleteMalwareProtectionPlanInput:
 class DeleteMalwareProtectionPlanOutput:
     """Dataclass for DeleteMalwareProtectionPlanOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_MALWARE_PROTECTION_PLAN_OUTPUT, self)
 
@@ -13767,58 +15316,6 @@ class DeleteMalwareProtectionPlanOutput:
 
         deserializer.read_struct(
             _SCHEMA_DELETE_MALWARE_PROTECTION_PLAN_OUTPUT, consumer=_consumer
-        )
-        return kwargs
-
-
-@dataclass(kw_only=True)
-class ResourceNotFoundException(ServiceError):
-    """The requested resource can't be found."""
-
-    fault: Literal["client", "server"] | None = "client"
-
-    type: str | None = None
-    """The error type."""
-
-    def serialize(self, serializer: ShapeSerializer):
-        serializer.write_struct(_SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION, self)
-
-    def serialize_members(self, serializer: ShapeSerializer):
-        if self.message is not None:
-            serializer.write_string(
-                _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION.members["Message"], self.message
-            )
-
-        if self.type is not None:
-            serializer.write_string(
-                _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION.members["Type"], self.type
-            )
-
-    @classmethod
-    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
-        return cls(**cls.deserialize_kwargs(deserializer))
-
-    @classmethod
-    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
-        kwargs: dict[str, Any] = {}
-
-        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
-            match schema.expect_member_index():
-                case 0:
-                    kwargs["message"] = de.read_string(
-                        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION.members["Message"]
-                    )
-
-                case 1:
-                    kwargs["type"] = de.read_string(
-                        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION.members["Type"]
-                    )
-
-                case _:
-                    logger.debug("Unexpected member schema: %s", schema)
-
-        deserializer.read_struct(
-            _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION, consumer=_consumer
         )
         return kwargs
 
@@ -13923,6 +15420,16 @@ class DeleteMembersOutput:
 
     unprocessed_accounts: list[UnprocessedAccount] | None = None
     """The accounts that could not be processed."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_MEMBERS_OUTPUT, self)
@@ -14050,6 +15557,16 @@ class DeletePublishingDestinationInput:
 class DeletePublishingDestinationOutput:
     """Dataclass for DeletePublishingDestinationOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_PUBLISHING_DESTINATION_OUTPUT, self)
 
@@ -14169,6 +15686,16 @@ class DeleteThreatEntitySetInput:
 class DeleteThreatEntitySetOutput:
     """Dataclass for DeleteThreatEntitySetOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_THREAT_ENTITY_SET_OUTPUT, self)
 
@@ -14284,6 +15811,16 @@ class DeleteThreatIntelSetInput:
 @dataclass(kw_only=True)
 class DeleteThreatIntelSetOutput:
     """Dataclass for DeleteThreatIntelSetOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_THREAT_INTEL_SET_OUTPUT, self)
@@ -14403,6 +15940,16 @@ class DeleteTrustedEntitySetInput:
 @dataclass(kw_only=True)
 class DeleteTrustedEntitySetOutput:
     """Dataclass for DeleteTrustedEntitySetOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_TRUSTED_ENTITY_SET_OUTPUT, self)
@@ -14534,7 +16081,7 @@ class FilterCriterion:
     for their own account.
     """
 
-    criterion_key: CriterionKey | None = None
+    criterion_key: str | None = None
     """
     An enum value representing possible scan properties to match with given
     scan entries.
@@ -14664,7 +16211,7 @@ class SortCriteria:
     findings.
     """
 
-    order_by: OrderBy | None = None
+    order_by: str | None = None
     """The order by which the sorted findings are to be displayed."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -15012,7 +16559,7 @@ class ScanResult(UnknownEnumMixin, StrEnum):
 class ScanResultDetails:
     """Represents the result of the scan."""
 
-    scan_result: ScanResult | None = None
+    scan_result: str | None = None
     """An enum value representing possible scan results."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -15075,7 +16622,7 @@ class TriggerDetails:
     description: str | None = None
     """The description of the scan trigger."""
 
-    trigger_type: TriggerType | None = None
+    trigger_type: str | None = None
     """Specifies the trigger type that started the malware scan."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -15162,7 +16709,7 @@ class Scan:
     scan_id: str | None = None
     """The unique scan ID associated with a scan entry."""
 
-    scan_status: ScanStatus | None = None
+    scan_status: str | None = None
     """An enum value representing possible scan statuses."""
 
     failure_reason: str | None = None
@@ -15198,7 +16745,7 @@ class Scan:
     scanned.
     """
 
-    scan_type: ScanType | None = None
+    scan_type: str | None = None
     """Specifies the scan type that invoked the malware scan."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -15393,6 +16940,16 @@ class DescribeMalwareScansOutput:
     """
     The pagination parameter to be used on the next list operation to
     retrieve more items.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -15964,14 +17521,14 @@ class OrganizationAdditionalConfigurationResult:
     organization.
     """
 
-    name: OrgFeatureAdditionalConfiguration | None = None
+    name: str | None = None
     """
     The name of the additional configuration that is configured for the
     member accounts within the organization. These values are applicable to
     only Runtime Monitoring protection plan.
     """
 
-    auto_enable: OrgFeatureStatus | None = None
+    auto_enable: str | None = None
     """
     Describes the status of the additional configuration that is configured
     for the member accounts within the organization. One of the following
@@ -16093,13 +17650,13 @@ class OrgFeature(UnknownEnumMixin, StrEnum):
 class OrganizationFeatureConfigurationResult:
     """A list of features which will be configured for the organization."""
 
-    name: OrgFeature | None = None
+    name: str | None = None
     """
     The name of the feature that is configured for the member accounts
     within the organization.
     """
 
-    auto_enable: OrgFeatureStatus | None = None
+    auto_enable: str | None = None
     """
     Describes the status of the feature that is configured for the member
     accounts within the organization.
@@ -16259,7 +17816,7 @@ class DescribeOrganizationConfigurationOutput:
     retrieve more items.
     """
 
-    auto_enable_organization_members: AutoEnableMembers | None = None
+    auto_enable_organization_members: str | None = None
     """
     Indicates the auto-enablement configuration of GuardDuty or any of the
     corresponding protection plans for the member accounts in the
@@ -16285,6 +17842,16 @@ class DescribeOrganizationConfigurationOutput:
       existing accounts. This configuration will apply to the new accounts
       that join the organization. After you update the auto-enable settings,
       no new account will have the corresponding option as enabled.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -16507,13 +18074,13 @@ class DescribePublishingDestinationOutput:
     destination_id: str | None = None
     """The ID of the publishing destination."""
 
-    destination_type: DestinationType | None = None
+    destination_type: str | None = None
     """
     The type of publishing destination. Currently, only Amazon S3 buckets
     are supported.
     """
 
-    status: PublishingStatus | None = None
+    status: str | None = None
     """The status of the publishing destination."""
 
     publishing_failure_start_timestamp: int | None = None
@@ -16530,6 +18097,16 @@ class DescribePublishingDestinationOutput:
 
     tags: dict[str, str] | None = None
     """The tags of the publishing destination resource."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DESCRIBE_PUBLISHING_DESTINATION_OUTPUT, self)
@@ -16672,13 +18249,13 @@ class Destination:
     destination_id: str | None = None
     """The unique ID of the publishing destination."""
 
-    destination_type: DestinationType | None = None
+    destination_type: str | None = None
     """
     The type of resource used for the publishing destination. Currently,
     only Amazon S3 buckets are supported.
     """
 
-    status: PublishingStatus | None = None
+    status: str | None = None
     """The status of the publishing destination."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -16764,7 +18341,7 @@ class NetworkDirection(UnknownEnumMixin, StrEnum):
 class NetworkConnection:
     """Contains information about the network connection."""
 
-    direction: NetworkDirection | None = None
+    direction: str | None = None
     """The direction in which the network traffic is flowing."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -17781,7 +19358,7 @@ class EcsCluster:
     GuardDuty finding, including cluster identification and status.
     """
 
-    status: EcsClusterStatus | None = None
+    status: str | None = None
     """The current status of the Amazon ECS cluster."""
 
     ec2_instance_uids: list[str] | None = None
@@ -17855,7 +19432,7 @@ class EcsTask:
     definitions of the Amazon ECS task.
     """
 
-    launch_type: EcsLaunchType | None = None
+    launch_type: str | None = None
     """The infrastructure type on which the Amazon ECS task runs."""
 
     container_uids: list[str] | None = None
@@ -17947,7 +19524,7 @@ class EksCluster:
     format.
     """
 
-    status: ClusterStatus | None = None
+    status: str | None = None
     """The current status of the Amazon EKS cluster."""
 
     vpc_id: str | None = None
@@ -18104,7 +19681,7 @@ class KubernetesWorkload:
     logical isolation within the cluster.
     """
 
-    kubernetes_resources_types: KubernetesResourcesTypes | None = None
+    kubernetes_resources_types: str | None = None
     """The types of Kubernetes resources involved in the workload."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -18191,26 +19768,26 @@ class PublicAccessConfiguration:
     in the *Amazon S3 User Guide*.
     """
 
-    public_acl_access: PublicAccessStatus | None = None
+    public_acl_access: str | None = None
     """
     Indicates whether or not there is a setting that allows public access to
     the Amazon S3 buckets through access control lists (ACLs).
     """
 
-    public_policy_access: PublicAccessStatus | None = None
+    public_policy_access: str | None = None
     """
     Indicates whether or not there is a setting that allows public access to
     the Amazon S3 bucket policy.
     """
 
-    public_acl_ignore_behavior: PublicAclIgnoreBehavior | None = None
+    public_acl_ignore_behavior: str | None = None
     """
     Indicates whether or not there is a setting that ignores all public
     access control lists (ACLs) on the Amazon S3 bucket and the objects that
     it contains.
     """
 
-    public_bucket_restrict_behavior: PublicBucketRestrictBehavior | None = None
+    public_bucket_restrict_behavior: str | None = None
     """
     Indicates whether or not there is a setting that restricts access to the
     bucket with specified policies.
@@ -18359,13 +19936,13 @@ class S3Bucket:
     all the attached policies.
     """
 
-    public_read_access: PublicAccessStatus | None = None
+    public_read_access: str | None = None
     """
     Indicates whether or not the public read access is allowed for an Amazon
     S3 bucket.
     """
 
-    public_write_access: PublicAccessStatus | None = None
+    public_write_access: str | None = None
     """
     Indicates whether or not the public write access is allowed for an
     Amazon S3 bucket.
@@ -18664,6 +20241,13 @@ class ResourceData:
     with the activity that prompted GuardDuty to generate a finding.
     """
 
+    bedrock_guardrail: BedrockGuardrailResource | None = None
+    """
+    Contains detailed information about the Amazon Bedrock guardrail
+    associated with the activity that prompted GuardDuty to generate a
+    finding.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_RESOURCE_DATA, self)
 
@@ -18754,6 +20338,12 @@ class ResourceData:
                 self.cloudformation_stack,
             )
 
+        if self.bedrock_guardrail is not None:
+            serializer.write_struct(
+                _SCHEMA_RESOURCE_DATA.members["BedrockGuardrail"],
+                self.bedrock_guardrail,
+            )
+
     @classmethod
     def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
         return cls(**cls.deserialize_kwargs(deserializer))
@@ -18818,6 +20408,11 @@ class ResourceData:
                 case 15:
                     kwargs["cloudformation_stack"] = CloudformationStack.deserialize(de)
 
+                case 16:
+                    kwargs["bedrock_guardrail"] = BedrockGuardrailResource.deserialize(
+                        de
+                    )
+
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
 
@@ -18842,6 +20437,32 @@ class FindingResourceType(UnknownEnumMixin, StrEnum):
     EC2_LAUNCH_TEMPLATE = "EC2_LAUNCH_TEMPLATE"
     EC2_VPC = "EC2_VPC"
     EC2_IMAGE = "EC2_IMAGE"
+    BEDROCK_CUSTOM_MODEL = "BEDROCK_CUSTOM_MODEL"
+    """An Amazon Bedrock custom model fine-tuned by the customer."""
+    BEDROCK_IMPORTED_MODEL = "BEDROCK_IMPORTED_MODEL"
+    """An Amazon Bedrock imported model brought in from an external source."""
+    BEDROCK_PROVISIONED_MODEL = "BEDROCK_PROVISIONED_MODEL"
+    """An Amazon Bedrock model with provisioned throughput."""
+    BEDROCK_CUSTOM_MODEL_DEPLOYMENT = "BEDROCK_CUSTOM_MODEL_DEPLOYMENT"
+    """A deployment of an Amazon Bedrock custom model."""
+    BEDROCK_INFERENCE_PROFILE = "BEDROCK_INFERENCE_PROFILE"
+    """
+    An Amazon Bedrock inference profile that routes model invocations across
+    Regions.
+    """
+    BEDROCK_APPLICATION_INFERENCE_PROFILE = "BEDROCK_APPLICATION_INFERENCE_PROFILE"
+    """
+    An application-scoped Amazon Bedrock inference profile used to track
+    invocation usage.
+    """
+    BEDROCK_PROMPT = "BEDROCK_PROMPT"
+    """A managed prompt stored in Amazon Bedrock Prompt Management."""
+    BEDROCK_PROMPT_ROUTER = "BEDROCK_PROMPT_ROUTER"
+    """An Amazon Bedrock prompt router that selects a model per request."""
+    BEDROCK_GUARDRAIL = "BEDROCK_GUARDRAIL"
+    """An Amazon Bedrock guardrail evaluated during a model invocation."""
+    SAGEMAKER_ENDPOINT = "SAGEMAKER_ENDPOINT"
+    """An Amazon SageMaker inference endpoint."""
 
 
 @dataclass(kw_only=True)
@@ -18926,7 +20547,7 @@ class ResourceV2:
     account_id: str | None = None
     """The Amazon Web Services account ID to which the resource belongs."""
 
-    resource_type: FindingResourceType | None = None
+    resource_type: str | None = None
     """The type of the Amazon Web Services resource."""
 
     region: str | None = None
@@ -19128,7 +20749,7 @@ class Indicator:
     observed in an attack sequence.
     """
 
-    key: IndicatorType | None = None
+    key: str | None = None
     """
     Specific indicator keys observed in the attack sequence. For description
     of the valid values for key, see [Attack sequence finding
@@ -19286,7 +20907,7 @@ class Signal:
     uid: str | None = None
     """The unique identifier of the signal."""
 
-    type: SignalType | None = None
+    type: str | None = None
     """
     The type of the signal used to identify an attack sequence.
 
@@ -19366,6 +20987,12 @@ class Signal:
     signal_indicators: list[Indicator] | None = None
     """Contains information about the indicators associated with the signals."""
 
+    activities: list[Activity] | None = None
+    """
+    Contains information about the activities, such as API calls, that were
+    observed for this signal.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SIGNAL, self)
 
@@ -19430,6 +21057,11 @@ class Signal:
                 serializer,
                 _SCHEMA_SIGNAL.members["SignalIndicators"],
                 self.signal_indicators,
+            )
+
+        if self.activities is not None:
+            _serialize_activities(
+                serializer, _SCHEMA_SIGNAL.members["Activities"], self.activities
             )
 
     @classmethod
@@ -19504,6 +21136,11 @@ class Signal:
                 case 13:
                     kwargs["signal_indicators"] = _deserialize_indicators(
                         de, _SCHEMA_SIGNAL.members["SignalIndicators"]
+                    )
+
+                case 14:
+                    kwargs["activities"] = _deserialize_activities(
+                        de, _SCHEMA_SIGNAL.members["Activities"]
                     )
 
                 case _:
@@ -19730,25 +21367,547 @@ class Detection:
         return kwargs
 
 
+class DetectionRuleConfigurationStatus(UnknownEnumMixin, StrEnum):
+    ACTIVE = "ACTIVE"
+    PROCESSING = "PROCESSING"
+    FAILED = "FAILED"
+
+
+class DetectionRuleDataSource(UnknownEnumMixin, StrEnum):
+    CLOUDTRAIL_MANAGEMENT_EVENT = "CloudTrailManagementEvent"
+
+
+class DetectionRuleFilterCondition(UnknownEnumMixin, StrEnum):
+    EQUALS = "EQUALS"
+    CONTAINS = "CONTAINS"
+
+
+class FilterFieldName(UnknownEnumMixin, StrEnum):
+    NAME = "name"
+    DESCRIPTION = "description"
+    DATA_SOURCE = "dataSource"
+    SEVERITY = "severity"
+    TACTIC = "tactic"
+    TECHNIQUE = "technique"
+    SERVICE = "service"
+
+
+def _serialize_detection_rule_filter_values(
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_string(member_schema, e)
+
+
+def _deserialize_detection_rule_filter_values(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[str]:
+    result: list[str] = []
+    member_schema = schema.members["member"]
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(d.read_string(member_schema))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
+class DetectionRuleFilter:
+    """
+    Contains filter criteria for listing custom detection rules or
+    associations.
+    """
+
+    name: str | None = None
+    """The name of the field to filter by."""
+
+    values: list[str] | None = None
+    """The values to match against the specified filter name."""
+
+    condition: str | None = None
+    """
+    The condition to apply to the filter. For example, `EQUALS` or
+    `CONTAINS`.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_DETECTION_RULE_FILTER, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.name is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTION_RULE_FILTER.members["Name"], self.name
+            )
+
+        if self.values is not None:
+            _serialize_detection_rule_filter_values(
+                serializer, _SCHEMA_DETECTION_RULE_FILTER.members["Values"], self.values
+            )
+
+        if self.condition is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTION_RULE_FILTER.members["Condition"], self.condition
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["name"] = FilterFieldName(
+                        de.read_string(_SCHEMA_DETECTION_RULE_FILTER.members["Name"])
+                    )
+
+                case 1:
+                    kwargs["values"] = _deserialize_detection_rule_filter_values(
+                        de, _SCHEMA_DETECTION_RULE_FILTER.members["Values"]
+                    )
+
+                case 2:
+                    kwargs["condition"] = DetectionRuleFilterCondition(
+                        de.read_string(
+                            _SCHEMA_DETECTION_RULE_FILTER.members["Condition"]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_DETECTION_RULE_FILTER, consumer=_consumer)
+        return kwargs
+
+
+def _serialize_detection_rule_filter_list(
+    serializer: ShapeSerializer, schema: Schema, value: list[DetectionRuleFilter]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_struct(member_schema, e)
+
+
+def _deserialize_detection_rule_filter_list(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[DetectionRuleFilter]:
+    result: list[DetectionRuleFilter] = []
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(DetectionRuleFilter.deserialize(d))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
+class DetectionRuleOrgConfiguration:
+    """
+    Contains the organization-level configuration for a custom detection
+    rule.
+    """
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    mode: str | None = None
+    """
+    The execution mode of the organization configuration. Valid values:
+    `LIVE` | `DRY_RUN`.
+    """
+
+    status: str | None = None
+    """
+    The configuration status. Valid values: `ACTIVE` | `PROCESSING` |
+    `FAILED`.
+    """
+
+    status_reason: str | None = None
+    """The reason for the current configuration status."""
+
+    include_account_ids: list[str] | None = None
+    """
+    A list of member account IDs included in the organization configuration.
+    Mutually exclusive with `ExcludeAccountIds`.
+    """
+
+    exclude_account_ids: list[str] | None = None
+    """
+    A list of member account IDs excluded from the organization
+    configuration. Mutually exclusive with `IncludeAccountIds`.
+    """
+
+    created_at: datetime | None = None
+    """The timestamp when the organization configuration was created."""
+
+    updated_at: datetime | None = None
+    """The timestamp when the organization configuration was last updated."""
+
+    expires_at: datetime | None = None
+    """The timestamp when the organization configuration expires."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_DETECTION_RULE_ORG_CONFIGURATION, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["RuleId"], self.rule_id
+            )
+
+        if self.mode is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["Mode"], self.mode
+            )
+
+        if self.status is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["Status"], self.status
+            )
+
+        if self.status_reason is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["StatusReason"],
+                self.status_reason,
+            )
+
+        if self.include_account_ids is not None:
+            _serialize_detection_rule_account_ids(
+                serializer,
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["IncludeAccountIds"],
+                self.include_account_ids,
+            )
+
+        if self.exclude_account_ids is not None:
+            _serialize_detection_rule_account_ids(
+                serializer,
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["ExcludeAccountIds"],
+                self.exclude_account_ids,
+            )
+
+        if self.created_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["CreatedAt"],
+                self.created_at,
+            )
+
+        if self.updated_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["UpdatedAt"],
+                self.updated_at,
+            )
+
+        if self.expires_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["ExpiresAt"],
+                self.expires_at,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["RuleId"]
+                    )
+
+                case 1:
+                    kwargs["mode"] = AssociationMode(
+                        de.read_string(
+                            _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["Mode"]
+                        )
+                    )
+
+                case 2:
+                    kwargs["status"] = DetectionRuleConfigurationStatus(
+                        de.read_string(
+                            _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["Status"]
+                        )
+                    )
+
+                case 3:
+                    kwargs["status_reason"] = de.read_string(
+                        _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["StatusReason"]
+                    )
+
+                case 4:
+                    kwargs["include_account_ids"] = (
+                        _deserialize_detection_rule_account_ids(
+                            de,
+                            _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members[
+                                "IncludeAccountIds"
+                            ],
+                        )
+                    )
+
+                case 5:
+                    kwargs["exclude_account_ids"] = (
+                        _deserialize_detection_rule_account_ids(
+                            de,
+                            _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members[
+                                "ExcludeAccountIds"
+                            ],
+                        )
+                    )
+
+                case 6:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["CreatedAt"]
+                    )
+
+                case 7:
+                    kwargs["updated_at"] = de.read_timestamp(
+                        _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["UpdatedAt"]
+                    )
+
+                case 8:
+                    kwargs["expires_at"] = de.read_timestamp(
+                        _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION.members["ExpiresAt"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class DetectionRuleOrgConfigurationSummary:
+    """
+    Contains summary information about an organization-level configuration
+    for a custom detection rule.
+    """
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    mode: str | None = None
+    """The rule execution mode."""
+
+    status: str | None = None
+    """The configuration status."""
+
+    status_reason: str | None = None
+    """The reason for the current configuration status."""
+
+    created_at: datetime | None = None
+    """The timestamp when the organization configuration was created."""
+
+    updated_at: datetime | None = None
+    """The timestamp when the organization configuration was last updated."""
+
+    expires_at: datetime | None = None
+    """The timestamp when the organization configuration expires."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members["RuleId"],
+                self.rule_id,
+            )
+
+        if self.mode is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members["Mode"],
+                self.mode,
+            )
+
+        if self.status is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members["Status"],
+                self.status,
+            )
+
+        if self.status_reason is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members[
+                    "StatusReason"
+                ],
+                self.status_reason,
+            )
+
+        if self.created_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members["CreatedAt"],
+                self.created_at,
+            )
+
+        if self.updated_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members["UpdatedAt"],
+                self.updated_at,
+            )
+
+        if self.expires_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members["ExpiresAt"],
+                self.expires_at,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members[
+                            "RuleId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["mode"] = AssociationMode(
+                        de.read_string(
+                            _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members[
+                                "Mode"
+                            ]
+                        )
+                    )
+
+                case 2:
+                    kwargs["status"] = DetectionRuleConfigurationStatus(
+                        de.read_string(
+                            _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members[
+                                "Status"
+                            ]
+                        )
+                    )
+
+                case 3:
+                    kwargs["status_reason"] = de.read_string(
+                        _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members[
+                            "StatusReason"
+                        ]
+                    )
+
+                case 4:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members[
+                            "CreatedAt"
+                        ]
+                    )
+
+                case 5:
+                    kwargs["updated_at"] = de.read_timestamp(
+                        _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members[
+                            "UpdatedAt"
+                        ]
+                    )
+
+                case 6:
+                    kwargs["expires_at"] = de.read_timestamp(
+                        _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY.members[
+                            "ExpiresAt"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_DETECTION_RULE_ORG_CONFIGURATION_SUMMARY, consumer=_consumer
+        )
+        return kwargs
+
+
+def _serialize_detection_rule_org_configuration_summary_list(
+    serializer: ShapeSerializer,
+    schema: Schema,
+    value: list[DetectionRuleOrgConfigurationSummary],
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_struct(member_schema, e)
+
+
+def _deserialize_detection_rule_org_configuration_summary_list(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[DetectionRuleOrgConfigurationSummary]:
+    result: list[DetectionRuleOrgConfigurationSummary] = []
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(DetectionRuleOrgConfigurationSummary.deserialize(d))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+class DetectionRuleSeverity(UnknownEnumMixin, StrEnum):
+    CRITICAL = "CRITICAL"
+    HIGH = "HIGH"
+    MEDIUM = "MEDIUM"
+    LOW = "LOW"
+
+
 class DetectionSource(UnknownEnumMixin, StrEnum):
     AMAZON = "AMAZON"
     BITDEFENDER = "BITDEFENDER"
+
+
+class ManagedBy(UnknownEnumMixin, StrEnum):
+    GUARDDUTY_POLICY = "GUARDDUTY_POLICY"
 
 
 @dataclass(kw_only=True)
 class DetectorAdditionalConfigurationResult:
     """Information about the additional configuration."""
 
-    name: FeatureAdditionalConfiguration | None = None
+    name: str | None = None
     """Name of the additional configuration."""
 
-    status: FeatureStatus | None = None
+    status: str | None = None
     """Status of the additional configuration."""
 
     updated_at: datetime | None = None
     """
     The timestamp at which the additional configuration was last updated.
     This is in UTC format.
+    """
+
+    managed_by: str | None = None
+    """
+    Indicates what manages the additional configuration. A value of
+    `GUARDDUTY_POLICY` means a GuardDuty policy manages the additional
+    configuration.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -19771,6 +21930,12 @@ class DetectorAdditionalConfigurationResult:
             serializer.write_timestamp(
                 _SCHEMA_DETECTOR_ADDITIONAL_CONFIGURATION_RESULT.members["UpdatedAt"],
                 self.updated_at,
+            )
+
+        if self.managed_by is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTOR_ADDITIONAL_CONFIGURATION_RESULT.members["ManagedBy"],
+                self.managed_by,
             )
 
     @classmethod
@@ -19806,6 +21971,15 @@ class DetectorAdditionalConfigurationResult:
                         _SCHEMA_DETECTOR_ADDITIONAL_CONFIGURATION_RESULT.members[
                             "UpdatedAt"
                         ]
+                    )
+
+                case 3:
+                    kwargs["managed_by"] = ManagedBy(
+                        de.read_string(
+                            _SCHEMA_DETECTOR_ADDITIONAL_CONFIGURATION_RESULT.members[
+                                "ManagedBy"
+                            ]
+                        )
                     )
 
                 case _:
@@ -19872,10 +22046,10 @@ class DetectorFeatureConfigurationResult:
     Monitoring](https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html).
     """
 
-    name: DetectorFeatureResult | None = None
+    name: str | None = None
     """Indicates the name of the feature that can be enabled for the detector."""
 
-    status: FeatureStatus | None = None
+    status: str | None = None
     """Indicates the status of the feature that is enabled for the detector."""
 
     updated_at: datetime | None = None
@@ -19883,6 +22057,12 @@ class DetectorFeatureConfigurationResult:
 
     additional_configuration: list[DetectorAdditionalConfigurationResult] | None = None
     """Additional configuration for a resource."""
+
+    managed_by: str | None = None
+    """
+    Indicates what manages the feature. A value of `GUARDDUTY_POLICY` means
+    a GuardDuty policy manages the feature.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DETECTOR_FEATURE_CONFIGURATION_RESULT, self)
@@ -19912,6 +22092,12 @@ class DetectorFeatureConfigurationResult:
                     "AdditionalConfiguration"
                 ],
                 self.additional_configuration,
+            )
+
+        if self.managed_by is not None:
+            serializer.write_string(
+                _SCHEMA_DETECTOR_FEATURE_CONFIGURATION_RESULT.members["ManagedBy"],
+                self.managed_by,
             )
 
     @classmethod
@@ -19956,6 +22142,15 @@ class DetectorFeatureConfigurationResult:
                             _SCHEMA_DETECTOR_FEATURE_CONFIGURATION_RESULT.members[
                                 "AdditionalConfiguration"
                             ],
+                        )
+                    )
+
+                case 4:
+                    kwargs["managed_by"] = ManagedBy(
+                        de.read_string(
+                            _SCHEMA_DETECTOR_FEATURE_CONFIGURATION_RESULT.members[
+                                "ManagedBy"
+                            ]
                         )
                     )
 
@@ -20078,6 +22273,16 @@ class DisableOrganizationAdminAccountInput:
 class DisableOrganizationAdminAccountOutput:
     """Dataclass for DisableOrganizationAdminAccountOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DISABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT, self)
 
@@ -20176,6 +22381,16 @@ class DisassociateFromAdministratorAccountInput:
 class DisassociateFromAdministratorAccountOutput:
     """Dataclass for DisassociateFromAdministratorAccountOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT_OUTPUT, self
@@ -20271,6 +22486,16 @@ class DisassociateFromMasterAccountInput:
 @dataclass(kw_only=True)
 class DisassociateFromMasterAccountOutput:
     """Dataclass for DisassociateFromMasterAccountOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DISASSOCIATE_FROM_MASTER_ACCOUNT_OUTPUT, self)
@@ -20387,6 +22612,16 @@ class DisassociateMembersOutput:
     """
     A list of objects that contain the unprocessed account and a result
     string that explains why it was unprocessed.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -21185,7 +23420,7 @@ class EbsVolumeScanDetails:
     scan_detections: ScanDetections | None = None
     """Contains a complete view providing malware scan result details."""
 
-    scan_type: ScanType | None = None
+    scan_type: str | None = None
     """Specifies the scan type that invoked the malware scan."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -21893,6 +24128,16 @@ class EnableOrganizationAdminAccountInput:
 @dataclass(kw_only=True)
 class EnableOrganizationAdminAccountOutput:
     """Dataclass for EnableOrganizationAdminAccountOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ENABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT, self)
@@ -24570,7 +26815,7 @@ class IncrementalScanDetails:
 class MalwareProtectionFindingsScanConfiguration:
     """Contains finding configuration details about the malware scan."""
 
-    trigger_type: TriggerType | None = None
+    trigger_type: str | None = None
     """The event that triggered the malware scan."""
 
     incremental_scan_details: IncrementalScanDetails | None = None
@@ -24950,10 +27195,10 @@ class MalwareScanDetails:
     scan_id: str | None = None
     """The unique identifier for the malware scan."""
 
-    scan_type: MalwareProtectionScanType | None = None
+    scan_type: str | None = None
     """The type of malware scan performed."""
 
-    scan_category: ScanCategory | None = None
+    scan_category: str | None = None
     """The category of the malware scan."""
 
     scan_configuration: MalwareProtectionFindingsScanConfiguration | None = None
@@ -26968,7 +29213,7 @@ class FindingStatisticType(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_finding_statistic_types(
-    serializer: ShapeSerializer, schema: Schema, value: list[FindingStatisticType]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -26978,8 +29223,8 @@ def _serialize_finding_statistic_types(
 
 def _deserialize_finding_statistic_types(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[FindingStatisticType]:
-    result: list[FindingStatisticType] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -27040,6 +29285,16 @@ class GetAdministratorAccountOutput:
 
     administrator: Administrator | None = None
     """The administrator account details."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_ADMINISTRATOR_ACCOUNT_OUTPUT, self)
@@ -27112,7 +29367,7 @@ class GetCoverageStatisticsInput:
     filter_criteria: CoverageFilterCriteria | None = None
     """Represents the criteria used to filter the coverage statistics."""
 
-    statistics_type: list[CoverageStatisticsType] | None = None
+    statistics_type: list[str] | None = None
     """Represents the statistics type used to aggregate the coverage details."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -27182,6 +29437,16 @@ class GetCoverageStatisticsOutput:
     coverage_statistics: CoverageStatistics | None = None
     """Represents the count aggregated by the `statusCode` and `resourceType`."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_COVERAGE_STATISTICS_OUTPUT, self)
 
@@ -27232,6 +29497,685 @@ GET_COVERAGE_STATISTICS = APIOperation(
     error_schemas=[
         _SCHEMA_BAD_REQUEST_EXCEPTION,
         _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class GetCustomDetectionRuleInput:
+    """Dataclass for GetCustomDetectionRuleInput structure."""
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_GET_CUSTOM_DETECTION_RULE_INPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_GET_CUSTOM_DETECTION_RULE_INPUT.members["RuleId"], self.rule_id
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_GET_CUSTOM_DETECTION_RULE_INPUT.members["RuleId"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_GET_CUSTOM_DETECTION_RULE_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class RuleDefinition:
+    """Contains the detection logic for a custom detection rule."""
+
+    expression: str | None = None
+    """The detection logic expression for the rule."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_RULE_DEFINITION, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.expression is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_DEFINITION.members["Expression"], self.expression
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["expression"] = de.read_string(
+                        _SCHEMA_RULE_DEFINITION.members["Expression"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_RULE_DEFINITION, consumer=_consumer)
+        return kwargs
+
+
+class RuleLanguage(UnknownEnumMixin, StrEnum):
+    SQL = "SQL"
+
+
+class RuleSchema(UnknownEnumMixin, StrEnum):
+    CLOUD_TRAIL = "CloudTrail"
+
+
+@dataclass(kw_only=True)
+class RuleDetail:
+    """
+    Contains the full details of a custom detection rule, including its
+    detection logic.
+    """
+
+    rule_id: str | None = None
+    """The unique identifier for the rule."""
+
+    arn: str | None = None
+    """The Amazon Resource Name (ARN) of the rule."""
+
+    name: str | None = None
+    """The display name of the rule."""
+
+    description: str | None = None
+    """A description of what the rule detects."""
+
+    severity: str | None = None
+    """The severity level assigned to findings generated by this rule."""
+
+    data_source: str | None = None
+    """The data source that the rule analyzes."""
+
+    tactic: str | None = None
+    """The MITRE ATT&CK tactic associated with the rule."""
+
+    technique: str | None = None
+    """The MITRE ATT&CK technique associated with the rule."""
+
+    service: str | None = None
+    """The Amazon Web Services service associated with the rule."""
+
+    definition: RuleDefinition | None = None
+    """The detection logic definition for the rule."""
+
+    language: str | None = None
+    """The language used for the detection logic expression."""
+
+    schema: str | None = None
+    """The schema version used by the rule definition."""
+
+    created_at: datetime | None = None
+    """The timestamp when the rule was created."""
+
+    updated_at: datetime | None = None
+    """The timestamp when the rule was last updated."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_RULE_DETAIL, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(_SCHEMA_RULE_DETAIL.members["RuleId"], self.rule_id)
+
+        if self.arn is not None:
+            serializer.write_string(_SCHEMA_RULE_DETAIL.members["Arn"], self.arn)
+
+        if self.name is not None:
+            serializer.write_string(_SCHEMA_RULE_DETAIL.members["Name"], self.name)
+
+        if self.description is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_DETAIL.members["Description"], self.description
+            )
+
+        if self.severity is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_DETAIL.members["Severity"], self.severity
+            )
+
+        if self.data_source is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_DETAIL.members["DataSource"], self.data_source
+            )
+
+        if self.tactic is not None:
+            serializer.write_string(_SCHEMA_RULE_DETAIL.members["Tactic"], self.tactic)
+
+        if self.technique is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_DETAIL.members["Technique"], self.technique
+            )
+
+        if self.service is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_DETAIL.members["Service"], self.service
+            )
+
+        if self.definition is not None:
+            serializer.write_struct(
+                _SCHEMA_RULE_DETAIL.members["Definition"], self.definition
+            )
+
+        if self.language is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_DETAIL.members["Language"], self.language
+            )
+
+        if self.schema is not None:
+            serializer.write_string(_SCHEMA_RULE_DETAIL.members["Schema"], self.schema)
+
+        if self.created_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_RULE_DETAIL.members["CreatedAt"], self.created_at
+            )
+
+        if self.updated_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_RULE_DETAIL.members["UpdatedAt"], self.updated_at
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_RULE_DETAIL.members["RuleId"]
+                    )
+
+                case 1:
+                    kwargs["arn"] = de.read_string(_SCHEMA_RULE_DETAIL.members["Arn"])
+
+                case 2:
+                    kwargs["name"] = de.read_string(_SCHEMA_RULE_DETAIL.members["Name"])
+
+                case 3:
+                    kwargs["description"] = de.read_string(
+                        _SCHEMA_RULE_DETAIL.members["Description"]
+                    )
+
+                case 4:
+                    kwargs["severity"] = DetectionRuleSeverity(
+                        de.read_string(_SCHEMA_RULE_DETAIL.members["Severity"])
+                    )
+
+                case 5:
+                    kwargs["data_source"] = DetectionRuleDataSource(
+                        de.read_string(_SCHEMA_RULE_DETAIL.members["DataSource"])
+                    )
+
+                case 6:
+                    kwargs["tactic"] = de.read_string(
+                        _SCHEMA_RULE_DETAIL.members["Tactic"]
+                    )
+
+                case 7:
+                    kwargs["technique"] = de.read_string(
+                        _SCHEMA_RULE_DETAIL.members["Technique"]
+                    )
+
+                case 8:
+                    kwargs["service"] = de.read_string(
+                        _SCHEMA_RULE_DETAIL.members["Service"]
+                    )
+
+                case 9:
+                    kwargs["definition"] = RuleDefinition.deserialize(de)
+
+                case 10:
+                    kwargs["language"] = RuleLanguage(
+                        de.read_string(_SCHEMA_RULE_DETAIL.members["Language"])
+                    )
+
+                case 11:
+                    kwargs["schema"] = RuleSchema(
+                        de.read_string(_SCHEMA_RULE_DETAIL.members["Schema"])
+                    )
+
+                case 12:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_RULE_DETAIL.members["CreatedAt"]
+                    )
+
+                case 13:
+                    kwargs["updated_at"] = de.read_timestamp(
+                        _SCHEMA_RULE_DETAIL.members["UpdatedAt"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_RULE_DETAIL, consumer=_consumer)
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class GetCustomDetectionRuleOutput:
+    """Dataclass for GetCustomDetectionRuleOutput structure."""
+
+    rule: RuleDetail | None = None
+    """The details of the custom detection rule."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_GET_CUSTOM_DETECTION_RULE_OUTPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule is not None:
+            serializer.write_struct(
+                _SCHEMA_GET_CUSTOM_DETECTION_RULE_OUTPUT.members["Rule"], self.rule
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule"] = RuleDetail.deserialize(de)
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_GET_CUSTOM_DETECTION_RULE_OUTPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+GET_CUSTOM_DETECTION_RULE = APIOperation(
+    input=GetCustomDetectionRuleInput,
+    output=GetCustomDetectionRuleOutput,
+    schema=_SCHEMA_GET_CUSTOM_DETECTION_RULE,
+    input_schema=_SCHEMA_GET_CUSTOM_DETECTION_RULE_INPUT,
+    output_schema=_SCHEMA_GET_CUSTOM_DETECTION_RULE_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+            ShapeID(
+                "com.amazonaws.guardduty#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class GetCustomDetectionRuleAssociationInput:
+    """Dataclass for GetCustomDetectionRuleAssociationInput structure."""
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    association_id: str | None = None
+    """The unique identifier for the association."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members["RuleId"],
+                self.rule_id,
+            )
+
+        if self.association_id is not None:
+            serializer.write_string(
+                _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                    "AssociationId"
+                ],
+                self.association_id,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                            "RuleId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["association_id"] = de.read_string(
+                        _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                            "AssociationId"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class GetCustomDetectionRuleAssociationOutput:
+    """Dataclass for GetCustomDetectionRuleAssociationOutput structure."""
+
+    rule_association: AssociationDetail | None = None
+    """The details of the custom detection rule association."""
+
+    tags: dict[str, str] | None = None
+    """The tags associated with the custom detection rule association resource."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_association is not None:
+            serializer.write_struct(
+                _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT.members[
+                    "RuleAssociation"
+                ],
+                self.rule_association,
+            )
+
+        if self.tags is not None:
+            _serialize_tag_map(
+                serializer,
+                _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT.members["Tags"],
+                self.tags,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_association"] = AssociationDetail.deserialize(de)
+
+                case 1:
+                    kwargs["tags"] = _deserialize_tag_map(
+                        de,
+                        _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT.members[
+                            "Tags"
+                        ],
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+GET_CUSTOM_DETECTION_RULE_ASSOCIATION = APIOperation(
+    input=GetCustomDetectionRuleAssociationInput,
+    output=GetCustomDetectionRuleAssociationOutput,
+    schema=_SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION,
+    input_schema=_SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    output_schema=_SCHEMA_GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+            ShapeID(
+                "com.amazonaws.guardduty#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class GetCustomDetectionRuleOrgConfigurationInput:
+    """Dataclass for GetCustomDetectionRuleOrgConfigurationInput structure."""
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    mode: str | None = None
+    """
+    The execution mode of the organization configuration to retrieve. Valid
+    values: `LIVE` | `DRY_RUN`.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "RuleId"
+                ],
+                self.rule_id,
+            )
+
+        if self.mode is not None:
+            serializer.write_string(
+                _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "Mode"
+                ],
+                self.mode,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                            "RuleId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["mode"] = AssociationMode(
+                        de.read_string(
+                            _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                                "Mode"
+                            ]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+            consumer=_consumer,
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class GetCustomDetectionRuleOrgConfigurationOutput:
+    """Dataclass for GetCustomDetectionRuleOrgConfigurationOutput structure."""
+
+    configuration: DetectionRuleOrgConfiguration | None = None
+    """The details of the organization configuration."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.configuration is not None:
+            serializer.write_struct(
+                _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT.members[
+                    "Configuration"
+                ],
+                self.configuration,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["configuration"] = DetectionRuleOrgConfiguration.deserialize(
+                        de
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+            consumer=_consumer,
+        )
+        return kwargs
+
+
+GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = APIOperation(
+    input=GetCustomDetectionRuleOrgConfigurationInput,
+    output=GetCustomDetectionRuleOrgConfigurationOutput,
+    schema=_SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+    input_schema=_SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    output_schema=_SCHEMA_GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+            ShapeID(
+                "com.amazonaws.guardduty#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
     ],
 )
 
@@ -27288,13 +30232,13 @@ class GetDetectorOutput:
     created_at: str | None = None
     """The timestamp of when the detector was created."""
 
-    finding_publishing_frequency: FindingPublishingFrequency | None = None
+    finding_publishing_frequency: str | None = None
     """The publishing frequency of the finding."""
 
     service_role: str | None = None
     """The GuardDuty service role."""
 
-    status: DetectorStatus | None = None
+    status: str | None = None
     """The detector status."""
 
     updated_at: str | None = None
@@ -27308,6 +30252,16 @@ class GetDetectorOutput:
 
     features: list[DetectorFeatureConfigurationResult] | None = None
     """Describes the features that have been enabled for the detector."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_DETECTOR_OUTPUT, self)
@@ -27509,7 +30463,7 @@ class GetFilterOutput:
     description: str | None = None
     """The description of the filter."""
 
-    action: FilterAction | None = None
+    action: str | None = None
     """
     Specifies the action that is to be applied to the findings that match
     the filter.
@@ -27547,6 +30501,16 @@ class GetFilterOutput:
     The version of the filter. Every time the filter is updated, the version
     increments by 1. This field is not available for legacy filters that
     were created before the lifecycle metadata feature was enabled.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -27760,6 +30724,16 @@ class GetFindingsOutput:
     findings: list[Finding] | None = None
     """A list of findings."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_FINDINGS_OUTPUT, self)
 
@@ -27837,19 +30811,19 @@ class GetFindingsStatisticsInput:
     API.
     """
 
-    finding_statistic_types: list[FindingStatisticType] | None = None
+    finding_statistic_types: list[str] | None = None
     """The types of finding statistics to retrieve."""
 
     finding_criteria: FindingCriteria | None = None
     """Represents the criteria that is used for querying findings."""
 
-    group_by: GroupByType | None = None
+    group_by: str | None = None
     """
     Displays the findings statistics grouped by one of the listed valid
     values.
     """
 
-    order_by: OrderBy | None = None
+    order_by: str | None = None
     """
     Displays the sorted findings in the requested order. The default value
     of `orderBy` is `DESC`.
@@ -27973,6 +30947,16 @@ class GetFindingsStatisticsOutput:
     retrieve more items.
 
     This parameter is currently not supported.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -28218,7 +31202,7 @@ class Investigation:
     investigation_id: str | None = None
     """The unique identifier of the investigation."""
 
-    status: InvestigationStatus | None = None
+    status: str | None = None
     """
     The current status of the investigation. Possible values are `RUNNING`,
     `COMPLETED`, and `FAILED`.
@@ -28239,7 +31223,7 @@ class Investigation:
     performed, including the provider, region, and account.
     """
 
-    risk_level: RiskLevel | None = None
+    risk_level: str | None = None
     """
     The assessed risk level of the investigated threat. Possible values are
     `Info`, `Low`, `Medium`, `High`, and `Critical`.
@@ -28248,7 +31232,7 @@ class Investigation:
     risk: str | None = None
     """A human-readable description of the assessed risk."""
 
-    confidence: Confidence | None = None
+    confidence: str | None = None
     """
     The confidence level of the investigation's assessment. Possible values
     are `Unknown`, `Low`, `Medium`, and `High`.
@@ -28417,6 +31401,16 @@ class GetInvestigationOutput:
     investigation: Investigation | None = None
     """The details and results of the requested investigation."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_INVESTIGATION_OUTPUT, self)
 
@@ -28512,6 +31506,16 @@ class GetInvitationsCountOutput:
 
     invitations_count: int | None = None
     """The number of received invitations."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_INVITATIONS_COUNT_OUTPUT, self)
@@ -28644,13 +31648,13 @@ class GetIPSetOutput:
     name: str | None = None
     """The user-friendly name for the IPSet."""
 
-    format: IpSetFormat | None = None
+    format: str | None = None
     """The format of the file that contains the IPSet."""
 
     location: str | None = None
     """The URI of the file that contains the IPSet."""
 
-    status: IpSetStatus | None = None
+    status: str | None = None
     """The status of IPSet file that was uploaded."""
 
     tags: dict[str, str] | None = None
@@ -28661,6 +31665,16 @@ class GetIPSetOutput:
     The Amazon Web Services account ID that owns the Amazon S3 bucket
     specified in the **location** parameter. This field appears in the
     response only if it was provided during IPSet creation or update.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -28937,7 +31951,7 @@ class GetMalwareProtectionPlanOutput:
     created_at: datetime | None = None
     """The timestamp when the Malware Protection plan resource was created."""
 
-    status: MalwareProtectionPlanStatus | None = None
+    status: str | None = None
     """Malware Protection plan status."""
 
     status_reasons: list[MalwareProtectionPlanStatusReason] | None = None
@@ -28948,6 +31962,16 @@ class GetMalwareProtectionPlanOutput:
 
     tags: dict[str, str] | None = None
     """Tags added to the Malware Protection plan resource."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MALWARE_PROTECTION_PLAN_OUTPUT, self)
@@ -29386,13 +32410,13 @@ class ScannedResource:
     scanned_resource_arn: str | None = None
     """Amazon Resource Name (ARN) of the scanned resource."""
 
-    scanned_resource_type: MalwareProtectionResourceType | None = None
+    scanned_resource_type: str | None = None
     """The resource type of the scanned resource."""
 
-    scanned_resource_status: MalwareProtectionScanStatus | None = None
+    scanned_resource_status: str | None = None
     """The status of the scanned resource."""
 
-    scan_status_reason: ScanStatusReason | None = None
+    scan_status_reason: str | None = None
     """
     The reason for the scan status of this particular resource, if
     applicable.
@@ -29521,7 +32545,7 @@ class ScanResultThreat:
     name: str | None = None
     """The name of the detected threat."""
 
-    source: DetectionSource | None = None
+    source: str | None = None
     """The source that detected this threat."""
 
     count: int | None = None
@@ -29635,7 +32659,7 @@ def _deserialize_scan_result_threats(
 class GetMalwareScanResultDetails:
     """Contains information about the results of the malware scan."""
 
-    scan_result_status: ScanResultStatus | None = None
+    scan_result_status: str | None = None
     """Status indicating whether threats were found for a completed scan."""
 
     skipped_file_count: int | None = None
@@ -29826,7 +32850,7 @@ class GetMalwareScanOutput:
     invoked.
     """
 
-    resource_type: MalwareProtectionResourceType | None = None
+    resource_type: str | None = None
     """The type of resource that was scanned for malware."""
 
     scanned_resources_count: int | None = None
@@ -29850,16 +32874,16 @@ class GetMalwareScanOutput:
     scan_configuration: ScanConfiguration | None = None
     """Information about the scan configuration used for the malware scan."""
 
-    scan_category: ScanCategory | None = None
+    scan_category: str | None = None
     """The category of the malware scan, indicating the type of scan performed."""
 
-    scan_status: MalwareProtectionScanStatus | None = None
+    scan_status: str | None = None
     """A value representing the current status of the malware scan."""
 
-    scan_status_reason: ScanStatusReason | None = None
+    scan_status_reason: str | None = None
     """Represents the reason for the current scan status, if applicable."""
 
-    scan_type: MalwareProtectionScanType | None = None
+    scan_type: str | None = None
     """A value representing the initiator of the scan."""
 
     scan_started_at: datetime | None = None
@@ -29872,6 +32896,16 @@ class GetMalwareScanOutput:
     """
     Detailed information about the results of the malware scan, if the scan
     completed.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -30390,8 +33424,18 @@ class GetMalwareScanSettingsOutput:
     scan_resource_criteria: ScanResourceCriteria | None = None
     """Represents the criteria to be used in the filter for scanning resources."""
 
-    ebs_snapshot_preservation: EbsSnapshotPreservation | None = None
+    ebs_snapshot_preservation: str | None = None
     """An enum value representing possible snapshot preservation settings."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MALWARE_SCAN_SETTINGS_OUTPUT, self)
@@ -30603,6 +33647,16 @@ class GetMasterAccountOutput:
     master: Master | None = None
     """The administrator account details."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MASTER_ACCOUNT_OUTPUT, self)
 
@@ -30719,13 +33773,13 @@ class GetMemberDetectorsInput:
 class MemberAdditionalConfigurationResult:
     """Information about the additional configuration for the member account."""
 
-    name: OrgFeatureAdditionalConfiguration | None = None
+    name: str | None = None
     """
     Indicates the name of the additional configuration that is set for the
     member account.
     """
 
-    status: FeatureStatus | None = None
+    status: str | None = None
     """
     Indicates the status of the additional configuration that is set for the
     member account.
@@ -30735,6 +33789,13 @@ class MemberAdditionalConfigurationResult:
     """
     The timestamp at which the additional configuration was set for the
     member account. This is in UTC format.
+    """
+
+    managed_by: str | None = None
+    """
+    Indicates what manages the additional configuration. A value of
+    `GUARDDUTY_POLICY` means a GuardDuty policy manages the additional
+    configuration.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -30757,6 +33818,12 @@ class MemberAdditionalConfigurationResult:
             serializer.write_timestamp(
                 _SCHEMA_MEMBER_ADDITIONAL_CONFIGURATION_RESULT.members["UpdatedAt"],
                 self.updated_at,
+            )
+
+        if self.managed_by is not None:
+            serializer.write_string(
+                _SCHEMA_MEMBER_ADDITIONAL_CONFIGURATION_RESULT.members["ManagedBy"],
+                self.managed_by,
             )
 
     @classmethod
@@ -30792,6 +33859,15 @@ class MemberAdditionalConfigurationResult:
                         _SCHEMA_MEMBER_ADDITIONAL_CONFIGURATION_RESULT.members[
                             "UpdatedAt"
                         ]
+                    )
+
+                case 3:
+                    kwargs["managed_by"] = ManagedBy(
+                        de.read_string(
+                            _SCHEMA_MEMBER_ADDITIONAL_CONFIGURATION_RESULT.members[
+                                "ManagedBy"
+                            ]
+                        )
                     )
 
                 case _:
@@ -30834,10 +33910,10 @@ def _deserialize_member_additional_configuration_results(
 class MemberFeaturesConfigurationResult:
     """Contains information about the features for the member account."""
 
-    name: OrgFeature | None = None
+    name: str | None = None
     """Indicates the name of the feature that is enabled for the detector."""
 
-    status: FeatureStatus | None = None
+    status: str | None = None
     """Indicates the status of the feature that is enabled for the detector."""
 
     updated_at: datetime | None = None
@@ -30847,6 +33923,12 @@ class MemberFeaturesConfigurationResult:
     """
     Indicates the additional configuration of the feature that is configured
     for the member account.
+    """
+
+    managed_by: str | None = None
+    """
+    Indicates what manages the feature. A value of `GUARDDUTY_POLICY` means
+    a GuardDuty policy manages the feature.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -30877,6 +33959,12 @@ class MemberFeaturesConfigurationResult:
                     "AdditionalConfiguration"
                 ],
                 self.additional_configuration,
+            )
+
+        if self.managed_by is not None:
+            serializer.write_string(
+                _SCHEMA_MEMBER_FEATURES_CONFIGURATION_RESULT.members["ManagedBy"],
+                self.managed_by,
             )
 
     @classmethod
@@ -30919,6 +34007,15 @@ class MemberFeaturesConfigurationResult:
                             _SCHEMA_MEMBER_FEATURES_CONFIGURATION_RESULT.members[
                                 "AdditionalConfiguration"
                             ],
+                        )
+                    )
+
+                case 4:
+                    kwargs["managed_by"] = ManagedBy(
+                        de.read_string(
+                            _SCHEMA_MEMBER_FEATURES_CONFIGURATION_RESULT.members[
+                                "ManagedBy"
+                            ]
                         )
                     )
 
@@ -31080,6 +34177,16 @@ class GetMemberDetectorsOutput:
     """
     A list of member account IDs that were unable to be processed along with
     an explanation for why they were not processed.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -31386,6 +34493,16 @@ class GetMembersOutput:
     string that explains why it was unprocessed.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MEMBERS_OUTPUT, self)
 
@@ -31487,7 +34604,7 @@ class OrganizationFeatureStatisticsAdditionalConfiguration:
     configuration of the feature.
     """
 
-    name: OrgFeatureAdditionalConfiguration | None = None
+    name: str | None = None
     """Name of the additional configuration within a feature."""
 
     enabled_accounts_count: int | None = None
@@ -31587,7 +34704,7 @@ class OrganizationFeatureStatistics:
     feature.
     """
 
-    name: OrgFeature | None = None
+    name: str | None = None
     """Name of the feature."""
 
     enabled_accounts_count: int | None = None
@@ -31871,6 +34988,16 @@ class GetOrganizationStatisticsOutput:
     organization_details: OrganizationDetails | None = None
     """Information about the statistics report for your organization."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_ORGANIZATION_STATISTICS_OUTPUT, self)
 
@@ -32009,6 +35136,16 @@ class GetRemainingFreeTrialDaysOutput:
     """
     The member account that was included in a request but for which the
     request could not be processed.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -32171,7 +35308,7 @@ class GetThreatEntitySetOutput:
     `threatEntitySetId`.
     """
 
-    format: ThreatEntitySetFormat | None = None
+    format: str | None = None
     """The format of the file that contains the threat entity set."""
 
     location: str | None = None
@@ -32183,7 +35320,7 @@ class GetThreatEntitySetOutput:
     specified in the **location** parameter.
     """
 
-    status: ThreatEntitySetStatus | None = None
+    status: str | None = None
     """The status of the associated threat entity set."""
 
     tags: dict[str, str] | None = None
@@ -32197,6 +35334,16 @@ class GetThreatEntitySetOutput:
 
     error_details: str | None = None
     """The error details when the status is shown as `ERROR`."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_THREAT_ENTITY_SET_OUTPUT, self)
@@ -32427,13 +35574,13 @@ class GetThreatIntelSetOutput:
     ThreatIntelSet.
     """
 
-    format: ThreatIntelSetFormat | None = None
+    format: str | None = None
     """The format of the threatIntelSet."""
 
     location: str | None = None
     """The URI of the file that contains the ThreatIntelSet."""
 
-    status: ThreatIntelSetStatus | None = None
+    status: str | None = None
     """The status of threatIntelSet file uploaded."""
 
     tags: dict[str, str] | None = None
@@ -32445,6 +35592,16 @@ class GetThreatIntelSetOutput:
     specified in the **location** parameter. This field appears in the
     response only if it was provided during ThreatIntelSet creation or
     update.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -32641,7 +35798,7 @@ class GetTrustedEntitySetOutput:
     `trustedEntitySetId`.
     """
 
-    format: TrustedEntitySetFormat | None = None
+    format: str | None = None
     """The format of the file that contains the trusted entity set."""
 
     location: str | None = None
@@ -32653,7 +35810,7 @@ class GetTrustedEntitySetOutput:
     specified in the **location** parameter.
     """
 
-    status: TrustedEntitySetStatus | None = None
+    status: str | None = None
     """The status of the associated trusted entity set."""
 
     tags: dict[str, str] | None = None
@@ -32667,6 +35824,16 @@ class GetTrustedEntitySetOutput:
 
     error_details: str | None = None
     """The error details when the status is shown as `ERROR`."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_TRUSTED_ENTITY_SET_OUTPUT, self)
@@ -32833,7 +36000,7 @@ class UsageFeature(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_usage_feature_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[UsageFeature]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -32843,8 +36010,8 @@ def _serialize_usage_feature_list(
 
 def _deserialize_usage_feature_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[UsageFeature]:
-    result: list[UsageFeature] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -32891,7 +36058,7 @@ class UsageCriteria:
     account_ids: list[str] | None = None
     """The account IDs to aggregate usage statistics from."""
 
-    data_sources: list[DataSource] | None = None
+    data_sources: list[str] | None = None
     """The data sources to aggregate usage statistics from."""
 
     resources: list[str] | None = None
@@ -32900,7 +36067,7 @@ class UsageCriteria:
     resource names.
     """
 
-    features: list[UsageFeature] | None = None
+    features: list[str] | None = None
     """The features to aggregate usage statistics from."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -32992,7 +36159,7 @@ class GetUsageStatisticsInput:
     API.
     """
 
-    usage_statistic_type: UsageStatisticType | None = None
+    usage_statistic_type: str | None = None
     """The type of usage statistics to retrieve."""
 
     usage_criteria: UsageCriteria | None = None
@@ -33226,7 +36393,7 @@ def _deserialize_usage_account_result_list(
 class UsageDataSourceResult:
     """Contains information on the result of usage based on data source type."""
 
-    data_source: DataSource | None = None
+    data_source: str | None = None
     """The data source type that generated usage."""
 
     total: Total | None = None
@@ -33305,7 +36472,7 @@ class UsageFeatureResult:
     feature.
     """
 
-    feature: UsageFeature | None = None
+    feature: str | None = None
     """The feature that generated the usage cost."""
 
     total: Total | None = None
@@ -33542,7 +36709,7 @@ class UsageTopAccountsResult:
     feature.
     """
 
-    feature: UsageFeature | None = None
+    feature: str | None = None
     """
     Features by which you can generate the usage statistics.
 
@@ -33771,6 +36938,16 @@ class GetUsageStatisticsOutput:
     retrieve more items.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_USAGE_STATISTICS_OUTPUT, self)
 
@@ -33944,6 +37121,16 @@ class InviteMembersOutput:
     string that explains why it was unprocessed.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_INVITE_MEMBERS_OUTPUT, self)
 
@@ -34112,6 +37299,16 @@ class ListCoverageOutput:
     retrieve more items.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_COVERAGE_OUTPUT, self)
 
@@ -34171,6 +37368,801 @@ LIST_COVERAGE = APIOperation(
     ),
     effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
     error_schemas=[
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class ListCustomDetectionRuleAssociationsInput:
+    """Dataclass for ListCustomDetectionRuleAssociationsInput structure."""
+
+    max_results: int | None = None
+    """
+    The maximum number of results to return in a single page. Minimum value
+    of 1, maximum value of 100.
+    """
+
+    next_token: str | None = None
+    """
+    A pagination token from a previous response. Use this token to retrieve
+    the next page of results.
+    """
+
+    rule_id: str | None = None
+    """
+    The unique identifier for the custom detection rule to filter
+    associations by.
+    """
+
+    mode: str | None = None
+    """The rule execution mode to filter associations by."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.max_results is not None:
+            serializer.write_integer(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT.members[
+                    "MaxResults"
+                ],
+                self.max_results,
+            )
+
+        if self.next_token is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT.members[
+                    "NextToken"
+                ],
+                self.next_token,
+            )
+
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT.members["RuleId"],
+                self.rule_id,
+            )
+
+        if self.mode is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT.members["Mode"],
+                self.mode,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["max_results"] = de.read_integer(
+                        _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT.members[
+                            "MaxResults"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["next_token"] = de.read_string(
+                        _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT.members[
+                            "NextToken"
+                        ]
+                    )
+
+                case 2:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT.members[
+                            "RuleId"
+                        ]
+                    )
+
+                case 3:
+                    kwargs["mode"] = AssociationMode(
+                        de.read_string(
+                            _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT.members[
+                                "Mode"
+                            ]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class ListCustomDetectionRuleAssociationsOutput:
+    """Dataclass for ListCustomDetectionRuleAssociationsOutput structure."""
+
+    rule_associations: list[AssociationSummary] | None = None
+    """A list of custom detection rule association summaries."""
+
+    next_token: str | None = None
+    """
+    A pagination token to retrieve the next page of results. If this field
+    is empty, there are no additional results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_associations is not None:
+            _serialize_association_summary_list(
+                serializer,
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT.members[
+                    "RuleAssociations"
+                ],
+                self.rule_associations,
+            )
+
+        if self.next_token is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT.members[
+                    "NextToken"
+                ],
+                self.next_token,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_associations"] = _deserialize_association_summary_list(
+                        de,
+                        _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT.members[
+                            "RuleAssociations"
+                        ],
+                    )
+
+                case 1:
+                    kwargs["next_token"] = de.read_string(
+                        _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT.members[
+                            "NextToken"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS = APIOperation(
+    input=ListCustomDetectionRuleAssociationsInput,
+    output=ListCustomDetectionRuleAssociationsOutput,
+    schema=_SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS,
+    input_schema=_SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT,
+    output_schema=_SCHEMA_LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class ListCustomDetectionRuleOrgConfigurationsInput:
+    """Dataclass for ListCustomDetectionRuleOrgConfigurationsInput structure."""
+
+    max_results: int | None = None
+    """
+    The maximum number of results to return in a single page. Minimum value
+    of 1, maximum value of 100.
+    """
+
+    next_token: str | None = None
+    """
+    A pagination token from a previous response. Use this token to retrieve
+    the next page of results.
+    """
+
+    status: str | None = None
+    """The configuration status to filter by."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.max_results is not None:
+            serializer.write_integer(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT.members[
+                    "MaxResults"
+                ],
+                self.max_results,
+            )
+
+        if self.next_token is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT.members[
+                    "NextToken"
+                ],
+                self.next_token,
+            )
+
+        if self.status is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT.members[
+                    "Status"
+                ],
+                self.status,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["max_results"] = de.read_integer(
+                        _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT.members[
+                            "MaxResults"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["next_token"] = de.read_string(
+                        _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT.members[
+                            "NextToken"
+                        ]
+                    )
+
+                case 2:
+                    kwargs["status"] = DetectionRuleConfigurationStatus(
+                        de.read_string(
+                            _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT.members[
+                                "Status"
+                            ]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT,
+            consumer=_consumer,
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class ListCustomDetectionRuleOrgConfigurationsOutput:
+    """Dataclass for ListCustomDetectionRuleOrgConfigurationsOutput structure."""
+
+    configurations: list[DetectionRuleOrgConfigurationSummary] | None = None
+    """A list of organization configurations for custom detection rules."""
+
+    next_token: str | None = None
+    """
+    A pagination token to retrieve the next page of results. If this field
+    is empty, there are no additional results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.configurations is not None:
+            _serialize_detection_rule_org_configuration_summary_list(
+                serializer,
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT.members[
+                    "Configurations"
+                ],
+                self.configurations,
+            )
+
+        if self.next_token is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT.members[
+                    "NextToken"
+                ],
+                self.next_token,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["configurations"] = (
+                        _deserialize_detection_rule_org_configuration_summary_list(
+                            de,
+                            _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT.members[
+                                "Configurations"
+                            ],
+                        )
+                    )
+
+                case 1:
+                    kwargs["next_token"] = de.read_string(
+                        _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT.members[
+                            "NextToken"
+                        ]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT,
+            consumer=_consumer,
+        )
+        return kwargs
+
+
+LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS = APIOperation(
+    input=ListCustomDetectionRuleOrgConfigurationsInput,
+    output=ListCustomDetectionRuleOrgConfigurationsOutput,
+    schema=_SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS,
+    input_schema=_SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT,
+    output_schema=_SCHEMA_LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class ListCustomDetectionRulesInput:
+    """Dataclass for ListCustomDetectionRulesInput structure."""
+
+    max_results: int | None = None
+    """
+    The maximum number of results to return in a single page. Minimum value
+    of 1, maximum value of 100.
+    """
+
+    next_token: str | None = None
+    """
+    A pagination token from a previous response. Use this token to retrieve
+    the next page of results.
+    """
+
+    filters: list[DetectionRuleFilter] | None = None
+    """A list of filter criteria to apply when listing custom detection rules."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_LIST_CUSTOM_DETECTION_RULES_INPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.max_results is not None:
+            serializer.write_integer(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULES_INPUT.members["MaxResults"],
+                self.max_results,
+            )
+
+        if self.next_token is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULES_INPUT.members["NextToken"],
+                self.next_token,
+            )
+
+        if self.filters is not None:
+            _serialize_detection_rule_filter_list(
+                serializer,
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULES_INPUT.members["Filters"],
+                self.filters,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["max_results"] = de.read_integer(
+                        _SCHEMA_LIST_CUSTOM_DETECTION_RULES_INPUT.members["MaxResults"]
+                    )
+
+                case 1:
+                    kwargs["next_token"] = de.read_string(
+                        _SCHEMA_LIST_CUSTOM_DETECTION_RULES_INPUT.members["NextToken"]
+                    )
+
+                case 2:
+                    kwargs["filters"] = _deserialize_detection_rule_filter_list(
+                        de, _SCHEMA_LIST_CUSTOM_DETECTION_RULES_INPUT.members["Filters"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_LIST_CUSTOM_DETECTION_RULES_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class RuleSummary:
+    """Contains summary information about a custom detection rule."""
+
+    rule_id: str | None = None
+    """The unique identifier for the rule."""
+
+    arn: str | None = None
+    """The Amazon Resource Name (ARN) of the rule."""
+
+    name: str | None = None
+    """The display name of the rule."""
+
+    description: str | None = None
+    """A description of what the rule detects."""
+
+    severity: str | None = None
+    """The severity level assigned to findings generated by this rule."""
+
+    data_source: str | None = None
+    """The data source that the rule analyzes."""
+
+    tactic: str | None = None
+    """The MITRE ATT&CK tactic associated with the rule."""
+
+    technique: str | None = None
+    """The MITRE ATT&CK technique associated with the rule."""
+
+    service: str | None = None
+    """The Amazon Web Services service associated with the rule."""
+
+    language: str | None = None
+    """The language used for the detection logic expression."""
+
+    schema: str | None = None
+    """The schema version used by the rule definition."""
+
+    created_at: datetime | None = None
+    """The timestamp when the rule was created."""
+
+    updated_at: datetime | None = None
+    """The timestamp when the rule was last updated."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_RULE_SUMMARY, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_SUMMARY.members["RuleId"], self.rule_id
+            )
+
+        if self.arn is not None:
+            serializer.write_string(_SCHEMA_RULE_SUMMARY.members["Arn"], self.arn)
+
+        if self.name is not None:
+            serializer.write_string(_SCHEMA_RULE_SUMMARY.members["Name"], self.name)
+
+        if self.description is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_SUMMARY.members["Description"], self.description
+            )
+
+        if self.severity is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_SUMMARY.members["Severity"], self.severity
+            )
+
+        if self.data_source is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_SUMMARY.members["DataSource"], self.data_source
+            )
+
+        if self.tactic is not None:
+            serializer.write_string(_SCHEMA_RULE_SUMMARY.members["Tactic"], self.tactic)
+
+        if self.technique is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_SUMMARY.members["Technique"], self.technique
+            )
+
+        if self.service is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_SUMMARY.members["Service"], self.service
+            )
+
+        if self.language is not None:
+            serializer.write_string(
+                _SCHEMA_RULE_SUMMARY.members["Language"], self.language
+            )
+
+        if self.schema is not None:
+            serializer.write_string(_SCHEMA_RULE_SUMMARY.members["Schema"], self.schema)
+
+        if self.created_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_RULE_SUMMARY.members["CreatedAt"], self.created_at
+            )
+
+        if self.updated_at is not None:
+            serializer.write_timestamp(
+                _SCHEMA_RULE_SUMMARY.members["UpdatedAt"], self.updated_at
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_RULE_SUMMARY.members["RuleId"]
+                    )
+
+                case 1:
+                    kwargs["arn"] = de.read_string(_SCHEMA_RULE_SUMMARY.members["Arn"])
+
+                case 2:
+                    kwargs["name"] = de.read_string(
+                        _SCHEMA_RULE_SUMMARY.members["Name"]
+                    )
+
+                case 3:
+                    kwargs["description"] = de.read_string(
+                        _SCHEMA_RULE_SUMMARY.members["Description"]
+                    )
+
+                case 4:
+                    kwargs["severity"] = DetectionRuleSeverity(
+                        de.read_string(_SCHEMA_RULE_SUMMARY.members["Severity"])
+                    )
+
+                case 5:
+                    kwargs["data_source"] = DetectionRuleDataSource(
+                        de.read_string(_SCHEMA_RULE_SUMMARY.members["DataSource"])
+                    )
+
+                case 6:
+                    kwargs["tactic"] = de.read_string(
+                        _SCHEMA_RULE_SUMMARY.members["Tactic"]
+                    )
+
+                case 7:
+                    kwargs["technique"] = de.read_string(
+                        _SCHEMA_RULE_SUMMARY.members["Technique"]
+                    )
+
+                case 8:
+                    kwargs["service"] = de.read_string(
+                        _SCHEMA_RULE_SUMMARY.members["Service"]
+                    )
+
+                case 9:
+                    kwargs["language"] = RuleLanguage(
+                        de.read_string(_SCHEMA_RULE_SUMMARY.members["Language"])
+                    )
+
+                case 10:
+                    kwargs["schema"] = RuleSchema(
+                        de.read_string(_SCHEMA_RULE_SUMMARY.members["Schema"])
+                    )
+
+                case 11:
+                    kwargs["created_at"] = de.read_timestamp(
+                        _SCHEMA_RULE_SUMMARY.members["CreatedAt"]
+                    )
+
+                case 12:
+                    kwargs["updated_at"] = de.read_timestamp(
+                        _SCHEMA_RULE_SUMMARY.members["UpdatedAt"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_RULE_SUMMARY, consumer=_consumer)
+        return kwargs
+
+
+def _serialize_rule_summary_list(
+    serializer: ShapeSerializer, schema: Schema, value: list[RuleSummary]
+) -> None:
+    member_schema = schema.members["member"]
+    with serializer.begin_list(schema, len(value)) as ls:
+        for e in value:
+            ls.write_struct(member_schema, e)
+
+
+def _deserialize_rule_summary_list(
+    deserializer: ShapeDeserializer, schema: Schema
+) -> list[RuleSummary]:
+    result: list[RuleSummary] = []
+
+    def _read_value(d: ShapeDeserializer):
+        if d.is_null():
+            d.read_null()
+
+        else:
+            result.append(RuleSummary.deserialize(d))
+
+    deserializer.read_list(schema, _read_value)
+    return result
+
+
+@dataclass(kw_only=True)
+class ListCustomDetectionRulesOutput:
+    """Dataclass for ListCustomDetectionRulesOutput structure."""
+
+    rules: list[RuleSummary] | None = None
+    """A list of custom detection rule summaries."""
+
+    next_token: str | None = None
+    """
+    A pagination token to retrieve the next page of results. If this field
+    is empty, there are no additional results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_LIST_CUSTOM_DETECTION_RULES_OUTPUT, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rules is not None:
+            _serialize_rule_summary_list(
+                serializer,
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULES_OUTPUT.members["Rules"],
+                self.rules,
+            )
+
+        if self.next_token is not None:
+            serializer.write_string(
+                _SCHEMA_LIST_CUSTOM_DETECTION_RULES_OUTPUT.members["NextToken"],
+                self.next_token,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rules"] = _deserialize_rule_summary_list(
+                        de, _SCHEMA_LIST_CUSTOM_DETECTION_RULES_OUTPUT.members["Rules"]
+                    )
+
+                case 1:
+                    kwargs["next_token"] = de.read_string(
+                        _SCHEMA_LIST_CUSTOM_DETECTION_RULES_OUTPUT.members["NextToken"]
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_LIST_CUSTOM_DETECTION_RULES_OUTPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+LIST_CUSTOM_DETECTION_RULES = APIOperation(
+    input=ListCustomDetectionRulesInput,
+    output=ListCustomDetectionRulesOutput,
+    schema=_SCHEMA_LIST_CUSTOM_DETECTION_RULES,
+    input_schema=_SCHEMA_LIST_CUSTOM_DETECTION_RULES_INPUT,
+    output_schema=_SCHEMA_LIST_CUSTOM_DETECTION_RULES_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
         _SCHEMA_BAD_REQUEST_EXCEPTION,
         _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
     ],
@@ -34248,6 +38240,16 @@ class ListDetectorsOutput:
     """
     The pagination parameter to be used on the next list operation to
     retrieve more items.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -34406,6 +38408,16 @@ class ListFiltersOutput:
     """
     The pagination parameter to be used on the next list operation to
     retrieve more items.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -34699,6 +38711,16 @@ class ListFindingsOutput:
     retrieve more items.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_FINDINGS_OUTPUT, self)
 
@@ -34776,10 +38798,10 @@ class InvestigationSortField(UnknownEnumMixin, StrEnum):
 class InvestigationSortCriteria:
     """Contains information about the criteria used for sorting investigations."""
 
-    attribute_name: InvestigationSortField | None = None
+    attribute_name: str | None = None
     """The attribute by which to sort investigations."""
 
-    order_by: OrderBy | None = None
+    order_by: str | None = None
     """The order in which the sorted results are to be displayed."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -34931,16 +38953,16 @@ class InvestigationSummary:
     investigation_id: str | None = None
     """The unique identifier of the investigation."""
 
-    status: InvestigationStatus | None = None
+    status: str | None = None
     """The current status of the investigation."""
 
     trigger_prompt: str | None = None
     """The natural-language prompt that initiated this investigation."""
 
-    risk_level: RiskLevel | None = None
+    risk_level: str | None = None
     """The assessed risk level of the investigated threat."""
 
-    confidence: Confidence | None = None
+    confidence: str | None = None
     """The confidence level of the investigation's assessment."""
 
     title: str | None = None
@@ -35111,6 +39133,16 @@ class ListInvestigationsOutput:
     """
     The pagination parameter to be used on the next list operation to
     retrieve more items.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -35361,6 +39393,16 @@ class ListInvitationsOutput:
     retrieve more items.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_INVITATIONS_OUTPUT, self)
 
@@ -35542,6 +39584,16 @@ class ListIPSetsOutput:
     """
     The pagination parameter to be used on the next list operation to
     retrieve more items.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -35747,6 +39799,16 @@ class ListMalwareProtectionPlansOutput:
     data.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_MALWARE_PROTECTION_PLANS_OUTPUT, self)
 
@@ -35849,7 +39911,7 @@ class ListMalwareScansFilterCriterion:
     for their own account.
     """
 
-    list_malware_scans_criterion_key: ListMalwareScansCriterionKey | None = None
+    list_malware_scans_criterion_key: str | None = None
     """
     An enum value representing possible scan properties to match with given
     scan entries.
@@ -36084,7 +40146,7 @@ class MalwareScan:
     resource_arn: str | None = None
     """Amazon Resource Name (ARN) of the resource for the given malware scan."""
 
-    resource_type: MalwareProtectionResourceType | None = None
+    resource_type: str | None = None
     """The type of resource that was scanned for malware."""
 
     scan_id: str | None = None
@@ -36094,13 +40156,13 @@ class MalwareScan:
     scan ID, you can monitor the status of your malware scan.
     """
 
-    scan_status: MalwareProtectionScanStatus | None = None
+    scan_status: str | None = None
     """An enum value representing the current status of the malware scan."""
 
-    scan_result_status: ScanResultStatus | None = None
+    scan_result_status: str | None = None
     """An enum value representing the result of the malware scan."""
 
-    scan_type: MalwareProtectionScanType | None = None
+    scan_type: str | None = None
     """An enum value representing the type of scan that was initiated."""
 
     scan_started_at: datetime | None = None
@@ -36247,6 +40309,16 @@ class ListMalwareScansOutput:
     """
     The pagination parameter to be used on the next list operation to
     retrieve more scans.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -36433,6 +40505,16 @@ class ListMembersOutput:
     retrieve more items.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_MEMBERS_OUTPUT, self)
 
@@ -36571,6 +40653,16 @@ class ListOrganizationAdminAccountsOutput:
     """
     The pagination parameter to be used on the next list operation to
     retrieve more items.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -36748,6 +40840,16 @@ class ListPublishingDestinationsOutput:
     the previous request to continue listing results after the first page.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_PUBLISHING_DESTINATIONS_OUTPUT, self)
 
@@ -36866,6 +40968,16 @@ class ListTagsForResourceOutput:
 
     tags: dict[str, str] | None = None
     """The tags associated with the resource."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_TAGS_FOR_RESOURCE_OUTPUT, self)
@@ -37050,6 +41162,16 @@ class ListThreatEntitySetsOutput:
     """
     The pagination parameter to be used on the next list operation to
     retrieve more items.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -37251,6 +41373,16 @@ class ListThreatIntelSetsOutput:
     retrieve more items.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_THREAT_INTEL_SETS_OUTPUT, self)
 
@@ -37444,6 +41576,16 @@ class ListTrustedEntitySetsOutput:
     """
     The pagination parameter to be used on the next list operation to
     retrieve more items.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -37648,6 +41790,16 @@ class SendObjectMalwareScanInput:
 @dataclass(kw_only=True)
 class SendObjectMalwareScanOutput:
     """Dataclass for SendObjectMalwareScanOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SEND_OBJECT_MALWARE_SCAN_OUTPUT, self)
@@ -37927,6 +42079,16 @@ class StartMalwareScanOutput:
     scan ID, you can monitor the status of your malware scan.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_START_MALWARE_SCAN_OUTPUT, self)
 
@@ -38057,6 +42219,16 @@ class StartMonitoringMembersOutput:
     """
     A list of objects that contain the unprocessed account and a result
     string that explains why it was unprocessed.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -38194,6 +42366,16 @@ class StopMonitoringMembersOutput:
     not processed.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_STOP_MONITORING_MEMBERS_OUTPUT, self)
 
@@ -38312,6 +42494,16 @@ class TagResourceInput:
 class TagResourceOutput:
     """Dataclass for TagResourceOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TAG_RESOURCE_OUTPUT, self)
 
@@ -38424,6 +42616,16 @@ class UnarchiveFindingsInput:
 @dataclass(kw_only=True)
 class UnarchiveFindingsOutput:
     """Dataclass for UnarchiveFindingsOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNARCHIVE_FINDINGS_OUTPUT, self)
@@ -38553,6 +42755,16 @@ class UntagResourceInput:
 class UntagResourceOutput:
     """Dataclass for UntagResourceOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNTAG_RESOURCE_OUTPUT, self)
 
@@ -38603,6 +42815,357 @@ UNTAG_RESOURCE = APIOperation(
 
 
 @dataclass(kw_only=True)
+class UpdateCustomDetectionRuleAssociationInput:
+    """Dataclass for UpdateCustomDetectionRuleAssociationInput structure."""
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    association_id: str | None = None
+    """The unique identifier for the association to update."""
+
+    mode: str | None = None
+    """The rule execution mode. Valid values: `LIVE` | `DRY_RUN`."""
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                    "RuleId"
+                ],
+                self.rule_id,
+            )
+
+        if self.association_id is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                    "AssociationId"
+                ],
+                self.association_id,
+            )
+
+        if self.mode is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members["Mode"],
+                self.mode,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                            "RuleId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["association_id"] = de.read_string(
+                        _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                            "AssociationId"
+                        ]
+                    )
+
+                case 2:
+                    kwargs["mode"] = AssociationMode(
+                        de.read_string(
+                            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT.members[
+                                "Mode"
+                            ]
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class UpdateCustomDetectionRuleAssociationOutput:
+    """Dataclass for UpdateCustomDetectionRuleAssociationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        pass
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT, consumer=_consumer
+        )
+        return kwargs
+
+
+UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION = APIOperation(
+    input=UpdateCustomDetectionRuleAssociationInput,
+    output=UpdateCustomDetectionRuleAssociationOutput,
+    schema=_SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION,
+    input_schema=_SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    output_schema=_SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID("com.amazonaws.guardduty#ConflictException"): ConflictException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+            ShapeID(
+                "com.amazonaws.guardduty#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
+class UpdateCustomDetectionRuleOrgConfigurationInput:
+    """Dataclass for UpdateCustomDetectionRuleOrgConfigurationInput structure."""
+
+    rule_id: str | None = None
+    """The unique identifier for the custom detection rule."""
+
+    mode: str | None = None
+    """
+    The execution mode of the organization configuration. Valid values:
+    `LIVE` | `DRY_RUN`.
+    """
+
+    include_account_ids: list[str] | None = None
+    """
+    The account IDs to include in the organization configuration. Mutually
+    exclusive with `ExcludeAccountIds`.
+    """
+
+    exclude_account_ids: list[str] | None = None
+    """
+    The account IDs to exclude from the organization configuration. Mutually
+    exclusive with `IncludeAccountIds`.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.rule_id is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "RuleId"
+                ],
+                self.rule_id,
+            )
+
+        if self.mode is not None:
+            serializer.write_string(
+                _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "Mode"
+                ],
+                self.mode,
+            )
+
+        if self.include_account_ids is not None:
+            _serialize_detection_rule_account_ids(
+                serializer,
+                _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "IncludeAccountIds"
+                ],
+                self.include_account_ids,
+            )
+
+        if self.exclude_account_ids is not None:
+            _serialize_detection_rule_account_ids(
+                serializer,
+                _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                    "ExcludeAccountIds"
+                ],
+                self.exclude_account_ids,
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["rule_id"] = de.read_string(
+                        _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                            "RuleId"
+                        ]
+                    )
+
+                case 1:
+                    kwargs["mode"] = AssociationMode(
+                        de.read_string(
+                            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                                "Mode"
+                            ]
+                        )
+                    )
+
+                case 2:
+                    kwargs["include_account_ids"] = (
+                        _deserialize_detection_rule_account_ids(
+                            de,
+                            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                                "IncludeAccountIds"
+                            ],
+                        )
+                    )
+
+                case 3:
+                    kwargs["exclude_account_ids"] = (
+                        _deserialize_detection_rule_account_ids(
+                            de,
+                            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT.members[
+                                "ExcludeAccountIds"
+                            ],
+                        )
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+            consumer=_consumer,
+        )
+        return kwargs
+
+
+@dataclass(kw_only=True)
+class UpdateCustomDetectionRuleOrgConfigurationOutput:
+    """Dataclass for UpdateCustomDetectionRuleOrgConfigurationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(
+            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT, self
+        )
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        pass
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(
+            _SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+            consumer=_consumer,
+        )
+        return kwargs
+
+
+UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = APIOperation(
+    input=UpdateCustomDetectionRuleOrgConfigurationInput,
+    output=UpdateCustomDetectionRuleOrgConfigurationOutput,
+    schema=_SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION,
+    input_schema=_SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    output_schema=_SCHEMA_UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+    error_registry=TypeRegistry(
+        {
+            ShapeID(
+                "com.amazonaws.guardduty#AccessDeniedException"
+            ): AccessDeniedException,
+            ShapeID("com.amazonaws.guardduty#BadRequestException"): BadRequestException,
+            ShapeID("com.amazonaws.guardduty#ConflictException"): ConflictException,
+            ShapeID(
+                "com.amazonaws.guardduty#InternalServerErrorException"
+            ): InternalServerErrorException,
+            ShapeID(
+                "com.amazonaws.guardduty#ResourceNotFoundException"
+            ): ResourceNotFoundException,
+        }
+    ),
+    effective_auth_schemes=[ShapeID("aws.auth#sigv4")],
+    error_schemas=[
+        _SCHEMA_ACCESS_DENIED_EXCEPTION,
+        _SCHEMA_BAD_REQUEST_EXCEPTION,
+        _SCHEMA_CONFLICT_EXCEPTION,
+        _SCHEMA_INTERNAL_SERVER_ERROR_EXCEPTION,
+        _SCHEMA_RESOURCE_NOT_FOUND_EXCEPTION,
+    ],
+)
+
+
+@dataclass(kw_only=True)
 class UpdateDetectorInput:
     """Dataclass for UpdateDetectorInput structure."""
 
@@ -38619,7 +43182,7 @@ class UpdateDetectorInput:
     enable: bool | None = None
     """Specifies whether the detector is enabled or not enabled."""
 
-    finding_publishing_frequency: FindingPublishingFrequency | None = None
+    finding_publishing_frequency: str | None = None
     """
     An enum value that specifies how frequently findings are exported, such
     as to CloudWatch Events.
@@ -38718,6 +43281,16 @@ class UpdateDetectorInput:
 class UpdateDetectorOutput:
     """Dataclass for UpdateDetectorOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_DETECTOR_OUTPUT, self)
 
@@ -38790,7 +43363,7 @@ class UpdateFilterInput:
     whitespace.
     """
 
-    action: FilterAction | None = None
+    action: str | None = None
     """
     Specifies the action that is to be applied to the findings that match
     the filter.
@@ -40212,6 +44785,16 @@ class UpdateFilterOutput:
     name: str | None = None
     """The name of the filter."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_FILTER_OUTPUT, self)
 
@@ -40283,7 +44866,7 @@ class UpdateFindingsFeedbackInput:
     finding_ids: list[str] | None = None
     """The IDs of the findings that you want to mark as useful or not useful."""
 
-    feedback: Feedback | None = None
+    feedback: str | None = None
     """The feedback for the finding."""
 
     comments: str | None = field(repr=False, default=None)
@@ -40362,6 +44945,16 @@ class UpdateFindingsFeedbackInput:
 @dataclass(kw_only=True)
 class UpdateFindingsFeedbackOutput:
     """Dataclass for UpdateFindingsFeedbackOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_FINDINGS_FEEDBACK_OUTPUT, self)
@@ -40531,6 +45124,16 @@ class UpdateIPSetInput:
 @dataclass(kw_only=True)
 class UpdateIPSetOutput:
     """Dataclass for UpdateIPSetOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_IP_SET_OUTPUT, self)
@@ -40767,6 +45370,16 @@ class UpdateMalwareProtectionPlanInput:
 class UpdateMalwareProtectionPlanOutput:
     """Dataclass for UpdateMalwareProtectionPlanOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_MALWARE_PROTECTION_PLAN_OUTPUT, self)
 
@@ -40843,7 +45456,7 @@ class UpdateMalwareScanSettingsInput:
     to scan.
     """
 
-    ebs_snapshot_preservation: EbsSnapshotPreservation | None = None
+    ebs_snapshot_preservation: str | None = None
     """An enum value representing possible snapshot preservation settings."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -40914,6 +45527,16 @@ class UpdateMalwareScanSettingsInput:
 class UpdateMalwareScanSettingsOutput:
     """Dataclass for UpdateMalwareScanSettingsOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_MALWARE_SCAN_SETTINGS_OUTPUT, self)
 
@@ -40965,10 +45588,10 @@ UPDATE_MALWARE_SCAN_SETTINGS = APIOperation(
 class MemberAdditionalConfiguration:
     """Information about the additional configuration for the member account."""
 
-    name: OrgFeatureAdditionalConfiguration | None = None
+    name: str | None = None
     """Name of the additional configuration."""
 
-    status: FeatureStatus | None = None
+    status: str | None = None
     """Status of the additional configuration."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -41049,10 +45672,10 @@ def _deserialize_member_additional_configurations(
 class MemberFeaturesConfiguration:
     """Contains information about the features for the member account."""
 
-    name: OrgFeature | None = None
+    name: str | None = None
     """The name of the feature."""
 
-    status: FeatureStatus | None = None
+    status: str | None = None
     """The status of the feature."""
 
     additional_configuration: list[MemberAdditionalConfiguration] | None = None
@@ -41252,6 +45875,16 @@ class UpdateMemberDetectorsOutput:
     """
     A list of member account IDs that were unable to be processed along with
     an explanation for why they were not processed.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -41684,14 +46317,14 @@ class OrganizationAdditionalConfiguration:
     protection plan.
     """
 
-    name: OrgFeatureAdditionalConfiguration | None = None
+    name: str | None = None
     """
     The name of the additional configuration that will be configured for the
     organization. These values are applicable to only Runtime Monitoring
     protection plan.
     """
 
-    auto_enable: OrgFeatureStatus | None = None
+    auto_enable: str | None = None
     """
     The status of the additional configuration that will be configured for
     the organization. Use one of the following values to configure the
@@ -41797,10 +46430,10 @@ def _deserialize_organization_additional_configurations(
 class OrganizationFeatureConfiguration:
     """A list of features which will be configured for the organization."""
 
-    name: OrgFeature | None = None
+    name: str | None = None
     """The name of the feature that will be configured for the organization."""
 
-    auto_enable: OrgFeatureStatus | None = None
+    auto_enable: str | None = None
     """
     Describes the status of the feature that is configured for the member
     accounts within the organization. One of the following values is the
@@ -41954,7 +46587,7 @@ class UpdateOrganizationConfigurationInput:
     features: list[OrganizationFeatureConfiguration] | None = None
     """A list of features that will be configured for the organization."""
 
-    auto_enable_organization_members: AutoEnableMembers | None = None
+    auto_enable_organization_members: str | None = None
     """
     Indicates the auto-enablement configuration of GuardDuty for the member
     accounts in the organization. You must provide a value for either
@@ -42082,6 +46715,16 @@ class UpdateOrganizationConfigurationInput:
 @dataclass(kw_only=True)
 class UpdateOrganizationConfigurationOutput:
     """Dataclass for UpdateOrganizationConfigurationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_ORGANIZATION_CONFIGURATION_OUTPUT, self)
@@ -42219,6 +46862,16 @@ class UpdatePublishingDestinationInput:
 @dataclass(kw_only=True)
 class UpdatePublishingDestinationOutput:
     """Dataclass for UpdatePublishingDestinationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_PUBLISHING_DESTINATION_OUTPUT, self)
@@ -42409,6 +47062,16 @@ class UpdateThreatEntitySetInput:
 class UpdateThreatEntitySetOutput:
     """Dataclass for UpdateThreatEntitySetOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_THREAT_ENTITY_SET_OUTPUT, self)
 
@@ -42585,6 +47248,16 @@ class UpdateThreatIntelSetInput:
 @dataclass(kw_only=True)
 class UpdateThreatIntelSetOutput:
     """Dataclass for UpdateThreatIntelSetOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_THREAT_INTEL_SET_OUTPUT, self)
@@ -42778,6 +47451,16 @@ class UpdateTrustedEntitySetInput:
 @dataclass(kw_only=True)
 class UpdateTrustedEntitySetOutput:
     """Dataclass for UpdateTrustedEntitySetOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_TRUSTED_ENTITY_SET_OUTPUT, self)

@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Connecthealth"
+site_name = "AWS SDK for Python v4 - Connecthealth"
 site_description = "Documentation for AWS Connecthealth Client"
 site_author = "Amazon Web Services"
 

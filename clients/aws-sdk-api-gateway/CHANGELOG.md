@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.12.0
+
+### API Changes
+* API Gateway now supports two new security policies for REST APIs and custom domain names, SecurityPolicy-TLS13-1-2-Ext2-PQ-2025-09 (TLS 1.3 1.2 with post-quantum cryptography) and SecurityPolicy-TLS13-1-2-Ext2-FIPS-PQ-2025-09 (adds FIPS). Both retain legacy algorithms for backward compatibility.
+
+### Enhancements
+* Re-generated with smithy-python 0.6.0
+
+### Dependencies
+* Bump `smithy-core` from `~=0.8.0` to `~=0.9.0`.
+* Bump `smithy-aws-core` from `~=0.11.0` to `~=0.12.0`.
+* Bump `smithy-http` from `~=0.5.0` to `~=0.6.0`.
+
 ## v0.11.0
 
 ### Enhancements

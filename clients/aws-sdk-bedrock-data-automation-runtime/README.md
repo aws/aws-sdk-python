@@ -1,14 +1,20 @@
 # Runtime for Amazon Bedrock Data Automation Client
 
-The `aws_sdk_bedrock_data_automation_runtime` client is still under active development.
-Changes may result in breaking changes prior to the release of version
-1.0.0.
+The `aws-sdk-bedrock-data-automation-runtime` package provides a client for making
+requests to Runtime for Amazon Bedrock Data Automation.
 
+> **Note:** This SDK is experimental and in early development. Breaking changes
+> may occur prior to the release of version 1.0.0.
+
+## Installation
+
+```bash
+python -m pip install aws-sdk-bedrock-data-automation-runtime
+```
 
 ## Documentation
 
-Documentation is available in the `/docs` directory of this package.
-Pages can be built into portable HTML files for the time being. You can
-follow the instructions in the docs [README.md](https://github.com/aws/aws-sdk-python/blob/main/clients/aws-sdk-bedrock-data-automation-runtime/docs/README.md).
-
-For high-level documentation, you can view the [`dev-guide`](https://github.com/aws/aws-sdk-python/tree/main/dev-guide) at the top level of this repo.
+- [API Reference](https://docs.aws.amazon.com/sdk-for-python/v4/reference/clients/bedrock-data-automation-runtime/) -
+  the Bedrock Data Automation Runtime client, available operations, and types.
+- [Developer Guide](https://docs.aws.amazon.com/sdk-for-python/v4/guide/) -
+  configuration, authentication, and usage of the AWS SDK for Python v4.

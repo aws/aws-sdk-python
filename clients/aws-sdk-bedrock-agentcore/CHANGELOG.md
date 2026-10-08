@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.12.0
+
+### API Changes
+* AgentCore Memory now supports direct ingestion into long-term memory via IngestData API.
+* Batch evaluation now supports up to 10 CloudWatch log groups per CloudWatchLogsSource.
+* Batch evaluation now supports evaluating specific traces within a session. Each session can specify up to 100 trace IDs to evaluate.
+* Adds log group name prefix trace source selection, custom or source log group result destinations, and metrics namespace customization.
+* Amazon Bedrock AgentCore Harness now supports lifecycle hooks for invocations and tool calls, with Lambda, SNS, and EventBridge targets. This release also adds apiBase for custom OpenAI-compatible endpoints.
+
+### Enhancements
+* Re-generated with smithy-python 0.6.0
+
+### Dependencies
+* Bump `smithy-core` from `~=0.8.0` to `~=0.9.0`.
+* Bump `smithy-aws-core` from `~=0.11.0` to `~=0.12.0`.
+* Bump `smithy-http` from `~=0.5.0` to `~=0.6.0`.
+
 ## v0.11.0
 
 ### API Changes

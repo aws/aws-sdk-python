@@ -8,15 +8,7 @@ from smithy_core.traits import Trait
 
 
 ACCESS_KEY_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#accessKeyIdType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 16, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w]*$"),
-    ],
+    id=ShapeID("com.amazonaws.sts#accessKeyIdType"), shape_type=ShapeType.STRING
 )
 
 ACCESS_KEY_SECRET_TYPE = Schema(
@@ -29,31 +21,10 @@ ACCOUNT_TYPE = Schema(
     id=ShapeID("com.amazonaws.sts#accountType"), shape_type=ShapeType.STRING
 )
 
-ARN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#arnType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 20, "max": 2048}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]+$",
-        ),
-    ],
-)
+ARN_TYPE = Schema(id=ShapeID("com.amazonaws.sts#arnType"), shape_type=ShapeType.STRING)
 
 ASSUMED_ROLE_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#assumedRoleIdType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 2, "max": 193}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w+=,.@:-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.sts#assumedRoleIdType"), shape_type=ShapeType.STRING
 )
 
 ASSUMED_ROLE_USER = Schema.collection(
@@ -73,37 +44,20 @@ ASSUMED_ROLE_USER = Schema.collection(
 ROLE_DURATION_SECONDS_TYPE = Schema(
     id=ShapeID("com.amazonaws.sts#roleDurationSecondsType"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 900, "max": 43200}),
-        ),
-    ],
 )
 
 EXTERNAL_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#externalIdType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 2, "max": 1224}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w+=,.@:\\/-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.sts#externalIdType"), shape_type=ShapeType.STRING
+)
+
+MINIMUM_SESSION_TOKEN_SIZE_TYPE = Schema(
+    id=ShapeID("com.amazonaws.sts#minimumSessionTokenSizeType"),
+    shape_type=ShapeType.INTEGER,
 )
 
 UNRESTRICTED_SESSION_POLICY_DOCUMENT_TYPE = Schema(
     id=ShapeID("com.amazonaws.sts#unrestrictedSessionPolicyDocumentType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1})),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$",
-        ),
-    ],
 )
 
 POLICY_DESCRIPTOR_TYPE = Schema.collection(
@@ -118,14 +72,7 @@ POLICY_DESCRIPTOR_LIST_TYPE = Schema.collection(
 )
 
 CONTEXT_ASSERTION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#contextAssertionType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 4, "max": 2048}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.sts#contextAssertionType"), shape_type=ShapeType.STRING
 )
 
 PROVIDED_CONTEXT = Schema.collection(
@@ -139,77 +86,27 @@ PROVIDED_CONTEXT = Schema.collection(
 PROVIDED_CONTEXTS_LIST_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.sts#ProvidedContextsListType"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 5}),
-        )
-    ],
     members={"member": {"target": PROVIDED_CONTEXT}},
 )
 
 ROLE_SESSION_NAME_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#roleSessionNameType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 2, "max": 64}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w+=,.@-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.sts#roleSessionNameType"), shape_type=ShapeType.STRING
 )
 
 SERIAL_NUMBER_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#serialNumberType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 9, "max": 256}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w+=/:,.@-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.sts#serialNumberType"), shape_type=ShapeType.STRING
 )
 
 SOURCE_IDENTITY_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#sourceIdentityType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 2, "max": 64}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w+=,.@-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.sts#sourceIdentityType"), shape_type=ShapeType.STRING
 )
 
 TAG_KEY_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#tagKeyType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]+$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.sts#tagKeyType"), shape_type=ShapeType.STRING
 )
 
 TAG_VALUE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#tagValueType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.sts#tagValueType"), shape_type=ShapeType.STRING
 )
 
 TAG = Schema.collection(
@@ -229,36 +126,16 @@ TAG = Schema.collection(
 TAG_LIST_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.sts#tagListType"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": TAG}},
 )
 
 TOKEN_CODE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#tokenCodeType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 6, "max": 6}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\d]*$"),
-    ],
+    id=ShapeID("com.amazonaws.sts#tokenCodeType"), shape_type=ShapeType.STRING
 )
 
 TAG_KEY_LIST_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.sts#tagKeyListType"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 50}),
-        )
-    ],
     members={"member": {"target": TAG_KEY_TYPE}},
 )
 
@@ -268,8 +145,7 @@ ASSUME_ROLE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#AssumeRoleRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "RoleArn": {
@@ -290,6 +166,7 @@ ASSUME_ROLE_INPUT = Schema.collection(
         "TokenCode": {"target": TOKEN_CODE_TYPE},
         "SourceIdentity": {"target": SOURCE_IDENTITY_TYPE},
         "ProvidedContexts": {"target": PROVIDED_CONTEXTS_LIST_TYPE},
+        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
     },
 )
 
@@ -324,12 +201,16 @@ CREDENTIALS = Schema.collection(
 )
 
 NON_NEGATIVE_INTEGER_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#nonNegativeIntegerType"),
+    id=ShapeID("com.amazonaws.sts#nonNegativeIntegerType"), shape_type=ShapeType.INTEGER
+)
+
+SESSION_TOKEN_SIZE_TYPE = Schema(
+    id=ShapeID("com.amazonaws.sts#sessionTokenSizeType"), shape_type=ShapeType.INTEGER
+)
+
+SESSION_TOKEN_UTILIZATION_TYPE = Schema(
+    id=ShapeID("com.amazonaws.sts#sessionTokenUtilizationType"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0})),
-    ],
 )
 
 ASSUME_ROLE_OUTPUT = Schema.collection(
@@ -338,14 +219,15 @@ ASSUME_ROLE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#AssumeRoleResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Credentials": {"target": CREDENTIALS},
         "AssumedRoleUser": {"target": ASSUMED_ROLE_USER},
         "PackedPolicySize": {"target": NON_NEGATIVE_INTEGER_TYPE},
         "SourceIdentity": {"target": SOURCE_IDENTITY_TYPE},
+        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
+        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
     },
 )
 
@@ -429,87 +311,18 @@ REGION_DISABLED_EXCEPTION = Schema.collection(
 )
 
 ASSUME_ROLE = Schema(
-    id=ShapeID("com.amazonaws.sts#AssumeRole"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To assume a role",
-                        "documentation": "",
-                        "input": MappingProxyType(
-                            {
-                                "RoleArn": "arn:aws:iam::123456789012:role/demo",
-                                "RoleSessionName": "testAssumeRoleSession",
-                                "Policy": "escaped-JSON-IAM-POLICY",
-                                "Tags": (
-                                    MappingProxyType(
-                                        {"Key": "Project", "Value": "Unicorn"}
-                                    ),
-                                    MappingProxyType(
-                                        {"Key": "Team", "Value": "Automation"}
-                                    ),
-                                    MappingProxyType(
-                                        {"Key": "Cost-Center", "Value": "12345"}
-                                    ),
-                                ),
-                                "TransitiveTagKeys": ("Project", "Cost-Center"),
-                                "ExternalId": "123ABC",
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "Credentials": MappingProxyType(
-                                    {
-                                        "SessionToken": "AQoDYXdzEPT//////////wEXAMPLEtc764bNrC9SAPBSM22wDOk4x4HIZ8j4FZTwdQWLWsKWHGBuFqwAeMicRXmxfpSPfIeoIYRqTflfKD8YUuwthAx7mSEI/qkPpKPi/kMcGdQrmGdeehM4IC1NtBmUpp2wUE8phUZampKsburEDy0KPkyQDYwT7WZ0wq5VSXDvp75YU9HFvlRd8Tx6q6fE8YQcHNVXAkiY9q6d+xo0rKwT38xVqr7ZD0u0iPPkUL64lIZbqBAz+scqKmlzm8FDrypNC9Yjc8fPOLn9FX9KSYvKTr4rvx3iSIlTJabIQwj2ICCR/oLxBA==",
-                                        "AccessKeyId": "AKIAIOSFODNN7EXAMPLE",
-                                        "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY",
-                                        "Expiration": "2011-07-15T23:28:33.359Z",
-                                    }
-                                ),
-                                "AssumedRoleUser": MappingProxyType(
-                                    {
-                                        "Arn": "arn:aws:sts::123456789012:assumed-role/demo/Bob",
-                                        "AssumedRoleId": "ARO123EXAMPLE123:Bob",
-                                    }
-                                ),
-                                "PackedPolicySize": 8,
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
+    id=ShapeID("com.amazonaws.sts#AssumeRole"), shape_type=ShapeType.OPERATION
 )
 
 SESSION_POLICY_DOCUMENT_TYPE = Schema(
     id=ShapeID("com.amazonaws.sts#sessionPolicyDocumentType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$",
-        ),
-    ],
 )
 
 SAML_ASSERTION_TYPE = Schema(
     id=ShapeID("com.amazonaws.sts#SAMLAssertionType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 4, "max": 100000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 ASSUME_ROLE_WITH_SAML_INPUT = Schema.collection(
@@ -518,8 +331,7 @@ ASSUME_ROLE_WITH_SAML_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#AssumeRoleWithSAMLRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "RoleArn": {
@@ -537,6 +349,7 @@ ASSUME_ROLE_WITH_SAML_INPUT = Schema.collection(
         "PolicyArns": {"target": POLICY_DESCRIPTOR_LIST_TYPE},
         "Policy": {"target": SESSION_POLICY_DOCUMENT_TYPE},
         "DurationSeconds": {"target": ROLE_DURATION_SECONDS_TYPE},
+        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
     },
 )
 
@@ -560,8 +373,7 @@ ASSUME_ROLE_WITH_SAML_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#AssumeRoleWithSAMLResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Credentials": {"target": CREDENTIALS},
@@ -573,6 +385,8 @@ ASSUME_ROLE_WITH_SAML_OUTPUT = Schema.collection(
         "Audience": {"target": AUDIENCE},
         "NameQualifier": {"target": NAME_QUALIFIER},
         "SourceIdentity": {"target": SOURCE_IDENTITY_TYPE},
+        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
+        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
     },
 )
 
@@ -616,78 +430,15 @@ INVALID_IDENTITY_TOKEN_EXCEPTION = Schema.collection(
 )
 
 ASSUME_ROLE_WITH_SAML = Schema(
-    id=ShapeID("com.amazonaws.sts#AssumeRoleWithSAML"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#optionalAuth")),
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To assume a role using a SAML assertion",
-                        "documentation": "",
-                        "input": MappingProxyType(
-                            {
-                                "RoleArn": "arn:aws:iam::123456789012:role/TestSaml",
-                                "PrincipalArn": "arn:aws:iam::123456789012:saml-provider/SAML-test",
-                                "SAMLAssertion": "VERYLONGENCODEDASSERTIONEXAMPLExzYW1sOkF1ZGllbmNlPmJsYW5rPC9zYW1sOkF1ZGllbmNlPjwvc2FtbDpBdWRpZW5jZVJlc3RyaWN0aW9uPjwvc2FtbDpDb25kaXRpb25zPjxzYW1sOlN1YmplY3Q+PHNhbWw6TmFtZUlEIEZvcm1hdD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOm5hbWVpZC1mb3JtYXQ6dHJhbnNpZW50Ij5TYW1sRXhhbXBsZTwvc2FtbDpOYW1lSUQ+PHNhbWw6U3ViamVjdENvbmZpcm1hdGlvbiBNZXRob2Q9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpjbTpiZWFyZXIiPjxzYW1sOlN1YmplY3RDb25maXJtYXRpb25EYXRhIE5vdE9uT3JBZnRlcj0iMjAxOS0xMS0wMVQyMDoyNTowNS4xNDVaIiBSZWNpcGllbnQ9Imh0dHBzOi8vc2lnbmluLmF3cy5hbWF6b24uY29tL3NhbWwiLz48L3NhbWw6U3ViamVjdENvbmZpcm1hdGlvbj48L3NhbWw6U3ViamVjdD48c2FtbDpBdXRoblN0YXRlbWVudCBBdXRoPD94bWwgdmpSZXNwb25zZT4=",
-                                "DurationSeconds": 3600,
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "Issuer": "https://integ.example.com/idp/shibboleth",
-                                "AssumedRoleUser": MappingProxyType(
-                                    {
-                                        "AssumedRoleId": "ARO456EXAMPLE789:TestSaml",
-                                        "Arn": "arn:aws:sts::123456789012:assumed-role/TestSaml",
-                                    }
-                                ),
-                                "Credentials": MappingProxyType(
-                                    {
-                                        "SecretAccessKey": "8P+SQvWIuLnKhh8d++jpw0nNmQRBZvNEXAMPLEKEY",
-                                        "AccessKeyId": "ASIAV3ZUEFP6EXAMPLE",
-                                        "SessionToken": "IQoJb3JpZ2luX2VjEOz////////////////////wEXAMPLEtMSJHMEUCIDoKK3JH9uGQE1z0sINr5M4jk+Na8KHDcCYRVjJCZEvOAiEA3OvJGtw1EcViOleS2vhs8VdCKFJQWPQrmGdeehM4IC1NtBmUpp2wUE8phUZampKsburEDy0KPkyQDYwT7WZ0wq5VSXDvp75YU9HFvlRd8Tx6q6fE8YQcHNVXAkiY9q6d+xo0rKwT38xVqr7ZD0u0iPPkUL64lIZbqBAz+scqKmlzm8FDrypNC9Yjc8fPOLn9FX9KSYvKTr4rvx3iSIlTJabIQwj2ICCR/oLxBA==",
-                                        "Expiration": "2019-11-01T20:26:47Z",
-                                    }
-                                ),
-                                "Audience": "https://signin.aws.amazon.com/saml",
-                                "SubjectType": "transient",
-                                "PackedPolicySize": 6,
-                                "NameQualifier": "SbdGOnUkh1i4+EXAMPLExL/jEvs=",
-                                "Subject": "SamlExample",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#auth"), value=()),
-    ],
+    id=ShapeID("com.amazonaws.sts#AssumeRoleWithSAML"), shape_type=ShapeType.OPERATION
 )
 
-URL_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#urlType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 4, "max": 2048}),
-        )
-    ],
-)
+URL_TYPE = Schema(id=ShapeID("com.amazonaws.sts#urlType"), shape_type=ShapeType.STRING)
 
 CLIENT_TOKEN_TYPE = Schema(
     id=ShapeID("com.amazonaws.sts#clientTokenType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 4, "max": 20000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 ASSUME_ROLE_WITH_WEB_IDENTITY_INPUT = Schema.collection(
@@ -696,8 +447,7 @@ ASSUME_ROLE_WITH_WEB_IDENTITY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#AssumeRoleWithWebIdentityRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "RoleArn": {
@@ -716,18 +466,12 @@ ASSUME_ROLE_WITH_WEB_IDENTITY_INPUT = Schema.collection(
         "PolicyArns": {"target": POLICY_DESCRIPTOR_LIST_TYPE},
         "Policy": {"target": SESSION_POLICY_DOCUMENT_TYPE},
         "DurationSeconds": {"target": ROLE_DURATION_SECONDS_TYPE},
+        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
     },
 )
 
 WEB_IDENTITY_SUBJECT_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#webIdentitySubjectType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 6, "max": 255}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.sts#webIdentitySubjectType"), shape_type=ShapeType.STRING
 )
 
 ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT = Schema.collection(
@@ -736,8 +480,7 @@ ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#AssumeRoleWithWebIdentityResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Credentials": {"target": CREDENTIALS},
@@ -747,6 +490,8 @@ ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT = Schema.collection(
         "Provider": {"target": ISSUER},
         "Audience": {"target": AUDIENCE},
         "SourceIdentity": {"target": SOURCE_IDENTITY_TYPE},
+        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
+        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
     },
 )
 
@@ -773,76 +518,15 @@ IDP_COMMUNICATION_ERROR_EXCEPTION = Schema.collection(
 ASSUME_ROLE_WITH_WEB_IDENTITY = Schema(
     id=ShapeID("com.amazonaws.sts#AssumeRoleWithWebIdentity"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#optionalAuth")),
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To assume a role as an OpenID Connect-federated user",
-                        "documentation": "",
-                        "input": MappingProxyType(
-                            {
-                                "RoleArn": "arn:aws:iam::123456789012:role/FederatedWebIdentityRole",
-                                "RoleSessionName": "app1",
-                                "Policy": "escaped-JSON-IAM-POLICY",
-                                "WebIdentityToken": "Atza%7CIQEBLjAsAhRFiXuWpUXuRvQ9PZL3GMFcYevydwIUFAHZwXZXXXXXXXXJnrulxKDHwy87oGKPznh0D6bEQZTSCzyoCtL_8S07pLpr0zMbn6w1lfVZKNTBdDansFBmtGnIsIapjI6xKR02Yc_2bQ8LZbUXSGm6Ry6_BG7PrtLZtj_dfCTj92xNGed-CrKqjG7nPBjNIL016GGvuS5gSvPRUxWES3VYfm1wl7WTI7jn-Pcb6M-buCgHhFOzTQxod27L9CqnOLio7N3gZAGpsp6n1-AJBOCJckcyXe2c6uD0srOJeZlKUm2eTDVMf8IehDVI0r1QOnTV6KzzAI3OY87Vd_cVMQ",
-                                "ProviderId": "www.amazon.com",
-                                "DurationSeconds": 3600,
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "Credentials": MappingProxyType(
-                                    {
-                                        "SessionToken": "AQoDYXdzEE0a8ANXXXXXXXXNO1ewxE5TijQyp+IEXAMPLE",
-                                        "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY",
-                                        "Expiration": "2014-10-24T23:00:23Z",
-                                        "AccessKeyId": "AKIAIOSFODNN7EXAMPLE",
-                                    }
-                                ),
-                                "SubjectFromWebIdentityToken": "amzn1.account.AF6RHO7KZU5XRVQJGXK6HEXAMPLE",
-                                "AssumedRoleUser": MappingProxyType(
-                                    {
-                                        "Arn": "arn:aws:sts::123456789012:assumed-role/FederatedWebIdentityRole/app1",
-                                        "AssumedRoleId": "AROACLKWSDQRAOEXAMPLE:app1",
-                                    }
-                                ),
-                                "PackedPolicySize": 123,
-                                "Provider": "www.amazon.com",
-                                "Audience": "client.5498841531868486423.1548@apps.example.com",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#auth"), value=()),
-    ],
 )
 
 ROOT_DURATION_SECONDS_TYPE = Schema(
     id=ShapeID("com.amazonaws.sts#RootDurationSecondsType"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 0, "max": 900}),
-        ),
-    ],
 )
 
 TARGET_PRINCIPAL_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#TargetPrincipalType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 12, "max": 2048}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.sts#TargetPrincipalType"), shape_type=ShapeType.STRING
 )
 
 ASSUME_ROOT_INPUT = Schema.collection(
@@ -851,8 +535,7 @@ ASSUME_ROOT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#AssumeRootRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "TargetPrincipal": {
@@ -864,6 +547,7 @@ ASSUME_ROOT_INPUT = Schema.collection(
             "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "DurationSeconds": {"target": ROOT_DURATION_SECONDS_TYPE},
+        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
     },
 )
 
@@ -873,66 +557,22 @@ ASSUME_ROOT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#AssumeRootResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Credentials": {"target": CREDENTIALS},
         "SourceIdentity": {"target": SOURCE_IDENTITY_TYPE},
+        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
+        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
     },
 )
 
 ASSUME_ROOT = Schema(
-    id=ShapeID("com.amazonaws.sts#AssumeRoot"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To launch a privileged session",
-                        "documentation": "The following command retrieves a set of short-term credentials you can use to unlock an S3 bucket for a member account by removing the bucket policy.",
-                        "input": MappingProxyType(
-                            {
-                                "TargetPrincipal": "111122223333",
-                                "TaskPolicyArn": MappingProxyType(
-                                    {
-                                        "arn": "arn:aws:iam::aws:policy/root-task/S3UnlockBucketPolicy"
-                                    }
-                                ),
-                                "DurationSeconds": 900,
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "Credentials": MappingProxyType(
-                                    {
-                                        "SecretAccessKey": "9drTJvcXLB89EXAMPLELB8923FB892xMFI",
-                                        "SessionToken": "AQoXdzELDDY//////////wEaoAK1wvxJY12r2IrDFT2IvAzTCn3zHoZ7YNtpiQLF0MqZye/qwjzP2iEXAMPLEbw/m3hsj8VBTkPORGvr9jM5sgP+w9IZWZnU+LWhmg+a5fDi2oTGUYcdg9uexQ4mtCHIHfi4citgqZTgco40Yqr4lIlo4V2b2Dyauk0eYFNebHtYlFVgAUj+7Indz3LU0aTWk1WKIjHmmMCIoTkyYp/k7kUG7moeEYKSitwQIi6Gjn+nyzM+PtoA3685ixzv0R7i5rjQi0YE0lf1oeie3bDiNHncmzosRM6SFiPzSvp6h/32xQuZsjcypmwsPSDtTPYcs0+YN/8BRi2/IcrxSpnWEXAMPLEXSDFTAQAM6Dl9zR0tXoybnlrZIwMLlMi1Kcgo5OytwU=",
-                                        "Expiration": "2024-11-15T00:05:07Z",
-                                        "AccessKeyId": "ASIAJEXAMPLEXEG2JICEA",
-                                    }
-                                ),
-                                "SourceIdentity": "Alice",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
+    id=ShapeID("com.amazonaws.sts#AssumeRoot"), shape_type=ShapeType.OPERATION
 )
 
 ENCODED_MESSAGE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#encodedMessageType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 10240}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.sts#encodedMessageType"), shape_type=ShapeType.STRING
 )
 
 DECODE_AUTHORIZATION_MESSAGE_INPUT = Schema.collection(
@@ -941,8 +581,7 @@ DECODE_AUTHORIZATION_MESSAGE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#DecodeAuthorizationMessageRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "EncodedMessage": {
@@ -962,8 +601,7 @@ DECODE_AUTHORIZATION_MESSAGE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#DecodeAuthorizationMessageResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"DecodedMessage": {"target": DECODED_MESSAGE_TYPE}},
 )
@@ -994,27 +632,6 @@ INVALID_AUTHORIZATION_MESSAGE_EXCEPTION = Schema.collection(
 DECODE_AUTHORIZATION_MESSAGE = Schema(
     id=ShapeID("com.amazonaws.sts#DecodeAuthorizationMessage"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To decode information about an authorization status of a request",
-                        "documentation": "",
-                        "input": MappingProxyType(
-                            {"EncodedMessage": "<encoded-message>"}
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "DecodedMessage": '{"allowed": "false","explicitDeny": "false","matchedStatements": "","failures": "","context": {"principal": {"id": "AIDACKCEVSQ6C2EXAMPLE","name": "Bob","arn": "arn:aws:iam::123456789012:user/Bob"},"action": "ec2:StopInstances","resource": "arn:aws:ec2:us-east-1:123456789012:instance/i-dd01c9bd","conditions": [{"item": {"key": "ec2:Tenancy","values": ["default"]},{"item": {"key": "ec2:ResourceTag/elasticbeanstalk:environment-name","values": ["Default-Environment"]}},(Additional items ...)]}}'
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 GET_ACCESS_KEY_INFO_INPUT = Schema.collection(
@@ -1023,8 +640,7 @@ GET_ACCESS_KEY_INFO_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetAccessKeyInfoRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "AccessKeyId": {
@@ -1040,8 +656,7 @@ GET_ACCESS_KEY_INFO_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetAccessKeyInfoResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"Account": {"target": ACCOUNT_TYPE}},
 )
@@ -1056,8 +671,7 @@ GET_CALLER_IDENTITY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetCallerIdentityRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
 )
 
@@ -1071,8 +685,7 @@ GET_CALLER_IDENTITY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetCallerIdentityResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "UserId": {"target": USER_ID_TYPE},
@@ -1082,54 +695,7 @@ GET_CALLER_IDENTITY_OUTPUT = Schema.collection(
 )
 
 GET_CALLER_IDENTITY = Schema(
-    id=ShapeID("com.amazonaws.sts#GetCallerIdentity"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To get details about a calling IAM user",
-                        "documentation": "This example shows a request and response made with the credentials for a user named Alice in the AWS account 123456789012.",
-                        "output": MappingProxyType(
-                            {
-                                "UserId": "AKIAI44QH8DHBEXAMPLE",
-                                "Account": "123456789012",
-                                "Arn": "arn:aws:iam::123456789012:user/Alice",
-                            }
-                        ),
-                    }
-                ),
-                MappingProxyType(
-                    {
-                        "title": "To get details about a calling user federated with AssumeRole",
-                        "documentation": "This example shows a request and response made with temporary credentials created by AssumeRole. The name of the assumed role is my-role-name, and the RoleSessionName is set to my-role-session-name.",
-                        "output": MappingProxyType(
-                            {
-                                "UserId": "AKIAI44QH8DHBEXAMPLE:my-role-session-name",
-                                "Account": "123456789012",
-                                "Arn": "arn:aws:sts::123456789012:assumed-role/my-role-name/my-role-session-name",
-                            }
-                        ),
-                    }
-                ),
-                MappingProxyType(
-                    {
-                        "title": "To get details about a calling user federated with GetFederationToken",
-                        "documentation": "This example shows a request and response made with temporary credentials created by using GetFederationToken. The Name parameter is set to my-federated-user-name.",
-                        "output": MappingProxyType(
-                            {
-                                "UserId": "123456789012:my-federated-user-name",
-                                "Account": "123456789012",
-                                "Arn": "arn:aws:sts::123456789012:federated-user/my-federated-user-name",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
+    id=ShapeID("com.amazonaws.sts#GetCallerIdentity"), shape_type=ShapeType.OPERATION
 )
 
 EXPIRED_TRADE_IN_TOKEN_EXCEPTION_MESSAGE = Schema(
@@ -1164,8 +730,7 @@ GET_DELEGATED_ACCESS_TOKEN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetDelegatedAccessTokenRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "TradeInToken": {
@@ -1181,8 +746,7 @@ GET_DELEGATED_ACCESS_TOKEN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetDelegatedAccessTokenResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Credentials": {"target": CREDENTIALS},
@@ -1197,27 +761,11 @@ GET_DELEGATED_ACCESS_TOKEN = Schema(
 )
 
 DURATION_SECONDS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#durationSecondsType"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 900, "max": 129600}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.sts#durationSecondsType"), shape_type=ShapeType.INTEGER
 )
 
 USER_NAME_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#userNameType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 2, "max": 32}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w+=,.@-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.sts#userNameType"), shape_type=ShapeType.STRING
 )
 
 GET_FEDERATION_TOKEN_INPUT = Schema.collection(
@@ -1226,8 +774,7 @@ GET_FEDERATION_TOKEN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetFederationTokenRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -1238,19 +785,12 @@ GET_FEDERATION_TOKEN_INPUT = Schema.collection(
         "PolicyArns": {"target": POLICY_DESCRIPTOR_LIST_TYPE},
         "DurationSeconds": {"target": DURATION_SECONDS_TYPE},
         "Tags": {"target": TAG_LIST_TYPE},
+        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
     },
 )
 
 FEDERATED_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#federatedIdType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 2, "max": 193}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w+=,.@\\:-]*$"),
-    ],
+    id=ShapeID("com.amazonaws.sts#federatedIdType"), shape_type=ShapeType.STRING
 )
 
 FEDERATED_USER = Schema.collection(
@@ -1273,66 +813,19 @@ GET_FEDERATION_TOKEN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetFederationTokenResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Credentials": {"target": CREDENTIALS},
         "FederatedUser": {"target": FEDERATED_USER},
         "PackedPolicySize": {"target": NON_NEGATIVE_INTEGER_TYPE},
+        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
+        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
     },
 )
 
 GET_FEDERATION_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.sts#GetFederationToken"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To get temporary credentials for a role by using GetFederationToken",
-                        "documentation": "",
-                        "input": MappingProxyType(
-                            {
-                                "Name": "testFedUserSession",
-                                "Policy": "escaped-JSON-IAM-POLICY",
-                                "DurationSeconds": 3600,
-                                "Tags": (
-                                    MappingProxyType(
-                                        {"Key": "Project", "Value": "Pegasus"}
-                                    ),
-                                    MappingProxyType(
-                                        {"Key": "Cost-Center", "Value": "98765"}
-                                    ),
-                                ),
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "Credentials": MappingProxyType(
-                                    {
-                                        "SessionToken": "AQoDYXdzEPT//////////wEXAMPLEtc764bNrC9SAPBSM22wDOk4x4HIZ8j4FZTwdQWLWsKWHGBuFqwAeMicRXmxfpSPfIeoIYRqTflfKD8YUuwthAx7mSEI/qkPpKPi/kMcGdQrmGdeehM4IC1NtBmUpp2wUE8phUZampKsburEDy0KPkyQDYwT7WZ0wq5VSXDvp75YU9HFvlRd8Tx6q6fE8YQcHNVXAkiY9q6d+xo0rKwT38xVqr7ZD0u0iPPkUL64lIZbqBAz+scqKmlzm8FDrypNC9Yjc8fPOLn9FX9KSYvKTr4rvx3iSIlTJabIQwj2ICCR/oLxBA==",
-                                        "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY",
-                                        "Expiration": "2011-07-15T23:28:33.359Z",
-                                        "AccessKeyId": "AKIAIOSFODNN7EXAMPLE",
-                                    }
-                                ),
-                                "FederatedUser": MappingProxyType(
-                                    {
-                                        "Arn": "arn:aws:sts::123456789012:federated-user/Bob",
-                                        "FederatedUserId": "123456789012:Bob",
-                                    }
-                                ),
-                                "PackedPolicySize": 8,
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
+    id=ShapeID("com.amazonaws.sts#GetFederationToken"), shape_type=ShapeType.OPERATION
 )
 
 GET_SESSION_TOKEN_INPUT = Schema.collection(
@@ -1341,13 +834,13 @@ GET_SESSION_TOKEN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetSessionTokenRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DurationSeconds": {"target": DURATION_SECONDS_TYPE},
         "SerialNumber": {"target": SERIAL_NUMBER_TYPE},
         "TokenCode": {"target": TOKEN_CODE_TYPE},
+        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
     },
 )
 
@@ -1357,93 +850,37 @@ GET_SESSION_TOKEN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetSessionTokenResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
-    members={"Credentials": {"target": CREDENTIALS}},
+    members={
+        "Credentials": {"target": CREDENTIALS},
+        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
+        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
+    },
 )
 
 GET_SESSION_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.sts#GetSessionToken"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To get temporary credentials for an IAM user or an AWS account",
-                        "documentation": "",
-                        "input": MappingProxyType(
-                            {
-                                "DurationSeconds": 3600,
-                                "SerialNumber": "YourMFASerialNumber",
-                                "TokenCode": "123456",
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "Credentials": MappingProxyType(
-                                    {
-                                        "SessionToken": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKwRcOIfrRh3c/LTo6UDdyJwOOvEVPvLXCrrrUtdnniCEXAMPLE/IvU1dYUg2RVAJBanLiHb4IgRmpRV3zrkuWJOgQs8IZZaIv2BXIa2R4OlgkBN9bkUDNCJiBeb/AXlzBBko7b15fjrBs2+cTQtpZ3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE",
-                                        "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY",
-                                        "Expiration": "2011-07-11T19:55:29.611Z",
-                                        "AccessKeyId": "AKIAIOSFODNN7EXAMPLE",
-                                    }
-                                )
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
+    id=ShapeID("com.amazonaws.sts#GetSessionToken"), shape_type=ShapeType.OPERATION
 )
 
 WEB_IDENTITY_TOKEN_AUDIENCE_STRING_TYPE = Schema(
     id=ShapeID("com.amazonaws.sts#webIdentityTokenAudienceStringType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        )
-    ],
 )
 
 WEB_IDENTITY_TOKEN_AUDIENCE_LIST_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.sts#webIdentityTokenAudienceListType"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        )
-    ],
     members={"member": {"target": WEB_IDENTITY_TOKEN_AUDIENCE_STRING_TYPE}},
 )
 
 WEB_IDENTITY_TOKEN_DURATION_SECONDS_TYPE = Schema(
     id=ShapeID("com.amazonaws.sts#webIdentityTokenDurationSecondsType"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 60, "max": 3600}),
-        ),
-    ],
 )
 
 JWT_ALGORITHM_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#jwtAlgorithmType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 5, "max": 5}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.sts#jwtAlgorithmType"), shape_type=ShapeType.STRING
 )
 
 GET_WEB_IDENTITY_TOKEN_INPUT = Schema.collection(
@@ -1452,8 +889,7 @@ GET_WEB_IDENTITY_TOKEN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetWebIdentityTokenRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Audience": {
@@ -1481,8 +917,7 @@ GET_WEB_IDENTITY_TOKEN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.sts#GetWebIdentityTokenResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "WebIdentityToken": {"target": WEB_IDENTITY_TOKEN_TYPE},
@@ -1566,3153 +1001,10 @@ AWS_SECURITY_TOKEN_SERVICE_V20110615 = Schema(
         Trait.new(
             id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "sts"})
         ),
-        Trait.new(id=ShapeID("smithy.api#title"), value="AWS Security Token Service"),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointTests"),
-            value=MappingProxyType(
-                {
-                    "testCases": (
-                        MappingProxyType(
-                            {
-                                "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.af-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "af-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.ap-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.ap-northeast-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.ap-northeast-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.ap-northeast-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.ap-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.ap-southeast-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.ap-southeast-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.ap-southeast-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region aws-global with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "aws-global",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.ca-central-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ca-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.eu-central-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.eu-north-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.eu-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.eu-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.eu-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.eu-west-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.me-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "me-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.sa-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "sa-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts-fips.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts-fips.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts-fips.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts-fips.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts-fips.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://sts.us-east-1.api.aws"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.cn-northwest-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-northwest-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts-fips.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts-fips.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://sts.us-gov-east-1.api.aws"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.us-iso-west-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts-fips.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://sts-fips.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "Missing region",
-                                "expect": MappingProxyType(
-                                    {"error": "Invalid Configuration: Missing Region"}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `ap-northeast-1`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "ap-northeast-1",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `ap-south-1`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "ap-south-1",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `ap-southeast-1`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "ap-southeast-1",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `ap-southeast-2`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "ap-southeast-2",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `aws-global`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "aws-global",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "aws-global",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `ca-central-1`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "ca-central-1",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ca-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `eu-central-1`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "eu-central-1",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `eu-north-1`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "eu-north-1",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `eu-west-1`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "eu-west-1",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `eu-west-2`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "eu-west-2",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `eu-west-3`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "eu-west-3",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `sa-east-1`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "sa-east-1",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "sa-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `us-east-1`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "us-east-1",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `us-east-2`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "us-east-2",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `us-west-1`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "us-west-1",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region `us-west-2`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-1",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "us-west-2",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with Non-legacy region `us-east-3`",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "properties": MappingProxyType(
-                                                    {
-                                                        "authSchemes": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "name": "sigv4",
-                                                                    "signingName": "sts",
-                                                                    "signingRegion": "us-east-3",
-                                                                }
-                                                            ),
-                                                        )
-                                                    }
-                                                ),
-                                                "url": "https://sts.us-east-3.amazonaws.com",
-                                            }
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "us-east-3",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with legacy region and custom endpoint",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "operationInputs": (
-                                    MappingProxyType(
-                                        {
-                                            "builtInParams": MappingProxyType(
-                                                {
-                                                    "AWS::Region": "us-west-1",
-                                                    "AWS::STS::UseGlobalEndpoint": True,
-                                                    "SDK::Endpoint": "https://example.com",
-                                                }
-                                            ),
-                                            "operationName": "GetCallerIdentity",
-                                        }
-                                    ),
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": True,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "UseGlobalEndpoint with unset region and custom endpoint",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "UseGlobalEndpoint": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                    ),
-                    "version": "1.0",
-                }
-            ),
-        ),
         Trait.new(
             id=ShapeID("aws.auth#sigv4a"), value=MappingProxyType({"name": "sts"})
         ),
         Trait.new(id=ShapeID("aws.protocols#awsQuery")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointRuleSet"),
-            value=MappingProxyType(
-                {
-                    "version": "1.0",
-                    "parameters": MappingProxyType(
-                        {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseGlobalEndpoint": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::STS::UseGlobalEndpoint",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "Whether the global endpoint should be used, rather then the regional endpoint for us-east-1.",
-                                    "type": "boolean",
-                                }
-                            ),
-                        }
-                    ),
-                    "rules": (
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "UseGlobalEndpoint"}
-                                                ),
-                                                True,
-                                            ),
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "fn": "not",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "isSet",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Endpoint"}
-                                                            ),
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Region"}),
-                                            ),
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "fn": "aws.partition",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Region"}),
-                                            ),
-                                            "assign": "PartitionResult",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": (
-                                                MappingProxyType({"ref": "UseFIPS"}),
-                                                False,
-                                            ),
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "fn": "booleanEquals",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "UseDualStack"}
-                                                ),
-                                                False,
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "ap-northeast-1",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "ap-south-1",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "ap-southeast-1",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "ap-southeast-2",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "aws-global",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "ca-central-1",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "eu-central-1",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "eu-north-1",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "eu-west-1",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "eu-west-2",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "eu-west-3",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "sa-east-1",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "us-east-1",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "us-east-2",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "us-west-1",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "stringEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                            "us-west-2",
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.amazonaws.com",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "us-east-1",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": "https://sts.{Region}.{PartitionResult#dnsSuffix}",
-                                                    "properties": MappingProxyType(
-                                                        {
-                                                            "authSchemes": (
-                                                                MappingProxyType(
-                                                                    {
-                                                                        "name": "sigv4",
-                                                                        "signingName": "sts",
-                                                                        "signingRegion": "{Region}",
-                                                                    }
-                                                                ),
-                                                            )
-                                                        }
-                                                    ),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Endpoint"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseFIPS"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseDualStack"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": MappingProxyType(
-                                                        {"ref": "Endpoint"}
-                                                    ),
-                                                    "properties": MappingProxyType({}),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Region"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "aws.partition",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                        ),
-                                                        "assign": "PartitionResult",
-                                                    }
-                                                ),
-                                            ),
-                                            "rules": (
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://sts-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "name",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                                "aws-us-gov",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://sts.{Region}.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://sts-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://sts.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "Region"
-                                                                            }
-                                                                        ),
-                                                                        "aws-global",
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "endpoint": MappingProxyType(
-                                                            {
-                                                                "url": "https://sts.amazonaws.com",
-                                                                "properties": MappingProxyType(
-                                                                    {
-                                                                        "authSchemes": (
-                                                                            MappingProxyType(
-                                                                                {
-                                                                                    "name": "sigv4",
-                                                                                    "signingName": "sts",
-                                                                                    "signingRegion": "us-east-1",
-                                                                                }
-                                                                            ),
-                                                                        )
-                                                                    }
-                                                                ),
-                                                                "headers": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                            }
-                                                        ),
-                                                        "type": "endpoint",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (),
-                                                        "endpoint": MappingProxyType(
-                                                            {
-                                                                "url": "https://sts.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                                "headers": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                            }
-                                                        ),
-                                                        "type": "endpoint",
-                                                    }
-                                                ),
-                                            ),
-                                            "type": "tree",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
-                    ),
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#auth"), value=("aws.auth#sigv4", "aws.auth#sigv4a")
-        ),
         Trait.new(
             id=ShapeID("smithy.rules#endpointBdd"),
             value=MappingProxyType(

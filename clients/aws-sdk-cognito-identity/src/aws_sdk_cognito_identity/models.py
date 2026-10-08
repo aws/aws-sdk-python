@@ -9,6 +9,7 @@ from typing import Any, Literal, Self
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import TypeRegistry
 from smithy_core.exceptions import ModeledError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -582,6 +583,16 @@ class CreateIdentityPoolOutput:
     criteria.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_IDENTITY_POOL_OUTPUT, self)
 
@@ -1099,7 +1110,7 @@ class UnprocessedIdentityId:
     identity_id: str | None = None
     """A unique identifier in the format REGION:GUID."""
 
-    error_code: ErrorCode | None = None
+    error_code: str | None = None
     """The error code indicating the type of error that occurred."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -1178,6 +1189,16 @@ class DeleteIdentitiesOutput:
     """
     An array of UnprocessedIdentityId objects, each of which contains an
     ErrorCode and IdentityId.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -1288,6 +1309,16 @@ class DeleteIdentityPoolInput:
 @dataclass(kw_only=True)
 class DeleteIdentityPoolOutput:
     """Dataclass for DeleteIdentityPoolOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_IDENTITY_POOL_OUTPUT, self)
@@ -1471,6 +1502,16 @@ class DescribeIdentityOutput:
 
     last_modified_date: datetime | None = None
     """Date on which the identity was last modified."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DESCRIBE_IDENTITY_OUTPUT, self)
@@ -1659,6 +1700,16 @@ class DescribeIdentityPoolOutput:
     you can apply to identity pools to categorize and manage them in
     different ways, such as by purpose, owner, environment, or other
     criteria.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -2116,6 +2167,16 @@ class GetCredentialsForIdentityOutput:
     credentials: Credentials | None = None
     """Credentials for the provided identity ID."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_CREDENTIALS_FOR_IDENTITY_OUTPUT, self)
 
@@ -2355,6 +2416,16 @@ class GetIdOutput:
     identity_id: str | None = None
     """A unique identifier in the format REGION:GUID."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_ID_OUTPUT, self)
 
@@ -2495,7 +2566,7 @@ class MappingRule:
     \"isAdmin\" or \"paid\".
     """
 
-    match_type: MappingRuleMatchType
+    match_type: str
     """
     The match condition that specifies how closely the claim value in the
     IdP token must match `Value`.
@@ -2643,7 +2714,7 @@ class RoleMappingType(UnknownEnumMixin, StrEnum):
 class RoleMapping:
     """A role mapping."""
 
-    type: RoleMappingType
+    type: str
     """
     The role mapping type. Token will use `cognito:roles` and
     `cognito:preferred_role` claims from the Cognito identity provider token
@@ -2651,7 +2722,7 @@ class RoleMapping:
     token to map to a role.
     """
 
-    ambiguous_role_resolution: AmbiguousRoleResolutionType | None = None
+    ambiguous_role_resolution: str | None = None
     """
     If you specify Token or Rules as the `Type`, `AmbiguousRoleResolution`
     is required.
@@ -2794,6 +2865,16 @@ class GetIdentityPoolRolesOutput:
     is a String-to-RoleMapping object map. The string identifies the
     identity provider, for example, `graph.facebook.com` or
     `cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id`.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -2966,6 +3047,16 @@ class GetOpenIdTokenOutput:
 
     token: str | None = field(repr=False, default=None)
     """An OpenID token, valid for 10 minutes."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_OPEN_ID_TOKEN_OUTPUT, self)
@@ -3286,6 +3377,16 @@ class GetOpenIdTokenForDeveloperIdentityOutput:
     token: str | None = field(repr=False, default=None)
     """An OpenID token."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY_OUTPUT, self
@@ -3470,6 +3571,16 @@ class GetPrincipalTagAttributeMapOutput:
     You can use this operation to add principal tags. The
     `PrincipalTags`operation enables you to reference user attributes in
     your IAM permissions policy.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3788,6 +3899,16 @@ class ListIdentitiesOutput:
     next_token: str | None = None
     """A pagination token."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_IDENTITIES_OUTPUT, self)
 
@@ -4026,6 +4147,16 @@ class ListIdentityPoolsOutput:
     next_token: str | None = None
     """A pagination token."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_IDENTITY_POOLS_OUTPUT, self)
 
@@ -4155,6 +4286,16 @@ class ListTagsForResourceOutput:
 
     tags: dict[str, str] | None = None
     """The tags that are assigned to the identity pool."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_TAGS_FOR_RESOURCE_OUTPUT, self)
@@ -4391,6 +4532,16 @@ class LookupDeveloperIdentityOutput:
     call the API again and get results starting from the 11th match.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LOOKUP_DEVELOPER_IDENTITY_OUTPUT, self)
 
@@ -4612,6 +4763,16 @@ class MergeDeveloperIdentitiesOutput:
     identity_id: str | None = None
     """A unique identifier in the format REGION:GUID."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_MERGE_DEVELOPER_IDENTITIES_OUTPUT, self)
 
@@ -4813,6 +4974,16 @@ class SetIdentityPoolRolesInput:
 class SetIdentityPoolRolesOutput:
     """Dataclass for SetIdentityPoolRolesOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SET_IDENTITY_POOL_ROLES_OUTPUT, self)
 
@@ -5003,6 +5174,16 @@ class SetPrincipalTagAttributeMapOutput:
     your IAM permissions policy.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SET_PRINCIPAL_TAG_ATTRIBUTE_MAP_OUTPUT, self)
 
@@ -5175,6 +5356,16 @@ class TagResourceInput:
 class TagResourceOutput:
     """Dataclass for TagResourceOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TAG_RESOURCE_OUTPUT, self)
 
@@ -5334,6 +5525,16 @@ class UnlinkDeveloperIdentityInput:
 class UnlinkDeveloperIdentityOutput:
     """Dataclass for UnlinkDeveloperIdentityOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNLINK_DEVELOPER_IDENTITY_OUTPUT, self)
 
@@ -5471,6 +5672,16 @@ class UnlinkIdentityInput:
 @dataclass(kw_only=True)
 class UnlinkIdentityOutput:
     """Dataclass for UnlinkIdentityOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNLINK_IDENTITY_OUTPUT, self)
@@ -5621,6 +5832,16 @@ class UntagResourceInput:
 @dataclass(kw_only=True)
 class UntagResourceOutput:
     """Dataclass for UntagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNTAG_RESOURCE_OUTPUT, self)
@@ -5932,6 +6153,16 @@ class UpdateIdentityPoolOutput:
     you can apply to identity pools to categorize and manage them in
     different ways, such as by purpose, owner, environment, or other
     criteria.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):

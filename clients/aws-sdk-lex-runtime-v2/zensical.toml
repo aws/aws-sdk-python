@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Lex Runtime V2"
+site_name = "AWS SDK for Python v4 - Lex Runtime V2"
 site_description = "Documentation for AWS Lex Runtime V2 Client"
 site_author = "Amazon Web Services"
 

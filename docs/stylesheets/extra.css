@@ -12,3 +12,31 @@ p:has(span.breadcrumb) {
 [data-md-color-scheme="default"] .md-header__button.md-logo img {
   content: url('../assets/aws-logo-dark.svg');
 }
+
+/* Keep the experimental status announcement prominent across the docs site. */
+.md-banner {
+  background-color: #ffe0a3;
+  border-bottom: 1px solid #d98b00;
+  color: #291b00;
+}
+
+[data-md-color-scheme="slate"] .md-banner {
+  background-color: #332407;
+  border-bottom-color: #8f650b;
+  color: #fff4d6;
+}
+
+.md-banner__inner {
+  font-size: 0.72rem;
+}
+
+.md-banner__inner strong,
+.md-banner__inner a {
+  font-weight: 700;
+}
+
+.md-banner__inner a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.1em;
+}

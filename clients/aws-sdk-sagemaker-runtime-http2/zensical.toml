@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Sagemaker Runtime Http2"
+site_name = "AWS SDK for Python v4 - Sagemaker Runtime Http2"
 site_description = "Documentation for AWS Sagemaker Runtime Http2 Client"
 site_author = "Amazon Web Services"
 

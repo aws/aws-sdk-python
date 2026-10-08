@@ -1,0 +1,28 @@
+{
+  "changes": [
+    {
+      "type": "api-change",
+      "description": "Updates documentation for lambda function timeout."
+    },
+    {
+      "type": "api-change",
+      "description": "AWS Lambda now provides configurable control over S3 direct access, allowing you to explicitly enable or disable how functions stream file reads directly from S3 buckets. This gives you flexibility to tune data access behavior based on your workload requirements, independent of memory size."
+    },
+    {
+      "type": "enhancement",
+      "description": "Re-generated with smithy-python 0.6.0"
+    },
+    {
+      "type": "dependency",
+      "description": "Bump `smithy-core` from `~=0.8.0` to `~=0.9.0`."
+    },
+    {
+      "type": "dependency",
+      "description": "Bump `smithy-aws-core` from `~=0.11.0` to `~=0.12.0`."
+    },
+    {
+      "type": "dependency",
+      "description": "Bump `smithy-http` from `~=0.5.0` to `~=0.6.0`."
+    }
+  ]
+}

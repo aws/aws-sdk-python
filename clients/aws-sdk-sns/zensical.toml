@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Sns"
+site_name = "AWS SDK for Python v4 - Sns"
 site_description = "Documentation for AWS Sns Client"
 site_author = "Amazon Web Services"
 
