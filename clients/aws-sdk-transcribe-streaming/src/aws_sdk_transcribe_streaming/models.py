@@ -9,6 +9,7 @@ from typing import Any, Literal, Self, Union
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import TypeRegistry
 from smithy_core.exceptions import ModeledError, SerializationError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -256,7 +257,7 @@ class Item:
     precision (e.g., 1.056)
     """
 
-    type: ItemType | None = None
+    type: str | None = None
     """
     The type of item identified. Options are: `PRONUNCIATION` (spoken words)
     and `PUNCTUATION`.
@@ -567,7 +568,7 @@ class ChannelDefinition:
     speaking).
     """
 
-    participant_role: ParticipantRole
+    participant_role: str
     """
     Specify the speaker you want to define. Omitting this parameter is
     equivalent to specifying both participants.
@@ -689,7 +690,7 @@ class PostCallAnalyticsSettings:
     ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
     """
 
-    content_redaction_output: ContentRedactionOutput | None = None
+    content_redaction_output: str | None = None
     """
     Specify whether you want only a redacted transcript or both a redacted
     and an unredacted transcript. If you choose redacted and unredacted, two
@@ -1201,7 +1202,7 @@ class CallAnalyticsItem:
     end of the identified item.
     """
 
-    type: ItemType | None = None
+    type: str | None = None
     """
     The type of item identified. Options are: `PRONUNCIATION` (spoken words)
     and `PUNCTUATION`.
@@ -1370,7 +1371,7 @@ class CallAnalyticsLanguageWithScore:
     including the associated confidence score.
     """
 
-    language_code: CallAnalyticsLanguageCode | None = None
+    language_code: str | None = None
     """The language code of the identified language."""
 
     score: float = 0
@@ -2015,7 +2016,7 @@ class UtteranceEvent:
     (`FALSE`) or partial (`TRUE`).
     """
 
-    participant_role: ParticipantRole | None = None
+    participant_role: str | None = None
     """
     Provides the role of the speaker for each audio channel, either
     `CUSTOMER` or `AGENT`.
@@ -2048,13 +2049,13 @@ class UtteranceEvent:
     (PII) in your transcription output.
     """
 
-    sentiment: Sentiment | None = None
+    sentiment: str | None = None
     """Provides the sentiment that was detected in the specified segment."""
 
     issues_detected: list[IssueDetected] | None = None
     """Provides the issue that was detected in the specified segment."""
 
-    language_code: CallAnalyticsLanguageCode | None = None
+    language_code: str | None = None
     """
     The language code that represents the language spoken in your audio
     stream.
@@ -2531,7 +2532,7 @@ class ClinicalNoteGenerationResult:
     transcript_output_location: str | None = None
     """Holds the Amazon S3 URI for the output Transcript."""
 
-    status: ClinicalNoteGenerationStatus | None = None
+    status: str | None = None
     """
     The status of the clinical note generation.
 
@@ -2671,7 +2672,7 @@ class ClinicalNoteGenerationSettings:
     .
     """
 
-    note_template: MedicalScribeNoteTemplate | None = None
+    note_template: str | None = None
     """
     Specify one of the following templates to use for the clinical note
     summary. The default is `HISTORY_AND_PHYSICAL`.
@@ -2831,7 +2832,7 @@ class MedicalScribeChannelDefinition:
     the transcription and identify speaker roles for each speaker.
     """
 
-    participant_role: MedicalScribeParticipantRole
+    participant_role: str
     """
     Specify the participant that you want to flag. The allowed options are
     `CLINICIAN` and `PATIENT`.
@@ -3190,13 +3191,13 @@ class MedicalScribeStreamDetails:
     stream_ended_at: datetime | None = None
     """The date and time when the HealthScribe streaming session was ended."""
 
-    language_code: MedicalScribeLanguageCode | None = None
+    language_code: str | None = None
     """The Language Code of the HealthScribe streaming session."""
 
     media_sample_rate_hertz: int | None = None
     """The sample rate (in hertz) of the HealthScribe streaming session."""
 
-    media_encoding: MedicalScribeMediaEncoding | None = None
+    media_encoding: str | None = None
     """The Media Encoding of the HealthScribe streaming session."""
 
     vocabulary_name: str | None = None
@@ -3208,7 +3209,7 @@ class MedicalScribeStreamDetails:
     session .
     """
 
-    vocabulary_filter_method: MedicalScribeVocabularyFilterMethod | None = None
+    vocabulary_filter_method: str | None = None
     """
     The method of the vocabulary filter for the HealthScribe streaming
     session.
@@ -3226,7 +3227,7 @@ class MedicalScribeStreamDetails:
     encryption_settings: MedicalScribeEncryptionSettings | None = None
     """The Encryption Settings of the HealthScribe streaming session."""
 
-    stream_status: MedicalScribeStreamStatus | None = None
+    stream_status: str | None = None
     """
     The streaming status of the HealthScribe streaming session.
 
@@ -3512,6 +3513,16 @@ class GetMedicalScribeStreamOutput:
     medical_scribe_stream_details: MedicalScribeStreamDetails | None = None
     """Provides details about a HealthScribe streaming session."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MEDICAL_SCRIBE_STREAM_OUTPUT, self)
 
@@ -3730,7 +3741,7 @@ class LanguageWithScore:
     language, you will have more than one `LanguageWithScore` result.
     """
 
-    language_code: LanguageCode | None = None
+    language_code: str | None = None
     """The language code of the identified language."""
 
     score: float = 0
@@ -3953,7 +3964,7 @@ class MedicalItem:
     end_time: float = 0
     """The end time, in seconds, of the transcribed item."""
 
-    type: ItemType | None = None
+    type: str | None = None
     """
     The type of item identified. Options are: `PRONUNCIATION` (spoken words)
     and `PUNCTUATION`.
@@ -4392,7 +4403,7 @@ class Pronouns(UnknownEnumMixin, StrEnum):
 class MedicalScribePatientContext:
     """Contains patient-specific information."""
 
-    pronouns: Pronouns | None = field(repr=False, default=None)
+    pronouns: str | None = field(repr=False, default=None)
     """
     The patient's preferred pronouns that the user wants to provide as a
     context for clinical note generation .
@@ -4528,7 +4539,7 @@ class MedicalScribeConfigurationEvent:
     `VocabularyFilterMethod`.
     """
 
-    vocabulary_filter_method: MedicalScribeVocabularyFilterMethod | None = None
+    vocabulary_filter_method: str | None = None
     """
     Specify how you want your custom vocabulary filter applied to the
     streaming session.
@@ -4703,7 +4714,7 @@ class MedicalScribeSessionControlEventType(UnknownEnumMixin, StrEnum):
 class MedicalScribeSessionControlEvent:
     """Specify the lifecycle of your streaming session."""
 
-    type: MedicalScribeSessionControlEventType
+    type: str
     """
     The type of `MedicalScribeSessionControlEvent`.
 
@@ -4939,7 +4950,7 @@ class MedicalScribeTranscriptItem:
     end_audio_time: float = 0
     """The end time, in milliseconds, of the transcribed item."""
 
-    type: MedicalScribeTranscriptItemType | None = None
+    type: str | None = None
     """
     The type of item identified. Options are: `PRONUNCIATION` (spoken words)
     and `PUNCTUATION`.
@@ -5908,7 +5919,7 @@ class Result:
     channel_id: str | None = None
     """Indicates which audio channel is associated with the `Result`."""
 
-    language_code: LanguageCode | None = None
+    language_code: str | None = None
     """
     The language code that represents the language spoken in your audio
     stream.
@@ -6057,7 +6068,7 @@ class VocabularyFilterMethod(UnknownEnumMixin, StrEnum):
 class StartCallAnalyticsStreamTranscriptionInput:
     """Dataclass for StartCallAnalyticsStreamTranscriptionInput structure."""
 
-    language_code: CallAnalyticsLanguageCode | None = None
+    language_code: str | None = None
     """
     Specify the language code that represents the language spoken in your
     audio.
@@ -6076,7 +6087,7 @@ class StartCallAnalyticsStreamTranscriptionInput:
     you specify must match that of your audio.
     """
 
-    media_encoding: MediaEncoding | None = None
+    media_encoding: str | None = None
     """
     Specify the encoding of your input audio. Supported formats are:
 
@@ -6126,7 +6137,7 @@ class StartCallAnalyticsStreamTranscriptionInput:
     words](https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html).
     """
 
-    vocabulary_filter_method: VocabularyFilterMethod | None = None
+    vocabulary_filter_method: str | None = None
     """
     Specify how you want your vocabulary filter applied to your transcript.
 
@@ -6191,7 +6202,7 @@ class StartCallAnalyticsStreamTranscriptionInput:
         example, you cannot include `en-US` and `en-AU` in the same request.
     """
 
-    preferred_language: CallAnalyticsLanguageCode | None = None
+    preferred_language: str | None = None
     """
     Specify a preferred language from the subset of languages codes you
     specified in `LanguageOptions`.
@@ -6245,7 +6256,7 @@ class StartCallAnalyticsStreamTranscriptionInput:
     stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
     """
 
-    partial_results_stability: PartialResultsStability | None = None
+    partial_results_stability: str | None = None
     """
     Specify the level of stability to use when you enable partial results
     stabilization (`EnablePartialResultsStabilization`).
@@ -6257,7 +6268,7 @@ class StartCallAnalyticsStreamTranscriptionInput:
     stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
     """
 
-    content_identification_type: ContentIdentificationType | None = None
+    content_identification_type: str | None = None
     """
     Labels all personally identifiable information (PII) identified in your
     transcript.
@@ -6276,7 +6287,7 @@ class StartCallAnalyticsStreamTranscriptionInput:
     information](https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html).
     """
 
-    content_redaction_type: ContentRedactionType | None = None
+    content_redaction_type: str | None = None
     """
     Redacts all personally identifiable information (PII) identified in your
     transcript.
@@ -6630,7 +6641,7 @@ class StartCallAnalyticsStreamTranscriptionOutput:
     request_id: str | None = None
     """Provides the identifier for your real-time Call Analytics request."""
 
-    language_code: CallAnalyticsLanguageCode | None = None
+    language_code: str | None = None
     """
     Provides the language code that you specified in your Call Analytics
     request.
@@ -6642,7 +6653,7 @@ class StartCallAnalyticsStreamTranscriptionOutput:
     request.
     """
 
-    media_encoding: MediaEncoding | None = None
+    media_encoding: str | None = None
     """
     Provides the media encoding you specified in your Call Analytics
     request.
@@ -6663,7 +6674,7 @@ class StartCallAnalyticsStreamTranscriptionOutput:
     your Call Analytics request.
     """
 
-    vocabulary_filter_method: VocabularyFilterMethod | None = None
+    vocabulary_filter_method: str | None = None
     """
     Provides the vocabulary filtering method used in your Call Analytics
     transcription.
@@ -6687,7 +6698,7 @@ class StartCallAnalyticsStreamTranscriptionOutput:
     request.
     """
 
-    preferred_language: CallAnalyticsLanguageCode | None = None
+    preferred_language: str | None = None
     """
     Provides the preferred language that you specified in your Call
     Analytics request.
@@ -6711,16 +6722,16 @@ class StartCallAnalyticsStreamTranscriptionOutput:
     Analytics transcription.
     """
 
-    partial_results_stability: PartialResultsStability | None = None
+    partial_results_stability: str | None = None
     """Provides the stabilization level used for your transcription."""
 
-    content_identification_type: ContentIdentificationType | None = None
+    content_identification_type: str | None = None
     """
     Shows whether content identification was enabled for your Call Analytics
     transcription.
     """
 
-    content_redaction_type: ContentRedactionType | None = None
+    content_redaction_type: str | None = None
     """
     Shows whether content redaction was enabled for your Call Analytics
     transcription.
@@ -6728,6 +6739,16 @@ class StartCallAnalyticsStreamTranscriptionOutput:
 
     pii_entity_types: str | None = None
     """Lists the PII entity types you specified in your Call Analytics request."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -7096,7 +7117,7 @@ class StartMedicalScribeStreamInput:
     HealthScribe generates an ID and returns it in the response.
     """
 
-    language_code: MedicalScribeLanguageCode | None = None
+    language_code: str | None = None
     """Specify the language code for your HealthScribe streaming session."""
 
     media_sample_rate_hertz: int | None = None
@@ -7106,7 +7127,7 @@ class StartMedicalScribeStreamInput:
     sample rate you specify must match that of your audio.
     """
 
-    media_encoding: MedicalScribeMediaEncoding | None = None
+    media_encoding: str | None = None
     """
     Specify the encoding used for the input audio.
 
@@ -7217,7 +7238,7 @@ class StartMedicalScribeStreamOutput:
     request_id: str | None = None
     """The unique identifier for your streaming request."""
 
-    language_code: MedicalScribeLanguageCode | None = None
+    language_code: str | None = None
     """
     The Language Code that you specified in your request. Same as provided
     in the `StartMedicalScribeStreamRequest`.
@@ -7229,10 +7250,20 @@ class StartMedicalScribeStreamOutput:
     provided in the `StartMedicalScribeStreamRequest`
     """
 
-    media_encoding: MedicalScribeMediaEncoding | None = None
+    media_encoding: str | None = None
     """
     The Media Encoding you specified in your request. Same as provided in
     the `StartMedicalScribeStreamRequest`
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -7370,7 +7401,7 @@ class Type(UnknownEnumMixin, StrEnum):
 class StartMedicalStreamTranscriptionInput:
     """Dataclass for StartMedicalStreamTranscriptionInput structure."""
 
-    language_code: LanguageCode | None = None
+    language_code: str | None = None
     """
     Specify the language code that represents the language spoken in your
     audio.
@@ -7386,7 +7417,7 @@ class StartMedicalStreamTranscriptionInput:
     you specify must match that of your audio.
     """
 
-    media_encoding: MediaEncoding | None = None
+    media_encoding: str | None = None
     """
     Specify the encoding used for the input audio. Supported formats are:
 
@@ -7408,10 +7439,10 @@ class StartMedicalStreamTranscriptionInput:
     sensitive.
     """
 
-    specialty: Specialty | None = None
+    specialty: str | None = None
     """Specify the medical specialty contained in your audio."""
 
-    type: Type | None = None
+    type: str | None = None
     """
     Specify the type of input audio. For example, choose `DICTATION` for a
     provider dictating patient notes and `CONVERSATION` for a dialogue
@@ -7464,7 +7495,7 @@ class StartMedicalStreamTranscriptionInput:
     `EnableChannelIdentification`.
     """
 
-    content_identification_type: MedicalContentIdentificationType | None = None
+    content_identification_type: str | None = None
     """
     Labels all personal health information (PHI) identified in your
     transcript.
@@ -7678,7 +7709,7 @@ class StartMedicalStreamTranscriptionOutput:
     request_id: str | None = None
     """Provides the identifier for your streaming request."""
 
-    language_code: LanguageCode | None = None
+    language_code: str | None = None
     """
     Provides the language code that you specified in your request. This must
     be `en-US`.
@@ -7687,7 +7718,7 @@ class StartMedicalStreamTranscriptionOutput:
     media_sample_rate_hertz: int | None = None
     """Provides the sample rate that you specified in your request."""
 
-    media_encoding: MediaEncoding | None = None
+    media_encoding: str | None = None
     """Provides the media encoding you specified in your request."""
 
     vocabulary_name: str | None = None
@@ -7696,10 +7727,10 @@ class StartMedicalStreamTranscriptionOutput:
     request.
     """
 
-    specialty: Specialty | None = None
+    specialty: str | None = None
     """Provides the medical specialty that you specified in your request."""
 
-    type: Type | None = None
+    type: str | None = None
     """Provides the type of audio you specified in your request."""
 
     show_speaker_label: bool = False
@@ -7714,8 +7745,18 @@ class StartMedicalStreamTranscriptionOutput:
     number_of_channels: int | None = None
     """Provides the number of channels that you specified in your request."""
 
-    content_identification_type: MedicalContentIdentificationType | None = None
+    content_identification_type: str | None = None
     """Shows whether content identification was enabled for your transcription."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_START_MEDICAL_STREAM_TRANSCRIPTION_OUTPUT, self)
@@ -7965,7 +8006,7 @@ class TranscriptFormat(UnknownEnumMixin, StrEnum):
 class StartStreamTranscriptionInput:
     """Dataclass for StartStreamTranscriptionInput structure."""
 
-    language_code: LanguageCode | None = None
+    language_code: str | None = None
     """
     Specify the language code that represents the language spoken in your
     audio.
@@ -7987,7 +8028,7 @@ class StartStreamTranscriptionInput:
     you specify must match that of your audio.
     """
 
-    media_encoding: MediaEncoding | None = None
+    media_encoding: str | None = None
     """
     Specify the encoding of your input audio. Supported formats are:
 
@@ -8049,7 +8090,7 @@ class StartStreamTranscriptionInput:
     words](https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html).
     """
 
-    vocabulary_filter_method: VocabularyFilterMethod | None = None
+    vocabulary_filter_method: str | None = None
     """
     Specify how you want your vocabulary filter applied to your transcript.
 
@@ -8107,7 +8148,7 @@ class StartStreamTranscriptionInput:
     stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
     """
 
-    partial_results_stability: PartialResultsStability | None = None
+    partial_results_stability: str | None = None
     """
     Specify the level of stability to use when you enable partial results
     stabilization (`EnablePartialResultsStabilization`).
@@ -8119,7 +8160,7 @@ class StartStreamTranscriptionInput:
     stabilization](https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization).
     """
 
-    content_identification_type: ContentIdentificationType | None = None
+    content_identification_type: str | None = None
     """
     Labels all personally identifiable information (PII) identified in your
     transcript.
@@ -8138,7 +8179,7 @@ class StartStreamTranscriptionInput:
     information](https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html).
     """
 
-    content_redaction_type: ContentRedactionType | None = None
+    content_redaction_type: str | None = None
     """
     Redacts all personally identifiable information (PII) identified in your
     transcript.
@@ -8239,7 +8280,7 @@ class StartStreamTranscriptionInput:
         example, you cannot include `en-US` and `en-AU` in the same request.
     """
 
-    preferred_language: LanguageCode | None = None
+    preferred_language: str | None = None
     """
     Specify a preferred language from the subset of languages codes you
     specified in `LanguageOptions`.
@@ -8317,7 +8358,7 @@ class StartStreamTranscriptionInput:
     many times as you want until 1:30 PM.
     """
 
-    transcript_format: TranscriptFormat | None = None
+    transcript_format: str | None = None
     """
     Specify how numbers, dates, and other alphanumeric entities are rendered
     in your transcription results.
@@ -9035,13 +9076,13 @@ class StartStreamTranscriptionOutput:
     request_id: str | None = None
     """Provides the identifier for your streaming request."""
 
-    language_code: LanguageCode | None = None
+    language_code: str | None = None
     """Provides the language code that you specified in your request."""
 
     media_sample_rate_hertz: int | None = None
     """Provides the sample rate that you specified in your request."""
 
-    media_encoding: MediaEncoding | None = None
+    media_encoding: str | None = None
     """Provides the media encoding you specified in your request."""
 
     vocabulary_name: str | None = None
@@ -9059,7 +9100,7 @@ class StartStreamTranscriptionOutput:
     your request.
     """
 
-    vocabulary_filter_method: VocabularyFilterMethod | None = None
+    vocabulary_filter_method: str | None = None
     """Provides the vocabulary filtering method used in your transcription."""
 
     show_speaker_label: bool = False
@@ -9077,13 +9118,13 @@ class StartStreamTranscriptionOutput:
     transcription.
     """
 
-    partial_results_stability: PartialResultsStability | None = None
+    partial_results_stability: str | None = None
     """Provides the stabilization level used for your transcription."""
 
-    content_identification_type: ContentIdentificationType | None = None
+    content_identification_type: str | None = None
     """Shows whether content identification was enabled for your transcription."""
 
-    content_redaction_type: ContentRedactionType | None = None
+    content_redaction_type: str | None = None
     """Shows whether content redaction was enabled for your transcription."""
 
     pii_entity_types: str | None = None
@@ -9104,7 +9145,7 @@ class StartStreamTranscriptionOutput:
     language_options: str | None = None
     """Provides the language codes that you specified in your request."""
 
-    preferred_language: LanguageCode | None = None
+    preferred_language: str | None = None
     """Provides the preferred language that you specified in your request."""
 
     identify_multiple_languages: bool = False
@@ -9131,8 +9172,18 @@ class StartStreamTranscriptionOutput:
     your request.
     """
 
-    transcript_format: TranscriptFormat | None = None
+    transcript_format: str | None = None
     """Provides the transcript format that you specified in your request."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_START_STREAM_TRANSCRIPTION_OUTPUT, self)

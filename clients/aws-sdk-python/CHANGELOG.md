@@ -1,5 +1,34 @@
 # Changelog
 
+## v0.12.0
+
+### Dependencies
+* Add support for the `aws-sdk-signin` client.
+* Bump `aws-sdk-api-gateway` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-bedrock` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-bedrock-agent` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-bedrock-agent-runtime` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-bedrock-agentcore` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-bedrock-agentcore-control` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-bedrock-data-automation` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-bedrock-data-automation-runtime` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-bedrock-runtime` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-cloudtrail` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-cognito-identity` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-connecthealth` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-dynamodb` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-guardduty` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-lambda` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-lex-runtime-v2` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-polly` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-qbusiness` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-sagemaker-runtime-http2` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-secrets-manager` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-sns` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-sqs` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-sts` from `~=0.11.0` to `~=0.12.0`.
+* Bump `aws-sdk-transcribe-streaming` from `~=0.11.0` to `~=0.12.0`.
+
 ## v0.11.0
 
 ### Dependencies

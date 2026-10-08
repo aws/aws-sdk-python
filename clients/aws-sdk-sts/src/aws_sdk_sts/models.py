@@ -8,6 +8,7 @@ from typing import Any, Literal, Self
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import TypeRegistry
 from smithy_core.exceptions import ModeledError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -708,6 +709,14 @@ class AssumeRoleInput:
     `[{"ProviderArn":"arn:aws:iam::aws:contextProvider/IdentityCenter","ContextAssertion":"trusted-context-assertion"}]`
     """
 
+    minimum_session_token_size: int | None = None
+    """
+    The minimum size, in bytes, of the session token that STS issues for the
+    request. STS increases the session token to at least this size,
+    regardless of its actual content. The value must not exceed 4,096 bytes.
+    When set to 0 or not specified, the session token size is unchanged.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ASSUME_ROLE_INPUT, self)
 
@@ -781,6 +790,12 @@ class AssumeRoleInput:
                 self.provided_contexts,
             )
 
+        if self.minimum_session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROLE_INPUT.members["MinimumSessionTokenSize"],
+                self.minimum_session_token_size,
+            )
+
     @classmethod
     def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
         return cls(**cls.deserialize_kwargs(deserializer))
@@ -851,6 +866,11 @@ class AssumeRoleInput:
                         _deserialize_provided_contexts_list_type(
                             de, _SCHEMA_ASSUME_ROLE_INPUT.members["ProvidedContexts"]
                         )
+                    )
+
+                case 12:
+                    kwargs["minimum_session_token_size"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROLE_INPUT.members["MinimumSessionTokenSize"]
                     )
 
                 case _:
@@ -1000,6 +1020,28 @@ class AssumeRoleOutput:
     characters: =,.@-
     """
 
+    session_token_utilization: int | None = None
+    """
+    The percentage (0-100) of the maximum allowed session token size that
+    the returned session token consumes.
+    """
+
+    session_token_size: int | None = None
+    """
+    The size, in bytes, of the session token returned in the Credentials for
+    this response.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ASSUME_ROLE_OUTPUT, self)
 
@@ -1027,6 +1069,18 @@ class AssumeRoleOutput:
                 self.source_identity,
             )
 
+        if self.session_token_utilization is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROLE_OUTPUT.members["SessionTokenUtilization"],
+                self.session_token_utilization,
+            )
+
+        if self.session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROLE_OUTPUT.members["SessionTokenSize"],
+                self.session_token_size,
+            )
+
     @classmethod
     def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
         return cls(**cls.deserialize_kwargs(deserializer))
@@ -1051,6 +1105,16 @@ class AssumeRoleOutput:
                 case 3:
                     kwargs["source_identity"] = de.read_string(
                         _SCHEMA_ASSUME_ROLE_OUTPUT.members["SourceIdentity"]
+                    )
+
+                case 4:
+                    kwargs["session_token_utilization"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROLE_OUTPUT.members["SessionTokenUtilization"]
+                    )
+
+                case 5:
+                    kwargs["session_token_size"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROLE_OUTPUT.members["SessionTokenSize"]
                     )
 
                 case _:
@@ -1394,6 +1458,14 @@ class AssumeRoleWithSAMLInput:
         in the *IAM User Guide*.
     """
 
+    minimum_session_token_size: int | None = None
+    """
+    The minimum size, in bytes, of the session token that STS issues for the
+    request. STS increases the session token to at least this size,
+    regardless of its actual content. The value must not exceed 4,096 bytes.
+    When set to 0 or not specified, the session token size is unchanged.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ASSUME_ROLE_WITH_SAML_INPUT, self)
 
@@ -1431,6 +1503,12 @@ class AssumeRoleWithSAMLInput:
             serializer.write_integer(
                 _SCHEMA_ASSUME_ROLE_WITH_SAML_INPUT.members["DurationSeconds"],
                 self.duration_seconds,
+            )
+
+        if self.minimum_session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROLE_WITH_SAML_INPUT.members["MinimumSessionTokenSize"],
+                self.minimum_session_token_size,
             )
 
     @classmethod
@@ -1471,6 +1549,13 @@ class AssumeRoleWithSAMLInput:
                 case 5:
                     kwargs["duration_seconds"] = de.read_integer(
                         _SCHEMA_ASSUME_ROLE_WITH_SAML_INPUT.members["DurationSeconds"]
+                    )
+
+                case 6:
+                    kwargs["minimum_session_token_size"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROLE_WITH_SAML_INPUT.members[
+                            "MinimumSessionTokenSize"
+                        ]
                     )
 
                 case _:
@@ -1590,6 +1675,28 @@ class AssumeRoleWithSAMLOutput:
     characters: =,.@-
     """
 
+    session_token_utilization: int | None = None
+    """
+    The percentage (0-100) of the maximum allowed session token size that
+    the returned session token consumes.
+    """
+
+    session_token_size: int | None = None
+    """
+    The size, in bytes, of the session token returned in the Credentials for
+    this response.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ASSUME_ROLE_WITH_SAML_OUTPUT, self)
 
@@ -1645,6 +1752,18 @@ class AssumeRoleWithSAMLOutput:
                 self.source_identity,
             )
 
+        if self.session_token_utilization is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROLE_WITH_SAML_OUTPUT.members["SessionTokenUtilization"],
+                self.session_token_utilization,
+            )
+
+        if self.session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROLE_WITH_SAML_OUTPUT.members["SessionTokenSize"],
+                self.session_token_size,
+            )
+
     @classmethod
     def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
         return cls(**cls.deserialize_kwargs(deserializer))
@@ -1694,6 +1813,18 @@ class AssumeRoleWithSAMLOutput:
                 case 8:
                     kwargs["source_identity"] = de.read_string(
                         _SCHEMA_ASSUME_ROLE_WITH_SAML_OUTPUT.members["SourceIdentity"]
+                    )
+
+                case 9:
+                    kwargs["session_token_utilization"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROLE_WITH_SAML_OUTPUT.members[
+                            "SessionTokenUtilization"
+                        ]
+                    )
+
+                case 10:
+                    kwargs["session_token_size"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROLE_WITH_SAML_OUTPUT.members["SessionTokenSize"]
                     )
 
                 case _:
@@ -1999,6 +2130,14 @@ class AssumeRoleWithWebIdentityInput:
         in the *IAM User Guide*.
     """
 
+    minimum_session_token_size: int | None = None
+    """
+    The minimum size, in bytes, of the session token that STS issues for the
+    request. STS increases the session token to at least this size,
+    regardless of its actual content. The value must not exceed 4,096 bytes.
+    When set to 0 or not specified, the session token size is unchanged.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ASSUME_ROLE_WITH_WEB_IDENTITY_INPUT, self)
 
@@ -2044,6 +2183,14 @@ class AssumeRoleWithWebIdentityInput:
             serializer.write_integer(
                 _SCHEMA_ASSUME_ROLE_WITH_WEB_IDENTITY_INPUT.members["DurationSeconds"],
                 self.duration_seconds,
+            )
+
+        if self.minimum_session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROLE_WITH_WEB_IDENTITY_INPUT.members[
+                    "MinimumSessionTokenSize"
+                ],
+                self.minimum_session_token_size,
             )
 
     @classmethod
@@ -2099,6 +2246,13 @@ class AssumeRoleWithWebIdentityInput:
                     kwargs["duration_seconds"] = de.read_integer(
                         _SCHEMA_ASSUME_ROLE_WITH_WEB_IDENTITY_INPUT.members[
                             "DurationSeconds"
+                        ]
+                    )
+
+                case 7:
+                    kwargs["minimum_session_token_size"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROLE_WITH_WEB_IDENTITY_INPUT.members[
+                            "MinimumSessionTokenSize"
                         ]
                     )
 
@@ -2204,6 +2358,28 @@ class AssumeRoleWithWebIdentityOutput:
     characters: =,.@-
     """
 
+    session_token_utilization: int | None = None
+    """
+    The percentage (0-100) of the maximum allowed session token size that
+    the returned session token consumes.
+    """
+
+    session_token_size: int | None = None
+    """
+    The size, in bytes, of the session token returned in the Credentials for
+    this response.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT, self)
 
@@ -2254,6 +2430,22 @@ class AssumeRoleWithWebIdentityOutput:
                 self.source_identity,
             )
 
+        if self.session_token_utilization is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT.members[
+                    "SessionTokenUtilization"
+                ],
+                self.session_token_utilization,
+            )
+
+        if self.session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT.members[
+                    "SessionTokenSize"
+                ],
+                self.session_token_size,
+            )
+
     @classmethod
     def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
         return cls(**cls.deserialize_kwargs(deserializer))
@@ -2298,6 +2490,20 @@ class AssumeRoleWithWebIdentityOutput:
                     kwargs["source_identity"] = de.read_string(
                         _SCHEMA_ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT.members[
                             "SourceIdentity"
+                        ]
+                    )
+
+                case 7:
+                    kwargs["session_token_utilization"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT.members[
+                            "SessionTokenUtilization"
+                        ]
+                    )
+
+                case 8:
+                    kwargs["session_token_size"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT.members[
+                            "SessionTokenSize"
                         ]
                     )
 
@@ -2433,6 +2639,14 @@ class AssumeRootInput:
     By default, the value is set to `900` seconds.
     """
 
+    minimum_session_token_size: int | None = None
+    """
+    The minimum size, in bytes, of the session token that STS issues for the
+    request. STS increases the session token to at least this size,
+    regardless of its actual content. The value must not exceed 4,096 bytes.
+    When set to 0 or not specified, the session token size is unchanged.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ASSUME_ROOT_INPUT, self)
 
@@ -2452,6 +2666,12 @@ class AssumeRootInput:
             serializer.write_integer(
                 _SCHEMA_ASSUME_ROOT_INPUT.members["DurationSeconds"],
                 self.duration_seconds,
+            )
+
+        if self.minimum_session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROOT_INPUT.members["MinimumSessionTokenSize"],
+                self.minimum_session_token_size,
             )
 
     @classmethod
@@ -2475,6 +2695,11 @@ class AssumeRootInput:
                 case 2:
                     kwargs["duration_seconds"] = de.read_integer(
                         _SCHEMA_ASSUME_ROOT_INPUT.members["DurationSeconds"]
+                    )
+
+                case 3:
+                    kwargs["minimum_session_token_size"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROOT_INPUT.members["MinimumSessionTokenSize"]
                     )
 
                 case _:
@@ -2516,6 +2741,28 @@ class AssumeRootOutput:
     characters: =,.@-
     """
 
+    session_token_utilization: int | None = None
+    """
+    The percentage (0-100) of the maximum allowed session token size that
+    the returned session token consumes.
+    """
+
+    session_token_size: int | None = None
+    """
+    The size, in bytes, of the session token returned in the Credentials for
+    this response.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ASSUME_ROOT_OUTPUT, self)
 
@@ -2529,6 +2776,18 @@ class AssumeRootOutput:
             serializer.write_string(
                 _SCHEMA_ASSUME_ROOT_OUTPUT.members["SourceIdentity"],
                 self.source_identity,
+            )
+
+        if self.session_token_utilization is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROOT_OUTPUT.members["SessionTokenUtilization"],
+                self.session_token_utilization,
+            )
+
+        if self.session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_ASSUME_ROOT_OUTPUT.members["SessionTokenSize"],
+                self.session_token_size,
             )
 
     @classmethod
@@ -2547,6 +2806,16 @@ class AssumeRootOutput:
                 case 1:
                     kwargs["source_identity"] = de.read_string(
                         _SCHEMA_ASSUME_ROOT_OUTPUT.members["SourceIdentity"]
+                    )
+
+                case 2:
+                    kwargs["session_token_utilization"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROOT_OUTPUT.members["SessionTokenUtilization"]
+                    )
+
+                case 3:
+                    kwargs["session_token_size"] = de.read_integer(
+                        _SCHEMA_ASSUME_ROOT_OUTPUT.members["SessionTokenSize"]
                     )
 
                 case _:
@@ -2628,6 +2897,16 @@ class DecodeAuthorizationMessageOutput:
 
     decoded_message: str | None = None
     """The API returns a response with the decoded message."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DECODE_AUTHORIZATION_MESSAGE_OUTPUT, self)
@@ -2780,6 +3059,16 @@ class GetAccessKeyInfoOutput:
     account: str | None = None
     """The number used to identify the Amazon Web Services account."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_ACCESS_KEY_INFO_OUTPUT, self)
 
@@ -2875,6 +3164,16 @@ class GetCallerIdentityOutput:
 
     arn: str | None = None
     """The Amazon Web Services ARN associated with the calling entity."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_CALLER_IDENTITY_OUTPUT, self)
@@ -3047,6 +3346,16 @@ class GetDelegatedAccessTokenOutput:
     The Amazon Resource Name (ARN) of the principal that was assumed when
     obtaining the delegated access token. This ARN identifies the IAM entity
     whose permissions are granted by the temporary credentials.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3289,6 +3598,14 @@ class GetFederationTokenInput:
     in the request takes precedence over the role tag.
     """
 
+    minimum_session_token_size: int | None = None
+    """
+    The minimum size, in bytes, of the session token that STS issues for the
+    request. STS increases the session token to at least this size,
+    regardless of its actual content. The value must not exceed 4,096 bytes.
+    When set to 0 or not specified, the session token size is unchanged.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_FEDERATION_TOKEN_INPUT, self)
 
@@ -3321,6 +3638,12 @@ class GetFederationTokenInput:
                 serializer,
                 _SCHEMA_GET_FEDERATION_TOKEN_INPUT.members["Tags"],
                 self.tags,
+            )
+
+        if self.minimum_session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_GET_FEDERATION_TOKEN_INPUT.members["MinimumSessionTokenSize"],
+                self.minimum_session_token_size,
             )
 
     @classmethod
@@ -3356,6 +3679,13 @@ class GetFederationTokenInput:
                 case 4:
                     kwargs["tags"] = _deserialize_tag_list_type(
                         de, _SCHEMA_GET_FEDERATION_TOKEN_INPUT.members["Tags"]
+                    )
+
+                case 5:
+                    kwargs["minimum_session_token_size"] = de.read_integer(
+                        _SCHEMA_GET_FEDERATION_TOKEN_INPUT.members[
+                            "MinimumSessionTokenSize"
+                        ]
                     )
 
                 case _:
@@ -3462,6 +3792,28 @@ class GetFederationTokenOutput:
     policies and tags exceeded the allowed space.
     """
 
+    session_token_utilization: int | None = None
+    """
+    The percentage (0-100) of the maximum allowed session token size that
+    the returned session token consumes.
+    """
+
+    session_token_size: int | None = None
+    """
+    The size, in bytes, of the session token returned in the Credentials for
+    this response.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_FEDERATION_TOKEN_OUTPUT, self)
 
@@ -3484,6 +3836,18 @@ class GetFederationTokenOutput:
                 self.packed_policy_size,
             )
 
+        if self.session_token_utilization is not None:
+            serializer.write_integer(
+                _SCHEMA_GET_FEDERATION_TOKEN_OUTPUT.members["SessionTokenUtilization"],
+                self.session_token_utilization,
+            )
+
+        if self.session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_GET_FEDERATION_TOKEN_OUTPUT.members["SessionTokenSize"],
+                self.session_token_size,
+            )
+
     @classmethod
     def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
         return cls(**cls.deserialize_kwargs(deserializer))
@@ -3503,6 +3867,18 @@ class GetFederationTokenOutput:
                 case 2:
                     kwargs["packed_policy_size"] = de.read_integer(
                         _SCHEMA_GET_FEDERATION_TOKEN_OUTPUT.members["PackedPolicySize"]
+                    )
+
+                case 3:
+                    kwargs["session_token_utilization"] = de.read_integer(
+                        _SCHEMA_GET_FEDERATION_TOKEN_OUTPUT.members[
+                            "SessionTokenUtilization"
+                        ]
+                    )
+
+                case 4:
+                    kwargs["session_token_size"] = de.read_integer(
+                        _SCHEMA_GET_FEDERATION_TOKEN_OUTPUT.members["SessionTokenSize"]
                     )
 
                 case _:
@@ -3587,6 +3963,14 @@ class GetSessionTokenInput:
     sequence of six numeric digits.
     """
 
+    minimum_session_token_size: int | None = None
+    """
+    The minimum size, in bytes, of the session token that STS issues for the
+    request. STS increases the session token to at least this size,
+    regardless of its actual content. The value must not exceed 4,096 bytes.
+    When set to 0 or not specified, the session token size is unchanged.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_SESSION_TOKEN_INPUT, self)
 
@@ -3606,6 +3990,12 @@ class GetSessionTokenInput:
         if self.token_code is not None:
             serializer.write_string(
                 _SCHEMA_GET_SESSION_TOKEN_INPUT.members["TokenCode"], self.token_code
+            )
+
+        if self.minimum_session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_GET_SESSION_TOKEN_INPUT.members["MinimumSessionTokenSize"],
+                self.minimum_session_token_size,
             )
 
     @classmethod
@@ -3631,6 +4021,13 @@ class GetSessionTokenInput:
                 case 2:
                     kwargs["token_code"] = de.read_string(
                         _SCHEMA_GET_SESSION_TOKEN_INPUT.members["TokenCode"]
+                    )
+
+                case 3:
+                    kwargs["minimum_session_token_size"] = de.read_integer(
+                        _SCHEMA_GET_SESSION_TOKEN_INPUT.members[
+                            "MinimumSessionTokenSize"
+                        ]
                     )
 
                 case _:
@@ -3659,6 +4056,28 @@ class GetSessionTokenOutput:
         maximum size.
     """
 
+    session_token_utilization: int | None = None
+    """
+    The percentage (0-100) of the maximum allowed session token size that
+    the returned session token consumes.
+    """
+
+    session_token_size: int | None = None
+    """
+    The size, in bytes, of the session token returned in the Credentials for
+    this response.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_SESSION_TOKEN_OUTPUT, self)
 
@@ -3667,6 +4086,18 @@ class GetSessionTokenOutput:
             serializer.write_struct(
                 _SCHEMA_GET_SESSION_TOKEN_OUTPUT.members["Credentials"],
                 self.credentials,
+            )
+
+        if self.session_token_utilization is not None:
+            serializer.write_integer(
+                _SCHEMA_GET_SESSION_TOKEN_OUTPUT.members["SessionTokenUtilization"],
+                self.session_token_utilization,
+            )
+
+        if self.session_token_size is not None:
+            serializer.write_integer(
+                _SCHEMA_GET_SESSION_TOKEN_OUTPUT.members["SessionTokenSize"],
+                self.session_token_size,
             )
 
     @classmethod
@@ -3681,6 +4112,18 @@ class GetSessionTokenOutput:
             match schema.expect_member_index():
                 case 0:
                     kwargs["credentials"] = Credentials.deserialize(de)
+
+                case 1:
+                    kwargs["session_token_utilization"] = de.read_integer(
+                        _SCHEMA_GET_SESSION_TOKEN_OUTPUT.members[
+                            "SessionTokenUtilization"
+                        ]
+                    )
+
+                case 2:
+                    kwargs["session_token_size"] = de.read_integer(
+                        _SCHEMA_GET_SESSION_TOKEN_OUTPUT.members["SessionTokenSize"]
+                    )
 
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
@@ -3858,6 +4301,16 @@ class GetWebIdentityTokenOutput:
     expiration is determined by adding the `DurationSeconds` value to the
     time the token was issued. After this time, the token should no longer
     be considered valid.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):

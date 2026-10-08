@@ -1,4 +1,0 @@
-{
-  "type": "api-change",
-  "description": "AgentCore Memory now supports direct ingestion into long-term memory via IngestData API."
-}

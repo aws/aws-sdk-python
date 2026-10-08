@@ -18,43 +18,20 @@ ACCESS_DENIED_EXCEPTION = Schema.collection(
 )
 
 DOMAIN_ID = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#DomainId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 20, "max": 25}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^(hai-|dom-)[a-z0-9]+$"),
-        Trait.new(
-            id=ShapeID("aws.api#arnReference"),
-            value=MappingProxyType({"type": "AWS::HealthAgent::Domain"}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.connecthealth#DomainId"), shape_type=ShapeType.STRING
 )
 
 SUBSCRIPTION_ID = Schema(
     id=ShapeID("com.amazonaws.connecthealth#SubscriptionId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 25, "max": 25}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^sub-[a-zA-Z0-9]{21}$"),
-    ],
 )
 
 ACTIVATE_SUBSCRIPTION_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#ActivateSubscriptionInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "domainId": {
             "target": DOMAIN_ID,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#resourceIdentifier"), value="domainId"
-                ),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -62,9 +39,6 @@ ACTIVATE_SUBSCRIPTION_INPUT = Schema.collection(
         "subscriptionId": {
             "target": SUBSCRIPTION_ID,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#resourceIdentifier"), value="subscriptionId"
-                ),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -75,30 +49,15 @@ ACTIVATE_SUBSCRIPTION_INPUT = Schema.collection(
 SUBSCRIPTION_ARN = Schema(
     id=ShapeID("com.amazonaws.connecthealth#SubscriptionArn"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:aws:health-agent:[a-z0-9-]+:[0-9]{12}:domain/(hai-|dom-)[a-z0-9]+/subscription/sub-[a-zA-Z0-9]{21}$",
-        )
-    ],
 )
 
 SUBSCRIPTION_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#SubscriptionStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "INACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="INACTIVE")],
-        },
-        "DELETED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETED")],
-        },
+        "ACTIVE": {"target": UNIT},
+        "INACTIVE": {"target": UNIT},
+        "DELETED": {"target": UNIT},
     },
 )
 
@@ -107,21 +66,11 @@ SUBSCRIPTION_DESCRIPTION = Schema.collection(
     members={
         "domainId": {
             "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#resourceIdentifier"), value="domainId"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "subscriptionId": {
             "target": SUBSCRIPTION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#resourceIdentifier"), value="subscriptionId"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "arn": {
             "target": SUBSCRIPTION_ARN,
@@ -146,13 +95,7 @@ SUBSCRIPTION_DESCRIPTION = Schema.collection(
 
 ACTIVATE_SUBSCRIPTION_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#ActivateSubscriptionOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
-    members={
-        "subscription": {
-            "target": SUBSCRIPTION_DESCRIPTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#notProperty"))],
-        }
-    },
+    members={"subscription": {"target": SUBSCRIPTION_DESCRIPTION}},
 )
 
 INTERNAL_SERVER_EXCEPTION = Schema.collection(
@@ -160,7 +103,6 @@ INTERNAL_SERVER_EXCEPTION = Schema.collection(
     traits=[
         Trait.new(id=ShapeID("smithy.api#error"), value="server"),
         Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-        Trait.new(id=ShapeID("smithy.api#retryable")),
     ],
     members={"message": {"target": STRING}},
 )
@@ -201,46 +143,18 @@ ACTIVATE_SUBSCRIPTION = Schema(
 )
 
 ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#ErrorMessage"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\s\\S]*$"),
-    ],
+    id=ShapeID("com.amazonaws.connecthealth#ErrorMessage"), shape_type=ShapeType.STRING
 )
 
-URI = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#Uri"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1})),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="(s3://|http(s*)://).+"),
-    ],
-)
+URI = Schema(id=ShapeID("com.amazonaws.connecthealth#Uri"), shape_type=ShapeType.STRING)
 
 POST_STREAM_ARTIFACT_GENERATION_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#PostStreamArtifactGenerationStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "IN_PROGRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="IN_PROGRESS")
-            ],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "COMPLETED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="COMPLETED")
-            ],
-        },
+        "IN_PROGRESS": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "COMPLETED": {"target": UNIT},
     },
 )
 
@@ -258,9 +172,7 @@ AUDIO_CHUNK = Schema(
 )
 
 AUDIO_OFFSET = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#AudioOffset"),
-    shape_type=ShapeType.DOUBLE,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
+    id=ShapeID("com.amazonaws.connecthealth#AudioOffset"), shape_type=ShapeType.DOUBLE
 )
 
 CLINICAL_NOTE_GENERATION_RESULT = Schema.collection(
@@ -272,32 +184,23 @@ CLINICAL_NOTE_GENERATION_RESULT = Schema.collection(
     },
 )
 
-SENSITIVE_ALPHANUMERIC_STRING = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#SensitiveAlphanumericString"),
+SENSITIVE_SECTION_HEADER_STRING = Schema(
+    id=ShapeID("com.amazonaws.connecthealth#SensitiveSectionHeaderString"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9]+$"),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 SENSITIVE_MARKDOWN_STRING = Schema(
     id=ShapeID("com.amazonaws.connecthealth#SensitiveMarkdownString"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[\\p{L}\\p{N}\\s\\*_\\-#\\[\\]\\(\\)\\.,:;!?'\"`<>~/|+=&%@\\\\{}^]+$",
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 TEMPLATE_SECTION_INSTRUCTION = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#TemplateSectionInstruction"),
     members={
         "sectionHeader": {
-            "target": SENSITIVE_ALPHANUMERIC_STRING,
+            "target": SENSITIVE_SECTION_HEADER_STRING,
             "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "sectionInstruction": {
@@ -310,12 +213,6 @@ TEMPLATE_SECTION_INSTRUCTION = Schema.collection(
 TEMPLATE_INSTRUCTIONS = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#TemplateInstructions"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 20}),
-        )
-    ],
     members={"member": {"target": TEMPLATE_SECTION_INSTRUCTION}},
 )
 
@@ -323,36 +220,12 @@ CUSTOM_TEMPLATE_BASE = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#CustomTemplateBase"),
     shape_type=ShapeType.ENUM,
     members={
-        "HISTORY_AND_PHYSICAL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="HISTORY_AND_PHYSICAL"
-                )
-            ],
-        },
-        "GIRPP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="GIRPP")],
-        },
-        "DAP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DAP")],
-        },
-        "SIRP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SIRP")],
-        },
-        "BIRP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="BIRP")],
-        },
-        "BEHAVIORAL_SOAP": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="BEHAVIORAL_SOAP")
-            ],
-        },
+        "HISTORY_AND_PHYSICAL": {"target": UNIT},
+        "GIRPP": {"target": UNIT},
+        "DAP": {"target": UNIT},
+        "SIRP": {"target": UNIT},
+        "BIRP": {"target": UNIT},
+        "BEHAVIORAL_SOAP": {"target": UNIT},
     },
 )
 
@@ -374,42 +247,13 @@ MANAGED_NOTE_TEMPLATE = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#ManagedNoteTemplate"),
     shape_type=ShapeType.ENUM,
     members={
-        "HISTORY_AND_PHYSICAL": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="HISTORY_AND_PHYSICAL"
-                )
-            ],
-        },
-        "GIRPP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="GIRPP")],
-        },
-        "DAP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DAP")],
-        },
-        "SIRP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SIRP")],
-        },
-        "BIRP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="BIRP")],
-        },
-        "BEHAVIORAL_SOAP": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="BEHAVIORAL_SOAP")
-            ],
-        },
-        "PHYSICAL_SOAP": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PHYSICAL_SOAP")
-            ],
-        },
+        "HISTORY_AND_PHYSICAL": {"target": UNIT},
+        "GIRPP": {"target": UNIT},
+        "DAP": {"target": UNIT},
+        "SIRP": {"target": UNIT},
+        "BIRP": {"target": UNIT},
+        "BEHAVIORAL_SOAP": {"target": UNIT},
+        "PHYSICAL_SOAP": {"target": UNIT},
     },
 )
 
@@ -476,47 +320,19 @@ CONFLICT_EXCEPTION = Schema.collection(
 )
 
 KMS_KEY_ARN = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#KmsKeyArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:aws:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9-]+$",
-        )
-    ],
+    id=ShapeID("com.amazonaws.connecthealth#KmsKeyArn"), shape_type=ShapeType.STRING
 )
 
 DOMAIN_NAME = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#DomainName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 64}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.connecthealth#DomainName"), shape_type=ShapeType.STRING
 )
 
 TAG_KEY = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#TagKey"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.connecthealth#TagKey"), shape_type=ShapeType.STRING
 )
 
 TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#TagValue"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.connecthealth#TagValue"), shape_type=ShapeType.STRING
 )
 
 TAG_MAP = Schema.collection(
@@ -530,90 +346,42 @@ CREATE_WEB_APP_CONFIGURATION = Schema.collection(
     members={
         "ehrRole": {
             "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 2048}),
-                ),
-                Trait.new(
-                    id=ShapeID("smithy.api#pattern"),
-                    value="^arn:aws:iam::[0-9]{12}:role/.+$",
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "idcInstanceId": {
             "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 256}),
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "idcRegion": {
             "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 64}),
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
     },
 )
 
 CREATE_DOMAIN_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#CreateDomainInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "name": {
             "target": DOMAIN_NAME,
             "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "kmsKeyArn": {"target": KMS_KEY_ARN},
-        "webAppSetupConfiguration": {
-            "target": CREATE_WEB_APP_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#notProperty"))],
-        },
-        "tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#notProperty"))],
-        },
+        "webAppSetupConfiguration": {"target": CREATE_WEB_APP_CONFIGURATION},
+        "tags": {"target": TAG_MAP},
     },
 )
 
 DOMAIN_ARN = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#DomainArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:aws:health-agent:[a-z0-9-]+:[0-9]{12}:domain/(hai-|dom-)[a-z0-9]+$",
-        )
-    ],
+    id=ShapeID("com.amazonaws.connecthealth#DomainArn"), shape_type=ShapeType.STRING
 )
 
 ENCRYPTION_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#EncryptionType"),
     shape_type=ShapeType.ENUM,
     members={
-        "AWS_OWNED_KEY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AWS_OWNED_KEY")
-            ],
-        },
-        "CUSTOMER_MANAGED_KEY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="CUSTOMER_MANAGED_KEY"
-                )
-            ],
-        },
+        "AWS_OWNED_KEY": {"target": UNIT},
+        "CUSTOMER_MANAGED_KEY": {"target": UNIT},
     },
 )
 
@@ -632,18 +400,9 @@ DOMAIN_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#DomainStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "ACTIVE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACTIVE")],
-        },
-        "DELETING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETING")],
-        },
-        "DELETED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETED")],
-        },
+        "ACTIVE": {"target": UNIT},
+        "DELETING": {"target": UNIT},
+        "DELETED": {"target": UNIT},
     },
 )
 
@@ -652,37 +411,15 @@ WEB_APP_CONFIGURATION = Schema.collection(
     members={
         "ehrRole": {
             "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 2048}),
-                ),
-                Trait.new(
-                    id=ShapeID("smithy.api#pattern"),
-                    value="^arn:aws:iam::[0-9]{12}:role/.+$",
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "idcApplicationId": {
             "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 256}),
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "idcRegion": {
             "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 64}),
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
     },
 )
@@ -693,7 +430,6 @@ WEB_APP_URL = Schema(
 
 CREATE_DOMAIN_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#CreateDomainOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "domainId": {
             "target": DOMAIN_ID,
@@ -735,21 +471,15 @@ CREATE_DOMAIN = Schema(
     id=ShapeID("com.amazonaws.connecthealth#CreateDomain"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("aws.iam#requiredActions"),
-            value=("health-agent:TagResource", "iam:PassRole"),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"method": "POST", "uri": "/domain", "code": 201}),
-        ),
+        )
     ],
 )
 
 CREATE_SUBSCRIPTION_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#CreateSubscriptionInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "domainId": {
             "target": DOMAIN_ID,
@@ -763,25 +493,14 @@ CREATE_SUBSCRIPTION_INPUT = Schema.collection(
 
 CREATE_SUBSCRIPTION_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#CreateSubscriptionOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "domainId": {
             "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#resourceIdentifier"), value="domainId"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "subscriptionId": {
             "target": SUBSCRIPTION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#resourceIdentifier"), value="subscriptionId"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "arn": {
             "target": SUBSCRIPTION_ARN,
@@ -823,14 +542,10 @@ CREATE_SUBSCRIPTION = Schema(
 
 DEACTIVATE_SUBSCRIPTION_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#DeactivateSubscriptionInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "domainId": {
             "target": DOMAIN_ID,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#resourceIdentifier"), value="domainId"
-                ),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -838,9 +553,6 @@ DEACTIVATE_SUBSCRIPTION_INPUT = Schema.collection(
         "subscriptionId": {
             "target": SUBSCRIPTION_ID,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#resourceIdentifier"), value="subscriptionId"
-                ),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -850,20 +562,13 @@ DEACTIVATE_SUBSCRIPTION_INPUT = Schema.collection(
 
 DEACTIVATE_SUBSCRIPTION_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#DeactivateSubscriptionOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
-    members={
-        "subscription": {
-            "target": SUBSCRIPTION_DESCRIPTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#notProperty"))],
-        }
-    },
+    members={"subscription": {"target": SUBSCRIPTION_DESCRIPTION}},
 )
 
 DEACTIVATE_SUBSCRIPTION = Schema(
     id=ShapeID("com.amazonaws.connecthealth#DeactivateSubscription"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -873,13 +578,12 @@ DEACTIVATE_SUBSCRIPTION = Schema(
                     "code": 200,
                 }
             ),
-        ),
+        )
     ],
 )
 
 DELETE_DOMAIN_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#DeleteDomainInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "domainId": {
             "target": DOMAIN_ID,
@@ -893,7 +597,6 @@ DELETE_DOMAIN_INPUT = Schema.collection(
 
 DELETE_DOMAIN_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#DeleteDomainOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "domainId": {
             "target": DOMAIN_ID,
@@ -914,17 +617,15 @@ DELETE_DOMAIN = Schema(
     id=ShapeID("com.amazonaws.connecthealth#DeleteDomain"),
     shape_type=ShapeType.OPERATION,
     traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"method": "DELETE", "uri": "/domain/{domainId}"}),
-        ),
+        )
     ],
 )
 
 GET_DOMAIN_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#GetDomainInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "domainId": {
             "target": DOMAIN_ID,
@@ -938,7 +639,6 @@ GET_DOMAIN_INPUT = Schema.collection(
 
 GET_DOMAIN_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#GetDomainOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "domainId": {
             "target": DOMAIN_ID,
@@ -964,10 +664,7 @@ GET_DOMAIN_OUTPUT = Schema.collection(
             "target": TIMESTAMP,
             "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
-        "tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#notProperty"))],
-        },
+        "tags": {"target": TAG_MAP},
     },
 )
 
@@ -978,29 +675,17 @@ GET_DOMAIN = Schema(
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"method": "GET", "uri": "/domain/{domainId}"}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 SCRIBE_SESSION_ID = Schema(
     id=ShapeID("com.amazonaws.connecthealth#ScribeSessionId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
-        ),
-    ],
 )
 
 GET_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#GetMedicalScribeListeningSessionInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "sessionId": {
             "target": SCRIBE_SESSION_ID,
@@ -1029,29 +714,12 @@ GET_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT = Schema.collection(
 MEDICAL_SCRIBE_CHANNEL_ID = Schema(
     id=ShapeID("com.amazonaws.connecthealth#MedicalScribeChannelId"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"), value=MappingProxyType({"min": 0, "max": 1})
-        ),
-    ],
 )
 
 MEDICAL_SCRIBE_PARTICIPANT_ROLE = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#MedicalScribeParticipantRole"),
     shape_type=ShapeType.ENUM,
-    members={
-        "PATIENT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PATIENT")],
-        },
-        "CLINICIAN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CLINICIAN")
-            ],
-        },
-    },
+    members={"PATIENT": {"target": UNIT}, "CLINICIAN": {"target": UNIT}},
 )
 
 MEDICAL_SCRIBE_CHANNEL_DEFINITION = Schema.collection(
@@ -1071,57 +739,29 @@ MEDICAL_SCRIBE_CHANNEL_DEFINITION = Schema.collection(
 MEDICAL_SCRIBE_CHANNEL_DEFINITIONS = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#MedicalScribeChannelDefinitions"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 2, "max": 2}),
-        )
-    ],
     members={"member": {"target": MEDICAL_SCRIBE_CHANNEL_DEFINITION}},
 )
 
 NON_NULL_BOOLEAN = Schema(
     id=ShapeID("com.amazonaws.connecthealth#NonNullBoolean"),
     shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 MEDICAL_SCRIBE_LANGUAGE_CODE = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#MedicalScribeLanguageCode"),
     shape_type=ShapeType.ENUM,
-    members={
-        "EN_US": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="en-US")],
-        }
-    },
+    members={"EN_US": {"target": UNIT}, "MULTI": {"target": UNIT}},
 )
 
 MEDICAL_SCRIBE_MEDIA_ENCODING = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#MedicalScribeMediaEncoding"),
     shape_type=ShapeType.ENUM,
-    members={
-        "PCM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="pcm")],
-        },
-        "FLAC": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="flac")],
-        },
-    },
+    members={"PCM": {"target": UNIT}, "FLAC": {"target": UNIT}},
 )
 
 MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ = Schema(
     id=ShapeID("com.amazonaws.connecthealth#MedicalScribeMediaSampleRateHertz"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 8000, "max": 48000}),
-        ),
-    ],
 )
 
 MEDICAL_SCRIBE_POST_STREAM_ACTIONS_RESULT = Schema.collection(
@@ -1132,17 +772,7 @@ MEDICAL_SCRIBE_POST_STREAM_ACTIONS_RESULT = Schema.collection(
 )
 
 S3_URI = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#S3Uri"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 1024})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.connecthealth#S3Uri"), shape_type=ShapeType.STRING
 )
 
 MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS_RESPONSE = Schema.collection(
@@ -1165,26 +795,10 @@ MEDICAL_SCRIBE_STREAM_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#MedicalScribeStreamStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "IN_PROGRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="IN_PROGRESS")
-            ],
-        },
-        "PAUSED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PAUSED")],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "COMPLETED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="COMPLETED")
-            ],
-        },
+        "IN_PROGRESS": {"target": UNIT},
+        "PAUSED": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "COMPLETED": {"target": UNIT},
     },
 )
 
@@ -1211,7 +825,6 @@ MEDICAL_SCRIBE_LISTENING_SESSION_DETAILS = Schema.collection(
 
 GET_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#GetMedicalScribeListeningSessionOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "medicalScribeListeningSessionDetails": {
             "target": MEDICAL_SCRIBE_LISTENING_SESSION_DETAILS
@@ -1224,10 +837,6 @@ THROTTLING_EXCEPTION = Schema.collection(
     traits=[
         Trait.new(id=ShapeID("smithy.api#error"), value="client"),
         Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-        Trait.new(
-            id=ShapeID("smithy.api#retryable"),
-            value=MappingProxyType({"throttling": True}),
-        ),
     ],
     members={"message": {"target": STRING}},
 )
@@ -1249,19 +858,11 @@ GET_MEDICAL_SCRIBE_LISTENING_SESSION = Schema(
                 }
             ),
         ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
     ],
 )
 
 JOB_ID = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#JobId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 36}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.connecthealth#JobId"), shape_type=ShapeType.STRING
 )
 
 GET_PATIENT_INSIGHTS_JOB_INPUT = Schema.collection(
@@ -1270,8 +871,7 @@ GET_PATIENT_INSIGHTS_JOB_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.connecthealth#GetPatientInsightsJobRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "domainId": {
@@ -1294,10 +894,7 @@ GET_PATIENT_INSIGHTS_JOB_INPUT = Schema.collection(
 SENSITIVE_NON_EMPTY_STRING = Schema(
     id=ShapeID("com.amazonaws.connecthealth#SensitiveNonEmptyString"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="[\\s\\S]*\\S[\\s\\S]*"),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 PATIENT_INSIGHTS_ENCOUNTER_CONTEXT = Schema.collection(
@@ -1305,14 +902,7 @@ PATIENT_INSIGHTS_ENCOUNTER_CONTEXT = Schema.collection(
     members={
         "encounterReason": {
             "target": SENSITIVE_NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#length"),
-                    value=MappingProxyType({"min": 1, "max": 256}),
-                ),
-                Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9 .,-]+$"),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         }
     },
 )
@@ -1320,7 +910,6 @@ PATIENT_INSIGHTS_ENCOUNTER_CONTEXT = Schema.collection(
 NON_EMPTY_STRING = Schema(
     id=ShapeID("com.amazonaws.connecthealth#NonEmptyString"),
     shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#pattern"), value="[\\s\\S]*\\S[\\s\\S]*")],
 )
 
 FHIR_SERVER = Schema.collection(
@@ -1328,13 +917,7 @@ FHIR_SERVER = Schema.collection(
     members={
         "fhirEndpoint": {
             "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#pattern"),
-                    value="^https?://[a-zA-Z0-9\\-._~:/?#\\[\\]@!$&'()*+,;=%]+$",
-                ),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
         },
         "oauthToken": {"target": SENSITIVE_NON_EMPTY_STRING},
     },
@@ -1353,9 +936,6 @@ S3_SOURCE = Schema.collection(
 S3_SOURCES = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#S3Sources"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"max": 10}))
-    ],
     members={"member": {"target": S3_SOURCE}},
 )
 
@@ -1370,14 +950,7 @@ INPUT_DATA_CONFIG = Schema.collection(
 INSIGHTS_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#InsightsType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "PRE_VISIT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PRE_VISIT")
-            ],
-        }
-    },
+    members={"PRE_VISIT": {"target": UNIT}},
 )
 
 INSIGHTS_CONTEXT = Schema.collection(
@@ -1401,46 +974,17 @@ INSIGHTS_OUTPUT = Schema.collection(
 )
 
 JOB_ARN = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#JobArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 20, "max": 200}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:aws[-a-z]*:health-agent:[-a-z0-9]+:[0-9]{12}:domain/[-a-zA-Z0-9-]+/patient-insights-job/[-a-zA-Z0-9_/.]+$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.connecthealth#JobArn"), shape_type=ShapeType.STRING
 )
 
 JOB_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#JobStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "SUBMITTED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUBMITTED")
-            ],
-        },
-        "IN_PROGRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="IN_PROGRESS")
-            ],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "SUCCEEDED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUCCEEDED")
-            ],
-        },
+        "SUBMITTED": {"target": UNIT},
+        "IN_PROGRESS": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "SUCCEEDED": {"target": UNIT},
     },
 )
 
@@ -1457,13 +1001,7 @@ OUTPUT_DATA_CONFIG = Schema.collection(
 SENSITIVE_ISO_DATE_STRING = Schema(
     id=ShapeID("com.amazonaws.connecthealth#SensitiveIsoDateString"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$",
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 PRONOUNS = Schema.collection(
@@ -1471,20 +1009,9 @@ PRONOUNS = Schema.collection(
     shape_type=ShapeType.ENUM,
     traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
     members={
-        "HE_HIM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HE_HIM")],
-        },
-        "SHE_HER": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SHE_HER")],
-        },
-        "THEY_THEM": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="THEY_THEM")
-            ],
-        },
+        "HE_HIM": {"target": UNIT},
+        "SHE_HER": {"target": UNIT},
+        "THEY_THEM": {"target": UNIT},
     },
 )
 
@@ -1503,27 +1030,13 @@ PATIENT_INSIGHTS_PATIENT_CONTEXT = Schema.collection(
 PROVIDER_ROLE = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#ProviderRole"),
     shape_type=ShapeType.ENUM,
-    members={
-        "CLINICIAN": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CLINICIAN")
-            ],
-        }
-    },
+    members={"CLINICIAN": {"target": UNIT}},
 )
 
 SPECIALTY = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#Specialty"),
     shape_type=ShapeType.ENUM,
-    members={
-        "PRIMARY_CARE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PRIMARY_CARE")
-            ],
-        }
-    },
+    members={"PRIMARY_CARE": {"target": UNIT}},
 )
 
 USER_CONTEXT = Schema.collection(
@@ -1547,8 +1060,7 @@ GET_PATIENT_INSIGHTS_JOB_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.connecthealth#GetPatientInsightsJobResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "jobId": {
@@ -1612,24 +1124,6 @@ GET_PATIENT_INSIGHTS_JOB = Schema(
             id=ShapeID("smithy.api#endpoint"),
             value=MappingProxyType({"hostPrefix": "runtime."}),
         ),
-        Trait.new(id=ShapeID("aws.api#dataPlane")),
-        Trait.new(
-            id=ShapeID("aws.iam#iamAction"),
-            value=MappingProxyType(
-                {
-                    "resources": MappingProxyType(
-                        {
-                            "required": MappingProxyType(
-                                {
-                                    "DomainResource": MappingProxyType({}),
-                                    "PatientInsightsJobResource": MappingProxyType({}),
-                                }
-                            )
-                        }
-                    )
-                }
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -1640,20 +1134,15 @@ GET_PATIENT_INSIGHTS_JOB = Schema(
                 }
             ),
         ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
     ],
 )
 
 GET_SUBSCRIPTION_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#GetSubscriptionInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "domainId": {
             "target": DOMAIN_ID,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#resourceIdentifier"), value="domainId"
-                ),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -1661,9 +1150,6 @@ GET_SUBSCRIPTION_INPUT = Schema.collection(
         "subscriptionId": {
             "target": SUBSCRIPTION_ID,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#resourceIdentifier"), value="subscriptionId"
-                ),
                 Trait.new(id=ShapeID("smithy.api#required")),
                 Trait.new(id=ShapeID("smithy.api#httpLabel")),
             ],
@@ -1673,13 +1159,7 @@ GET_SUBSCRIPTION_INPUT = Schema.collection(
 
 GET_SUBSCRIPTION_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#GetSubscriptionOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
-    members={
-        "subscription": {
-            "target": SUBSCRIPTION_DESCRIPTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#notProperty"))],
-        }
-    },
+    members={"subscription": {"target": SUBSCRIPTION_DESCRIPTION}},
 )
 
 GET_SUBSCRIPTION = Schema(
@@ -1694,14 +1174,12 @@ GET_SUBSCRIPTION = Schema(
                     "uri": "/domains/{domainId}/subscriptions/{subscriptionId}",
                 }
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 LIST_DOMAINS_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#ListDomainsInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "status": {
             "target": DOMAIN_STATUS,
@@ -1710,19 +1188,13 @@ LIST_DOMAINS_INPUT = Schema.collection(
         "maxResults": {
             "target": INTEGER,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#notProperty")),
-                Trait.new(
-                    id=ShapeID("smithy.api#range"),
-                    value=MappingProxyType({"min": 1, "max": 100}),
-                ),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults"),
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
             ],
         },
         "nextToken": {
             "target": STRING,
             "traits": [
-                Trait.new(id=ShapeID("smithy.api#notProperty")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken"),
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
             ],
         },
     },
@@ -1762,7 +1234,6 @@ DOMAIN_SUMMARY_LIST = Schema.collection(
 
 LIST_DOMAINS_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#ListDomainsOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "domains": {
             "target": DOMAIN_SUMMARY_LIST,
@@ -1777,41 +1248,14 @@ LIST_DOMAINS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.test#smokeTests"),
-            value=(
-                MappingProxyType(
-                    {
-                        "id": "ListDomainsSuccess",
-                        "params": MappingProxyType({}),
-                        "expect": MappingProxyType({"success": MappingProxyType({})}),
-                        "vendorParamsShape": "aws.test#AwsVendorParams",
-                        "vendorParams": MappingProxyType({"region": "us-east-1"}),
-                    }
-                ),
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "domains",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"method": "GET", "uri": "/domain"}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 LIST_SUBSCRIPTIONS_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#ListSubscriptionsInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "domainId": {
             "target": DOMAIN_ID,
@@ -1823,11 +1267,7 @@ LIST_SUBSCRIPTIONS_INPUT = Schema.collection(
         "maxResults": {
             "target": INTEGER,
             "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#range"),
-                    value=MappingProxyType({"min": 1, "max": 100}),
-                ),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults"),
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
             ],
         },
         "nextToken": {
@@ -1847,7 +1287,6 @@ SUBSCRIPTION_LIST = Schema.collection(
 
 LIST_SUBSCRIPTIONS_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#ListSubscriptionsOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "subscriptions": {
             "target": SUBSCRIPTION_LIST,
@@ -1862,29 +1301,16 @@ LIST_SUBSCRIPTIONS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults",
-                    "items": "subscriptions",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/domains/{domainId}/subscriptions"}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
 LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#ListTagsForResourceInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "resourceArn": {
             "target": STRING,
@@ -1898,7 +1324,6 @@ LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
 
 LIST_TAGS_FOR_RESOURCE_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#ListTagsForResourceOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={"tags": {"target": TAG_MAP}},
 )
 
@@ -1907,16 +1332,11 @@ LIST_TAGS_FOR_RESOURCE = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#actionPermissionDescription"),
-            value="Grants permission to list the tags for the specified resource",
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/tags/{resourceArn}", "method": "GET", "code": 200}
             ),
-        ),
-        Trait.new(id=ShapeID("smithy.api#readonly")),
+        )
     ],
 )
 
@@ -1977,14 +1397,7 @@ MEDICAL_SCRIBE_CONFIGURATION_EVENT = Schema.collection(
 MEDICAL_SCRIBE_SESSION_CONTROL_EVENT_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#MedicalScribeSessionControlEventType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "END_OF_SESSION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="END_OF_SESSION")
-            ],
-        }
-    },
+    members={"END_OF_SESSION": {"target": UNIT}},
 )
 
 MEDICAL_SCRIBE_SESSION_CONTROL_EVENT = Schema.collection(
@@ -2006,7 +1419,6 @@ MEDICAL_SCRIBE_INPUT_STREAM = Schema.collection(
 
 START_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#StartMedicalScribeListeningSessionInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "sessionId": {
             "target": SCRIBE_SESSION_ID,
@@ -2076,14 +1488,7 @@ START_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT = Schema.collection(
 )
 
 REQUEST_ID = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#RequestId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.connecthealth#RequestId"), shape_type=ShapeType.STRING
 )
 
 MEDICAL_SCRIBE_TRANSCRIPT_SEGMENT = Schema.collection(
@@ -2116,7 +1521,6 @@ MEDICAL_SCRIBE_OUTPUT_STREAM = Schema.collection(
 
 START_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#StartMedicalScribeListeningSessionOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "sessionId": {
             "target": SCRIBE_SESSION_ID,
@@ -2210,8 +1614,7 @@ START_PATIENT_INSIGHTS_JOB_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.connecthealth#StartPatientInsightsJobRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "domainId": {
@@ -2258,8 +1661,7 @@ START_PATIENT_INSIGHTS_JOB_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.connecthealth#StartPatientInsightsJobResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "jobArn": {
@@ -2287,24 +1689,6 @@ START_PATIENT_INSIGHTS_JOB = Schema(
             id=ShapeID("smithy.api#endpoint"),
             value=MappingProxyType({"hostPrefix": "runtime."}),
         ),
-        Trait.new(id=ShapeID("aws.api#dataPlane")),
-        Trait.new(
-            id=ShapeID("aws.iam#iamAction"),
-            value=MappingProxyType(
-                {
-                    "resources": MappingProxyType(
-                        {
-                            "required": MappingProxyType(
-                                {
-                                    "DomainResource": MappingProxyType({}),
-                                    "PatientInsightsJobResource": MappingProxyType({}),
-                                }
-                            )
-                        }
-                    )
-                }
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
@@ -2320,7 +1704,6 @@ START_PATIENT_INSIGHTS_JOB = Schema(
 
 TAG_RESOURCE_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#TagResourceInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "resourceArn": {
             "target": STRING,
@@ -2341,8 +1724,7 @@ TAG_RESOURCE_OUTPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -2351,38 +1733,22 @@ TAG_RESOURCE = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#actionPermissionDescription"),
-            value="Grants permission to add the specified tags to the specified resource",
-        ),
-        Trait.new(
-            id=ShapeID("aws.iam#conditionKeys"),
-            value=("aws:TagKeys", "aws:RequestTag/${TagKey}"),
-        ),
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/tags/{resourceArn}", "method": "POST", "code": 204}
             ),
-        ),
+        )
     ],
 )
 
 TAG_KEY_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#TagKeyList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        )
-    ],
     members={"member": {"target": TAG_KEY}},
 )
 
 UNTAG_RESOURCE_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.connecthealth#UntagResourceInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "resourceArn": {
             "target": STRING,
@@ -2406,8 +1772,7 @@ UNTAG_RESOURCE_OUTPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -2416,17 +1781,11 @@ UNTAG_RESOURCE = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("aws.iam#actionPermissionDescription"),
-            value="Grants permission to remove the specified tags from the specified resource",
-        ),
-        Trait.new(id=ShapeID("aws.iam#conditionKeys"), value=("aws:TagKeys",)),
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"uri": "/tags/{resourceArn}", "method": "DELETE", "code": 204}
             ),
-        ),
+        )
     ],
 )
 
@@ -2438,357 +1797,6 @@ CONNECT_HEALTH = Schema(
             id=ShapeID("aws.auth#sigv4"),
             value=MappingProxyType({"name": "health-agent"}),
         ),
-        Trait.new(id=ShapeID("smithy.api#title"), value="Connect Health"),
-        Trait.new(
-            id=ShapeID("aws.iam#supportedPrincipalTypes"),
-            value=("Root", "IAMUser", "IAMRole", "FederatedUser"),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointTests"),
-            value=MappingProxyType(
-                {
-                    "testCases": (
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region not set and fips disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Endpoint": "https://example.com",
-                                        "UseFIPS": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Endpoint": "https://example.com", "UseFIPS": True}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://health-agent-fips.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "us-east-1", "UseFIPS": True}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://health-agent.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "us-east-1", "UseFIPS": False}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://health-agent-fips.cn-northwest-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "cn-northwest-1", "UseFIPS": True}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://health-agent.cn-northwest-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "cn-northwest-1", "UseFIPS": False}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://health-agent-fips.us-gov-west-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "us-gov-west-1", "UseFIPS": True}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://health-agent.us-gov-west-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {"Region": "us-gov-west-1", "UseFIPS": False}
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "Missing region",
-                                "expect": MappingProxyType(
-                                    {"error": "Invalid Configuration: Missing Region"}
-                                ),
-                            }
-                        ),
-                    ),
-                    "version": "1.0",
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointRuleSet"),
-            value=MappingProxyType(
-                {
-                    "version": "1.0",
-                    "parameters": MappingProxyType(
-                        {
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                        }
-                    ),
-                    "rules": (
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Endpoint"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseFIPS"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": MappingProxyType(
-                                                        {"ref": "Endpoint"}
-                                                    ),
-                                                    "properties": MappingProxyType({}),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "isSet",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "rules": (
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "aws.partition",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "Region"
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "assign": "PartitionResult",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "ref": "UseFIPS"
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "endpoint": MappingProxyType(
-                                                                        {
-                                                                            "url": "https://health-agent-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                            "properties": MappingProxyType(
-                                                                                {}
-                                                                            ),
-                                                                            "headers": MappingProxyType(
-                                                                                {}
-                                                                            ),
-                                                                        }
-                                                                    ),
-                                                                    "type": "endpoint",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "endpoint": MappingProxyType(
-                                                                        {
-                                                                            "url": "https://health-agent.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                            "properties": MappingProxyType(
-                                                                                {}
-                                                                            ),
-                                                                            "headers": MappingProxyType(
-                                                                                {}
-                                                                            ),
-                                                                        }
-                                                                    ),
-                                                                    "type": "endpoint",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                            ),
-                                            "type": "tree",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "error": "Invalid Configuration: Missing Region",
-                                            "type": "error",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                    ),
-                }
-            ),
-        ),
-        Trait.new(id=ShapeID("aws.endpoints#dualStackOnlyEndpoints")),
         Trait.new(
             id=ShapeID("smithy.rules#endpointBdd"),
             value=MappingProxyType(
@@ -2922,7 +1930,12 @@ CONNECT_HEALTH = Schema(
                 }
             ),
         ),
-        Trait.new(id=ShapeID("aws.endpoints#standardRegionalEndpoints")),
+        Trait.new(
+            id=ShapeID("aws.protocols#restJson1"),
+            value=MappingProxyType(
+                {"http": ("h2", "http/1.1"), "eventStreamHttp": ("h2",)}
+            ),
+        ),
         Trait.new(
             id=ShapeID("smithy.api#cors"),
             value=MappingProxyType(
@@ -2947,12 +1960,6 @@ CONNECT_HEALTH = Schema(
                     ),
                     "maxAge": 86400,
                 }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("aws.protocols#restJson1"),
-            value=MappingProxyType(
-                {"http": ("h2", "http/1.1"), "eventStreamHttp": ("h2",)}
             ),
         ),
     ],

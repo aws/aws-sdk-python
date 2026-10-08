@@ -9,6 +9,7 @@ from typing import Any, Literal, Self, Union
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import Document as _Document, TypeRegistry
 from smithy_core.exceptions import ModeledError, SerializationError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -460,7 +461,7 @@ class MembershipType(UnknownEnumMixin, StrEnum):
 class PrincipalGroup:
     """Provides information about a group associated with the principal."""
 
-    access: ReadAccessType
+    access: str
     """
     Provides information about whether to allow or deny access to the
     principal.
@@ -469,7 +470,7 @@ class PrincipalGroup:
     name: str | None = None
     """The name of the group."""
 
-    membership_type: MembershipType | None = None
+    membership_type: str | None = None
     """The type of group."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -525,7 +526,7 @@ class PrincipalGroup:
 class PrincipalUser:
     """Provides information about a user associated with a principal."""
 
-    access: ReadAccessType
+    access: str
     """
     Provides information about whether to allow or deny access to the
     principal.
@@ -534,7 +535,7 @@ class PrincipalUser:
     id: str | None = None
     """The identifier of the user."""
 
-    membership_type: MembershipType | None = None
+    membership_type: str | None = None
     """The type of group."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -720,7 +721,7 @@ class AccessControl:
     access: `ALLOW` or `DENY`.
     """
 
-    member_relation: MemberRelation | None = None
+    member_relation: str | None = None
     """Describes the member relation within a principal list."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -796,7 +797,7 @@ class AccessConfiguration:
     access_controls: list[AccessControl]
     """A list of `AccessControlList` objects."""
 
-    member_relation: MemberRelation | None = None
+    member_relation: str | None = None
     """Describes the member relation within the `AccessControlList` object."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -1476,7 +1477,7 @@ class ActionReviewPayloadField:
     help users understand the field.
     """
 
-    type: ActionPayloadFieldType | None = None
+    type: str | None = None
     """The type of field."""
 
     value: _Document | None = None
@@ -1696,7 +1697,7 @@ class ActionReview:
     plugin_id: str | None = None
     """The identifier of the plugin associated with the action review."""
 
-    plugin_type: PluginType | None = None
+    plugin_type: str | None = None
     """The type of plugin."""
 
     payload: dict[str, ActionReviewPayloadField] | None = None
@@ -1803,7 +1804,7 @@ class ActionReviewEvent:
     plugin_id: str | None = None
     """The identifier of the plugin associated with the action review event."""
 
-    plugin_type: PluginType | None = None
+    plugin_type: str | None = None
     """The type of plugin."""
 
     payload: dict[str, ActionReviewPayloadField] | None = None
@@ -2276,13 +2277,13 @@ class Application:
     updated.
     """
 
-    status: ApplicationStatus | None = None
+    status: str | None = None
     """
     The status of the Amazon Q Business application. The application is
     ready to use when the status is `ACTIVE`.
     """
 
-    identity_type: IdentityType | None = None
+    identity_type: str | None = None
     """The authentication type being used by a Amazon Q Business application."""
 
     quick_sight_configuration: QuickSightConfiguration | None = None
@@ -2456,7 +2457,7 @@ class AttachmentsControlMode(UnknownEnumMixin, StrEnum):
 class AttachmentsConfiguration:
     """Configuration information for the file upload during chat feature."""
 
-    attachments_control_mode: AttachmentsControlMode
+    attachments_control_mode: str
     """
     Status information about whether file upload functionality is activated
     or deactivated for your end user.
@@ -2582,7 +2583,7 @@ class PersonalizationConfiguration:
     responses](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html).
     """
 
-    personalization_control_mode: PersonalizationControlMode
+    personalization_control_mode: str
     """
     An option to allow Amazon Q Business to customize chat responses using
     user specific metadata---specifically, location and job information---in
@@ -2639,7 +2640,7 @@ class QAppsControlMode(UnknownEnumMixin, StrEnum):
 class QAppsConfiguration:
     """Configuration information about Amazon Q Apps."""
 
-    q_apps_control_mode: QAppsControlMode
+    q_apps_control_mode: str
     """
     Status information about whether end users can create and use Amazon Q
     Apps in the web experience.
@@ -2773,7 +2774,7 @@ class CreateApplicationInput:
     and use it as the application's role.
     """
 
-    identity_type: IdentityType | None = None
+    identity_type: str | None = None
     """The authentication type being used by a Amazon Q Business application."""
 
     iam_identity_provider_arn: str | None = None
@@ -3030,6 +3031,16 @@ class CreateApplicationOutput:
 
     application_arn: str | None = None
     """The Amazon Resource Name (ARN) of the Amazon Q Business application."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_APPLICATION_OUTPUT, self)
@@ -3382,7 +3393,7 @@ class ValidationException(ServiceError):
 
     fault: Literal["client", "server"] | None = "client"
 
-    reason: ValidationExceptionReason
+    reason: str
     """The reason for the `ValidationException`."""
 
     fields: list[ValidationExceptionField] | None = None
@@ -3678,7 +3689,7 @@ class DataAccessorAuthenticationDetail:
     through the data accessor.
     """
 
-    authentication_type: DataAccessorAuthenticationType
+    authentication_type: str
     """
     The type of authentication to use for the data accessor. This determines
     how the ISV authenticates when accessing data. You can use one of two
@@ -3791,6 +3802,16 @@ class CreateDataAccessorOutput:
 
     data_accessor_arn: str
     """The Amazon Resource Name (ARN) of the created data accessor."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_DATA_ACCESSOR_OUTPUT, self)
@@ -3905,6 +3926,16 @@ class DeleteDataAccessorInput:
 @dataclass(kw_only=True)
 class DeleteDataAccessorOutput:
     """Dataclass for DeleteDataAccessorOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_DATA_ACCESSOR_OUTPUT, self)
@@ -4263,6 +4294,16 @@ class ListDataAccessorsOutput:
     next_token: str | None = None
     """The token to use to retrieve the next set of results, if there are any."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_DATA_ACCESSORS_OUTPUT, self)
 
@@ -4342,6 +4383,16 @@ LIST_DATA_ACCESSORS = APIOperation(
 class UpdateDataAccessorOutput:
     """Dataclass for UpdateDataAccessorOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_DATA_ACCESSOR_OUTPUT, self)
 
@@ -4409,6 +4460,16 @@ class DeleteApplicationInput:
 @dataclass(kw_only=True)
 class DeleteApplicationOutput:
     """Dataclass for DeleteApplicationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_APPLICATION_OUTPUT, self)
@@ -4513,7 +4574,7 @@ class AppliedAttachmentsConfiguration:
     your application.
     """
 
-    attachments_control_mode: AttachmentsControlMode | None = None
+    attachments_control_mode: str | None = None
     """
     Information about whether file upload during chat functionality is
     activated for your application.
@@ -4576,13 +4637,13 @@ class AutoSubscriptionConfiguration:
     application using IAM identity federation for user management.
     """
 
-    auto_subscribe: AutoSubscriptionStatus
+    auto_subscribe: str
     """
     Describes whether automatic subscriptions are enabled for an Amazon Q
     Business application using IAM identity federation for user management.
     """
 
-    default_subscription_type: SubscriptionType | None = None
+    default_subscription_type: str | None = None
     """
     Describes the default subscription type assigned to an Amazon Q Business
     application using IAM identity federation for user management. If the
@@ -4659,7 +4720,7 @@ class ErrorDetail:
     error_message: str | None = None
     """The message explaining the Amazon Q Business request error."""
 
-    error_code: ErrorCode | None = None
+    error_code: str | None = None
     """The code associated with the Amazon Q Business request error."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -4716,7 +4777,7 @@ class GetApplicationOutput:
     application_arn: str | None = None
     """The Amazon Resource Name (ARN) of the Amazon Q Business application."""
 
-    identity_type: IdentityType | None = None
+    identity_type: str | None = None
     """The authentication type being used by a Amazon Q Business application."""
 
     iam_identity_provider_arn: str | None = None
@@ -4737,7 +4798,7 @@ class GetApplicationOutput:
     your CloudWatch logs and metrics.
     """
 
-    status: ApplicationStatus | None = None
+    status: str | None = None
     """The status of the Amazon Q Business application."""
 
     description: str | None = None
@@ -4797,6 +4858,16 @@ class GetApplicationOutput:
     """
     The Amazon Quick Suite authentication configuration for the Amazon Q
     Business application.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -5113,7 +5184,7 @@ class CreateIndexInput:
     description: str | None = None
     """A description for the Amazon Q Business index."""
 
-    type: IndexType | None = None
+    type: str | None = None
     """
     The index type that's suitable for your needs. For more information on
     what's included in each type of index, see [Amazon Q Business
@@ -5243,6 +5314,16 @@ class CreateIndexOutput:
     index_arn: str | None = None
     """The Amazon Resource Name (ARN) of an Amazon Q Business index."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_INDEX_OUTPUT, self)
 
@@ -5369,7 +5450,7 @@ class DocumentAttributeCondition:
     attribute key used for the condition.
     """
 
-    operator: DocumentEnrichmentConditionOperator
+    operator: str
     """
     The identifier of the document attribute used for the condition.
 
@@ -5488,7 +5569,7 @@ class DocumentAttributeTarget:
     document attribute.
     """
 
-    attribute_value_operator: AttributeValueOperator | None = None
+    attribute_value_operator: str | None = None
     """
     `TRUE` to delete the existing target value for your specified target
     attribute key. You cannot create a target value and set this to `TRUE`.
@@ -5611,7 +5692,7 @@ class InlineDocumentEnrichmentConfiguration:
     .
     """
 
-    document_content_operator: DocumentContentOperator | None = None
+    document_content_operator: str | None = None
     """
     `TRUE` to delete content if the condition used for the target attribute
     is met.
@@ -5954,7 +6035,7 @@ class AudioExtractionStatus(UnknownEnumMixin, StrEnum):
 class AudioExtractionConfiguration:
     """Configuration settings for audio content extraction and processing."""
 
-    audio_extraction_status: AudioExtractionStatus
+    audio_extraction_status: str
     """
     The status of audio extraction (ENABLED or DISABLED) for processing
     audio content from files.
@@ -6013,7 +6094,7 @@ class ImageExtractionConfiguration:
     visuals](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html).
     """
 
-    image_extraction_status: ImageExtractionStatus
+    image_extraction_status: str
     """
     Specify whether to extract semantic meaning from images and visuals from
     documents.
@@ -6067,7 +6148,7 @@ class VideoExtractionStatus(UnknownEnumMixin, StrEnum):
 class VideoExtractionConfiguration:
     """Configuration settings for video content extraction and processing."""
 
-    video_extraction_status: VideoExtractionStatus
+    video_extraction_status: str
     """
     The status of video extraction (ENABLED or DISABLED) for processing
     video content from files.
@@ -6597,6 +6678,16 @@ class CreateDataSourceOutput:
     application.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_DATA_SOURCE_OUTPUT, self)
 
@@ -6750,6 +6841,16 @@ class DeleteDataSourceInput:
 @dataclass(kw_only=True)
 class DeleteDataSourceOutput:
     """Dataclass for DeleteDataSourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_DATA_SOURCE_OUTPUT, self)
@@ -6923,7 +7024,7 @@ class GetDataSourceOutput:
     description: str | None = None
     """The description for the data source connector."""
 
-    status: DataSourceStatus | None = None
+    status: str | None = None
     """
     The current status of the data source connector. When the `Status` field
     value is `FAILED`, the `ErrorMessage` field contains a description of
@@ -6959,6 +7060,16 @@ class GetDataSourceOutput:
     """
     The configuration for extracting information from media in documents for
     the data source.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -7303,7 +7414,7 @@ class DataSource:
     updated.
     """
 
-    status: DataSourceStatus | None = None
+    status: str | None = None
     """The status of the Amazon Q Business data source."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -7418,6 +7529,16 @@ class ListDataSourcesOutput:
     If the response is truncated, Amazon Q Business returns this token. You
     can use this token in a subsequent request to retrieve the next set of
     data source connectors.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -7701,6 +7822,16 @@ class UpdateDataSourceInput:
 class UpdateDataSourceOutput:
     """Dataclass for UpdateDataSourceOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_DATA_SOURCE_OUTPUT, self)
 
@@ -7815,6 +7946,16 @@ class DeleteIndexInput:
 @dataclass(kw_only=True)
 class DeleteIndexOutput:
     """Dataclass for DeleteIndexOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_INDEX_OUTPUT, self)
@@ -7953,10 +8094,10 @@ class DocumentAttributeConfiguration:
     name: str | None = None
     """The name of the document attribute."""
 
-    type: AttributeType | None = None
+    type: str | None = None
     """The type of document attribute."""
 
-    search: Status | None = None
+    search: str | None = None
     """
     Information about whether the document attribute can be used by an end
     user to search for information on their web experience.
@@ -8167,14 +8308,14 @@ class GetIndexOutput:
     index_arn: str | None = None
     """The Amazon Resource Name (ARN) of the Amazon Q Business index."""
 
-    status: IndexStatus | None = None
+    status: str | None = None
     """
     The current status of the index. When the value is `ACTIVE`, the index
     is ready for use. If the `Status` field value is `FAILED`, the
     `ErrorMessage` field contains a message that explains why.
     """
 
-    type: IndexType | None = None
+    type: str | None = None
     """The type of index attached to your Amazon Q Business application."""
 
     description: str | None = None
@@ -8208,6 +8349,16 @@ class GetIndexOutput:
 
     index_statistics: IndexStatistics | None = None
     """Provides information about the number of documents indexed."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_INDEX_OUTPUT, self)
@@ -8483,7 +8634,7 @@ class Index:
     updated_at: datetime | None = None
     """The Unix timestamp when the index was last updated."""
 
-    status: IndexStatus | None = None
+    status: str | None = None
     """
     The current status of the index. When the status is `ACTIVE`, the index
     is ready.
@@ -8594,6 +8745,16 @@ class ListIndicesOutput:
 
     indices: list[Index] | None = None
     """An array of information on the items in one or more indexes."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_INDICES_OUTPUT, self)
@@ -8797,6 +8958,16 @@ class UpdateIndexInput:
 class UpdateIndexOutput:
     """Dataclass for UpdateIndexOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_INDEX_OUTPUT, self)
 
@@ -8954,6 +9125,16 @@ class ListApplicationsOutput:
     """
     An array of summary information on the configuration of one or more
     Amazon Q Business applications.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -9474,7 +9655,7 @@ class CustomPluginConfiguration:
     description: str
     """A description for your custom plugin configuration."""
 
-    api_schema_type: APISchemaType
+    api_schema_type: str
     """The type of OpenAPI schema to use."""
 
     api_schema: APISchema | None = None
@@ -9549,7 +9730,7 @@ class CreatePluginInput:
     display_name: str | None = None
     """A the name for your plugin."""
 
-    type: PluginType | None = None
+    type: str | None = None
     """The type of plugin you want to create."""
 
     auth_configuration: PluginAuthConfiguration | None = None
@@ -9702,8 +9883,18 @@ class CreatePluginOutput:
     plugin_arn: str | None = None
     """The Amazon Resource Name (ARN) of a plugin."""
 
-    build_status: PluginBuildStatus | None = None
+    build_status: str | None = None
     """The current status of a plugin. A plugin is modified asynchronously."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_PLUGIN_OUTPUT, self)
@@ -9852,6 +10043,16 @@ class DeletePluginInput:
 class DeletePluginOutput:
     """Dataclass for DeletePluginOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_PLUGIN_OUTPUT, self)
 
@@ -9978,7 +10179,7 @@ class GetPluginOutput:
     display_name: str | None = None
     """The name of the plugin."""
 
-    type: PluginType | None = None
+    type: str | None = None
     """The type of the plugin."""
 
     server_url: str | None = None
@@ -9993,7 +10194,7 @@ class GetPluginOutput:
     custom_plugin_configuration: CustomPluginConfiguration | None = None
     """Configuration information required to create a custom plugin."""
 
-    build_status: PluginBuildStatus | None = None
+    build_status: str | None = None
     """The current status of a plugin. A plugin is modified asynchronously."""
 
     plugin_arn: str | None = None
@@ -10002,7 +10203,7 @@ class GetPluginOutput:
     resources needed to create the plugin.
     """
 
-    state: PluginState | None = None
+    state: str | None = None
     """The current state of the plugin."""
 
     created_at: datetime | None = None
@@ -10010,6 +10211,16 @@ class GetPluginOutput:
 
     updated_at: datetime | None = None
     """The timestamp for when the plugin was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_PLUGIN_OUTPUT, self)
@@ -10265,16 +10476,16 @@ class Plugin:
     display_name: str | None = None
     """The name of the plugin."""
 
-    type: PluginType | None = None
+    type: str | None = None
     """The type of the plugin."""
 
     server_url: str | None = None
     """The plugin server URL used for configuration."""
 
-    state: PluginState | None = None
+    state: str | None = None
     """The current status of the plugin."""
 
-    build_status: PluginBuildStatus | None = None
+    build_status: str | None = None
     """The status of the plugin."""
 
     created_at: datetime | None = None
@@ -10418,6 +10629,16 @@ class ListPluginsOutput:
     plugins: list[Plugin] | None = None
     """Information about a configured plugin."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_PLUGINS_OUTPUT, self)
 
@@ -10504,7 +10725,7 @@ class UpdatePluginInput:
     display_name: str | None = None
     """The name of the plugin."""
 
-    state: PluginState | None = None
+    state: str | None = None
     """The status of the plugin."""
 
     server_url: str | None = None
@@ -10613,6 +10834,16 @@ class UpdatePluginInput:
 @dataclass(kw_only=True)
 class UpdatePluginOutput:
     """Dataclass for UpdatePluginOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_PLUGIN_OUTPUT, self)
@@ -10734,7 +10965,7 @@ class DateAttributeBoostingConfiguration:
     attributes](https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html).
     """
 
-    boosting_level: DocumentAttributeBoostingLevel
+    boosting_level: str
     """
     Specifies the priority tier ranking of boosting applied to document
     attributes. For version 2, this parameter indicates the relative ranking
@@ -10827,7 +11058,7 @@ class NumberAttributeBoostingConfiguration:
     attributes](https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html).
     """
 
-    boosting_level: DocumentAttributeBoostingLevel
+    boosting_level: str
     """
     Specifies the priority of boosted document attributes in relation to
     other boosted attributes. This parameter determines how strongly the
@@ -10836,7 +11067,7 @@ class NumberAttributeBoostingConfiguration:
     not supported when using `NativeIndexConfiguration` version 2.
     """
 
-    boosting_type: NumberAttributeBoostingType | None = None
+    boosting_type: str | None = None
     """
     Specifies whether higher or lower numeric values should be prioritized
     when boosting. Valid values are ASCENDING (higher numbers are more
@@ -10909,9 +11140,7 @@ class StringAttributeValueBoostingLevel(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_string_attribute_value_boosting(
-    serializer: ShapeSerializer,
-    schema: Schema,
-    value: dict[str, StringAttributeValueBoostingLevel],
+    serializer: ShapeSerializer, schema: Schema, value: dict[str, str]
 ) -> None:
     with serializer.begin_map(schema, len(value)) as m:
         value_schema = schema.members["value"]
@@ -10921,8 +11150,8 @@ def _serialize_string_attribute_value_boosting(
 
 def _deserialize_string_attribute_value_boosting(
     deserializer: ShapeDeserializer, schema: Schema
-) -> dict[str, StringAttributeValueBoostingLevel]:
-    result: dict[str, StringAttributeValueBoostingLevel] = {}
+) -> dict[str, str]:
+    result: dict[str, str] = {}
     value_schema = schema.members["value"]
 
     def _read_value(k: str, d: ShapeDeserializer):
@@ -10956,7 +11185,7 @@ class StringAttributeBoostingConfiguration:
     attributes](https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html).
     """
 
-    boosting_level: DocumentAttributeBoostingLevel
+    boosting_level: str
     """
     Specifies the priority tier ranking of boosting applied to document
     attributes. For version 2, this parameter indicates the relative ranking
@@ -10969,7 +11198,7 @@ class StringAttributeBoostingConfiguration:
     value TWO.
     """
 
-    attribute_value_boosting: dict[str, StringAttributeValueBoostingLevel] | None = None
+    attribute_value_boosting: dict[str, str] | None = None
     """
     Specifies specific values of a `STRING` type document attribute being
     boosted. When using `NativeIndexConfiguration` version 2, you can
@@ -11059,7 +11288,7 @@ class StringListAttributeBoostingConfiguration:
     attributes](https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html).
     """
 
-    boosting_level: DocumentAttributeBoostingLevel
+    boosting_level: str
     """
     Specifies the priority of boosted document attributes in relation to
     other boosted attributes. This parameter determines how strongly the
@@ -11604,7 +11833,7 @@ class CreateRetrieverInput:
     application_id: str | None = None
     """The identifier of your Amazon Q Business application."""
 
-    type: RetrieverType | None = None
+    type: str | None = None
     """The type of retriever you are using."""
 
     display_name: str | None = None
@@ -11740,6 +11969,16 @@ class CreateRetrieverOutput:
     """
     The Amazon Resource Name (ARN) of an IAM role associated with a
     retriever.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -11879,6 +12118,16 @@ class DeleteRetrieverInput:
 class DeleteRetrieverOutput:
     """Dataclass for DeleteRetrieverOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_RETRIEVER_OUTPUT, self)
 
@@ -12010,10 +12259,10 @@ class GetRetrieverOutput:
     retriever.
     """
 
-    type: RetrieverType | None = None
+    type: str | None = None
     """The type of the retriever."""
 
-    status: RetrieverStatus | None = None
+    status: str | None = None
     """The status of the retriever."""
 
     display_name: str | None = None
@@ -12036,6 +12285,16 @@ class GetRetrieverOutput:
 
     updated_at: datetime | None = None
     """The Unix timestamp when the retriever was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_RETRIEVER_OUTPUT, self)
@@ -12277,10 +12536,10 @@ class Retriever:
     application.
     """
 
-    type: RetrieverType | None = None
+    type: str | None = None
     """The type of your retriever."""
 
-    status: RetrieverStatus | None = None
+    status: str | None = None
     """The status of your retriever."""
 
     display_name: str | None = None
@@ -12389,6 +12648,16 @@ class ListRetrieversOutput:
     """
     If the response is truncated, Amazon Q Business returns this token,
     which you can use in a later request to list the next set of retrievers.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -12567,6 +12836,16 @@ class UpdateRetrieverInput:
 @dataclass(kw_only=True)
 class UpdateRetrieverOutput:
     """Dataclass for UpdateRetrieverOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_RETRIEVER_OUTPUT, self)
@@ -12805,6 +13084,16 @@ class UpdateApplicationInput:
 @dataclass(kw_only=True)
 class UpdateApplicationOutput:
     """Dataclass for UpdateApplicationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_APPLICATION_OUTPUT, self)
@@ -13344,7 +13633,7 @@ class CreateWebExperienceInput:
     experience.
     """
 
-    sample_prompts_control_mode: WebExperienceSamplePromptsControlMode | None = None
+    sample_prompts_control_mode: str | None = None
     """
     Determines whether sample prompts are enabled in the web experience for
     an end user.
@@ -13588,6 +13877,16 @@ class CreateWebExperienceOutput:
     web_experience_arn: str | None = None
     """The Amazon Resource Name (ARN) of an Amazon Q Business web experience."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_WEB_EXPERIENCE_OUTPUT, self)
 
@@ -13732,6 +14031,16 @@ class DeleteWebExperienceInput:
 @dataclass(kw_only=True)
 class DeleteWebExperienceOutput:
     """Dataclass for DeleteWebExperienceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_WEB_EXPERIENCE_OUTPUT, self)
@@ -14064,7 +14373,7 @@ class GetWebExperienceOutput:
     default_endpoint: str | None = None
     """The endpoint of your Amazon Q Business web experience."""
 
-    status: WebExperienceStatus | None = None
+    status: str | None = None
     """
     The current status of the Amazon Q Business web experience. When the
     `Status` field value is `FAILED`, the `ErrorMessage` field contains a
@@ -14095,7 +14404,7 @@ class GetWebExperienceOutput:
     experience.
     """
 
-    sample_prompts_control_mode: WebExperienceSamplePromptsControlMode | None = None
+    sample_prompts_control_mode: str | None = None
     """
     Determines whether sample prompts are enabled in the web experience for
     an end user.
@@ -14144,6 +14453,16 @@ class GetWebExperienceOutput:
     """
     Gets the custom logo, favicon, font, and color used in the Amazon Q web
     experience.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -14502,7 +14821,7 @@ class WebExperience:
     are unique and fully hosted by Amazon Web Services.
     """
 
-    status: WebExperienceStatus | None = None
+    status: str | None = None
     """The status of your Amazon Q Business web experience."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -14616,6 +14935,16 @@ class ListWebExperiencesOutput:
     """
     If the response is truncated, Amazon Q Business returns this token,
     which you can use in a later request to list the next set of messages.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -14734,7 +15063,7 @@ class UpdateWebExperienceInput:
     experience.
     """
 
-    sample_prompts_control_mode: WebExperienceSamplePromptsControlMode | None = None
+    sample_prompts_control_mode: str | None = None
     """
     Determines whether sample prompts are enabled in the web experience for
     an end user.
@@ -14951,6 +15280,16 @@ class UpdateWebExperienceInput:
 class UpdateWebExperienceOutput:
     """Dataclass for UpdateWebExperienceOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_WEB_EXPERIENCE_OUTPUT, self)
 
@@ -15028,7 +15367,7 @@ class AppliedCreatorModeConfiguration:
     settings](https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope).
     """
 
-    creator_mode_control: CreatorModeControl
+    creator_mode_control: str
     """
     Information about whether creator mode is enabled or disabled for an
     Amazon Q Business application.
@@ -15090,7 +15429,7 @@ class AppliedOrchestrationConfiguration:
     settings](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails-global-controls.html#guardrails-global-orchestration).
     """
 
-    control: OrchestrationControl
+    control: str
     """
     Information about whether chat orchestration is enabled or disabled for
     an Amazon Q Business application.
@@ -15147,7 +15486,7 @@ class AssociatedGroup:
     the group in access control decisions.
     """
 
-    type: MembershipType | None = None
+    type: str | None = None
     """
     The type of the associated group. This indicates the scope of the
     group's applicability.
@@ -15225,7 +15564,7 @@ class AssociatedUser:
     the user in access control decisions.
     """
 
-    type: MembershipType | None = None
+    type: str | None = None
     """
     The type of the associated user. This indicates the scope of the user's
     association.
@@ -15355,7 +15694,7 @@ class PermissionCondition:
     the request.
     """
 
-    condition_operator: PermissionConditionOperator
+    condition_operator: str
     """
     The operator to use for the condition evaluation. This determines how
     the condition values are compared.
@@ -15566,6 +15905,16 @@ class AssociatePermissionOutput:
 
     statement: str | None = None
     """The JSON representation of the added permission statement."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ASSOCIATE_PERMISSION_OUTPUT, self)
@@ -15809,7 +16158,7 @@ class Attachment:
     created_at: datetime | None = None
     """The Unix timestamp when the Amazon Q Business attachment was created."""
 
-    status: AttachmentStatus | None = None
+    status: str | None = None
     """AttachmentStatus of the Amazon Q Business attachment."""
 
     error: ErrorDetail | None = None
@@ -16064,7 +16413,7 @@ class AttachmentOutput:
     name: str | None = None
     """The name of a file uploaded during chat."""
 
-    status: AttachmentStatus | None = None
+    status: str | None = None
     """The status of a file uploaded during chat."""
 
     error: ErrorDetail | None = None
@@ -16220,7 +16569,7 @@ class AudioSourceDetails:
     end_time_milliseconds: int | None = None
     """The ending timestamp in milliseconds for the relevant audio segment."""
 
-    audio_extraction_type: AudioExtractionType | None = None
+    audio_extraction_type: str | None = None
     """The type of audio extraction performed on the content."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -16768,6 +17117,16 @@ class BatchDeleteDocumentOutput:
     document couldn't be removed from the index.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_BATCH_DELETE_DOCUMENT_OUTPUT, self)
 
@@ -17010,7 +17369,7 @@ class Document:
     content: DocumentContent | None = None
     """The contents of the document."""
 
-    content_type: ContentType | None = None
+    content_type: str | None = None
     """
     The file type of the document in the Blob field.
 
@@ -17266,6 +17625,16 @@ class BatchPutDocumentOutput:
     because the document failed a validation check. Each document contains
     an error message that indicates why the document couldn't be added to
     the index.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -17595,7 +17964,7 @@ class CancelSubscriptionInput:
 class SubscriptionDetails:
     """The details of an Amazon Q Business subscription."""
 
-    type: SubscriptionType | None = None
+    type: str | None = None
     """The type of an Amazon Q Business subscription."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -17644,6 +18013,16 @@ class CancelSubscriptionOutput:
 
     next_subscription: SubscriptionDetails | None = None
     """The type of the Amazon Q Business subscription for the next month."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CANCEL_SUBSCRIPTION_OUTPUT, self)
@@ -18170,7 +18549,7 @@ class VideoSourceDetails:
     end_time_milliseconds: int | None = None
     """The ending timestamp in milliseconds for the relevant video segment."""
 
-    video_extraction_type: VideoExtractionType | None = None
+    video_extraction_type: str | None = None
     """The type of video extraction performed on the content."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -18853,7 +19232,7 @@ class TextOutputEvent:
     experience.
     """
 
-    system_message_type: SystemMessageType | None = None
+    system_message_type: str | None = None
     """
     The type of AI-generated message in a `TextOutputEvent`. Amazon Q
     Business currently supports two types of messages:
@@ -19149,6 +19528,16 @@ class _ChatOutputStreamDeserializer:
 class ChatOutput:
     """Dataclass for ChatOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CHAT_OUTPUT, self)
 
@@ -19294,7 +19683,7 @@ class ChatResponseConfiguration:
     organization.
     """
 
-    status: ChatResponseConfigurationStatus
+    status: str
     """
     The current status of the chat response configuration, indicating
     whether it is active, pending, or in another state that affects its
@@ -19703,7 +20092,7 @@ class ChatResponseConfigurationDetail:
     generation behavior.
     """
 
-    status: ChatResponseConfigurationStatus | None = None
+    status: str | None = None
     """
     The current status of the chat response configuration, indicating
     whether it is active, pending, or in another state that affects its
@@ -19873,6 +20262,16 @@ class ChatSyncOutput:
 
     failed_attachments: list[AttachmentOutput] | None = None
     """A list of files which failed to upload during chat."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CHAT_SYNC_OUTPUT, self)
@@ -20105,7 +20504,7 @@ class DocumentAclGroup:
     the group when applying access rules.
     """
 
-    type: MembershipType | None = None
+    type: str | None = None
     """
     The type of the group. This indicates the scope of the group's
     applicability in access control.
@@ -20190,7 +20589,7 @@ class DocumentAclUser:
     to identify the user when applying access rules.
     """
 
-    type: MembershipType | None = None
+    type: str | None = None
     """
     The type of the user. This indicates the scope of the user's
     applicability in access control.
@@ -20267,7 +20666,7 @@ class DocumentAclCondition:
     for users and groups.
     """
 
-    member_relation: MemberRelation | None = None
+    member_relation: str | None = None
     """
     The logical relation between members in the condition, determining how
     multiple user or group conditions are combined.
@@ -20373,7 +20772,7 @@ class DocumentAclMembership:
     or groups are associated with access permissions.
     """
 
-    member_relation: MemberRelation | None = None
+    member_relation: str | None = None
     """
     The logical relation between members in the membership rule, determining
     how multiple conditions are combined.
@@ -20516,6 +20915,16 @@ class CheckDocumentAccessOutput:
     """
     The Access Control List (ACL) associated with the document. Includes
     allowlist and denylist conditions that determine user access.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -21096,6 +21505,16 @@ class CreateAnonymousWebExperienceUrlOutput:
         it's generated.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_CREATE_ANONYMOUS_WEB_EXPERIENCE_URL_OUTPUT, self
@@ -21322,6 +21741,16 @@ class CreateChatResponseConfigurationOutput:
     The Amazon Resource Name (ARN) of the newly created chat response
     configuration, which uniquely identifies the resource across all Amazon
     Web Services services.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -21555,7 +21984,7 @@ class CreateSubscriptionInput:
     application.
     """
 
-    type: SubscriptionType | None = None
+    type: str | None = None
     """The type of Amazon Q Business subscription you want to create."""
 
     client_token: str | None = None
@@ -21647,6 +22076,16 @@ class CreateSubscriptionOutput:
 
     next_subscription: SubscriptionDetails | None = None
     """The type of the Amazon Q Business subscription for the next month."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_SUBSCRIPTION_OUTPUT, self)
@@ -21923,6 +22362,16 @@ class CreateUserInput:
 class CreateUserOutput:
     """Dataclass for CreateUserOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_USER_OUTPUT, self)
 
@@ -21995,7 +22444,7 @@ class CreatorModeConfiguration:
     settings](https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope).
     """
 
-    creator_mode_control: CreatorModeControl
+    creator_mode_control: str
     """
     Status information about whether `CREATOR_MODE` has been enabled or
     disabled. The default status is `DISABLED`.
@@ -22207,7 +22656,7 @@ class DataSourceSyncJob:
     end_time: datetime | None = None
     """The Unix timestamp when the synchronization job completed."""
 
-    status: DataSourceSyncJobStatus | None = None
+    status: str | None = None
     """
     The status of the synchronization job. When the `Status` field is set to
     `SUCCEEDED`, the synchronization job is done. If the status code is
@@ -22432,6 +22881,16 @@ class DeleteAttachmentInput:
 class DeleteAttachmentOutput:
     """Dataclass for DeleteAttachmentOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_ATTACHMENT_OUTPUT, self)
 
@@ -22542,6 +23001,16 @@ class DeleteChatControlsConfigurationInput:
 @dataclass(kw_only=True)
 class DeleteChatControlsConfigurationOutput:
     """Dataclass for DeleteChatControlsConfigurationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_CHAT_CONTROLS_CONFIGURATION_OUTPUT, self)
@@ -22672,6 +23141,16 @@ class DeleteChatResponseConfigurationInput:
 @dataclass(kw_only=True)
 class DeleteChatResponseConfigurationOutput:
     """Dataclass for DeleteChatResponseConfigurationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_CHAT_RESPONSE_CONFIGURATION_OUTPUT, self)
@@ -22807,6 +23286,16 @@ class DeleteConversationInput:
 @dataclass(kw_only=True)
 class DeleteConversationOutput:
     """Dataclass for DeleteConversationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_CONVERSATION_OUTPUT, self)
@@ -22961,6 +23450,16 @@ class DeleteGroupInput:
 class DeleteGroupOutput:
     """Dataclass for DeleteGroupOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_GROUP_OUTPUT, self)
 
@@ -23072,6 +23571,16 @@ class DeleteUserInput:
 @dataclass(kw_only=True)
 class DeleteUserOutput:
     """Dataclass for DeleteUserOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_USER_OUTPUT, self)
@@ -23189,6 +23698,16 @@ class DisassociatePermissionInput:
 class DisassociatePermissionOutput:
     """Dataclass for DisassociatePermissionOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DISASSOCIATE_PERMISSION_OUTPUT, self)
 
@@ -23266,7 +23785,7 @@ class DocumentDetails:
     document_id: str | None = None
     """The identifier of the document."""
 
-    status: DocumentStatus | None = None
+    status: str | None = None
     """The current status of the document."""
 
     error: ErrorDetail | None = None
@@ -23498,7 +24017,7 @@ class HallucinationReductionConfiguration:
         controls are enabled for your application.
     """
 
-    hallucination_reduction_control: HallucinationReductionControl | None = None
+    hallucination_reduction_control: str | None = None
     """
     Controls whether hallucination reduction has been enabled or disabled
     for your application. The default status is `DISABLED`.
@@ -23754,7 +24273,7 @@ class Rule:
     supports only one rule at a time.
     """
 
-    rule_type: RuleType
+    rule_type: str
     """The type of rule."""
 
     included_users_and_groups: UsersAndGroups | None = None
@@ -23966,7 +24485,7 @@ def _deserialize_topic_configurations(
 class GetChatControlsConfigurationOutput:
     """Dataclass for GetChatControlsConfigurationOutput structure."""
 
-    response_scope: ResponseScope | None = None
+    response_scope: str | None = None
     """
     The response scope configured for a Amazon Q Business application. This
     determines whether your application uses its retrieval augmented
@@ -24010,6 +24529,16 @@ class GetChatControlsConfigurationOutput:
         HallucinationReductionConfiguration | None
     ) = None
     """The hallucination reduction settings for your application."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_CHAT_CONTROLS_CONFIGURATION_OUTPUT, self)
@@ -24268,6 +24797,16 @@ class GetChatResponseConfigurationOutput:
     timestamp and modification details.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_CHAT_RESPONSE_CONFIGURATION_OUTPUT, self)
 
@@ -24440,7 +24979,7 @@ class GetDocumentContentInput:
     in chat or chatSync response.
     """
 
-    output_format: OutputFormat | None = None
+    output_format: str | None = None
     """Document outputFormat. Defaults to RAW if not selected."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -24540,6 +25079,16 @@ class GetDocumentContentOutput:
     application/vnd.openxmlformats-officedocument.wordprocessingml.document).
     When outputFormat is EXTRACTED, the MIME type is always
     application/json.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -24708,7 +25257,7 @@ class GroupStatus(UnknownEnumMixin, StrEnum):
 class GroupStatusDetail:
     """Provides the details of a group's status."""
 
-    status: GroupStatus | None = None
+    status: str | None = None
     """The status of a group."""
 
     last_updated_at: datetime | None = None
@@ -24804,6 +25353,16 @@ class GetGroupOutput:
 
     status_history: list[GroupStatusDetail] | None = None
     """The status history of the group."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_GROUP_OUTPUT, self)
@@ -24971,6 +25530,16 @@ class GetMediaOutput:
     media_mime_type: str | None = None
     """The MIME type of the media object (image/png)."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MEDIA_OUTPUT, self)
 
@@ -25133,6 +25702,16 @@ class GetPolicyOutput:
     policy: str | None = None
     """The JSON representation of the permission policy."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_POLICY_OUTPUT, self)
 
@@ -25253,6 +25832,16 @@ class GetUserOutput:
 
     user_aliases: list[UserAlias] | None = None
     """A list of user aliases attached to a user."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_USER_OUTPUT, self)
@@ -25437,6 +26026,16 @@ class ListAttachmentsOutput:
     attachments.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_ATTACHMENTS_OUTPUT, self)
 
@@ -25619,6 +26218,16 @@ class ListChatResponseConfigurationsOutput:
     A pagination token that can be used in a subsequent request to retrieve
     additional chat response configurations if the results were truncated
     due to the `maxResults` parameter.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -25810,6 +26419,16 @@ class ListConversationsOutput:
     Amazon Q Business web experiences.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_CONVERSATIONS_OUTPUT, self)
 
@@ -25925,7 +26544,7 @@ class ListDataSourceSyncJobsInput:
     end_time: datetime | None = None
     """The end time of the data source connector sync."""
 
-    status_filter: DataSourceSyncJobStatus | None = None
+    status_filter: str | None = None
     """
     Only returns synchronization jobs with the `Status` field equal to the
     specified status.
@@ -26060,6 +26679,16 @@ class ListDataSourceSyncJobsOutput:
     If the response is truncated, Amazon Q Business returns this token. You
     can use this token in any subsequent request to retrieve the next set of
     jobs.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -26253,6 +26882,16 @@ class ListDocumentsOutput:
     to retrieve, Amazon Q Business returns a pagination token in the
     response. You can use this pagination token to retrieve the next set of
     documents.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -26528,6 +27167,16 @@ class ListGroupsOutput:
     items: list[GroupSummary] | None = None
     """Summary information for list of groups that are mapped to users."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_GROUPS_OUTPUT, self)
 
@@ -26720,7 +27369,7 @@ class Message:
     time: datetime | None = None
     """The timestamp of the first Amazon Q Business web experience message."""
 
-    type: MessageType | None = None
+    type: str | None = None
     """
     The type of Amazon Q Business message, whether `HUMAN` or `AI`
     generated.
@@ -26874,6 +27523,16 @@ class ListMessagesOutput:
     """
     If the response is truncated, Amazon Q Business returns this token,
     which you can use in a later request to list the next set of messages.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -27055,6 +27714,16 @@ class ListPluginActionsOutput:
     items: list[ActionSummary] | None = None
     """An array of information on one or more plugin actions."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_PLUGIN_ACTIONS_OUTPUT, self)
 
@@ -27134,7 +27803,7 @@ LIST_PLUGIN_ACTIONS = APIOperation(
 class ListPluginTypeActionsInput:
     """Dataclass for ListPluginTypeActionsInput structure."""
 
-    plugin_type: PluginType | None = None
+    plugin_type: str | None = None
     """The type of the plugin."""
 
     next_token: str | None = None
@@ -27217,6 +27886,16 @@ class ListPluginTypeActionsOutput:
 
     items: list[ActionSummary] | None = None
     """An array of information on one or more plugins."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_PLUGIN_TYPE_ACTIONS_OUTPUT, self)
@@ -27362,10 +28041,10 @@ class PluginTypeCategory(UnknownEnumMixin, StrEnum):
 class PluginTypeMetadataSummary:
     """Summary metadata information for a Amazon Q Business plugin."""
 
-    type: PluginType | None = None
+    type: str | None = None
     """The type of the plugin."""
 
-    category: PluginTypeCategory | None = None
+    category: str | None = None
     """The category of the plugin type."""
 
     description: str | None = None
@@ -27470,6 +28149,16 @@ class ListPluginTypeMetadataOutput:
 
     items: list[PluginTypeMetadataSummary] | None = None
     """An array of information on plugin metadata."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_PLUGIN_TYPE_METADATA_OUTPUT, self)
@@ -27764,6 +28453,16 @@ class ListSubscriptionsOutput:
     Amazon Q Business application.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_SUBSCRIPTIONS_OUTPUT, self)
 
@@ -27895,6 +28594,16 @@ class ListTagsForResourceOutput:
     source.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_TAGS_FOR_RESOURCE_OUTPUT, self)
 
@@ -27989,13 +28698,13 @@ class MessageUsefulnessFeedback:
     usefulness.
     """
 
-    usefulness: MessageUsefulness
+    usefulness: str
     """The usefulness value assigned by an end user to a message."""
 
     submitted_at: datetime
     """The timestamp for when the feedback was submitted."""
 
-    reason: MessageUsefulnessReason | None = None
+    reason: str | None = None
     """The reason for a usefulness rating."""
 
     comment: str | None = None
@@ -28183,6 +28892,16 @@ class PutFeedbackInput:
 class PutFeedbackOutput:
     """Dataclass for PutFeedbackOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_FEEDBACK_OUTPUT, self)
 
@@ -28245,7 +28964,7 @@ class MemberGroup:
     group_name: str
     """The name of the sub group."""
 
-    type: MembershipType | None = None
+    type: str | None = None
     """The type of the sub group."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -28319,7 +29038,7 @@ class MemberUser:
     user_id: str
     """The identifier of the user you want to map to a group."""
 
-    type: MembershipType | None = None
+    type: str | None = None
     """The type of the user."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -28501,7 +29220,7 @@ class PutGroupInput:
     in Salesforce.
     """
 
-    type: MembershipType | None = None
+    type: str | None = None
     """The type of the group."""
 
     group_members: GroupMembers | None = None
@@ -28608,6 +29327,16 @@ class PutGroupInput:
 class PutGroupOutput:
     """Dataclass for PutGroupOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_GROUP_OUTPUT, self)
 
@@ -28681,7 +29410,7 @@ class ScoreConfidence(UnknownEnumMixin, StrEnum):
 class ScoreAttributes:
     """Provides information about the relevance score of content."""
 
-    score_confidence: ScoreConfidence | None = None
+    score_confidence: str | None = None
     """The confidence level of the relevance score."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -28857,6 +29586,16 @@ class SearchRelevantContentOutput:
     next_token: str | None = None
     """The token to use to retrieve the next set of results, if there are any."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SEARCH_RELEVANT_CONTENT_OUTPUT, self)
 
@@ -28986,6 +29725,16 @@ class StartDataSourceSyncJobOutput:
 
     execution_id: str | None = None
     """The identifier for a particular synchronization job."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_START_DATA_SOURCE_SYNC_JOB_OUTPUT, self)
@@ -29138,6 +29887,16 @@ class StopDataSourceSyncJobInput:
 class StopDataSourceSyncJobOutput:
     """Dataclass for StopDataSourceSyncJobOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_STOP_DATA_SOURCE_SYNC_JOB_OUTPUT, self)
 
@@ -29258,6 +30017,16 @@ class TagResourceInput:
 @dataclass(kw_only=True)
 class TagResourceOutput:
     """Dataclass for TagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TAG_RESOURCE_OUTPUT, self)
@@ -29403,6 +30172,16 @@ class UntagResourceInput:
 class UntagResourceOutput:
     """Dataclass for UntagResourceOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNTAG_RESOURCE_OUTPUT, self)
 
@@ -29471,7 +30250,7 @@ class OrchestrationConfiguration:
         languages](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/supported-languages.html).
     """
 
-    control: OrchestrationControl
+    control: str
     """
     Status information about whether chat orchestration is activated or
     deactivated for your Amazon Q Business application.
@@ -29529,7 +30308,7 @@ class UpdateChatControlsConfigurationInput:
     Business application chat configuration.
     """
 
-    response_scope: ResponseScope | None = None
+    response_scope: str | None = None
     """
     The response scope configured for your application. This determines
     whether your application uses its retrieval augmented generation (RAG)
@@ -29721,6 +30500,16 @@ class UpdateChatControlsConfigurationInput:
 @dataclass(kw_only=True)
 class UpdateChatControlsConfigurationOutput:
     """Dataclass for UpdateChatControlsConfigurationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_CHAT_CONTROLS_CONFIGURATION_OUTPUT, self)
@@ -29923,6 +30712,16 @@ class UpdateChatResponseConfigurationInput:
 class UpdateChatResponseConfigurationOutput:
     """Dataclass for UpdateChatResponseConfigurationOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_CHAT_RESPONSE_CONFIGURATION_OUTPUT, self)
 
@@ -29995,7 +30794,7 @@ class UpdateSubscriptionInput:
     subscription_id: str | None = None
     """The identifier of the Amazon Q Business subscription to be updated."""
 
-    type: SubscriptionType | None = None
+    type: str | None = None
     """The type of the Amazon Q Business subscription to be updated."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -30068,6 +30867,16 @@ class UpdateSubscriptionOutput:
 
     next_subscription: SubscriptionDetails | None = None
     """The type of the Amazon Q Business subscription for the next month."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_SUBSCRIPTION_OUTPUT, self)
@@ -30246,6 +31055,16 @@ class UpdateUserOutput:
 
     user_aliases_deleted: list[UserAlias] | None = None
     """The user aliases that have been deleted from a user id."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_USER_OUTPUT, self)
@@ -30651,7 +31470,7 @@ class ChatSyncInput:
     document attributes or metadata fields.
     """
 
-    chat_mode: ChatMode | None = None
+    chat_mode: str | None = None
     """
     The `chatMode` parameter determines the chat modes available to Amazon Q
     Business users:
@@ -30853,7 +31672,7 @@ class ConfigurationEvent:
     specific chat mode.
     """
 
-    chat_mode: ChatMode | None = None
+    chat_mode: str | None = None
     """
     The chat modes available to an Amazon Q Business end user.
 
@@ -31763,6 +32582,16 @@ class GetDataAccessorOutput:
 
     updated_at: datetime | None = None
     """The timestamp when the data accessor was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_DATA_ACCESSOR_OUTPUT, self)

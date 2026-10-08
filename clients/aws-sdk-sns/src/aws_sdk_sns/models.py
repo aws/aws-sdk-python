@@ -9,6 +9,7 @@ from typing import Any, Literal, Self
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import TypeRegistry
 from smithy_core.exceptions import ModeledError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -346,6 +347,16 @@ class AddPermissionInput:
 class AddPermissionOutput:
     """Dataclass for AddPermissionOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ADD_PERMISSION_OUTPUT, self)
 
@@ -613,6 +624,16 @@ class CheckIfPhoneNumberIsOptedOutOutput:
       messages to it.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT_OUTPUT, self)
 
@@ -795,6 +816,16 @@ class ConfirmSubscriptionOutput:
 
     subscription_arn: str | None = None
     """The ARN of the created subscription."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CONFIRM_SUBSCRIPTION_OUTPUT, self)
@@ -1116,6 +1147,16 @@ class CreatePlatformApplicationOutput:
     platform_application_arn: str | None = None
     """`PlatformApplicationArn` is returned."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_PLATFORM_APPLICATION_OUTPUT, self)
 
@@ -1291,6 +1332,16 @@ class CreatePlatformEndpointOutput:
     endpoint_arn: str | None = None
     """EndpointArn returned from CreateEndpoint action."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_PLATFORM_ENDPOINT_OUTPUT, self)
 
@@ -1382,7 +1433,7 @@ class CreateSMSSandboxPhoneNumberInput:
     send SMS messages to.
     """
 
-    language_code: LanguageCodeString | None = None
+    language_code: str | None = None
     """The language to use for sending the OTP. The default value is `en-US`."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -1439,6 +1490,16 @@ class CreateSMSSandboxPhoneNumberInput:
 @dataclass(kw_only=True)
 class CreateSMSSandboxPhoneNumberOutput:
     """Dataclass for CreateSMSSandboxPhoneNumberOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_SMS_SANDBOX_PHONE_NUMBER_OUTPUT, self)
@@ -1739,8 +1800,20 @@ class CreateTopicInput:
     - `DeliveryPolicy` -- The policy that defines how Amazon SNS retries
       failed deliveries to HTTP/S endpoints.
 
-    - `DisplayName` -- The display name to use for a topic with SMS
-      subscriptions.
+    - `DisplayName` -- The display name to use for a topic with SMS,
+      `email`, and `email-json` subscriptions. For `email` and `email-json`
+      subscriptions, the display name is used as the sender name for regular
+      notification messages. Subscription confirmation and unsubscribe
+      confirmation emails always use \"Amazon Web Services Notifications\"
+      as the sender name.
+
+    - `MaximumMessageSize` -- The maximum size, in bytes, of a message that
+      can be published to the topic. Valid values are `1024` to `1048576` (1
+      MiB). The default is `262144` (256 KiB).
+
+      A topic with a `MaximumMessageSize` above 256 KiB must have 100 or
+      fewer subscriptions, and each subscription must be an Amazon SQS,
+      Amazon Data Firehose, or Lambda subscription.
 
     - `Policy` -- The policy that defines who can access your topic. By
       default, only the topic owner can publish or subscribe to the topic.
@@ -1905,6 +1978,12 @@ class CreateTopicInput:
 
     data_protection_policy: str | None = None
     """
+    Warning:
+        Amazon SNS message data protection is no longer available to new
+        customers. For more information and guidance on alternatives, see
+        [Amazon SNS message data protection availability
+        change](https://docs.aws.amazon.com/sns/latest/dg/sns-message-data-protection-availability-change.html).
+
     The body of the policy document you want to use for this topic.
 
     You can only add one policy per topic.
@@ -1984,6 +2063,16 @@ class CreateTopicOutput:
 
     topic_arn: str | None = None
     """The Amazon Resource Name (ARN) assigned to the created topic."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_TOPIC_OUTPUT, self)
@@ -2305,6 +2394,16 @@ class DeleteEndpointInput:
 class DeleteEndpointOutput:
     """Dataclass for DeleteEndpointOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_ENDPOINT_OUTPUT, self)
 
@@ -2403,6 +2502,16 @@ class DeletePlatformApplicationInput:
 class DeletePlatformApplicationOutput:
     """Dataclass for DeletePlatformApplicationOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_PLATFORM_APPLICATION_OUTPUT, self)
 
@@ -2500,6 +2609,16 @@ class DeleteSMSSandboxPhoneNumberInput:
 @dataclass(kw_only=True)
 class DeleteSMSSandboxPhoneNumberOutput:
     """Dataclass for DeleteSMSSandboxPhoneNumberOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_SMS_SANDBOX_PHONE_NUMBER_OUTPUT, self)
@@ -2643,6 +2762,16 @@ class DeleteTopicInput:
 @dataclass(kw_only=True)
 class DeleteTopicOutput:
     """Dataclass for DeleteTopicOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_TOPIC_OUTPUT, self)
@@ -2799,6 +2928,16 @@ class GetDataProtectionPolicyOutput:
     data_protection_policy: str | None = None
     """Retrieves the `DataProtectionPolicy` in JSON string format."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_DATA_PROTECTION_POLICY_OUTPUT, self)
 
@@ -2934,6 +3073,16 @@ class GetEndpointAttributesOutput:
 
       Note:
         The device token for the iOS platform is returned in lowercase.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3081,6 +3230,16 @@ class GetPlatformApplicationAttributesOutput:
     - `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
       notifications should be sent upon Direct Publish delivery failure
       (permanent) to one of the application's endpoints.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3234,6 +3393,16 @@ class GetSMSAttributesOutput:
     attributes: dict[str, str] | None = None
     """The SMS attribute names and their values."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_SMS_ATTRIBUTES_OUTPUT, self)
 
@@ -3332,6 +3501,16 @@ class GetSMSSandboxAccountStatusOutput:
     """
     Indicates whether the calling Amazon Web Services account is in the SMS
     sandbox.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3533,6 +3712,16 @@ class GetSubscriptionAttributesOutput:
       in the *Amazon SNS Developer Guide*.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_SUBSCRIPTION_ATTRIBUTES_OUTPUT, self)
 
@@ -3650,10 +3839,18 @@ class GetTopicAttributesOutput:
       policy.
 
     - `DisplayName` -- The human-readable name used in the `From` field for
-      notifications to `email` and `email-json` endpoints.
+      notifications to `email` and `email-json` endpoints. For subscription
+      confirmation and unsubscribe confirmation emails, the sender name is
+      always \"Amazon Web Services Notifications\" regardless of this
+      attribute.
 
     - `EffectiveDeliveryPolicy` -- The JSON serialization of the effective
       delivery policy, taking system defaults into account.
+
+    - `MaximumMessageSize` -- The maximum size, in bytes, of a message that
+      can be published to the topic. Amazon SNS returns this attribute only
+      if you explicitly set it. If Amazon SNS doesn't return it, the topic
+      uses the default of `262144` (256 KiB).
 
     - `Owner` -- The Amazon Web Services account ID of the topic's owner.
 
@@ -3733,6 +3930,16 @@ class GetTopicAttributesOutput:
         for the `MessageDeduplicationId` parameter for the `Publish` action.
 
     - `FifoTopic` -- When this is set to `true`, a FIFO topic is created.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3964,6 +4171,16 @@ class ListEndpointsByPlatformApplicationOutput:
     available after the first page results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_LIST_ENDPOINTS_BY_PLATFORM_APPLICATION_OUTPUT, self
@@ -4113,7 +4330,7 @@ class NumberCapability(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_number_capability_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[NumberCapability]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -4123,8 +4340,8 @@ def _serialize_number_capability_list(
 
 def _deserialize_number_capability_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[NumberCapability]:
-    result: list[NumberCapability] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -4169,10 +4386,10 @@ class PhoneNumberInformation:
     format.
     """
 
-    route_type: RouteType | None = None
+    route_type: str | None = None
     """The list of supported routes."""
 
-    number_capabilities: list[NumberCapability] | None = None
+    number_capabilities: list[str] | None = None
     """The capabilities of each phone number."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -4303,6 +4520,16 @@ class ListOriginationNumbersOutput:
     """
     A list of the calling account's verified and pending origination
     numbers.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -4509,6 +4736,16 @@ class ListPhoneNumbersOptedOutOutput:
     A `NextToken` string is returned when you call the
     `ListPhoneNumbersOptedOut` action if additional records are available
     after the first page of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -4728,6 +4965,16 @@ class ListPlatformApplicationsOutput:
     action if additional records are available after the first page results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_PLATFORM_APPLICATIONS_OUTPUT, self)
 
@@ -4901,7 +5148,7 @@ class SMSSandboxPhoneNumber:
     phone_number: str | None = field(repr=False, default=None)
     """The destination phone number."""
 
-    status: SMSSandboxPhoneNumberVerificationStatus | None = None
+    status: str | None = None
     """The destination phone number's verification status."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -4985,6 +5232,16 @@ class ListSMSSandboxPhoneNumbersOutput:
     A `NextToken` string is returned when you call the
     `ListSMSSandboxPhoneNumbersInput` operation if additional pages of
     records are available.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -5236,6 +5493,16 @@ class ListSubscriptionsOutput:
     element is returned if there are more subscriptions to retrieve.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_SUBSCRIPTIONS_OUTPUT, self)
 
@@ -5373,6 +5640,16 @@ class ListSubscriptionsByTopicOutput:
     element is returned if there are more subscriptions to retrieve.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_SUBSCRIPTIONS_BY_TOPIC_OUTPUT, self)
 
@@ -5497,6 +5774,16 @@ class ListTagsForResourceOutput:
 
     tags: list[Tag] | None = None
     """The tags associated with the specified topic."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_TAGS_FOR_RESOURCE_OUTPUT, self)
@@ -5682,6 +5969,16 @@ class ListTopicsOutput:
     returned if there are additional topics to retrieve.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_TOPICS_OUTPUT, self)
 
@@ -5791,6 +6088,16 @@ class OptInPhoneNumberInput:
 @dataclass(kw_only=True)
 class OptInPhoneNumberOutput:
     """The response for the OptInPhoneNumber action."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_OPT_IN_PHONE_NUMBER_OUTPUT, self)
@@ -6227,8 +6534,11 @@ class MessageAttributeValue:
     Name, type, and value must not be empty or null. In addition, the
     message body should not be empty or null. All parts of the message
     attribute, including name, type, and value, are included in the message
-    size restriction, which is currently 256 KB (262,144 bytes). For more
-    information, see [Amazon SNS message
+    size restriction, which is 256 KiB (262,144 bytes) by default and is
+    determined by the topic's `MaximumMessageSize` attribute. For more
+    information, see [Large message
+    payloads](https://docs.aws.amazon.com/sns/latest/dg/large-message-payloads.html),
+    [Amazon SNS message
     attributes](https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html)
     and [Publishing to a mobile
     phone](https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html)
@@ -6374,8 +6684,19 @@ class PublishInput:
 
     Constraints:
 
-    - With the exception of SMS, messages must be UTF-8 encoded strings and
-      at most 256 KB in size (262,144 bytes, not 262,144 characters).
+    - With the exception of SMS, messages must be UTF-8 encoded strings. By
+      default, a message can be at most 256 KiB in size (262,144 bytes, not
+      262,144 characters).
+
+      When you publish to a topic, the maximum size is determined by the
+      topic's `MaximumMessageSize` attribute, which supports values up to 1
+      MiB (1,048,576 bytes). Amazon SNS validates the combined size of the
+      message body and message attributes against this value and returns an
+      `InvalidParameter` error if the limit is exceeded.
+
+      For more information, see [Large message
+      payloads](https://docs.aws.amazon.com/sns/latest/dg/large-message-payloads.html)
+      in the *Amazon SNS Developer Guide.*
 
     - For SMS, each message can contain up to 140 characters. This character
       limit depends on the encoding schema. For example, an SMS message can
@@ -6651,6 +6972,16 @@ class PublishOutput:
     The sequence number is a large, non-consecutive number that Amazon SNS
     assigns to each message. The length of `SequenceNumber` is 128 bits.
     `SequenceNumber` continues to increase for each `MessageGroupId`.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -7459,6 +7790,16 @@ class PublishBatchOutput:
     failed: list[BatchResultErrorEntry] | None = None
     """A list of failed `PublishBatch` responses."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUBLISH_BATCH_OUTPUT, self)
 
@@ -7704,6 +8045,16 @@ class PutDataProtectionPolicyInput:
 class PutDataProtectionPolicyOutput:
     """Dataclass for PutDataProtectionPolicyOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_DATA_PROTECTION_POLICY_OUTPUT, self)
 
@@ -7815,6 +8166,16 @@ class RemovePermissionInput:
 @dataclass(kw_only=True)
 class RemovePermissionOutput:
     """Dataclass for RemovePermissionOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_REMOVE_PERMISSION_OUTPUT, self)
@@ -7943,6 +8304,16 @@ class SetEndpointAttributesInput:
 @dataclass(kw_only=True)
 class SetEndpointAttributesOutput:
     """Dataclass for SetEndpointAttributesOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SET_ENDPOINT_ATTRIBUTES_OUTPUT, self)
@@ -8136,6 +8507,16 @@ class SetPlatformApplicationAttributesInput:
 class SetPlatformApplicationAttributesOutput:
     """Dataclass for SetPlatformApplicationAttributesOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_SET_PLATFORM_APPLICATION_ATTRIBUTES_OUTPUT, self
@@ -8315,6 +8696,16 @@ class SetSMSAttributesInput:
 class SetSMSAttributesOutput:
     """The response for the SetSMSAttributes action."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SET_SMS_ATTRIBUTES_OUTPUT, self)
 
@@ -8493,6 +8884,16 @@ class SetSubscriptionAttributesInput:
 class SetSubscriptionAttributesOutput:
     """Dataclass for SetSubscriptionAttributesOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SET_SUBSCRIPTION_ATTRIBUTES_OUTPUT, self)
 
@@ -8571,8 +8972,27 @@ class SetTopicAttributesInput:
     - `DeliveryPolicy` -- The policy that defines how Amazon SNS retries
       failed deliveries to HTTP/S endpoints.
 
-    - `DisplayName` -- The display name to use for a topic with SMS
-      subscriptions.
+    - `DisplayName` -- The display name to use for a topic with SMS,
+      `email`, and `email-json` subscriptions. For `email` and `email-json`
+      subscriptions, the display name is used as the sender name for regular
+      notification messages. Subscription confirmation and unsubscribe
+      confirmation emails always use \"Amazon Web Services Notifications\"
+      as the sender name.
+
+    - `MaximumMessageSize` -- The maximum size, in bytes, of a message that
+      can be published to the topic. Valid values are `1024` to `1048576` (1
+      MiB). The default is `262144` (256 KiB).
+
+      A topic with a `MaximumMessageSize` above 256 KiB must have 100 or
+      fewer subscriptions, and each subscription must be an Amazon SQS,
+      Amazon Data Firehose, or Lambda subscription.
+
+      You can increase or decrease this value at any time. If the topic
+      doesn't meet these requirements when you set a value above 256 KiB,
+      Amazon SNS returns an `InvalidParameter` error. For more information,
+      see [Large message
+      payloads](https://docs.aws.amazon.com/sns/latest/dg/large-message-payloads.html)
+      in the *Amazon SNS Developer Guide.*
 
     - `Policy` -- The policy that defines who can access your topic. By
       default, only the topic owner can publish or subscribe to the topic.
@@ -8790,6 +9210,16 @@ class SetTopicAttributesInput:
 @dataclass(kw_only=True)
 class SetTopicAttributesOutput:
     """Dataclass for SetTopicAttributesOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SET_TOPIC_ATTRIBUTES_OUTPUT, self)
@@ -9086,6 +9516,16 @@ class SubscribeOutput:
     confirmation.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_SUBSCRIBE_OUTPUT, self)
 
@@ -9220,6 +9660,16 @@ class TagResourceInput:
 class TagResourceOutput:
     """Dataclass for TagResourceOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TAG_RESOURCE_OUTPUT, self)
 
@@ -9325,6 +9775,16 @@ class UnsubscribeInput:
 @dataclass(kw_only=True)
 class UnsubscribeOutput:
     """Dataclass for UnsubscribeOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNSUBSCRIBE_OUTPUT, self)
@@ -9463,6 +9923,16 @@ class UntagResourceInput:
 @dataclass(kw_only=True)
 class UntagResourceOutput:
     """Dataclass for UntagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNTAG_RESOURCE_OUTPUT, self)
@@ -9646,6 +10116,16 @@ class VerifySMSSandboxPhoneNumberInput:
 @dataclass(kw_only=True)
 class VerifySMSSandboxPhoneNumberOutput:
     """The destination phone number's verification status."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_VERIFY_SMS_SANDBOX_PHONE_NUMBER_OUTPUT, self)

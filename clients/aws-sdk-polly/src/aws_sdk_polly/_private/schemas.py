@@ -60,14 +60,11 @@ DATE_TIME = Schema(
 )
 
 LEXICON_NAME = Schema(
-    id=ShapeID("com.amazonaws.polly#LexiconName"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#pattern"), value="^[0-9A-Za-z]{1,20}$")],
+    id=ShapeID("com.amazonaws.polly#LexiconName"), shape_type=ShapeType.STRING
 )
 
 DELETE_LEXICON_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#DeleteLexiconInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "Name": {
             "target": LEXICON_NAME,
@@ -80,8 +77,7 @@ DELETE_LEXICON_INPUT = Schema.collection(
 )
 
 DELETE_LEXICON_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#DeleteLexiconOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
+    id=ShapeID("com.amazonaws.polly#DeleteLexiconOutput")
 )
 
 ERROR_MESSAGE = Schema(
@@ -111,24 +107,11 @@ DELETE_LEXICON = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To delete a lexicon",
-                        "documentation": "Deletes a specified pronunciation lexicon stored in an AWS Region.",
-                        "input": MappingProxyType({"Name": "example"}),
-                        "output": MappingProxyType({}),
-                    }
-                ),
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "DELETE", "uri": "/v1/lexicons/{Name}", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
@@ -136,26 +119,10 @@ ENGINE = Schema.collection(
     id=ShapeID("com.amazonaws.polly#Engine"),
     shape_type=ShapeType.ENUM,
     members={
-        "STANDARD": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="standard")],
-        },
-        "NEURAL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="neural")],
-        },
-        "LONG_FORM": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="long-form")
-            ],
-        },
-        "GENERATIVE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="generative")
-            ],
-        },
+        "STANDARD": {"target": UNIT},
+        "NEURAL": {"target": UNIT},
+        "LONG_FORM": {"target": UNIT},
+        "GENERATIVE": {"target": UNIT},
     },
 )
 
@@ -169,193 +136,57 @@ LANGUAGE_CODE = Schema.collection(
     id=ShapeID("com.amazonaws.polly#LanguageCode"),
     shape_type=ShapeType.ENUM,
     members={
-        "arb": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="arb")],
-        },
-        "cmn_CN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="cmn-CN")],
-        },
-        "cy_GB": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="cy-GB")],
-        },
-        "da_DK": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="da-DK")],
-        },
-        "de_DE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="de-DE")],
-        },
-        "en_AU": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="en-AU")],
-        },
-        "en_GB": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="en-GB")],
-        },
-        "en_GB_WLS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="en-GB-WLS")
-            ],
-        },
-        "en_IN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="en-IN")],
-        },
-        "en_US": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="en-US")],
-        },
-        "es_ES": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="es-ES")],
-        },
-        "es_MX": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="es-MX")],
-        },
-        "es_US": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="es-US")],
-        },
-        "fr_CA": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="fr-CA")],
-        },
-        "fr_FR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="fr-FR")],
-        },
-        "is_IS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="is-IS")],
-        },
-        "it_IT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="it-IT")],
-        },
-        "ja_JP": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ja-JP")],
-        },
-        "hi_IN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="hi-IN")],
-        },
-        "ko_KR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ko-KR")],
-        },
-        "nb_NO": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="nb-NO")],
-        },
-        "nl_NL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="nl-NL")],
-        },
-        "pl_PL": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="pl-PL")],
-        },
-        "pt_BR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="pt-BR")],
-        },
-        "pt_PT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="pt-PT")],
-        },
-        "ro_RO": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ro-RO")],
-        },
-        "ru_RU": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ru-RU")],
-        },
-        "sv_SE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="sv-SE")],
-        },
-        "tr_TR": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="tr-TR")],
-        },
-        "en_NZ": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="en-NZ")],
-        },
-        "en_ZA": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="en-ZA")],
-        },
-        "ca_ES": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ca-ES")],
-        },
-        "de_AT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="de-AT")],
-        },
-        "yue_CN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="yue-CN")],
-        },
-        "ar_AE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ar-AE")],
-        },
-        "fi_FI": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="fi-FI")],
-        },
-        "en_IE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="en-IE")],
-        },
-        "nl_BE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="nl-BE")],
-        },
-        "fr_BE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="fr-BE")],
-        },
-        "cs_CZ": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="cs-CZ")],
-        },
-        "de_CH": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="de-CH")],
-        },
-        "en_SG": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="en-SG")],
-        },
+        "arb": {"target": UNIT},
+        "cmn_CN": {"target": UNIT},
+        "cy_GB": {"target": UNIT},
+        "da_DK": {"target": UNIT},
+        "de_DE": {"target": UNIT},
+        "en_AU": {"target": UNIT},
+        "en_GB": {"target": UNIT},
+        "en_GB_WLS": {"target": UNIT},
+        "en_IN": {"target": UNIT},
+        "en_US": {"target": UNIT},
+        "es_ES": {"target": UNIT},
+        "es_MX": {"target": UNIT},
+        "es_US": {"target": UNIT},
+        "fr_CA": {"target": UNIT},
+        "fr_FR": {"target": UNIT},
+        "is_IS": {"target": UNIT},
+        "it_IT": {"target": UNIT},
+        "ja_JP": {"target": UNIT},
+        "hi_IN": {"target": UNIT},
+        "ko_KR": {"target": UNIT},
+        "nb_NO": {"target": UNIT},
+        "nl_NL": {"target": UNIT},
+        "pl_PL": {"target": UNIT},
+        "pt_BR": {"target": UNIT},
+        "pt_PT": {"target": UNIT},
+        "ro_RO": {"target": UNIT},
+        "ru_RU": {"target": UNIT},
+        "sv_SE": {"target": UNIT},
+        "tr_TR": {"target": UNIT},
+        "en_NZ": {"target": UNIT},
+        "en_ZA": {"target": UNIT},
+        "ca_ES": {"target": UNIT},
+        "de_AT": {"target": UNIT},
+        "yue_CN": {"target": UNIT},
+        "ar_AE": {"target": UNIT},
+        "fi_FI": {"target": UNIT},
+        "en_IE": {"target": UNIT},
+        "nl_BE": {"target": UNIT},
+        "fr_BE": {"target": UNIT},
+        "cs_CZ": {"target": UNIT},
+        "de_CH": {"target": UNIT},
+        "en_SG": {"target": UNIT},
     },
 )
 
 NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.polly#NextToken"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 4096}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.polly#NextToken"), shape_type=ShapeType.STRING
 )
 
 DESCRIBE_VOICES_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#DescribeVoicesInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "Engine": {
             "target": ENGINE,
@@ -395,450 +226,119 @@ LANGUAGE_CODE_LIST = Schema.collection(
 GENDER = Schema.collection(
     id=ShapeID("com.amazonaws.polly#Gender"),
     shape_type=ShapeType.ENUM,
-    members={
-        "Female": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Female")],
-        },
-        "Male": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Male")],
-        },
-    },
+    members={"Female": {"target": UNIT}, "Male": {"target": UNIT}},
 )
 
 VOICE_ID = Schema.collection(
     id=ShapeID("com.amazonaws.polly#VoiceId"),
     shape_type=ShapeType.ENUM,
     members={
-        "Aditi": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Aditi")],
-        },
-        "Amy": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Amy")],
-        },
-        "Astrid": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Astrid")],
-        },
-        "Bianca": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Bianca")],
-        },
-        "Brian": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Brian")],
-        },
-        "Camila": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Camila")],
-        },
-        "Carla": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Carla")],
-        },
-        "Carmen": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Carmen")],
-        },
-        "Celine": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Celine")],
-        },
-        "Chantal": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Chantal")],
-        },
-        "Conchita": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Conchita")],
-        },
-        "Cristiano": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="Cristiano")
-            ],
-        },
-        "Dora": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Dora")],
-        },
-        "Emma": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Emma")],
-        },
-        "Enrique": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Enrique")],
-        },
-        "Ewa": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Ewa")],
-        },
-        "Filiz": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Filiz")],
-        },
-        "Gabrielle": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="Gabrielle")
-            ],
-        },
-        "Geraint": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Geraint")],
-        },
-        "Giorgio": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Giorgio")],
-        },
-        "Gwyneth": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Gwyneth")],
-        },
-        "Hans": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Hans")],
-        },
-        "Ines": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Ines")],
-        },
-        "Ivy": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Ivy")],
-        },
-        "Jacek": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Jacek")],
-        },
-        "Jan": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Jan")],
-        },
-        "Joanna": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Joanna")],
-        },
-        "Joey": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Joey")],
-        },
-        "Justin": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Justin")],
-        },
-        "Karl": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Karl")],
-        },
-        "Kendra": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Kendra")],
-        },
-        "Kevin": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Kevin")],
-        },
-        "Kimberly": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Kimberly")],
-        },
-        "Lea": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Lea")],
-        },
-        "Liv": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Liv")],
-        },
-        "Lotte": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Lotte")],
-        },
-        "Lucia": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Lucia")],
-        },
-        "Lupe": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Lupe")],
-        },
-        "Mads": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Mads")],
-        },
-        "Maja": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Maja")],
-        },
-        "Marlene": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Marlene")],
-        },
-        "Mathieu": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Mathieu")],
-        },
-        "Matthew": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Matthew")],
-        },
-        "Maxim": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Maxim")],
-        },
-        "Mia": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Mia")],
-        },
-        "Miguel": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Miguel")],
-        },
-        "Mizuki": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Mizuki")],
-        },
-        "Naja": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Naja")],
-        },
-        "Nicole": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Nicole")],
-        },
-        "Olivia": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Olivia")],
-        },
-        "Penelope": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Penelope")],
-        },
-        "Raveena": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Raveena")],
-        },
-        "Ricardo": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Ricardo")],
-        },
-        "Ruben": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Ruben")],
-        },
-        "Russell": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Russell")],
-        },
-        "Salli": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Salli")],
-        },
-        "Seoyeon": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Seoyeon")],
-        },
-        "Takumi": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Takumi")],
-        },
-        "Tatyana": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Tatyana")],
-        },
-        "Vicki": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Vicki")],
-        },
-        "Vitoria": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Vitoria")],
-        },
-        "Zeina": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Zeina")],
-        },
-        "Zhiyu": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Zhiyu")],
-        },
-        "Aria": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Aria")],
-        },
-        "Ayanda": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Ayanda")],
-        },
-        "Arlet": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Arlet")],
-        },
-        "Hannah": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Hannah")],
-        },
-        "Arthur": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Arthur")],
-        },
-        "Daniel": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Daniel")],
-        },
-        "Liam": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Liam")],
-        },
-        "Pedro": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Pedro")],
-        },
-        "Kajal": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Kajal")],
-        },
-        "Hiujin": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Hiujin")],
-        },
-        "Laura": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Laura")],
-        },
-        "Elin": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Elin")],
-        },
-        "Ida": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Ida")],
-        },
-        "Suvi": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Suvi")],
-        },
-        "Ola": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Ola")],
-        },
-        "Hala": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Hala")],
-        },
-        "Andres": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Andres")],
-        },
-        "Sergio": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Sergio")],
-        },
-        "Remi": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Remi")],
-        },
-        "Adriano": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Adriano")],
-        },
-        "Thiago": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Thiago")],
-        },
-        "Ruth": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Ruth")],
-        },
-        "Stephen": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Stephen")],
-        },
-        "Kazuha": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Kazuha")],
-        },
-        "Tomoko": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Tomoko")],
-        },
-        "Niamh": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Niamh")],
-        },
-        "Sofie": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Sofie")],
-        },
-        "Lisa": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Lisa")],
-        },
-        "Isabelle": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Isabelle")],
-        },
-        "Zayd": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Zayd")],
-        },
-        "Danielle": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Danielle")],
-        },
-        "Gregory": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Gregory")],
-        },
-        "Burcu": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Burcu")],
-        },
-        "Jitka": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Jitka")],
-        },
-        "Sabrina": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Sabrina")],
-        },
-        "Jasmine": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Jasmine")],
-        },
-        "Jihye": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Jihye")],
-        },
-        "Ambre": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Ambre")],
-        },
-        "Beatrice": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Beatrice")],
-        },
-        "Florian": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Florian")],
-        },
-        "Lennart": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Lennart")],
-        },
-        "Lorenzo": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Lorenzo")],
-        },
-        "Tiffany": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Tiffany")],
-        },
+        "Aditi": {"target": UNIT},
+        "Amy": {"target": UNIT},
+        "Astrid": {"target": UNIT},
+        "Bianca": {"target": UNIT},
+        "Brian": {"target": UNIT},
+        "Camila": {"target": UNIT},
+        "Carla": {"target": UNIT},
+        "Carmen": {"target": UNIT},
+        "Celine": {"target": UNIT},
+        "Chantal": {"target": UNIT},
+        "Conchita": {"target": UNIT},
+        "Cristiano": {"target": UNIT},
+        "Dora": {"target": UNIT},
+        "Emma": {"target": UNIT},
+        "Enrique": {"target": UNIT},
+        "Ewa": {"target": UNIT},
+        "Filiz": {"target": UNIT},
+        "Gabrielle": {"target": UNIT},
+        "Geraint": {"target": UNIT},
+        "Giorgio": {"target": UNIT},
+        "Gwyneth": {"target": UNIT},
+        "Hans": {"target": UNIT},
+        "Ines": {"target": UNIT},
+        "Ivy": {"target": UNIT},
+        "Jacek": {"target": UNIT},
+        "Jan": {"target": UNIT},
+        "Joanna": {"target": UNIT},
+        "Joey": {"target": UNIT},
+        "Justin": {"target": UNIT},
+        "Karl": {"target": UNIT},
+        "Kendra": {"target": UNIT},
+        "Kevin": {"target": UNIT},
+        "Kimberly": {"target": UNIT},
+        "Lea": {"target": UNIT},
+        "Liv": {"target": UNIT},
+        "Lotte": {"target": UNIT},
+        "Lucia": {"target": UNIT},
+        "Lupe": {"target": UNIT},
+        "Mads": {"target": UNIT},
+        "Maja": {"target": UNIT},
+        "Marlene": {"target": UNIT},
+        "Mathieu": {"target": UNIT},
+        "Matthew": {"target": UNIT},
+        "Maxim": {"target": UNIT},
+        "Mia": {"target": UNIT},
+        "Miguel": {"target": UNIT},
+        "Mizuki": {"target": UNIT},
+        "Naja": {"target": UNIT},
+        "Nicole": {"target": UNIT},
+        "Olivia": {"target": UNIT},
+        "Penelope": {"target": UNIT},
+        "Raveena": {"target": UNIT},
+        "Ricardo": {"target": UNIT},
+        "Ruben": {"target": UNIT},
+        "Russell": {"target": UNIT},
+        "Salli": {"target": UNIT},
+        "Seoyeon": {"target": UNIT},
+        "Takumi": {"target": UNIT},
+        "Tatyana": {"target": UNIT},
+        "Vicki": {"target": UNIT},
+        "Vitoria": {"target": UNIT},
+        "Zeina": {"target": UNIT},
+        "Zhiyu": {"target": UNIT},
+        "Aria": {"target": UNIT},
+        "Ayanda": {"target": UNIT},
+        "Arlet": {"target": UNIT},
+        "Hannah": {"target": UNIT},
+        "Arthur": {"target": UNIT},
+        "Daniel": {"target": UNIT},
+        "Liam": {"target": UNIT},
+        "Pedro": {"target": UNIT},
+        "Kajal": {"target": UNIT},
+        "Hiujin": {"target": UNIT},
+        "Laura": {"target": UNIT},
+        "Elin": {"target": UNIT},
+        "Ida": {"target": UNIT},
+        "Suvi": {"target": UNIT},
+        "Ola": {"target": UNIT},
+        "Hala": {"target": UNIT},
+        "Andres": {"target": UNIT},
+        "Sergio": {"target": UNIT},
+        "Remi": {"target": UNIT},
+        "Adriano": {"target": UNIT},
+        "Thiago": {"target": UNIT},
+        "Ruth": {"target": UNIT},
+        "Stephen": {"target": UNIT},
+        "Kazuha": {"target": UNIT},
+        "Tomoko": {"target": UNIT},
+        "Niamh": {"target": UNIT},
+        "Sofie": {"target": UNIT},
+        "Lisa": {"target": UNIT},
+        "Isabelle": {"target": UNIT},
+        "Zayd": {"target": UNIT},
+        "Danielle": {"target": UNIT},
+        "Gregory": {"target": UNIT},
+        "Burcu": {"target": UNIT},
+        "Jitka": {"target": UNIT},
+        "Sabrina": {"target": UNIT},
+        "Jasmine": {"target": UNIT},
+        "Jihye": {"target": UNIT},
+        "Ambre": {"target": UNIT},
+        "Beatrice": {"target": UNIT},
+        "Florian": {"target": UNIT},
+        "Lennart": {"target": UNIT},
+        "Lorenzo": {"target": UNIT},
+        "Tiffany": {"target": UNIT},
     },
 )
 
@@ -877,7 +377,6 @@ VOICE_LIST = Schema.collection(
 
 DESCRIBE_VOICES_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#DescribeVoicesOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={"Voices": {"target": VOICE_LIST}, "NextToken": {"target": NEXT_TOKEN}},
 )
 
@@ -895,68 +394,9 @@ DESCRIBE_VOICES = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.test#smokeTests"),
-            value=(
-                MappingProxyType(
-                    {
-                        "id": "DescribeVoicesSuccess",
-                        "params": MappingProxyType({}),
-                        "vendorParams": MappingProxyType({"region": "us-west-2"}),
-                        "vendorParamsShape": "aws.test#AwsVendorParams",
-                        "expect": MappingProxyType({"success": MappingProxyType({})}),
-                    }
-                ),
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To describe available voices",
-                        "documentation": "Returns the list of voices that are available for use when requesting speech synthesis. Displayed languages are those within the specified language code. If no language code is specified, voices for all available languages are displayed.",
-                        "input": MappingProxyType({"LanguageCode": "en-GB"}),
-                        "output": MappingProxyType(
-                            {
-                                "Voices": (
-                                    MappingProxyType(
-                                        {
-                                            "Gender": "Female",
-                                            "Name": "Emma",
-                                            "LanguageName": "British English",
-                                            "Id": "Emma",
-                                            "LanguageCode": "en-GB",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "Gender": "Male",
-                                            "Name": "Brian",
-                                            "LanguageName": "British English",
-                                            "Id": "Brian",
-                                            "LanguageCode": "en-GB",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "Gender": "Female",
-                                            "Name": "Amy",
-                                            "LanguageName": "British English",
-                                            "Id": "Amy",
-                                            "LanguageCode": "en-GB",
-                                        }
-                                    ),
-                                )
-                            }
-                        ),
-                    }
-                ),
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType({"method": "GET", "uri": "/v1/voices", "code": 200}),
-        ),
+        )
     ],
 )
 
@@ -987,7 +427,6 @@ FLUSH_STREAM_CONFIGURATION = Schema.collection(
 
 GET_LEXICON_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#GetLexiconInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "Name": {
             "target": LEXICON_NAME,
@@ -1050,7 +489,6 @@ LEXICON_ATTRIBUTES = Schema.collection(
 
 GET_LEXICON_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#GetLexiconOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "Lexicon": {"target": LEXICON},
         "LexiconAttributes": {"target": LEXICON_ATTRIBUTES},
@@ -1070,17 +508,10 @@ GET_LEXICON = Schema(
     ],
 )
 
-TASK_ID = Schema(
-    id=ShapeID("com.amazonaws.polly#TaskId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9_-]{1,100}$")
-    ],
-)
+TASK_ID = Schema(id=ShapeID("com.amazonaws.polly#TaskId"), shape_type=ShapeType.STRING)
 
 GET_SPEECH_SYNTHESIS_TASK_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#GetSpeechSynthesisTaskInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "TaskId": {
             "target": TASK_ID,
@@ -1095,12 +526,6 @@ GET_SPEECH_SYNTHESIS_TASK_INPUT = Schema.collection(
 LEXICON_NAME_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.polly#LexiconNameList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 5}),
-        )
-    ],
     members={"member": {"target": LEXICON_NAME}},
 )
 
@@ -1108,36 +533,13 @@ OUTPUT_FORMAT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#OutputFormat"),
     shape_type=ShapeType.ENUM,
     members={
-        "JSON": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="json")],
-        },
-        "MP3": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mp3")],
-        },
-        "OGG_OPUS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ogg_opus")],
-        },
-        "OGG_VORBIS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ogg_vorbis")
-            ],
-        },
-        "PCM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="pcm")],
-        },
-        "MULAW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="mulaw")],
-        },
-        "ALAW": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="alaw")],
-        },
+        "JSON": {"target": UNIT},
+        "MP3": {"target": UNIT},
+        "OGG_OPUS": {"target": UNIT},
+        "OGG_VORBIS": {"target": UNIT},
+        "PCM": {"target": UNIT},
+        "MULAW": {"target": UNIT},
+        "ALAW": {"target": UNIT},
     },
 )
 
@@ -1156,48 +558,23 @@ SAMPLE_RATE = Schema(
 )
 
 SNS_TOPIC_ARN = Schema(
-    id=ShapeID("com.amazonaws.polly#SnsTopicArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^arn:aws(-(cn|iso(-b)?|us-gov))?:sns:[a-z0-9_-]{1,50}:\\d{12}:[a-zA-Z0-9_-]{1,251}([a-zA-Z0-9_-]{0,5}|\\.fifo)$",
-        )
-    ],
+    id=ShapeID("com.amazonaws.polly#SnsTopicArn"), shape_type=ShapeType.STRING
 )
 
 SPEECH_MARK_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.polly#SpeechMarkType"),
     shape_type=ShapeType.ENUM,
     members={
-        "SENTENCE": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="sentence")],
-        },
-        "SSML": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ssml")],
-        },
-        "VISEME": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="viseme")],
-        },
-        "WORD": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="word")],
-        },
+        "SENTENCE": {"target": UNIT},
+        "SSML": {"target": UNIT},
+        "VISEME": {"target": UNIT},
+        "WORD": {"target": UNIT},
     },
 )
 
 SPEECH_MARK_TYPE_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.polly#SpeechMarkTypeList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 4}),
-        )
-    ],
     members={"member": {"target": SPEECH_MARK_TYPE}},
 )
 
@@ -1205,28 +582,10 @@ TASK_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.polly#TaskStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "SCHEDULED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="scheduled")
-            ],
-        },
-        "IN_PROGRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="inProgress")
-            ],
-        },
-        "COMPLETED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="completed")
-            ],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="failed")],
-        },
+        "SCHEDULED": {"target": UNIT},
+        "IN_PROGRESS": {"target": UNIT},
+        "COMPLETED": {"target": UNIT},
+        "FAILED": {"target": UNIT},
     },
 )
 
@@ -1237,16 +596,7 @@ TASK_STATUS_REASON = Schema(
 TEXT_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.polly#TextType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "SSML": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ssml")],
-        },
-        "TEXT": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="text")],
-        },
-    },
+    members={"SSML": {"target": UNIT}, "TEXT": {"target": UNIT}},
 )
 
 SYNTHESIS_TASK = Schema.collection(
@@ -1275,7 +625,6 @@ SYNTHESIS_TASK = Schema.collection(
 
 GET_SPEECH_SYNTHESIS_TASK_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#GetSpeechSynthesisTaskOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={"SynthesisTask": {"target": SYNTHESIS_TASK}},
 )
 
@@ -1398,7 +747,6 @@ LEXICON_SIZE_EXCEEDED_EXCEPTION = Schema.collection(
 
 LIST_LEXICONS_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#ListLexiconsInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "NextToken": {
             "target": NEXT_TOKEN,
@@ -1411,7 +759,6 @@ LIST_LEXICONS_INPUT = Schema.collection(
 
 LIST_LEXICONS_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#ListLexiconsOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "Lexicons": {"target": LEXICON_DESCRIPTION_LIST},
         "NextToken": {"target": NEXT_TOKEN},
@@ -1423,61 +770,20 @@ LIST_LEXICONS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To list all lexicons in a region",
-                        "documentation": "Returns a list of pronunciation lexicons stored in an AWS Region.",
-                        "output": MappingProxyType(
-                            {
-                                "Lexicons": (
-                                    MappingProxyType(
-                                        {
-                                            "Attributes": MappingProxyType(
-                                                {
-                                                    "LanguageCode": "en-US",
-                                                    "LastModified": 1.478542980117e9,
-                                                    "Alphabet": "ipa",
-                                                    "LexemesCount": 1,
-                                                    "LexiconArn": "arn:aws:polly:us-east-1:123456789012:lexicon/example",
-                                                    "Size": 503,
-                                                }
-                                            ),
-                                            "Name": "example",
-                                        }
-                                    ),
-                                )
-                            }
-                        ),
-                    }
-                ),
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/v1/lexicons", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
 MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.polly#MaxResults"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.polly#MaxResults"), shape_type=ShapeType.INTEGER
 )
 
 LIST_SPEECH_SYNTHESIS_TASKS_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#ListSpeechSynthesisTasksInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "MaxResults": {
             "target": MAX_RESULTS,
@@ -1506,7 +812,6 @@ SYNTHESIS_TASKS = Schema.collection(
 
 LIST_SPEECH_SYNTHESIS_TASKS_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#ListSpeechSynthesisTasksOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "NextToken": {"target": NEXT_TOKEN},
         "SynthesisTasks": {"target": SYNTHESIS_TASKS},
@@ -1518,21 +823,11 @@ LIST_SPEECH_SYNTHESIS_TASKS = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "GET", "uri": "/v1/synthesisTasks", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
@@ -1564,30 +859,15 @@ MAX_LEXICONS_NUMBER_EXCEEDED_EXCEPTION = Schema.collection(
 )
 
 OUTPUT_S3_BUCKET_NAME = Schema(
-    id=ShapeID("com.amazonaws.polly#OutputS3BucketName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-        )
-    ],
+    id=ShapeID("com.amazonaws.polly#OutputS3BucketName"), shape_type=ShapeType.STRING
 )
 
 OUTPUT_S3_KEY_PREFIX = Schema(
-    id=ShapeID("com.amazonaws.polly#OutputS3KeyPrefix"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[0-9a-zA-Z\\/\\!\\-_\\.\\*\\'\\(\\):;\\$@=+\\,\\?&]{0,800}$",
-        )
-    ],
+    id=ShapeID("com.amazonaws.polly#OutputS3KeyPrefix"), shape_type=ShapeType.STRING
 )
 
 PUT_LEXICON_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#PutLexiconInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "Name": {
             "target": LEXICON_NAME,
@@ -1604,8 +884,7 @@ PUT_LEXICON_INPUT = Schema.collection(
 )
 
 PUT_LEXICON_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#PutLexiconOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
+    id=ShapeID("com.amazonaws.polly#PutLexiconOutput")
 )
 
 UNSUPPORTED_PLS_ALPHABET_EXCEPTION = Schema.collection(
@@ -1631,26 +910,11 @@ PUT_LEXICON = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To save a lexicon",
-                        "documentation": "Stores a pronunciation lexicon in an AWS Region.",
-                        "input": MappingProxyType(
-                            {"Name": "W3C", "Content": "<Lexicon Content>"}
-                        ),
-                        "output": MappingProxyType({}),
-                    }
-                ),
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "PUT", "uri": "/v1/lexicons/{Name}", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
@@ -1658,35 +922,15 @@ QUOTA_CODE = Schema.collection(
     id=ShapeID("com.amazonaws.polly#QuotaCode"),
     shape_type=ShapeType.ENUM,
     members={
-        "INPUT_STREAM_INBOUND_EVENT_TIMEOUT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="input-stream-inbound-event-timeout",
-                )
-            ],
-        },
-        "INPUT_STREAM_TIMEOUT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="input-stream-timeout"
-                )
-            ],
-        },
+        "INPUT_STREAM_INBOUND_EVENT_TIMEOUT": {"target": UNIT},
+        "INPUT_STREAM_TIMEOUT": {"target": UNIT},
     },
 )
 
 SERVICE_CODE = Schema.collection(
     id=ShapeID("com.amazonaws.polly#ServiceCode"),
     shape_type=ShapeType.ENUM,
-    members={
-        "POLLY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="polly")],
-        }
-    },
+    members={"POLLY": {"target": UNIT}},
 )
 
 SERVICE_QUOTA_EXCEEDED_EXCEPTION = Schema.collection(
@@ -1737,7 +981,6 @@ START_SPEECH_SYNTHESIS_STREAM_ACTION_STREAM = Schema.collection(
 
 START_SPEECH_SYNTHESIS_STREAM_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisStreamInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "Engine": {
             "target": ENGINE,
@@ -1867,34 +1110,10 @@ VALIDATION_EXCEPTION_REASON = Schema.collection(
     id=ShapeID("com.amazonaws.polly#ValidationExceptionReason"),
     shape_type=ShapeType.ENUM,
     members={
-        "UNSUPPORTED_OPERATION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="unsupportedOperation"
-                )
-            ],
-        },
-        "FIELD_VALIDATION_FAILED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="fieldValidationFailed"
-                )
-            ],
-        },
-        "OTHER": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="other")],
-        },
-        "INVALID_INBOUND_EVENT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="invalidInboundEvent"
-                )
-            ],
-        },
+        "UNSUPPORTED_OPERATION": {"target": UNIT},
+        "FIELD_VALIDATION_FAILED": {"target": UNIT},
+        "OTHER": {"target": UNIT},
+        "INVALID_INBOUND_EVENT": {"target": UNIT},
     },
 )
 
@@ -1933,7 +1152,6 @@ START_SPEECH_SYNTHESIS_STREAM_EVENT_STREAM = Schema.collection(
 
 START_SPEECH_SYNTHESIS_STREAM_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisStreamOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "EventStream": {
             "target": START_SPEECH_SYNTHESIS_STREAM_EVENT_STREAM,
@@ -1966,7 +1184,6 @@ SSML_MARKS_NOT_SUPPORTED_FOR_TEXT_TYPE_EXCEPTION = Schema.collection(
 
 START_SPEECH_SYNTHESIS_TASK_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisTaskInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "Engine": {"target": ENGINE},
         "LanguageCode": {"target": LANGUAGE_CODE},
@@ -1997,7 +1214,6 @@ START_SPEECH_SYNTHESIS_TASK_INPUT = Schema.collection(
 
 START_SPEECH_SYNTHESIS_TASK_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisTaskOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={"SynthesisTask": {"target": SYNTHESIS_TASK}},
 )
 
@@ -2025,7 +1241,6 @@ START_SPEECH_SYNTHESIS_TASK = Schema(
 
 SYNTHESIZE_SPEECH_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#SynthesizeSpeechInput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#input"))],
     members={
         "Engine": {"target": ENGINE},
         "LanguageCode": {"target": LANGUAGE_CODE},
@@ -2050,7 +1265,6 @@ SYNTHESIZE_SPEECH_INPUT = Schema.collection(
 
 SYNTHESIZE_SPEECH_OUTPUT = Schema.collection(
     id=ShapeID("com.amazonaws.polly#SynthesizeSpeechOutput"),
-    traits=[Trait.new(id=ShapeID("smithy.api#output"))],
     members={
         "AudioStream": {
             "target": AUDIO_STREAM,
@@ -2083,39 +1297,11 @@ SYNTHESIZE_SPEECH = Schema(
     shape_type=ShapeType.OPERATION,
     traits=[
         Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To synthesize speech",
-                        "documentation": "Synthesizes plain text or SSML into a file of human-like speech.",
-                        "input": MappingProxyType(
-                            {
-                                "LexiconNames": ("example",),
-                                "OutputFormat": "mp3",
-                                "SampleRate": "8000",
-                                "Text": "All Gaul is divided into three parts",
-                                "TextType": "text",
-                                "VoiceId": "Joanna",
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "AudioStream": "TEXT",
-                                "ContentType": "audio/mpeg",
-                                "RequestCharacters": 37,
-                            }
-                        ),
-                    }
-                ),
-            ),
-        ),
-        Trait.new(
             id=ShapeID("smithy.api#http"),
             value=MappingProxyType(
                 {"method": "POST", "uri": "/v1/speech", "code": 200}
             ),
-        ),
+        )
     ],
 )
 
@@ -2125,1379 +1311,6 @@ PARROT_V1 = Schema(
     traits=[
         Trait.new(
             id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "polly"})
-        ),
-        Trait.new(id=ShapeID("smithy.api#title"), value="Amazon Polly"),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointTests"),
-            value=MappingProxyType(
-                {
-                    "testCases": (
-                        MappingProxyType(
-                            {
-                                "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.af-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "af-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.ap-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.ap-northeast-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.ap-northeast-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.ap-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.ap-southeast-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.ap-southeast-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.ca-central-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ca-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.eu-central-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.eu-north-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.eu-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.eu-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.eu-west-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.me-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "me-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.sa-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "sa-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://polly.us-east-1.api.aws"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.cn-northwest-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-northwest-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly-fips.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://polly.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "Missing region",
-                                "expect": MappingProxyType(
-                                    {"error": "Invalid Configuration: Missing Region"}
-                                ),
-                            }
-                        ),
-                    ),
-                    "version": "1.0",
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointRuleSet"),
-            value=MappingProxyType(
-                {
-                    "version": "1.0",
-                    "parameters": MappingProxyType(
-                        {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                        }
-                    ),
-                    "rules": (
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Endpoint"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseFIPS"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseDualStack"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": MappingProxyType(
-                                                        {"ref": "Endpoint"}
-                                                    ),
-                                                    "properties": MappingProxyType({}),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Region"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "aws.partition",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                        ),
-                                                        "assign": "PartitionResult",
-                                                    }
-                                                ),
-                                            ),
-                                            "rules": (
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://polly-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://polly-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://polly.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (),
-                                                        "endpoint": MappingProxyType(
-                                                            {
-                                                                "url": "https://polly.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                                "headers": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                            }
-                                                        ),
-                                                        "type": "endpoint",
-                                                    }
-                                                ),
-                                            ),
-                                            "type": "tree",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
-                    ),
-                }
-            ),
         ),
         Trait.new(
             id=ShapeID("smithy.rules#endpointBdd"),

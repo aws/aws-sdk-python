@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Guardduty"
+site_name = "AWS SDK for Python v4 - Guardduty"
 site_description = "Documentation for AWS Guardduty Client"
 site_author = "Amazon Web Services"
 

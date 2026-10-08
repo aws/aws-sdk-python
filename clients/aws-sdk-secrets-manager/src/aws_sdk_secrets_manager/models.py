@@ -9,6 +9,7 @@ from typing import Any, Literal, Self
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import TypeRegistry
 from smithy_core.exceptions import ModeledError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -349,7 +350,7 @@ class Filter:
     Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_search-secret.html).
     """
 
-    key: FilterNameStringType | None = None
+    key: str | None = None
     """
     The following are keys you can use:
 
@@ -772,6 +773,16 @@ class BatchGetSecretValueOutput:
     retrieve individual secrets.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_BATCH_GET_SECRET_VALUE_OUTPUT, self)
 
@@ -1179,6 +1190,16 @@ class CancelRotateSecretOutput:
     value `AWSPENDING` from this version so that Secrets Manager can delete
     it. Failing to clean up a cancelled rotation can block you from starting
     future rotations.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -1644,7 +1665,7 @@ class ReplicationStatusType:
     kms_key_id: str | None = None
     """Can be an `ARN`, `Key ID`, or `Alias`."""
 
-    status: StatusType | None = None
+    status: str | None = None
     """The status can be `InProgress`, `Failed`, or `InSync`."""
 
     status_message: str | None = None
@@ -1788,6 +1809,16 @@ class CreateSecretOutput:
       of creating the replica.
 
     - `InSync`, which indicates that the replica was created.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -2171,6 +2202,16 @@ class DeleteResourcePolicyOutput:
     name: str | None = None
     """The name of the secret that the resource-based policy was deleted for."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_RESOURCE_POLICY_OUTPUT, self)
 
@@ -2362,6 +2403,16 @@ class DeleteSecretOutput:
     permanently delete this secret, and it can no longer be restored. This
     value is the date and time of the delete request plus the number of days
     in `RecoveryWindowInDays`.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -2897,6 +2948,16 @@ class DescribeSecretOutput:
     - `InSync`, which indicates that the replica was created.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DESCRIBE_SECRET_OUTPUT, self)
 
@@ -3357,6 +3418,16 @@ class GetRandomPasswordOutput:
     random_password: str | None = field(repr=False, default=None)
     """A string with the password."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_RANDOM_PASSWORD_OUTPUT, self)
 
@@ -3478,6 +3549,16 @@ class GetResourcePolicyOutput:
     the secret. For more information about permissions policies, see
     [Authentication and access control for Secrets
     Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3709,6 +3790,16 @@ class GetSecretValueOutput:
     Secrets Manager uses the `AWSCURRENT` version.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_SECRET_VALUE_OUTPUT, self)
 
@@ -3908,10 +3999,10 @@ class ListSecretsInput:
     filters: list[Filter] | None = None
     """The filters to apply to the list of secrets."""
 
-    sort_order: SortOrderType | None = None
+    sort_order: str | None = None
     """Secrets are listed by `CreatedDate`."""
 
-    sort_by: SortByType | None = None
+    sort_by: str | None = None
     """If not specified, secrets are listed by `CreatedDate`."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -4410,6 +4501,16 @@ class ListSecretsOutput:
     `ListSecrets` again with this value.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_SECRETS_OUTPUT, self)
 
@@ -4741,6 +4842,16 @@ class ListSecretVersionIdsOutput:
     name: str | None = None
     """The name of the secret."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_SECRET_VERSION_IDS_OUTPUT, self)
 
@@ -4985,6 +5096,16 @@ class PutResourcePolicyOutput:
 
     name: str | None = None
     """The name of the secret."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_RESOURCE_POLICY_OUTPUT, self)
@@ -5289,6 +5410,16 @@ class PutSecretValueOutput:
     it progresses through the secret rotation process.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_SECRET_VALUE_OUTPUT, self)
 
@@ -5501,6 +5632,16 @@ class RemoveRegionsFromReplicationOutput:
     replication_status: list[ReplicationStatusType] | None = None
     """The status of replicas for this secret after you remove Regions."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_REMOVE_REGIONS_FROM_REPLICATION_OUTPUT, self)
 
@@ -5677,6 +5818,16 @@ class ReplicateSecretToRegionsOutput:
     replication_status: list[ReplicationStatusType] | None = None
     """The status of replication."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_REPLICATE_SECRET_TO_REGIONS_OUTPUT, self)
 
@@ -5812,6 +5963,16 @@ class RestoreSecretOutput:
 
     name: str | None = None
     """The name of the secret that was restored."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_RESTORE_SECRET_OUTPUT, self)
@@ -6113,6 +6274,16 @@ class RotateSecretOutput:
     version_id: str | None = None
     """The ID of the new version of the secret."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ROTATE_SECRET_OUTPUT, self)
 
@@ -6251,6 +6422,16 @@ class StopReplicationToReplicaOutput:
     primary secret except the Region is changed.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_STOP_REPLICATION_TO_REPLICA_OUTPUT, self)
 
@@ -6386,6 +6567,16 @@ class TagResourceInput:
 @dataclass(kw_only=True)
 class TagResourceOutput:
     """Dataclass for TagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TAG_RESOURCE_OUTPUT, self)
@@ -6541,6 +6732,16 @@ class UntagResourceInput:
 @dataclass(kw_only=True)
 class UntagResourceOutput:
     """Dataclass for UntagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNTAG_RESOURCE_OUTPUT, self)
@@ -6812,6 +7013,16 @@ class UpdateSecretOutput:
     version.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_SECRET_OUTPUT, self)
 
@@ -7039,6 +7250,16 @@ class UpdateSecretVersionStageOutput:
 
     name: str | None = None
     """The name of the secret that was updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_SECRET_VERSION_STAGE_OUTPUT, self)
@@ -7272,6 +7493,16 @@ class ValidateResourcePolicyOutput:
 
     validation_errors: list[ValidationErrorsEntry] | None = None
     """Validation errors if your policy didn't pass validation."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_VALIDATE_RESOURCE_POLICY_OUTPUT, self)

@@ -9,6 +9,7 @@ from typing import Any, Literal, Self, Union
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import Document, TypeRegistry
 from smithy_core.exceptions import ModeledError, SerializationError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -774,10 +775,10 @@ class SelectiveGuardingMode(UnknownEnumMixin, StrEnum):
 class SelectiveContentGuarding:
     """Selective content guarding controls for enforced guardrails."""
 
-    system: SelectiveGuardingMode | None = None
+    system: str | None = None
     """Selective guarding mode for system prompts.\""""
 
-    messages: SelectiveGuardingMode | None = None
+    messages: str | None = None
     """Selective guarding mode for user messages."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -942,7 +943,7 @@ class AccountEnforcedGuardrailOutputConfiguration:
     guardrail_id: str | None = None
     """Unique ID for the guardrail."""
 
-    input_tags: InputTags | None = None
+    input_tags: str | None = None
     """Whether to honor or ignore input tags at runtime."""
 
     selective_content_guarding: SelectiveContentGuarding | None = None
@@ -1380,7 +1381,7 @@ class BatchDeleteAdvancedPromptOptimizationJobItem:
     job_identifier: str
     """The identifier of the deleted job."""
 
-    job_status: AdvancedPromptOptimizationJobStatus
+    job_status: str
     """The status of the deleted job."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -1592,6 +1593,16 @@ class BatchDeleteAdvancedPromptOptimizationJobOutput:
         BatchDeleteAdvancedPromptOptimizationJobItem
     ]
     """A list of successfully deleted advanced prompt optimization jobs."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -2404,6 +2415,16 @@ class CreateAdvancedPromptOptimizationJobOutput:
     optimization job.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_CREATE_ADVANCED_PROMPT_OPTIMIZATION_JOB_OUTPUT, self
@@ -2683,7 +2704,7 @@ class GetAdvancedPromptOptimizationJobOutput:
     job_name: str
     """The name of the advanced prompt optimization job."""
 
-    job_status: AdvancedPromptOptimizationJobStatus
+    job_status: str
     """The status of the advanced prompt optimization job."""
 
     input_config: AdvancedPromptOptimizationInputConfig
@@ -2715,6 +2736,16 @@ class GetAdvancedPromptOptimizationJobOutput:
 
     failure_message: str | None = None
     """If the job failed, a message describing the reason for the failure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -2957,10 +2988,10 @@ class ListAdvancedPromptOptimizationJobsInput:
     the next set of results.
     """
 
-    sort_by: SortJobsBy | None = None
+    sort_by: str | None = None
     """The field to sort the results by."""
 
-    sort_order: SortOrder | None = None
+    sort_order: str | None = None
     """The sort order for the results."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3060,7 +3091,7 @@ class AdvancedPromptOptimizationJobSummary:
     job_name: str
     """The name of the job."""
 
-    job_status: AdvancedPromptOptimizationJobStatus
+    job_status: str
     """The status of the job."""
 
     creation_time: datetime
@@ -3200,6 +3231,16 @@ class ListAdvancedPromptOptimizationJobsOutput:
     If the total number of results is greater than the `maxResults` value
     provided in the request, use this token in a subsequent request to get
     the next set of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -3343,6 +3384,16 @@ class StopAdvancedPromptOptimizationJobInput:
 class StopAdvancedPromptOptimizationJobOutput:
     """Stop Advanced Prompt Optimization Job Response"""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_STOP_ADVANCED_PROMPT_OPTIMIZATION_JOB_OUTPUT, self
@@ -3418,7 +3469,7 @@ class AgreementStatus(UnknownEnumMixin, StrEnum):
 class AgreementAvailability:
     """Information about the agreement availability"""
 
-    status: AgreementStatus
+    status: str
     """Status of the agreement."""
 
     error_message: str | None = None
@@ -3505,6 +3556,16 @@ class GetUseCaseForModelAccessOutput:
 
     form_data: bytes
     """Get customer profile Response."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_USE_CASE_FOR_MODEL_ACCESS_OUTPUT, self)
@@ -3616,6 +3677,16 @@ class PutUseCaseForModelAccessInput:
 @dataclass(kw_only=True)
 class PutUseCaseForModelAccessOutput:
     """Dataclass for PutUseCaseForModelAccessOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_USE_CASE_FOR_MODEL_ACCESS_OUTPUT, self)
@@ -3754,6 +3825,16 @@ class CancelAutomatedReasoningPolicyBuildWorkflowOutput:
     """
     Dataclass for CancelAutomatedReasoningPolicyBuildWorkflowOutput
     structure.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -4578,6 +4659,16 @@ class CreateAutomatedReasoningPolicyOutput:
     for creating policy versions that you can use in your application.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_AUTOMATED_REASONING_POLICY_OUTPUT, self)
 
@@ -4768,7 +4859,7 @@ class CreateAutomatedReasoningPolicyTestCaseInput:
     context for the validation.
     """
 
-    expected_aggregated_findings_result: AutomatedReasoningCheckResult | None = None
+    expected_aggregated_findings_result: str | None = None
     """
     The expected result of the Automated Reasoning check. Valid values
     include: , TOO_COMPLEX, and NO_TRANSLATIONS.
@@ -4957,6 +5048,16 @@ class CreateAutomatedReasoningPolicyTestCaseOutput:
 
     test_case_id: str
     """The unique identifier of the created test."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -5190,6 +5291,16 @@ class CreateAutomatedReasoningPolicyVersionOutput:
     description: str | None = field(repr=False, default=None)
     """The description of the policy version."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_CREATE_AUTOMATED_REASONING_POLICY_VERSION_OUTPUT, self
@@ -5416,6 +5527,16 @@ class DeleteAutomatedReasoningPolicyInput:
 class DeleteAutomatedReasoningPolicyOutput:
     """Dataclass for DeleteAutomatedReasoningPolicyOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_AUTOMATED_REASONING_POLICY_OUTPUT, self)
 
@@ -5625,6 +5746,16 @@ class DeleteAutomatedReasoningPolicyBuildWorkflowOutput:
     structure.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_DELETE_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW_OUTPUT, self
@@ -5788,6 +5919,16 @@ class DeleteAutomatedReasoningPolicyTestCaseInput:
 class DeleteAutomatedReasoningPolicyTestCaseOutput:
     """Dataclass for DeleteAutomatedReasoningPolicyTestCaseOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_DELETE_AUTOMATED_REASONING_POLICY_TEST_CASE_OUTPUT, self
@@ -5916,6 +6057,16 @@ class ExportAutomatedReasoningPolicyVersionOutput:
     """
     The exported policy definition containing the formal logic rules,
     variables, and custom variable types.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -6077,6 +6228,16 @@ class GetAutomatedReasoningPolicyOutput:
 
     created_at: datetime | None = None
     """The timestamp when the policy was created."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_AUTOMATED_REASONING_POLICY_OUTPUT, self)
@@ -8263,6 +8424,16 @@ class GetAutomatedReasoningPolicyAnnotationsOutput:
     updated_at: datetime
     """The timestamp when the annotations were last updated."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_GET_AUTOMATED_REASONING_POLICY_ANNOTATIONS_OUTPUT, self
@@ -8522,13 +8693,13 @@ class GetAutomatedReasoningPolicyBuildWorkflowOutput:
     build_workflow_id: str
     """The unique identifier of the build workflow."""
 
-    status: AutomatedReasoningPolicyBuildWorkflowStatus
+    status: str
     """
     The current status of the build workflow (e.g., RUNNING, COMPLETED,
     FAILED, CANCELLED).
     """
 
-    build_workflow_type: AutomatedReasoningPolicyBuildWorkflowType
+    build_workflow_type: str
     """
     The type of build workflow being executed (e.g., DOCUMENT_INGESTION,
     POLICY_REPAIR).
@@ -8543,9 +8714,7 @@ class GetAutomatedReasoningPolicyBuildWorkflowOutput:
     document_name: str | None = field(repr=False, default=None)
     """The name of the source document used in the build workflow."""
 
-    document_content_type: AutomatedReasoningPolicyBuildDocumentContentType | None = (
-        None
-    )
+    document_content_type: str | None = None
     """
     The content type of the source document (e.g., text/plain,
     application/pdf).
@@ -8555,6 +8724,16 @@ class GetAutomatedReasoningPolicyBuildWorkflowOutput:
     """
     A detailed description of the document's content and how it should be
     used in the policy generation process.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -8798,7 +8977,7 @@ class GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput:
     to retrieve.
     """
 
-    asset_type: AutomatedReasoningPolicyBuildResultAssetType | None = None
+    asset_type: str | None = None
     """
     The type of asset to retrieve (e.g., BUILD_LOG, QUALITY_REPORT,
     POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS,
@@ -8909,7 +9088,7 @@ class AutomatedReasoningPolicyBuildResultAssetManifestEntry:
     produced by the build workflow.
     """
 
-    asset_type: AutomatedReasoningPolicyBuildResultAssetType
+    asset_type: str
     """
     The type of asset (e.g., BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION,
     GENERATED_TEST_CASES, POLICY_SCENARIOS, FIDELITY_REPORT, ASSET_MANIFEST,
@@ -10057,7 +10236,7 @@ class AutomatedReasoningPolicyBuildStepMessage:
     step.
     """
 
-    message_type: AutomatedReasoningPolicyBuildMessageType
+    message_type: str
     """
     The type of message (e.g., INFO, WARNING, ERROR) indicating its severity
     and purpose.
@@ -10465,7 +10644,7 @@ class AutomatedReasoningPolicyBuildLogEntry:
     was created.
     """
 
-    status: AutomatedReasoningPolicyAnnotationStatus
+    status: str
     """The status of the build step (e.g., SUCCESS, FAILED, IN_PROGRESS)."""
 
     build_steps: list[AutomatedReasoningPolicyBuildStep]
@@ -10636,7 +10815,7 @@ class AutomatedReasoningPolicySourceDocument:
     document: bytes = field(repr=False)
     """The raw content of the source document as a binary blob."""
 
-    document_content_type: AutomatedReasoningPolicyBuildDocumentContentType
+    document_content_type: str
     """The MIME type of the document (e.g., application/pdf, text/plain)."""
 
     document_name: str = field(repr=False)
@@ -12051,7 +12230,7 @@ class AutomatedReasoningPolicyGeneratedTestCase:
     accuracy.
     """
 
-    expected_aggregated_findings_result: AutomatedReasoningCheckResult
+    expected_aggregated_findings_result: str
     """
     The expected results of the generated test case. Possible values
     include:
@@ -12252,7 +12431,7 @@ class AutomatedReasoningPolicyScenario:
     validation and comparison purposes.
     """
 
-    expected_result: AutomatedReasoningCheckResult
+    expected_result: str
     """
     The expected outcome when this scenario is evaluated against the policy
     (e.g., PASS, FAIL, VIOLATION).
@@ -13326,6 +13505,16 @@ class GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput:
     artifacts) based on the specific asset type requested in the API call.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_GET_AUTOMATED_REASONING_POLICY_BUILD_WORKFLOW_RESULT_ASSETS_OUTPUT,
@@ -13518,6 +13707,16 @@ class GetAutomatedReasoningPolicyNextScenarioOutput:
     expected results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_GET_AUTOMATED_REASONING_POLICY_NEXT_SCENARIO_OUTPUT, self
@@ -13703,7 +13902,7 @@ class AutomatedReasoningPolicyTestCase:
     context for the validation.
     """
 
-    expected_aggregated_findings_result: AutomatedReasoningCheckResult | None = None
+    expected_aggregated_findings_result: str | None = None
     """The expected result of the Automated Reasoning check for this test."""
 
     confidence_threshold: float | None = None
@@ -13854,6 +14053,16 @@ class GetAutomatedReasoningPolicyTestCaseOutput:
     """
     The test details including the content, query, expected result, and
     metadata.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -14224,7 +14433,7 @@ class AutomatedReasoningCheckLogicWarning:
     or always false.
     """
 
-    type: AutomatedReasoningCheckLogicWarningType | None = None
+    type: str | None = None
     """
     The category of the detected logical issue, such as statements that are
     always true or always false.
@@ -15610,7 +15819,7 @@ class AutomatedReasoningPolicyTestResult:
     was tested.
     """
 
-    test_run_status: AutomatedReasoningPolicyTestRunStatus
+    test_run_status: str
     """
     The overall status of the test run (e.g., COMPLETED, FAILED,
     IN_PROGRESS).
@@ -15625,13 +15834,13 @@ class AutomatedReasoningPolicyTestResult:
     or unexpected behaviors discovered.
     """
 
-    test_run_result: AutomatedReasoningPolicyTestRunResult | None = None
+    test_run_result: str | None = None
     """
     The overall result of the test run, indicating whether the policy passed
     or failed validation.
     """
 
-    aggregated_test_findings_result: AutomatedReasoningCheckResult | None = None
+    aggregated_test_findings_result: str | None = None
     """
     A summary of all test findings, aggregated to provide an overall
     assessment of policy quality and correctness.
@@ -15783,6 +15992,16 @@ class GetAutomatedReasoningPolicyTestResultOutput:
     """
     The test result containing validation findings, execution status, and
     detailed analysis.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -16111,6 +16330,16 @@ class ListAutomatedReasoningPoliciesOutput:
     page of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_AUTOMATED_REASONING_POLICIES_OUTPUT, self)
 
@@ -16310,13 +16539,13 @@ class AutomatedReasoningPolicyBuildWorkflowSummary:
     build_workflow_id: str
     """The unique identifier of the build workflow."""
 
-    status: AutomatedReasoningPolicyBuildWorkflowStatus
+    status: str
     """
     The current status of the build workflow (e.g., RUNNING, COMPLETED,
     FAILED, CANCELLED).
     """
 
-    build_workflow_type: AutomatedReasoningPolicyBuildWorkflowType
+    build_workflow_type: str
     """The type of build workflow (e.g., DOCUMENT_INGESTION, POLICY_REPAIR)."""
 
     created_at: datetime
@@ -16496,6 +16725,16 @@ class ListAutomatedReasoningPolicyBuildWorkflowsOutput:
     """
     A pagination token to use in subsequent requests to retrieve additional
     build workflows.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -16720,6 +16959,16 @@ class ListAutomatedReasoningPolicyTestCasesOutput:
     """
     The pagination token to use in a subsequent request to retrieve the next
     page of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -16974,6 +17223,16 @@ class ListAutomatedReasoningPolicyTestResultsOutput:
     test results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_LIST_AUTOMATED_REASONING_POLICY_TEST_RESULTS_OUTPUT, self
@@ -17086,7 +17345,7 @@ class AutomatedReasoningPolicyBuildWorkflowDocument:
     extract policy rules and concepts.
     """
 
-    document_content_type: AutomatedReasoningPolicyBuildDocumentContentType
+    document_content_type: str
     """
     The MIME type of the document content (e.g., text/plain,
     application/pdf, text/markdown).
@@ -17839,7 +18098,7 @@ class StartAutomatedReasoningPolicyBuildWorkflowInput:
     which to start the build workflow.
     """
 
-    build_workflow_type: AutomatedReasoningPolicyBuildWorkflowType | None = None
+    build_workflow_type: str | None = None
     """
     The type of build workflow to start (e.g., DOCUMENT_INGESTION for
     processing new documents, POLICY_REPAIR for fixing existing policies).
@@ -17960,6 +18219,16 @@ class StartAutomatedReasoningPolicyBuildWorkflowOutput:
     """
     The unique identifier of the newly started build workflow. Use this ID
     to track the workflow's progress and retrieve its results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -18220,6 +18489,16 @@ class StartAutomatedReasoningPolicyTestWorkflowOutput:
     was started.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_START_AUTOMATED_REASONING_POLICY_TEST_WORKFLOW_OUTPUT, self
@@ -18411,6 +18690,16 @@ class UpdateAutomatedReasoningPolicyOutput:
 
     updated_at: datetime
     """The timestamp when the policy was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_AUTOMATED_REASONING_POLICY_OUTPUT, self)
@@ -18658,6 +18947,16 @@ class UpdateAutomatedReasoningPolicyAnnotationsOutput:
     updated_at: datetime
     """The timestamp when the annotations were updated."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_UPDATE_AUTOMATED_REASONING_POLICY_ANNOTATIONS_OUTPUT, self
@@ -18807,7 +19106,7 @@ class UpdateAutomatedReasoningPolicyTestCaseInput:
     concurrency token to prevent conflicting modifications.
     """
 
-    expected_aggregated_findings_result: AutomatedReasoningCheckResult | None = None
+    expected_aggregated_findings_result: str | None = None
     """The updated expected result of the Automated Reasoning check."""
 
     confidence_threshold: float | None = None
@@ -18986,6 +19285,16 @@ class UpdateAutomatedReasoningPolicyTestCaseOutput:
 
     test_case_id: str
     """The unique identifier of the updated test."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -19562,7 +19871,7 @@ class MarketplaceModelEndpoint:
     Failed).
     """
 
-    status: Status | None = None
+    status: str | None = None
     """
     The overall status of the endpoint in Amazon Bedrock Marketplace (e.g.,
     ACTIVE, INACTIVE).
@@ -19714,6 +20023,16 @@ class CreateMarketplaceModelEndpointOutput:
     marketplace_model_endpoint: MarketplaceModelEndpoint
     """Details about the created endpoint."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_MARKETPLACE_MODEL_ENDPOINT_OUTPUT, self)
 
@@ -19841,6 +20160,16 @@ class DeleteMarketplaceModelEndpointInput:
 class DeleteMarketplaceModelEndpointOutput:
     """Dataclass for DeleteMarketplaceModelEndpointOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_MARKETPLACE_MODEL_ENDPOINT_OUTPUT, self)
 
@@ -19951,6 +20280,16 @@ class DeregisterMarketplaceModelEndpointInput:
 @dataclass(kw_only=True)
 class DeregisterMarketplaceModelEndpointOutput:
     """Dataclass for DeregisterMarketplaceModelEndpointOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -20109,6 +20448,16 @@ class GetMarketplaceModelEndpointOutput:
 
     marketplace_model_endpoint: MarketplaceModelEndpoint | None = None
     """Details about the requested endpoint."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MARKETPLACE_MODEL_ENDPOINT_OUTPUT, self)
@@ -20289,7 +20638,7 @@ class MarketplaceModelEndpointSummary:
     updated_at: datetime
     """The timestamp when the endpoint was last updated."""
 
-    status: Status | None = None
+    status: str | None = None
     """The overall status of the endpoint in Amazon Bedrock Marketplace."""
 
     status_message: str | None = None
@@ -20431,6 +20780,16 @@ class ListMarketplaceModelEndpointsOutput:
     """
     The token for the next set of results. Use this token to get the next
     set of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -20598,6 +20957,16 @@ class RegisterMarketplaceModelEndpointOutput:
 
     marketplace_model_endpoint: MarketplaceModelEndpoint
     """Details about the registered endpoint."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -20771,6 +21140,16 @@ class UpdateMarketplaceModelEndpointOutput:
 
     marketplace_model_endpoint: MarketplaceModelEndpoint
     """Details about the updated endpoint."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_MARKETPLACE_MODEL_ENDPOINT_OUTPUT, self)
@@ -20990,6 +21369,16 @@ class CreateCustomModelDeploymentOutput:
     `InvokeModel` or `Converse` operations.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_CUSTOM_MODEL_DEPLOYMENT_OUTPUT, self)
 
@@ -21121,6 +21510,16 @@ class DeleteCustomModelDeploymentInput:
 @dataclass(kw_only=True)
 class DeleteCustomModelDeploymentOutput:
     """Dataclass for DeleteCustomModelDeploymentOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_CUSTOM_MODEL_DEPLOYMENT_OUTPUT, self)
@@ -21254,7 +21653,7 @@ class CustomModelDeploymentUpdateDetails:
     model_arn: str
     """ARN of the new custom model being deployed as part of the update."""
 
-    update_status: CustomModelDeploymentUpdateStatus
+    update_status: str
     """Current status of the deployment update."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -21328,7 +21727,7 @@ class GetCustomModelDeploymentOutput:
     created_at: datetime
     """The date and time when the custom model deployment was created."""
 
-    status: CustomModelDeploymentStatus
+    status: str
     """
     The status of the custom model deployment. Possible values are:
 
@@ -21358,6 +21757,16 @@ class GetCustomModelDeploymentOutput:
 
     last_updated_at: datetime | None = None
     """The date and time when the custom model deployment was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_CUSTOM_MODEL_DEPLOYMENT_OUTPUT, self)
@@ -21555,19 +21964,19 @@ class ListCustomModelDeploymentsInput:
     additional results when the response is truncated.
     """
 
-    sort_by: SortModelsBy | None = None
+    sort_by: str | None = None
     """
     The field to sort the results by. The only supported value is
     `CreationTime`.
     """
 
-    sort_order: SortOrder | None = None
+    sort_order: str | None = None
     """
     The sort order for the results. Valid values are `Ascending` and
     `Descending`. Default is `Descending`.
     """
 
-    status_equals: CustomModelDeploymentStatus | None = None
+    status_equals: str | None = None
     """
     Filters deployments by status. Valid values are `CREATING`, `ACTIVE`,
     and `FAILED`.
@@ -21745,7 +22154,7 @@ class CustomModelDeploymentSummary:
     created_at: datetime
     """The date and time when the custom model deployment was created."""
 
-    status: CustomModelDeploymentStatus
+    status: str
     """
     The status of the custom model deployment. Possible values are
     `CREATING`, `ACTIVE`, and `FAILED`.
@@ -21908,6 +22317,16 @@ class ListCustomModelDeploymentsOutput:
     model_deployment_summaries: list[CustomModelDeploymentSummary] | None = None
     """A list of custom model deployment summaries."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_CUSTOM_MODEL_DEPLOYMENTS_OUTPUT, self)
 
@@ -22065,6 +22484,16 @@ class UpdateCustomModelDeploymentOutput:
 
     custom_model_deployment_arn: str
     """ARN of the custom model deployment being updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_CUSTOM_MODEL_DEPLOYMENT_OUTPUT, self)
@@ -22580,6 +23009,16 @@ class CreateCustomModelOutput:
     model_arn: str
     """The Amazon Resource Name (ARN) of the new custom model."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_CUSTOM_MODEL_OUTPUT, self)
 
@@ -22697,6 +23136,16 @@ class DeleteCustomModelInput:
 @dataclass(kw_only=True)
 class DeleteCustomModelOutput:
     """Dataclass for DeleteCustomModelOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_CUSTOM_MODEL_OUTPUT, self)
@@ -23080,7 +23529,7 @@ class RFTHyperParameters:
     prompt during RFT training.
     """
 
-    reasoning_effort: ReasoningEffort | None = None
+    reasoning_effort: str | None = None
     """
     Level of reasoning effort applied during RFT training. Higher values may
     improve response quality but increase training time.
@@ -24175,7 +24624,7 @@ class GetCustomModelOutput:
     base_model_arn: str | None = None
     """Amazon Resource Name (ARN) of the base model."""
 
-    customization_type: CustomizationType | None = None
+    customization_type: str | None = None
     """The type of model customization."""
 
     model_kms_key_arn: str | None = None
@@ -24206,7 +24655,7 @@ class GetCustomModelOutput:
     customization_config: CustomizationConfig | None = None
     """The customization configuration for the custom model."""
 
-    model_status: ModelStatus | None = None
+    model_status: str | None = None
     """
     The current status of the custom model. Possible values include:
 
@@ -24223,6 +24672,16 @@ class GetCustomModelOutput:
     """
     A failure message for any issues that occurred when creating the custom
     model. This is included for only a failed CreateCustomModel operation.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -24506,10 +24965,10 @@ class ListCustomModelsInput:
     field in the response in this field to return the next batch of results.
     """
 
-    sort_by: SortModelsBy | None = None
+    sort_by: str | None = None
     """The field to sort by in the returned list of models."""
 
-    sort_order: SortOrder | None = None
+    sort_order: str | None = None
     """The sort order of the results."""
 
     is_owned: bool | None = None
@@ -24518,7 +24977,7 @@ class ListCustomModelsInput:
     (`true`) or if they were shared with the current account (`false`).
     """
 
-    model_status: ModelStatus | None = None
+    model_status: str | None = None
     """
     The status of them model to filter results by. Possible values include:
 
@@ -24697,7 +25156,7 @@ class CustomModelSummary:
     base_model_name: str
     """The base model name."""
 
-    customization_type: CustomizationType | None = None
+    customization_type: str | None = None
     """
     Specifies whether to carry out continued pre-training of a model or
     whether to fine-tune it. For more information, see [Custom
@@ -24707,7 +25166,7 @@ class CustomModelSummary:
     owner_account_id: str | None = None
     """The unique identifier of the account that owns the model."""
 
-    model_status: ModelStatus | None = None
+    model_status: str | None = None
     """
     The current status of the custom model. Possible values include:
 
@@ -24865,6 +25324,16 @@ class ListCustomModelsOutput:
     model_summaries: list[CustomModelSummary] | None = None
     """Model summaries."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_CUSTOM_MODELS_OUTPUT, self)
 
@@ -24976,6 +25445,10 @@ class DataRetentionMode(UnknownEnumMixin, StrEnum):
 
     - `none` -- Zero data retention.
 
+    - `aws_review` -- Amazon Web Services may review the request data. The
+      data is not shared with the model provider. A model must support this
+      mode to be invoked under it.
+
     - `provider_data_share` -- Data may be shared with the model provider.
 
     - `inherit` -- No data retention mode is set at this scope.
@@ -24983,6 +25456,7 @@ class DataRetentionMode(UnknownEnumMixin, StrEnum):
 
     DEFAULT = "default"
     NONE = "none"
+    AWS_REVIEW = "aws_review"
     PROVIDER_DATA_SHARE = "provider_data_share"
     INHERIT = "inherit"
 
@@ -24991,11 +25465,21 @@ class DataRetentionMode(UnknownEnumMixin, StrEnum):
 class GetAccountDataRetentionOutput:
     """Dataclass for GetAccountDataRetentionOutput structure."""
 
-    mode: DataRetentionMode
+    mode: str
     """The data retention mode configured for the account."""
 
     updated_at: datetime | None = None
     """The time at which the data retention mode was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_ACCOUNT_DATA_RETENTION_OUTPUT, self)
@@ -25078,7 +25562,7 @@ GET_ACCOUNT_DATA_RETENTION = APIOperation(
 class PutAccountDataRetentionInput:
     """Dataclass for PutAccountDataRetentionInput structure."""
 
-    mode: DataRetentionMode | None = None
+    mode: str | None = None
     """The data retention mode to set for the account."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -25120,11 +25604,21 @@ class PutAccountDataRetentionInput:
 class PutAccountDataRetentionOutput:
     """Dataclass for PutAccountDataRetentionOutput structure."""
 
-    mode: DataRetentionMode
+    mode: str
     """The data retention mode set for the account."""
 
     updated_at: datetime | None = None
     """The time at which the data retention mode was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_ACCOUNT_DATA_RETENTION_OUTPUT, self)
@@ -25254,6 +25748,16 @@ class DeleteEnforcedGuardrailConfigurationInput:
 class DeleteEnforcedGuardrailConfigurationOutput:
     """Dataclass for DeleteEnforcedGuardrailConfigurationOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_DELETE_ENFORCED_GUARDRAIL_CONFIGURATION_OUTPUT, self
@@ -25372,6 +25876,16 @@ class ListEnforcedGuardrailsConfigurationOutput:
 
     next_token: str | None = None
     """Opaque continuation token of previous paginated response."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -25544,6 +26058,16 @@ class PutEnforcedGuardrailConfigurationOutput:
 
     updated_by: str | None = None
     """The ARN of the role used to update the configuration."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -25840,7 +26364,7 @@ class BatchDeleteEvaluationJobItem:
     job_identifier: str = field(repr=False)
     """The Amazon Resource Name (ARN) of the evaluation job for deletion."""
 
-    job_status: EvaluationJobStatus
+    job_status: str
     """The status of the evaluation job for deletion."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -25934,6 +26458,16 @@ class BatchDeleteEvaluationJobOutput:
 
     evaluation_jobs: list[BatchDeleteEvaluationJobItem]
     """The list of evaluation jobs for deletion."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_BATCH_DELETE_EVALUATION_JOB_OUTPUT, self)
@@ -26862,7 +27396,7 @@ class EvaluationDatasetMetricConfig:
     names, and the task type.
     """
 
-    task_type: EvaluationTaskType
+    task_type: str
     """
     The the type of task you want to evaluate for your evaluation job. This
     applies only to model evaluation jobs and is ignored for knowledge base
@@ -27634,7 +28168,7 @@ class PerformanceConfigLatency(UnknownEnumMixin, StrEnum):
 class PerformanceConfiguration:
     """Contains performance settings for a model."""
 
-    latency: PerformanceConfigLatency | None = None
+    latency: str | None = None
     """
     Specifies whether to use the latency-optimized or standard version of a
     model or inference profile.
@@ -28447,7 +28981,7 @@ class ExternalSource:
     object.
     """
 
-    source_type: ExternalSourceType
+    source_type: str
     """The source type of the external source wrapper object."""
 
     s3_location: S3ObjectDoc | None = None
@@ -28735,7 +29269,7 @@ class QueryTransformationType(UnknownEnumMixin, StrEnum):
 class QueryTransformationConfiguration:
     """The configuration details for transforming the prompt."""
 
-    type: QueryTransformationType
+    type: str
     """The type of transformation to apply to the prompt."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -28904,7 +29438,7 @@ class MetadataAttributeSchema:
     configurations.
     """
 
-    type: AttributeType
+    type: str
     """
     The data type of the metadata attribute. The type determines how the
     attribute can be used in filter expressions and reranking.
@@ -29314,7 +29848,7 @@ class MetadataConfigurationForReranking:
     metadata fields are included or excluded when reordering search results.
     """
 
-    selection_mode: RerankingMetadataSelectionMode
+    selection_mode: str
     """
     The mode for selecting which metadata fields to include in the reranking
     process. Valid values are ALL (use all available metadata fields) or
@@ -29579,7 +30113,7 @@ class VectorSearchRerankingConfiguration:
     vector search results based on more sophisticated criteria.
     """
 
-    type: VectorSearchRerankingConfigurationType
+    type: str
     """
     The type of reranking to apply to vector search results. Currently, the
     only supported value is BEDROCK, which uses Amazon Bedrock foundation
@@ -29956,6 +30490,16 @@ class CreateEvaluationJobOutput:
     job_arn: str
     """The Amazon Resource Name (ARN) of the evaluation job."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_EVALUATION_JOB_OUTPUT, self)
 
@@ -30073,10 +30617,10 @@ class ListEvaluationJobsInput:
     creation_time_before: datetime | None = None
     """A filter to only list evaluation jobs created before a specified time."""
 
-    status_equals: EvaluationJobStatus | None = None
+    status_equals: str | None = None
     """A filter to only list evaluation jobs that are of a certain status."""
 
-    application_type_equals: ApplicationType | None = None
+    application_type_equals: str | None = None
     """
     A filter to only list evaluation jobs that are either model evaluations
     or knowledge base evaluations.
@@ -30097,13 +30641,13 @@ class ListEvaluationJobsInput:
     list the next set of results.
     """
 
-    sort_by: SortJobsBy | None = None
+    sort_by: str | None = None
     """
     Specifies a creation time to sort the list of evaluation jobs by when
     they were created.
     """
 
-    sort_order: SortOrder | None = None
+    sort_order: str | None = None
     """
     Specifies whether to sort the list of evaluation jobs by either
     ascending or descending order.
@@ -30263,7 +30807,7 @@ def _deserialize_evaluator_model_identifiers(
 
 
 def _serialize_evaluation_task_types(
-    serializer: ShapeSerializer, schema: Schema, value: list[EvaluationTaskType]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -30273,8 +30817,8 @@ def _serialize_evaluation_task_types(
 
 def _deserialize_evaluation_task_types(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[EvaluationTaskType]:
-    result: list[EvaluationTaskType] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -30637,16 +31181,16 @@ class EvaluationSummary:
     job_name: str
     """The name for the evaluation job."""
 
-    status: EvaluationJobStatus
+    status: str
     """The current status of the evaluation job."""
 
     creation_time: datetime
     """The time the evaluation job was created."""
 
-    job_type: EvaluationJobType
+    job_type: str
     """Specifies whether the evaluation job is automated or human-based."""
 
-    evaluation_task_types: list[EvaluationTaskType]
+    evaluation_task_types: list[str]
     """The type of task for model evaluation."""
 
     model_identifiers: list[str] = field(default_factory=list[str])
@@ -30679,7 +31223,7 @@ class EvaluationSummary:
     in a model or Knowledge Base evaluation job.
     """
 
-    application_type: ApplicationType | None = None
+    application_type: str | None = None
     """
     Specifies whether the evaluation job is for evaluating a model or
     evaluating a knowledge base (retrieval and response generation).
@@ -30895,6 +31439,16 @@ class ListEvaluationJobsOutput:
     job_summaries: list[EvaluationSummary] | None = None
     """A list of summaries of the evaluation jobs."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_EVALUATION_JOBS_OUTPUT, self)
 
@@ -31014,6 +31568,16 @@ class StopEvaluationJobInput:
 @dataclass(kw_only=True)
 class StopEvaluationJobOutput:
     """Dataclass for StopEvaluationJobOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_STOP_EVALUATION_JOB_OUTPUT, self)
@@ -31188,7 +31752,7 @@ class GuardrailModality(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_guardrail_modalities(
-    serializer: ShapeSerializer, schema: Schema, value: list[GuardrailModality]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -31198,8 +31762,8 @@ def _serialize_guardrail_modalities(
 
 def _deserialize_guardrail_modalities(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[GuardrailModality]:
-    result: list[GuardrailModality] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -31269,10 +31833,10 @@ class GuardrailContentFilterConfig:
     filters](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters.html).
     """
 
-    type: GuardrailContentFilterType
+    type: str
     """The harmful category that the content filter is applied to."""
 
-    input_strength: GuardrailFilterStrength
+    input_strength: str
     """
     The strength of the content filter to apply to prompts. As you increase
     the filter strength, the likelihood of filtering harmful content
@@ -31280,7 +31844,7 @@ class GuardrailContentFilterConfig:
     application reduces.
     """
 
-    output_strength: GuardrailFilterStrength
+    output_strength: str
     """
     The strength of the content filter to apply to model responses. As you
     increase the filter strength, the likelihood of filtering harmful
@@ -31288,19 +31852,19 @@ class GuardrailContentFilterConfig:
     application reduces.
     """
 
-    input_modalities: list[GuardrailModality] | None = None
+    input_modalities: list[str] | None = None
     """
     The input modalities selected for the guardrail content filter
     configuration.
     """
 
-    output_modalities: list[GuardrailModality] | None = None
+    output_modalities: list[str] | None = None
     """
     The output modalities selected for the guardrail content filter
     configuration.
     """
 
-    input_action: GuardrailContentFilterAction | None = field(repr=False, default=None)
+    input_action: str | None = field(repr=False, default=None)
     """
     Specifies the action to take when harmful content is detected. Supported
     values include:
@@ -31311,7 +31875,7 @@ class GuardrailContentFilterConfig:
       response.
     """
 
-    output_action: GuardrailContentFilterAction | None = field(repr=False, default=None)
+    output_action: str | None = field(repr=False, default=None)
     """
     Specifies the action to take when harmful content is detected in the
     output. Supported values include:
@@ -31523,7 +32087,7 @@ class GuardrailContentFiltersTierConfig:
     existing generative AI workflows.
     """
 
-    tier_name: GuardrailContentFiltersTierName = field(repr=False)
+    tier_name: str = field(repr=False)
     """
     The tier that your guardrail uses for content filters. Valid values
     include:
@@ -31657,13 +32221,13 @@ class GuardrailContextualGroundingFilterConfig:
     filter.
     """
 
-    type: GuardrailContextualGroundingFilterType
+    type: str
     """The filter details for the guardrails contextual grounding filter."""
 
     threshold: float
     """The threshold details for the guardrails contextual grounding filter."""
 
-    action: GuardrailContextualGroundingAction | None = field(repr=False, default=None)
+    action: str | None = field(repr=False, default=None)
     """
     Specifies the action to take when content fails the contextual grounding
     evaluation. Supported values include:
@@ -31950,7 +32514,7 @@ class GuardrailPiiEntityType(UnknownEnumMixin, StrEnum):
 class GuardrailPiiEntityConfig:
     """The PII entity to configure for the guardrail."""
 
-    type: GuardrailPiiEntityType
+    type: str
     """
     Configure guardrail type when the PII entity is detected.
 
@@ -32169,10 +32733,10 @@ class GuardrailPiiEntityConfig:
         number, booking ID etc..
     """
 
-    action: GuardrailSensitiveInformationAction
+    action: str
     """Configure guardrail action when the PII entity is detected."""
 
-    input_action: GuardrailSensitiveInformationAction | None = None
+    input_action: str | None = None
     """
     Specifies the action to take when harmful content is detected in the
     input. Supported values include:
@@ -32185,7 +32749,7 @@ class GuardrailPiiEntityConfig:
       response.
     """
 
-    output_action: GuardrailSensitiveInformationAction | None = None
+    output_action: str | None = None
     """
     Specifies the action to take when harmful content is detected in the
     output. Supported values include:
@@ -32342,7 +32906,7 @@ class GuardrailRegexConfig:
     pattern: str
     """The regular expression pattern to configure for the guardrail."""
 
-    action: GuardrailSensitiveInformationAction
+    action: str
     """
     The guardrail action to configure when matching regular expression is
     detected.
@@ -32354,7 +32918,7 @@ class GuardrailRegexConfig:
     guardrail.
     """
 
-    input_action: GuardrailSensitiveInformationAction | None = None
+    input_action: str | None = None
     """
     Specifies the action to take when harmful content is detected in the
     input. Supported values include:
@@ -32365,7 +32929,7 @@ class GuardrailRegexConfig:
       response.
     """
 
-    output_action: GuardrailSensitiveInformationAction | None = None
+    output_action: str | None = None
     """
     Specifies the action to take when harmful content is detected in the
     output. Supported values include:
@@ -32610,7 +33174,7 @@ class GuardrailTopicsTierConfig:
     your existing generative AI workflows.
     """
 
-    tier_name: GuardrailTopicsTierName = field(repr=False)
+    tier_name: str = field(repr=False)
     """
     The tier that your guardrail uses for denied topic filters. Valid values
     include:
@@ -32705,7 +33269,7 @@ class GuardrailTopicConfig:
     definition: str = field(repr=False)
     """A definition of the topic to deny."""
 
-    type: GuardrailTopicType
+    type: str
     """Specifies to deny the topic."""
 
     examples: list[str] | None = None
@@ -32714,7 +33278,7 @@ class GuardrailTopicConfig:
     categorized as belonging to the topic.
     """
 
-    input_action: GuardrailTopicAction | None = field(repr=False, default=None)
+    input_action: str | None = field(repr=False, default=None)
     """
     Specifies the action to take when harmful content is detected in the
     input. Supported values include:
@@ -32725,7 +33289,7 @@ class GuardrailTopicConfig:
       response.
     """
 
-    output_action: GuardrailTopicAction | None = field(repr=False, default=None)
+    output_action: str | None = field(repr=False, default=None)
     """
     Specifies the action to take when harmful content is detected in the
     output. Supported values include:
@@ -32956,10 +33520,10 @@ class GuardrailManagedWordsType(UnknownEnumMixin, StrEnum):
 class GuardrailManagedWordsConfig:
     """The managed word list to configure for the guardrail."""
 
-    type: GuardrailManagedWordsType
+    type: str
     """The managed word type to configure for the guardrail."""
 
-    input_action: GuardrailWordAction | None = field(repr=False, default=None)
+    input_action: str | None = field(repr=False, default=None)
     """
     Specifies the action to take when harmful content is detected in the
     input. Supported values include:
@@ -32970,7 +33534,7 @@ class GuardrailManagedWordsConfig:
       response.
     """
 
-    output_action: GuardrailWordAction | None = field(repr=False, default=None)
+    output_action: str | None = field(repr=False, default=None)
     """
     Specifies the action to take when harmful content is detected in the
     output. Supported values include:
@@ -33116,7 +33680,7 @@ class GuardrailWordConfig:
     text: str
     """Text of the word configured for the guardrail to block."""
 
-    input_action: GuardrailWordAction | None = field(repr=False, default=None)
+    input_action: str | None = field(repr=False, default=None)
     """
     Specifies the action to take when harmful content is detected in the
     input. Supported values include:
@@ -33127,7 +33691,7 @@ class GuardrailWordConfig:
       response.
     """
 
-    output_action: GuardrailWordAction | None = field(repr=False, default=None)
+    output_action: str | None = field(repr=False, default=None)
     """
     Specifies the action to take when harmful content is detected in the
     output. Supported values include:
@@ -33587,6 +34151,16 @@ class CreateGuardrailOutput:
     created_at: datetime
     """The time at which the guardrail was created."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_GUARDRAIL_OUTPUT, self)
 
@@ -33782,6 +34356,16 @@ class CreateGuardrailVersionOutput:
     version: str
     """The number of the version of the guardrail."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_GUARDRAIL_VERSION_OUTPUT, self)
 
@@ -33924,6 +34508,16 @@ class DeleteGuardrailInput:
 @dataclass(kw_only=True)
 class DeleteGuardrailOutput:
     """Dataclass for DeleteGuardrailOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_GUARDRAIL_OUTPUT, self)
@@ -34168,10 +34762,10 @@ class GuardrailContentFilter:
       body](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax)
     """
 
-    type: GuardrailContentFilterType
+    type: str
     """The harmful category that the content filter is applied to."""
 
-    input_strength: GuardrailFilterStrength
+    input_strength: str
     """
     The strength of the content filter to apply to prompts. As you increase
     the filter strength, the likelihood of filtering harmful content
@@ -34179,7 +34773,7 @@ class GuardrailContentFilter:
     application reduces.
     """
 
-    output_strength: GuardrailFilterStrength
+    output_strength: str
     """
     The strength of the content filter to apply to model responses. As you
     increase the filter strength, the likelihood of filtering harmful
@@ -34187,13 +34781,13 @@ class GuardrailContentFilter:
     application reduces.
     """
 
-    input_modalities: list[GuardrailModality] | None = None
+    input_modalities: list[str] | None = None
     """The input modalities selected for the guardrail content filter."""
 
-    output_modalities: list[GuardrailModality] | None = None
+    output_modalities: list[str] | None = None
     """The output modalities selected for the guardrail content filter."""
 
-    input_action: GuardrailContentFilterAction | None = field(repr=False, default=None)
+    input_action: str | None = field(repr=False, default=None)
     """
     The action to take when harmful content is detected in the input.
     Supported values include:
@@ -34204,7 +34798,7 @@ class GuardrailContentFilter:
       response.
     """
 
-    output_action: GuardrailContentFilterAction | None = field(repr=False, default=None)
+    output_action: str | None = field(repr=False, default=None)
     """
     The action to take when harmful content is detected in the output.
     Supported values include:
@@ -34387,7 +34981,7 @@ def _deserialize_guardrail_content_filters(
 class GuardrailContentFiltersTier:
     """The tier that your guardrail uses for content filters."""
 
-    tier_name: GuardrailContentFiltersTierName = field(repr=False)
+    tier_name: str = field(repr=False)
     """
     The tier that your guardrail uses for content filters. Valid values
     include:
@@ -34502,13 +35096,13 @@ class GuardrailContentPolicy:
 class GuardrailContextualGroundingFilter:
     """The details for the guardrails contextual grounding filter."""
 
-    type: GuardrailContextualGroundingFilterType
+    type: str
     """The filter type details for the guardrails contextual grounding filter."""
 
     threshold: float
     """The threshold details for the guardrails contextual grounding filter."""
 
-    action: GuardrailContextualGroundingAction | None = field(repr=False, default=None)
+    action: str | None = field(repr=False, default=None)
     """
     The action to take when content fails the contextual grounding
     evaluation. Supported values include:
@@ -34780,13 +35374,13 @@ def _deserialize_guardrail_failure_recommendations(
 class GuardrailPiiEntity:
     """The PII entity configured for the guardrail."""
 
-    type: GuardrailPiiEntityType
+    type: str
     """The type of PII entity. For example, Social Security Number."""
 
-    action: GuardrailSensitiveInformationAction
+    action: str
     """The configured guardrail action when PII entity is detected."""
 
-    input_action: GuardrailSensitiveInformationAction | None = None
+    input_action: str | None = None
     """
     The action to take when harmful content is detected in the input.
     Supported values include:
@@ -34799,7 +35393,7 @@ class GuardrailPiiEntity:
       response.
     """
 
-    output_action: GuardrailSensitiveInformationAction | None = None
+    output_action: str | None = None
     """
     The action to take when harmful content is detected in the output.
     Supported values include:
@@ -34945,13 +35539,13 @@ class GuardrailRegex:
     pattern: str
     """The pattern of the regular expression configured for the guardrail."""
 
-    action: GuardrailSensitiveInformationAction
+    action: str
     """The action taken when a match to the regular expression is detected."""
 
     description: str | None = None
     """The description of the regular expression for the guardrail."""
 
-    input_action: GuardrailSensitiveInformationAction | None = None
+    input_action: str | None = None
     """
     The action to take when harmful content is detected in the input.
     Supported values include:
@@ -34962,7 +35556,7 @@ class GuardrailRegex:
       response.
     """
 
-    output_action: GuardrailSensitiveInformationAction | None = None
+    output_action: str | None = None
     """
     The action to take when harmful content is detected in the output.
     Supported values include:
@@ -35214,7 +35808,7 @@ def _deserialize_guardrail_status_reasons(
 class GuardrailTopicsTier:
     """The tier that your guardrail uses for denied topic filters."""
 
-    tier_name: GuardrailTopicsTierName = field(repr=False)
+    tier_name: str = field(repr=False)
     """
     The tier that your guardrail uses for denied topic filters. Valid values
     include:
@@ -35285,10 +35879,10 @@ class GuardrailTopic:
     categorized as belonging to the topic.
     """
 
-    type: GuardrailTopicType | None = None
+    type: str | None = None
     """Specifies to deny the topic."""
 
-    input_action: GuardrailTopicAction | None = field(repr=False, default=None)
+    input_action: str | None = field(repr=False, default=None)
     """
     The action to take when harmful content is detected in the input.
     Supported values include:
@@ -35299,7 +35893,7 @@ class GuardrailTopic:
       response.
     """
 
-    output_action: GuardrailTopicAction | None = field(repr=False, default=None)
+    output_action: str | None = field(repr=False, default=None)
     """
     The action to take when harmful content is detected in the output.
     Supported values include:
@@ -35510,13 +36104,13 @@ class GuardrailManagedWords:
     list of words that are pre-defined and managed by guardrails only.)
     """
 
-    type: GuardrailManagedWordsType
+    type: str
     """
     ManagedWords$type The managed word type that was configured for the
     guardrail. (For now, we only offer profanity word list)
     """
 
-    input_action: GuardrailWordAction | None = field(repr=False, default=None)
+    input_action: str | None = field(repr=False, default=None)
     """
     The action to take when harmful content is detected in the input.
     Supported values include:
@@ -35527,7 +36121,7 @@ class GuardrailManagedWords:
       response.
     """
 
-    output_action: GuardrailWordAction | None = field(repr=False, default=None)
+    output_action: str | None = field(repr=False, default=None)
     """
     The action to take when harmful content is detected in the output.
     Supported values include:
@@ -35663,7 +36257,7 @@ class GuardrailWord:
     text: str
     """Text of the word configured for the guardrail to block."""
 
-    input_action: GuardrailWordAction | None = field(repr=False, default=None)
+    input_action: str | None = field(repr=False, default=None)
     """
     The action to take when harmful content is detected in the input.
     Supported values include:
@@ -35674,7 +36268,7 @@ class GuardrailWord:
       response.
     """
 
-    output_action: GuardrailWordAction | None = field(repr=False, default=None)
+    output_action: str | None = field(repr=False, default=None)
     """
     The action to take when harmful content is detected in the output.
     Supported values include:
@@ -35865,7 +36459,7 @@ class GetGuardrailOutput:
     version: str
     """The version of the guardrail."""
 
-    status: GuardrailStatus
+    status: str
     """The status of the guardrail."""
 
     created_at: datetime
@@ -35925,6 +36519,16 @@ class GetGuardrailOutput:
 
     kms_key_arn: str | None = None
     """The ARN of the KMS key that encrypts the guardrail."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_GUARDRAIL_OUTPUT, self)
@@ -36276,7 +36880,7 @@ class GuardrailSummary:
     arn: str
     """The ARN of the guardrail."""
 
-    status: GuardrailStatus
+    status: str
     """The status of the guardrail."""
 
     name: str = field(repr=False)
@@ -36444,6 +37048,16 @@ class ListGuardrailsOutput:
     If there are more results than were returned in the response, the
     response returns a `nextToken` that you can send in another
     `ListGuardrails` request to see the next batch of results.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -36771,6 +37385,16 @@ class UpdateGuardrailOutput:
     updated_at: datetime
     """The date and time at which the guardrail was updated."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_GUARDRAIL_OUTPUT, self)
 
@@ -37095,10 +37719,20 @@ class CreateInferenceProfileOutput:
     inference_profile_arn: str
     """The ARN of the inference profile that you created."""
 
-    status: InferenceProfileStatus | None = None
+    status: str | None = None
     """
     The status of the inference profile. `ACTIVE` means that the inference
     profile is ready to be used.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -37243,6 +37877,16 @@ class DeleteInferenceProfileInput:
 @dataclass(kw_only=True)
 class DeleteInferenceProfileOutput:
     """Dataclass for DeleteInferenceProfileOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_INFERENCE_PROFILE_OUTPUT, self)
@@ -37435,13 +38079,13 @@ class GetInferenceProfileOutput:
     inference_profile_id: str
     """The unique identifier of the inference profile."""
 
-    status: InferenceProfileStatus
+    status: str
     """
     The status of the inference profile. `ACTIVE` means that the inference
     profile is ready to be used.
     """
 
-    type: InferenceProfileType
+    type: str
     """
     The type of the inference profile. The following types are possible:
 
@@ -37463,6 +38107,16 @@ class GetInferenceProfileOutput:
 
     updated_at: datetime | None = None
     """The time at which the inference profile was last updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_INFERENCE_PROFILE_OUTPUT, self)
@@ -37650,7 +38304,7 @@ class ListInferenceProfilesInput:
     field in the response in this field to return the next batch of results.
     """
 
-    type_equals: InferenceProfileType | None = None
+    type_equals: str | None = None
     """
     Filters for inference profiles that match the type you specify.
 
@@ -37738,13 +38392,13 @@ class InferenceProfileSummary:
     inference_profile_id: str
     """The unique identifier of the inference profile."""
 
-    status: InferenceProfileStatus
+    status: str
     """
     The status of the inference profile. `ACTIVE` means that the inference
     profile is ready to be used.
     """
 
-    type: InferenceProfileType
+    type: str
     """
     The type of the inference profile. The following types are possible:
 
@@ -37928,6 +38582,16 @@ class ListInferenceProfilesOutput:
     the `nextToken` field to return the next batch of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_INFERENCE_PROFILES_OUTPUT, self)
 
@@ -38047,6 +38711,16 @@ class DeleteModelInvocationLoggingConfigurationInput:
 @dataclass(kw_only=True)
 class DeleteModelInvocationLoggingConfigurationOutput:
     """Dataclass for DeleteModelInvocationLoggingConfigurationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -38375,6 +39049,16 @@ class GetModelInvocationLoggingConfigurationOutput:
     logging_config: LoggingConfig | None = None
     """The current configuration values."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_GET_MODEL_INVOCATION_LOGGING_CONFIGURATION_OUTPUT, self
@@ -38487,6 +39171,16 @@ class PutModelInvocationLoggingConfigurationInput:
 @dataclass(kw_only=True)
 class PutModelInvocationLoggingConfigurationOutput:
     """Dataclass for PutModelInvocationLoggingConfigurationOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -38666,6 +39360,16 @@ class CreateModelCopyJobOutput:
     job_arn: str
     """The Amazon Resource Name (ARN) of the model copy job."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_MODEL_COPY_JOB_OUTPUT, self)
 
@@ -38784,7 +39488,7 @@ class GetModelCopyJobOutput:
     job_arn: str
     """The Amazon Resource Name (ARN) of the model copy job."""
 
-    status: ModelCopyJobStatus
+    status: str
     """The status of the model copy job."""
 
     creation_time: datetime
@@ -38819,6 +39523,16 @@ class GetModelCopyJobOutput:
 
     source_model_name: str | None = None
     """The name of the original model being copied."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MODEL_COPY_JOB_OUTPUT, self)
@@ -39010,7 +39724,7 @@ class ListModelCopyJobsInput:
     creation_time_before: datetime | None = None
     """Filters for model copy jobs created before the specified time."""
 
-    status_equals: ModelCopyJobStatus | None = None
+    status_equals: str | None = None
     """
     Filters for model copy jobs whose status matches the value that you
     specify.
@@ -39049,10 +39763,10 @@ class ListModelCopyJobsInput:
     field in the response in this field to return the next batch of results.
     """
 
-    sort_by: SortJobsBy | None = None
+    sort_by: str | None = None
     """The field to sort by in the returned list of model copy jobs."""
 
-    sort_order: SortOrder | None = None
+    sort_order: str | None = None
     """Specifies whether to sort the results in ascending or descending order."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -39209,7 +39923,7 @@ class ModelCopyJobSummary:
     job_arn: str
     """The Amazon Resoource Name (ARN) of the model copy job."""
 
-    status: ModelCopyJobStatus
+    status: str
     """The status of the model copy job."""
 
     creation_time: datetime
@@ -39426,6 +40140,16 @@ class ListModelCopyJobsOutput:
 
     model_copy_job_summaries: list[ModelCopyJobSummary] | None = None
     """A list of information about each model copy job."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_MODEL_COPY_JOBS_OUTPUT, self)
@@ -39689,6 +40413,16 @@ class CreateModelImportJobOutput:
     job_arn: str
     """The Amazon Resource Name (ARN) of the model import job."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_MODEL_IMPORT_JOB_OUTPUT, self)
 
@@ -39810,6 +40544,16 @@ class DeleteImportedModelInput:
 @dataclass(kw_only=True)
 class DeleteImportedModelOutput:
     """Dataclass for DeleteImportedModelOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_IMPORTED_MODEL_OUTPUT, self)
@@ -40016,6 +40760,16 @@ class GetImportedModelOutput:
     """
     Information about the hardware utilization for a single copy of the
     model.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -40245,7 +40999,7 @@ class GetModelImportJobOutput:
     model_data_source: ModelDataSource | None = None
     """The data source for the imported model."""
 
-    status: ModelImportJobStatus | None = None
+    status: str | None = None
     """
     The status of the job. A successful job transitions from in-progress to
     completed when the imported model is ready to use. If the job failed,
@@ -40269,6 +41023,16 @@ class GetModelImportJobOutput:
 
     imported_model_kms_key_arn: str | None = None
     """The imported model is encrypted at rest using this key."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MODEL_IMPORT_JOB_OUTPUT, self)
@@ -40496,10 +41260,10 @@ class ListImportedModelsInput:
     field in the response in this field to return the next batch of results.
     """
 
-    sort_by: SortModelsBy | None = None
+    sort_by: str | None = None
     """The field to sort by in the returned list of imported models."""
 
-    sort_order: SortOrder | None = None
+    sort_order: str | None = None
     """Specifies whetehr to sort the results in ascending or descending order."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -40732,6 +41496,16 @@ class ListImportedModelsOutput:
     model_summaries: list[ImportedModelSummary] | None = None
     """Model summaries."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_IMPORTED_MODELS_OUTPUT, self)
 
@@ -40824,7 +41598,7 @@ class ListModelImportJobsInput:
     creation_time_before: datetime | None = None
     """Return import jobs that were created before the specified time."""
 
-    status_equals: ModelImportJobStatus | None = None
+    status_equals: str | None = None
     """Return imported jobs with the specified status."""
 
     name_contains: str | None = None
@@ -40845,10 +41619,10 @@ class ListModelImportJobsInput:
     field in the response in this field to return the next batch of results.
     """
 
-    sort_by: SortJobsBy | None = None
+    sort_by: str | None = None
     """The field to sort by in the returned list of imported jobs."""
 
-    sort_order: SortOrder | None = None
+    sort_order: str | None = None
     """Specifies whether to sort the results in ascending or descending order."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -40981,7 +41755,7 @@ class ModelImportJobSummary:
     job_name: str
     """The name of the import job."""
 
-    status: ModelImportJobStatus
+    status: str
     """The status of the imported job."""
 
     creation_time: datetime
@@ -41144,6 +41918,16 @@ class ListModelImportJobsOutput:
     model_import_job_summaries: list[ModelImportJobSummary] | None = None
     """Import job summaries."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_MODEL_IMPORT_JOBS_OUTPUT, self)
 
@@ -41239,7 +42023,7 @@ class ModelInvocationJobS3InputDataConfig:
     s3_uri: str
     """The S3 location of the input data."""
 
-    s3_input_format: S3InputFormat | None = None
+    s3_input_format: str | None = None
     """The format of the input data."""
 
     s3_bucket_owner: str | None = None
@@ -41650,7 +42434,7 @@ class CreateModelInvocationJobInput:
     resources](https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html).
     """
 
-    model_invocation_type: ModelInvocationType = ModelInvocationType("InvokeModel")
+    model_invocation_type: str = ModelInvocationType("InvokeModel")
     """The invocation endpoint for ModelInvocationJob"""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -41805,6 +42589,16 @@ class CreateModelInvocationJobOutput:
 
     job_arn: str
     """The Amazon Resource Name (ARN) of the batch inference job."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_MODEL_INVOCATION_JOB_OUTPUT, self)
@@ -41975,7 +42769,7 @@ class GetModelInvocationJobOutput:
     idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
     """
 
-    status: ModelInvocationJobStatus | None = None
+    status: str | None = None
     """
     The status of the batch inference job.
 
@@ -42051,7 +42845,7 @@ class GetModelInvocationJobOutput:
     job_expiration_time: datetime | None = None
     """The time at which the batch inference job times or timed out."""
 
-    model_invocation_type: ModelInvocationType | None = None
+    model_invocation_type: str | None = None
     """The invocation endpoint for ModelInvocationJob"""
 
     total_record_count: int | None = None
@@ -42071,6 +42865,16 @@ class GetModelInvocationJobOutput:
 
     error_record_count: int | None = None
     """The number of records that failed to process in the batch inference job."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MODEL_INVOCATION_JOB_OUTPUT, self)
@@ -42389,7 +43193,7 @@ class ListModelInvocationJobsInput:
     before the time you specify.
     """
 
-    status_equals: ModelInvocationJobStatus | None = None
+    status_equals: str | None = None
     """
     Specify a status to filter for batch inference jobs whose statuses match
     the string you specify.
@@ -42461,10 +43265,10 @@ class ListModelInvocationJobsInput:
     of results, send the `nextToken` value in another request.
     """
 
-    sort_by: SortJobsBy | None = None
+    sort_by: str | None = None
     """An attribute by which to sort the results."""
 
-    sort_order: SortOrder | None = None
+    sort_order: str | None = None
     """Specifies whether to sort the results by ascending or descending order."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -42631,7 +43435,7 @@ class ModelInvocationJobSummary:
     idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
     """
 
-    status: ModelInvocationJobStatus | None = None
+    status: str | None = None
     """
     The status of the batch inference job.
 
@@ -42710,7 +43514,7 @@ class ModelInvocationJobSummary:
     job_expiration_time: datetime | None = None
     """The time at which the batch inference job times or timed out."""
 
-    model_invocation_type: ModelInvocationType | None = None
+    model_invocation_type: str | None = None
     """The invocation endpoint for ModelInvocationJob"""
 
     total_record_count: int | None = None
@@ -43028,6 +43832,16 @@ class ListModelInvocationJobsOutput:
     inference job.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_MODEL_INVOCATION_JOBS_OUTPUT, self)
 
@@ -43157,6 +43971,16 @@ class StopModelInvocationJobInput:
 class StopModelInvocationJobOutput:
     """Dataclass for StopModelInvocationJobOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_STOP_MODEL_INVOCATION_JOB_OUTPUT, self)
 
@@ -43265,7 +44089,7 @@ class ModelCustomization(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_model_customization_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[ModelCustomization]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -43275,8 +44099,8 @@ def _serialize_model_customization_list(
 
 def _deserialize_model_customization_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[ModelCustomization]:
-    result: list[ModelCustomization] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -43296,7 +44120,7 @@ class InferenceType(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_inference_type_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[InferenceType]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -43306,8 +44130,8 @@ def _serialize_inference_type_list(
 
 def _deserialize_inference_type_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[InferenceType]:
-    result: list[InferenceType] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -43328,7 +44152,7 @@ class ModelModality(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_model_modality_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[ModelModality]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -43338,8 +44162,8 @@ def _serialize_model_modality_list(
 
 def _deserialize_model_modality_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[ModelModality]:
-    result: list[ModelModality] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -43362,7 +44186,7 @@ class FoundationModelLifecycleStatus(UnknownEnumMixin, StrEnum):
 class FoundationModelLifecycle:
     """Details about whether a model version is available or deprecated."""
 
-    status: FoundationModelLifecycleStatus
+    status: str
     """
     Specifies whether a model version is available (`ACTIVE`) or deprecated
     (`LEGACY`.
@@ -43482,19 +44306,19 @@ class FoundationModelDetails:
     provider_name: str | None = None
     """The model's provider name."""
 
-    input_modalities: list[ModelModality] | None = None
+    input_modalities: list[str] | None = None
     """The input modalities that the model supports."""
 
-    output_modalities: list[ModelModality] | None = None
+    output_modalities: list[str] | None = None
     """The output modalities that the model supports."""
 
     response_streaming_supported: bool | None = None
     """Indicates whether the model supports streaming."""
 
-    customizations_supported: list[ModelCustomization] | None = None
+    customizations_supported: list[str] | None = None
     """The customization that the model supports."""
 
-    inference_types_supported: list[InferenceType] | None = None
+    inference_types_supported: list[str] | None = None
     """The inference types that the model supports."""
 
     model_lifecycle: FoundationModelLifecycle | None = None
@@ -43652,6 +44476,16 @@ class GetFoundationModelOutput:
     model_details: FoundationModelDetails | None = None
     """Information about the foundation model."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_FOUNDATION_MODEL_OUTPUT, self)
 
@@ -43726,7 +44560,7 @@ class ListFoundationModelsInput:
     by_provider: str | None = None
     """Return models belonging to the model provider that you specify."""
 
-    by_customization_type: ModelCustomization | None = None
+    by_customization_type: str | None = None
     """
     Return models that support the customization type that you specify. For
     more information, see [Custom
@@ -43735,10 +44569,10 @@ class ListFoundationModelsInput:
     Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
     """
 
-    by_output_modality: ModelModality | None = None
+    by_output_modality: str | None = None
     """Return models that support the output modality that you specify."""
 
-    by_inference_type: InferenceType | None = None
+    by_inference_type: str | None = None
     """
     Return models that support the inference type that you specify. For more
     information, see [Provisioned
@@ -43842,19 +44676,19 @@ class FoundationModelSummary:
     provider_name: str | None = None
     """The model's provider name."""
 
-    input_modalities: list[ModelModality] | None = None
+    input_modalities: list[str] | None = None
     """The input modalities that the model supports."""
 
-    output_modalities: list[ModelModality] | None = None
+    output_modalities: list[str] | None = None
     """The output modalities that the model supports."""
 
     response_streaming_supported: bool | None = None
     """Indicates whether the model supports streaming."""
 
-    customizations_supported: list[ModelCustomization] | None = None
+    customizations_supported: list[str] | None = None
     """Whether the model supports fine-tuning or continual pre-training."""
 
-    inference_types_supported: list[InferenceType] | None = None
+    inference_types_supported: list[str] | None = None
     """The inference types that the model supports."""
 
     model_lifecycle: FoundationModelLifecycle | None = None
@@ -44036,6 +44870,16 @@ class ListFoundationModelsOutput:
 
     model_summaries: list[FoundationModelSummary] | None = None
     """A list of Amazon Bedrock foundation models."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_FOUNDATION_MODELS_OUTPUT, self)
@@ -44369,6 +45213,16 @@ class CreatePromptRouterOutput:
     router.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_PROMPT_ROUTER_OUTPUT, self)
 
@@ -44488,6 +45342,16 @@ class DeletePromptRouterInput:
 @dataclass(kw_only=True)
 class DeletePromptRouterOutput:
     """Dataclass for DeletePromptRouterOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_PROMPT_ROUTER_OUTPUT, self)
@@ -44616,10 +45480,10 @@ class GetPromptRouterOutput:
     fallback_model: PromptRouterTargetModel
     """The router's fallback model."""
 
-    status: PromptRouterStatus
+    status: str
     """The router's status."""
 
-    type: PromptRouterType
+    type: str
     """The router's type."""
 
     description: str | None = field(repr=False, default=None)
@@ -44630,6 +45494,16 @@ class GetPromptRouterOutput:
 
     updated_at: datetime | None = None
     """When the router was updated."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_PROMPT_ROUTER_OUTPUT, self)
@@ -44804,7 +45678,7 @@ class ListPromptRoutersInput:
     next page of results.
     """
 
-    type: PromptRouterType = PromptRouterType("default")
+    type: str = PromptRouterType("default")
     """The type of the prompt routers, such as whether it's default or custom."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -44880,10 +45754,10 @@ class PromptRouterSummary:
     fallback_model: PromptRouterTargetModel
     """The router's fallback model."""
 
-    status: PromptRouterStatus
+    status: str
     """The router's status."""
 
-    type: PromptRouterType
+    type: str
     """The summary's type."""
 
     description: str | None = field(repr=False, default=None)
@@ -45054,6 +45928,16 @@ class ListPromptRoutersOutput:
     next page of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_PROMPT_ROUTERS_OUTPUT, self)
 
@@ -45186,7 +46070,7 @@ class CreateProvisionedModelThroughputInput:
     Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
     """
 
-    commitment_duration: CommitmentDuration | None = None
+    commitment_duration: str | None = None
     """
     The commitment duration requested for the Provisioned Throughput.
     Billing occurs hourly and is discounted for longer commitment terms. To
@@ -45320,6 +46204,16 @@ class CreateProvisionedModelThroughputOutput:
     provisioned_model_arn: str
     """The Amazon Resource Name (ARN) for this Provisioned Throughput."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_CREATE_PROVISIONED_MODEL_THROUGHPUT_OUTPUT, self
@@ -45450,6 +46344,16 @@ class DeleteProvisionedModelThroughputInput:
 @dataclass(kw_only=True)
 class DeleteProvisionedModelThroughputOutput:
     """Dataclass for DeleteProvisionedModelThroughputOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -45606,7 +46510,7 @@ class GetProvisionedModelThroughputOutput:
     model for which the Provisioned Throughput was created was customized.
     """
 
-    status: ProvisionedModelStatus
+    status: str
     """The status of the Provisioned Throughput."""
 
     creation_time: datetime
@@ -45624,13 +46528,23 @@ class GetProvisionedModelThroughputOutput:
     updating, or deletion of the Provisioned Throughput.
     """
 
-    commitment_duration: CommitmentDuration | None = None
+    commitment_duration: str | None = None
     """Commitment duration of the Provisioned Throughput."""
 
     commitment_expiration_time: datetime | None = None
     """
     The timestamp for when the commitment term for the Provisioned
     Throughput expires.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -45898,7 +46812,7 @@ class ListProvisionedModelThroughputsInput:
     specified time.
     """
 
-    status_equals: ProvisionedModelStatus | None = None
+    status_equals: str | None = None
     """
     A filter that returns Provisioned Throughputs if their statuses matches
     the value that you specify.
@@ -45931,10 +46845,10 @@ class ListProvisionedModelThroughputsInput:
     next batch of results, specify the `nextToken` value in this field.
     """
 
-    sort_by: SortByProvisionedModels | None = None
+    sort_by: str | None = None
     """The field by which to sort the returned list of Provisioned Throughputs."""
 
-    sort_order: SortOrder | None = None
+    sort_order: str | None = None
     """The sort order of the results."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -46139,7 +47053,7 @@ class ProvisionedModelSummary:
     Provisioned Throughput.
     """
 
-    status: ProvisionedModelStatus
+    status: str
     """The status of the Provisioned Throughput."""
 
     creation_time: datetime
@@ -46148,7 +47062,7 @@ class ProvisionedModelSummary:
     last_modified_time: datetime
     """The time that the Provisioned Throughput was last modified."""
 
-    commitment_duration: CommitmentDuration | None = None
+    commitment_duration: str | None = None
     """The duration for which the Provisioned Throughput was committed."""
 
     commitment_expiration_time: datetime | None = None
@@ -46361,6 +47275,16 @@ class ListProvisionedModelThroughputsOutput:
     response.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_PROVISIONED_MODEL_THROUGHPUTS_OUTPUT, self)
 
@@ -46547,6 +47471,16 @@ class UpdateProvisionedModelThroughputInput:
 class UpdateProvisionedModelThroughputOutput:
     """Dataclass for UpdateProvisionedModelThroughputOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_UPDATE_PROVISIONED_MODEL_THROUGHPUT_OUTPUT, self
@@ -46654,6 +47588,16 @@ class DeleteResourcePolicyInput:
 class DeleteResourcePolicyOutput:
     """Dataclass for DeleteResourcePolicyOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_RESOURCE_POLICY_OUTPUT, self)
 
@@ -46759,6 +47703,16 @@ class GetResourcePolicyOutput:
 
     resource_policy: str | None = None
     """The JSON string representing the Bedrock resource policy."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_RESOURCE_POLICY_OUTPUT, self)
@@ -46886,6 +47840,16 @@ class PutResourcePolicyOutput:
 
     resource_arn: str | None = None
     """The ARN of the Bedrock resource to which this resource policy applies."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_RESOURCE_POLICY_OUTPUT, self)
@@ -47018,6 +47982,16 @@ class CreateFoundationModelAgreementOutput:
     model_id: str
     """Model Id of the model for the access request."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_FOUNDATION_MODEL_AGREEMENT_OUTPUT, self)
 
@@ -47138,6 +48112,16 @@ class DeleteFoundationModelAgreementInput:
 @dataclass(kw_only=True)
 class DeleteFoundationModelAgreementOutput:
     """Dataclass for DeleteFoundationModelAgreementOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_FOUNDATION_MODEL_AGREEMENT_OUTPUT, self)
@@ -47269,14 +48253,24 @@ class GetFoundationModelAvailabilityOutput:
     agreement_availability: AgreementAvailability
     """Agreement availability."""
 
-    authorization_status: AuthorizationStatus
+    authorization_status: str
     """Authorization status."""
 
-    entitlement_availability: EntitlementAvailability
+    entitlement_availability: str
     """Entitlement availability."""
 
-    region_availability: RegionAvailability
+    region_availability: str
     """Region availability."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_FOUNDATION_MODEL_AVAILABILITY_OUTPUT, self)
@@ -47426,7 +48420,7 @@ class ListFoundationModelAgreementOffersInput:
     model_id: str | None = None
     """Model Id of the foundation model."""
 
-    offer_type: OfferType | None = None
+    offer_type: str | None = None
     """Type of offer associated with the model."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -47917,6 +48911,16 @@ class ListFoundationModelAgreementOffersOutput:
     offers: list[Offer]
     """List of the offers associated with the specified model."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_LIST_FOUNDATION_MODEL_AGREEMENT_OFFERS_OUTPUT, self
@@ -48054,6 +49058,16 @@ class ListTagsForResourceOutput:
     tags: list[Tag] | None = None
     """An array of the tags associated with this resource."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_TAGS_FOR_RESOURCE_OUTPUT, self)
 
@@ -48178,6 +49192,16 @@ class TagResourceInput:
 @dataclass(kw_only=True)
 class TagResourceOutput:
     """Dataclass for TagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TAG_RESOURCE_OUTPUT, self)
@@ -48322,6 +49346,16 @@ class UntagResourceInput:
 class UntagResourceOutput:
     """Dataclass for UntagResourceOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNTAG_RESOURCE_OUTPUT, self)
 
@@ -48412,7 +49446,7 @@ class CreateModelCustomizationJobInput:
     base_model_identifier: str | None = None
     """Name of the base model."""
 
-    customization_type: CustomizationType | None = None
+    customization_type: str | None = None
     """The customization type."""
 
     custom_model_kms_key_id: str | None = None
@@ -48680,6 +49714,16 @@ class CreateModelCustomizationJobOutput:
     job_arn: str
     """Amazon Resource Name (ARN) of the fine tuning job"""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_MODEL_CUSTOMIZATION_JOB_OUTPUT, self)
 
@@ -48825,7 +49869,7 @@ class DataProcessingDetails:
     sub-task of the job.
     """
 
-    status: JobStatusDetails | None = None
+    status: str | None = None
     """The status of the data processing sub-task of the job."""
 
     creation_time: datetime | None = None
@@ -48896,7 +49940,7 @@ class TrainingDetails:
     the job.
     """
 
-    status: JobStatusDetails | None = None
+    status: str | None = None
     """The status of the training sub-task of the job."""
 
     creation_time: datetime | None = None
@@ -48964,7 +50008,7 @@ class ValidationDetails:
     of the job.
     """
 
-    status: JobStatusDetails | None = None
+    status: str | None = None
     """The status of the validation sub-task of the job."""
 
     creation_time: datetime | None = None
@@ -49139,7 +50183,7 @@ class GetModelCustomizationJobOutput:
     client_request_token: str | None = None
     """The token that you specified in the `CreateCustomizationJob` request."""
 
-    status: ModelCustomizationJobStatus | None = None
+    status: str | None = None
     """
     The status of the job. A successful job transitions from in-progress to
     completed when the output model is ready to use. If the job failed, the
@@ -49168,7 +50212,7 @@ class GetModelCustomizationJobOutput:
     hyperparameters](https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html).
     """
 
-    customization_type: CustomizationType | None = None
+    customization_type: str | None = None
     """The type of model customization."""
 
     output_model_kms_key_arn: str | None = None
@@ -49188,6 +50232,16 @@ class GetModelCustomizationJobOutput:
 
     customization_config: CustomizationConfig | None = None
     """The customization configuration for the model customization job."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_MODEL_CUSTOMIZATION_JOB_OUTPUT, self)
@@ -49543,7 +50597,7 @@ class ListModelCustomizationJobsInput:
     creation_time_before: datetime | None = None
     """Return customization jobs created before the specified time."""
 
-    status_equals: FineTuningJobStatus | None = None
+    status_equals: str | None = None
     """Return customization jobs with the specified status."""
 
     name_contains: str | None = None
@@ -49567,10 +50621,10 @@ class ListModelCustomizationJobsInput:
     field in the response in this field to return the next batch of results.
     """
 
-    sort_by: SortJobsBy | None = None
+    sort_by: str | None = None
     """The field to sort by in the returned list of jobs."""
 
-    sort_order: SortOrder | None = None
+    sort_order: str | None = None
     """The sort order of the results."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -49721,7 +50775,7 @@ class ModelCustomizationJobSummary:
     job_name: str
     """Name of the customization job."""
 
-    status: ModelCustomizationJobStatus
+    status: str
     """Status of the customization job."""
 
     creation_time: datetime
@@ -49742,7 +50796,7 @@ class ModelCustomizationJobSummary:
     custom_model_name: str | None = None
     """Name of the custom model."""
 
-    customization_type: CustomizationType | None = None
+    customization_type: str | None = None
     """
     Specifies whether to carry out continued pre-training of a model or
     whether to fine-tune it. For more information, see [Custom
@@ -49941,6 +50995,16 @@ class ListModelCustomizationJobsOutput:
     model_customization_job_summaries: list[ModelCustomizationJobSummary] | None = None
     """Job summaries."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_MODEL_CUSTOMIZATION_JOBS_OUTPUT, self)
 
@@ -50073,6 +51137,16 @@ class StopModelCustomizationJobInput:
 @dataclass(kw_only=True)
 class StopModelCustomizationJobOutput:
     """Dataclass for StopModelCustomizationJobOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_STOP_MODEL_CUSTOMIZATION_JOB_OUTPUT, self)
@@ -50636,7 +51710,7 @@ class KnowledgeBaseVectorSearchConfiguration:
     number_of_results: int | None = None
     """The number of text chunks to retrieve; the number of results to return."""
 
-    override_search_type: SearchType | None = None
+    override_search_type: str | None = None
     """
     By default, Amazon Bedrock decides a search strategy for you. If you're
     using an Amazon OpenSearch Serverless vector store that contains a
@@ -51012,7 +52086,7 @@ class RetrieveAndGenerateConfiguration:
     response generation.
     """
 
-    type: RetrieveAndGenerateType
+    type: str
     """
     The type of resource that contains your data for retrieving information
     and generating responses.
@@ -51521,7 +52595,7 @@ class CreateEvaluationJobInput:
     job_tags: list[Tag] | None = None
     """Tags to attach to the model evaluation job."""
 
-    application_type: ApplicationType | None = None
+    application_type: str | None = None
     """
     Specifies whether the evaluation job is for evaluating a model or
     evaluating a knowledge base (retrieval and response generation).
@@ -51698,7 +52772,7 @@ class GetEvaluationJobOutput:
     job_name: str
     """The name for the evaluation job."""
 
-    status: EvaluationJobStatus
+    status: str
     """The current status of the evaluation job."""
 
     job_arn: str
@@ -51710,7 +52784,7 @@ class GetEvaluationJobOutput:
     evaluation job.
     """
 
-    job_type: EvaluationJobType
+    job_type: str
     """Specifies whether the evaluation job is automated or human-based."""
 
     evaluation_config: EvaluationConfig
@@ -51743,7 +52817,7 @@ class GetEvaluationJobOutput:
     specified when the evaluation job was created.
     """
 
-    application_type: ApplicationType | None = None
+    application_type: str | None = None
     """
     Specifies whether the evaluation job is for evaluating a model or
     evaluating a knowledge base (retrieval and response generation).
@@ -51754,6 +52828,16 @@ class GetEvaluationJobOutput:
 
     failure_messages: list[str] | None = None
     """A list of strings that specify why the evaluation job failed to create."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_EVALUATION_JOB_OUTPUT, self)

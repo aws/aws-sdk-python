@@ -1,0 +1,9 @@
+/* Custom breadcrumb styling */
+.breadcrumb {
+    font-size: 0.85em;
+    color: var(--md-default-fg-color--light);
+}
+
+p:has(span.breadcrumb) {
+    margin-top: 0;
+}

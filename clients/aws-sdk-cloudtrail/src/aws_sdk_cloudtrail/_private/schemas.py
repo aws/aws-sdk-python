@@ -9,15 +9,7 @@ from smithy_core.traits import Trait
 
 
 ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ErrorMessage"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 4, "max": 1000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value=".*"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#ErrorMessage"), shape_type=ShapeType.STRING
 )
 
 ACCESS_DENIED_EXCEPTION = Schema.collection(
@@ -51,15 +43,7 @@ ACCOUNT_HAS_ONGOING_IMPORT_EXCEPTION = Schema.collection(
 )
 
 ACCOUNT_ID = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#AccountId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 12, "max": 16}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\d+$"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#AccountId"), shape_type=ShapeType.STRING
 )
 
 ACCOUNT_NOT_FOUND_EXCEPTION = Schema.collection(
@@ -112,25 +96,11 @@ STRING = Schema(
 )
 
 TAG_KEY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#TagKey"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#TagKey"), shape_type=ShapeType.STRING
 )
 
 TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#TagValue"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#TagValue"), shape_type=ShapeType.STRING
 )
 
 TAG = Schema.collection(
@@ -147,12 +117,6 @@ TAG = Schema.collection(
 TAGS_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#TagsList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 200}),
-        )
-    ],
     members={"member": {"target": TAG}},
 )
 
@@ -162,8 +126,7 @@ ADD_TAGS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#AddTagsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ResourceId": {
@@ -183,8 +146,7 @@ ADD_TAGS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#AddTagsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -429,42 +391,21 @@ UNSUPPORTED_OPERATION_EXCEPTION = Schema.collection(
 )
 
 ADD_TAGS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#AddTags"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#AddTags"), shape_type=ShapeType.OPERATION
 )
 
 OPERATOR_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#OperatorValue"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^.+$"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#OperatorValue"), shape_type=ShapeType.STRING
 )
 
 OPERATOR = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#Operator"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1}))
-    ],
     members={"member": {"target": OPERATOR_VALUE}},
 )
 
 SELECTOR_FIELD = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#SelectorField"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[\\w|\\d|\\.|_]+$"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#SelectorField"), shape_type=ShapeType.STRING
 )
 
 ADVANCED_FIELD_SELECTOR = Schema.collection(
@@ -486,22 +427,11 @@ ADVANCED_FIELD_SELECTOR = Schema.collection(
 ADVANCED_FIELD_SELECTORS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#AdvancedFieldSelectors"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1}))
-    ],
     members={"member": {"target": ADVANCED_FIELD_SELECTOR}},
 )
 
 SELECTOR_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#SelectorName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value=".*"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#SelectorName"), shape_type=ShapeType.STRING
 )
 
 ADVANCED_EVENT_SELECTOR = Schema.collection(
@@ -524,48 +454,22 @@ ADVANCED_EVENT_SELECTORS = Schema.collection(
 EVENT_CATEGORY_AGGREGATION = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#EventCategoryAggregation"),
     shape_type=ShapeType.ENUM,
-    members={
-        "Data": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Data")],
-        }
-    },
+    members={"Data": {"target": UNIT}},
 )
 
 TEMPLATE = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#Template"),
     shape_type=ShapeType.ENUM,
     members={
-        "API_ACTIVITY": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="API_ACTIVITY")
-            ],
-        },
-        "RESOURCE_ACCESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RESOURCE_ACCESS")
-            ],
-        },
-        "USER_ACTIONS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="USER_ACTIONS")
-            ],
-        },
+        "API_ACTIVITY": {"target": UNIT},
+        "RESOURCE_ACCESS": {"target": UNIT},
+        "USER_ACTIONS": {"target": UNIT},
     },
 )
 
 TEMPLATES = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#Templates"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        )
-    ],
     members={"member": {"target": TEMPLATE}},
 )
 
@@ -586,12 +490,6 @@ AGGREGATION_CONFIGURATION = Schema.collection(
 AGGREGATION_CONFIGURATIONS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#AggregationConfigurations"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1}),
-        )
-    ],
     members={"member": {"target": AGGREGATION_CONFIGURATION}},
 )
 
@@ -599,30 +497,13 @@ BILLING_MODE = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#BillingMode"),
     shape_type=ShapeType.ENUM,
     members={
-        "EXTENDABLE_RETENTION_PRICING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="EXTENDABLE_RETENTION_PRICING",
-                )
-            ],
-        },
-        "FIXED_RETENTION_PRICING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="FIXED_RETENTION_PRICING"
-                )
-            ],
-        },
+        "EXTENDABLE_RETENTION_PRICING": {"target": UNIT},
+        "FIXED_RETENTION_PRICING": {"target": UNIT},
     },
 )
 
 BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Boolean"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
+    id=ShapeID("com.amazonaws.cloudtrail#Boolean"), shape_type=ShapeType.BOOLEAN
 )
 
 BYTE_BUFFER = Schema(
@@ -632,26 +513,9 @@ BYTE_BUFFER = Schema(
 EVENT_DATA_STORE_ARN = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreArn"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 256}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._/\\-:]+$"),
-    ],
 )
 
-UUID = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#UUID"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 36}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-f0-9\\-]+$"),
-    ],
-)
+UUID = Schema(id=ShapeID("com.amazonaws.cloudtrail#UUID"), shape_type=ShapeType.STRING)
 
 CANCEL_QUERY_INPUT = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#CancelQueryInput"),
@@ -659,23 +523,10 @@ CANCEL_QUERY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#CancelQueryRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "EventDataStore is no longer required by CancelQueryRequest"
-                        }
-                    ),
-                )
-            ],
-        },
+        "EventDataStore": {"target": EVENT_DATA_STORE_ARN},
         "QueryId": {
             "target": UUID,
             "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
@@ -688,34 +539,12 @@ QUERY_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#QueryStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "QUEUED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="QUEUED")],
-        },
-        "RUNNING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="RUNNING")],
-        },
-        "FINISHED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FINISHED")],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "CANCELLED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CANCELLED")
-            ],
-        },
-        "TIMED_OUT": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="TIMED_OUT")
-            ],
-        },
+        "QUEUED": {"target": UNIT},
+        "RUNNING": {"target": UNIT},
+        "FINISHED": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "CANCELLED": {"target": UNIT},
+        "TIMED_OUT": {"target": UNIT},
     },
 )
 
@@ -725,8 +554,7 @@ CANCEL_QUERY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#CancelQueryResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "QueryId": {
@@ -785,9 +613,7 @@ QUERY_ID_NOT_FOUND_EXCEPTION = Schema.collection(
 )
 
 CANCEL_QUERY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#CancelQuery"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#CancelQuery"), shape_type=ShapeType.OPERATION
 )
 
 CANNOT_DELEGATE_MANAGEMENT_ACCOUNT_EXCEPTION = Schema.collection(
@@ -806,27 +632,11 @@ CANNOT_DELEGATE_MANAGEMENT_ACCOUNT_EXCEPTION = Schema.collection(
 )
 
 CHANNEL_ARN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ChannelArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 256}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._/\\-:]+$"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#ChannelArn"), shape_type=ShapeType.STRING
 )
 
 CHANNEL_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ChannelName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._\\-]+$"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#ChannelName"), shape_type=ShapeType.STRING
 )
 
 CHANNEL = Schema.collection(
@@ -886,34 +696,13 @@ CHANNELS = Schema.collection(
 )
 
 LOCATION = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Location"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 1024}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._/\\-:*]+$"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#Location"), shape_type=ShapeType.STRING
 )
 
 DESTINATION_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#DestinationType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "EVENT_DATA_STORE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EVENT_DATA_STORE")
-            ],
-        },
-        "AWS_SERVICE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AWS_SERVICE")
-            ],
-        },
-    },
+    members={"EVENT_DATA_STORE": {"target": UNIT}, "AWS_SERVICE": {"target": UNIT}},
 )
 
 DESTINATION = Schema.collection(
@@ -933,25 +722,11 @@ DESTINATION = Schema.collection(
 DESTINATIONS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#Destinations"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 200}),
-        )
-    ],
     members={"member": {"target": DESTINATION}},
 )
 
 SOURCE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Source"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value=".*"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#Source"), shape_type=ShapeType.STRING
 )
 
 CREATE_CHANNEL_INPUT = Schema.collection(
@@ -960,8 +735,7 @@ CREATE_CHANNEL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#CreateChannelRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -986,8 +760,7 @@ CREATE_CHANNEL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#CreateChannelResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ChannelArn": {"target": CHANNEL_ARN},
@@ -1031,36 +804,18 @@ CREATE_CHANNEL = Schema(
 )
 
 DASHBOARD_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DashboardName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9_\\-]+$"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#DashboardName"), shape_type=ShapeType.STRING
 )
 
 REFRESH_SCHEDULE_FREQUENCY_UNIT = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#RefreshScheduleFrequencyUnit"),
     shape_type=ShapeType.ENUM,
-    members={
-        "HOURS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="HOURS")],
-        },
-        "DAYS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DAYS")],
-        },
-    },
+    members={"HOURS": {"target": UNIT}, "DAYS": {"target": UNIT}},
 )
 
 REFRESH_SCHEDULE_FREQUENCY_VALUE = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#RefreshScheduleFrequencyValue"),
     shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 REFRESH_SCHEDULE_FREQUENCY = Schema.collection(
@@ -1074,22 +829,11 @@ REFRESH_SCHEDULE_FREQUENCY = Schema.collection(
 REFRESH_SCHEDULE_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#RefreshScheduleStatus"),
     shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
-    },
+    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
 TIME_OF_DAY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#TimeOfDay"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#pattern"), value="^[0-9]{2}:[0-9]{2}$")],
+    id=ShapeID("com.amazonaws.cloudtrail#TimeOfDay"), shape_type=ShapeType.STRING
 )
 
 REFRESH_SCHEDULE = Schema.collection(
@@ -1104,67 +848,30 @@ REFRESH_SCHEDULE = Schema.collection(
 TERMINATION_PROTECTION_ENABLED = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#TerminationProtectionEnabled"),
     shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
 )
 
 QUERY_PARAMETER = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryParameter"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1024}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value=".*"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#QueryParameter"), shape_type=ShapeType.STRING
 )
 
 QUERY_PARAMETERS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#QueryParameters"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        )
-    ],
     members={"member": {"target": QUERY_PARAMETER}},
 )
 
 QUERY_STATEMENT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryStatement"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 10000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^(?s)"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#QueryStatement"), shape_type=ShapeType.STRING
 )
 
 VIEW_PROPERTIES_KEY = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ViewPropertiesKey"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._\\-]+$"),
-    ],
 )
 
 VIEW_PROPERTIES_VALUE = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ViewPropertiesValue"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._\\- ]+$"),
-    ],
 )
 
 VIEW_PROPERTIES_MAP = Schema.collection(
@@ -1203,8 +910,7 @@ CREATE_DASHBOARD_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#CreateDashboardRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -1219,38 +925,17 @@ CREATE_DASHBOARD_INPUT = Schema.collection(
 )
 
 DASHBOARD_ARN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DashboardArn"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._/\\-:]+$")],
+    id=ShapeID("com.amazonaws.cloudtrail#DashboardArn"), shape_type=ShapeType.STRING
 )
 
 DASHBOARD_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#DashboardType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "MANAGED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="MANAGED")],
-        },
-        "CUSTOM": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CUSTOM")],
-        },
-    },
+    members={"MANAGED": {"target": UNIT}, "CUSTOM": {"target": UNIT}},
 )
 
 QUERY_ALIAS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryAlias"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z][a-zA-Z0-9._\\-]*$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#QueryAlias"), shape_type=ShapeType.STRING
 )
 
 WIDGET = Schema.collection(
@@ -1275,8 +960,7 @@ CREATE_DASHBOARD_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#CreateDashboardResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "DashboardArn": {"target": DASHBOARD_ARN},
@@ -1337,7 +1021,6 @@ SERVICE_QUOTA_EXCEEDED_EXCEPTION = Schema.collection(
 CREATE_DASHBOARD = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#CreateDashboard"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION = Schema.collection(
@@ -1358,37 +1041,15 @@ CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION = Schema.collection(
 EVENT_DATA_STORE_KMS_KEY_ID = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreKmsKeyId"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 350}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._/\\-:]+$"),
-    ],
 )
 
 EVENT_DATA_STORE_NAME = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreName"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._\\-]+$"),
-    ],
 )
 
 RETENTION_PERIOD = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#RetentionPeriod"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 7, "max": 3653}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#RetentionPeriod"), shape_type=ShapeType.INTEGER
 )
 
 CREATE_EVENT_DATA_STORE_INPUT = Schema.collection(
@@ -1397,8 +1058,7 @@ CREATE_EVENT_DATA_STORE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#CreateEventDataStoreRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -1425,42 +1085,12 @@ EVENT_DATA_STORE_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "CREATED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATED")],
-        },
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "PENDING_DELETION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="PENDING_DELETION")
-            ],
-        },
-        "STARTING_INGESTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="STARTING_INGESTION"
-                )
-            ],
-        },
-        "STOPPING_INGESTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="STOPPING_INGESTION"
-                )
-            ],
-        },
-        "STOPPED_INGESTION": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="STOPPED_INGESTION")
-            ],
-        },
+        "CREATED": {"target": UNIT},
+        "ENABLED": {"target": UNIT},
+        "PENDING_DELETION": {"target": UNIT},
+        "STARTING_INGESTION": {"target": UNIT},
+        "STOPPING_INGESTION": {"target": UNIT},
+        "STOPPED_INGESTION": {"target": UNIT},
     },
 )
 
@@ -1470,8 +1100,7 @@ CREATE_EVENT_DATA_STORE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#CreateEventDataStoreResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
@@ -1682,8 +1311,7 @@ CREATE_TRAIL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#CreateTrailRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -1704,6 +1332,7 @@ CREATE_TRAIL_INPUT = Schema.collection(
         "KmsKeyId": {"target": STRING},
         "IsOrganizationTrail": {"target": BOOLEAN},
         "TagsList": {"target": TAGS_LIST},
+        "RecursiveLogging": {"target": BOOLEAN},
     },
 )
 
@@ -1713,17 +1342,13 @@ CREATE_TRAIL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#CreateTrailResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Name": {"target": STRING},
         "S3BucketName": {"target": STRING},
         "S3KeyPrefix": {"target": STRING},
-        "SnsTopicName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#deprecated"))],
-        },
+        "SnsTopicName": {"target": STRING},
         "SnsTopicARN": {"target": STRING},
         "IncludeGlobalServiceEvents": {"target": BOOLEAN},
         "IsMultiRegionTrail": {"target": BOOLEAN},
@@ -1733,6 +1358,7 @@ CREATE_TRAIL_OUTPUT = Schema.collection(
         "CloudWatchLogsRoleArn": {"target": STRING},
         "KmsKeyId": {"target": STRING},
         "IsOrganizationTrail": {"target": BOOLEAN},
+        "RecursiveLogging": {"target": BOOLEAN},
     },
 )
 
@@ -1859,7 +1485,6 @@ INVALID_SNS_TOPIC_NAME_EXCEPTION = Schema.collection(
 KMS_KEY_DISABLED_EXCEPTION = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#KmsKeyDisabledException"),
     traits=[
-        Trait.new(id=ShapeID("smithy.api#deprecated")),
         Trait.new(id=ShapeID("smithy.api#error"), value="client"),
         Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
         Trait.new(
@@ -1931,9 +1556,7 @@ TRAIL_NOT_PROVIDED_EXCEPTION = Schema.collection(
 )
 
 CREATE_TRAIL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateTrail"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#CreateTrail"), shape_type=ShapeType.OPERATION
 )
 
 DELETE_CHANNEL_INPUT = Schema.collection(
@@ -1942,8 +1565,7 @@ DELETE_CHANNEL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeleteChannelRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Channel": {
@@ -1959,8 +1581,7 @@ DELETE_CHANNEL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeleteChannelResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -1974,8 +1595,7 @@ DELETE_DASHBOARD_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeleteDashboardRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DashboardId": {
@@ -1991,15 +1611,13 @@ DELETE_DASHBOARD_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeleteDashboardResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
 DELETE_DASHBOARD = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#DeleteDashboard"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 DELETE_EVENT_DATA_STORE_INPUT = Schema.collection(
@@ -2008,8 +1626,7 @@ DELETE_EVENT_DATA_STORE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeleteEventDataStoreRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "EventDataStore": {
@@ -2025,8 +1642,7 @@ DELETE_EVENT_DATA_STORE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeleteEventDataStoreResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -2084,15 +1700,7 @@ DELETE_EVENT_DATA_STORE = Schema(
 )
 
 RESOURCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourceArn"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 256}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._/\\-:]+$"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#ResourceArn"), shape_type=ShapeType.STRING
 )
 
 DELETE_RESOURCE_POLICY_INPUT = Schema.collection(
@@ -2101,8 +1709,7 @@ DELETE_RESOURCE_POLICY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeleteResourcePolicyRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ResourceArn": {
@@ -2118,8 +1725,7 @@ DELETE_RESOURCE_POLICY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeleteResourcePolicyResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -2156,7 +1762,6 @@ RESOURCE_POLICY_NOT_FOUND_EXCEPTION = Schema.collection(
 DELETE_RESOURCE_POLICY = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#DeleteResourcePolicy"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 DELETE_TRAIL_INPUT = Schema.collection(
@@ -2165,8 +1770,7 @@ DELETE_TRAIL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeleteTrailRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -2182,8 +1786,7 @@ DELETE_TRAIL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeleteTrailResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -2216,9 +1819,7 @@ TRAIL_NOT_FOUND_EXCEPTION = Schema.collection(
 )
 
 DELETE_TRAIL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteTrail"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#DeleteTrail"), shape_type=ShapeType.OPERATION
 )
 
 DEREGISTER_ORGANIZATION_DELEGATED_ADMIN_INPUT = Schema.collection(
@@ -2227,8 +1828,7 @@ DEREGISTER_ORGANIZATION_DELEGATED_ADMIN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DelegatedAdminAccountId": {
@@ -2244,8 +1844,7 @@ DEREGISTER_ORGANIZATION_DELEGATED_ADMIN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -2267,19 +1866,10 @@ NOT_ORGANIZATION_MANAGEMENT_ACCOUNT_EXCEPTION = Schema.collection(
 DEREGISTER_ORGANIZATION_DELEGATED_ADMIN = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdmin"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 REFRESH_ID = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#RefreshId"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 10, "max": 20}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^\\d+$"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#RefreshId"), shape_type=ShapeType.STRING
 )
 
 DESCRIBE_QUERY_INPUT = Schema.collection(
@@ -2288,23 +1878,10 @@ DESCRIBE_QUERY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DescribeQueryRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "EventDataStore is no longer required by DescribeQueryRequest"
-                        }
-                    ),
-                )
-            ],
-        },
+        "EventDataStore": {"target": EVENT_DATA_STORE_ARN},
         "QueryId": {"target": UUID},
         "QueryAlias": {"target": QUERY_ALIAS},
         "RefreshId": {"target": REFRESH_ID},
@@ -2313,102 +1890,33 @@ DESCRIBE_QUERY_INPUT = Schema.collection(
 )
 
 DELIVERY_S3_URI = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DeliveryS3Uri"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 1024}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#DeliveryS3Uri"), shape_type=ShapeType.STRING
 )
 
 DELIVERY_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#DeliveryStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "SUCCESS": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUCCESS")],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "FAILED_SIGNING_FILE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="FAILED_SIGNING_FILE"
-                )
-            ],
-        },
-        "PENDING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="PENDING")],
-        },
-        "RESOURCE_NOT_FOUND": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="RESOURCE_NOT_FOUND"
-                )
-            ],
-        },
-        "ACCESS_DENIED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ACCESS_DENIED")
-            ],
-        },
-        "ACCESS_DENIED_SIGNING_FILE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"),
-                    value="ACCESS_DENIED_SIGNING_FILE",
-                )
-            ],
-        },
-        "CANCELLED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="CANCELLED")
-            ],
-        },
-        "UNKNOWN": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="UNKNOWN")],
-        },
+        "SUCCESS": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "FAILED_SIGNING_FILE": {"target": UNIT},
+        "PENDING": {"target": UNIT},
+        "RESOURCE_NOT_FOUND": {"target": UNIT},
+        "ACCESS_DENIED": {"target": UNIT},
+        "ACCESS_DENIED_SIGNING_FILE": {"target": UNIT},
+        "CANCELLED": {"target": UNIT},
+        "UNKNOWN": {"target": UNIT},
     },
 )
 
 PROMPT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Prompt"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 500}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[ -~\\n]*$"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#Prompt"), shape_type=ShapeType.STRING
 )
 
-LONG = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Long"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
-)
+LONG = Schema(id=ShapeID("com.amazonaws.cloudtrail#Long"), shape_type=ShapeType.LONG)
 
 INTEGER = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Integer"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
+    id=ShapeID("com.amazonaws.cloudtrail#Integer"), shape_type=ShapeType.INTEGER
 )
 
 QUERY_STATISTICS_FOR_DESCRIBE_QUERY = Schema.collection(
@@ -2428,8 +1936,7 @@ DESCRIBE_QUERY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DescribeQueryResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "QueryId": {"target": UUID},
@@ -2445,9 +1952,7 @@ DESCRIBE_QUERY_OUTPUT = Schema.collection(
 )
 
 DESCRIBE_QUERY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DescribeQuery"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#DescribeQuery"), shape_type=ShapeType.OPERATION
 )
 
 TRAIL_NAME_LIST = Schema.collection(
@@ -2462,8 +1967,7 @@ DESCRIBE_TRAILS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DescribeTrailsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "trailNameList": {"target": TRAIL_NAME_LIST},
@@ -2477,10 +1981,7 @@ TRAIL = Schema.collection(
         "Name": {"target": STRING},
         "S3BucketName": {"target": STRING},
         "S3KeyPrefix": {"target": STRING},
-        "SnsTopicName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#deprecated"))],
-        },
+        "SnsTopicName": {"target": STRING},
         "SnsTopicARN": {"target": STRING},
         "IncludeGlobalServiceEvents": {"target": BOOLEAN},
         "IsMultiRegionTrail": {"target": BOOLEAN},
@@ -2493,6 +1994,7 @@ TRAIL = Schema.collection(
         "HasCustomEventSelectors": {"target": BOOLEAN},
         "HasInsightSelectors": {"target": BOOLEAN},
         "IsOrganizationTrail": {"target": BOOLEAN},
+        "RecursiveLogging": {"target": BOOLEAN},
     },
 )
 
@@ -2508,8 +2010,7 @@ DESCRIBE_TRAILS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DescribeTrailsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"trailList": {"target": TRAIL_LIST}},
 )
@@ -2517,23 +2018,6 @@ DESCRIBE_TRAILS_OUTPUT = Schema.collection(
 DESCRIBE_TRAILS = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#DescribeTrails"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.test#smokeTests"),
-            value=(
-                MappingProxyType(
-                    {
-                        "id": "DescribeTrailsSuccess",
-                        "params": MappingProxyType({}),
-                        "vendorParams": MappingProxyType({"region": "us-west-2"}),
-                        "vendorParamsShape": "aws.test#AwsVendorParams",
-                        "expect": MappingProxyType({"success": MappingProxyType({})}),
-                    }
-                ),
-            ),
-        ),
-    ],
 )
 
 CONCURRENT_MODIFICATION_EXCEPTION = Schema.collection(
@@ -2557,8 +2041,7 @@ DISABLE_FEDERATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DisableFederationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "EventDataStore": {
@@ -2572,24 +2055,10 @@ FEDERATION_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#FederationStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "ENABLING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLING")],
-        },
-        "ENABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ENABLED")],
-        },
-        "DISABLING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLING")
-            ],
-        },
-        "DISABLED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DISABLED")],
-        },
+        "ENABLING": {"target": UNIT},
+        "ENABLED": {"target": UNIT},
+        "DISABLING": {"target": UNIT},
+        "DISABLED": {"target": UNIT},
     },
 )
 
@@ -2599,8 +2068,7 @@ DISABLE_FEDERATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#DisableFederationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
@@ -2616,15 +2084,6 @@ DISABLE_FEDERATION = Schema(
 FEDERATION_ROLE_ARN = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#FederationRoleArn"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 125}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._/\\-:@=\\+,\\.]+$"
-        ),
-    ],
 )
 
 ENABLE_FEDERATION_INPUT = Schema.collection(
@@ -2633,8 +2092,7 @@ ENABLE_FEDERATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#EnableFederationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "EventDataStore": {
@@ -2654,8 +2112,7 @@ ENABLE_FEDERATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#EnableFederationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
@@ -2672,12 +2129,6 @@ ENABLE_FEDERATION = Schema(
 EVENT_DATA_STORE_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1}),
-        )
-    ],
     members={"member": {"target": EVENT_DATA_STORE_ARN}},
 )
 
@@ -2687,8 +2138,7 @@ GENERATE_QUERY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GenerateQueryRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "EventDataStores": {
@@ -2708,8 +2158,7 @@ GENERATE_QUERY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GenerateQueryResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "QueryStatement": {"target": QUERY_STATEMENT},
@@ -2734,9 +2183,7 @@ GENERATE_RESPONSE_EXCEPTION = Schema.collection(
 )
 
 GENERATE_QUERY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GenerateQuery"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#GenerateQuery"), shape_type=ShapeType.OPERATION
 )
 
 GET_CHANNEL_INPUT = Schema.collection(
@@ -2745,8 +2192,7 @@ GET_CHANNEL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetChannelRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Channel": {
@@ -2781,8 +2227,7 @@ GET_CHANNEL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetChannelResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ChannelArn": {"target": CHANNEL_ARN},
@@ -2795,9 +2240,7 @@ GET_CHANNEL_OUTPUT = Schema.collection(
 )
 
 GET_CHANNEL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetChannel"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#GetChannel"), shape_type=ShapeType.OPERATION
 )
 
 GET_DASHBOARD_INPUT = Schema.collection(
@@ -2806,8 +2249,7 @@ GET_DASHBOARD_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetDashboardRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DashboardId": {
@@ -2821,26 +2263,11 @@ DASHBOARD_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#DashboardStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "CREATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATING")],
-        },
-        "CREATED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="CREATED")],
-        },
-        "UPDATING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="UPDATING")],
-        },
-        "UPDATED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="UPDATED")],
-        },
-        "DELETING": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="DELETING")],
-        },
+        "CREATING": {"target": UNIT},
+        "CREATED": {"target": UNIT},
+        "UPDATING": {"target": UNIT},
+        "UPDATED": {"target": UNIT},
+        "DELETING": {"target": UNIT},
     },
 )
 
@@ -2850,8 +2277,7 @@ GET_DASHBOARD_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetDashboardResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "DashboardArn": {"target": DASHBOARD_ARN},
@@ -2868,9 +2294,7 @@ GET_DASHBOARD_OUTPUT = Schema.collection(
 )
 
 GET_DASHBOARD = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetDashboard"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#GetDashboard"), shape_type=ShapeType.OPERATION
 )
 
 GET_EVENT_CONFIGURATION_INPUT = Schema.collection(
@@ -2879,8 +2303,7 @@ GET_EVENT_CONFIGURATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetEventConfigurationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={"TrailName": {"target": STRING}, "EventDataStore": {"target": STRING}},
 )
@@ -2888,43 +2311,18 @@ GET_EVENT_CONFIGURATION_INPUT = Schema.collection(
 OPERATOR_TARGET_LIST_MEMBER = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#OperatorTargetListMember"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        )
-    ],
 )
 
 OPERATOR_TARGET_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#OperatorTargetList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        )
-    ],
     members={"member": {"target": OPERATOR_TARGET_LIST_MEMBER}},
 )
 
 TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#Type"),
     shape_type=ShapeType.ENUM,
-    members={
-        "TagContext": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="TagContext")
-            ],
-        },
-        "RequestContext": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="RequestContext")
-            ],
-        },
-    },
+    members={"TagContext": {"target": UNIT}, "RequestContext": {"target": UNIT}},
 )
 
 CONTEXT_KEY_SELECTOR = Schema.collection(
@@ -2944,28 +2342,13 @@ CONTEXT_KEY_SELECTOR = Schema.collection(
 CONTEXT_KEY_SELECTORS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#ContextKeySelectors"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 2}),
-        )
-    ],
     members={"member": {"target": CONTEXT_KEY_SELECTOR}},
 )
 
 MAX_EVENT_SIZE = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#MaxEventSize"),
     shape_type=ShapeType.ENUM,
-    members={
-        "Standard": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Standard")],
-        },
-        "Large": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Large")],
-        },
-    },
+    members={"Standard": {"target": UNIT}, "Large": {"target": UNIT}},
 )
 
 GET_EVENT_CONFIGURATION_OUTPUT = Schema.collection(
@@ -2974,8 +2357,7 @@ GET_EVENT_CONFIGURATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetEventConfigurationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "TrailARN": {"target": STRING},
@@ -3004,7 +2386,6 @@ INVALID_EVENT_DATA_STORE_STATUS_EXCEPTION = Schema.collection(
 GET_EVENT_CONFIGURATION = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#GetEventConfiguration"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 GET_EVENT_DATA_STORE_INPUT = Schema.collection(
@@ -3013,8 +2394,7 @@ GET_EVENT_DATA_STORE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetEventDataStoreRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "EventDataStore": {
@@ -3025,33 +2405,11 @@ GET_EVENT_DATA_STORE_INPUT = Schema.collection(
 )
 
 PARTITION_KEY_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#PartitionKeyName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 255}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#PartitionKeyName"), shape_type=ShapeType.STRING
 )
 
 PARTITION_KEY_TYPE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#PartitionKeyType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 255}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$",
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#PartitionKeyType"), shape_type=ShapeType.STRING
 )
 
 PARTITION_KEY = Schema.collection(
@@ -3071,12 +2429,6 @@ PARTITION_KEY = Schema.collection(
 PARTITION_KEY_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#PartitionKeyList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 2}),
-        )
-    ],
     members={"member": {"target": PARTITION_KEY}},
 )
 
@@ -3086,8 +2438,7 @@ GET_EVENT_DATA_STORE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetEventDataStoreResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
@@ -3111,7 +2462,6 @@ GET_EVENT_DATA_STORE_OUTPUT = Schema.collection(
 GET_EVENT_DATA_STORE = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#GetEventDataStore"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 GET_EVENT_SELECTORS_INPUT = Schema.collection(
@@ -3120,8 +2470,7 @@ GET_EVENT_SELECTORS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetEventSelectorsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "TrailName": {
@@ -3158,20 +2507,9 @@ READ_WRITE_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#ReadWriteType"),
     shape_type=ShapeType.ENUM,
     members={
-        "ReadOnly": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ReadOnly")],
-        },
-        "WriteOnly": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="WriteOnly")
-            ],
-        },
-        "All": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="All")],
-        },
+        "ReadOnly": {"target": UNIT},
+        "WriteOnly": {"target": UNIT},
+        "All": {"target": UNIT},
     },
 )
 
@@ -3197,8 +2535,7 @@ GET_EVENT_SELECTORS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetEventSelectorsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "TrailARN": {"target": STRING},
@@ -3210,7 +2547,6 @@ GET_EVENT_SELECTORS_OUTPUT = Schema.collection(
 GET_EVENT_SELECTORS = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#GetEventSelectors"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 GET_IMPORT_INPUT = Schema.collection(
@@ -3219,8 +2555,7 @@ GET_IMPORT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetImportRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ImportId": {
@@ -3233,12 +2568,6 @@ GET_IMPORT_INPUT = Schema.collection(
 IMPORT_DESTINATIONS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#ImportDestinations"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1}),
-        )
-    ],
     members={"member": {"target": EVENT_DATA_STORE_ARN}},
 )
 
@@ -3285,32 +2614,11 @@ IMPORT_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#ImportStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "INITIALIZING": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="INITIALIZING")
-            ],
-        },
-        "IN_PROGRESS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="IN_PROGRESS")
-            ],
-        },
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "STOPPED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="STOPPED")],
-        },
-        "COMPLETED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="COMPLETED")
-            ],
-        },
+        "INITIALIZING": {"target": UNIT},
+        "IN_PROGRESS": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+        "STOPPED": {"target": UNIT},
+        "COMPLETED": {"target": UNIT},
     },
 )
 
@@ -3320,8 +2628,7 @@ GET_IMPORT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetImportResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ImportId": {"target": UUID},
@@ -3359,8 +2666,7 @@ GET_INSIGHT_SELECTORS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetInsightSelectorsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "TrailName": {"target": STRING},
@@ -3371,18 +2677,7 @@ GET_INSIGHT_SELECTORS_INPUT = Schema.collection(
 SOURCE_EVENT_CATEGORY = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#SourceEventCategory"),
     shape_type=ShapeType.ENUM,
-    members={
-        "Management": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="Management")
-            ],
-        },
-        "Data": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Data")],
-        },
-    },
+    members={"Management": {"target": UNIT}, "Data": {"target": UNIT}},
 )
 
 SOURCE_EVENT_CATEGORIES = Schema.collection(
@@ -3395,22 +2690,8 @@ INSIGHT_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#InsightType"),
     shape_type=ShapeType.ENUM,
     members={
-        "ApiCallRateInsight": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="ApiCallRateInsight"
-                )
-            ],
-        },
-        "ApiErrorRateInsight": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="ApiErrorRateInsight"
-                )
-            ],
-        },
+        "ApiCallRateInsight": {"target": UNIT},
+        "ApiErrorRateInsight": {"target": UNIT},
     },
 )
 
@@ -3434,8 +2715,7 @@ GET_INSIGHT_SELECTORS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetInsightSelectorsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "TrailARN": {"target": STRING},
@@ -3463,31 +2743,14 @@ INSIGHT_NOT_ENABLED_EXCEPTION = Schema.collection(
 GET_INSIGHT_SELECTORS = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#GetInsightSelectors"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 MAX_QUERY_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#MaxQueryResults"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#MaxQueryResults"), shape_type=ShapeType.INTEGER
 )
 
 PAGINATION_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#PaginationToken"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 4, "max": 1000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value=".*"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#PaginationToken"), shape_type=ShapeType.STRING
 )
 
 GET_QUERY_RESULTS_INPUT = Schema.collection(
@@ -3496,23 +2759,10 @@ GET_QUERY_RESULTS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetQueryResultsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "EventDataStore is no longer required by GetQueryResultsRequest"
-                        }
-                    ),
-                )
-            ],
-        },
+        "EventDataStore": {"target": EVENT_DATA_STORE_ARN},
         "QueryId": {
             "target": UUID,
             "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
@@ -3567,8 +2817,7 @@ GET_QUERY_RESULTS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetQueryResultsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "QueryStatus": {"target": QUERY_STATUS},
@@ -3612,14 +2861,6 @@ INVALID_NEXT_TOKEN_EXCEPTION = Schema.collection(
 GET_QUERY_RESULTS = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#GetQueryResults"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {"inputToken": "NextToken", "outputToken": "NextToken"}
-            ),
-        )
-    ],
 )
 
 GET_RESOURCE_POLICY_INPUT = Schema.collection(
@@ -3628,8 +2869,7 @@ GET_RESOURCE_POLICY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetResourcePolicyRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ResourceArn": {
@@ -3640,14 +2880,7 @@ GET_RESOURCE_POLICY_INPUT = Schema.collection(
 )
 
 RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourcePolicy"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 8192}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#ResourcePolicy"), shape_type=ShapeType.STRING
 )
 
 GET_RESOURCE_POLICY_OUTPUT = Schema.collection(
@@ -3656,8 +2889,7 @@ GET_RESOURCE_POLICY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetResourcePolicyResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ResourceArn": {"target": RESOURCE_ARN},
@@ -3669,7 +2901,6 @@ GET_RESOURCE_POLICY_OUTPUT = Schema.collection(
 GET_RESOURCE_POLICY = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#GetResourcePolicy"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 GET_TRAIL_INPUT = Schema.collection(
@@ -3678,8 +2909,7 @@ GET_TRAIL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetTrailRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -3695,16 +2925,13 @@ GET_TRAIL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetTrailResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"Trail": {"target": TRAIL}},
 )
 
 GET_TRAIL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetTrail"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#GetTrail"), shape_type=ShapeType.OPERATION
 )
 
 GET_TRAIL_STATUS_INPUT = Schema.collection(
@@ -3713,8 +2940,7 @@ GET_TRAIL_STATUS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetTrailStatusRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -3730,8 +2956,7 @@ GET_TRAIL_STATUS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#GetTrailStatusResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "IsLogging": {"target": BOOLEAN},
@@ -3757,19 +2982,11 @@ GET_TRAIL_STATUS_OUTPUT = Schema.collection(
 GET_TRAIL_STATUS = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#GetTrailStatus"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 LIST_CHANNELS_MAX_RESULTS_COUNT = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListChannelsMaxResultsCount"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-    ],
 )
 
 LIST_CHANNELS_INPUT = Schema.collection(
@@ -3778,8 +2995,7 @@ LIST_CHANNELS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListChannelsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "MaxResults": {"target": LIST_CHANNELS_MAX_RESULTS_COUNT},
@@ -3793,8 +3009,7 @@ LIST_CHANNELS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListChannelsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Channels": {"target": CHANNELS},
@@ -3803,33 +3018,12 @@ LIST_CHANNELS_OUTPUT = Schema.collection(
 )
 
 LIST_CHANNELS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListChannels"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#ListChannels"), shape_type=ShapeType.OPERATION
 )
 
 LIST_DASHBOARDS_MAX_RESULTS_COUNT = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListDashboardsMaxResultsCount"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-    ],
 )
 
 LIST_DASHBOARDS_INPUT = Schema.collection(
@@ -3838,8 +3032,7 @@ LIST_DASHBOARDS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListDashboardsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "NamePrefix": {"target": DASHBOARD_NAME},
@@ -3869,8 +3062,7 @@ LIST_DASHBOARDS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListDashboardsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Dashboards": {"target": DASHBOARDS},
@@ -3881,19 +3073,11 @@ LIST_DASHBOARDS_OUTPUT = Schema.collection(
 LIST_DASHBOARDS = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListDashboards"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 LIST_EVENT_DATA_STORES_MAX_RESULTS_COUNT = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListEventDataStoresMaxResultsCount"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-    ],
 )
 
 LIST_EVENT_DATA_STORES_INPUT = Schema.collection(
@@ -3902,8 +3086,7 @@ LIST_EVENT_DATA_STORES_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListEventDataStoresRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "NextToken": {"target": PAGINATION_TOKEN},
@@ -3916,110 +3099,14 @@ EVENT_DATA_STORE = Schema.collection(
     members={
         "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
         "Name": {"target": EVENT_DATA_STORE_NAME},
-        "TerminationProtectionEnabled": {
-            "target": TERMINATION_PROTECTION_ENABLED,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "TerminationProtectionEnabled is no longer returned by ListEventDataStores"
-                        }
-                    ),
-                )
-            ],
-        },
-        "Status": {
-            "target": EVENT_DATA_STORE_STATUS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "Status is no longer returned by ListEventDataStores"
-                        }
-                    ),
-                )
-            ],
-        },
-        "AdvancedEventSelectors": {
-            "target": ADVANCED_EVENT_SELECTORS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "AdvancedEventSelectors is no longer returned by ListEventDataStores"
-                        }
-                    ),
-                )
-            ],
-        },
-        "MultiRegionEnabled": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "MultiRegionEnabled is no longer returned by ListEventDataStores"
-                        }
-                    ),
-                )
-            ],
-        },
-        "OrganizationEnabled": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "OrganizationEnabled is no longer returned by ListEventDataStores"
-                        }
-                    ),
-                )
-            ],
-        },
-        "RetentionPeriod": {
-            "target": RETENTION_PERIOD,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "RetentionPeriod is no longer returned by ListEventDataStores"
-                        }
-                    ),
-                )
-            ],
-        },
-        "CreatedTimestamp": {
-            "target": DATE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "CreatedTimestamp is no longer returned by ListEventDataStores"
-                        }
-                    ),
-                )
-            ],
-        },
-        "UpdatedTimestamp": {
-            "target": DATE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#deprecated"),
-                    value=MappingProxyType(
-                        {
-                            "message": "UpdatedTimestamp is no longer returned by ListEventDataStores"
-                        }
-                    ),
-                )
-            ],
-        },
+        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
+        "Status": {"target": EVENT_DATA_STORE_STATUS},
+        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
+        "MultiRegionEnabled": {"target": BOOLEAN},
+        "OrganizationEnabled": {"target": BOOLEAN},
+        "RetentionPeriod": {"target": RETENTION_PERIOD},
+        "CreatedTimestamp": {"target": DATE},
+        "UpdatedTimestamp": {"target": DATE},
     },
 )
 
@@ -4035,8 +3122,7 @@ LIST_EVENT_DATA_STORES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListEventDataStoresResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "EventDataStores": {"target": EVENT_DATA_STORES},
@@ -4047,31 +3133,11 @@ LIST_EVENT_DATA_STORES_OUTPUT = Schema.collection(
 LIST_EVENT_DATA_STORES = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListEventDataStores"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-    ],
 )
 
 LIST_IMPORT_FAILURES_MAX_RESULTS_COUNT = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListImportFailuresMaxResultsCount"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-    ],
 )
 
 LIST_IMPORT_FAILURES_INPUT = Schema.collection(
@@ -4080,8 +3146,7 @@ LIST_IMPORT_FAILURES_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListImportFailuresRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ImportId": {
@@ -4097,20 +3162,9 @@ IMPORT_FAILURE_STATUS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#ImportFailureStatus"),
     shape_type=ShapeType.ENUM,
     members={
-        "FAILED": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="FAILED")],
-        },
-        "RETRY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="RETRY")],
-        },
-        "SUCCEEDED": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="SUCCEEDED")
-            ],
-        },
+        "FAILED": {"target": UNIT},
+        "RETRY": {"target": UNIT},
+        "SUCCEEDED": {"target": UNIT},
     },
 )
 
@@ -4137,8 +3191,7 @@ LIST_IMPORT_FAILURES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListImportFailuresResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Failures": {"target": IMPORT_FAILURE_LIST},
@@ -4149,32 +3202,11 @@ LIST_IMPORT_FAILURES_OUTPUT = Schema.collection(
 LIST_IMPORT_FAILURES = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListImportFailures"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Failures",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-    ],
 )
 
 LIST_IMPORTS_MAX_RESULTS_COUNT = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListImportsMaxResultsCount"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-    ],
 )
 
 LIST_IMPORTS_INPUT = Schema.collection(
@@ -4183,8 +3215,7 @@ LIST_IMPORTS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListImportsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "MaxResults": {"target": LIST_IMPORTS_MAX_RESULTS_COUNT},
@@ -4217,8 +3248,7 @@ LIST_IMPORTS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListImportsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Imports": {"target": IMPORTS_LIST},
@@ -4227,80 +3257,33 @@ LIST_IMPORTS_OUTPUT = Schema.collection(
 )
 
 LIST_IMPORTS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListImports"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Imports",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#ListImports"), shape_type=ShapeType.OPERATION
 )
 
 LIST_INSIGHTS_DATA_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "INSIGHTS_EVENTS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="InsightsEvents")
-            ],
-        }
-    },
+    members={"INSIGHTS_EVENTS": {"target": UNIT}},
 )
 
 LIST_INSIGHTS_DATA_DIMENSION_KEY = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataDimensionKey"),
     shape_type=ShapeType.ENUM,
     members={
-        "EVENT_ID": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="EventId")],
-        },
-        "EVENT_NAME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EventName")
-            ],
-        },
-        "EVENT_SOURCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EventSource")
-            ],
-        },
+        "EVENT_ID": {"target": UNIT},
+        "EVENT_NAME": {"target": UNIT},
+        "EVENT_SOURCE": {"target": UNIT},
     },
 )
 
 LIST_INSIGHTS_DATA_DIMENSION_VALUE = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataDimensionValue"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2000}),
-        )
-    ],
 )
 
 LIST_INSIGHTS_DATA_DIMENSIONS = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataDimensions"),
     shape_type=ShapeType.MAP,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 1}),
-        )
-    ],
     members={
         "key": {"target": LIST_INSIGHTS_DATA_DIMENSION_KEY},
         "value": {"target": LIST_INSIGHTS_DATA_DIMENSION_VALUE},
@@ -4310,13 +3293,6 @@ LIST_INSIGHTS_DATA_DIMENSIONS = Schema.collection(
 LIST_INSIGHTS_DATA_MAX_RESULTS_COUNT = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataMaxResultsCount"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        ),
-    ],
 )
 
 LIST_INSIGHTS_DATA_INPUT = Schema.collection(
@@ -4325,8 +3301,7 @@ LIST_INSIGHTS_DATA_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListInsightsDataRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "InsightSource": {
@@ -4383,8 +3358,7 @@ LIST_INSIGHTS_DATA_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListInsightsDataResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Events": {"target": EVENTS_LIST},
@@ -4395,114 +3369,39 @@ LIST_INSIGHTS_DATA_OUTPUT = Schema.collection(
 LIST_INSIGHTS_DATA = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListInsightsData"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Events",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-    ],
 )
 
 INSIGHTS_METRIC_DATA_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#InsightsMetricDataType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "FILL_WITH_ZEROS": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="FillWithZeros")
-            ],
-        },
-        "NON_ZERO_DATA": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="NonZeroData")
-            ],
-        },
-    },
+    members={"FILL_WITH_ZEROS": {"target": UNIT}, "NON_ZERO_DATA": {"target": UNIT}},
 )
 
 ERROR_CODE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ErrorCode"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 128}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[\\w\\d\\s_.,\\-:\\[\\]]+$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#ErrorCode"), shape_type=ShapeType.STRING
 )
 
 EVENT_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#EventName"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[A-Za-z0-9_]+$"),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#EventName"), shape_type=ShapeType.STRING
 )
 
 EVENT_SOURCE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#EventSource"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"), value="^[a-z0-9_-]+\\.amazonaws\\.com$"
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#EventSource"), shape_type=ShapeType.STRING
 )
 
 INSIGHTS_METRIC_MAX_RESULTS = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#InsightsMetricMaxResults"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 21600}),
-        ),
-    ],
 )
 
 INSIGHTS_METRIC_NEXT_TOKEN = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#InsightsMetricNextToken"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 5000}),
-        )
-    ],
 )
 
 INSIGHTS_METRIC_PERIOD = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#InsightsMetricPeriod"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 60, "max": 3600}),
-        ),
-    ],
 )
 
 LIST_INSIGHTS_METRIC_DATA_INPUT = Schema.collection(
@@ -4511,8 +3410,7 @@ LIST_INSIGHTS_METRIC_DATA_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListInsightsMetricDataRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "TrailName": {"target": STRING},
@@ -4545,9 +3443,7 @@ TIMESTAMPS = Schema.collection(
 )
 
 DOUBLE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Double"),
-    shape_type=ShapeType.DOUBLE,
-    traits=[Trait.new(id=ShapeID("smithy.api#box"))],
+    id=ShapeID("com.amazonaws.cloudtrail#Double"), shape_type=ShapeType.DOUBLE
 )
 
 INSIGHTS_METRIC_VALUES = Schema.collection(
@@ -4562,8 +3458,7 @@ LIST_INSIGHTS_METRIC_DATA_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListInsightsMetricDataResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "TrailARN": {"target": STRING},
@@ -4580,19 +3475,6 @@ LIST_INSIGHTS_METRIC_DATA_OUTPUT = Schema.collection(
 LIST_INSIGHTS_METRIC_DATA = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListInsightsMetricData"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-    ],
 )
 
 INVALID_TIME_RANGE_EXCEPTION = Schema.collection(
@@ -4629,8 +3511,7 @@ LIST_PUBLIC_KEYS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListPublicKeysRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "StartTime": {"target": DATE},
@@ -4661,8 +3542,7 @@ LIST_PUBLIC_KEYS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListPublicKeysResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "PublicKeyList": {"target": PUBLIC_KEY_LIST},
@@ -4673,19 +3553,6 @@ LIST_PUBLIC_KEYS_OUTPUT = Schema.collection(
 LIST_PUBLIC_KEYS = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListPublicKeys"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "PublicKeyList",
-                }
-            ),
-        ),
-    ],
 )
 
 INVALID_DATE_RANGE_EXCEPTION = Schema.collection(
@@ -4721,13 +3588,6 @@ INVALID_QUERY_STATUS_EXCEPTION = Schema.collection(
 LIST_QUERIES_MAX_RESULTS_COUNT = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#ListQueriesMaxResultsCount"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-    ],
 )
 
 LIST_QUERIES_INPUT = Schema.collection(
@@ -4736,8 +3596,7 @@ LIST_QUERIES_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListQueriesRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "EventDataStore": {
@@ -4773,28 +3632,13 @@ LIST_QUERIES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListQueriesResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"Queries": {"target": QUERIES}, "NextToken": {"target": PAGINATION_TOKEN}},
 )
 
 LIST_QUERIES = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListQueries"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#ListQueries"), shape_type=ShapeType.OPERATION
 )
 
 RESOURCE_ID_LIST = Schema.collection(
@@ -4809,8 +3653,7 @@ LIST_TAGS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListTagsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ResourceIdList": {
@@ -4838,8 +3681,7 @@ LIST_TAGS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListTagsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ResourceTagList": {"target": RESOURCE_TAG_LIST},
@@ -4848,21 +3690,7 @@ LIST_TAGS_OUTPUT = Schema.collection(
 )
 
 LIST_TAGS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListTags"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "ResourceTagList",
-                }
-            ),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#ListTags"), shape_type=ShapeType.OPERATION
 )
 
 LIST_TRAILS_INPUT = Schema.collection(
@@ -4871,8 +3699,7 @@ LIST_TRAILS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListTrailsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={"NextToken": {"target": STRING}},
 )
@@ -4898,28 +3725,13 @@ LIST_TRAILS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#ListTrailsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"Trails": {"target": TRAILS}, "NextToken": {"target": STRING}},
 )
 
 LIST_TRAILS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListTrails"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Trails",
-                }
-            ),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#ListTrails"), shape_type=ShapeType.OPERATION
 )
 
 INVALID_EVENT_CATEGORY_EXCEPTION = Schema.collection(
@@ -4955,72 +3767,27 @@ INVALID_LOOKUP_ATTRIBUTES_EXCEPTION = Schema.collection(
 EVENT_CATEGORY = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#EventCategory"),
     shape_type=ShapeType.ENUM,
-    members={
-        "Insight": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="insight")],
-        }
-    },
+    members={"Insight": {"target": UNIT}},
 )
 
 LOOKUP_ATTRIBUTE_KEY = Schema.collection(
     id=ShapeID("com.amazonaws.cloudtrail#LookupAttributeKey"),
     shape_type=ShapeType.ENUM,
     members={
-        "EVENT_ID": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="EventId")],
-        },
-        "EVENT_NAME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EventName")
-            ],
-        },
-        "READ_ONLY": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="ReadOnly")],
-        },
-        "USERNAME": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Username")],
-        },
-        "RESOURCE_TYPE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ResourceType")
-            ],
-        },
-        "RESOURCE_NAME": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="ResourceName")
-            ],
-        },
-        "EVENT_SOURCE": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="EventSource")
-            ],
-        },
-        "ACCESS_KEY_ID": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="AccessKeyId")
-            ],
-        },
+        "EVENT_ID": {"target": UNIT},
+        "EVENT_NAME": {"target": UNIT},
+        "READ_ONLY": {"target": UNIT},
+        "USERNAME": {"target": UNIT},
+        "RESOURCE_TYPE": {"target": UNIT},
+        "RESOURCE_NAME": {"target": UNIT},
+        "EVENT_SOURCE": {"target": UNIT},
+        "ACCESS_KEY_ID": {"target": UNIT},
     },
 )
 
 LOOKUP_ATTRIBUTE_VALUE = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#LookupAttributeValue"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2000}),
-        )
-    ],
 )
 
 LOOKUP_ATTRIBUTE = Schema.collection(
@@ -5044,15 +3811,7 @@ LOOKUP_ATTRIBUTES_LIST = Schema.collection(
 )
 
 MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#MaxResults"),
-    shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#MaxResults"), shape_type=ShapeType.INTEGER
 )
 
 NEXT_TOKEN = Schema(
@@ -5065,8 +3824,7 @@ LOOKUP_EVENTS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#LookupEventsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "LookupAttributes": {"target": LOOKUP_ATTRIBUTES_LIST},
@@ -5084,29 +3842,13 @@ LOOKUP_EVENTS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#LookupEventsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"Events": {"target": EVENTS_LIST}, "NextToken": {"target": NEXT_TOKEN}},
 )
 
 LOOKUP_EVENTS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#LookupEvents"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#idempotent")),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Events",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-    ],
+    id=ShapeID("com.amazonaws.cloudtrail#LookupEvents"), shape_type=ShapeType.OPERATION
 )
 
 INSUFFICIENT_IAM_ACCESS_PERMISSION_EXCEPTION = Schema.collection(
@@ -5130,8 +3872,7 @@ PUT_EVENT_CONFIGURATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#PutEventConfigurationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "TrailName": {"target": STRING},
@@ -5148,8 +3889,7 @@ PUT_EVENT_CONFIGURATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#PutEventConfigurationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "TrailARN": {"target": STRING},
@@ -5163,7 +3903,6 @@ PUT_EVENT_CONFIGURATION_OUTPUT = Schema.collection(
 PUT_EVENT_CONFIGURATION = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#PutEventConfiguration"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 PUT_EVENT_SELECTORS_INPUT = Schema.collection(
@@ -5172,8 +3911,7 @@ PUT_EVENT_SELECTORS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#PutEventSelectorsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "TrailName": {
@@ -5191,8 +3929,7 @@ PUT_EVENT_SELECTORS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#PutEventSelectorsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "TrailARN": {"target": STRING},
@@ -5204,7 +3941,6 @@ PUT_EVENT_SELECTORS_OUTPUT = Schema.collection(
 PUT_EVENT_SELECTORS = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#PutEventSelectors"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 INVALID_INSIGHT_SELECTORS_EXCEPTION = Schema.collection(
@@ -5228,8 +3964,7 @@ PUT_INSIGHT_SELECTORS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#PutInsightSelectorsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "TrailName": {"target": STRING},
@@ -5248,8 +3983,7 @@ PUT_INSIGHT_SELECTORS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#PutInsightSelectorsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "TrailARN": {"target": STRING},
@@ -5262,7 +3996,6 @@ PUT_INSIGHT_SELECTORS_OUTPUT = Schema.collection(
 PUT_INSIGHT_SELECTORS = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#PutInsightSelectors"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 PUT_RESOURCE_POLICY_INPUT = Schema.collection(
@@ -5271,8 +4004,7 @@ PUT_RESOURCE_POLICY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#PutResourcePolicyRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ResourceArn": {
@@ -5292,8 +4024,7 @@ PUT_RESOURCE_POLICY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#PutResourcePolicyResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ResourceArn": {"target": RESOURCE_ARN},
@@ -5320,7 +4051,6 @@ RESOURCE_POLICY_NOT_VALID_EXCEPTION = Schema.collection(
 PUT_RESOURCE_POLICY = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#PutResourcePolicy"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 DELEGATED_ADMIN_ACCOUNT_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
@@ -5344,8 +4074,7 @@ REGISTER_ORGANIZATION_DELEGATED_ADMIN_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "MemberAccountId": {
@@ -5361,15 +4090,13 @@ REGISTER_ORGANIZATION_DELEGATED_ADMIN_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
 REGISTER_ORGANIZATION_DELEGATED_ADMIN = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdmin"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 REMOVE_TAGS_INPUT = Schema.collection(
@@ -5378,8 +4105,7 @@ REMOVE_TAGS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#RemoveTagsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ResourceId": {
@@ -5399,15 +4125,12 @@ REMOVE_TAGS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#RemoveTagsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
 REMOVE_TAGS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#RemoveTags"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#RemoveTags"), shape_type=ShapeType.OPERATION
 )
 
 RESTORE_EVENT_DATA_STORE_INPUT = Schema.collection(
@@ -5416,8 +4139,7 @@ RESTORE_EVENT_DATA_STORE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#RestoreEventDataStoreRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "EventDataStore": {
@@ -5433,8 +4155,7 @@ RESTORE_EVENT_DATA_STORE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#RestoreEventDataStoreResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
@@ -5460,25 +4181,11 @@ RESTORE_EVENT_DATA_STORE = Schema(
 SEARCH_SAMPLE_QUERIES_MAX_RESULTS = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#SearchSampleQueriesMaxResults"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 50}),
-        ),
-    ],
 )
 
 SEARCH_SAMPLE_QUERIES_SEARCH_PHRASE = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#SearchSampleQueriesSearchPhrase"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 2, "max": 1000}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[ -~\\n]*$"),
-    ],
 )
 
 SEARCH_SAMPLE_QUERIES_INPUT = Schema.collection(
@@ -5487,8 +4194,7 @@ SEARCH_SAMPLE_QUERIES_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#SearchSampleQueriesRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SearchPhrase": {
@@ -5544,8 +4250,7 @@ SEARCH_SAMPLE_QUERIES_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#SearchSampleQueriesResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "SearchResults": {"target": SEARCH_SAMPLE_QUERIES_SEARCH_RESULTS},
@@ -5556,31 +4261,16 @@ SEARCH_SAMPLE_QUERIES_OUTPUT = Schema.collection(
 SEARCH_SAMPLE_QUERIES = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#SearchSampleQueries"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 QUERY_PARAMETER_KEY = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#QueryParameterKey"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 3, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._/\\-:$]+$"),
-    ],
 )
 
 QUERY_PARAMETER_VALUE = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#QueryParameterValue"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9._/\\-:]+$"),
-    ],
 )
 
 QUERY_PARAMETER_VALUES = Schema.collection(
@@ -5598,8 +4288,7 @@ START_DASHBOARD_REFRESH_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StartDashboardRefreshRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DashboardId": {
@@ -5616,8 +4305,7 @@ START_DASHBOARD_REFRESH_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StartDashboardRefreshResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"RefreshId": {"target": REFRESH_ID}},
 )
@@ -5625,7 +4313,6 @@ START_DASHBOARD_REFRESH_OUTPUT = Schema.collection(
 START_DASHBOARD_REFRESH = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#StartDashboardRefresh"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 START_EVENT_DATA_STORE_INGESTION_INPUT = Schema.collection(
@@ -5634,8 +4321,7 @@ START_EVENT_DATA_STORE_INGESTION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StartEventDataStoreIngestionRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "EventDataStore": {
@@ -5651,8 +4337,7 @@ START_EVENT_DATA_STORE_INGESTION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StartEventDataStoreIngestionResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -5682,8 +4367,7 @@ START_IMPORT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StartImportRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Destinations": {"target": IMPORT_DESTINATIONS},
@@ -5700,8 +4384,7 @@ START_IMPORT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StartImportResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ImportId": {"target": UUID},
@@ -5725,8 +4408,7 @@ START_LOGGING_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StartLoggingRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -5742,15 +4424,12 @@ START_LOGGING_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StartLoggingResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
 START_LOGGING = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#StartLogging"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#StartLogging"), shape_type=ShapeType.OPERATION
 )
 
 MAX_CONCURRENT_QUERIES_EXCEPTION = Schema.collection(
@@ -5774,8 +4453,7 @@ START_QUERY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StartQueryRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "QueryStatement": {"target": QUERY_STATEMENT},
@@ -5792,8 +4470,7 @@ START_QUERY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StartQueryResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "QueryId": {"target": UUID},
@@ -5802,9 +4479,7 @@ START_QUERY_OUTPUT = Schema.collection(
 )
 
 START_QUERY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#StartQuery"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#StartQuery"), shape_type=ShapeType.OPERATION
 )
 
 STOP_EVENT_DATA_STORE_INGESTION_INPUT = Schema.collection(
@@ -5813,8 +4488,7 @@ STOP_EVENT_DATA_STORE_INGESTION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StopEventDataStoreIngestionRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "EventDataStore": {
@@ -5830,8 +4504,7 @@ STOP_EVENT_DATA_STORE_INGESTION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StopEventDataStoreIngestionResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
@@ -5846,8 +4519,7 @@ STOP_IMPORT_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StopImportRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "ImportId": {
@@ -5863,8 +4535,7 @@ STOP_IMPORT_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StopImportResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ImportId": {"target": UUID},
@@ -5889,8 +4560,7 @@ STOP_LOGGING_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StopLoggingRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -5906,15 +4576,12 @@ STOP_LOGGING_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#StopLoggingResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
 STOP_LOGGING = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#StopLogging"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#StopLogging"), shape_type=ShapeType.OPERATION
 )
 
 UPDATE_CHANNEL_INPUT = Schema.collection(
@@ -5923,8 +4590,7 @@ UPDATE_CHANNEL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#UpdateChannelRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Channel": {
@@ -5942,8 +4608,7 @@ UPDATE_CHANNEL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#UpdateChannelResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ChannelArn": {"target": CHANNEL_ARN},
@@ -5954,9 +4619,7 @@ UPDATE_CHANNEL_OUTPUT = Schema.collection(
 )
 
 UPDATE_CHANNEL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateChannel"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#UpdateChannel"), shape_type=ShapeType.OPERATION
 )
 
 UPDATE_DASHBOARD_INPUT = Schema.collection(
@@ -5965,8 +4628,7 @@ UPDATE_DASHBOARD_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#UpdateDashboardRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "DashboardId": {
@@ -5985,8 +4647,7 @@ UPDATE_DASHBOARD_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#UpdateDashboardResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "DashboardArn": {"target": DASHBOARD_ARN},
@@ -6003,7 +4664,6 @@ UPDATE_DASHBOARD_OUTPUT = Schema.collection(
 UPDATE_DASHBOARD = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#UpdateDashboard"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 UPDATE_EVENT_DATA_STORE_INPUT = Schema.collection(
@@ -6012,8 +4672,7 @@ UPDATE_EVENT_DATA_STORE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#UpdateEventDataStoreRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "EventDataStore": {
@@ -6037,8 +4696,7 @@ UPDATE_EVENT_DATA_STORE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#UpdateEventDataStoreResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
@@ -6061,7 +4719,6 @@ UPDATE_EVENT_DATA_STORE_OUTPUT = Schema.collection(
 UPDATE_EVENT_DATA_STORE = Schema(
     id=ShapeID("com.amazonaws.cloudtrail#UpdateEventDataStore"),
     shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
 )
 
 UPDATE_TRAIL_INPUT = Schema.collection(
@@ -6070,8 +4727,7 @@ UPDATE_TRAIL_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#UpdateTrailRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -6088,6 +4744,7 @@ UPDATE_TRAIL_INPUT = Schema.collection(
         "CloudWatchLogsRoleArn": {"target": STRING},
         "KmsKeyId": {"target": STRING},
         "IsOrganizationTrail": {"target": BOOLEAN},
+        "RecursiveLogging": {"target": BOOLEAN},
     },
 )
 
@@ -6097,17 +4754,13 @@ UPDATE_TRAIL_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.cloudtrail#UpdateTrailResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Name": {"target": STRING},
         "S3BucketName": {"target": STRING},
         "S3KeyPrefix": {"target": STRING},
-        "SnsTopicName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#deprecated"))],
-        },
+        "SnsTopicName": {"target": STRING},
         "SnsTopicARN": {"target": STRING},
         "IncludeGlobalServiceEvents": {"target": BOOLEAN},
         "IsMultiRegionTrail": {"target": BOOLEAN},
@@ -6117,13 +4770,12 @@ UPDATE_TRAIL_OUTPUT = Schema.collection(
         "CloudWatchLogsRoleArn": {"target": STRING},
         "KmsKeyId": {"target": STRING},
         "IsOrganizationTrail": {"target": BOOLEAN},
+        "RecursiveLogging": {"target": BOOLEAN},
     },
 )
 
 UPDATE_TRAIL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateTrail"),
-    shape_type=ShapeType.OPERATION,
-    traits=[Trait.new(id=ShapeID("smithy.api#idempotent"))],
+    id=ShapeID("com.amazonaws.cloudtrail#UpdateTrail"), shape_type=ShapeType.OPERATION
 )
 
 CLOUD_TRAIL_20131101 = Schema(
@@ -6133,1528 +4785,7 @@ CLOUD_TRAIL_20131101 = Schema(
         Trait.new(
             id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "cloudtrail"})
         ),
-        Trait.new(id=ShapeID("smithy.api#title"), value="AWS CloudTrail"),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointTests"),
-            value=MappingProxyType(
-                {
-                    "testCases": (
-                        MappingProxyType(
-                            {
-                                "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.af-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "af-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.ap-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.ap-northeast-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.ap-northeast-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.ap-northeast-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.ap-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.ap-southeast-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.ap-southeast-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.ap-southeast-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.ca-central-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ca-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.eu-central-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.eu-north-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.eu-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.eu-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.eu-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.eu-west-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.me-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "me-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.sa-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "sa-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail-fips.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail-fips.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail-fips.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail-fips.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail-fips.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.cn-northwest-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-northwest-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail-fips.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail-fips.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-gov-east-1.api.aws"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-iso-west-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail-fips.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://cloudtrail-fips.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "Missing region",
-                                "expect": MappingProxyType(
-                                    {"error": "Invalid Configuration: Missing Region"}
-                                ),
-                            }
-                        ),
-                    ),
-                    "version": "1.0",
-                }
-            ),
-        ),
         Trait.new(id=ShapeID("aws.protocols#awsJson1_1")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointRuleSet"),
-            value=MappingProxyType(
-                {
-                    "version": "1.0",
-                    "parameters": MappingProxyType(
-                        {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                        }
-                    ),
-                    "rules": (
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Endpoint"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseFIPS"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseDualStack"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": MappingProxyType(
-                                                        {"ref": "Endpoint"}
-                                                    ),
-                                                    "properties": MappingProxyType({}),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Region"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "aws.partition",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                        ),
-                                                        "assign": "PartitionResult",
-                                                    }
-                                                ),
-                                            ),
-                                            "rules": (
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cloudtrail-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "Region"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "us-gov-east-1",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cloudtrail.us-gov-east-1.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "Region"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "us-gov-west-1",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cloudtrail.us-gov-west-1.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cloudtrail-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://cloudtrail.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (),
-                                                        "endpoint": MappingProxyType(
-                                                            {
-                                                                "url": "https://cloudtrail.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                                "headers": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                            }
-                                                        ),
-                                                        "type": "endpoint",
-                                                    }
-                                                ),
-                                            ),
-                                            "type": "tree",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
-                    ),
-                }
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.rules#endpointBdd"),
             value=MappingProxyType(

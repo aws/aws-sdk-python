@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Secrets Manager"
+site_name = "AWS SDK for Python v4 - Secrets Manager"
 site_description = "Documentation for AWS Secrets Manager Client"
 site_author = "Amazon Web Services"
 

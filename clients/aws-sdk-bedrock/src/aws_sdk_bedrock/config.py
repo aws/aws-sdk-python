@@ -13,16 +13,19 @@ from smithy_aws_core.endpoints.standard_regional import (
     StandardRegionalEndpointsResolver,
 )
 from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
-from smithy_core.aio.interfaces import ClientProtocol, EndpointResolver
+from smithy_core.aio.interfaces import (
+    ClientProtocol,
+    EndpointResolver,
+    ProtocolConstructor,
+    ProtocolSettings,
+)
 from smithy_core.aio.interfaces.auth import AuthScheme
 from smithy_core.aio.interfaces.identity import IdentityResolver
 from smithy_core.interceptors import Interceptor
+from smithy_core.interfaces.auth import AuthSchemeResolver
 from smithy_core.shapes import ShapeID
 from smithy_http.aio.aiohttp import AIOHTTPClient
 
-from ._private.schemas import (
-    AMAZON_BEDROCK_CONTROL_PLANE_SERVICE as _SCHEMA_AMAZON_BEDROCK_CONTROL_PLANE_SERVICE,
-)
 from .auth import HTTPAuthSchemeResolver
 from .models import (
     BatchDeleteAdvancedPromptOptimizationJobInput,
@@ -629,13 +632,18 @@ _ServiceInterceptor = Union[
         Any,
     ],
 ]
+_PROTOCOL_SETTINGS = ProtocolSettings(
+    namespace="com.amazonaws.bedrock", service_target="AmazonBedrockControlPlaneService"
+)
 
 
 class _AsyncBedrockConfigOverrides(AwsConfigOverrides, total=False):
     endpoint_resolver: EndpointResolver | None
-    protocol: ClientProtocol[Any, Any] | None
+    protocol: (
+        ClientProtocol[Any, Any] | ProtocolConstructor[ClientProtocol[Any, Any]] | None
+    )
     auth_schemes: dict[ShapeID, AuthScheme[Any, Any, Any, Any]] | None
-    auth_scheme_resolver: HTTPAuthSchemeResolver | None
+    auth_scheme_resolver: AuthSchemeResolver | None
 
 
 @dataclass(kw_only=True, repr=False, init=False)
@@ -649,7 +657,11 @@ class AsyncBedrockConfig(AsyncAwsConfig):
     """
 
     protocol: ClientProtocol[Any, Any] | None = None
-    """The protocol to serialize and deserialize requests with."""
+    """
+    Pass a protocol class reference from smithy_aws_core.aio.protocols to
+    select the protocol, e.g. protocol=AwsJson10ClientProtocol. For custom
+    protocols a protocol instance may also be passed.
+    """
 
     interceptors: list[_ServiceInterceptor] = field(default_factory=lambda: [])
     """
@@ -660,7 +672,7 @@ class AsyncBedrockConfig(AsyncAwsConfig):
     auth_schemes: dict[ShapeID, AuthScheme[Any, Any, Any, Any]] | None = None
     """A map of auth scheme ids to auth schemes."""
 
-    auth_scheme_resolver: HTTPAuthSchemeResolver | None = None
+    auth_scheme_resolver: AuthSchemeResolver | None = None
     """
     An auth scheme resolver that determines the auth scheme for each
     operation.
@@ -713,9 +725,8 @@ class AsyncBedrockConfig(AsyncAwsConfig):
             )
         ),
         "protocol": FieldSpec(
-            default_factory=lambda: RestJsonClientProtocol(
-                _SCHEMA_AMAZON_BEDROCK_CONTROL_PLANE_SERVICE
-            )
+            default_factory=lambda: RestJsonClientProtocol(_PROTOCOL_SETTINGS),
+            converter=lambda p: p(_PROTOCOL_SETTINGS) if isinstance(p, type) else p,
         ),
         "auth_schemes": FieldSpec(
             default_factory=lambda: {

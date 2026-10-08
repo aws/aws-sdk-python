@@ -13,16 +13,19 @@ from smithy_aws_core.endpoints.standard_regional import (
     StandardRegionalEndpointsResolver,
 )
 from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
-from smithy_core.aio.interfaces import ClientProtocol, EndpointResolver
+from smithy_core.aio.interfaces import (
+    ClientProtocol,
+    EndpointResolver,
+    ProtocolConstructor,
+    ProtocolSettings,
+)
 from smithy_core.aio.interfaces.auth import AuthScheme
 from smithy_core.aio.interfaces.identity import IdentityResolver
 from smithy_core.interceptors import Interceptor
+from smithy_core.interfaces.auth import AuthSchemeResolver
 from smithy_core.shapes import ShapeID
 from smithy_http.aio.aiohttp import AIOHTTPClient
 
-from ._private.schemas import (
-    AMAZON_BEDROCK_AGENT_BUILD_TIME_LAMBDA as _SCHEMA_AMAZON_BEDROCK_AGENT_BUILD_TIME_LAMBDA,
-)
 from .auth import HTTPAuthSchemeResolver
 from .models import (
     AssociateAgentCollaboratorInput,
@@ -49,6 +52,8 @@ from .models import (
     CreatePromptOutput,
     CreatePromptVersionInput,
     CreatePromptVersionOutput,
+    CreateVpcConfigurationInput,
+    CreateVpcConfigurationOutput,
     DeleteAgentActionGroupInput,
     DeleteAgentActionGroupOutput,
     DeleteAgentAliasInput,
@@ -73,6 +78,8 @@ from .models import (
     DeletePromptOutput,
     DeleteResourcePolicyInput,
     DeleteResourcePolicyOutput,
+    DeleteVpcConfigurationInput,
+    DeleteVpcConfigurationOutput,
     DisassociateAgentCollaboratorInput,
     DisassociateAgentCollaboratorOutput,
     DisassociateAgentKnowledgeBaseInput,
@@ -107,6 +114,8 @@ from .models import (
     GetPromptOutput,
     GetResourcePolicyInput,
     GetResourcePolicyOutput,
+    GetVpcConfigurationInput,
+    GetVpcConfigurationOutput,
     IngestKnowledgeBaseDocumentsInput,
     IngestKnowledgeBaseDocumentsOutput,
     ListAgentActionGroupsInput,
@@ -139,6 +148,8 @@ from .models import (
     ListPromptsOutput,
     ListTagsForResourceInput,
     ListTagsForResourceOutput,
+    ListVpcConfigurationsInput,
+    ListVpcConfigurationsOutput,
     PrepareAgentInput,
     PrepareAgentOutput,
     PrepareFlowInput,
@@ -195,6 +206,7 @@ _ServiceInterceptor = Union[
     Interceptor[CreateKnowledgeBaseInput, CreateKnowledgeBaseOutput, Any, Any],
     Interceptor[CreatePromptInput, CreatePromptOutput, Any, Any],
     Interceptor[CreatePromptVersionInput, CreatePromptVersionOutput, Any, Any],
+    Interceptor[CreateVpcConfigurationInput, CreateVpcConfigurationOutput, Any, Any],
     Interceptor[DeleteAgentInput, DeleteAgentOutput, Any, Any],
     Interceptor[DeleteAgentActionGroupInput, DeleteAgentActionGroupOutput, Any, Any],
     Interceptor[DeleteAgentAliasInput, DeleteAgentAliasOutput, Any, Any],
@@ -209,6 +221,7 @@ _ServiceInterceptor = Union[
     ],
     Interceptor[DeletePromptInput, DeletePromptOutput, Any, Any],
     Interceptor[DeleteResourcePolicyInput, DeleteResourcePolicyOutput, Any, Any],
+    Interceptor[DeleteVpcConfigurationInput, DeleteVpcConfigurationOutput, Any, Any],
     Interceptor[
         DisassociateAgentCollaboratorInput,
         DisassociateAgentCollaboratorOutput,
@@ -238,6 +251,7 @@ _ServiceInterceptor = Union[
     ],
     Interceptor[GetPromptInput, GetPromptOutput, Any, Any],
     Interceptor[GetResourcePolicyInput, GetResourcePolicyOutput, Any, Any],
+    Interceptor[GetVpcConfigurationInput, GetVpcConfigurationOutput, Any, Any],
     Interceptor[
         IngestKnowledgeBaseDocumentsInput, IngestKnowledgeBaseDocumentsOutput, Any, Any
     ],
@@ -258,6 +272,7 @@ _ServiceInterceptor = Union[
     Interceptor[ListKnowledgeBasesInput, ListKnowledgeBasesOutput, Any, Any],
     Interceptor[ListPromptsInput, ListPromptsOutput, Any, Any],
     Interceptor[ListTagsForResourceInput, ListTagsForResourceOutput, Any, Any],
+    Interceptor[ListVpcConfigurationsInput, ListVpcConfigurationsOutput, Any, Any],
     Interceptor[PrepareAgentInput, PrepareAgentOutput, Any, Any],
     Interceptor[PrepareFlowInput, PrepareFlowOutput, Any, Any],
     Interceptor[PutResourcePolicyInput, PutResourcePolicyOutput, Any, Any],
@@ -279,13 +294,19 @@ _ServiceInterceptor = Union[
     Interceptor[UpdatePromptInput, UpdatePromptOutput, Any, Any],
     Interceptor[ValidateFlowDefinitionInput, ValidateFlowDefinitionOutput, Any, Any],
 ]
+_PROTOCOL_SETTINGS = ProtocolSettings(
+    namespace="com.amazonaws.bedrockagent",
+    service_target="AmazonBedrockAgentBuildTimeLambda",
+)
 
 
 class _AsyncBedrockAgentConfigOverrides(AwsConfigOverrides, total=False):
     endpoint_resolver: EndpointResolver | None
-    protocol: ClientProtocol[Any, Any] | None
+    protocol: (
+        ClientProtocol[Any, Any] | ProtocolConstructor[ClientProtocol[Any, Any]] | None
+    )
     auth_schemes: dict[ShapeID, AuthScheme[Any, Any, Any, Any]] | None
-    auth_scheme_resolver: HTTPAuthSchemeResolver | None
+    auth_scheme_resolver: AuthSchemeResolver | None
 
 
 @dataclass(kw_only=True, repr=False, init=False)
@@ -299,7 +320,11 @@ class AsyncBedrockAgentConfig(AsyncAwsConfig):
     """
 
     protocol: ClientProtocol[Any, Any] | None = None
-    """The protocol to serialize and deserialize requests with."""
+    """
+    Pass a protocol class reference from smithy_aws_core.aio.protocols to
+    select the protocol, e.g. protocol=AwsJson10ClientProtocol. For custom
+    protocols a protocol instance may also be passed.
+    """
 
     interceptors: list[_ServiceInterceptor] = field(default_factory=lambda: [])
     """
@@ -310,7 +335,7 @@ class AsyncBedrockAgentConfig(AsyncAwsConfig):
     auth_schemes: dict[ShapeID, AuthScheme[Any, Any, Any, Any]] | None = None
     """A map of auth scheme ids to auth schemes."""
 
-    auth_scheme_resolver: HTTPAuthSchemeResolver | None = None
+    auth_scheme_resolver: AuthSchemeResolver | None = None
     """
     An auth scheme resolver that determines the auth scheme for each
     operation.
@@ -363,9 +388,8 @@ class AsyncBedrockAgentConfig(AsyncAwsConfig):
             )
         ),
         "protocol": FieldSpec(
-            default_factory=lambda: RestJsonClientProtocol(
-                _SCHEMA_AMAZON_BEDROCK_AGENT_BUILD_TIME_LAMBDA
-            )
+            default_factory=lambda: RestJsonClientProtocol(_PROTOCOL_SETTINGS),
+            converter=lambda p: p(_PROTOCOL_SETTINGS) if isinstance(p, type) else p,
         ),
         "auth_schemes": FieldSpec(
             default_factory=lambda: {

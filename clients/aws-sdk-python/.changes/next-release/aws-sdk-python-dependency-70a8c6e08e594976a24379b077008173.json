@@ -1,4 +1,0 @@
-{
-  "type": "dependency",
-  "description": "Add support for the `aws-sdk-signin` client."
-}

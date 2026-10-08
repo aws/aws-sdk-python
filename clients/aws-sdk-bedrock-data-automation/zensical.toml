@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Bedrock Data Automation"
+site_name = "AWS SDK for Python v4 - Bedrock Data Automation"
 site_description = "Documentation for AWS Bedrock Data Automation Client"
 site_author = "Amazon Web Services"
 

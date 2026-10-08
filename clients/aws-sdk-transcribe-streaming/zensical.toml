@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Transcribe Streaming"
+site_name = "AWS SDK for Python v4 - Transcribe Streaming"
 site_description = "Documentation for AWS Transcribe Streaming Client"
 site_author = "Amazon Web Services"
 

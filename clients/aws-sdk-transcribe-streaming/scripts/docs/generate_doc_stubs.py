@@ -1,5 +1,5 @@
 """
-Generate markdown API Reference stubs for AWS SDK for Python clients.
+Generate markdown API Reference stubs for AWS SDK for Python v4 clients.
 
 This script generates markdown stub files for a single client package.
 It uses griffe to analyze the Python source and outputs mkdocstrings directives
@@ -124,7 +124,7 @@ class ClientInfo:
 
 
 class DocStubGenerator:
-    """Generate markdown API Reference stubs for AWS SDK for Python clients."""
+    """Generate markdown API Reference stubs for AWS SDK for Python v4 clients."""
 
     def __init__(self, client_dir: Path, output_dir: Path, service_name: str | None = None) -> None:
         """
@@ -449,6 +449,14 @@ class DocStubGenerator:
         """Generate the main index.md file."""
         lines = [
             f"# {self.service_name}",
+            "",
+            "## Installation",
+            "",
+            f"To install the {self.service_name} client:",
+            "",
+            "```bash",
+            f"python -m pip install {client_info.package_name.replace('_', '-')}",
+            "```",
             "",
             "## Client",
             "",

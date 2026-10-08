@@ -10,6 +10,7 @@ from smithy_core.aio.interfaces import StreamingBlob
 from smithy_core.deserializers import ShapeDeserializer
 from smithy_core.documents import TypeRegistry
 from smithy_core.exceptions import ModeledError, SerializationError
+from smithy_core.response import EMPTY_RESPONSE_METADATA, ResponseMetadata
 from smithy_core.schemas import APIOperation, Schema
 from smithy_core.serializers import ShapeSerializer
 from smithy_core.shapes import ShapeID
@@ -381,6 +382,7 @@ from ._private.schemas import (
     RETRY_DETAILS as _SCHEMA_RETRY_DETAILS,
     RUNTIME_VERSION_CONFIG as _SCHEMA_RUNTIME_VERSION_CONFIG,
     RUNTIME_VERSION_ERROR as _SCHEMA_RUNTIME_VERSION_ERROR,
+    S3_FILES_CONFIG as _SCHEMA_S3_FILES_CONFIG,
     S3_FILES_MOUNT_CONNECTIVITY_EXCEPTION as _SCHEMA_S3_FILES_MOUNT_CONNECTIVITY_EXCEPTION,
     S3_FILES_MOUNT_FAILURE_EXCEPTION as _SCHEMA_S3_FILES_MOUNT_FAILURE_EXCEPTION,
     S3_FILES_MOUNT_TIMEOUT_EXCEPTION as _SCHEMA_S3_FILES_MOUNT_TIMEOUT_EXCEPTION,
@@ -812,6 +814,16 @@ class AddLayerVersionPermissionOutput:
     revision_id: str | None = None
     """A unique identifier for the current revision of the policy."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ADD_LAYER_VERSION_PERMISSION_OUTPUT, self)
 
@@ -1209,7 +1221,7 @@ class TooManyRequestsException(ServiceError):
 
     type: str | None = None
 
-    reason: ThrottleReason | None = None
+    reason: str | None = None
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TOO_MANY_REQUESTS_EXCEPTION, self)
@@ -1377,7 +1389,7 @@ class AddPermissionInput:
     operator.
     """
 
-    function_url_auth_type: FunctionUrlAuthType | None = None
+    function_url_auth_type: str | None = None
     """
     The type of authentication that your function URL uses. Set to `AWS_IAM`
     if you want to restrict access to authenticated users only. Set to
@@ -1578,6 +1590,16 @@ class AddPermissionOutput:
 
     statement: str | None = None
     """The permission statement that's added to the function policy."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_ADD_PERMISSION_OUTPUT, self)
@@ -2105,7 +2127,7 @@ class KafkaSchemaRegistryAccessConfig:
     Manager secret ARN in the `URI` field.
     """
 
-    type: KafkaSchemaRegistryAuthType | None = None
+    type: str | None = None
     """The type of authentication Lambda uses to access your schema registry."""
 
     uri: str | None = None
@@ -2204,7 +2226,7 @@ class KafkaSchemaValidationConfig:
     registry.
     """
 
-    attribute: KafkaSchemaValidationAttribute | None = None
+    attribute: str | None = None
     """
     The attributes you want your schema registry to validate and filter for.
     If you selected `JSON` as the `EventRecordFormat`, Lambda also
@@ -2288,7 +2310,7 @@ class KafkaSchemaRegistryConfig:
     - For Confluent schema registries, use the URL of the registry.
     """
 
-    event_record_format: SchemaRegistryEventRecordFormat | None = None
+    event_record_format: str | None = None
     """
     The record format that Lambda delivers to your function after schema
     validation.
@@ -2485,7 +2507,7 @@ class Architecture(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_architectures_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[Architecture]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -2495,8 +2517,8 @@ def _serialize_architectures_list(
 
 def _deserialize_architectures_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[Architecture]:
-    result: list[Architecture] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -2592,7 +2614,7 @@ class TargetTrackingScalingPolicy:
     capacity to maintain a target value for a specific metric.
     """
 
-    predefined_metric_type: CapacityProviderPredefinedMetricType
+    predefined_metric_type: str
     """The predefined metric type to track for scaling decisions."""
 
     target_value: float
@@ -2695,7 +2717,7 @@ class CapacityProviderScalingConfig:
     across all compute instances.
     """
 
-    scaling_mode: CapacityProviderScalingMode | None = None
+    scaling_mode: str | None = None
     """
     The scaling mode that determines how the capacity provider responds to
     changes in demand.
@@ -2806,7 +2828,7 @@ class InstanceRequirements:
     compute instances used by the capacity provider.
     """
 
-    architectures: list[Architecture] | None = None
+    architectures: list[str] | None = None
     """
     A list of supported CPU architectures for compute instances. Valid
     values include `x86_64` and `arm64`.
@@ -2982,7 +3004,7 @@ class PropagateTags:
     capacity provider.
     """
 
-    mode: PropagateTagsMode | None = None
+    mode: str | None = None
     """
     The tag propagation mode. Set to `Explicit` to propagate the tags
     specified in `ExplicitTags` to managed resources. Set to `None` to
@@ -3046,7 +3068,7 @@ class SystemLogLevel(UnknownEnumMixin, StrEnum):
 class CapacityProviderLoggingConfig:
     """The capacity provider's Amazon CloudWatch Logs configuration settings."""
 
-    system_log_level: SystemLogLevel | None = None
+    system_log_level: str | None = None
     """
     Set this property to filter the system logs for your capacity provider
     that Lambda sends to CloudWatch. Lambda only sends system logs at the
@@ -3475,7 +3497,7 @@ class CapacityProvider:
     capacity_provider_arn: str
     """The Amazon Resource Name (ARN) of the capacity provider."""
 
-    state: CapacityProviderState
+    state: str
     """The current state of the capacity provider."""
 
     vpc_config: CapacityProviderVpcConfig
@@ -3652,6 +3674,16 @@ class CreateCapacityProviderOutput:
     capacity_provider: CapacityProvider
     """Information about the capacity provider that was created."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_CAPACITY_PROVIDER_OUTPUT, self)
 
@@ -3768,6 +3800,16 @@ class DeleteCapacityProviderOutput:
 
     capacity_provider: CapacityProvider
     """Information about the deleted capacity provider."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_CAPACITY_PROVIDER_OUTPUT, self)
@@ -3889,6 +3931,16 @@ class GetCapacityProviderOutput:
     current state.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_CAPACITY_PROVIDER_OUTPUT, self)
 
@@ -3956,7 +4008,7 @@ GET_CAPACITY_PROVIDER = APIOperation(
 class ListCapacityProvidersInput:
     """Dataclass for ListCapacityProvidersInput structure."""
 
-    state: CapacityProviderState | None = None
+    state: str | None = None
     """Filter capacity providers by their current state."""
 
     marker: str | None = None
@@ -4058,6 +4110,16 @@ class ListCapacityProvidersOutput:
 
     next_marker: str | None = None
     """The pagination token that's included if more results are available."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_CAPACITY_PROVIDERS_OUTPUT, self)
@@ -4242,7 +4304,7 @@ class FunctionVersionsByCapacityProviderListItem:
     function_arn: str
     """The Amazon Resource Name (ARN) of the function version."""
 
-    state: State
+    state: str
     """The current state of the function version."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -4340,6 +4402,16 @@ class ListFunctionVersionsByCapacityProviderOutput:
 
     next_marker: str | None = None
     """The pagination token that's included if more results are available."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -4541,6 +4613,16 @@ class UpdateCapacityProviderOutput:
     capacity_provider: CapacityProvider
     """Information about the updated capacity provider."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_CAPACITY_PROVIDER_OUTPUT, self)
 
@@ -4621,7 +4703,7 @@ class CodeSigningPolicies:
     specify the validation failure action for signature mismatch or expiry.
     """
 
-    untrusted_artifact_on_deployment: CodeSigningPolicy | None = None
+    untrusted_artifact_on_deployment: str | None = None
     """
     Code signing configuration policy for deployment validation failure. If
     you set the policy to `Enforce`, Lambda blocks the deployment request if
@@ -4890,6 +4972,16 @@ class CreateCodeSigningConfigOutput:
     code_signing_config: CodeSigningConfig
     """The code signing configuration."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_CODE_SIGNING_CONFIG_OUTPUT, self)
 
@@ -4993,6 +5085,16 @@ class DeleteCodeSigningConfigInput:
 @dataclass(kw_only=True)
 class DeleteCodeSigningConfigOutput:
     """Dataclass for DeleteCodeSigningConfigOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_CODE_SIGNING_CONFIG_OUTPUT, self)
@@ -5098,6 +5200,16 @@ class GetCodeSigningConfigOutput:
 
     code_signing_config: CodeSigningConfig
     """The code signing configuration"""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_CODE_SIGNING_CONFIG_OUTPUT, self)
@@ -5249,6 +5361,16 @@ class ListCodeSigningConfigsOutput:
 
     code_signing_configs: list[CodeSigningConfig] | None = None
     """The code signing configurations"""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_CODE_SIGNING_CONFIGS_OUTPUT, self)
@@ -5441,6 +5563,16 @@ class ListFunctionsByCodeSigningConfigOutput:
     function_arns: list[str] | None = None
     """The function ARNs."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG_OUTPUT, self
@@ -5616,6 +5748,16 @@ class UpdateCodeSigningConfigOutput:
     code_signing_config: CodeSigningConfig
     """The code signing configuration"""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_CODE_SIGNING_CONFIG_OUTPUT, self)
 
@@ -5752,6 +5894,16 @@ class DeleteFunctionOutput:
 
     status_code: int = 0
     """The HTTP status code returned by the operation."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_FUNCTION_OUTPUT, self)
@@ -5898,6 +6050,16 @@ class DeleteFunctionEventInvokeConfigInput:
 class DeleteFunctionEventInvokeConfigOutput:
     """Dataclass for DeleteFunctionEventInvokeConfigOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_DELETE_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT, self
@@ -6027,6 +6189,16 @@ class DeleteResourcePolicyInput:
 @dataclass(kw_only=True)
 class DeleteResourcePolicyOutput:
     """Dataclass for DeleteResourcePolicyOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_RESOURCE_POLICY_OUTPUT, self)
@@ -6448,10 +6620,10 @@ class OperationUpdate:
     id: str
     """The unique identifier for this operation."""
 
-    type: OperationType
+    type: str
     """The type of operation to update."""
 
-    action: OperationAction
+    action: str
     """The action to take on the operation."""
 
     parent_id: str | None = None
@@ -7126,7 +7298,7 @@ class Operation:
     id: str
     """The unique identifier for this operation."""
 
-    type: OperationType
+    type: str
     """The type of operation."""
 
     start_timestamp: datetime
@@ -7135,7 +7307,7 @@ class Operation:
     format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
     """
 
-    status: OperationStatus
+    status: str
     """The current status of the operation."""
 
     parent_id: str | None = None
@@ -7429,6 +7601,16 @@ class CheckpointDurableExecutionOutput:
     A new checkpoint token to use for the next checkpoint operation. This
     token replaces the one provided in the request and must be used for
     subsequent checkpoints to maintain proper ordering.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -7956,7 +8138,7 @@ class GetDurableExecutionOutput:
     format.
     """
 
-    status: ExecutionStatus
+    status: str
     """
     The current status of the durable execution. Valid values are `RUNNING`,
     `SUCCEEDED`, `FAILED`, `TIMED_OUT`, and `STOPPED`.
@@ -8013,6 +8195,16 @@ class GetDurableExecutionOutput:
     the Key Management Service (KMS) customer managed key that is used to
     encrypt your durable execution's payload data, including input, output,
     and error payloads.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -9706,7 +9898,7 @@ class WaitSucceededDetails:
 class Event:
     """An event that occurred during the execution of a durable function."""
 
-    event_type: EventType | None = None
+    event_type: str | None = None
     """The type of event that occurred."""
 
     sub_type: str | None = None
@@ -10196,6 +10388,16 @@ class GetDurableExecutionHistoryOutput:
     next page of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_DURABLE_EXECUTION_HISTORY_OUTPUT, self)
 
@@ -10408,6 +10610,16 @@ class GetDurableExecutionStateOutput:
     page of results.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_DURABLE_EXECUTION_STATE_OUTPUT, self)
 
@@ -10555,6 +10767,16 @@ class StopDurableExecutionOutput:
 
     stop_timestamp: datetime
     """The timestamp when the execution was stopped (ISO 8601 format)."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_STOP_DURABLE_EXECUTION_OUTPUT, self)
@@ -10836,7 +11058,7 @@ class DocumentDBEventSourceConfig:
     specify a collection, Lambda consumes all collections.
     """
 
-    full_document: FullDocument | None = None
+    full_document: str | None = None
     """
     Determines what DocumentDB sends to your event stream during document
     update operations. If set to UpdateLookup, DocumentDB sends a delta
@@ -11018,7 +11240,7 @@ class FunctionResponseType(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_function_response_type_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[FunctionResponseType]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -11028,8 +11250,8 @@ def _serialize_function_response_type_list(
 
 def _deserialize_function_response_type_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[FunctionResponseType]:
-    result: list[FunctionResponseType] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -11057,7 +11279,7 @@ class EventSourceMappingLoggingConfig:
     define the level of logs for your event source mapping.
     """
 
-    system_log_level: EventSourceMappingSystemLogLevel | None = None
+    system_log_level: str | None = None
     """
     The log level you want your event source mapping to use. Lambda event
     poller only sends system logs at the selected level of detail and lower,
@@ -11111,7 +11333,7 @@ class EventSourceMappingMetric(UnknownEnumMixin, StrEnum):
 
 
 def _serialize_event_source_mapping_metric_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[EventSourceMappingMetric]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -11121,8 +11343,8 @@ def _serialize_event_source_mapping_metric_list(
 
 def _deserialize_event_source_mapping_metric_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[EventSourceMappingMetric]:
-    result: list[EventSourceMappingMetric] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -11144,7 +11366,7 @@ class EventSourceMappingMetricsConfig:
     produce.
     """
 
-    metrics: list[EventSourceMappingMetric] | None = None
+    metrics: list[str] | None = None
     """
     The metrics you want your event source mapping to produce, including
     `EventCount`, `ErrorCount`, `KafkaMetrics`.
@@ -11547,7 +11769,7 @@ class SourceAccessConfiguration:
     authentication protocol, VPC components, or virtual host.
     """
 
-    type: SourceAccessType | None = None
+    type: str | None = None
     """
     The type of authentication protocol, VPC components, or virtual host for
     your event source. For example: `"Type":"SASL_SCRAM_512_AUTH"`.
@@ -11839,7 +12061,7 @@ class CreateEventSourceMappingInput:
     from each shard concurrently.
     """
 
-    starting_position: EventSourcePosition | None = None
+    starting_position: str | None = None
     """
     The position in a stream from which to start reading. Required for
     Amazon Kinesis and Amazon DynamoDB Stream event sources. `AT_TIMESTAMP`
@@ -11906,7 +12128,7 @@ class CreateEventSourceMappingInput:
     self_managed_event_source: SelfManagedEventSource | None = None
     """The self-managed Apache Kafka cluster to receive records from."""
 
-    function_response_types: list[FunctionResponseType] | None = None
+    function_response_types: list[str] | None = None
     """
     (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka, and
     Amazon SQS) A list of current response type enums applied to the event
@@ -12397,7 +12619,7 @@ class CreateEventSourceMappingOutput:
     uuid: str | None = None
     """The identifier of the event source mapping."""
 
-    starting_position: EventSourcePosition | None = None
+    starting_position: str | None = None
     """
     The position in a stream from which to start reading. Required for
     Amazon Kinesis and Amazon DynamoDB Stream event sources. `AT_TIMESTAMP`
@@ -12589,7 +12811,7 @@ class CreateEventSourceMappingOutput:
     value of 0 seconds indicates no tumbling window.
     """
 
-    function_response_types: list[FunctionResponseType] | None = None
+    function_response_types: list[str] | None = None
     """
     (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka, and
     Amazon SQS) A list of current response type enums applied to the event
@@ -12624,6 +12846,16 @@ class CreateEventSourceMappingOutput:
     provisioned mode configuration for the event source. For more
     information, see [provisioned
     mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -13168,7 +13400,7 @@ class DeleteEventSourceMappingOutput:
     uuid: str | None = None
     """The identifier of the event source mapping."""
 
-    starting_position: EventSourcePosition | None = None
+    starting_position: str | None = None
     """
     The position in a stream from which to start reading. Required for
     Amazon Kinesis and Amazon DynamoDB Stream event sources. `AT_TIMESTAMP`
@@ -13360,7 +13592,7 @@ class DeleteEventSourceMappingOutput:
     value of 0 seconds indicates no tumbling window.
     """
 
-    function_response_types: list[FunctionResponseType] | None = None
+    function_response_types: list[str] | None = None
     """
     (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka, and
     Amazon SQS) A list of current response type enums applied to the event
@@ -13395,6 +13627,16 @@ class DeleteEventSourceMappingOutput:
     provisioned mode configuration for the event source. For more
     information, see [provisioned
     mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -13996,7 +14238,7 @@ class GetEventSourceMappingOutput:
     uuid: str | None = None
     """The identifier of the event source mapping."""
 
-    starting_position: EventSourcePosition | None = None
+    starting_position: str | None = None
     """
     The position in a stream from which to start reading. Required for
     Amazon Kinesis and Amazon DynamoDB Stream event sources. `AT_TIMESTAMP`
@@ -14188,7 +14430,7 @@ class GetEventSourceMappingOutput:
     value of 0 seconds indicates no tumbling window.
     """
 
-    function_response_types: list[FunctionResponseType] | None = None
+    function_response_types: list[str] | None = None
     """
     (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka, and
     Amazon SQS) A list of current response type enums applied to the event
@@ -14223,6 +14465,16 @@ class GetEventSourceMappingOutput:
     provisioned mode configuration for the event source. For more
     information, see [provisioned
     mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -14835,7 +15087,7 @@ class EventSourceMappingConfiguration:
     uuid: str | None = None
     """The identifier of the event source mapping."""
 
-    starting_position: EventSourcePosition | None = None
+    starting_position: str | None = None
     """
     The position in a stream from which to start reading. Required for
     Amazon Kinesis and Amazon DynamoDB Stream event sources. `AT_TIMESTAMP`
@@ -15027,7 +15279,7 @@ class EventSourceMappingConfiguration:
     value of 0 seconds indicates no tumbling window.
     """
 
-    function_response_types: list[FunctionResponseType] | None = None
+    function_response_types: list[str] | None = None
     """
     (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka, and
     Amazon SQS) A list of current response type enums applied to the event
@@ -15562,6 +15814,16 @@ class ListEventSourceMappingsOutput:
     event_source_mappings: list[EventSourceMappingConfiguration] | None = None
     """A list of event source mappings."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_EVENT_SOURCE_MAPPINGS_OUTPUT, self)
 
@@ -15810,7 +16072,7 @@ class UpdateEventSourceMappingInput:
     secure your event source.
     """
 
-    function_response_types: list[FunctionResponseType] | None = None
+    function_response_types: list[str] | None = None
     """
     (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka, and
     Amazon SQS) A list of current response type enums applied to the event
@@ -16162,7 +16424,7 @@ class UpdateEventSourceMappingOutput:
     uuid: str | None = None
     """The identifier of the event source mapping."""
 
-    starting_position: EventSourcePosition | None = None
+    starting_position: str | None = None
     """
     The position in a stream from which to start reading. Required for
     Amazon Kinesis and Amazon DynamoDB Stream event sources. `AT_TIMESTAMP`
@@ -16354,7 +16616,7 @@ class UpdateEventSourceMappingOutput:
     value of 0 seconds indicates no tumbling window.
     """
 
-    function_response_types: list[FunctionResponseType] | None = None
+    function_response_types: list[str] | None = None
     """
     (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka, and
     Amazon SQS) A list of current response type enums applied to the event
@@ -16389,6 +16651,16 @@ class UpdateEventSourceMappingOutput:
     provisioned mode configuration for the event source. For more
     information, see [provisioned
     mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -17255,7 +17527,7 @@ class FunctionCode:
     use.
     """
 
-    s3_object_storage_mode: S3ObjectStorageMode | None = None
+    s3_object_storage_mode: str | None = None
     """
     Specifies how the deployment package is stored. Valid values:
 
@@ -17535,13 +17807,78 @@ class EphemeralStorage:
         return kwargs
 
 
+class DirectS3Read(UnknownEnumMixin, StrEnum):
+    ENABLED = "ENABLED"
+    DISABLED = "DISABLED"
+    AUTO = "AUTO"
+
+
+@dataclass(kw_only=True)
+class S3FilesConfig:
+    """
+    Setting controls how your function accesses data from an Amazon S3 file
+    system.
+    """
+
+    direct_s3_read: str | None = None
+    """
+    Specifies if a function reads from the file system for the lowest
+    latency, or through Amazon S3 Files feature \"direct Amazon S3 bucket
+    reads\" for the highest throughput. Valid values:
+
+    - `AUTO` (default) -- Direct reads are active for functions you
+      configure with 512 MB or more of memory.
+
+    - `ENABLED` -- Enforces all reads are directly from the Amazon S3
+      bucket, regardless of available memory (less than 512 MB).
+
+    - `DISABLED` -- Routes all reads through the file system, regardless of
+      memory configuration.
+
+    To use direct reads, you must grant the execution role the
+    `s3:GetObject` and `s3:GetObjectVersion` permissions. If a direct read
+    fails, Lambda automatically falls back to reading through the file
+    system.
+    """
+
+    def serialize(self, serializer: ShapeSerializer):
+        serializer.write_struct(_SCHEMA_S3_FILES_CONFIG, self)
+
+    def serialize_members(self, serializer: ShapeSerializer):
+        if self.direct_s3_read is not None:
+            serializer.write_string(
+                _SCHEMA_S3_FILES_CONFIG.members["DirectS3Read"], self.direct_s3_read
+            )
+
+    @classmethod
+    def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
+        return cls(**cls.deserialize_kwargs(deserializer))
+
+    @classmethod
+    def deserialize_kwargs(cls, deserializer: ShapeDeserializer) -> dict[str, Any]:
+        kwargs: dict[str, Any] = {}
+
+        def _consumer(schema: Schema, de: ShapeDeserializer) -> None:
+            match schema.expect_member_index():
+                case 0:
+                    kwargs["direct_s3_read"] = DirectS3Read(
+                        de.read_string(_SCHEMA_S3_FILES_CONFIG.members["DirectS3Read"])
+                    )
+
+                case _:
+                    logger.debug("Unexpected member schema: %s", schema)
+
+        deserializer.read_struct(_SCHEMA_S3_FILES_CONFIG, consumer=_consumer)
+        return kwargs
+
+
 @dataclass(kw_only=True)
 class FileSystemConfig:
     """
     Details about the connection between a Lambda function and an [Amazon
     EFS file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-    or an [Amazon S3 Files file
+    or an [Amazon S3 file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
     """
 
@@ -17557,6 +17894,15 @@ class FileSystemConfig:
     `/mnt/`.
     """
 
+    s3_files_config: S3FilesConfig | None = None
+    """
+    The configuration for how your function accesses data on an Amazon S3
+    file system. Valid only when the file system access point ARN is an
+    Amazon S3 Files access point. If you specify a different access point
+    type (for example, Amazon Elastic File System), the operation returns an
+    `InvalidParameterException`.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_FILE_SYSTEM_CONFIG, self)
 
@@ -17565,6 +17911,11 @@ class FileSystemConfig:
         serializer.write_string(
             _SCHEMA_FILE_SYSTEM_CONFIG.members["LocalMountPath"], self.local_mount_path
         )
+        if self.s3_files_config is not None:
+            serializer.write_struct(
+                _SCHEMA_FILE_SYSTEM_CONFIG.members["S3FilesConfig"],
+                self.s3_files_config,
+            )
 
     @classmethod
     def deserialize(cls, deserializer: ShapeDeserializer) -> Self:
@@ -17585,6 +17936,9 @@ class FileSystemConfig:
                     kwargs["local_mount_path"] = de.read_string(
                         _SCHEMA_FILE_SYSTEM_CONFIG.members["LocalMountPath"]
                     )
+
+                case 2:
+                    kwargs["s3_files_config"] = S3FilesConfig.deserialize(de)
 
                 case _:
                     logger.debug("Unexpected member schema: %s", schema)
@@ -17754,13 +18108,13 @@ class LogFormat(UnknownEnumMixin, StrEnum):
 class LoggingConfig:
     """The function's Amazon CloudWatch Logs configuration settings."""
 
-    log_format: LogFormat | None = None
+    log_format: str | None = None
     """
     The format in which Lambda sends your function's application and system
     logs to CloudWatch. Select between plain text and structured JSON.
     """
 
-    application_log_level: ApplicationLogLevel | None = None
+    application_log_level: str | None = None
     """
     Set this property to filter the application logs for your function that
     Lambda sends to CloudWatch. Lambda only sends application logs at the
@@ -17768,7 +18122,7 @@ class LoggingConfig:
     and `FATAL` is the lowest.
     """
 
-    system_log_level: SystemLogLevel | None = None
+    system_log_level: str | None = None
     """
     Set this property to filter the system logs for your function that
     Lambda sends to CloudWatch. Lambda only sends system logs at the
@@ -17926,7 +18280,7 @@ class SnapStart:
     version.
     """
 
-    apply_on: SnapStartApplyOn | None = None
+    apply_on: str | None = None
     """
     Set to `PublishedVersions` to create a snapshot of the initialized
     execution environment when you publish a function version.
@@ -17976,7 +18330,7 @@ class TenancyConfig:
     modified after function creation.
     """
 
-    tenant_isolation_mode: TenantIsolationMode
+    tenant_isolation_mode: str
     """
     Tenant isolation mode allows for invocation to be sent to a
     corresponding execution environment dedicated to a specific tenant ID.
@@ -18031,7 +18385,7 @@ class TracingConfig:
     `Mode` to `Active`.
     """
 
-    mode: TracingMode | None = None
+    mode: str | None = None
     """The tracing mode."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -18211,7 +18565,7 @@ class CreateFunctionInput:
     the function name, it is limited to 64 characters in length.
     """
 
-    runtime: Runtime | None = None
+    runtime: str | None = None
     """
     The identifier of the function's
     [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
@@ -18250,8 +18604,11 @@ class CreateFunctionInput:
     timeout: int | None = None
     """
     The amount of time (in seconds) that Lambda allows a function to run
-    before stopping it. The default is 3 seconds. The maximum allowed value
-    is 900 seconds. For more information, see [Lambda execution
+    before stopping it. The default is 3 seconds, and the maximum allowed
+    value is 900 seconds. For functions using Lambda Managed Instances,
+    asynchronous invocations and event source mapping invocations (except
+    Amazon MQ and Amazon DocumentDB) support a maximum allowed value of
+    5,400 seconds (90 minutes). For more information, see [Lambda execution
     environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html).
     """
 
@@ -18270,7 +18627,7 @@ class CreateFunctionInput:
     creation.
     """
 
-    publish_to: FunctionVersionLatestPublished | None = None
+    publish_to: str | None = None
     """Specifies where to publish the function version or configuration."""
 
     vpc_config: VpcConfig | None = None
@@ -18283,7 +18640,7 @@ class CreateFunctionInput:
     VPC](https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html).
     """
 
-    package_type: PackageType | None = None
+    package_type: str | None = None
     """
     The type of deployment package. Set to `Image` for container image and
     set to `Zip` for .zip file archive.
@@ -18376,7 +18733,7 @@ class CreateFunctionInput:
     that override the values in the container image Dockerfile.
     """
 
-    architectures: list[Architecture] | None = None
+    architectures: list[str] | None = None
     """
     The instruction set architecture that the function supports. Enter a
     string array with one of the valid values (arm64 or x86_64). The default
@@ -19187,13 +19544,13 @@ class SnapStartResponse:
     setting.
     """
 
-    apply_on: SnapStartApplyOn | None = None
+    apply_on: str | None = None
     """
     When set to `PublishedVersions`, Lambda creates a snapshot of the
     execution environment when you publish a function version.
     """
 
-    optimization_status: SnapStartOptimizationStatus | None = None
+    optimization_status: str | None = None
     """
     When you provide a [qualified Amazon Resource Name
     (ARN)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using),
@@ -19292,7 +19649,7 @@ class StateReasonCode(UnknownEnumMixin, StrEnum):
 class TracingConfigResponse:
     """The function's X-Ray tracing configuration."""
 
-    mode: TracingMode | None = None
+    mode: str | None = None
     """The tracing mode."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -19424,7 +19781,7 @@ class CreateFunctionOutput:
     function_arn: str | None = None
     """The function's Amazon Resource Name (ARN)."""
 
-    runtime: Runtime | None = None
+    runtime: str | None = None
     """
     The identifier of the function's
     [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
@@ -19532,7 +19889,7 @@ class CreateFunctionOutput:
     [layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
     """
 
-    state: State | None = None
+    state: str | None = None
     """
     The current state of the function. When the state is `Inactive`, you can
     reactivate the function by invoking it.
@@ -19541,13 +19898,13 @@ class CreateFunctionOutput:
     state_reason: str | None = None
     """The reason for the function's current state."""
 
-    state_reason_code: StateReasonCode | None = None
+    state_reason_code: str | None = None
     """
     The reason code for the function's current state. When the code is
     `Creating`, you can't invoke or modify the function.
     """
 
-    last_update_status: LastUpdateStatus | None = None
+    last_update_status: str | None = None
     """
     The status of the last update that was performed on the function. This
     is first set to `Successful` after function creation completes.
@@ -19556,14 +19913,14 @@ class CreateFunctionOutput:
     last_update_status_reason: str | None = None
     """The reason for the last update that was performed on the function."""
 
-    last_update_status_reason_code: LastUpdateStatusReasonCode | None = None
+    last_update_status_reason_code: str | None = None
     """The reason code for the last update that was performed on the function."""
 
     file_system_configs: list[FileSystemConfig] | None = None
     """
     Connection settings for an [Amazon EFS file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-    or an [Amazon S3 Files file
+    or an [Amazon S3 file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
     """
 
@@ -19573,7 +19930,7 @@ class CreateFunctionOutput:
     signing_job_arn: str | None = None
     """The ARN of the signing job."""
 
-    package_type: PackageType | None = None
+    package_type: str | None = None
     """
     The type of deployment package. Set to `Image` for container image and
     set `Zip` for .zip file archive.
@@ -19582,7 +19939,7 @@ class CreateFunctionOutput:
     image_config_response: ImageConfigResponse | None = None
     """The function's image configuration values."""
 
-    architectures: list[Architecture] | None = None
+    architectures: list[str] | None = None
     """
     The instruction set architecture that the function supports.
     Architecture is a string array with one of the valid values. The default
@@ -19631,6 +19988,16 @@ class CreateFunctionOutput:
     """
     The function's durable execution configuration settings, if the
     function is configured for durability.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -20442,7 +20809,7 @@ class CreateFunctionUrlConfigInput:
     qualifier: str | None = None
     """The alias name."""
 
-    auth_type: FunctionUrlAuthType | None = None
+    auth_type: str | None = None
     """
     The type of authentication that your function URL uses. Set to `AWS_IAM`
     if you want to restrict access to authenticated users only. Set to
@@ -20458,7 +20825,7 @@ class CreateFunctionUrlConfigInput:
     for your function URL.
     """
 
-    invoke_mode: InvokeMode | None = None
+    invoke_mode: str | None = None
     """
     Use one of the following options:
 
@@ -20563,7 +20930,7 @@ class CreateFunctionUrlConfigOutput:
     function_arn: str
     """The Amazon Resource Name (ARN) of your function."""
 
-    auth_type: FunctionUrlAuthType
+    auth_type: str
     """
     The type of authentication that your function URL uses. Set to `AWS_IAM`
     if you want to restrict access to authenticated users only. Set to
@@ -20585,7 +20952,7 @@ class CreateFunctionUrlConfigOutput:
     for your function URL.
     """
 
-    invoke_mode: InvokeMode | None = None
+    invoke_mode: str | None = None
     """
     Use one of the following options:
 
@@ -20597,6 +20964,16 @@ class CreateFunctionUrlConfigOutput:
       become available. Lambda invokes your function using the
       `InvokeWithResponseStream` API operation. The maximum response payload
       size is 200 MB.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -20792,6 +21169,16 @@ class DeleteFunctionCodeSigningConfigInput:
 class DeleteFunctionCodeSigningConfigOutput:
     """Dataclass for DeleteFunctionCodeSigningConfigOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_DELETE_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT, self
@@ -20917,6 +21304,16 @@ class DeleteFunctionConcurrencyInput:
 @dataclass(kw_only=True)
 class DeleteFunctionConcurrencyOutput:
     """Dataclass for DeleteFunctionConcurrencyOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_FUNCTION_CONCURRENCY_OUTPUT, self)
@@ -21049,6 +21446,16 @@ class DeleteFunctionUrlConfigInput:
 @dataclass(kw_only=True)
 class DeleteFunctionUrlConfigOutput:
     """Dataclass for DeleteFunctionUrlConfigOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_FUNCTION_URL_CONFIG_OUTPUT, self)
@@ -21488,7 +21895,7 @@ class FunctionConfiguration:
     function_arn: str | None = None
     """The function's Amazon Resource Name (ARN)."""
 
-    runtime: Runtime | None = None
+    runtime: str | None = None
     """
     The identifier of the function's
     [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
@@ -21596,7 +22003,7 @@ class FunctionConfiguration:
     [layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
     """
 
-    state: State | None = None
+    state: str | None = None
     """
     The current state of the function. When the state is `Inactive`, you can
     reactivate the function by invoking it.
@@ -21605,13 +22012,13 @@ class FunctionConfiguration:
     state_reason: str | None = None
     """The reason for the function's current state."""
 
-    state_reason_code: StateReasonCode | None = None
+    state_reason_code: str | None = None
     """
     The reason code for the function's current state. When the code is
     `Creating`, you can't invoke or modify the function.
     """
 
-    last_update_status: LastUpdateStatus | None = None
+    last_update_status: str | None = None
     """
     The status of the last update that was performed on the function. This
     is first set to `Successful` after function creation completes.
@@ -21620,14 +22027,14 @@ class FunctionConfiguration:
     last_update_status_reason: str | None = None
     """The reason for the last update that was performed on the function."""
 
-    last_update_status_reason_code: LastUpdateStatusReasonCode | None = None
+    last_update_status_reason_code: str | None = None
     """The reason code for the last update that was performed on the function."""
 
     file_system_configs: list[FileSystemConfig] | None = None
     """
     Connection settings for an [Amazon EFS file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-    or an [Amazon S3 Files file
+    or an [Amazon S3 file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
     """
 
@@ -21637,7 +22044,7 @@ class FunctionConfiguration:
     signing_job_arn: str | None = None
     """The ARN of the signing job."""
 
-    package_type: PackageType | None = None
+    package_type: str | None = None
     """
     The type of deployment package. Set to `Image` for container image and
     set `Zip` for .zip file archive.
@@ -21646,7 +22053,7 @@ class FunctionConfiguration:
     image_config_response: ImageConfigResponse | None = None
     """The function's image configuration values."""
 
-    architectures: list[Architecture] | None = None
+    architectures: list[str] | None = None
     """
     The instruction set architecture that the function supports.
     Architecture is a string array with one of the valid values. The default
@@ -22224,6 +22631,16 @@ class GetFunctionOutput:
     concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html).
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_FUNCTION_OUTPUT, self)
 
@@ -22398,6 +22815,16 @@ class GetFunctionCodeSigningConfigOutput:
     the function name, it is limited to 64 characters in length.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT, self)
 
@@ -22547,6 +22974,16 @@ class GetFunctionConcurrencyOutput:
     """
     The number of simultaneous executions that are reserved for the
     function.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -22701,7 +23138,7 @@ class GetFunctionConfigurationOutput:
     function_arn: str | None = None
     """The function's Amazon Resource Name (ARN)."""
 
-    runtime: Runtime | None = None
+    runtime: str | None = None
     """
     The identifier of the function's
     [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
@@ -22809,7 +23246,7 @@ class GetFunctionConfigurationOutput:
     [layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
     """
 
-    state: State | None = None
+    state: str | None = None
     """
     The current state of the function. When the state is `Inactive`, you can
     reactivate the function by invoking it.
@@ -22818,13 +23255,13 @@ class GetFunctionConfigurationOutput:
     state_reason: str | None = None
     """The reason for the function's current state."""
 
-    state_reason_code: StateReasonCode | None = None
+    state_reason_code: str | None = None
     """
     The reason code for the function's current state. When the code is
     `Creating`, you can't invoke or modify the function.
     """
 
-    last_update_status: LastUpdateStatus | None = None
+    last_update_status: str | None = None
     """
     The status of the last update that was performed on the function. This
     is first set to `Successful` after function creation completes.
@@ -22833,14 +23270,14 @@ class GetFunctionConfigurationOutput:
     last_update_status_reason: str | None = None
     """The reason for the last update that was performed on the function."""
 
-    last_update_status_reason_code: LastUpdateStatusReasonCode | None = None
+    last_update_status_reason_code: str | None = None
     """The reason code for the last update that was performed on the function."""
 
     file_system_configs: list[FileSystemConfig] | None = None
     """
     Connection settings for an [Amazon EFS file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-    or an [Amazon S3 Files file
+    or an [Amazon S3 file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
     """
 
@@ -22850,7 +23287,7 @@ class GetFunctionConfigurationOutput:
     signing_job_arn: str | None = None
     """The ARN of the signing job."""
 
-    package_type: PackageType | None = None
+    package_type: str | None = None
     """
     The type of deployment package. Set to `Image` for container image and
     set `Zip` for .zip file archive.
@@ -22859,7 +23296,7 @@ class GetFunctionConfigurationOutput:
     image_config_response: ImageConfigResponse | None = None
     """The function's image configuration values."""
 
-    architectures: list[Architecture] | None = None
+    architectures: list[str] | None = None
     """
     The instruction set architecture that the function supports.
     Architecture is a string array with one of the valid values. The default
@@ -22908,6 +23345,16 @@ class GetFunctionConfigurationOutput:
     """
     The function's durable execution configuration settings, if the
     function is configured for durability.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -23490,7 +23937,7 @@ class RecursiveLoop(UnknownEnumMixin, StrEnum):
 class GetFunctionRecursionConfigOutput:
     """Dataclass for GetFunctionRecursionConfigOutput structure."""
 
-    recursive_loop: RecursiveLoop | None = None
+    recursive_loop: str | None = None
     """
     If your function's recursive loop detection configuration is `Allow`,
     Lambda doesn't take any action when it detects your function being
@@ -23503,6 +23950,16 @@ class GetFunctionRecursionConfigOutput:
     By default, Lambda sets your function's configuration to `Terminate`.
     You can update this configuration using the PutFunctionRecursionConfig
     action.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -23716,6 +24173,16 @@ class GetFunctionScalingConfigOutput:
     requested_function_scaling_config: FunctionScalingConfig | None = None
     """The scaling configuration that was requested for the function."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_FUNCTION_SCALING_CONFIG_OUTPUT, self)
 
@@ -23887,7 +24354,7 @@ class GetFunctionUrlConfigOutput:
     function_arn: str
     """The Amazon Resource Name (ARN) of your function."""
 
-    auth_type: FunctionUrlAuthType
+    auth_type: str
     """
     The type of authentication that your function URL uses. Set to `AWS_IAM`
     if you want to restrict access to authenticated users only. Set to
@@ -23915,7 +24382,7 @@ class GetFunctionUrlConfigOutput:
     for your function URL.
     """
 
-    invoke_mode: InvokeMode | None = None
+    invoke_mode: str | None = None
     """
     Use one of the following options:
 
@@ -23927,6 +24394,16 @@ class GetFunctionUrlConfigOutput:
       become available. Lambda invokes your function using the
       `InvokeWithResponseStream` API operation. The maximum response payload
       size is 200 MB.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -24138,6 +24615,16 @@ class GetPolicyOutput:
     revision_id: str | None = None
     """A unique identifier for the current revision of the policy."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_POLICY_OUTPUT, self)
 
@@ -24294,7 +24781,7 @@ class UpdateRuntimeOn(UnknownEnumMixin, StrEnum):
 class GetRuntimeManagementConfigOutput:
     """Dataclass for GetRuntimeManagementConfigOutput structure."""
 
-    update_runtime_on: UpdateRuntimeOn | None = None
+    update_runtime_on: str | None = None
     """The current runtime update mode of the function."""
 
     function_arn: str | None = None
@@ -24305,6 +24792,16 @@ class GetRuntimeManagementConfigOutput:
     The ARN of the runtime the function is configured to use. If the runtime
     update mode is **Manual**, the ARN is returned, otherwise `null` is
     returned.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -25432,7 +25929,7 @@ class InvokeInput:
     function name, it is limited to 64 characters in length.
     """
 
-    invocation_type: InvocationType | None = None
+    invocation_type: str | None = None
     """
     Choose from the following options.
 
@@ -25449,7 +25946,7 @@ class InvokeInput:
       has permission to invoke the function.
     """
 
-    log_type: LogType | None = None
+    log_type: str | None = None
     """
     Set to `Tail` to include the execution log in the response. Applies to
     synchronously invoked functions only.
@@ -25631,6 +26128,16 @@ class InvokeOutput:
     The ARN of the durable execution that was started. This is returned when
     invoking a durable function and provides a unique identifier for
     tracking the execution.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -26871,6 +27378,16 @@ class InvokeAsyncOutput:
     status: int = 0
     """The status code."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_INVOKE_ASYNC_OUTPUT, self)
 
@@ -27049,7 +27566,7 @@ class InvokeWithResponseStreamInput:
     the function name, it is limited to 64 characters in length.
     """
 
-    log_type: LogType | None = None
+    log_type: str | None = None
     """
     Set to `Tail` to include the execution log in the response. Applies to
     synchronously invoked functions only.
@@ -27076,7 +27593,7 @@ class InvokeWithResponseStreamInput:
     tenant_id: str | None = None
     """The identifier of the tenant in a multi-tenant Lambda function."""
 
-    invocation_type: ResponseStreamingInvocationType | None = None
+    invocation_type: str | None = None
     """
     Use one of the following options:
 
@@ -27469,6 +27986,16 @@ class InvokeWithResponseStreamOutput:
     response_stream_content_type: str | None = None
     """The type of data the stream is returning."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_INVOKE_WITH_RESPONSE_STREAM_OUTPUT, self)
 
@@ -27684,7 +28211,7 @@ INVOKE_WITH_RESPONSE_STREAM = APIOperation(
 
 
 def _serialize_execution_status_list(
-    serializer: ShapeSerializer, schema: Schema, value: list[ExecutionStatus]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -27694,8 +28221,8 @@ def _serialize_execution_status_list(
 
 def _deserialize_execution_status_list(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[ExecutionStatus]:
-    result: list[ExecutionStatus] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -27731,7 +28258,7 @@ class ListDurableExecutionsByFunctionInput:
     string are returned.
     """
 
-    statuses: list[ExecutionStatus] | None = None
+    statuses: list[str] | None = None
     """
     Filter executions by status. Valid values: RUNNING, SUCCEEDED, FAILED,
     TIMED_OUT, STOPPED.
@@ -27929,7 +28456,7 @@ class Execution:
     function_arn: str
     """The Amazon Resource Name (ARN) of the Lambda function."""
 
-    status: ExecutionStatus
+    status: str
     """The current status of the durable execution."""
 
     start_timestamp: datetime
@@ -28082,6 +28609,16 @@ class ListDurableExecutionsByFunctionOutput:
     there are more results available.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_LIST_DURABLE_EXECUTIONS_BY_FUNCTION_OUTPUT, self
@@ -28186,7 +28723,7 @@ class ListFunctionsInput:
     `ALL`.
     """
 
-    function_version: FunctionVersion | None = None
+    function_version: str | None = None
     """
     Set to `ALL` to include entries for all published versions of each
     function.
@@ -28303,6 +28840,16 @@ class ListFunctionsOutput:
 
     functions: list[FunctionConfiguration] | None = None
     """A list of Lambda functions."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_FUNCTIONS_OUTPUT, self)
@@ -28484,7 +29031,7 @@ class FunctionUrlConfig:
     format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
     """
 
-    auth_type: FunctionUrlAuthType
+    auth_type: str
     """
     The type of authentication that your function URL uses. Set to `AWS_IAM`
     if you want to restrict access to authenticated users only. Set to
@@ -28501,7 +29048,7 @@ class FunctionUrlConfig:
     for your function URL.
     """
 
-    invoke_mode: InvokeMode | None = None
+    invoke_mode: str | None = None
     """
     Use one of the following options:
 
@@ -28641,6 +29188,16 @@ class ListFunctionUrlConfigsOutput:
 
     next_marker: str | None = None
     """The pagination token that's included if more results are available."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_FUNCTION_URL_CONFIGS_OUTPUT, self)
@@ -28849,7 +29406,7 @@ class ProvisionedConcurrencyConfigListItem:
     function versions.
     """
 
-    status: ProvisionedConcurrencyStatusEnum | None = None
+    status: str | None = None
     """The status of the allocation process."""
 
     status_reason: str | None = None
@@ -29034,6 +29591,16 @@ class ListProvisionedConcurrencyConfigsOutput:
 
     next_marker: str | None = None
     """The pagination token that's included if more results are available."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -29223,6 +29790,16 @@ class PutFunctionCodeSigningConfigOutput:
     the function name, it is limited to 64 characters in length.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT, self)
 
@@ -29397,6 +29974,16 @@ class PutFunctionConcurrencyOutput:
     concurrency](https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html).
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_FUNCTION_CONCURRENCY_OUTPUT, self)
 
@@ -29490,7 +30077,7 @@ class PutFunctionRecursionConfigInput:
     the function name, it is limited to 64 characters in length.
     """
 
-    recursive_loop: RecursiveLoop | None = None
+    recursive_loop: str | None = None
     """
     If you set your function's recursive loop detection configuration to
     `Allow`, Lambda doesn't take any action when it detects your function
@@ -29571,7 +30158,7 @@ class PutFunctionRecursionConfigInput:
 class PutFunctionRecursionConfigOutput:
     """Dataclass for PutFunctionRecursionConfigOutput structure."""
 
-    recursive_loop: RecursiveLoop | None = None
+    recursive_loop: str | None = None
     """
     The status of your function's recursive loop detection configuration.
 
@@ -29581,6 +30168,16 @@ class PutFunctionRecursionConfigOutput:
     When this value is set to `Terminate` and Lambda detects your function
     being invoked as part of a recursive loop, it stops your function being
     invoked and notifies you.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -29738,10 +30335,20 @@ class PutFunctionScalingConfigInput:
 class PutFunctionScalingConfigOutput:
     """Dataclass for PutFunctionScalingConfigOutput structure."""
 
-    function_state: State | None = None
+    function_state: str | None = None
     """
     The current state of the function after applying the scaling
     configuration.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -29844,7 +30451,7 @@ class PutRuntimeManagementConfigInput:
     `$LATEST` version is returned.
     """
 
-    update_runtime_on: UpdateRuntimeOn | None = None
+    update_runtime_on: str | None = None
     """
     Specify the runtime update mode.
 
@@ -29961,7 +30568,7 @@ class PutRuntimeManagementConfigInput:
 class PutRuntimeManagementConfigOutput:
     """Dataclass for PutRuntimeManagementConfigOutput structure."""
 
-    update_runtime_on: UpdateRuntimeOn
+    update_runtime_on: str
     """The runtime update mode."""
 
     function_arn: str
@@ -29972,6 +30579,16 @@ class PutRuntimeManagementConfigOutput:
     The ARN of the runtime the function is configured to use. If the runtime
     update mode is **manual**, the ARN is returned, otherwise `null` is
     returned.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -30122,7 +30739,7 @@ class UpdateFunctionCodeInput:
     use.
     """
 
-    s3_object_storage_mode: S3ObjectStorageMode | None = None
+    s3_object_storage_mode: str | None = None
     """
     Specifies how the deployment package is stored. Valid values:
 
@@ -30139,7 +30756,7 @@ class UpdateFunctionCodeInput:
     function defined with a .zip file archive.
     """
 
-    architectures: list[Architecture] | None = None
+    architectures: list[str] | None = None
     """
     The instruction set architecture that the function supports. Enter a
     string array with one of the valid values (arm64 or x86_64). The default
@@ -30152,7 +30769,7 @@ class UpdateFunctionCodeInput:
     code. This has the same effect as calling PublishVersion separately.
     """
 
-    publish_to: FunctionVersionLatestPublished | None = None
+    publish_to: str | None = None
     """Specifies where to publish the function version or configuration."""
 
     dry_run: bool = False
@@ -30350,7 +30967,7 @@ class UpdateFunctionCodeOutput:
     function_arn: str | None = None
     """The function's Amazon Resource Name (ARN)."""
 
-    runtime: Runtime | None = None
+    runtime: str | None = None
     """
     The identifier of the function's
     [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
@@ -30458,7 +31075,7 @@ class UpdateFunctionCodeOutput:
     [layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
     """
 
-    state: State | None = None
+    state: str | None = None
     """
     The current state of the function. When the state is `Inactive`, you can
     reactivate the function by invoking it.
@@ -30467,13 +31084,13 @@ class UpdateFunctionCodeOutput:
     state_reason: str | None = None
     """The reason for the function's current state."""
 
-    state_reason_code: StateReasonCode | None = None
+    state_reason_code: str | None = None
     """
     The reason code for the function's current state. When the code is
     `Creating`, you can't invoke or modify the function.
     """
 
-    last_update_status: LastUpdateStatus | None = None
+    last_update_status: str | None = None
     """
     The status of the last update that was performed on the function. This
     is first set to `Successful` after function creation completes.
@@ -30482,14 +31099,14 @@ class UpdateFunctionCodeOutput:
     last_update_status_reason: str | None = None
     """The reason for the last update that was performed on the function."""
 
-    last_update_status_reason_code: LastUpdateStatusReasonCode | None = None
+    last_update_status_reason_code: str | None = None
     """The reason code for the last update that was performed on the function."""
 
     file_system_configs: list[FileSystemConfig] | None = None
     """
     Connection settings for an [Amazon EFS file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-    or an [Amazon S3 Files file
+    or an [Amazon S3 file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
     """
 
@@ -30499,7 +31116,7 @@ class UpdateFunctionCodeOutput:
     signing_job_arn: str | None = None
     """The ARN of the signing job."""
 
-    package_type: PackageType | None = None
+    package_type: str | None = None
     """
     The type of deployment package. Set to `Image` for container image and
     set `Zip` for .zip file archive.
@@ -30508,7 +31125,7 @@ class UpdateFunctionCodeOutput:
     image_config_response: ImageConfigResponse | None = None
     """The function's image configuration values."""
 
-    architectures: list[Architecture] | None = None
+    architectures: list[str] | None = None
     """
     The instruction set architecture that the function supports.
     Architecture is a string array with one of the valid values. The default
@@ -30557,6 +31174,16 @@ class UpdateFunctionCodeOutput:
     """
     The function's durable execution configuration settings, if the
     function is configured for durability.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -31123,8 +31750,11 @@ class UpdateFunctionConfigurationInput:
     timeout: int | None = None
     """
     The amount of time (in seconds) that Lambda allows a function to run
-    before stopping it. The default is 3 seconds. The maximum allowed value
-    is 900 seconds. For more information, see [Lambda execution
+    before stopping it. The default is 3 seconds, and the maximum allowed
+    value is 900 seconds. For functions using Lambda Managed Instances,
+    asynchronous invocations and event source mapping invocations (except
+    Amazon MQ and Amazon DocumentDB) support a maximum allowed value of
+    5,400 seconds (90 minutes). For more information, see [Lambda execution
     environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html).
     """
 
@@ -31153,7 +31783,7 @@ class UpdateFunctionConfigurationInput:
     execution.
     """
 
-    runtime: Runtime | None = None
+    runtime: str | None = None
     """
     The identifier of the function's
     [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
@@ -31546,7 +32176,7 @@ class UpdateFunctionConfigurationOutput:
     function_arn: str | None = None
     """The function's Amazon Resource Name (ARN)."""
 
-    runtime: Runtime | None = None
+    runtime: str | None = None
     """
     The identifier of the function's
     [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
@@ -31654,7 +32284,7 @@ class UpdateFunctionConfigurationOutput:
     [layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
     """
 
-    state: State | None = None
+    state: str | None = None
     """
     The current state of the function. When the state is `Inactive`, you can
     reactivate the function by invoking it.
@@ -31663,13 +32293,13 @@ class UpdateFunctionConfigurationOutput:
     state_reason: str | None = None
     """The reason for the function's current state."""
 
-    state_reason_code: StateReasonCode | None = None
+    state_reason_code: str | None = None
     """
     The reason code for the function's current state. When the code is
     `Creating`, you can't invoke or modify the function.
     """
 
-    last_update_status: LastUpdateStatus | None = None
+    last_update_status: str | None = None
     """
     The status of the last update that was performed on the function. This
     is first set to `Successful` after function creation completes.
@@ -31678,14 +32308,14 @@ class UpdateFunctionConfigurationOutput:
     last_update_status_reason: str | None = None
     """The reason for the last update that was performed on the function."""
 
-    last_update_status_reason_code: LastUpdateStatusReasonCode | None = None
+    last_update_status_reason_code: str | None = None
     """The reason code for the last update that was performed on the function."""
 
     file_system_configs: list[FileSystemConfig] | None = None
     """
     Connection settings for an [Amazon EFS file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-    or an [Amazon S3 Files file
+    or an [Amazon S3 file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
     """
 
@@ -31695,7 +32325,7 @@ class UpdateFunctionConfigurationOutput:
     signing_job_arn: str | None = None
     """The ARN of the signing job."""
 
-    package_type: PackageType | None = None
+    package_type: str | None = None
     """
     The type of deployment package. Set to `Image` for container image and
     set `Zip` for .zip file archive.
@@ -31704,7 +32334,7 @@ class UpdateFunctionConfigurationOutput:
     image_config_response: ImageConfigResponse | None = None
     """The function's image configuration values."""
 
-    architectures: list[Architecture] | None = None
+    architectures: list[str] | None = None
     """
     The instruction set architecture that the function supports.
     Architecture is a string array with one of the valid values. The default
@@ -31753,6 +32383,16 @@ class UpdateFunctionConfigurationOutput:
     """
     The function's durable execution configuration settings, if the
     function is configured for durability.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -32357,7 +32997,7 @@ class UpdateFunctionUrlConfigInput:
     qualifier: str | None = None
     """The alias name."""
 
-    auth_type: FunctionUrlAuthType | None = None
+    auth_type: str | None = None
     """
     The type of authentication that your function URL uses. Set to `AWS_IAM`
     if you want to restrict access to authenticated users only. Set to
@@ -32373,7 +33013,7 @@ class UpdateFunctionUrlConfigInput:
     for your function URL.
     """
 
-    invoke_mode: InvokeMode | None = None
+    invoke_mode: str | None = None
     """
     Use one of the following options:
 
@@ -32478,7 +33118,7 @@ class UpdateFunctionUrlConfigOutput:
     function_arn: str
     """The Amazon Resource Name (ARN) of your function."""
 
-    auth_type: FunctionUrlAuthType
+    auth_type: str
     """
     The type of authentication that your function URL uses. Set to `AWS_IAM`
     if you want to restrict access to authenticated users only. Set to
@@ -32506,7 +33146,7 @@ class UpdateFunctionUrlConfigOutput:
     for your function URL.
     """
 
-    invoke_mode: InvokeMode | None = None
+    invoke_mode: str | None = None
     """
     Use one of the following options:
 
@@ -32518,6 +33158,16 @@ class UpdateFunctionUrlConfigOutput:
       become available. Lambda invokes your function using the
       `InvokeWithResponseStream` API operation. The maximum response payload
       size is 200 MB.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -32799,6 +33449,16 @@ class CreateAliasOutput:
     revision_id: str | None = None
     """A unique identifier that changes when you update the alias."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_CREATE_ALIAS_OUTPUT, self)
 
@@ -32987,6 +33647,16 @@ class DeleteAliasInput:
 class DeleteAliasOutput:
     """Dataclass for DeleteAliasOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_ALIAS_OUTPUT, self)
 
@@ -33135,6 +33805,16 @@ class GetAliasOutput:
 
     revision_id: str | None = None
     """A unique identifier that changes when you update the alias."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_ALIAS_OUTPUT, self)
@@ -33351,6 +34031,16 @@ class ListAliasesOutput:
 
     aliases: list[AliasConfiguration] | None = None
     """A list of aliases."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_ALIASES_OUTPUT, self)
@@ -33576,6 +34266,16 @@ class UpdateAliasOutput:
     revision_id: str | None = None
     """A unique identifier that changes when you update the alias."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UPDATE_ALIAS_OUTPUT, self)
 
@@ -33794,6 +34494,16 @@ class ListVersionsByFunctionOutput:
     versions: list[FunctionConfiguration] | None = None
     """A list of Lambda function versions."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_VERSIONS_BY_FUNCTION_OUTPUT, self)
 
@@ -33912,7 +34622,7 @@ class PublishVersionInput:
     configuration has changed since you last updated it.
     """
 
-    publish_to: FunctionVersionLatestPublished | None = None
+    publish_to: str | None = None
     """Specifies where to publish the function version or configuration."""
 
     def serialize(self, serializer: ShapeSerializer):
@@ -33999,7 +34709,7 @@ class PublishVersionOutput:
     function_arn: str | None = None
     """The function's Amazon Resource Name (ARN)."""
 
-    runtime: Runtime | None = None
+    runtime: str | None = None
     """
     The identifier of the function's
     [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
@@ -34107,7 +34817,7 @@ class PublishVersionOutput:
     [layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
     """
 
-    state: State | None = None
+    state: str | None = None
     """
     The current state of the function. When the state is `Inactive`, you can
     reactivate the function by invoking it.
@@ -34116,13 +34826,13 @@ class PublishVersionOutput:
     state_reason: str | None = None
     """The reason for the function's current state."""
 
-    state_reason_code: StateReasonCode | None = None
+    state_reason_code: str | None = None
     """
     The reason code for the function's current state. When the code is
     `Creating`, you can't invoke or modify the function.
     """
 
-    last_update_status: LastUpdateStatus | None = None
+    last_update_status: str | None = None
     """
     The status of the last update that was performed on the function. This
     is first set to `Successful` after function creation completes.
@@ -34131,14 +34841,14 @@ class PublishVersionOutput:
     last_update_status_reason: str | None = None
     """The reason for the last update that was performed on the function."""
 
-    last_update_status_reason_code: LastUpdateStatusReasonCode | None = None
+    last_update_status_reason_code: str | None = None
     """The reason code for the last update that was performed on the function."""
 
     file_system_configs: list[FileSystemConfig] | None = None
     """
     Connection settings for an [Amazon EFS file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-    or an [Amazon S3 Files file
+    or an [Amazon S3 file
     system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
     """
 
@@ -34148,7 +34858,7 @@ class PublishVersionOutput:
     signing_job_arn: str | None = None
     """The ARN of the signing job."""
 
-    package_type: PackageType | None = None
+    package_type: str | None = None
     """
     The type of deployment package. Set to `Image` for container image and
     set `Zip` for .zip file archive.
@@ -34157,7 +34867,7 @@ class PublishVersionOutput:
     image_config_response: ImageConfigResponse | None = None
     """The function's image configuration values."""
 
-    architectures: list[Architecture] | None = None
+    architectures: list[str] | None = None
     """
     The instruction set architecture that the function supports.
     Architecture is a string array with one of the valid values. The default
@@ -34206,6 +34916,16 @@ class PublishVersionOutput:
     """
     The function's durable execution configuration settings, if the
     function is configured for durability.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -34735,6 +35455,16 @@ class GetAccountSettingsOutput:
     account_usage: AccountUsage | None = None
     """The number of functions and amount of storage in use."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_ACCOUNT_SETTINGS_OUTPUT, self)
 
@@ -34909,6 +35639,16 @@ class GetFunctionEventInvokeConfigOutput:
     Note:
         S3 buckets are supported only for on-failure destinations. To retain
         records of successful invocations, use another destination type.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -35089,6 +35829,16 @@ class GetResourcePolicyOutput:
     operation acts on the expected version of the policy.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_RESOURCE_POLICY_OUTPUT, self)
 
@@ -35165,13 +35915,13 @@ GET_RESOURCE_POLICY = APIOperation(
 class ListLayersInput:
     """Dataclass for ListLayersInput structure."""
 
-    compatible_architecture: Architecture | None = None
+    compatible_architecture: str | None = None
     """
     The compatible [instruction set
     architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
     """
 
-    compatible_runtime: Runtime | None = None
+    compatible_runtime: str | None = None
     """
     A runtime identifier.
 
@@ -35257,7 +36007,7 @@ class ListLayersInput:
 
 
 def _serialize_compatible_architectures(
-    serializer: ShapeSerializer, schema: Schema, value: list[Architecture]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -35267,8 +36017,8 @@ def _serialize_compatible_architectures(
 
 def _deserialize_compatible_architectures(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[Architecture]:
-    result: list[Architecture] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -35283,7 +36033,7 @@ def _deserialize_compatible_architectures(
 
 
 def _serialize_compatible_runtimes(
-    serializer: ShapeSerializer, schema: Schema, value: list[Runtime]
+    serializer: ShapeSerializer, schema: Schema, value: list[str]
 ) -> None:
     member_schema = schema.members["member"]
     with serializer.begin_list(schema, len(value)) as ls:
@@ -35293,8 +36043,8 @@ def _serialize_compatible_runtimes(
 
 def _deserialize_compatible_runtimes(
     deserializer: ShapeDeserializer, schema: Schema
-) -> list[Runtime]:
-    result: list[Runtime] = []
+) -> list[str]:
+    result: list[str] = []
     member_schema = schema.members["member"]
 
     def _read_value(d: ShapeDeserializer):
@@ -35330,13 +36080,13 @@ class LayerVersionsListItem:
     `2018-11-27T15:10:45.123+0000`.
     """
 
-    compatible_architectures: list[Architecture] | None = None
+    compatible_architectures: list[str] | None = None
     """
     A list of compatible [instruction set
     architectures](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
     """
 
-    compatible_runtimes: list[Runtime] | None = None
+    compatible_runtimes: list[str] | None = None
     """
     The layer's compatible runtimes.
 
@@ -35560,6 +36310,16 @@ class ListLayersOutput:
     layers: list[LayersListItem] | None = None
     """A list of function layers."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_LAYERS_OUTPUT, self)
 
@@ -35682,6 +36442,16 @@ class DeleteLayerVersionInput:
 @dataclass(kw_only=True)
 class DeleteLayerVersionOutput:
     """Dataclass for DeleteLayerVersionOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_DELETE_LAYER_VERSION_OUTPUT, self)
@@ -35927,13 +36697,13 @@ class GetLayerVersionOutput:
     version: int = 0
     """The version number."""
 
-    compatible_architectures: list[Architecture] | None = None
+    compatible_architectures: list[str] | None = None
     """
     A list of compatible [instruction set
     architectures](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
     """
 
-    compatible_runtimes: list[Runtime] | None = None
+    compatible_runtimes: list[str] | None = None
     """
     The layer's compatible runtimes.
 
@@ -35947,6 +36717,16 @@ class GetLayerVersionOutput:
 
     license_info: str | None = None
     """The layer's software license."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_LAYER_VERSION_OUTPUT, self)
@@ -36164,13 +36944,13 @@ class GetLayerVersionByArnOutput:
     version: int = 0
     """The version number."""
 
-    compatible_architectures: list[Architecture] | None = None
+    compatible_architectures: list[str] | None = None
     """
     A list of compatible [instruction set
     architectures](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
     """
 
-    compatible_runtimes: list[Runtime] | None = None
+    compatible_runtimes: list[str] | None = None
     """
     The layer's compatible runtimes.
 
@@ -36184,6 +36964,16 @@ class GetLayerVersionByArnOutput:
 
     license_info: str | None = None
     """The layer's software license."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_LAYER_VERSION_BY_ARN_OUTPUT, self)
@@ -36410,6 +37200,16 @@ class GetLayerVersionPolicyOutput:
     revision_id: str | None = None
     """A unique identifier for the current revision of the policy."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_GET_LAYER_VERSION_POLICY_OUTPUT, self)
 
@@ -36488,13 +37288,13 @@ GET_LAYER_VERSION_POLICY = APIOperation(
 class ListLayerVersionsInput:
     """Dataclass for ListLayerVersionsInput structure."""
 
-    compatible_architecture: Architecture | None = None
+    compatible_architecture: str | None = None
     """
     The compatible [instruction set
     architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
     """
 
-    compatible_runtime: Runtime | None = None
+    compatible_runtime: str | None = None
     """
     A runtime identifier.
 
@@ -36634,6 +37434,16 @@ class ListLayerVersionsOutput:
     layer_versions: list[LayerVersionsListItem] | None = None
     """A list of versions."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_LAYER_VERSIONS_OUTPUT, self)
 
@@ -36726,7 +37536,7 @@ class LayerVersionContentInput:
     s3_object_version: str | None = None
     """For versioned objects, the version of the layer archive object to use."""
 
-    s3_object_storage_mode: S3ObjectStorageMode | None = None
+    s3_object_storage_mode: str | None = None
     """
     Specifies how the layer archive is stored. Valid values:
 
@@ -36834,13 +37644,13 @@ class PublishLayerVersionInput:
     content: LayerVersionContentInput | None = None
     """The function layer archive."""
 
-    compatible_architectures: list[Architecture] | None = None
+    compatible_architectures: list[str] | None = None
     """
     A list of compatible [instruction set
     architectures](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
     """
 
-    compatible_runtimes: list[Runtime] | None = None
+    compatible_runtimes: list[str] | None = None
     """
     A list of compatible [function
     runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
@@ -36985,13 +37795,13 @@ class PublishLayerVersionOutput:
     version: int = 0
     """The version number."""
 
-    compatible_architectures: list[Architecture] | None = None
+    compatible_architectures: list[str] | None = None
     """
     A list of compatible [instruction set
     architectures](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
     """
 
-    compatible_runtimes: list[Runtime] | None = None
+    compatible_runtimes: list[str] | None = None
     """
     The layer's compatible runtimes.
 
@@ -37005,6 +37815,16 @@ class PublishLayerVersionOutput:
 
     license_info: str | None = None
     """The layer's software license."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUBLISH_LAYER_VERSION_OUTPUT, self)
@@ -37263,6 +38083,16 @@ class RemoveLayerVersionPermissionInput:
 @dataclass(kw_only=True)
 class RemoveLayerVersionPermissionOutput:
     """Dataclass for RemoveLayerVersionPermissionOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_REMOVE_LAYER_VERSION_PERMISSION_OUTPUT, self)
@@ -37575,6 +38405,16 @@ class ListFunctionEventInvokeConfigsOutput:
     next_marker: str | None = None
     """The pagination token that's included if more results are available."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_FUNCTION_EVENT_INVOKE_CONFIGS_OUTPUT, self)
 
@@ -37707,6 +38547,16 @@ class ListTagsOutput:
 
     tags: dict[str, str] | None = None
     """The function's tags."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_LIST_TAGS_OUTPUT, self)
@@ -37875,6 +38725,16 @@ class RemovePermissionInput:
 class RemovePermissionOutput:
     """Dataclass for RemovePermissionOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_REMOVE_PERMISSION_OUTPUT, self)
 
@@ -38018,6 +38878,16 @@ class DeleteProvisionedConcurrencyConfigInput:
 @dataclass(kw_only=True)
 class DeleteProvisionedConcurrencyConfigOutput:
     """Dataclass for DeleteProvisionedConcurrencyConfigOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -38173,7 +39043,7 @@ class GetProvisionedConcurrencyConfigOutput:
     function versions.
     """
 
-    status: ProvisionedConcurrencyStatusEnum | None = None
+    status: str | None = None
     """The status of the allocation process."""
 
     status_reason: str | None = None
@@ -38186,6 +39056,16 @@ class GetProvisionedConcurrencyConfigOutput:
     """
     The date and time that a user last updated the configuration, in [ISO
     8601 format](https://www.iso.org/iso-8601-date-and-time-format.html).
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -38519,7 +39399,7 @@ class PutProvisionedConcurrencyConfigOutput:
     available_provisioned_concurrent_executions: int | None = None
     """The amount of provisioned concurrency available."""
 
-    status: ProvisionedConcurrencyStatusEnum | None = None
+    status: str | None = None
     """The status of the allocation process."""
 
     status_reason: str | None = None
@@ -38532,6 +39412,16 @@ class PutProvisionedConcurrencyConfigOutput:
     """
     The date and time that a user last updated the configuration, in [ISO
     8601 format](https://www.iso.org/iso-8601-date-and-time-format.html).
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):
@@ -38875,6 +39765,16 @@ class PutFunctionEventInvokeConfigOutput:
         records of successful invocations, use another destination type.
     """
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT, self)
 
@@ -39092,6 +39992,16 @@ class PutResourcePolicyOutput:
     revision_id: str | None = None
     """The revision ID of the policy that Lambda adds to your Lambda resource."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_PUT_RESOURCE_POLICY_OUTPUT, self)
 
@@ -39296,6 +40206,16 @@ class SendDurableExecutionCallbackFailureInput:
 class SendDurableExecutionCallbackFailureOutput:
     """Dataclass for SendDurableExecutionCallbackFailureOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_SEND_DURABLE_EXECUTION_CALLBACK_FAILURE_OUTPUT, self
@@ -39419,6 +40339,16 @@ class SendDurableExecutionCallbackHeartbeatInput:
 @dataclass(kw_only=True)
 class SendDurableExecutionCallbackHeartbeatOutput:
     """Dataclass for SendDurableExecutionCallbackHeartbeatOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
@@ -39551,6 +40481,16 @@ class SendDurableExecutionCallbackSuccessInput:
 class SendDurableExecutionCallbackSuccessOutput:
     """Dataclass for SendDurableExecutionCallbackSuccessOutput structure."""
 
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(
             _SCHEMA_SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS_OUTPUT, self
@@ -39678,6 +40618,16 @@ class TagResourceInput:
 @dataclass(kw_only=True)
 class TagResourceOutput:
     """Dataclass for TagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_TAG_RESOURCE_OUTPUT, self)
@@ -39818,6 +40768,16 @@ class UntagResourceInput:
 @dataclass(kw_only=True)
 class UntagResourceOutput:
     """Dataclass for UntagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
     def serialize(self, serializer: ShapeSerializer):
         serializer.write_struct(_SCHEMA_UNTAG_RESOURCE_OUTPUT, self)
@@ -40064,6 +41024,16 @@ class UpdateFunctionEventInvokeConfigOutput:
     Note:
         S3 buckets are supported only for on-failure destinations. To retain
         records of successful invocations, use another destination type.
+    """
+
+    response_metadata: ResponseMetadata = field(
+        default=EMPTY_RESPONSE_METADATA, repr=False, compare=False
+    )
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
     def serialize(self, serializer: ShapeSerializer):

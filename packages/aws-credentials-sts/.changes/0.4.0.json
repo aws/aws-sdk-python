@@ -1,0 +1,20 @@
+{
+  "changes": [
+    {
+      "type": "dependency",
+      "description": "Bump `aws-sdk-sts` from `~=0.11.0` to `~=0.12.0`."
+    },
+    {
+      "type": "dependency",
+      "description": "Bump `smithy-aws-core` from `~=0.11.0` to `~=0.12.0`."
+    },
+    {
+      "type": "dependency",
+      "description": "Bump `smithy-core` from `~=0.8.0` to `~=0.9.0`."
+    },
+    {
+      "type": "dependency",
+      "description": "Bump `smithy-http` from `~=0.5.0` to `~=0.6.0`."
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Polly"
+site_name = "AWS SDK for Python v4 - Polly"
 site_description = "Documentation for AWS Polly Client"
 site_author = "Amazon Web Services"
 

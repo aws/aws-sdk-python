@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Bedrock Agentcore Control"
+site_name = "AWS SDK for Python v4 - Bedrock Agentcore Control"
 site_description = "Documentation for AWS Bedrock Agentcore Control Client"
 site_author = "Amazon Web Services"
 

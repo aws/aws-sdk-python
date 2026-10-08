@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Dynamodb"
+site_name = "AWS SDK for Python v4 - Dynamodb"
 site_description = "Documentation for AWS Dynamodb Client"
 site_author = "Amazon Web Services"
 

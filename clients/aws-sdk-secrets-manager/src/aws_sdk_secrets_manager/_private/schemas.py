@@ -9,26 +9,11 @@ from smithy_core.traits import Trait
 
 
 KMS_KEY_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#KmsKeyIdType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 2048}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.secretsmanager#KmsKeyIdType"), shape_type=ShapeType.STRING
 )
 
 REGION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RegionType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^([a-z]+-)+\\d+$"),
-    ],
+    id=ShapeID("com.amazonaws.secretsmanager#RegionType"), shape_type=ShapeType.STRING
 )
 
 REPLICA_REGION_TYPE = Schema.collection(
@@ -42,9 +27,6 @@ REPLICA_REGION_TYPE = Schema.collection(
 ADD_REPLICA_REGION_LIST_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.secretsmanager#AddReplicaRegionListType"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1}))
-    ],
     members={"member": {"target": REPLICA_REGION_TYPE}},
 )
 
@@ -57,14 +39,7 @@ ERROR_MESSAGE = Schema(
 )
 
 SECRET_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretIdType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.secretsmanager#SecretIdType"), shape_type=ShapeType.STRING
 )
 
 API_ERROR_TYPE = Schema.collection(
@@ -85,82 +60,30 @@ API_ERROR_LIST_TYPE = Schema.collection(
 AUTOMATICALLY_ROTATE_AFTER_DAYS_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#AutomaticallyRotateAfterDaysType"),
     shape_type=ShapeType.LONG,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 1000}),
-        ),
-    ],
 )
 
 FILTER_NAME_STRING_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.secretsmanager#FilterNameStringType"),
     shape_type=ShapeType.ENUM,
     members={
-        "description": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="description")
-            ],
-        },
-        "name": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="name")],
-        },
-        "tag_key": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="tag-key")],
-        },
-        "tag_value": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="tag-value")
-            ],
-        },
-        "primary_region": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="primary-region")
-            ],
-        },
-        "owning_service": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="owning-service")
-            ],
-        },
-        "all": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="all")],
-        },
+        "description": {"target": UNIT},
+        "name": {"target": UNIT},
+        "tag_key": {"target": UNIT},
+        "tag_value": {"target": UNIT},
+        "primary_region": {"target": UNIT},
+        "owning_service": {"target": UNIT},
+        "all": {"target": UNIT},
     },
 )
 
 FILTER_VALUE_STRING_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#FilterValueStringType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 512}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^\\!?[a-zA-Z0-9 :_@\\/\\+\\=\\.\\-\\!]*$",
-        ),
-    ],
 )
 
 FILTER_VALUES_STRING_LIST = Schema.collection(
     id=ShapeID("com.amazonaws.secretsmanager#FilterValuesStringList"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 10}),
-        )
-    ],
     members={"member": {"target": FILTER_VALUE_STRING_TYPE}},
 )
 
@@ -175,47 +98,22 @@ FILTER = Schema.collection(
 FILTERS_LIST_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.secretsmanager#FiltersListType"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 10}),
-        )
-    ],
     members={"member": {"target": FILTER}},
 )
 
 MAX_RESULTS_BATCH_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#MaxResultsBatchType"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 20}),
-        ),
-    ],
 )
 
 NEXT_TOKEN_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#NextTokenType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 4096}),
-        )
-    ],
 )
 
 SECRET_ID_LIST_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.secretsmanager#SecretIdListType"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 20}),
-        )
-    ],
     members={"member": {"target": SECRET_ID_TYPE}},
 )
 
@@ -225,8 +123,7 @@ BATCH_GET_SECRET_VALUE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#BatchGetSecretValueRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretIdList": {"target": SECRET_ID_LIST_TYPE},
@@ -239,12 +136,6 @@ BATCH_GET_SECRET_VALUE_INPUT = Schema.collection(
 SECRET_ARN_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#SecretARNType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 20, "max": 2048}),
-        )
-    ],
 )
 
 CREATED_DATE_TYPE = Schema(
@@ -255,69 +146,33 @@ CREATED_DATE_TYPE = Schema(
 SECRET_NAME_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#SecretNameType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        )
-    ],
 )
 
 SECRET_BINARY_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#SecretBinaryType"),
     shape_type=ShapeType.BLOB,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 65536}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 SECRET_STRING_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#SecretStringType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 65536}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 SECRET_VERSION_ID_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#SecretVersionIdType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 32, "max": 64}),
-        )
-    ],
 )
 
 SECRET_VERSION_STAGE_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#SecretVersionStageType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        )
-    ],
 )
 
 SECRET_VERSION_STAGES_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.secretsmanager#SecretVersionStagesType"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 20}),
-        )
-    ],
     members={"member": {"target": SECRET_VERSION_STAGE_TYPE}},
 )
 
@@ -346,8 +201,7 @@ BATCH_GET_SECRET_VALUE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#BatchGetSecretValueResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "SecretValues": {"target": SECRET_VALUES_TYPE},
@@ -395,69 +249,6 @@ RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
 BATCH_GET_SECRET_VALUE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#BatchGetSecretValue"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To retrieve the secret values for a group of secrets listed by name",
-                        "documentation": "The following example gets the values for three secrets.",
-                        "input": MappingProxyType(
-                            {"SecretIdList": ("MySecret1", "MySecret2", "MySecret3")}
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "SecretValues": (
-                                    MappingProxyType(
-                                        {
-                                            "ARN": "&region-arn;&asm-service-name;:us-west-2:&ExampleAccountId;:secret:MySecret1-a1b2c3",
-                                            "CreatedDate": 1.700591229801e9,
-                                            "Name": "MySecret1",
-                                            "SecretString": '{"username":"diego_ramirez","password":"EXAMPLE-PASSWORD","engine":"mysql","host":"secretsmanagertutorial.cluster.us-west-2.rds.amazonaws.com","port":3306,"dbClusterIdentifier":"secretsmanagertutorial"}',
-                                            "VersionId": "a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa",
-                                            "VersionStages": ("AWSCURRENT",),
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "ARN": "&region-arn;&asm-service-name;:us-west-2:&ExampleAccountId;:secret:MySecret2-a1b2c3",
-                                            "CreatedDate": 1.699911394105e9,
-                                            "Name": "MySecret2",
-                                            "SecretString": '{"username":"akua_mansa","password":"EXAMPLE-PASSWORD"',
-                                            "VersionId": "a1b2c3d4-5678-90ab-cdef-EXAMPLEbbbbb",
-                                            "VersionStages": ("AWSCURRENT",),
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "ARN": "&region-arn;&asm-service-name;:us-west-2:&ExampleAccountId;:secret:MySecret3-a1b2c3",
-                                            "CreatedDate": 1.699911394105e9,
-                                            "Name": "MySecret3",
-                                            "SecretString": '{"username":"jie_liu","password":"EXAMPLE-PASSWORD"',
-                                            "VersionId": "a1b2c3d4-5678-90ab-cdef-EXAMPLEccccc",
-                                            "VersionStages": ("AWSCURRENT",),
-                                        }
-                                    ),
-                                ),
-                                "Errors": (),
-                            }
-                        ),
-                    }
-                ),
-            ),
-        ),
-    ],
 )
 
 BOOLEAN_TYPE = Schema(
@@ -472,8 +263,7 @@ CANCEL_ROTATE_SECRET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#CancelRotateSecretRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -489,8 +279,7 @@ CANCEL_ROTATE_SECRET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#CancelRotateSecretResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ARN": {"target": SECRET_ARN_TYPE},
@@ -502,81 +291,28 @@ CANCEL_ROTATE_SECRET_OUTPUT = Schema.collection(
 CANCEL_ROTATE_SECRET = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#CancelRotateSecret"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To cancel scheduled rotation for a secret",
-                        "documentation": "The following example shows how to cancel rotation for a secret. The operation sets the RotationEnabled field to false and cancels all scheduled rotations. To resume scheduled rotations, you must re-enable rotation by calling the rotate-secret operation.",
-                        "input": MappingProxyType({"SecretId": "MyTestDatabaseSecret"}),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "Name",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 CLIENT_REQUEST_TOKEN_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#ClientRequestTokenType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 32, "max": 64}),
-        )
-    ],
 )
 
 DESCRIPTION_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#DescriptionType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 2048}),
-        )
-    ],
 )
 
 NAME_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#NameType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 512}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.secretsmanager#NameType"), shape_type=ShapeType.STRING
 )
 
 TAG_KEY_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#TagKeyType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.secretsmanager#TagKeyType"), shape_type=ShapeType.STRING
 )
 
 TAG_VALUE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#TagValueType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.secretsmanager#TagValueType"), shape_type=ShapeType.STRING
 )
 
 TAG = Schema.collection(
@@ -593,12 +329,6 @@ TAG_LIST_TYPE = Schema.collection(
 MEDEA_TYPE_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#MedeaTypeType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 256}),
-        )
-    ],
 )
 
 CREATE_SECRET_INPUT = Schema.collection(
@@ -607,8 +337,7 @@ CREATE_SECRET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#CreateSecretRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "Name": {
@@ -642,32 +371,15 @@ STATUS_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.secretsmanager#StatusType"),
     shape_type=ShapeType.ENUM,
     members={
-        "InSync": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="InSync")],
-        },
-        "Failed": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="Failed")],
-        },
-        "InProgress": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="InProgress")
-            ],
-        },
+        "InSync": {"target": UNIT},
+        "Failed": {"target": UNIT},
+        "InProgress": {"target": UNIT},
     },
 )
 
 STATUS_MESSAGE_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#StatusMessageType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 4096}),
-        )
-    ],
 )
 
 REPLICATION_STATUS_TYPE = Schema.collection(
@@ -693,8 +405,7 @@ CREATE_SECRET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#CreateSecretResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ARN": {"target": SECRET_ARN_TYPE},
@@ -737,34 +448,6 @@ RESOURCE_EXISTS_EXCEPTION = Schema.collection(
 CREATE_SECRET = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#CreateSecret"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To create a basic secret",
-                        "documentation": "The following example shows how to create a secret. The credentials stored in the encrypted secret value are retrieved from a file on disk named mycreds.json.",
-                        "input": MappingProxyType(
-                            {
-                                "Name": "MyTestDatabaseSecret",
-                                "Description": "My test database secret created with the CLI",
-                                "SecretString": '{"username":"david","password":"EXAMPLE-PASSWORD"}',
-                                "ClientRequestToken": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                                "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 DELETED_DATE_TYPE = Schema(
@@ -778,8 +461,7 @@ DELETE_RESOURCE_POLICY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#DeleteResourcePolicyRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -795,8 +477,7 @@ DELETE_RESOURCE_POLICY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#DeleteResourcePolicyResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"ARN": {"target": SECRET_ARN_TYPE}, "Name": {"target": NAME_TYPE}},
 )
@@ -804,26 +485,6 @@ DELETE_RESOURCE_POLICY_OUTPUT = Schema.collection(
 DELETE_RESOURCE_POLICY = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#DeleteResourcePolicy"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To delete the resource-based policy attached to a secret",
-                        "documentation": "The following example shows how to delete the resource-based policy that is attached to a secret.",
-                        "input": MappingProxyType({"SecretId": "MyTestDatabaseSecret"}),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 RECOVERY_WINDOW_IN_DAYS_TYPE = Schema(
@@ -838,8 +499,7 @@ DELETE_SECRET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#DeleteSecretRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -848,17 +508,11 @@ DELETE_SECRET_INPUT = Schema.collection(
         },
         "RecoveryWindowInDays": {
             "target": RECOVERY_WINDOW_IN_DAYS_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
         "ForceDeleteWithoutRecovery": {
             "target": BOOLEAN_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
     },
 )
@@ -874,8 +528,7 @@ DELETE_SECRET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#DeleteSecretResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ARN": {"target": SECRET_ARN_TYPE},
@@ -895,8 +548,7 @@ DESCRIBE_SECRET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#DescribeSecretRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -916,12 +568,6 @@ EXTERNAL_SECRET_ROTATION_METADATA_ITEM_KEY_TYPE = Schema(
         "com.amazonaws.secretsmanager#ExternalSecretRotationMetadataItemKeyType"
     ),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        )
-    ],
 )
 
 EXTERNAL_SECRET_ROTATION_METADATA_ITEM_VALUE_TYPE = Schema(
@@ -929,12 +575,6 @@ EXTERNAL_SECRET_ROTATION_METADATA_ITEM_VALUE_TYPE = Schema(
         "com.amazonaws.secretsmanager#ExternalSecretRotationMetadataItemValueType"
     ),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 2048}),
-        )
-    ],
 )
 
 EXTERNAL_SECRET_ROTATION_METADATA_ITEM = Schema.collection(
@@ -952,14 +592,7 @@ EXTERNAL_SECRET_ROTATION_METADATA_TYPE = Schema.collection(
 )
 
 ROLE_ARN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RoleARNType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 20, "max": 2048}),
-        )
-    ],
+    id=ShapeID("com.amazonaws.secretsmanager#RoleARNType"), shape_type=ShapeType.STRING
 )
 
 LAST_CHANGED_DATE_TYPE = Schema(
@@ -980,12 +613,6 @@ NEXT_ROTATION_DATE_TYPE = Schema(
 OWNING_SERVICE_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#OwningServiceType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 128}),
-        )
-    ],
 )
 
 ROTATION_ENABLED_TYPE = Schema(
@@ -997,39 +624,15 @@ ROTATION_ENABLED_TYPE = Schema(
 ROTATION_LAMBDA_ARN_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#RotationLambdaARNType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 2048}),
-        )
-    ],
 )
 
 DURATION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#DurationType"),
-    shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 2, "max": 3}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[0-9]+h$"),
-    ],
+    id=ShapeID("com.amazonaws.secretsmanager#DurationType"), shape_type=ShapeType.STRING
 )
 
 SCHEDULE_EXPRESSION_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#ScheduleExpressionType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 256}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#pattern"),
-            value="^[0-9A-Za-z\\(\\)#\\?\\*\\-\\/, ]+$",
-        ),
-    ],
 )
 
 ROTATION_RULES_TYPE = Schema.collection(
@@ -1056,8 +659,7 @@ DESCRIBE_SECRET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#DescribeSecretResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ARN": {"target": SECRET_ARN_TYPE},
@@ -1067,10 +669,7 @@ DESCRIBE_SECRET_OUTPUT = Schema.collection(
         "KmsKeyId": {"target": KMS_KEY_ID_TYPE},
         "RotationEnabled": {
             "target": ROTATION_ENABLED_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
         "RotationLambdaARN": {"target": ROTATION_LAMBDA_ARN_TYPE},
         "RotationRules": {"target": ROTATION_RULES_TYPE},
@@ -1095,33 +694,11 @@ DESCRIBE_SECRET_OUTPUT = Schema.collection(
 DESCRIBE_SECRET = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#DescribeSecret"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.test#smokeTests"),
-            value=(
-                MappingProxyType(
-                    {
-                        "id": "DescribeSecretFailure",
-                        "params": MappingProxyType({"SecretId": "fake-secret-id"}),
-                        "vendorParams": MappingProxyType({"region": "us-west-2"}),
-                        "vendorParamsShape": "aws.test#AwsVendorParams",
-                        "expect": MappingProxyType({"failure": MappingProxyType({})}),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 EXCLUDE_CHARACTERS_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#ExcludeCharactersType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 4096}),
-        )
-    ],
 )
 
 EXCLUDE_LOWERCASE_TYPE = Schema(
@@ -1157,13 +734,6 @@ INCLUDE_SPACE_TYPE = Schema(
 PASSWORD_LENGTH_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#PasswordLengthType"),
     shape_type=ShapeType.LONG,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 4096}),
-        ),
-    ],
 )
 
 REQUIRE_EACH_INCLUDED_TYPE_TYPE = Schema(
@@ -1178,53 +748,34 @@ GET_RANDOM_PASSWORD_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#GetRandomPasswordRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "PasswordLength": {"target": PASSWORD_LENGTH_TYPE},
         "ExcludeCharacters": {"target": EXCLUDE_CHARACTERS_TYPE},
         "ExcludeNumbers": {
             "target": EXCLUDE_NUMBERS_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
         "ExcludePunctuation": {
             "target": EXCLUDE_PUNCTUATION_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
         "ExcludeUppercase": {
             "target": EXCLUDE_UPPERCASE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
         "ExcludeLowercase": {
             "target": EXCLUDE_LOWERCASE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
         "IncludeSpace": {
             "target": INCLUDE_SPACE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
         "RequireEachIncludedType": {
             "target": REQUIRE_EACH_INCLUDED_TYPE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
     },
 )
@@ -1232,13 +783,7 @@ GET_RANDOM_PASSWORD_INPUT = Schema.collection(
 RANDOM_PASSWORD_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#RandomPasswordType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 0, "max": 4096}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 GET_RANDOM_PASSWORD_OUTPUT = Schema.collection(
@@ -1247,8 +792,7 @@ GET_RANDOM_PASSWORD_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#GetRandomPasswordResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"RandomPassword": {"target": RANDOM_PASSWORD_TYPE}},
 )
@@ -1256,29 +800,6 @@ GET_RANDOM_PASSWORD_OUTPUT = Schema.collection(
 GET_RANDOM_PASSWORD = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#GetRandomPassword"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To generate a random password",
-                        "documentation": "The following example shows how to request a randomly generated password. This example includes the optional flags to require spaces and at least one character of each included type. It specifies a length of 20 characters.",
-                        "input": MappingProxyType(
-                            {
-                                "PasswordLength": 20,
-                                "IncludeSpace": True,
-                                "RequireEachIncludedType": True,
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {"RandomPassword": "EXAMPLE-PASSWORD"}
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 GET_RESOURCE_POLICY_INPUT = Schema.collection(
@@ -1287,8 +808,7 @@ GET_RESOURCE_POLICY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#GetResourcePolicyRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -1301,12 +821,6 @@ GET_RESOURCE_POLICY_INPUT = Schema.collection(
 NON_EMPTY_RESOURCE_POLICY_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#NonEmptyResourcePolicyType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 1, "max": 20480}),
-        )
-    ],
 )
 
 GET_RESOURCE_POLICY_OUTPUT = Schema.collection(
@@ -1315,8 +829,7 @@ GET_RESOURCE_POLICY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#GetResourcePolicyResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ARN": {"target": SECRET_ARN_TYPE},
@@ -1328,27 +841,6 @@ GET_RESOURCE_POLICY_OUTPUT = Schema.collection(
 GET_RESOURCE_POLICY = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#GetResourcePolicy"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To retrieve the resource-based policy attached to a secret",
-                        "documentation": "The following example shows how to retrieve the resource-based policy that is attached to a secret.",
-                        "input": MappingProxyType({"SecretId": "MyTestDatabaseSecret"}),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                                "ResourcePolicy": '{\n"Version":"2012-10-17",\n"Statement":[{\n"Effect":"Allow",\n"Principal":{\n"AWS":"arn:aws:iam::123456789012:root"\n},\n"Action":"secretsmanager:GetSecretValue",\n"Resource":"*"\n}]\n}',
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 GET_SECRET_VALUE_INPUT = Schema.collection(
@@ -1357,8 +849,7 @@ GET_SECRET_VALUE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#GetSecretValueRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -1376,8 +867,7 @@ GET_SECRET_VALUE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#GetSecretValueResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ARN": {"target": SECRET_ARN_TYPE},
@@ -1393,30 +883,6 @@ GET_SECRET_VALUE_OUTPUT = Schema.collection(
 GET_SECRET_VALUE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#GetSecretValue"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To retrieve the encrypted secret value of a secret",
-                        "documentation": "The following example shows how to retrieve a secret string value.",
-                        "input": MappingProxyType({"SecretId": "MyTestDatabaseSecret"}),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "CreatedDate": 1.523477145713e9,
-                                "Name": "MyTestDatabaseSecret",
-                                "SecretString": '{\n  "username":"david",\n  "password":"EXAMPLE-PASSWORD"\n}\n',
-                                "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
-                                "VersionStages": ("AWSPREVIOUS",),
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 KMS_KEY_ID_LIST_TYPE = Schema.collection(
@@ -1428,59 +894,23 @@ KMS_KEY_ID_LIST_TYPE = Schema.collection(
 MAX_RESULTS_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#MaxResultsType"),
     shape_type=ShapeType.INTEGER,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#box")),
-        Trait.new(
-            id=ShapeID("smithy.api#range"),
-            value=MappingProxyType({"min": 1, "max": 100}),
-        ),
-    ],
 )
 
 SORT_BY_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.secretsmanager#SortByType"),
     shape_type=ShapeType.ENUM,
     members={
-        "created_date": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="created-date")
-            ],
-        },
-        "last_accessed_date": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#enumValue"), value="last-accessed-date"
-                )
-            ],
-        },
-        "last_changed_date": {
-            "target": UNIT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#enumValue"), value="last-changed-date")
-            ],
-        },
-        "name": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="name")],
-        },
+        "created_date": {"target": UNIT},
+        "last_accessed_date": {"target": UNIT},
+        "last_changed_date": {"target": UNIT},
+        "name": {"target": UNIT},
     },
 )
 
 SORT_ORDER_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.secretsmanager#SortOrderType"),
     shape_type=ShapeType.ENUM,
-    members={
-        "asc": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="asc")],
-        },
-        "desc": {
-            "target": UNIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#enumValue"), value="desc")],
-        },
-    },
+    members={"asc": {"target": UNIT}, "desc": {"target": UNIT}},
 )
 
 LIST_SECRETS_INPUT = Schema.collection(
@@ -1489,16 +919,12 @@ LIST_SECRETS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#ListSecretsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "IncludePlannedDeletion": {
             "target": BOOLEAN_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
         "MaxResults": {"target": MAX_RESULTS_TYPE},
         "NextToken": {"target": NEXT_TOKEN_TYPE},
@@ -1518,10 +944,7 @@ SECRET_LIST_ENTRY = Schema.collection(
         "KmsKeyId": {"target": KMS_KEY_ID_TYPE},
         "RotationEnabled": {
             "target": ROTATION_ENABLED_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
         "RotationLambdaARN": {"target": ROTATION_LAMBDA_ARN_TYPE},
         "RotationRules": {"target": ROTATION_RULES_TYPE},
@@ -1554,8 +977,7 @@ LIST_SECRETS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#ListSecretsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "SecretList": {"target": SECRET_LIST_TYPE},
@@ -1566,79 +988,6 @@ LIST_SECRETS_OUTPUT = Schema.collection(
 LIST_SECRETS = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#ListSecrets"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.test#smokeTests"),
-            value=(
-                MappingProxyType(
-                    {
-                        "id": "ListSecretsSuccess",
-                        "params": MappingProxyType({}),
-                        "vendorParams": MappingProxyType({"region": "us-west-2"}),
-                        "vendorParamsShape": "aws.test#AwsVendorParams",
-                        "expect": MappingProxyType({"success": MappingProxyType({})}),
-                    }
-                ),
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To list the secrets in your account",
-                        "documentation": "The following example shows how to list all of the secrets in your account.",
-                        "output": MappingProxyType(
-                            {
-                                "SecretList": (
-                                    MappingProxyType(
-                                        {
-                                            "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                            "Name": "MyTestDatabaseSecret",
-                                            "Description": "My test database secret",
-                                            "LastChangedDate": 1.523477145729e9,
-                                            "SecretVersionsToStages": MappingProxyType(
-                                                {
-                                                    "EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE": (
-                                                        "AWSCURRENT",
-                                                    )
-                                                }
-                                            ),
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret1-d4e5f6",
-                                            "Name": "MyTestDatabaseSecret1",
-                                            "Description": "Another secret created for a different database",
-                                            "LastChangedDate": 1.523482025685e9,
-                                            "SecretVersionsToStages": MappingProxyType(
-                                                {
-                                                    "EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE": (
-                                                        "AWSCURRENT",
-                                                    )
-                                                }
-                                            ),
-                                        }
-                                    ),
-                                )
-                            }
-                        ),
-                    }
-                ),
-            ),
-        ),
-    ],
 )
 
 LIST_SECRET_VERSION_IDS_INPUT = Schema.collection(
@@ -1647,8 +996,7 @@ LIST_SECRET_VERSION_IDS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#ListSecretVersionIdsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -1659,10 +1007,7 @@ LIST_SECRET_VERSION_IDS_INPUT = Schema.collection(
         "NextToken": {"target": NEXT_TOKEN_TYPE},
         "IncludeDeprecated": {
             "target": BOOLEAN_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
     },
 )
@@ -1690,8 +1035,7 @@ LIST_SECRET_VERSION_IDS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#ListSecretVersionIdsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "Versions": {"target": SECRET_VERSIONS_LIST_TYPE},
@@ -1704,63 +1048,6 @@ LIST_SECRET_VERSION_IDS_OUTPUT = Schema.collection(
 LIST_SECRET_VERSION_IDS = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#ListSecretVersionIds"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#paginated"),
-            value=MappingProxyType(
-                {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "pageSize": "MaxResults",
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To list all of the secret versions associated with a secret",
-                        "documentation": "The following example shows how to retrieve a list of all of the versions of a secret, including those without any staging labels.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "IncludeDeprecated": True,
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "Versions": (
-                                    MappingProxyType(
-                                        {
-                                            "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE",
-                                            "VersionStages": ("AWSPREVIOUS",),
-                                            "CreatedDate": 1.523477145713e9,
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "VersionId": "EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE",
-                                            "VersionStages": ("AWSCURRENT",),
-                                            "CreatedDate": 1.523486221391e9,
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "CreatedDate": 1.51197446236e9,
-                                            "VersionId": "EXAMPLE3-90ab-cdef-fedc-ba987EXAMPLE;",
-                                        }
-                                    ),
-                                ),
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        ),
-    ],
 )
 
 PUBLIC_POLICY_EXCEPTION = Schema.collection(
@@ -1775,8 +1062,7 @@ PUT_RESOURCE_POLICY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#PutResourcePolicyRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -1789,10 +1075,7 @@ PUT_RESOURCE_POLICY_INPUT = Schema.collection(
         },
         "BlockPublicPolicy": {
             "target": BOOLEAN_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
     },
 )
@@ -1803,8 +1086,7 @@ PUT_RESOURCE_POLICY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#PutResourcePolicyResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"ARN": {"target": SECRET_ARN_TYPE}, "Name": {"target": NAME_TYPE}},
 )
@@ -1812,44 +1094,12 @@ PUT_RESOURCE_POLICY_OUTPUT = Schema.collection(
 PUT_RESOURCE_POLICY = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#PutResourcePolicy"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To add a resource-based policy to a secret",
-                        "documentation": "The following example shows how to add a resource-based policy to a secret.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "ResourcePolicy": '{\n"Version":"2012-10-17",\n"Statement":[{\n"Effect":"Allow",\n"Principal":{\n"AWS":"arn:aws:iam::123456789012:root"\n},\n"Action":"secretsmanager:GetSecretValue",\n"Resource":"*"\n}]\n}',
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 ROTATION_TOKEN_TYPE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#RotationTokenType"),
     shape_type=ShapeType.STRING,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#length"),
-            value=MappingProxyType({"min": 36, "max": 256}),
-        ),
-        Trait.new(id=ShapeID("smithy.api#pattern"), value="^[a-zA-Z0-9\\-]+$"),
-        Trait.new(id=ShapeID("smithy.api#sensitive")),
-    ],
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
 PUT_SECRET_VALUE_INPUT = Schema.collection(
@@ -1858,8 +1108,7 @@ PUT_SECRET_VALUE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#PutSecretValueRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -1883,8 +1132,7 @@ PUT_SECRET_VALUE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#PutSecretValueResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ARN": {"target": SECRET_ARN_TYPE},
@@ -1897,42 +1145,11 @@ PUT_SECRET_VALUE_OUTPUT = Schema.collection(
 PUT_SECRET_VALUE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#PutSecretValue"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To store a secret value in a new version of a secret",
-                        "documentation": "The following example shows how to create a new version of the secret. Alternatively, you can use the update-secret command.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "SecretString": '{"username":"david","password":"EXAMPLE-PASSWORD"}',
-                                "ClientRequestToken": "EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE",
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                                "VersionId": "EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE",
-                                "VersionStages": ("AWSCURRENT",),
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 REMOVE_REPLICA_REGION_LIST_TYPE = Schema.collection(
     id=ShapeID("com.amazonaws.secretsmanager#RemoveReplicaRegionListType"),
     shape_type=ShapeType.LIST,
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#length"), value=MappingProxyType({"min": 1}))
-    ],
     members={"member": {"target": REGION_TYPE}},
 )
 
@@ -1942,8 +1159,7 @@ REMOVE_REGIONS_FROM_REPLICATION_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#RemoveRegionsFromReplicationRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -1963,8 +1179,7 @@ REMOVE_REGIONS_FROM_REPLICATION_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#RemoveRegionsFromReplicationResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ARN": {"target": SECRET_ARN_TYPE},
@@ -1983,8 +1198,7 @@ REPLICATE_SECRET_TO_REGIONS_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#ReplicateSecretToRegionsRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -2008,8 +1222,7 @@ REPLICATE_SECRET_TO_REGIONS_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#ReplicateSecretToRegionsResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ARN": {"target": SECRET_ARN_TYPE},
@@ -2020,42 +1233,6 @@ REPLICATE_SECRET_TO_REGIONS_OUTPUT = Schema.collection(
 REPLICATE_SECRET_TO_REGIONS = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#ReplicateSecretToRegions"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "Example",
-                        "documentation": "The following example replicates a secret to eu-west-3. The replica is encrypted with the AWS managed key aws/secretsmanager.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestSecret",
-                                "AddReplicaRegions": (
-                                    MappingProxyType({"Region": "eu-west-3"}),
-                                ),
-                                "ForceOverwriteReplicaSecret": True,
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestSecret-1a2b3c",
-                                "ReplicationStatus": (
-                                    MappingProxyType(
-                                        {
-                                            "Region": "eu-west-3",
-                                            "KmsKeyId": "alias/aws/secretsmanager",
-                                            "Status": "InProgress",
-                                        }
-                                    ),
-                                ),
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 RESTORE_SECRET_INPUT = Schema.collection(
@@ -2064,8 +1241,7 @@ RESTORE_SECRET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#RestoreSecretRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -2081,8 +1257,7 @@ RESTORE_SECRET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#RestoreSecretResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"ARN": {"target": SECRET_ARN_TYPE}, "Name": {"target": SECRET_NAME_TYPE}},
 )
@@ -2090,26 +1265,6 @@ RESTORE_SECRET_OUTPUT = Schema.collection(
 RESTORE_SECRET = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#RestoreSecret"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To restore a previously deleted secret",
-                        "documentation": "The following example shows how to restore a secret that you previously scheduled for deletion.",
-                        "input": MappingProxyType({"SecretId": "MyTestDatabaseSecret"}),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 ROTATE_SECRET_INPUT = Schema.collection(
@@ -2118,8 +1273,7 @@ ROTATE_SECRET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#RotateSecretRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -2138,10 +1292,7 @@ ROTATE_SECRET_INPUT = Schema.collection(
         "ExternalSecretRotationRoleArn": {"target": ROLE_ARN_TYPE},
         "RotateImmediately": {
             "target": BOOLEAN_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#box")),
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-            ],
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
         },
     },
 )
@@ -2152,8 +1303,7 @@ ROTATE_SECRET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#RotateSecretResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ARN": {"target": SECRET_ARN_TYPE},
@@ -2165,52 +1315,6 @@ ROTATE_SECRET_OUTPUT = Schema.collection(
 ROTATE_SECRET = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#RotateSecret"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To configure rotation for a secret",
-                        "documentation": "The following example configures rotation for a secret using a cron expression. The first rotation happens immediately after the changes are stored in the secret. The rotation schedule is the first and 15th day of every month. The rotation window begins at 4:00 PM UTC and ends at 6:00 PM.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "RotationLambdaARN": "arn:aws:lambda:us-west-2:123456789012:function:MyTestDatabaseRotationLambda",
-                                "RotationRules": MappingProxyType(
-                                    {
-                                        "ScheduleExpression": "cron(0 16 1,15 * ? *)",
-                                        "Duration": "2h",
-                                    }
-                                ),
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                                "VersionId": "EXAMPLE2-90ab-cdef-fedc-ba987SECRET2",
-                            }
-                        ),
-                    }
-                ),
-                MappingProxyType(
-                    {
-                        "title": "To request an immediate rotation for a secret",
-                        "documentation": "The following example requests an immediate invocation of the secret's Lambda rotation function. It assumes that the specified secret already has rotation configured. The rotation function runs asynchronously in the background.",
-                        "input": MappingProxyType({"SecretId": "MyTestDatabaseSecret"}),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                                "VersionId": "EXAMPLE2-90ab-cdef-fedc-ba987SECRET2",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 STOP_REPLICATION_TO_REPLICA_INPUT = Schema.collection(
@@ -2219,8 +1323,7 @@ STOP_REPLICATION_TO_REPLICA_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#StopReplicationToReplicaRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -2236,8 +1339,7 @@ STOP_REPLICATION_TO_REPLICA_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#StopReplicationToReplicaResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"ARN": {"target": SECRET_ARN_TYPE}},
 )
@@ -2253,8 +1355,7 @@ TAG_RESOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#TagResourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -2273,40 +1374,13 @@ TAG_RESOURCE_OUTPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
 TAG_RESOURCE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#TagResource"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To add tags to a secret",
-                        "documentation": "The following example shows how to attach two tags each with a Key and Value to a secret. There is no output from this API. To see the result, use the DescribeSecret operation.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyExampleSecret",
-                                "Tags": (
-                                    MappingProxyType(
-                                        {"Key": "FirstTag", "Value": "SomeValue"}
-                                    ),
-                                    MappingProxyType(
-                                        {"Key": "SecondTag", "Value": "AnotherValue"}
-                                    ),
-                                ),
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 TAG_KEY_LIST_TYPE = Schema.collection(
@@ -2321,8 +1395,7 @@ UNTAG_RESOURCE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#UntagResourceRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -2341,33 +1414,13 @@ UNTAG_RESOURCE_OUTPUT = Schema.collection(
     traits=[
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
 )
 
 UNTAG_RESOURCE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#UntagResource"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To remove tags from a secret",
-                        "documentation": "The following example shows how to remove two tags from a secret's metadata. For each, both the tag and the associated value are removed. There is no output from this API. To see the result, use the DescribeSecret operation.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "TagKeys": ("FirstTag", "SecondTag"),
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 UPDATE_SECRET_INPUT = Schema.collection(
@@ -2376,8 +1429,7 @@ UPDATE_SECRET_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#UpdateSecretRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -2402,8 +1454,7 @@ UPDATE_SECRET_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#UpdateSecretResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "ARN": {"target": SECRET_ARN_TYPE},
@@ -2415,69 +1466,6 @@ UPDATE_SECRET_OUTPUT = Schema.collection(
 UPDATE_SECRET = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#UpdateSecret"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To create a new version of the encrypted secret value",
-                        "documentation": "The following example shows how to create a new version of the secret by updating the SecretString field. Alternatively, you can use the put-secret-value operation.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "SecretString": "{JSON STRING WITH CREDENTIALS}",
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "aws:arn:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                                "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE",
-                            }
-                        ),
-                    }
-                ),
-                MappingProxyType(
-                    {
-                        "title": "To update the description of a secret",
-                        "documentation": "The following example shows how to modify the description of a secret.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "Description": "This is a new description for the secret.",
-                                "ClientRequestToken": "EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE",
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                            }
-                        ),
-                    }
-                ),
-                MappingProxyType(
-                    {
-                        "title": "To update the KMS key associated with a secret",
-                        "documentation": "This example shows how to update the KMS customer managed key (CMK) used to encrypt the secret value. The KMS CMK must be in the same region as the secret.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "KmsKeyId": "arn:aws:kms:us-west-2:123456789012:key/EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE",
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 UPDATE_SECRET_VERSION_STAGE_INPUT = Schema.collection(
@@ -2486,8 +1474,7 @@ UPDATE_SECRET_VERSION_STAGE_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#UpdateSecretVersionStageRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {
@@ -2509,8 +1496,7 @@ UPDATE_SECRET_VERSION_STAGE_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#UpdateSecretVersionStageResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={"ARN": {"target": SECRET_ARN_TYPE}, "Name": {"target": SECRET_NAME_TYPE}},
 )
@@ -2518,71 +1504,6 @@ UPDATE_SECRET_VERSION_STAGE_OUTPUT = Schema.collection(
 UPDATE_SECRET_VERSION_STAGE = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#UpdateSecretVersionStage"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To add a staging label attached to a version of a secret",
-                        "documentation": "The following example shows you how to add a staging label to a version of a secret. You can review the results by running the operation ListSecretVersionIds and viewing the VersionStages response field for the affected version.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "VersionStage": "STAGINGLABEL1",
-                                "MoveToVersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                            }
-                        ),
-                    }
-                ),
-                MappingProxyType(
-                    {
-                        "title": "To delete a staging label attached to a version of a secret",
-                        "documentation": "The following example shows you how to delete a staging label that is attached to a version of a secret. You can review the results by running the operation ListSecretVersionIds and viewing the VersionStages response field for the affected version.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "VersionStage": "STAGINGLABEL1",
-                                "RemoveFromVersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                            }
-                        ),
-                    }
-                ),
-                MappingProxyType(
-                    {
-                        "title": "To move a staging label from one version of a secret to another",
-                        "documentation": "The following example shows you how to move a staging label that is attached to one version of a secret to a different version. You can review the results by running the operation ListSecretVersionIds and viewing the VersionStages response field for the affected version.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "VersionStage": "AWSCURRENT",
-                                "RemoveFromVersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
-                                "MoveToVersionId": "EXAMPLE2-90ab-cdef-fedc-ba987SECRET2",
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {
-                                "ARN": "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
-                                "Name": "MyTestDatabaseSecret",
-                            }
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 VALIDATE_RESOURCE_POLICY_INPUT = Schema.collection(
@@ -2591,8 +1512,7 @@ VALIDATE_RESOURCE_POLICY_INPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#ValidateResourcePolicyRequest",
-        ),
-        Trait.new(id=ShapeID("smithy.api#input")),
+        )
     ],
     members={
         "SecretId": {"target": SECRET_ID_TYPE},
@@ -2623,8 +1543,7 @@ VALIDATE_RESOURCE_POLICY_OUTPUT = Schema.collection(
         Trait.new(
             id=ShapeID("smithy.synthetic#originalShapeId"),
             value="com.amazonaws.secretsmanager#ValidateResourcePolicyResponse",
-        ),
-        Trait.new(id=ShapeID("smithy.api#output")),
+        )
     ],
     members={
         "PolicyValidationPassed": {
@@ -2638,28 +1557,6 @@ VALIDATE_RESOURCE_POLICY_OUTPUT = Schema.collection(
 VALIDATE_RESOURCE_POLICY = Schema(
     id=ShapeID("com.amazonaws.secretsmanager#ValidateResourcePolicy"),
     shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#examples"),
-            value=(
-                MappingProxyType(
-                    {
-                        "title": "To validate a resource-based policy to a secret",
-                        "documentation": "The following example shows how to validate a resource-based policy to a secret.",
-                        "input": MappingProxyType(
-                            {
-                                "SecretId": "MyTestDatabaseSecret",
-                                "ResourcePolicy": '{\n"Version":"2012-10-17",\n"Statement":[{\n"Effect":"Allow",\n"Principal":{\n"AWS":"arn:aws:iam::123456789012:root"\n},\n"Action":"secretsmanager:GetSecretValue",\n"Resource":"*"\n}]\n}',
-                            }
-                        ),
-                        "output": MappingProxyType(
-                            {"PolicyValidationPassed": True, "ValidationErrors": ()}
-                        ),
-                    }
-                ),
-            ),
-        )
-    ],
 )
 
 SECRETSMANAGER = Schema(
@@ -2670,1661 +1567,7 @@ SECRETSMANAGER = Schema(
             id=ShapeID("aws.auth#sigv4"),
             value=MappingProxyType({"name": "secretsmanager"}),
         ),
-        Trait.new(id=ShapeID("smithy.api#title"), value="AWS Secrets Manager"),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointTests"),
-            value=MappingProxyType(
-                {
-                    "testCases": (
-                        MappingProxyType(
-                            {
-                                "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.af-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "af-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.ap-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.ap-northeast-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.ap-northeast-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.ap-northeast-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-northeast-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.ap-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.ap-southeast-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.ap-southeast-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.ap-southeast-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ap-southeast-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.ca-central-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ca-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.ca-central-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "ca-central-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.eu-central-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-central-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.eu-north-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.eu-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.eu-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.eu-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.eu-west-3.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "eu-west-3",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.me-south-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "me-south-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.sa-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "sa-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.us-east-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.us-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.us-west-2.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-west-2",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.us-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.cn-northwest-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-northwest-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.cn-north-1.api.amazonwebservices.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.cn-north-1.amazonaws.com.cn"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "cn-north-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.us-gov-west-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-west-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.us-gov-east-1.amazonaws.com"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-gov-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.us-iso-east-1.c2s.ic.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-iso-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager-fips.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {
-                                                "url": "https://secretsmanager.us-isob-east-1.sc2s.sgov.gov"
-                                            }
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-isob-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "endpoint": MappingProxyType(
-                                            {"url": "https://example.com"}
-                                        )
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "UseFIPS": False,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": True,
-                                        "UseDualStack": False,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-                                "expect": MappingProxyType(
-                                    {
-                                        "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-                                    }
-                                ),
-                                "params": MappingProxyType(
-                                    {
-                                        "Region": "us-east-1",
-                                        "UseFIPS": False,
-                                        "UseDualStack": True,
-                                        "Endpoint": "https://example.com",
-                                    }
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "documentation": "Missing region",
-                                "expect": MappingProxyType(
-                                    {"error": "Invalid Configuration: Missing Region"}
-                                ),
-                            }
-                        ),
-                    ),
-                    "version": "1.0",
-                }
-            ),
-        ),
         Trait.new(id=ShapeID("aws.protocols#awsJson1_1")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointRuleSet"),
-            value=MappingProxyType(
-                {
-                    "version": "1.0",
-                    "parameters": MappingProxyType(
-                        {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                        }
-                    ),
-                    "rules": (
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Endpoint"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseFIPS"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "booleanEquals",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "UseDualStack"}
-                                                            ),
-                                                            True,
-                                                        ),
-                                                    }
-                                                ),
-                                            ),
-                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                            "type": "error",
-                                        }
-                                    ),
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (),
-                                            "endpoint": MappingProxyType(
-                                                {
-                                                    "url": MappingProxyType(
-                                                        {"ref": "Endpoint"}
-                                                    ),
-                                                    "properties": MappingProxyType({}),
-                                                    "headers": MappingProxyType({}),
-                                                }
-                                            ),
-                                            "type": "endpoint",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "isSet",
-                                            "argv": (
-                                                MappingProxyType({"ref": "Region"}),
-                                            ),
-                                        }
-                                    ),
-                                ),
-                                "rules": (
-                                    MappingProxyType(
-                                        {
-                                            "conditions": (
-                                                MappingProxyType(
-                                                    {
-                                                        "fn": "aws.partition",
-                                                        "argv": (
-                                                            MappingProxyType(
-                                                                {"ref": "Region"}
-                                                            ),
-                                                        ),
-                                                        "assign": "PartitionResult",
-                                                    }
-                                                ),
-                                            ),
-                                            "rules": (
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                "aws",
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "name",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://secretsmanager-fips.{Region}.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                "aws-us-gov",
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "name",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://secretsmanager-fips.{Region}.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://secretsmanager-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseFIPS"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsFIPS",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                    True,
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://secretsmanager-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "FIPS is enabled but this partition does not support FIPS",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "fn": "booleanEquals",
-                                                                    "argv": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "ref": "UseDualStack"
-                                                                            }
-                                                                        ),
-                                                                        True,
-                                                                    ),
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "rules": (
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "fn": "booleanEquals",
-                                                                                "argv": (
-                                                                                    True,
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "getAttr",
-                                                                                            "argv": (
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "ref": "PartitionResult"
-                                                                                                    }
-                                                                                                ),
-                                                                                                "supportsDualStack",
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "rules": (
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                "aws",
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "name",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://secretsmanager.{Region}.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                "aws-cn",
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "name",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://secretsmanager.{Region}.amazonaws.com.cn",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (
-                                                                                    MappingProxyType(
-                                                                                        {
-                                                                                            "fn": "stringEquals",
-                                                                                            "argv": (
-                                                                                                "aws-us-gov",
-                                                                                                MappingProxyType(
-                                                                                                    {
-                                                                                                        "fn": "getAttr",
-                                                                                                        "argv": (
-                                                                                                            MappingProxyType(
-                                                                                                                {
-                                                                                                                    "ref": "PartitionResult"
-                                                                                                                }
-                                                                                                            ),
-                                                                                                            "name",
-                                                                                                        ),
-                                                                                                    }
-                                                                                                ),
-                                                                                            ),
-                                                                                        }
-                                                                                    ),
-                                                                                ),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://secretsmanager.{Region}.amazonaws.com",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                        MappingProxyType(
-                                                                            {
-                                                                                "conditions": (),
-                                                                                "endpoint": MappingProxyType(
-                                                                                    {
-                                                                                        "url": "https://secretsmanager.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                                                                        "properties": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                        "headers": MappingProxyType(
-                                                                                            {}
-                                                                                        ),
-                                                                                    }
-                                                                                ),
-                                                                                "type": "endpoint",
-                                                                            }
-                                                                        ),
-                                                                    ),
-                                                                    "type": "tree",
-                                                                }
-                                                            ),
-                                                            MappingProxyType(
-                                                                {
-                                                                    "conditions": (),
-                                                                    "error": "DualStack is enabled but this partition does not support DualStack",
-                                                                    "type": "error",
-                                                                }
-                                                            ),
-                                                        ),
-                                                        "type": "tree",
-                                                    }
-                                                ),
-                                                MappingProxyType(
-                                                    {
-                                                        "conditions": (),
-                                                        "endpoint": MappingProxyType(
-                                                            {
-                                                                "url": "https://secretsmanager.{Region}.{PartitionResult#dnsSuffix}",
-                                                                "properties": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                                "headers": MappingProxyType(
-                                                                    {}
-                                                                ),
-                                                            }
-                                                        ),
-                                                        "type": "endpoint",
-                                                    }
-                                                ),
-                                            ),
-                                            "type": "tree",
-                                        }
-                                    ),
-                                ),
-                                "type": "tree",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
-                    ),
-                }
-            ),
-        ),
         Trait.new(
             id=ShapeID("smithy.rules#endpointBdd"),
             value=MappingProxyType(

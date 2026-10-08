@@ -1,5 +1,5 @@
 [project]
-site_name = "AWS SDK for Python - Api Gateway"
+site_name = "AWS SDK for Python v4 - Api Gateway"
 site_description = "Documentation for AWS Api Gateway Client"
 site_author = "Amazon Web Services"
 

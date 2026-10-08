@@ -13,14 +13,19 @@ from smithy_aws_core.endpoints.standard_regional import (
     StandardRegionalEndpointsResolver,
 )
 from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
-from smithy_core.aio.interfaces import ClientProtocol, EndpointResolver
+from smithy_core.aio.interfaces import (
+    ClientProtocol,
+    EndpointResolver,
+    ProtocolConstructor,
+    ProtocolSettings,
+)
 from smithy_core.aio.interfaces.auth import AuthScheme
 from smithy_core.aio.interfaces.identity import IdentityResolver
 from smithy_core.interceptors import Interceptor
+from smithy_core.interfaces.auth import AuthSchemeResolver
 from smithy_core.shapes import ShapeID
 from smithy_http.aio.aiohttp import AIOHTTPClient
 
-from ._private.schemas import GUARD_DUTY_API_SERVICE as _SCHEMA_GUARD_DUTY_API_SERVICE
 from .auth import HTTPAuthSchemeResolver
 from .models import (
     AcceptAdministratorInvitationInput,
@@ -29,6 +34,10 @@ from .models import (
     AcceptInvitationOutput,
     ArchiveFindingsInput,
     ArchiveFindingsOutput,
+    CreateCustomDetectionRuleAssociationInput,
+    CreateCustomDetectionRuleAssociationOutput,
+    CreateCustomDetectionRuleOrgConfigurationInput,
+    CreateCustomDetectionRuleOrgConfigurationOutput,
     CreateDetectorInput,
     CreateDetectorOutput,
     CreateFilterInput,
@@ -53,6 +62,10 @@ from .models import (
     CreateTrustedEntitySetOutput,
     DeclineInvitationsInput,
     DeclineInvitationsOutput,
+    DeleteCustomDetectionRuleAssociationInput,
+    DeleteCustomDetectionRuleAssociationOutput,
+    DeleteCustomDetectionRuleOrgConfigurationInput,
+    DeleteCustomDetectionRuleOrgConfigurationOutput,
     DeleteDetectorInput,
     DeleteDetectorOutput,
     DeleteFilterInput,
@@ -93,6 +106,12 @@ from .models import (
     GetAdministratorAccountOutput,
     GetCoverageStatisticsInput,
     GetCoverageStatisticsOutput,
+    GetCustomDetectionRuleAssociationInput,
+    GetCustomDetectionRuleAssociationOutput,
+    GetCustomDetectionRuleInput,
+    GetCustomDetectionRuleOrgConfigurationInput,
+    GetCustomDetectionRuleOrgConfigurationOutput,
+    GetCustomDetectionRuleOutput,
     GetDetectorInput,
     GetDetectorOutput,
     GetFilterInput,
@@ -135,6 +154,12 @@ from .models import (
     InviteMembersOutput,
     ListCoverageInput,
     ListCoverageOutput,
+    ListCustomDetectionRuleAssociationsInput,
+    ListCustomDetectionRuleAssociationsOutput,
+    ListCustomDetectionRuleOrgConfigurationsInput,
+    ListCustomDetectionRuleOrgConfigurationsOutput,
+    ListCustomDetectionRulesInput,
+    ListCustomDetectionRulesOutput,
     ListDetectorsInput,
     ListDetectorsOutput,
     ListFiltersInput,
@@ -179,6 +204,10 @@ from .models import (
     UnarchiveFindingsOutput,
     UntagResourceInput,
     UntagResourceOutput,
+    UpdateCustomDetectionRuleAssociationInput,
+    UpdateCustomDetectionRuleAssociationOutput,
+    UpdateCustomDetectionRuleOrgConfigurationInput,
+    UpdateCustomDetectionRuleOrgConfigurationOutput,
     UpdateDetectorInput,
     UpdateDetectorOutput,
     UpdateFilterInput,
@@ -215,6 +244,18 @@ _ServiceInterceptor = Union[
     ],
     Interceptor[AcceptInvitationInput, AcceptInvitationOutput, Any, Any],
     Interceptor[ArchiveFindingsInput, ArchiveFindingsOutput, Any, Any],
+    Interceptor[
+        CreateCustomDetectionRuleAssociationInput,
+        CreateCustomDetectionRuleAssociationOutput,
+        Any,
+        Any,
+    ],
+    Interceptor[
+        CreateCustomDetectionRuleOrgConfigurationInput,
+        CreateCustomDetectionRuleOrgConfigurationOutput,
+        Any,
+        Any,
+    ],
     Interceptor[CreateDetectorInput, CreateDetectorOutput, Any, Any],
     Interceptor[CreateFilterInput, CreateFilterOutput, Any, Any],
     Interceptor[CreateInvestigationInput, CreateInvestigationOutput, Any, Any],
@@ -231,6 +272,18 @@ _ServiceInterceptor = Union[
     Interceptor[CreateThreatIntelSetInput, CreateThreatIntelSetOutput, Any, Any],
     Interceptor[CreateTrustedEntitySetInput, CreateTrustedEntitySetOutput, Any, Any],
     Interceptor[DeclineInvitationsInput, DeclineInvitationsOutput, Any, Any],
+    Interceptor[
+        DeleteCustomDetectionRuleAssociationInput,
+        DeleteCustomDetectionRuleAssociationOutput,
+        Any,
+        Any,
+    ],
+    Interceptor[
+        DeleteCustomDetectionRuleOrgConfigurationInput,
+        DeleteCustomDetectionRuleOrgConfigurationOutput,
+        Any,
+        Any,
+    ],
     Interceptor[DeleteDetectorInput, DeleteDetectorOutput, Any, Any],
     Interceptor[DeleteFilterInput, DeleteFilterOutput, Any, Any],
     Interceptor[DeleteInvitationsInput, DeleteInvitationsOutput, Any, Any],
@@ -285,6 +338,19 @@ _ServiceInterceptor = Union[
     ],
     Interceptor[GetAdministratorAccountInput, GetAdministratorAccountOutput, Any, Any],
     Interceptor[GetCoverageStatisticsInput, GetCoverageStatisticsOutput, Any, Any],
+    Interceptor[GetCustomDetectionRuleInput, GetCustomDetectionRuleOutput, Any, Any],
+    Interceptor[
+        GetCustomDetectionRuleAssociationInput,
+        GetCustomDetectionRuleAssociationOutput,
+        Any,
+        Any,
+    ],
+    Interceptor[
+        GetCustomDetectionRuleOrgConfigurationInput,
+        GetCustomDetectionRuleOrgConfigurationOutput,
+        Any,
+        Any,
+    ],
     Interceptor[GetDetectorInput, GetDetectorOutput, Any, Any],
     Interceptor[GetFilterInput, GetFilterOutput, Any, Any],
     Interceptor[GetFindingsInput, GetFindingsOutput, Any, Any],
@@ -312,6 +378,21 @@ _ServiceInterceptor = Union[
     Interceptor[GetUsageStatisticsInput, GetUsageStatisticsOutput, Any, Any],
     Interceptor[InviteMembersInput, InviteMembersOutput, Any, Any],
     Interceptor[ListCoverageInput, ListCoverageOutput, Any, Any],
+    Interceptor[
+        ListCustomDetectionRuleAssociationsInput,
+        ListCustomDetectionRuleAssociationsOutput,
+        Any,
+        Any,
+    ],
+    Interceptor[
+        ListCustomDetectionRuleOrgConfigurationsInput,
+        ListCustomDetectionRuleOrgConfigurationsOutput,
+        Any,
+        Any,
+    ],
+    Interceptor[
+        ListCustomDetectionRulesInput, ListCustomDetectionRulesOutput, Any, Any
+    ],
     Interceptor[ListDetectorsInput, ListDetectorsOutput, Any, Any],
     Interceptor[ListFiltersInput, ListFiltersOutput, Any, Any],
     Interceptor[ListFindingsInput, ListFindingsOutput, Any, Any],
@@ -343,6 +424,18 @@ _ServiceInterceptor = Union[
     Interceptor[TagResourceInput, TagResourceOutput, Any, Any],
     Interceptor[UnarchiveFindingsInput, UnarchiveFindingsOutput, Any, Any],
     Interceptor[UntagResourceInput, UntagResourceOutput, Any, Any],
+    Interceptor[
+        UpdateCustomDetectionRuleAssociationInput,
+        UpdateCustomDetectionRuleAssociationOutput,
+        Any,
+        Any,
+    ],
+    Interceptor[
+        UpdateCustomDetectionRuleOrgConfigurationInput,
+        UpdateCustomDetectionRuleOrgConfigurationOutput,
+        Any,
+        Any,
+    ],
     Interceptor[UpdateDetectorInput, UpdateDetectorOutput, Any, Any],
     Interceptor[UpdateFilterInput, UpdateFilterOutput, Any, Any],
     Interceptor[UpdateFindingsFeedbackInput, UpdateFindingsFeedbackOutput, Any, Any],
@@ -367,13 +460,18 @@ _ServiceInterceptor = Union[
     Interceptor[UpdateThreatIntelSetInput, UpdateThreatIntelSetOutput, Any, Any],
     Interceptor[UpdateTrustedEntitySetInput, UpdateTrustedEntitySetOutput, Any, Any],
 ]
+_PROTOCOL_SETTINGS = ProtocolSettings(
+    namespace="com.amazonaws.guardduty", service_target="GuardDutyAPIService"
+)
 
 
 class _AsyncGuardDutyConfigOverrides(AwsConfigOverrides, total=False):
     endpoint_resolver: EndpointResolver | None
-    protocol: ClientProtocol[Any, Any] | None
+    protocol: (
+        ClientProtocol[Any, Any] | ProtocolConstructor[ClientProtocol[Any, Any]] | None
+    )
     auth_schemes: dict[ShapeID, AuthScheme[Any, Any, Any, Any]] | None
-    auth_scheme_resolver: HTTPAuthSchemeResolver | None
+    auth_scheme_resolver: AuthSchemeResolver | None
 
 
 @dataclass(kw_only=True, repr=False, init=False)
@@ -387,7 +485,11 @@ class AsyncGuardDutyConfig(AsyncAwsConfig):
     """
 
     protocol: ClientProtocol[Any, Any] | None = None
-    """The protocol to serialize and deserialize requests with."""
+    """
+    Pass a protocol class reference from smithy_aws_core.aio.protocols to
+    select the protocol, e.g. protocol=AwsJson10ClientProtocol. For custom
+    protocols a protocol instance may also be passed.
+    """
 
     interceptors: list[_ServiceInterceptor] = field(default_factory=lambda: [])
     """
@@ -398,7 +500,7 @@ class AsyncGuardDutyConfig(AsyncAwsConfig):
     auth_schemes: dict[ShapeID, AuthScheme[Any, Any, Any, Any]] | None = None
     """A map of auth scheme ids to auth schemes."""
 
-    auth_scheme_resolver: HTTPAuthSchemeResolver | None = None
+    auth_scheme_resolver: AuthSchemeResolver | None = None
     """
     An auth scheme resolver that determines the auth scheme for each
     operation.
@@ -451,9 +553,8 @@ class AsyncGuardDutyConfig(AsyncAwsConfig):
             )
         ),
         "protocol": FieldSpec(
-            default_factory=lambda: RestJsonClientProtocol(
-                _SCHEMA_GUARD_DUTY_API_SERVICE
-            )
+            default_factory=lambda: RestJsonClientProtocol(_PROTOCOL_SETTINGS),
+            converter=lambda p: p(_PROTOCOL_SETTINGS) if isinstance(p, type) else p,
         ),
         "auth_schemes": FieldSpec(
             default_factory=lambda: {

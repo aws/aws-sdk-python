@@ -1,14 +1,20 @@
-## Connect Health Client
+# Connect Health Client
 
-The `aws_sdk_connecthealth` client is still under active development.
-Changes may result in breaking changes prior to the release of version
-1.0.0.
+The `aws-sdk-connecthealth` package provides a client for making
+requests to Connect Health.
 
+> **Note:** This SDK is experimental and in early development. Breaking changes
+> may occur prior to the release of version 1.0.0.
 
-### Documentation
+## Installation
 
-Documentation is available in the `/docs` directory of this package.
-Pages can be built into portable HTML files for the time being. You can
-follow the instructions in the docs [README.md](https://github.com/aws/aws-sdk-python/blob/main/clients/aws-sdk-connecthealth/docs/README.md).
+```bash
+python -m pip install aws-sdk-connecthealth
+```
 
-For high-level documentation, you can view the [`dev-guide`](https://github.com/aws/aws-sdk-python/tree/main/dev-guide) at the top level of this repo.
+## Documentation
+
+- [API Reference](https://docs.aws.amazon.com/sdk-for-python/v4/reference/clients/connecthealth/) -
+  the ConnectHealth client, available operations, and types.
+- [Developer Guide](https://docs.aws.amazon.com/sdk-for-python/v4/guide/) -
+  configuration, authentication, and usage of the AWS SDK for Python v4.
