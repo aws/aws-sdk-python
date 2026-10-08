@@ -42,6 +42,7 @@ polly = ["aws_sdk_polly~=0.11.0"]
 qbusiness = ["aws_sdk_qbusiness~=0.11.0"]
 sagemaker_runtime_http2 = ["aws_sdk_sagemaker_runtime_http2~=0.11.0"]
 secrets_manager = ["aws_sdk_secrets_manager~=0.11.0"]
+signin = ["aws_sdk_signin~=0.12.0"]
 sns = ["aws_sdk_sns~=0.11.0"]
 sqs = ["aws_sdk_sqs~=0.11.0"]
 sts = ["aws_sdk_sts~=0.11.0"]
@@ -68,6 +69,7 @@ all = [
     "aws_sdk_python[qbusiness]",
     "aws_sdk_python[sagemaker_runtime_http2]",
     "aws_sdk_python[secrets_manager]",
+    "aws_sdk_python[signin]",
     "aws_sdk_python[sns]",
     "aws_sdk_python[sqs]",
     "aws_sdk_python[sts]",
