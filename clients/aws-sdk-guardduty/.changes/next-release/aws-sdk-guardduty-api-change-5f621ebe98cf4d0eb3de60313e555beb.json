@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "GuardDuty AWS Organizations policy integration. GetDetector and GetMemberDetectors now show whether a GuardDuty policy manages a feature."
+}

@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "Batch evaluation now supports evaluating specific traces within a session. Each session can specify up to 100 trace IDs to evaluate."
+}

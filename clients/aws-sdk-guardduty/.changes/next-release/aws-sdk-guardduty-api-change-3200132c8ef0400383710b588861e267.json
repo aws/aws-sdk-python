@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "Adding awsServiceName field to GuardDuty Findings."
+}

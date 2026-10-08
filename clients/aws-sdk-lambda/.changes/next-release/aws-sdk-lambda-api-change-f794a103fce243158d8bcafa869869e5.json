@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "Updates documentation for lambda function timeout."
+}
