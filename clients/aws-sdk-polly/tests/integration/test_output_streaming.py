@@ -5,7 +5,7 @@
 
 from smithy_core.aio.utils import read_streaming_blob_async
 
-from aws_sdk_polly.models import SynthesizeSpeechInput, SynthesizeSpeechOutput
+from aws_sdk_polly.models import SynthesizeSpeechOutput
 
 from . import (
     ENGINE,
@@ -22,13 +22,11 @@ async def test_synthesize_speech() -> None:
     """Test output-streaming SynthesizeSpeech operation."""
     async with await create_polly_client(REGION) as client:
         response = await client.synthesize_speech(
-            input=SynthesizeSpeechInput(
-                engine=ENGINE,
-                output_format=OUTPUT_FORMAT,
-                sample_rate=SAMPLE_RATE,
-                text=TEST_TEXT,
-                voice_id=VOICE_ID,
-            )
+            engine=ENGINE,
+            output_format=OUTPUT_FORMAT,
+            sample_rate=SAMPLE_RATE,
+            text=TEST_TEXT,
+            voice_id=VOICE_ID,
         )
 
         assert isinstance(response, SynthesizeSpeechOutput)

@@ -1,0 +1,4 @@
+{
+  "type": "breaking",
+  "description": "Operation input members are now keyword-only arguments. Replace `client.operation(input=OperationInput(...))` with `client.operation(member=...)`."
+}

@@ -3,7 +3,7 @@
 
 """Test non-streaming output type handling."""
 
-from aws_sdk_polly.models import DescribeVoicesInput, DescribeVoicesOutput
+from aws_sdk_polly.models import DescribeVoicesOutput
 
 from . import ENGINE, REGION, VOICE_ID, create_polly_client
 
@@ -11,9 +11,7 @@ from . import ENGINE, REGION, VOICE_ID, create_polly_client
 async def test_describe_voices() -> None:
     """Test non-streaming DescribeVoices operation."""
     async with await create_polly_client(REGION) as client:
-        response = await client.describe_voices(
-            input=DescribeVoicesInput(engine=ENGINE)
-        )
+        response = await client.describe_voices(engine=ENGINE)
 
         assert isinstance(response, DescribeVoicesOutput)
         assert response.voices is not None

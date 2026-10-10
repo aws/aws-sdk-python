@@ -128,7 +128,6 @@ class AssumeRoleCredentialsResolver(
     async def _assume_role(self) -> AWSCredentialsIdentity:
         from aws_sdk_sts.client import AsyncSTSClient
         from aws_sdk_sts.config import AsyncSTSConfig
-        from aws_sdk_sts.models import AssumeRoleInput
 
         if self._client is None:
             overrides: AwsConfigOverrides = {
@@ -142,12 +141,10 @@ class AssumeRoleCredentialsResolver(
             )
 
         response = await self._client.assume_role(
-            AssumeRoleInput(
-                role_arn=self._role_arn,
-                role_session_name=self._role_session_name,
-                external_id=self._external_id,
-                duration_seconds=self._duration_seconds,
-            )
+            role_arn=self._role_arn,
+            role_session_name=self._role_session_name,
+            external_id=self._external_id,
+            duration_seconds=self._duration_seconds,
         )
 
         credentials = response.credentials

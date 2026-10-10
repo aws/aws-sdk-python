@@ -6,13 +6,9 @@
 from aws_sdk_connecthealth.models import (
     DomainStatus,
     EncryptionType,
-    GetDomainInput,
     GetDomainOutput,
-    GetSubscriptionInput,
     GetSubscriptionOutput,
-    ListDomainsInput,
     ListDomainsOutput,
-    ListSubscriptionsInput,
     ListSubscriptionsOutput,
     SubscriptionStatus,
 )
@@ -24,7 +20,7 @@ async def test_list_domains(connecthealth_resources) -> None:
     """Test non-streaming ListDomains operation."""
     _ = connecthealth_resources
     async with await create_connecthealth_client(REGION) as client:
-        response = await client.list_domains(input=ListDomainsInput())
+        response = await client.list_domains()
 
         assert isinstance(response, ListDomainsOutput)
         assert response.domains is not None
@@ -35,7 +31,7 @@ async def test_get_domain(connecthealth_resources) -> None:
     """Test non-streaming GetDomain operation."""
     domain_id, _, _ = connecthealth_resources
     async with await create_connecthealth_client(REGION) as client:
-        response = await client.get_domain(input=GetDomainInput(domain_id=domain_id))
+        response = await client.get_domain(domain_id=domain_id)
 
         assert isinstance(response, GetDomainOutput)
         assert response.domain_id == domain_id
@@ -55,9 +51,7 @@ async def test_list_subscriptions(connecthealth_resources) -> None:
     """Test non-streaming ListSubscriptions operation."""
     domain_id, subscription_id, _ = connecthealth_resources
     async with await create_connecthealth_client(REGION) as client:
-        response = await client.list_subscriptions(
-            input=ListSubscriptionsInput(domain_id=domain_id)
-        )
+        response = await client.list_subscriptions(domain_id=domain_id)
 
         assert isinstance(response, ListSubscriptionsOutput)
         assert response.subscriptions is not None
@@ -73,9 +67,7 @@ async def test_get_subscription(connecthealth_resources) -> None:
     domain_id, subscription_id, _ = connecthealth_resources
     async with await create_connecthealth_client(REGION) as client:
         response = await client.get_subscription(
-            input=GetSubscriptionInput(
-                domain_id=domain_id, subscription_id=subscription_id
-            )
+            domain_id=domain_id, subscription_id=subscription_id
         )
 
         assert isinstance(response, GetSubscriptionOutput)

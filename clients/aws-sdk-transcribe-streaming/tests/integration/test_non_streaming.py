@@ -13,7 +13,6 @@ from smithy_http.aio.crt import AWSCRTHTTPClient
 from aws_sdk_transcribe_streaming.models import (
     BadRequestException,
     ClinicalNoteGenerationSettings,
-    GetMedicalScribeStreamInput,
     GetMedicalScribeStreamOutput,
     LanguageCode,
     LimitExceededException,
@@ -26,7 +25,6 @@ from aws_sdk_transcribe_streaming.models import (
     MedicalScribePostStreamAnalyticsSettings,
     MedicalScribeSessionControlEvent,
     MedicalScribeSessionControlEventType,
-    StartMedicalScribeStreamInput,
 )
 
 from . import AUDIO_FILE, create_transcribe_client
@@ -50,12 +48,10 @@ async def _run_medical_scribe_session(role_arn: str, s3_bucket: str) -> None:
         session_id = str(uuid.uuid4())
 
         stream = await transcribe_client.start_medical_scribe_stream(
-            input=StartMedicalScribeStreamInput(
-                language_code=LanguageCode.EN_US,
-                media_sample_rate_hertz=SAMPLE_RATE,
-                media_encoding=MediaEncoding.PCM,
-                session_id=session_id,
-            )
+            language_code=LanguageCode.EN_US,
+            media_sample_rate_hertz=SAMPLE_RATE,
+            media_encoding=MediaEncoding.PCM,
+            session_id=session_id,
         )
 
         await stream.input_stream.send(
@@ -105,7 +101,7 @@ async def _run_medical_scribe_session(role_arn: str, s3_bucket: str) -> None:
                 pass
 
         response = await transcribe_client.get_medical_scribe_stream(
-            input=GetMedicalScribeStreamInput(session_id=session_id)
+            session_id=session_id
         )
 
         assert isinstance(response, GetMedicalScribeStreamOutput)

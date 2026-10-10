@@ -71,6 +71,8 @@ pyyaml==6.0.3
     #   zensical
 pyyaml-env-tag==1.1
     # via mkdocs
+ruff==0.16.9
+    # via -r requirements-docs.in
 six==1.17.0
     # via python-dateutil
 tomli==2.4.1

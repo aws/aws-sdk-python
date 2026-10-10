@@ -14,7 +14,6 @@ from smithy_http.aio.crt import AWSCRTHTTPClient
 from aws_sdk_bedrock_runtime.models import (
     BidirectionalInputPayloadPart,
     InvokeModelWithBidirectionalStreamInputChunk,
-    InvokeModelWithBidirectionalStreamOperationInput,
     InvokeModelWithBidirectionalStreamInput,
     InvokeModelWithBidirectionalStreamOutput,
     InvokeModelWithBidirectionalStreamOperationOutput,
@@ -249,9 +248,7 @@ async def test_invoke_model_with_bidirectional_stream() -> None:
         "us-east-1", transport=AWSCRTHTTPClient()
     ) as bedrock_client:
         stream = await bedrock_client.invoke_model_with_bidirectional_stream(
-            InvokeModelWithBidirectionalStreamOperationInput(
-                model_id=BIDIRECTIONAL_MODEL_ID
-            )
+            model_id=BIDIRECTIONAL_MODEL_ID
         )
 
         prompt_name = str(uuid.uuid4())

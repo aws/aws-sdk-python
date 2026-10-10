@@ -12,7 +12,6 @@ from smithy_http.aio.crt import AWSCRTHTTPClient
 from aws_sdk_lex_runtime_v2.models import (
     ConfigurationEvent,
     DisconnectionEvent,
-    StartConversationInput,
     StartConversationOutput,
     StartConversationRequestEventStream,
     StartConversationRequestEventStreamConfigurationEvent,
@@ -129,13 +128,11 @@ async def test_start_conversation(lex_bot: str) -> None:
     """Test bidirectional streaming StartConversation operation."""
     async with await create_lex_client(REGION, transport=AWSCRTHTTPClient()) as client:
         stream = await client.start_conversation(
-            input=StartConversationInput(
-                bot_id=lex_bot,
-                bot_alias_id=BOT_ALIAS_ID,
-                locale_id=LOCALE_ID,
-                session_id=str(uuid.uuid4()),
-                conversation_mode="TEXT",
-            )
+            bot_id=lex_bot,
+            bot_alias_id=BOT_ALIAS_ID,
+            locale_id=LOCALE_ID,
+            session_id=str(uuid.uuid4()),
+            conversation_mode="TEXT",
         )
 
         results = await asyncio.gather(_send_events(stream), _receive_events(stream))

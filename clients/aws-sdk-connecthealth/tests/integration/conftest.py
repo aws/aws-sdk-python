@@ -16,14 +16,7 @@ import boto3
 import pytest
 
 from aws_sdk_connecthealth.client import AsyncConnectHealthClient
-from aws_sdk_connecthealth.models import (
-    CreateDomainInput,
-    CreateSubscriptionInput,
-    DeactivateSubscriptionInput,
-    DeleteDomainInput,
-    GetSubscriptionInput,
-    SubscriptionStatus,
-)
+from aws_sdk_connecthealth.models import SubscriptionStatus
 
 from . import REGION, create_connecthealth_client
 
@@ -50,9 +43,7 @@ async def _wait_for_subscription_inactive(
     deadline = asyncio.get_running_loop().time() + _SUBSCRIPTION_POLL_TIMEOUT_SECONDS
     while asyncio.get_running_loop().time() < deadline:
         response = await client.get_subscription(
-            input=GetSubscriptionInput(
-                domain_id=domain_id, subscription_id=subscription_id
-            )
+            domain_id=domain_id, subscription_id=subscription_id
         )
         if (
             response.subscription is not None
@@ -75,14 +66,10 @@ async def _create_connecthealth_resources(
     Returns:
         Tuple of (domain_id, subscription_id).
     """
-    domain_response = await client.create_domain(
-        input=CreateDomainInput(name=domain_name, tags=_TAGS)
-    )
+    domain_response = await client.create_domain(name=domain_name, tags=_TAGS)
     domain_id = domain_response.domain_id
 
-    subscription_response = await client.create_subscription(
-        input=CreateSubscriptionInput(domain_id=domain_id)
-    )
+    subscription_response = await client.create_subscription(domain_id=domain_id)
     return domain_id, subscription_response.subscription_id
 
 
@@ -99,13 +86,11 @@ async def _delete_connecthealth_resources(
     """
     if domain_id and subscription_id:
         await client.deactivate_subscription(
-            input=DeactivateSubscriptionInput(
-                domain_id=domain_id, subscription_id=subscription_id
-            )
+            domain_id=domain_id, subscription_id=subscription_id
         )
         await _wait_for_subscription_inactive(client, domain_id, subscription_id)
     if domain_id:
-        await client.delete_domain(input=DeleteDomainInput(domain_id=domain_id))
+        await client.delete_domain(domain_id=domain_id)
 
 
 def _create_s3_bucket(s3_client: Any, bucket_name: str) -> None:

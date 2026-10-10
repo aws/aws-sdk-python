@@ -15,7 +15,6 @@ from aws_sdk_transcribe_streaming.models import (
     AudioStreamAudioEvent,
     LanguageCode,
     MediaEncoding,
-    StartStreamTranscriptionInput,
     StartStreamTranscriptionOutput,
     TranscriptResultStream,
     TranscriptResultStreamTranscriptEvent,
@@ -92,11 +91,9 @@ async def test_start_stream_transcription() -> None:
         "us-west-2", transport=AWSCRTHTTPClient()
     ) as transcribe_client:
         stream = await transcribe_client.start_stream_transcription(
-            input=StartStreamTranscriptionInput(
-                language_code=LanguageCode.EN_US,
-                media_sample_rate_hertz=SAMPLE_RATE,
-                media_encoding=MediaEncoding.PCM,
-            )
+            language_code=LanguageCode.EN_US,
+            media_sample_rate_hertz=SAMPLE_RATE,
+            media_encoding=MediaEncoding.PCM,
         )
 
         results = await asyncio.gather(
