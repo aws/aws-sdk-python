@@ -1,0 +1,4 @@
+{
+  "type": "feature",
+  "description": "Document and validate inherited request-compression configuration for the Bedrock Runtime client. Explicit gzip requires operation support; current Bedrock operations remain unsupported."
+}
