@@ -1,0 +1,4 @@
+{
+  "type": "enhancement",
+  "description": "Regenerate the Bedrock Runtime client with the current Smithy compact-schema API for compatibility with the shared runtime."
+}
