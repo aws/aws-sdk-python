@@ -1,2 +1,4 @@
 mkdocstrings[python]~=1.0.4
-zensical~=0.0.53
+# zensical 0.0.71 rejects search fields over a size limit, which fails on
+# large docstrings such as GuardDuty's CreateFilterInput.finding_criteria.
+zensical>=0.0.53,<0.0.71
