@@ -9,6 +9,8 @@
 >
 > **For production deployments, use [Boto3](https://github.com/boto/boto3)**: the established, generally available AWS SDK for Python with full coverage of all AWS services.
 
+[API Reference](https://docs.aws.amazon.com/sdk-for-python/v4/reference/) | [Developer Guide](https://docs.aws.amazon.com/sdk-for-python/v4/guide/welcome.html)
+
 This repository contains the next-generation AWS SDK for Python v4, rebuilt from
 the ground up with an async-first, modular architecture. These new clients allow
 you to interact with select AWS services using Python's native `async`/`await`
