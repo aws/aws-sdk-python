@@ -2,4114 +2,4166 @@
 
 from types import MappingProxyType
 
-from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
+from smithy_core.prelude import (
+    BLOB,
+    BOOLEAN,
+    DOCUMENT,
+    DOUBLE,
+    FLOAT,
+    INTEGER,
+    LONG,
+    STRING,
+    UNIT,
+)
+from smithy_core.schemas import Schema
+from smithy_core.shapes import ShapeID, ShapeType
+from smithy_core.traits import Trait
 
 
-n0 = "com.amazonaws.bedrockruntime"
-_NBS = "NonBlankString"
-_ADE = "AccessDeniedException"
-_s = "smithy.api#error"
-_c = "client"
-_sE = "smithy.api#httpError"
-_m = "message"
-_AI = "AccountId"
-_AMRFP = "AdditionalModelResponseFieldPaths"
-_me = "member"
-_IA = "InvocationArn"
-_GAII = "GetAsyncInvokeInput"
-_sSI = "smithy.synthetic#originalShapeId"
-_cGAIR = "com.amazonaws.bedrockruntime#GetAsyncInvokeRequest"
-_iA = "invocationArn"
-_sm = "smithy.api#required"
-_sL = "smithy.api#httpLabel"
-_AIIT = "AsyncInvokeIdempotencyToken"
-_T = "Timestamp"
-_sF = "smithy.api#timestampFormat"
-_dt = "date-time"
-_AIM = "AsyncInvokeMessage"
-_smi = "smithy.api#sensitive"
-_AIA = "AsyncInvokeArn"
-_KKI = "KmsKeyId"
-_SU = "S3Uri"
-_AISODC = "AsyncInvokeS3OutputDataConfig"
-_sU = "s3Uri"
-_kKI = "kmsKeyId"
-_bO = "bucketOwner"
-_AIODC = "AsyncInvokeOutputDataConfig"
-_sODC = "s3OutputDataConfig"
-_AIS = "AsyncInvokeStatus"
-_IP = "IN_PROGRESS"
-_COMPLETED = "COMPLETED"
-_FAILED = "FAILED"
-_GAIO = "GetAsyncInvokeOutput"
-_cGAIRo = "com.amazonaws.bedrockruntime#GetAsyncInvokeResponse"
-_mA = "modelArn"
-_cRT = "clientRequestToken"
-_st = "status"
-_fM = "failureMessage"
-_sT = "submitTime"
-_lMT = "lastModifiedTime"
-_eT = "endTime"
-_oDC = "outputDataConfig"
-_ISE = "InternalServerException"
-_se = "server"
-_TE = "ThrottlingException"
-_VE = "ValidationException"
-_GAI = "GetAsyncInvoke"
-_smit = "smithy.api#http"
-_MR = "MaxResults"
-_PT = "PaginationToken"
-_SAIB = "SortAsyncInvocationBy"
-_ST = "SUBMISSION_TIME"
-_SO = "SortOrder"
-_ASCENDING = "ASCENDING"
-_DESCENDING = "DESCENDING"
-_LAII = "ListAsyncInvokesInput"
-_cLAIR = "com.amazonaws.bedrockruntime#ListAsyncInvokesRequest"
-_sTA = "submitTimeAfter"
-_sQ = "smithy.api#httpQuery"
-_sTB = "submitTimeBefore"
-_sEt = "statusEquals"
-_mR = "maxResults"
-_nT = "nextToken"
-_sB = "sortBy"
-_smith = "smithy.api#default"
-_STu = "SubmissionTime"
-_sO = "sortOrder"
-_D = "Descending"
-_AISs = "AsyncInvokeSummary"
-_AISsy = "AsyncInvokeSummaries"
-_LAIO = "ListAsyncInvokesOutput"
-_cLAIRo = "com.amazonaws.bedrockruntime#ListAsyncInvokesResponse"
-_aIS = "asyncInvokeSummaries"
-_LAI = "ListAsyncInvokes"
-_CE = "ConflictException"
-_RNFE = "ResourceNotFoundException"
-_SQEE = "ServiceQuotaExceededException"
-_SUE = "ServiceUnavailableException"
-_AII = "AsyncInvokeIdentifier"
-_MIP = "ModelInputPayload"
-_TK = "TagKey"
-_TV = "TagValue"
-_Ta = "Tag"
-_k = "key"
-_v = "value"
-_TL = "TagList"
-_SAII = "StartAsyncInvokeInput"
-_cSAIR = "com.amazonaws.bedrockruntime#StartAsyncInvokeRequest"
-_sTm = "smithy.api#idempotencyToken"
-_mI = "modelId"
-_mIo = "modelInput"
-_t = "tags"
-_SAIO = "StartAsyncInvokeOutput"
-_cSAIRo = "com.amazonaws.bedrockruntime#StartAsyncInvokeResponse"
-_SAI = "StartAsyncInvoke"
-_GIF = "GuardrailImageFormat"
-_PNG = "PNG"
-_JPEG = "JPEG"
-_GIS = "GuardrailImageSource"
-_b = "bytes"
-_GIB = "GuardrailImageBlock"
-_f = "format"
-_so = "source"
-_GCQ = "GuardrailContentQualifier"
-_GS = "GROUNDING_SOURCE"
-_QUERY = "QUERY"
-_GC = "GUARD_CONTENT"
-_GCQL = "GuardrailContentQualifierList"
-_GTB = "GuardrailTextBlock"
-_te = "text"
-_q = "qualifiers"
-_GCB = "GuardrailContentBlock"
-_i = "image"
-_GCBL = "GuardrailContentBlockList"
-_GI = "GuardrailIdentifier"
-_GV = "GuardrailVersion"
-_GOS = "GuardrailOutputScope"
-_INTERVENTIONS = "INTERVENTIONS"
-_FULL = "FULL"
-_GCS = "GuardrailContentSource"
-_INPUT = "INPUT"
-_OUTPUT = "OUTPUT"
-_AGI = "ApplyGuardrailInput"
-_cAGR = "com.amazonaws.bedrockruntime#ApplyGuardrailRequest"
-_gI = "guardrailIdentifier"
-_gV = "guardrailVersion"
-_co = "content"
-_oS = "outputScope"
-_GA = "GuardrailAction"
-_NONE = "NONE"
-_GI_ = "GUARDRAIL_INTERVENED"
-_GAu = "GuardrailArn"
-_GIu = "GuardrailId"
-_GO = "GuardrailOrigin"
-_REQUEST = "REQUEST"
-_AE = "ACCOUNT_ENFORCED"
-_OE = "ORGANIZATION_ENFORCED"
-_GOL = "GuardrailOriginList"
-_GOu = "GuardrailOwnership"
-_SELF = "SELF"
-_CA = "CROSS_ACCOUNT"
-_AGD = "AppliedGuardrailDetails"
-_gIu = "guardrailId"
-_gA = "guardrailArn"
-_gO = "guardrailOrigin"
-_gOu = "guardrailOwnership"
-_ARRI = "AutomatedReasoningRuleIdentifier"
-_GARPVA = "GuardrailAutomatedReasoningPolicyVersionArn"
-_GARR = "GuardrailAutomatedReasoningRule"
-_id = "identifier"
-_pVA = "policyVersionArn"
-_GARRL = "GuardrailAutomatedReasoningRuleList"
-_GARSLC = "GuardrailAutomatedReasoningStatementLogicContent"
-_GARSNLC = "GuardrailAutomatedReasoningStatementNaturalLanguageContent"
-_GARS = "GuardrailAutomatedReasoningStatement"
-_l = "logic"
-_nL = "naturalLanguage"
-_GARSL = "GuardrailAutomatedReasoningStatementList"
-_GARLWT = "GuardrailAutomatedReasoningLogicWarningType"
-_AF = "ALWAYS_FALSE"
-_AT = "ALWAYS_TRUE"
-_GARLW = "GuardrailAutomatedReasoningLogicWarning"
-_ty = "type"
-_p = "premises"
-_cl = "claims"
-_GARTC = "GuardrailAutomatedReasoningTranslationConfidence"
-_GARITR = "GuardrailAutomatedReasoningInputTextReference"
-_GARITRL = "GuardrailAutomatedReasoningInputTextReferenceList"
-_GART = "GuardrailAutomatedReasoningTranslation"
-_uP = "untranslatedPremises"
-_uC = "untranslatedClaims"
-_con = "confidence"
-_GARIF = "GuardrailAutomatedReasoningImpossibleFinding"
-_tr = "translation"
-_cR = "contradictingRules"
-_lW = "logicWarning"
-_GARIFu = "GuardrailAutomatedReasoningInvalidFinding"
-_GARNTF = "GuardrailAutomatedReasoningNoTranslationsFinding"
-_GARSu = "GuardrailAutomatedReasoningScenario"
-_sta = "statements"
-_GARSF = "GuardrailAutomatedReasoningSatisfiableFinding"
-_cTS = "claimsTrueScenario"
-_cFS = "claimsFalseScenario"
-_GARTCF = "GuardrailAutomatedReasoningTooComplexFinding"
-_GARDSL = "GuardrailAutomatedReasoningDifferenceScenarioList"
-_GARTL = "GuardrailAutomatedReasoningTranslationList"
-_GARTO = "GuardrailAutomatedReasoningTranslationOption"
-_tra = "translations"
-_GARTOL = "GuardrailAutomatedReasoningTranslationOptionList"
-_GARTAF = "GuardrailAutomatedReasoningTranslationAmbiguousFinding"
-_o = "options"
-_dS = "differenceScenarios"
-_GARVF = "GuardrailAutomatedReasoningValidFinding"
-_sR = "supportingRules"
-_GARF = "GuardrailAutomatedReasoningFinding"
-_va = "valid"
-_in = "invalid"
-_sa = "satisfiable"
-_im = "impossible"
-_tA = "translationAmbiguous"
-_tC = "tooComplex"
-_nTo = "noTranslations"
-_GARFL = "GuardrailAutomatedReasoningFindingList"
-_GARPA = "GuardrailAutomatedReasoningPolicyAssessment"
-_fi = "findings"
-_GCPA = "GuardrailContentPolicyAction"
-_BLOCKED = "BLOCKED"
-_GCFC = "GuardrailContentFilterConfidence"
-_LOW = "LOW"
-_MEDIUM = "MEDIUM"
-_HIGH = "HIGH"
-_GCFS = "GuardrailContentFilterStrength"
-_GCFT = "GuardrailContentFilterType"
-_INSULTS = "INSULTS"
-_HATE = "HATE"
-_SEXUAL = "SEXUAL"
-_VIOLENCE = "VIOLENCE"
-_MISCONDUCT = "MISCONDUCT"
-_PA = "PROMPT_ATTACK"
-_GCF = "GuardrailContentFilter"
-_fS = "filterStrength"
-_a = "action"
-_d = "detected"
-_GCFL = "GuardrailContentFilterList"
-_GCPAu = "GuardrailContentPolicyAssessment"
-_fil = "filters"
-_GCGPA = "GuardrailContextualGroundingPolicyAction"
-_GCGFT = "GuardrailContextualGroundingFilterType"
-_GROUNDING = "GROUNDING"
-_RELEVANCE = "RELEVANCE"
-_GCGF = "GuardrailContextualGroundingFilter"
-_th = "threshold"
-_sc = "score"
-_GCGFu = "GuardrailContextualGroundingFilters"
-_GCGPAu = "GuardrailContextualGroundingPolicyAssessment"
-_IG = "ImagesGuarded"
-_IT = "ImagesTotal"
-_GIC = "GuardrailImageCoverage"
-_g = "guarded"
-_to = "total"
-_TCG = "TextCharactersGuarded"
-_TCT = "TextCharactersTotal"
-_GTCC = "GuardrailTextCharactersCoverage"
-_GCu = "GuardrailCoverage"
-_tCe = "textCharacters"
-_ima = "images"
-_GPL = "GuardrailProcessingLatency"
-_GARPP = "GuardrailAutomatedReasoningPoliciesProcessed"
-_GARPUP = "GuardrailAutomatedReasoningPolicyUnitsProcessed"
-_GCPIUP = "GuardrailContentPolicyImageUnitsProcessed"
-_GCPUP = "GuardrailContentPolicyUnitsProcessed"
-_GCGPUP = "GuardrailContextualGroundingPolicyUnitsProcessed"
-_GSIPFUP = "GuardrailSensitiveInformationPolicyFreeUnitsProcessed"
-_GSIPUP = "GuardrailSensitiveInformationPolicyUnitsProcessed"
-_GTPUP = "GuardrailTopicPolicyUnitsProcessed"
-_GWPUP = "GuardrailWordPolicyUnitsProcessed"
-_GU = "GuardrailUsage"
-_tPU = "topicPolicyUnits"
-_cPU = "contentPolicyUnits"
-_wPU = "wordPolicyUnits"
-_sIPU = "sensitiveInformationPolicyUnits"
-_sIPFU = "sensitiveInformationPolicyFreeUnits"
-_cGPU = "contextualGroundingPolicyUnits"
-_cPIU = "contentPolicyImageUnits"
-_aRPU = "automatedReasoningPolicyUnits"
-_aRP = "automatedReasoningPolicies"
-_GIM = "GuardrailInvocationMetrics"
-_gPL = "guardrailProcessingLatency"
-_u = "usage"
-_gC = "guardrailCoverage"
-_GSIPA = "GuardrailSensitiveInformationPolicyAction"
-_ANONYMIZED = "ANONYMIZED"
-_GPET = "GuardrailPiiEntityType"
-_ADDRESS = "ADDRESS"
-_AGE = "AGE"
-_AAK = "AWS_ACCESS_KEY"
-_ASK = "AWS_SECRET_KEY"
-_CHN = "CA_HEALTH_NUMBER"
-_CSIN = "CA_SOCIAL_INSURANCE_NUMBER"
-_CDCC = "CREDIT_DEBIT_CARD_CVV"
-_CDCE = "CREDIT_DEBIT_CARD_EXPIRY"
-_CDCN = "CREDIT_DEBIT_CARD_NUMBER"
-_DI = "DRIVER_ID"
-_EMAIL = "EMAIL"
-_IBAN = "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
-_IA_ = "IP_ADDRESS"
-_LP = "LICENSE_PLATE"
-_MA = "MAC_ADDRESS"
-_NAME = "NAME"
-_PASSWORD = "PASSWORD"
-_PHONE = "PHONE"
-_PIN = "PIN"
-_SC = "SWIFT_CODE"
-_UNHSN = "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
-_UNIN = "UK_NATIONAL_INSURANCE_NUMBER"
-_UUTRN = "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
-_URL = "URL"
-_USERNAME = "USERNAME"
-_UBAN = "US_BANK_ACCOUNT_NUMBER"
-_UBRN = "US_BANK_ROUTING_NUMBER"
-_UITIN = "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
-_UPN = "US_PASSPORT_NUMBER"
-_USSN = "US_SOCIAL_SECURITY_NUMBER"
-_VIN = "VEHICLE_IDENTIFICATION_NUMBER"
-_GPEF = "GuardrailPiiEntityFilter"
-_ma = "match"
-_GPEFL = "GuardrailPiiEntityFilterList"
-_GRF = "GuardrailRegexFilter"
-_n = "name"
-_r = "regex"
-_GRFL = "GuardrailRegexFilterList"
-_GSIPAu = "GuardrailSensitiveInformationPolicyAssessment"
-_pE = "piiEntities"
-_re = "regexes"
-_GTPA = "GuardrailTopicPolicyAction"
-_GTT = "GuardrailTopicType"
-_DENY = "DENY"
-_GT = "GuardrailTopic"
-_GTL = "GuardrailTopicList"
-_GTPAu = "GuardrailTopicPolicyAssessment"
-_top = "topics"
-_GWPA = "GuardrailWordPolicyAction"
-_GCW = "GuardrailCustomWord"
-_GCWL = "GuardrailCustomWordList"
-_GMWT = "GuardrailManagedWordType"
-_PROFANITY = "PROFANITY"
-_GMW = "GuardrailManagedWord"
-_GMWL = "GuardrailManagedWordList"
-_GWPAu = "GuardrailWordPolicyAssessment"
-_cW = "customWords"
-_mWL = "managedWordLists"
-_GAua = "GuardrailAssessment"
-_tP = "topicPolicy"
-_cP = "contentPolicy"
-_wP = "wordPolicy"
-_sIP = "sensitiveInformationPolicy"
-_cGP = "contextualGroundingPolicy"
-_aRPu = "automatedReasoningPolicy"
-_iM = "invocationMetrics"
-_aGD = "appliedGuardrailDetails"
-_GAL = "GuardrailAssessmentList"
-_GOT = "GuardrailOutputText"
-_GOC = "GuardrailOutputContent"
-_GOCL = "GuardrailOutputContentList"
-_AGO = "ApplyGuardrailOutput"
-_cAGRo = "com.amazonaws.bedrockruntime#ApplyGuardrailResponse"
-_aR = "actionReason"
-_ou = "outputs"
-_as = "assessments"
-_AG = "ApplyGuardrail"
-_GCCFC = "GuardrailChecksContentFilterCategory"
-_GCCFCC = "GuardrailChecksContentFilterCategoryConfig"
-_ca = "category"
-_GCCFCCL = "GuardrailChecksContentFilterCategoryConfigList"
-_GCCFCu = "GuardrailChecksContentFilterConfig"
-_cat = "categories"
-_GCPAC = "GuardrailChecksPromptAttackCategory"
-_JAILBREAK = "JAILBREAK"
-_PI = "PROMPT_INJECTION"
-_PL = "PROMPT_LEAKAGE"
-_GCPACC = "GuardrailChecksPromptAttackCategoryConfig"
-_GCPACCL = "GuardrailChecksPromptAttackCategoryConfigList"
-_GCPACu = "GuardrailChecksPromptAttackConfig"
-_GCSIET = "GuardrailChecksSensitiveInformationEntityType"
-_GCSIEC = "GuardrailChecksSensitiveInformationEntityConfig"
-_GCSIECL = "GuardrailChecksSensitiveInformationEntityConfigList"
-_GCSIC = "GuardrailChecksSensitiveInformationConfig"
-_e = "entities"
-_GCC = "GuardrailChecksConfig"
-_cF = "contentFilter"
-_pA = "promptAttack"
-_sI = "sensitiveInformation"
-_GCTC = "GuardrailChecksTextContent"
-_GCCB = "GuardrailChecksContentBlock"
-_GCCBL = "GuardrailChecksContentBlockList"
-_GCR = "GuardrailChecksRole"
-_USER = "USER"
-_ASSISTANT = "ASSISTANT"
-_SYSTEM = "SYSTEM"
-_GCM = "GuardrailChecksMessage"
-_ro = "role"
-_GCML = "GuardrailChecksMessageList"
-_IGCI = "InvokeGuardrailChecksInput"
-_cIGCR = "com.amazonaws.bedrockruntime#InvokeGuardrailChecksRequest"
-_mes = "messages"
-_ch = "checks"
-_GCCFRE = "GuardrailChecksContentFilterResultEntry"
-_sS = "severityScore"
-_GCCFRL = "GuardrailChecksContentFilterResultList"
-_GCCFR = "GuardrailChecksContentFilterResult"
-_res = "results"
-_GCPARE = "GuardrailChecksPromptAttackResultEntry"
-_GCPARL = "GuardrailChecksPromptAttackResultList"
-_GCPAR = "GuardrailChecksPromptAttackResult"
-_GCSIRE = "GuardrailChecksSensitiveInformationResultEntry"
-_cS = "confidenceScore"
-_bOe = "beginOffset"
-_eO = "endOffset"
-_mIe = "messageIndex"
-_cI = "contentIndex"
-_GCSIRL = "GuardrailChecksSensitiveInformationResultList"
-_GCSIR = "GuardrailChecksSensitiveInformationResult"
-_tru = "truncated"
-_GCRu = "GuardrailChecksResults"
-_GCCFU = "GuardrailChecksContentFilterUsage"
-_tU = "textUnits"
-_GCPAU = "GuardrailChecksPromptAttackUsage"
-_GCSIU = "GuardrailChecksSensitiveInformationUsage"
-_GCUR = "GuardrailChecksUsageResults"
-_IGCO = "InvokeGuardrailChecksOutput"
-_cIGCRo = "com.amazonaws.bedrockruntime#InvokeGuardrailChecksResponse"
-_IGC = "InvokeGuardrailChecks"
-_GTu = "GuardrailTrace"
-_ENABLED = "ENABLED"
-_DISABLED = "DISABLED"
-_EF = "ENABLED_FULL"
-_GCua = "GuardrailConfiguration"
-_v_ = ""
-_trac = "trace"
-_di = "disabled"
-_NES = "NonEmptyString"
-_NESL = "NonEmptyStringList"
-_IC = "InferenceConfiguration"
-_mT = "maxTokens"
-_tem = "temperature"
-_tPo = "topP"
-_sSt = "stopSequences"
-_EB = "ErrorBlock"
-_AFu = "AudioFormat"
-_MP = "MP3"
-_OPUS = "OPUS"
-_WAV = "WAV"
-_AAC = "AAC"
-_FLAC = "FLAC"
-_MP_ = "MP4"
-_OGG = "OGG"
-_MKV = "MKV"
-_MKA = "MKA"
-_XA = "X_AAC"
-_MA_ = "M4A"
-_MPEG = "MPEG"
-_MPGA = "MPGA"
-_PCM = "PCM"
-_WEBM = "WEBM"
-_SL = "S3Location"
-_ur = "uri"
-_AS = "AudioSource"
-_sLo = "s3Location"
-_AB = "AudioBlock"
-_er = "error"
-_CTTL = "CacheTTL"
-_FM = "FIVE_MINUTES"
-_OH = "ONE_HOUR"
-_CPT = "CachePointType"
-_DEFAULT = "DEFAULT"
-_CPB = "CachePointBlock"
-_tt = "ttl"
-_DCL = "DocumentCharLocation"
-_dI = "documentIndex"
-_star = "start"
-_en = "end"
-_DCLo = "DocumentChunkLocation"
-_DPL = "DocumentPageLocation"
-_SRL = "SearchResultLocation"
-_sRI = "searchResultIndex"
-_WL = "WebLocation"
-_url = "url"
-_do = "domain"
-_CL = "CitationLocation"
-_w = "web"
-_dC = "documentChar"
-_dP = "documentPage"
-_dCo = "documentChunk"
-_sRL = "searchResultLocation"
-_CSC = "CitationSourceContent"
-_CSCL = "CitationSourceContentList"
-_C = "Citation"
-_ti = "title"
-_sC = "sourceContent"
-_lo = "location"
-_Ci = "Citations"
-_CGC = "CitationGeneratedContent"
-_CGCL = "CitationGeneratedContentList"
-_CCB = "CitationsContentBlock"
-_ci = "citations"
-_CC = "CitationsConfig"
-_ena = "enabled"
-_DF = "DocumentFormat"
-_PDF = "PDF"
-_CSV = "CSV"
-_DOC = "DOC"
-_DOCX = "DOCX"
-_XLS = "XLS"
-_XLSX = "XLSX"
-_HTML = "HTML"
-_TXT = "TXT"
-_MD = "MD"
-_DCB = "DocumentContentBlock"
-_DCBo = "DocumentContentBlocks"
-_DS = "DocumentSource"
-_DB = "DocumentBlock"
-_tx = "txt"
-_cont = "context"
-_GCIF = "GuardrailConverseImageFormat"
-_GCIS = "GuardrailConverseImageSource"
-_GCIB = "GuardrailConverseImageBlock"
-_GCCQ = "GuardrailConverseContentQualifier"
-_GCCQL = "GuardrailConverseContentQualifierList"
-_GCTB = "GuardrailConverseTextBlock"
-_GCCBu = "GuardrailConverseContentBlock"
-_IF = "ImageFormat"
-_GIF_ = "GIF"
-_WEBP = "WEBP"
-_IS = "ImageSource"
-_IB = "ImageBlock"
-_RTB = "ReasoningTextBlock"
-_si = "signature"
-_RCB = "ReasoningContentBlock"
-_rT = "reasoningText"
-_rC = "redactedContent"
-_SRCB = "SearchResultContentBlock"
-_SRCBe = "SearchResultContentBlocks"
-_SRB = "SearchResultBlock"
-_TR = "ToolReference"
-_sN = "serverName"
-_TAB = "ToolAdditionBlock"
-_too = "tool"
-_TRB = "ToolRemovalBlock"
-_VF = "VideoFormat"
-_MOV = "MOV"
-_FLV = "FLV"
-_MPG = "MPG"
-_WMV = "WMV"
-_TG = "THREE_GP"
-_VS = "VideoSource"
-_VB = "VideoBlock"
-_TRCB = "ToolResultContentBlock"
-_j = "json"
-_doc = "document"
-_vi = "video"
-_sRe = "searchResult"
-_TRCBo = "ToolResultContentBlocks"
-_TRS = "ToolResultStatus"
-_SUCCESS = "SUCCESS"
-_ERROR = "ERROR"
-_TUI = "ToolUseId"
-_TRBo = "ToolResultBlock"
-_tUI = "toolUseId"
-_TN = "ToolName"
-_TUT = "ToolUseType"
-_STU = "SERVER_TOOL_USE"
-_TUB = "ToolUseBlock"
-_inp = "input"
-_CB = "ContentBlock"
-_au = "audio"
-_tUo = "toolUse"
-_tR = "toolResult"
-_gCu = "guardContent"
-_cPa = "cachePoint"
-_rCe = "reasoningContent"
-_cC = "citationsContent"
-_tAo = "toolAddition"
-_tRo = "toolRemoval"
-_CBo = "ContentBlocks"
-_CR = "ConversationRole"
-_M = "Message"
-_Me = "Messages"
-_CMI = "ConversationalModelId"
-_JSD = "JsonSchemaDefinition"
-_sch = "schema"
-_de = "description"
-_OFS = "OutputFormatStructure"
-_jS = "jsonSchema"
-_OFT = "OutputFormatType"
-_JS = "JSON_SCHEMA"
-_OF = "OutputFormat"
-_str = "structure"
-_OC = "OutputConfig"
-_tF = "textFormat"
-_ef = "effort"
-_PCL = "PerformanceConfigLatency"
-_STANDARD = "STANDARD"
-_OPTIMIZED = "OPTIMIZED"
-_PC = "PerformanceConfiguration"
-_la = "latency"
-_stan = "standard"
-_PVV = "PromptVariableValues"
-_PVM = "PromptVariableMap"
-_RM = "RequestMetadata"
-_STT = "ServiceTierType"
-_PRIORITY = "PRIORITY"
-_FLEX = "FLEX"
-_RESERVED = "RESERVED"
-_STe = "ServiceTier"
-_SCB = "SystemContentBlock"
-_SCBy = "SystemContentBlocks"
-_ATC = "AnyToolChoice"
-_ATCu = "AutoToolChoice"
-_STC = "SpecificToolChoice"
-_TC = "ToolChoice"
-_aut = "auto"
-_an = "any"
-_STy = "SystemTool"
-_TIS = "ToolInputSchema"
-_TS = "ToolSpecification"
-_iS = "inputSchema"
-_stri = "strict"
-_To = "Tool"
-_tS = "toolSpec"
-_sTy = "systemTool"
-_Too = "Tools"
-_TCo = "ToolConfiguration"
-_tool = "tools"
-_tCo = "toolChoice"
-_CI = "ConverseInput"
-_cCR = "com.amazonaws.bedrockruntime#ConverseRequest"
-_sy = "system"
-_iC = "inferenceConfig"
-_tCoo = "toolConfig"
-_gCua = "guardrailConfig"
-_aMRF = "additionalModelRequestFields"
-_pV = "promptVariables"
-_aMRFP = "additionalModelResponseFieldPaths"
-_rM = "requestMetadata"
-_pC = "performanceConfig"
-_sTe = "serviceTier"
-_oC = "outputConfig"
-_CM = "ConverseMetrics"
-_lM = "latencyMs"
-_CO = "ConverseOutput"
-_SR = "StopReason"
-_ET = "END_TURN"
-_TU = "TOOL_USE"
-_MT = "MAX_TOKENS"
-_SS = "STOP_SEQUENCE"
-_CF = "CONTENT_FILTERED"
-_MMO = "MALFORMED_MODEL_OUTPUT"
-_MTU = "MALFORMED_TOOL_USE"
-_MCWE = "MODEL_CONTEXT_WINDOW_EXCEEDED"
-_GAM = "GuardrailAssessmentMap"
-_MO = "ModelOutputs"
-_GALM = "GuardrailAssessmentListMap"
-_GTA = "GuardrailTraceAssessment"
-_mO = "modelOutput"
-_iAn = "inputAssessment"
-_oA = "outputAssessments"
-_IMI = "InvokedModelId"
-_PRT = "PromptRouterTrace"
-_iMI = "invokedModelId"
-_CT = "ConverseTrace"
-_gu = "guardrail"
-_pR = "promptRouter"
-_CD = "CacheDetail"
-_iT = "inputTokens"
-_CDL = "CacheDetailsList"
-_TUo = "TokenUsage"
-_oT = "outputTokens"
-_tT = "totalTokens"
-_cRIT = "cacheReadInputTokens"
-_cWIT = "cacheWriteInputTokens"
-_cD = "cacheDetails"
-_COO = "ConverseOperationOutput"
-_cCRo = "com.amazonaws.bedrockruntime#ConverseResponse"
-_out = "output"
-_sRt = "stopReason"
-_met = "metrics"
-_aMRFd = "additionalModelResponseFields"
-_SCt = "StatusCode"
-_MEE = "ModelErrorException"
-_oSC = "originalStatusCode"
-_rN = "resourceName"
-_MNRE = "ModelNotReadyException"
-_MTE = "ModelTimeoutException"
-_Co = "Converse"
-_GSPM = "GuardrailStreamProcessingMode"
-_SYNC = "SYNC"
-_ASYNC = "ASYNC"
-_GSC = "GuardrailStreamConfiguration"
-_sPM = "streamProcessingMode"
-_syn = "sync"
-_CSI = "ConverseStreamInput"
-_cCSR = "com.amazonaws.bedrockruntime#ConverseStreamRequest"
-_NNI = "NonNegativeInteger"
-_CSCD = "CitationSourceContentDelta"
-_CSCLD = "CitationSourceContentListDelta"
-_CDi = "CitationsDelta"
-_IBD = "ImageBlockDelta"
-_RCBD = "ReasoningContentBlockDelta"
-_TRBD = "ToolResultBlockDelta"
-_TRBDo = "ToolResultBlocksDelta"
-_TUBD = "ToolUseBlockDelta"
-_CBD = "ContentBlockDelta"
-_cit = "citation"
-_CBDE = "ContentBlockDeltaEvent"
-_del = "delta"
-_cBI = "contentBlockIndex"
-_IBS = "ImageBlockStart"
-_TRBS = "ToolResultBlockStart"
-_TUBS = "ToolUseBlockStart"
-_CBS = "ContentBlockStart"
-_CBSE = "ContentBlockStartEvent"
-_CBSEo = "ContentBlockStopEvent"
-_MSE = "MessageStartEvent"
-_MSEe = "MessageStopEvent"
-_CSM = "ConverseStreamMetrics"
-_CST = "ConverseStreamTrace"
-_CSME = "ConverseStreamMetadataEvent"
-_MSEE = "ModelStreamErrorException"
-_oM = "originalMessage"
-_CSO = "ConverseStreamOutput"
-_smithy = "smithy.api#streaming"
-_mS = "messageStart"
-_cBS = "contentBlockStart"
-_cBD = "contentBlockDelta"
-_cBSo = "contentBlockStop"
-_mSe = "messageStop"
-_meta = "metadata"
-_iSE = "internalServerException"
-_mSEE = "modelStreamErrorException"
-_vE = "validationException"
-_tE = "throttlingException"
-_sUE = "serviceUnavailableException"
-_CSOO = "ConverseStreamOperationOutput"
-_cCSRo = "com.amazonaws.bedrockruntime#ConverseStreamResponse"
-_stre = "stream"
-_sP = "smithy.api#httpPayload"
-_CS = "ConverseStream"
-_MTi = "MimeType"
-_B = "Body"
-_IMIn = "InvokeModelIdentifier"
-_RMJ = "RequestMetadataJson"
-_Tr = "Trace"
-_IMInv = "InvokeModelInput"
-_cIMR = "com.amazonaws.bedrockruntime#InvokeModelRequest"
-_bo = "body"
-_cT = "contentType"
-_sH = "smithy.api#httpHeader"
-_CT_ = "Content-Type"
-_ac = "accept"
-_A = "Accept"
-_XABT = "X-Amzn-Bedrock-Trace"
-_XABG = "X-Amzn-Bedrock-GuardrailIdentifier"
-_XABG_ = "X-Amzn-Bedrock-GuardrailVersion"
-_pCL = "performanceConfigLatency"
-_XABPL = "X-Amzn-Bedrock-PerformanceConfig-Latency"
-_XABST = "X-Amzn-Bedrock-Service-Tier"
-_XABRM = "X-Amzn-Bedrock-Request-Metadata"
-_IMO = "InvokeModelOutput"
-_cIMRo = "com.amazonaws.bedrockruntime#InvokeModelResponse"
-_IM = "InvokeModel"
-_PB = "PartBody"
-_BIPP = "BidirectionalInputPayloadPart"
-_IMWBSI = "InvokeModelWithBidirectionalStreamInput"
-_chu = "chunk"
-_IMWBSOI = "InvokeModelWithBidirectionalStreamOperationInput"
-_cIMWBSR = "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamRequest"
-_BOPP = "BidirectionalOutputPayloadPart"
-_IMWBSO = "InvokeModelWithBidirectionalStreamOutput"
-_mTE = "modelTimeoutException"
-_IMWBSOO = "InvokeModelWithBidirectionalStreamOperationOutput"
-_cIMWBSRo = "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamResponse"
-_IMWBS = "InvokeModelWithBidirectionalStream"
-_IMWRSI = "InvokeModelWithResponseStreamInput"
-_cIMWRSR = "com.amazonaws.bedrockruntime#InvokeModelWithResponseStreamRequest"
-_XABA = "X-Amzn-Bedrock-Accept"
-_PP = "PayloadPart"
-_RS = "ResponseStream"
-_IMWRSO = "InvokeModelWithResponseStreamOutput"
-_cIMWRSRo = "com.amazonaws.bedrockruntime#InvokeModelWithResponseStreamResponse"
-_XABCT = "X-Amzn-Bedrock-Content-Type"
-_IMWRS = "InvokeModelWithResponseStream"
-_CTR = "ConverseTokensRequest"
-_IMTR = "InvokeModelTokensRequest"
-_CTI = "CountTokensInput"
-_iMn = "invokeModel"
-_conv = "converse"
-_FMVI = "FoundationModelVersionIdentifier"
-_CTOI = "CountTokensOperationInput"
-_cCTR = "com.amazonaws.bedrockruntime#CountTokensRequest"
-_CTO = "CountTokensOutput"
-_cCTRo = "com.amazonaws.bedrockruntime#CountTokensResponse"
-_CTo = "CountTokens"
-_ABFS = "AmazonBedrockFrontendService"
-_aw = "aws.auth#sigv4"
-_sBm = "smithy.rules#endpointBdd"
-_aws = "aws.api#service"
-_aJ = "aws.protocols#restJson1"
-_sBA = "smithy.api#httpBearerAuth"
-
-NON_BLANK_STRING: StaticSchema = (3, n0, _NBS, 0)
-
-ACCESS_DENIED_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _ADE,
-    {_s: _c, _sE: 403},
-    (_m,),
-    ((NON_BLANK_STRING, 0),),
+NON_BLANK_STRING = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#NonBlankString"),
+    shape_type=ShapeType.STRING,
 )
 
-ACCOUNT_ID: StaticSchema = (3, n0, _AI, 0)
-
-ADDITIONAL_MODEL_RESPONSE_FIELD_PATHS: StaticSchema = (
-    16,
-    n0,
-    _AMRFP,
-    0,
-    (_me,),
-    ((3, 0),),
+ACCESS_DENIED_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AccessDeniedException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
+    ],
+    members={"message": {"target": NON_BLANK_STRING}},
 )
 
-INVOCATION_ARN: StaticSchema = (3, n0, _IA, 0)
-
-GET_ASYNC_INVOKE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GAII,
-    {_sSI: _cGAIR},
-    (_iA,),
-    ((INVOCATION_ARN, 9),),
+ACCOUNT_ID = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#AccountId"), shape_type=ShapeType.STRING
 )
 
-ASYNC_INVOKE_IDEMPOTENCY_TOKEN: StaticSchema = (3, n0, _AIIT, 0)
-
-TIMESTAMP: StaticSchema = (4, n0, _T, {_sF: _dt})
-
-ASYNC_INVOKE_MESSAGE: StaticSchema = (3, n0, _AIM, 4)
-
-ASYNC_INVOKE_ARN: StaticSchema = (3, n0, _AIA, 0)
-
-KMS_KEY_ID: StaticSchema = (3, n0, _KKI, 0)
-
-S3_URI: StaticSchema = (3, n0, _SU, 0)
-
-ASYNC_INVOKE_S3_OUTPUT_DATA_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _AISODC,
-    0,
-    (_sU, _kKI, _bO),
-    ((S3_URI, 1), (KMS_KEY_ID, 0), (ACCOUNT_ID, 0)),
+ADDITIONAL_MODEL_RESPONSE_FIELD_PATHS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AdditionalModelResponseFieldPaths"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": STRING}},
 )
 
-ASYNC_INVOKE_OUTPUT_DATA_CONFIG: StaticSchema = (
-    19,
-    n0,
-    _AIODC,
-    0,
-    (_sODC,),
-    ((ASYNC_INVOKE_S3_OUTPUT_DATA_CONFIG, 0),),
+INVOCATION_ARN = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvocationArn"),
+    shape_type=ShapeType.STRING,
 )
 
-ASYNC_INVOKE_STATUS: StaticSchema = (
-    14,
-    n0,
-    _AIS,
-    0,
-    (_IP, _COMPLETED, _FAILED),
-    ((-1, 0), (-1, 0), (-1, 0)),
-)
-
-GET_ASYNC_INVOKE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GAIO,
-    {_sSI: _cGAIRo},
-    (_iA, _mA, _cRT, _st, _fM, _sT, _lMT, _eT, _oDC),
-    (
-        (INVOCATION_ARN, 1),
-        (ASYNC_INVOKE_ARN, 1),
-        (ASYNC_INVOKE_IDEMPOTENCY_TOKEN, 0),
-        (ASYNC_INVOKE_STATUS, 1),
-        (ASYNC_INVOKE_MESSAGE, 0),
-        (TIMESTAMP, 1),
-        (TIMESTAMP, 0),
-        (TIMESTAMP, 0),
-        (ASYNC_INVOKE_OUTPUT_DATA_CONFIG, 1),
-    ),
-)
-
-INTERNAL_SERVER_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _ISE,
-    {_s: _se, _sE: 500},
-    (_m,),
-    ((NON_BLANK_STRING, 0),),
-)
-
-THROTTLING_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _TE,
-    {_s: _c, _sE: 429},
-    (_m,),
-    ((NON_BLANK_STRING, 0),),
-)
-
-VALIDATION_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _VE,
-    {_s: _c, _sE: 400},
-    (_m,),
-    ((NON_BLANK_STRING, 0),),
-)
-
-GET_ASYNC_INVOKE: StaticOperationSchema = (
-    23,
-    n0,
-    _GAI,
-    {
-        _smit: MappingProxyType(
-            {"code": 200, "method": "GET", "uri": "/async-invoke/{invocationArn}"}
+GET_ASYNC_INVOKE_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GetAsyncInvokeInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#GetAsyncInvokeRequest",
         )
+    ],
+    members={
+        "invocationArn": {
+            "target": INVOCATION_ARN,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        }
     },
-    GET_ASYNC_INVOKE_INPUT,
-    GET_ASYNC_INVOKE_OUTPUT,
-    (
-        ACCESS_DENIED_EXCEPTION,
-        INTERNAL_SERVER_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        VALIDATION_EXCEPTION,
-    ),
 )
 
-MAX_RESULTS: StaticSchema = (7, n0, _MR, 0)
-
-PAGINATION_TOKEN: StaticSchema = (3, n0, _PT, 0)
-
-SORT_ASYNC_INVOCATION_BY: StaticSchema = (14, n0, _SAIB, 0, (_ST,), ((-1, 0),))
-
-SORT_ORDER: StaticSchema = (
-    14,
-    n0,
-    _SO,
-    0,
-    (_ASCENDING, _DESCENDING),
-    ((-1, 0), (-1, 0)),
-)
-
-LIST_ASYNC_INVOKES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LAII,
-    {_sSI: _cLAIR},
-    (_sTA, _sTB, _sEt, _mR, _nT, _sB, _sO),
-    (
-        (TIMESTAMP, {_sQ: _sTA}),
-        (TIMESTAMP, {_sQ: _sTB}),
-        (ASYNC_INVOKE_STATUS, {_sQ: _sEt}),
-        (MAX_RESULTS, {_sQ: _mR}),
-        (PAGINATION_TOKEN, {_sQ: _nT}),
-        (SORT_ASYNC_INVOCATION_BY, {_smith: _STu, _sQ: _sB}),
-        (SORT_ORDER, {_smith: _D, _sQ: _sO}),
-    ),
-)
-
-ASYNC_INVOKE_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _AISs,
-    0,
-    (_iA, _mA, _cRT, _st, _fM, _sT, _lMT, _eT, _oDC),
-    (
-        (INVOCATION_ARN, 1),
-        (ASYNC_INVOKE_ARN, 1),
-        (ASYNC_INVOKE_IDEMPOTENCY_TOKEN, 0),
-        (ASYNC_INVOKE_STATUS, 0),
-        (ASYNC_INVOKE_MESSAGE, 0),
-        (TIMESTAMP, 1),
-        (TIMESTAMP, 0),
-        (TIMESTAMP, 0),
-        (ASYNC_INVOKE_OUTPUT_DATA_CONFIG, 1),
-    ),
-)
-
-ASYNC_INVOKE_SUMMARIES: StaticSchema = (
-    16,
-    n0,
-    _AISsy,
-    0,
-    (_me,),
-    ((ASYNC_INVOKE_SUMMARY, 0),),
-)
-
-LIST_ASYNC_INVOKES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LAIO,
-    {_sSI: _cLAIRo},
-    (_nT, _aIS),
-    ((PAGINATION_TOKEN, 0), (ASYNC_INVOKE_SUMMARIES, 0)),
-)
-
-LIST_ASYNC_INVOKES: StaticOperationSchema = (
-    23,
-    n0,
-    _LAI,
-    {_smit: MappingProxyType({"code": 200, "method": "GET", "uri": "/async-invoke"})},
-    LIST_ASYNC_INVOKES_INPUT,
-    LIST_ASYNC_INVOKES_OUTPUT,
-    (
-        ACCESS_DENIED_EXCEPTION,
-        INTERNAL_SERVER_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        VALIDATION_EXCEPTION,
-    ),
-)
-
-CONFLICT_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _CE,
-    {_s: _c, _sE: 400},
-    (_m,),
-    ((NON_BLANK_STRING, 0),),
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _RNFE,
-    {_s: _c, _sE: 404},
-    (_m,),
-    ((NON_BLANK_STRING, 0),),
-)
-
-SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _SQEE,
-    {_s: _c, _sE: 400},
-    (_m,),
-    ((NON_BLANK_STRING, 0),),
-)
-
-SERVICE_UNAVAILABLE_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _SUE,
-    {_s: _se, _sE: 503},
-    (_m,),
-    ((NON_BLANK_STRING, 0),),
-)
-
-ASYNC_INVOKE_IDENTIFIER: StaticSchema = (3, n0, _AII, 0)
-
-MODEL_INPUT_PAYLOAD: StaticSchema = (13, n0, _MIP, 4)
-
-TAG_KEY: StaticSchema = (3, n0, _TK, 0)
-
-TAG_VALUE: StaticSchema = (3, n0, _TV, 0)
-
-TAG: StaticSchema = (18, n0, _Ta, 0, (_k, _v), ((TAG_KEY, 1), (TAG_VALUE, 1)))
-
-TAG_LIST: StaticSchema = (16, n0, _TL, 0, (_me,), ((TAG, 0),))
-
-START_ASYNC_INVOKE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _SAII,
-    {_sSI: _cSAIR},
-    (_cRT, _mI, _mIo, _oDC, _t),
-    (
-        (ASYNC_INVOKE_IDEMPOTENCY_TOKEN, 2),
-        (ASYNC_INVOKE_IDENTIFIER, 1),
-        (MODEL_INPUT_PAYLOAD, 1),
-        (ASYNC_INVOKE_OUTPUT_DATA_CONFIG, 1),
-        (TAG_LIST, 0),
-    ),
-)
-
-START_ASYNC_INVOKE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _SAIO,
-    {_sSI: _cSAIRo},
-    (_iA,),
-    ((INVOCATION_ARN, 1),),
-)
-
-START_ASYNC_INVOKE: StaticOperationSchema = (
-    23,
-    n0,
-    _SAI,
-    {_smit: MappingProxyType({"code": 200, "method": "POST", "uri": "/async-invoke"})},
-    START_ASYNC_INVOKE_INPUT,
-    START_ASYNC_INVOKE_OUTPUT,
-    (
-        ACCESS_DENIED_EXCEPTION,
-        CONFLICT_EXCEPTION,
-        INTERNAL_SERVER_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
-        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        SERVICE_UNAVAILABLE_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        VALIDATION_EXCEPTION,
-    ),
-)
-
-GUARDRAIL_IMAGE_FORMAT: StaticSchema = (
-    14,
-    n0,
-    _GIF,
-    0,
-    (_PNG, _JPEG),
-    ((-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_IMAGE_SOURCE: StaticSchema = (19, n0, _GIS, 4, (_b,), ((1, 0),))
-
-GUARDRAIL_IMAGE_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _GIB,
-    4,
-    (_f, _so),
-    ((GUARDRAIL_IMAGE_FORMAT, 1), (GUARDRAIL_IMAGE_SOURCE, 1)),
-)
-
-GUARDRAIL_CONTENT_QUALIFIER: StaticSchema = (
-    14,
-    n0,
-    _GCQ,
-    0,
-    (_GS, _QUERY, _GC),
-    ((-1, 0), (-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CONTENT_QUALIFIER_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCQL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CONTENT_QUALIFIER, 0),),
-)
-
-GUARDRAIL_TEXT_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _GTB,
-    0,
-    (_te, _q),
-    ((3, 1), (GUARDRAIL_CONTENT_QUALIFIER_LIST, 0)),
-)
-
-GUARDRAIL_CONTENT_BLOCK: StaticSchema = (
-    19,
-    n0,
-    _GCB,
-    0,
-    (_te, _i),
-    ((GUARDRAIL_TEXT_BLOCK, 0), (GUARDRAIL_IMAGE_BLOCK, 0)),
-)
-
-GUARDRAIL_CONTENT_BLOCK_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCBL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CONTENT_BLOCK, 0),),
-)
-
-GUARDRAIL_IDENTIFIER: StaticSchema = (3, n0, _GI, 0)
-
-GUARDRAIL_VERSION: StaticSchema = (3, n0, _GV, 0)
-
-GUARDRAIL_OUTPUT_SCOPE: StaticSchema = (
-    14,
-    n0,
-    _GOS,
-    0,
-    (_INTERVENTIONS, _FULL),
-    ((-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CONTENT_SOURCE: StaticSchema = (
-    14,
-    n0,
-    _GCS,
-    0,
-    (_INPUT, _OUTPUT),
-    ((-1, 0), (-1, 0)),
-)
-
-APPLY_GUARDRAIL_INPUT: StaticSchema = (
-    18,
-    n0,
-    _AGI,
-    {_sSI: _cAGR},
-    (_gI, _gV, _so, _co, _oS),
-    (
-        (GUARDRAIL_IDENTIFIER, 9),
-        (GUARDRAIL_VERSION, 9),
-        (GUARDRAIL_CONTENT_SOURCE, 1),
-        (GUARDRAIL_CONTENT_BLOCK_LIST, 1),
-        (GUARDRAIL_OUTPUT_SCOPE, 0),
-    ),
-)
-
-GUARDRAIL_ACTION: StaticSchema = (14, n0, _GA, 0, (_NONE, _GI_), ((-1, 0), (-1, 0)))
-
-GUARDRAIL_ARN: StaticSchema = (3, n0, _GAu, 0)
-
-GUARDRAIL_ID: StaticSchema = (3, n0, _GIu, 0)
-
-GUARDRAIL_ORIGIN: StaticSchema = (
-    14,
-    n0,
-    _GO,
-    0,
-    (_REQUEST, _AE, _OE),
-    ((-1, 0), (-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_ORIGIN_LIST: StaticSchema = (
-    16,
-    n0,
-    _GOL,
-    0,
-    (_me,),
-    ((GUARDRAIL_ORIGIN, 0),),
-)
-
-GUARDRAIL_OWNERSHIP: StaticSchema = (14, n0, _GOu, 0, (_SELF, _CA), ((-1, 0), (-1, 0)))
-
-APPLIED_GUARDRAIL_DETAILS: StaticSchema = (
-    18,
-    n0,
-    _AGD,
-    0,
-    (_gIu, _gV, _gA, _gO, _gOu),
-    (
-        (GUARDRAIL_ID, 0),
-        (GUARDRAIL_VERSION, 0),
-        (GUARDRAIL_ARN, 0),
-        (GUARDRAIL_ORIGIN_LIST, 0),
-        (GUARDRAIL_OWNERSHIP, 0),
-    ),
-)
-
-AUTOMATED_REASONING_RULE_IDENTIFIER: StaticSchema = (3, n0, _ARRI, 0)
-
-GUARDRAIL_AUTOMATED_REASONING_POLICY_VERSION_ARN: StaticSchema = (3, n0, _GARPVA, 0)
-
-GUARDRAIL_AUTOMATED_REASONING_RULE: StaticSchema = (
-    18,
-    n0,
-    _GARR,
-    0,
-    (_id, _pVA),
-    (
-        (AUTOMATED_REASONING_RULE_IDENTIFIER, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_POLICY_VERSION_ARN, 0),
-    ),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_RULE_LIST: StaticSchema = (
-    16,
-    n0,
-    _GARRL,
-    0,
-    (_me,),
-    ((GUARDRAIL_AUTOMATED_REASONING_RULE, 0),),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LOGIC_CONTENT: StaticSchema = (
-    3,
-    n0,
-    _GARSLC,
-    4,
-)
-
-GUARDRAIL_AUTOMATED_REASONING_STATEMENT_NATURAL_LANGUAGE_CONTENT: StaticSchema = (
-    3,
-    n0,
-    _GARSNLC,
-    4,
-)
-
-GUARDRAIL_AUTOMATED_REASONING_STATEMENT: StaticSchema = (
-    18,
-    n0,
-    _GARS,
-    0,
-    (_l, _nL),
-    (
-        (GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LOGIC_CONTENT, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_STATEMENT_NATURAL_LANGUAGE_CONTENT, 0),
-    ),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST: StaticSchema = (
-    16,
-    n0,
-    _GARSL,
-    0,
-    (_me,),
-    ((GUARDRAIL_AUTOMATED_REASONING_STATEMENT, 0),),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING_TYPE: StaticSchema = (
-    14,
-    n0,
-    _GARLWT,
-    0,
-    (_AF, _AT),
-    ((-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING: StaticSchema = (
-    18,
-    n0,
-    _GARLW,
-    0,
-    (_ty, _p, _cl),
-    (
-        (GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING_TYPE, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST, 0),
-    ),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_CONFIDENCE: StaticSchema = (10, n0, _GARTC, 0)
-
-GUARDRAIL_AUTOMATED_REASONING_INPUT_TEXT_REFERENCE: StaticSchema = (
-    18,
-    n0,
-    _GARITR,
-    0,
-    (_te,),
-    ((GUARDRAIL_AUTOMATED_REASONING_STATEMENT_NATURAL_LANGUAGE_CONTENT, 0),),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_INPUT_TEXT_REFERENCE_LIST: StaticSchema = (
-    16,
-    n0,
-    _GARITRL,
-    0,
-    (_me,),
-    ((GUARDRAIL_AUTOMATED_REASONING_INPUT_TEXT_REFERENCE, 0),),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_TRANSLATION: StaticSchema = (
-    18,
-    n0,
-    _GART,
-    0,
-    (_p, _cl, _uP, _uC, _con),
-    (
-        (GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_INPUT_TEXT_REFERENCE_LIST, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_INPUT_TEXT_REFERENCE_LIST, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_CONFIDENCE, 0),
-    ),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_IMPOSSIBLE_FINDING: StaticSchema = (
-    18,
-    n0,
-    _GARIF,
-    0,
-    (_tr, _cR, _lW),
-    (
-        (GUARDRAIL_AUTOMATED_REASONING_TRANSLATION, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_RULE_LIST, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING, 0),
-    ),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_INVALID_FINDING: StaticSchema = (
-    18,
-    n0,
-    _GARIFu,
-    0,
-    (_tr, _cR, _lW),
-    (
-        (GUARDRAIL_AUTOMATED_REASONING_TRANSLATION, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_RULE_LIST, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING, 0),
-    ),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_NO_TRANSLATIONS_FINDING: StaticSchema = (
-    18,
-    n0,
-    _GARNTF,
-    0,
-)
-
-GUARDRAIL_AUTOMATED_REASONING_SCENARIO: StaticSchema = (
-    18,
-    n0,
-    _GARSu,
-    0,
-    (_sta,),
-    ((GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST, 0),),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_SATISFIABLE_FINDING: StaticSchema = (
-    18,
-    n0,
-    _GARSF,
-    0,
-    (_tr, _cTS, _cFS, _lW),
-    (
-        (GUARDRAIL_AUTOMATED_REASONING_TRANSLATION, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_SCENARIO, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_SCENARIO, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING, 0),
-    ),
+ASYNC_INVOKE_IDEMPOTENCY_TOKEN = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeIdempotencyToken"),
+    shape_type=ShapeType.STRING,
 )
 
-GUARDRAIL_AUTOMATED_REASONING_TOO_COMPLEX_FINDING: StaticSchema = (18, n0, _GARTCF, 0)
-
-GUARDRAIL_AUTOMATED_REASONING_DIFFERENCE_SCENARIO_LIST: StaticSchema = (
-    16,
-    n0,
-    _GARDSL,
-    0,
-    (_me,),
-    ((GUARDRAIL_AUTOMATED_REASONING_SCENARIO, 0),),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_LIST: StaticSchema = (
-    16,
-    n0,
-    _GARTL,
-    0,
-    (_me,),
-    ((GUARDRAIL_AUTOMATED_REASONING_TRANSLATION, 0),),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_OPTION: StaticSchema = (
-    18,
-    n0,
-    _GARTO,
-    0,
-    (_tra,),
-    ((GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_LIST, 0),),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_OPTION_LIST: StaticSchema = (
-    16,
-    n0,
-    _GARTOL,
-    0,
-    (_me,),
-    ((GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_OPTION, 0),),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_AMBIGUOUS_FINDING: StaticSchema = (
-    18,
-    n0,
-    _GARTAF,
-    0,
-    (_o, _dS),
-    (
-        (GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_OPTION_LIST, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_DIFFERENCE_SCENARIO_LIST, 0),
-    ),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_VALID_FINDING: StaticSchema = (
-    18,
-    n0,
-    _GARVF,
-    0,
-    (_tr, _cTS, _sR, _lW),
-    (
-        (GUARDRAIL_AUTOMATED_REASONING_TRANSLATION, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_SCENARIO, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_RULE_LIST, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING, 0),
-    ),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_FINDING: StaticSchema = (
-    19,
-    n0,
-    _GARF,
-    0,
-    (_va, _in, _sa, _im, _tA, _tC, _nTo),
-    (
-        (GUARDRAIL_AUTOMATED_REASONING_VALID_FINDING, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_INVALID_FINDING, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_SATISFIABLE_FINDING, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_IMPOSSIBLE_FINDING, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_AMBIGUOUS_FINDING, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_TOO_COMPLEX_FINDING, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_NO_TRANSLATIONS_FINDING, 0),
-    ),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_FINDING_LIST: StaticSchema = (
-    16,
-    n0,
-    _GARFL,
-    0,
-    (_me,),
-    ((GUARDRAIL_AUTOMATED_REASONING_FINDING, 0),),
-)
-
-GUARDRAIL_AUTOMATED_REASONING_POLICY_ASSESSMENT: StaticSchema = (
-    18,
-    n0,
-    _GARPA,
-    0,
-    (_fi,),
-    ((GUARDRAIL_AUTOMATED_REASONING_FINDING_LIST, 0),),
-)
-
-GUARDRAIL_CONTENT_POLICY_ACTION: StaticSchema = (
-    14,
-    n0,
-    _GCPA,
-    0,
-    (_BLOCKED, _NONE),
-    ((-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CONTENT_FILTER_CONFIDENCE: StaticSchema = (
-    14,
-    n0,
-    _GCFC,
-    0,
-    (_NONE, _LOW, _MEDIUM, _HIGH),
-    ((-1, 0), (-1, 0), (-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CONTENT_FILTER_STRENGTH: StaticSchema = (
-    14,
-    n0,
-    _GCFS,
-    0,
-    (_NONE, _LOW, _MEDIUM, _HIGH),
-    ((-1, 0), (-1, 0), (-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CONTENT_FILTER_TYPE: StaticSchema = (
-    14,
-    n0,
-    _GCFT,
-    0,
-    (_INSULTS, _HATE, _SEXUAL, _VIOLENCE, _MISCONDUCT, _PA),
-    ((-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CONTENT_FILTER: StaticSchema = (
-    18,
-    n0,
-    _GCF,
-    0,
-    (_ty, _con, _fS, _a, _d),
-    (
-        (GUARDRAIL_CONTENT_FILTER_TYPE, 1),
-        (GUARDRAIL_CONTENT_FILTER_CONFIDENCE, 1),
-        (GUARDRAIL_CONTENT_FILTER_STRENGTH, 0),
-        (GUARDRAIL_CONTENT_POLICY_ACTION, 1),
-        (2, 0),
-    ),
-)
-
-GUARDRAIL_CONTENT_FILTER_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCFL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CONTENT_FILTER, 0),),
-)
-
-GUARDRAIL_CONTENT_POLICY_ASSESSMENT: StaticSchema = (
-    18,
-    n0,
-    _GCPAu,
-    0,
-    (_fil,),
-    ((GUARDRAIL_CONTENT_FILTER_LIST, 1),),
-)
-
-GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_ACTION: StaticSchema = (
-    14,
-    n0,
-    _GCGPA,
-    0,
-    (_BLOCKED, _NONE),
-    ((-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER_TYPE: StaticSchema = (
-    14,
-    n0,
-    _GCGFT,
-    0,
-    (_GROUNDING, _RELEVANCE),
-    ((-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER: StaticSchema = (
-    18,
-    n0,
-    _GCGF,
-    0,
-    (_ty, _th, _sc, _a, _d),
-    (
-        (GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER_TYPE, 1),
-        (10, 1),
-        (10, 1),
-        (GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_ACTION, 1),
-        (2, 0),
-    ),
-)
-
-GUARDRAIL_CONTEXTUAL_GROUNDING_FILTERS: StaticSchema = (
-    16,
-    n0,
-    _GCGFu,
-    0,
-    (_me,),
-    ((GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER, 0),),
-)
-
-GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_ASSESSMENT: StaticSchema = (
-    18,
-    n0,
-    _GCGPAu,
-    0,
-    (_fil,),
-    ((GUARDRAIL_CONTEXTUAL_GROUNDING_FILTERS, 0),),
-)
-
-IMAGES_GUARDED: StaticSchema = (7, n0, _IG, 0)
-
-IMAGES_TOTAL: StaticSchema = (7, n0, _IT, 0)
-
-GUARDRAIL_IMAGE_COVERAGE: StaticSchema = (
-    18,
-    n0,
-    _GIC,
-    0,
-    (_g, _to),
-    ((IMAGES_GUARDED, 0), (IMAGES_TOTAL, 0)),
-)
-
-TEXT_CHARACTERS_GUARDED: StaticSchema = (7, n0, _TCG, 0)
-
-TEXT_CHARACTERS_TOTAL: StaticSchema = (7, n0, _TCT, 0)
-
-GUARDRAIL_TEXT_CHARACTERS_COVERAGE: StaticSchema = (
-    18,
-    n0,
-    _GTCC,
-    0,
-    (_g, _to),
-    ((TEXT_CHARACTERS_GUARDED, 0), (TEXT_CHARACTERS_TOTAL, 0)),
-)
-
-GUARDRAIL_COVERAGE: StaticSchema = (
-    18,
-    n0,
-    _GCu,
-    0,
-    (_tCe, _ima),
-    ((GUARDRAIL_TEXT_CHARACTERS_COVERAGE, 0), (GUARDRAIL_IMAGE_COVERAGE, 0)),
-)
-
-GUARDRAIL_PROCESSING_LATENCY: StaticSchema = (8, n0, _GPL, 0)
-
-GUARDRAIL_AUTOMATED_REASONING_POLICIES_PROCESSED: StaticSchema = (7, n0, _GARPP, 0)
-
-GUARDRAIL_AUTOMATED_REASONING_POLICY_UNITS_PROCESSED: StaticSchema = (7, n0, _GARPUP, 0)
-
-GUARDRAIL_CONTENT_POLICY_IMAGE_UNITS_PROCESSED: StaticSchema = (7, n0, _GCPIUP, 0)
-
-GUARDRAIL_CONTENT_POLICY_UNITS_PROCESSED: StaticSchema = (7, n0, _GCPUP, 0)
-
-GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_UNITS_PROCESSED: StaticSchema = (
-    7,
-    n0,
-    _GCGPUP,
-    0,
-)
-
-GUARDRAIL_SENSITIVE_INFORMATION_POLICY_FREE_UNITS_PROCESSED: StaticSchema = (
-    7,
-    n0,
-    _GSIPFUP,
-    0,
-)
-
-GUARDRAIL_SENSITIVE_INFORMATION_POLICY_UNITS_PROCESSED: StaticSchema = (
-    7,
-    n0,
-    _GSIPUP,
-    0,
-)
-
-GUARDRAIL_TOPIC_POLICY_UNITS_PROCESSED: StaticSchema = (7, n0, _GTPUP, 0)
-
-GUARDRAIL_WORD_POLICY_UNITS_PROCESSED: StaticSchema = (7, n0, _GWPUP, 0)
-
-GUARDRAIL_USAGE: StaticSchema = (
-    18,
-    n0,
-    _GU,
-    0,
-    (_tPU, _cPU, _wPU, _sIPU, _sIPFU, _cGPU, _cPIU, _aRPU, _aRP),
-    (
-        (GUARDRAIL_TOPIC_POLICY_UNITS_PROCESSED, 1),
-        (GUARDRAIL_CONTENT_POLICY_UNITS_PROCESSED, 1),
-        (GUARDRAIL_WORD_POLICY_UNITS_PROCESSED, 1),
-        (GUARDRAIL_SENSITIVE_INFORMATION_POLICY_UNITS_PROCESSED, 1),
-        (GUARDRAIL_SENSITIVE_INFORMATION_POLICY_FREE_UNITS_PROCESSED, 1),
-        (GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_UNITS_PROCESSED, 1),
-        (GUARDRAIL_CONTENT_POLICY_IMAGE_UNITS_PROCESSED, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_POLICY_UNITS_PROCESSED, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_POLICIES_PROCESSED, 0),
-    ),
-)
-
-GUARDRAIL_INVOCATION_METRICS: StaticSchema = (
-    18,
-    n0,
-    _GIM,
-    0,
-    (_gPL, _u, _gC),
-    ((GUARDRAIL_PROCESSING_LATENCY, 0), (GUARDRAIL_USAGE, 0), (GUARDRAIL_COVERAGE, 0)),
-)
-
-GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ACTION: StaticSchema = (
-    14,
-    n0,
-    _GSIPA,
-    0,
-    (_ANONYMIZED, _BLOCKED, _NONE),
-    ((-1, 0), (-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_PII_ENTITY_TYPE: StaticSchema = (
-    14,
-    n0,
-    _GPET,
-    0,
-    (
-        _ADDRESS,
-        _AGE,
-        _AAK,
-        _ASK,
-        _CHN,
-        _CSIN,
-        _CDCC,
-        _CDCE,
-        _CDCN,
-        _DI,
-        _EMAIL,
-        _IBAN,
-        _IA_,
-        _LP,
-        _MA,
-        _NAME,
-        _PASSWORD,
-        _PHONE,
-        _PIN,
-        _SC,
-        _UNHSN,
-        _UNIN,
-        _UUTRN,
-        _URL,
-        _USERNAME,
-        _UBAN,
-        _UBRN,
-        _UITIN,
-        _UPN,
-        _USSN,
-        _VIN,
-    ),
-    (
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-    ),
-)
-
-GUARDRAIL_PII_ENTITY_FILTER: StaticSchema = (
-    18,
-    n0,
-    _GPEF,
-    0,
-    (_ma, _ty, _a, _d),
-    (
-        (3, 1),
-        (GUARDRAIL_PII_ENTITY_TYPE, 1),
-        (GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ACTION, 1),
-        (2, 0),
-    ),
-)
-
-GUARDRAIL_PII_ENTITY_FILTER_LIST: StaticSchema = (
-    16,
-    n0,
-    _GPEFL,
-    0,
-    (_me,),
-    ((GUARDRAIL_PII_ENTITY_FILTER, 0),),
-)
-
-GUARDRAIL_REGEX_FILTER: StaticSchema = (
-    18,
-    n0,
-    _GRF,
-    0,
-    (_n, _ma, _r, _a, _d),
-    (
-        (3, 0),
-        (3, 0),
-        (3, 0),
-        (GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ACTION, 1),
-        (2, 0),
-    ),
-)
-
-GUARDRAIL_REGEX_FILTER_LIST: StaticSchema = (
-    16,
-    n0,
-    _GRFL,
-    0,
-    (_me,),
-    ((GUARDRAIL_REGEX_FILTER, 0),),
-)
-
-GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ASSESSMENT: StaticSchema = (
-    18,
-    n0,
-    _GSIPAu,
-    0,
-    (_pE, _re),
-    ((GUARDRAIL_PII_ENTITY_FILTER_LIST, 1), (GUARDRAIL_REGEX_FILTER_LIST, 1)),
-)
-
-GUARDRAIL_TOPIC_POLICY_ACTION: StaticSchema = (
-    14,
-    n0,
-    _GTPA,
-    0,
-    (_BLOCKED, _NONE),
-    ((-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_TOPIC_TYPE: StaticSchema = (14, n0, _GTT, 0, (_DENY,), ((-1, 0),))
-
-GUARDRAIL_TOPIC: StaticSchema = (
-    18,
-    n0,
-    _GT,
-    0,
-    (_n, _ty, _a, _d),
-    ((3, 1), (GUARDRAIL_TOPIC_TYPE, 1), (GUARDRAIL_TOPIC_POLICY_ACTION, 1), (2, 0)),
-)
-
-GUARDRAIL_TOPIC_LIST: StaticSchema = (16, n0, _GTL, 0, (_me,), ((GUARDRAIL_TOPIC, 0),))
-
-GUARDRAIL_TOPIC_POLICY_ASSESSMENT: StaticSchema = (
-    18,
-    n0,
-    _GTPAu,
-    0,
-    (_top,),
-    ((GUARDRAIL_TOPIC_LIST, 1),),
-)
-
-GUARDRAIL_WORD_POLICY_ACTION: StaticSchema = (
-    14,
-    n0,
-    _GWPA,
-    0,
-    (_BLOCKED, _NONE),
-    ((-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CUSTOM_WORD: StaticSchema = (
-    18,
-    n0,
-    _GCW,
-    0,
-    (_ma, _a, _d),
-    ((3, 1), (GUARDRAIL_WORD_POLICY_ACTION, 1), (2, 0)),
+TIMESTAMP = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#Timestamp"),
+    shape_type=ShapeType.TIMESTAMP,
+    traits=[Trait.new(id=ShapeID("smithy.api#timestampFormat"), value="date-time")],
 )
 
-GUARDRAIL_CUSTOM_WORD_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCWL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CUSTOM_WORD, 0),),
+ASYNC_INVOKE_MESSAGE = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeMessage"),
+    shape_type=ShapeType.STRING,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
 )
 
-GUARDRAIL_MANAGED_WORD_TYPE: StaticSchema = (
-    14,
-    n0,
-    _GMWT,
-    0,
-    (_PROFANITY,),
-    ((-1, 0),),
+ASYNC_INVOKE_ARN = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeArn"),
+    shape_type=ShapeType.STRING,
 )
 
-GUARDRAIL_MANAGED_WORD: StaticSchema = (
-    18,
-    n0,
-    _GMW,
-    0,
-    (_ma, _ty, _a, _d),
-    (
-        (3, 1),
-        (GUARDRAIL_MANAGED_WORD_TYPE, 1),
-        (GUARDRAIL_WORD_POLICY_ACTION, 1),
-        (2, 0),
-    ),
+KMS_KEY_ID = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#KmsKeyId"), shape_type=ShapeType.STRING
 )
 
-GUARDRAIL_MANAGED_WORD_LIST: StaticSchema = (
-    16,
-    n0,
-    _GMWL,
-    0,
-    (_me,),
-    ((GUARDRAIL_MANAGED_WORD, 0),),
+S3_URI = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#S3Uri"), shape_type=ShapeType.STRING
 )
-
-GUARDRAIL_WORD_POLICY_ASSESSMENT: StaticSchema = (
-    18,
-    n0,
-    _GWPAu,
-    0,
-    (_cW, _mWL),
-    ((GUARDRAIL_CUSTOM_WORD_LIST, 1), (GUARDRAIL_MANAGED_WORD_LIST, 1)),
-)
-
-GUARDRAIL_ASSESSMENT: StaticSchema = (
-    18,
-    n0,
-    _GAua,
-    0,
-    (_tP, _cP, _wP, _sIP, _cGP, _aRPu, _iM, _aGD),
-    (
-        (GUARDRAIL_TOPIC_POLICY_ASSESSMENT, 0),
-        (GUARDRAIL_CONTENT_POLICY_ASSESSMENT, 0),
-        (GUARDRAIL_WORD_POLICY_ASSESSMENT, 0),
-        (GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ASSESSMENT, 0),
-        (GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_ASSESSMENT, 0),
-        (GUARDRAIL_AUTOMATED_REASONING_POLICY_ASSESSMENT, 0),
-        (GUARDRAIL_INVOCATION_METRICS, 0),
-        (APPLIED_GUARDRAIL_DETAILS, 0),
-    ),
-)
-
-GUARDRAIL_ASSESSMENT_LIST: StaticSchema = (
-    16,
-    n0,
-    _GAL,
-    0,
-    (_me,),
-    ((GUARDRAIL_ASSESSMENT, 0),),
-)
-
-GUARDRAIL_OUTPUT_TEXT: StaticSchema = (3, n0, _GOT, 0)
 
-GUARDRAIL_OUTPUT_CONTENT: StaticSchema = (
-    18,
-    n0,
-    _GOC,
-    0,
-    (_te,),
-    ((GUARDRAIL_OUTPUT_TEXT, 0),),
+ASYNC_INVOKE_S3_OUTPUT_DATA_CONFIG = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeS3OutputDataConfig"),
+    members={
+        "s3Uri": {
+            "target": S3_URI,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "kmsKeyId": {"target": KMS_KEY_ID},
+        "bucketOwner": {"target": ACCOUNT_ID},
+    },
 )
 
-GUARDRAIL_OUTPUT_CONTENT_LIST: StaticSchema = (
-    16,
-    n0,
-    _GOCL,
-    0,
-    (_me,),
-    ((GUARDRAIL_OUTPUT_CONTENT, 0),),
+ASYNC_INVOKE_OUTPUT_DATA_CONFIG = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeOutputDataConfig"),
+    shape_type=ShapeType.UNION,
+    members={"s3OutputDataConfig": {"target": ASYNC_INVOKE_S3_OUTPUT_DATA_CONFIG}},
 )
 
-APPLY_GUARDRAIL_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _AGO,
-    {_sSI: _cAGRo},
-    (_u, _a, _aR, _ou, _as, _gC),
-    (
-        (GUARDRAIL_USAGE, 1),
-        (GUARDRAIL_ACTION, 1),
-        (3, 0),
-        (GUARDRAIL_OUTPUT_CONTENT_LIST, 1),
-        (GUARDRAIL_ASSESSMENT_LIST, 1),
-        (GUARDRAIL_COVERAGE, 0),
-    ),
+ASYNC_INVOKE_STATUS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeStatus"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "IN_PROGRESS": {"target": UNIT},
+        "COMPLETED": {"target": UNIT},
+        "FAILED": {"target": UNIT},
+    },
 )
 
-APPLY_GUARDRAIL: StaticOperationSchema = (
-    23,
-    n0,
-    _AG,
-    {
-        _smit: MappingProxyType(
-            {
-                "code": 200,
-                "method": "POST",
-                "uri": "/guardrail/{guardrailIdentifier}/version/{guardrailVersion}/apply",
-            }
+GET_ASYNC_INVOKE_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GetAsyncInvokeOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#GetAsyncInvokeResponse",
         )
+    ],
+    members={
+        "invocationArn": {
+            "target": INVOCATION_ARN,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "modelArn": {
+            "target": ASYNC_INVOKE_ARN,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "clientRequestToken": {"target": ASYNC_INVOKE_IDEMPOTENCY_TOKEN},
+        "status": {
+            "target": ASYNC_INVOKE_STATUS,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "failureMessage": {"target": ASYNC_INVOKE_MESSAGE},
+        "submitTime": {
+            "target": TIMESTAMP,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "lastModifiedTime": {"target": TIMESTAMP},
+        "endTime": {"target": TIMESTAMP},
+        "outputDataConfig": {
+            "target": ASYNC_INVOKE_OUTPUT_DATA_CONFIG,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
     },
-    APPLY_GUARDRAIL_INPUT,
-    APPLY_GUARDRAIL_OUTPUT,
-    (
-        ACCESS_DENIED_EXCEPTION,
-        INTERNAL_SERVER_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
-        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        SERVICE_UNAVAILABLE_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        VALIDATION_EXCEPTION,
-    ),
 )
 
-GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY: StaticSchema = (
-    14,
-    n0,
-    _GCCFC,
-    0,
-    (_VIOLENCE, _HATE, _SEXUAL, _MISCONDUCT, _INSULTS),
-    ((-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0)),
+INTERNAL_SERVER_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#InternalServerException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
+    ],
+    members={"message": {"target": NON_BLANK_STRING}},
 )
 
-GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _GCCFCC,
-    0,
-    (_ca,),
-    ((GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY, 1),),
+THROTTLING_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ThrottlingException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
+    ],
+    members={"message": {"target": NON_BLANK_STRING}},
 )
 
-GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY_CONFIG_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCCFCCL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY_CONFIG, 0),),
+VALIDATION_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ValidationException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
+    ],
+    members={"message": {"target": NON_BLANK_STRING}},
 )
 
-GUARDRAIL_CHECKS_CONTENT_FILTER_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _GCCFCu,
-    0,
-    (_cat,),
-    ((GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY_CONFIG_LIST, 1),),
-)
-
-GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY: StaticSchema = (
-    14,
-    n0,
-    _GCPAC,
-    0,
-    (_JAILBREAK, _PI, _PL),
-    ((-1, 0), (-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _GCPACC,
-    0,
-    (_ca,),
-    ((GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY, 1),),
-)
-
-GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY_CONFIG_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCPACCL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY_CONFIG, 0),),
-)
-
-GUARDRAIL_CHECKS_PROMPT_ATTACK_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _GCPACu,
-    0,
-    (_cat,),
-    ((GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY_CONFIG_LIST, 1),),
-)
-
-GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_TYPE: StaticSchema = (
-    14,
-    n0,
-    _GCSIET,
-    0,
-    (
-        _ADDRESS,
-        _AGE,
-        _AAK,
-        _ASK,
-        _CHN,
-        _CSIN,
-        _CDCC,
-        _CDCE,
-        _CDCN,
-        _DI,
-        _EMAIL,
-        _IBAN,
-        _IA_,
-        _LP,
-        _MA,
-        _NAME,
-        _PASSWORD,
-        _PHONE,
-        _PIN,
-        _SC,
-        _UNHSN,
-        _UNIN,
-        _UUTRN,
-        _URL,
-        _USERNAME,
-        _UBAN,
-        _UBRN,
-        _UITIN,
-        _UPN,
-        _USSN,
-        _VIN,
-    ),
-    (
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-    ),
-)
-
-GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _GCSIEC,
-    0,
-    (_ty,),
-    ((GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_TYPE, 1),),
-)
-
-GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_CONFIG_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCSIECL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_CONFIG, 0),),
-)
-
-GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _GCSIC,
-    0,
-    (_e,),
-    ((GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_CONFIG_LIST, 1),),
-)
-
-GUARDRAIL_CHECKS_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _GCC,
-    0,
-    (_cF, _pA, _sI),
-    (
-        (GUARDRAIL_CHECKS_CONTENT_FILTER_CONFIG, 0),
-        (GUARDRAIL_CHECKS_PROMPT_ATTACK_CONFIG, 0),
-        (GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_CONFIG, 0),
-    ),
-)
-
-GUARDRAIL_CHECKS_TEXT_CONTENT: StaticSchema = (3, n0, _GCTC, 4)
-
-GUARDRAIL_CHECKS_CONTENT_BLOCK: StaticSchema = (
-    19,
-    n0,
-    _GCCB,
-    0,
-    (_te,),
-    ((GUARDRAIL_CHECKS_TEXT_CONTENT, 0),),
-)
-
-GUARDRAIL_CHECKS_CONTENT_BLOCK_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCCBL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CHECKS_CONTENT_BLOCK, 0),),
-)
-
-GUARDRAIL_CHECKS_ROLE: StaticSchema = (
-    14,
-    n0,
-    _GCR,
-    0,
-    (_USER, _ASSISTANT, _SYSTEM),
-    ((-1, 0), (-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CHECKS_MESSAGE: StaticSchema = (
-    18,
-    n0,
-    _GCM,
-    0,
-    (_ro, _co),
-    ((GUARDRAIL_CHECKS_ROLE, 1), (GUARDRAIL_CHECKS_CONTENT_BLOCK_LIST, 1)),
-)
-
-GUARDRAIL_CHECKS_MESSAGE_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCML,
-    0,
-    (_me,),
-    ((GUARDRAIL_CHECKS_MESSAGE, 0),),
-)
-
-INVOKE_GUARDRAIL_CHECKS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _IGCI,
-    {_sSI: _cIGCR},
-    (_mes, _ch),
-    ((GUARDRAIL_CHECKS_MESSAGE_LIST, 1), (GUARDRAIL_CHECKS_CONFIG, 1)),
-)
-
-GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT_ENTRY: StaticSchema = (
-    18,
-    n0,
-    _GCCFRE,
-    0,
-    (_ca, _sS),
-    ((GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY, 1), (10, 1)),
-)
-
-GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCCFRL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT_ENTRY, 0),),
-)
-
-GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT: StaticSchema = (
-    18,
-    n0,
-    _GCCFR,
-    0,
-    (_res,),
-    ((GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT_LIST, 1),),
-)
-
-GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT_ENTRY: StaticSchema = (
-    18,
-    n0,
-    _GCPARE,
-    0,
-    (_ca, _sS),
-    ((GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY, 1), (10, 1)),
-)
-
-GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCPARL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT_ENTRY, 0),),
-)
-
-GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT: StaticSchema = (
-    18,
-    n0,
-    _GCPAR,
-    0,
-    (_res,),
-    ((GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT_LIST, 1),),
-)
-
-GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT_ENTRY: StaticSchema = (
-    18,
-    n0,
-    _GCSIRE,
-    0,
-    (_ty, _cS, _bOe, _eO, _mIe, _cI),
-    (
-        (GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_TYPE, 1),
-        (10, 1),
-        (7, 1),
-        (7, 1),
-        (7, 1),
-        (7, 1),
-    ),
-)
-
-GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCSIRL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT_ENTRY, 0),),
-)
-
-GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT: StaticSchema = (
-    18,
-    n0,
-    _GCSIR,
-    0,
-    (_res, _tru),
-    ((GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT_LIST, 1), (2, 0)),
-)
-
-GUARDRAIL_CHECKS_RESULTS: StaticSchema = (
-    18,
-    n0,
-    _GCRu,
-    0,
-    (_cF, _pA, _sI),
-    (
-        (GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT, 0),
-        (GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT, 0),
-        (GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT, 0),
-    ),
-)
-
-GUARDRAIL_CHECKS_CONTENT_FILTER_USAGE: StaticSchema = (
-    18,
-    n0,
-    _GCCFU,
-    0,
-    (_tU,),
-    ((7, 1),),
-)
-
-GUARDRAIL_CHECKS_PROMPT_ATTACK_USAGE: StaticSchema = (
-    18,
-    n0,
-    _GCPAU,
-    0,
-    (_tU,),
-    ((7, 1),),
-)
-
-GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_USAGE: StaticSchema = (
-    18,
-    n0,
-    _GCSIU,
-    0,
-    (_tU,),
-    ((7, 1),),
-)
-
-GUARDRAIL_CHECKS_USAGE_RESULTS: StaticSchema = (
-    18,
-    n0,
-    _GCUR,
-    0,
-    (_cF, _pA, _sI),
-    (
-        (GUARDRAIL_CHECKS_CONTENT_FILTER_USAGE, 0),
-        (GUARDRAIL_CHECKS_PROMPT_ATTACK_USAGE, 0),
-        (GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_USAGE, 0),
-    ),
-)
-
-INVOKE_GUARDRAIL_CHECKS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _IGCO,
-    {_sSI: _cIGCRo},
-    (_res, _u),
-    ((GUARDRAIL_CHECKS_RESULTS, 1), (GUARDRAIL_CHECKS_USAGE_RESULTS, 1)),
-)
-
-INVOKE_GUARDRAIL_CHECKS: StaticOperationSchema = (
-    23,
-    n0,
-    _IGC,
-    {
-        _smit: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/guardrail-checks/invoke"}
+GET_ASYNC_INVOKE = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#GetAsyncInvoke"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {"code": 200, "method": "GET", "uri": "/async-invoke/{invocationArn}"}
+            ),
         )
-    },
-    INVOKE_GUARDRAIL_CHECKS_INPUT,
-    INVOKE_GUARDRAIL_CHECKS_OUTPUT,
-    (
-        ACCESS_DENIED_EXCEPTION,
-        INTERNAL_SERVER_EXCEPTION,
-        SERVICE_UNAVAILABLE_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        VALIDATION_EXCEPTION,
-    ),
+    ],
 )
 
-GUARDRAIL_TRACE: StaticSchema = (
-    14,
-    n0,
-    _GTu,
-    0,
-    (_ENABLED, _DISABLED, _EF),
-    ((-1, 0), (-1, 0), (-1, 0)),
+MAX_RESULTS = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#MaxResults"), shape_type=ShapeType.INTEGER
 )
 
-GUARDRAIL_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _GCua,
-    0,
-    (_gI, _gV, _trac),
-    (
-        (GUARDRAIL_IDENTIFIER, {_smith: _v_}),
-        (GUARDRAIL_VERSION, {_smith: _v_}),
-        (GUARDRAIL_TRACE, {_smith: _di}),
-    ),
+PAGINATION_TOKEN = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#PaginationToken"),
+    shape_type=ShapeType.STRING,
 )
 
-NON_EMPTY_STRING: StaticSchema = (3, n0, _NES, 0)
-
-NON_EMPTY_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _NESL,
-    0,
-    (_me,),
-    ((NON_EMPTY_STRING, 0),),
-)
-
-INFERENCE_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _IC,
-    0,
-    (_mT, _tem, _tPo, _sSt),
-    ((7, 0), (9, 0), (9, 0), (NON_EMPTY_STRING_LIST, 0)),
-)
-
-ERROR_BLOCK: StaticSchema = (18, n0, _EB, 4, (_m,), ((3, 0),))
-
-AUDIO_FORMAT: StaticSchema = (
-    14,
-    n0,
-    _AFu,
-    0,
-    (
-        _MP,
-        _OPUS,
-        _WAV,
-        _AAC,
-        _FLAC,
-        _MP_,
-        _OGG,
-        _MKV,
-        _MKA,
-        _XA,
-        _MA_,
-        _MPEG,
-        _MPGA,
-        _PCM,
-        _WEBM,
-    ),
-    (
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-        (-1, 0),
-    ),
-)
-
-S3_LOCATION: StaticSchema = (18, n0, _SL, 0, (_ur, _bO), ((S3_URI, 1), (ACCOUNT_ID, 0)))
-
-AUDIO_SOURCE: StaticSchema = (19, n0, _AS, 4, (_b, _sLo), ((1, 0), (S3_LOCATION, 0)))
-
-AUDIO_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _AB,
-    0,
-    (_f, _so, _er),
-    ((AUDIO_FORMAT, 1), (AUDIO_SOURCE, 1), (ERROR_BLOCK, 0)),
-)
-
-CACHE_TTL: StaticSchema = (14, n0, _CTTL, 0, (_FM, _OH), ((-1, 0), (-1, 0)))
-
-CACHE_POINT_TYPE: StaticSchema = (14, n0, _CPT, 0, (_DEFAULT,), ((-1, 0),))
-
-CACHE_POINT_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _CPB,
-    0,
-    (_ty, _tt),
-    ((CACHE_POINT_TYPE, 1), (CACHE_TTL, 0)),
-)
-
-DOCUMENT_CHAR_LOCATION: StaticSchema = (
-    18,
-    n0,
-    _DCL,
-    0,
-    (_dI, _star, _en),
-    ((7, 0), (7, 0), (7, 0)),
-)
-
-DOCUMENT_CHUNK_LOCATION: StaticSchema = (
-    18,
-    n0,
-    _DCLo,
-    0,
-    (_dI, _star, _en),
-    ((7, 0), (7, 0), (7, 0)),
-)
-
-DOCUMENT_PAGE_LOCATION: StaticSchema = (
-    18,
-    n0,
-    _DPL,
-    0,
-    (_dI, _star, _en),
-    ((7, 0), (7, 0), (7, 0)),
-)
-
-SEARCH_RESULT_LOCATION: StaticSchema = (
-    18,
-    n0,
-    _SRL,
-    0,
-    (_sRI, _star, _en),
-    ((7, 0), (7, 0), (7, 0)),
-)
-
-WEB_LOCATION: StaticSchema = (18, n0, _WL, 0, (_url, _do), ((3, 0), (3, 0)))
-
-CITATION_LOCATION: StaticSchema = (
-    19,
-    n0,
-    _CL,
-    0,
-    (_w, _dC, _dP, _dCo, _sRL),
-    (
-        (WEB_LOCATION, 0),
-        (DOCUMENT_CHAR_LOCATION, 0),
-        (DOCUMENT_PAGE_LOCATION, 0),
-        (DOCUMENT_CHUNK_LOCATION, 0),
-        (SEARCH_RESULT_LOCATION, 0),
-    ),
-)
-
-CITATION_SOURCE_CONTENT: StaticSchema = (19, n0, _CSC, 0, (_te,), ((3, 0),))
-
-CITATION_SOURCE_CONTENT_LIST: StaticSchema = (
-    16,
-    n0,
-    _CSCL,
-    0,
-    (_me,),
-    ((CITATION_SOURCE_CONTENT, 0),),
-)
-
-CITATION: StaticSchema = (
-    18,
-    n0,
-    _C,
-    0,
-    (_ti, _so, _sC, _lo),
-    ((3, 0), (3, 0), (CITATION_SOURCE_CONTENT_LIST, 0), (CITATION_LOCATION, 0)),
-)
-
-CITATIONS: StaticSchema = (16, n0, _Ci, 0, (_me,), ((CITATION, 0),))
-
-CITATION_GENERATED_CONTENT: StaticSchema = (19, n0, _CGC, 0, (_te,), ((3, 0),))
-
-CITATION_GENERATED_CONTENT_LIST: StaticSchema = (
-    16,
-    n0,
-    _CGCL,
-    0,
-    (_me,),
-    ((CITATION_GENERATED_CONTENT, 0),),
-)
-
-CITATIONS_CONTENT_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _CCB,
-    0,
-    (_co, _ci),
-    ((CITATION_GENERATED_CONTENT_LIST, 0), (CITATIONS, 0)),
-)
-
-CITATIONS_CONFIG: StaticSchema = (18, n0, _CC, 0, (_ena,), ((2, 1),))
-
-DOCUMENT_FORMAT: StaticSchema = (
-    14,
-    n0,
-    _DF,
-    0,
-    (_PDF, _CSV, _DOC, _DOCX, _XLS, _XLSX, _HTML, _TXT, _MD),
-    ((-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0)),
-)
-
-DOCUMENT_CONTENT_BLOCK: StaticSchema = (19, n0, _DCB, 0, (_te,), ((3, 0),))
-
-DOCUMENT_CONTENT_BLOCKS: StaticSchema = (
-    16,
-    n0,
-    _DCBo,
-    0,
-    (_me,),
-    ((DOCUMENT_CONTENT_BLOCK, 0),),
-)
-
-DOCUMENT_SOURCE: StaticSchema = (
-    19,
-    n0,
-    _DS,
-    0,
-    (_b, _sLo, _te, _co),
-    ((1, 0), (S3_LOCATION, 0), (3, 0), (DOCUMENT_CONTENT_BLOCKS, 0)),
-)
-
-DOCUMENT_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _DB,
-    0,
-    (_f, _n, _so, _cont, _ci),
-    (
-        (DOCUMENT_FORMAT, {_smith: _tx}),
-        (3, 1),
-        (DOCUMENT_SOURCE, 1),
-        (3, 0),
-        (CITATIONS_CONFIG, 0),
-    ),
-)
-
-GUARDRAIL_CONVERSE_IMAGE_FORMAT: StaticSchema = (
-    14,
-    n0,
-    _GCIF,
-    0,
-    (_PNG, _JPEG),
-    ((-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CONVERSE_IMAGE_SOURCE: StaticSchema = (19, n0, _GCIS, 4, (_b,), ((1, 0),))
-
-GUARDRAIL_CONVERSE_IMAGE_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _GCIB,
-    4,
-    (_f, _so),
-    ((GUARDRAIL_CONVERSE_IMAGE_FORMAT, 1), (GUARDRAIL_CONVERSE_IMAGE_SOURCE, 1)),
-)
-
-GUARDRAIL_CONVERSE_CONTENT_QUALIFIER: StaticSchema = (
-    14,
-    n0,
-    _GCCQ,
-    0,
-    (_GS, _QUERY, _GC),
-    ((-1, 0), (-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_CONVERSE_CONTENT_QUALIFIER_LIST: StaticSchema = (
-    16,
-    n0,
-    _GCCQL,
-    0,
-    (_me,),
-    ((GUARDRAIL_CONVERSE_CONTENT_QUALIFIER, 0),),
-)
-
-GUARDRAIL_CONVERSE_TEXT_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _GCTB,
-    0,
-    (_te, _q),
-    ((3, 1), (GUARDRAIL_CONVERSE_CONTENT_QUALIFIER_LIST, 0)),
-)
-
-GUARDRAIL_CONVERSE_CONTENT_BLOCK: StaticSchema = (
-    19,
-    n0,
-    _GCCBu,
-    0,
-    (_te, _i),
-    ((GUARDRAIL_CONVERSE_TEXT_BLOCK, 0), (GUARDRAIL_CONVERSE_IMAGE_BLOCK, 0)),
-)
-
-IMAGE_FORMAT: StaticSchema = (
-    14,
-    n0,
-    _IF,
-    0,
-    (_PNG, _JPEG, _GIF_, _WEBP),
-    ((-1, 0), (-1, 0), (-1, 0), (-1, 0)),
-)
-
-IMAGE_SOURCE: StaticSchema = (19, n0, _IS, 4, (_b, _sLo), ((1, 0), (S3_LOCATION, 0)))
-
-IMAGE_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _IB,
-    0,
-    (_f, _so, _er),
-    ((IMAGE_FORMAT, 1), (IMAGE_SOURCE, 1), (ERROR_BLOCK, 0)),
-)
-
-REASONING_TEXT_BLOCK: StaticSchema = (18, n0, _RTB, 4, (_te, _si), ((3, 1), (3, 0)))
-
-REASONING_CONTENT_BLOCK: StaticSchema = (
-    19,
-    n0,
-    _RCB,
-    4,
-    (_rT, _rC),
-    ((REASONING_TEXT_BLOCK, 0), (1, 0)),
-)
-
-SEARCH_RESULT_CONTENT_BLOCK: StaticSchema = (18, n0, _SRCB, 0, (_te,), ((3, 1),))
-
-SEARCH_RESULT_CONTENT_BLOCKS: StaticSchema = (
-    16,
-    n0,
-    _SRCBe,
-    0,
-    (_me,),
-    ((SEARCH_RESULT_CONTENT_BLOCK, 0),),
-)
-
-SEARCH_RESULT_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _SRB,
-    0,
-    (_so, _ti, _co, _ci),
-    ((3, 1), (3, 1), (SEARCH_RESULT_CONTENT_BLOCKS, 1), (CITATIONS_CONFIG, 0)),
-)
-
-TOOL_REFERENCE: StaticSchema = (
-    18,
-    n0,
-    _TR,
-    0,
-    (_ty, _n, _sN),
-    ((3, 0), (3, 0), (3, 0)),
-)
-
-TOOL_ADDITION_BLOCK: StaticSchema = (18, n0, _TAB, 0, (_too,), ((TOOL_REFERENCE, 1),))
-
-TOOL_REMOVAL_BLOCK: StaticSchema = (18, n0, _TRB, 0, (_too,), ((TOOL_REFERENCE, 1),))
-
-VIDEO_FORMAT: StaticSchema = (
-    14,
-    n0,
-    _VF,
-    0,
-    (_MKV, _MOV, _MP_, _WEBM, _FLV, _MPEG, _MPG, _WMV, _TG),
-    ((-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0)),
-)
-
-VIDEO_SOURCE: StaticSchema = (19, n0, _VS, 0, (_b, _sLo), ((1, 0), (S3_LOCATION, 0)))
-
-VIDEO_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _VB,
-    0,
-    (_f, _so),
-    ((VIDEO_FORMAT, 1), (VIDEO_SOURCE, 1)),
-)
-
-TOOL_RESULT_CONTENT_BLOCK: StaticSchema = (
-    19,
-    n0,
-    _TRCB,
-    0,
-    (_j, _te, _i, _doc, _vi, _sRe),
-    (
-        (13, 0),
-        (3, 0),
-        (IMAGE_BLOCK, 0),
-        (DOCUMENT_BLOCK, 0),
-        (VIDEO_BLOCK, 0),
-        (SEARCH_RESULT_BLOCK, 0),
-    ),
-)
-
-TOOL_RESULT_CONTENT_BLOCKS: StaticSchema = (
-    16,
-    n0,
-    _TRCBo,
-    0,
-    (_me,),
-    ((TOOL_RESULT_CONTENT_BLOCK, 0),),
-)
-
-TOOL_RESULT_STATUS: StaticSchema = (
-    14,
-    n0,
-    _TRS,
-    0,
-    (_SUCCESS, _ERROR),
-    ((-1, 0), (-1, 0)),
-)
-
-TOOL_USE_ID: StaticSchema = (3, n0, _TUI, 0)
-
-TOOL_RESULT_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _TRBo,
-    0,
-    (_tUI, _co, _st, _ty),
-    (
-        (TOOL_USE_ID, 1),
-        (TOOL_RESULT_CONTENT_BLOCKS, 1),
-        (TOOL_RESULT_STATUS, 0),
-        (3, 0),
-    ),
-)
-
-TOOL_NAME: StaticSchema = (3, n0, _TN, 0)
-
-TOOL_USE_TYPE: StaticSchema = (14, n0, _TUT, 0, (_STU,), ((-1, 0),))
-
-TOOL_USE_BLOCK: StaticSchema = (
-    18,
-    n0,
-    _TUB,
-    0,
-    (_tUI, _n, _inp, _ty),
-    ((TOOL_USE_ID, 1), (TOOL_NAME, 1), (13, 1), (TOOL_USE_TYPE, 0)),
-)
-
-CONTENT_BLOCK: StaticSchema = (
-    19,
-    n0,
-    _CB,
-    0,
-    (_te, _i, _doc, _vi, _au, _tUo, _tR, _gCu, _cPa, _rCe, _cC, _sRe, _tAo, _tRo),
-    (
-        (3, 0),
-        (IMAGE_BLOCK, 0),
-        (DOCUMENT_BLOCK, 0),
-        (VIDEO_BLOCK, 0),
-        (AUDIO_BLOCK, 0),
-        (TOOL_USE_BLOCK, 0),
-        (TOOL_RESULT_BLOCK, 0),
-        (GUARDRAIL_CONVERSE_CONTENT_BLOCK, 0),
-        (CACHE_POINT_BLOCK, 0),
-        (REASONING_CONTENT_BLOCK, 0),
-        (CITATIONS_CONTENT_BLOCK, 0),
-        (SEARCH_RESULT_BLOCK, 0),
-        (TOOL_ADDITION_BLOCK, 0),
-        (TOOL_REMOVAL_BLOCK, 0),
-    ),
-)
-
-CONTENT_BLOCKS: StaticSchema = (16, n0, _CBo, 0, (_me,), ((CONTENT_BLOCK, 0),))
-
-CONVERSATION_ROLE: StaticSchema = (
-    14,
-    n0,
-    _CR,
-    0,
-    (_USER, _ASSISTANT, _SYSTEM),
-    ((-1, 0), (-1, 0), (-1, 0)),
-)
-
-MESSAGE: StaticSchema = (
-    18,
-    n0,
-    _M,
-    0,
-    (_ro, _co),
-    ((CONVERSATION_ROLE, 1), (CONTENT_BLOCKS, 1)),
-)
-
-MESSAGES: StaticSchema = (16, n0, _Me, 0, (_me,), ((MESSAGE, 0),))
-
-CONVERSATIONAL_MODEL_ID: StaticSchema = (3, n0, _CMI, 0)
-
-JSON_SCHEMA_DEFINITION: StaticSchema = (
-    18,
-    n0,
-    _JSD,
-    0,
-    (_sch, _n, _de),
-    ((3, 1), (3, 0), (3, 0)),
-)
-
-OUTPUT_FORMAT_STRUCTURE: StaticSchema = (
-    19,
-    n0,
-    _OFS,
-    4,
-    (_jS,),
-    ((JSON_SCHEMA_DEFINITION, 0),),
-)
-
-OUTPUT_FORMAT_TYPE: StaticSchema = (14, n0, _OFT, 0, (_JS,), ((-1, 0),))
-
-OUTPUT_FORMAT: StaticSchema = (
-    18,
-    n0,
-    _OF,
-    0,
-    (_ty, _str),
-    ((OUTPUT_FORMAT_TYPE, 1), (OUTPUT_FORMAT_STRUCTURE, 1)),
-)
-
-OUTPUT_CONFIG: StaticSchema = (18, n0, _OC, 0, (_tF, _ef), ((OUTPUT_FORMAT, 0), (3, 0)))
-
-PERFORMANCE_CONFIG_LATENCY: StaticSchema = (
-    14,
-    n0,
-    _PCL,
-    0,
-    (_STANDARD, _OPTIMIZED),
-    ((-1, 0), (-1, 0)),
-)
-
-PERFORMANCE_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _PC,
-    0,
-    (_la,),
-    ((PERFORMANCE_CONFIG_LATENCY, {_smith: _stan}),),
-)
-
-PROMPT_VARIABLE_VALUES: StaticSchema = (19, n0, _PVV, 0, (_te,), ((3, 0),))
-
-PROMPT_VARIABLE_MAP: StaticSchema = (
-    17,
-    n0,
-    _PVM,
-    4,
-    (_k, _v),
-    ((3, 0), (PROMPT_VARIABLE_VALUES, 0)),
-)
-
-REQUEST_METADATA: StaticSchema = (17, n0, _RM, 4, (_k, _v), ((3, 0), (3, 0)))
-
-SERVICE_TIER_TYPE: StaticSchema = (
-    14,
-    n0,
-    _STT,
-    0,
-    (_PRIORITY, _DEFAULT, _FLEX, _RESERVED),
-    ((-1, 0), (-1, 0), (-1, 0), (-1, 0)),
-)
-
-SERVICE_TIER: StaticSchema = (18, n0, _STe, 0, (_ty,), ((SERVICE_TIER_TYPE, 1),))
-
-SYSTEM_CONTENT_BLOCK: StaticSchema = (
-    19,
-    n0,
-    _SCB,
-    0,
-    (_te, _gCu, _cPa),
-    (
-        (NON_EMPTY_STRING, 0),
-        (GUARDRAIL_CONVERSE_CONTENT_BLOCK, 0),
-        (CACHE_POINT_BLOCK, 0),
-    ),
-)
-
-SYSTEM_CONTENT_BLOCKS: StaticSchema = (
-    16,
-    n0,
-    _SCBy,
-    0,
-    (_me,),
-    ((SYSTEM_CONTENT_BLOCK, 0),),
-)
-
-ANY_TOOL_CHOICE: StaticSchema = (18, n0, _ATC, 0)
-
-AUTO_TOOL_CHOICE: StaticSchema = (18, n0, _ATCu, 0)
-
-SPECIFIC_TOOL_CHOICE: StaticSchema = (18, n0, _STC, 0, (_n,), ((TOOL_NAME, 1),))
-
-TOOL_CHOICE: StaticSchema = (
-    19,
-    n0,
-    _TC,
-    0,
-    (_aut, _an, _too),
-    ((AUTO_TOOL_CHOICE, 0), (ANY_TOOL_CHOICE, 0), (SPECIFIC_TOOL_CHOICE, 0)),
-)
-
-SYSTEM_TOOL: StaticSchema = (18, n0, _STy, 0, (_n,), ((TOOL_NAME, 1),))
-
-TOOL_INPUT_SCHEMA: StaticSchema = (19, n0, _TIS, 0, (_j,), ((13, 0),))
-
-TOOL_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _TS,
-    0,
-    (_n, _de, _iS, _stri),
-    ((TOOL_NAME, 1), (NON_EMPTY_STRING, 0), (TOOL_INPUT_SCHEMA, 1), (2, 0)),
-)
-
-TOOL: StaticSchema = (
-    19,
-    n0,
-    _To,
-    0,
-    (_tS, _sTy, _cPa),
-    ((TOOL_SPECIFICATION, 0), (SYSTEM_TOOL, 0), (CACHE_POINT_BLOCK, 0)),
-)
-
-TOOLS: StaticSchema = (16, n0, _Too, 0, (_me,), ((TOOL, 0),))
-
-TOOL_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _TCo,
-    0,
-    (_tool, _tCo),
-    ((TOOLS, 1), (TOOL_CHOICE, 0)),
-)
-
-CONVERSE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CI,
-    {_sSI: _cCR},
-    (_mI, _mes, _sy, _iC, _tCoo, _gCua, _aMRF, _pV, _aMRFP, _rM, _pC, _sTe, _oC),
-    (
-        (CONVERSATIONAL_MODEL_ID, 9),
-        (MESSAGES, 0),
-        (SYSTEM_CONTENT_BLOCKS, 0),
-        (INFERENCE_CONFIGURATION, 0),
-        (TOOL_CONFIGURATION, 0),
-        (GUARDRAIL_CONFIGURATION, 0),
-        (13, 0),
-        (PROMPT_VARIABLE_MAP, 0),
-        (ADDITIONAL_MODEL_RESPONSE_FIELD_PATHS, 0),
-        (REQUEST_METADATA, 0),
-        (PERFORMANCE_CONFIGURATION, 0),
-        (SERVICE_TIER, 0),
-        (OUTPUT_CONFIG, 0),
-    ),
-)
-
-CONVERSE_METRICS: StaticSchema = (18, n0, _CM, 0, (_lM,), ((8, 1),))
-
-CONVERSE_OUTPUT: StaticSchema = (19, n0, _CO, 0, (_m,), ((MESSAGE, 0),))
-
-STOP_REASON: StaticSchema = (
-    14,
-    n0,
-    _SR,
-    0,
-    (_ET, _TU, _MT, _SS, _GI_, _CF, _MMO, _MTU, _MCWE),
-    ((-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0), (-1, 0)),
-)
-
-GUARDRAIL_ASSESSMENT_MAP: StaticSchema = (
-    17,
-    n0,
-    _GAM,
-    0,
-    (_k, _v),
-    ((3, 0), (GUARDRAIL_ASSESSMENT, 0)),
-)
-
-MODEL_OUTPUTS: StaticSchema = (16, n0, _MO, 0, (_me,), ((GUARDRAIL_OUTPUT_TEXT, 0),))
-
-GUARDRAIL_ASSESSMENT_LIST_MAP: StaticSchema = (
-    17,
-    n0,
-    _GALM,
-    0,
-    (_k, _v),
-    ((3, 0), (GUARDRAIL_ASSESSMENT_LIST, 0)),
-)
-
-GUARDRAIL_TRACE_ASSESSMENT: StaticSchema = (
-    18,
-    n0,
-    _GTA,
-    0,
-    (_mO, _iAn, _oA, _aR),
-    (
-        (MODEL_OUTPUTS, 0),
-        (GUARDRAIL_ASSESSMENT_MAP, 0),
-        (GUARDRAIL_ASSESSMENT_LIST_MAP, 0),
-        (3, 0),
-    ),
-)
-
-INVOKED_MODEL_ID: StaticSchema = (3, n0, _IMI, 0)
-
-PROMPT_ROUTER_TRACE: StaticSchema = (18, n0, _PRT, 0, (_iMI,), ((INVOKED_MODEL_ID, 0),))
-
-CONVERSE_TRACE: StaticSchema = (
-    18,
-    n0,
-    _CT,
-    0,
-    (_gu, _pR),
-    ((GUARDRAIL_TRACE_ASSESSMENT, 0), (PROMPT_ROUTER_TRACE, 0)),
-)
-
-CACHE_DETAIL: StaticSchema = (18, n0, _CD, 0, (_tt, _iT), ((CACHE_TTL, 1), (7, 1)))
-
-CACHE_DETAILS_LIST: StaticSchema = (16, n0, _CDL, 0, (_me,), ((CACHE_DETAIL, 0),))
-
-TOKEN_USAGE: StaticSchema = (
-    18,
-    n0,
-    _TUo,
-    0,
-    (_iT, _oT, _tT, _cRIT, _cWIT, _cD),
-    ((7, 1), (7, 1), (7, 1), (7, 0), (7, 0), (CACHE_DETAILS_LIST, 0)),
-)
-
-CONVERSE_OPERATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _COO,
-    {_sSI: _cCRo},
-    (_out, _sRt, _u, _met, _aMRFd, _trac, _pC, _sTe),
-    (
-        (CONVERSE_OUTPUT, 1),
-        (STOP_REASON, 1),
-        (TOKEN_USAGE, 1),
-        (CONVERSE_METRICS, 1),
-        (13, 0),
-        (CONVERSE_TRACE, 0),
-        (PERFORMANCE_CONFIGURATION, 0),
-        (SERVICE_TIER, 0),
-    ),
-)
-
-STATUS_CODE: StaticSchema = (7, n0, _SCt, 0)
-
-MODEL_ERROR_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _MEE,
-    {_s: _c, _sE: 424},
-    (_m, _oSC, _rN),
-    ((NON_BLANK_STRING, 0), (STATUS_CODE, 0), (NON_BLANK_STRING, 0)),
-)
-
-MODEL_NOT_READY_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _MNRE,
-    {_s: _c, _sE: 429},
-    (_m,),
-    ((NON_BLANK_STRING, 0),),
+SORT_ASYNC_INVOCATION_BY = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#SortAsyncInvocationBy"),
+    shape_type=ShapeType.ENUM,
+    members={"SUBMISSION_TIME": {"target": UNIT}},
 )
 
-MODEL_TIMEOUT_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _MTE,
-    {_s: _c, _sE: 408},
-    (_m,),
-    ((NON_BLANK_STRING, 0),),
+SORT_ORDER = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#SortOrder"),
+    shape_type=ShapeType.ENUM,
+    members={"ASCENDING": {"target": UNIT}, "DESCENDING": {"target": UNIT}},
 )
 
-CONVERSE: StaticOperationSchema = (
-    23,
-    n0,
-    _Co,
-    {
-        _smit: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/model/{modelId}/converse"}
+LIST_ASYNC_INVOKES_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ListAsyncInvokesInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#ListAsyncInvokesRequest",
         )
+    ],
+    members={
+        "submitTimeAfter": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="submitTimeAfter")
+            ],
+        },
+        "submitTimeBefore": {
+            "target": TIMESTAMP,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="submitTimeBefore")
+            ],
+        },
+        "statusEquals": {
+            "target": ASYNC_INVOKE_STATUS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="statusEquals")
+            ],
+        },
+        "maxResults": {
+            "target": MAX_RESULTS,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
+            ],
+        },
+        "nextToken": {
+            "target": PAGINATION_TOKEN,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
+            ],
+        },
+        "sortBy": {
+            "target": SORT_ASYNC_INVOCATION_BY,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#default"), value="SubmissionTime"),
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="sortBy"),
+            ],
+        },
+        "sortOrder": {
+            "target": SORT_ORDER,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#default"), value="Descending"),
+                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="sortOrder"),
+            ],
+        },
     },
-    CONVERSE_INPUT,
-    CONVERSE_OPERATION_OUTPUT,
-    (
-        ACCESS_DENIED_EXCEPTION,
-        INTERNAL_SERVER_EXCEPTION,
-        MODEL_ERROR_EXCEPTION,
-        MODEL_NOT_READY_EXCEPTION,
-        MODEL_TIMEOUT_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
-        SERVICE_UNAVAILABLE_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        VALIDATION_EXCEPTION,
-    ),
 )
 
-GUARDRAIL_STREAM_PROCESSING_MODE: StaticSchema = (
-    14,
-    n0,
-    _GSPM,
-    0,
-    (_SYNC, _ASYNC),
-    ((-1, 0), (-1, 0)),
+ASYNC_INVOKE_SUMMARY = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeSummary"),
+    members={
+        "invocationArn": {
+            "target": INVOCATION_ARN,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "modelArn": {
+            "target": ASYNC_INVOKE_ARN,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "clientRequestToken": {"target": ASYNC_INVOKE_IDEMPOTENCY_TOKEN},
+        "status": {"target": ASYNC_INVOKE_STATUS},
+        "failureMessage": {"target": ASYNC_INVOKE_MESSAGE},
+        "submitTime": {
+            "target": TIMESTAMP,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "lastModifiedTime": {"target": TIMESTAMP},
+        "endTime": {"target": TIMESTAMP},
+        "outputDataConfig": {
+            "target": ASYNC_INVOKE_OUTPUT_DATA_CONFIG,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
 )
 
-GUARDRAIL_STREAM_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _GSC,
-    0,
-    (_gI, _gV, _trac, _sPM),
-    (
-        (GUARDRAIL_IDENTIFIER, {_smith: _v_}),
-        (GUARDRAIL_VERSION, {_smith: _v_}),
-        (GUARDRAIL_TRACE, {_smith: _di}),
-        (GUARDRAIL_STREAM_PROCESSING_MODE, {_smith: _syn}),
-    ),
+ASYNC_INVOKE_SUMMARIES = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeSummaries"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": ASYNC_INVOKE_SUMMARY}},
 )
 
-CONVERSE_STREAM_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CSI,
-    {_sSI: _cCSR},
-    (_mI, _mes, _sy, _iC, _tCoo, _gCua, _aMRF, _pV, _aMRFP, _rM, _pC, _sTe, _oC),
-    (
-        (CONVERSATIONAL_MODEL_ID, 9),
-        (MESSAGES, 0),
-        (SYSTEM_CONTENT_BLOCKS, 0),
-        (INFERENCE_CONFIGURATION, 0),
-        (TOOL_CONFIGURATION, 0),
-        (GUARDRAIL_STREAM_CONFIGURATION, 0),
-        (13, 0),
-        (PROMPT_VARIABLE_MAP, 0),
-        (ADDITIONAL_MODEL_RESPONSE_FIELD_PATHS, 0),
-        (REQUEST_METADATA, 0),
-        (PERFORMANCE_CONFIGURATION, 0),
-        (SERVICE_TIER, 0),
-        (OUTPUT_CONFIG, 0),
-    ),
-)
-
-NON_NEGATIVE_INTEGER: StaticSchema = (7, n0, _NNI, 0)
-
-CITATION_SOURCE_CONTENT_DELTA: StaticSchema = (18, n0, _CSCD, 0, (_te,), ((3, 0),))
-
-CITATION_SOURCE_CONTENT_LIST_DELTA: StaticSchema = (
-    16,
-    n0,
-    _CSCLD,
-    0,
-    (_me,),
-    ((CITATION_SOURCE_CONTENT_DELTA, 0),),
-)
-
-CITATIONS_DELTA: StaticSchema = (
-    18,
-    n0,
-    _CDi,
-    0,
-    (_ti, _so, _sC, _lo),
-    ((3, 0), (3, 0), (CITATION_SOURCE_CONTENT_LIST_DELTA, 0), (CITATION_LOCATION, 0)),
-)
-
-IMAGE_BLOCK_DELTA: StaticSchema = (
-    18,
-    n0,
-    _IBD,
-    0,
-    (_so, _er),
-    ((IMAGE_SOURCE, 0), (ERROR_BLOCK, 0)),
-)
-
-REASONING_CONTENT_BLOCK_DELTA: StaticSchema = (
-    19,
-    n0,
-    _RCBD,
-    4,
-    (_te, _rC, _si),
-    ((3, 0), (1, 0), (3, 0)),
-)
-
-TOOL_RESULT_BLOCK_DELTA: StaticSchema = (19, n0, _TRBD, 0, (_te, _j), ((3, 0), (13, 0)))
-
-TOOL_RESULT_BLOCKS_DELTA: StaticSchema = (
-    16,
-    n0,
-    _TRBDo,
-    0,
-    (_me,),
-    ((TOOL_RESULT_BLOCK_DELTA, 0),),
-)
-
-TOOL_USE_BLOCK_DELTA: StaticSchema = (18, n0, _TUBD, 0, (_inp,), ((3, 1),))
-
-CONTENT_BLOCK_DELTA: StaticSchema = (
-    19,
-    n0,
-    _CBD,
-    0,
-    (_te, _tUo, _tR, _rCe, _cit, _i),
-    (
-        (3, 0),
-        (TOOL_USE_BLOCK_DELTA, 0),
-        (TOOL_RESULT_BLOCKS_DELTA, 0),
-        (REASONING_CONTENT_BLOCK_DELTA, 0),
-        (CITATIONS_DELTA, 0),
-        (IMAGE_BLOCK_DELTA, 0),
-    ),
-)
-
-CONTENT_BLOCK_DELTA_EVENT: StaticSchema = (
-    18,
-    n0,
-    _CBDE,
-    0,
-    (_del, _cBI),
-    ((CONTENT_BLOCK_DELTA, 1), (NON_NEGATIVE_INTEGER, 1)),
-)
-
-IMAGE_BLOCK_START: StaticSchema = (18, n0, _IBS, 0, (_f,), ((IMAGE_FORMAT, 1),))
-
-TOOL_RESULT_BLOCK_START: StaticSchema = (
-    18,
-    n0,
-    _TRBS,
-    0,
-    (_tUI, _ty, _st),
-    ((TOOL_USE_ID, 1), (3, 0), (TOOL_RESULT_STATUS, 0)),
-)
-
-TOOL_USE_BLOCK_START: StaticSchema = (
-    18,
-    n0,
-    _TUBS,
-    0,
-    (_tUI, _n, _ty),
-    ((TOOL_USE_ID, 1), (TOOL_NAME, 1), (TOOL_USE_TYPE, 0)),
-)
-
-CONTENT_BLOCK_START: StaticSchema = (
-    19,
-    n0,
-    _CBS,
-    0,
-    (_tUo, _tR, _i),
-    ((TOOL_USE_BLOCK_START, 0), (TOOL_RESULT_BLOCK_START, 0), (IMAGE_BLOCK_START, 0)),
-)
-
-CONTENT_BLOCK_START_EVENT: StaticSchema = (
-    18,
-    n0,
-    _CBSE,
-    0,
-    (_star, _cBI),
-    ((CONTENT_BLOCK_START, 1), (NON_NEGATIVE_INTEGER, 1)),
-)
-
-CONTENT_BLOCK_STOP_EVENT: StaticSchema = (
-    18,
-    n0,
-    _CBSEo,
-    0,
-    (_cBI,),
-    ((NON_NEGATIVE_INTEGER, 1),),
-)
-
-MESSAGE_START_EVENT: StaticSchema = (18, n0, _MSE, 0, (_ro,), ((CONVERSATION_ROLE, 1),))
-
-MESSAGE_STOP_EVENT: StaticSchema = (
-    18,
-    n0,
-    _MSEe,
-    0,
-    (_sRt, _aMRFd),
-    ((STOP_REASON, 1), (13, 0)),
-)
-
-CONVERSE_STREAM_METRICS: StaticSchema = (18, n0, _CSM, 0, (_lM,), ((8, 1),))
-
-CONVERSE_STREAM_TRACE: StaticSchema = (
-    18,
-    n0,
-    _CST,
-    0,
-    (_gu, _pR),
-    ((GUARDRAIL_TRACE_ASSESSMENT, 0), (PROMPT_ROUTER_TRACE, 0)),
-)
-
-CONVERSE_STREAM_METADATA_EVENT: StaticSchema = (
-    18,
-    n0,
-    _CSME,
-    0,
-    (_u, _met, _trac, _pC, _sTe),
-    (
-        (TOKEN_USAGE, 1),
-        (CONVERSE_STREAM_METRICS, 1),
-        (CONVERSE_STREAM_TRACE, 0),
-        (PERFORMANCE_CONFIGURATION, 0),
-        (SERVICE_TIER, 0),
-    ),
-)
-
-MODEL_STREAM_ERROR_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _MSEE,
-    {_s: _c, _sE: 424},
-    (_m, _oSC, _oM),
-    ((NON_BLANK_STRING, 0), (STATUS_CODE, 0), (NON_BLANK_STRING, 0)),
-)
-
-CONVERSE_STREAM_OUTPUT: StaticSchema = (
-    19,
-    n0,
-    _CSO,
-    {_smithy: None},
-    (_mS, _cBS, _cBD, _cBSo, _mSe, _meta, _iSE, _mSEE, _vE, _tE, _sUE),
-    (
-        (MESSAGE_START_EVENT, 0),
-        (CONTENT_BLOCK_START_EVENT, 0),
-        (CONTENT_BLOCK_DELTA_EVENT, 0),
-        (CONTENT_BLOCK_STOP_EVENT, 0),
-        (MESSAGE_STOP_EVENT, 0),
-        (CONVERSE_STREAM_METADATA_EVENT, 0),
-        (INTERNAL_SERVER_EXCEPTION, 0),
-        (MODEL_STREAM_ERROR_EXCEPTION, 0),
-        (VALIDATION_EXCEPTION, 0),
-        (THROTTLING_EXCEPTION, 0),
-        (SERVICE_UNAVAILABLE_EXCEPTION, 0),
-    ),
-)
-
-CONVERSE_STREAM_OPERATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CSOO,
-    {_sSI: _cCSRo},
-    (_stre,),
-    ((CONVERSE_STREAM_OUTPUT, 16),),
-)
-
-CONVERSE_STREAM: StaticOperationSchema = (
-    23,
-    n0,
-    _CS,
-    {
-        _smit: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/model/{modelId}/converse-stream"}
+LIST_ASYNC_INVOKES_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ListAsyncInvokesOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#ListAsyncInvokesResponse",
         )
+    ],
+    members={
+        "nextToken": {"target": PAGINATION_TOKEN},
+        "asyncInvokeSummaries": {"target": ASYNC_INVOKE_SUMMARIES},
     },
-    CONVERSE_STREAM_INPUT,
-    CONVERSE_STREAM_OPERATION_OUTPUT,
-    (
-        ACCESS_DENIED_EXCEPTION,
-        INTERNAL_SERVER_EXCEPTION,
-        MODEL_ERROR_EXCEPTION,
-        MODEL_NOT_READY_EXCEPTION,
-        MODEL_TIMEOUT_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
-        SERVICE_UNAVAILABLE_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        VALIDATION_EXCEPTION,
-    ),
 )
 
-MIME_TYPE: StaticSchema = (3, n0, _MTi, 0)
-
-BODY: StaticSchema = (1, n0, _B, 4)
-
-INVOKE_MODEL_IDENTIFIER: StaticSchema = (3, n0, _IMIn, 0)
-
-REQUEST_METADATA_JSON: StaticSchema = (3, n0, _RMJ, 4)
-
-TRACE: StaticSchema = (
-    14,
-    n0,
-    _Tr,
-    0,
-    (_ENABLED, _DISABLED, _EF),
-    ((-1, 0), (-1, 0), (-1, 0)),
-)
-
-INVOKE_MODEL_INPUT: StaticSchema = (
-    18,
-    n0,
-    _IMInv,
-    {_sSI: _cIMR},
-    (_bo, _cT, _ac, _mI, _trac, _gI, _gV, _pCL, _sTe, _rM),
-    (
-        (BODY, 16),
-        (MIME_TYPE, {_sH: _CT_}),
-        (MIME_TYPE, {_sH: _A}),
-        (INVOKE_MODEL_IDENTIFIER, 9),
-        (TRACE, {_sH: _XABT}),
-        (GUARDRAIL_IDENTIFIER, {_sH: _XABG}),
-        (GUARDRAIL_VERSION, {_sH: _XABG_}),
-        (PERFORMANCE_CONFIG_LATENCY, {_smith: _stan, _sH: _XABPL}),
-        (SERVICE_TIER_TYPE, {_sH: _XABST}),
-        (REQUEST_METADATA_JSON, {_sH: _XABRM}),
-    ),
-)
-
-INVOKE_MODEL_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _IMO,
-    {_sSI: _cIMRo},
-    (_bo, _cT, _pCL, _sTe),
-    (
-        (BODY, 17),
-        (MIME_TYPE, {_sH: _CT_, _sm: None}),
-        (PERFORMANCE_CONFIG_LATENCY, {_sH: _XABPL}),
-        (SERVICE_TIER_TYPE, {_sH: _XABST}),
-    ),
-)
-
-INVOKE_MODEL: StaticOperationSchema = (
-    23,
-    n0,
-    _IM,
-    {
-        _smit: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/model/{modelId}/invoke"}
+LIST_ASYNC_INVOKES = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#ListAsyncInvokes"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {"code": 200, "method": "GET", "uri": "/async-invoke"}
+            ),
         )
+    ],
+)
+
+CONFLICT_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConflictException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
+    ],
+    members={"message": {"target": NON_BLANK_STRING}},
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ResourceNotFoundException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
+    ],
+    members={"message": {"target": NON_BLANK_STRING}},
+)
+
+SERVICE_QUOTA_EXCEEDED_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ServiceQuotaExceededException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
+    ],
+    members={"message": {"target": NON_BLANK_STRING}},
+)
+
+SERVICE_UNAVAILABLE_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ServiceUnavailableException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=503),
+    ],
+    members={"message": {"target": NON_BLANK_STRING}},
+)
+
+ASYNC_INVOKE_IDENTIFIER = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#AsyncInvokeIdentifier"),
+    shape_type=ShapeType.STRING,
+)
+
+MODEL_INPUT_PAYLOAD = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#ModelInputPayload"),
+    shape_type=ShapeType.DOCUMENT,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+)
+
+TAG_KEY = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#TagKey"), shape_type=ShapeType.STRING
+)
+
+TAG_VALUE = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#TagValue"), shape_type=ShapeType.STRING
+)
+
+TAG = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#Tag"),
+    members={
+        "key": {
+            "target": TAG_KEY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "value": {
+            "target": TAG_VALUE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
     },
-    INVOKE_MODEL_INPUT,
-    INVOKE_MODEL_OUTPUT,
-    (
-        ACCESS_DENIED_EXCEPTION,
-        INTERNAL_SERVER_EXCEPTION,
-        MODEL_ERROR_EXCEPTION,
-        MODEL_NOT_READY_EXCEPTION,
-        MODEL_TIMEOUT_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
-        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        SERVICE_UNAVAILABLE_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        VALIDATION_EXCEPTION,
-    ),
 )
 
-PART_BODY: StaticSchema = (1, n0, _PB, 4)
-
-BIDIRECTIONAL_INPUT_PAYLOAD_PART: StaticSchema = (
-    18,
-    n0,
-    _BIPP,
-    4,
-    (_b,),
-    ((PART_BODY, 0),),
+TAG_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#TagList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": TAG}},
 )
 
-INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_INPUT: StaticSchema = (
-    19,
-    n0,
-    _IMWBSI,
-    {_smithy: None},
-    (_chu,),
-    ((BIDIRECTIONAL_INPUT_PAYLOAD_PART, 0),),
-)
-
-INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OPERATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _IMWBSOI,
-    {_sSI: _cIMWBSR},
-    (_mI, _bo),
-    ((INVOKE_MODEL_IDENTIFIER, 9), (INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_INPUT, 17)),
-)
-
-BIDIRECTIONAL_OUTPUT_PAYLOAD_PART: StaticSchema = (
-    18,
-    n0,
-    _BOPP,
-    4,
-    (_b,),
-    ((PART_BODY, 0),),
-)
-
-INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OUTPUT: StaticSchema = (
-    19,
-    n0,
-    _IMWBSO,
-    {_smithy: None},
-    (_chu, _iSE, _mSEE, _vE, _tE, _mTE, _sUE),
-    (
-        (BIDIRECTIONAL_OUTPUT_PAYLOAD_PART, 0),
-        (INTERNAL_SERVER_EXCEPTION, 0),
-        (MODEL_STREAM_ERROR_EXCEPTION, 0),
-        (VALIDATION_EXCEPTION, 0),
-        (THROTTLING_EXCEPTION, 0),
-        (MODEL_TIMEOUT_EXCEPTION, 0),
-        (SERVICE_UNAVAILABLE_EXCEPTION, 0),
-    ),
-)
-
-INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OPERATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _IMWBSOO,
-    {_sSI: _cIMWBSRo},
-    (_bo,),
-    ((INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OUTPUT, 17),),
-)
-
-INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM: StaticOperationSchema = (
-    23,
-    n0,
-    _IMWBS,
-    {
-        _smit: MappingProxyType(
-            {
-                "code": 200,
-                "method": "POST",
-                "uri": "/model/{modelId}/invoke-with-bidirectional-stream",
-            }
+START_ASYNC_INVOKE_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#StartAsyncInvokeInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#StartAsyncInvokeRequest",
         )
+    ],
+    members={
+        "clientRequestToken": {
+            "target": ASYNC_INVOKE_IDEMPOTENCY_TOKEN,
+            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
+        },
+        "modelId": {
+            "target": ASYNC_INVOKE_IDENTIFIER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "modelInput": {
+            "target": MODEL_INPUT_PAYLOAD,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "outputDataConfig": {
+            "target": ASYNC_INVOKE_OUTPUT_DATA_CONFIG,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "tags": {"target": TAG_LIST},
     },
-    INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OPERATION_INPUT,
-    INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OPERATION_OUTPUT,
-    (
-        ACCESS_DENIED_EXCEPTION,
-        INTERNAL_SERVER_EXCEPTION,
-        MODEL_ERROR_EXCEPTION,
-        MODEL_NOT_READY_EXCEPTION,
-        MODEL_STREAM_ERROR_EXCEPTION,
-        MODEL_TIMEOUT_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
-        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        SERVICE_UNAVAILABLE_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        VALIDATION_EXCEPTION,
-    ),
 )
 
-INVOKE_MODEL_WITH_RESPONSE_STREAM_INPUT: StaticSchema = (
-    18,
-    n0,
-    _IMWRSI,
-    {_sSI: _cIMWRSR},
-    (_bo, _cT, _ac, _mI, _trac, _gI, _gV, _pCL, _sTe, _rM),
-    (
-        (BODY, 16),
-        (MIME_TYPE, {_sH: _CT_}),
-        (MIME_TYPE, {_sH: _XABA}),
-        (INVOKE_MODEL_IDENTIFIER, 9),
-        (TRACE, {_sH: _XABT}),
-        (GUARDRAIL_IDENTIFIER, {_sH: _XABG}),
-        (GUARDRAIL_VERSION, {_sH: _XABG_}),
-        (PERFORMANCE_CONFIG_LATENCY, {_smith: _stan, _sH: _XABPL}),
-        (SERVICE_TIER_TYPE, {_sH: _XABST}),
-        (REQUEST_METADATA_JSON, {_sH: _XABRM}),
-    ),
-)
-
-PAYLOAD_PART: StaticSchema = (18, n0, _PP, 4, (_b,), ((PART_BODY, 0),))
-
-RESPONSE_STREAM: StaticSchema = (
-    19,
-    n0,
-    _RS,
-    {_smithy: None},
-    (_chu, _iSE, _mSEE, _vE, _tE, _mTE, _sUE),
-    (
-        (PAYLOAD_PART, 0),
-        (INTERNAL_SERVER_EXCEPTION, 0),
-        (MODEL_STREAM_ERROR_EXCEPTION, 0),
-        (VALIDATION_EXCEPTION, 0),
-        (THROTTLING_EXCEPTION, 0),
-        (MODEL_TIMEOUT_EXCEPTION, 0),
-        (SERVICE_UNAVAILABLE_EXCEPTION, 0),
-    ),
-)
-
-INVOKE_MODEL_WITH_RESPONSE_STREAM_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _IMWRSO,
-    {_sSI: _cIMWRSRo},
-    (_bo, _cT, _pCL, _sTe),
-    (
-        (RESPONSE_STREAM, 17),
-        (MIME_TYPE, {_sH: _XABCT, _sm: None}),
-        (PERFORMANCE_CONFIG_LATENCY, {_sH: _XABPL}),
-        (SERVICE_TIER_TYPE, {_sH: _XABST}),
-    ),
-)
-
-INVOKE_MODEL_WITH_RESPONSE_STREAM: StaticOperationSchema = (
-    23,
-    n0,
-    _IMWRS,
-    {
-        _smit: MappingProxyType(
-            {
-                "code": 200,
-                "method": "POST",
-                "uri": "/model/{modelId}/invoke-with-response-stream",
-            }
+START_ASYNC_INVOKE_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#StartAsyncInvokeOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#StartAsyncInvokeResponse",
         )
+    ],
+    members={
+        "invocationArn": {
+            "target": INVOCATION_ARN,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
     },
-    INVOKE_MODEL_WITH_RESPONSE_STREAM_INPUT,
-    INVOKE_MODEL_WITH_RESPONSE_STREAM_OUTPUT,
-    (
-        ACCESS_DENIED_EXCEPTION,
-        INTERNAL_SERVER_EXCEPTION,
-        MODEL_ERROR_EXCEPTION,
-        MODEL_NOT_READY_EXCEPTION,
-        MODEL_STREAM_ERROR_EXCEPTION,
-        MODEL_TIMEOUT_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
-        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        SERVICE_UNAVAILABLE_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        VALIDATION_EXCEPTION,
-    ),
 )
 
-CONVERSE_TOKENS_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _CTR,
-    0,
-    (_mes, _sy, _tCoo, _aMRF),
-    ((MESSAGES, 0), (SYSTEM_CONTENT_BLOCKS, 0), (TOOL_CONFIGURATION, 0), (13, 0)),
-)
-
-INVOKE_MODEL_TOKENS_REQUEST: StaticSchema = (18, n0, _IMTR, 0, (_bo,), ((BODY, 1),))
-
-COUNT_TOKENS_INPUT: StaticSchema = (
-    19,
-    n0,
-    _CTI,
-    0,
-    (_iMn, _conv),
-    ((INVOKE_MODEL_TOKENS_REQUEST, 0), (CONVERSE_TOKENS_REQUEST, 0)),
-)
-
-FOUNDATION_MODEL_VERSION_IDENTIFIER: StaticSchema = (3, n0, _FMVI, 0)
-
-COUNT_TOKENS_OPERATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CTOI,
-    {_sSI: _cCTR},
-    (_mI, _inp),
-    ((FOUNDATION_MODEL_VERSION_IDENTIFIER, 9), (COUNT_TOKENS_INPUT, 1)),
-)
-
-COUNT_TOKENS_OUTPUT: StaticSchema = (18, n0, _CTO, {_sSI: _cCTRo}, (_iT,), ((7, 1),))
-
-COUNT_TOKENS: StaticOperationSchema = (
-    23,
-    n0,
-    _CTo,
-    {
-        _smit: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/model/{modelId}/count-tokens"}
+START_ASYNC_INVOKE = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#StartAsyncInvoke"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {"code": 200, "method": "POST", "uri": "/async-invoke"}
+            ),
         )
-    },
-    COUNT_TOKENS_OPERATION_INPUT,
-    COUNT_TOKENS_OUTPUT,
-    (
-        ACCESS_DENIED_EXCEPTION,
-        INTERNAL_SERVER_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
-        SERVICE_UNAVAILABLE_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        VALIDATION_EXCEPTION,
-    ),
+    ],
 )
 
-AMAZON_BEDROCK_FRONTEND_SERVICE: StaticSchema = (
-    21,
-    n0,
-    _ABFS,
-    {
-        _aw: MappingProxyType({"name": "bedrock"}),
-        _sBm: MappingProxyType(
-            {
-                "version": "1.1",
-                "parameters": MappingProxyType(
-                    {
-                        "Region": MappingProxyType(
-                            {
-                                "builtIn": "AWS::Region",
-                                "required": False,
-                                "documentation": "The AWS region used to dispatch the request.",
-                                "type": "string",
-                            }
-                        ),
-                        "UseDualStack": MappingProxyType(
-                            {
-                                "builtIn": "AWS::UseDualStack",
-                                "required": True,
-                                "default": False,
-                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                "type": "boolean",
-                            }
-                        ),
-                        "UseFIPS": MappingProxyType(
-                            {
-                                "builtIn": "AWS::UseFIPS",
-                                "required": True,
-                                "default": False,
-                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                "type": "boolean",
-                            }
-                        ),
-                        "Endpoint": MappingProxyType(
-                            {
-                                "builtIn": "SDK::Endpoint",
-                                "required": False,
-                                "documentation": "Override the endpoint used to send this request",
-                                "type": "string",
-                            }
-                        ),
-                    }
+GUARDRAIL_IMAGE_FORMAT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailImageFormat"),
+    shape_type=ShapeType.ENUM,
+    members={"PNG": {"target": UNIT}, "JPEG": {"target": UNIT}},
+)
+
+GUARDRAIL_IMAGE_SOURCE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailImageSource"),
+    shape_type=ShapeType.UNION,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"bytes": {"target": BLOB}},
+)
+
+GUARDRAIL_IMAGE_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailImageBlock"),
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={
+        "format": {
+            "target": GUARDRAIL_IMAGE_FORMAT,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "source": {
+            "target": GUARDRAIL_IMAGE_SOURCE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+GUARDRAIL_CONTENT_QUALIFIER = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentQualifier"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "GROUNDING_SOURCE": {"target": UNIT},
+        "QUERY": {"target": UNIT},
+        "GUARD_CONTENT": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_CONTENT_QUALIFIER_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentQualifierList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CONTENT_QUALIFIER}},
+)
+
+GUARDRAIL_TEXT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTextBlock"),
+    members={
+        "text": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "qualifiers": {"target": GUARDRAIL_CONTENT_QUALIFIER_LIST},
+    },
+)
+
+GUARDRAIL_CONTENT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentBlock"),
+    shape_type=ShapeType.UNION,
+    members={
+        "text": {"target": GUARDRAIL_TEXT_BLOCK},
+        "image": {"target": GUARDRAIL_IMAGE_BLOCK},
+    },
+)
+
+GUARDRAIL_CONTENT_BLOCK_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentBlockList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CONTENT_BLOCK}},
+)
+
+GUARDRAIL_IDENTIFIER = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailIdentifier"),
+    shape_type=ShapeType.STRING,
+)
+
+GUARDRAIL_VERSION = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailVersion"),
+    shape_type=ShapeType.STRING,
+)
+
+GUARDRAIL_OUTPUT_SCOPE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailOutputScope"),
+    shape_type=ShapeType.ENUM,
+    members={"INTERVENTIONS": {"target": UNIT}, "FULL": {"target": UNIT}},
+)
+
+GUARDRAIL_CONTENT_SOURCE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentSource"),
+    shape_type=ShapeType.ENUM,
+    members={"INPUT": {"target": UNIT}, "OUTPUT": {"target": UNIT}},
+)
+
+APPLY_GUARDRAIL_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ApplyGuardrailInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#ApplyGuardrailRequest",
+        )
+    ],
+    members={
+        "guardrailIdentifier": {
+            "target": GUARDRAIL_IDENTIFIER,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "guardrailVersion": {
+            "target": GUARDRAIL_VERSION,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "source": {
+            "target": GUARDRAIL_CONTENT_SOURCE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "content": {
+            "target": GUARDRAIL_CONTENT_BLOCK_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "outputScope": {"target": GUARDRAIL_OUTPUT_SCOPE},
+    },
+)
+
+GUARDRAIL_ACTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAction"),
+    shape_type=ShapeType.ENUM,
+    members={"NONE": {"target": UNIT}, "GUARDRAIL_INTERVENED": {"target": UNIT}},
+)
+
+GUARDRAIL_ARN = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailArn"), shape_type=ShapeType.STRING
+)
+
+GUARDRAIL_ID = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailId"), shape_type=ShapeType.STRING
+)
+
+GUARDRAIL_ORIGIN = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailOrigin"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "REQUEST": {"target": UNIT},
+        "ACCOUNT_ENFORCED": {"target": UNIT},
+        "ORGANIZATION_ENFORCED": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_ORIGIN_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailOriginList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_ORIGIN}},
+)
+
+GUARDRAIL_OWNERSHIP = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailOwnership"),
+    shape_type=ShapeType.ENUM,
+    members={"SELF": {"target": UNIT}, "CROSS_ACCOUNT": {"target": UNIT}},
+)
+
+APPLIED_GUARDRAIL_DETAILS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AppliedGuardrailDetails"),
+    members={
+        "guardrailId": {"target": GUARDRAIL_ID},
+        "guardrailVersion": {"target": GUARDRAIL_VERSION},
+        "guardrailArn": {"target": GUARDRAIL_ARN},
+        "guardrailOrigin": {"target": GUARDRAIL_ORIGIN_LIST},
+        "guardrailOwnership": {"target": GUARDRAIL_OWNERSHIP},
+    },
+)
+
+AUTOMATED_REASONING_RULE_IDENTIFIER = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#AutomatedReasoningRuleIdentifier"),
+    shape_type=ShapeType.STRING,
+)
+
+GUARDRAIL_AUTOMATED_REASONING_POLICY_VERSION_ARN = Schema(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningPolicyVersionArn"
+    ),
+    shape_type=ShapeType.STRING,
+)
+
+GUARDRAIL_AUTOMATED_REASONING_RULE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningRule"),
+    members={
+        "identifier": {"target": AUTOMATED_REASONING_RULE_IDENTIFIER},
+        "policyVersionArn": {
+            "target": GUARDRAIL_AUTOMATED_REASONING_POLICY_VERSION_ARN
+        },
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_RULE_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningRuleList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_AUTOMATED_REASONING_RULE}},
+)
+
+GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LOGIC_CONTENT = Schema(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningStatementLogicContent"
+    ),
+    shape_type=ShapeType.STRING,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+)
+
+GUARDRAIL_AUTOMATED_REASONING_STATEMENT_NATURAL_LANGUAGE_CONTENT = Schema(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningStatementNaturalLanguageContent"
+    ),
+    shape_type=ShapeType.STRING,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+)
+
+GUARDRAIL_AUTOMATED_REASONING_STATEMENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningStatement"),
+    members={
+        "logic": {"target": GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LOGIC_CONTENT},
+        "naturalLanguage": {
+            "target": GUARDRAIL_AUTOMATED_REASONING_STATEMENT_NATURAL_LANGUAGE_CONTENT
+        },
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningStatementList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_AUTOMATED_REASONING_STATEMENT}},
+)
+
+GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING_TYPE = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningLogicWarningType"
+    ),
+    shape_type=ShapeType.ENUM,
+    members={"ALWAYS_FALSE": {"target": UNIT}, "ALWAYS_TRUE": {"target": UNIT}},
+)
+
+GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningLogicWarning"),
+    members={
+        "type": {"target": GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING_TYPE},
+        "premises": {"target": GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST},
+        "claims": {"target": GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST},
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_CONFIDENCE = Schema(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslationConfidence"
+    ),
+    shape_type=ShapeType.DOUBLE,
+)
+
+GUARDRAIL_AUTOMATED_REASONING_INPUT_TEXT_REFERENCE = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningInputTextReference"
+    ),
+    members={
+        "text": {
+            "target": GUARDRAIL_AUTOMATED_REASONING_STATEMENT_NATURAL_LANGUAGE_CONTENT
+        }
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_INPUT_TEXT_REFERENCE_LIST = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningInputTextReferenceList"
+    ),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_AUTOMATED_REASONING_INPUT_TEXT_REFERENCE}},
+)
+
+GUARDRAIL_AUTOMATED_REASONING_TRANSLATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslation"),
+    members={
+        "premises": {"target": GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST},
+        "claims": {"target": GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST},
+        "untranslatedPremises": {
+            "target": GUARDRAIL_AUTOMATED_REASONING_INPUT_TEXT_REFERENCE_LIST
+        },
+        "untranslatedClaims": {
+            "target": GUARDRAIL_AUTOMATED_REASONING_INPUT_TEXT_REFERENCE_LIST
+        },
+        "confidence": {"target": GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_CONFIDENCE},
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_IMPOSSIBLE_FINDING = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningImpossibleFinding"
+    ),
+    members={
+        "translation": {"target": GUARDRAIL_AUTOMATED_REASONING_TRANSLATION},
+        "contradictingRules": {"target": GUARDRAIL_AUTOMATED_REASONING_RULE_LIST},
+        "logicWarning": {"target": GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING},
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_INVALID_FINDING = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningInvalidFinding"
+    ),
+    members={
+        "translation": {"target": GUARDRAIL_AUTOMATED_REASONING_TRANSLATION},
+        "contradictingRules": {"target": GUARDRAIL_AUTOMATED_REASONING_RULE_LIST},
+        "logicWarning": {"target": GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING},
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_NO_TRANSLATIONS_FINDING = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningNoTranslationsFinding"
+    )
+)
+
+GUARDRAIL_AUTOMATED_REASONING_SCENARIO = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningScenario"),
+    members={"statements": {"target": GUARDRAIL_AUTOMATED_REASONING_STATEMENT_LIST}},
+)
+
+GUARDRAIL_AUTOMATED_REASONING_SATISFIABLE_FINDING = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningSatisfiableFinding"
+    ),
+    members={
+        "translation": {"target": GUARDRAIL_AUTOMATED_REASONING_TRANSLATION},
+        "claimsTrueScenario": {"target": GUARDRAIL_AUTOMATED_REASONING_SCENARIO},
+        "claimsFalseScenario": {"target": GUARDRAIL_AUTOMATED_REASONING_SCENARIO},
+        "logicWarning": {"target": GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING},
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_TOO_COMPLEX_FINDING = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTooComplexFinding"
+    )
+)
+
+GUARDRAIL_AUTOMATED_REASONING_DIFFERENCE_SCENARIO_LIST = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningDifferenceScenarioList"
+    ),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_AUTOMATED_REASONING_SCENARIO}},
+)
+
+GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_LIST = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslationList"
+    ),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_AUTOMATED_REASONING_TRANSLATION}},
+)
+
+GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_OPTION = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslationOption"
+    ),
+    members={
+        "translations": {"target": GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_LIST}
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_OPTION_LIST = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslationOptionList"
+    ),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_OPTION}},
+)
+
+GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_AMBIGUOUS_FINDING = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslationAmbiguousFinding"
+    ),
+    members={
+        "options": {"target": GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_OPTION_LIST},
+        "differenceScenarios": {
+            "target": GUARDRAIL_AUTOMATED_REASONING_DIFFERENCE_SCENARIO_LIST
+        },
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_VALID_FINDING = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningValidFinding"),
+    members={
+        "translation": {"target": GUARDRAIL_AUTOMATED_REASONING_TRANSLATION},
+        "claimsTrueScenario": {"target": GUARDRAIL_AUTOMATED_REASONING_SCENARIO},
+        "supportingRules": {"target": GUARDRAIL_AUTOMATED_REASONING_RULE_LIST},
+        "logicWarning": {"target": GUARDRAIL_AUTOMATED_REASONING_LOGIC_WARNING},
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_FINDING = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningFinding"),
+    shape_type=ShapeType.UNION,
+    members={
+        "valid": {"target": GUARDRAIL_AUTOMATED_REASONING_VALID_FINDING},
+        "invalid": {"target": GUARDRAIL_AUTOMATED_REASONING_INVALID_FINDING},
+        "satisfiable": {"target": GUARDRAIL_AUTOMATED_REASONING_SATISFIABLE_FINDING},
+        "impossible": {"target": GUARDRAIL_AUTOMATED_REASONING_IMPOSSIBLE_FINDING},
+        "translationAmbiguous": {
+            "target": GUARDRAIL_AUTOMATED_REASONING_TRANSLATION_AMBIGUOUS_FINDING
+        },
+        "tooComplex": {"target": GUARDRAIL_AUTOMATED_REASONING_TOO_COMPLEX_FINDING},
+        "noTranslations": {
+            "target": GUARDRAIL_AUTOMATED_REASONING_NO_TRANSLATIONS_FINDING
+        },
+    },
+)
+
+GUARDRAIL_AUTOMATED_REASONING_FINDING_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningFindingList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_AUTOMATED_REASONING_FINDING}},
+)
+
+GUARDRAIL_AUTOMATED_REASONING_POLICY_ASSESSMENT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningPolicyAssessment"
+    ),
+    members={"findings": {"target": GUARDRAIL_AUTOMATED_REASONING_FINDING_LIST}},
+)
+
+GUARDRAIL_CONTENT_POLICY_ACTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentPolicyAction"),
+    shape_type=ShapeType.ENUM,
+    members={"BLOCKED": {"target": UNIT}, "NONE": {"target": UNIT}},
+)
+
+GUARDRAIL_CONTENT_FILTER_CONFIDENCE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentFilterConfidence"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "NONE": {"target": UNIT},
+        "LOW": {"target": UNIT},
+        "MEDIUM": {"target": UNIT},
+        "HIGH": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_CONTENT_FILTER_STRENGTH = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentFilterStrength"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "NONE": {"target": UNIT},
+        "LOW": {"target": UNIT},
+        "MEDIUM": {"target": UNIT},
+        "HIGH": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_CONTENT_FILTER_TYPE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentFilterType"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "INSULTS": {"target": UNIT},
+        "HATE": {"target": UNIT},
+        "SEXUAL": {"target": UNIT},
+        "VIOLENCE": {"target": UNIT},
+        "MISCONDUCT": {"target": UNIT},
+        "PROMPT_ATTACK": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_CONTENT_FILTER = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentFilter"),
+    members={
+        "type": {
+            "target": GUARDRAIL_CONTENT_FILTER_TYPE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "confidence": {
+            "target": GUARDRAIL_CONTENT_FILTER_CONFIDENCE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "filterStrength": {"target": GUARDRAIL_CONTENT_FILTER_STRENGTH},
+        "action": {
+            "target": GUARDRAIL_CONTENT_POLICY_ACTION,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "detected": {"target": BOOLEAN},
+    },
+)
+
+GUARDRAIL_CONTENT_FILTER_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentFilterList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CONTENT_FILTER}},
+)
+
+GUARDRAIL_CONTENT_POLICY_ASSESSMENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentPolicyAssessment"),
+    members={
+        "filters": {
+            "target": GUARDRAIL_CONTENT_FILTER_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_ACTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContextualGroundingPolicyAction"),
+    shape_type=ShapeType.ENUM,
+    members={"BLOCKED": {"target": UNIT}, "NONE": {"target": UNIT}},
+)
+
+GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER_TYPE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContextualGroundingFilterType"),
+    shape_type=ShapeType.ENUM,
+    members={"GROUNDING": {"target": UNIT}, "RELEVANCE": {"target": UNIT}},
+)
+
+GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContextualGroundingFilter"),
+    members={
+        "type": {
+            "target": GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER_TYPE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "threshold": {
+            "target": DOUBLE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "score": {
+            "target": DOUBLE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "action": {
+            "target": GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_ACTION,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "detected": {"target": BOOLEAN},
+    },
+)
+
+GUARDRAIL_CONTEXTUAL_GROUNDING_FILTERS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContextualGroundingFilters"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER}},
+)
+
+GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_ASSESSMENT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailContextualGroundingPolicyAssessment"
+    ),
+    members={"filters": {"target": GUARDRAIL_CONTEXTUAL_GROUNDING_FILTERS}},
+)
+
+IMAGES_GUARDED = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#ImagesGuarded"),
+    shape_type=ShapeType.INTEGER,
+)
+
+IMAGES_TOTAL = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#ImagesTotal"), shape_type=ShapeType.INTEGER
+)
+
+GUARDRAIL_IMAGE_COVERAGE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailImageCoverage"),
+    members={"guarded": {"target": IMAGES_GUARDED}, "total": {"target": IMAGES_TOTAL}},
+)
+
+TEXT_CHARACTERS_GUARDED = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#TextCharactersGuarded"),
+    shape_type=ShapeType.INTEGER,
+)
+
+TEXT_CHARACTERS_TOTAL = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#TextCharactersTotal"),
+    shape_type=ShapeType.INTEGER,
+)
+
+GUARDRAIL_TEXT_CHARACTERS_COVERAGE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTextCharactersCoverage"),
+    members={
+        "guarded": {"target": TEXT_CHARACTERS_GUARDED},
+        "total": {"target": TEXT_CHARACTERS_TOTAL},
+    },
+)
+
+GUARDRAIL_COVERAGE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailCoverage"),
+    members={
+        "textCharacters": {"target": GUARDRAIL_TEXT_CHARACTERS_COVERAGE},
+        "images": {"target": GUARDRAIL_IMAGE_COVERAGE},
+    },
+)
+
+GUARDRAIL_PROCESSING_LATENCY = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailProcessingLatency"),
+    shape_type=ShapeType.LONG,
+)
+
+GUARDRAIL_AUTOMATED_REASONING_POLICIES_PROCESSED = Schema(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningPoliciesProcessed"
+    ),
+    shape_type=ShapeType.INTEGER,
+)
+
+GUARDRAIL_AUTOMATED_REASONING_POLICY_UNITS_PROCESSED = Schema(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningPolicyUnitsProcessed"
+    ),
+    shape_type=ShapeType.INTEGER,
+)
+
+GUARDRAIL_CONTENT_POLICY_IMAGE_UNITS_PROCESSED = Schema(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailContentPolicyImageUnitsProcessed"
+    ),
+    shape_type=ShapeType.INTEGER,
+)
+
+GUARDRAIL_CONTENT_POLICY_UNITS_PROCESSED = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailContentPolicyUnitsProcessed"),
+    shape_type=ShapeType.INTEGER,
+)
+
+GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_UNITS_PROCESSED = Schema(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailContextualGroundingPolicyUnitsProcessed"
+    ),
+    shape_type=ShapeType.INTEGER,
+)
+
+GUARDRAIL_SENSITIVE_INFORMATION_POLICY_FREE_UNITS_PROCESSED = Schema(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyFreeUnitsProcessed"
+    ),
+    shape_type=ShapeType.INTEGER,
+)
+
+GUARDRAIL_SENSITIVE_INFORMATION_POLICY_UNITS_PROCESSED = Schema(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyUnitsProcessed"
+    ),
+    shape_type=ShapeType.INTEGER,
+)
+
+GUARDRAIL_TOPIC_POLICY_UNITS_PROCESSED = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTopicPolicyUnitsProcessed"),
+    shape_type=ShapeType.INTEGER,
+)
+
+GUARDRAIL_WORD_POLICY_UNITS_PROCESSED = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailWordPolicyUnitsProcessed"),
+    shape_type=ShapeType.INTEGER,
+)
+
+GUARDRAIL_USAGE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailUsage"),
+    members={
+        "topicPolicyUnits": {
+            "target": GUARDRAIL_TOPIC_POLICY_UNITS_PROCESSED,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "contentPolicyUnits": {
+            "target": GUARDRAIL_CONTENT_POLICY_UNITS_PROCESSED,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "wordPolicyUnits": {
+            "target": GUARDRAIL_WORD_POLICY_UNITS_PROCESSED,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "sensitiveInformationPolicyUnits": {
+            "target": GUARDRAIL_SENSITIVE_INFORMATION_POLICY_UNITS_PROCESSED,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "sensitiveInformationPolicyFreeUnits": {
+            "target": GUARDRAIL_SENSITIVE_INFORMATION_POLICY_FREE_UNITS_PROCESSED,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "contextualGroundingPolicyUnits": {
+            "target": GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_UNITS_PROCESSED,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "contentPolicyImageUnits": {
+            "target": GUARDRAIL_CONTENT_POLICY_IMAGE_UNITS_PROCESSED
+        },
+        "automatedReasoningPolicyUnits": {
+            "target": GUARDRAIL_AUTOMATED_REASONING_POLICY_UNITS_PROCESSED
+        },
+        "automatedReasoningPolicies": {
+            "target": GUARDRAIL_AUTOMATED_REASONING_POLICIES_PROCESSED
+        },
+    },
+)
+
+GUARDRAIL_INVOCATION_METRICS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailInvocationMetrics"),
+    members={
+        "guardrailProcessingLatency": {"target": GUARDRAIL_PROCESSING_LATENCY},
+        "usage": {"target": GUARDRAIL_USAGE},
+        "guardrailCoverage": {"target": GUARDRAIL_COVERAGE},
+    },
+)
+
+GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ACTION = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyAction"
+    ),
+    shape_type=ShapeType.ENUM,
+    members={
+        "ANONYMIZED": {"target": UNIT},
+        "BLOCKED": {"target": UNIT},
+        "NONE": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_PII_ENTITY_TYPE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailPiiEntityType"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "ADDRESS": {"target": UNIT},
+        "AGE": {"target": UNIT},
+        "AWS_ACCESS_KEY": {"target": UNIT},
+        "AWS_SECRET_KEY": {"target": UNIT},
+        "CA_HEALTH_NUMBER": {"target": UNIT},
+        "CA_SOCIAL_INSURANCE_NUMBER": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_CVV": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_EXPIRY": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_NUMBER": {"target": UNIT},
+        "DRIVER_ID": {"target": UNIT},
+        "EMAIL": {"target": UNIT},
+        "INTERNATIONAL_BANK_ACCOUNT_NUMBER": {"target": UNIT},
+        "IP_ADDRESS": {"target": UNIT},
+        "LICENSE_PLATE": {"target": UNIT},
+        "MAC_ADDRESS": {"target": UNIT},
+        "NAME": {"target": UNIT},
+        "PASSWORD": {"target": UNIT},
+        "PHONE": {"target": UNIT},
+        "PIN": {"target": UNIT},
+        "SWIFT_CODE": {"target": UNIT},
+        "UK_NATIONAL_HEALTH_SERVICE_NUMBER": {"target": UNIT},
+        "UK_NATIONAL_INSURANCE_NUMBER": {"target": UNIT},
+        "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER": {"target": UNIT},
+        "URL": {"target": UNIT},
+        "USERNAME": {"target": UNIT},
+        "US_BANK_ACCOUNT_NUMBER": {"target": UNIT},
+        "US_BANK_ROUTING_NUMBER": {"target": UNIT},
+        "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER": {"target": UNIT},
+        "US_PASSPORT_NUMBER": {"target": UNIT},
+        "US_SOCIAL_SECURITY_NUMBER": {"target": UNIT},
+        "VEHICLE_IDENTIFICATION_NUMBER": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_PII_ENTITY_FILTER = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailPiiEntityFilter"),
+    members={
+        "match": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "type": {
+            "target": GUARDRAIL_PII_ENTITY_TYPE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "action": {
+            "target": GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ACTION,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "detected": {"target": BOOLEAN},
+    },
+)
+
+GUARDRAIL_PII_ENTITY_FILTER_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailPiiEntityFilterList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_PII_ENTITY_FILTER}},
+)
+
+GUARDRAIL_REGEX_FILTER = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailRegexFilter"),
+    members={
+        "name": {"target": STRING},
+        "match": {"target": STRING},
+        "regex": {"target": STRING},
+        "action": {
+            "target": GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ACTION,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "detected": {"target": BOOLEAN},
+    },
+)
+
+GUARDRAIL_REGEX_FILTER_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailRegexFilterList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_REGEX_FILTER}},
+)
+
+GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ASSESSMENT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailSensitiveInformationPolicyAssessment"
+    ),
+    members={
+        "piiEntities": {
+            "target": GUARDRAIL_PII_ENTITY_FILTER_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "regexes": {
+            "target": GUARDRAIL_REGEX_FILTER_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+GUARDRAIL_TOPIC_POLICY_ACTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTopicPolicyAction"),
+    shape_type=ShapeType.ENUM,
+    members={"BLOCKED": {"target": UNIT}, "NONE": {"target": UNIT}},
+)
+
+GUARDRAIL_TOPIC_TYPE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTopicType"),
+    shape_type=ShapeType.ENUM,
+    members={"DENY": {"target": UNIT}},
+)
+
+GUARDRAIL_TOPIC = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTopic"),
+    members={
+        "name": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "type": {
+            "target": GUARDRAIL_TOPIC_TYPE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "action": {
+            "target": GUARDRAIL_TOPIC_POLICY_ACTION,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "detected": {"target": BOOLEAN},
+    },
+)
+
+GUARDRAIL_TOPIC_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTopicList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_TOPIC}},
+)
+
+GUARDRAIL_TOPIC_POLICY_ASSESSMENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTopicPolicyAssessment"),
+    members={
+        "topics": {
+            "target": GUARDRAIL_TOPIC_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_WORD_POLICY_ACTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailWordPolicyAction"),
+    shape_type=ShapeType.ENUM,
+    members={"BLOCKED": {"target": UNIT}, "NONE": {"target": UNIT}},
+)
+
+GUARDRAIL_CUSTOM_WORD = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailCustomWord"),
+    members={
+        "match": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "action": {
+            "target": GUARDRAIL_WORD_POLICY_ACTION,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "detected": {"target": BOOLEAN},
+    },
+)
+
+GUARDRAIL_CUSTOM_WORD_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailCustomWordList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CUSTOM_WORD}},
+)
+
+GUARDRAIL_MANAGED_WORD_TYPE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailManagedWordType"),
+    shape_type=ShapeType.ENUM,
+    members={"PROFANITY": {"target": UNIT}},
+)
+
+GUARDRAIL_MANAGED_WORD = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailManagedWord"),
+    members={
+        "match": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "type": {
+            "target": GUARDRAIL_MANAGED_WORD_TYPE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "action": {
+            "target": GUARDRAIL_WORD_POLICY_ACTION,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "detected": {"target": BOOLEAN},
+    },
+)
+
+GUARDRAIL_MANAGED_WORD_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailManagedWordList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_MANAGED_WORD}},
+)
+
+GUARDRAIL_WORD_POLICY_ASSESSMENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailWordPolicyAssessment"),
+    members={
+        "customWords": {
+            "target": GUARDRAIL_CUSTOM_WORD_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "managedWordLists": {
+            "target": GUARDRAIL_MANAGED_WORD_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+GUARDRAIL_ASSESSMENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAssessment"),
+    members={
+        "topicPolicy": {"target": GUARDRAIL_TOPIC_POLICY_ASSESSMENT},
+        "contentPolicy": {"target": GUARDRAIL_CONTENT_POLICY_ASSESSMENT},
+        "wordPolicy": {"target": GUARDRAIL_WORD_POLICY_ASSESSMENT},
+        "sensitiveInformationPolicy": {
+            "target": GUARDRAIL_SENSITIVE_INFORMATION_POLICY_ASSESSMENT
+        },
+        "contextualGroundingPolicy": {
+            "target": GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_ASSESSMENT
+        },
+        "automatedReasoningPolicy": {
+            "target": GUARDRAIL_AUTOMATED_REASONING_POLICY_ASSESSMENT
+        },
+        "invocationMetrics": {"target": GUARDRAIL_INVOCATION_METRICS},
+        "appliedGuardrailDetails": {"target": APPLIED_GUARDRAIL_DETAILS},
+    },
+)
+
+GUARDRAIL_ASSESSMENT_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAssessmentList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_ASSESSMENT}},
+)
+
+GUARDRAIL_OUTPUT_TEXT = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailOutputText"),
+    shape_type=ShapeType.STRING,
+)
+
+GUARDRAIL_OUTPUT_CONTENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailOutputContent"),
+    members={"text": {"target": GUARDRAIL_OUTPUT_TEXT}},
+)
+
+GUARDRAIL_OUTPUT_CONTENT_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailOutputContentList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_OUTPUT_CONTENT}},
+)
+
+APPLY_GUARDRAIL_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ApplyGuardrailOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#ApplyGuardrailResponse",
+        )
+    ],
+    members={
+        "usage": {
+            "target": GUARDRAIL_USAGE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "action": {
+            "target": GUARDRAIL_ACTION,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "actionReason": {"target": STRING},
+        "outputs": {
+            "target": GUARDRAIL_OUTPUT_CONTENT_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "assessments": {
+            "target": GUARDRAIL_ASSESSMENT_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "guardrailCoverage": {"target": GUARDRAIL_COVERAGE},
+    },
+)
+
+APPLY_GUARDRAIL = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#ApplyGuardrail"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/guardrail/{guardrailIdentifier}/version/{guardrailVersion}/apply",
+                }
+            ),
+        )
+    ],
+)
+
+GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksContentFilterCategory"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "VIOLENCE": {"target": UNIT},
+        "HATE": {"target": UNIT},
+        "SEXUAL": {"target": UNIT},
+        "MISCONDUCT": {"target": UNIT},
+        "INSULTS": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY_CONFIG = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailChecksContentFilterCategoryConfig"
+    ),
+    members={
+        "category": {
+            "target": GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY_CONFIG_LIST = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailChecksContentFilterCategoryConfigList"
+    ),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY_CONFIG}},
+)
+
+GUARDRAIL_CHECKS_CONTENT_FILTER_CONFIG = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksContentFilterConfig"),
+    members={
+        "categories": {
+            "target": GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY_CONFIG_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackCategory"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "JAILBREAK": {"target": UNIT},
+        "PROMPT_INJECTION": {"target": UNIT},
+        "PROMPT_LEAKAGE": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY_CONFIG = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackCategoryConfig"
+    ),
+    members={
+        "category": {
+            "target": GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY_CONFIG_LIST = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackCategoryConfigList"
+    ),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY_CONFIG}},
+)
+
+GUARDRAIL_CHECKS_PROMPT_ATTACK_CONFIG = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackConfig"),
+    members={
+        "categories": {
+            "target": GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY_CONFIG_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_TYPE = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationEntityType"
+    ),
+    shape_type=ShapeType.ENUM,
+    members={
+        "ADDRESS": {"target": UNIT},
+        "AGE": {"target": UNIT},
+        "AWS_ACCESS_KEY": {"target": UNIT},
+        "AWS_SECRET_KEY": {"target": UNIT},
+        "CA_HEALTH_NUMBER": {"target": UNIT},
+        "CA_SOCIAL_INSURANCE_NUMBER": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_CVV": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_EXPIRY": {"target": UNIT},
+        "CREDIT_DEBIT_CARD_NUMBER": {"target": UNIT},
+        "DRIVER_ID": {"target": UNIT},
+        "EMAIL": {"target": UNIT},
+        "INTERNATIONAL_BANK_ACCOUNT_NUMBER": {"target": UNIT},
+        "IP_ADDRESS": {"target": UNIT},
+        "LICENSE_PLATE": {"target": UNIT},
+        "MAC_ADDRESS": {"target": UNIT},
+        "NAME": {"target": UNIT},
+        "PASSWORD": {"target": UNIT},
+        "PHONE": {"target": UNIT},
+        "PIN": {"target": UNIT},
+        "SWIFT_CODE": {"target": UNIT},
+        "UK_NATIONAL_HEALTH_SERVICE_NUMBER": {"target": UNIT},
+        "UK_NATIONAL_INSURANCE_NUMBER": {"target": UNIT},
+        "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER": {"target": UNIT},
+        "URL": {"target": UNIT},
+        "USERNAME": {"target": UNIT},
+        "US_BANK_ACCOUNT_NUMBER": {"target": UNIT},
+        "US_BANK_ROUTING_NUMBER": {"target": UNIT},
+        "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER": {"target": UNIT},
+        "US_PASSPORT_NUMBER": {"target": UNIT},
+        "US_SOCIAL_SECURITY_NUMBER": {"target": UNIT},
+        "VEHICLE_IDENTIFICATION_NUMBER": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_CONFIG = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationEntityConfig"
+    ),
+    members={
+        "type": {
+            "target": GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_TYPE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_CONFIG_LIST = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationEntityConfigList"
+    ),
+    shape_type=ShapeType.LIST,
+    members={
+        "member": {"target": GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_CONFIG}
+    },
+)
+
+GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_CONFIG = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationConfig"
+    ),
+    members={
+        "entities": {
+            "target": GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_CONFIG_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CHECKS_CONFIG = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksConfig"),
+    members={
+        "contentFilter": {"target": GUARDRAIL_CHECKS_CONTENT_FILTER_CONFIG},
+        "promptAttack": {"target": GUARDRAIL_CHECKS_PROMPT_ATTACK_CONFIG},
+        "sensitiveInformation": {
+            "target": GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_CONFIG
+        },
+    },
+)
+
+GUARDRAIL_CHECKS_TEXT_CONTENT = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksTextContent"),
+    shape_type=ShapeType.STRING,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+)
+
+GUARDRAIL_CHECKS_CONTENT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksContentBlock"),
+    shape_type=ShapeType.UNION,
+    members={"text": {"target": GUARDRAIL_CHECKS_TEXT_CONTENT}},
+)
+
+GUARDRAIL_CHECKS_CONTENT_BLOCK_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksContentBlockList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CHECKS_CONTENT_BLOCK}},
+)
+
+GUARDRAIL_CHECKS_ROLE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksRole"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "USER": {"target": UNIT},
+        "ASSISTANT": {"target": UNIT},
+        "SYSTEM": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_CHECKS_MESSAGE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksMessage"),
+    members={
+        "role": {
+            "target": GUARDRAIL_CHECKS_ROLE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "content": {
+            "target": GUARDRAIL_CHECKS_CONTENT_BLOCK_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+GUARDRAIL_CHECKS_MESSAGE_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksMessageList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CHECKS_MESSAGE}},
+)
+
+INVOKE_GUARDRAIL_CHECKS_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeGuardrailChecksInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#InvokeGuardrailChecksRequest",
+        )
+    ],
+    members={
+        "messages": {
+            "target": GUARDRAIL_CHECKS_MESSAGE_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "checks": {
+            "target": GUARDRAIL_CHECKS_CONFIG,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT_ENTRY = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksContentFilterResultEntry"),
+    members={
+        "category": {
+            "target": GUARDRAIL_CHECKS_CONTENT_FILTER_CATEGORY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "severityScore": {
+            "target": DOUBLE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksContentFilterResultList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT_ENTRY}},
+)
+
+GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksContentFilterResult"),
+    members={
+        "results": {
+            "target": GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT_ENTRY = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackResultEntry"),
+    members={
+        "category": {
+            "target": GUARDRAIL_CHECKS_PROMPT_ATTACK_CATEGORY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "severityScore": {
+            "target": DOUBLE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackResultList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT_ENTRY}},
+)
+
+GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackResult"),
+    members={
+        "results": {
+            "target": GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT_ENTRY = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationResultEntry"
+    ),
+    members={
+        "type": {
+            "target": GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_ENTITY_TYPE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "confidenceScore": {
+            "target": DOUBLE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "beginOffset": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "endOffset": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "messageIndex": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "contentIndex": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT_LIST = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationResultList"
+    ),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT_ENTRY}},
+)
+
+GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationResult"
+    ),
+    members={
+        "results": {
+            "target": GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT_LIST,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "truncated": {"target": BOOLEAN},
+    },
+)
+
+GUARDRAIL_CHECKS_RESULTS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksResults"),
+    members={
+        "contentFilter": {"target": GUARDRAIL_CHECKS_CONTENT_FILTER_RESULT},
+        "promptAttack": {"target": GUARDRAIL_CHECKS_PROMPT_ATTACK_RESULT},
+        "sensitiveInformation": {
+            "target": GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_RESULT
+        },
+    },
+)
+
+GUARDRAIL_CHECKS_CONTENT_FILTER_USAGE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksContentFilterUsage"),
+    members={
+        "textUnits": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CHECKS_PROMPT_ATTACK_USAGE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackUsage"),
+    members={
+        "textUnits": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_USAGE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationUsage"),
+    members={
+        "textUnits": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+GUARDRAIL_CHECKS_USAGE_RESULTS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailChecksUsageResults"),
+    members={
+        "contentFilter": {"target": GUARDRAIL_CHECKS_CONTENT_FILTER_USAGE},
+        "promptAttack": {"target": GUARDRAIL_CHECKS_PROMPT_ATTACK_USAGE},
+        "sensitiveInformation": {
+            "target": GUARDRAIL_CHECKS_SENSITIVE_INFORMATION_USAGE
+        },
+    },
+)
+
+INVOKE_GUARDRAIL_CHECKS_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeGuardrailChecksOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#InvokeGuardrailChecksResponse",
+        )
+    ],
+    members={
+        "results": {
+            "target": GUARDRAIL_CHECKS_RESULTS,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "usage": {
+            "target": GUARDRAIL_CHECKS_USAGE_RESULTS,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+INVOKE_GUARDRAIL_CHECKS = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeGuardrailChecks"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {"code": 200, "method": "POST", "uri": "/guardrail-checks/invoke"}
+            ),
+        )
+    ],
+)
+
+GUARDRAIL_TRACE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTrace"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "ENABLED": {"target": UNIT},
+        "DISABLED": {"target": UNIT},
+        "ENABLED_FULL": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_CONFIGURATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailConfiguration"),
+    members={
+        "guardrailIdentifier": {
+            "target": GUARDRAIL_IDENTIFIER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="")],
+        },
+        "guardrailVersion": {
+            "target": GUARDRAIL_VERSION,
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="")],
+        },
+        "trace": {
+            "target": GUARDRAIL_TRACE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="disabled")],
+        },
+    },
+)
+
+NON_EMPTY_STRING = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#NonEmptyString"),
+    shape_type=ShapeType.STRING,
+)
+
+NON_EMPTY_STRING_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#NonEmptyStringList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": NON_EMPTY_STRING}},
+)
+
+INFERENCE_CONFIGURATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#InferenceConfiguration"),
+    members={
+        "maxTokens": {"target": INTEGER},
+        "temperature": {"target": FLOAT},
+        "topP": {"target": FLOAT},
+        "stopSequences": {"target": NON_EMPTY_STRING_LIST},
+    },
+)
+
+ERROR_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ErrorBlock"),
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"message": {"target": STRING}},
+)
+
+AUDIO_FORMAT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AudioFormat"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "MP3": {"target": UNIT},
+        "OPUS": {"target": UNIT},
+        "WAV": {"target": UNIT},
+        "AAC": {"target": UNIT},
+        "FLAC": {"target": UNIT},
+        "MP4": {"target": UNIT},
+        "OGG": {"target": UNIT},
+        "MKV": {"target": UNIT},
+        "MKA": {"target": UNIT},
+        "X_AAC": {"target": UNIT},
+        "M4A": {"target": UNIT},
+        "MPEG": {"target": UNIT},
+        "MPGA": {"target": UNIT},
+        "PCM": {"target": UNIT},
+        "WEBM": {"target": UNIT},
+    },
+)
+
+S3_LOCATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#S3Location"),
+    members={
+        "uri": {
+            "target": S3_URI,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "bucketOwner": {"target": ACCOUNT_ID},
+    },
+)
+
+AUDIO_SOURCE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AudioSource"),
+    shape_type=ShapeType.UNION,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"bytes": {"target": BLOB}, "s3Location": {"target": S3_LOCATION}},
+)
+
+AUDIO_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AudioBlock"),
+    members={
+        "format": {
+            "target": AUDIO_FORMAT,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "source": {
+            "target": AUDIO_SOURCE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "error": {"target": ERROR_BLOCK},
+    },
+)
+
+CACHE_TTL = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CacheTTL"),
+    shape_type=ShapeType.ENUM,
+    members={"FIVE_MINUTES": {"target": UNIT}, "ONE_HOUR": {"target": UNIT}},
+)
+
+CACHE_POINT_TYPE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CachePointType"),
+    shape_type=ShapeType.ENUM,
+    members={"DEFAULT": {"target": UNIT}},
+)
+
+CACHE_POINT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CachePointBlock"),
+    members={
+        "type": {
+            "target": CACHE_POINT_TYPE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "ttl": {"target": CACHE_TTL},
+    },
+)
+
+DOCUMENT_CHAR_LOCATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#DocumentCharLocation"),
+    members={
+        "documentIndex": {"target": INTEGER},
+        "start": {"target": INTEGER},
+        "end": {"target": INTEGER},
+    },
+)
+
+DOCUMENT_CHUNK_LOCATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#DocumentChunkLocation"),
+    members={
+        "documentIndex": {"target": INTEGER},
+        "start": {"target": INTEGER},
+        "end": {"target": INTEGER},
+    },
+)
+
+DOCUMENT_PAGE_LOCATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#DocumentPageLocation"),
+    members={
+        "documentIndex": {"target": INTEGER},
+        "start": {"target": INTEGER},
+        "end": {"target": INTEGER},
+    },
+)
+
+SEARCH_RESULT_LOCATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#SearchResultLocation"),
+    members={
+        "searchResultIndex": {"target": INTEGER},
+        "start": {"target": INTEGER},
+        "end": {"target": INTEGER},
+    },
+)
+
+WEB_LOCATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#WebLocation"),
+    members={"url": {"target": STRING}, "domain": {"target": STRING}},
+)
+
+CITATION_LOCATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CitationLocation"),
+    shape_type=ShapeType.UNION,
+    members={
+        "web": {"target": WEB_LOCATION},
+        "documentChar": {"target": DOCUMENT_CHAR_LOCATION},
+        "documentPage": {"target": DOCUMENT_PAGE_LOCATION},
+        "documentChunk": {"target": DOCUMENT_CHUNK_LOCATION},
+        "searchResultLocation": {"target": SEARCH_RESULT_LOCATION},
+    },
+)
+
+CITATION_SOURCE_CONTENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CitationSourceContent"),
+    shape_type=ShapeType.UNION,
+    members={"text": {"target": STRING}},
+)
+
+CITATION_SOURCE_CONTENT_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CitationSourceContentList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": CITATION_SOURCE_CONTENT}},
+)
+
+CITATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#Citation"),
+    members={
+        "title": {"target": STRING},
+        "source": {"target": STRING},
+        "sourceContent": {"target": CITATION_SOURCE_CONTENT_LIST},
+        "location": {"target": CITATION_LOCATION},
+    },
+)
+
+CITATIONS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#Citations"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": CITATION}},
+)
+
+CITATION_GENERATED_CONTENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CitationGeneratedContent"),
+    shape_type=ShapeType.UNION,
+    members={"text": {"target": STRING}},
+)
+
+CITATION_GENERATED_CONTENT_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CitationGeneratedContentList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": CITATION_GENERATED_CONTENT}},
+)
+
+CITATIONS_CONTENT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CitationsContentBlock"),
+    members={
+        "content": {"target": CITATION_GENERATED_CONTENT_LIST},
+        "citations": {"target": CITATIONS},
+    },
+)
+
+CITATIONS_CONFIG = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CitationsConfig"),
+    members={
+        "enabled": {
+            "target": BOOLEAN,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+DOCUMENT_FORMAT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#DocumentFormat"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "PDF": {"target": UNIT},
+        "CSV": {"target": UNIT},
+        "DOC": {"target": UNIT},
+        "DOCX": {"target": UNIT},
+        "XLS": {"target": UNIT},
+        "XLSX": {"target": UNIT},
+        "HTML": {"target": UNIT},
+        "TXT": {"target": UNIT},
+        "MD": {"target": UNIT},
+    },
+)
+
+DOCUMENT_CONTENT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#DocumentContentBlock"),
+    shape_type=ShapeType.UNION,
+    members={"text": {"target": STRING}},
+)
+
+DOCUMENT_CONTENT_BLOCKS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#DocumentContentBlocks"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": DOCUMENT_CONTENT_BLOCK}},
+)
+
+DOCUMENT_SOURCE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#DocumentSource"),
+    shape_type=ShapeType.UNION,
+    members={
+        "bytes": {"target": BLOB},
+        "s3Location": {"target": S3_LOCATION},
+        "text": {"target": STRING},
+        "content": {"target": DOCUMENT_CONTENT_BLOCKS},
+    },
+)
+
+DOCUMENT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#DocumentBlock"),
+    members={
+        "format": {
+            "target": DOCUMENT_FORMAT,
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="txt")],
+        },
+        "name": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "source": {
+            "target": DOCUMENT_SOURCE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "context": {"target": STRING},
+        "citations": {"target": CITATIONS_CONFIG},
+    },
+)
+
+GUARDRAIL_CONVERSE_IMAGE_FORMAT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailConverseImageFormat"),
+    shape_type=ShapeType.ENUM,
+    members={"PNG": {"target": UNIT}, "JPEG": {"target": UNIT}},
+)
+
+GUARDRAIL_CONVERSE_IMAGE_SOURCE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailConverseImageSource"),
+    shape_type=ShapeType.UNION,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"bytes": {"target": BLOB}},
+)
+
+GUARDRAIL_CONVERSE_IMAGE_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailConverseImageBlock"),
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={
+        "format": {
+            "target": GUARDRAIL_CONVERSE_IMAGE_FORMAT,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "source": {
+            "target": GUARDRAIL_CONVERSE_IMAGE_SOURCE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+GUARDRAIL_CONVERSE_CONTENT_QUALIFIER = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailConverseContentQualifier"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "GROUNDING_SOURCE": {"target": UNIT},
+        "QUERY": {"target": UNIT},
+        "GUARD_CONTENT": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_CONVERSE_CONTENT_QUALIFIER_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailConverseContentQualifierList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_CONVERSE_CONTENT_QUALIFIER}},
+)
+
+GUARDRAIL_CONVERSE_TEXT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailConverseTextBlock"),
+    members={
+        "text": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "qualifiers": {"target": GUARDRAIL_CONVERSE_CONTENT_QUALIFIER_LIST},
+    },
+)
+
+GUARDRAIL_CONVERSE_CONTENT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailConverseContentBlock"),
+    shape_type=ShapeType.UNION,
+    members={
+        "text": {"target": GUARDRAIL_CONVERSE_TEXT_BLOCK},
+        "image": {"target": GUARDRAIL_CONVERSE_IMAGE_BLOCK},
+    },
+)
+
+IMAGE_FORMAT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ImageFormat"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "PNG": {"target": UNIT},
+        "JPEG": {"target": UNIT},
+        "GIF": {"target": UNIT},
+        "WEBP": {"target": UNIT},
+    },
+)
+
+IMAGE_SOURCE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ImageSource"),
+    shape_type=ShapeType.UNION,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"bytes": {"target": BLOB}, "s3Location": {"target": S3_LOCATION}},
+)
+
+IMAGE_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ImageBlock"),
+    members={
+        "format": {
+            "target": IMAGE_FORMAT,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "source": {
+            "target": IMAGE_SOURCE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "error": {"target": ERROR_BLOCK},
+    },
+)
+
+REASONING_TEXT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ReasoningTextBlock"),
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={
+        "text": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "signature": {"target": STRING},
+    },
+)
+
+REASONING_CONTENT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ReasoningContentBlock"),
+    shape_type=ShapeType.UNION,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={
+        "reasoningText": {"target": REASONING_TEXT_BLOCK},
+        "redactedContent": {"target": BLOB},
+    },
+)
+
+SEARCH_RESULT_CONTENT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#SearchResultContentBlock"),
+    members={
+        "text": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+SEARCH_RESULT_CONTENT_BLOCKS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#SearchResultContentBlocks"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": SEARCH_RESULT_CONTENT_BLOCK}},
+)
+
+SEARCH_RESULT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#SearchResultBlock"),
+    members={
+        "source": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "title": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "content": {
+            "target": SEARCH_RESULT_CONTENT_BLOCKS,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "citations": {"target": CITATIONS_CONFIG},
+    },
+)
+
+TOOL_REFERENCE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolReference"),
+    members={
+        "type": {"target": STRING},
+        "name": {"target": STRING},
+        "serverName": {"target": STRING},
+    },
+)
+
+TOOL_ADDITION_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolAdditionBlock"),
+    members={
+        "tool": {
+            "target": TOOL_REFERENCE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+TOOL_REMOVAL_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolRemovalBlock"),
+    members={
+        "tool": {
+            "target": TOOL_REFERENCE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+VIDEO_FORMAT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#VideoFormat"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "MKV": {"target": UNIT},
+        "MOV": {"target": UNIT},
+        "MP4": {"target": UNIT},
+        "WEBM": {"target": UNIT},
+        "FLV": {"target": UNIT},
+        "MPEG": {"target": UNIT},
+        "MPG": {"target": UNIT},
+        "WMV": {"target": UNIT},
+        "THREE_GP": {"target": UNIT},
+    },
+)
+
+VIDEO_SOURCE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#VideoSource"),
+    shape_type=ShapeType.UNION,
+    members={"bytes": {"target": BLOB}, "s3Location": {"target": S3_LOCATION}},
+)
+
+VIDEO_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#VideoBlock"),
+    members={
+        "format": {
+            "target": VIDEO_FORMAT,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "source": {
+            "target": VIDEO_SOURCE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+TOOL_RESULT_CONTENT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolResultContentBlock"),
+    shape_type=ShapeType.UNION,
+    members={
+        "json": {"target": DOCUMENT},
+        "text": {"target": STRING},
+        "image": {"target": IMAGE_BLOCK},
+        "document": {"target": DOCUMENT_BLOCK},
+        "video": {"target": VIDEO_BLOCK},
+        "searchResult": {"target": SEARCH_RESULT_BLOCK},
+    },
+)
+
+TOOL_RESULT_CONTENT_BLOCKS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolResultContentBlocks"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": TOOL_RESULT_CONTENT_BLOCK}},
+)
+
+TOOL_RESULT_STATUS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolResultStatus"),
+    shape_type=ShapeType.ENUM,
+    members={"SUCCESS": {"target": UNIT}, "ERROR": {"target": UNIT}},
+)
+
+TOOL_USE_ID = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolUseId"), shape_type=ShapeType.STRING
+)
+
+TOOL_RESULT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolResultBlock"),
+    members={
+        "toolUseId": {
+            "target": TOOL_USE_ID,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "content": {
+            "target": TOOL_RESULT_CONTENT_BLOCKS,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "status": {"target": TOOL_RESULT_STATUS},
+        "type": {"target": STRING},
+    },
+)
+
+TOOL_NAME = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolName"), shape_type=ShapeType.STRING
+)
+
+TOOL_USE_TYPE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolUseType"),
+    shape_type=ShapeType.ENUM,
+    members={"SERVER_TOOL_USE": {"target": UNIT}},
+)
+
+TOOL_USE_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolUseBlock"),
+    members={
+        "toolUseId": {
+            "target": TOOL_USE_ID,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "name": {
+            "target": TOOL_NAME,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "input": {
+            "target": DOCUMENT,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "type": {"target": TOOL_USE_TYPE},
+    },
+)
+
+CONTENT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ContentBlock"),
+    shape_type=ShapeType.UNION,
+    members={
+        "text": {"target": STRING},
+        "image": {"target": IMAGE_BLOCK},
+        "document": {"target": DOCUMENT_BLOCK},
+        "video": {"target": VIDEO_BLOCK},
+        "audio": {"target": AUDIO_BLOCK},
+        "toolUse": {"target": TOOL_USE_BLOCK},
+        "toolResult": {"target": TOOL_RESULT_BLOCK},
+        "guardContent": {"target": GUARDRAIL_CONVERSE_CONTENT_BLOCK},
+        "cachePoint": {"target": CACHE_POINT_BLOCK},
+        "reasoningContent": {"target": REASONING_CONTENT_BLOCK},
+        "citationsContent": {"target": CITATIONS_CONTENT_BLOCK},
+        "searchResult": {"target": SEARCH_RESULT_BLOCK},
+        "toolAddition": {"target": TOOL_ADDITION_BLOCK},
+        "toolRemoval": {"target": TOOL_REMOVAL_BLOCK},
+    },
+)
+
+CONTENT_BLOCKS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ContentBlocks"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": CONTENT_BLOCK}},
+)
+
+CONVERSATION_ROLE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConversationRole"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "USER": {"target": UNIT},
+        "ASSISTANT": {"target": UNIT},
+        "SYSTEM": {"target": UNIT},
+    },
+)
+
+MESSAGE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#Message"),
+    members={
+        "role": {
+            "target": CONVERSATION_ROLE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "content": {
+            "target": CONTENT_BLOCKS,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+MESSAGES = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#Messages"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": MESSAGE}},
+)
+
+CONVERSATIONAL_MODEL_ID = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConversationalModelId"),
+    shape_type=ShapeType.STRING,
+)
+
+JSON_SCHEMA_DEFINITION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#JsonSchemaDefinition"),
+    members={
+        "schema": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "name": {"target": STRING},
+        "description": {"target": STRING},
+    },
+)
+
+OUTPUT_FORMAT_STRUCTURE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#OutputFormatStructure"),
+    shape_type=ShapeType.UNION,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"jsonSchema": {"target": JSON_SCHEMA_DEFINITION}},
+)
+
+OUTPUT_FORMAT_TYPE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#OutputFormatType"),
+    shape_type=ShapeType.ENUM,
+    members={"JSON_SCHEMA": {"target": UNIT}},
+)
+
+OUTPUT_FORMAT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#OutputFormat"),
+    members={
+        "type": {
+            "target": OUTPUT_FORMAT_TYPE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "structure": {
+            "target": OUTPUT_FORMAT_STRUCTURE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+OUTPUT_CONFIG = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#OutputConfig"),
+    members={"textFormat": {"target": OUTPUT_FORMAT}, "effort": {"target": STRING}},
+)
+
+PERFORMANCE_CONFIG_LATENCY = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#PerformanceConfigLatency"),
+    shape_type=ShapeType.ENUM,
+    members={"STANDARD": {"target": UNIT}, "OPTIMIZED": {"target": UNIT}},
+)
+
+PERFORMANCE_CONFIGURATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#PerformanceConfiguration"),
+    members={
+        "latency": {
+            "target": PERFORMANCE_CONFIG_LATENCY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="standard")],
+        }
+    },
+)
+
+PROMPT_VARIABLE_VALUES = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#PromptVariableValues"),
+    shape_type=ShapeType.UNION,
+    members={"text": {"target": STRING}},
+)
+
+PROMPT_VARIABLE_MAP = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#PromptVariableMap"),
+    shape_type=ShapeType.MAP,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"key": {"target": STRING}, "value": {"target": PROMPT_VARIABLE_VALUES}},
+)
+
+REQUEST_METADATA = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#RequestMetadata"),
+    shape_type=ShapeType.MAP,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"key": {"target": STRING}, "value": {"target": STRING}},
+)
+
+SERVICE_TIER_TYPE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ServiceTierType"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "PRIORITY": {"target": UNIT},
+        "DEFAULT": {"target": UNIT},
+        "FLEX": {"target": UNIT},
+        "RESERVED": {"target": UNIT},
+    },
+)
+
+SERVICE_TIER = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ServiceTier"),
+    members={
+        "type": {
+            "target": SERVICE_TIER_TYPE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+SYSTEM_CONTENT_BLOCK = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#SystemContentBlock"),
+    shape_type=ShapeType.UNION,
+    members={
+        "text": {"target": NON_EMPTY_STRING},
+        "guardContent": {"target": GUARDRAIL_CONVERSE_CONTENT_BLOCK},
+        "cachePoint": {"target": CACHE_POINT_BLOCK},
+    },
+)
+
+SYSTEM_CONTENT_BLOCKS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#SystemContentBlocks"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": SYSTEM_CONTENT_BLOCK}},
+)
+
+ANY_TOOL_CHOICE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AnyToolChoice")
+)
+
+AUTO_TOOL_CHOICE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#AutoToolChoice")
+)
+
+SPECIFIC_TOOL_CHOICE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#SpecificToolChoice"),
+    members={
+        "name": {
+            "target": TOOL_NAME,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+TOOL_CHOICE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolChoice"),
+    shape_type=ShapeType.UNION,
+    members={
+        "auto": {"target": AUTO_TOOL_CHOICE},
+        "any": {"target": ANY_TOOL_CHOICE},
+        "tool": {"target": SPECIFIC_TOOL_CHOICE},
+    },
+)
+
+SYSTEM_TOOL = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#SystemTool"),
+    members={
+        "name": {
+            "target": TOOL_NAME,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+TOOL_INPUT_SCHEMA = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolInputSchema"),
+    shape_type=ShapeType.UNION,
+    members={"json": {"target": DOCUMENT}},
+)
+
+TOOL_SPECIFICATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolSpecification"),
+    members={
+        "name": {
+            "target": TOOL_NAME,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "description": {"target": NON_EMPTY_STRING},
+        "inputSchema": {
+            "target": TOOL_INPUT_SCHEMA,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "strict": {"target": BOOLEAN},
+    },
+)
+
+TOOL = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#Tool"),
+    shape_type=ShapeType.UNION,
+    members={
+        "toolSpec": {"target": TOOL_SPECIFICATION},
+        "systemTool": {"target": SYSTEM_TOOL},
+        "cachePoint": {"target": CACHE_POINT_BLOCK},
+    },
+)
+
+TOOLS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#Tools"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": TOOL}},
+)
+
+TOOL_CONFIGURATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolConfiguration"),
+    members={
+        "tools": {
+            "target": TOOLS,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "toolChoice": {"target": TOOL_CHOICE},
+    },
+)
+
+CONVERSE_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#ConverseRequest",
+        )
+    ],
+    members={
+        "modelId": {
+            "target": CONVERSATIONAL_MODEL_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "messages": {"target": MESSAGES},
+        "system": {"target": SYSTEM_CONTENT_BLOCKS},
+        "inferenceConfig": {"target": INFERENCE_CONFIGURATION},
+        "toolConfig": {"target": TOOL_CONFIGURATION},
+        "guardrailConfig": {"target": GUARDRAIL_CONFIGURATION},
+        "additionalModelRequestFields": {"target": DOCUMENT},
+        "promptVariables": {"target": PROMPT_VARIABLE_MAP},
+        "additionalModelResponseFieldPaths": {
+            "target": ADDITIONAL_MODEL_RESPONSE_FIELD_PATHS
+        },
+        "requestMetadata": {"target": REQUEST_METADATA},
+        "performanceConfig": {"target": PERFORMANCE_CONFIGURATION},
+        "serviceTier": {"target": SERVICE_TIER},
+        "outputConfig": {"target": OUTPUT_CONFIG},
+    },
+)
+
+CONVERSE_METRICS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseMetrics"),
+    members={
+        "latencyMs": {
+            "target": LONG,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+CONVERSE_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseOutput"),
+    shape_type=ShapeType.UNION,
+    members={"message": {"target": MESSAGE}},
+)
+
+STOP_REASON = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#StopReason"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "END_TURN": {"target": UNIT},
+        "TOOL_USE": {"target": UNIT},
+        "MAX_TOKENS": {"target": UNIT},
+        "STOP_SEQUENCE": {"target": UNIT},
+        "GUARDRAIL_INTERVENED": {"target": UNIT},
+        "CONTENT_FILTERED": {"target": UNIT},
+        "MALFORMED_MODEL_OUTPUT": {"target": UNIT},
+        "MALFORMED_TOOL_USE": {"target": UNIT},
+        "MODEL_CONTEXT_WINDOW_EXCEEDED": {"target": UNIT},
+    },
+)
+
+GUARDRAIL_ASSESSMENT_MAP = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAssessmentMap"),
+    shape_type=ShapeType.MAP,
+    members={"key": {"target": STRING}, "value": {"target": GUARDRAIL_ASSESSMENT}},
+)
+
+MODEL_OUTPUTS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ModelOutputs"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": GUARDRAIL_OUTPUT_TEXT}},
+)
+
+GUARDRAIL_ASSESSMENT_LIST_MAP = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailAssessmentListMap"),
+    shape_type=ShapeType.MAP,
+    members={"key": {"target": STRING}, "value": {"target": GUARDRAIL_ASSESSMENT_LIST}},
+)
+
+GUARDRAIL_TRACE_ASSESSMENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailTraceAssessment"),
+    members={
+        "modelOutput": {"target": MODEL_OUTPUTS},
+        "inputAssessment": {"target": GUARDRAIL_ASSESSMENT_MAP},
+        "outputAssessments": {"target": GUARDRAIL_ASSESSMENT_LIST_MAP},
+        "actionReason": {"target": STRING},
+    },
+)
+
+INVOKED_MODEL_ID = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokedModelId"),
+    shape_type=ShapeType.STRING,
+)
+
+PROMPT_ROUTER_TRACE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#PromptRouterTrace"),
+    members={"invokedModelId": {"target": INVOKED_MODEL_ID}},
+)
+
+CONVERSE_TRACE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseTrace"),
+    members={
+        "guardrail": {"target": GUARDRAIL_TRACE_ASSESSMENT},
+        "promptRouter": {"target": PROMPT_ROUTER_TRACE},
+    },
+)
+
+CACHE_DETAIL = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CacheDetail"),
+    members={
+        "ttl": {
+            "target": CACHE_TTL,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "inputTokens": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+CACHE_DETAILS_LIST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CacheDetailsList"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": CACHE_DETAIL}},
+)
+
+TOKEN_USAGE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#TokenUsage"),
+    members={
+        "inputTokens": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "outputTokens": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "totalTokens": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "cacheReadInputTokens": {"target": INTEGER},
+        "cacheWriteInputTokens": {"target": INTEGER},
+        "cacheDetails": {"target": CACHE_DETAILS_LIST},
+    },
+)
+
+CONVERSE_OPERATION_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseOperationOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#ConverseResponse",
+        )
+    ],
+    members={
+        "output": {
+            "target": CONVERSE_OUTPUT,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "stopReason": {
+            "target": STOP_REASON,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "usage": {
+            "target": TOKEN_USAGE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "metrics": {
+            "target": CONVERSE_METRICS,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "additionalModelResponseFields": {"target": DOCUMENT},
+        "trace": {"target": CONVERSE_TRACE},
+        "performanceConfig": {"target": PERFORMANCE_CONFIGURATION},
+        "serviceTier": {"target": SERVICE_TIER},
+    },
+)
+
+STATUS_CODE = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#StatusCode"), shape_type=ShapeType.INTEGER
+)
+
+MODEL_ERROR_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ModelErrorException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=424),
+    ],
+    members={
+        "message": {"target": NON_BLANK_STRING},
+        "originalStatusCode": {"target": STATUS_CODE},
+        "resourceName": {"target": NON_BLANK_STRING},
+    },
+)
+
+MODEL_NOT_READY_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ModelNotReadyException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
+    ],
+    members={"message": {"target": NON_BLANK_STRING}},
+)
+
+MODEL_TIMEOUT_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ModelTimeoutException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=408),
+    ],
+    members={"message": {"target": NON_BLANK_STRING}},
+)
+
+CONVERSE = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#Converse"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {"code": 200, "method": "POST", "uri": "/model/{modelId}/converse"}
+            ),
+        )
+    ],
+)
+
+GUARDRAIL_STREAM_PROCESSING_MODE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailStreamProcessingMode"),
+    shape_type=ShapeType.ENUM,
+    members={"SYNC": {"target": UNIT}, "ASYNC": {"target": UNIT}},
+)
+
+GUARDRAIL_STREAM_CONFIGURATION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#GuardrailStreamConfiguration"),
+    members={
+        "guardrailIdentifier": {
+            "target": GUARDRAIL_IDENTIFIER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="")],
+        },
+        "guardrailVersion": {
+            "target": GUARDRAIL_VERSION,
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="")],
+        },
+        "trace": {
+            "target": GUARDRAIL_TRACE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="disabled")],
+        },
+        "streamProcessingMode": {
+            "target": GUARDRAIL_STREAM_PROCESSING_MODE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value="sync")],
+        },
+    },
+)
+
+CONVERSE_STREAM_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseStreamInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#ConverseStreamRequest",
+        )
+    ],
+    members={
+        "modelId": {
+            "target": CONVERSATIONAL_MODEL_ID,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "messages": {"target": MESSAGES},
+        "system": {"target": SYSTEM_CONTENT_BLOCKS},
+        "inferenceConfig": {"target": INFERENCE_CONFIGURATION},
+        "toolConfig": {"target": TOOL_CONFIGURATION},
+        "guardrailConfig": {"target": GUARDRAIL_STREAM_CONFIGURATION},
+        "additionalModelRequestFields": {"target": DOCUMENT},
+        "promptVariables": {"target": PROMPT_VARIABLE_MAP},
+        "additionalModelResponseFieldPaths": {
+            "target": ADDITIONAL_MODEL_RESPONSE_FIELD_PATHS
+        },
+        "requestMetadata": {"target": REQUEST_METADATA},
+        "performanceConfig": {"target": PERFORMANCE_CONFIGURATION},
+        "serviceTier": {"target": SERVICE_TIER},
+        "outputConfig": {"target": OUTPUT_CONFIG},
+    },
+)
+
+NON_NEGATIVE_INTEGER = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#NonNegativeInteger"),
+    shape_type=ShapeType.INTEGER,
+)
+
+CITATION_SOURCE_CONTENT_DELTA = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CitationSourceContentDelta"),
+    members={"text": {"target": STRING}},
+)
+
+CITATION_SOURCE_CONTENT_LIST_DELTA = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CitationSourceContentListDelta"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": CITATION_SOURCE_CONTENT_DELTA}},
+)
+
+CITATIONS_DELTA = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CitationsDelta"),
+    members={
+        "title": {"target": STRING},
+        "source": {"target": STRING},
+        "sourceContent": {"target": CITATION_SOURCE_CONTENT_LIST_DELTA},
+        "location": {"target": CITATION_LOCATION},
+    },
+)
+
+IMAGE_BLOCK_DELTA = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ImageBlockDelta"),
+    members={"source": {"target": IMAGE_SOURCE}, "error": {"target": ERROR_BLOCK}},
+)
+
+REASONING_CONTENT_BLOCK_DELTA = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ReasoningContentBlockDelta"),
+    shape_type=ShapeType.UNION,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={
+        "text": {"target": STRING},
+        "redactedContent": {"target": BLOB},
+        "signature": {"target": STRING},
+    },
+)
+
+TOOL_RESULT_BLOCK_DELTA = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolResultBlockDelta"),
+    shape_type=ShapeType.UNION,
+    members={"text": {"target": STRING}, "json": {"target": DOCUMENT}},
+)
+
+TOOL_RESULT_BLOCKS_DELTA = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolResultBlocksDelta"),
+    shape_type=ShapeType.LIST,
+    members={"member": {"target": TOOL_RESULT_BLOCK_DELTA}},
+)
+
+TOOL_USE_BLOCK_DELTA = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolUseBlockDelta"),
+    members={
+        "input": {
+            "target": STRING,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+CONTENT_BLOCK_DELTA = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ContentBlockDelta"),
+    shape_type=ShapeType.UNION,
+    members={
+        "text": {"target": STRING},
+        "toolUse": {"target": TOOL_USE_BLOCK_DELTA},
+        "toolResult": {"target": TOOL_RESULT_BLOCKS_DELTA},
+        "reasoningContent": {"target": REASONING_CONTENT_BLOCK_DELTA},
+        "citation": {"target": CITATIONS_DELTA},
+        "image": {"target": IMAGE_BLOCK_DELTA},
+    },
+)
+
+CONTENT_BLOCK_DELTA_EVENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ContentBlockDeltaEvent"),
+    members={
+        "delta": {
+            "target": CONTENT_BLOCK_DELTA,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "contentBlockIndex": {
+            "target": NON_NEGATIVE_INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+IMAGE_BLOCK_START = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ImageBlockStart"),
+    members={
+        "format": {
+            "target": IMAGE_FORMAT,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+TOOL_RESULT_BLOCK_START = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolResultBlockStart"),
+    members={
+        "toolUseId": {
+            "target": TOOL_USE_ID,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "type": {"target": STRING},
+        "status": {"target": TOOL_RESULT_STATUS},
+    },
+)
+
+TOOL_USE_BLOCK_START = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ToolUseBlockStart"),
+    members={
+        "toolUseId": {
+            "target": TOOL_USE_ID,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "name": {
+            "target": TOOL_NAME,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "type": {"target": TOOL_USE_TYPE},
+    },
+)
+
+CONTENT_BLOCK_START = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ContentBlockStart"),
+    shape_type=ShapeType.UNION,
+    members={
+        "toolUse": {"target": TOOL_USE_BLOCK_START},
+        "toolResult": {"target": TOOL_RESULT_BLOCK_START},
+        "image": {"target": IMAGE_BLOCK_START},
+    },
+)
+
+CONTENT_BLOCK_START_EVENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ContentBlockStartEvent"),
+    members={
+        "start": {
+            "target": CONTENT_BLOCK_START,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "contentBlockIndex": {
+            "target": NON_NEGATIVE_INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+CONTENT_BLOCK_STOP_EVENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ContentBlockStopEvent"),
+    members={
+        "contentBlockIndex": {
+            "target": NON_NEGATIVE_INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+MESSAGE_START_EVENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#MessageStartEvent"),
+    members={
+        "role": {
+            "target": CONVERSATION_ROLE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+MESSAGE_STOP_EVENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#MessageStopEvent"),
+    members={
+        "stopReason": {
+            "target": STOP_REASON,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "additionalModelResponseFields": {"target": DOCUMENT},
+    },
+)
+
+CONVERSE_STREAM_METRICS = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseStreamMetrics"),
+    members={
+        "latencyMs": {
+            "target": LONG,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+CONVERSE_STREAM_TRACE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseStreamTrace"),
+    members={
+        "guardrail": {"target": GUARDRAIL_TRACE_ASSESSMENT},
+        "promptRouter": {"target": PROMPT_ROUTER_TRACE},
+    },
+)
+
+CONVERSE_STREAM_METADATA_EVENT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseStreamMetadataEvent"),
+    members={
+        "usage": {
+            "target": TOKEN_USAGE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "metrics": {
+            "target": CONVERSE_STREAM_METRICS,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+        "trace": {"target": CONVERSE_STREAM_TRACE},
+        "performanceConfig": {"target": PERFORMANCE_CONFIGURATION},
+        "serviceTier": {"target": SERVICE_TIER},
+    },
+)
+
+MODEL_STREAM_ERROR_EXCEPTION = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ModelStreamErrorException"),
+    traits=[
+        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
+        Trait.new(id=ShapeID("smithy.api#httpError"), value=424),
+    ],
+    members={
+        "message": {"target": NON_BLANK_STRING},
+        "originalStatusCode": {"target": STATUS_CODE},
+        "originalMessage": {"target": NON_BLANK_STRING},
+    },
+)
+
+CONVERSE_STREAM_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseStreamOutput"),
+    shape_type=ShapeType.UNION,
+    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
+    members={
+        "messageStart": {"target": MESSAGE_START_EVENT},
+        "contentBlockStart": {"target": CONTENT_BLOCK_START_EVENT},
+        "contentBlockDelta": {"target": CONTENT_BLOCK_DELTA_EVENT},
+        "contentBlockStop": {"target": CONTENT_BLOCK_STOP_EVENT},
+        "messageStop": {"target": MESSAGE_STOP_EVENT},
+        "metadata": {"target": CONVERSE_STREAM_METADATA_EVENT},
+        "internalServerException": {"target": INTERNAL_SERVER_EXCEPTION},
+        "modelStreamErrorException": {"target": MODEL_STREAM_ERROR_EXCEPTION},
+        "validationException": {"target": VALIDATION_EXCEPTION},
+        "throttlingException": {"target": THROTTLING_EXCEPTION},
+        "serviceUnavailableException": {"target": SERVICE_UNAVAILABLE_EXCEPTION},
+    },
+)
+
+CONVERSE_STREAM_OPERATION_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseStreamOperationOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#ConverseStreamResponse",
+        )
+    ],
+    members={
+        "stream": {
+            "target": CONVERSE_STREAM_OUTPUT,
+            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
+        }
+    },
+)
+
+CONVERSE_STREAM = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseStream"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/model/{modelId}/converse-stream",
+                }
+            ),
+        )
+    ],
+)
+
+MIME_TYPE = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#MimeType"), shape_type=ShapeType.STRING
+)
+
+BODY = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#Body"),
+    shape_type=ShapeType.BLOB,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+)
+
+INVOKE_MODEL_IDENTIFIER = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeModelIdentifier"),
+    shape_type=ShapeType.STRING,
+)
+
+REQUEST_METADATA_JSON = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#RequestMetadataJson"),
+    shape_type=ShapeType.STRING,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+)
+
+TRACE = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#Trace"),
+    shape_type=ShapeType.ENUM,
+    members={
+        "ENABLED": {"target": UNIT},
+        "DISABLED": {"target": UNIT},
+        "ENABLED_FULL": {"target": UNIT},
+    },
+)
+
+INVOKE_MODEL_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeModelInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#InvokeModelRequest",
+        )
+    ],
+    members={
+        "body": {
+            "target": BODY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
+        },
+        "contentType": {
+            "target": MIME_TYPE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Content-Type")
+            ],
+        },
+        "accept": {
+            "target": MIME_TYPE,
+            "traits": [Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Accept")],
+        },
+        "modelId": {
+            "target": INVOKE_MODEL_IDENTIFIER,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "trace": {
+            "target": TRACE,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"), value="X-Amzn-Bedrock-Trace"
+                )
+            ],
+        },
+        "guardrailIdentifier": {
+            "target": GUARDRAIL_IDENTIFIER,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-GuardrailIdentifier",
+                )
+            ],
+        },
+        "guardrailVersion": {
+            "target": GUARDRAIL_VERSION,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-GuardrailVersion",
+                )
+            ],
+        },
+        "performanceConfigLatency": {
+            "target": PERFORMANCE_CONFIG_LATENCY,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#default"), value="standard"),
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-PerformanceConfig-Latency",
                 ),
-                "conditions": (
-                    MappingProxyType(
+            ],
+        },
+        "serviceTier": {
+            "target": SERVICE_TIER_TYPE,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-Service-Tier",
+                )
+            ],
+        },
+        "requestMetadata": {
+            "target": REQUEST_METADATA_JSON,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-Request-Metadata",
+                )
+            ],
+        },
+    },
+)
+
+INVOKE_MODEL_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeModelOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#InvokeModelResponse",
+        )
+    ],
+    members={
+        "body": {
+            "target": BODY,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpPayload")),
+            ],
+        },
+        "contentType": {
+            "target": MIME_TYPE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Content-Type"),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "performanceConfigLatency": {
+            "target": PERFORMANCE_CONFIG_LATENCY,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-PerformanceConfig-Latency",
+                )
+            ],
+        },
+        "serviceTier": {
+            "target": SERVICE_TIER_TYPE,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-Service-Tier",
+                )
+            ],
+        },
+    },
+)
+
+INVOKE_MODEL = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeModel"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {"code": 200, "method": "POST", "uri": "/model/{modelId}/invoke"}
+            ),
+        )
+    ],
+)
+
+PART_BODY = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#PartBody"),
+    shape_type=ShapeType.BLOB,
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+)
+
+BIDIRECTIONAL_INPUT_PAYLOAD_PART = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#BidirectionalInputPayloadPart"),
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"bytes": {"target": PART_BODY}},
+)
+
+INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamInput"),
+    shape_type=ShapeType.UNION,
+    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
+    members={"chunk": {"target": BIDIRECTIONAL_INPUT_PAYLOAD_PART}},
+)
+
+INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OPERATION_INPUT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamOperationInput"
+    ),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamRequest",
+        )
+    ],
+    members={
+        "modelId": {
+            "target": INVOKE_MODEL_IDENTIFIER,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "body": {
+            "target": INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_INPUT,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpPayload")),
+            ],
+        },
+    },
+)
+
+BIDIRECTIONAL_OUTPUT_PAYLOAD_PART = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#BidirectionalOutputPayloadPart"),
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"bytes": {"target": PART_BODY}},
+)
+
+INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamOutput"),
+    shape_type=ShapeType.UNION,
+    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
+    members={
+        "chunk": {"target": BIDIRECTIONAL_OUTPUT_PAYLOAD_PART},
+        "internalServerException": {"target": INTERNAL_SERVER_EXCEPTION},
+        "modelStreamErrorException": {"target": MODEL_STREAM_ERROR_EXCEPTION},
+        "validationException": {"target": VALIDATION_EXCEPTION},
+        "throttlingException": {"target": THROTTLING_EXCEPTION},
+        "modelTimeoutException": {"target": MODEL_TIMEOUT_EXCEPTION},
+        "serviceUnavailableException": {"target": SERVICE_UNAVAILABLE_EXCEPTION},
+    },
+)
+
+INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OPERATION_OUTPUT = Schema.collection(
+    id=ShapeID(
+        "com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamOperationOutput"
+    ),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamResponse",
+        )
+    ],
+    members={
+        "body": {
+            "target": INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM_OUTPUT,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpPayload")),
+            ],
+        }
+    },
+)
+
+INVOKE_MODEL_WITH_BIDIRECTIONAL_STREAM = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStream"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/model/{modelId}/invoke-with-bidirectional-stream",
+                }
+            ),
+        )
+    ],
+)
+
+INVOKE_MODEL_WITH_RESPONSE_STREAM_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeModelWithResponseStreamInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#InvokeModelWithResponseStreamRequest",
+        )
+    ],
+    members={
+        "body": {
+            "target": BODY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
+        },
+        "contentType": {
+            "target": MIME_TYPE,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Content-Type")
+            ],
+        },
+        "accept": {
+            "target": MIME_TYPE,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"), value="X-Amzn-Bedrock-Accept"
+                )
+            ],
+        },
+        "modelId": {
+            "target": INVOKE_MODEL_IDENTIFIER,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "trace": {
+            "target": TRACE,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"), value="X-Amzn-Bedrock-Trace"
+                )
+            ],
+        },
+        "guardrailIdentifier": {
+            "target": GUARDRAIL_IDENTIFIER,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-GuardrailIdentifier",
+                )
+            ],
+        },
+        "guardrailVersion": {
+            "target": GUARDRAIL_VERSION,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-GuardrailVersion",
+                )
+            ],
+        },
+        "performanceConfigLatency": {
+            "target": PERFORMANCE_CONFIG_LATENCY,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#default"), value="standard"),
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-PerformanceConfig-Latency",
+                ),
+            ],
+        },
+        "serviceTier": {
+            "target": SERVICE_TIER_TYPE,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-Service-Tier",
+                )
+            ],
+        },
+        "requestMetadata": {
+            "target": REQUEST_METADATA_JSON,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-Request-Metadata",
+                )
+            ],
+        },
+    },
+)
+
+PAYLOAD_PART = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#PayloadPart"),
+    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+    members={"bytes": {"target": PART_BODY}},
+)
+
+RESPONSE_STREAM = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ResponseStream"),
+    shape_type=ShapeType.UNION,
+    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
+    members={
+        "chunk": {"target": PAYLOAD_PART},
+        "internalServerException": {"target": INTERNAL_SERVER_EXCEPTION},
+        "modelStreamErrorException": {"target": MODEL_STREAM_ERROR_EXCEPTION},
+        "validationException": {"target": VALIDATION_EXCEPTION},
+        "throttlingException": {"target": THROTTLING_EXCEPTION},
+        "modelTimeoutException": {"target": MODEL_TIMEOUT_EXCEPTION},
+        "serviceUnavailableException": {"target": SERVICE_UNAVAILABLE_EXCEPTION},
+    },
+)
+
+INVOKE_MODEL_WITH_RESPONSE_STREAM_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeModelWithResponseStreamOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#InvokeModelWithResponseStreamResponse",
+        )
+    ],
+    members={
+        "body": {
+            "target": RESPONSE_STREAM,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpPayload")),
+            ],
+        },
+        "contentType": {
+            "target": MIME_TYPE,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-Content-Type",
+                ),
+                Trait.new(id=ShapeID("smithy.api#required")),
+            ],
+        },
+        "performanceConfigLatency": {
+            "target": PERFORMANCE_CONFIG_LATENCY,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-PerformanceConfig-Latency",
+                )
+            ],
+        },
+        "serviceTier": {
+            "target": SERVICE_TIER_TYPE,
+            "traits": [
+                Trait.new(
+                    id=ShapeID("smithy.api#httpHeader"),
+                    value="X-Amzn-Bedrock-Service-Tier",
+                )
+            ],
+        },
+    },
+)
+
+INVOKE_MODEL_WITH_RESPONSE_STREAM = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeModelWithResponseStream"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/model/{modelId}/invoke-with-response-stream",
+                }
+            ),
+        )
+    ],
+)
+
+CONVERSE_TOKENS_REQUEST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#ConverseTokensRequest"),
+    members={
+        "messages": {"target": MESSAGES},
+        "system": {"target": SYSTEM_CONTENT_BLOCKS},
+        "toolConfig": {"target": TOOL_CONFIGURATION},
+        "additionalModelRequestFields": {"target": DOCUMENT},
+    },
+)
+
+INVOKE_MODEL_TOKENS_REQUEST = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#InvokeModelTokensRequest"),
+    members={
+        "body": {
+            "target": BODY,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+COUNT_TOKENS_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CountTokensInput"),
+    shape_type=ShapeType.UNION,
+    members={
+        "invokeModel": {"target": INVOKE_MODEL_TOKENS_REQUEST},
+        "converse": {"target": CONVERSE_TOKENS_REQUEST},
+    },
+)
+
+FOUNDATION_MODEL_VERSION_IDENTIFIER = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#FoundationModelVersionIdentifier"),
+    shape_type=ShapeType.STRING,
+)
+
+COUNT_TOKENS_OPERATION_INPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CountTokensOperationInput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#CountTokensRequest",
+        )
+    ],
+    members={
+        "modelId": {
+            "target": FOUNDATION_MODEL_VERSION_IDENTIFIER,
+            "traits": [
+                Trait.new(id=ShapeID("smithy.api#required")),
+                Trait.new(id=ShapeID("smithy.api#httpLabel")),
+            ],
+        },
+        "input": {
+            "target": COUNT_TOKENS_INPUT,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        },
+    },
+)
+
+COUNT_TOKENS_OUTPUT = Schema.collection(
+    id=ShapeID("com.amazonaws.bedrockruntime#CountTokensOutput"),
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.synthetic#originalShapeId"),
+            value="com.amazonaws.bedrockruntime#CountTokensResponse",
+        )
+    ],
+    members={
+        "inputTokens": {
+            "target": INTEGER,
+            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
+        }
+    },
+)
+
+COUNT_TOKENS = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#CountTokens"),
+    shape_type=ShapeType.OPERATION,
+    traits=[
+        Trait.new(
+            id=ShapeID("smithy.api#http"),
+            value=MappingProxyType(
+                {"code": 200, "method": "POST", "uri": "/model/{modelId}/count-tokens"}
+            ),
+        )
+    ],
+)
+
+AMAZON_BEDROCK_FRONTEND_SERVICE = Schema(
+    id=ShapeID("com.amazonaws.bedrockruntime#AmazonBedrockFrontendService"),
+    shape_type=ShapeType.SERVICE,
+    traits=[
+        Trait.new(
+            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "bedrock"})
+        ),
+        Trait.new(
+            id=ShapeID("smithy.rules#endpointBdd"),
+            value=MappingProxyType(
+                {
+                    "version": "1.1",
+                    "parameters": MappingProxyType(
                         {
-                            "fn": "isSet",
-                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                            "Region": MappingProxyType(
+                                {
+                                    "builtIn": "AWS::Region",
+                                    "required": False,
+                                    "documentation": "The AWS region used to dispatch the request.",
+                                    "type": "string",
+                                }
+                            ),
+                            "UseDualStack": MappingProxyType(
+                                {
+                                    "builtIn": "AWS::UseDualStack",
+                                    "required": True,
+                                    "default": False,
+                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                    "type": "boolean",
+                                }
+                            ),
+                            "UseFIPS": MappingProxyType(
+                                {
+                                    "builtIn": "AWS::UseFIPS",
+                                    "required": True,
+                                    "default": False,
+                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                    "type": "boolean",
+                                }
+                            ),
+                            "Endpoint": MappingProxyType(
+                                {
+                                    "builtIn": "SDK::Endpoint",
+                                    "required": False,
+                                    "documentation": "Override the endpoint used to send this request",
+                                    "type": "string",
+                                }
+                            ),
                         }
                     ),
-                    MappingProxyType(
-                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
-                    ),
-                    MappingProxyType(
-                        {
-                            "fn": "aws.partition",
-                            "argv": (MappingProxyType({"ref": "Region"}),),
-                            "assign": "PartitionResult",
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "fn": "booleanEquals",
-                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "fn": "booleanEquals",
-                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "fn": "booleanEquals",
-                            "argv": (
-                                MappingProxyType(
-                                    {
-                                        "fn": "getAttr",
-                                        "argv": (
-                                            MappingProxyType(
-                                                {"ref": "PartitionResult"}
+                    "conditions": (
+                        MappingProxyType(
+                            {
+                                "fn": "isSet",
+                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "fn": "isSet",
+                                "argv": (MappingProxyType({"ref": "Region"}),),
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "fn": "aws.partition",
+                                "argv": (MappingProxyType({"ref": "Region"}),),
+                                "assign": "PartitionResult",
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "fn": "booleanEquals",
+                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "fn": "booleanEquals",
+                                "argv": (
+                                    MappingProxyType({"ref": "UseDualStack"}),
+                                    True,
+                                ),
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "fn": "booleanEquals",
+                                "argv": (
+                                    MappingProxyType(
+                                        {
+                                            "fn": "getAttr",
+                                            "argv": (
+                                                MappingProxyType(
+                                                    {"ref": "PartitionResult"}
+                                                ),
+                                                "supportsDualStack",
                                             ),
-                                            "supportsDualStack",
-                                        ),
+                                        }
+                                    ),
+                                    True,
+                                ),
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "fn": "booleanEquals",
+                                "argv": (
+                                    MappingProxyType(
+                                        {
+                                            "fn": "getAttr",
+                                            "argv": (
+                                                MappingProxyType(
+                                                    {"ref": "PartitionResult"}
+                                                ),
+                                                "supportsFIPS",
+                                            ),
+                                        }
+                                    ),
+                                    True,
+                                ),
+                            }
+                        ),
+                    ),
+                    "results": (
+                        MappingProxyType(
+                            {
+                                "conditions": (),
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                "type": "error",
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "conditions": (),
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                "type": "error",
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "conditions": (),
+                                "endpoint": MappingProxyType(
+                                    {
+                                        "url": MappingProxyType({"ref": "Endpoint"}),
+                                        "properties": MappingProxyType({}),
+                                        "headers": MappingProxyType({}),
                                     }
                                 ),
-                                True,
-                            ),
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "fn": "booleanEquals",
-                            "argv": (
-                                MappingProxyType(
+                                "type": "endpoint",
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "conditions": (),
+                                "endpoint": MappingProxyType(
                                     {
-                                        "fn": "getAttr",
-                                        "argv": (
-                                            MappingProxyType(
-                                                {"ref": "PartitionResult"}
-                                            ),
-                                            "supportsFIPS",
-                                        ),
+                                        "url": "https://bedrock-runtime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                        "properties": MappingProxyType({}),
+                                        "headers": MappingProxyType({}),
                                     }
                                 ),
-                                True,
-                            ),
-                        }
+                                "type": "endpoint",
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "conditions": (),
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                "type": "error",
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "conditions": (),
+                                "endpoint": MappingProxyType(
+                                    {
+                                        "url": "https://bedrock-runtime-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": MappingProxyType({}),
+                                        "headers": MappingProxyType({}),
+                                    }
+                                ),
+                                "type": "endpoint",
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "conditions": (),
+                                "error": "FIPS is enabled but this partition does not support FIPS",
+                                "type": "error",
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "conditions": (),
+                                "endpoint": MappingProxyType(
+                                    {
+                                        "url": "https://bedrock-runtime.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                        "properties": MappingProxyType({}),
+                                        "headers": MappingProxyType({}),
+                                    }
+                                ),
+                                "type": "endpoint",
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "conditions": (),
+                                "error": "DualStack is enabled but this partition does not support DualStack",
+                                "type": "error",
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "conditions": (),
+                                "endpoint": MappingProxyType(
+                                    {
+                                        "url": "https://bedrock-runtime.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": MappingProxyType({}),
+                                        "headers": MappingProxyType({}),
+                                    }
+                                ),
+                                "type": "endpoint",
+                            }
+                        ),
+                        MappingProxyType(
+                            {
+                                "conditions": (),
+                                "error": "Invalid Configuration: Missing Region",
+                                "type": "error",
+                            }
+                        ),
                     ),
-                ),
-                "results": (
-                    MappingProxyType(
-                        {
-                            "conditions": (),
-                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                            "type": "error",
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "conditions": (),
-                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                            "type": "error",
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "conditions": (),
-                            "endpoint": MappingProxyType(
-                                {
-                                    "url": MappingProxyType({"ref": "Endpoint"}),
-                                    "properties": MappingProxyType[str, object]({}),
-                                    "headers": MappingProxyType[str, object]({}),
-                                }
-                            ),
-                            "type": "endpoint",
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "conditions": (),
-                            "endpoint": MappingProxyType(
-                                {
-                                    "url": "https://bedrock-runtime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                    "properties": MappingProxyType[str, object]({}),
-                                    "headers": MappingProxyType[str, object]({}),
-                                }
-                            ),
-                            "type": "endpoint",
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "conditions": (),
-                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                            "type": "error",
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "conditions": (),
-                            "endpoint": MappingProxyType(
-                                {
-                                    "url": "https://bedrock-runtime-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                    "properties": MappingProxyType[str, object]({}),
-                                    "headers": MappingProxyType[str, object]({}),
-                                }
-                            ),
-                            "type": "endpoint",
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "conditions": (),
-                            "error": "FIPS is enabled but this partition does not support FIPS",
-                            "type": "error",
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "conditions": (),
-                            "endpoint": MappingProxyType(
-                                {
-                                    "url": "https://bedrock-runtime.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                    "properties": MappingProxyType[str, object]({}),
-                                    "headers": MappingProxyType[str, object]({}),
-                                }
-                            ),
-                            "type": "endpoint",
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "conditions": (),
-                            "error": "DualStack is enabled but this partition does not support DualStack",
-                            "type": "error",
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "conditions": (),
-                            "endpoint": MappingProxyType(
-                                {
-                                    "url": "https://bedrock-runtime.{Region}.{PartitionResult#dnsSuffix}",
-                                    "properties": MappingProxyType[str, object]({}),
-                                    "headers": MappingProxyType[str, object]({}),
-                                }
-                            ),
-                            "type": "endpoint",
-                        }
-                    ),
-                    MappingProxyType(
-                        {
-                            "conditions": (),
-                            "error": "Invalid Configuration: Missing Region",
-                            "type": "error",
-                        }
-                    ),
-                ),
-                "root": 2,
-                "nodeCount": 13,
-                "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
-            }
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
+                }
+            ),
         ),
-        _aws: MappingProxyType(
-            {
-                "sdkId": "Bedrock Runtime",
-                "endpointPrefix": "bedrock-runtime",
-                "cloudTrailEventSource": "bedrock.amazonaws.com",
-            }
+        Trait.new(
+            id=ShapeID("aws.api#service"),
+            value=MappingProxyType(
+                {
+                    "sdkId": "Bedrock Runtime",
+                    "endpointPrefix": "bedrock-runtime",
+                    "cloudTrailEventSource": "bedrock.amazonaws.com",
+                }
+            ),
         ),
-        _aJ: MappingProxyType(
-            {"http": ("h2", "http/1.1"), "eventStreamHttp": ("h2", "http/1.1")}
+        Trait.new(
+            id=ShapeID("aws.protocols#restJson1"),
+            value=MappingProxyType(
+                {"http": ("h2", "http/1.1"), "eventStreamHttp": ("h2", "http/1.1")}
+            ),
         ),
-        _sBA: None,
-    },
+        Trait.new(id=ShapeID("smithy.api#httpBearerAuth")),
+    ],
 )

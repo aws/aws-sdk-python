@@ -21,6 +21,11 @@ python -m pip install aws-sdk-bedrock-runtime
 
 ## Request compression
 
+> **Pending upstream support:** This integration requires a Smithy runtime release
+> containing [request compression](https://github.com/smithy-lang/smithy-python/pull/855)
+> and the normal client regeneration/dependency update. The configuration below
+> is not available with the currently declared dependencies.
+
 Request compression reduces the bytes uploaded to an operation that advertises
 gzip support. It does not reduce model input tokens. The client exposes two
 configuration settings:
