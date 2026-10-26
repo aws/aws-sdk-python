@@ -7,11 +7,9 @@ from typing import Unpack
 import pytest
 from smithy_core import URI
 from smithy_core.aio.types import AsyncBytesReader
-from smithy_core.exceptions import SmithyError
 from smithy_core.types import TypedProperties
 from smithy_http.testing import MockHTTPClient
 
-from aws_sdk_bedrock_runtime.client import AsyncBedrockRuntimeClient
 from aws_sdk_bedrock_runtime.config import (
     AsyncBedrockRuntimeConfig,
     _AsyncBedrockRuntimeConfigOverrides,
@@ -62,19 +60,16 @@ async def test_compression_defaults_are_available_on_generated_config(
     config = await resolve_config(tmp_path)
     assert config.disable_request_compression is False
     assert config.request_min_compression_size_bytes == 10240
-    assert config.request_compression_encoding is None
 
 
-async def test_explicit_gzip_survives_generated_config_resolution(
-    tmp_path: Path,
+@pytest.mark.parametrize("minimum_size", [0, 10485760])
+async def test_compression_threshold_boundaries_survive_generated_config_resolution(
+    tmp_path: Path, minimum_size: int
 ) -> None:
     config = await resolve_config(
-        tmp_path,
-        request_compression_encoding="gzip",
-        request_min_compression_size_bytes=10485760,
+        tmp_path, request_min_compression_size_bytes=minimum_size
     )
-    assert config.request_compression_encoding == "gzip"
-    assert config.request_min_compression_size_bytes == 10485760
+    assert config.request_min_compression_size_bytes == minimum_size
 
 
 async def test_standard_compression_settings_resolve_from_environment(
@@ -87,7 +82,7 @@ async def test_standard_compression_settings_resolve_from_environment(
     assert config.request_min_compression_size_bytes == 256
 
 
-async def test_explicit_settings_override_environment(
+async def test_client_settings_override_environment(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setenv("AWS_DISABLE_REQUEST_COMPRESSION", "true")
@@ -96,20 +91,24 @@ async def test_explicit_settings_override_environment(
         tmp_path,
         disable_request_compression=False,
         request_min_compression_size_bytes=0,
-        request_compression_encoding="gzip",
     )
     assert config.disable_request_compression is False
     assert config.request_min_compression_size_bytes == 0
-    assert config.request_compression_encoding == "gzip"
 
 
 @pytest.mark.parametrize(
     "kind", ["converse", "converse-stream", "invoke", "invoke-with-response-stream"]
 )
-async def test_default_bedrock_request_stays_uncompressed(
-    tmp_path: Path, kind: str
+@pytest.mark.parametrize("minimum_size", [None, 0])
+async def test_unsupported_bedrock_request_stays_uncompressed(
+    tmp_path: Path, kind: str, minimum_size: int | None
 ) -> None:
-    config = await resolve_config(tmp_path)
+    if minimum_size is None:
+        config = await resolve_config(tmp_path)
+    else:
+        config = await resolve_config(
+            tmp_path, request_min_compression_size_bytes=minimum_size
+        )
     assert config.protocol is not None
     messages = [Message(role="user", content=[ContentBlockText(value="hello")])]
     if kind == "converse":
@@ -155,28 +154,3 @@ async def test_default_bedrock_request_stays_uncompressed(
         assert wire == b'{"messages":[{"role":"user","content":[{"text":"hello"}]}]}'
     else:
         assert wire == b'{"prompt":"hello"}'
-
-
-async def test_explicit_gzip_rejects_unmodeled_bedrock_before_signing(
-    tmp_path: Path,
-) -> None:
-    config = await resolve_config(tmp_path, request_compression_encoding="gzip")
-    assert config.protocol is not None
-    with pytest.raises(ValueError, match=r"Converse.*gzip|gzip.*Converse"):
-        config.protocol.serialize_request(
-            operation=CONVERSE,
-            input=ConverseInput(model_id="test-model"),
-            endpoint=URI(host="bedrock-runtime.us-west-2.amazonaws.com"),
-            context=TypedProperties({"config": config}),
-        )
-
-
-async def test_explicit_gzip_client_call_fails_before_transport(tmp_path: Path) -> None:
-    transport = MockHTTPClient()
-    config = await resolve_config(
-        tmp_path, request_compression_encoding="gzip", transport=transport
-    )
-    async with AsyncBedrockRuntimeClient(config=config) as client:
-        with pytest.raises(SmithyError, match=r"Converse.*gzip|gzip.*Converse"):
-            await client.converse(ConverseInput(model_id="test-model"))
-    assert transport.captured_requests == []

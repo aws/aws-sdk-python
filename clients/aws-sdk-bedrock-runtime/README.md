@@ -22,31 +22,28 @@ python -m pip install aws-sdk-bedrock-runtime
 ## Request compression
 
 Request compression reduces the bytes uploaded to an operation that advertises
-gzip support. It does not reduce model input tokens. The client exposes three
+gzip support. It does not reduce model input tokens. The client exposes two
 configuration settings:
 
 - `disable_request_compression`: disable automatic compression.
 - `request_min_compression_size_bytes`: the automatic compression threshold,
-  defaulting to 10,240 bytes.
-- `request_compression_encoding`: explicitly select `"gzip"` regardless of the
-  threshold, or leave it as `None` for automatic behavior.
+  defaulting to 10,240 bytes, with an accepted range of 0 through 10,485,760.
 
-For an operation with advertised gzip support, explicit configuration is:
+For operations with advertised gzip support, set the threshold to zero to
+compress eligible buffered requests regardless of size:
 
 ```python
 from aws_sdk_bedrock_runtime.config import AsyncBedrockRuntimeConfig
 
 config = await AsyncBedrockRuntimeConfig.resolve(
     region="us-east-1",
-    request_compression_encoding="gzip",
+    request_min_compression_size_bytes=0,
 )
 ```
 
 The current Bedrock Runtime service model does not advertise request compression.
-Leave the explicit encoding unset for current Bedrock operations. Selecting gzip
-on an unsupported operation fails before sending a request; the SDK does not
-silently send an uncompressed request. Disabling compression while explicitly
-selecting gzip is also invalid. Zstd is not currently supported.
+Current Bedrock operations therefore remain uncompressed, even with a zero
+threshold. Zstd is not currently supported.
 
 The configuration cannot enable server-side compression support. Bedrock and
 Mantle endpoints must accept compressed requests before applications can use it

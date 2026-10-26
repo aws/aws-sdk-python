@@ -1,4 +1,4 @@
 {
   "type": "feature",
-  "description": "Document and validate inherited request-compression configuration for the Bedrock Runtime client. Explicit gzip requires operation support; current Bedrock operations remain unsupported."
+  "description": "Document and validate standard request-compression thresholds and disable controls inherited from the shared runtime. Current Bedrock operations remain uncompressed because their service model does not advertise support."
 }
