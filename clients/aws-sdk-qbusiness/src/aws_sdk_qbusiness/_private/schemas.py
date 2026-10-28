@@ -2,8615 +2,8304 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import BLOB as _BLOB, BOOLEAN, UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
-
-
-MEMBER_RELATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MemberRelation"),
-    shape_type=ShapeType.ENUM,
-    members={"AND": {"target": UNIT}, "OR": {"target": UNIT}},
-)
-
-READ_ACCESS_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ReadAccessType"),
-    shape_type=ShapeType.ENUM,
-    members={"ALLOW": {"target": UNIT}, "DENY": {"target": UNIT}},
-)
-
-MEMBERSHIP_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MembershipType"),
-    shape_type=ShapeType.ENUM,
-    members={"INDEX": {"target": UNIT}, "DATASOURCE": {"target": UNIT}},
-)
-
-GROUP_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GroupName"), shape_type=ShapeType.STRING
-)
-
-PRINCIPAL_GROUP = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PrincipalGroup"),
-    members={
-        "name": {"target": GROUP_NAME},
-        "access": {
-            "target": READ_ACCESS_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "membershipType": {"target": MEMBERSHIP_TYPE},
-    },
-)
-
-USER_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UserId"), shape_type=ShapeType.STRING
-)
-
-PRINCIPAL_USER = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PrincipalUser"),
-    members={
-        "id": {"target": USER_ID},
-        "access": {
-            "target": READ_ACCESS_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "membershipType": {"target": MEMBERSHIP_TYPE},
-    },
-)
-
-PRINCIPAL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Principal"),
-    shape_type=ShapeType.UNION,
-    members={"user": {"target": PRINCIPAL_USER}, "group": {"target": PRINCIPAL_GROUP}},
-)
-
-PRINCIPALS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Principals"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PRINCIPAL}},
-)
-
-ACCESS_CONTROL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AccessControl"),
-    members={
-        "principals": {
-            "target": PRINCIPALS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "memberRelation": {"target": MEMBER_RELATION},
-    },
-)
-
-ACCESS_CONTROLS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AccessControls"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACCESS_CONTROL}},
-)
-
-ACCESS_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AccessConfiguration"),
-    members={
-        "accessControls": {
-            "target": ACCESS_CONTROLS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "memberRelation": {"target": MEMBER_RELATION},
-    },
-)
-
-ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ErrorMessage"), shape_type=ShapeType.STRING
-)
-
-ACCESS_DENIED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AccessDeniedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-Q_IAM_ACTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#QIamAction"), shape_type=ShapeType.STRING
-)
-
-DOCUMENT_ATTRIBUTE_KEY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeKey"),
-    shape_type=ShapeType.STRING,
-)
-
-TIMESTAMP = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Timestamp"), shape_type=ShapeType.TIMESTAMP
-)
-
-LONG = Schema(id=ShapeID("com.amazonaws.qbusiness#Long"), shape_type=ShapeType.LONG)
-
-STRING = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#String"), shape_type=ShapeType.STRING
-)
-
-DOCUMENT_ATTRIBUTE_STRING_LIST_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeStringListValue"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-DOCUMENT_ATTRIBUTE_STRING_VALUE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeStringValue"),
-    shape_type=ShapeType.STRING,
-)
-
-DOCUMENT_ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeValue"),
-    shape_type=ShapeType.UNION,
-    members={
-        "stringValue": {"target": DOCUMENT_ATTRIBUTE_STRING_VALUE},
-        "stringListValue": {"target": DOCUMENT_ATTRIBUTE_STRING_LIST_VALUE},
-        "longValue": {"target": LONG},
-        "dateValue": {"target": TIMESTAMP},
-    },
-)
-
-DOCUMENT_ATTRIBUTE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttribute"),
-    members={
-        "name": {
-            "target": DOCUMENT_ATTRIBUTE_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "value": {
-            "target": DOCUMENT_ATTRIBUTE_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-ACTION_PAYLOAD_FIELD_KEY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ActionPayloadFieldKey"),
-    shape_type=ShapeType.STRING,
-)
-
-ACTION_PAYLOAD_FIELD_VALUE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ActionPayloadFieldValue"),
-    shape_type=ShapeType.DOCUMENT,
-)
-
-ACTION_EXECUTION_PAYLOAD_FIELD = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionExecutionPayloadField"),
-    members={
-        "value": {
-            "target": ACTION_PAYLOAD_FIELD_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-ACTION_EXECUTION_PAYLOAD = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionExecutionPayload"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": ACTION_PAYLOAD_FIELD_KEY},
-        "value": {"target": ACTION_EXECUTION_PAYLOAD_FIELD},
-    },
-)
-
-ACTION_PAYLOAD_FIELD_NAME_SEPARATOR = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ActionPayloadFieldNameSeparator"),
-    shape_type=ShapeType.STRING,
-)
-
-PLUGIN_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PluginId"), shape_type=ShapeType.STRING
-)
-
-ACTION_EXECUTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionExecution"),
-    members={
-        "pluginId": {
-            "target": PLUGIN_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "payload": {
-            "target": ACTION_EXECUTION_PAYLOAD,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "payloadFieldNameSeparator": {
-            "target": ACTION_PAYLOAD_FIELD_NAME_SEPARATOR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-ACTION_EXECUTION_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionExecutionEvent"),
-    members={
-        "pluginId": {
-            "target": PLUGIN_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "payload": {
-            "target": ACTION_EXECUTION_PAYLOAD,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "payloadFieldNameSeparator": {
-            "target": ACTION_PAYLOAD_FIELD_NAME_SEPARATOR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-ACTION_PAYLOAD_FIELD_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionPayloadFieldType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "STRING": {"target": UNIT},
-        "NUMBER": {"target": UNIT},
-        "ARRAY": {"target": UNIT},
-        "BOOLEAN": {"target": UNIT},
-    },
-)
-
-ACTION_REVIEW_PAYLOAD_FIELD_ALLOWED_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionReviewPayloadFieldAllowedValue"),
-    members={
-        "value": {"target": ACTION_PAYLOAD_FIELD_VALUE},
-        "displayValue": {"target": ACTION_PAYLOAD_FIELD_VALUE},
-    },
-)
-
-ACTION_REVIEW_PAYLOAD_FIELD_ALLOWED_VALUES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionReviewPayloadFieldAllowedValues"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACTION_REVIEW_PAYLOAD_FIELD_ALLOWED_VALUE}},
-)
-
-ACTION_REVIEW_PAYLOAD_FIELD_ARRAY_ITEM_JSON_SCHEMA = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ActionReviewPayloadFieldArrayItemJsonSchema"),
-    shape_type=ShapeType.DOCUMENT,
-)
-
-INTEGER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Integer"), shape_type=ShapeType.INTEGER
-)
-
-ACTION_REVIEW_PAYLOAD_FIELD = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionReviewPayloadField"),
-    members={
-        "displayName": {"target": STRING},
-        "displayOrder": {"target": INTEGER},
-        "displayDescription": {"target": STRING},
-        "type": {"target": ACTION_PAYLOAD_FIELD_TYPE},
-        "value": {"target": ACTION_PAYLOAD_FIELD_VALUE},
-        "allowedValues": {"target": ACTION_REVIEW_PAYLOAD_FIELD_ALLOWED_VALUES},
-        "allowedFormat": {"target": STRING},
-        "arrayItemJsonSchema": {
-            "target": ACTION_REVIEW_PAYLOAD_FIELD_ARRAY_ITEM_JSON_SCHEMA
-        },
-        "required": {"target": BOOLEAN},
-    },
-)
-
-ACTION_REVIEW_PAYLOAD = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionReviewPayload"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": ACTION_PAYLOAD_FIELD_KEY},
-        "value": {"target": ACTION_REVIEW_PAYLOAD_FIELD},
-    },
-)
-
-PLUGIN_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PluginType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "SERVICE_NOW": {"target": UNIT},
-        "SALESFORCE": {"target": UNIT},
-        "JIRA": {"target": UNIT},
-        "ZENDESK": {"target": UNIT},
-        "CUSTOM": {"target": UNIT},
-        "QUICKSIGHT": {"target": UNIT},
-        "SERVICENOW_NOW_PLATFORM": {"target": UNIT},
-        "JIRA_CLOUD": {"target": UNIT},
-        "SALESFORCE_CRM": {"target": UNIT},
-        "ZENDESK_SUITE": {"target": UNIT},
-        "ATLASSIAN_CONFLUENCE": {"target": UNIT},
-        "GOOGLE_CALENDAR": {"target": UNIT},
-        "MICROSOFT_TEAMS": {"target": UNIT},
-        "MICROSOFT_EXCHANGE": {"target": UNIT},
-        "PAGERDUTY_ADVANCE": {"target": UNIT},
-        "SMARTSHEET": {"target": UNIT},
-        "ASANA": {"target": UNIT},
-    },
-)
-
-ACTION_REVIEW = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionReview"),
-    members={
-        "pluginId": {"target": PLUGIN_ID},
-        "pluginType": {"target": PLUGIN_TYPE},
-        "payload": {"target": ACTION_REVIEW_PAYLOAD},
-        "payloadFieldNameSeparator": {"target": ACTION_PAYLOAD_FIELD_NAME_SEPARATOR},
-    },
-)
-
-CONVERSATION_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ConversationId"), shape_type=ShapeType.STRING
-)
-
-MESSAGE_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MessageId"), shape_type=ShapeType.STRING
-)
-
-ACTION_REVIEW_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionReviewEvent"),
-    members={
-        "conversationId": {"target": CONVERSATION_ID},
-        "userMessageId": {"target": MESSAGE_ID},
-        "systemMessageId": {"target": MESSAGE_ID},
-        "pluginId": {"target": PLUGIN_ID},
-        "pluginType": {"target": PLUGIN_TYPE},
-        "payload": {"target": ACTION_REVIEW_PAYLOAD},
-        "payloadFieldNameSeparator": {"target": ACTION_PAYLOAD_FIELD_NAME_SEPARATOR},
-    },
-)
-
-ACTION_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionSummary"),
-    members={
-        "actionIdentifier": {"target": STRING},
-        "displayName": {"target": STRING},
-        "instructionExample": {"target": STRING},
-        "description": {"target": STRING},
-    },
-)
-
-ACTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Actions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACTION_SUMMARY}},
-)
-
-AMAZON_RESOURCE_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#AmazonResourceName"),
-    shape_type=ShapeType.STRING,
-)
-
-PAYLOAD = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Payload"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-S3_BUCKET_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#S3BucketName"), shape_type=ShapeType.STRING
-)
-
-S3_OBJECT_KEY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#S3ObjectKey"), shape_type=ShapeType.STRING
-)
-
-S3 = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#S3"),
-    members={
-        "bucket": {
-            "target": S3_BUCKET_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "key": {
-            "target": S3_OBJECT_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-API_SCHEMA = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#APISchema"),
-    shape_type=ShapeType.UNION,
-    members={"payload": {"target": PAYLOAD}, "s3": {"target": S3}},
-)
-
-API_SCHEMA_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#APISchemaType"),
-    shape_type=ShapeType.ENUM,
-    members={"OPEN_API_V3": {"target": UNIT}},
-)
-
-APPLICATION_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ApplicationId"), shape_type=ShapeType.STRING
-)
-
-APPLICATION_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ApplicationName"), shape_type=ShapeType.STRING
-)
-
-IDENTITY_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#IdentityType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "AWS_IAM_IDP_SAML": {"target": UNIT},
-        "AWS_IAM_IDP_OIDC": {"target": UNIT},
-        "AWS_IAM_IDC": {"target": UNIT},
-        "AWS_QUICKSIGHT_IDP": {"target": UNIT},
-        "ANONYMOUS": {"target": UNIT},
-    },
-)
-
-CLIENT_NAMESPACE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ClientNamespace"), shape_type=ShapeType.STRING
-)
-
-QUICK_SIGHT_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#QuickSightConfiguration"),
-    members={
-        "clientNamespace": {
-            "target": CLIENT_NAMESPACE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-APPLICATION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ApplicationStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-    },
-)
-
-APPLICATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Application"),
-    members={
-        "displayName": {"target": APPLICATION_NAME},
-        "applicationId": {"target": APPLICATION_ID},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-        "status": {"target": APPLICATION_STATUS},
-        "identityType": {"target": IDENTITY_TYPE},
-        "quickSightConfiguration": {"target": QUICK_SIGHT_CONFIGURATION},
-    },
-)
-
-APPLICATION_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ApplicationArn"), shape_type=ShapeType.STRING
-)
-
-CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ConflictException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "resourceType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-ATTACHMENTS_CONTROL_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentsControlMode"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-ATTACHMENTS_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentsConfiguration"),
-    members={
-        "attachmentsControlMode": {
-            "target": ATTACHMENTS_CONTROL_MODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CLIENT_ID_FOR_OIDC = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ClientIdForOIDC"), shape_type=ShapeType.STRING
-)
-
-CLIENT_IDS_FOR_OIDC = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ClientIdsForOIDC"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CLIENT_ID_FOR_OIDC}},
-)
-
-CLIENT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ClientToken"), shape_type=ShapeType.STRING
-)
-
-DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Description"), shape_type=ShapeType.STRING
-)
-
-KMS_KEY_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#KmsKeyId"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-ENCRYPTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#EncryptionConfiguration"),
-    members={"kmsKeyId": {"target": KMS_KEY_ID}},
-)
-
-IAM_IDENTITY_PROVIDER_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IAMIdentityProviderArn"),
-    shape_type=ShapeType.STRING,
-)
-
-INSTANCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#InstanceArn"), shape_type=ShapeType.STRING
-)
-
-PERSONALIZATION_CONTROL_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PersonalizationControlMode"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-PERSONALIZATION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PersonalizationConfiguration"),
-    members={
-        "personalizationControlMode": {
-            "target": PERSONALIZATION_CONTROL_MODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-Q_APPS_CONTROL_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#QAppsControlMode"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-Q_APPS_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#QAppsConfiguration"),
-    members={
-        "qAppsControlMode": {
-            "target": Q_APPS_CONTROL_MODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-ROLE_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#RoleArn"), shape_type=ShapeType.STRING
-)
-
-TAG_KEY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#TagKey"), shape_type=ShapeType.STRING
-)
-
-TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#TagValue"), shape_type=ShapeType.STRING
-)
-
-TAG = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Tag"),
-    members={
-        "key": {
-            "target": TAG_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "value": {
-            "target": TAG_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAGS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Tags"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG}},
-)
-
-CREATE_APPLICATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateApplicationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateApplicationRequest",
-        )
-    ],
-    members={
-        "displayName": {
-            "target": APPLICATION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "roleArn": {"target": ROLE_ARN},
-        "identityType": {"target": IDENTITY_TYPE},
-        "iamIdentityProviderArn": {"target": IAM_IDENTITY_PROVIDER_ARN},
-        "identityCenterInstanceArn": {"target": INSTANCE_ARN},
-        "clientIdsForOIDC": {"target": CLIENT_IDS_FOR_OIDC},
-        "description": {"target": DESCRIPTION},
-        "encryptionConfiguration": {"target": ENCRYPTION_CONFIGURATION},
-        "tags": {"target": TAGS},
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "attachmentsConfiguration": {"target": ATTACHMENTS_CONFIGURATION},
-        "qAppsConfiguration": {"target": Q_APPS_CONFIGURATION},
-        "personalizationConfiguration": {"target": PERSONALIZATION_CONFIGURATION},
-        "quickSightConfiguration": {"target": QUICK_SIGHT_CONFIGURATION},
-    },
-)
-
-CREATE_APPLICATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateApplicationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateApplicationResponse",
-        )
-    ],
-    members={
-        "applicationId": {"target": APPLICATION_ID},
-        "applicationArn": {"target": APPLICATION_ARN},
-    },
-)
-
-INTERNAL_SERVER_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#InternalServerException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "resourceType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-SERVICE_QUOTA_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ServiceQuotaExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=402),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "resourceType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-THROTTLING_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ThrottlingException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-VALIDATION_EXCEPTION_FIELD = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ValidationExceptionField"),
-    members={
-        "name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-VALIDATION_EXCEPTION_FIELDS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ValidationExceptionFields"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VALIDATION_EXCEPTION_FIELD}},
-)
-
-VALIDATION_EXCEPTION_REASON = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ValidationExceptionReason"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CANNOT_PARSE": {"target": UNIT},
-        "FIELD_VALIDATION_FAILED": {"target": UNIT},
-        "UNKNOWN_OPERATION": {"target": UNIT},
-    },
-)
-
-VALIDATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ValidationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "reason": {
-            "target": VALIDATION_EXCEPTION_REASON,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "fields": {"target": VALIDATION_EXCEPTION_FIELDS},
-    },
-)
-
-CREATE_APPLICATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CreateApplication"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"uri": "/applications", "method": "POST"}),
-        )
-    ],
-)
-
-IDC_TRUSTED_TOKEN_ISSUER_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IdcTrustedTokenIssuerArn"),
-    shape_type=ShapeType.STRING,
-)
-
-DATA_ACCESSOR_IDC_TRUSTED_TOKEN_ISSUER_CONFIGURATION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.qbusiness#DataAccessorIdcTrustedTokenIssuerConfiguration"
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
+
+
+n0 = "com.amazonaws.qbusiness"
+_MR = "MemberRelation"
+_AND = "AND"
+_sV = "smithy.api#enumValue"
+_OR = "OR"
+_RAT = "ReadAccessType"
+_ALLOW = "ALLOW"
+_DENY = "DENY"
+_MT = "MembershipType"
+_INDEX = "INDEX"
+_DATASOURCE = "DATASOURCE"
+_GN = "GroupName"
+_PG = "PrincipalGroup"
+_n = "name"
+_a = "access"
+_s = "smithy.api#required"
+_mT = "membershipType"
+_UI = "UserId"
+_PU = "PrincipalUser"
+_i = "id"
+_P = "Principal"
+_u = "user"
+_g = "group"
+_Pr = "Principals"
+_m = "member"
+_AC = "AccessControl"
+_p = "principals"
+_mR = "memberRelation"
+_ACc = "AccessControls"
+_ACcc = "AccessConfiguration"
+_aC = "accessControls"
+_EM = "ErrorMessage"
+_ADE = "AccessDeniedException"
+_sm = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_me = "message"
+_QIA = "QIamAction"
+_DAK = "DocumentAttributeKey"
+_T = "Timestamp"
+_L = "Long"
+_S = "String"
+_DASLV = "DocumentAttributeStringListValue"
+_DASV = "DocumentAttributeStringValue"
+_DAV = "DocumentAttributeValue"
+_sVt = "stringValue"
+_sLV = "stringListValue"
+_lV = "longValue"
+_dV = "dateValue"
+_DA = "DocumentAttribute"
+_v = "value"
+_APFK = "ActionPayloadFieldKey"
+_APFV = "ActionPayloadFieldValue"
+_AEPF = "ActionExecutionPayloadField"
+_AEP = "ActionExecutionPayload"
+_k = "key"
+_APFNS = "ActionPayloadFieldNameSeparator"
+_PI = "PluginId"
+_AE = "ActionExecution"
+_pI = "pluginId"
+_pa = "payload"
+_pFNS = "payloadFieldNameSeparator"
+_AEE = "ActionExecutionEvent"
+_APFT = "ActionPayloadFieldType"
+_STRING = "STRING"
+_NUMBER = "NUMBER"
+_ARRAY = "ARRAY"
+_BOOLEAN = "BOOLEAN"
+_ARPFAV = "ActionReviewPayloadFieldAllowedValue"
+_dVi = "displayValue"
+_ARPFAVc = "ActionReviewPayloadFieldAllowedValues"
+_ARPFAIJS = "ActionReviewPayloadFieldArrayItemJsonSchema"
+_I = "Integer"
+_ARPF = "ActionReviewPayloadField"
+_dN = "displayName"
+_dO = "displayOrder"
+_dD = "displayDescription"
+_t = "type"
+_aV = "allowedValues"
+_aF = "allowedFormat"
+_aIJS = "arrayItemJsonSchema"
+_r = "required"
+_ARP = "ActionReviewPayload"
+_PT = "PluginType"
+_SN = "SERVICE_NOW"
+_SALESFORCE = "SALESFORCE"
+_JIRA = "JIRA"
+_ZENDESK = "ZENDESK"
+_CUSTOM = "CUSTOM"
+_QUICKSIGHT = "QUICKSIGHT"
+_SNP = "SERVICENOW_NOW_PLATFORM"
+_JC = "JIRA_CLOUD"
+_SC = "SALESFORCE_CRM"
+_ZS = "ZENDESK_SUITE"
+_AC_ = "ATLASSIAN_CONFLUENCE"
+_GC = "GOOGLE_CALENDAR"
+_MT_ = "MICROSOFT_TEAMS"
+_ME = "MICROSOFT_EXCHANGE"
+_PA = "PAGERDUTY_ADVANCE"
+_SMARTSHEET = "SMARTSHEET"
+_ASANA = "ASANA"
+_AR = "ActionReview"
+_pT = "pluginType"
+_CI = "ConversationId"
+_MI = "MessageId"
+_ARE = "ActionReviewEvent"
+_cI = "conversationId"
+_uMI = "userMessageId"
+_sMI = "systemMessageId"
+_AS = "ActionSummary"
+_aI = "actionIdentifier"
+_iE = "instructionExample"
+_d = "description"
+_A = "Actions"
+_ARN = "AmazonResourceName"
+_Pa = "Payload"
+_smi = "smithy.api#sensitive"
+_SBN = "S3BucketName"
+_SOK = "S3ObjectKey"
+_S_ = "S3"
+_b = "bucket"
+_APIS = "APISchema"
+_s_ = "s3"
+_APIST = "APISchemaType"
+_OAV = "OPEN_API_V3"
+_AI = "ApplicationId"
+_AN = "ApplicationName"
+_IT = "IdentityType"
+_AIIS = "AWS_IAM_IDP_SAML"
+_AIIO = "AWS_IAM_IDP_OIDC"
+_AII = "AWS_IAM_IDC"
+_AQI = "AWS_QUICKSIGHT_IDP"
+_ANONYMOUS = "ANONYMOUS"
+_CN = "ClientNamespace"
+_QSC = "QuickSightConfiguration"
+_cN = "clientNamespace"
+_ASp = "ApplicationStatus"
+_CREATING = "CREATING"
+_ACTIVE = "ACTIVE"
+_DELETING = "DELETING"
+_FAILED = "FAILED"
+_UPDATING = "UPDATING"
+_Ap = "Application"
+_aIp = "applicationId"
+_cA = "createdAt"
+_uA = "updatedAt"
+_st = "status"
+_iT = "identityType"
+_qSC = "quickSightConfiguration"
+_AA = "ApplicationArn"
+_CE = "ConflictException"
+_rI = "resourceId"
+_rT = "resourceType"
+_ACM = "AttachmentsControlMode"
+_ENABLED = "ENABLED"
+_DISABLED = "DISABLED"
+_ACt = "AttachmentsConfiguration"
+_aCM = "attachmentsControlMode"
+_CIFOIDC = "ClientIdForOIDC"
+_CIFOIDCl = "ClientIdsForOIDC"
+_CT = "ClientToken"
+_D = "Description"
+_KKI = "KmsKeyId"
+_EC = "EncryptionConfiguration"
+_kKI = "kmsKeyId"
+_IAMIPA = "IAMIdentityProviderArn"
+_IA = "InstanceArn"
+_PCM = "PersonalizationControlMode"
+_PC = "PersonalizationConfiguration"
+_pCM = "personalizationControlMode"
+_QACM = "QAppsControlMode"
+_QAC = "QAppsConfiguration"
+_qACM = "qAppsControlMode"
+_RA = "RoleArn"
+_TK = "TagKey"
+_TV = "TagValue"
+_Ta = "Tag"
+_Tag = "Tags"
+_CAI = "CreateApplicationInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cCAR = "com.amazonaws.qbusiness#CreateApplicationRequest"
+_smit = "smithy.api#input"
+_rA = "roleArn"
+_iIPA = "iamIdentityProviderArn"
+_iCIA = "identityCenterInstanceArn"
+_cIFOIDC = "clientIdsForOIDC"
+_eC = "encryptionConfiguration"
+_ta = "tags"
+_cT = "clientToken"
+_sT = "smithy.api#idempotencyToken"
+_aCt = "attachmentsConfiguration"
+_qAC = "qAppsConfiguration"
+_pC = "personalizationConfiguration"
+_CAO = "CreateApplicationOutput"
+_cCARo = "com.amazonaws.qbusiness#CreateApplicationResponse"
+_smith = "smithy.api#output"
+_aA = "applicationArn"
+_ISE = "InternalServerException"
+_se = "server"
+_RNFE = "ResourceNotFoundException"
+_SQEE = "ServiceQuotaExceededException"
+_TE = "ThrottlingException"
+_VEF = "ValidationExceptionField"
+_VEFa = "ValidationExceptionFields"
+_VER = "ValidationExceptionReason"
+_CP = "CANNOT_PARSE"
+_FVF = "FIELD_VALIDATION_FAILED"
+_UO = "UNKNOWN_OPERATION"
+_VE = "ValidationException"
+_re = "reason"
+_f = "fields"
+_CA = "CreateApplication"
+_smithy = "smithy.api#http"
+_ITTIA = "IdcTrustedTokenIssuerArn"
+_DAITTIC = "DataAccessorIdcTrustedTokenIssuerConfiguration"
+_iTTIA = "idcTrustedTokenIssuerArn"
+_DAAC = "DataAccessorAuthenticationConfiguration"
+_iTTIC = "idcTrustedTokenIssuerConfiguration"
+_DAAT = "DataAccessorAuthenticationType"
+_AIIT = "AWS_IAM_IDC_TTI"
+_AIIAC = "AWS_IAM_IDC_AUTH_CODE"
+_DAEI = "DataAccessorExternalId"
+_DAEIa = "DataAccessorExternalIds"
+_DAAD = "DataAccessorAuthenticationDetail"
+_aT = "authenticationType"
+_aCu = "authenticationConfiguration"
+_eI = "externalIds"
+_DAN = "DataAccessorName"
+_PRA = "PrincipalRoleArn"
+_DAA = "DataAccessorArn"
+_DAI = "DataAccessorId"
+_IAA = "IdcApplicationArn"
+_CDAO = "CreateDataAccessorOutput"
+_cCDAR = "com.amazonaws.qbusiness#CreateDataAccessorResponse"
+_dAI = "dataAccessorId"
+_iAA = "idcApplicationArn"
+_dAA = "dataAccessorArn"
+_DDAI = "DeleteDataAccessorInput"
+_cDDAR = "com.amazonaws.qbusiness#DeleteDataAccessorRequest"
+_sL = "smithy.api#httpLabel"
+_DDAO = "DeleteDataAccessorOutput"
+_cDDARo = "com.amazonaws.qbusiness#DeleteDataAccessorResponse"
+_DDA = "DeleteDataAccessor"
+_GDAI = "GetDataAccessorInput"
+_cGDAR = "com.amazonaws.qbusiness#GetDataAccessorRequest"
+_MRIFLDA = "MaxResultsIntegerForListDataAccessors"
+_NT = "NextToken1500"
+_LDAI = "ListDataAccessorsInput"
+_cLDAR = "com.amazonaws.qbusiness#ListDataAccessorsRequest"
+_nT = "nextToken"
+_sQ = "smithy.api#httpQuery"
+_mRa = "maxResults"
+_DAa = "DataAccessor"
+_pr = "principal"
+_aD = "authenticationDetail"
+_DAat = "DataAccessors"
+_LDAO = "ListDataAccessorsOutput"
+_cLDARo = "com.amazonaws.qbusiness#ListDataAccessorsResponse"
+_dA = "dataAccessors"
+_LDA = "ListDataAccessors"
+_UDAO = "UpdateDataAccessorOutput"
+_cUDAR = "com.amazonaws.qbusiness#UpdateDataAccessorResponse"
+_DAIe = "DeleteApplicationInput"
+_cDAR = "com.amazonaws.qbusiness#DeleteApplicationRequest"
+_DAO = "DeleteApplicationOutput"
+_cDARo = "com.amazonaws.qbusiness#DeleteApplicationResponse"
+_DAe = "DeleteApplication"
+_GAI = "GetApplicationInput"
+_cGAR = "com.amazonaws.qbusiness#GetApplicationRequest"
+_AAC = "AppliedAttachmentsConfiguration"
+_ASS = "AutoSubscriptionStatus"
+_ST = "SubscriptionType"
+_QL = "Q_LITE"
+_QB = "Q_BUSINESS"
+_ASC = "AutoSubscriptionConfiguration"
+_aS = "autoSubscribe"
+_dST = "defaultSubscriptionType"
+_ECr = "ErrorCode"
+_IE = "INTERNAL_ERROR"
+_IEn = "InternalError"
+_IR = "INVALID_REQUEST"
+_IRn = "InvalidRequest"
+_RI = "RESOURCE_INACTIVE"
+_RIe = "ResourceInactive"
+_RNF = "RESOURCE_NOT_FOUND"
+_RNFe = "ResourceNotFound"
+_ED = "ErrorDetail"
+_eM = "errorMessage"
+_eCr = "errorCode"
+_GAO = "GetApplicationOutput"
+_cGARo = "com.amazonaws.qbusiness#GetApplicationResponse"
+_iCAA = "identityCenterApplicationArn"
+_e = "error"
+_aSC = "autoSubscriptionConfiguration"
+_GA = "GetApplication"
+_ICI = "IndexCapacityInteger"
+_ICC = "IndexCapacityConfiguration"
+_un = "units"
+_IN = "IndexName"
+_ITn = "IndexType"
+_ENTERPRISE = "ENTERPRISE"
+_STARTER = "STARTER"
+_CII = "CreateIndexInput"
+_cCIR = "com.amazonaws.qbusiness#CreateIndexRequest"
+_cC = "capacityConfiguration"
+_IAn = "IndexArn"
+_II = "IndexId"
+_CIO = "CreateIndexOutput"
+_cCIRo = "com.amazonaws.qbusiness#CreateIndexResponse"
+_iI = "indexId"
+_iA = "indexArn"
+_CIr = "CreateIndex"
+_DSC = "DataSourceConfiguration"
+_DSN = "DataSourceName"
+_DECO = "DocumentEnrichmentConditionOperator"
+_GT = "GREATER_THAN"
+_GTOE = "GREATER_THAN_OR_EQUALS"
+_LT = "LESS_THAN"
+_LTOE = "LESS_THAN_OR_EQUALS"
+_EQUALS = "EQUALS"
+_NE = "NOT_EQUALS"
+_CONTAINS = "CONTAINS"
+_NC = "NOT_CONTAINS"
+_EXISTS = "EXISTS"
+_NE_ = "NOT_EXISTS"
+_BW = "BEGINS_WITH"
+_DAC = "DocumentAttributeCondition"
+_o = "operator"
+_DCO = "DocumentContentOperator"
+_DELETE = "DELETE"
+_AVO = "AttributeValueOperator"
+_DAT = "DocumentAttributeTarget"
+_aVO = "attributeValueOperator"
+_IDEC = "InlineDocumentEnrichmentConfiguration"
+_co = "condition"
+_tar = "target"
+_dCO = "documentContentOperator"
+_IDECn = "InlineDocumentEnrichmentConfigurations"
+_LA = "LambdaArn"
+_HC = "HookConfiguration"
+_iC = "invocationCondition"
+_lA = "lambdaArn"
+_sBN = "s3BucketName"
+_DEC = "DocumentEnrichmentConfiguration"
+_iCn = "inlineConfigurations"
+_pEHC = "preExtractionHookConfiguration"
+_pEHCo = "postExtractionHookConfiguration"
+_AES = "AudioExtractionStatus"
+_AEC = "AudioExtractionConfiguration"
+_aES = "audioExtractionStatus"
+_IES = "ImageExtractionStatus"
+_IEC = "ImageExtractionConfiguration"
+_iES = "imageExtractionStatus"
+_VES = "VideoExtractionStatus"
+_VEC = "VideoExtractionConfiguration"
+_vES = "videoExtractionStatus"
+_MEC = "MediaExtractionConfiguration"
+_iEC = "imageExtractionConfiguration"
+_aEC = "audioExtractionConfiguration"
+_vEC = "videoExtractionConfiguration"
+_SS = "SyncSchedule"
+_SGI = "SecurityGroupId"
+_SGIe = "SecurityGroupIds"
+_SI = "SubnetId"
+_SIu = "SubnetIds"
+_DSVC = "DataSourceVpcConfiguration"
+_sI = "subnetIds"
+_sGI = "securityGroupIds"
+_CDSI = "CreateDataSourceInput"
+_cCDSR = "com.amazonaws.qbusiness#CreateDataSourceRequest"
+_con = "configuration"
+_vC = "vpcConfiguration"
+_sS = "syncSchedule"
+_dEC = "documentEnrichmentConfiguration"
+_mEC = "mediaExtractionConfiguration"
+_DSA = "DataSourceArn"
+_DSI = "DataSourceId"
+_CDSO = "CreateDataSourceOutput"
+_cCDSRo = "com.amazonaws.qbusiness#CreateDataSourceResponse"
+_dSI = "dataSourceId"
+_dSA = "dataSourceArn"
+_CDS = "CreateDataSource"
+_DDSI = "DeleteDataSourceInput"
+_cDDSR = "com.amazonaws.qbusiness#DeleteDataSourceRequest"
+_DDSO = "DeleteDataSourceOutput"
+_cDDSRo = "com.amazonaws.qbusiness#DeleteDataSourceResponse"
+_DDS = "DeleteDataSource"
+_GDSI = "GetDataSourceInput"
+_cGDSR = "com.amazonaws.qbusiness#GetDataSourceRequest"
+_DSS = "DataSourceStatus"
+_PC_ = "PENDING_CREATION"
+_GDSO = "GetDataSourceOutput"
+_cGDSRo = "com.amazonaws.qbusiness#GetDataSourceResponse"
+_GDS = "GetDataSource"
+_MRIFLDS = "MaxResultsIntegerForListDataSources"
+_NTe = "NextToken"
+_LDSI = "ListDataSourcesInput"
+_cLDSR = "com.amazonaws.qbusiness#ListDataSourcesRequest"
+_DS = "DataSource"
+_DSa = "DataSources"
+_LDSO = "ListDataSourcesOutput"
+_cLDSRo = "com.amazonaws.qbusiness#ListDataSourcesResponse"
+_dS = "dataSources"
+_LDS = "ListDataSources"
+_UDSI = "UpdateDataSourceInput"
+_cUDSR = "com.amazonaws.qbusiness#UpdateDataSourceRequest"
+_UDSO = "UpdateDataSourceOutput"
+_cUDSRo = "com.amazonaws.qbusiness#UpdateDataSourceResponse"
+_UDS = "UpdateDataSource"
+_DII = "DeleteIndexInput"
+_cDIR = "com.amazonaws.qbusiness#DeleteIndexRequest"
+_DIO = "DeleteIndexOutput"
+_cDIRo = "com.amazonaws.qbusiness#DeleteIndexResponse"
+_DI = "DeleteIndex"
+_GII = "GetIndexInput"
+_cGIR = "com.amazonaws.qbusiness#GetIndexRequest"
+_DMCN = "DocumentMetadataConfigurationName"
+_St = "Status"
+_AT = "AttributeType"
+_SL = "STRING_LIST"
+_DATE = "DATE"
+_DACo = "DocumentAttributeConfiguration"
+_sea = "search"
+_DACoc = "DocumentAttributeConfigurations"
+_ITB = "IndexedTextBytes"
+_ITD = "IndexedTextDocument"
+_TDS = "TextDocumentStatistics"
+_iTB = "indexedTextBytes"
+_iTDC = "indexedTextDocumentCount"
+_IS = "IndexStatistics"
+_tDS = "textDocumentStatistics"
+_ISn = "IndexStatus"
+_GIO = "GetIndexOutput"
+_cGIRo = "com.amazonaws.qbusiness#GetIndexResponse"
+_dAC = "documentAttributeConfigurations"
+_iS = "indexStatistics"
+_GI = "GetIndex"
+_MRIFLI = "MaxResultsIntegerForListIndices"
+_LII = "ListIndicesInput"
+_cLIR = "com.amazonaws.qbusiness#ListIndicesRequest"
+_In = "Index"
+_Ind = "Indices"
+_LIO = "ListIndicesOutput"
+_cLIRo = "com.amazonaws.qbusiness#ListIndicesResponse"
+_in = "indices"
+_LI = "ListIndices"
+_UII = "UpdateIndexInput"
+_cUIR = "com.amazonaws.qbusiness#UpdateIndexRequest"
+_UIO = "UpdateIndexOutput"
+_cUIRo = "com.amazonaws.qbusiness#UpdateIndexResponse"
+_UIp = "UpdateIndex"
+_IIn = "IntegrationId"
+_MRIFLA = "MaxResultsIntegerForListApplications"
+_LAI = "ListApplicationsInput"
+_cLAR = "com.amazonaws.qbusiness#ListApplicationsRequest"
+_App = "Applications"
+_LAO = "ListApplicationsOutput"
+_cLARo = "com.amazonaws.qbusiness#ListApplicationsResponse"
+_ap = "applications"
+_LAi = "ListApplications"
+_SA = "SecretArn"
+_BAC = "BasicAuthConfiguration"
+_sA = "secretArn"
+_IAC = "IdcAuthConfiguration"
+_NAC = "NoAuthConfiguration"
+_U = "Url"
+_OACCC = "OAuth2ClientCredentialConfiguration"
+_aU = "authorizationUrl"
+_tU = "tokenUrl"
+_PAC = "PluginAuthConfiguration"
+_bAC = "basicAuthConfiguration"
+_oACCC = "oAuth2ClientCredentialConfiguration"
+_nAC = "noAuthConfiguration"
+_iAC = "idcAuthConfiguration"
+_PD = "PluginDescription"
+_CPC = "CustomPluginConfiguration"
+_aST = "apiSchemaType"
+_aSp = "apiSchema"
+_PN = "PluginName"
+_CPI = "CreatePluginInput"
+_cCPR = "com.amazonaws.qbusiness#CreatePluginRequest"
+_aCut = "authConfiguration"
+_sU = "serverUrl"
+_cPC = "customPluginConfiguration"
+_PBS = "PluginBuildStatus"
+_READY = "READY"
+_CIP = "CREATE_IN_PROGRESS"
+_CF = "CREATE_FAILED"
+_UIP = "UPDATE_IN_PROGRESS"
+_UF = "UPDATE_FAILED"
+_DIP = "DELETE_IN_PROGRESS"
+_DF = "DELETE_FAILED"
+_PAl = "PluginArn"
+_CPO = "CreatePluginOutput"
+_cCPRo = "com.amazonaws.qbusiness#CreatePluginResponse"
+_pA = "pluginArn"
+_bS = "buildStatus"
+_CPr = "CreatePlugin"
+_DPI = "DeletePluginInput"
+_cDPR = "com.amazonaws.qbusiness#DeletePluginRequest"
+_DPO = "DeletePluginOutput"
+_cDPRo = "com.amazonaws.qbusiness#DeletePluginResponse"
+_DP = "DeletePlugin"
+_GPI = "GetPluginInput"
+_cGPR = "com.amazonaws.qbusiness#GetPluginRequest"
+_PS = "PluginState"
+_GPO = "GetPluginOutput"
+_cGPRo = "com.amazonaws.qbusiness#GetPluginResponse"
+_sta = "state"
+_GP = "GetPlugin"
+_MRIFLP = "MaxResultsIntegerForListPlugins"
+_LPI = "ListPluginsInput"
+_cLPR = "com.amazonaws.qbusiness#ListPluginsRequest"
+_Pl = "Plugin"
+_Plu = "Plugins"
+_LPO = "ListPluginsOutput"
+_cLPRo = "com.amazonaws.qbusiness#ListPluginsResponse"
+_pl = "plugins"
+_LP = "ListPlugins"
+_UPI = "UpdatePluginInput"
+_cUPR = "com.amazonaws.qbusiness#UpdatePluginRequest"
+_UPO = "UpdatePluginOutput"
+_cUPRo = "com.amazonaws.qbusiness#UpdatePluginResponse"
+_UP = "UpdatePlugin"
+_KII = "KendraIndexId"
+_KIC = "KendraIndexConfiguration"
+_BDIS = "BoostingDurationInSeconds"
+_DABL = "DocumentAttributeBoostingLevel"
+_NONE = "NONE"
+_LOW = "LOW"
+_MEDIUM = "MEDIUM"
+_HIGH = "HIGH"
+_VH = "VERY_HIGH"
+_ONE = "ONE"
+_TWO = "TWO"
+_DABC = "DateAttributeBoostingConfiguration"
+_bL = "boostingLevel"
+_bDIS = "boostingDurationInSeconds"
+_NABT = "NumberAttributeBoostingType"
+_PLV = "PRIORITIZE_LARGER_VALUES"
+_PSV = "PRIORITIZE_SMALLER_VALUES"
+_NABC = "NumberAttributeBoostingConfiguration"
+_bT = "boostingType"
+_SAVBL = "StringAttributeValueBoostingLevel"
+_THREE = "THREE"
+_FOUR = "FOUR"
+_FIVE = "FIVE"
+_SAVB = "StringAttributeValueBoosting"
+_SABC = "StringAttributeBoostingConfiguration"
+_aVB = "attributeValueBoosting"
+_SLABC = "StringListAttributeBoostingConfiguration"
+_DABCo = "DocumentAttributeBoostingConfiguration"
+_nC = "numberConfiguration"
+_sC = "stringConfiguration"
+_dC = "dateConfiguration"
+_sLC = "stringListConfiguration"
+_DABOM = "DocumentAttributeBoostingOverrideMap"
+_NIC = "NativeIndexConfiguration"
+_ve = "version"
+_bO = "boostingOverride"
+_RC = "RetrieverConfiguration"
+_nIC = "nativeIndexConfiguration"
+_kIC = "kendraIndexConfiguration"
+_RN = "RetrieverName"
+_RT = "RetrieverType"
+_NI = "NATIVE_INDEX"
+_KI = "KENDRA_INDEX"
+_CRI = "CreateRetrieverInput"
+_cCRR = "com.amazonaws.qbusiness#CreateRetrieverRequest"
+_RAe = "RetrieverArn"
+_RIet = "RetrieverId"
+_CRO = "CreateRetrieverOutput"
+_cCRRo = "com.amazonaws.qbusiness#CreateRetrieverResponse"
+_rIe = "retrieverId"
+_rAe = "retrieverArn"
+_CR = "CreateRetriever"
+_DRI = "DeleteRetrieverInput"
+_cDRR = "com.amazonaws.qbusiness#DeleteRetrieverRequest"
+_DRO = "DeleteRetrieverOutput"
+_cDRRo = "com.amazonaws.qbusiness#DeleteRetrieverResponse"
+_DR = "DeleteRetriever"
+_GRI = "GetRetrieverInput"
+_cGRR = "com.amazonaws.qbusiness#GetRetrieverRequest"
+_RS = "RetrieverStatus"
+_GRO = "GetRetrieverOutput"
+_cGRRo = "com.amazonaws.qbusiness#GetRetrieverResponse"
+_GR = "GetRetriever"
+_MRIFLRR = "MaxResultsIntegerForListRetrieversRequest"
+_LRI = "ListRetrieversInput"
+_cLRR = "com.amazonaws.qbusiness#ListRetrieversRequest"
+_R = "Retriever"
+_Re = "Retrievers"
+_LRO = "ListRetrieversOutput"
+_cLRRo = "com.amazonaws.qbusiness#ListRetrieversResponse"
+_ret = "retrievers"
+_LR = "ListRetrievers"
+_URI = "UpdateRetrieverInput"
+_cURR = "com.amazonaws.qbusiness#UpdateRetrieverRequest"
+_URO = "UpdateRetrieverOutput"
+_cURRo = "com.amazonaws.qbusiness#UpdateRetrieverResponse"
+_UR = "UpdateRetriever"
+_UAI = "UpdateApplicationInput"
+_cUAR = "com.amazonaws.qbusiness#UpdateApplicationRequest"
+_UAO = "UpdateApplicationOutput"
+_cUARo = "com.amazonaws.qbusiness#UpdateApplicationResponse"
+_UA = "UpdateApplication"
+_BE = "BrowserExtension"
+_BEL = "BrowserExtensionList"
+_BEC = "BrowserExtensionConfiguration"
+_eBE = "enabledBrowserExtensions"
+_CCSSU = "CustomCSSUrl"
+_FU = "FaviconUrl"
+_FUo = "FontUrl"
+_LU = "LogoUrl"
+_CC = "CustomizationConfiguration"
+_cCSSU = "customCSSUrl"
+_lU = "logoUrl"
+_fU = "fontUrl"
+_fUa = "faviconUrl"
+_OIDCPC = "OpenIDConnectProviderConfiguration"
+_sAe = "secretsArn"
+_sR = "secretsRole"
+_SAU = "SamlAuthenticationUrl"
+_SPC = "SamlProviderConfiguration"
+_aUu = "authenticationUrl"
+_IPC = "IdentityProviderConfiguration"
+_sCa = "samlConfiguration"
+_oIDCC = "openIDConnectConfiguration"
+_O = "Origin"
+_WEO = "WebExperienceOrigins"
+_WESPCM = "WebExperienceSamplePromptsControlMode"
+_WES = "WebExperienceSubtitle"
+_WET = "WebExperienceTitle"
+_WEWM = "WebExperienceWelcomeMessage"
+_CWEI = "CreateWebExperienceInput"
+_cCWER = "com.amazonaws.qbusiness#CreateWebExperienceRequest"
+_ti = "title"
+_su = "subtitle"
+_wM = "welcomeMessage"
+_sPCM = "samplePromptsControlMode"
+_or = "origins"
+_iPC = "identityProviderConfiguration"
+_bEC = "browserExtensionConfiguration"
+_cCu = "customizationConfiguration"
+_WEA = "WebExperienceArn"
+_WEI = "WebExperienceId"
+_CWEO = "CreateWebExperienceOutput"
+_cCWERo = "com.amazonaws.qbusiness#CreateWebExperienceResponse"
+_wEI = "webExperienceId"
+_wEA = "webExperienceArn"
+_CWE = "CreateWebExperience"
+_DWEI = "DeleteWebExperienceInput"
+_cDWER = "com.amazonaws.qbusiness#DeleteWebExperienceRequest"
+_DWEO = "DeleteWebExperienceOutput"
+_cDWERo = "com.amazonaws.qbusiness#DeleteWebExperienceResponse"
+_DWE = "DeleteWebExperience"
+_GWEI = "GetWebExperienceInput"
+_cGWER = "com.amazonaws.qbusiness#GetWebExperienceRequest"
+_SMXML = "SamlMetadataXML"
+_SAa = "SamlAttribute"
+_SCa = "SamlConfiguration"
+_mXML = "metadataXML"
+_uIA = "userIdAttribute"
+_uGA = "userGroupAttribute"
+_WEAC = "WebExperienceAuthConfiguration"
+_WESe = "WebExperienceStatus"
+_PAC_ = "PENDING_AUTH_CONFIG"
+_GWEO = "GetWebExperienceOutput"
+_cGWERo = "com.amazonaws.qbusiness#GetWebExperienceResponse"
+_dE = "defaultEndpoint"
+_GWE = "GetWebExperience"
+_MRIFLWER = "MaxResultsIntegerForListWebExperiencesRequest"
+_LWEI = "ListWebExperiencesInput"
+_cLWER = "com.amazonaws.qbusiness#ListWebExperiencesRequest"
+_WE = "WebExperience"
+_WEe = "WebExperiences"
+_LWEO = "ListWebExperiencesOutput"
+_cLWERo = "com.amazonaws.qbusiness#ListWebExperiencesResponse"
+_wE = "webExperiences"
+_LWE = "ListWebExperiences"
+_UWEI = "UpdateWebExperienceInput"
+_cUWER = "com.amazonaws.qbusiness#UpdateWebExperienceRequest"
+_UWEO = "UpdateWebExperienceOutput"
+_cUWERo = "com.amazonaws.qbusiness#UpdateWebExperienceResponse"
+_UWE = "UpdateWebExperience"
+_CMC = "CreatorModeControl"
+_ACMC = "AppliedCreatorModeConfiguration"
+_cMC = "creatorModeControl"
+_OC = "OrchestrationControl"
+_AOC = "AppliedOrchestrationConfiguration"
+_cont = "control"
+_AG = "AssociatedGroup"
+_AGs = "AssociatedGroups"
+_AU = "AssociatedUser"
+_AUs = "AssociatedUsers"
+_QIAa = "QIamActions"
+_PCK = "PermissionConditionKey"
+_PCO = "PermissionConditionOperator"
+_SE = "STRING_EQUALS"
+_SEt = "StringEquals"
+_PCV = "PermissionConditionValue"
+_PCVe = "PermissionConditionValues"
+_PCe = "PermissionCondition"
+_cO = "conditionOperator"
+_cK = "conditionKey"
+_cV = "conditionValues"
+_PCer = "PermissionConditions"
+_SIt = "StatementId"
+_API = "AssociatePermissionInput"
+_cAPR = "com.amazonaws.qbusiness#AssociatePermissionRequest"
+_sIt = "statementId"
+_ac = "actions"
+_cond = "conditions"
+_APO = "AssociatePermissionOutput"
+_cAPRo = "com.amazonaws.qbusiness#AssociatePermissionResponse"
+_stat = "statement"
+_AP = "AssociatePermission"
+_AIt = "AttachmentId"
+_CS = "ConversationSource"
+_aIt = "attachmentId"
+_CFS = "CopyFromSource"
+_conv = "conversation"
+_ANt = "AttachmentName"
+_ASt = "AttachmentStatus"
+_SUCCESS = "SUCCESS"
+_At = "Attachment"
+_cF = "copyFrom"
+_fT = "fileType"
+_fS = "fileSize"
+_md = "md5chksum"
+_B = "Blob"
+_AItt = "AttachmentInput"
+_da = "data"
+_AIE = "AttachmentInputEvent"
+_at = "attachment"
+_AL = "AttachmentList"
+_AO = "AttachmentOutput"
+_AItta = "AttachmentsInput"
+_AOt = "AttachmentsOutput"
+_AET = "AudioExtractionType"
+_TRANSCRIPT = "TRANSCRIPT"
+_SUMMARY = "SUMMARY"
+_MIe = "MediaId"
+_ASD = "AudioSourceDetails"
+_mI = "mediaId"
+_mMT = "mediaMimeType"
+_sTM = "startTimeMilliseconds"
+_eTM = "endTimeMilliseconds"
+_aET = "audioExtractionType"
+_ACR = "AuthChallengeRequest"
+_ACRE = "AuthChallengeRequestEvent"
+_ARK = "AuthResponseKey"
+_ARV = "AuthResponseValue"
+_ARM = "AuthorizationResponseMap"
+_ACRu = "AuthChallengeResponse"
+_rM = "responseMap"
+_ACREu = "AuthChallengeResponseEvent"
+_EI = "ExecutionId"
+_DIo = "DocumentId"
+_DD = "DeleteDocument"
+_dI = "documentId"
+_DDe = "DeleteDocuments"
+_BDDI = "BatchDeleteDocumentInput"
+_cBDDR = "com.amazonaws.qbusiness#BatchDeleteDocumentRequest"
+_do = "documents"
+_dSSI = "dataSourceSyncId"
+_FD = "FailedDocument"
+_FDa = "FailedDocuments"
+_BDDO = "BatchDeleteDocumentOutput"
+_cBDDRo = "com.amazonaws.qbusiness#BatchDeleteDocumentResponse"
+_fD = "failedDocuments"
+_BDD = "BatchDeleteDocument"
+_DAo = "DocumentAttributes"
+_DC = "DocumentContent"
+_bl = "blob"
+_CTo = "ContentType"
+_PDF = "PDF"
+_HTML = "HTML"
+_MW = "MS_WORD"
+_PT_ = "PLAIN_TEXT"
+_PPT = "PPT"
+_RTF = "RTF"
+_XML = "XML"
+_XSLT = "XSLT"
+_ME_ = "MS_EXCEL"
+_CSV = "CSV"
+_JSON = "JSON"
+_MD = "MD"
+_Ti = "Title"
+_Do = "Document"
+_att = "attributes"
+_conte = "content"
+_cTo = "contentType"
+_aCc = "accessConfiguration"
+_Doc = "Documents"
+_BPDI = "BatchPutDocumentInput"
+_cBPDR = "com.amazonaws.qbusiness#BatchPutDocumentRequest"
+_BPDO = "BatchPutDocumentOutput"
+_cBPDRo = "com.amazonaws.qbusiness#BatchPutDocumentResponse"
+_BPD = "BatchPutDocument"
+_BP = "BlockedPhrase"
+_BPl = "BlockedPhrases"
+_SMO = "SystemMessageOverride"
+_BPC = "BlockedPhrasesConfiguration"
+_bP = "blockedPhrases"
+_sMO = "systemMessageOverride"
+_BPCU = "BlockedPhrasesConfigurationUpdate"
+_bPTCOU = "blockedPhrasesToCreateOrUpdate"
+_bPTD = "blockedPhrasesToDelete"
+_SIub = "SubscriptionId"
+_CSI = "CancelSubscriptionInput"
+_cCSR = "com.amazonaws.qbusiness#CancelSubscriptionRequest"
+_sIu = "subscriptionId"
+_SD = "SubscriptionDetails"
+_SAu = "SubscriptionArn"
+_CSO = "CancelSubscriptionOutput"
+_cCSRo = "com.amazonaws.qbusiness#CancelSubscriptionResponse"
+_sAu = "subscriptionArn"
+_cS = "currentSubscription"
+_nS = "nextSubscription"
+_CSa = "CancelSubscription"
+_CM = "ChatMode"
+_RM = "RETRIEVAL_MODE"
+_CM_ = "CREATOR_MODE"
+_PM = "PLUGIN_MODE"
+_PCl = "PluginConfiguration"
+_CMCh = "ChatModeConfiguration"
+_pCl = "pluginConfiguration"
+_EOIE = "EndOfInputEvent"
+_UM = "UserMessage"
+_TIE = "TextInputEvent"
+_uM = "userMessage"
+_UG = "UserGroups"
+_FAE = "FailedAttachmentEvent"
+_SAMI = "SourceAttributionMediaId"
+_SET = "SnippetExcerptText"
+_SEn = "SnippetExcerpt"
+_te = "text"
+_ISD = "ImageSourceDetails"
+_VET = "VideoExtractionType"
+_VSD = "VideoSourceDetails"
+_vET = "videoExtractionType"
+_SDo = "SourceDetails"
+_iSD = "imageSourceDetails"
+_aSD = "audioSourceDetails"
+_vSD = "videoSourceDetails"
+_TS = "TextSegment"
+_bOe = "beginOffset"
+_eO = "endOffset"
+_sEn = "snippetExcerpt"
+_sD = "sourceDetails"
+_TSL = "TextSegmentList"
+_SAo = "SourceAttribution"
+_sn = "snippet"
+_ur = "url"
+_cNi = "citationNumber"
+_tMS = "textMessageSegments"
+_dIa = "datasourceId"
+_SAou = "SourceAttributions"
+_smithya = "smithy.api#sparse"
+_MEe = "MetadataEvent"
+_sAo = "sourceAttributions"
+_fTM = "finalTextMessage"
+_SMT = "SystemMessageType"
+_RESPONSE = "RESPONSE"
+_GR_ = "GROUNDED_RESPONSE"
+_TOE = "TextOutputEvent"
+_sMT = "systemMessageType"
+_sM = "systemMessage"
+_COS = "ChatOutputStream"
+_smithyap = "smithy.api#streaming"
+_tE = "textEvent"
+_mE = "metadataEvent"
+_aRE = "actionReviewEvent"
+_fAE = "failedAttachmentEvent"
+_aCRE = "authChallengeRequestEvent"
+_CO = "ChatOutput"
+_oS = "outputStream"
+_sP = "smithy.api#httpPayload"
+_ERE = "ExternalResourceException"
+_LNFE = "LicenseNotFoundException"
+_CRCA = "ChatResponseConfigurationArn"
+_CRCI = "ChatResponseConfigurationId"
+_DN = "DisplayName"
+_RCS = "ResponseConfigurationSummary"
+_CRCS = "ChatResponseConfigurationStatus"
+_CRC = "ChatResponseConfiguration"
+_cRCI = "chatResponseConfigurationId"
+_cRCA = "chatResponseConfigurationArn"
+_rCS = "responseConfigurationSummary"
+_RCT = "ResponseConfigurationType"
+_ALL = "ALL"
+_Ins = "Instruction"
+_IC = "InstructionCollection"
+_rL = "responseLength"
+_tA = "targetAudience"
+_pe = "perspective"
+_oSu = "outputStyle"
+_id = "identity"
+_to = "tone"
+_cIu = "customInstructions"
+_ex = "examples"
+_RCe = "ResponseConfiguration"
+_iCns = "instructionCollection"
+_RCes = "ResponseConfigurations"
+_CRCD = "ChatResponseConfigurationDetail"
+_rC = "responseConfigurations"
+_CRCh = "ChatResponseConfigurations"
+_CSOh = "ChatSyncOutput"
+_aR = "actionReview"
+_aCR = "authChallengeRequest"
+_fA = "failedAttachments"
+_CDAI = "CheckDocumentAccessInput"
+_cCDARo = "com.amazonaws.qbusiness#CheckDocumentAccessRequest"
+_uI = "userId"
+_DAG = "DocumentAclGroup"
+_DAGo = "DocumentAclGroups"
+_DAU = "DocumentAclUser"
+_DAUo = "DocumentAclUsers"
+_DACocu = "DocumentAclCondition"
+_us = "users"
+_gr = "groups"
+_DACocum = "DocumentAclConditions"
+_DAM = "DocumentAclMembership"
+_DAoc = "DocumentAcl"
+_al = "allowlist"
+_dL = "denyList"
+_CDAOh = "CheckDocumentAccessOutput"
+_cCDARom = "com.amazonaws.qbusiness#CheckDocumentAccessResponse"
+_uG = "userGroups"
+_uAs = "userAliases"
+_hA = "hasAccess"
+_dAo = "documentAcl"
+_CDA = "CheckDocumentAccess"
+_CBR = "ContentBlockerRule"
+_EDS = "EligibleDataSource"
+_EDSl = "EligibleDataSources"
+_CRR = "ContentRetrievalRule"
+_eDS = "eligibleDataSources"
+_RCSe = "RetrieverContentSource"
+_CSo = "ContentSource"
+_retr = "retriever"
+_CTon = "ConversationTitle"
+_C = "Conversation"
+_sTt = "startTime"
+_Co = "Conversations"
+_SDIM = "SessionDurationInMinutes"
+_CAWEUI = "CreateAnonymousWebExperienceUrlInput"
+_cCAWEUR = "com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlRequest"
+_sDIM = "sessionDurationInMinutes"
+_CAWEUO = "CreateAnonymousWebExperienceUrlOutput"
+_cCAWEURo = "com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlResponse"
+_aUn = "anonymousUrl"
+_CAWEU = "CreateAnonymousWebExperienceUrl"
+_CCRCI = "CreateChatResponseConfigurationInput"
+_cCCRCR = "com.amazonaws.qbusiness#CreateChatResponseConfigurationRequest"
+_CCRCO = "CreateChatResponseConfigurationOutput"
+_cCCRCRo = "com.amazonaws.qbusiness#CreateChatResponseConfigurationResponse"
+_CCRC = "CreateChatResponseConfiguration"
+_GIr = "GroupIdentifier"
+_UIs = "UserIdentifier"
+_SP = "SubscriptionPrincipal"
+_CSIr = "CreateSubscriptionInput"
+_cCSRom = "com.amazonaws.qbusiness#CreateSubscriptionRequest"
+_CSOr = "CreateSubscriptionOutput"
+_cCSRoma = "com.amazonaws.qbusiness#CreateSubscriptionResponse"
+_CSr = "CreateSubscription"
+_UAs = "UserAlias"
+_UAse = "UserAliases"
+_CUI = "CreateUserInput"
+_cCUR = "com.amazonaws.qbusiness#CreateUserRequest"
+_CUO = "CreateUserOutput"
+_cCURo = "com.amazonaws.qbusiness#CreateUserResponse"
+_CU = "CreateUser"
+_CMCr = "CreatorModeConfiguration"
+_DSIa = "DataSourceIds"
+_MV = "MetricValue"
+_DSSJM = "DataSourceSyncJobMetrics"
+_dAoc = "documentsAdded"
+_dM = "documentsModified"
+_dDo = "documentsDeleted"
+_dF = "documentsFailed"
+_dSo = "documentsScanned"
+_DSSJS = "DataSourceSyncJobStatus"
+_SUCCEEDED = "SUCCEEDED"
+_SYNCING = "SYNCING"
+_INCOMPLETE = "INCOMPLETE"
+_STOPPING = "STOPPING"
+_ABORTED = "ABORTED"
+_SI_ = "SYNCING_INDEXING"
+_DSSJ = "DataSourceSyncJob"
+_eIx = "executionId"
+_eT = "endTime"
+_dSEC = "dataSourceErrorCode"
+_met = "metrics"
+_DSSJa = "DataSourceSyncJobs"
+_DSUI = "DataSourceUserId"
+_DAIel = "DeleteAttachmentInput"
+_cDARom = "com.amazonaws.qbusiness#DeleteAttachmentRequest"
+_DAOe = "DeleteAttachmentOutput"
+_cDARoma = "com.amazonaws.qbusiness#DeleteAttachmentResponse"
+_DAel = "DeleteAttachment"
+_DCCCI = "DeleteChatControlsConfigurationInput"
+_cDCCCR = "com.amazonaws.qbusiness#DeleteChatControlsConfigurationRequest"
+_DCCCO = "DeleteChatControlsConfigurationOutput"
+_cDCCCRo = "com.amazonaws.qbusiness#DeleteChatControlsConfigurationResponse"
+_DCCC = "DeleteChatControlsConfiguration"
+_DCRCI = "DeleteChatResponseConfigurationInput"
+_cDCRCR = "com.amazonaws.qbusiness#DeleteChatResponseConfigurationRequest"
+_DCRCO = "DeleteChatResponseConfigurationOutput"
+_cDCRCRo = "com.amazonaws.qbusiness#DeleteChatResponseConfigurationResponse"
+_DCRC = "DeleteChatResponseConfiguration"
+_DCI = "DeleteConversationInput"
+_cDCR = "com.amazonaws.qbusiness#DeleteConversationRequest"
+_DCOe = "DeleteConversationOutput"
+_cDCRo = "com.amazonaws.qbusiness#DeleteConversationResponse"
+_DCe = "DeleteConversation"
+_DGI = "DeleteGroupInput"
+_cDGR = "com.amazonaws.qbusiness#DeleteGroupRequest"
+_gN = "groupName"
+_DGO = "DeleteGroupOutput"
+_cDGRo = "com.amazonaws.qbusiness#DeleteGroupResponse"
+_DG = "DeleteGroup"
+_DUI = "DeleteUserInput"
+_cDUR = "com.amazonaws.qbusiness#DeleteUserRequest"
+_DUO = "DeleteUserOutput"
+_cDURo = "com.amazonaws.qbusiness#DeleteUserResponse"
+_DU = "DeleteUser"
+_DPIi = "DisassociatePermissionInput"
+_cDPRom = "com.amazonaws.qbusiness#DisassociatePermissionRequest"
+_DPOi = "DisassociatePermissionOutput"
+_cDPRoma = "com.amazonaws.qbusiness#DisassociatePermissionResponse"
+_DPi = "DisassociatePermission"
+_DSo = "DocumentStatus"
+_RECEIVED = "RECEIVED"
+_PROCESSING = "PROCESSING"
+_INDEXED = "INDEXED"
+_UPDATED = "UPDATED"
+_DELETED = "DELETED"
+_DFTI = "DOCUMENT_FAILED_TO_INDEX"
+_DDo = "DocumentDetails"
+_DDL = "DocumentDetailList"
+_ECM = "ExampleChatMessage"
+_ECMx = "ExampleChatMessages"
+_MRIFGTC = "MaxResultsIntegerForGetTopicConfigurations"
+_GCCCI = "GetChatControlsConfigurationInput"
+_cGCCCR = "com.amazonaws.qbusiness#GetChatControlsConfigurationRequest"
+_HRC = "HallucinationReductionControl"
+_HRCa = "HallucinationReductionConfiguration"
+_hRC = "hallucinationReductionControl"
+_RSe = "ResponseScope"
+_ECO = "ENTERPRISE_CONTENT_ONLY"
+_EKE = "EXTENDED_KNOWLEDGE_ENABLED"
+_TD = "TopicDescription"
+_TCN = "TopicConfigurationName"
+_UIse = "UserIds"
+_UAG = "UsersAndGroups"
+_uIs = "userIds"
+_RCu = "RuleConfiguration"
+_cBR = "contentBlockerRule"
+_cRR = "contentRetrievalRule"
+_RTu = "RuleType"
+_CBR_ = "CONTENT_BLOCKER_RULE"
+_CRR_ = "CONTENT_RETRIEVAL_RULE"
+_Ru = "Rule"
+_iUAG = "includedUsersAndGroups"
+_eUAG = "excludedUsersAndGroups"
+_rTu = "ruleType"
+_rCu = "ruleConfiguration"
+_Rul = "Rules"
+_TC = "TopicConfiguration"
+_eCM = "exampleChatMessages"
+_ru = "rules"
+_TCo = "TopicConfigurations"
+_GCCCO = "GetChatControlsConfigurationOutput"
+_cGCCCRo = "com.amazonaws.qbusiness#GetChatControlsConfigurationResponse"
+_rS = "responseScope"
+_oC = "orchestrationConfiguration"
+_tC = "topicConfigurations"
+_cMCr = "creatorModeConfiguration"
+_hRCa = "hallucinationReductionConfiguration"
+_GCCC = "GetChatControlsConfiguration"
+_GCRCI = "GetChatResponseConfigurationInput"
+_cGCRCR = "com.amazonaws.qbusiness#GetChatResponseConfigurationRequest"
+_GCRCO = "GetChatResponseConfigurationOutput"
+_cGCRCRo = "com.amazonaws.qbusiness#GetChatResponseConfigurationResponse"
+_iUC = "inUseConfiguration"
+_lUC = "lastUpdateConfiguration"
+_GCRC = "GetChatResponseConfiguration"
+_OF = "OutputFormat"
+_RAW = "RAW"
+_EXTRACTED = "EXTRACTED"
+_GDCI = "GetDocumentContentInput"
+_cGDCR = "com.amazonaws.qbusiness#GetDocumentContentRequest"
+_oF = "outputFormat"
+_GDCO = "GetDocumentContentOutput"
+_cGDCRo = "com.amazonaws.qbusiness#GetDocumentContentResponse"
+_pU = "presignedUrl"
+_mTi = "mimeType"
+_GDC = "GetDocumentContent"
+_GGI = "GetGroupInput"
+_cGGR = "com.amazonaws.qbusiness#GetGroupRequest"
+_GS = "GroupStatus"
+_GSD = "GroupStatusDetail"
+_lUA = "lastUpdatedAt"
+_eD = "errorDetail"
+_GSDr = "GroupStatusDetails"
+_GGO = "GetGroupOutput"
+_cGGRo = "com.amazonaws.qbusiness#GetGroupResponse"
+_sH = "statusHistory"
+_GG = "GetGroup"
+_GMI = "GetMediaInput"
+_cGMR = "com.amazonaws.qbusiness#GetMediaRequest"
+_mIe = "messageId"
+_GMO = "GetMediaOutput"
+_cGMRo = "com.amazonaws.qbusiness#GetMediaResponse"
+_mB = "mediaBytes"
+_MTLE = "MediaTooLargeException"
+_GM = "GetMedia"
+_GPIe = "GetPolicyInput"
+_cGPRom = "com.amazonaws.qbusiness#GetPolicyRequest"
+_GPOe = "GetPolicyOutput"
+_cGPRoma = "com.amazonaws.qbusiness#GetPolicyResponse"
+_po = "policy"
+_GPe = "GetPolicy"
+_GUI = "GetUserInput"
+_cGUR = "com.amazonaws.qbusiness#GetUserRequest"
+_GUO = "GetUserOutput"
+_cGURo = "com.amazonaws.qbusiness#GetUserResponse"
+_GU = "GetUser"
+_MRIFLAa = "MaxResultsIntegerForListAttachments"
+_LAIi = "ListAttachmentsInput"
+_cLARom = "com.amazonaws.qbusiness#ListAttachmentsRequest"
+_LAOi = "ListAttachmentsOutput"
+_cLARoma = "com.amazonaws.qbusiness#ListAttachmentsResponse"
+_atta = "attachments"
+_LAis = "ListAttachments"
+_LCRCI = "ListChatResponseConfigurationsInput"
+_cLCRCR = "com.amazonaws.qbusiness#ListChatResponseConfigurationsRequest"
+_LCRCO = "ListChatResponseConfigurationsOutput"
+_cLCRCRo = "com.amazonaws.qbusiness#ListChatResponseConfigurationsResponse"
+_cRC = "chatResponseConfigurations"
+_LCRC = "ListChatResponseConfigurations"
+_MRIFLC = "MaxResultsIntegerForListConversations"
+_LCI = "ListConversationsInput"
+_cLCR = "com.amazonaws.qbusiness#ListConversationsRequest"
+_LCO = "ListConversationsOutput"
+_cLCRo = "com.amazonaws.qbusiness#ListConversationsResponse"
+_conve = "conversations"
+_LC = "ListConversations"
+_MRIFLDSSJ = "MaxResultsIntegerForListDataSourcesSyncJobs"
+_LDSSJI = "ListDataSourceSyncJobsInput"
+_cLDSSJR = "com.amazonaws.qbusiness#ListDataSourceSyncJobsRequest"
+_sF = "statusFilter"
+_sSy = "syncStatus"
+_LDSSJO = "ListDataSourceSyncJobsOutput"
+_cLDSSJRo = "com.amazonaws.qbusiness#ListDataSourceSyncJobsResponse"
+_h = "history"
+_LDSSJ = "ListDataSourceSyncJobs"
+_MRIFLD = "MaxResultsIntegerForListDocuments"
+_LDI = "ListDocumentsInput"
+_cLDR = "com.amazonaws.qbusiness#ListDocumentsRequest"
+_dSIa = "dataSourceIds"
+_LDO = "ListDocumentsOutput"
+_cLDRo = "com.amazonaws.qbusiness#ListDocumentsResponse"
+_dDL = "documentDetailList"
+_LD = "ListDocuments"
+_MRIFLGR = "MaxResultsIntegerForListGroupsRequest"
+_LGI = "ListGroupsInput"
+_cLGR = "com.amazonaws.qbusiness#ListGroupsRequest"
+_uET = "updatedEarlierThan"
+_GSr = "GroupSummary"
+_GSL = "GroupSummaryList"
+_LGO = "ListGroupsOutput"
+_cLGRo = "com.amazonaws.qbusiness#ListGroupsResponse"
+_it = "items"
+_LG = "ListGroups"
+_MRIFLM = "MaxResultsIntegerForListMessages"
+_LMI = "ListMessagesInput"
+_cLMR = "com.amazonaws.qbusiness#ListMessagesRequest"
+_MB = "MessageBody"
+_MTe = "MessageType"
+_USER = "USER"
+_SYSTEM = "SYSTEM"
+_M = "Message"
+_bo = "body"
+_tim = "time"
+_sAou = "sourceAttribution"
+_aE = "actionExecution"
+_Me = "Messages"
+_LMO = "ListMessagesOutput"
+_cLMRo = "com.amazonaws.qbusiness#ListMessagesResponse"
+_mes = "messages"
+_LM = "ListMessages"
+_MRIFLPA = "MaxResultsIntegerForListPluginActions"
+_LPAI = "ListPluginActionsInput"
+_cLPAR = "com.amazonaws.qbusiness#ListPluginActionsRequest"
+_LPAO = "ListPluginActionsOutput"
+_cLPARo = "com.amazonaws.qbusiness#ListPluginActionsResponse"
+_LPA = "ListPluginActions"
+_MRIFLPTA = "MaxResultsIntegerForListPluginTypeActions"
+_LPTAI = "ListPluginTypeActionsInput"
+_cLPTAR = "com.amazonaws.qbusiness#ListPluginTypeActionsRequest"
+_LPTAO = "ListPluginTypeActionsOutput"
+_cLPTARo = "com.amazonaws.qbusiness#ListPluginTypeActionsResponse"
+_LPTA = "ListPluginTypeActions"
+_MRIFLPTM = "MaxResultsIntegerForListPluginTypeMetadata"
+_LPTMI = "ListPluginTypeMetadataInput"
+_cLPTMR = "com.amazonaws.qbusiness#ListPluginTypeMetadataRequest"
+_PTC = "PluginTypeCategory"
+_CRM = "CRM"
+_Crm = "Customer relationship management (CRM)"
+_PM_ = "PROJECT_MANAGEMENT"
+_Pm = "Project management"
+_COMMUNICATION = "COMMUNICATION"
+_Com = "Communication"
+_PRODUCTIVITY = "PRODUCTIVITY"
+_Pro = "Productivity"
+_TM = "TICKETING_MANAGEMENT"
+_Taim = "Ticketing and incident management"
+_PTMS = "PluginTypeMetadataSummary"
+_ca = "category"
+_LPTMS = "ListPluginTypeMetadataSummaries"
+_LPTMO = "ListPluginTypeMetadataOutput"
+_cLPTMRo = "com.amazonaws.qbusiness#ListPluginTypeMetadataResponse"
+_LPTM = "ListPluginTypeMetadata"
+_MRIFLS = "MaxResultsIntegerForListSubscriptions"
+_LSI = "ListSubscriptionsInput"
+_cLSR = "com.amazonaws.qbusiness#ListSubscriptionsRequest"
+_Su = "Subscription"
+_Sub = "Subscriptions"
+_LSO = "ListSubscriptionsOutput"
+_cLSRo = "com.amazonaws.qbusiness#ListSubscriptionsResponse"
+_sub = "subscriptions"
+_LS = "ListSubscriptions"
+_LTFRI = "ListTagsForResourceInput"
+_cLTFRR = "com.amazonaws.qbusiness#ListTagsForResourceRequest"
+_rARN = "resourceARN"
+_LTFRO = "ListTagsForResourceOutput"
+_cLTFRRo = "com.amazonaws.qbusiness#ListTagsForResourceResponse"
+_LTFR = "ListTagsForResource"
+_SMI = "SystemMessageId"
+_MUC = "MessageUsefulnessComment"
+_MUR = "MessageUsefulnessReason"
+_NFC = "NOT_FACTUALLY_CORRECT"
+_HOU = "HARMFUL_OR_UNSAFE"
+_IOMS = "INCORRECT_OR_MISSING_SOURCES"
+_NH = "NOT_HELPFUL"
+_FC = "FACTUALLY_CORRECT"
+_COMPLETE = "COMPLETE"
+_RS_ = "RELEVANT_SOURCES"
+_HELPFUL = "HELPFUL"
+_NBOD = "NOT_BASED_ON_DOCUMENTS"
+_NC_ = "NOT_COMPLETE"
+_NC__ = "NOT_CONCISE"
+_OTHER = "OTHER"
+_MU = "MessageUsefulness"
+_USEFUL = "USEFUL"
+_NU = "NOT_USEFUL"
+_MUF = "MessageUsefulnessFeedback"
+_use = "usefulness"
+_com = "comment"
+_sAub = "submittedAt"
+_PFI = "PutFeedbackInput"
+_cPFR = "com.amazonaws.qbusiness#PutFeedbackRequest"
+_mCA = "messageCopiedAt"
+_mU = "messageUsefulness"
+_PFO = "PutFeedbackOutput"
+_sUm = "smithy.api#Unit"
+_PF = "PutFeedback"
+_MG = "MemberGroup"
+_MGe = "MemberGroups"
+_MUe = "MemberUser"
+_MUem = "MemberUsers"
+_GMr = "GroupMembers"
+_mG = "memberGroups"
+_mUe = "memberUsers"
+_sPFGM = "s3PathForGroupMembers"
+_PGI = "PutGroupInput"
+_cPGR = "com.amazonaws.qbusiness#PutGroupRequest"
+_gM = "groupMembers"
+_PGO = "PutGroupOutput"
+_cPGRo = "com.amazonaws.qbusiness#PutGroupResponse"
+_PGu = "PutGroup"
+_MRa = "MaxResults"
+_QT = "QueryText"
+_SCc = "ScoreConfidence"
+_NA = "NOT_AVAILABLE"
+_SAc = "ScoreAttributes"
+_sCc = "scoreConfidence"
+_RCel = "RelevantContent"
+_dT = "documentTitle"
+_dU = "documentUri"
+_dAocu = "documentAttributes"
+_sAc = "scoreAttributes"
+_RCL = "RelevantContentList"
+_SRCO = "SearchRelevantContentOutput"
+_cSRCR = "com.amazonaws.qbusiness#SearchRelevantContentResponse"
+_rCe = "relevantContent"
+_SDSSJI = "StartDataSourceSyncJobInput"
+_cSDSSJR = "com.amazonaws.qbusiness#StartDataSourceSyncJobRequest"
+_SDSSJO = "StartDataSourceSyncJobOutput"
+_cSDSSJRo = "com.amazonaws.qbusiness#StartDataSourceSyncJobResponse"
+_SDSSJ = "StartDataSourceSyncJob"
+_SDSSJIt = "StopDataSourceSyncJobInput"
+_cSDSSJRom = "com.amazonaws.qbusiness#StopDataSourceSyncJobRequest"
+_SDSSJOt = "StopDataSourceSyncJobOutput"
+_cSDSSJRoma = "com.amazonaws.qbusiness#StopDataSourceSyncJobResponse"
+_SDSSJt = "StopDataSourceSyncJob"
+_TRI = "TagResourceInput"
+_cTRR = "com.amazonaws.qbusiness#TagResourceRequest"
+_TRO = "TagResourceOutput"
+_cTRRo = "com.amazonaws.qbusiness#TagResourceResponse"
+_TR = "TagResource"
+_TKa = "TagKeys"
+_URIn = "UntagResourceInput"
+_cURRom = "com.amazonaws.qbusiness#UntagResourceRequest"
+_tK = "tagKeys"
+_UROn = "UntagResourceOutput"
+_cURRoma = "com.amazonaws.qbusiness#UntagResourceResponse"
+_URn = "UntagResource"
+_OCr = "OrchestrationConfiguration"
+_UCCCI = "UpdateChatControlsConfigurationInput"
+_cUCCCR = "com.amazonaws.qbusiness#UpdateChatControlsConfigurationRequest"
+_bPCU = "blockedPhrasesConfigurationUpdate"
+_tCTCOU = "topicConfigurationsToCreateOrUpdate"
+_tCTD = "topicConfigurationsToDelete"
+_UCCCO = "UpdateChatControlsConfigurationOutput"
+_cUCCCRo = "com.amazonaws.qbusiness#UpdateChatControlsConfigurationResponse"
+_UCCC = "UpdateChatControlsConfiguration"
+_UCRCI = "UpdateChatResponseConfigurationInput"
+_cUCRCR = "com.amazonaws.qbusiness#UpdateChatResponseConfigurationRequest"
+_UCRCO = "UpdateChatResponseConfigurationOutput"
+_cUCRCRo = "com.amazonaws.qbusiness#UpdateChatResponseConfigurationResponse"
+_UCRC = "UpdateChatResponseConfiguration"
+_USI = "UpdateSubscriptionInput"
+_cUSR = "com.amazonaws.qbusiness#UpdateSubscriptionRequest"
+_USO = "UpdateSubscriptionOutput"
+_cUSRo = "com.amazonaws.qbusiness#UpdateSubscriptionResponse"
+_US = "UpdateSubscription"
+_UUI = "UpdateUserInput"
+_cUUR = "com.amazonaws.qbusiness#UpdateUserRequest"
+_uATU = "userAliasesToUpdate"
+_uATD = "userAliasesToDelete"
+_UUO = "UpdateUserOutput"
+_cUURo = "com.amazonaws.qbusiness#UpdateUserResponse"
+_uAA = "userAliasesAdded"
+_uAU = "userAliasesUpdated"
+_uAD = "userAliasesDeleted"
+_UU = "UpdateUser"
+_AF = "AttributeFilter"
+_aAF = "andAllFilters"
+_oAF = "orAllFilters"
+_nF = "notFilter"
+_eTq = "equalsTo"
+_cAo = "containsAll"
+_cAon = "containsAny"
+_gT = "greaterThan"
+_gTOE = "greaterThanOrEquals"
+_lT = "lessThan"
+_lTOE = "lessThanOrEquals"
+_AFt = "AttributeFilters"
+_AFC = "ActionFilterConfiguration"
+_dAF = "documentAttributeFilter"
+_CSIh = "ChatSyncInput"
+_aCRu = "authChallengeResponse"
+_pMI = "parentMessageId"
+_aFt = "attributeFilter"
+_cM = "chatMode"
+_cMCh = "chatModeConfiguration"
+_CEo = "ConfigurationEvent"
+_SRCI = "SearchRelevantContentInput"
+_cSRCRo = "com.amazonaws.qbusiness#SearchRelevantContentRequest"
+_qT = "queryText"
+_cSo = "contentSource"
+_smithyapi = "smithy.api#default"
+_CSh = "ChatSync"
+_SRC = "SearchRelevantContent"
+_ACct = "ActionConfiguration"
+_act = "action"
+_fC = "filterConfiguration"
+_CIS = "ChatInputStream"
+_cE = "configurationEvent"
+_aEt = "attachmentEvent"
+_aEE = "actionExecutionEvent"
+_eOIE = "endOfInputEvent"
+_aCREu = "authChallengeResponseEvent"
+_ACL = "ActionConfigurationList"
+_CIh = "ChatInput"
+_iSn = "inputStream"
+_Ch = "Chat"
+_CDAIr = "CreateDataAccessorInput"
+_cCDARoma = "com.amazonaws.qbusiness#CreateDataAccessorRequest"
+_aCct = "actionConfigurations"
+_GDAO = "GetDataAccessorOutput"
+_cGDARo = "com.amazonaws.qbusiness#GetDataAccessorResponse"
+_UDAI = "UpdateDataAccessorInput"
+_cUDARo = "com.amazonaws.qbusiness#UpdateDataAccessorRequest"
+_CDAr = "CreateDataAccessor"
+_GDA = "GetDataAccessor"
+_UDA = "UpdateDataAccessor"
+_EQ = "ExpertQ"
+_aw = "aws.auth#sigv4"
+_sB = "smithy.rules#endpointBdd"
+_aws = "aws.api#service"
+_aJ = "aws.protocols#restJson1"
+
+MEMBER_RELATION: StaticSchema = (
+    14,
+    n0,
+    _MR,
+    0,
+    (_AND, _OR),
+    ((-1, {_sV: _AND}), (-1, {_sV: _OR})),
+)
+
+READ_ACCESS_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RAT,
+    0,
+    (_ALLOW, _DENY),
+    ((-1, {_sV: _ALLOW}), (-1, {_sV: _DENY})),
+)
+
+MEMBERSHIP_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MT,
+    0,
+    (_INDEX, _DATASOURCE),
+    ((-1, {_sV: _INDEX}), (-1, {_sV: _DATASOURCE})),
+)
+
+GROUP_NAME: StaticSchema = (3, n0, _GN, 0)
+
+PRINCIPAL_GROUP: StaticSchema = (
+    18,
+    n0,
+    _PG,
+    0,
+    (_n, _a, _mT),
+    ((GROUP_NAME, 0), (READ_ACCESS_TYPE, 1), (MEMBERSHIP_TYPE, 0)),
+)
+
+USER_ID: StaticSchema = (3, n0, _UI, 0)
+
+PRINCIPAL_USER: StaticSchema = (
+    18,
+    n0,
+    _PU,
+    0,
+    (_i, _a, _mT),
+    ((USER_ID, 0), (READ_ACCESS_TYPE, 1), (MEMBERSHIP_TYPE, 0)),
+)
+
+PRINCIPAL: StaticSchema = (
+    19,
+    n0,
+    _P,
+    0,
+    (_u, _g),
+    ((PRINCIPAL_USER, 0), (PRINCIPAL_GROUP, 0)),
+)
+
+PRINCIPALS: StaticSchema = (16, n0, _Pr, 0, (_m,), ((PRINCIPAL, 0),))
+
+ACCESS_CONTROL: StaticSchema = (
+    18,
+    n0,
+    _AC,
+    0,
+    (_p, _mR),
+    ((PRINCIPALS, 1), (MEMBER_RELATION, 0)),
+)
+
+ACCESS_CONTROLS: StaticSchema = (16, n0, _ACc, 0, (_m,), ((ACCESS_CONTROL, 0),))
+
+ACCESS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _ACcc,
+    0,
+    (_aC, _mR),
+    ((ACCESS_CONTROLS, 1), (MEMBER_RELATION, 0)),
+)
+
+ERROR_MESSAGE: StaticSchema = (3, n0, _EM, 0)
+
+ACCESS_DENIED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ADE,
+    {_sm: _c, _sE: 403},
+    (_me,),
+    ((ERROR_MESSAGE, 1),),
+)
+
+Q_IAM_ACTION: StaticSchema = (3, n0, _QIA, 0)
+
+DOCUMENT_ATTRIBUTE_KEY: StaticSchema = (3, n0, _DAK, 0)
+
+TIMESTAMP: StaticSchema = (4, n0, _T, 0)
+
+LONG: StaticSchema = (8, n0, _L, 0)
+
+STRING: StaticSchema = (3, n0, _S, 0)
+
+DOCUMENT_ATTRIBUTE_STRING_LIST_VALUE: StaticSchema = (
+    16,
+    n0,
+    _DASLV,
+    0,
+    (_m,),
+    ((STRING, 0),),
+)
+
+DOCUMENT_ATTRIBUTE_STRING_VALUE: StaticSchema = (3, n0, _DASV, 0)
+
+DOCUMENT_ATTRIBUTE_VALUE: StaticSchema = (
+    19,
+    n0,
+    _DAV,
+    0,
+    (_sVt, _sLV, _lV, _dV),
+    (
+        (DOCUMENT_ATTRIBUTE_STRING_VALUE, 0),
+        (DOCUMENT_ATTRIBUTE_STRING_LIST_VALUE, 0),
+        (LONG, 0),
+        (TIMESTAMP, 0),
     ),
-    members={
-        "idcTrustedTokenIssuerArn": {
-            "target": IDC_TRUSTED_TOKEN_ISSUER_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DATA_ACCESSOR_AUTHENTICATION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessorAuthenticationConfiguration"),
-    shape_type=ShapeType.UNION,
-    members={
-        "idcTrustedTokenIssuerConfiguration": {
-            "target": DATA_ACCESSOR_IDC_TRUSTED_TOKEN_ISSUER_CONFIGURATION
-        }
-    },
-)
-
-DATA_ACCESSOR_AUTHENTICATION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessorAuthenticationType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "AWS_IAM_IDC_TTI": {"target": UNIT},
-        "AWS_IAM_IDC_AUTH_CODE": {"target": UNIT},
-    },
-)
-
-DATA_ACCESSOR_EXTERNAL_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessorExternalId"),
-    shape_type=ShapeType.STRING,
-)
-
-DATA_ACCESSOR_EXTERNAL_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessorExternalIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DATA_ACCESSOR_EXTERNAL_ID}},
-)
-
-DATA_ACCESSOR_AUTHENTICATION_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessorAuthenticationDetail"),
-    members={
-        "authenticationType": {
-            "target": DATA_ACCESSOR_AUTHENTICATION_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "authenticationConfiguration": {
-            "target": DATA_ACCESSOR_AUTHENTICATION_CONFIGURATION
-        },
-        "externalIds": {"target": DATA_ACCESSOR_EXTERNAL_IDS},
-    },
-)
-
-DATA_ACCESSOR_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessorName"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-PRINCIPAL_ROLE_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PrincipalRoleArn"), shape_type=ShapeType.STRING
-)
-
-DATA_ACCESSOR_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessorArn"), shape_type=ShapeType.STRING
-)
-
-DATA_ACCESSOR_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessorId"), shape_type=ShapeType.STRING
-)
-
-IDC_APPLICATION_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IdcApplicationArn"), shape_type=ShapeType.STRING
-)
-
-CREATE_DATA_ACCESSOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateDataAccessorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateDataAccessorResponse",
-        )
-    ],
-    members={
-        "dataAccessorId": {
-            "target": DATA_ACCESSOR_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "idcApplicationArn": {
-            "target": IDC_APPLICATION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "dataAccessorArn": {
-            "target": DATA_ACCESSOR_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-DELETE_DATA_ACCESSOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteDataAccessorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteDataAccessorRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "dataAccessorId": {
-            "target": DATA_ACCESSOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_DATA_ACCESSOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteDataAccessorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteDataAccessorResponse",
-        )
-    ],
-)
-
-DELETE_DATA_ACCESSOR = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteDataAccessor"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/dataaccessors/{dataAccessorId}",
-                    "method": "DELETE",
-                }
-            ),
-        )
-    ],
-)
-
-GET_DATA_ACCESSOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetDataAccessorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetDataAccessorRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "dataAccessorId": {
-            "target": DATA_ACCESSOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_DATA_ACCESSORS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListDataAccessors"),
-    shape_type=ShapeType.INTEGER,
-)
-
-NEXT_TOKEN1500 = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#NextToken1500"), shape_type=ShapeType.STRING
-)
-
-LIST_DATA_ACCESSORS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListDataAccessorsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListDataAccessorsRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN1500,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_DATA_ACCESSORS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-DATA_ACCESSOR = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessor"),
-    members={
-        "displayName": {"target": DATA_ACCESSOR_NAME},
-        "dataAccessorId": {"target": DATA_ACCESSOR_ID},
-        "dataAccessorArn": {"target": DATA_ACCESSOR_ARN},
-        "idcApplicationArn": {"target": IDC_APPLICATION_ARN},
-        "principal": {"target": PRINCIPAL_ROLE_ARN},
-        "authenticationDetail": {"target": DATA_ACCESSOR_AUTHENTICATION_DETAIL},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-    },
-)
-
-DATA_ACCESSORS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataAccessors"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DATA_ACCESSOR}},
-)
-
-LIST_DATA_ACCESSORS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListDataAccessorsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListDataAccessorsResponse",
-        )
-    ],
-    members={
-        "dataAccessors": {"target": DATA_ACCESSORS},
-        "nextToken": {"target": NEXT_TOKEN1500},
-    },
-)
-
-LIST_DATA_ACCESSORS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListDataAccessors"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/dataaccessors", "method": "GET"}
-            ),
-        )
-    ],
-)
-
-UPDATE_DATA_ACCESSOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateDataAccessorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateDataAccessorResponse",
-        )
-    ],
-)
-
-DELETE_APPLICATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteApplicationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteApplicationRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_APPLICATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteApplicationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteApplicationResponse",
-        )
-    ],
-)
-
-DELETE_APPLICATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteApplication"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}", "method": "DELETE"}
-            ),
-        )
-    ],
-)
-
-GET_APPLICATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetApplicationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetApplicationRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-APPLIED_ATTACHMENTS_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AppliedAttachmentsConfiguration"),
-    members={"attachmentsControlMode": {"target": ATTACHMENTS_CONTROL_MODE}},
-)
-
-AUTO_SUBSCRIPTION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AutoSubscriptionStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-SUBSCRIPTION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SubscriptionType"),
-    shape_type=ShapeType.ENUM,
-    members={"Q_LITE": {"target": UNIT}, "Q_BUSINESS": {"target": UNIT}},
-)
-
-AUTO_SUBSCRIPTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AutoSubscriptionConfiguration"),
-    members={
-        "autoSubscribe": {
-            "target": AUTO_SUBSCRIPTION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "defaultSubscriptionType": {"target": SUBSCRIPTION_TYPE},
-    },
-)
-
-ERROR_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ErrorCode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "INTERNAL_ERROR": {"target": UNIT},
-        "INVALID_REQUEST": {"target": UNIT},
-        "RESOURCE_INACTIVE": {"target": UNIT},
-        "RESOURCE_NOT_FOUND": {"target": UNIT},
-    },
-)
-
-ERROR_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ErrorDetail"),
-    members={
-        "errorMessage": {"target": ERROR_MESSAGE},
-        "errorCode": {"target": ERROR_CODE},
-    },
-)
-
-GET_APPLICATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetApplicationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetApplicationResponse",
-        )
-    ],
-    members={
-        "displayName": {"target": APPLICATION_NAME},
-        "applicationId": {"target": APPLICATION_ID},
-        "applicationArn": {"target": APPLICATION_ARN},
-        "identityType": {"target": IDENTITY_TYPE},
-        "iamIdentityProviderArn": {"target": IAM_IDENTITY_PROVIDER_ARN},
-        "identityCenterApplicationArn": {"target": IDC_APPLICATION_ARN},
-        "roleArn": {"target": ROLE_ARN},
-        "status": {"target": APPLICATION_STATUS},
-        "description": {"target": DESCRIPTION},
-        "encryptionConfiguration": {"target": ENCRYPTION_CONFIGURATION},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-        "error": {"target": ERROR_DETAIL},
-        "attachmentsConfiguration": {"target": APPLIED_ATTACHMENTS_CONFIGURATION},
-        "qAppsConfiguration": {"target": Q_APPS_CONFIGURATION},
-        "personalizationConfiguration": {"target": PERSONALIZATION_CONFIGURATION},
-        "autoSubscriptionConfiguration": {"target": AUTO_SUBSCRIPTION_CONFIGURATION},
-        "clientIdsForOIDC": {"target": CLIENT_IDS_FOR_OIDC},
-        "quickSightConfiguration": {"target": QUICK_SIGHT_CONFIGURATION},
-    },
-)
-
-GET_APPLICATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetApplication"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}", "method": "GET"}
-            ),
-        )
-    ],
-)
-
-INDEX_CAPACITY_INTEGER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IndexCapacityInteger"),
-    shape_type=ShapeType.INTEGER,
-)
-
-INDEX_CAPACITY_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#IndexCapacityConfiguration"),
-    members={"units": {"target": INDEX_CAPACITY_INTEGER}},
-)
-
-INDEX_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IndexName"), shape_type=ShapeType.STRING
-)
-
-INDEX_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#IndexType"),
-    shape_type=ShapeType.ENUM,
-    members={"ENTERPRISE": {"target": UNIT}, "STARTER": {"target": UNIT}},
-)
-
-CREATE_INDEX_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateIndexInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateIndexRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "displayName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "description": {"target": DESCRIPTION},
-        "type": {"target": INDEX_TYPE},
-        "tags": {"target": TAGS},
-        "capacityConfiguration": {"target": INDEX_CAPACITY_CONFIGURATION},
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-    },
-)
-
-INDEX_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IndexArn"), shape_type=ShapeType.STRING
-)
-
-INDEX_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IndexId"), shape_type=ShapeType.STRING
-)
-
-CREATE_INDEX_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateIndexOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateIndexResponse",
-        )
-    ],
-    members={"indexId": {"target": INDEX_ID}, "indexArn": {"target": INDEX_ARN}},
-)
-
-CREATE_INDEX = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CreateIndex"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/indices", "method": "POST"}
-            ),
-        )
-    ],
-)
-
-DATA_SOURCE_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceConfiguration"),
-    shape_type=ShapeType.DOCUMENT,
-)
-
-DATA_SOURCE_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceName"), shape_type=ShapeType.STRING
-)
-
-DOCUMENT_ENRICHMENT_CONDITION_OPERATOR = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentEnrichmentConditionOperator"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "GREATER_THAN": {"target": UNIT},
-        "GREATER_THAN_OR_EQUALS": {"target": UNIT},
-        "LESS_THAN": {"target": UNIT},
-        "LESS_THAN_OR_EQUALS": {"target": UNIT},
-        "EQUALS": {"target": UNIT},
-        "NOT_EQUALS": {"target": UNIT},
-        "CONTAINS": {"target": UNIT},
-        "NOT_CONTAINS": {"target": UNIT},
-        "EXISTS": {"target": UNIT},
-        "NOT_EXISTS": {"target": UNIT},
-        "BEGINS_WITH": {"target": UNIT},
-    },
-)
-
-DOCUMENT_ATTRIBUTE_CONDITION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeCondition"),
-    members={
-        "key": {
-            "target": DOCUMENT_ATTRIBUTE_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "operator": {
-            "target": DOCUMENT_ENRICHMENT_CONDITION_OPERATOR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "value": {"target": DOCUMENT_ATTRIBUTE_VALUE},
-    },
-)
-
-DOCUMENT_CONTENT_OPERATOR = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentContentOperator"),
-    shape_type=ShapeType.ENUM,
-    members={"DELETE": {"target": UNIT}},
-)
-
-ATTRIBUTE_VALUE_OPERATOR = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttributeValueOperator"),
-    shape_type=ShapeType.ENUM,
-    members={"DELETE": {"target": UNIT}},
-)
-
-DOCUMENT_ATTRIBUTE_TARGET = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeTarget"),
-    members={
-        "key": {
-            "target": DOCUMENT_ATTRIBUTE_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "value": {"target": DOCUMENT_ATTRIBUTE_VALUE},
-        "attributeValueOperator": {"target": ATTRIBUTE_VALUE_OPERATOR},
-    },
-)
-
-INLINE_DOCUMENT_ENRICHMENT_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#InlineDocumentEnrichmentConfiguration"),
-    members={
-        "condition": {"target": DOCUMENT_ATTRIBUTE_CONDITION},
-        "target": {"target": DOCUMENT_ATTRIBUTE_TARGET},
-        "documentContentOperator": {"target": DOCUMENT_CONTENT_OPERATOR},
-    },
-)
-
-INLINE_DOCUMENT_ENRICHMENT_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#InlineDocumentEnrichmentConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": INLINE_DOCUMENT_ENRICHMENT_CONFIGURATION}},
-)
-
-LAMBDA_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#LambdaArn"), shape_type=ShapeType.STRING
-)
-
-HOOK_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#HookConfiguration"),
-    members={
-        "invocationCondition": {"target": DOCUMENT_ATTRIBUTE_CONDITION},
-        "lambdaArn": {"target": LAMBDA_ARN},
-        "s3BucketName": {"target": S3_BUCKET_NAME},
-        "roleArn": {"target": ROLE_ARN},
-    },
-)
-
-DOCUMENT_ENRICHMENT_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentEnrichmentConfiguration"),
-    members={
-        "inlineConfigurations": {"target": INLINE_DOCUMENT_ENRICHMENT_CONFIGURATIONS},
-        "preExtractionHookConfiguration": {"target": HOOK_CONFIGURATION},
-        "postExtractionHookConfiguration": {"target": HOOK_CONFIGURATION},
-    },
-)
-
-AUDIO_EXTRACTION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AudioExtractionStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
 )
 
-AUDIO_EXTRACTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AudioExtractionConfiguration"),
-    members={
-        "audioExtractionStatus": {
-            "target": AUDIO_EXTRACTION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
+DOCUMENT_ATTRIBUTE: StaticSchema = (
+    18,
+    n0,
+    _DA,
+    0,
+    (_n, _v),
+    ((DOCUMENT_ATTRIBUTE_KEY, 1), (DOCUMENT_ATTRIBUTE_VALUE, 1)),
+)
+
+ACTION_PAYLOAD_FIELD_KEY: StaticSchema = (3, n0, _APFK, 0)
+
+ACTION_PAYLOAD_FIELD_VALUE: StaticSchema = (13, n0, _APFV, 0)
+
+ACTION_EXECUTION_PAYLOAD_FIELD: StaticSchema = (
+    18,
+    n0,
+    _AEPF,
+    0,
+    (_v,),
+    ((ACTION_PAYLOAD_FIELD_VALUE, 1),),
+)
+
+ACTION_EXECUTION_PAYLOAD: StaticSchema = (
+    17,
+    n0,
+    _AEP,
+    0,
+    (_k, _v),
+    ((ACTION_PAYLOAD_FIELD_KEY, 0), (ACTION_EXECUTION_PAYLOAD_FIELD, 0)),
+)
+
+ACTION_PAYLOAD_FIELD_NAME_SEPARATOR: StaticSchema = (3, n0, _APFNS, 0)
+
+PLUGIN_ID: StaticSchema = (3, n0, _PI, 0)
+
+ACTION_EXECUTION: StaticSchema = (
+    18,
+    n0,
+    _AE,
+    0,
+    (_pI, _pa, _pFNS),
+    (
+        (PLUGIN_ID, 1),
+        (ACTION_EXECUTION_PAYLOAD, 1),
+        (ACTION_PAYLOAD_FIELD_NAME_SEPARATOR, 1),
+    ),
+)
+
+ACTION_EXECUTION_EVENT: StaticSchema = (
+    18,
+    n0,
+    _AEE,
+    0,
+    (_pI, _pa, _pFNS),
+    (
+        (PLUGIN_ID, 1),
+        (ACTION_EXECUTION_PAYLOAD, 1),
+        (ACTION_PAYLOAD_FIELD_NAME_SEPARATOR, 1),
+    ),
+)
+
+ACTION_PAYLOAD_FIELD_TYPE: StaticSchema = (
+    14,
+    n0,
+    _APFT,
+    0,
+    (_STRING, _NUMBER, _ARRAY, _BOOLEAN),
+    (
+        (-1, {_sV: _STRING}),
+        (-1, {_sV: _NUMBER}),
+        (-1, {_sV: _ARRAY}),
+        (-1, {_sV: _BOOLEAN}),
+    ),
+)
+
+ACTION_REVIEW_PAYLOAD_FIELD_ALLOWED_VALUE: StaticSchema = (
+    18,
+    n0,
+    _ARPFAV,
+    0,
+    (_v, _dVi),
+    ((ACTION_PAYLOAD_FIELD_VALUE, 0), (ACTION_PAYLOAD_FIELD_VALUE, 0)),
+)
+
+ACTION_REVIEW_PAYLOAD_FIELD_ALLOWED_VALUES: StaticSchema = (
+    16,
+    n0,
+    _ARPFAVc,
+    0,
+    (_m,),
+    ((ACTION_REVIEW_PAYLOAD_FIELD_ALLOWED_VALUE, 0),),
+)
+
+ACTION_REVIEW_PAYLOAD_FIELD_ARRAY_ITEM_JSON_SCHEMA: StaticSchema = (
+    13,
+    n0,
+    _ARPFAIJS,
+    0,
+)
 
-IMAGE_EXTRACTION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ImageExtractionStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-IMAGE_EXTRACTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ImageExtractionConfiguration"),
-    members={
-        "imageExtractionStatus": {
-            "target": IMAGE_EXTRACTION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-VIDEO_EXTRACTION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#VideoExtractionStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-VIDEO_EXTRACTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#VideoExtractionConfiguration"),
-    members={
-        "videoExtractionStatus": {
-            "target": VIDEO_EXTRACTION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-MEDIA_EXTRACTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MediaExtractionConfiguration"),
-    members={
-        "imageExtractionConfiguration": {"target": IMAGE_EXTRACTION_CONFIGURATION},
-        "audioExtractionConfiguration": {"target": AUDIO_EXTRACTION_CONFIGURATION},
-        "videoExtractionConfiguration": {"target": VIDEO_EXTRACTION_CONFIGURATION},
-    },
-)
-
-SYNC_SCHEDULE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SyncSchedule"), shape_type=ShapeType.STRING
-)
-
-SECURITY_GROUP_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SecurityGroupId"), shape_type=ShapeType.STRING
-)
-
-SECURITY_GROUP_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SecurityGroupIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SECURITY_GROUP_ID}},
-)
-
-SUBNET_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SubnetId"), shape_type=ShapeType.STRING
-)
-
-SUBNET_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SubnetIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SUBNET_ID}},
-)
-
-DATA_SOURCE_VPC_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceVpcConfiguration"),
-    members={
-        "subnetIds": {
-            "target": SUBNET_IDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "securityGroupIds": {
-            "target": SECURITY_GROUP_IDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CREATE_DATA_SOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateDataSourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateDataSourceRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "displayName": {
-            "target": DATA_SOURCE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "configuration": {
-            "target": DATA_SOURCE_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "vpcConfiguration": {"target": DATA_SOURCE_VPC_CONFIGURATION},
-        "description": {"target": DESCRIPTION},
-        "tags": {"target": TAGS},
-        "syncSchedule": {"target": SYNC_SCHEDULE},
-        "roleArn": {"target": ROLE_ARN},
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "documentEnrichmentConfiguration": {
-            "target": DOCUMENT_ENRICHMENT_CONFIGURATION
-        },
-        "mediaExtractionConfiguration": {"target": MEDIA_EXTRACTION_CONFIGURATION},
-    },
-)
-
-DATA_SOURCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceArn"), shape_type=ShapeType.STRING
-)
-
-DATA_SOURCE_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceId"), shape_type=ShapeType.STRING
-)
-
-CREATE_DATA_SOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateDataSourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateDataSourceResponse",
-        )
-    ],
-    members={
-        "dataSourceId": {"target": DATA_SOURCE_ID},
-        "dataSourceArn": {"target": DATA_SOURCE_ARN},
-    },
-)
-
-CREATE_DATA_SOURCE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CreateDataSource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/indices/{indexId}/datasources",
-                    "method": "POST",
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_DATA_SOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteDataSourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteDataSourceRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "dataSourceId": {
-            "target": DATA_SOURCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_DATA_SOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteDataSourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteDataSourceResponse",
-        )
-    ],
-)
-
-DELETE_DATA_SOURCE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteDataSource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}",
-                    "method": "DELETE",
-                }
-            ),
-        )
-    ],
-)
-
-GET_DATA_SOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetDataSourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetDataSourceRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "dataSourceId": {
-            "target": DATA_SOURCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DATA_SOURCE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "PENDING_CREATION": {"target": UNIT},
-        "CREATING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-    },
-)
-
-GET_DATA_SOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetDataSourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetDataSourceResponse",
-        )
-    ],
-    members={
-        "applicationId": {"target": APPLICATION_ID},
-        "indexId": {"target": INDEX_ID},
-        "dataSourceId": {"target": DATA_SOURCE_ID},
-        "dataSourceArn": {"target": DATA_SOURCE_ARN},
-        "displayName": {"target": DATA_SOURCE_NAME},
-        "type": {"target": STRING},
-        "configuration": {"target": DATA_SOURCE_CONFIGURATION},
-        "vpcConfiguration": {"target": DATA_SOURCE_VPC_CONFIGURATION},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-        "description": {"target": DESCRIPTION},
-        "status": {"target": DATA_SOURCE_STATUS},
-        "syncSchedule": {"target": SYNC_SCHEDULE},
-        "roleArn": {"target": ROLE_ARN},
-        "error": {"target": ERROR_DETAIL},
-        "documentEnrichmentConfiguration": {
-            "target": DOCUMENT_ENRICHMENT_CONFIGURATION
-        },
-        "mediaExtractionConfiguration": {"target": MEDIA_EXTRACTION_CONFIGURATION},
-    },
-)
-
-GET_DATA_SOURCE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetDataSource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}",
-                    "method": "GET",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_DATA_SOURCES = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListDataSources"),
-    shape_type=ShapeType.INTEGER,
-)
-
-NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#NextToken"), shape_type=ShapeType.STRING
-)
-
-LIST_DATA_SOURCES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListDataSourcesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListDataSourcesRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_DATA_SOURCES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-DATA_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataSource"),
-    members={
-        "displayName": {"target": DATA_SOURCE_NAME},
-        "dataSourceId": {"target": DATA_SOURCE_ID},
-        "type": {"target": STRING},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-        "status": {"target": DATA_SOURCE_STATUS},
-    },
-)
-
-DATA_SOURCES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataSources"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DATA_SOURCE}},
-)
-
-LIST_DATA_SOURCES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListDataSourcesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListDataSourcesResponse",
-        )
-    ],
-    members={
-        "dataSources": {"target": DATA_SOURCES},
-        "nextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LIST_DATA_SOURCES = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListDataSources"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/indices/{indexId}/datasources",
-                    "method": "GET",
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_DATA_SOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateDataSourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateDataSourceRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "dataSourceId": {
-            "target": DATA_SOURCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "displayName": {"target": DATA_SOURCE_NAME},
-        "configuration": {"target": DATA_SOURCE_CONFIGURATION},
-        "vpcConfiguration": {"target": DATA_SOURCE_VPC_CONFIGURATION},
-        "description": {"target": DESCRIPTION},
-        "syncSchedule": {"target": SYNC_SCHEDULE},
-        "roleArn": {"target": ROLE_ARN},
-        "documentEnrichmentConfiguration": {
-            "target": DOCUMENT_ENRICHMENT_CONFIGURATION
-        },
-        "mediaExtractionConfiguration": {"target": MEDIA_EXTRACTION_CONFIGURATION},
-    },
-)
-
-UPDATE_DATA_SOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateDataSourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateDataSourceResponse",
-        )
-    ],
-)
-
-UPDATE_DATA_SOURCE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateDataSource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}",
-                    "method": "PUT",
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_INDEX_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteIndexInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteIndexRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_INDEX_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteIndexOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteIndexResponse",
-        )
-    ],
-)
-
-DELETE_INDEX = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteIndex"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/indices/{indexId}",
-                    "method": "DELETE",
-                }
-            ),
-        )
-    ],
-)
-
-GET_INDEX_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetIndexInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetIndexRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DOCUMENT_METADATA_CONFIGURATION_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentMetadataConfigurationName"),
-    shape_type=ShapeType.STRING,
-)
-
-STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Status"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-ATTRIBUTE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttributeType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "STRING": {"target": UNIT},
-        "STRING_LIST": {"target": UNIT},
-        "NUMBER": {"target": UNIT},
-        "DATE": {"target": UNIT},
-    },
-)
-
-DOCUMENT_ATTRIBUTE_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeConfiguration"),
-    members={
-        "name": {"target": DOCUMENT_METADATA_CONFIGURATION_NAME},
-        "type": {"target": ATTRIBUTE_TYPE},
-        "search": {"target": STATUS},
-    },
-)
-
-DOCUMENT_ATTRIBUTE_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOCUMENT_ATTRIBUTE_CONFIGURATION}},
-)
-
-INDEXED_TEXT_BYTES = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IndexedTextBytes"), shape_type=ShapeType.LONG
-)
-
-INDEXED_TEXT_DOCUMENT = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IndexedTextDocument"),
-    shape_type=ShapeType.INTEGER,
-)
-
-TEXT_DOCUMENT_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#TextDocumentStatistics"),
-    members={
-        "indexedTextBytes": {"target": INDEXED_TEXT_BYTES},
-        "indexedTextDocumentCount": {"target": INDEXED_TEXT_DOCUMENT},
-    },
-)
-
-INDEX_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#IndexStatistics"),
-    members={"textDocumentStatistics": {"target": TEXT_DOCUMENT_STATISTICS}},
-)
-
-INDEX_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#IndexStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-    },
-)
-
-GET_INDEX_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetIndexOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetIndexResponse",
-        )
-    ],
-    members={
-        "applicationId": {"target": APPLICATION_ID},
-        "indexId": {"target": INDEX_ID},
-        "displayName": {"target": INDEX_NAME},
-        "indexArn": {"target": INDEX_ARN},
-        "status": {"target": INDEX_STATUS},
-        "type": {"target": INDEX_TYPE},
-        "description": {"target": DESCRIPTION},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-        "capacityConfiguration": {"target": INDEX_CAPACITY_CONFIGURATION},
-        "documentAttributeConfigurations": {
-            "target": DOCUMENT_ATTRIBUTE_CONFIGURATIONS
-        },
-        "error": {"target": ERROR_DETAIL},
-        "indexStatistics": {"target": INDEX_STATISTICS},
-    },
-)
-
-GET_INDEX = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetIndex"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/indices/{indexId}",
-                    "method": "GET",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_INDICES = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListIndices"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_INDICES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListIndicesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListIndicesRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_INDICES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-INDEX = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Index"),
-    members={
-        "displayName": {"target": INDEX_NAME},
-        "indexId": {"target": INDEX_ID},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-        "status": {"target": INDEX_STATUS},
-    },
-)
-
-INDICES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Indices"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": INDEX}},
-)
-
-LIST_INDICES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListIndicesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListIndicesResponse",
-        )
-    ],
-    members={"nextToken": {"target": NEXT_TOKEN}, "indices": {"target": INDICES}},
-)
-
-LIST_INDICES = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListIndices"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/indices", "method": "GET"}
-            ),
-        )
-    ],
-)
-
-UPDATE_INDEX_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateIndexInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateIndexRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "displayName": {"target": APPLICATION_NAME},
-        "description": {"target": DESCRIPTION},
-        "capacityConfiguration": {"target": INDEX_CAPACITY_CONFIGURATION},
-        "documentAttributeConfigurations": {
-            "target": DOCUMENT_ATTRIBUTE_CONFIGURATIONS
-        },
-    },
-)
-
-UPDATE_INDEX_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateIndexOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateIndexResponse",
-        )
-    ],
-)
-
-UPDATE_INDEX = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateIndex"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/indices/{indexId}",
-                    "method": "PUT",
-                }
-            ),
-        )
-    ],
-)
-
-INTEGRATION_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#IntegrationId"), shape_type=ShapeType.STRING
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_APPLICATIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListApplications"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_APPLICATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListApplicationsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListApplicationsRequest",
-        )
-    ],
-    members={
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_APPLICATIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-APPLICATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Applications"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": APPLICATION}},
-)
-
-LIST_APPLICATIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListApplicationsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListApplicationsResponse",
-        )
-    ],
-    members={
-        "nextToken": {"target": NEXT_TOKEN},
-        "applications": {"target": APPLICATIONS},
-    },
-)
-
-LIST_APPLICATIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListApplications"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"uri": "/applications", "method": "GET"}),
-        )
-    ],
-)
-
-SECRET_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SecretArn"), shape_type=ShapeType.STRING
-)
-
-BASIC_AUTH_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#BasicAuthConfiguration"),
-    members={
-        "secretArn": {
-            "target": SECRET_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "roleArn": {
-            "target": ROLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-IDC_AUTH_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#IdcAuthConfiguration"),
-    members={
-        "idcApplicationArn": {
-            "target": IDC_APPLICATION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "roleArn": {
-            "target": ROLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-NO_AUTH_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#NoAuthConfiguration")
-)
-
-URL = Schema(id=ShapeID("com.amazonaws.qbusiness#Url"), shape_type=ShapeType.STRING)
-
-O_AUTH2_CLIENT_CREDENTIAL_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#OAuth2ClientCredentialConfiguration"),
-    members={
-        "secretArn": {
-            "target": SECRET_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "roleArn": {
-            "target": ROLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "authorizationUrl": {"target": URL},
-        "tokenUrl": {"target": URL},
-    },
-)
-
-PLUGIN_AUTH_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PluginAuthConfiguration"),
-    shape_type=ShapeType.UNION,
-    members={
-        "basicAuthConfiguration": {"target": BASIC_AUTH_CONFIGURATION},
-        "oAuth2ClientCredentialConfiguration": {
-            "target": O_AUTH2_CLIENT_CREDENTIAL_CONFIGURATION
-        },
-        "noAuthConfiguration": {"target": NO_AUTH_CONFIGURATION},
-        "idcAuthConfiguration": {"target": IDC_AUTH_CONFIGURATION},
-    },
-)
-
-PLUGIN_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PluginDescription"), shape_type=ShapeType.STRING
-)
-
-CUSTOM_PLUGIN_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CustomPluginConfiguration"),
-    members={
-        "description": {
-            "target": PLUGIN_DESCRIPTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "apiSchemaType": {
-            "target": API_SCHEMA_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "apiSchema": {"target": API_SCHEMA},
-    },
-)
-
-PLUGIN_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PluginName"), shape_type=ShapeType.STRING
-)
-
-CREATE_PLUGIN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreatePluginInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreatePluginRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "displayName": {
-            "target": PLUGIN_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "type": {
-            "target": PLUGIN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "authConfiguration": {
-            "target": PLUGIN_AUTH_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "serverUrl": {"target": URL},
-        "customPluginConfiguration": {"target": CUSTOM_PLUGIN_CONFIGURATION},
-        "tags": {"target": TAGS},
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-    },
-)
-
-PLUGIN_BUILD_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PluginBuildStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "READY": {"target": UNIT},
-        "CREATE_IN_PROGRESS": {"target": UNIT},
-        "CREATE_FAILED": {"target": UNIT},
-        "UPDATE_IN_PROGRESS": {"target": UNIT},
-        "UPDATE_FAILED": {"target": UNIT},
-        "DELETE_IN_PROGRESS": {"target": UNIT},
-        "DELETE_FAILED": {"target": UNIT},
-    },
-)
-
-PLUGIN_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PluginArn"), shape_type=ShapeType.STRING
-)
-
-CREATE_PLUGIN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreatePluginOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreatePluginResponse",
-        )
-    ],
-    members={
-        "pluginId": {"target": PLUGIN_ID},
-        "pluginArn": {"target": PLUGIN_ARN},
-        "buildStatus": {"target": PLUGIN_BUILD_STATUS},
-    },
-)
-
-CREATE_PLUGIN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CreatePlugin"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/applications/{applicationId}/plugins"}
-            ),
-        )
-    ],
-)
-
-DELETE_PLUGIN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeletePluginInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeletePluginRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "pluginId": {
-            "target": PLUGIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_PLUGIN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeletePluginOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeletePluginResponse",
-        )
-    ],
-)
-
-DELETE_PLUGIN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeletePlugin"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/applications/{applicationId}/plugins/{pluginId}",
-                }
-            ),
-        )
-    ],
-)
-
-GET_PLUGIN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetPluginInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetPluginRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "pluginId": {
-            "target": PLUGIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-PLUGIN_STATE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PluginState"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-GET_PLUGIN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetPluginOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetPluginResponse",
-        )
-    ],
-    members={
-        "applicationId": {"target": APPLICATION_ID},
-        "pluginId": {"target": PLUGIN_ID},
-        "displayName": {"target": PLUGIN_NAME},
-        "type": {"target": PLUGIN_TYPE},
-        "serverUrl": {"target": URL},
-        "authConfiguration": {"target": PLUGIN_AUTH_CONFIGURATION},
-        "customPluginConfiguration": {"target": CUSTOM_PLUGIN_CONFIGURATION},
-        "buildStatus": {"target": PLUGIN_BUILD_STATUS},
-        "pluginArn": {"target": PLUGIN_ARN},
-        "state": {"target": PLUGIN_STATE},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-    },
-)
-
-GET_PLUGIN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetPlugin"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/applications/{applicationId}/plugins/{pluginId}",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_PLUGINS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListPlugins"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_PLUGINS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListPluginsRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_PLUGINS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-PLUGIN = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Plugin"),
-    members={
-        "pluginId": {"target": PLUGIN_ID},
-        "displayName": {"target": PLUGIN_NAME},
-        "type": {"target": PLUGIN_TYPE},
-        "serverUrl": {"target": URL},
-        "state": {"target": PLUGIN_STATE},
-        "buildStatus": {"target": PLUGIN_BUILD_STATUS},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-    },
-)
-
-PLUGINS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Plugins"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PLUGIN}},
-)
-
-LIST_PLUGINS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListPluginsResponse",
-        )
-    ],
-    members={"nextToken": {"target": NEXT_TOKEN}, "plugins": {"target": PLUGINS}},
-)
-
-LIST_PLUGINS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListPlugins"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/applications/{applicationId}/plugins"}
-            ),
-        )
-    ],
-)
-
-UPDATE_PLUGIN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdatePluginInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdatePluginRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "pluginId": {
-            "target": PLUGIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "displayName": {"target": PLUGIN_NAME},
-        "state": {"target": PLUGIN_STATE},
-        "serverUrl": {"target": URL},
-        "customPluginConfiguration": {"target": CUSTOM_PLUGIN_CONFIGURATION},
-        "authConfiguration": {"target": PLUGIN_AUTH_CONFIGURATION},
-    },
-)
-
-UPDATE_PLUGIN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdatePluginOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdatePluginResponse",
-        )
-    ],
-)
-
-UPDATE_PLUGIN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UpdatePlugin"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/applications/{applicationId}/plugins/{pluginId}",
-                }
-            ),
-        )
-    ],
-)
-
-KENDRA_INDEX_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#KendraIndexId"), shape_type=ShapeType.STRING
-)
-
-KENDRA_INDEX_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#KendraIndexConfiguration"),
-    members={
-        "indexId": {
-            "target": KENDRA_INDEX_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-BOOSTING_DURATION_IN_SECONDS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#BoostingDurationInSeconds"),
-    shape_type=ShapeType.LONG,
-)
-
-DOCUMENT_ATTRIBUTE_BOOSTING_LEVEL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeBoostingLevel"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "NONE": {"target": UNIT},
-        "LOW": {"target": UNIT},
-        "MEDIUM": {"target": UNIT},
-        "HIGH": {"target": UNIT},
-        "VERY_HIGH": {"target": UNIT},
-        "ONE": {"target": UNIT},
-        "TWO": {"target": UNIT},
-    },
-)
-
-DATE_ATTRIBUTE_BOOSTING_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DateAttributeBoostingConfiguration"),
-    members={
-        "boostingLevel": {
-            "target": DOCUMENT_ATTRIBUTE_BOOSTING_LEVEL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "boostingDurationInSeconds": {"target": BOOSTING_DURATION_IN_SECONDS},
-    },
-)
-
-NUMBER_ATTRIBUTE_BOOSTING_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#NumberAttributeBoostingType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "PRIORITIZE_LARGER_VALUES": {"target": UNIT},
-        "PRIORITIZE_SMALLER_VALUES": {"target": UNIT},
-    },
-)
-
-NUMBER_ATTRIBUTE_BOOSTING_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#NumberAttributeBoostingConfiguration"),
-    members={
-        "boostingLevel": {
-            "target": DOCUMENT_ATTRIBUTE_BOOSTING_LEVEL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "boostingType": {"target": NUMBER_ATTRIBUTE_BOOSTING_TYPE},
-    },
-)
-
-STRING_ATTRIBUTE_VALUE_BOOSTING_LEVEL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#StringAttributeValueBoostingLevel"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "LOW": {"target": UNIT},
-        "MEDIUM": {"target": UNIT},
-        "HIGH": {"target": UNIT},
-        "VERY_HIGH": {"target": UNIT},
-        "ONE": {"target": UNIT},
-        "TWO": {"target": UNIT},
-        "THREE": {"target": UNIT},
-        "FOUR": {"target": UNIT},
-        "FIVE": {"target": UNIT},
-    },
-)
-
-STRING_ATTRIBUTE_VALUE_BOOSTING = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#StringAttributeValueBoosting"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": STRING},
-        "value": {"target": STRING_ATTRIBUTE_VALUE_BOOSTING_LEVEL},
-    },
-)
-
-STRING_ATTRIBUTE_BOOSTING_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#StringAttributeBoostingConfiguration"),
-    members={
-        "boostingLevel": {
-            "target": DOCUMENT_ATTRIBUTE_BOOSTING_LEVEL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "attributeValueBoosting": {"target": STRING_ATTRIBUTE_VALUE_BOOSTING},
-    },
-)
-
-STRING_LIST_ATTRIBUTE_BOOSTING_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#StringListAttributeBoostingConfiguration"),
-    members={
-        "boostingLevel": {
-            "target": DOCUMENT_ATTRIBUTE_BOOSTING_LEVEL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DOCUMENT_ATTRIBUTE_BOOSTING_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeBoostingConfiguration"),
-    shape_type=ShapeType.UNION,
-    members={
-        "numberConfiguration": {"target": NUMBER_ATTRIBUTE_BOOSTING_CONFIGURATION},
-        "stringConfiguration": {"target": STRING_ATTRIBUTE_BOOSTING_CONFIGURATION},
-        "dateConfiguration": {"target": DATE_ATTRIBUTE_BOOSTING_CONFIGURATION},
-        "stringListConfiguration": {
-            "target": STRING_LIST_ATTRIBUTE_BOOSTING_CONFIGURATION
-        },
-    },
-)
-
-DOCUMENT_ATTRIBUTE_BOOSTING_OVERRIDE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributeBoostingOverrideMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": DOCUMENT_ATTRIBUTE_KEY},
-        "value": {"target": DOCUMENT_ATTRIBUTE_BOOSTING_CONFIGURATION},
-    },
-)
-
-NATIVE_INDEX_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#NativeIndexConfiguration"),
-    members={
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "version": {"target": LONG},
-        "boostingOverride": {"target": DOCUMENT_ATTRIBUTE_BOOSTING_OVERRIDE_MAP},
-    },
-)
-
-RETRIEVER_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#RetrieverConfiguration"),
-    shape_type=ShapeType.UNION,
-    members={
-        "nativeIndexConfiguration": {"target": NATIVE_INDEX_CONFIGURATION},
-        "kendraIndexConfiguration": {"target": KENDRA_INDEX_CONFIGURATION},
-    },
-)
-
-RETRIEVER_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#RetrieverName"), shape_type=ShapeType.STRING
-)
-
-RETRIEVER_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#RetrieverType"),
-    shape_type=ShapeType.ENUM,
-    members={"NATIVE_INDEX": {"target": UNIT}, "KENDRA_INDEX": {"target": UNIT}},
-)
-
-CREATE_RETRIEVER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateRetrieverInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateRetrieverRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "type": {
-            "target": RETRIEVER_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "displayName": {
-            "target": RETRIEVER_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "configuration": {
-            "target": RETRIEVER_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "roleArn": {"target": ROLE_ARN},
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "tags": {"target": TAGS},
-    },
-)
-
-RETRIEVER_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#RetrieverArn"), shape_type=ShapeType.STRING
-)
-
-RETRIEVER_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#RetrieverId"), shape_type=ShapeType.STRING
-)
-
-CREATE_RETRIEVER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateRetrieverOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateRetrieverResponse",
-        )
-    ],
-    members={
-        "retrieverId": {"target": RETRIEVER_ID},
-        "retrieverArn": {"target": RETRIEVER_ARN},
-    },
-)
-
-CREATE_RETRIEVER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CreateRetriever"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/applications/{applicationId}/retrievers"}
-            ),
-        )
-    ],
-)
-
-DELETE_RETRIEVER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteRetrieverInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteRetrieverRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "retrieverId": {
-            "target": RETRIEVER_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_RETRIEVER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteRetrieverOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteRetrieverResponse",
-        )
-    ],
-)
-
-DELETE_RETRIEVER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteRetriever"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/applications/{applicationId}/retrievers/{retrieverId}",
-                }
-            ),
-        )
-    ],
-)
-
-GET_RETRIEVER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetRetrieverInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetRetrieverRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "retrieverId": {
-            "target": RETRIEVER_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-RETRIEVER_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#RetrieverStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-    },
-)
-
-GET_RETRIEVER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetRetrieverOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetRetrieverResponse",
-        )
-    ],
-    members={
-        "applicationId": {"target": APPLICATION_ID},
-        "retrieverId": {"target": RETRIEVER_ID},
-        "retrieverArn": {"target": RETRIEVER_ARN},
-        "type": {"target": RETRIEVER_TYPE},
-        "status": {"target": RETRIEVER_STATUS},
-        "displayName": {"target": RETRIEVER_NAME},
-        "configuration": {"target": RETRIEVER_CONFIGURATION},
-        "roleArn": {"target": ROLE_ARN},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-    },
-)
-
-GET_RETRIEVER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetRetriever"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/applications/{applicationId}/retrievers/{retrieverId}",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_RETRIEVERS_REQUEST = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListRetrieversRequest"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_RETRIEVERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListRetrieversInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListRetrieversRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_RETRIEVERS_REQUEST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-RETRIEVER = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Retriever"),
-    members={
-        "applicationId": {"target": APPLICATION_ID},
-        "retrieverId": {"target": RETRIEVER_ID},
-        "type": {"target": RETRIEVER_TYPE},
-        "status": {"target": RETRIEVER_STATUS},
-        "displayName": {"target": RETRIEVER_NAME},
-    },
-)
-
-RETRIEVERS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Retrievers"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RETRIEVER}},
-)
-
-LIST_RETRIEVERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListRetrieversOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListRetrieversResponse",
-        )
-    ],
-    members={"retrievers": {"target": RETRIEVERS}, "nextToken": {"target": NEXT_TOKEN}},
-)
-
-LIST_RETRIEVERS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListRetrievers"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/retrievers", "method": "GET"}
-            ),
-        )
-    ],
-)
-
-UPDATE_RETRIEVER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateRetrieverInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateRetrieverRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "retrieverId": {
-            "target": RETRIEVER_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "configuration": {"target": RETRIEVER_CONFIGURATION},
-        "displayName": {"target": RETRIEVER_NAME},
-        "roleArn": {"target": ROLE_ARN},
-    },
-)
-
-UPDATE_RETRIEVER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateRetrieverOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateRetrieverResponse",
-        )
-    ],
-)
-
-UPDATE_RETRIEVER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateRetriever"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/applications/{applicationId}/retrievers/{retrieverId}",
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_APPLICATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateApplicationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateApplicationRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "identityCenterInstanceArn": {"target": INSTANCE_ARN},
-        "displayName": {"target": APPLICATION_NAME},
-        "description": {"target": DESCRIPTION},
-        "roleArn": {"target": ROLE_ARN},
-        "attachmentsConfiguration": {"target": ATTACHMENTS_CONFIGURATION},
-        "qAppsConfiguration": {"target": Q_APPS_CONFIGURATION},
-        "personalizationConfiguration": {"target": PERSONALIZATION_CONFIGURATION},
-        "autoSubscriptionConfiguration": {"target": AUTO_SUBSCRIPTION_CONFIGURATION},
-    },
-)
-
-UPDATE_APPLICATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateApplicationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateApplicationResponse",
-        )
-    ],
-)
-
-UPDATE_APPLICATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateApplication"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}", "method": "PUT"}
-            ),
-        )
-    ],
-)
-
-BROWSER_EXTENSION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#BrowserExtension"), shape_type=ShapeType.STRING
-)
-
-BROWSER_EXTENSION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#BrowserExtensionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BROWSER_EXTENSION}},
-)
-
-BROWSER_EXTENSION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#BrowserExtensionConfiguration"),
-    members={
-        "enabledBrowserExtensions": {
-            "target": BROWSER_EXTENSION_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CUSTOM_CSS_URL = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CustomCSSUrl"), shape_type=ShapeType.STRING
-)
-
-FAVICON_URL = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#FaviconUrl"), shape_type=ShapeType.STRING
-)
-
-FONT_URL = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#FontUrl"), shape_type=ShapeType.STRING
-)
-
-LOGO_URL = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#LogoUrl"), shape_type=ShapeType.STRING
-)
-
-CUSTOMIZATION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CustomizationConfiguration"),
-    members={
-        "customCSSUrl": {"target": CUSTOM_CSS_URL},
-        "logoUrl": {"target": LOGO_URL},
-        "fontUrl": {"target": FONT_URL},
-        "faviconUrl": {"target": FAVICON_URL},
-    },
-)
-
-OPEN_ID_CONNECT_PROVIDER_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#OpenIDConnectProviderConfiguration"),
-    members={
-        "secretsArn": {
-            "target": SECRET_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "secretsRole": {
-            "target": ROLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-SAML_AUTHENTICATION_URL = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SamlAuthenticationUrl"),
-    shape_type=ShapeType.STRING,
-)
-
-SAML_PROVIDER_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SamlProviderConfiguration"),
-    members={
-        "authenticationUrl": {
-            "target": SAML_AUTHENTICATION_URL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-IDENTITY_PROVIDER_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#IdentityProviderConfiguration"),
-    shape_type=ShapeType.UNION,
-    members={
-        "samlConfiguration": {"target": SAML_PROVIDER_CONFIGURATION},
-        "openIDConnectConfiguration": {
-            "target": OPEN_ID_CONNECT_PROVIDER_CONFIGURATION
-        },
-    },
-)
-
-ORIGIN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Origin"), shape_type=ShapeType.STRING
-)
-
-WEB_EXPERIENCE_ORIGINS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperienceOrigins"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ORIGIN}},
-)
-
-WEB_EXPERIENCE_SAMPLE_PROMPTS_CONTROL_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperienceSamplePromptsControlMode"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-WEB_EXPERIENCE_SUBTITLE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperienceSubtitle"),
-    shape_type=ShapeType.STRING,
-)
-
-WEB_EXPERIENCE_TITLE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperienceTitle"),
-    shape_type=ShapeType.STRING,
-)
-
-WEB_EXPERIENCE_WELCOME_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperienceWelcomeMessage"),
-    shape_type=ShapeType.STRING,
-)
-
-CREATE_WEB_EXPERIENCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateWebExperienceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateWebExperienceRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "title": {"target": WEB_EXPERIENCE_TITLE},
-        "subtitle": {"target": WEB_EXPERIENCE_SUBTITLE},
-        "welcomeMessage": {"target": WEB_EXPERIENCE_WELCOME_MESSAGE},
-        "samplePromptsControlMode": {
-            "target": WEB_EXPERIENCE_SAMPLE_PROMPTS_CONTROL_MODE
-        },
-        "origins": {"target": WEB_EXPERIENCE_ORIGINS},
-        "roleArn": {"target": ROLE_ARN},
-        "tags": {"target": TAGS},
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "identityProviderConfiguration": {"target": IDENTITY_PROVIDER_CONFIGURATION},
-        "browserExtensionConfiguration": {"target": BROWSER_EXTENSION_CONFIGURATION},
-        "customizationConfiguration": {"target": CUSTOMIZATION_CONFIGURATION},
-    },
-)
-
-WEB_EXPERIENCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperienceArn"), shape_type=ShapeType.STRING
-)
-
-WEB_EXPERIENCE_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperienceId"), shape_type=ShapeType.STRING
-)
-
-CREATE_WEB_EXPERIENCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateWebExperienceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateWebExperienceResponse",
-        )
-    ],
-    members={
-        "webExperienceId": {"target": WEB_EXPERIENCE_ID},
-        "webExperienceArn": {"target": WEB_EXPERIENCE_ARN},
-    },
-)
-
-CREATE_WEB_EXPERIENCE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CreateWebExperience"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/experiences", "method": "POST"}
-            ),
-        )
-    ],
-)
-
-DELETE_WEB_EXPERIENCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteWebExperienceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteWebExperienceRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "webExperienceId": {
-            "target": WEB_EXPERIENCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_WEB_EXPERIENCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteWebExperienceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteWebExperienceResponse",
-        )
-    ],
-)
-
-DELETE_WEB_EXPERIENCE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteWebExperience"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/experiences/{webExperienceId}",
-                    "method": "DELETE",
-                }
-            ),
-        )
-    ],
-)
-
-GET_WEB_EXPERIENCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetWebExperienceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetWebExperienceRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "webExperienceId": {
-            "target": WEB_EXPERIENCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-SAML_METADATA_XML = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SamlMetadataXML"), shape_type=ShapeType.STRING
-)
-
-SAML_ATTRIBUTE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SamlAttribute"), shape_type=ShapeType.STRING
-)
-
-SAML_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SamlConfiguration"),
-    members={
-        "metadataXML": {
-            "target": SAML_METADATA_XML,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "roleArn": {
-            "target": ROLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "userIdAttribute": {
-            "target": SAML_ATTRIBUTE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "userGroupAttribute": {"target": SAML_ATTRIBUTE},
-    },
-)
-
-WEB_EXPERIENCE_AUTH_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperienceAuthConfiguration"),
-    shape_type=ShapeType.UNION,
-    members={"samlConfiguration": {"target": SAML_CONFIGURATION}},
-)
-
-WEB_EXPERIENCE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperienceStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "PENDING_AUTH_CONFIG": {"target": UNIT},
-    },
-)
-
-GET_WEB_EXPERIENCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetWebExperienceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetWebExperienceResponse",
-        )
-    ],
-    members={
-        "applicationId": {"target": APPLICATION_ID},
-        "webExperienceId": {"target": WEB_EXPERIENCE_ID},
-        "webExperienceArn": {"target": WEB_EXPERIENCE_ARN},
-        "defaultEndpoint": {"target": URL},
-        "status": {"target": WEB_EXPERIENCE_STATUS},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-        "title": {"target": WEB_EXPERIENCE_TITLE},
-        "subtitle": {"target": WEB_EXPERIENCE_SUBTITLE},
-        "welcomeMessage": {"target": WEB_EXPERIENCE_WELCOME_MESSAGE},
-        "samplePromptsControlMode": {
-            "target": WEB_EXPERIENCE_SAMPLE_PROMPTS_CONTROL_MODE
-        },
-        "origins": {"target": WEB_EXPERIENCE_ORIGINS},
-        "roleArn": {"target": ROLE_ARN},
-        "identityProviderConfiguration": {"target": IDENTITY_PROVIDER_CONFIGURATION},
-        "authenticationConfiguration": {"target": WEB_EXPERIENCE_AUTH_CONFIGURATION},
-        "error": {"target": ERROR_DETAIL},
-        "browserExtensionConfiguration": {"target": BROWSER_EXTENSION_CONFIGURATION},
-        "customizationConfiguration": {"target": CUSTOMIZATION_CONFIGURATION},
-    },
-)
-
-GET_WEB_EXPERIENCE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetWebExperience"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/experiences/{webExperienceId}",
-                    "method": "GET",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_WEB_EXPERIENCES_REQUEST = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListWebExperiencesRequest"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_WEB_EXPERIENCES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListWebExperiencesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListWebExperiencesRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_WEB_EXPERIENCES_REQUEST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-WEB_EXPERIENCE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperience"),
-    members={
-        "webExperienceId": {"target": WEB_EXPERIENCE_ID},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-        "defaultEndpoint": {"target": URL},
-        "status": {"target": WEB_EXPERIENCE_STATUS},
-    },
-)
-
-WEB_EXPERIENCES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#WebExperiences"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": WEB_EXPERIENCE}},
-)
-
-LIST_WEB_EXPERIENCES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListWebExperiencesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListWebExperiencesResponse",
-        )
-    ],
-    members={
-        "webExperiences": {"target": WEB_EXPERIENCES},
-        "nextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LIST_WEB_EXPERIENCES = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListWebExperiences"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/experiences", "method": "GET"}
-            ),
-        )
-    ],
-)
-
-UPDATE_WEB_EXPERIENCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateWebExperienceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateWebExperienceRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "webExperienceId": {
-            "target": WEB_EXPERIENCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "roleArn": {"target": ROLE_ARN},
-        "authenticationConfiguration": {"target": WEB_EXPERIENCE_AUTH_CONFIGURATION},
-        "title": {"target": WEB_EXPERIENCE_TITLE},
-        "subtitle": {"target": WEB_EXPERIENCE_SUBTITLE},
-        "welcomeMessage": {"target": WEB_EXPERIENCE_WELCOME_MESSAGE},
-        "samplePromptsControlMode": {
-            "target": WEB_EXPERIENCE_SAMPLE_PROMPTS_CONTROL_MODE
-        },
-        "identityProviderConfiguration": {"target": IDENTITY_PROVIDER_CONFIGURATION},
-        "origins": {"target": WEB_EXPERIENCE_ORIGINS},
-        "browserExtensionConfiguration": {"target": BROWSER_EXTENSION_CONFIGURATION},
-        "customizationConfiguration": {"target": CUSTOMIZATION_CONFIGURATION},
-    },
-)
-
-UPDATE_WEB_EXPERIENCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateWebExperienceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateWebExperienceResponse",
-        )
-    ],
-)
-
-UPDATE_WEB_EXPERIENCE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateWebExperience"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/experiences/{webExperienceId}",
-                    "method": "PUT",
-                }
-            ),
-        )
-    ],
-)
-
-CREATOR_MODE_CONTROL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreatorModeControl"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-APPLIED_CREATOR_MODE_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AppliedCreatorModeConfiguration"),
-    members={
-        "creatorModeControl": {
-            "target": CREATOR_MODE_CONTROL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-ORCHESTRATION_CONTROL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#OrchestrationControl"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-APPLIED_ORCHESTRATION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AppliedOrchestrationConfiguration"),
-    members={
-        "control": {
-            "target": ORCHESTRATION_CONTROL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-ASSOCIATED_GROUP = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AssociatedGroup"),
-    members={"name": {"target": GROUP_NAME}, "type": {"target": MEMBERSHIP_TYPE}},
-)
-
-ASSOCIATED_GROUPS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AssociatedGroups"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ASSOCIATED_GROUP}},
-)
-
-ASSOCIATED_USER = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AssociatedUser"),
-    members={"id": {"target": STRING}, "type": {"target": MEMBERSHIP_TYPE}},
-)
-
-ASSOCIATED_USERS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AssociatedUsers"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ASSOCIATED_USER}},
-)
-
-Q_IAM_ACTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#QIamActions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": Q_IAM_ACTION}},
-)
-
-PERMISSION_CONDITION_KEY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PermissionConditionKey"),
-    shape_type=ShapeType.STRING,
-)
-
-PERMISSION_CONDITION_OPERATOR = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PermissionConditionOperator"),
-    shape_type=ShapeType.ENUM,
-    members={"STRING_EQUALS": {"target": UNIT}},
-)
-
-PERMISSION_CONDITION_VALUE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PermissionConditionValue"),
-    shape_type=ShapeType.STRING,
-)
-
-PERMISSION_CONDITION_VALUES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PermissionConditionValues"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PERMISSION_CONDITION_VALUE}},
-)
-
-PERMISSION_CONDITION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PermissionCondition"),
-    members={
-        "conditionOperator": {
-            "target": PERMISSION_CONDITION_OPERATOR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "conditionKey": {
-            "target": PERMISSION_CONDITION_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "conditionValues": {
-            "target": PERMISSION_CONDITION_VALUES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PERMISSION_CONDITIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PermissionConditions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PERMISSION_CONDITION}},
-)
-
-STATEMENT_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#StatementId"), shape_type=ShapeType.STRING
-)
-
-ASSOCIATE_PERMISSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AssociatePermissionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#AssociatePermissionRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "statementId": {
-            "target": STATEMENT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "actions": {
-            "target": Q_IAM_ACTIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "conditions": {"target": PERMISSION_CONDITIONS},
-        "principal": {
-            "target": PRINCIPAL_ROLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-ASSOCIATE_PERMISSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AssociatePermissionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#AssociatePermissionResponse",
-        )
-    ],
-    members={"statement": {"target": STRING}},
-)
-
-ASSOCIATE_PERMISSION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#AssociatePermission"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/policy", "method": "POST"}
-            ),
-        )
-    ],
-)
-
-ATTACHMENT_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentId"), shape_type=ShapeType.STRING
-)
-
-CONVERSATION_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ConversationSource"),
-    members={
-        "conversationId": {
-            "target": CONVERSATION_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "attachmentId": {
-            "target": ATTACHMENT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-COPY_FROM_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CopyFromSource"),
-    shape_type=ShapeType.UNION,
-    members={"conversation": {"target": CONVERSATION_SOURCE}},
-)
-
-ATTACHMENT_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentName"), shape_type=ShapeType.STRING
-)
-
-ATTACHMENT_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"FAILED": {"target": UNIT}, "SUCCESS": {"target": UNIT}},
-)
-
-ATTACHMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Attachment"),
-    members={
-        "attachmentId": {"target": ATTACHMENT_ID},
-        "conversationId": {"target": CONVERSATION_ID},
-        "name": {"target": ATTACHMENT_NAME},
-        "copyFrom": {"target": COPY_FROM_SOURCE},
-        "fileType": {"target": STRING},
-        "fileSize": {"target": INTEGER},
-        "md5chksum": {"target": STRING},
-        "createdAt": {"target": TIMESTAMP},
-        "status": {"target": ATTACHMENT_STATUS},
-        "error": {"target": ERROR_DETAIL},
-    },
-)
-
-BLOB = Schema(id=ShapeID("com.amazonaws.qbusiness#Blob"), shape_type=ShapeType.BLOB)
-
-ATTACHMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentInput"),
-    members={
-        "data": {"target": BLOB},
-        "name": {"target": ATTACHMENT_NAME},
-        "copyFrom": {"target": COPY_FROM_SOURCE},
-    },
-)
-
-ATTACHMENT_INPUT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentInputEvent"),
-    members={"attachment": {"target": ATTACHMENT_INPUT}},
-)
-
-ATTACHMENT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ATTACHMENT}},
-)
-
-ATTACHMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentOutput"),
-    members={
-        "name": {"target": ATTACHMENT_NAME},
-        "status": {"target": ATTACHMENT_STATUS},
-        "error": {"target": ERROR_DETAIL},
-        "attachmentId": {"target": ATTACHMENT_ID},
-        "conversationId": {"target": CONVERSATION_ID},
-    },
-)
-
-ATTACHMENTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentsInput"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ATTACHMENT_INPUT}},
-)
-
-ATTACHMENTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttachmentsOutput"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ATTACHMENT_OUTPUT}},
-)
-
-AUDIO_EXTRACTION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AudioExtractionType"),
-    shape_type=ShapeType.ENUM,
-    members={"TRANSCRIPT": {"target": UNIT}, "SUMMARY": {"target": UNIT}},
-)
-
-MEDIA_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MediaId"), shape_type=ShapeType.STRING
-)
-
-AUDIO_SOURCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AudioSourceDetails"),
-    members={
-        "mediaId": {"target": MEDIA_ID},
-        "mediaMimeType": {"target": STRING},
-        "startTimeMilliseconds": {"target": LONG},
-        "endTimeMilliseconds": {"target": LONG},
-        "audioExtractionType": {"target": AUDIO_EXTRACTION_TYPE},
-    },
-)
-
-AUTH_CHALLENGE_REQUEST = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AuthChallengeRequest"),
-    members={
-        "authorizationUrl": {
-            "target": URL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-AUTH_CHALLENGE_REQUEST_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AuthChallengeRequestEvent"),
-    members={
-        "authorizationUrl": {
-            "target": URL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-AUTH_RESPONSE_KEY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#AuthResponseKey"), shape_type=ShapeType.STRING
-)
-
-AUTH_RESPONSE_VALUE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#AuthResponseValue"), shape_type=ShapeType.STRING
-)
-
-AUTHORIZATION_RESPONSE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AuthorizationResponseMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": AUTH_RESPONSE_KEY},
-        "value": {"target": AUTH_RESPONSE_VALUE},
-    },
-)
-
-AUTH_CHALLENGE_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AuthChallengeResponse"),
-    members={
-        "responseMap": {
-            "target": AUTHORIZATION_RESPONSE_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-AUTH_CHALLENGE_RESPONSE_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AuthChallengeResponseEvent"),
-    members={
-        "responseMap": {
-            "target": AUTHORIZATION_RESPONSE_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-EXECUTION_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ExecutionId"), shape_type=ShapeType.STRING
-)
-
-DOCUMENT_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentId"), shape_type=ShapeType.STRING
-)
-
-DELETE_DOCUMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteDocument"),
-    members={
-        "documentId": {
-            "target": DOCUMENT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_DOCUMENTS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteDocuments"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DELETE_DOCUMENT}},
-)
-
-BATCH_DELETE_DOCUMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#BatchDeleteDocumentInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#BatchDeleteDocumentRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "documents": {
-            "target": DELETE_DOCUMENTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "dataSourceSyncId": {"target": EXECUTION_ID},
-    },
-)
-
-FAILED_DOCUMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#FailedDocument"),
-    members={
-        "id": {"target": DOCUMENT_ID},
-        "error": {"target": ERROR_DETAIL},
-        "dataSourceId": {"target": DATA_SOURCE_ID},
-    },
-)
-
-FAILED_DOCUMENTS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#FailedDocuments"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FAILED_DOCUMENT}},
-)
-
-BATCH_DELETE_DOCUMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#BatchDeleteDocumentOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#BatchDeleteDocumentResponse",
-        )
-    ],
-    members={"failedDocuments": {"target": FAILED_DOCUMENTS}},
-)
-
-BATCH_DELETE_DOCUMENT = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#BatchDeleteDocument"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/applications/{applicationId}/indices/{indexId}/documents/delete",
-                }
-            ),
-        )
-    ],
-)
-
-DOCUMENT_ATTRIBUTES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAttributes"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOCUMENT_ATTRIBUTE}},
-)
-
-DOCUMENT_CONTENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentContent"),
-    shape_type=ShapeType.UNION,
-    members={"blob": {"target": _BLOB}, "s3": {"target": S3}},
-)
-
-CONTENT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ContentType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "PDF": {"target": UNIT},
-        "HTML": {"target": UNIT},
-        "MS_WORD": {"target": UNIT},
-        "PLAIN_TEXT": {"target": UNIT},
-        "PPT": {"target": UNIT},
-        "RTF": {"target": UNIT},
-        "XML": {"target": UNIT},
-        "XSLT": {"target": UNIT},
-        "MS_EXCEL": {"target": UNIT},
-        "CSV": {"target": UNIT},
-        "JSON": {"target": UNIT},
-        "MD": {"target": UNIT},
-    },
-)
-
-TITLE = Schema(id=ShapeID("com.amazonaws.qbusiness#Title"), shape_type=ShapeType.STRING)
-
-DOCUMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Document"),
-    members={
-        "id": {
-            "target": DOCUMENT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "attributes": {"target": DOCUMENT_ATTRIBUTES},
-        "content": {"target": DOCUMENT_CONTENT},
-        "contentType": {"target": CONTENT_TYPE},
-        "title": {"target": TITLE},
-        "accessConfiguration": {"target": ACCESS_CONFIGURATION},
-        "documentEnrichmentConfiguration": {
-            "target": DOCUMENT_ENRICHMENT_CONFIGURATION
-        },
-        "mediaExtractionConfiguration": {"target": MEDIA_EXTRACTION_CONFIGURATION},
-    },
-)
-
-DOCUMENTS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Documents"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOCUMENT}},
-)
-
-BATCH_PUT_DOCUMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#BatchPutDocumentInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#BatchPutDocumentRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "documents": {
-            "target": DOCUMENTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "roleArn": {"target": ROLE_ARN},
-        "dataSourceSyncId": {"target": EXECUTION_ID},
-    },
-)
-
-BATCH_PUT_DOCUMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#BatchPutDocumentOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#BatchPutDocumentResponse",
-        )
-    ],
-    members={"failedDocuments": {"target": FAILED_DOCUMENTS}},
-)
-
-BATCH_PUT_DOCUMENT = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#BatchPutDocument"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/applications/{applicationId}/indices/{indexId}/documents",
-                }
-            ),
-        )
-    ],
-)
-
-BLOCKED_PHRASE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#BlockedPhrase"), shape_type=ShapeType.STRING
-)
-
-BLOCKED_PHRASES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#BlockedPhrases"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BLOCKED_PHRASE}},
-)
-
-SYSTEM_MESSAGE_OVERRIDE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SystemMessageOverride"),
-    shape_type=ShapeType.STRING,
-)
-
-BLOCKED_PHRASES_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#BlockedPhrasesConfiguration"),
-    members={
-        "blockedPhrases": {"target": BLOCKED_PHRASES},
-        "systemMessageOverride": {"target": SYSTEM_MESSAGE_OVERRIDE},
-    },
-)
-
-BLOCKED_PHRASES_CONFIGURATION_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#BlockedPhrasesConfigurationUpdate"),
-    members={
-        "blockedPhrasesToCreateOrUpdate": {"target": BLOCKED_PHRASES},
-        "blockedPhrasesToDelete": {"target": BLOCKED_PHRASES},
-        "systemMessageOverride": {"target": SYSTEM_MESSAGE_OVERRIDE},
-    },
-)
-
-SUBSCRIPTION_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SubscriptionId"), shape_type=ShapeType.STRING
-)
-
-CANCEL_SUBSCRIPTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CancelSubscriptionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CancelSubscriptionRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "subscriptionId": {
-            "target": SUBSCRIPTION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-SUBSCRIPTION_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SubscriptionDetails"),
-    members={"type": {"target": SUBSCRIPTION_TYPE}},
-)
-
-SUBSCRIPTION_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SubscriptionArn"), shape_type=ShapeType.STRING
-)
-
-CANCEL_SUBSCRIPTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CancelSubscriptionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CancelSubscriptionResponse",
-        )
-    ],
-    members={
-        "subscriptionArn": {"target": SUBSCRIPTION_ARN},
-        "currentSubscription": {"target": SUBSCRIPTION_DETAILS},
-        "nextSubscription": {"target": SUBSCRIPTION_DETAILS},
-    },
-)
-
-CANCEL_SUBSCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CancelSubscription"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/applications/{applicationId}/subscriptions/{subscriptionId}",
-                }
-            ),
-        )
-    ],
-)
-
-CHAT_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatMode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "RETRIEVAL_MODE": {"target": UNIT},
-        "CREATOR_MODE": {"target": UNIT},
-        "PLUGIN_MODE": {"target": UNIT},
-    },
-)
-
-PLUGIN_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PluginConfiguration"),
-    members={
-        "pluginId": {
-            "target": PLUGIN_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CHAT_MODE_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatModeConfiguration"),
-    shape_type=ShapeType.UNION,
-    members={"pluginConfiguration": {"target": PLUGIN_CONFIGURATION}},
-)
-
-END_OF_INPUT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#EndOfInputEvent")
-)
-
-USER_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UserMessage"), shape_type=ShapeType.STRING
-)
-
-TEXT_INPUT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#TextInputEvent"),
-    members={
-        "userMessage": {
-            "target": USER_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-USER_GROUPS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UserGroups"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-FAILED_ATTACHMENT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#FailedAttachmentEvent"),
-    members={
-        "conversationId": {"target": CONVERSATION_ID},
-        "userMessageId": {"target": MESSAGE_ID},
-        "systemMessageId": {"target": MESSAGE_ID},
-        "attachment": {"target": ATTACHMENT_OUTPUT},
-    },
-)
-
-SOURCE_ATTRIBUTION_MEDIA_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SourceAttributionMediaId"),
-    shape_type=ShapeType.STRING,
-)
-
-SNIPPET_EXCERPT_TEXT = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SnippetExcerptText"),
-    shape_type=ShapeType.STRING,
-)
-
-SNIPPET_EXCERPT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SnippetExcerpt"),
-    members={"text": {"target": SNIPPET_EXCERPT_TEXT}},
-)
-
-IMAGE_SOURCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ImageSourceDetails"),
-    members={"mediaId": {"target": MEDIA_ID}, "mediaMimeType": {"target": STRING}},
-)
-
-VIDEO_EXTRACTION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#VideoExtractionType"),
-    shape_type=ShapeType.ENUM,
-    members={"TRANSCRIPT": {"target": UNIT}, "SUMMARY": {"target": UNIT}},
-)
-
-VIDEO_SOURCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#VideoSourceDetails"),
-    members={
-        "mediaId": {"target": MEDIA_ID},
-        "mediaMimeType": {"target": STRING},
-        "startTimeMilliseconds": {"target": LONG},
-        "endTimeMilliseconds": {"target": LONG},
-        "videoExtractionType": {"target": VIDEO_EXTRACTION_TYPE},
-    },
-)
-
-SOURCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SourceDetails"),
-    shape_type=ShapeType.UNION,
-    members={
-        "imageSourceDetails": {"target": IMAGE_SOURCE_DETAILS},
-        "audioSourceDetails": {"target": AUDIO_SOURCE_DETAILS},
-        "videoSourceDetails": {"target": VIDEO_SOURCE_DETAILS},
-    },
-)
-
-TEXT_SEGMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#TextSegment"),
-    members={
-        "beginOffset": {"target": INTEGER},
-        "endOffset": {"target": INTEGER},
-        "snippetExcerpt": {"target": SNIPPET_EXCERPT},
-        "mediaId": {"target": SOURCE_ATTRIBUTION_MEDIA_ID},
-        "mediaMimeType": {"target": STRING},
-        "sourceDetails": {"target": SOURCE_DETAILS},
-    },
-)
-
-TEXT_SEGMENT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#TextSegmentList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TEXT_SEGMENT}},
-)
-
-SOURCE_ATTRIBUTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SourceAttribution"),
-    members={
-        "title": {"target": STRING},
-        "snippet": {"target": STRING},
-        "url": {"target": STRING},
-        "citationNumber": {"target": INTEGER},
-        "updatedAt": {"target": TIMESTAMP},
-        "textMessageSegments": {"target": TEXT_SEGMENT_LIST},
-        "documentId": {"target": STRING},
-        "indexId": {"target": STRING},
-        "datasourceId": {"target": STRING},
-    },
-)
-
-SOURCE_ATTRIBUTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SourceAttributions"),
-    shape_type=ShapeType.LIST,
-    traits=[Trait.new(id=ShapeID("smithy.api#sparse"))],
-    members={"member": {"target": SOURCE_ATTRIBUTION}},
-)
-
-METADATA_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MetadataEvent"),
-    members={
-        "conversationId": {"target": CONVERSATION_ID},
-        "userMessageId": {"target": MESSAGE_ID},
-        "systemMessageId": {"target": MESSAGE_ID},
-        "sourceAttributions": {"target": SOURCE_ATTRIBUTIONS},
-        "finalTextMessage": {"target": STRING},
-    },
-)
-
-SYSTEM_MESSAGE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SystemMessageType"),
-    shape_type=ShapeType.ENUM,
-    members={"RESPONSE": {"target": UNIT}, "GROUNDED_RESPONSE": {"target": UNIT}},
-)
-
-TEXT_OUTPUT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#TextOutputEvent"),
-    members={
-        "systemMessageType": {"target": SYSTEM_MESSAGE_TYPE},
-        "conversationId": {"target": CONVERSATION_ID},
-        "userMessageId": {"target": MESSAGE_ID},
-        "systemMessageId": {"target": MESSAGE_ID},
-        "systemMessage": {"target": STRING},
-    },
-)
-
-CHAT_OUTPUT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatOutputStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "textEvent": {"target": TEXT_OUTPUT_EVENT},
-        "metadataEvent": {"target": METADATA_EVENT},
-        "actionReviewEvent": {"target": ACTION_REVIEW_EVENT},
-        "failedAttachmentEvent": {"target": FAILED_ATTACHMENT_EVENT},
-        "authChallengeRequestEvent": {"target": AUTH_CHALLENGE_REQUEST_EVENT},
-    },
-)
-
-CHAT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatOutput"),
-    members={
-        "outputStream": {
-            "target": CHAT_OUTPUT_STREAM,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        }
-    },
-)
-
-EXTERNAL_RESOURCE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ExternalResourceException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=424),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-LICENSE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#LicenseNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CHAT_RESPONSE_CONFIGURATION_ARN = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ChatResponseConfigurationArn"),
-    shape_type=ShapeType.STRING,
-)
-
-CHAT_RESPONSE_CONFIGURATION_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ChatResponseConfigurationId"),
-    shape_type=ShapeType.STRING,
-)
-
-DISPLAY_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DisplayName"), shape_type=ShapeType.STRING
-)
-
-RESPONSE_CONFIGURATION_SUMMARY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ResponseConfigurationSummary"),
-    shape_type=ShapeType.STRING,
-)
-
-CHAT_RESPONSE_CONFIGURATION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatResponseConfigurationStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-    },
-)
-
-CHAT_RESPONSE_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatResponseConfiguration"),
-    members={
-        "chatResponseConfigurationId": {
-            "target": CHAT_RESPONSE_CONFIGURATION_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "chatResponseConfigurationArn": {
-            "target": CHAT_RESPONSE_CONFIGURATION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "displayName": {
-            "target": DISPLAY_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "responseConfigurationSummary": {"target": RESPONSE_CONFIGURATION_SUMMARY},
-        "status": {
-            "target": CHAT_RESPONSE_CONFIGURATION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-    },
-)
-
-RESPONSE_CONFIGURATION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ResponseConfigurationType"),
-    shape_type=ShapeType.ENUM,
-    members={"ALL": {"target": UNIT}},
-)
-
-INSTRUCTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Instruction"), shape_type=ShapeType.STRING
-)
-
-INSTRUCTION_COLLECTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#InstructionCollection"),
-    members={
-        "responseLength": {"target": INSTRUCTION},
-        "targetAudience": {"target": INSTRUCTION},
-        "perspective": {"target": INSTRUCTION},
-        "outputStyle": {"target": INSTRUCTION},
-        "identity": {"target": INSTRUCTION},
-        "tone": {"target": INSTRUCTION},
-        "customInstructions": {"target": INSTRUCTION},
-        "examples": {"target": INSTRUCTION},
-    },
-)
-
-RESPONSE_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ResponseConfiguration"),
-    members={"instructionCollection": {"target": INSTRUCTION_COLLECTION}},
-)
-
-RESPONSE_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ResponseConfigurations"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": RESPONSE_CONFIGURATION_TYPE},
-        "value": {"target": RESPONSE_CONFIGURATION},
-    },
-)
-
-CHAT_RESPONSE_CONFIGURATION_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatResponseConfigurationDetail"),
-    members={
-        "responseConfigurations": {"target": RESPONSE_CONFIGURATIONS},
-        "responseConfigurationSummary": {"target": STRING},
-        "status": {"target": CHAT_RESPONSE_CONFIGURATION_STATUS},
-        "error": {"target": ERROR_DETAIL},
-        "updatedAt": {"target": TIMESTAMP},
-    },
-)
-
-CHAT_RESPONSE_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatResponseConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CHAT_RESPONSE_CONFIGURATION}},
-)
-
-CHAT_SYNC_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatSyncOutput"),
-    members={
-        "conversationId": {"target": CONVERSATION_ID},
-        "systemMessage": {"target": STRING},
-        "systemMessageId": {"target": MESSAGE_ID},
-        "userMessageId": {"target": MESSAGE_ID},
-        "actionReview": {"target": ACTION_REVIEW},
-        "authChallengeRequest": {"target": AUTH_CHALLENGE_REQUEST},
-        "sourceAttributions": {"target": SOURCE_ATTRIBUTIONS},
-        "failedAttachments": {"target": ATTACHMENTS_OUTPUT},
-    },
-)
-
-CHECK_DOCUMENT_ACCESS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CheckDocumentAccessInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CheckDocumentAccessRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "documentId": {
-            "target": DOCUMENT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "dataSourceId": {
-            "target": DATA_SOURCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="dataSourceId")
-            ],
-        },
-    },
-)
-
-DOCUMENT_ACL_GROUP = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAclGroup"),
-    members={"name": {"target": GROUP_NAME}, "type": {"target": MEMBERSHIP_TYPE}},
-)
-
-DOCUMENT_ACL_GROUPS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAclGroups"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOCUMENT_ACL_GROUP}},
-)
-
-DOCUMENT_ACL_USER = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAclUser"),
-    members={"id": {"target": STRING}, "type": {"target": MEMBERSHIP_TYPE}},
-)
-
-DOCUMENT_ACL_USERS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAclUsers"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOCUMENT_ACL_USER}},
-)
-
-DOCUMENT_ACL_CONDITION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAclCondition"),
-    members={
-        "memberRelation": {"target": MEMBER_RELATION},
-        "users": {"target": DOCUMENT_ACL_USERS},
-        "groups": {"target": DOCUMENT_ACL_GROUPS},
-    },
-)
-
-DOCUMENT_ACL_CONDITIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAclConditions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOCUMENT_ACL_CONDITION}},
-)
-
-DOCUMENT_ACL_MEMBERSHIP = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAclMembership"),
-    members={
-        "memberRelation": {"target": MEMBER_RELATION},
-        "conditions": {"target": DOCUMENT_ACL_CONDITIONS},
-    },
-)
-
-DOCUMENT_ACL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentAcl"),
-    members={
-        "allowlist": {"target": DOCUMENT_ACL_MEMBERSHIP},
-        "denyList": {"target": DOCUMENT_ACL_MEMBERSHIP},
-    },
-)
-
-CHECK_DOCUMENT_ACCESS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CheckDocumentAccessOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CheckDocumentAccessResponse",
-        )
-    ],
-    members={
-        "userGroups": {"target": ASSOCIATED_GROUPS},
-        "userAliases": {"target": ASSOCIATED_USERS},
-        "hasAccess": {"target": BOOLEAN},
-        "documentAcl": {"target": DOCUMENT_ACL},
-    },
-)
-
-CHECK_DOCUMENT_ACCESS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CheckDocumentAccess"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/applications/{applicationId}/index/{indexId}/users/{userId}/documents/{documentId}/check-document-access",
-                }
-            ),
-        )
-    ],
-)
-
-CONTENT_BLOCKER_RULE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ContentBlockerRule"),
-    members={"systemMessageOverride": {"target": SYSTEM_MESSAGE_OVERRIDE}},
-)
-
-ELIGIBLE_DATA_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#EligibleDataSource"),
-    members={
-        "indexId": {"target": INDEX_ID},
-        "dataSourceId": {"target": DATA_SOURCE_ID},
-    },
-)
-
-ELIGIBLE_DATA_SOURCES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#EligibleDataSources"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ELIGIBLE_DATA_SOURCE}},
-)
-
-CONTENT_RETRIEVAL_RULE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ContentRetrievalRule"),
-    members={"eligibleDataSources": {"target": ELIGIBLE_DATA_SOURCES}},
-)
-
-RETRIEVER_CONTENT_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#RetrieverContentSource"),
-    members={
-        "retrieverId": {
-            "target": RETRIEVER_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CONTENT_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ContentSource"),
-    shape_type=ShapeType.UNION,
-    members={"retriever": {"target": RETRIEVER_CONTENT_SOURCE}},
-)
-
-CONVERSATION_TITLE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ConversationTitle"), shape_type=ShapeType.STRING
-)
-
-CONVERSATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Conversation"),
-    members={
-        "conversationId": {"target": CONVERSATION_ID},
-        "title": {"target": CONVERSATION_TITLE},
-        "startTime": {"target": TIMESTAMP},
-    },
-)
-
-CONVERSATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Conversations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CONVERSATION}},
-)
-
-SESSION_DURATION_IN_MINUTES = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SessionDurationInMinutes"),
-    shape_type=ShapeType.INTEGER,
-)
-
-CREATE_ANONYMOUS_WEB_EXPERIENCE_URL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "webExperienceId": {
-            "target": WEB_EXPERIENCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "sessionDurationInMinutes": {"target": SESSION_DURATION_IN_MINUTES},
-    },
-)
-
-CREATE_ANONYMOUS_WEB_EXPERIENCE_URL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrlResponse",
-        )
-    ],
-    members={"anonymousUrl": {"target": URL}},
-)
-
-CREATE_ANONYMOUS_WEB_EXPERIENCE_URL = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CreateAnonymousWebExperienceUrl"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/experiences/{webExperienceId}/anonymous-url",
-                    "method": "POST",
-                }
-            ),
-        )
-    ],
-)
-
-CREATE_CHAT_RESPONSE_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateChatResponseConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateChatResponseConfigurationRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "displayName": {
-            "target": DISPLAY_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "clientToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "responseConfigurations": {
-            "target": RESPONSE_CONFIGURATIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "tags": {"target": TAGS},
-    },
-)
-
-CREATE_CHAT_RESPONSE_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateChatResponseConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateChatResponseConfigurationResponse",
-        )
-    ],
-    members={
-        "chatResponseConfigurationId": {
-            "target": CHAT_RESPONSE_CONFIGURATION_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "chatResponseConfigurationArn": {
-            "target": CHAT_RESPONSE_CONFIGURATION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CREATE_CHAT_RESPONSE_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CreateChatResponseConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/applications/{applicationId}/chatresponseconfigurations",
-                }
-            ),
-        )
-    ],
-)
-
-GROUP_IDENTIFIER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GroupIdentifier"), shape_type=ShapeType.STRING
-)
-
-USER_IDENTIFIER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UserIdentifier"), shape_type=ShapeType.STRING
-)
-
-SUBSCRIPTION_PRINCIPAL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SubscriptionPrincipal"),
-    shape_type=ShapeType.UNION,
-    members={
-        "user": {"target": USER_IDENTIFIER},
-        "group": {"target": GROUP_IDENTIFIER},
-    },
-)
-
-CREATE_SUBSCRIPTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateSubscriptionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateSubscriptionRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "principal": {
-            "target": SUBSCRIPTION_PRINCIPAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "type": {
-            "target": SUBSCRIPTION_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-    },
-)
-
-CREATE_SUBSCRIPTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateSubscriptionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateSubscriptionResponse",
-        )
-    ],
-    members={
-        "subscriptionId": {"target": SUBSCRIPTION_ID},
-        "subscriptionArn": {"target": SUBSCRIPTION_ARN},
-        "currentSubscription": {"target": SUBSCRIPTION_DETAILS},
-        "nextSubscription": {"target": SUBSCRIPTION_DETAILS},
-    },
-)
-
-CREATE_SUBSCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CreateSubscription"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/applications/{applicationId}/subscriptions"}
-            ),
-        )
-    ],
-)
-
-USER_ALIAS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UserAlias"),
-    members={
-        "indexId": {"target": INDEX_ID},
-        "dataSourceId": {"target": DATA_SOURCE_ID},
-        "userId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-USER_ALIASES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UserAliases"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": USER_ALIAS}},
-)
-
-CREATE_USER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateUserInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateUserRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "userAliases": {"target": USER_ALIASES},
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-    },
-)
-
-CREATE_USER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateUserOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateUserResponse",
-        )
-    ],
-)
-
-CREATE_USER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CreateUser"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/applications/{applicationId}/users"}
-            ),
-        )
-    ],
-)
-
-CREATOR_MODE_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreatorModeConfiguration"),
-    members={
-        "creatorModeControl": {
-            "target": CREATOR_MODE_CONTROL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DATA_SOURCE_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DATA_SOURCE_ID}},
-)
-
-METRIC_VALUE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MetricValue"), shape_type=ShapeType.STRING
-)
-
-DATA_SOURCE_SYNC_JOB_METRICS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceSyncJobMetrics"),
-    members={
-        "documentsAdded": {"target": METRIC_VALUE},
-        "documentsModified": {"target": METRIC_VALUE},
-        "documentsDeleted": {"target": METRIC_VALUE},
-        "documentsFailed": {"target": METRIC_VALUE},
-        "documentsScanned": {"target": METRIC_VALUE},
-    },
-)
-
-DATA_SOURCE_SYNC_JOB_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceSyncJobStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FAILED": {"target": UNIT},
-        "SUCCEEDED": {"target": UNIT},
-        "SYNCING": {"target": UNIT},
-        "INCOMPLETE": {"target": UNIT},
-        "STOPPING": {"target": UNIT},
-        "ABORTED": {"target": UNIT},
-        "SYNCING_INDEXING": {"target": UNIT},
-    },
-)
-
-DATA_SOURCE_SYNC_JOB = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceSyncJob"),
-    members={
-        "executionId": {"target": EXECUTION_ID},
-        "startTime": {"target": TIMESTAMP},
-        "endTime": {"target": TIMESTAMP},
-        "status": {"target": DATA_SOURCE_SYNC_JOB_STATUS},
-        "error": {"target": ERROR_DETAIL},
-        "dataSourceErrorCode": {"target": STRING},
-        "metrics": {"target": DATA_SOURCE_SYNC_JOB_METRICS},
-    },
-)
-
-DATA_SOURCE_SYNC_JOBS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceSyncJobs"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DATA_SOURCE_SYNC_JOB}},
-)
-
-DATA_SOURCE_USER_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DataSourceUserId"), shape_type=ShapeType.STRING
-)
-
-DELETE_ATTACHMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteAttachmentInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteAttachmentRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "conversationId": {
-            "target": CONVERSATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "attachmentId": {
-            "target": ATTACHMENT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": USER_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="userId")],
-        },
-    },
-)
-
-DELETE_ATTACHMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteAttachmentOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteAttachmentResponse",
-        )
-    ],
-)
-
-DELETE_ATTACHMENT = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteAttachment"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/conversations/{conversationId}/attachments/{attachmentId}",
-                    "method": "DELETE",
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_CHAT_CONTROLS_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteChatControlsConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteChatControlsConfigurationRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_CHAT_CONTROLS_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteChatControlsConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteChatControlsConfigurationResponse",
-        )
-    ],
-)
-
-DELETE_CHAT_CONTROLS_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteChatControlsConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/chatcontrols",
-                    "method": "DELETE",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_CHAT_RESPONSE_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteChatResponseConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteChatResponseConfigurationRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "chatResponseConfigurationId": {
-            "target": CHAT_RESPONSE_CONFIGURATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_CHAT_RESPONSE_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteChatResponseConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteChatResponseConfigurationResponse",
-        )
-    ],
-)
-
-DELETE_CHAT_RESPONSE_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteChatResponseConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}",
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_CONVERSATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteConversationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteConversationRequest",
-        )
-    ],
-    members={
-        "conversationId": {
-            "target": CONVERSATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": USER_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="userId")],
-        },
-    },
-)
-
-DELETE_CONVERSATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteConversationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteConversationResponse",
-        )
-    ],
-)
-
-DELETE_CONVERSATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteConversation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/conversations/{conversationId}",
-                    "method": "DELETE",
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_GROUP_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteGroupInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteGroupRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "groupName": {
-            "target": GROUP_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "dataSourceId": {
-            "target": DATA_SOURCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="dataSourceId")
-            ],
-        },
-    },
-)
-
-DELETE_GROUP_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteGroupOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteGroupResponse",
-        )
-    ],
-)
-
-DELETE_GROUP = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteGroup"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/applications/{applicationId}/indices/{indexId}/groups/{groupName}",
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_USER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteUserInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteUserRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_USER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteUserOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DeleteUserResponse",
-        )
-    ],
-)
-
-DELETE_USER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DeleteUser"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/applications/{applicationId}/users/{userId}",
-                }
-            ),
-        )
-    ],
-)
-
-DISASSOCIATE_PERMISSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DisassociatePermissionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DisassociatePermissionRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "statementId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DISASSOCIATE_PERMISSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DisassociatePermissionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#DisassociatePermissionResponse",
-        )
-    ],
-)
-
-DISASSOCIATE_PERMISSION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#DisassociatePermission"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/policy/{statementId}",
-                    "method": "DELETE",
-                }
-            ),
-        )
-    ],
-)
-
-DOCUMENT_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "RECEIVED": {"target": UNIT},
-        "PROCESSING": {"target": UNIT},
-        "INDEXED": {"target": UNIT},
-        "UPDATED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "DELETED": {"target": UNIT},
-        "DOCUMENT_FAILED_TO_INDEX": {"target": UNIT},
-    },
-)
-
-DOCUMENT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentDetails"),
-    members={
-        "documentId": {"target": DOCUMENT_ID},
-        "status": {"target": DOCUMENT_STATUS},
-        "error": {"target": ERROR_DETAIL},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-    },
-)
-
-DOCUMENT_DETAIL_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#DocumentDetailList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOCUMENT_DETAILS}},
-)
-
-EXAMPLE_CHAT_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ExampleChatMessage"),
-    shape_type=ShapeType.STRING,
-)
-
-EXAMPLE_CHAT_MESSAGES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ExampleChatMessages"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EXAMPLE_CHAT_MESSAGE}},
-)
-
-MAX_RESULTS_INTEGER_FOR_GET_TOPIC_CONFIGURATIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForGetTopicConfigurations"),
-    shape_type=ShapeType.INTEGER,
-)
-
-GET_CHAT_CONTROLS_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetChatControlsConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetChatControlsConfigurationRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_GET_TOPIC_CONFIGURATIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-HALLUCINATION_REDUCTION_CONTROL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#HallucinationReductionControl"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-HALLUCINATION_REDUCTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#HallucinationReductionConfiguration"),
-    members={
-        "hallucinationReductionControl": {"target": HALLUCINATION_REDUCTION_CONTROL}
-    },
-)
-
-RESPONSE_SCOPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ResponseScope"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ENTERPRISE_CONTENT_ONLY": {"target": UNIT},
-        "EXTENDED_KNOWLEDGE_ENABLED": {"target": UNIT},
-    },
-)
-
-TOPIC_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#TopicDescription"), shape_type=ShapeType.STRING
-)
-
-TOPIC_CONFIGURATION_NAME = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#TopicConfigurationName"),
-    shape_type=ShapeType.STRING,
-)
-
-USER_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UserIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-USERS_AND_GROUPS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UsersAndGroups"),
-    members={"userIds": {"target": USER_IDS}, "userGroups": {"target": USER_GROUPS}},
-)
-
-RULE_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#RuleConfiguration"),
-    shape_type=ShapeType.UNION,
-    members={
-        "contentBlockerRule": {"target": CONTENT_BLOCKER_RULE},
-        "contentRetrievalRule": {"target": CONTENT_RETRIEVAL_RULE},
-    },
-)
-
-RULE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#RuleType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CONTENT_BLOCKER_RULE": {"target": UNIT},
-        "CONTENT_RETRIEVAL_RULE": {"target": UNIT},
-    },
-)
-
-RULE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Rule"),
-    members={
-        "includedUsersAndGroups": {"target": USERS_AND_GROUPS},
-        "excludedUsersAndGroups": {"target": USERS_AND_GROUPS},
-        "ruleType": {
-            "target": RULE_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ruleConfiguration": {"target": RULE_CONFIGURATION},
-    },
-)
-
-RULES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Rules"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RULE}},
-)
-
-TOPIC_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#TopicConfiguration"),
-    members={
-        "name": {
-            "target": TOPIC_CONFIGURATION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "description": {"target": TOPIC_DESCRIPTION},
-        "exampleChatMessages": {"target": EXAMPLE_CHAT_MESSAGES},
-        "rules": {
-            "target": RULES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TOPIC_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#TopicConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TOPIC_CONFIGURATION}},
-)
-
-GET_CHAT_CONTROLS_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetChatControlsConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetChatControlsConfigurationResponse",
-        )
-    ],
-    members={
-        "responseScope": {"target": RESPONSE_SCOPE},
-        "orchestrationConfiguration": {"target": APPLIED_ORCHESTRATION_CONFIGURATION},
-        "blockedPhrases": {"target": BLOCKED_PHRASES_CONFIGURATION},
-        "topicConfigurations": {"target": TOPIC_CONFIGURATIONS},
-        "creatorModeConfiguration": {"target": APPLIED_CREATOR_MODE_CONFIGURATION},
-        "nextToken": {"target": NEXT_TOKEN},
-        "hallucinationReductionConfiguration": {
-            "target": HALLUCINATION_REDUCTION_CONFIGURATION
-        },
-    },
-)
-
-GET_CHAT_CONTROLS_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetChatControlsConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/chatcontrols",
-                    "method": "GET",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_CHAT_RESPONSE_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetChatResponseConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetChatResponseConfigurationRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "chatResponseConfigurationId": {
-            "target": CHAT_RESPONSE_CONFIGURATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_CHAT_RESPONSE_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetChatResponseConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetChatResponseConfigurationResponse",
-        )
-    ],
-    members={
-        "chatResponseConfigurationId": {"target": CHAT_RESPONSE_CONFIGURATION_ID},
-        "chatResponseConfigurationArn": {"target": CHAT_RESPONSE_CONFIGURATION_ARN},
-        "displayName": {"target": DISPLAY_NAME},
-        "createdAt": {"target": TIMESTAMP},
-        "inUseConfiguration": {"target": CHAT_RESPONSE_CONFIGURATION_DETAIL},
-        "lastUpdateConfiguration": {"target": CHAT_RESPONSE_CONFIGURATION_DETAIL},
-    },
-)
-
-GET_CHAT_RESPONSE_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetChatResponseConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}",
-                }
-            ),
-        )
-    ],
-)
-
-OUTPUT_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#OutputFormat"),
-    shape_type=ShapeType.ENUM,
-    members={"RAW": {"target": UNIT}, "EXTRACTED": {"target": UNIT}},
-)
-
-GET_DOCUMENT_CONTENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetDocumentContentInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetDocumentContentRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "dataSourceId": {
-            "target": DATA_SOURCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="dataSourceId")
-            ],
-        },
-        "documentId": {
-            "target": DOCUMENT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "outputFormat": {
-            "target": OUTPUT_FORMAT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="outputFormat")
-            ],
-        },
-    },
-)
-
-GET_DOCUMENT_CONTENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetDocumentContentOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetDocumentContentResponse",
-        )
-    ],
-    members={
-        "presignedUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "mimeType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-GET_DOCUMENT_CONTENT = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetDocumentContent"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/index/{indexId}/documents/{documentId}/content",
-                    "method": "GET",
-                }
-            ),
-        )
-    ],
-)
-
-GET_GROUP_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetGroupInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetGroupRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "groupName": {
-            "target": GROUP_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "dataSourceId": {
-            "target": DATA_SOURCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="dataSourceId")
-            ],
-        },
-    },
-)
-
-GROUP_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GroupStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FAILED": {"target": UNIT},
-        "SUCCEEDED": {"target": UNIT},
-        "PROCESSING": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "DELETED": {"target": UNIT},
-    },
-)
-
-GROUP_STATUS_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GroupStatusDetail"),
-    members={
-        "status": {"target": GROUP_STATUS},
-        "lastUpdatedAt": {"target": TIMESTAMP},
-        "errorDetail": {"target": ERROR_DETAIL},
-    },
-)
-
-GROUP_STATUS_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GroupStatusDetails"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GROUP_STATUS_DETAIL}},
-)
-
-GET_GROUP_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetGroupOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetGroupResponse",
-        )
-    ],
-    members={
-        "status": {"target": GROUP_STATUS_DETAIL},
-        "statusHistory": {"target": GROUP_STATUS_DETAILS},
-    },
-)
-
-GET_GROUP = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetGroup"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/applications/{applicationId}/indices/{indexId}/groups/{groupName}",
-                }
-            ),
-        )
-    ],
-)
-
-GET_MEDIA_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetMediaInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetMediaRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "conversationId": {
-            "target": CONVERSATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "messageId": {
-            "target": MESSAGE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "mediaId": {
-            "target": MEDIA_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_MEDIA_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetMediaOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetMediaResponse",
-        )
-    ],
-    members={"mediaBytes": {"target": BLOB}, "mediaMimeType": {"target": STRING}},
-)
-
-MEDIA_TOO_LARGE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MediaTooLargeException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-GET_MEDIA = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetMedia"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/applications/{applicationId}/conversations/{conversationId}/messages/{messageId}/media/{mediaId}",
-                }
-            ),
-        )
-    ],
-)
-
-GET_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetPolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetPolicyRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetPolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetPolicyResponse",
-        )
-    ],
-    members={"policy": {"target": STRING}},
-)
-
-GET_POLICY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetPolicy"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/policy", "method": "GET"}
-            ),
-        )
-    ],
-)
-
-GET_USER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetUserInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetUserRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_USER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetUserOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetUserResponse",
-        )
-    ],
-    members={"userAliases": {"target": USER_ALIASES}},
-)
-
-GET_USER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetUser"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/applications/{applicationId}/users/{userId}"}
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_ATTACHMENTS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListAttachments"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_ATTACHMENTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListAttachmentsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListAttachmentsRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "conversationId": {
-            "target": CONVERSATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="conversationId")
-            ],
-        },
-        "userId": {
-            "target": USER_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="userId")],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_ATTACHMENTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-LIST_ATTACHMENTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListAttachmentsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListAttachmentsResponse",
-        )
-    ],
-    members={
-        "attachments": {"target": ATTACHMENT_LIST},
-        "nextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LIST_ATTACHMENTS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListAttachments"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/attachments", "method": "GET"}
-            ),
-        )
-    ],
-)
-
-LIST_CHAT_RESPONSE_CONFIGURATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListChatResponseConfigurationsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListChatResponseConfigurationsRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "maxResults": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-LIST_CHAT_RESPONSE_CONFIGURATIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListChatResponseConfigurationsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListChatResponseConfigurationsResponse",
-        )
-    ],
-    members={
-        "chatResponseConfigurations": {"target": CHAT_RESPONSE_CONFIGURATIONS},
-        "nextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LIST_CHAT_RESPONSE_CONFIGURATIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListChatResponseConfigurations"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/applications/{applicationId}/chatresponseconfigurations",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_CONVERSATIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListConversations"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_CONVERSATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListConversationsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListConversationsRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": USER_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="userId")],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_CONVERSATIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-LIST_CONVERSATIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListConversationsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListConversationsResponse",
-        )
-    ],
-    members={
-        "nextToken": {"target": NEXT_TOKEN},
-        "conversations": {"target": CONVERSATIONS},
-    },
-)
-
-LIST_CONVERSATIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListConversations"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/conversations", "method": "GET"}
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_DATA_SOURCES_SYNC_JOBS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListDataSourcesSyncJobs"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_DATA_SOURCE_SYNC_JOBS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListDataSourceSyncJobsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListDataSourceSyncJobsRequest",
-        )
-    ],
-    members={
-        "dataSourceId": {
-            "target": DATA_SOURCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_DATA_SOURCES_SYNC_JOBS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "startTime": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="startTime")
-            ],
-        },
-        "endTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="endTime")],
-        },
-        "statusFilter": {
-            "target": DATA_SOURCE_SYNC_JOB_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="syncStatus")
-            ],
-        },
-    },
-)
-
-LIST_DATA_SOURCE_SYNC_JOBS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListDataSourceSyncJobsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListDataSourceSyncJobsResponse",
-        )
-    ],
-    members={
-        "history": {"target": DATA_SOURCE_SYNC_JOBS},
-        "nextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LIST_DATA_SOURCE_SYNC_JOBS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListDataSourceSyncJobs"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}/syncjobs",
-                    "method": "GET",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_DOCUMENTS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListDocuments"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_DOCUMENTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListDocumentsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListDocumentsRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "dataSourceIds": {
-            "target": DATA_SOURCE_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="dataSourceIds")
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_DOCUMENTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-LIST_DOCUMENTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListDocumentsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListDocumentsResponse",
-        )
-    ],
-    members={
-        "documentDetailList": {"target": DOCUMENT_DETAIL_LIST},
-        "nextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LIST_DOCUMENTS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListDocuments"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/index/{indexId}/documents",
-                    "method": "GET",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_GROUPS_REQUEST = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListGroupsRequest"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_GROUPS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListGroupsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListGroupsRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "updatedEarlierThan": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpQuery"), value="updatedEarlierThan"
+INTEGER: StaticSchema = (7, n0, _I, 0)
+
+ACTION_REVIEW_PAYLOAD_FIELD: StaticSchema = (
+    18,
+    n0,
+    _ARPF,
+    0,
+    (_dN, _dO, _dD, _t, _v, _aV, _aF, _aIJS, _r),
+    (
+        (STRING, 0),
+        (INTEGER, 0),
+        (STRING, 0),
+        (ACTION_PAYLOAD_FIELD_TYPE, 0),
+        (ACTION_PAYLOAD_FIELD_VALUE, 0),
+        (ACTION_REVIEW_PAYLOAD_FIELD_ALLOWED_VALUES, 0),
+        (STRING, 0),
+        (ACTION_REVIEW_PAYLOAD_FIELD_ARRAY_ITEM_JSON_SCHEMA, 0),
+        (2, 0),
+    ),
+)
+
+ACTION_REVIEW_PAYLOAD: StaticSchema = (
+    17,
+    n0,
+    _ARP,
+    0,
+    (_k, _v),
+    ((ACTION_PAYLOAD_FIELD_KEY, 0), (ACTION_REVIEW_PAYLOAD_FIELD, 0)),
+)
+
+PLUGIN_TYPE: StaticSchema = (
+    14,
+    n0,
+    _PT,
+    0,
+    (
+        _SN,
+        _SALESFORCE,
+        _JIRA,
+        _ZENDESK,
+        _CUSTOM,
+        _QUICKSIGHT,
+        _SNP,
+        _JC,
+        _SC,
+        _ZS,
+        _AC_,
+        _GC,
+        _MT_,
+        _ME,
+        _PA,
+        _SMARTSHEET,
+        _ASANA,
+    ),
+    (
+        (-1, {_sV: _SN}),
+        (-1, {_sV: _SALESFORCE}),
+        (-1, {_sV: _JIRA}),
+        (-1, {_sV: _ZENDESK}),
+        (-1, {_sV: _CUSTOM}),
+        (-1, {_sV: _QUICKSIGHT}),
+        (-1, {_sV: _SNP}),
+        (-1, {_sV: _JC}),
+        (-1, {_sV: _SC}),
+        (-1, {_sV: _ZS}),
+        (-1, {_sV: _AC_}),
+        (-1, {_sV: _GC}),
+        (-1, {_sV: _MT_}),
+        (-1, {_sV: _ME}),
+        (-1, {_sV: _PA}),
+        (-1, {_sV: _SMARTSHEET}),
+        (-1, {_sV: _ASANA}),
+    ),
+)
+
+ACTION_REVIEW: StaticSchema = (
+    18,
+    n0,
+    _AR,
+    0,
+    (_pI, _pT, _pa, _pFNS),
+    (
+        (PLUGIN_ID, 0),
+        (PLUGIN_TYPE, 0),
+        (ACTION_REVIEW_PAYLOAD, 0),
+        (ACTION_PAYLOAD_FIELD_NAME_SEPARATOR, 0),
+    ),
+)
+
+CONVERSATION_ID: StaticSchema = (3, n0, _CI, 0)
+
+MESSAGE_ID: StaticSchema = (3, n0, _MI, 0)
+
+ACTION_REVIEW_EVENT: StaticSchema = (
+    18,
+    n0,
+    _ARE,
+    0,
+    (_cI, _uMI, _sMI, _pI, _pT, _pa, _pFNS),
+    (
+        (CONVERSATION_ID, 0),
+        (MESSAGE_ID, 0),
+        (MESSAGE_ID, 0),
+        (PLUGIN_ID, 0),
+        (PLUGIN_TYPE, 0),
+        (ACTION_REVIEW_PAYLOAD, 0),
+        (ACTION_PAYLOAD_FIELD_NAME_SEPARATOR, 0),
+    ),
+)
+
+ACTION_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _AS,
+    0,
+    (_aI, _dN, _iE, _d),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+ACTIONS: StaticSchema = (16, n0, _A, 0, (_m,), ((ACTION_SUMMARY, 0),))
+
+AMAZON_RESOURCE_NAME: StaticSchema = (3, n0, _ARN, 0)
+
+PAYLOAD: StaticSchema = (3, n0, _Pa, 4)
+
+S3_BUCKET_NAME: StaticSchema = (3, n0, _SBN, 0)
+
+S3_OBJECT_KEY: StaticSchema = (3, n0, _SOK, 0)
+
+S3: StaticSchema = (18, n0, _S_, 0, (_b, _k), ((S3_BUCKET_NAME, 1), (S3_OBJECT_KEY, 1)))
+
+API_SCHEMA: StaticSchema = (19, n0, _APIS, 0, (_pa, _s_), ((PAYLOAD, 0), (S3, 0)))
+
+API_SCHEMA_TYPE: StaticSchema = (14, n0, _APIST, 0, (_OAV,), ((-1, {_sV: _OAV}),))
+
+APPLICATION_ID: StaticSchema = (3, n0, _AI, 0)
+
+APPLICATION_NAME: StaticSchema = (3, n0, _AN, 0)
+
+IDENTITY_TYPE: StaticSchema = (
+    14,
+    n0,
+    _IT,
+    0,
+    (_AIIS, _AIIO, _AII, _AQI, _ANONYMOUS),
+    (
+        (-1, {_sV: _AIIS}),
+        (-1, {_sV: _AIIO}),
+        (-1, {_sV: _AII}),
+        (-1, {_sV: _AQI}),
+        (-1, {_sV: _ANONYMOUS}),
+    ),
+)
+
+CLIENT_NAMESPACE: StaticSchema = (3, n0, _CN, 0)
+
+QUICK_SIGHT_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _QSC,
+    0,
+    (_cN,),
+    ((CLIENT_NAMESPACE, 1),),
+)
+
+APPLICATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ASp,
+    0,
+    (_CREATING, _ACTIVE, _DELETING, _FAILED, _UPDATING),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _UPDATING}),
+    ),
+)
+
+APPLICATION: StaticSchema = (
+    18,
+    n0,
+    _Ap,
+    0,
+    (_dN, _aIp, _cA, _uA, _st, _iT, _qSC),
+    (
+        (APPLICATION_NAME, 0),
+        (APPLICATION_ID, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (APPLICATION_STATUS, 0),
+        (IDENTITY_TYPE, 0),
+        (QUICK_SIGHT_CONFIGURATION, 0),
+    ),
+)
+
+APPLICATION_ARN: StaticSchema = (3, n0, _AA, 0)
+
+CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CE,
+    {_sm: _c, _sE: 409},
+    (_me, _rI, _rT),
+    ((ERROR_MESSAGE, 1), (STRING, 1), (STRING, 1)),
+)
+
+ATTACHMENTS_CONTROL_MODE: StaticSchema = (
+    14,
+    n0,
+    _ACM,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+ATTACHMENTS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _ACt,
+    0,
+    (_aCM,),
+    ((ATTACHMENTS_CONTROL_MODE, 1),),
+)
+
+CLIENT_ID_FOR_OIDC: StaticSchema = (3, n0, _CIFOIDC, 0)
+
+CLIENT_IDS_FOR_OIDC: StaticSchema = (
+    16,
+    n0,
+    _CIFOIDCl,
+    0,
+    (_m,),
+    ((CLIENT_ID_FOR_OIDC, 0),),
+)
+
+CLIENT_TOKEN: StaticSchema = (3, n0, _CT, 0)
+
+DESCRIPTION: StaticSchema = (3, n0, _D, 0)
+
+KMS_KEY_ID: StaticSchema = (3, n0, _KKI, 4)
+
+ENCRYPTION_CONFIGURATION: StaticSchema = (18, n0, _EC, 0, (_kKI,), ((KMS_KEY_ID, 0),))
+
+IAM_IDENTITY_PROVIDER_ARN: StaticSchema = (3, n0, _IAMIPA, 0)
+
+INSTANCE_ARN: StaticSchema = (3, n0, _IA, 0)
+
+PERSONALIZATION_CONTROL_MODE: StaticSchema = (
+    14,
+    n0,
+    _PCM,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+PERSONALIZATION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _PC,
+    0,
+    (_pCM,),
+    ((PERSONALIZATION_CONTROL_MODE, 1),),
+)
+
+Q_APPS_CONTROL_MODE: StaticSchema = (
+    14,
+    n0,
+    _QACM,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+Q_APPS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _QAC,
+    0,
+    (_qACM,),
+    ((Q_APPS_CONTROL_MODE, 1),),
+)
+
+ROLE_ARN: StaticSchema = (3, n0, _RA, 0)
+
+TAG_KEY: StaticSchema = (3, n0, _TK, 0)
+
+TAG_VALUE: StaticSchema = (3, n0, _TV, 0)
+
+TAG: StaticSchema = (18, n0, _Ta, 0, (_k, _v), ((TAG_KEY, 1), (TAG_VALUE, 1)))
+
+TAGS: StaticSchema = (16, n0, _Tag, 0, (_m,), ((TAG, 0),))
+
+CREATE_APPLICATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CAI,
+    {_sSI: _cCAR, _smit: None},
+    (_dN, _rA, _iT, _iIPA, _iCIA, _cIFOIDC, _d, _eC, _ta, _cT, _aCt, _qAC, _pC, _qSC),
+    (
+        (APPLICATION_NAME, 1),
+        (ROLE_ARN, 0),
+        (IDENTITY_TYPE, 0),
+        (IAM_IDENTITY_PROVIDER_ARN, 0),
+        (INSTANCE_ARN, 0),
+        (CLIENT_IDS_FOR_OIDC, 0),
+        (DESCRIPTION, 0),
+        (ENCRYPTION_CONFIGURATION, 0),
+        (TAGS, 0),
+        (CLIENT_TOKEN, 2),
+        (ATTACHMENTS_CONFIGURATION, 0),
+        (Q_APPS_CONFIGURATION, 0),
+        (PERSONALIZATION_CONFIGURATION, 0),
+        (QUICK_SIGHT_CONFIGURATION, 0),
+    ),
+)
+
+CREATE_APPLICATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CAO,
+    {_sSI: _cCARo, _smith: None},
+    (_aIp, _aA),
+    ((APPLICATION_ID, 0), (APPLICATION_ARN, 0)),
+)
+
+INTERNAL_SERVER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_sm: _se, _sE: 500},
+    (_me,),
+    ((ERROR_MESSAGE, 1),),
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_sm: _c, _sE: 404},
+    (_me, _rI, _rT),
+    ((ERROR_MESSAGE, 1), (STRING, 1), (STRING, 1)),
+)
+
+SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SQEE,
+    {_sm: _c, _sE: 402},
+    (_me, _rI, _rT),
+    ((ERROR_MESSAGE, 1), (STRING, 1), (STRING, 1)),
+)
+
+THROTTLING_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TE,
+    {_sm: _c, _sE: 429},
+    (_me,),
+    ((ERROR_MESSAGE, 1),),
+)
+
+VALIDATION_EXCEPTION_FIELD: StaticSchema = (
+    18,
+    n0,
+    _VEF,
+    0,
+    (_n, _me),
+    ((STRING, 1), (STRING, 1)),
+)
+
+VALIDATION_EXCEPTION_FIELDS: StaticSchema = (
+    16,
+    n0,
+    _VEFa,
+    0,
+    (_m,),
+    ((VALIDATION_EXCEPTION_FIELD, 0),),
+)
+
+VALIDATION_EXCEPTION_REASON: StaticSchema = (
+    14,
+    n0,
+    _VER,
+    0,
+    (_CP, _FVF, _UO),
+    ((-1, {_sV: _CP}), (-1, {_sV: _FVF}), (-1, {_sV: _UO})),
+)
+
+VALIDATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _VE,
+    {_sm: _c, _sE: 400},
+    (_me, _re, _f),
+    (
+        (ERROR_MESSAGE, 1),
+        (VALIDATION_EXCEPTION_REASON, 1),
+        (VALIDATION_EXCEPTION_FIELDS, 0),
+    ),
+)
+
+CREATE_APPLICATION: StaticOperationSchema = (
+    23,
+    n0,
+    _CA,
+    {_smithy: MappingProxyType({"uri": "/applications", "method": "POST"})},
+    CREATE_APPLICATION_INPUT,
+    CREATE_APPLICATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+IDC_TRUSTED_TOKEN_ISSUER_ARN: StaticSchema = (3, n0, _ITTIA, 0)
+
+DATA_ACCESSOR_IDC_TRUSTED_TOKEN_ISSUER_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _DAITTIC,
+    0,
+    (_iTTIA,),
+    ((IDC_TRUSTED_TOKEN_ISSUER_ARN, 1),),
+)
+
+DATA_ACCESSOR_AUTHENTICATION_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _DAAC,
+    0,
+    (_iTTIC,),
+    ((DATA_ACCESSOR_IDC_TRUSTED_TOKEN_ISSUER_CONFIGURATION, 0),),
+)
+
+DATA_ACCESSOR_AUTHENTICATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _DAAT,
+    0,
+    (_AIIT, _AIIAC),
+    ((-1, {_sV: _AIIT}), (-1, {_sV: _AIIAC})),
+)
+
+DATA_ACCESSOR_EXTERNAL_ID: StaticSchema = (3, n0, _DAEI, 0)
+
+DATA_ACCESSOR_EXTERNAL_IDS: StaticSchema = (
+    16,
+    n0,
+    _DAEIa,
+    0,
+    (_m,),
+    ((DATA_ACCESSOR_EXTERNAL_ID, 0),),
+)
+
+DATA_ACCESSOR_AUTHENTICATION_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _DAAD,
+    0,
+    (_aT, _aCu, _eI),
+    (
+        (DATA_ACCESSOR_AUTHENTICATION_TYPE, 1),
+        (DATA_ACCESSOR_AUTHENTICATION_CONFIGURATION, 0),
+        (DATA_ACCESSOR_EXTERNAL_IDS, 0),
+    ),
+)
+
+DATA_ACCESSOR_NAME: StaticSchema = (3, n0, _DAN, 4)
+
+PRINCIPAL_ROLE_ARN: StaticSchema = (3, n0, _PRA, 0)
+
+DATA_ACCESSOR_ARN: StaticSchema = (3, n0, _DAA, 0)
+
+DATA_ACCESSOR_ID: StaticSchema = (3, n0, _DAI, 0)
+
+IDC_APPLICATION_ARN: StaticSchema = (3, n0, _IAA, 0)
+
+CREATE_DATA_ACCESSOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDAO,
+    {_sSI: _cCDAR, _smith: None},
+    (_dAI, _iAA, _dAA),
+    ((DATA_ACCESSOR_ID, 1), (IDC_APPLICATION_ARN, 1), (DATA_ACCESSOR_ARN, 1)),
+)
+
+DELETE_DATA_ACCESSOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDAI,
+    {_sSI: _cDDAR, _smit: None},
+    (_aIp, _dAI),
+    ((APPLICATION_ID, 9), (DATA_ACCESSOR_ID, 9)),
+)
+
+DELETE_DATA_ACCESSOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DDAO,
+    {_sSI: _cDDARo, _smith: None},
+)
+
+DELETE_DATA_ACCESSOR: StaticOperationSchema = (
+    23,
+    n0,
+    _DDA,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/dataaccessors/{dataAccessorId}",
+                "method": "DELETE",
+            }
+        )
+    },
+    DELETE_DATA_ACCESSOR_INPUT,
+    DELETE_DATA_ACCESSOR_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_DATA_ACCESSOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDAI,
+    {_sSI: _cGDAR, _smit: None},
+    (_aIp, _dAI),
+    ((APPLICATION_ID, 9), (DATA_ACCESSOR_ID, 9)),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_DATA_ACCESSORS: StaticSchema = (7, n0, _MRIFLDA, 0)
+
+NEXT_TOKEN1500: StaticSchema = (3, n0, _NT, 0)
+
+LIST_DATA_ACCESSORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDAI,
+    {_sSI: _cLDAR, _smit: None},
+    (_aIp, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (NEXT_TOKEN1500, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_DATA_ACCESSORS, {_sQ: _mRa}),
+    ),
+)
+
+DATA_ACCESSOR: StaticSchema = (
+    18,
+    n0,
+    _DAa,
+    0,
+    (_dN, _dAI, _dAA, _iAA, _pr, _aD, _cA, _uA),
+    (
+        (DATA_ACCESSOR_NAME, 0),
+        (DATA_ACCESSOR_ID, 0),
+        (DATA_ACCESSOR_ARN, 0),
+        (IDC_APPLICATION_ARN, 0),
+        (PRINCIPAL_ROLE_ARN, 0),
+        (DATA_ACCESSOR_AUTHENTICATION_DETAIL, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+DATA_ACCESSORS: StaticSchema = (16, n0, _DAat, 0, (_m,), ((DATA_ACCESSOR, 0),))
+
+LIST_DATA_ACCESSORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDAO,
+    {_sSI: _cLDARo, _smith: None},
+    (_dA, _nT),
+    ((DATA_ACCESSORS, 0), (NEXT_TOKEN1500, 0)),
+)
+
+LIST_DATA_ACCESSORS: StaticOperationSchema = (
+    23,
+    n0,
+    _LDA,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/dataaccessors", "method": "GET"}
+        )
+    },
+    LIST_DATA_ACCESSORS_INPUT,
+    LIST_DATA_ACCESSORS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_DATA_ACCESSOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UDAO,
+    {_sSI: _cUDAR, _smith: None},
+)
+
+DELETE_APPLICATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DAIe,
+    {_sSI: _cDAR, _smit: None},
+    (_aIp,),
+    ((APPLICATION_ID, 9),),
+)
+
+DELETE_APPLICATION_OUTPUT: StaticSchema = (18, n0, _DAO, {_sSI: _cDARo, _smith: None})
+
+DELETE_APPLICATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DAe,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}", "method": "DELETE"}
+        )
+    },
+    DELETE_APPLICATION_INPUT,
+    DELETE_APPLICATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_APPLICATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GAI,
+    {_sSI: _cGAR, _smit: None},
+    (_aIp,),
+    ((APPLICATION_ID, 9),),
+)
+
+APPLIED_ATTACHMENTS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _AAC,
+    0,
+    (_aCM,),
+    ((ATTACHMENTS_CONTROL_MODE, 0),),
+)
+
+AUTO_SUBSCRIPTION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ASS,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+SUBSCRIPTION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ST,
+    0,
+    (_QL, _QB),
+    ((-1, {_sV: _QL}), (-1, {_sV: _QB})),
+)
+
+AUTO_SUBSCRIPTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _ASC,
+    0,
+    (_aS, _dST),
+    ((AUTO_SUBSCRIPTION_STATUS, 1), (SUBSCRIPTION_TYPE, 0)),
+)
+
+ERROR_CODE: StaticSchema = (
+    14,
+    n0,
+    _ECr,
+    0,
+    (_IE, _IR, _RI, _RNF),
+    ((-1, {_sV: _IEn}), (-1, {_sV: _IRn}), (-1, {_sV: _RIe}), (-1, {_sV: _RNFe})),
+)
+
+ERROR_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _ED,
+    0,
+    (_eM, _eCr),
+    ((ERROR_MESSAGE, 0), (ERROR_CODE, 0)),
+)
+
+GET_APPLICATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GAO,
+    {_sSI: _cGARo, _smith: None},
+    (
+        _dN,
+        _aIp,
+        _aA,
+        _iT,
+        _iIPA,
+        _iCAA,
+        _rA,
+        _st,
+        _d,
+        _eC,
+        _cA,
+        _uA,
+        _e,
+        _aCt,
+        _qAC,
+        _pC,
+        _aSC,
+        _cIFOIDC,
+        _qSC,
+    ),
+    (
+        (APPLICATION_NAME, 0),
+        (APPLICATION_ID, 0),
+        (APPLICATION_ARN, 0),
+        (IDENTITY_TYPE, 0),
+        (IAM_IDENTITY_PROVIDER_ARN, 0),
+        (IDC_APPLICATION_ARN, 0),
+        (ROLE_ARN, 0),
+        (APPLICATION_STATUS, 0),
+        (DESCRIPTION, 0),
+        (ENCRYPTION_CONFIGURATION, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (ERROR_DETAIL, 0),
+        (APPLIED_ATTACHMENTS_CONFIGURATION, 0),
+        (Q_APPS_CONFIGURATION, 0),
+        (PERSONALIZATION_CONFIGURATION, 0),
+        (AUTO_SUBSCRIPTION_CONFIGURATION, 0),
+        (CLIENT_IDS_FOR_OIDC, 0),
+        (QUICK_SIGHT_CONFIGURATION, 0),
+    ),
+)
+
+GET_APPLICATION: StaticOperationSchema = (
+    23,
+    n0,
+    _GA,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}", "method": "GET"}
+        )
+    },
+    GET_APPLICATION_INPUT,
+    GET_APPLICATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+INDEX_CAPACITY_INTEGER: StaticSchema = (7, n0, _ICI, 0)
+
+INDEX_CAPACITY_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _ICC,
+    0,
+    (_un,),
+    ((INDEX_CAPACITY_INTEGER, 0),),
+)
+
+INDEX_NAME: StaticSchema = (3, n0, _IN, 0)
+
+INDEX_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ITn,
+    0,
+    (_ENTERPRISE, _STARTER),
+    ((-1, {_sV: _ENTERPRISE}), (-1, {_sV: _STARTER})),
+)
+
+CREATE_INDEX_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CII,
+    {_sSI: _cCIR, _smit: None},
+    (_aIp, _dN, _d, _t, _ta, _cC, _cT),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_NAME, 1),
+        (DESCRIPTION, 0),
+        (INDEX_TYPE, 0),
+        (TAGS, 0),
+        (INDEX_CAPACITY_CONFIGURATION, 0),
+        (CLIENT_TOKEN, 2),
+    ),
+)
+
+INDEX_ARN: StaticSchema = (3, n0, _IAn, 0)
+
+INDEX_ID: StaticSchema = (3, n0, _II, 0)
+
+CREATE_INDEX_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CIO,
+    {_sSI: _cCIRo, _smith: None},
+    (_iI, _iA),
+    ((INDEX_ID, 0), (INDEX_ARN, 0)),
+)
+
+CREATE_INDEX: StaticOperationSchema = (
+    23,
+    n0,
+    _CIr,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/indices", "method": "POST"}
+        )
+    },
+    CREATE_INDEX_INPUT,
+    CREATE_INDEX_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DATA_SOURCE_CONFIGURATION: StaticSchema = (13, n0, _DSC, 0)
+
+DATA_SOURCE_NAME: StaticSchema = (3, n0, _DSN, 0)
+
+DOCUMENT_ENRICHMENT_CONDITION_OPERATOR: StaticSchema = (
+    14,
+    n0,
+    _DECO,
+    0,
+    (_GT, _GTOE, _LT, _LTOE, _EQUALS, _NE, _CONTAINS, _NC, _EXISTS, _NE_, _BW),
+    (
+        (-1, {_sV: _GT}),
+        (-1, {_sV: _GTOE}),
+        (-1, {_sV: _LT}),
+        (-1, {_sV: _LTOE}),
+        (-1, {_sV: _EQUALS}),
+        (-1, {_sV: _NE}),
+        (-1, {_sV: _CONTAINS}),
+        (-1, {_sV: _NC}),
+        (-1, {_sV: _EXISTS}),
+        (-1, {_sV: _NE_}),
+        (-1, {_sV: _BW}),
+    ),
+)
+
+DOCUMENT_ATTRIBUTE_CONDITION: StaticSchema = (
+    18,
+    n0,
+    _DAC,
+    0,
+    (_k, _o, _v),
+    (
+        (DOCUMENT_ATTRIBUTE_KEY, 1),
+        (DOCUMENT_ENRICHMENT_CONDITION_OPERATOR, 1),
+        (DOCUMENT_ATTRIBUTE_VALUE, 0),
+    ),
+)
+
+DOCUMENT_CONTENT_OPERATOR: StaticSchema = (
+    14,
+    n0,
+    _DCO,
+    0,
+    (_DELETE,),
+    ((-1, {_sV: _DELETE}),),
+)
+
+ATTRIBUTE_VALUE_OPERATOR: StaticSchema = (
+    14,
+    n0,
+    _AVO,
+    0,
+    (_DELETE,),
+    ((-1, {_sV: _DELETE}),),
+)
+
+DOCUMENT_ATTRIBUTE_TARGET: StaticSchema = (
+    18,
+    n0,
+    _DAT,
+    0,
+    (_k, _v, _aVO),
+    (
+        (DOCUMENT_ATTRIBUTE_KEY, 1),
+        (DOCUMENT_ATTRIBUTE_VALUE, 0),
+        (ATTRIBUTE_VALUE_OPERATOR, 0),
+    ),
+)
+
+INLINE_DOCUMENT_ENRICHMENT_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _IDEC,
+    0,
+    (_co, _tar, _dCO),
+    (
+        (DOCUMENT_ATTRIBUTE_CONDITION, 0),
+        (DOCUMENT_ATTRIBUTE_TARGET, 0),
+        (DOCUMENT_CONTENT_OPERATOR, 0),
+    ),
+)
+
+INLINE_DOCUMENT_ENRICHMENT_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _IDECn,
+    0,
+    (_m,),
+    ((INLINE_DOCUMENT_ENRICHMENT_CONFIGURATION, 0),),
+)
+
+LAMBDA_ARN: StaticSchema = (3, n0, _LA, 0)
+
+HOOK_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _HC,
+    0,
+    (_iC, _lA, _sBN, _rA),
+    (
+        (DOCUMENT_ATTRIBUTE_CONDITION, 0),
+        (LAMBDA_ARN, 0),
+        (S3_BUCKET_NAME, 0),
+        (ROLE_ARN, 0),
+    ),
+)
+
+DOCUMENT_ENRICHMENT_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _DEC,
+    0,
+    (_iCn, _pEHC, _pEHCo),
+    (
+        (INLINE_DOCUMENT_ENRICHMENT_CONFIGURATIONS, 0),
+        (HOOK_CONFIGURATION, 0),
+        (HOOK_CONFIGURATION, 0),
+    ),
+)
+
+AUDIO_EXTRACTION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _AES,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+AUDIO_EXTRACTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _AEC,
+    0,
+    (_aES,),
+    ((AUDIO_EXTRACTION_STATUS, 1),),
+)
+
+IMAGE_EXTRACTION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _IES,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+IMAGE_EXTRACTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _IEC,
+    0,
+    (_iES,),
+    ((IMAGE_EXTRACTION_STATUS, 1),),
+)
+
+VIDEO_EXTRACTION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _VES,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+VIDEO_EXTRACTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _VEC,
+    0,
+    (_vES,),
+    ((VIDEO_EXTRACTION_STATUS, 1),),
+)
+
+MEDIA_EXTRACTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _MEC,
+    0,
+    (_iEC, _aEC, _vEC),
+    (
+        (IMAGE_EXTRACTION_CONFIGURATION, 0),
+        (AUDIO_EXTRACTION_CONFIGURATION, 0),
+        (VIDEO_EXTRACTION_CONFIGURATION, 0),
+    ),
+)
+
+SYNC_SCHEDULE: StaticSchema = (3, n0, _SS, 0)
+
+SECURITY_GROUP_ID: StaticSchema = (3, n0, _SGI, 0)
+
+SECURITY_GROUP_IDS: StaticSchema = (16, n0, _SGIe, 0, (_m,), ((SECURITY_GROUP_ID, 0),))
+
+SUBNET_ID: StaticSchema = (3, n0, _SI, 0)
+
+SUBNET_IDS: StaticSchema = (16, n0, _SIu, 0, (_m,), ((SUBNET_ID, 0),))
+
+DATA_SOURCE_VPC_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _DSVC,
+    0,
+    (_sI, _sGI),
+    ((SUBNET_IDS, 1), (SECURITY_GROUP_IDS, 1)),
+)
+
+CREATE_DATA_SOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDSI,
+    {_sSI: _cCDSR, _smit: None},
+    (_aIp, _iI, _dN, _con, _vC, _d, _ta, _sS, _rA, _cT, _dEC, _mEC),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (DATA_SOURCE_NAME, 1),
+        (DATA_SOURCE_CONFIGURATION, 1),
+        (DATA_SOURCE_VPC_CONFIGURATION, 0),
+        (DESCRIPTION, 0),
+        (TAGS, 0),
+        (SYNC_SCHEDULE, 0),
+        (ROLE_ARN, 0),
+        (CLIENT_TOKEN, 2),
+        (DOCUMENT_ENRICHMENT_CONFIGURATION, 0),
+        (MEDIA_EXTRACTION_CONFIGURATION, 0),
+    ),
+)
+
+DATA_SOURCE_ARN: StaticSchema = (3, n0, _DSA, 0)
+
+DATA_SOURCE_ID: StaticSchema = (3, n0, _DSI, 0)
+
+CREATE_DATA_SOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDSO,
+    {_sSI: _cCDSRo, _smith: None},
+    (_dSI, _dSA),
+    ((DATA_SOURCE_ID, 0), (DATA_SOURCE_ARN, 0)),
+)
+
+CREATE_DATA_SOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _CDS,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/indices/{indexId}/datasources",
+                "method": "POST",
+            }
+        )
+    },
+    CREATE_DATA_SOURCE_INPUT,
+    CREATE_DATA_SOURCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_DATA_SOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDSI,
+    {_sSI: _cDDSR, _smit: None},
+    (_aIp, _iI, _dSI),
+    ((APPLICATION_ID, 9), (INDEX_ID, 9), (DATA_SOURCE_ID, 9)),
+)
+
+DELETE_DATA_SOURCE_OUTPUT: StaticSchema = (18, n0, _DDSO, {_sSI: _cDDSRo, _smith: None})
+
+DELETE_DATA_SOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _DDS,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}",
+                "method": "DELETE",
+            }
+        )
+    },
+    DELETE_DATA_SOURCE_INPUT,
+    DELETE_DATA_SOURCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_DATA_SOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDSI,
+    {_sSI: _cGDSR, _smit: None},
+    (_aIp, _iI, _dSI),
+    ((APPLICATION_ID, 9), (INDEX_ID, 9), (DATA_SOURCE_ID, 9)),
+)
+
+DATA_SOURCE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DSS,
+    0,
+    (_PC_, _CREATING, _ACTIVE, _DELETING, _FAILED, _UPDATING),
+    (
+        (-1, {_sV: _PC_}),
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _UPDATING}),
+    ),
+)
+
+GET_DATA_SOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDSO,
+    {_sSI: _cGDSRo, _smith: None},
+    (
+        _aIp,
+        _iI,
+        _dSI,
+        _dSA,
+        _dN,
+        _t,
+        _con,
+        _vC,
+        _cA,
+        _uA,
+        _d,
+        _st,
+        _sS,
+        _rA,
+        _e,
+        _dEC,
+        _mEC,
+    ),
+    (
+        (APPLICATION_ID, 0),
+        (INDEX_ID, 0),
+        (DATA_SOURCE_ID, 0),
+        (DATA_SOURCE_ARN, 0),
+        (DATA_SOURCE_NAME, 0),
+        (STRING, 0),
+        (DATA_SOURCE_CONFIGURATION, 0),
+        (DATA_SOURCE_VPC_CONFIGURATION, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (DESCRIPTION, 0),
+        (DATA_SOURCE_STATUS, 0),
+        (SYNC_SCHEDULE, 0),
+        (ROLE_ARN, 0),
+        (ERROR_DETAIL, 0),
+        (DOCUMENT_ENRICHMENT_CONFIGURATION, 0),
+        (MEDIA_EXTRACTION_CONFIGURATION, 0),
+    ),
+)
+
+GET_DATA_SOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _GDS,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}",
+                "method": "GET",
+            }
+        )
+    },
+    GET_DATA_SOURCE_INPUT,
+    GET_DATA_SOURCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_DATA_SOURCES: StaticSchema = (7, n0, _MRIFLDS, 0)
+
+NEXT_TOKEN: StaticSchema = (3, n0, _NTe, 0)
+
+LIST_DATA_SOURCES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDSI,
+    {_sSI: _cLDSR, _smit: None},
+    (_aIp, _iI, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_DATA_SOURCES, {_sQ: _mRa}),
+    ),
+)
+
+DATA_SOURCE: StaticSchema = (
+    18,
+    n0,
+    _DS,
+    0,
+    (_dN, _dSI, _t, _cA, _uA, _st),
+    (
+        (DATA_SOURCE_NAME, 0),
+        (DATA_SOURCE_ID, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (DATA_SOURCE_STATUS, 0),
+    ),
+)
+
+DATA_SOURCES: StaticSchema = (16, n0, _DSa, 0, (_m,), ((DATA_SOURCE, 0),))
+
+LIST_DATA_SOURCES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDSO,
+    {_sSI: _cLDSRo, _smith: None},
+    (_dS, _nT),
+    ((DATA_SOURCES, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_DATA_SOURCES: StaticOperationSchema = (
+    23,
+    n0,
+    _LDS,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/indices/{indexId}/datasources",
+                "method": "GET",
+            }
+        )
+    },
+    LIST_DATA_SOURCES_INPUT,
+    LIST_DATA_SOURCES_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_DATA_SOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UDSI,
+    {_sSI: _cUDSR, _smit: None},
+    (_aIp, _iI, _dSI, _dN, _con, _vC, _d, _sS, _rA, _dEC, _mEC),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (DATA_SOURCE_ID, 9),
+        (DATA_SOURCE_NAME, 0),
+        (DATA_SOURCE_CONFIGURATION, 0),
+        (DATA_SOURCE_VPC_CONFIGURATION, 0),
+        (DESCRIPTION, 0),
+        (SYNC_SCHEDULE, 0),
+        (ROLE_ARN, 0),
+        (DOCUMENT_ENRICHMENT_CONFIGURATION, 0),
+        (MEDIA_EXTRACTION_CONFIGURATION, 0),
+    ),
+)
+
+UPDATE_DATA_SOURCE_OUTPUT: StaticSchema = (18, n0, _UDSO, {_sSI: _cUDSRo, _smith: None})
+
+UPDATE_DATA_SOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _UDS,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}",
+                "method": "PUT",
+            }
+        )
+    },
+    UPDATE_DATA_SOURCE_INPUT,
+    UPDATE_DATA_SOURCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_INDEX_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DII,
+    {_sSI: _cDIR, _smit: None},
+    (_aIp, _iI),
+    ((APPLICATION_ID, 9), (INDEX_ID, 9)),
+)
+
+DELETE_INDEX_OUTPUT: StaticSchema = (18, n0, _DIO, {_sSI: _cDIRo, _smith: None})
+
+DELETE_INDEX: StaticOperationSchema = (
+    23,
+    n0,
+    _DI,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/indices/{indexId}",
+                "method": "DELETE",
+            }
+        )
+    },
+    DELETE_INDEX_INPUT,
+    DELETE_INDEX_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_INDEX_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GII,
+    {_sSI: _cGIR, _smit: None},
+    (_aIp, _iI),
+    ((APPLICATION_ID, 9), (INDEX_ID, 9)),
+)
+
+DOCUMENT_METADATA_CONFIGURATION_NAME: StaticSchema = (3, n0, _DMCN, 0)
+
+STATUS: StaticSchema = (
+    14,
+    n0,
+    _St,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+ATTRIBUTE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _AT,
+    0,
+    (_STRING, _SL, _NUMBER, _DATE),
+    ((-1, {_sV: _STRING}), (-1, {_sV: _SL}), (-1, {_sV: _NUMBER}), (-1, {_sV: _DATE})),
+)
+
+DOCUMENT_ATTRIBUTE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _DACo,
+    0,
+    (_n, _t, _sea),
+    ((DOCUMENT_METADATA_CONFIGURATION_NAME, 0), (ATTRIBUTE_TYPE, 0), (STATUS, 0)),
+)
+
+DOCUMENT_ATTRIBUTE_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _DACoc,
+    0,
+    (_m,),
+    ((DOCUMENT_ATTRIBUTE_CONFIGURATION, 0),),
+)
+
+INDEXED_TEXT_BYTES: StaticSchema = (8, n0, _ITB, 0)
+
+INDEXED_TEXT_DOCUMENT: StaticSchema = (7, n0, _ITD, 0)
+
+TEXT_DOCUMENT_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _TDS,
+    0,
+    (_iTB, _iTDC),
+    ((INDEXED_TEXT_BYTES, 0), (INDEXED_TEXT_DOCUMENT, 0)),
+)
+
+INDEX_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _IS,
+    0,
+    (_tDS,),
+    ((TEXT_DOCUMENT_STATISTICS, 0),),
+)
+
+INDEX_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ISn,
+    0,
+    (_CREATING, _ACTIVE, _DELETING, _FAILED, _UPDATING),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _UPDATING}),
+    ),
+)
+
+GET_INDEX_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIO,
+    {_sSI: _cGIRo, _smith: None},
+    (_aIp, _iI, _dN, _iA, _st, _t, _d, _cA, _uA, _cC, _dAC, _e, _iS),
+    (
+        (APPLICATION_ID, 0),
+        (INDEX_ID, 0),
+        (INDEX_NAME, 0),
+        (INDEX_ARN, 0),
+        (INDEX_STATUS, 0),
+        (INDEX_TYPE, 0),
+        (DESCRIPTION, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (INDEX_CAPACITY_CONFIGURATION, 0),
+        (DOCUMENT_ATTRIBUTE_CONFIGURATIONS, 0),
+        (ERROR_DETAIL, 0),
+        (INDEX_STATISTICS, 0),
+    ),
+)
+
+GET_INDEX: StaticOperationSchema = (
+    23,
+    n0,
+    _GI,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/indices/{indexId}", "method": "GET"}
+        )
+    },
+    GET_INDEX_INPUT,
+    GET_INDEX_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_INDICES: StaticSchema = (7, n0, _MRIFLI, 0)
+
+LIST_INDICES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LII,
+    {_sSI: _cLIR, _smit: None},
+    (_aIp, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_INDICES, {_sQ: _mRa}),
+    ),
+)
+
+INDEX: StaticSchema = (
+    18,
+    n0,
+    _In,
+    0,
+    (_dN, _iI, _cA, _uA, _st),
+    ((INDEX_NAME, 0), (INDEX_ID, 0), (TIMESTAMP, 0), (TIMESTAMP, 0), (INDEX_STATUS, 0)),
+)
+
+INDICES: StaticSchema = (16, n0, _Ind, 0, (_m,), ((INDEX, 0),))
+
+LIST_INDICES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LIO,
+    {_sSI: _cLIRo, _smith: None},
+    (_nT, _in),
+    ((NEXT_TOKEN, 0), (INDICES, 0)),
+)
+
+LIST_INDICES: StaticOperationSchema = (
+    23,
+    n0,
+    _LI,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/indices", "method": "GET"}
+        )
+    },
+    LIST_INDICES_INPUT,
+    LIST_INDICES_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_INDEX_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UII,
+    {_sSI: _cUIR, _smit: None},
+    (_aIp, _iI, _dN, _d, _cC, _dAC),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (APPLICATION_NAME, 0),
+        (DESCRIPTION, 0),
+        (INDEX_CAPACITY_CONFIGURATION, 0),
+        (DOCUMENT_ATTRIBUTE_CONFIGURATIONS, 0),
+    ),
+)
+
+UPDATE_INDEX_OUTPUT: StaticSchema = (18, n0, _UIO, {_sSI: _cUIRo, _smith: None})
+
+UPDATE_INDEX: StaticOperationSchema = (
+    23,
+    n0,
+    _UIp,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/indices/{indexId}", "method": "PUT"}
+        )
+    },
+    UPDATE_INDEX_INPUT,
+    UPDATE_INDEX_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+INTEGRATION_ID: StaticSchema = (3, n0, _IIn, 0)
+
+MAX_RESULTS_INTEGER_FOR_LIST_APPLICATIONS: StaticSchema = (7, n0, _MRIFLA, 0)
+
+LIST_APPLICATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LAI,
+    {_sSI: _cLAR, _smit: None},
+    (_nT, _mRa),
+    (
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_APPLICATIONS, {_sQ: _mRa}),
+    ),
+)
+
+APPLICATIONS: StaticSchema = (16, n0, _App, 0, (_m,), ((APPLICATION, 0),))
+
+LIST_APPLICATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LAO,
+    {_sSI: _cLARo, _smith: None},
+    (_nT, _ap),
+    ((NEXT_TOKEN, 0), (APPLICATIONS, 0)),
+)
+
+LIST_APPLICATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LAi,
+    {_smithy: MappingProxyType({"uri": "/applications", "method": "GET"})},
+    LIST_APPLICATIONS_INPUT,
+    LIST_APPLICATIONS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+SECRET_ARN: StaticSchema = (3, n0, _SA, 0)
+
+BASIC_AUTH_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _BAC,
+    0,
+    (_sA, _rA),
+    ((SECRET_ARN, 1), (ROLE_ARN, 1)),
+)
+
+IDC_AUTH_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _IAC,
+    0,
+    (_iAA, _rA),
+    ((IDC_APPLICATION_ARN, 1), (ROLE_ARN, 1)),
+)
+
+NO_AUTH_CONFIGURATION: StaticSchema = (18, n0, _NAC, 0)
+
+URL: StaticSchema = (3, n0, _U, 0)
+
+O_AUTH2_CLIENT_CREDENTIAL_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OACCC,
+    0,
+    (_sA, _rA, _aU, _tU),
+    ((SECRET_ARN, 1), (ROLE_ARN, 1), (URL, 0), (URL, 0)),
+)
+
+PLUGIN_AUTH_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _PAC,
+    0,
+    (_bAC, _oACCC, _nAC, _iAC),
+    (
+        (BASIC_AUTH_CONFIGURATION, 0),
+        (O_AUTH2_CLIENT_CREDENTIAL_CONFIGURATION, 0),
+        (NO_AUTH_CONFIGURATION, 0),
+        (IDC_AUTH_CONFIGURATION, 0),
+    ),
+)
+
+PLUGIN_DESCRIPTION: StaticSchema = (3, n0, _PD, 0)
+
+CUSTOM_PLUGIN_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _CPC,
+    0,
+    (_d, _aST, _aSp),
+    ((PLUGIN_DESCRIPTION, 1), (API_SCHEMA_TYPE, 1), (API_SCHEMA, 0)),
+)
+
+PLUGIN_NAME: StaticSchema = (3, n0, _PN, 0)
+
+CREATE_PLUGIN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CPI,
+    {_sSI: _cCPR, _smit: None},
+    (_aIp, _dN, _t, _aCut, _sU, _cPC, _ta, _cT),
+    (
+        (APPLICATION_ID, 9),
+        (PLUGIN_NAME, 1),
+        (PLUGIN_TYPE, 1),
+        (PLUGIN_AUTH_CONFIGURATION, 1),
+        (URL, 0),
+        (CUSTOM_PLUGIN_CONFIGURATION, 0),
+        (TAGS, 0),
+        (CLIENT_TOKEN, 2),
+    ),
+)
+
+PLUGIN_BUILD_STATUS: StaticSchema = (
+    14,
+    n0,
+    _PBS,
+    0,
+    (_READY, _CIP, _CF, _UIP, _UF, _DIP, _DF),
+    (
+        (-1, {_sV: _READY}),
+        (-1, {_sV: _CIP}),
+        (-1, {_sV: _CF}),
+        (-1, {_sV: _UIP}),
+        (-1, {_sV: _UF}),
+        (-1, {_sV: _DIP}),
+        (-1, {_sV: _DF}),
+    ),
+)
+
+PLUGIN_ARN: StaticSchema = (3, n0, _PAl, 0)
+
+CREATE_PLUGIN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CPO,
+    {_sSI: _cCPRo, _smith: None},
+    (_pI, _pA, _bS),
+    ((PLUGIN_ID, 0), (PLUGIN_ARN, 0), (PLUGIN_BUILD_STATUS, 0)),
+)
+
+CREATE_PLUGIN: StaticOperationSchema = (
+    23,
+    n0,
+    _CPr,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/applications/{applicationId}/plugins"}
+        )
+    },
+    CREATE_PLUGIN_INPUT,
+    CREATE_PLUGIN_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_PLUGIN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DPI,
+    {_sSI: _cDPR, _smit: None},
+    (_aIp, _pI),
+    ((APPLICATION_ID, 9), (PLUGIN_ID, 9)),
+)
+
+DELETE_PLUGIN_OUTPUT: StaticSchema = (18, n0, _DPO, {_sSI: _cDPRo, _smith: None})
+
+DELETE_PLUGIN: StaticOperationSchema = (
+    23,
+    n0,
+    _DP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/applications/{applicationId}/plugins/{pluginId}",
+            }
+        )
+    },
+    DELETE_PLUGIN_INPUT,
+    DELETE_PLUGIN_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_PLUGIN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GPI,
+    {_sSI: _cGPR, _smit: None},
+    (_aIp, _pI),
+    ((APPLICATION_ID, 9), (PLUGIN_ID, 9)),
+)
+
+PLUGIN_STATE: StaticSchema = (
+    14,
+    n0,
+    _PS,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+GET_PLUGIN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GPO,
+    {_sSI: _cGPRo, _smith: None},
+    (_aIp, _pI, _dN, _t, _sU, _aCut, _cPC, _bS, _pA, _sta, _cA, _uA),
+    (
+        (APPLICATION_ID, 0),
+        (PLUGIN_ID, 0),
+        (PLUGIN_NAME, 0),
+        (PLUGIN_TYPE, 0),
+        (URL, 0),
+        (PLUGIN_AUTH_CONFIGURATION, 0),
+        (CUSTOM_PLUGIN_CONFIGURATION, 0),
+        (PLUGIN_BUILD_STATUS, 0),
+        (PLUGIN_ARN, 0),
+        (PLUGIN_STATE, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+GET_PLUGIN: StaticOperationSchema = (
+    23,
+    n0,
+    _GP,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/applications/{applicationId}/plugins/{pluginId}"}
+        )
+    },
+    GET_PLUGIN_INPUT,
+    GET_PLUGIN_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_PLUGINS: StaticSchema = (7, n0, _MRIFLP, 0)
+
+LIST_PLUGINS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LPI,
+    {_sSI: _cLPR, _smit: None},
+    (_aIp, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_PLUGINS, {_sQ: _mRa}),
+    ),
+)
+
+PLUGIN: StaticSchema = (
+    18,
+    n0,
+    _Pl,
+    0,
+    (_pI, _dN, _t, _sU, _sta, _bS, _cA, _uA),
+    (
+        (PLUGIN_ID, 0),
+        (PLUGIN_NAME, 0),
+        (PLUGIN_TYPE, 0),
+        (URL, 0),
+        (PLUGIN_STATE, 0),
+        (PLUGIN_BUILD_STATUS, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+PLUGINS: StaticSchema = (16, n0, _Plu, 0, (_m,), ((PLUGIN, 0),))
+
+LIST_PLUGINS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LPO,
+    {_sSI: _cLPRo, _smith: None},
+    (_nT, _pl),
+    ((NEXT_TOKEN, 0), (PLUGINS, 0)),
+)
+
+LIST_PLUGINS: StaticOperationSchema = (
+    23,
+    n0,
+    _LP,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/applications/{applicationId}/plugins"}
+        )
+    },
+    LIST_PLUGINS_INPUT,
+    LIST_PLUGINS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_PLUGIN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UPI,
+    {_sSI: _cUPR, _smit: None},
+    (_aIp, _pI, _dN, _sta, _sU, _cPC, _aCut),
+    (
+        (APPLICATION_ID, 9),
+        (PLUGIN_ID, 9),
+        (PLUGIN_NAME, 0),
+        (PLUGIN_STATE, 0),
+        (URL, 0),
+        (CUSTOM_PLUGIN_CONFIGURATION, 0),
+        (PLUGIN_AUTH_CONFIGURATION, 0),
+    ),
+)
+
+UPDATE_PLUGIN_OUTPUT: StaticSchema = (18, n0, _UPO, {_sSI: _cUPRo, _smith: None})
+
+UPDATE_PLUGIN: StaticOperationSchema = (
+    23,
+    n0,
+    _UP,
+    {
+        _smithy: MappingProxyType(
+            {"method": "PUT", "uri": "/applications/{applicationId}/plugins/{pluginId}"}
+        )
+    },
+    UPDATE_PLUGIN_INPUT,
+    UPDATE_PLUGIN_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+KENDRA_INDEX_ID: StaticSchema = (3, n0, _KII, 0)
+
+KENDRA_INDEX_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _KIC,
+    0,
+    (_iI,),
+    ((KENDRA_INDEX_ID, 1),),
+)
+
+BOOSTING_DURATION_IN_SECONDS: StaticSchema = (8, n0, _BDIS, 0)
+
+DOCUMENT_ATTRIBUTE_BOOSTING_LEVEL: StaticSchema = (
+    14,
+    n0,
+    _DABL,
+    0,
+    (_NONE, _LOW, _MEDIUM, _HIGH, _VH, _ONE, _TWO),
+    (
+        (-1, {_sV: _NONE}),
+        (-1, {_sV: _LOW}),
+        (-1, {_sV: _MEDIUM}),
+        (-1, {_sV: _HIGH}),
+        (-1, {_sV: _VH}),
+        (-1, {_sV: _ONE}),
+        (-1, {_sV: _TWO}),
+    ),
+)
+
+DATE_ATTRIBUTE_BOOSTING_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _DABC,
+    0,
+    (_bL, _bDIS),
+    ((DOCUMENT_ATTRIBUTE_BOOSTING_LEVEL, 1), (BOOSTING_DURATION_IN_SECONDS, 0)),
+)
+
+NUMBER_ATTRIBUTE_BOOSTING_TYPE: StaticSchema = (
+    14,
+    n0,
+    _NABT,
+    0,
+    (_PLV, _PSV),
+    ((-1, {_sV: _PLV}), (-1, {_sV: _PSV})),
+)
+
+NUMBER_ATTRIBUTE_BOOSTING_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _NABC,
+    0,
+    (_bL, _bT),
+    ((DOCUMENT_ATTRIBUTE_BOOSTING_LEVEL, 1), (NUMBER_ATTRIBUTE_BOOSTING_TYPE, 0)),
+)
+
+STRING_ATTRIBUTE_VALUE_BOOSTING_LEVEL: StaticSchema = (
+    14,
+    n0,
+    _SAVBL,
+    0,
+    (_LOW, _MEDIUM, _HIGH, _VH, _ONE, _TWO, _THREE, _FOUR, _FIVE),
+    (
+        (-1, {_sV: _LOW}),
+        (-1, {_sV: _MEDIUM}),
+        (-1, {_sV: _HIGH}),
+        (-1, {_sV: _VH}),
+        (-1, {_sV: _ONE}),
+        (-1, {_sV: _TWO}),
+        (-1, {_sV: _THREE}),
+        (-1, {_sV: _FOUR}),
+        (-1, {_sV: _FIVE}),
+    ),
+)
+
+STRING_ATTRIBUTE_VALUE_BOOSTING: StaticSchema = (
+    17,
+    n0,
+    _SAVB,
+    0,
+    (_k, _v),
+    ((STRING, 0), (STRING_ATTRIBUTE_VALUE_BOOSTING_LEVEL, 0)),
+)
+
+STRING_ATTRIBUTE_BOOSTING_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SABC,
+    0,
+    (_bL, _aVB),
+    ((DOCUMENT_ATTRIBUTE_BOOSTING_LEVEL, 1), (STRING_ATTRIBUTE_VALUE_BOOSTING, 0)),
+)
+
+STRING_LIST_ATTRIBUTE_BOOSTING_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SLABC,
+    0,
+    (_bL,),
+    ((DOCUMENT_ATTRIBUTE_BOOSTING_LEVEL, 1),),
+)
+
+DOCUMENT_ATTRIBUTE_BOOSTING_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _DABCo,
+    0,
+    (_nC, _sC, _dC, _sLC),
+    (
+        (NUMBER_ATTRIBUTE_BOOSTING_CONFIGURATION, 0),
+        (STRING_ATTRIBUTE_BOOSTING_CONFIGURATION, 0),
+        (DATE_ATTRIBUTE_BOOSTING_CONFIGURATION, 0),
+        (STRING_LIST_ATTRIBUTE_BOOSTING_CONFIGURATION, 0),
+    ),
+)
+
+DOCUMENT_ATTRIBUTE_BOOSTING_OVERRIDE_MAP: StaticSchema = (
+    17,
+    n0,
+    _DABOM,
+    0,
+    (_k, _v),
+    ((DOCUMENT_ATTRIBUTE_KEY, 0), (DOCUMENT_ATTRIBUTE_BOOSTING_CONFIGURATION, 0)),
+)
+
+NATIVE_INDEX_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _NIC,
+    0,
+    (_iI, _ve, _bO),
+    ((INDEX_ID, 1), (LONG, 0), (DOCUMENT_ATTRIBUTE_BOOSTING_OVERRIDE_MAP, 0)),
+)
+
+RETRIEVER_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _RC,
+    0,
+    (_nIC, _kIC),
+    ((NATIVE_INDEX_CONFIGURATION, 0), (KENDRA_INDEX_CONFIGURATION, 0)),
+)
+
+RETRIEVER_NAME: StaticSchema = (3, n0, _RN, 0)
+
+RETRIEVER_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RT,
+    0,
+    (_NI, _KI),
+    ((-1, {_sV: _NI}), (-1, {_sV: _KI})),
+)
+
+CREATE_RETRIEVER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CRI,
+    {_sSI: _cCRR, _smit: None},
+    (_aIp, _t, _dN, _con, _rA, _cT, _ta),
+    (
+        (APPLICATION_ID, 9),
+        (RETRIEVER_TYPE, 1),
+        (RETRIEVER_NAME, 1),
+        (RETRIEVER_CONFIGURATION, 1),
+        (ROLE_ARN, 0),
+        (CLIENT_TOKEN, 2),
+        (TAGS, 0),
+    ),
+)
+
+RETRIEVER_ARN: StaticSchema = (3, n0, _RAe, 0)
+
+RETRIEVER_ID: StaticSchema = (3, n0, _RIet, 0)
+
+CREATE_RETRIEVER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CRO,
+    {_sSI: _cCRRo, _smith: None},
+    (_rIe, _rAe),
+    ((RETRIEVER_ID, 0), (RETRIEVER_ARN, 0)),
+)
+
+CREATE_RETRIEVER: StaticOperationSchema = (
+    23,
+    n0,
+    _CR,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/applications/{applicationId}/retrievers"}
+        )
+    },
+    CREATE_RETRIEVER_INPUT,
+    CREATE_RETRIEVER_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_RETRIEVER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRI,
+    {_sSI: _cDRR, _smit: None},
+    (_aIp, _rIe),
+    ((APPLICATION_ID, 9), (RETRIEVER_ID, 9)),
+)
+
+DELETE_RETRIEVER_OUTPUT: StaticSchema = (18, n0, _DRO, {_sSI: _cDRRo, _smith: None})
+
+DELETE_RETRIEVER: StaticOperationSchema = (
+    23,
+    n0,
+    _DR,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/applications/{applicationId}/retrievers/{retrieverId}",
+            }
+        )
+    },
+    DELETE_RETRIEVER_INPUT,
+    DELETE_RETRIEVER_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_RETRIEVER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRI,
+    {_sSI: _cGRR, _smit: None},
+    (_aIp, _rIe),
+    ((APPLICATION_ID, 9), (RETRIEVER_ID, 9)),
+)
+
+RETRIEVER_STATUS: StaticSchema = (
+    14,
+    n0,
+    _RS,
+    0,
+    (_CREATING, _ACTIVE, _FAILED),
+    ((-1, {_sV: _CREATING}), (-1, {_sV: _ACTIVE}), (-1, {_sV: _FAILED})),
+)
+
+GET_RETRIEVER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRO,
+    {_sSI: _cGRRo, _smith: None},
+    (_aIp, _rIe, _rAe, _t, _st, _dN, _con, _rA, _cA, _uA),
+    (
+        (APPLICATION_ID, 0),
+        (RETRIEVER_ID, 0),
+        (RETRIEVER_ARN, 0),
+        (RETRIEVER_TYPE, 0),
+        (RETRIEVER_STATUS, 0),
+        (RETRIEVER_NAME, 0),
+        (RETRIEVER_CONFIGURATION, 0),
+        (ROLE_ARN, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+GET_RETRIEVER: StaticOperationSchema = (
+    23,
+    n0,
+    _GR,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/applications/{applicationId}/retrievers/{retrieverId}",
+            }
+        )
+    },
+    GET_RETRIEVER_INPUT,
+    GET_RETRIEVER_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_RETRIEVERS_REQUEST: StaticSchema = (7, n0, _MRIFLRR, 0)
+
+LIST_RETRIEVERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LRI,
+    {_sSI: _cLRR, _smit: None},
+    (_aIp, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_RETRIEVERS_REQUEST, {_sQ: _mRa}),
+    ),
+)
+
+RETRIEVER: StaticSchema = (
+    18,
+    n0,
+    _R,
+    0,
+    (_aIp, _rIe, _t, _st, _dN),
+    (
+        (APPLICATION_ID, 0),
+        (RETRIEVER_ID, 0),
+        (RETRIEVER_TYPE, 0),
+        (RETRIEVER_STATUS, 0),
+        (RETRIEVER_NAME, 0),
+    ),
+)
+
+RETRIEVERS: StaticSchema = (16, n0, _Re, 0, (_m,), ((RETRIEVER, 0),))
+
+LIST_RETRIEVERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LRO,
+    {_sSI: _cLRRo, _smith: None},
+    (_ret, _nT),
+    ((RETRIEVERS, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_RETRIEVERS: StaticOperationSchema = (
+    23,
+    n0,
+    _LR,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/retrievers", "method": "GET"}
+        )
+    },
+    LIST_RETRIEVERS_INPUT,
+    LIST_RETRIEVERS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_RETRIEVER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URI,
+    {_sSI: _cURR, _smit: None},
+    (_aIp, _rIe, _con, _dN, _rA),
+    (
+        (APPLICATION_ID, 9),
+        (RETRIEVER_ID, 9),
+        (RETRIEVER_CONFIGURATION, 0),
+        (RETRIEVER_NAME, 0),
+        (ROLE_ARN, 0),
+    ),
+)
+
+UPDATE_RETRIEVER_OUTPUT: StaticSchema = (18, n0, _URO, {_sSI: _cURRo, _smith: None})
+
+UPDATE_RETRIEVER: StaticOperationSchema = (
+    23,
+    n0,
+    _UR,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/applications/{applicationId}/retrievers/{retrieverId}",
+            }
+        )
+    },
+    UPDATE_RETRIEVER_INPUT,
+    UPDATE_RETRIEVER_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_APPLICATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UAI,
+    {_sSI: _cUAR, _smit: None},
+    (_aIp, _iCIA, _dN, _d, _rA, _aCt, _qAC, _pC, _aSC),
+    (
+        (APPLICATION_ID, 9),
+        (INSTANCE_ARN, 0),
+        (APPLICATION_NAME, 0),
+        (DESCRIPTION, 0),
+        (ROLE_ARN, 0),
+        (ATTACHMENTS_CONFIGURATION, 0),
+        (Q_APPS_CONFIGURATION, 0),
+        (PERSONALIZATION_CONFIGURATION, 0),
+        (AUTO_SUBSCRIPTION_CONFIGURATION, 0),
+    ),
+)
+
+UPDATE_APPLICATION_OUTPUT: StaticSchema = (18, n0, _UAO, {_sSI: _cUARo, _smith: None})
+
+UPDATE_APPLICATION: StaticOperationSchema = (
+    23,
+    n0,
+    _UA,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}", "method": "PUT"}
+        )
+    },
+    UPDATE_APPLICATION_INPUT,
+    UPDATE_APPLICATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+BROWSER_EXTENSION: StaticSchema = (3, n0, _BE, 0)
+
+BROWSER_EXTENSION_LIST: StaticSchema = (
+    16,
+    n0,
+    _BEL,
+    0,
+    (_m,),
+    ((BROWSER_EXTENSION, 0),),
+)
+
+BROWSER_EXTENSION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _BEC,
+    0,
+    (_eBE,),
+    ((BROWSER_EXTENSION_LIST, 1),),
+)
+
+CUSTOM_CSS_URL: StaticSchema = (3, n0, _CCSSU, 0)
+
+FAVICON_URL: StaticSchema = (3, n0, _FU, 0)
+
+FONT_URL: StaticSchema = (3, n0, _FUo, 0)
+
+LOGO_URL: StaticSchema = (3, n0, _LU, 0)
+
+CUSTOMIZATION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _CC,
+    0,
+    (_cCSSU, _lU, _fU, _fUa),
+    ((CUSTOM_CSS_URL, 0), (LOGO_URL, 0), (FONT_URL, 0), (FAVICON_URL, 0)),
+)
+
+OPEN_ID_CONNECT_PROVIDER_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OIDCPC,
+    0,
+    (_sAe, _sR),
+    ((SECRET_ARN, 1), (ROLE_ARN, 1)),
+)
+
+SAML_AUTHENTICATION_URL: StaticSchema = (3, n0, _SAU, 0)
+
+SAML_PROVIDER_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SPC,
+    0,
+    (_aUu,),
+    ((SAML_AUTHENTICATION_URL, 1),),
+)
+
+IDENTITY_PROVIDER_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _IPC,
+    0,
+    (_sCa, _oIDCC),
+    ((SAML_PROVIDER_CONFIGURATION, 0), (OPEN_ID_CONNECT_PROVIDER_CONFIGURATION, 0)),
+)
+
+ORIGIN: StaticSchema = (3, n0, _O, 0)
+
+WEB_EXPERIENCE_ORIGINS: StaticSchema = (16, n0, _WEO, 0, (_m,), ((ORIGIN, 0),))
+
+WEB_EXPERIENCE_SAMPLE_PROMPTS_CONTROL_MODE: StaticSchema = (
+    14,
+    n0,
+    _WESPCM,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+WEB_EXPERIENCE_SUBTITLE: StaticSchema = (3, n0, _WES, 0)
+
+WEB_EXPERIENCE_TITLE: StaticSchema = (3, n0, _WET, 0)
+
+WEB_EXPERIENCE_WELCOME_MESSAGE: StaticSchema = (3, n0, _WEWM, 0)
+
+CREATE_WEB_EXPERIENCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CWEI,
+    {_sSI: _cCWER, _smit: None},
+    (_aIp, _ti, _su, _wM, _sPCM, _or, _rA, _ta, _cT, _iPC, _bEC, _cCu),
+    (
+        (APPLICATION_ID, 9),
+        (WEB_EXPERIENCE_TITLE, 0),
+        (WEB_EXPERIENCE_SUBTITLE, 0),
+        (WEB_EXPERIENCE_WELCOME_MESSAGE, 0),
+        (WEB_EXPERIENCE_SAMPLE_PROMPTS_CONTROL_MODE, 0),
+        (WEB_EXPERIENCE_ORIGINS, 0),
+        (ROLE_ARN, 0),
+        (TAGS, 0),
+        (CLIENT_TOKEN, 2),
+        (IDENTITY_PROVIDER_CONFIGURATION, 0),
+        (BROWSER_EXTENSION_CONFIGURATION, 0),
+        (CUSTOMIZATION_CONFIGURATION, 0),
+    ),
+)
+
+WEB_EXPERIENCE_ARN: StaticSchema = (3, n0, _WEA, 0)
+
+WEB_EXPERIENCE_ID: StaticSchema = (3, n0, _WEI, 0)
+
+CREATE_WEB_EXPERIENCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CWEO,
+    {_sSI: _cCWERo, _smith: None},
+    (_wEI, _wEA),
+    ((WEB_EXPERIENCE_ID, 0), (WEB_EXPERIENCE_ARN, 0)),
+)
+
+CREATE_WEB_EXPERIENCE: StaticOperationSchema = (
+    23,
+    n0,
+    _CWE,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/experiences", "method": "POST"}
+        )
+    },
+    CREATE_WEB_EXPERIENCE_INPUT,
+    CREATE_WEB_EXPERIENCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_WEB_EXPERIENCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DWEI,
+    {_sSI: _cDWER, _smit: None},
+    (_aIp, _wEI),
+    ((APPLICATION_ID, 9), (WEB_EXPERIENCE_ID, 9)),
+)
+
+DELETE_WEB_EXPERIENCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DWEO,
+    {_sSI: _cDWERo, _smith: None},
+)
+
+DELETE_WEB_EXPERIENCE: StaticOperationSchema = (
+    23,
+    n0,
+    _DWE,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/experiences/{webExperienceId}",
+                "method": "DELETE",
+            }
+        )
+    },
+    DELETE_WEB_EXPERIENCE_INPUT,
+    DELETE_WEB_EXPERIENCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_WEB_EXPERIENCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GWEI,
+    {_sSI: _cGWER, _smit: None},
+    (_aIp, _wEI),
+    ((APPLICATION_ID, 9), (WEB_EXPERIENCE_ID, 9)),
+)
+
+SAML_METADATA_XML: StaticSchema = (3, n0, _SMXML, 0)
+
+SAML_ATTRIBUTE: StaticSchema = (3, n0, _SAa, 0)
+
+SAML_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SCa,
+    0,
+    (_mXML, _rA, _uIA, _uGA),
+    ((SAML_METADATA_XML, 1), (ROLE_ARN, 1), (SAML_ATTRIBUTE, 1), (SAML_ATTRIBUTE, 0)),
+)
+
+WEB_EXPERIENCE_AUTH_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _WEAC,
+    0,
+    (_sCa,),
+    ((SAML_CONFIGURATION, 0),),
+)
+
+WEB_EXPERIENCE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _WESe,
+    0,
+    (_CREATING, _ACTIVE, _DELETING, _FAILED, _PAC_),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _PAC_}),
+    ),
+)
+
+GET_WEB_EXPERIENCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GWEO,
+    {_sSI: _cGWERo, _smith: None},
+    (
+        _aIp,
+        _wEI,
+        _wEA,
+        _dE,
+        _st,
+        _cA,
+        _uA,
+        _ti,
+        _su,
+        _wM,
+        _sPCM,
+        _or,
+        _rA,
+        _iPC,
+        _aCu,
+        _e,
+        _bEC,
+        _cCu,
+    ),
+    (
+        (APPLICATION_ID, 0),
+        (WEB_EXPERIENCE_ID, 0),
+        (WEB_EXPERIENCE_ARN, 0),
+        (URL, 0),
+        (WEB_EXPERIENCE_STATUS, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (WEB_EXPERIENCE_TITLE, 0),
+        (WEB_EXPERIENCE_SUBTITLE, 0),
+        (WEB_EXPERIENCE_WELCOME_MESSAGE, 0),
+        (WEB_EXPERIENCE_SAMPLE_PROMPTS_CONTROL_MODE, 0),
+        (WEB_EXPERIENCE_ORIGINS, 0),
+        (ROLE_ARN, 0),
+        (IDENTITY_PROVIDER_CONFIGURATION, 0),
+        (WEB_EXPERIENCE_AUTH_CONFIGURATION, 0),
+        (ERROR_DETAIL, 0),
+        (BROWSER_EXTENSION_CONFIGURATION, 0),
+        (CUSTOMIZATION_CONFIGURATION, 0),
+    ),
+)
+
+GET_WEB_EXPERIENCE: StaticOperationSchema = (
+    23,
+    n0,
+    _GWE,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/experiences/{webExperienceId}",
+                "method": "GET",
+            }
+        )
+    },
+    GET_WEB_EXPERIENCE_INPUT,
+    GET_WEB_EXPERIENCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_WEB_EXPERIENCES_REQUEST: StaticSchema = (
+    7,
+    n0,
+    _MRIFLWER,
+    0,
+)
+
+LIST_WEB_EXPERIENCES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LWEI,
+    {_sSI: _cLWER, _smit: None},
+    (_aIp, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_WEB_EXPERIENCES_REQUEST, {_sQ: _mRa}),
+    ),
+)
+
+WEB_EXPERIENCE: StaticSchema = (
+    18,
+    n0,
+    _WE,
+    0,
+    (_wEI, _cA, _uA, _dE, _st),
+    (
+        (WEB_EXPERIENCE_ID, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (URL, 0),
+        (WEB_EXPERIENCE_STATUS, 0),
+    ),
+)
+
+WEB_EXPERIENCES: StaticSchema = (16, n0, _WEe, 0, (_m,), ((WEB_EXPERIENCE, 0),))
+
+LIST_WEB_EXPERIENCES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LWEO,
+    {_sSI: _cLWERo, _smith: None},
+    (_wE, _nT),
+    ((WEB_EXPERIENCES, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_WEB_EXPERIENCES: StaticOperationSchema = (
+    23,
+    n0,
+    _LWE,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/experiences", "method": "GET"}
+        )
+    },
+    LIST_WEB_EXPERIENCES_INPUT,
+    LIST_WEB_EXPERIENCES_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_WEB_EXPERIENCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UWEI,
+    {_sSI: _cUWER, _smit: None},
+    (_aIp, _wEI, _rA, _aCu, _ti, _su, _wM, _sPCM, _iPC, _or, _bEC, _cCu),
+    (
+        (APPLICATION_ID, 9),
+        (WEB_EXPERIENCE_ID, 9),
+        (ROLE_ARN, 0),
+        (WEB_EXPERIENCE_AUTH_CONFIGURATION, 0),
+        (WEB_EXPERIENCE_TITLE, 0),
+        (WEB_EXPERIENCE_SUBTITLE, 0),
+        (WEB_EXPERIENCE_WELCOME_MESSAGE, 0),
+        (WEB_EXPERIENCE_SAMPLE_PROMPTS_CONTROL_MODE, 0),
+        (IDENTITY_PROVIDER_CONFIGURATION, 0),
+        (WEB_EXPERIENCE_ORIGINS, 0),
+        (BROWSER_EXTENSION_CONFIGURATION, 0),
+        (CUSTOMIZATION_CONFIGURATION, 0),
+    ),
+)
+
+UPDATE_WEB_EXPERIENCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UWEO,
+    {_sSI: _cUWERo, _smith: None},
+)
+
+UPDATE_WEB_EXPERIENCE: StaticOperationSchema = (
+    23,
+    n0,
+    _UWE,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/experiences/{webExperienceId}",
+                "method": "PUT",
+            }
+        )
+    },
+    UPDATE_WEB_EXPERIENCE_INPUT,
+    UPDATE_WEB_EXPERIENCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+CREATOR_MODE_CONTROL: StaticSchema = (
+    14,
+    n0,
+    _CMC,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+APPLIED_CREATOR_MODE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _ACMC,
+    0,
+    (_cMC,),
+    ((CREATOR_MODE_CONTROL, 1),),
+)
+
+ORCHESTRATION_CONTROL: StaticSchema = (
+    14,
+    n0,
+    _OC,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+APPLIED_ORCHESTRATION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _AOC,
+    0,
+    (_cont,),
+    ((ORCHESTRATION_CONTROL, 1),),
+)
+
+ASSOCIATED_GROUP: StaticSchema = (
+    18,
+    n0,
+    _AG,
+    0,
+    (_n, _t),
+    ((GROUP_NAME, 0), (MEMBERSHIP_TYPE, 0)),
+)
+
+ASSOCIATED_GROUPS: StaticSchema = (16, n0, _AGs, 0, (_m,), ((ASSOCIATED_GROUP, 0),))
+
+ASSOCIATED_USER: StaticSchema = (
+    18,
+    n0,
+    _AU,
+    0,
+    (_i, _t),
+    ((STRING, 0), (MEMBERSHIP_TYPE, 0)),
+)
+
+ASSOCIATED_USERS: StaticSchema = (16, n0, _AUs, 0, (_m,), ((ASSOCIATED_USER, 0),))
+
+Q_IAM_ACTIONS: StaticSchema = (16, n0, _QIAa, 0, (_m,), ((Q_IAM_ACTION, 0),))
+
+PERMISSION_CONDITION_KEY: StaticSchema = (3, n0, _PCK, 0)
+
+PERMISSION_CONDITION_OPERATOR: StaticSchema = (
+    14,
+    n0,
+    _PCO,
+    0,
+    (_SE,),
+    ((-1, {_sV: _SEt}),),
+)
+
+PERMISSION_CONDITION_VALUE: StaticSchema = (3, n0, _PCV, 0)
+
+PERMISSION_CONDITION_VALUES: StaticSchema = (
+    16,
+    n0,
+    _PCVe,
+    0,
+    (_m,),
+    ((PERMISSION_CONDITION_VALUE, 0),),
+)
+
+PERMISSION_CONDITION: StaticSchema = (
+    18,
+    n0,
+    _PCe,
+    0,
+    (_cO, _cK, _cV),
+    (
+        (PERMISSION_CONDITION_OPERATOR, 1),
+        (PERMISSION_CONDITION_KEY, 1),
+        (PERMISSION_CONDITION_VALUES, 1),
+    ),
+)
+
+PERMISSION_CONDITIONS: StaticSchema = (
+    16,
+    n0,
+    _PCer,
+    0,
+    (_m,),
+    ((PERMISSION_CONDITION, 0),),
+)
+
+STATEMENT_ID: StaticSchema = (3, n0, _SIt, 0)
+
+ASSOCIATE_PERMISSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _API,
+    {_sSI: _cAPR, _smit: None},
+    (_aIp, _sIt, _ac, _cond, _pr),
+    (
+        (APPLICATION_ID, 9),
+        (STATEMENT_ID, 1),
+        (Q_IAM_ACTIONS, 1),
+        (PERMISSION_CONDITIONS, 0),
+        (PRINCIPAL_ROLE_ARN, 1),
+    ),
+)
+
+ASSOCIATE_PERMISSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _APO,
+    {_sSI: _cAPRo, _smith: None},
+    (_stat,),
+    ((STRING, 0),),
+)
+
+ASSOCIATE_PERMISSION: StaticOperationSchema = (
+    23,
+    n0,
+    _AP,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/policy", "method": "POST"}
+        )
+    },
+    ASSOCIATE_PERMISSION_INPUT,
+    ASSOCIATE_PERMISSION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+ATTACHMENT_ID: StaticSchema = (3, n0, _AIt, 0)
+
+CONVERSATION_SOURCE: StaticSchema = (
+    18,
+    n0,
+    _CS,
+    0,
+    (_cI, _aIt),
+    ((CONVERSATION_ID, 1), (ATTACHMENT_ID, 1)),
+)
+
+COPY_FROM_SOURCE: StaticSchema = (
+    19,
+    n0,
+    _CFS,
+    0,
+    (_conv,),
+    ((CONVERSATION_SOURCE, 0),),
+)
+
+ATTACHMENT_NAME: StaticSchema = (3, n0, _ANt, 0)
+
+ATTACHMENT_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ASt,
+    0,
+    (_FAILED, _SUCCESS),
+    ((-1, {_sV: _FAILED}), (-1, {_sV: _SUCCESS})),
+)
+
+ATTACHMENT: StaticSchema = (
+    18,
+    n0,
+    _At,
+    0,
+    (_aIt, _cI, _n, _cF, _fT, _fS, _md, _cA, _st, _e),
+    (
+        (ATTACHMENT_ID, 0),
+        (CONVERSATION_ID, 0),
+        (ATTACHMENT_NAME, 0),
+        (COPY_FROM_SOURCE, 0),
+        (STRING, 0),
+        (INTEGER, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (ATTACHMENT_STATUS, 0),
+        (ERROR_DETAIL, 0),
+    ),
+)
+
+BLOB: StaticSchema = (1, n0, _B, 0)
+
+ATTACHMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _AItt,
+    0,
+    (_da, _n, _cF),
+    ((BLOB, 0), (ATTACHMENT_NAME, 0), (COPY_FROM_SOURCE, 0)),
+)
+
+ATTACHMENT_INPUT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _AIE,
+    0,
+    (_at,),
+    ((ATTACHMENT_INPUT, 0),),
+)
+
+ATTACHMENT_LIST: StaticSchema = (16, n0, _AL, 0, (_m,), ((ATTACHMENT, 0),))
+
+ATTACHMENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _AO,
+    0,
+    (_n, _st, _e, _aIt, _cI),
+    (
+        (ATTACHMENT_NAME, 0),
+        (ATTACHMENT_STATUS, 0),
+        (ERROR_DETAIL, 0),
+        (ATTACHMENT_ID, 0),
+        (CONVERSATION_ID, 0),
+    ),
+)
+
+ATTACHMENTS_INPUT: StaticSchema = (16, n0, _AItta, 0, (_m,), ((ATTACHMENT_INPUT, 0),))
+
+ATTACHMENTS_OUTPUT: StaticSchema = (16, n0, _AOt, 0, (_m,), ((ATTACHMENT_OUTPUT, 0),))
+
+AUDIO_EXTRACTION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _AET,
+    0,
+    (_TRANSCRIPT, _SUMMARY),
+    ((-1, {_sV: _TRANSCRIPT}), (-1, {_sV: _SUMMARY})),
+)
+
+MEDIA_ID: StaticSchema = (3, n0, _MIe, 0)
+
+AUDIO_SOURCE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ASD,
+    0,
+    (_mI, _mMT, _sTM, _eTM, _aET),
+    ((MEDIA_ID, 0), (STRING, 0), (LONG, 0), (LONG, 0), (AUDIO_EXTRACTION_TYPE, 0)),
+)
+
+AUTH_CHALLENGE_REQUEST: StaticSchema = (18, n0, _ACR, 0, (_aU,), ((URL, 1),))
+
+AUTH_CHALLENGE_REQUEST_EVENT: StaticSchema = (18, n0, _ACRE, 0, (_aU,), ((URL, 1),))
+
+AUTH_RESPONSE_KEY: StaticSchema = (3, n0, _ARK, 0)
+
+AUTH_RESPONSE_VALUE: StaticSchema = (3, n0, _ARV, 0)
+
+AUTHORIZATION_RESPONSE_MAP: StaticSchema = (
+    17,
+    n0,
+    _ARM,
+    0,
+    (_k, _v),
+    ((AUTH_RESPONSE_KEY, 0), (AUTH_RESPONSE_VALUE, 0)),
+)
+
+AUTH_CHALLENGE_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _ACRu,
+    0,
+    (_rM,),
+    ((AUTHORIZATION_RESPONSE_MAP, 1),),
+)
+
+AUTH_CHALLENGE_RESPONSE_EVENT: StaticSchema = (
+    18,
+    n0,
+    _ACREu,
+    0,
+    (_rM,),
+    ((AUTHORIZATION_RESPONSE_MAP, 1),),
+)
+
+EXECUTION_ID: StaticSchema = (3, n0, _EI, 0)
+
+DOCUMENT_ID: StaticSchema = (3, n0, _DIo, 0)
+
+DELETE_DOCUMENT: StaticSchema = (18, n0, _DD, 0, (_dI,), ((DOCUMENT_ID, 1),))
+
+DELETE_DOCUMENTS: StaticSchema = (16, n0, _DDe, 0, (_m,), ((DELETE_DOCUMENT, 0),))
+
+BATCH_DELETE_DOCUMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _BDDI,
+    {_sSI: _cBDDR, _smit: None},
+    (_aIp, _iI, _do, _dSSI),
+    ((APPLICATION_ID, 9), (INDEX_ID, 9), (DELETE_DOCUMENTS, 1), (EXECUTION_ID, 0)),
+)
+
+FAILED_DOCUMENT: StaticSchema = (
+    18,
+    n0,
+    _FD,
+    0,
+    (_i, _e, _dSI),
+    ((DOCUMENT_ID, 0), (ERROR_DETAIL, 0), (DATA_SOURCE_ID, 0)),
+)
+
+FAILED_DOCUMENTS: StaticSchema = (16, n0, _FDa, 0, (_m,), ((FAILED_DOCUMENT, 0),))
+
+BATCH_DELETE_DOCUMENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _BDDO,
+    {_sSI: _cBDDRo, _smith: None},
+    (_fD,),
+    ((FAILED_DOCUMENTS, 0),),
+)
+
+BATCH_DELETE_DOCUMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _BDD,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/applications/{applicationId}/indices/{indexId}/documents/delete",
+            }
+        )
+    },
+    BATCH_DELETE_DOCUMENT_INPUT,
+    BATCH_DELETE_DOCUMENT_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DOCUMENT_ATTRIBUTES: StaticSchema = (16, n0, _DAo, 0, (_m,), ((DOCUMENT_ATTRIBUTE, 0),))
+
+DOCUMENT_CONTENT: StaticSchema = (19, n0, _DC, 0, (_bl, _s_), ((1, 0), (S3, 0)))
+
+CONTENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CTo,
+    0,
+    (_PDF, _HTML, _MW, _PT_, _PPT, _RTF, _XML, _XSLT, _ME_, _CSV, _JSON, _MD),
+    (
+        (-1, {_sV: _PDF}),
+        (-1, {_sV: _HTML}),
+        (-1, {_sV: _MW}),
+        (-1, {_sV: _PT_}),
+        (-1, {_sV: _PPT}),
+        (-1, {_sV: _RTF}),
+        (-1, {_sV: _XML}),
+        (-1, {_sV: _XSLT}),
+        (-1, {_sV: _ME_}),
+        (-1, {_sV: _CSV}),
+        (-1, {_sV: _JSON}),
+        (-1, {_sV: _MD}),
+    ),
+)
+
+TITLE: StaticSchema = (3, n0, _Ti, 0)
+
+DOCUMENT: StaticSchema = (
+    18,
+    n0,
+    _Do,
+    0,
+    (_i, _att, _conte, _cTo, _ti, _aCc, _dEC, _mEC),
+    (
+        (DOCUMENT_ID, 1),
+        (DOCUMENT_ATTRIBUTES, 0),
+        (DOCUMENT_CONTENT, 0),
+        (CONTENT_TYPE, 0),
+        (TITLE, 0),
+        (ACCESS_CONFIGURATION, 0),
+        (DOCUMENT_ENRICHMENT_CONFIGURATION, 0),
+        (MEDIA_EXTRACTION_CONFIGURATION, 0),
+    ),
+)
+
+DOCUMENTS: StaticSchema = (16, n0, _Doc, 0, (_m,), ((DOCUMENT, 0),))
+
+BATCH_PUT_DOCUMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _BPDI,
+    {_sSI: _cBPDR, _smit: None},
+    (_aIp, _iI, _do, _rA, _dSSI),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (DOCUMENTS, 1),
+        (ROLE_ARN, 0),
+        (EXECUTION_ID, 0),
+    ),
+)
+
+BATCH_PUT_DOCUMENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _BPDO,
+    {_sSI: _cBPDRo, _smith: None},
+    (_fD,),
+    ((FAILED_DOCUMENTS, 0),),
+)
+
+BATCH_PUT_DOCUMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _BPD,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/applications/{applicationId}/indices/{indexId}/documents",
+            }
+        )
+    },
+    BATCH_PUT_DOCUMENT_INPUT,
+    BATCH_PUT_DOCUMENT_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+BLOCKED_PHRASE: StaticSchema = (3, n0, _BP, 0)
+
+BLOCKED_PHRASES: StaticSchema = (16, n0, _BPl, 0, (_m,), ((BLOCKED_PHRASE, 0),))
+
+SYSTEM_MESSAGE_OVERRIDE: StaticSchema = (3, n0, _SMO, 0)
+
+BLOCKED_PHRASES_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _BPC,
+    0,
+    (_bP, _sMO),
+    ((BLOCKED_PHRASES, 0), (SYSTEM_MESSAGE_OVERRIDE, 0)),
+)
+
+BLOCKED_PHRASES_CONFIGURATION_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _BPCU,
+    0,
+    (_bPTCOU, _bPTD, _sMO),
+    ((BLOCKED_PHRASES, 0), (BLOCKED_PHRASES, 0), (SYSTEM_MESSAGE_OVERRIDE, 0)),
+)
+
+SUBSCRIPTION_ID: StaticSchema = (3, n0, _SIub, 0)
+
+CANCEL_SUBSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSI,
+    {_sSI: _cCSR, _smit: None},
+    (_aIp, _sIu),
+    ((APPLICATION_ID, 9), (SUBSCRIPTION_ID, 9)),
+)
+
+SUBSCRIPTION_DETAILS: StaticSchema = (18, n0, _SD, 0, (_t,), ((SUBSCRIPTION_TYPE, 0),))
+
+SUBSCRIPTION_ARN: StaticSchema = (3, n0, _SAu, 0)
+
+CANCEL_SUBSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CSO,
+    {_sSI: _cCSRo, _smith: None},
+    (_sAu, _cS, _nS),
+    ((SUBSCRIPTION_ARN, 0), (SUBSCRIPTION_DETAILS, 0), (SUBSCRIPTION_DETAILS, 0)),
+)
+
+CANCEL_SUBSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _CSa,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/applications/{applicationId}/subscriptions/{subscriptionId}",
+            }
+        )
+    },
+    CANCEL_SUBSCRIPTION_INPUT,
+    CANCEL_SUBSCRIPTION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+CHAT_MODE: StaticSchema = (
+    14,
+    n0,
+    _CM,
+    0,
+    (_RM, _CM_, _PM),
+    ((-1, {_sV: _RM}), (-1, {_sV: _CM_}), (-1, {_sV: _PM})),
+)
+
+PLUGIN_CONFIGURATION: StaticSchema = (18, n0, _PCl, 0, (_pI,), ((PLUGIN_ID, 1),))
+
+CHAT_MODE_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _CMCh,
+    0,
+    (_pCl,),
+    ((PLUGIN_CONFIGURATION, 0),),
+)
+
+END_OF_INPUT_EVENT: StaticSchema = (18, n0, _EOIE, 0)
+
+USER_MESSAGE: StaticSchema = (3, n0, _UM, 0)
+
+TEXT_INPUT_EVENT: StaticSchema = (18, n0, _TIE, 0, (_uM,), ((USER_MESSAGE, 1),))
+
+USER_GROUPS: StaticSchema = (16, n0, _UG, 0, (_m,), ((STRING, 0),))
+
+FAILED_ATTACHMENT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _FAE,
+    0,
+    (_cI, _uMI, _sMI, _at),
+    ((CONVERSATION_ID, 0), (MESSAGE_ID, 0), (MESSAGE_ID, 0), (ATTACHMENT_OUTPUT, 0)),
+)
+
+SOURCE_ATTRIBUTION_MEDIA_ID: StaticSchema = (3, n0, _SAMI, 0)
+
+SNIPPET_EXCERPT_TEXT: StaticSchema = (3, n0, _SET, 0)
+
+SNIPPET_EXCERPT: StaticSchema = (18, n0, _SEn, 0, (_te,), ((SNIPPET_EXCERPT_TEXT, 0),))
+
+IMAGE_SOURCE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ISD,
+    0,
+    (_mI, _mMT),
+    ((MEDIA_ID, 0), (STRING, 0)),
+)
+
+VIDEO_EXTRACTION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _VET,
+    0,
+    (_TRANSCRIPT, _SUMMARY),
+    ((-1, {_sV: _TRANSCRIPT}), (-1, {_sV: _SUMMARY})),
+)
+
+VIDEO_SOURCE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _VSD,
+    0,
+    (_mI, _mMT, _sTM, _eTM, _vET),
+    ((MEDIA_ID, 0), (STRING, 0), (LONG, 0), (LONG, 0), (VIDEO_EXTRACTION_TYPE, 0)),
+)
+
+SOURCE_DETAILS: StaticSchema = (
+    19,
+    n0,
+    _SDo,
+    0,
+    (_iSD, _aSD, _vSD),
+    ((IMAGE_SOURCE_DETAILS, 0), (AUDIO_SOURCE_DETAILS, 0), (VIDEO_SOURCE_DETAILS, 0)),
+)
+
+TEXT_SEGMENT: StaticSchema = (
+    18,
+    n0,
+    _TS,
+    0,
+    (_bOe, _eO, _sEn, _mI, _mMT, _sD),
+    (
+        (INTEGER, 0),
+        (INTEGER, 0),
+        (SNIPPET_EXCERPT, 0),
+        (SOURCE_ATTRIBUTION_MEDIA_ID, 0),
+        (STRING, 0),
+        (SOURCE_DETAILS, 0),
+    ),
+)
+
+TEXT_SEGMENT_LIST: StaticSchema = (16, n0, _TSL, 0, (_m,), ((TEXT_SEGMENT, 0),))
+
+SOURCE_ATTRIBUTION: StaticSchema = (
+    18,
+    n0,
+    _SAo,
+    0,
+    (_ti, _sn, _ur, _cNi, _uA, _tMS, _dI, _iI, _dIa),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (INTEGER, 0),
+        (TIMESTAMP, 0),
+        (TEXT_SEGMENT_LIST, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+    ),
+)
+
+SOURCE_ATTRIBUTIONS: StaticSchema = (
+    16,
+    n0,
+    _SAou,
+    64,
+    (_m,),
+    ((SOURCE_ATTRIBUTION, 0),),
+)
+
+METADATA_EVENT: StaticSchema = (
+    18,
+    n0,
+    _MEe,
+    0,
+    (_cI, _uMI, _sMI, _sAo, _fTM),
+    (
+        (CONVERSATION_ID, 0),
+        (MESSAGE_ID, 0),
+        (MESSAGE_ID, 0),
+        (SOURCE_ATTRIBUTIONS, 0),
+        (STRING, 0),
+    ),
+)
+
+SYSTEM_MESSAGE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _SMT,
+    0,
+    (_RESPONSE, _GR_),
+    ((-1, {_sV: _RESPONSE}), (-1, {_sV: _GR_})),
+)
+
+TEXT_OUTPUT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _TOE,
+    0,
+    (_sMT, _cI, _uMI, _sMI, _sM),
+    (
+        (SYSTEM_MESSAGE_TYPE, 0),
+        (CONVERSATION_ID, 0),
+        (MESSAGE_ID, 0),
+        (MESSAGE_ID, 0),
+        (STRING, 0),
+    ),
+)
+
+CHAT_OUTPUT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _COS,
+    {_smithyap: None},
+    (_tE, _mE, _aRE, _fAE, _aCRE),
+    (
+        (TEXT_OUTPUT_EVENT, 0),
+        (METADATA_EVENT, 0),
+        (ACTION_REVIEW_EVENT, 0),
+        (FAILED_ATTACHMENT_EVENT, 0),
+        (AUTH_CHALLENGE_REQUEST_EVENT, 0),
+    ),
+)
+
+CHAT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CO,
+    {_smith: None},
+    (_oS,),
+    ((CHAT_OUTPUT_STREAM, 16),),
+)
+
+EXTERNAL_RESOURCE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ERE,
+    {_sm: _c, _sE: 424},
+    (_me,),
+    ((ERROR_MESSAGE, 1),),
+)
+
+LICENSE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LNFE,
+    {_sm: _c, _sE: 400},
+    (_me,),
+    ((ERROR_MESSAGE, 1),),
+)
+
+CHAT_RESPONSE_CONFIGURATION_ARN: StaticSchema = (3, n0, _CRCA, 0)
+
+CHAT_RESPONSE_CONFIGURATION_ID: StaticSchema = (3, n0, _CRCI, 0)
+
+DISPLAY_NAME: StaticSchema = (3, n0, _DN, 0)
+
+RESPONSE_CONFIGURATION_SUMMARY: StaticSchema = (3, n0, _RCS, 0)
+
+CHAT_RESPONSE_CONFIGURATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CRCS,
+    0,
+    (_CREATING, _UPDATING, _FAILED, _ACTIVE),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _UPDATING}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _ACTIVE}),
+    ),
+)
+
+CHAT_RESPONSE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _CRC,
+    0,
+    (_cRCI, _cRCA, _dN, _rCS, _st, _cA, _uA),
+    (
+        (CHAT_RESPONSE_CONFIGURATION_ID, 1),
+        (CHAT_RESPONSE_CONFIGURATION_ARN, 1),
+        (DISPLAY_NAME, 1),
+        (RESPONSE_CONFIGURATION_SUMMARY, 0),
+        (CHAT_RESPONSE_CONFIGURATION_STATUS, 1),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+RESPONSE_CONFIGURATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RCT,
+    0,
+    (_ALL,),
+    ((-1, {_sV: _ALL}),),
+)
+
+INSTRUCTION: StaticSchema = (3, n0, _Ins, 0)
+
+INSTRUCTION_COLLECTION: StaticSchema = (
+    18,
+    n0,
+    _IC,
+    0,
+    (_rL, _tA, _pe, _oSu, _id, _to, _cIu, _ex),
+    (
+        (INSTRUCTION, 0),
+        (INSTRUCTION, 0),
+        (INSTRUCTION, 0),
+        (INSTRUCTION, 0),
+        (INSTRUCTION, 0),
+        (INSTRUCTION, 0),
+        (INSTRUCTION, 0),
+        (INSTRUCTION, 0),
+    ),
+)
+
+RESPONSE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _RCe,
+    0,
+    (_iCns,),
+    ((INSTRUCTION_COLLECTION, 0),),
+)
+
+RESPONSE_CONFIGURATIONS: StaticSchema = (
+    17,
+    n0,
+    _RCes,
+    0,
+    (_k, _v),
+    ((RESPONSE_CONFIGURATION_TYPE, 0), (RESPONSE_CONFIGURATION, 0)),
+)
+
+CHAT_RESPONSE_CONFIGURATION_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _CRCD,
+    0,
+    (_rC, _rCS, _st, _e, _uA),
+    (
+        (RESPONSE_CONFIGURATIONS, 0),
+        (STRING, 0),
+        (CHAT_RESPONSE_CONFIGURATION_STATUS, 0),
+        (ERROR_DETAIL, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+CHAT_RESPONSE_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _CRCh,
+    0,
+    (_m,),
+    ((CHAT_RESPONSE_CONFIGURATION, 0),),
+)
+
+CHAT_SYNC_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CSOh,
+    {_smith: None},
+    (_cI, _sM, _sMI, _uMI, _aR, _aCR, _sAo, _fA),
+    (
+        (CONVERSATION_ID, 0),
+        (STRING, 0),
+        (MESSAGE_ID, 0),
+        (MESSAGE_ID, 0),
+        (ACTION_REVIEW, 0),
+        (AUTH_CHALLENGE_REQUEST, 0),
+        (SOURCE_ATTRIBUTIONS, 0),
+        (ATTACHMENTS_OUTPUT, 0),
+    ),
+)
+
+CHECK_DOCUMENT_ACCESS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDAI,
+    {_sSI: _cCDARo, _smit: None},
+    (_aIp, _iI, _uI, _dI, _dSI),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (STRING, 9),
+        (DOCUMENT_ID, 9),
+        (DATA_SOURCE_ID, {_sQ: _dSI}),
+    ),
+)
+
+DOCUMENT_ACL_GROUP: StaticSchema = (
+    18,
+    n0,
+    _DAG,
+    0,
+    (_n, _t),
+    ((GROUP_NAME, 0), (MEMBERSHIP_TYPE, 0)),
+)
+
+DOCUMENT_ACL_GROUPS: StaticSchema = (
+    16,
+    n0,
+    _DAGo,
+    0,
+    (_m,),
+    ((DOCUMENT_ACL_GROUP, 0),),
+)
+
+DOCUMENT_ACL_USER: StaticSchema = (
+    18,
+    n0,
+    _DAU,
+    0,
+    (_i, _t),
+    ((STRING, 0), (MEMBERSHIP_TYPE, 0)),
+)
+
+DOCUMENT_ACL_USERS: StaticSchema = (16, n0, _DAUo, 0, (_m,), ((DOCUMENT_ACL_USER, 0),))
+
+DOCUMENT_ACL_CONDITION: StaticSchema = (
+    18,
+    n0,
+    _DACocu,
+    0,
+    (_mR, _us, _gr),
+    ((MEMBER_RELATION, 0), (DOCUMENT_ACL_USERS, 0), (DOCUMENT_ACL_GROUPS, 0)),
+)
+
+DOCUMENT_ACL_CONDITIONS: StaticSchema = (
+    16,
+    n0,
+    _DACocum,
+    0,
+    (_m,),
+    ((DOCUMENT_ACL_CONDITION, 0),),
+)
+
+DOCUMENT_ACL_MEMBERSHIP: StaticSchema = (
+    18,
+    n0,
+    _DAM,
+    0,
+    (_mR, _cond),
+    ((MEMBER_RELATION, 0), (DOCUMENT_ACL_CONDITIONS, 0)),
+)
+
+DOCUMENT_ACL: StaticSchema = (
+    18,
+    n0,
+    _DAoc,
+    0,
+    (_al, _dL),
+    ((DOCUMENT_ACL_MEMBERSHIP, 0), (DOCUMENT_ACL_MEMBERSHIP, 0)),
+)
+
+CHECK_DOCUMENT_ACCESS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDAOh,
+    {_sSI: _cCDARom, _smith: None},
+    (_uG, _uAs, _hA, _dAo),
+    ((ASSOCIATED_GROUPS, 0), (ASSOCIATED_USERS, 0), (2, 0), (DOCUMENT_ACL, 0)),
+)
+
+CHECK_DOCUMENT_ACCESS: StaticOperationSchema = (
+    23,
+    n0,
+    _CDA,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/applications/{applicationId}/index/{indexId}/users/{userId}/documents/{documentId}/check-document-access",
+            }
+        )
+    },
+    CHECK_DOCUMENT_ACCESS_INPUT,
+    CHECK_DOCUMENT_ACCESS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+CONTENT_BLOCKER_RULE: StaticSchema = (
+    18,
+    n0,
+    _CBR,
+    0,
+    (_sMO,),
+    ((SYSTEM_MESSAGE_OVERRIDE, 0),),
+)
+
+ELIGIBLE_DATA_SOURCE: StaticSchema = (
+    18,
+    n0,
+    _EDS,
+    0,
+    (_iI, _dSI),
+    ((INDEX_ID, 0), (DATA_SOURCE_ID, 0)),
+)
+
+ELIGIBLE_DATA_SOURCES: StaticSchema = (
+    16,
+    n0,
+    _EDSl,
+    0,
+    (_m,),
+    ((ELIGIBLE_DATA_SOURCE, 0),),
+)
+
+CONTENT_RETRIEVAL_RULE: StaticSchema = (
+    18,
+    n0,
+    _CRR,
+    0,
+    (_eDS,),
+    ((ELIGIBLE_DATA_SOURCES, 0),),
+)
+
+RETRIEVER_CONTENT_SOURCE: StaticSchema = (
+    18,
+    n0,
+    _RCSe,
+    0,
+    (_rIe,),
+    ((RETRIEVER_ID, 1),),
+)
+
+CONTENT_SOURCE: StaticSchema = (
+    19,
+    n0,
+    _CSo,
+    0,
+    (_retr,),
+    ((RETRIEVER_CONTENT_SOURCE, 0),),
+)
+
+CONVERSATION_TITLE: StaticSchema = (3, n0, _CTon, 0)
+
+CONVERSATION: StaticSchema = (
+    18,
+    n0,
+    _C,
+    0,
+    (_cI, _ti, _sTt),
+    ((CONVERSATION_ID, 0), (CONVERSATION_TITLE, 0), (TIMESTAMP, 0)),
+)
+
+CONVERSATIONS: StaticSchema = (16, n0, _Co, 0, (_m,), ((CONVERSATION, 0),))
+
+SESSION_DURATION_IN_MINUTES: StaticSchema = (7, n0, _SDIM, 0)
+
+CREATE_ANONYMOUS_WEB_EXPERIENCE_URL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CAWEUI,
+    {_sSI: _cCAWEUR, _smit: None},
+    (_aIp, _wEI, _sDIM),
+    ((APPLICATION_ID, 9), (WEB_EXPERIENCE_ID, 9), (SESSION_DURATION_IN_MINUTES, 0)),
+)
+
+CREATE_ANONYMOUS_WEB_EXPERIENCE_URL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CAWEUO,
+    {_sSI: _cCAWEURo, _smith: None},
+    (_aUn,),
+    ((URL, 0),),
+)
+
+CREATE_ANONYMOUS_WEB_EXPERIENCE_URL: StaticOperationSchema = (
+    23,
+    n0,
+    _CAWEU,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/experiences/{webExperienceId}/anonymous-url",
+                "method": "POST",
+            }
+        )
+    },
+    CREATE_ANONYMOUS_WEB_EXPERIENCE_URL_INPUT,
+    CREATE_ANONYMOUS_WEB_EXPERIENCE_URL_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+CREATE_CHAT_RESPONSE_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CCRCI,
+    {_sSI: _cCCRCR, _smit: None},
+    (_aIp, _dN, _cT, _rC, _ta),
+    (
+        (APPLICATION_ID, 9),
+        (DISPLAY_NAME, 1),
+        (STRING, 2),
+        (RESPONSE_CONFIGURATIONS, 1),
+        (TAGS, 0),
+    ),
+)
+
+CREATE_CHAT_RESPONSE_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CCRCO,
+    {_sSI: _cCCRCRo, _smith: None},
+    (_cRCI, _cRCA),
+    ((CHAT_RESPONSE_CONFIGURATION_ID, 1), (CHAT_RESPONSE_CONFIGURATION_ARN, 1)),
+)
+
+CREATE_CHAT_RESPONSE_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _CCRC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/applications/{applicationId}/chatresponseconfigurations",
+            }
+        )
+    },
+    CREATE_CHAT_RESPONSE_CONFIGURATION_INPUT,
+    CREATE_CHAT_RESPONSE_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GROUP_IDENTIFIER: StaticSchema = (3, n0, _GIr, 0)
+
+USER_IDENTIFIER: StaticSchema = (3, n0, _UIs, 0)
+
+SUBSCRIPTION_PRINCIPAL: StaticSchema = (
+    19,
+    n0,
+    _SP,
+    0,
+    (_u, _g),
+    ((USER_IDENTIFIER, 0), (GROUP_IDENTIFIER, 0)),
+)
+
+CREATE_SUBSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSIr,
+    {_sSI: _cCSRom, _smit: None},
+    (_aIp, _pr, _t, _cT),
+    (
+        (APPLICATION_ID, 9),
+        (SUBSCRIPTION_PRINCIPAL, 1),
+        (SUBSCRIPTION_TYPE, 1),
+        (CLIENT_TOKEN, 2),
+    ),
+)
+
+CREATE_SUBSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CSOr,
+    {_sSI: _cCSRoma, _smith: None},
+    (_sIu, _sAu, _cS, _nS),
+    (
+        (SUBSCRIPTION_ID, 0),
+        (SUBSCRIPTION_ARN, 0),
+        (SUBSCRIPTION_DETAILS, 0),
+        (SUBSCRIPTION_DETAILS, 0),
+    ),
+)
+
+CREATE_SUBSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _CSr,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/applications/{applicationId}/subscriptions"}
+        )
+    },
+    CREATE_SUBSCRIPTION_INPUT,
+    CREATE_SUBSCRIPTION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+USER_ALIAS: StaticSchema = (
+    18,
+    n0,
+    _UAs,
+    0,
+    (_iI, _dSI, _uI),
+    ((INDEX_ID, 0), (DATA_SOURCE_ID, 0), (STRING, 1)),
+)
+
+USER_ALIASES: StaticSchema = (16, n0, _UAse, 0, (_m,), ((USER_ALIAS, 0),))
+
+CREATE_USER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CUI,
+    {_sSI: _cCUR, _smit: None},
+    (_aIp, _uI, _uAs, _cT),
+    ((APPLICATION_ID, 9), (STRING, 1), (USER_ALIASES, 0), (CLIENT_TOKEN, 2)),
+)
+
+CREATE_USER_OUTPUT: StaticSchema = (18, n0, _CUO, {_sSI: _cCURo, _smith: None})
+
+CREATE_USER: StaticOperationSchema = (
+    23,
+    n0,
+    _CU,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/applications/{applicationId}/users"}
+        )
+    },
+    CREATE_USER_INPUT,
+    CREATE_USER_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+CREATOR_MODE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _CMCr,
+    0,
+    (_cMC,),
+    ((CREATOR_MODE_CONTROL, 1),),
+)
+
+DATA_SOURCE_IDS: StaticSchema = (16, n0, _DSIa, 0, (_m,), ((DATA_SOURCE_ID, 0),))
+
+METRIC_VALUE: StaticSchema = (3, n0, _MV, 0)
+
+DATA_SOURCE_SYNC_JOB_METRICS: StaticSchema = (
+    18,
+    n0,
+    _DSSJM,
+    0,
+    (_dAoc, _dM, _dDo, _dF, _dSo),
+    (
+        (METRIC_VALUE, 0),
+        (METRIC_VALUE, 0),
+        (METRIC_VALUE, 0),
+        (METRIC_VALUE, 0),
+        (METRIC_VALUE, 0),
+    ),
+)
+
+DATA_SOURCE_SYNC_JOB_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DSSJS,
+    0,
+    (_FAILED, _SUCCEEDED, _SYNCING, _INCOMPLETE, _STOPPING, _ABORTED, _SI_),
+    (
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _SUCCEEDED}),
+        (-1, {_sV: _SYNCING}),
+        (-1, {_sV: _INCOMPLETE}),
+        (-1, {_sV: _STOPPING}),
+        (-1, {_sV: _ABORTED}),
+        (-1, {_sV: _SI_}),
+    ),
+)
+
+DATA_SOURCE_SYNC_JOB: StaticSchema = (
+    18,
+    n0,
+    _DSSJ,
+    0,
+    (_eIx, _sTt, _eT, _st, _e, _dSEC, _met),
+    (
+        (EXECUTION_ID, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (DATA_SOURCE_SYNC_JOB_STATUS, 0),
+        (ERROR_DETAIL, 0),
+        (STRING, 0),
+        (DATA_SOURCE_SYNC_JOB_METRICS, 0),
+    ),
+)
+
+DATA_SOURCE_SYNC_JOBS: StaticSchema = (
+    16,
+    n0,
+    _DSSJa,
+    0,
+    (_m,),
+    ((DATA_SOURCE_SYNC_JOB, 0),),
+)
+
+DATA_SOURCE_USER_ID: StaticSchema = (3, n0, _DSUI, 0)
+
+DELETE_ATTACHMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DAIel,
+    {_sSI: _cDARom, _smit: None},
+    (_aIp, _cI, _aIt, _uI),
+    (
+        (APPLICATION_ID, 9),
+        (CONVERSATION_ID, 9),
+        (ATTACHMENT_ID, 9),
+        (USER_ID, {_sQ: _uI}),
+    ),
+)
+
+DELETE_ATTACHMENT_OUTPUT: StaticSchema = (18, n0, _DAOe, {_sSI: _cDARoma, _smith: None})
+
+DELETE_ATTACHMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _DAel,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/conversations/{conversationId}/attachments/{attachmentId}",
+                "method": "DELETE",
+            }
+        )
+    },
+    DELETE_ATTACHMENT_INPUT,
+    DELETE_ATTACHMENT_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        LICENSE_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_CHAT_CONTROLS_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCCCI,
+    {_sSI: _cDCCCR, _smit: None},
+    (_aIp,),
+    ((APPLICATION_ID, 9),),
+)
+
+DELETE_CHAT_CONTROLS_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCCCO,
+    {_sSI: _cDCCCRo, _smith: None},
+)
+
+DELETE_CHAT_CONTROLS_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DCCC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/chatcontrols",
+                "method": "DELETE",
+                "code": 200,
+            }
+        )
+    },
+    DELETE_CHAT_CONTROLS_CONFIGURATION_INPUT,
+    DELETE_CHAT_CONTROLS_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_CHAT_RESPONSE_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRCI,
+    {_sSI: _cDCRCR, _smit: None},
+    (_aIp, _cRCI),
+    ((APPLICATION_ID, 9), (CHAT_RESPONSE_CONFIGURATION_ID, 9)),
+)
+
+DELETE_CHAT_RESPONSE_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRCO,
+    {_sSI: _cDCRCRo, _smith: None},
+)
+
+DELETE_CHAT_RESPONSE_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DCRC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}",
+            }
+        )
+    },
+    DELETE_CHAT_RESPONSE_CONFIGURATION_INPUT,
+    DELETE_CHAT_RESPONSE_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_CONVERSATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCI,
+    {_sSI: _cDCR, _smit: None},
+    (_cI, _aIp, _uI),
+    ((CONVERSATION_ID, 9), (APPLICATION_ID, 9), (USER_ID, {_sQ: _uI})),
+)
+
+DELETE_CONVERSATION_OUTPUT: StaticSchema = (18, n0, _DCOe, {_sSI: _cDCRo, _smith: None})
+
+DELETE_CONVERSATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DCe,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/conversations/{conversationId}",
+                "method": "DELETE",
+            }
+        )
+    },
+    DELETE_CONVERSATION_INPUT,
+    DELETE_CONVERSATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        LICENSE_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_GROUP_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DGI,
+    {_sSI: _cDGR, _smit: None},
+    (_aIp, _iI, _gN, _dSI),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (GROUP_NAME, 9),
+        (DATA_SOURCE_ID, {_sQ: _dSI}),
+    ),
+)
+
+DELETE_GROUP_OUTPUT: StaticSchema = (18, n0, _DGO, {_sSI: _cDGRo, _smith: None})
+
+DELETE_GROUP: StaticOperationSchema = (
+    23,
+    n0,
+    _DG,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/applications/{applicationId}/indices/{indexId}/groups/{groupName}",
+            }
+        )
+    },
+    DELETE_GROUP_INPUT,
+    DELETE_GROUP_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_USER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DUI,
+    {_sSI: _cDUR, _smit: None},
+    (_aIp, _uI),
+    ((APPLICATION_ID, 9), (STRING, 9)),
+)
+
+DELETE_USER_OUTPUT: StaticSchema = (18, n0, _DUO, {_sSI: _cDURo, _smith: None})
+
+DELETE_USER: StaticOperationSchema = (
+    23,
+    n0,
+    _DU,
+    {
+        _smithy: MappingProxyType(
+            {"method": "DELETE", "uri": "/applications/{applicationId}/users/{userId}"}
+        )
+    },
+    DELETE_USER_INPUT,
+    DELETE_USER_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DISASSOCIATE_PERMISSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DPIi,
+    {_sSI: _cDPRom, _smit: None},
+    (_aIp, _sIt),
+    ((APPLICATION_ID, 9), (STRING, 9)),
+)
+
+DISASSOCIATE_PERMISSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DPOi,
+    {_sSI: _cDPRoma, _smith: None},
+)
+
+DISASSOCIATE_PERMISSION: StaticOperationSchema = (
+    23,
+    n0,
+    _DPi,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/policy/{statementId}",
+                "method": "DELETE",
+            }
+        )
+    },
+    DISASSOCIATE_PERMISSION_INPUT,
+    DISASSOCIATE_PERMISSION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DOCUMENT_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DSo,
+    0,
+    (_RECEIVED, _PROCESSING, _INDEXED, _UPDATED, _FAILED, _DELETING, _DELETED, _DFTI),
+    (
+        (-1, {_sV: _RECEIVED}),
+        (-1, {_sV: _PROCESSING}),
+        (-1, {_sV: _INDEXED}),
+        (-1, {_sV: _UPDATED}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _DELETED}),
+        (-1, {_sV: _DFTI}),
+    ),
+)
+
+DOCUMENT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _DDo,
+    0,
+    (_dI, _st, _e, _cA, _uA),
+    (
+        (DOCUMENT_ID, 0),
+        (DOCUMENT_STATUS, 0),
+        (ERROR_DETAIL, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+DOCUMENT_DETAIL_LIST: StaticSchema = (16, n0, _DDL, 0, (_m,), ((DOCUMENT_DETAILS, 0),))
+
+EXAMPLE_CHAT_MESSAGE: StaticSchema = (3, n0, _ECM, 0)
+
+EXAMPLE_CHAT_MESSAGES: StaticSchema = (
+    16,
+    n0,
+    _ECMx,
+    0,
+    (_m,),
+    ((EXAMPLE_CHAT_MESSAGE, 0),),
+)
+
+MAX_RESULTS_INTEGER_FOR_GET_TOPIC_CONFIGURATIONS: StaticSchema = (7, n0, _MRIFGTC, 0)
+
+GET_CHAT_CONTROLS_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCCCI,
+    {_sSI: _cGCCCR, _smit: None},
+    (_aIp, _mRa, _nT),
+    (
+        (APPLICATION_ID, 9),
+        (MAX_RESULTS_INTEGER_FOR_GET_TOPIC_CONFIGURATIONS, {_sQ: _mRa}),
+        (NEXT_TOKEN, {_sQ: _nT}),
+    ),
+)
+
+HALLUCINATION_REDUCTION_CONTROL: StaticSchema = (
+    14,
+    n0,
+    _HRC,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+HALLUCINATION_REDUCTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _HRCa,
+    0,
+    (_hRC,),
+    ((HALLUCINATION_REDUCTION_CONTROL, 0),),
+)
+
+RESPONSE_SCOPE: StaticSchema = (
+    14,
+    n0,
+    _RSe,
+    0,
+    (_ECO, _EKE),
+    ((-1, {_sV: _ECO}), (-1, {_sV: _EKE})),
+)
+
+TOPIC_DESCRIPTION: StaticSchema = (3, n0, _TD, 0)
+
+TOPIC_CONFIGURATION_NAME: StaticSchema = (3, n0, _TCN, 0)
+
+USER_IDS: StaticSchema = (16, n0, _UIse, 0, (_m,), ((STRING, 0),))
+
+USERS_AND_GROUPS: StaticSchema = (
+    18,
+    n0,
+    _UAG,
+    0,
+    (_uIs, _uG),
+    ((USER_IDS, 0), (USER_GROUPS, 0)),
+)
+
+RULE_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _RCu,
+    0,
+    (_cBR, _cRR),
+    ((CONTENT_BLOCKER_RULE, 0), (CONTENT_RETRIEVAL_RULE, 0)),
+)
+
+RULE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RTu,
+    0,
+    (_CBR_, _CRR_),
+    ((-1, {_sV: _CBR_}), (-1, {_sV: _CRR_})),
+)
+
+RULE: StaticSchema = (
+    18,
+    n0,
+    _Ru,
+    0,
+    (_iUAG, _eUAG, _rTu, _rCu),
+    (
+        (USERS_AND_GROUPS, 0),
+        (USERS_AND_GROUPS, 0),
+        (RULE_TYPE, 1),
+        (RULE_CONFIGURATION, 0),
+    ),
+)
+
+RULES: StaticSchema = (16, n0, _Rul, 0, (_m,), ((RULE, 0),))
+
+TOPIC_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _TC,
+    0,
+    (_n, _d, _eCM, _ru),
+    (
+        (TOPIC_CONFIGURATION_NAME, 1),
+        (TOPIC_DESCRIPTION, 0),
+        (EXAMPLE_CHAT_MESSAGES, 0),
+        (RULES, 1),
+    ),
+)
+
+TOPIC_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _TCo,
+    0,
+    (_m,),
+    ((TOPIC_CONFIGURATION, 0),),
+)
+
+GET_CHAT_CONTROLS_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCCCO,
+    {_sSI: _cGCCCRo, _smith: None},
+    (_rS, _oC, _bP, _tC, _cMCr, _nT, _hRCa),
+    (
+        (RESPONSE_SCOPE, 0),
+        (APPLIED_ORCHESTRATION_CONFIGURATION, 0),
+        (BLOCKED_PHRASES_CONFIGURATION, 0),
+        (TOPIC_CONFIGURATIONS, 0),
+        (APPLIED_CREATOR_MODE_CONFIGURATION, 0),
+        (NEXT_TOKEN, 0),
+        (HALLUCINATION_REDUCTION_CONFIGURATION, 0),
+    ),
+)
+
+GET_CHAT_CONTROLS_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _GCCC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/chatcontrols",
+                "method": "GET",
+                "code": 200,
+            }
+        )
+    },
+    GET_CHAT_CONTROLS_CONFIGURATION_INPUT,
+    GET_CHAT_CONTROLS_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_CHAT_RESPONSE_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCRCI,
+    {_sSI: _cGCRCR, _smit: None},
+    (_aIp, _cRCI),
+    ((APPLICATION_ID, 9), (CHAT_RESPONSE_CONFIGURATION_ID, 9)),
+)
+
+GET_CHAT_RESPONSE_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCRCO,
+    {_sSI: _cGCRCRo, _smith: None},
+    (_cRCI, _cRCA, _dN, _cA, _iUC, _lUC),
+    (
+        (CHAT_RESPONSE_CONFIGURATION_ID, 0),
+        (CHAT_RESPONSE_CONFIGURATION_ARN, 0),
+        (DISPLAY_NAME, 0),
+        (TIMESTAMP, 0),
+        (CHAT_RESPONSE_CONFIGURATION_DETAIL, 0),
+        (CHAT_RESPONSE_CONFIGURATION_DETAIL, 0),
+    ),
+)
+
+GET_CHAT_RESPONSE_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _GCRC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}",
+            }
+        )
+    },
+    GET_CHAT_RESPONSE_CONFIGURATION_INPUT,
+    GET_CHAT_RESPONSE_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+OUTPUT_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _OF,
+    0,
+    (_RAW, _EXTRACTED),
+    ((-1, {_sV: _RAW}), (-1, {_sV: _EXTRACTED})),
+)
+
+GET_DOCUMENT_CONTENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDCI,
+    {_sSI: _cGDCR, _smit: None},
+    (_aIp, _iI, _dSI, _dI, _oF),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (DATA_SOURCE_ID, {_sQ: _dSI}),
+        (DOCUMENT_ID, 9),
+        (OUTPUT_FORMAT, {_sQ: _oF}),
+    ),
+)
+
+GET_DOCUMENT_CONTENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDCO,
+    {_sSI: _cGDCRo, _smith: None},
+    (_pU, _mTi),
+    ((STRING, 1), (STRING, 1)),
+)
+
+GET_DOCUMENT_CONTENT: StaticOperationSchema = (
+    23,
+    n0,
+    _GDC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/index/{indexId}/documents/{documentId}/content",
+                "method": "GET",
+            }
+        )
+    },
+    GET_DOCUMENT_CONTENT_INPUT,
+    GET_DOCUMENT_CONTENT_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_GROUP_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GGI,
+    {_sSI: _cGGR, _smit: None},
+    (_aIp, _iI, _gN, _dSI),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (GROUP_NAME, 9),
+        (DATA_SOURCE_ID, {_sQ: _dSI}),
+    ),
+)
+
+GROUP_STATUS: StaticSchema = (
+    14,
+    n0,
+    _GS,
+    0,
+    (_FAILED, _SUCCEEDED, _PROCESSING, _DELETING, _DELETED),
+    (
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _SUCCEEDED}),
+        (-1, {_sV: _PROCESSING}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _DELETED}),
+    ),
+)
+
+GROUP_STATUS_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _GSD,
+    0,
+    (_st, _lUA, _eD),
+    ((GROUP_STATUS, 0), (TIMESTAMP, 0), (ERROR_DETAIL, 0)),
+)
+
+GROUP_STATUS_DETAILS: StaticSchema = (
+    16,
+    n0,
+    _GSDr,
+    0,
+    (_m,),
+    ((GROUP_STATUS_DETAIL, 0),),
+)
+
+GET_GROUP_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GGO,
+    {_sSI: _cGGRo, _smith: None},
+    (_st, _sH),
+    ((GROUP_STATUS_DETAIL, 0), (GROUP_STATUS_DETAILS, 0)),
+)
+
+GET_GROUP: StaticOperationSchema = (
+    23,
+    n0,
+    _GG,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/applications/{applicationId}/indices/{indexId}/groups/{groupName}",
+            }
+        )
+    },
+    GET_GROUP_INPUT,
+    GET_GROUP_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_MEDIA_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMI,
+    {_sSI: _cGMR, _smit: None},
+    (_aIp, _cI, _mIe, _mI),
+    ((APPLICATION_ID, 9), (CONVERSATION_ID, 9), (MESSAGE_ID, 9), (MEDIA_ID, 9)),
+)
+
+GET_MEDIA_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMO,
+    {_sSI: _cGMRo, _smith: None},
+    (_mB, _mMT),
+    ((BLOB, 0), (STRING, 0)),
+)
+
+MEDIA_TOO_LARGE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MTLE,
+    {_sm: _c, _sE: 400},
+    (_me,),
+    ((ERROR_MESSAGE, 1),),
+)
+
+GET_MEDIA: StaticOperationSchema = (
+    23,
+    n0,
+    _GM,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/applications/{applicationId}/conversations/{conversationId}/messages/{messageId}/media/{mediaId}",
+            }
+        )
+    },
+    GET_MEDIA_INPUT,
+    GET_MEDIA_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        LICENSE_NOT_FOUND_EXCEPTION,
+        MEDIA_TOO_LARGE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GPIe,
+    {_sSI: _cGPRom, _smit: None},
+    (_aIp,),
+    ((APPLICATION_ID, 9),),
+)
+
+GET_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GPOe,
+    {_sSI: _cGPRoma, _smith: None},
+    (_po,),
+    ((STRING, 0),),
+)
+
+GET_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GPe,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/policy", "method": "GET"}
+        )
+    },
+    GET_POLICY_INPUT,
+    GET_POLICY_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_USER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GUI,
+    {_sSI: _cGUR, _smit: None},
+    (_aIp, _uI),
+    ((APPLICATION_ID, 9), (STRING, 9)),
+)
+
+GET_USER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GUO,
+    {_sSI: _cGURo, _smith: None},
+    (_uAs,),
+    ((USER_ALIASES, 0),),
+)
+
+GET_USER: StaticOperationSchema = (
+    23,
+    n0,
+    _GU,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/applications/{applicationId}/users/{userId}"}
+        )
+    },
+    GET_USER_INPUT,
+    GET_USER_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_ATTACHMENTS: StaticSchema = (7, n0, _MRIFLAa, 0)
+
+LIST_ATTACHMENTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LAIi,
+    {_sSI: _cLARom, _smit: None},
+    (_aIp, _cI, _uI, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (CONVERSATION_ID, {_sQ: _cI}),
+        (USER_ID, {_sQ: _uI}),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_ATTACHMENTS, {_sQ: _mRa}),
+    ),
+)
+
+LIST_ATTACHMENTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LAOi,
+    {_sSI: _cLARoma, _smith: None},
+    (_atta, _nT),
+    ((ATTACHMENT_LIST, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_ATTACHMENTS: StaticOperationSchema = (
+    23,
+    n0,
+    _LAis,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/attachments", "method": "GET"}
+        )
+    },
+    LIST_ATTACHMENTS_INPUT,
+    LIST_ATTACHMENTS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        LICENSE_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+LIST_CHAT_RESPONSE_CONFIGURATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LCRCI,
+    {_sSI: _cLCRCR, _smit: None},
+    (_aIp, _mRa, _nT),
+    ((APPLICATION_ID, 9), (INTEGER, {_sQ: _mRa}), (NEXT_TOKEN, {_sQ: _nT})),
+)
+
+LIST_CHAT_RESPONSE_CONFIGURATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LCRCO,
+    {_sSI: _cLCRCRo, _smith: None},
+    (_cRC, _nT),
+    ((CHAT_RESPONSE_CONFIGURATIONS, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_CHAT_RESPONSE_CONFIGURATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LCRC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/applications/{applicationId}/chatresponseconfigurations",
+            }
+        )
+    },
+    LIST_CHAT_RESPONSE_CONFIGURATIONS_INPUT,
+    LIST_CHAT_RESPONSE_CONFIGURATIONS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_CONVERSATIONS: StaticSchema = (7, n0, _MRIFLC, 0)
+
+LIST_CONVERSATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LCI,
+    {_sSI: _cLCR, _smit: None},
+    (_aIp, _uI, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (USER_ID, {_sQ: _uI}),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_CONVERSATIONS, {_sQ: _mRa}),
+    ),
+)
+
+LIST_CONVERSATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LCO,
+    {_sSI: _cLCRo, _smith: None},
+    (_nT, _conve),
+    ((NEXT_TOKEN, 0), (CONVERSATIONS, 0)),
+)
+
+LIST_CONVERSATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LC,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/conversations", "method": "GET"}
+        )
+    },
+    LIST_CONVERSATIONS_INPUT,
+    LIST_CONVERSATIONS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        LICENSE_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_DATA_SOURCES_SYNC_JOBS: StaticSchema = (
+    7,
+    n0,
+    _MRIFLDSSJ,
+    0,
+)
+
+LIST_DATA_SOURCE_SYNC_JOBS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDSSJI,
+    {_sSI: _cLDSSJR, _smit: None},
+    (_dSI, _aIp, _iI, _nT, _mRa, _sTt, _eT, _sF),
+    (
+        (DATA_SOURCE_ID, 9),
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_DATA_SOURCES_SYNC_JOBS, {_sQ: _mRa}),
+        (TIMESTAMP, {_sQ: _sTt}),
+        (TIMESTAMP, {_sQ: _eT}),
+        (DATA_SOURCE_SYNC_JOB_STATUS, {_sQ: _sSy}),
+    ),
+)
+
+LIST_DATA_SOURCE_SYNC_JOBS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDSSJO,
+    {_sSI: _cLDSSJRo, _smith: None},
+    (_h, _nT),
+    ((DATA_SOURCE_SYNC_JOBS, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_DATA_SOURCE_SYNC_JOBS: StaticOperationSchema = (
+    23,
+    n0,
+    _LDSSJ,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}/syncjobs",
+                "method": "GET",
+            }
+        )
+    },
+    LIST_DATA_SOURCE_SYNC_JOBS_INPUT,
+    LIST_DATA_SOURCE_SYNC_JOBS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_DOCUMENTS: StaticSchema = (7, n0, _MRIFLD, 0)
+
+LIST_DOCUMENTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDI,
+    {_sSI: _cLDR, _smit: None},
+    (_aIp, _iI, _dSIa, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (DATA_SOURCE_IDS, {_sQ: _dSIa}),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_DOCUMENTS, {_sQ: _mRa}),
+    ),
+)
+
+LIST_DOCUMENTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDO,
+    {_sSI: _cLDRo, _smith: None},
+    (_dDL, _nT),
+    ((DOCUMENT_DETAIL_LIST, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_DOCUMENTS: StaticOperationSchema = (
+    23,
+    n0,
+    _LD,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/index/{indexId}/documents",
+                "method": "GET",
+            }
+        )
+    },
+    LIST_DOCUMENTS_INPUT,
+    LIST_DOCUMENTS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_GROUPS_REQUEST: StaticSchema = (7, n0, _MRIFLGR, 0)
+
+LIST_GROUPS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LGI,
+    {_sSI: _cLGR, _smit: None},
+    (_aIp, _iI, _uET, _dSI, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (TIMESTAMP, {_sQ: _uET, _s: None}),
+        (DATA_SOURCE_ID, {_sQ: _dSI}),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_GROUPS_REQUEST, {_sQ: _mRa}),
+    ),
+)
+
+GROUP_SUMMARY: StaticSchema = (18, n0, _GSr, 0, (_gN,), ((GROUP_NAME, 0),))
+
+GROUP_SUMMARY_LIST: StaticSchema = (16, n0, _GSL, 0, (_m,), ((GROUP_SUMMARY, 0),))
+
+LIST_GROUPS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LGO,
+    {_sSI: _cLGRo, _smith: None},
+    (_nT, _it),
+    ((NEXT_TOKEN, 0), (GROUP_SUMMARY_LIST, 0)),
+)
+
+LIST_GROUPS: StaticOperationSchema = (
+    23,
+    n0,
+    _LG,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/applications/{applicationId}/indices/{indexId}/groups",
+            }
+        )
+    },
+    LIST_GROUPS_INPUT,
+    LIST_GROUPS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_MESSAGES: StaticSchema = (7, n0, _MRIFLM, 0)
+
+LIST_MESSAGES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LMI,
+    {_sSI: _cLMR, _smit: None},
+    (_cI, _aIp, _uI, _nT, _mRa),
+    (
+        (CONVERSATION_ID, 9),
+        (APPLICATION_ID, 9),
+        (USER_ID, {_sQ: _uI}),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_MESSAGES, {_sQ: _mRa}),
+    ),
+)
+
+MESSAGE_BODY: StaticSchema = (3, n0, _MB, 0)
+
+MESSAGE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MTe,
+    0,
+    (_USER, _SYSTEM),
+    ((-1, {_sV: _USER}), (-1, {_sV: _SYSTEM})),
+)
+
+MESSAGE: StaticSchema = (
+    18,
+    n0,
+    _M,
+    0,
+    (_mIe, _bo, _tim, _t, _atta, _sAou, _aR, _aE),
+    (
+        (STRING, 0),
+        (MESSAGE_BODY, 0),
+        (TIMESTAMP, 0),
+        (MESSAGE_TYPE, 0),
+        (ATTACHMENTS_OUTPUT, 0),
+        (SOURCE_ATTRIBUTIONS, 0),
+        (ACTION_REVIEW, 0),
+        (ACTION_EXECUTION, 0),
+    ),
+)
+
+MESSAGES: StaticSchema = (16, n0, _Me, 0, (_m,), ((MESSAGE, 0),))
+
+LIST_MESSAGES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LMO,
+    {_sSI: _cLMRo, _smith: None},
+    (_mes, _nT),
+    ((MESSAGES, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_MESSAGES: StaticOperationSchema = (
+    23,
+    n0,
+    _LM,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/conversations/{conversationId}",
+                "method": "GET",
+            }
+        )
+    },
+    LIST_MESSAGES_INPUT,
+    LIST_MESSAGES_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        LICENSE_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_ACTIONS: StaticSchema = (7, n0, _MRIFLPA, 0)
+
+LIST_PLUGIN_ACTIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LPAI,
+    {_sSI: _cLPAR, _smit: None},
+    (_aIp, _pI, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (PLUGIN_ID, 9),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_ACTIONS, {_sQ: _mRa}),
+    ),
+)
+
+LIST_PLUGIN_ACTIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LPAO,
+    {_sSI: _cLPARo, _smith: None},
+    (_nT, _it),
+    ((NEXT_TOKEN, 0), (ACTIONS, 0)),
+)
+
+LIST_PLUGIN_ACTIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LPA,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/applications/{applicationId}/plugins/{pluginId}/actions",
+            }
+        )
+    },
+    LIST_PLUGIN_ACTIONS_INPUT,
+    LIST_PLUGIN_ACTIONS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_TYPE_ACTIONS: StaticSchema = (7, n0, _MRIFLPTA, 0)
+
+LIST_PLUGIN_TYPE_ACTIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LPTAI,
+    {_sSI: _cLPTAR, _smit: None},
+    (_pT, _nT, _mRa),
+    (
+        (PLUGIN_TYPE, 9),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_TYPE_ACTIONS, {_sQ: _mRa}),
+    ),
+)
+
+LIST_PLUGIN_TYPE_ACTIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LPTAO,
+    {_sSI: _cLPTARo, _smith: None},
+    (_nT, _it),
+    ((NEXT_TOKEN, 0), (ACTIONS, 0)),
+)
+
+LIST_PLUGIN_TYPE_ACTIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LPTA,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/pluginTypes/{pluginType}/actions"}
+        )
+    },
+    LIST_PLUGIN_TYPE_ACTIONS_INPUT,
+    LIST_PLUGIN_TYPE_ACTIONS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_TYPE_METADATA: StaticSchema = (7, n0, _MRIFLPTM, 0)
+
+LIST_PLUGIN_TYPE_METADATA_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LPTMI,
+    {_sSI: _cLPTMR, _smit: None},
+    (_nT, _mRa),
+    (
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_TYPE_METADATA, {_sQ: _mRa}),
+    ),
+)
+
+PLUGIN_TYPE_CATEGORY: StaticSchema = (
+    14,
+    n0,
+    _PTC,
+    0,
+    (_CRM, _PM_, _COMMUNICATION, _PRODUCTIVITY, _TM),
+    (
+        (-1, {_sV: _Crm}),
+        (-1, {_sV: _Pm}),
+        (-1, {_sV: _Com}),
+        (-1, {_sV: _Pro}),
+        (-1, {_sV: _Taim}),
+    ),
+)
+
+PLUGIN_TYPE_METADATA_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _PTMS,
+    0,
+    (_t, _ca, _d),
+    ((PLUGIN_TYPE, 0), (PLUGIN_TYPE_CATEGORY, 0), (STRING, 0)),
+)
+
+LIST_PLUGIN_TYPE_METADATA_SUMMARIES: StaticSchema = (
+    16,
+    n0,
+    _LPTMS,
+    0,
+    (_m,),
+    ((PLUGIN_TYPE_METADATA_SUMMARY, 0),),
+)
+
+LIST_PLUGIN_TYPE_METADATA_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LPTMO,
+    {_sSI: _cLPTMRo, _smith: None},
+    (_nT, _it),
+    ((NEXT_TOKEN, 0), (LIST_PLUGIN_TYPE_METADATA_SUMMARIES, 0)),
+)
+
+LIST_PLUGIN_TYPE_METADATA: StaticOperationSchema = (
+    23,
+    n0,
+    _LPTM,
+    {_smithy: MappingProxyType({"method": "GET", "uri": "/pluginTypeMetadata"})},
+    LIST_PLUGIN_TYPE_METADATA_INPUT,
+    LIST_PLUGIN_TYPE_METADATA_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS_INTEGER_FOR_LIST_SUBSCRIPTIONS: StaticSchema = (7, n0, _MRIFLS, 0)
+
+LIST_SUBSCRIPTIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LSI,
+    {_sSI: _cLSR, _smit: None},
+    (_aIp, _nT, _mRa),
+    (
+        (APPLICATION_ID, 9),
+        (NEXT_TOKEN, {_sQ: _nT}),
+        (MAX_RESULTS_INTEGER_FOR_LIST_SUBSCRIPTIONS, {_sQ: _mRa}),
+    ),
+)
+
+SUBSCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _Su,
+    0,
+    (_sIu, _sAu, _pr, _cS, _nS),
+    (
+        (SUBSCRIPTION_ID, 0),
+        (SUBSCRIPTION_ARN, 0),
+        (SUBSCRIPTION_PRINCIPAL, 0),
+        (SUBSCRIPTION_DETAILS, 0),
+        (SUBSCRIPTION_DETAILS, 0),
+    ),
+)
+
+SUBSCRIPTIONS: StaticSchema = (16, n0, _Sub, 0, (_m,), ((SUBSCRIPTION, 0),))
+
+LIST_SUBSCRIPTIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LSO,
+    {_sSI: _cLSRo, _smith: None},
+    (_nT, _sub),
+    ((NEXT_TOKEN, 0), (SUBSCRIPTIONS, 0)),
+)
+
+LIST_SUBSCRIPTIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LS,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/applications/{applicationId}/subscriptions"}
+        )
+    },
+    LIST_SUBSCRIPTIONS_INPUT,
+    LIST_SUBSCRIPTIONS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+LIST_TAGS_FOR_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRI,
+    {_sSI: _cLTFRR, _smit: None},
+    (_rARN,),
+    ((AMAZON_RESOURCE_NAME, 9),),
+)
+
+LIST_TAGS_FOR_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRO,
+    {_sSI: _cLTFRRo, _smith: None},
+    (_ta,),
+    ((TAGS, 0),),
+)
+
+LIST_TAGS_FOR_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _LTFR,
+    {_smithy: MappingProxyType({"uri": "/v1/tags/{resourceARN}", "method": "GET"})},
+    LIST_TAGS_FOR_RESOURCE_INPUT,
+    LIST_TAGS_FOR_RESOURCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+SYSTEM_MESSAGE_ID: StaticSchema = (3, n0, _SMI, 0)
+
+MESSAGE_USEFULNESS_COMMENT: StaticSchema = (3, n0, _MUC, 0)
+
+MESSAGE_USEFULNESS_REASON: StaticSchema = (
+    14,
+    n0,
+    _MUR,
+    0,
+    (
+        _NFC,
+        _HOU,
+        _IOMS,
+        _NH,
+        _FC,
+        _COMPLETE,
+        _RS_,
+        _HELPFUL,
+        _NBOD,
+        _NC_,
+        _NC__,
+        _OTHER,
+    ),
+    (
+        (-1, {_sV: _NFC}),
+        (-1, {_sV: _HOU}),
+        (-1, {_sV: _IOMS}),
+        (-1, {_sV: _NH}),
+        (-1, {_sV: _FC}),
+        (-1, {_sV: _COMPLETE}),
+        (-1, {_sV: _RS_}),
+        (-1, {_sV: _HELPFUL}),
+        (-1, {_sV: _NBOD}),
+        (-1, {_sV: _NC_}),
+        (-1, {_sV: _NC__}),
+        (-1, {_sV: _OTHER}),
+    ),
+)
+
+MESSAGE_USEFULNESS: StaticSchema = (
+    14,
+    n0,
+    _MU,
+    0,
+    (_USEFUL, _NU),
+    ((-1, {_sV: _USEFUL}), (-1, {_sV: _NU})),
+)
+
+MESSAGE_USEFULNESS_FEEDBACK: StaticSchema = (
+    18,
+    n0,
+    _MUF,
+    0,
+    (_use, _re, _com, _sAub),
+    (
+        (MESSAGE_USEFULNESS, 1),
+        (MESSAGE_USEFULNESS_REASON, 0),
+        (MESSAGE_USEFULNESS_COMMENT, 0),
+        (TIMESTAMP, 1),
+    ),
+)
+
+PUT_FEEDBACK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PFI,
+    {_sSI: _cPFR, _smit: None},
+    (_aIp, _uI, _cI, _mIe, _mCA, _mU),
+    (
+        (APPLICATION_ID, 9),
+        (USER_ID, {_sQ: _uI}),
+        (CONVERSATION_ID, 9),
+        (SYSTEM_MESSAGE_ID, 9),
+        (TIMESTAMP, 0),
+        (MESSAGE_USEFULNESS_FEEDBACK, 0),
+    ),
+)
+
+PUT_FEEDBACK_OUTPUT: StaticSchema = (18, n0, _PFO, {_sSI: _sUm, _smith: None})
+
+PUT_FEEDBACK: StaticOperationSchema = (
+    23,
+    n0,
+    _PF,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/conversations/{conversationId}/messages/{messageId}/feedback",
+                "method": "POST",
+            }
+        )
+    },
+    PUT_FEEDBACK_INPUT,
+    PUT_FEEDBACK_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MEMBER_GROUP: StaticSchema = (
+    18,
+    n0,
+    _MG,
+    0,
+    (_gN, _t),
+    ((GROUP_NAME, 1), (MEMBERSHIP_TYPE, 0)),
+)
+
+MEMBER_GROUPS: StaticSchema = (16, n0, _MGe, 0, (_m,), ((MEMBER_GROUP, 0),))
+
+MEMBER_USER: StaticSchema = (
+    18,
+    n0,
+    _MUe,
+    0,
+    (_uI, _t),
+    ((DATA_SOURCE_USER_ID, 1), (MEMBERSHIP_TYPE, 0)),
+)
+
+MEMBER_USERS: StaticSchema = (16, n0, _MUem, 0, (_m,), ((MEMBER_USER, 0),))
+
+GROUP_MEMBERS: StaticSchema = (
+    18,
+    n0,
+    _GMr,
+    0,
+    (_mG, _mUe, _sPFGM),
+    ((MEMBER_GROUPS, 0), (MEMBER_USERS, 0), (S3, 0)),
+)
+
+PUT_GROUP_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PGI,
+    {_sSI: _cPGR, _smit: None},
+    (_aIp, _iI, _gN, _dSI, _t, _gM, _rA),
+    (
+        (APPLICATION_ID, 9),
+        (INDEX_ID, 9),
+        (GROUP_NAME, 1),
+        (DATA_SOURCE_ID, 0),
+        (MEMBERSHIP_TYPE, 1),
+        (GROUP_MEMBERS, 1),
+        (ROLE_ARN, 0),
+    ),
+)
+
+PUT_GROUP_OUTPUT: StaticSchema = (18, n0, _PGO, {_sSI: _cPGRo, _smith: None})
+
+PUT_GROUP: StaticOperationSchema = (
+    23,
+    n0,
+    _PGu,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/applications/{applicationId}/indices/{indexId}/groups",
+            }
+        )
+    },
+    PUT_GROUP_INPUT,
+    PUT_GROUP_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_RESULTS: StaticSchema = (7, n0, _MRa, 0)
+
+QUERY_TEXT: StaticSchema = (3, n0, _QT, 0)
+
+SCORE_CONFIDENCE: StaticSchema = (
+    14,
+    n0,
+    _SCc,
+    0,
+    (_VH, _HIGH, _MEDIUM, _LOW, _NA),
+    (
+        (-1, {_sV: _VH}),
+        (-1, {_sV: _HIGH}),
+        (-1, {_sV: _MEDIUM}),
+        (-1, {_sV: _LOW}),
+        (-1, {_sV: _NA}),
+    ),
+)
+
+SCORE_ATTRIBUTES: StaticSchema = (18, n0, _SAc, 0, (_sCc,), ((SCORE_CONFIDENCE, 0),))
+
+RELEVANT_CONTENT: StaticSchema = (
+    18,
+    n0,
+    _RCel,
+    0,
+    (_conte, _dI, _dT, _dU, _dAocu, _sAc),
+    (
+        (STRING, 0),
+        (DOCUMENT_ID, 0),
+        (TITLE, 0),
+        (URL, 0),
+        (DOCUMENT_ATTRIBUTES, 0),
+        (SCORE_ATTRIBUTES, 0),
+    ),
+)
+
+RELEVANT_CONTENT_LIST: StaticSchema = (16, n0, _RCL, 0, (_m,), ((RELEVANT_CONTENT, 0),))
+
+SEARCH_RELEVANT_CONTENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SRCO,
+    {_sSI: _cSRCR, _smith: None},
+    (_rCe, _nT),
+    ((RELEVANT_CONTENT_LIST, 0), (NEXT_TOKEN, 0)),
+)
+
+START_DATA_SOURCE_SYNC_JOB_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SDSSJI,
+    {_sSI: _cSDSSJR, _smit: None},
+    (_dSI, _aIp, _iI),
+    ((DATA_SOURCE_ID, 9), (APPLICATION_ID, 9), (INDEX_ID, 9)),
+)
+
+START_DATA_SOURCE_SYNC_JOB_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SDSSJO,
+    {_sSI: _cSDSSJRo, _smith: None},
+    (_eIx,),
+    ((EXECUTION_ID, 0),),
+)
+
+START_DATA_SOURCE_SYNC_JOB: StaticOperationSchema = (
+    23,
+    n0,
+    _SDSSJ,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}/startsync",
+                "method": "POST",
+            }
+        )
+    },
+    START_DATA_SOURCE_SYNC_JOB_INPUT,
+    START_DATA_SOURCE_SYNC_JOB_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+STOP_DATA_SOURCE_SYNC_JOB_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SDSSJIt,
+    {_sSI: _cSDSSJRom, _smit: None},
+    (_dSI, _aIp, _iI),
+    ((DATA_SOURCE_ID, 9), (APPLICATION_ID, 9), (INDEX_ID, 9)),
+)
+
+STOP_DATA_SOURCE_SYNC_JOB_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SDSSJOt,
+    {_sSI: _cSDSSJRoma, _smith: None},
+)
+
+STOP_DATA_SOURCE_SYNC_JOB: StaticOperationSchema = (
+    23,
+    n0,
+    _SDSSJt,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}/stopsync",
+                "method": "POST",
+            }
+        )
+    },
+    STOP_DATA_SOURCE_SYNC_JOB_INPUT,
+    STOP_DATA_SOURCE_SYNC_JOB_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+TAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TRI,
+    {_sSI: _cTRR, _smit: None},
+    (_rARN, _ta),
+    ((AMAZON_RESOURCE_NAME, 9), (TAGS, 1)),
+)
+
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _cTRRo, _smith: None})
+
+TAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _TR,
+    {_smithy: MappingProxyType({"uri": "/v1/tags/{resourceARN}", "method": "POST"})},
+    TAG_RESOURCE_INPUT,
+    TAG_RESOURCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+TAG_KEYS: StaticSchema = (16, n0, _TKa, 0, (_m,), ((TAG_KEY, 0),))
+
+UNTAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URIn,
+    {_sSI: _cURRom, _smit: None},
+    (_rARN, _tK),
+    ((AMAZON_RESOURCE_NAME, 9), (TAG_KEYS, {_sQ: _tK, _s: None})),
+)
+
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _UROn, {_sSI: _cURRoma, _smith: None})
+
+UNTAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _URn,
+    {_smithy: MappingProxyType({"uri": "/v1/tags/{resourceARN}", "method": "DELETE"})},
+    UNTAG_RESOURCE_INPUT,
+    UNTAG_RESOURCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+ORCHESTRATION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OCr,
+    0,
+    (_cont,),
+    ((ORCHESTRATION_CONTROL, 1),),
+)
+
+UPDATE_CHAT_CONTROLS_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UCCCI,
+    {_sSI: _cUCCCR, _smit: None},
+    (_aIp, _cT, _rS, _oC, _bPCU, _tCTCOU, _tCTD, _cMCr, _hRCa),
+    (
+        (APPLICATION_ID, 9),
+        (CLIENT_TOKEN, 2),
+        (RESPONSE_SCOPE, 0),
+        (ORCHESTRATION_CONFIGURATION, 0),
+        (BLOCKED_PHRASES_CONFIGURATION_UPDATE, 0),
+        (TOPIC_CONFIGURATIONS, 0),
+        (TOPIC_CONFIGURATIONS, 0),
+        (CREATOR_MODE_CONFIGURATION, 0),
+        (HALLUCINATION_REDUCTION_CONFIGURATION, 0),
+    ),
+)
+
+UPDATE_CHAT_CONTROLS_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UCCCO,
+    {_sSI: _cUCCCRo, _smith: None},
+)
+
+UPDATE_CHAT_CONTROLS_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _UCCC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/chatcontrols",
+                "method": "PATCH",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_CHAT_CONTROLS_CONFIGURATION_INPUT,
+    UPDATE_CHAT_CONTROLS_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_CHAT_RESPONSE_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UCRCI,
+    {_sSI: _cUCRCR, _smit: None},
+    (_aIp, _cRCI, _dN, _rC, _cT),
+    (
+        (APPLICATION_ID, 9),
+        (CHAT_RESPONSE_CONFIGURATION_ID, 9),
+        (DISPLAY_NAME, 0),
+        (RESPONSE_CONFIGURATIONS, 1),
+        (STRING, 2),
+    ),
+)
+
+UPDATE_CHAT_RESPONSE_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UCRCO,
+    {_sSI: _cUCRCRo, _smith: None},
+)
+
+UPDATE_CHAT_RESPONSE_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _UCRC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}",
+            }
+        )
+    },
+    UPDATE_CHAT_RESPONSE_CONFIGURATION_INPUT,
+    UPDATE_CHAT_RESPONSE_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_SUBSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _USI,
+    {_sSI: _cUSR, _smit: None},
+    (_aIp, _sIu, _t),
+    ((APPLICATION_ID, 9), (SUBSCRIPTION_ID, 9), (SUBSCRIPTION_TYPE, 1)),
+)
+
+UPDATE_SUBSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _USO,
+    {_sSI: _cUSRo, _smith: None},
+    (_sAu, _cS, _nS),
+    ((SUBSCRIPTION_ARN, 0), (SUBSCRIPTION_DETAILS, 0), (SUBSCRIPTION_DETAILS, 0)),
+)
+
+UPDATE_SUBSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _US,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/applications/{applicationId}/subscriptions/{subscriptionId}",
+            }
+        )
+    },
+    UPDATE_SUBSCRIPTION_INPUT,
+    UPDATE_SUBSCRIPTION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_USER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UUI,
+    {_sSI: _cUUR, _smit: None},
+    (_aIp, _uI, _uATU, _uATD),
+    ((APPLICATION_ID, 9), (STRING, 9), (USER_ALIASES, 0), (USER_ALIASES, 0)),
+)
+
+UPDATE_USER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UUO,
+    {_sSI: _cUURo, _smith: None},
+    (_uAA, _uAU, _uAD),
+    ((USER_ALIASES, 0), (USER_ALIASES, 0), (USER_ALIASES, 0)),
+)
+
+UPDATE_USER: StaticOperationSchema = (
+    23,
+    n0,
+    _UU,
+    {
+        _smithy: MappingProxyType(
+            {"method": "PUT", "uri": "/applications/{applicationId}/users/{userId}"}
+        )
+    },
+    UPDATE_USER_INPUT,
+    UPDATE_USER_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+ATTRIBUTE_FILTER: StaticSchema = (
+    18,
+    n0,
+    _AF,
+    0,
+    (_aAF, _oAF, _nF, _eTq, _cAo, _cAon, _gT, _gTOE, _lT, _lTOE),
+    (
+        (lambda: ATTRIBUTE_FILTERS, 0),
+        (lambda: ATTRIBUTE_FILTERS, 0),
+        (lambda: ATTRIBUTE_FILTER, 0),
+        (DOCUMENT_ATTRIBUTE, 0),
+        (DOCUMENT_ATTRIBUTE, 0),
+        (DOCUMENT_ATTRIBUTE, 0),
+        (DOCUMENT_ATTRIBUTE, 0),
+        (DOCUMENT_ATTRIBUTE, 0),
+        (DOCUMENT_ATTRIBUTE, 0),
+        (DOCUMENT_ATTRIBUTE, 0),
+    ),
+)
+
+ATTRIBUTE_FILTERS: StaticSchema = (16, n0, _AFt, 0, (_m,), ((ATTRIBUTE_FILTER, 0),))
+
+ACTION_FILTER_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _AFC,
+    0,
+    (_dAF,),
+    ((ATTRIBUTE_FILTER, 1),),
+)
+
+CHAT_SYNC_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSIh,
+    {_smit: None},
+    (_aIp, _uI, _uG, _uM, _atta, _aE, _aCRu, _cI, _pMI, _aFt, _cM, _cMCh, _cT),
+    (
+        (APPLICATION_ID, 9),
+        (USER_ID, {_sQ: _uI}),
+        (USER_GROUPS, {_sQ: _uG}),
+        (USER_MESSAGE, 0),
+        (ATTACHMENTS_INPUT, 0),
+        (ACTION_EXECUTION, 0),
+        (AUTH_CHALLENGE_RESPONSE, 0),
+        (CONVERSATION_ID, 0),
+        (MESSAGE_ID, 0),
+        (ATTRIBUTE_FILTER, 0),
+        (CHAT_MODE, 0),
+        (CHAT_MODE_CONFIGURATION, 0),
+        (CLIENT_TOKEN, 2),
+    ),
+)
+
+CONFIGURATION_EVENT: StaticSchema = (
+    18,
+    n0,
+    _CEo,
+    0,
+    (_cM, _cMCh, _aFt),
+    ((CHAT_MODE, 0), (CHAT_MODE_CONFIGURATION, 0), (ATTRIBUTE_FILTER, 0)),
+)
+
+SEARCH_RELEVANT_CONTENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SRCI,
+    {_sSI: _cSRCRo, _smit: None},
+    (_aIp, _qT, _cSo, _aFt, _mRa, _nT),
+    (
+        (APPLICATION_ID, 9),
+        (QUERY_TEXT, 1),
+        (CONTENT_SOURCE, 1),
+        (ATTRIBUTE_FILTER, 0),
+        (MAX_RESULTS, {_smithyapi: 10}),
+        (NEXT_TOKEN, 0),
+    ),
+)
+
+CHAT_SYNC: StaticOperationSchema = (
+    23,
+    n0,
+    _CSh,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/conversations?sync",
+                "method": "POST",
+            }
+        )
+    },
+    CHAT_SYNC_INPUT,
+    CHAT_SYNC_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        EXTERNAL_RESOURCE_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        LICENSE_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+SEARCH_RELEVANT_CONTENT: StaticOperationSchema = (
+    23,
+    n0,
+    _SRC,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/relevant-content", "method": "POST"}
+        )
+    },
+    SEARCH_RELEVANT_CONTENT_INPUT,
+    SEARCH_RELEVANT_CONTENT_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        LICENSE_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+ACTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _ACct,
+    0,
+    (_act, _fC),
+    ((Q_IAM_ACTION, 1), (ACTION_FILTER_CONFIGURATION, 0)),
+)
+
+CHAT_INPUT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _CIS,
+    {_smithyap: None},
+    (_cE, _tE, _aEt, _aEE, _eOIE, _aCREu),
+    (
+        (CONFIGURATION_EVENT, 0),
+        (TEXT_INPUT_EVENT, 0),
+        (ATTACHMENT_INPUT_EVENT, 0),
+        (ACTION_EXECUTION_EVENT, 0),
+        (END_OF_INPUT_EVENT, 0),
+        (AUTH_CHALLENGE_RESPONSE_EVENT, 0),
+    ),
+)
+
+ACTION_CONFIGURATION_LIST: StaticSchema = (
+    16,
+    n0,
+    _ACL,
+    0,
+    (_m,),
+    ((ACTION_CONFIGURATION, 0),),
+)
+
+CHAT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CIh,
+    {_smit: None},
+    (_aIp, _uI, _uG, _cI, _pMI, _cT, _iSn),
+    (
+        (APPLICATION_ID, 9),
+        (USER_ID, {_sQ: _uI}),
+        (USER_GROUPS, {_sQ: _uG}),
+        (CONVERSATION_ID, {_sQ: _cI}),
+        (MESSAGE_ID, {_sQ: _pMI}),
+        (CLIENT_TOKEN, {_sQ: _cT, _sT: None}),
+        (CHAT_INPUT_STREAM, 16),
+    ),
+)
+
+CHAT: StaticOperationSchema = (
+    23,
+    n0,
+    _Ch,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/conversations", "method": "POST"}
+        )
+    },
+    CHAT_INPUT,
+    CHAT_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        EXTERNAL_RESOURCE_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        LICENSE_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+CREATE_DATA_ACCESSOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDAIr,
+    {_sSI: _cCDARoma, _smit: None},
+    (_aIp, _pr, _aCct, _cT, _dN, _aD, _ta),
+    (
+        (APPLICATION_ID, 9),
+        (PRINCIPAL_ROLE_ARN, 1),
+        (ACTION_CONFIGURATION_LIST, 1),
+        (CLIENT_TOKEN, 2),
+        (DATA_ACCESSOR_NAME, 1),
+        (DATA_ACCESSOR_AUTHENTICATION_DETAIL, 0),
+        (TAGS, 0),
+    ),
+)
+
+GET_DATA_ACCESSOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDAO,
+    {_sSI: _cGDARo, _smith: None},
+    (_dN, _dAI, _dAA, _aIp, _iAA, _pr, _aCct, _aD, _cA, _uA),
+    (
+        (DATA_ACCESSOR_NAME, 0),
+        (DATA_ACCESSOR_ID, 0),
+        (DATA_ACCESSOR_ARN, 0),
+        (APPLICATION_ID, 0),
+        (IDC_APPLICATION_ARN, 0),
+        (PRINCIPAL_ROLE_ARN, 0),
+        (ACTION_CONFIGURATION_LIST, 0),
+        (DATA_ACCESSOR_AUTHENTICATION_DETAIL, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+UPDATE_DATA_ACCESSOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UDAI,
+    {_sSI: _cUDARo, _smit: None},
+    (_aIp, _dAI, _aCct, _aD, _dN),
+    (
+        (APPLICATION_ID, 9),
+        (DATA_ACCESSOR_ID, 9),
+        (ACTION_CONFIGURATION_LIST, 1),
+        (DATA_ACCESSOR_AUTHENTICATION_DETAIL, 0),
+        (DATA_ACCESSOR_NAME, 0),
+    ),
+)
+
+CREATE_DATA_ACCESSOR: StaticOperationSchema = (
+    23,
+    n0,
+    _CDAr,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/applications/{applicationId}/dataaccessors", "method": "POST"}
+        )
+    },
+    CREATE_DATA_ACCESSOR_INPUT,
+    CREATE_DATA_ACCESSOR_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_DATA_ACCESSOR: StaticOperationSchema = (
+    23,
+    n0,
+    _GDA,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/dataaccessors/{dataAccessorId}",
+                "method": "GET",
+            }
+        )
+    },
+    GET_DATA_ACCESSOR_INPUT,
+    GET_DATA_ACCESSOR_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_DATA_ACCESSOR: StaticOperationSchema = (
+    23,
+    n0,
+    _UDA,
+    {
+        _smithy: MappingProxyType(
+            {
+                "uri": "/applications/{applicationId}/dataaccessors/{dataAccessorId}",
+                "method": "PUT",
+            }
+        )
+    },
+    UPDATE_DATA_ACCESSOR_INPUT,
+    UPDATE_DATA_ACCESSOR_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+EXPERT_Q: StaticSchema = (
+    21,
+    n0,
+    _EQ,
+    {
+        _aw: MappingProxyType({"name": "qbusiness"}),
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
                 ),
-            ],
-        },
-        "dataSourceId": {
-            "target": DATA_SOURCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="dataSourceId")
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_GROUPS_REQUEST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-GROUP_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GroupSummary"),
-    members={"groupName": {"target": GROUP_NAME}},
-)
-
-GROUP_SUMMARY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GroupSummaryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GROUP_SUMMARY}},
-)
-
-LIST_GROUPS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListGroupsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListGroupsResponse",
-        )
-    ],
-    members={
-        "nextToken": {"target": NEXT_TOKEN},
-        "items": {"target": GROUP_SUMMARY_LIST},
-    },
-)
-
-LIST_GROUPS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListGroups"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/applications/{applicationId}/indices/{indexId}/groups",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_MESSAGES = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListMessages"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_MESSAGES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListMessagesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListMessagesRequest",
-        )
-    ],
-    members={
-        "conversationId": {
-            "target": CONVERSATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": USER_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="userId")],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_MESSAGES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-MESSAGE_BODY = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MessageBody"), shape_type=ShapeType.STRING
-)
-
-MESSAGE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MessageType"),
-    shape_type=ShapeType.ENUM,
-    members={"USER": {"target": UNIT}, "SYSTEM": {"target": UNIT}},
-)
-
-MESSAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Message"),
-    members={
-        "messageId": {"target": STRING},
-        "body": {"target": MESSAGE_BODY},
-        "time": {"target": TIMESTAMP},
-        "type": {"target": MESSAGE_TYPE},
-        "attachments": {"target": ATTACHMENTS_OUTPUT},
-        "sourceAttribution": {"target": SOURCE_ATTRIBUTIONS},
-        "actionReview": {"target": ACTION_REVIEW},
-        "actionExecution": {"target": ACTION_EXECUTION},
-    },
-)
-
-MESSAGES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Messages"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MESSAGE}},
-)
-
-LIST_MESSAGES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListMessagesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListMessagesResponse",
-        )
-    ],
-    members={"messages": {"target": MESSAGES}, "nextToken": {"target": NEXT_TOKEN}},
-)
-
-LIST_MESSAGES = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListMessages"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/conversations/{conversationId}",
-                    "method": "GET",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_ACTIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListPluginActions"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_PLUGIN_ACTIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginActionsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListPluginActionsRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "pluginId": {
-            "target": PLUGIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_ACTIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-LIST_PLUGIN_ACTIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginActionsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListPluginActionsResponse",
-        )
-    ],
-    members={"nextToken": {"target": NEXT_TOKEN}, "items": {"target": ACTIONS}},
-)
-
-LIST_PLUGIN_ACTIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginActions"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/applications/{applicationId}/plugins/{pluginId}/actions",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_TYPE_ACTIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListPluginTypeActions"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_PLUGIN_TYPE_ACTIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginTypeActionsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListPluginTypeActionsRequest",
-        )
-    ],
-    members={
-        "pluginType": {
-            "target": PLUGIN_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_TYPE_ACTIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-LIST_PLUGIN_TYPE_ACTIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginTypeActionsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListPluginTypeActionsResponse",
-        )
-    ],
-    members={"nextToken": {"target": NEXT_TOKEN}, "items": {"target": ACTIONS}},
-)
-
-LIST_PLUGIN_TYPE_ACTIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginTypeActions"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/pluginTypes/{pluginType}/actions"}
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_TYPE_METADATA = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListPluginTypeMetadata"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_PLUGIN_TYPE_METADATA_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginTypeMetadataInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListPluginTypeMetadataRequest",
-        )
-    ],
-    members={
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_PLUGIN_TYPE_METADATA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-PLUGIN_TYPE_CATEGORY = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PluginTypeCategory"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CRM": {"target": UNIT},
-        "PROJECT_MANAGEMENT": {"target": UNIT},
-        "COMMUNICATION": {"target": UNIT},
-        "PRODUCTIVITY": {"target": UNIT},
-        "TICKETING_MANAGEMENT": {"target": UNIT},
-    },
-)
-
-PLUGIN_TYPE_METADATA_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PluginTypeMetadataSummary"),
-    members={
-        "type": {"target": PLUGIN_TYPE},
-        "category": {"target": PLUGIN_TYPE_CATEGORY},
-        "description": {"target": STRING},
-    },
-)
-
-LIST_PLUGIN_TYPE_METADATA_SUMMARIES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginTypeMetadataSummaries"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PLUGIN_TYPE_METADATA_SUMMARY}},
-)
-
-LIST_PLUGIN_TYPE_METADATA_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginTypeMetadataOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListPluginTypeMetadataResponse",
-        )
-    ],
-    members={
-        "nextToken": {"target": NEXT_TOKEN},
-        "items": {"target": LIST_PLUGIN_TYPE_METADATA_SUMMARIES},
-    },
-)
-
-LIST_PLUGIN_TYPE_METADATA = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListPluginTypeMetadata"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "GET", "uri": "/pluginTypeMetadata"}),
-        )
-    ],
-)
-
-MAX_RESULTS_INTEGER_FOR_LIST_SUBSCRIPTIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResultsIntegerForListSubscriptions"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_SUBSCRIPTIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListSubscriptionsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListSubscriptionsRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "nextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "maxResults": {
-            "target": MAX_RESULTS_INTEGER_FOR_LIST_SUBSCRIPTIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-    },
-)
-
-SUBSCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Subscription"),
-    members={
-        "subscriptionId": {"target": SUBSCRIPTION_ID},
-        "subscriptionArn": {"target": SUBSCRIPTION_ARN},
-        "principal": {"target": SUBSCRIPTION_PRINCIPAL},
-        "currentSubscription": {"target": SUBSCRIPTION_DETAILS},
-        "nextSubscription": {"target": SUBSCRIPTION_DETAILS},
-    },
-)
-
-SUBSCRIPTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#Subscriptions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SUBSCRIPTION}},
-)
-
-LIST_SUBSCRIPTIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListSubscriptionsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListSubscriptionsResponse",
-        )
-    ],
-    members={
-        "nextToken": {"target": NEXT_TOKEN},
-        "subscriptions": {"target": SUBSCRIPTIONS},
-    },
-)
-
-LIST_SUBSCRIPTIONS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListSubscriptions"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/applications/{applicationId}/subscriptions"}
-            ),
-        )
-    ],
-)
-
-LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListTagsForResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListTagsForResourceRequest",
-        )
-    ],
-    members={
-        "resourceARN": {
-            "target": AMAZON_RESOURCE_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-LIST_TAGS_FOR_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ListTagsForResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#ListTagsForResourceResponse",
-        )
-    ],
-    members={"tags": {"target": TAGS}},
-)
-
-LIST_TAGS_FOR_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ListTagsForResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"uri": "/v1/tags/{resourceARN}", "method": "GET"}),
-        )
-    ],
-)
-
-SYSTEM_MESSAGE_ID = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SystemMessageId"), shape_type=ShapeType.STRING
-)
-
-MESSAGE_USEFULNESS_COMMENT = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MessageUsefulnessComment"),
-    shape_type=ShapeType.STRING,
-)
-
-MESSAGE_USEFULNESS_REASON = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MessageUsefulnessReason"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "NOT_FACTUALLY_CORRECT": {"target": UNIT},
-        "HARMFUL_OR_UNSAFE": {"target": UNIT},
-        "INCORRECT_OR_MISSING_SOURCES": {"target": UNIT},
-        "NOT_HELPFUL": {"target": UNIT},
-        "FACTUALLY_CORRECT": {"target": UNIT},
-        "COMPLETE": {"target": UNIT},
-        "RELEVANT_SOURCES": {"target": UNIT},
-        "HELPFUL": {"target": UNIT},
-        "NOT_BASED_ON_DOCUMENTS": {"target": UNIT},
-        "NOT_COMPLETE": {"target": UNIT},
-        "NOT_CONCISE": {"target": UNIT},
-        "OTHER": {"target": UNIT},
-    },
-)
-
-MESSAGE_USEFULNESS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MessageUsefulness"),
-    shape_type=ShapeType.ENUM,
-    members={"USEFUL": {"target": UNIT}, "NOT_USEFUL": {"target": UNIT}},
-)
-
-MESSAGE_USEFULNESS_FEEDBACK = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MessageUsefulnessFeedback"),
-    members={
-        "usefulness": {
-            "target": MESSAGE_USEFULNESS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "reason": {"target": MESSAGE_USEFULNESS_REASON},
-        "comment": {"target": MESSAGE_USEFULNESS_COMMENT},
-        "submittedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PUT_FEEDBACK_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PutFeedbackInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#PutFeedbackRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": USER_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="userId")],
-        },
-        "conversationId": {
-            "target": CONVERSATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "messageId": {
-            "target": SYSTEM_MESSAGE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "messageCopiedAt": {"target": TIMESTAMP},
-        "messageUsefulness": {"target": MESSAGE_USEFULNESS_FEEDBACK},
-    },
-)
-
-PUT_FEEDBACK_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PutFeedbackOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-PUT_FEEDBACK = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PutFeedback"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/conversations/{conversationId}/messages/{messageId}/feedback",
-                    "method": "POST",
-                }
-            ),
-        )
-    ],
-)
-
-MEMBER_GROUP = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MemberGroup"),
-    members={
-        "groupName": {
-            "target": GROUP_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "type": {"target": MEMBERSHIP_TYPE},
-    },
-)
-
-MEMBER_GROUPS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MemberGroups"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEMBER_GROUP}},
-)
-
-MEMBER_USER = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MemberUser"),
-    members={
-        "userId": {
-            "target": DATA_SOURCE_USER_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "type": {"target": MEMBERSHIP_TYPE},
-    },
-)
-
-MEMBER_USERS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#MemberUsers"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEMBER_USER}},
-)
-
-GROUP_MEMBERS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GroupMembers"),
-    members={
-        "memberGroups": {"target": MEMBER_GROUPS},
-        "memberUsers": {"target": MEMBER_USERS},
-        "s3PathForGroupMembers": {"target": S3},
-    },
-)
-
-PUT_GROUP_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PutGroupInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#PutGroupRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "groupName": {
-            "target": GROUP_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "dataSourceId": {"target": DATA_SOURCE_ID},
-        "type": {
-            "target": MEMBERSHIP_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "groupMembers": {
-            "target": GROUP_MEMBERS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "roleArn": {"target": ROLE_ARN},
-    },
-)
-
-PUT_GROUP_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#PutGroupOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#PutGroupResponse",
-        )
-    ],
-)
-
-PUT_GROUP = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#PutGroup"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/applications/{applicationId}/indices/{indexId}/groups",
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#MaxResults"), shape_type=ShapeType.INTEGER
-)
-
-QUERY_TEXT = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#QueryText"), shape_type=ShapeType.STRING
-)
-
-SCORE_CONFIDENCE = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ScoreConfidence"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "VERY_HIGH": {"target": UNIT},
-        "HIGH": {"target": UNIT},
-        "MEDIUM": {"target": UNIT},
-        "LOW": {"target": UNIT},
-        "NOT_AVAILABLE": {"target": UNIT},
-    },
-)
-
-SCORE_ATTRIBUTES = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ScoreAttributes"),
-    members={"scoreConfidence": {"target": SCORE_CONFIDENCE}},
-)
-
-RELEVANT_CONTENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#RelevantContent"),
-    members={
-        "content": {"target": STRING},
-        "documentId": {"target": DOCUMENT_ID},
-        "documentTitle": {"target": TITLE},
-        "documentUri": {"target": URL},
-        "documentAttributes": {"target": DOCUMENT_ATTRIBUTES},
-        "scoreAttributes": {"target": SCORE_ATTRIBUTES},
-    },
-)
-
-RELEVANT_CONTENT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#RelevantContentList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RELEVANT_CONTENT}},
-)
-
-SEARCH_RELEVANT_CONTENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SearchRelevantContentOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#SearchRelevantContentResponse",
-        )
-    ],
-    members={
-        "relevantContent": {"target": RELEVANT_CONTENT_LIST},
-        "nextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-START_DATA_SOURCE_SYNC_JOB_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#StartDataSourceSyncJobInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#StartDataSourceSyncJobRequest",
-        )
-    ],
-    members={
-        "dataSourceId": {
-            "target": DATA_SOURCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-START_DATA_SOURCE_SYNC_JOB_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#StartDataSourceSyncJobOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#StartDataSourceSyncJobResponse",
-        )
-    ],
-    members={"executionId": {"target": EXECUTION_ID}},
-)
-
-START_DATA_SOURCE_SYNC_JOB = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#StartDataSourceSyncJob"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}/startsync",
-                    "method": "POST",
-                }
-            ),
-        )
-    ],
-)
-
-STOP_DATA_SOURCE_SYNC_JOB_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#StopDataSourceSyncJobInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#StopDataSourceSyncJobRequest",
-        )
-    ],
-    members={
-        "dataSourceId": {
-            "target": DATA_SOURCE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "indexId": {
-            "target": INDEX_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-STOP_DATA_SOURCE_SYNC_JOB_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#StopDataSourceSyncJobOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#StopDataSourceSyncJobResponse",
-        )
-    ],
-)
-
-STOP_DATA_SOURCE_SYNC_JOB = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#StopDataSourceSyncJob"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/indices/{indexId}/datasources/{dataSourceId}/stopsync",
-                    "method": "POST",
-                }
-            ),
-        )
-    ],
-)
-
-TAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#TagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#TagResourceRequest",
-        )
-    ],
-    members={
-        "resourceARN": {
-            "target": AMAZON_RESOURCE_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "tags": {
-            "target": TAGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#TagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#TagResourceResponse",
-        )
-    ],
-)
-
-TAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#TagResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"uri": "/v1/tags/{resourceARN}", "method": "POST"}),
-        )
-    ],
-)
-
-TAG_KEYS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#TagKeys"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG_KEY}},
-)
-
-UNTAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UntagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UntagResourceRequest",
-        )
-    ],
-    members={
-        "resourceARN": {
-            "target": AMAZON_RESOURCE_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "tagKeys": {
-            "target": TAG_KEYS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="tagKeys"),
-            ],
-        },
-    },
-)
-
-UNTAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UntagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UntagResourceResponse",
-        )
-    ],
-)
-
-UNTAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UntagResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/v1/tags/{resourceARN}", "method": "DELETE"}
-            ),
-        )
-    ],
-)
-
-ORCHESTRATION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#OrchestrationConfiguration"),
-    members={
-        "control": {
-            "target": ORCHESTRATION_CONTROL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-UPDATE_CHAT_CONTROLS_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateChatControlsConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateChatControlsConfigurationRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "responseScope": {"target": RESPONSE_SCOPE},
-        "orchestrationConfiguration": {"target": ORCHESTRATION_CONFIGURATION},
-        "blockedPhrasesConfigurationUpdate": {
-            "target": BLOCKED_PHRASES_CONFIGURATION_UPDATE
-        },
-        "topicConfigurationsToCreateOrUpdate": {"target": TOPIC_CONFIGURATIONS},
-        "topicConfigurationsToDelete": {"target": TOPIC_CONFIGURATIONS},
-        "creatorModeConfiguration": {"target": CREATOR_MODE_CONFIGURATION},
-        "hallucinationReductionConfiguration": {
-            "target": HALLUCINATION_REDUCTION_CONFIGURATION
-        },
-    },
-)
-
-UPDATE_CHAT_CONTROLS_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateChatControlsConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateChatControlsConfigurationResponse",
-        )
-    ],
-)
-
-UPDATE_CHAT_CONTROLS_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateChatControlsConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/chatcontrols",
-                    "method": "PATCH",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_CHAT_RESPONSE_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateChatResponseConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateChatResponseConfigurationRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "chatResponseConfigurationId": {
-            "target": CHAT_RESPONSE_CONFIGURATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "displayName": {"target": DISPLAY_NAME},
-        "responseConfigurations": {
-            "target": RESPONSE_CONFIGURATIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "clientToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-    },
-)
-
-UPDATE_CHAT_RESPONSE_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateChatResponseConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateChatResponseConfigurationResponse",
-        )
-    ],
-)
-
-UPDATE_CHAT_RESPONSE_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateChatResponseConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/applications/{applicationId}/chatresponseconfigurations/{chatResponseConfigurationId}",
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_SUBSCRIPTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateSubscriptionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateSubscriptionRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "subscriptionId": {
-            "target": SUBSCRIPTION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "type": {
-            "target": SUBSCRIPTION_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-UPDATE_SUBSCRIPTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateSubscriptionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateSubscriptionResponse",
-        )
-    ],
-    members={
-        "subscriptionArn": {"target": SUBSCRIPTION_ARN},
-        "currentSubscription": {"target": SUBSCRIPTION_DETAILS},
-        "nextSubscription": {"target": SUBSCRIPTION_DETAILS},
-    },
-)
-
-UPDATE_SUBSCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateSubscription"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/applications/{applicationId}/subscriptions/{subscriptionId}",
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_USER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateUserInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateUserRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userAliasesToUpdate": {"target": USER_ALIASES},
-        "userAliasesToDelete": {"target": USER_ALIASES},
-    },
-)
-
-UPDATE_USER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateUserOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateUserResponse",
-        )
-    ],
-    members={
-        "userAliasesAdded": {"target": USER_ALIASES},
-        "userAliasesUpdated": {"target": USER_ALIASES},
-        "userAliasesDeleted": {"target": USER_ALIASES},
-    },
-)
-
-UPDATE_USER = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateUser"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "PUT", "uri": "/applications/{applicationId}/users/{userId}"}
-            ),
-        )
-    ],
-)
-
-ATTRIBUTE_FILTER = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttributeFilter"),
-    members={
-        # This needs to reference a schema that isn't defined yet.
-        # It will be populated with a non-null value at the end of the file.
-        "andAllFilters": None,
-        # This needs to reference a schema that isn't defined yet.
-        # It will be populated with a non-null value at the end of the file.
-        "orAllFilters": None,
-        # This needs to reference a schema that isn't defined yet.
-        # It will be populated with a non-null value at the end of the file.
-        "notFilter": None,
-        "equalsTo": {"target": DOCUMENT_ATTRIBUTE},
-        "containsAll": {"target": DOCUMENT_ATTRIBUTE},
-        "containsAny": {"target": DOCUMENT_ATTRIBUTE},
-        "greaterThan": {"target": DOCUMENT_ATTRIBUTE},
-        "greaterThanOrEquals": {"target": DOCUMENT_ATTRIBUTE},
-        "lessThan": {"target": DOCUMENT_ATTRIBUTE},
-        "lessThanOrEquals": {"target": DOCUMENT_ATTRIBUTE},
-    },
-)
-
-ATTRIBUTE_FILTERS = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#AttributeFilters"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ATTRIBUTE_FILTER}},
-)
-
-ACTION_FILTER_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionFilterConfiguration"),
-    members={
-        "documentAttributeFilter": {
-            "target": ATTRIBUTE_FILTER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CHAT_SYNC_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatSyncInput"),
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": USER_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="userId")],
-        },
-        "userGroups": {
-            "target": USER_GROUPS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="userGroups")
-            ],
-        },
-        "userMessage": {"target": USER_MESSAGE},
-        "attachments": {"target": ATTACHMENTS_INPUT},
-        "actionExecution": {"target": ACTION_EXECUTION},
-        "authChallengeResponse": {"target": AUTH_CHALLENGE_RESPONSE},
-        "conversationId": {"target": CONVERSATION_ID},
-        "parentMessageId": {"target": MESSAGE_ID},
-        "attributeFilter": {"target": ATTRIBUTE_FILTER},
-        "chatMode": {"target": CHAT_MODE},
-        "chatModeConfiguration": {"target": CHAT_MODE_CONFIGURATION},
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-    },
-)
-
-CONFIGURATION_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ConfigurationEvent"),
-    members={
-        "chatMode": {"target": CHAT_MODE},
-        "chatModeConfiguration": {"target": CHAT_MODE_CONFIGURATION},
-        "attributeFilter": {"target": ATTRIBUTE_FILTER},
-    },
-)
-
-SEARCH_RELEVANT_CONTENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#SearchRelevantContentInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#SearchRelevantContentRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "queryText": {
-            "target": QUERY_TEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "contentSource": {
-            "target": CONTENT_SOURCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "attributeFilter": {"target": ATTRIBUTE_FILTER},
-        "maxResults": {
-            "target": MAX_RESULTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=10)],
-        },
-        "nextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-CHAT_SYNC = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ChatSync"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/conversations?sync",
-                    "method": "POST",
-                }
-            ),
-        )
-    ],
-)
-
-SEARCH_RELEVANT_CONTENT = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#SearchRelevantContent"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/relevant-content",
-                    "method": "POST",
-                }
-            ),
-        )
-    ],
-)
-
-ACTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionConfiguration"),
-    members={
-        "action": {
-            "target": Q_IAM_ACTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "filterConfiguration": {"target": ACTION_FILTER_CONFIGURATION},
-    },
-)
-
-CHAT_INPUT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatInputStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "configurationEvent": {"target": CONFIGURATION_EVENT},
-        "textEvent": {"target": TEXT_INPUT_EVENT},
-        "attachmentEvent": {"target": ATTACHMENT_INPUT_EVENT},
-        "actionExecutionEvent": {"target": ACTION_EXECUTION_EVENT},
-        "endOfInputEvent": {"target": END_OF_INPUT_EVENT},
-        "authChallengeResponseEvent": {"target": AUTH_CHALLENGE_RESPONSE_EVENT},
-    },
-)
-
-ACTION_CONFIGURATION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ActionConfigurationList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACTION_CONFIGURATION}},
-)
-
-CHAT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#ChatInput"),
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "userId": {
-            "target": USER_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="userId")],
-        },
-        "userGroups": {
-            "target": USER_GROUPS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="userGroups")
-            ],
-        },
-        "conversationId": {
-            "target": CONVERSATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="conversationId")
-            ],
-        },
-        "parentMessageId": {
-            "target": MESSAGE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="parentMessageId")
-            ],
-        },
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="clientToken"),
-            ],
-        },
-        "inputStream": {
-            "target": CHAT_INPUT_STREAM,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-    },
-)
-
-CHAT = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#Chat"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/conversations", "method": "POST"}
-            ),
-        )
-    ],
-)
-
-CREATE_DATA_ACCESSOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#CreateDataAccessorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#CreateDataAccessorRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "principal": {
-            "target": PRINCIPAL_ROLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "actionConfigurations": {
-            "target": ACTION_CONFIGURATION_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "displayName": {
-            "target": DATA_ACCESSOR_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "authenticationDetail": {"target": DATA_ACCESSOR_AUTHENTICATION_DETAIL},
-        "tags": {"target": TAGS},
-    },
-)
-
-GET_DATA_ACCESSOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#GetDataAccessorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#GetDataAccessorResponse",
-        )
-    ],
-    members={
-        "displayName": {"target": DATA_ACCESSOR_NAME},
-        "dataAccessorId": {"target": DATA_ACCESSOR_ID},
-        "dataAccessorArn": {"target": DATA_ACCESSOR_ARN},
-        "applicationId": {"target": APPLICATION_ID},
-        "idcApplicationArn": {"target": IDC_APPLICATION_ARN},
-        "principal": {"target": PRINCIPAL_ROLE_ARN},
-        "actionConfigurations": {"target": ACTION_CONFIGURATION_LIST},
-        "authenticationDetail": {"target": DATA_ACCESSOR_AUTHENTICATION_DETAIL},
-        "createdAt": {"target": TIMESTAMP},
-        "updatedAt": {"target": TIMESTAMP},
-    },
-)
-
-UPDATE_DATA_ACCESSOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateDataAccessorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.qbusiness#UpdateDataAccessorRequest",
-        )
-    ],
-    members={
-        "applicationId": {
-            "target": APPLICATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "dataAccessorId": {
-            "target": DATA_ACCESSOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "actionConfigurations": {
-            "target": ACTION_CONFIGURATION_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "authenticationDetail": {"target": DATA_ACCESSOR_AUTHENTICATION_DETAIL},
-        "displayName": {"target": DATA_ACCESSOR_NAME},
-    },
-)
-
-CREATE_DATA_ACCESSOR = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#CreateDataAccessor"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/applications/{applicationId}/dataaccessors", "method": "POST"}
-            ),
-        )
-    ],
-)
-
-GET_DATA_ACCESSOR = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#GetDataAccessor"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/dataaccessors/{dataAccessorId}",
-                    "method": "GET",
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_DATA_ACCESSOR = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#UpdateDataAccessor"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/applications/{applicationId}/dataaccessors/{dataAccessorId}",
-                    "method": "PUT",
-                }
-            ),
-        )
-    ],
-)
-
-EXPERT_Q = Schema(
-    id=ShapeID("com.amazonaws.qbusiness#ExpertQ"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "qbusiness"})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsFIPS",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsDualStack",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://qbusiness-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://qbusiness.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://qbusiness-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://qbusiness.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 9,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAkAAAADAAAAAQAAAAQF9eEIAAAAAgAAAAUF9eEIAAAAAwAAAAcAAAAGAAAABQX14QUF9eEHAAAABAAAAAgF9eEEAAAABQX14QMF9eEGAAAAAwX14QEF9eEC",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://qbusiness-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://qbusiness.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://qbusiness-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://qbusiness.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 9,
+                "nodes": "/////wAAAAH/////AAAAAAAAAAkAAAADAAAAAQAAAAQF9eEIAAAAAgAAAAUF9eEIAAAAAwAAAAcAAAAGAAAABQX14QUF9eEHAAAABAAAAAgF9eEEAAAABQX14QMF9eEGAAAAAwX14QEF9eEC",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "QBusiness",
-                    "cloudFormationName": "QBusiness",
-                    "arnNamespace": "qbusiness",
-                    "cloudTrailEventSource": "qbusiness.amazonaws.com",
-                }
-            ),
+        _aws: MappingProxyType(
+            {
+                "sdkId": "QBusiness",
+                "cloudFormationName": "QBusiness",
+                "arnNamespace": "qbusiness",
+                "cloudTrailEventSource": "qbusiness.amazonaws.com",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.protocols#restJson1"),
-            value=MappingProxyType(
-                {"http": ("h2", "http/1.1"), "eventStreamHttp": ("h2",)}
-            ),
-        ),
-    ],
-)
-
-ATTRIBUTE_FILTER.members["andAllFilters"] = Schema.member(
-    id=ATTRIBUTE_FILTER.id.with_member("andAllFilters"),
-    target=ATTRIBUTE_FILTERS,
-    index=0,
-)
-
-ATTRIBUTE_FILTER.members["notFilter"] = Schema.member(
-    id=ATTRIBUTE_FILTER.id.with_member("notFilter"), target=ATTRIBUTE_FILTER, index=2
-)
-
-ATTRIBUTE_FILTER.members["orAllFilters"] = Schema.member(
-    id=ATTRIBUTE_FILTER.id.with_member("orAllFilters"),
-    target=ATTRIBUTE_FILTERS,
-    index=1,
+        _aJ: MappingProxyType({"http": ("h2", "http/1.1"), "eventStreamHttp": ("h2",)}),
+    },
 )

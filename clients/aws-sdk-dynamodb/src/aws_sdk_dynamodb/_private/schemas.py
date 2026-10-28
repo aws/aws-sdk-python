@@ -2,5891 +2,7239 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 
-APPROXIMATE_CREATION_DATE_TIME_PRECISION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ApproximateCreationDateTimePrecision"),
-    shape_type=ShapeType.ENUM,
-    members={"MILLISECOND": {"target": UNIT}, "MICROSECOND": {"target": UNIT}},
+n0 = "com.amazonaws.dynamodb"
+_ACDTP = "ApproximateCreationDateTimePrecision"
+_MILLISECOND = "MILLISECOND"
+_sV = "smithy.api#enumValue"
+_MICROSECOND = "MICROSECOND"
+_AR = "ArchivalReason"
+_BA = "BackupArn"
+_D = "Date"
+_AS = "ArchivalSummary"
+_ADT = "ArchivalDateTime"
+_ABA = "ArchivalBackupArn"
+_AA = "AttributeAction"
+_ADD = "ADD"
+_PUT = "PUT"
+_DELETE = "DELETE"
+_KSAN = "KeySchemaAttributeName"
+_SAT = "ScalarAttributeType"
+_S = "S"
+_N = "N"
+_B = "B"
+_AD = "AttributeDefinition"
+_AN = "AttributeName"
+_s = "smithy.api#required"
+_AT = "AttributeType"
+_ADt = "AttributeDefinitions"
+_m = "member"
+_BAV = "BinaryAttributeValue"
+_BAVo = "BooleanAttributeValue"
+_BSAV = "BinarySetAttributeValue"
+_NAV = "NumberAttributeValue"
+_NSAV = "NumberSetAttributeValue"
+_NAVu = "NullAttributeValue"
+_SAV = "StringAttributeValue"
+_SSAV = "StringSetAttributeValue"
+_ANL = "AttributeNameList"
+_ASPN = "AutoScalingPolicyName"
+_BO = "BooleanObject"
+_IO = "IntegerObject"
+_DO = "DoubleObject"
+_ASTTSPCD = "AutoScalingTargetTrackingScalingPolicyConfigurationDescription"
+_DSI = "DisableScaleIn"
+_SIC = "ScaleInCooldown"
+_SOC = "ScaleOutCooldown"
+_TV = "TargetValue"
+_ASPD = "AutoScalingPolicyDescription"
+_PN = "PolicyName"
+_TTSPC = "TargetTrackingScalingPolicyConfiguration"
+_ASPDL = "AutoScalingPolicyDescriptionList"
+_ASTTSPCU = "AutoScalingTargetTrackingScalingPolicyConfigurationUpdate"
+_ASPU = "AutoScalingPolicyUpdate"
+_ASRA = "AutoScalingRoleArn"
+_St = "String"
+_PLO = "PositiveLongObject"
+_ASSD = "AutoScalingSettingsDescription"
+_MU = "MinimumUnits"
+_MUa = "MaximumUnits"
+_ASD = "AutoScalingDisabled"
+_SP = "ScalingPolicies"
+_ASSU = "AutoScalingSettingsUpdate"
+_SPU = "ScalingPolicyUpdate"
+_AEM = "AvailabilityErrorMessage"
+_Ba = "Backfilling"
+_BCDT = "BackupCreationDateTime"
+_BN = "BackupName"
+_BSB = "BackupSizeBytes"
+_BS = "BackupStatus"
+_CREATING = "CREATING"
+_DELETED = "DELETED"
+_AVAILABLE = "AVAILABLE"
+_BT = "BackupType"
+_USER = "USER"
+_SYSTEM = "SYSTEM"
+_AB = "AWS_BACKUP"
+_BD = "BackupDetails"
+_BEDT = "BackupExpiryDateTime"
+_BM = "BillingMode"
+_PROVISIONED = "PROVISIONED"
+_PPR = "PAY_PER_REQUEST"
+_IC = "ItemCount"
+_KT = "KeyType"
+_HASH = "HASH"
+_RANGE = "RANGE"
+_KSE = "KeySchemaElement"
+_KS = "KeySchema"
+_LO = "LongObject"
+_ODT = "OnDemandThroughput"
+_MRRU = "MaxReadRequestUnits"
+_MWRU = "MaxWriteRequestUnits"
+_PT = "ProvisionedThroughput"
+_RCU = "ReadCapacityUnits"
+_WCU = "WriteCapacityUnits"
+_TA = "TableArn"
+_TCDT = "TableCreationDateTime"
+_TI = "TableId"
+_TN = "TableName"
+_STD = "SourceTableDetails"
+_TSB = "TableSizeBytes"
+_IN = "IndexName"
+_NKAN = "NonKeyAttributeName"
+_NKANL = "NonKeyAttributeNameList"
+_PTr = "ProjectionType"
+_ALL = "ALL"
+_KO = "KEYS_ONLY"
+_INCLUDE = "INCLUDE"
+_P = "Projection"
+_NKA = "NonKeyAttributes"
+_GSII = "GlobalSecondaryIndexInfo"
+_GSI = "GlobalSecondaryIndexes"
+_LSII = "LocalSecondaryIndexInfo"
+_LSI = "LocalSecondaryIndexes"
+_KMSMKA = "KMSMasterKeyArn"
+_SSET = "SSEType"
+_AES = "AES256"
+_KMS = "KMS"
+_SSES = "SSEStatus"
+_ENABLING = "ENABLING"
+_ENABLED = "ENABLED"
+_DISABLING = "DISABLING"
+_DISABLED = "DISABLED"
+_UPDATING = "UPDATING"
+_SSED = "SSEDescription"
+_Sta = "Status"
+_IEDT = "InaccessibleEncryptionDateTime"
+_SE = "StreamEnabled"
+_SVT = "StreamViewType"
+_NI = "NEW_IMAGE"
+_OI = "OLD_IMAGE"
+_NAOI = "NEW_AND_OLD_IMAGES"
+_SS = "StreamSpecification"
+_TTLAN = "TimeToLiveAttributeName"
+_TTLS = "TimeToLiveStatus"
+_TTLD = "TimeToLiveDescription"
+_VDF = "VectorDistanceFunction"
+_COSINE = "COSINE"
+_DP = "DOT_PRODUCT"
+_EUCLIDEAN = "EUCLIDEAN"
+_SSETe = "SearchSchemaElementType"
+_IF = "INLINE_FILTER"
+_SSE = "SearchSchemaElement"
+_SSe = "SearchSchema"
+_VAN = "VectorAttributeName"
+_VAD = "VectorAttributeDefinition"
+_VII = "VectorIndexInfo"
+_VA = "VectorAttribute"
+_Di = "Dimensions"
+_DF = "DistanceFunction"
+_VI = "VectorIndexes"
+_STFD = "SourceTableFeatureDetails"
+_SD = "StreamDescription"
+_BDa = "BackupDescription"
+_EM = "ErrorMessage"
+_BIUE = "BackupInUseException"
+_sm = "smithy.api#error"
+_c = "client"
+_me = "message"
+_BNFE = "BackupNotFoundException"
+_BIL = "BackupsInputLimit"
+_BSa = "BackupSummary"
+_BSac = "BackupSummaries"
+_BTF = "BackupTypeFilter"
+_RCC = "ReturnConsumedCapacity"
+_INDEXES = "INDEXES"
+_TOTAL = "TOTAL"
+_NONE = "NONE"
+_CR = "ConsistentRead"
+_RVOCCF = "ReturnValuesOnConditionCheckFailure"
+_AO = "ALL_OLD"
+_PQLS = "PartiQLStatement"
+_CCU = "ConsumedCapacityUnits"
+_C = "Capacity"
+_CU = "CapacityUnits"
+_SICM = "SecondaryIndexesCapacityMap"
+_k = "key"
+_v = "value"
+_VC = "VectorCapacity"
+_VSRB = "VectorSearchRequestBytes"
+_VWRB = "VectorWriteRequestBytes"
+_VICM = "VectorIndexesCapacityMap"
+_CC = "ConsumedCapacity"
+_T = "Table"
+_CCM = "ConsumedCapacityMultiple"
+_BSECE = "BatchStatementErrorCodeEnum"
+_CCF = "ConditionalCheckFailed"
+_ICSLE = "ItemCollectionSizeLimitExceeded"
+_RLE = "RequestLimitExceeded"
+_VE = "ValidationError"
+_PTE = "ProvisionedThroughputExceeded"
+_TC = "TransactionConflict"
+_TE = "ThrottlingError"
+_ISE = "InternalServerError"
+_RNF = "ResourceNotFound"
+_ADc = "AccessDenied"
+_DI = "DuplicateItem"
+_se = "server"
+_R = "Reason"
+_Re = "Resource"
+_TR = "ThrottlingReason"
+_r = "reason"
+_re = "resource"
+_TRL = "ThrottlingReasonList"
+_TRh = "ThrottlingReasons"
+_TEh = "ThrottlingException"
+_sE = "smithy.api#httpError"
+_tR = "throttlingReasons"
+_EANV = "ExpressionAttributeNameVariable"
+_EANM = "ExpressionAttributeNameMap"
+_PE = "ProjectionExpression"
+_IEE = "InvalidEndpointException"
+_M = "Message"
+_PTEE = "ProvisionedThroughputExceededException"
+_RNFE = "ResourceNotFoundException"
+_RICM = "ReturnItemCollectionMetrics"
+_SIZE = "SIZE"
+_ICSEB = "ItemCollectionSizeEstimateBound"
+_ICSER = "ItemCollectionSizeEstimateRange"
+_ICSLEE = "ItemCollectionSizeLimitExceededException"
+_RWCE = "ReplicatedWriteConflictException"
+_BSBi = "BilledSizeBytes"
+_BMS = "BillingModeSummary"
+_LUTPPRDT = "LastUpdateToPayPerRequestDateTime"
+_Co = "Code"
+_CRT = "ClientRequestToken"
+_CT = "ClientToken"
+_CWLGA = "CloudWatchLogGroupArn"
+_CO = "ComparisonOperator"
+_EQ = "EQ"
+_NE = "NE"
+_IN_ = "IN"
+_LE = "LE"
+_LT = "LT"
+_GE = "GE"
+_GT = "GT"
+_BETWEEN = "BETWEEN"
+_NN = "NOT_NULL"
+_NULL = "NULL"
+_CONTAINS = "CONTAINS"
+_NC = "NOT_CONTAINS"
+_BW = "BEGINS_WITH"
+_COo = "ConditionalOperator"
+_AND = "AND"
+_OR = "OR"
+_CE = "ConditionExpression"
+_EAVV = "ExpressionAttributeValueVariable"
+_CRSRA = "ConfirmRemoveSelfResourceAccess"
+_smi = "smithy.api#default"
+_CBS = "ContinuousBackupsStatus"
+_PITRS = "PointInTimeRecoveryStatus"
+_RPID = "RecoveryPeriodInDays"
+_PITRD = "PointInTimeRecoveryDescription"
+_ERDT = "EarliestRestorableDateTime"
+_LRDT = "LatestRestorableDateTime"
+_CBD = "ContinuousBackupsDescription"
+_CBUE = "ContinuousBackupsUnavailableException"
+_CIA = "ContributorInsightsAction"
+_ENABLE = "ENABLE"
+_DISABLE = "DISABLE"
+_CIM = "ContributorInsightsMode"
+_AATK = "ACCESSED_AND_THROTTLED_KEYS"
+_TK = "THROTTLED_KEYS"
+_CIR = "ContributorInsightsRule"
+_CIRL = "ContributorInsightsRuleList"
+_CIS = "ContributorInsightsStatus"
+_FAILED = "FAILED"
+_CISo = "ContributorInsightsSummary"
+_CISon = "ContributorInsightsSummaries"
+_CBI = "CreateBackupInput"
+_smit = "smithy.api#input"
+_CBO = "CreateBackupOutput"
+_smith = "smithy.api#output"
+_LEE = "LimitExceededException"
+_TIUE = "TableInUseException"
+_TNFE = "TableNotFoundException"
+_CB = "CreateBackup"
+_WT = "WarmThroughput"
+_RUPS = "ReadUnitsPerSecond"
+_WUPS = "WriteUnitsPerSecond"
+_CGSIA = "CreateGlobalSecondaryIndexAction"
+_RN = "RegionName"
+_Rep = "Replica"
+_RL = "ReplicaList"
+_CGTI = "CreateGlobalTableInput"
+_GTN = "GlobalTableName"
+_RG = "ReplicationGroup"
+_GTAS = "GlobalTableArnString"
+_GTS = "GlobalTableStatus"
+_ACTIVE = "ACTIVE"
+_DELETING = "DELETING"
+_ODTO = "OnDemandThroughputOverride"
+_PTO = "ProvisionedThroughputOverride"
+_IS = "IndexStatus"
+_GSIWTD = "GlobalSecondaryIndexWarmThroughputDescription"
+_RGSID = "ReplicaGlobalSecondaryIndexDescription"
+_RGSIDL = "ReplicaGlobalSecondaryIndexDescriptionList"
+_GTSRM = "GlobalTableSettingsReplicationMode"
+_EWO = "ENABLED_WITH_OVERRIDES"
+_KMSMKI = "KMSMasterKeyId"
+_RS = "ReplicaStatus"
+_CF = "CREATION_FAILED"
+_RD = "REGION_DISABLED"
+_IEC = "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+_ARCHIVING = "ARCHIVING"
+_ARCHIVED = "ARCHIVED"
+_RNA = "REPLICATION_NOT_AUTHORIZED"
+_RSD = "ReplicaStatusDescription"
+_RSPP = "ReplicaStatusPercentProgress"
+_TCa = "TableClass"
+_STANDARD = "STANDARD"
+_SIA = "STANDARD_INFREQUENT_ACCESS"
+_TCS = "TableClassSummary"
+_LUDT = "LastUpdateDateTime"
+_TS = "TableStatus"
+_TWTD = "TableWarmThroughputDescription"
+_RDe = "ReplicaDescription"
+_RA = "ReplicaArn"
+_RIDT = "ReplicaInaccessibleDateTime"
+_RTCS = "ReplicaTableClassSummary"
+_RDL = "ReplicaDescriptionList"
+_GTD = "GlobalTableDescription"
+_GTA = "GlobalTableArn"
+_CDT = "CreationDateTime"
+_CGTO = "CreateGlobalTableOutput"
+_GTAEE = "GlobalTableAlreadyExistsException"
+_CGT = "CreateGlobalTable"
+_CGTWGMA = "CreateGlobalTableWitnessGroupMemberAction"
+_CRA = "CreateReplicaAction"
+_RGSI = "ReplicaGlobalSecondaryIndex"
+_RGSIL = "ReplicaGlobalSecondaryIndexList"
+_CRGMA = "CreateReplicationGroupMemberAction"
+_TCO = "TableClassOverride"
+_DPE = "DeletionProtectionEnabled"
+_GSIl = "GlobalSecondaryIndex"
+_GSIL = "GlobalSecondaryIndexList"
+_LSIo = "LocalSecondaryIndex"
+_LSIL = "LocalSecondaryIndexList"
+_RP = "ResourcePolicy"
+_SSEE = "SSEEnabled"
+_SSESp = "SSESpecification"
+_E = "Enabled"
+_TKS = "TagKeyString"
+_TVS = "TagValueString"
+_Ta = "Tag"
+_K = "Key"
+_V = "Value"
+_TL = "TagList"
+_VIe = "VectorIndex"
+_VIL = "VectorIndexList"
+_CTI = "CreateTableInput"
+_Tag = "Tags"
+_GTSA = "GlobalTableSourceArn"
+_NNLO = "NonNegativeLongObject"
+_PTD = "ProvisionedThroughputDescription"
+_LIDT = "LastIncreaseDateTime"
+_LDDT = "LastDecreaseDateTime"
+_NODT = "NumberOfDecreasesToday"
+_GSID = "GlobalSecondaryIndexDescription"
+_ISB = "IndexSizeBytes"
+_IA = "IndexArn"
+_GSIDL = "GlobalSecondaryIndexDescriptionList"
+_WS = "WitnessStatus"
+_GTWD = "GlobalTableWitnessDescription"
+_GTWDL = "GlobalTableWitnessDescriptionList"
+_SA = "StreamArn"
+_LSID = "LocalSecondaryIndexDescription"
+_LSIDL = "LocalSecondaryIndexDescriptionList"
+_MRC = "MultiRegionConsistency"
+_EVENTUAL = "EVENTUAL"
+_STRONG = "STRONG"
+_RIP = "RestoreInProgress"
+_RSe = "RestoreSummary"
+_SBA = "SourceBackupArn"
+_STA = "SourceTableArn"
+_RDT = "RestoreDateTime"
+_VID = "VectorIndexDescription"
+_VIDL = "VectorIndexDescriptionList"
+_TD = "TableDescription"
+_LSL = "LatestStreamLabel"
+_LSA = "LatestStreamArn"
+_GTV = "GlobalTableVersion"
+_Repl = "Replicas"
+_GTW = "GlobalTableWitnesses"
+_CTO = "CreateTableOutput"
+_RIUE = "ResourceInUseException"
+_CTr = "CreateTable"
+_CVIA = "CreateVectorIndexAction"
+_CD = "CsvDelimiter"
+_CH = "CsvHeader"
+_CHL = "CsvHeaderList"
+_COs = "CsvOptions"
+_De = "Delimiter"
+_HL = "HeaderList"
+_DBI = "DeleteBackupInput"
+_DBO = "DeleteBackupOutput"
+_DB = "DeleteBackup"
+_DGSIA = "DeleteGlobalSecondaryIndexAction"
+_DGTWGMA = "DeleteGlobalTableWitnessGroupMemberAction"
+_RV = "ReturnValue"
+_UO = "UPDATED_OLD"
+_AN_ = "ALL_NEW"
+_UN = "UPDATED_NEW"
+_TCE = "TransactionConflictException"
+_DRA = "DeleteReplicaAction"
+_DRGMA = "DeleteReplicationGroupMemberAction"
+_PRI = "PolicyRevisionId"
+_RAS = "ResourceArnString"
+_DRPI = "DeleteResourcePolicyInput"
+_RAe = "ResourceArn"
+_ERI = "ExpectedRevisionId"
+_DRPO = "DeleteResourcePolicyOutput"
+_RI = "RevisionId"
+_PNFE = "PolicyNotFoundException"
+_DRP = "DeleteResourcePolicy"
+_DTI = "DeleteTableInput"
+_DTO = "DeleteTableOutput"
+_DT = "DeleteTable"
+_DVIA = "DeleteVectorIndexAction"
+_DBIe = "DescribeBackupInput"
+_DBOe = "DescribeBackupOutput"
+_DBe = "DescribeBackup"
+_DCBI = "DescribeContinuousBackupsInput"
+_DCBO = "DescribeContinuousBackupsOutput"
+_DCB = "DescribeContinuousBackups"
+_DCII = "DescribeContributorInsightsInput"
+_ED = "ExceptionDescription"
+_EN = "ExceptionName"
+_FE = "FailureException"
+_DCIO = "DescribeContributorInsightsOutput"
+_DCI = "DescribeContributorInsights"
+_DEI = "DescribeEndpointsInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cDER = "com.amazonaws.dynamodb#DescribeEndpointsRequest"
+_L = "Long"
+_En = "Endpoint"
+_A = "Address"
+_CPIM = "CachePeriodInMinutes"
+_End = "Endpoints"
+_DEO = "DescribeEndpointsOutput"
+_cDERo = "com.amazonaws.dynamodb#DescribeEndpointsResponse"
+_DE = "DescribeEndpoints"
+_EA = "ExportArn"
+_DEIe = "DescribeExportInput"
+_EET = "ExportEndTime"
+_EF = "ExportFormat"
+_DJ = "DYNAMODB_JSON"
+_ION = "ION"
+_EMx = "ExportManifest"
+_ES = "ExportStatus"
+_IP = "IN_PROGRESS"
+_COMPLETED = "COMPLETED"
+_ET = "ExportTime"
+_ETx = "ExportType"
+_FE_ = "FULL_EXPORT"
+_IE = "INCREMENTAL_EXPORT"
+_FC = "FailureCode"
+_FM = "FailureMessage"
+_KE = "KeyExpression"
+_EFT = "ExportFromTime"
+_ETT = "ExportToTime"
+_EVT = "ExportViewType"
+_IES = "IncrementalExportSpecification"
+_SB = "S3Bucket"
+_SBO = "S3BucketOwner"
+_SPr = "S3Prefix"
+_SSA = "S3SseAlgorithm"
+_SSKKI = "S3SseKmsKeyId"
+_EST = "ExportStartTime"
+_ENFE = "ExportNotFoundException"
+_DGTI = "DescribeGlobalTableInput"
+_DGTO = "DescribeGlobalTableOutput"
+_GTNFE = "GlobalTableNotFoundException"
+_DGT = "DescribeGlobalTable"
+_DGTSI = "DescribeGlobalTableSettingsInput"
+_RGSISD = "ReplicaGlobalSecondaryIndexSettingsDescription"
+_PRCU = "ProvisionedReadCapacityUnits"
+_PRCASS = "ProvisionedReadCapacityAutoScalingSettings"
+_PWCU = "ProvisionedWriteCapacityUnits"
+_PWCASS = "ProvisionedWriteCapacityAutoScalingSettings"
+_RGSISDL = "ReplicaGlobalSecondaryIndexSettingsDescriptionList"
+_RSDe = "ReplicaSettingsDescription"
+_RBMS = "ReplicaBillingModeSummary"
+_RPRCU = "ReplicaProvisionedReadCapacityUnits"
+_RPRCASS = "ReplicaProvisionedReadCapacityAutoScalingSettings"
+_RPWCU = "ReplicaProvisionedWriteCapacityUnits"
+_RPWCASS = "ReplicaProvisionedWriteCapacityAutoScalingSettings"
+_RGSIS = "ReplicaGlobalSecondaryIndexSettings"
+_RSDL = "ReplicaSettingsDescriptionList"
+_DGTSO = "DescribeGlobalTableSettingsOutput"
+_RSep = "ReplicaSettings"
+_DGTS = "DescribeGlobalTableSettings"
+_IAm = "ImportArn"
+_DII = "DescribeImportInput"
+_IET = "ImportEndTime"
+_EC = "ErrorCount"
+_IIC = "ImportedItemCount"
+_ISm = "ImportStatus"
+_CANCELLING = "CANCELLING"
+_CANCELLED = "CANCELLED"
+_ICT = "InputCompressionType"
+_GZIP = "GZIP"
+_ZSTD = "ZSTD"
+_IFn = "InputFormat"
+_CSV = "CSV"
+_IFO = "InputFormatOptions"
+_Cs = "Csv"
+_PIC = "ProcessedItemCount"
+_SBS = "S3BucketSource"
+_SKP = "S3KeyPrefix"
+_IST = "ImportStartTime"
+_TCP = "TableCreationParameters"
+_ITD = "ImportTableDescription"
+_ST = "StartTime"
+_ETn = "EndTime"
+_PSB = "ProcessedSizeBytes"
+_DIO = "DescribeImportOutput"
+_INFE = "ImportNotFoundException"
+_DIe = "DescribeImport"
+_DKSDI = "DescribeKinesisStreamingDestinationInput"
+_DS = "DestinationStatus"
+_EF_ = "ENABLE_FAILED"
+_KDSD = "KinesisDataStreamDestination"
+_DSD = "DestinationStatusDescription"
+_KDSDi = "KinesisDataStreamDestinations"
+_DKSDO = "DescribeKinesisStreamingDestinationOutput"
+_DKSD = "DescribeKinesisStreamingDestination"
+_DLI = "DescribeLimitsInput"
+_DLO = "DescribeLimitsOutput"
+_AMRCU = "AccountMaxReadCapacityUnits"
+_AMWCU = "AccountMaxWriteCapacityUnits"
+_TMRCU = "TableMaxReadCapacityUnits"
+_TMWCU = "TableMaxWriteCapacityUnits"
+_DL = "DescribeLimits"
+_DTIe = "DescribeTableInput"
+_DTOe = "DescribeTableOutput"
+_DTe = "DescribeTable"
+_DTRASI = "DescribeTableReplicaAutoScalingInput"
+_RGSIASD = "ReplicaGlobalSecondaryIndexAutoScalingDescription"
+_RGSIASDL = "ReplicaGlobalSecondaryIndexAutoScalingDescriptionList"
+_RASD = "ReplicaAutoScalingDescription"
+_RASDL = "ReplicaAutoScalingDescriptionList"
+_TASD = "TableAutoScalingDescription"
+_DTRASO = "DescribeTableReplicaAutoScalingOutput"
+_DTRAS = "DescribeTableReplicaAutoScaling"
+_DTTLI = "DescribeTimeToLiveInput"
+_DTTLO = "DescribeTimeToLiveOutput"
+_DTTL = "DescribeTimeToLive"
+_EKSC = "EnableKinesisStreamingConfiguration"
+_DKSDIi = "DisableKinesisStreamingDestinationInput"
+_cKSDI = "com.amazonaws.dynamodb#KinesisStreamingDestinationInput"
+_DKSDOi = "DisableKinesisStreamingDestinationOutput"
+_cKSDO = "com.amazonaws.dynamodb#KinesisStreamingDestinationOutput"
+_DKSDi = "DisableKinesisStreamingDestination"
+_DIE = "DuplicateItemException"
+_EKSDI = "EnableKinesisStreamingDestinationInput"
+_EKSDO = "EnableKinesisStreamingDestinationOutput"
+_EKSD = "EnableKinesisStreamingDestination"
+_PIO = "PositiveIntegerObject"
+_PQLNT = "PartiQLNextToken"
+_IPME = "IdempotentParameterMismatchException"
+_TIPE = "TransactionInProgressException"
+_ECE = "ExportConflictException"
+_IETE = "InvalidExportTimeException"
+_PITRUE = "PointInTimeRecoveryUnavailableException"
+_GRPI = "GetResourcePolicyInput"
+_GRPO = "GetResourcePolicyOutput"
+_Po = "Policy"
+_GRP = "GetResourcePolicy"
+_ICE = "ImportConflictException"
+_ITI = "ImportTableInput"
+_sT = "smithy.api#idempotencyToken"
+_ITO = "ImportTableOutput"
+_IT = "ImportTable"
+_TRLB = "TimeRangeLowerBound"
+_TRUB = "TimeRangeUpperBound"
+_LBI = "ListBackupsInput"
+_Li = "Limit"
+_ESBA = "ExclusiveStartBackupArn"
+_LBO = "ListBackupsOutput"
+_LEBA = "LastEvaluatedBackupArn"
+_LB = "ListBackups"
+_LCIL = "ListContributorInsightsLimit"
+_NTS = "NextTokenString"
+_LCII = "ListContributorInsightsInput"
+_NT = "NextToken"
+_MR = "MaxResults"
+_LCIO = "ListContributorInsightsOutput"
+_LCI = "ListContributorInsights"
+_LEML = "ListExportsMaxLimit"
+_ENT = "ExportNextToken"
+_LEI = "ListExportsInput"
+_ESx = "ExportSummary"
+_ESxp = "ExportSummaries"
+_LEO = "ListExportsOutput"
+_LEi = "ListExports"
+_LGTI = "ListGlobalTablesInput"
+_ESGTN = "ExclusiveStartGlobalTableName"
+_GTl = "GlobalTable"
+_GTL = "GlobalTableList"
+_LGTO = "ListGlobalTablesOutput"
+_GTlo = "GlobalTables"
+_LEGTN = "LastEvaluatedGlobalTableName"
+_LGT = "ListGlobalTables"
+_INT = "ImportNextToken"
+_LIML = "ListImportsMaxLimit"
+_LII = "ListImportsInput"
+_PS = "PageSize"
+_ISmp = "ImportSummary"
+_ISL = "ImportSummaryList"
+_LIO = "ListImportsOutput"
+_LI = "ListImports"
+_LTIL = "ListTablesInputLimit"
+_LTI = "ListTablesInput"
+_ESTN = "ExclusiveStartTableName"
+_TNL = "TableNameList"
+_LTO = "ListTablesOutput"
+_TNa = "TableNames"
+_LETN = "LastEvaluatedTableName"
+_LTi = "ListTables"
+_LTORI = "ListTagsOfResourceInput"
+_LTORO = "ListTagsOfResourceOutput"
+_LTOR = "ListTagsOfResource"
+_PRPI = "PutResourcePolicyInput"
+_sH = "smithy.api#httpHeader"
+_xacrsra = "x-amz-confirm-remove-self-resource-access"
+_PRPO = "PutResourcePolicyOutput"
+_PRP = "PutResourcePolicy"
+_Se = "Select"
+_AA_ = "ALL_ATTRIBUTES"
+_APA = "ALL_PROJECTED_ATTRIBUTES"
+_SA_ = "SPECIFIC_ATTRIBUTES"
+_COUNT = "COUNT"
+_I = "Integer"
+_RTFBI = "RestoreTableFromBackupInput"
+_TTN = "TargetTableName"
+_BMO = "BillingModeOverride"
+_GSIO = "GlobalSecondaryIndexOverride"
+_LSIO = "LocalSecondaryIndexOverride"
+_SSESO = "SSESpecificationOverride"
+_VIO = "VectorIndexOverride"
+_RTFBO = "RestoreTableFromBackupOutput"
+_TAEE = "TableAlreadyExistsException"
+_RTFB = "RestoreTableFromBackup"
+_IRTE = "InvalidRestoreTimeException"
+_RTTPITI = "RestoreTableToPointInTimeInput"
+_STN = "SourceTableName"
+_ULRT = "UseLatestRestorableTime"
+_RTTPITO = "RestoreTableToPointInTimeOutput"
+_RTTPIT = "RestoreTableToPointInTime"
+_SSc = "ScanSegment"
+_STS = "ScanTotalSegments"
+_TKI = "TopKInteger"
+_SN = "ScoreNumber"
+_TRI = "TagResourceInput"
+_TRO = "TagResourceOutput"
+_sU = "smithy.api#Unit"
+_TRa = "TagResource"
+_UE = "UpdateExpression"
+_TKL = "TagKeyList"
+_URI = "UntagResourceInput"
+_TKa = "TagKeys"
+_URO = "UntagResourceOutput"
+_UR = "UntagResource"
+_PITRSo = "PointInTimeRecoverySpecification"
+_PITRE = "PointInTimeRecoveryEnabled"
+_UCBI = "UpdateContinuousBackupsInput"
+_UCBO = "UpdateContinuousBackupsOutput"
+_UCB = "UpdateContinuousBackups"
+_UCII = "UpdateContributorInsightsInput"
+_UCIO = "UpdateContributorInsightsOutput"
+_UCI = "UpdateContributorInsights"
+_RAEE = "ReplicaAlreadyExistsException"
+_RNFEe = "ReplicaNotFoundException"
+_RU = "ReplicaUpdate"
+_Cr = "Create"
+_Del = "Delete"
+_RUL = "ReplicaUpdateList"
+_UGTI = "UpdateGlobalTableInput"
+_RUe = "ReplicaUpdates"
+_UGTO = "UpdateGlobalTableOutput"
+_UGT = "UpdateGlobalTable"
+_INFEn = "IndexNotFoundException"
+_GTGSISU = "GlobalTableGlobalSecondaryIndexSettingsUpdate"
+_PWCASSU = "ProvisionedWriteCapacityAutoScalingSettingsUpdate"
+_GTGSISUL = "GlobalTableGlobalSecondaryIndexSettingsUpdateList"
+_RGSISU = "ReplicaGlobalSecondaryIndexSettingsUpdate"
+_PRCASSU = "ProvisionedReadCapacityAutoScalingSettingsUpdate"
+_RGSISUL = "ReplicaGlobalSecondaryIndexSettingsUpdateList"
+_RSU = "ReplicaSettingsUpdate"
+_RPRCASSU = "ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate"
+_RTC = "ReplicaTableClass"
+_RSUL = "ReplicaSettingsUpdateList"
+_UGTSI = "UpdateGlobalTableSettingsInput"
+_GTBM = "GlobalTableBillingMode"
+_GTPWCU = "GlobalTableProvisionedWriteCapacityUnits"
+_GTPWCASSU = "GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate"
+_UGTSO = "UpdateGlobalTableSettingsOutput"
+_UGTS = "UpdateGlobalTableSettings"
+_UKSC = "UpdateKinesisStreamingConfiguration"
+_UKSDI = "UpdateKinesisStreamingDestinationInput"
+_UKSDO = "UpdateKinesisStreamingDestinationOutput"
+_UKSD = "UpdateKinesisStreamingDestination"
+_UGSIA = "UpdateGlobalSecondaryIndexAction"
+_GSIU = "GlobalSecondaryIndexUpdate"
+_U = "Update"
+_GSIUL = "GlobalSecondaryIndexUpdateList"
+_GTWGU = "GlobalTableWitnessGroupUpdate"
+_GTWGUL = "GlobalTableWitnessGroupUpdateList"
+_URGMA = "UpdateReplicationGroupMemberAction"
+_RGU = "ReplicationGroupUpdate"
+_RGUL = "ReplicationGroupUpdateList"
+_VIU = "VectorIndexUpdate"
+_VIUL = "VectorIndexUpdateList"
+_UTI = "UpdateTableInput"
+_GSIUl = "GlobalSecondaryIndexUpdates"
+_GTWU = "GlobalTableWitnessUpdates"
+_VIUe = "VectorIndexUpdates"
+_UTO = "UpdateTableOutput"
+_UT = "UpdateTable"
+_GSIASU = "GlobalSecondaryIndexAutoScalingUpdate"
+_PWCASU = "ProvisionedWriteCapacityAutoScalingUpdate"
+_GSIASUL = "GlobalSecondaryIndexAutoScalingUpdateList"
+_RGSIASU = "ReplicaGlobalSecondaryIndexAutoScalingUpdate"
+_PRCASU = "ProvisionedReadCapacityAutoScalingUpdate"
+_RGSIASUL = "ReplicaGlobalSecondaryIndexAutoScalingUpdateList"
+_RASU = "ReplicaAutoScalingUpdate"
+_RGSIU = "ReplicaGlobalSecondaryIndexUpdates"
+_RPRCASU = "ReplicaProvisionedReadCapacityAutoScalingUpdate"
+_RASUL = "ReplicaAutoScalingUpdateList"
+_UTRASI = "UpdateTableReplicaAutoScalingInput"
+_UTRASO = "UpdateTableReplicaAutoScalingOutput"
+_UTRAS = "UpdateTableReplicaAutoScaling"
+_TTLE = "TimeToLiveEnabled"
+_TTLSi = "TimeToLiveSpecification"
+_UTTLI = "UpdateTimeToLiveInput"
+_UTTLO = "UpdateTimeToLiveOutput"
+_UTTL = "UpdateTimeToLive"
+_AV = "AttributeValue"
+_SS_ = "SS"
+_NS = "NS"
+_BS_ = "BS"
+_M_ = "M"
+_L_ = "L"
+_BOOL = "BOOL"
+_LAV = "ListAttributeValue"
+_MAV = "MapAttributeValue"
+_AM = "AttributeMap"
+_AVL = "AttributeValueList"
+_AVU = "AttributeValueUpdate"
+_Ac = "Action"
+_EAVM = "ExpressionAttributeValueMap"
+_ICKAM = "ItemCollectionKeyAttributeMap"
+_PSP = "PreparedStatementParameters"
+_PIIAM = "PutItemInputAttributeMap"
+_SVL = "SearchVectorList"
+_AU = "AttributeUpdates"
+_BSE = "BatchStatementError"
+_It = "Item"
+_BSR = "BatchStatementRequest"
+_Stat = "Statement"
+_Pa = "Parameters"
+_CRa = "CancellationReason"
+_Con = "Condition"
+_CCFE = "ConditionalCheckFailedException"
+_DR = "DeleteRequest"
+_ESI = "ExecuteStatementInput"
+_FS = "FilterSpecification"
+_FEi = "FilterExpression"
+_KCE = "KeyConditionExpression"
+_EAN = "ExpressionAttributeNames"
+_EAV = "ExpressionAttributeValues"
+_G = "Get"
+_GII = "GetItemInput"
+_ATG = "AttributesToGet"
+_GIO = "GetItemOutput"
+_ICM = "ItemCollectionMetrics"
+_ICK = "ItemCollectionKey"
+_SERGB = "SizeEstimateRangeGB"
+_IL = "ItemList"
+_IR = "ItemResponse"
+_KL = "KeyList"
+_PSa = "ParameterizedStatement"
+_PR = "PutRequest"
+_SRI = "SearchResultItem"
+_Sc = "Score"
+_BGRM = "BatchGetResponseMap"
+_CRL = "CancellationReasonList"
+_EDx = "ExportDescription"
+_ETTPITI = "ExportTableToPointInTimeInput"
+_FCM = "FilterConditionMap"
+_ICMM = "ItemCollectionMetricsMultiple"
+_IRL = "ItemResponseList"
+_KC = "KeyConditions"
+_KAA = "KeysAndAttributes"
+_Ke = "Keys"
+_PSar = "ParameterizedStatements"
+_PQLBR = "PartiQLBatchRequest"
+_SRL = "SearchResultList"
+_TGI = "TransactGetItem"
+_BESI = "BatchExecuteStatementInput"
+_State = "Statements"
+_BGRMa = "BatchGetRequestMap"
+_DEOe = "DescribeExportOutput"
+_ETI = "ExecuteTransactionInput"
+_TSr = "TransactStatements"
+_ETO = "ExecuteTransactionOutput"
+_Res = "Responses"
+_ETTPITO = "ExportTableToPointInTimeOutput"
+_ICMPT = "ItemCollectionMetricsPerTable"
+_SVO = "SearchVectorsOutput"
+_SR = "SearchResults"
+_TGIL = "TransactGetItemList"
+_TGIO = "TransactGetItemsOutput"
+_TCEr = "TransactionCanceledException"
+_CRan = "CancellationReasons"
+_DEe = "DescribeExport"
+_BGII = "BatchGetItemInput"
+_RIe = "RequestItems"
+_EAVx = "ExpectedAttributeValue"
+_Ex = "Exists"
+_TGII = "TransactGetItemsInput"
+_TIr = "TransactItems"
+_TWIO = "TransactWriteItemsOutput"
+_CCo = "ConditionCheck"
+_Pu = "Put"
+_SVI = "SearchVectorsInput"
+_SV = "SearchVector"
+_SCE = "SearchConditionExpression"
+_TKo = "TopK"
+_BSRa = "BatchStatementResponse"
+_Er = "Error"
+_DIOe = "DeleteItemOutput"
+_At = "Attributes"
+_ESO = "ExecuteStatementOutput"
+_Ite = "Items"
+_LEK = "LastEvaluatedKey"
+_EAM = "ExpectedAttributeMap"
+_GI = "GetItem"
+_PIOu = "PutItemOutput"
+_QO = "QueryOutput"
+_Cou = "Count"
+_SC = "ScannedCount"
+_SO = "ScanOutput"
+_UIO = "UpdateItemOutput"
+_WR = "WriteRequest"
+_PQLBRa = "PartiQLBatchResponse"
+_ETTPIT = "ExportTableToPointInTime"
+_WRr = "WriteRequests"
+_BESO = "BatchExecuteStatementOutput"
+_BGIO = "BatchGetItemOutput"
+_UK = "UnprocessedKeys"
+_BWIRM = "BatchWriteItemRequestMap"
+_SI = "ScanInput"
+_SF = "ScanFilter"
+_ESK = "ExclusiveStartKey"
+_TSo = "TotalSegments"
+_Seg = "Segment"
+_SVe = "SearchVectors"
+_BWII = "BatchWriteItemInput"
+_DIIe = "DeleteItemInput"
+_Exp = "Expected"
+_RVe = "ReturnValues"
+_ESxe = "ExecuteStatement"
+_PII = "PutItemInput"
+_ETxe = "ExecuteTransaction"
+_QI = "QueryInput"
+_QF = "QueryFilter"
+_SIF = "ScanIndexForward"
+_BES = "BatchExecuteStatement"
+_TGIr = "TransactGetItems"
+_BGI = "BatchGetItem"
+_BWIO = "BatchWriteItemOutput"
+_UI = "UnprocessedItems"
+_UII = "UpdateItemInput"
+_Sca = "Scan"
+_Q = "Query"
+_DIel = "DeleteItem"
+_PI = "PutItem"
+_TWI = "TransactWriteItem"
+_UIp = "UpdateItem"
+_BWI = "BatchWriteItem"
+_TWIL = "TransactWriteItemList"
+_TWII = "TransactWriteItemsInput"
+_TWIr = "TransactWriteItems"
+_D_ = "DynamoDB_20120810"
+_a = "aws.auth#sigv4"
+_a_ = "aws.protocols#awsJson1_0"
+_sB = "smithy.rules#endpointBdd"
+_aw = "aws.api#service"
+_sN = "smithy.api#xmlNamespace"
+
+APPROXIMATE_CREATION_DATE_TIME_PRECISION: StaticSchema = (
+    14,
+    n0,
+    _ACDTP,
+    0,
+    (_MILLISECOND, _MICROSECOND),
+    ((-1, {_sV: _MILLISECOND}), (-1, {_sV: _MICROSECOND})),
 )
 
-ARCHIVAL_REASON = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ArchivalReason"), shape_type=ShapeType.STRING
+ARCHIVAL_REASON: StaticSchema = (3, n0, _AR, 0)
+
+BACKUP_ARN: StaticSchema = (3, n0, _BA, 0)
+
+DATE: StaticSchema = (4, n0, _D, 0)
+
+ARCHIVAL_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _AS,
+    0,
+    (_ADT, _AR, _ABA),
+    ((DATE, 0), (ARCHIVAL_REASON, 0), (BACKUP_ARN, 0)),
 )
 
-BACKUP_ARN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BackupArn"), shape_type=ShapeType.STRING
+ATTRIBUTE_ACTION: StaticSchema = (
+    14,
+    n0,
+    _AA,
+    0,
+    (_ADD, _PUT, _DELETE),
+    ((-1, {_sV: _ADD}), (-1, {_sV: _PUT}), (-1, {_sV: _DELETE})),
 )
 
-DATE = Schema(id=ShapeID("com.amazonaws.dynamodb#Date"), shape_type=ShapeType.TIMESTAMP)
+KEY_SCHEMA_ATTRIBUTE_NAME: StaticSchema = (3, n0, _KSAN, 0)
 
-ARCHIVAL_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ArchivalSummary"),
-    members={
-        "ArchivalDateTime": {"target": DATE},
-        "ArchivalReason": {"target": ARCHIVAL_REASON},
-        "ArchivalBackupArn": {"target": BACKUP_ARN},
-    },
+SCALAR_ATTRIBUTE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _SAT,
+    0,
+    (_S, _N, _B),
+    ((-1, {_sV: _S}), (-1, {_sV: _N}), (-1, {_sV: _B})),
 )
 
-ATTRIBUTE_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AttributeAction"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ADD": {"target": UNIT},
-        "PUT": {"target": UNIT},
-        "DELETE": {"target": UNIT},
-    },
+ATTRIBUTE_DEFINITION: StaticSchema = (
+    18,
+    n0,
+    _AD,
+    0,
+    (_AN, _AT),
+    ((KEY_SCHEMA_ATTRIBUTE_NAME, 1), (SCALAR_ATTRIBUTE_TYPE, 1)),
 )
 
-KEY_SCHEMA_ATTRIBUTE_NAME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#KeySchemaAttributeName"),
-    shape_type=ShapeType.STRING,
+ATTRIBUTE_DEFINITIONS: StaticSchema = (
+    16,
+    n0,
+    _ADt,
+    0,
+    (_m,),
+    ((ATTRIBUTE_DEFINITION, 0),),
 )
 
-SCALAR_ATTRIBUTE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ScalarAttributeType"),
-    shape_type=ShapeType.ENUM,
-    members={"S": {"target": UNIT}, "N": {"target": UNIT}, "B": {"target": UNIT}},
+ATTRIBUTE_NAME: StaticSchema = (3, n0, _AN, 0)
+
+BINARY_ATTRIBUTE_VALUE: StaticSchema = (1, n0, _BAV, 0)
+
+BOOLEAN_ATTRIBUTE_VALUE: StaticSchema = (2, n0, _BAVo, 0)
+
+BINARY_SET_ATTRIBUTE_VALUE: StaticSchema = (
+    16,
+    n0,
+    _BSAV,
+    0,
+    (_m,),
+    ((BINARY_ATTRIBUTE_VALUE, 0),),
 )
 
-ATTRIBUTE_DEFINITION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AttributeDefinition"),
-    members={
-        "AttributeName": {
-            "target": KEY_SCHEMA_ATTRIBUTE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributeType": {
-            "target": SCALAR_ATTRIBUTE_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+NUMBER_ATTRIBUTE_VALUE: StaticSchema = (3, n0, _NAV, 0)
+
+NUMBER_SET_ATTRIBUTE_VALUE: StaticSchema = (
+    16,
+    n0,
+    _NSAV,
+    0,
+    (_m,),
+    ((NUMBER_ATTRIBUTE_VALUE, 0),),
 )
 
-ATTRIBUTE_DEFINITIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AttributeDefinitions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ATTRIBUTE_DEFINITION}},
+NULL_ATTRIBUTE_VALUE: StaticSchema = (2, n0, _NAVu, 0)
+
+STRING_ATTRIBUTE_VALUE: StaticSchema = (3, n0, _SAV, 0)
+
+STRING_SET_ATTRIBUTE_VALUE: StaticSchema = (
+    16,
+    n0,
+    _SSAV,
+    0,
+    (_m,),
+    ((STRING_ATTRIBUTE_VALUE, 0),),
 )
 
-ATTRIBUTE_NAME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#AttributeName"), shape_type=ShapeType.STRING
+ATTRIBUTE_NAME_LIST: StaticSchema = (16, n0, _ANL, 0, (_m,), ((ATTRIBUTE_NAME, 0),))
+
+AUTO_SCALING_POLICY_NAME: StaticSchema = (3, n0, _ASPN, 0)
+
+BOOLEAN_OBJECT: StaticSchema = (2, n0, _BO, 0)
+
+INTEGER_OBJECT: StaticSchema = (7, n0, _IO, 0)
+
+DOUBLE_OBJECT: StaticSchema = (10, n0, _DO, 0)
+
+AUTO_SCALING_TARGET_TRACKING_SCALING_POLICY_CONFIGURATION_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _ASTTSPCD,
+    0,
+    (_DSI, _SIC, _SOC, _TV),
+    ((BOOLEAN_OBJECT, 0), (INTEGER_OBJECT, 0), (INTEGER_OBJECT, 0), (DOUBLE_OBJECT, 1)),
 )
 
-BINARY_ATTRIBUTE_VALUE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BinaryAttributeValue"), shape_type=ShapeType.BLOB
-)
-
-BOOLEAN_ATTRIBUTE_VALUE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BooleanAttributeValue"),
-    shape_type=ShapeType.BOOLEAN,
-)
-
-BINARY_SET_ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BinarySetAttributeValue"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BINARY_ATTRIBUTE_VALUE}},
-)
-
-NUMBER_ATTRIBUTE_VALUE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#NumberAttributeValue"),
-    shape_type=ShapeType.STRING,
-)
-
-NUMBER_SET_ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#NumberSetAttributeValue"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": NUMBER_ATTRIBUTE_VALUE}},
-)
-
-NULL_ATTRIBUTE_VALUE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#NullAttributeValue"),
-    shape_type=ShapeType.BOOLEAN,
-)
-
-STRING_ATTRIBUTE_VALUE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#StringAttributeValue"),
-    shape_type=ShapeType.STRING,
-)
-
-STRING_SET_ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#StringSetAttributeValue"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING_ATTRIBUTE_VALUE}},
-)
-
-ATTRIBUTE_NAME_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AttributeNameList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ATTRIBUTE_NAME}},
-)
-
-AUTO_SCALING_POLICY_NAME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#AutoScalingPolicyName"),
-    shape_type=ShapeType.STRING,
-)
-
-BOOLEAN_OBJECT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BooleanObject"), shape_type=ShapeType.BOOLEAN
-)
-
-INTEGER_OBJECT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#IntegerObject"), shape_type=ShapeType.INTEGER
-)
-
-DOUBLE_OBJECT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DoubleObject"), shape_type=ShapeType.DOUBLE
-)
-
-AUTO_SCALING_TARGET_TRACKING_SCALING_POLICY_CONFIGURATION_DESCRIPTION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.dynamodb#AutoScalingTargetTrackingScalingPolicyConfigurationDescription"
+AUTO_SCALING_POLICY_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _ASPD,
+    0,
+    (_PN, _TTSPC),
+    (
+        (AUTO_SCALING_POLICY_NAME, 0),
+        (AUTO_SCALING_TARGET_TRACKING_SCALING_POLICY_CONFIGURATION_DESCRIPTION, 0),
     ),
-    members={
-        "DisableScaleIn": {"target": BOOLEAN_OBJECT},
-        "ScaleInCooldown": {"target": INTEGER_OBJECT},
-        "ScaleOutCooldown": {"target": INTEGER_OBJECT},
-        "TargetValue": {
-            "target": DOUBLE_OBJECT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
 )
 
-AUTO_SCALING_POLICY_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AutoScalingPolicyDescription"),
-    members={
-        "PolicyName": {"target": AUTO_SCALING_POLICY_NAME},
-        "TargetTrackingScalingPolicyConfiguration": {
-            "target": AUTO_SCALING_TARGET_TRACKING_SCALING_POLICY_CONFIGURATION_DESCRIPTION
-        },
-    },
+AUTO_SCALING_POLICY_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _ASPDL,
+    0,
+    (_m,),
+    ((AUTO_SCALING_POLICY_DESCRIPTION, 0),),
 )
 
-AUTO_SCALING_POLICY_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AutoScalingPolicyDescriptionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": AUTO_SCALING_POLICY_DESCRIPTION}},
+AUTO_SCALING_TARGET_TRACKING_SCALING_POLICY_CONFIGURATION_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _ASTTSPCU,
+    0,
+    (_DSI, _SIC, _SOC, _TV),
+    ((BOOLEAN_OBJECT, 0), (INTEGER_OBJECT, 0), (INTEGER_OBJECT, 0), (DOUBLE_OBJECT, 1)),
 )
 
-AUTO_SCALING_TARGET_TRACKING_SCALING_POLICY_CONFIGURATION_UPDATE = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.dynamodb#AutoScalingTargetTrackingScalingPolicyConfigurationUpdate"
+AUTO_SCALING_POLICY_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _ASPU,
+    0,
+    (_PN, _TTSPC),
+    (
+        (AUTO_SCALING_POLICY_NAME, 0),
+        (AUTO_SCALING_TARGET_TRACKING_SCALING_POLICY_CONFIGURATION_UPDATE, 1),
     ),
-    members={
-        "DisableScaleIn": {"target": BOOLEAN_OBJECT},
-        "ScaleInCooldown": {"target": INTEGER_OBJECT},
-        "ScaleOutCooldown": {"target": INTEGER_OBJECT},
-        "TargetValue": {
-            "target": DOUBLE_OBJECT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
 )
 
-AUTO_SCALING_POLICY_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AutoScalingPolicyUpdate"),
-    members={
-        "PolicyName": {"target": AUTO_SCALING_POLICY_NAME},
-        "TargetTrackingScalingPolicyConfiguration": {
-            "target": AUTO_SCALING_TARGET_TRACKING_SCALING_POLICY_CONFIGURATION_UPDATE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-AUTO_SCALING_ROLE_ARN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#AutoScalingRoleArn"), shape_type=ShapeType.STRING
-)
-
-STRING = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#String"), shape_type=ShapeType.STRING
-)
-
-POSITIVE_LONG_OBJECT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#PositiveLongObject"), shape_type=ShapeType.LONG
-)
-
-AUTO_SCALING_SETTINGS_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AutoScalingSettingsDescription"),
-    members={
-        "MinimumUnits": {"target": POSITIVE_LONG_OBJECT},
-        "MaximumUnits": {"target": POSITIVE_LONG_OBJECT},
-        "AutoScalingDisabled": {"target": BOOLEAN_OBJECT},
-        "AutoScalingRoleArn": {"target": STRING},
-        "ScalingPolicies": {"target": AUTO_SCALING_POLICY_DESCRIPTION_LIST},
-    },
-)
-
-AUTO_SCALING_SETTINGS_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AutoScalingSettingsUpdate"),
-    members={
-        "MinimumUnits": {"target": POSITIVE_LONG_OBJECT},
-        "MaximumUnits": {"target": POSITIVE_LONG_OBJECT},
-        "AutoScalingDisabled": {"target": BOOLEAN_OBJECT},
-        "AutoScalingRoleArn": {"target": AUTO_SCALING_ROLE_ARN},
-        "ScalingPolicyUpdate": {"target": AUTO_SCALING_POLICY_UPDATE},
-    },
-)
-
-AVAILABILITY_ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#AvailabilityErrorMessage"),
-    shape_type=ShapeType.STRING,
-)
-
-BACKFILLING = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#Backfilling"), shape_type=ShapeType.BOOLEAN
-)
-
-BACKUP_CREATION_DATE_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BackupCreationDateTime"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-BACKUP_NAME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BackupName"), shape_type=ShapeType.STRING
-)
-
-BACKUP_SIZE_BYTES = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BackupSizeBytes"), shape_type=ShapeType.LONG
-)
-
-BACKUP_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BackupStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "DELETED": {"target": UNIT},
-        "AVAILABLE": {"target": UNIT},
-    },
-)
-
-BACKUP_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BackupType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "USER": {"target": UNIT},
-        "SYSTEM": {"target": UNIT},
-        "AWS_BACKUP": {"target": UNIT},
-    },
-)
-
-BACKUP_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BackupDetails"),
-    members={
-        "BackupArn": {
-            "target": BACKUP_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "BackupName": {
-            "target": BACKUP_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "BackupSizeBytes": {"target": BACKUP_SIZE_BYTES},
-        "BackupStatus": {
-            "target": BACKUP_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "BackupType": {
-            "target": BACKUP_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "BackupCreationDateTime": {
-            "target": BACKUP_CREATION_DATE_TIME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "BackupExpiryDateTime": {"target": DATE},
-    },
-)
-
-BILLING_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BillingMode"),
-    shape_type=ShapeType.ENUM,
-    members={"PROVISIONED": {"target": UNIT}, "PAY_PER_REQUEST": {"target": UNIT}},
-)
-
-ITEM_COUNT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ItemCount"), shape_type=ShapeType.LONG
-)
-
-KEY_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#KeyType"),
-    shape_type=ShapeType.ENUM,
-    members={"HASH": {"target": UNIT}, "RANGE": {"target": UNIT}},
-)
-
-KEY_SCHEMA_ELEMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#KeySchemaElement"),
-    members={
-        "AttributeName": {
-            "target": KEY_SCHEMA_ATTRIBUTE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "KeyType": {
-            "target": KEY_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-KEY_SCHEMA = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#KeySchema"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": KEY_SCHEMA_ELEMENT}},
-)
-
-LONG_OBJECT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#LongObject"), shape_type=ShapeType.LONG
-)
-
-ON_DEMAND_THROUGHPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#OnDemandThroughput"),
-    members={
-        "MaxReadRequestUnits": {"target": LONG_OBJECT},
-        "MaxWriteRequestUnits": {"target": LONG_OBJECT},
-    },
-)
-
-PROVISIONED_THROUGHPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ProvisionedThroughput"),
-    members={
-        "ReadCapacityUnits": {
-            "target": POSITIVE_LONG_OBJECT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "WriteCapacityUnits": {
-            "target": POSITIVE_LONG_OBJECT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TABLE_ARN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TableArn"), shape_type=ShapeType.STRING
-)
-
-TABLE_CREATION_DATE_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TableCreationDateTime"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-TABLE_ID = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TableId"), shape_type=ShapeType.STRING
-)
-
-TABLE_NAME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TableName"), shape_type=ShapeType.STRING
-)
-
-SOURCE_TABLE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SourceTableDetails"),
-    members={
-        "TableName": {
-            "target": TABLE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TableId": {
-            "target": TABLE_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TableArn": {"target": TABLE_ARN},
-        "TableSizeBytes": {"target": LONG_OBJECT},
-        "KeySchema": {
-            "target": KEY_SCHEMA,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TableCreationDateTime": {
-            "target": TABLE_CREATION_DATE_TIME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ProvisionedThroughput": {
-            "target": PROVISIONED_THROUGHPUT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "OnDemandThroughput": {"target": ON_DEMAND_THROUGHPUT},
-        "ItemCount": {"target": ITEM_COUNT},
-        "BillingMode": {"target": BILLING_MODE},
-    },
-)
-
-INDEX_NAME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#IndexName"), shape_type=ShapeType.STRING
-)
-
-NON_KEY_ATTRIBUTE_NAME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#NonKeyAttributeName"),
-    shape_type=ShapeType.STRING,
-)
-
-NON_KEY_ATTRIBUTE_NAME_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#NonKeyAttributeNameList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": NON_KEY_ATTRIBUTE_NAME}},
-)
-
-PROJECTION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ProjectionType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ALL": {"target": UNIT},
-        "KEYS_ONLY": {"target": UNIT},
-        "INCLUDE": {"target": UNIT},
-    },
-)
-
-PROJECTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Projection"),
-    members={
-        "ProjectionType": {"target": PROJECTION_TYPE},
-        "NonKeyAttributes": {"target": NON_KEY_ATTRIBUTE_NAME_LIST},
-    },
-)
-
-GLOBAL_SECONDARY_INDEX_INFO = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalSecondaryIndexInfo"),
-    members={
-        "IndexName": {"target": INDEX_NAME},
-        "KeySchema": {"target": KEY_SCHEMA},
-        "Projection": {"target": PROJECTION},
-        "ProvisionedThroughput": {"target": PROVISIONED_THROUGHPUT},
-        "OnDemandThroughput": {"target": ON_DEMAND_THROUGHPUT},
-    },
-)
-
-GLOBAL_SECONDARY_INDEXES = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalSecondaryIndexes"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GLOBAL_SECONDARY_INDEX_INFO}},
-)
-
-LOCAL_SECONDARY_INDEX_INFO = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#LocalSecondaryIndexInfo"),
-    members={
-        "IndexName": {"target": INDEX_NAME},
-        "KeySchema": {"target": KEY_SCHEMA},
-        "Projection": {"target": PROJECTION},
-    },
-)
-
-LOCAL_SECONDARY_INDEXES = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#LocalSecondaryIndexes"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LOCAL_SECONDARY_INDEX_INFO}},
-)
-
-KMS_MASTER_KEY_ARN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#KMSMasterKeyArn"), shape_type=ShapeType.STRING
-)
-
-SSE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SSEType"),
-    shape_type=ShapeType.ENUM,
-    members={"AES256": {"target": UNIT}, "KMS": {"target": UNIT}},
-)
-
-SSE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SSEStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ENABLING": {"target": UNIT},
-        "ENABLED": {"target": UNIT},
-        "DISABLING": {"target": UNIT},
-        "DISABLED": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-    },
-)
-
-SSE_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SSEDescription"),
-    members={
-        "Status": {"target": SSE_STATUS},
-        "SSEType": {"target": SSE_TYPE},
-        "KMSMasterKeyArn": {"target": KMS_MASTER_KEY_ARN},
-        "InaccessibleEncryptionDateTime": {"target": DATE},
-    },
-)
-
-STREAM_ENABLED = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#StreamEnabled"), shape_type=ShapeType.BOOLEAN
-)
-
-STREAM_VIEW_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#StreamViewType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "NEW_IMAGE": {"target": UNIT},
-        "OLD_IMAGE": {"target": UNIT},
-        "NEW_AND_OLD_IMAGES": {"target": UNIT},
-        "KEYS_ONLY": {"target": UNIT},
-    },
-)
-
-STREAM_SPECIFICATION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#StreamSpecification"),
-    members={
-        "StreamEnabled": {
-            "target": STREAM_ENABLED,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "StreamViewType": {"target": STREAM_VIEW_TYPE},
-    },
-)
-
-TIME_TO_LIVE_ATTRIBUTE_NAME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TimeToLiveAttributeName"),
-    shape_type=ShapeType.STRING,
-)
-
-TIME_TO_LIVE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TimeToLiveStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ENABLING": {"target": UNIT},
-        "DISABLING": {"target": UNIT},
-        "ENABLED": {"target": UNIT},
-        "DISABLED": {"target": UNIT},
-    },
-)
-
-TIME_TO_LIVE_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TimeToLiveDescription"),
-    members={
-        "TimeToLiveStatus": {"target": TIME_TO_LIVE_STATUS},
-        "AttributeName": {"target": TIME_TO_LIVE_ATTRIBUTE_NAME},
-    },
-)
-
-VECTOR_DISTANCE_FUNCTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorDistanceFunction"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "COSINE": {"target": UNIT},
-        "DOT_PRODUCT": {"target": UNIT},
-        "EUCLIDEAN": {"target": UNIT},
-    },
-)
-
-SEARCH_SCHEMA_ELEMENT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SearchSchemaElementType"),
-    shape_type=ShapeType.ENUM,
-    members={"HASH": {"target": UNIT}, "INLINE_FILTER": {"target": UNIT}},
-)
-
-SEARCH_SCHEMA_ELEMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SearchSchemaElement"),
-    members={
-        "AttributeName": {
-            "target": ATTRIBUTE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SearchSchemaElementType": {
-            "target": SEARCH_SCHEMA_ELEMENT_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-SEARCH_SCHEMA = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SearchSchema"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SEARCH_SCHEMA_ELEMENT}},
-)
-
-VECTOR_ATTRIBUTE_NAME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#VectorAttributeName"),
-    shape_type=ShapeType.STRING,
-)
-
-VECTOR_ATTRIBUTE_DEFINITION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorAttributeDefinition"),
-    members={
-        "AttributeName": {
-            "target": VECTOR_ATTRIBUTE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-VECTOR_INDEX_INFO = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorIndexInfo"),
-    members={
-        "IndexName": {"target": INDEX_NAME},
-        "VectorAttribute": {"target": VECTOR_ATTRIBUTE_DEFINITION},
-        "SearchSchema": {"target": SEARCH_SCHEMA},
-        "Projection": {"target": PROJECTION},
-        "Dimensions": {"target": POSITIVE_LONG_OBJECT},
-        "DistanceFunction": {"target": VECTOR_DISTANCE_FUNCTION},
-    },
-)
-
-VECTOR_INDEXES = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorIndexes"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VECTOR_INDEX_INFO}},
-)
-
-SOURCE_TABLE_FEATURE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SourceTableFeatureDetails"),
-    members={
-        "LocalSecondaryIndexes": {"target": LOCAL_SECONDARY_INDEXES},
-        "GlobalSecondaryIndexes": {"target": GLOBAL_SECONDARY_INDEXES},
-        "StreamDescription": {"target": STREAM_SPECIFICATION},
-        "TimeToLiveDescription": {"target": TIME_TO_LIVE_DESCRIPTION},
-        "SSEDescription": {"target": SSE_DESCRIPTION},
-        "VectorIndexes": {"target": VECTOR_INDEXES},
-    },
-)
-
-BACKUP_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BackupDescription"),
-    members={
-        "BackupDetails": {"target": BACKUP_DETAILS},
-        "SourceTableDetails": {"target": SOURCE_TABLE_DETAILS},
-        "SourceTableFeatureDetails": {"target": SOURCE_TABLE_FEATURE_DETAILS},
-    },
-)
-
-ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ErrorMessage"), shape_type=ShapeType.STRING
-)
-
-BACKUP_IN_USE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BackupInUseException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-BACKUP_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BackupNotFoundException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-BACKUPS_INPUT_LIMIT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BackupsInputLimit"), shape_type=ShapeType.INTEGER
-)
-
-BACKUP_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BackupSummary"),
-    members={
-        "TableName": {"target": TABLE_NAME},
-        "TableId": {"target": TABLE_ID},
-        "TableArn": {"target": TABLE_ARN},
-        "BackupArn": {"target": BACKUP_ARN},
-        "BackupName": {"target": BACKUP_NAME},
-        "BackupCreationDateTime": {"target": BACKUP_CREATION_DATE_TIME},
-        "BackupExpiryDateTime": {"target": DATE},
-        "BackupStatus": {"target": BACKUP_STATUS},
-        "BackupType": {"target": BACKUP_TYPE},
-        "BackupSizeBytes": {"target": BACKUP_SIZE_BYTES},
-    },
-)
-
-BACKUP_SUMMARIES = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BackupSummaries"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BACKUP_SUMMARY}},
-)
-
-BACKUP_TYPE_FILTER = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BackupTypeFilter"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "USER": {"target": UNIT},
-        "SYSTEM": {"target": UNIT},
-        "AWS_BACKUP": {"target": UNIT},
-        "ALL": {"target": UNIT},
-    },
-)
-
-RETURN_CONSUMED_CAPACITY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReturnConsumedCapacity"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "INDEXES": {"target": UNIT},
-        "TOTAL": {"target": UNIT},
-        "NONE": {"target": UNIT},
-    },
-)
-
-CONSISTENT_READ = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ConsistentRead"), shape_type=ShapeType.BOOLEAN
-)
-
-RETURN_VALUES_ON_CONDITION_CHECK_FAILURE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReturnValuesOnConditionCheckFailure"),
-    shape_type=ShapeType.ENUM,
-    members={"ALL_OLD": {"target": UNIT}, "NONE": {"target": UNIT}},
-)
-
-PARTI_QL_STATEMENT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#PartiQLStatement"), shape_type=ShapeType.STRING
-)
-
-CONSUMED_CAPACITY_UNITS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ConsumedCapacityUnits"),
-    shape_type=ShapeType.DOUBLE,
-)
-
-CAPACITY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Capacity"),
-    members={
-        "ReadCapacityUnits": {"target": CONSUMED_CAPACITY_UNITS},
-        "WriteCapacityUnits": {"target": CONSUMED_CAPACITY_UNITS},
-        "CapacityUnits": {"target": CONSUMED_CAPACITY_UNITS},
-    },
-)
-
-SECONDARY_INDEXES_CAPACITY_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SecondaryIndexesCapacityMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": INDEX_NAME}, "value": {"target": CAPACITY}},
-)
-
-VECTOR_CAPACITY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorCapacity"),
-    members={
-        "VectorSearchRequestBytes": {"target": CONSUMED_CAPACITY_UNITS},
-        "VectorWriteRequestBytes": {"target": CONSUMED_CAPACITY_UNITS},
-    },
-)
-
-VECTOR_INDEXES_CAPACITY_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorIndexesCapacityMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": INDEX_NAME}, "value": {"target": VECTOR_CAPACITY}},
-)
-
-CONSUMED_CAPACITY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ConsumedCapacity"),
-    members={
-        "TableName": {"target": TABLE_ARN},
-        "CapacityUnits": {"target": CONSUMED_CAPACITY_UNITS},
-        "ReadCapacityUnits": {"target": CONSUMED_CAPACITY_UNITS},
-        "WriteCapacityUnits": {"target": CONSUMED_CAPACITY_UNITS},
-        "Table": {"target": CAPACITY},
-        "LocalSecondaryIndexes": {"target": SECONDARY_INDEXES_CAPACITY_MAP},
-        "GlobalSecondaryIndexes": {"target": SECONDARY_INDEXES_CAPACITY_MAP},
-        "VectorIndexes": {"target": VECTOR_INDEXES_CAPACITY_MAP},
-    },
-)
-
-CONSUMED_CAPACITY_MULTIPLE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ConsumedCapacityMultiple"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CONSUMED_CAPACITY}},
-)
-
-BATCH_STATEMENT_ERROR_CODE_ENUM = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchStatementErrorCodeEnum"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ConditionalCheckFailed": {"target": UNIT},
-        "ItemCollectionSizeLimitExceeded": {"target": UNIT},
-        "RequestLimitExceeded": {"target": UNIT},
-        "ValidationError": {"target": UNIT},
-        "ProvisionedThroughputExceeded": {"target": UNIT},
-        "TransactionConflict": {"target": UNIT},
-        "ThrottlingError": {"target": UNIT},
-        "InternalServerError": {"target": UNIT},
-        "ResourceNotFound": {"target": UNIT},
-        "AccessDenied": {"target": UNIT},
-        "DuplicateItem": {"target": UNIT},
-    },
-)
-
-INTERNAL_SERVER_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#InternalServerError"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="server")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-REASON = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#Reason"), shape_type=ShapeType.STRING
-)
-
-RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#Resource"), shape_type=ShapeType.STRING
-)
-
-THROTTLING_REASON = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ThrottlingReason"),
-    members={"reason": {"target": REASON}, "resource": {"target": RESOURCE}},
-)
-
-THROTTLING_REASON_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ThrottlingReasonList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": THROTTLING_REASON}},
-)
-
-REQUEST_LIMIT_EXCEEDED = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#RequestLimitExceeded"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={
-        "message": {"target": ERROR_MESSAGE},
-        "ThrottlingReasons": {"target": THROTTLING_REASON_LIST},
-    },
-)
-
-THROTTLING_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ThrottlingException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "Throttling", "httpResponseCode": 400}),
-        ),
-    ],
-    members={
-        "message": {"target": AVAILABILITY_ERROR_MESSAGE},
-        "throttlingReasons": {"target": THROTTLING_REASON_LIST},
-    },
-)
-
-EXPRESSION_ATTRIBUTE_NAME_VARIABLE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExpressionAttributeNameVariable"),
-    shape_type=ShapeType.STRING,
-)
-
-EXPRESSION_ATTRIBUTE_NAME_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExpressionAttributeNameMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": EXPRESSION_ATTRIBUTE_NAME_VARIABLE},
-        "value": {"target": ATTRIBUTE_NAME},
-    },
-)
-
-PROJECTION_EXPRESSION = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ProjectionExpression"),
-    shape_type=ShapeType.STRING,
-)
-
-INVALID_ENDPOINT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#InvalidEndpointException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=421),
-    ],
-    members={"Message": {"target": STRING}},
-)
-
-PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ProvisionedThroughputExceededException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={
-        "message": {"target": ERROR_MESSAGE},
-        "ThrottlingReasons": {"target": THROTTLING_REASON_LIST},
-    },
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ResourceNotFoundException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-RETURN_ITEM_COLLECTION_METRICS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReturnItemCollectionMetrics"),
-    shape_type=ShapeType.ENUM,
-    members={"SIZE": {"target": UNIT}, "NONE": {"target": UNIT}},
-)
-
-ITEM_COLLECTION_SIZE_ESTIMATE_BOUND = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ItemCollectionSizeEstimateBound"),
-    shape_type=ShapeType.DOUBLE,
-)
-
-ITEM_COLLECTION_SIZE_ESTIMATE_RANGE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ItemCollectionSizeEstimateRange"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ITEM_COLLECTION_SIZE_ESTIMATE_BOUND}},
-)
-
-ITEM_COLLECTION_SIZE_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ItemCollectionSizeLimitExceededException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-REPLICATED_WRITE_CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicatedWriteConflictException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-BILLED_SIZE_BYTES = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BilledSizeBytes"), shape_type=ShapeType.LONG
-)
-
-BILLING_MODE_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BillingModeSummary"),
-    members={
-        "BillingMode": {"target": BILLING_MODE},
-        "LastUpdateToPayPerRequestDateTime": {"target": DATE},
-    },
-)
-
-CODE = Schema(id=ShapeID("com.amazonaws.dynamodb#Code"), shape_type=ShapeType.STRING)
-
-CLIENT_REQUEST_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ClientRequestToken"), shape_type=ShapeType.STRING
-)
-
-CLIENT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ClientToken"), shape_type=ShapeType.STRING
-)
-
-CLOUD_WATCH_LOG_GROUP_ARN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#CloudWatchLogGroupArn"),
-    shape_type=ShapeType.STRING,
-)
-
-COMPARISON_OPERATOR = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ComparisonOperator"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EQ": {"target": UNIT},
-        "NE": {"target": UNIT},
-        "IN": {"target": UNIT},
-        "LE": {"target": UNIT},
-        "LT": {"target": UNIT},
-        "GE": {"target": UNIT},
-        "GT": {"target": UNIT},
-        "BETWEEN": {"target": UNIT},
-        "NOT_NULL": {"target": UNIT},
-        "NULL": {"target": UNIT},
-        "CONTAINS": {"target": UNIT},
-        "NOT_CONTAINS": {"target": UNIT},
-        "BEGINS_WITH": {"target": UNIT},
-    },
-)
-
-CONDITIONAL_OPERATOR = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ConditionalOperator"),
-    shape_type=ShapeType.ENUM,
-    members={"AND": {"target": UNIT}, "OR": {"target": UNIT}},
-)
-
-CONDITION_EXPRESSION = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ConditionExpression"),
-    shape_type=ShapeType.STRING,
-)
-
-EXPRESSION_ATTRIBUTE_VALUE_VARIABLE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExpressionAttributeValueVariable"),
-    shape_type=ShapeType.STRING,
-)
-
-CONFIRM_REMOVE_SELF_RESOURCE_ACCESS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ConfirmRemoveSelfResourceAccess"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-CONTINUOUS_BACKUPS_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ContinuousBackupsStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-POINT_IN_TIME_RECOVERY_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PointInTimeRecoveryStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-RECOVERY_PERIOD_IN_DAYS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#RecoveryPeriodInDays"),
-    shape_type=ShapeType.INTEGER,
-)
-
-POINT_IN_TIME_RECOVERY_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PointInTimeRecoveryDescription"),
-    members={
-        "PointInTimeRecoveryStatus": {"target": POINT_IN_TIME_RECOVERY_STATUS},
-        "RecoveryPeriodInDays": {"target": RECOVERY_PERIOD_IN_DAYS},
-        "EarliestRestorableDateTime": {"target": DATE},
-        "LatestRestorableDateTime": {"target": DATE},
-    },
-)
-
-CONTINUOUS_BACKUPS_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ContinuousBackupsDescription"),
-    members={
-        "ContinuousBackupsStatus": {
-            "target": CONTINUOUS_BACKUPS_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "PointInTimeRecoveryDescription": {
-            "target": POINT_IN_TIME_RECOVERY_DESCRIPTION
-        },
-    },
-)
-
-CONTINUOUS_BACKUPS_UNAVAILABLE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ContinuousBackupsUnavailableException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-CONTRIBUTOR_INSIGHTS_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ContributorInsightsAction"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLE": {"target": UNIT}, "DISABLE": {"target": UNIT}},
-)
-
-CONTRIBUTOR_INSIGHTS_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ContributorInsightsMode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ACCESSED_AND_THROTTLED_KEYS": {"target": UNIT},
-        "THROTTLED_KEYS": {"target": UNIT},
-    },
-)
-
-CONTRIBUTOR_INSIGHTS_RULE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ContributorInsightsRule"),
-    shape_type=ShapeType.STRING,
-)
-
-CONTRIBUTOR_INSIGHTS_RULE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ContributorInsightsRuleList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CONTRIBUTOR_INSIGHTS_RULE}},
-)
-
-CONTRIBUTOR_INSIGHTS_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ContributorInsightsStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ENABLING": {"target": UNIT},
-        "ENABLED": {"target": UNIT},
-        "DISABLING": {"target": UNIT},
-        "DISABLED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-    },
-)
-
-CONTRIBUTOR_INSIGHTS_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ContributorInsightsSummary"),
-    members={
-        "TableName": {"target": TABLE_NAME},
-        "IndexName": {"target": INDEX_NAME},
-        "ContributorInsightsStatus": {"target": CONTRIBUTOR_INSIGHTS_STATUS},
-        "ContributorInsightsMode": {"target": CONTRIBUTOR_INSIGHTS_MODE},
-    },
-)
-
-CONTRIBUTOR_INSIGHTS_SUMMARIES = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ContributorInsightsSummaries"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CONTRIBUTOR_INSIGHTS_SUMMARY}},
-)
-
-CREATE_BACKUP_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CreateBackupInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "BackupName": {
-            "target": BACKUP_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CREATE_BACKUP_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CreateBackupOutput"),
-    members={"BackupDetails": {"target": BACKUP_DETAILS}},
-)
-
-LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#LimitExceededException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-TABLE_IN_USE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TableInUseException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-TABLE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TableNotFoundException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-CREATE_BACKUP = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#CreateBackup"), shape_type=ShapeType.OPERATION
-)
-
-WARM_THROUGHPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#WarmThroughput"),
-    members={
-        "ReadUnitsPerSecond": {"target": LONG_OBJECT},
-        "WriteUnitsPerSecond": {"target": LONG_OBJECT},
-    },
-)
-
-CREATE_GLOBAL_SECONDARY_INDEX_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CreateGlobalSecondaryIndexAction"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "KeySchema": {
-            "target": KEY_SCHEMA,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Projection": {
-            "target": PROJECTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ProvisionedThroughput": {"target": PROVISIONED_THROUGHPUT},
-        "OnDemandThroughput": {"target": ON_DEMAND_THROUGHPUT},
-        "WarmThroughput": {"target": WARM_THROUGHPUT},
-    },
-)
-
-REGION_NAME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#RegionName"), shape_type=ShapeType.STRING
-)
-
-REPLICA = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Replica"),
-    members={"RegionName": {"target": REGION_NAME}},
-)
-
-REPLICA_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA}},
-)
-
-CREATE_GLOBAL_TABLE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CreateGlobalTableInput"),
-    members={
-        "GlobalTableName": {
-            "target": TABLE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReplicationGroup": {
-            "target": REPLICA_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-GLOBAL_TABLE_ARN_STRING = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableArnString"),
-    shape_type=ShapeType.STRING,
-)
-
-GLOBAL_TABLE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-    },
-)
-
-ON_DEMAND_THROUGHPUT_OVERRIDE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#OnDemandThroughputOverride"),
-    members={"MaxReadRequestUnits": {"target": LONG_OBJECT}},
-)
-
-PROVISIONED_THROUGHPUT_OVERRIDE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ProvisionedThroughputOverride"),
-    members={"ReadCapacityUnits": {"target": POSITIVE_LONG_OBJECT}},
-)
-
-INDEX_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#IndexStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-    },
-)
-
-GLOBAL_SECONDARY_INDEX_WARM_THROUGHPUT_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalSecondaryIndexWarmThroughputDescription"),
-    members={
-        "ReadUnitsPerSecond": {"target": POSITIVE_LONG_OBJECT},
-        "WriteUnitsPerSecond": {"target": POSITIVE_LONG_OBJECT},
-        "Status": {"target": INDEX_STATUS},
-    },
-)
-
-REPLICA_GLOBAL_SECONDARY_INDEX_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexDescription"),
-    members={
-        "IndexName": {"target": INDEX_NAME},
-        "ProvisionedThroughputOverride": {"target": PROVISIONED_THROUGHPUT_OVERRIDE},
-        "OnDemandThroughputOverride": {"target": ON_DEMAND_THROUGHPUT_OVERRIDE},
-        "WarmThroughput": {
-            "target": GLOBAL_SECONDARY_INDEX_WARM_THROUGHPUT_DESCRIPTION
-        },
-    },
-)
-
-REPLICA_GLOBAL_SECONDARY_INDEX_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexDescriptionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_GLOBAL_SECONDARY_INDEX_DESCRIPTION}},
-)
-
-GLOBAL_TABLE_SETTINGS_REPLICATION_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableSettingsReplicationMode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {"target": UNIT},
-        "DISABLED": {"target": UNIT},
-        "ENABLED_WITH_OVERRIDES": {"target": UNIT},
-    },
-)
-
-KMS_MASTER_KEY_ID = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#KMSMasterKeyId"), shape_type=ShapeType.STRING
-)
-
-REPLICA_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "CREATION_FAILED": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "REGION_DISABLED": {"target": UNIT},
-        "INACCESSIBLE_ENCRYPTION_CREDENTIALS": {"target": UNIT},
-        "ARCHIVING": {"target": UNIT},
-        "ARCHIVED": {"target": UNIT},
-        "REPLICATION_NOT_AUTHORIZED": {"target": UNIT},
-    },
-)
-
-REPLICA_STATUS_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaStatusDescription"),
-    shape_type=ShapeType.STRING,
-)
-
-REPLICA_STATUS_PERCENT_PROGRESS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaStatusPercentProgress"),
-    shape_type=ShapeType.STRING,
-)
-
-TABLE_CLASS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TableClass"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "STANDARD": {"target": UNIT},
-        "STANDARD_INFREQUENT_ACCESS": {"target": UNIT},
-    },
-)
-
-TABLE_CLASS_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TableClassSummary"),
-    members={
-        "TableClass": {"target": TABLE_CLASS},
-        "LastUpdateDateTime": {"target": DATE},
-    },
-)
-
-TABLE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TableStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "INACCESSIBLE_ENCRYPTION_CREDENTIALS": {"target": UNIT},
-        "ARCHIVING": {"target": UNIT},
-        "ARCHIVED": {"target": UNIT},
-        "REPLICATION_NOT_AUTHORIZED": {"target": UNIT},
-    },
-)
-
-TABLE_WARM_THROUGHPUT_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TableWarmThroughputDescription"),
-    members={
-        "ReadUnitsPerSecond": {"target": POSITIVE_LONG_OBJECT},
-        "WriteUnitsPerSecond": {"target": POSITIVE_LONG_OBJECT},
-        "Status": {"target": TABLE_STATUS},
-    },
-)
-
-REPLICA_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaDescription"),
-    members={
-        "RegionName": {"target": REGION_NAME},
-        "ReplicaStatus": {"target": REPLICA_STATUS},
-        "ReplicaArn": {"target": STRING},
-        "ReplicaStatusDescription": {"target": REPLICA_STATUS_DESCRIPTION},
-        "ReplicaStatusPercentProgress": {"target": REPLICA_STATUS_PERCENT_PROGRESS},
-        "KMSMasterKeyId": {"target": KMS_MASTER_KEY_ID},
-        "ProvisionedThroughputOverride": {"target": PROVISIONED_THROUGHPUT_OVERRIDE},
-        "OnDemandThroughputOverride": {"target": ON_DEMAND_THROUGHPUT_OVERRIDE},
-        "WarmThroughput": {"target": TABLE_WARM_THROUGHPUT_DESCRIPTION},
-        "GlobalSecondaryIndexes": {
-            "target": REPLICA_GLOBAL_SECONDARY_INDEX_DESCRIPTION_LIST
-        },
-        "ReplicaInaccessibleDateTime": {"target": DATE},
-        "ReplicaTableClassSummary": {"target": TABLE_CLASS_SUMMARY},
-        "GlobalTableSettingsReplicationMode": {
-            "target": GLOBAL_TABLE_SETTINGS_REPLICATION_MODE
-        },
-    },
-)
-
-REPLICA_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaDescriptionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_DESCRIPTION}},
-)
-
-GLOBAL_TABLE_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableDescription"),
-    members={
-        "ReplicationGroup": {"target": REPLICA_DESCRIPTION_LIST},
-        "GlobalTableArn": {"target": GLOBAL_TABLE_ARN_STRING},
-        "CreationDateTime": {"target": DATE},
-        "GlobalTableStatus": {"target": GLOBAL_TABLE_STATUS},
-        "GlobalTableName": {"target": TABLE_NAME},
-    },
-)
-
-CREATE_GLOBAL_TABLE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CreateGlobalTableOutput"),
-    members={"GlobalTableDescription": {"target": GLOBAL_TABLE_DESCRIPTION}},
-)
-
-GLOBAL_TABLE_ALREADY_EXISTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableAlreadyExistsException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-CREATE_GLOBAL_TABLE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#CreateGlobalTable"),
-    shape_type=ShapeType.OPERATION,
-)
-
-CREATE_GLOBAL_TABLE_WITNESS_GROUP_MEMBER_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CreateGlobalTableWitnessGroupMemberAction"),
-    members={
-        "RegionName": {
-            "target": REGION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CREATE_REPLICA_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CreateReplicaAction"),
-    members={
-        "RegionName": {
-            "target": REGION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-REPLICA_GLOBAL_SECONDARY_INDEX = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndex"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ProvisionedThroughputOverride": {"target": PROVISIONED_THROUGHPUT_OVERRIDE},
-        "OnDemandThroughputOverride": {"target": ON_DEMAND_THROUGHPUT_OVERRIDE},
-    },
-)
-
-REPLICA_GLOBAL_SECONDARY_INDEX_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_GLOBAL_SECONDARY_INDEX}},
-)
-
-CREATE_REPLICATION_GROUP_MEMBER_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CreateReplicationGroupMemberAction"),
-    members={
-        "RegionName": {
-            "target": REGION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "KMSMasterKeyId": {"target": KMS_MASTER_KEY_ID},
-        "ProvisionedThroughputOverride": {"target": PROVISIONED_THROUGHPUT_OVERRIDE},
-        "OnDemandThroughputOverride": {"target": ON_DEMAND_THROUGHPUT_OVERRIDE},
-        "GlobalSecondaryIndexes": {"target": REPLICA_GLOBAL_SECONDARY_INDEX_LIST},
-        "TableClassOverride": {"target": TABLE_CLASS},
-    },
-)
-
-DELETION_PROTECTION_ENABLED = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DeletionProtectionEnabled"),
-    shape_type=ShapeType.BOOLEAN,
-)
-
-GLOBAL_SECONDARY_INDEX = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalSecondaryIndex"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "KeySchema": {
-            "target": KEY_SCHEMA,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Projection": {
-            "target": PROJECTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ProvisionedThroughput": {"target": PROVISIONED_THROUGHPUT},
-        "OnDemandThroughput": {"target": ON_DEMAND_THROUGHPUT},
-        "WarmThroughput": {"target": WARM_THROUGHPUT},
-    },
-)
-
-GLOBAL_SECONDARY_INDEX_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalSecondaryIndexList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GLOBAL_SECONDARY_INDEX}},
-)
-
-LOCAL_SECONDARY_INDEX = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#LocalSecondaryIndex"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "KeySchema": {
-            "target": KEY_SCHEMA,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Projection": {
-            "target": PROJECTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-LOCAL_SECONDARY_INDEX_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#LocalSecondaryIndexList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LOCAL_SECONDARY_INDEX}},
-)
-
-RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ResourcePolicy"), shape_type=ShapeType.STRING
-)
-
-SSE_ENABLED = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#SSEEnabled"), shape_type=ShapeType.BOOLEAN
-)
-
-SSE_SPECIFICATION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SSESpecification"),
-    members={
-        "Enabled": {"target": SSE_ENABLED},
-        "SSEType": {"target": SSE_TYPE},
-        "KMSMasterKeyId": {"target": KMS_MASTER_KEY_ID},
-    },
-)
-
-TAG_KEY_STRING = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TagKeyString"), shape_type=ShapeType.STRING
-)
-
-TAG_VALUE_STRING = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TagValueString"), shape_type=ShapeType.STRING
-)
-
-TAG = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Tag"),
-    members={
-        "Key": {
-            "target": TAG_KEY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Value": {
-            "target": TAG_VALUE_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAG_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TagList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG}},
-)
-
-VECTOR_INDEX = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorIndex"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "VectorAttribute": {
-            "target": VECTOR_ATTRIBUTE_DEFINITION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SearchSchema": {"target": SEARCH_SCHEMA},
-        "Projection": {
-            "target": PROJECTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Dimensions": {
-            "target": POSITIVE_LONG_OBJECT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DistanceFunction": {
-            "target": VECTOR_DISTANCE_FUNCTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-VECTOR_INDEX_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorIndexList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VECTOR_INDEX}},
-)
-
-CREATE_TABLE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CreateTableInput"),
-    members={
-        "AttributeDefinitions": {"target": ATTRIBUTE_DEFINITIONS},
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "KeySchema": {"target": KEY_SCHEMA},
-        "LocalSecondaryIndexes": {"target": LOCAL_SECONDARY_INDEX_LIST},
-        "GlobalSecondaryIndexes": {"target": GLOBAL_SECONDARY_INDEX_LIST},
-        "BillingMode": {"target": BILLING_MODE},
-        "ProvisionedThroughput": {"target": PROVISIONED_THROUGHPUT},
-        "StreamSpecification": {"target": STREAM_SPECIFICATION},
-        "SSESpecification": {"target": SSE_SPECIFICATION},
-        "Tags": {"target": TAG_LIST},
-        "TableClass": {"target": TABLE_CLASS},
-        "DeletionProtectionEnabled": {"target": DELETION_PROTECTION_ENABLED},
-        "WarmThroughput": {"target": WARM_THROUGHPUT},
-        "ResourcePolicy": {"target": RESOURCE_POLICY},
-        "OnDemandThroughput": {"target": ON_DEMAND_THROUGHPUT},
-        "GlobalTableSourceArn": {"target": TABLE_ARN},
-        "GlobalTableSettingsReplicationMode": {
-            "target": GLOBAL_TABLE_SETTINGS_REPLICATION_MODE
-        },
-        "VectorIndexes": {"target": VECTOR_INDEX_LIST},
-    },
-)
-
-NON_NEGATIVE_LONG_OBJECT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#NonNegativeLongObject"),
-    shape_type=ShapeType.LONG,
-)
-
-PROVISIONED_THROUGHPUT_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ProvisionedThroughputDescription"),
-    members={
-        "LastIncreaseDateTime": {"target": DATE},
-        "LastDecreaseDateTime": {"target": DATE},
-        "NumberOfDecreasesToday": {"target": POSITIVE_LONG_OBJECT},
-        "ReadCapacityUnits": {"target": NON_NEGATIVE_LONG_OBJECT},
-        "WriteCapacityUnits": {"target": NON_NEGATIVE_LONG_OBJECT},
-    },
-)
-
-GLOBAL_SECONDARY_INDEX_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalSecondaryIndexDescription"),
-    members={
-        "IndexName": {"target": INDEX_NAME},
-        "KeySchema": {"target": KEY_SCHEMA},
-        "Projection": {"target": PROJECTION},
-        "IndexStatus": {"target": INDEX_STATUS},
-        "Backfilling": {"target": BACKFILLING},
-        "ProvisionedThroughput": {"target": PROVISIONED_THROUGHPUT_DESCRIPTION},
-        "IndexSizeBytes": {"target": LONG_OBJECT},
-        "ItemCount": {"target": LONG_OBJECT},
-        "IndexArn": {"target": STRING},
-        "OnDemandThroughput": {"target": ON_DEMAND_THROUGHPUT},
-        "WarmThroughput": {
-            "target": GLOBAL_SECONDARY_INDEX_WARM_THROUGHPUT_DESCRIPTION
-        },
-    },
-)
-
-GLOBAL_SECONDARY_INDEX_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalSecondaryIndexDescriptionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GLOBAL_SECONDARY_INDEX_DESCRIPTION}},
-)
-
-WITNESS_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#WitnessStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-    },
-)
-
-GLOBAL_TABLE_WITNESS_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableWitnessDescription"),
-    members={
-        "RegionName": {"target": REGION_NAME},
-        "WitnessStatus": {"target": WITNESS_STATUS},
-    },
-)
-
-GLOBAL_TABLE_WITNESS_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableWitnessDescriptionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GLOBAL_TABLE_WITNESS_DESCRIPTION}},
-)
-
-STREAM_ARN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#StreamArn"), shape_type=ShapeType.STRING
-)
-
-LOCAL_SECONDARY_INDEX_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#LocalSecondaryIndexDescription"),
-    members={
-        "IndexName": {"target": INDEX_NAME},
-        "KeySchema": {"target": KEY_SCHEMA},
-        "Projection": {"target": PROJECTION},
-        "IndexSizeBytes": {"target": LONG_OBJECT},
-        "ItemCount": {"target": LONG_OBJECT},
-        "IndexArn": {"target": STRING},
-    },
-)
-
-LOCAL_SECONDARY_INDEX_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#LocalSecondaryIndexDescriptionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LOCAL_SECONDARY_INDEX_DESCRIPTION}},
-)
-
-MULTI_REGION_CONSISTENCY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#MultiRegionConsistency"),
-    shape_type=ShapeType.ENUM,
-    members={"EVENTUAL": {"target": UNIT}, "STRONG": {"target": UNIT}},
-)
-
-RESTORE_IN_PROGRESS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#RestoreInProgress"), shape_type=ShapeType.BOOLEAN
-)
-
-RESTORE_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#RestoreSummary"),
-    members={
-        "SourceBackupArn": {"target": BACKUP_ARN},
-        "SourceTableArn": {"target": TABLE_ARN},
-        "RestoreDateTime": {
-            "target": DATE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RestoreInProgress": {
-            "target": RESTORE_IN_PROGRESS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-VECTOR_INDEX_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorIndexDescription"),
-    members={
-        "IndexName": {"target": INDEX_NAME},
-        "SearchSchema": {"target": SEARCH_SCHEMA},
-        "Projection": {"target": PROJECTION},
-        "VectorAttribute": {"target": VECTOR_ATTRIBUTE_DEFINITION},
-        "Dimensions": {"target": POSITIVE_LONG_OBJECT},
-        "DistanceFunction": {"target": VECTOR_DISTANCE_FUNCTION},
-        "IndexStatus": {"target": INDEX_STATUS},
-        "Backfilling": {"target": BACKFILLING},
-        "IndexSizeBytes": {"target": LONG_OBJECT},
-        "ItemCount": {"target": LONG_OBJECT},
-        "IndexArn": {"target": STRING},
-    },
-)
-
-VECTOR_INDEX_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorIndexDescriptionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VECTOR_INDEX_DESCRIPTION}},
-)
-
-TABLE_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TableDescription"),
-    members={
-        "AttributeDefinitions": {"target": ATTRIBUTE_DEFINITIONS},
-        "TableName": {"target": TABLE_NAME},
-        "KeySchema": {"target": KEY_SCHEMA},
-        "TableStatus": {"target": TABLE_STATUS},
-        "CreationDateTime": {"target": DATE},
-        "ProvisionedThroughput": {"target": PROVISIONED_THROUGHPUT_DESCRIPTION},
-        "TableSizeBytes": {"target": LONG_OBJECT},
-        "ItemCount": {"target": LONG_OBJECT},
-        "TableArn": {"target": STRING},
-        "TableId": {"target": TABLE_ID},
-        "BillingModeSummary": {"target": BILLING_MODE_SUMMARY},
-        "LocalSecondaryIndexes": {"target": LOCAL_SECONDARY_INDEX_DESCRIPTION_LIST},
-        "GlobalSecondaryIndexes": {"target": GLOBAL_SECONDARY_INDEX_DESCRIPTION_LIST},
-        "StreamSpecification": {"target": STREAM_SPECIFICATION},
-        "LatestStreamLabel": {"target": STRING},
-        "LatestStreamArn": {"target": STREAM_ARN},
-        "GlobalTableVersion": {"target": STRING},
-        "Replicas": {"target": REPLICA_DESCRIPTION_LIST},
-        "GlobalTableWitnesses": {"target": GLOBAL_TABLE_WITNESS_DESCRIPTION_LIST},
-        "GlobalTableSettingsReplicationMode": {
-            "target": GLOBAL_TABLE_SETTINGS_REPLICATION_MODE
-        },
-        "RestoreSummary": {"target": RESTORE_SUMMARY},
-        "SSEDescription": {"target": SSE_DESCRIPTION},
-        "ArchivalSummary": {"target": ARCHIVAL_SUMMARY},
-        "TableClassSummary": {"target": TABLE_CLASS_SUMMARY},
-        "DeletionProtectionEnabled": {"target": DELETION_PROTECTION_ENABLED},
-        "OnDemandThroughput": {"target": ON_DEMAND_THROUGHPUT},
-        "WarmThroughput": {"target": TABLE_WARM_THROUGHPUT_DESCRIPTION},
-        "MultiRegionConsistency": {"target": MULTI_REGION_CONSISTENCY},
-        "VectorIndexes": {"target": VECTOR_INDEX_DESCRIPTION_LIST},
-    },
-)
-
-CREATE_TABLE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CreateTableOutput"),
-    members={"TableDescription": {"target": TABLE_DESCRIPTION}},
-)
-
-RESOURCE_IN_USE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ResourceInUseException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-CREATE_TABLE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#CreateTable"), shape_type=ShapeType.OPERATION
-)
-
-CREATE_VECTOR_INDEX_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CreateVectorIndexAction"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "VectorAttribute": {
-            "target": VECTOR_ATTRIBUTE_DEFINITION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SearchSchema": {"target": SEARCH_SCHEMA},
-        "Projection": {
-            "target": PROJECTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Dimensions": {
-            "target": POSITIVE_LONG_OBJECT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DistanceFunction": {
-            "target": VECTOR_DISTANCE_FUNCTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CSV_DELIMITER = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#CsvDelimiter"), shape_type=ShapeType.STRING
-)
-
-CSV_HEADER = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#CsvHeader"), shape_type=ShapeType.STRING
-)
-
-CSV_HEADER_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CsvHeaderList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CSV_HEADER}},
-)
-
-CSV_OPTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CsvOptions"),
-    members={
-        "Delimiter": {"target": CSV_DELIMITER},
-        "HeaderList": {"target": CSV_HEADER_LIST},
-    },
-)
-
-DELETE_BACKUP_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteBackupInput"),
-    members={
-        "BackupArn": {
-            "target": BACKUP_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_BACKUP_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteBackupOutput"),
-    members={"BackupDescription": {"target": BACKUP_DESCRIPTION}},
-)
-
-DELETE_BACKUP = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteBackup"), shape_type=ShapeType.OPERATION
-)
-
-DELETE_GLOBAL_SECONDARY_INDEX_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteGlobalSecondaryIndexAction"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_GLOBAL_TABLE_WITNESS_GROUP_MEMBER_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteGlobalTableWitnessGroupMemberAction"),
-    members={
-        "RegionName": {
-            "target": REGION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-RETURN_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReturnValue"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "NONE": {"target": UNIT},
-        "ALL_OLD": {"target": UNIT},
-        "UPDATED_OLD": {"target": UNIT},
-        "ALL_NEW": {"target": UNIT},
-        "UPDATED_NEW": {"target": UNIT},
-    },
-)
-
-TRANSACTION_CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TransactionConflictException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-DELETE_REPLICA_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteReplicaAction"),
-    members={
-        "RegionName": {
-            "target": REGION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_REPLICATION_GROUP_MEMBER_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteReplicationGroupMemberAction"),
-    members={
-        "RegionName": {
-            "target": REGION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-POLICY_REVISION_ID = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#PolicyRevisionId"), shape_type=ShapeType.STRING
-)
-
-RESOURCE_ARN_STRING = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ResourceArnString"), shape_type=ShapeType.STRING
-)
-
-DELETE_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteResourcePolicyInput"),
-    members={
-        "ResourceArn": {
-            "target": RESOURCE_ARN_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ExpectedRevisionId": {"target": POLICY_REVISION_ID},
-    },
-)
-
-DELETE_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteResourcePolicyOutput"),
-    members={"RevisionId": {"target": POLICY_REVISION_ID}},
-)
-
-POLICY_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PolicyNotFoundException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-DELETE_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DELETE_TABLE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteTableInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_TABLE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteTableOutput"),
-    members={"TableDescription": {"target": TABLE_DESCRIPTION}},
-)
-
-DELETE_TABLE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteTable"), shape_type=ShapeType.OPERATION
-)
-
-DELETE_VECTOR_INDEX_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteVectorIndexAction"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DESCRIBE_BACKUP_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeBackupInput"),
-    members={
-        "BackupArn": {
-            "target": BACKUP_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DESCRIBE_BACKUP_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeBackupOutput"),
-    members={"BackupDescription": {"target": BACKUP_DESCRIPTION}},
-)
-
-DESCRIBE_BACKUP = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeBackup"), shape_type=ShapeType.OPERATION
-)
-
-DESCRIBE_CONTINUOUS_BACKUPS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeContinuousBackupsInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DESCRIBE_CONTINUOUS_BACKUPS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeContinuousBackupsOutput"),
-    members={
-        "ContinuousBackupsDescription": {"target": CONTINUOUS_BACKUPS_DESCRIPTION}
-    },
-)
-
-DESCRIBE_CONTINUOUS_BACKUPS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeContinuousBackups"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DESCRIBE_CONTRIBUTOR_INSIGHTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeContributorInsightsInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IndexName": {"target": INDEX_NAME},
-    },
-)
-
-EXCEPTION_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExceptionDescription"),
-    shape_type=ShapeType.STRING,
-)
-
-EXCEPTION_NAME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExceptionName"), shape_type=ShapeType.STRING
-)
-
-FAILURE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#FailureException"),
-    members={
-        "ExceptionName": {"target": EXCEPTION_NAME},
-        "ExceptionDescription": {"target": EXCEPTION_DESCRIPTION},
-    },
-)
-
-LAST_UPDATE_DATE_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#LastUpdateDateTime"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-DESCRIBE_CONTRIBUTOR_INSIGHTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeContributorInsightsOutput"),
-    members={
-        "TableName": {"target": TABLE_NAME},
-        "IndexName": {"target": INDEX_NAME},
-        "ContributorInsightsRuleList": {"target": CONTRIBUTOR_INSIGHTS_RULE_LIST},
-        "ContributorInsightsStatus": {"target": CONTRIBUTOR_INSIGHTS_STATUS},
-        "LastUpdateDateTime": {"target": LAST_UPDATE_DATE_TIME},
-        "FailureException": {"target": FAILURE_EXCEPTION},
-        "ContributorInsightsMode": {"target": CONTRIBUTOR_INSIGHTS_MODE},
-    },
-)
-
-DESCRIBE_CONTRIBUTOR_INSIGHTS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeContributorInsights"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DESCRIBE_ENDPOINTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeEndpointsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.dynamodb#DescribeEndpointsRequest",
-        )
-    ],
-)
-
-LONG = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#Long"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-ENDPOINT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Endpoint"),
-    members={
-        "Address": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "CachePeriodInMinutes": {
-            "target": LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=0),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-ENDPOINTS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Endpoints"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ENDPOINT}},
-)
-
-DESCRIBE_ENDPOINTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeEndpointsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.dynamodb#DescribeEndpointsResponse",
-        )
-    ],
-    members={
-        "Endpoints": {
-            "target": ENDPOINTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DESCRIBE_ENDPOINTS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeEndpoints"),
-    shape_type=ShapeType.OPERATION,
-)
-
-EXPORT_ARN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExportArn"), shape_type=ShapeType.STRING
-)
-
-DESCRIBE_EXPORT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeExportInput"),
-    members={
-        "ExportArn": {
-            "target": EXPORT_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-EXPORT_END_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExportEndTime"), shape_type=ShapeType.TIMESTAMP
-)
-
-EXPORT_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExportFormat"),
-    shape_type=ShapeType.ENUM,
-    members={"DYNAMODB_JSON": {"target": UNIT}, "ION": {"target": UNIT}},
-)
-
-EXPORT_MANIFEST = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExportManifest"), shape_type=ShapeType.STRING
-)
-
-EXPORT_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExportStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "IN_PROGRESS": {"target": UNIT},
-        "COMPLETED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-    },
-)
-
-EXPORT_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExportTime"), shape_type=ShapeType.TIMESTAMP
-)
-
-EXPORT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExportType"),
-    shape_type=ShapeType.ENUM,
-    members={"FULL_EXPORT": {"target": UNIT}, "INCREMENTAL_EXPORT": {"target": UNIT}},
-)
-
-FAILURE_CODE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#FailureCode"), shape_type=ShapeType.STRING
-)
-
-FAILURE_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#FailureMessage"), shape_type=ShapeType.STRING
-)
-
-KEY_EXPRESSION = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#KeyExpression"), shape_type=ShapeType.STRING
-)
-
-EXPORT_FROM_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExportFromTime"), shape_type=ShapeType.TIMESTAMP
-)
-
-EXPORT_TO_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExportToTime"), shape_type=ShapeType.TIMESTAMP
-)
-
-EXPORT_VIEW_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExportViewType"),
-    shape_type=ShapeType.ENUM,
-    members={"NEW_IMAGE": {"target": UNIT}, "NEW_AND_OLD_IMAGES": {"target": UNIT}},
-)
-
-INCREMENTAL_EXPORT_SPECIFICATION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#IncrementalExportSpecification"),
-    members={
-        "ExportFromTime": {"target": EXPORT_FROM_TIME},
-        "ExportToTime": {"target": EXPORT_TO_TIME},
-        "ExportViewType": {"target": EXPORT_VIEW_TYPE},
-    },
-)
-
-S3_BUCKET = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#S3Bucket"), shape_type=ShapeType.STRING
-)
-
-S3_BUCKET_OWNER = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#S3BucketOwner"), shape_type=ShapeType.STRING
-)
-
-S3_PREFIX = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#S3Prefix"), shape_type=ShapeType.STRING
-)
-
-S3_SSE_ALGORITHM = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#S3SseAlgorithm"),
-    shape_type=ShapeType.ENUM,
-    members={"AES256": {"target": UNIT}, "KMS": {"target": UNIT}},
-)
-
-S3_SSE_KMS_KEY_ID = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#S3SseKmsKeyId"), shape_type=ShapeType.STRING
-)
-
-EXPORT_START_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExportStartTime"), shape_type=ShapeType.TIMESTAMP
-)
-
-EXPORT_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExportNotFoundException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-DESCRIBE_GLOBAL_TABLE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeGlobalTableInput"),
-    members={
-        "GlobalTableName": {
-            "target": TABLE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DESCRIBE_GLOBAL_TABLE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeGlobalTableOutput"),
-    members={"GlobalTableDescription": {"target": GLOBAL_TABLE_DESCRIPTION}},
-)
-
-GLOBAL_TABLE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableNotFoundException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-DESCRIBE_GLOBAL_TABLE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeGlobalTable"),
-    shape_type=ShapeType.OPERATION,
-)
+AUTO_SCALING_ROLE_ARN: StaticSchema = (3, n0, _ASRA, 0)
 
-DESCRIBE_GLOBAL_TABLE_SETTINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeGlobalTableSettingsInput"),
-    members={
-        "GlobalTableName": {
-            "target": TABLE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
+STRING: StaticSchema = (3, n0, _St, 0)
 
-REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexSettingsDescription"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IndexStatus": {"target": INDEX_STATUS},
-        "ProvisionedReadCapacityUnits": {"target": POSITIVE_LONG_OBJECT},
-        "ProvisionedReadCapacityAutoScalingSettings": {
-            "target": AUTO_SCALING_SETTINGS_DESCRIPTION
-        },
-        "ProvisionedWriteCapacityUnits": {"target": POSITIVE_LONG_OBJECT},
-        "ProvisionedWriteCapacityAutoScalingSettings": {
-            "target": AUTO_SCALING_SETTINGS_DESCRIPTION
-        },
-    },
-)
+POSITIVE_LONG_OBJECT: StaticSchema = (8, n0, _PLO, 0)
 
-REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexSettingsDescriptionList"
+AUTO_SCALING_SETTINGS_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _ASSD,
+    0,
+    (_MU, _MUa, _ASD, _ASRA, _SP),
+    (
+        (POSITIVE_LONG_OBJECT, 0),
+        (POSITIVE_LONG_OBJECT, 0),
+        (BOOLEAN_OBJECT, 0),
+        (STRING, 0),
+        (AUTO_SCALING_POLICY_DESCRIPTION_LIST, 0),
     ),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_DESCRIPTION}},
 )
 
-REPLICA_SETTINGS_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaSettingsDescription"),
-    members={
-        "RegionName": {
-            "target": REGION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReplicaStatus": {"target": REPLICA_STATUS},
-        "ReplicaBillingModeSummary": {"target": BILLING_MODE_SUMMARY},
-        "ReplicaProvisionedReadCapacityUnits": {"target": NON_NEGATIVE_LONG_OBJECT},
-        "ReplicaProvisionedReadCapacityAutoScalingSettings": {
-            "target": AUTO_SCALING_SETTINGS_DESCRIPTION
-        },
-        "ReplicaProvisionedWriteCapacityUnits": {"target": NON_NEGATIVE_LONG_OBJECT},
-        "ReplicaProvisionedWriteCapacityAutoScalingSettings": {
-            "target": AUTO_SCALING_SETTINGS_DESCRIPTION
-        },
-        "ReplicaGlobalSecondaryIndexSettings": {
-            "target": REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_DESCRIPTION_LIST
-        },
-        "ReplicaTableClassSummary": {"target": TABLE_CLASS_SUMMARY},
-    },
-)
-
-REPLICA_SETTINGS_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaSettingsDescriptionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_SETTINGS_DESCRIPTION}},
-)
-
-DESCRIBE_GLOBAL_TABLE_SETTINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeGlobalTableSettingsOutput"),
-    members={
-        "GlobalTableName": {"target": TABLE_NAME},
-        "ReplicaSettings": {"target": REPLICA_SETTINGS_DESCRIPTION_LIST},
-    },
-)
-
-DESCRIBE_GLOBAL_TABLE_SETTINGS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeGlobalTableSettings"),
-    shape_type=ShapeType.OPERATION,
-)
-
-IMPORT_ARN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ImportArn"), shape_type=ShapeType.STRING
-)
-
-DESCRIBE_IMPORT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeImportInput"),
-    members={
-        "ImportArn": {
-            "target": IMPORT_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-IMPORT_END_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ImportEndTime"), shape_type=ShapeType.TIMESTAMP
-)
-
-ERROR_COUNT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ErrorCount"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-IMPORTED_ITEM_COUNT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ImportedItemCount"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-IMPORT_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ImportStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "IN_PROGRESS": {"target": UNIT},
-        "COMPLETED": {"target": UNIT},
-        "CANCELLING": {"target": UNIT},
-        "CANCELLED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-    },
-)
-
-INPUT_COMPRESSION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#InputCompressionType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "GZIP": {"target": UNIT},
-        "ZSTD": {"target": UNIT},
-        "NONE": {"target": UNIT},
-    },
-)
-
-INPUT_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#InputFormat"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "DYNAMODB_JSON": {"target": UNIT},
-        "ION": {"target": UNIT},
-        "CSV": {"target": UNIT},
-    },
-)
-
-INPUT_FORMAT_OPTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#InputFormatOptions"),
-    members={"Csv": {"target": CSV_OPTIONS}},
-)
-
-PROCESSED_ITEM_COUNT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ProcessedItemCount"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-S3_BUCKET_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#S3BucketSource"),
-    members={
-        "S3BucketOwner": {"target": S3_BUCKET_OWNER},
-        "S3Bucket": {
-            "target": S3_BUCKET,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "S3KeyPrefix": {"target": S3_PREFIX},
-    },
-)
-
-IMPORT_START_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ImportStartTime"), shape_type=ShapeType.TIMESTAMP
-)
-
-TABLE_CREATION_PARAMETERS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TableCreationParameters"),
-    members={
-        "TableName": {
-            "target": TABLE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributeDefinitions": {
-            "target": ATTRIBUTE_DEFINITIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "KeySchema": {
-            "target": KEY_SCHEMA,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "BillingMode": {"target": BILLING_MODE},
-        "ProvisionedThroughput": {"target": PROVISIONED_THROUGHPUT},
-        "OnDemandThroughput": {"target": ON_DEMAND_THROUGHPUT},
-        "SSESpecification": {"target": SSE_SPECIFICATION},
-        "GlobalSecondaryIndexes": {"target": GLOBAL_SECONDARY_INDEX_LIST},
-        "VectorIndexes": {"target": VECTOR_INDEX_LIST},
-    },
-)
-
-IMPORT_TABLE_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ImportTableDescription"),
-    members={
-        "ImportArn": {"target": IMPORT_ARN},
-        "ImportStatus": {"target": IMPORT_STATUS},
-        "TableArn": {"target": TABLE_ARN},
-        "TableId": {"target": TABLE_ID},
-        "ClientToken": {"target": CLIENT_TOKEN},
-        "S3BucketSource": {"target": S3_BUCKET_SOURCE},
-        "ErrorCount": {
-            "target": ERROR_COUNT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "CloudWatchLogGroupArn": {"target": CLOUD_WATCH_LOG_GROUP_ARN},
-        "InputFormat": {"target": INPUT_FORMAT},
-        "InputFormatOptions": {"target": INPUT_FORMAT_OPTIONS},
-        "InputCompressionType": {"target": INPUT_COMPRESSION_TYPE},
-        "TableCreationParameters": {"target": TABLE_CREATION_PARAMETERS},
-        "StartTime": {"target": IMPORT_START_TIME},
-        "EndTime": {"target": IMPORT_END_TIME},
-        "ProcessedSizeBytes": {"target": LONG_OBJECT},
-        "ProcessedItemCount": {
-            "target": PROCESSED_ITEM_COUNT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "ImportedItemCount": {
-            "target": IMPORTED_ITEM_COUNT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "FailureCode": {"target": FAILURE_CODE},
-        "FailureMessage": {"target": FAILURE_MESSAGE},
-    },
-)
-
-DESCRIBE_IMPORT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeImportOutput"),
-    members={
-        "ImportTableDescription": {
-            "target": IMPORT_TABLE_DESCRIPTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-IMPORT_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ImportNotFoundException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-DESCRIBE_IMPORT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeImport"), shape_type=ShapeType.OPERATION
-)
-
-DESCRIBE_KINESIS_STREAMING_DESTINATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeKinesisStreamingDestinationInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DESTINATION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DestinationStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ENABLING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "DISABLING": {"target": UNIT},
-        "DISABLED": {"target": UNIT},
-        "ENABLE_FAILED": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-    },
-)
-
-KINESIS_DATA_STREAM_DESTINATION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#KinesisDataStreamDestination"),
-    members={
-        "StreamArn": {"target": STREAM_ARN},
-        "DestinationStatus": {"target": DESTINATION_STATUS},
-        "DestinationStatusDescription": {"target": STRING},
-        "ApproximateCreationDateTimePrecision": {
-            "target": APPROXIMATE_CREATION_DATE_TIME_PRECISION
-        },
-    },
-)
-
-KINESIS_DATA_STREAM_DESTINATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#KinesisDataStreamDestinations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": KINESIS_DATA_STREAM_DESTINATION}},
-)
-
-DESCRIBE_KINESIS_STREAMING_DESTINATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeKinesisStreamingDestinationOutput"),
-    members={
-        "TableName": {"target": TABLE_NAME},
-        "KinesisDataStreamDestinations": {"target": KINESIS_DATA_STREAM_DESTINATIONS},
-    },
-)
-
-DESCRIBE_KINESIS_STREAMING_DESTINATION = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeKinesisStreamingDestination"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DESCRIBE_LIMITS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeLimitsInput")
-)
-
-DESCRIBE_LIMITS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeLimitsOutput"),
-    members={
-        "AccountMaxReadCapacityUnits": {"target": POSITIVE_LONG_OBJECT},
-        "AccountMaxWriteCapacityUnits": {"target": POSITIVE_LONG_OBJECT},
-        "TableMaxReadCapacityUnits": {"target": POSITIVE_LONG_OBJECT},
-        "TableMaxWriteCapacityUnits": {"target": POSITIVE_LONG_OBJECT},
-    },
-)
-
-DESCRIBE_LIMITS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeLimits"), shape_type=ShapeType.OPERATION
-)
-
-DESCRIBE_TABLE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeTableInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DESCRIBE_TABLE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeTableOutput"),
-    members={"Table": {"target": TABLE_DESCRIPTION}},
-)
-
-DESCRIBE_TABLE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeTable"), shape_type=ShapeType.OPERATION
-)
-
-DESCRIBE_TABLE_REPLICA_AUTO_SCALING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeTableReplicaAutoScalingInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_DESCRIPTION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexAutoScalingDescription"
+AUTO_SCALING_SETTINGS_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _ASSU,
+    0,
+    (_MU, _MUa, _ASD, _ASRA, _SPU),
+    (
+        (POSITIVE_LONG_OBJECT, 0),
+        (POSITIVE_LONG_OBJECT, 0),
+        (BOOLEAN_OBJECT, 0),
+        (AUTO_SCALING_ROLE_ARN, 0),
+        (AUTO_SCALING_POLICY_UPDATE, 0),
     ),
-    members={
-        "IndexName": {"target": INDEX_NAME},
-        "IndexStatus": {"target": INDEX_STATUS},
-        "ProvisionedReadCapacityAutoScalingSettings": {
-            "target": AUTO_SCALING_SETTINGS_DESCRIPTION
-        },
-        "ProvisionedWriteCapacityAutoScalingSettings": {
-            "target": AUTO_SCALING_SETTINGS_DESCRIPTION
-        },
-    },
 )
 
-REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexAutoScalingDescriptionList"
+AVAILABILITY_ERROR_MESSAGE: StaticSchema = (3, n0, _AEM, 0)
+
+BACKFILLING: StaticSchema = (2, n0, _Ba, 0)
+
+BACKUP_CREATION_DATE_TIME: StaticSchema = (4, n0, _BCDT, 0)
+
+BACKUP_NAME: StaticSchema = (3, n0, _BN, 0)
+
+BACKUP_SIZE_BYTES: StaticSchema = (8, n0, _BSB, 0)
+
+BACKUP_STATUS: StaticSchema = (
+    14,
+    n0,
+    _BS,
+    0,
+    (_CREATING, _DELETED, _AVAILABLE),
+    ((-1, {_sV: _CREATING}), (-1, {_sV: _DELETED}), (-1, {_sV: _AVAILABLE})),
+)
+
+BACKUP_TYPE: StaticSchema = (
+    14,
+    n0,
+    _BT,
+    0,
+    (_USER, _SYSTEM, _AB),
+    ((-1, {_sV: _USER}), (-1, {_sV: _SYSTEM}), (-1, {_sV: _AB})),
+)
+
+BACKUP_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _BD,
+    0,
+    (_BA, _BN, _BSB, _BS, _BT, _BCDT, _BEDT),
+    (
+        (BACKUP_ARN, 1),
+        (BACKUP_NAME, 1),
+        (BACKUP_SIZE_BYTES, 0),
+        (BACKUP_STATUS, 1),
+        (BACKUP_TYPE, 1),
+        (BACKUP_CREATION_DATE_TIME, 1),
+        (DATE, 0),
     ),
-    shape_type=ShapeType.LIST,
-    members={
-        "member": {"target": REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_DESCRIPTION}
-    },
-)
-
-REPLICA_AUTO_SCALING_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaAutoScalingDescription"),
-    members={
-        "RegionName": {"target": REGION_NAME},
-        "GlobalSecondaryIndexes": {
-            "target": REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_DESCRIPTION_LIST
-        },
-        "ReplicaProvisionedReadCapacityAutoScalingSettings": {
-            "target": AUTO_SCALING_SETTINGS_DESCRIPTION
-        },
-        "ReplicaProvisionedWriteCapacityAutoScalingSettings": {
-            "target": AUTO_SCALING_SETTINGS_DESCRIPTION
-        },
-        "ReplicaStatus": {"target": REPLICA_STATUS},
-    },
-)
-
-REPLICA_AUTO_SCALING_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaAutoScalingDescriptionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_AUTO_SCALING_DESCRIPTION}},
-)
-
-TABLE_AUTO_SCALING_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TableAutoScalingDescription"),
-    members={
-        "TableName": {"target": TABLE_NAME},
-        "TableStatus": {"target": TABLE_STATUS},
-        "Replicas": {"target": REPLICA_AUTO_SCALING_DESCRIPTION_LIST},
-    },
-)
-
-DESCRIBE_TABLE_REPLICA_AUTO_SCALING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeTableReplicaAutoScalingOutput"),
-    members={"TableAutoScalingDescription": {"target": TABLE_AUTO_SCALING_DESCRIPTION}},
-)
-
-DESCRIBE_TABLE_REPLICA_AUTO_SCALING = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeTableReplicaAutoScaling"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DESCRIBE_TIME_TO_LIVE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeTimeToLiveInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DESCRIBE_TIME_TO_LIVE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeTimeToLiveOutput"),
-    members={"TimeToLiveDescription": {"target": TIME_TO_LIVE_DESCRIPTION}},
-)
-
-DESCRIBE_TIME_TO_LIVE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeTimeToLive"),
-    shape_type=ShapeType.OPERATION,
-)
-
-ENABLE_KINESIS_STREAMING_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#EnableKinesisStreamingConfiguration"),
-    members={
-        "ApproximateCreationDateTimePrecision": {
-            "target": APPROXIMATE_CREATION_DATE_TIME_PRECISION
-        }
-    },
-)
-
-DISABLE_KINESIS_STREAMING_DESTINATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DisableKinesisStreamingDestinationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.dynamodb#KinesisStreamingDestinationInput",
-        )
-    ],
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "StreamArn": {
-            "target": STREAM_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EnableKinesisStreamingConfiguration": {
-            "target": ENABLE_KINESIS_STREAMING_CONFIGURATION
-        },
-    },
-)
-
-DISABLE_KINESIS_STREAMING_DESTINATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DisableKinesisStreamingDestinationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.dynamodb#KinesisStreamingDestinationOutput",
-        )
-    ],
-    members={
-        "TableName": {"target": TABLE_NAME},
-        "StreamArn": {"target": STREAM_ARN},
-        "DestinationStatus": {"target": DESTINATION_STATUS},
-        "EnableKinesisStreamingConfiguration": {
-            "target": ENABLE_KINESIS_STREAMING_CONFIGURATION
-        },
-    },
-)
-
-DISABLE_KINESIS_STREAMING_DESTINATION = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DisableKinesisStreamingDestination"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DUPLICATE_ITEM_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DuplicateItemException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-ENABLE_KINESIS_STREAMING_DESTINATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#EnableKinesisStreamingDestinationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.dynamodb#KinesisStreamingDestinationInput",
-        )
-    ],
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "StreamArn": {
-            "target": STREAM_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EnableKinesisStreamingConfiguration": {
-            "target": ENABLE_KINESIS_STREAMING_CONFIGURATION
-        },
-    },
-)
-
-ENABLE_KINESIS_STREAMING_DESTINATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#EnableKinesisStreamingDestinationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.dynamodb#KinesisStreamingDestinationOutput",
-        )
-    ],
-    members={
-        "TableName": {"target": TABLE_NAME},
-        "StreamArn": {"target": STREAM_ARN},
-        "DestinationStatus": {"target": DESTINATION_STATUS},
-        "EnableKinesisStreamingConfiguration": {
-            "target": ENABLE_KINESIS_STREAMING_CONFIGURATION
-        },
-    },
-)
-
-ENABLE_KINESIS_STREAMING_DESTINATION = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#EnableKinesisStreamingDestination"),
-    shape_type=ShapeType.OPERATION,
-)
-
-POSITIVE_INTEGER_OBJECT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#PositiveIntegerObject"),
-    shape_type=ShapeType.INTEGER,
-)
-
-PARTI_QL_NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#PartiQLNextToken"), shape_type=ShapeType.STRING
-)
-
-IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#IdempotentParameterMismatchException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-TRANSACTION_IN_PROGRESS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TransactionInProgressException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-EXPORT_CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExportConflictException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_EXPORT_TIME_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#InvalidExportTimeException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-POINT_IN_TIME_RECOVERY_UNAVAILABLE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PointInTimeRecoveryUnavailableException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-GET_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GetResourcePolicyInput"),
-    members={
-        "ResourceArn": {
-            "target": RESOURCE_ARN_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-GET_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GetResourcePolicyOutput"),
-    members={
-        "Policy": {"target": RESOURCE_POLICY},
-        "RevisionId": {"target": POLICY_REVISION_ID},
-    },
-)
-
-GET_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#GetResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-IMPORT_CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ImportConflictException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-IMPORT_TABLE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ImportTableInput"),
-    members={
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "S3BucketSource": {
-            "target": S3_BUCKET_SOURCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "InputFormat": {
-            "target": INPUT_FORMAT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "InputFormatOptions": {"target": INPUT_FORMAT_OPTIONS},
-        "InputCompressionType": {"target": INPUT_COMPRESSION_TYPE},
-        "TableCreationParameters": {
-            "target": TABLE_CREATION_PARAMETERS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-IMPORT_TABLE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ImportTableOutput"),
-    members={
-        "ImportTableDescription": {
-            "target": IMPORT_TABLE_DESCRIPTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-IMPORT_TABLE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ImportTable"), shape_type=ShapeType.OPERATION
-)
-
-TIME_RANGE_LOWER_BOUND = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TimeRangeLowerBound"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-TIME_RANGE_UPPER_BOUND = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TimeRangeUpperBound"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-LIST_BACKUPS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListBackupsInput"),
-    members={
-        "TableName": {"target": TABLE_ARN},
-        "Limit": {"target": BACKUPS_INPUT_LIMIT},
-        "TimeRangeLowerBound": {"target": TIME_RANGE_LOWER_BOUND},
-        "TimeRangeUpperBound": {"target": TIME_RANGE_UPPER_BOUND},
-        "ExclusiveStartBackupArn": {"target": BACKUP_ARN},
-        "BackupType": {"target": BACKUP_TYPE_FILTER},
-    },
-)
-
-LIST_BACKUPS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListBackupsOutput"),
-    members={
-        "BackupSummaries": {"target": BACKUP_SUMMARIES},
-        "LastEvaluatedBackupArn": {"target": BACKUP_ARN},
-    },
-)
-
-LIST_BACKUPS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ListBackups"), shape_type=ShapeType.OPERATION
-)
-
-LIST_CONTRIBUTOR_INSIGHTS_LIMIT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ListContributorInsightsLimit"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
 )
 
-NEXT_TOKEN_STRING = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#NextTokenString"), shape_type=ShapeType.STRING
-)
-
-LIST_CONTRIBUTOR_INSIGHTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListContributorInsightsInput"),
-    members={
-        "TableName": {"target": TABLE_ARN},
-        "NextToken": {"target": NEXT_TOKEN_STRING},
-        "MaxResults": {
-            "target": LIST_CONTRIBUTOR_INSIGHTS_LIMIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-LIST_CONTRIBUTOR_INSIGHTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListContributorInsightsOutput"),
-    members={
-        "ContributorInsightsSummaries": {"target": CONTRIBUTOR_INSIGHTS_SUMMARIES},
-        "NextToken": {"target": NEXT_TOKEN_STRING},
-    },
-)
-
-LIST_CONTRIBUTOR_INSIGHTS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ListContributorInsights"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_EXPORTS_MAX_LIMIT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ListExportsMaxLimit"),
-    shape_type=ShapeType.INTEGER,
-)
-
-EXPORT_NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExportNextToken"), shape_type=ShapeType.STRING
-)
-
-LIST_EXPORTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListExportsInput"),
-    members={
-        "TableArn": {"target": TABLE_ARN},
-        "MaxResults": {"target": LIST_EXPORTS_MAX_LIMIT},
-        "NextToken": {"target": EXPORT_NEXT_TOKEN},
-    },
-)
-
-EXPORT_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExportSummary"),
-    members={
-        "ExportArn": {"target": EXPORT_ARN},
-        "ExportStatus": {"target": EXPORT_STATUS},
-        "ExportType": {"target": EXPORT_TYPE},
-    },
-)
-
-EXPORT_SUMMARIES = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExportSummaries"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EXPORT_SUMMARY}},
-)
-
-LIST_EXPORTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListExportsOutput"),
-    members={
-        "ExportSummaries": {"target": EXPORT_SUMMARIES},
-        "NextToken": {"target": EXPORT_NEXT_TOKEN},
-    },
-)
-
-LIST_EXPORTS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ListExports"), shape_type=ShapeType.OPERATION
-)
-
-LIST_GLOBAL_TABLES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListGlobalTablesInput"),
-    members={
-        "ExclusiveStartGlobalTableName": {"target": TABLE_NAME},
-        "Limit": {"target": POSITIVE_INTEGER_OBJECT},
-        "RegionName": {"target": REGION_NAME},
-    },
-)
-
-GLOBAL_TABLE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTable"),
-    members={
-        "GlobalTableName": {"target": TABLE_NAME},
-        "ReplicationGroup": {"target": REPLICA_LIST},
-    },
-)
-
-GLOBAL_TABLE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GLOBAL_TABLE}},
-)
-
-LIST_GLOBAL_TABLES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListGlobalTablesOutput"),
-    members={
-        "GlobalTables": {"target": GLOBAL_TABLE_LIST},
-        "LastEvaluatedGlobalTableName": {"target": TABLE_NAME},
-    },
-)
-
-LIST_GLOBAL_TABLES = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ListGlobalTables"),
-    shape_type=ShapeType.OPERATION,
-)
-
-IMPORT_NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ImportNextToken"), shape_type=ShapeType.STRING
-)
-
-LIST_IMPORTS_MAX_LIMIT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ListImportsMaxLimit"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_IMPORTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListImportsInput"),
-    members={
-        "TableArn": {"target": TABLE_ARN},
-        "PageSize": {"target": LIST_IMPORTS_MAX_LIMIT},
-        "NextToken": {"target": IMPORT_NEXT_TOKEN},
-    },
-)
-
-IMPORT_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ImportSummary"),
-    members={
-        "ImportArn": {"target": IMPORT_ARN},
-        "ImportStatus": {"target": IMPORT_STATUS},
-        "TableArn": {"target": TABLE_ARN},
-        "S3BucketSource": {"target": S3_BUCKET_SOURCE},
-        "CloudWatchLogGroupArn": {"target": CLOUD_WATCH_LOG_GROUP_ARN},
-        "InputFormat": {"target": INPUT_FORMAT},
-        "StartTime": {"target": IMPORT_START_TIME},
-        "EndTime": {"target": IMPORT_END_TIME},
-    },
-)
-
-IMPORT_SUMMARY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ImportSummaryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": IMPORT_SUMMARY}},
-)
-
-LIST_IMPORTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListImportsOutput"),
-    members={
-        "ImportSummaryList": {"target": IMPORT_SUMMARY_LIST},
-        "NextToken": {"target": IMPORT_NEXT_TOKEN},
-    },
-)
-
-LIST_IMPORTS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ListImports"), shape_type=ShapeType.OPERATION
-)
-
-LIST_TABLES_INPUT_LIMIT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ListTablesInputLimit"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_TABLES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListTablesInput"),
-    members={
-        "ExclusiveStartTableName": {"target": TABLE_NAME},
-        "Limit": {"target": LIST_TABLES_INPUT_LIMIT},
-    },
-)
-
-TABLE_NAME_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TableNameList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TABLE_NAME}},
-)
-
-LIST_TABLES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListTablesOutput"),
-    members={
-        "TableNames": {"target": TABLE_NAME_LIST},
-        "LastEvaluatedTableName": {"target": TABLE_NAME},
-    },
-)
-
-LIST_TABLES = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ListTables"), shape_type=ShapeType.OPERATION
-)
-
-LIST_TAGS_OF_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListTagsOfResourceInput"),
-    members={
-        "ResourceArn": {
-            "target": RESOURCE_ARN_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextToken": {"target": NEXT_TOKEN_STRING},
-    },
-)
-
-LIST_TAGS_OF_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListTagsOfResourceOutput"),
-    members={"Tags": {"target": TAG_LIST}, "NextToken": {"target": NEXT_TOKEN_STRING}},
-)
-
-LIST_TAGS_OF_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ListTagsOfResource"),
-    shape_type=ShapeType.OPERATION,
-)
+BILLING_MODE: StaticSchema = (
+    14,
+    n0,
+    _BM,
+    0,
+    (_PROVISIONED, _PPR),
+    ((-1, {_sV: _PROVISIONED}), (-1, {_sV: _PPR})),
+)
+
+ITEM_COUNT: StaticSchema = (8, n0, _IC, 0)
 
-PUT_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PutResourcePolicyInput"),
-    members={
-        "ResourceArn": {
-            "target": RESOURCE_ARN_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Policy": {
-            "target": RESOURCE_POLICY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ExpectedRevisionId": {"target": POLICY_REVISION_ID},
-        "ConfirmRemoveSelfResourceAccess": {
-            "target": CONFIRM_REMOVE_SELF_RESOURCE_ACCESS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amz-confirm-remove-self-resource-access",
+KEY_TYPE: StaticSchema = (
+    14,
+    n0,
+    _KT,
+    0,
+    (_HASH, _RANGE),
+    ((-1, {_sV: _HASH}), (-1, {_sV: _RANGE})),
+)
+
+KEY_SCHEMA_ELEMENT: StaticSchema = (
+    18,
+    n0,
+    _KSE,
+    0,
+    (_AN, _KT),
+    ((KEY_SCHEMA_ATTRIBUTE_NAME, 1), (KEY_TYPE, 1)),
+)
+
+KEY_SCHEMA: StaticSchema = (16, n0, _KS, 0, (_m,), ((KEY_SCHEMA_ELEMENT, 0),))
+
+LONG_OBJECT: StaticSchema = (8, n0, _LO, 0)
+
+ON_DEMAND_THROUGHPUT: StaticSchema = (
+    18,
+    n0,
+    _ODT,
+    0,
+    (_MRRU, _MWRU),
+    ((LONG_OBJECT, 0), (LONG_OBJECT, 0)),
+)
+
+PROVISIONED_THROUGHPUT: StaticSchema = (
+    18,
+    n0,
+    _PT,
+    0,
+    (_RCU, _WCU),
+    ((POSITIVE_LONG_OBJECT, 1), (POSITIVE_LONG_OBJECT, 1)),
+)
+
+TABLE_ARN: StaticSchema = (3, n0, _TA, 0)
+
+TABLE_CREATION_DATE_TIME: StaticSchema = (4, n0, _TCDT, 0)
+
+TABLE_ID: StaticSchema = (3, n0, _TI, 0)
+
+TABLE_NAME: StaticSchema = (3, n0, _TN, 0)
+
+SOURCE_TABLE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _STD,
+    0,
+    (_TN, _TI, _TA, _TSB, _KS, _TCDT, _PT, _ODT, _IC, _BM),
+    (
+        (TABLE_NAME, 1),
+        (TABLE_ID, 1),
+        (TABLE_ARN, 0),
+        (LONG_OBJECT, 0),
+        (KEY_SCHEMA, 1),
+        (TABLE_CREATION_DATE_TIME, 1),
+        (PROVISIONED_THROUGHPUT, 1),
+        (ON_DEMAND_THROUGHPUT, 0),
+        (ITEM_COUNT, 0),
+        (BILLING_MODE, 0),
+    ),
+)
+
+INDEX_NAME: StaticSchema = (3, n0, _IN, 0)
+
+NON_KEY_ATTRIBUTE_NAME: StaticSchema = (3, n0, _NKAN, 0)
+
+NON_KEY_ATTRIBUTE_NAME_LIST: StaticSchema = (
+    16,
+    n0,
+    _NKANL,
+    0,
+    (_m,),
+    ((NON_KEY_ATTRIBUTE_NAME, 0),),
+)
+
+PROJECTION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _PTr,
+    0,
+    (_ALL, _KO, _INCLUDE),
+    ((-1, {_sV: _ALL}), (-1, {_sV: _KO}), (-1, {_sV: _INCLUDE})),
+)
+
+PROJECTION: StaticSchema = (
+    18,
+    n0,
+    _P,
+    0,
+    (_PTr, _NKA),
+    ((PROJECTION_TYPE, 0), (NON_KEY_ATTRIBUTE_NAME_LIST, 0)),
+)
+
+GLOBAL_SECONDARY_INDEX_INFO: StaticSchema = (
+    18,
+    n0,
+    _GSII,
+    0,
+    (_IN, _KS, _P, _PT, _ODT),
+    (
+        (INDEX_NAME, 0),
+        (KEY_SCHEMA, 0),
+        (PROJECTION, 0),
+        (PROVISIONED_THROUGHPUT, 0),
+        (ON_DEMAND_THROUGHPUT, 0),
+    ),
+)
+
+GLOBAL_SECONDARY_INDEXES: StaticSchema = (
+    16,
+    n0,
+    _GSI,
+    0,
+    (_m,),
+    ((GLOBAL_SECONDARY_INDEX_INFO, 0),),
+)
+
+LOCAL_SECONDARY_INDEX_INFO: StaticSchema = (
+    18,
+    n0,
+    _LSII,
+    0,
+    (_IN, _KS, _P),
+    ((INDEX_NAME, 0), (KEY_SCHEMA, 0), (PROJECTION, 0)),
+)
+
+LOCAL_SECONDARY_INDEXES: StaticSchema = (
+    16,
+    n0,
+    _LSI,
+    0,
+    (_m,),
+    ((LOCAL_SECONDARY_INDEX_INFO, 0),),
+)
+
+KMS_MASTER_KEY_ARN: StaticSchema = (3, n0, _KMSMKA, 0)
+
+SSE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _SSET,
+    0,
+    (_AES, _KMS),
+    ((-1, {_sV: _AES}), (-1, {_sV: _KMS})),
+)
+
+SSE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _SSES,
+    0,
+    (_ENABLING, _ENABLED, _DISABLING, _DISABLED, _UPDATING),
+    (
+        (-1, {_sV: _ENABLING}),
+        (-1, {_sV: _ENABLED}),
+        (-1, {_sV: _DISABLING}),
+        (-1, {_sV: _DISABLED}),
+        (-1, {_sV: _UPDATING}),
+    ),
+)
+
+SSE_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _SSED,
+    0,
+    (_Sta, _SSET, _KMSMKA, _IEDT),
+    ((SSE_STATUS, 0), (SSE_TYPE, 0), (KMS_MASTER_KEY_ARN, 0), (DATE, 0)),
+)
+
+STREAM_ENABLED: StaticSchema = (2, n0, _SE, 0)
+
+STREAM_VIEW_TYPE: StaticSchema = (
+    14,
+    n0,
+    _SVT,
+    0,
+    (_NI, _OI, _NAOI, _KO),
+    ((-1, {_sV: _NI}), (-1, {_sV: _OI}), (-1, {_sV: _NAOI}), (-1, {_sV: _KO})),
+)
+
+STREAM_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _SS,
+    0,
+    (_SE, _SVT),
+    ((STREAM_ENABLED, 1), (STREAM_VIEW_TYPE, 0)),
+)
+
+TIME_TO_LIVE_ATTRIBUTE_NAME: StaticSchema = (3, n0, _TTLAN, 0)
+
+TIME_TO_LIVE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _TTLS,
+    0,
+    (_ENABLING, _DISABLING, _ENABLED, _DISABLED),
+    (
+        (-1, {_sV: _ENABLING}),
+        (-1, {_sV: _DISABLING}),
+        (-1, {_sV: _ENABLED}),
+        (-1, {_sV: _DISABLED}),
+    ),
+)
+
+TIME_TO_LIVE_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _TTLD,
+    0,
+    (_TTLS, _AN),
+    ((TIME_TO_LIVE_STATUS, 0), (TIME_TO_LIVE_ATTRIBUTE_NAME, 0)),
+)
+
+VECTOR_DISTANCE_FUNCTION: StaticSchema = (
+    14,
+    n0,
+    _VDF,
+    0,
+    (_COSINE, _DP, _EUCLIDEAN),
+    ((-1, {_sV: _COSINE}), (-1, {_sV: _DP}), (-1, {_sV: _EUCLIDEAN})),
+)
+
+SEARCH_SCHEMA_ELEMENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _SSETe,
+    0,
+    (_HASH, _IF),
+    ((-1, {_sV: _HASH}), (-1, {_sV: _IF})),
+)
+
+SEARCH_SCHEMA_ELEMENT: StaticSchema = (
+    18,
+    n0,
+    _SSE,
+    0,
+    (_AN, _SSETe),
+    ((ATTRIBUTE_NAME, 1), (SEARCH_SCHEMA_ELEMENT_TYPE, 1)),
+)
+
+SEARCH_SCHEMA: StaticSchema = (16, n0, _SSe, 0, (_m,), ((SEARCH_SCHEMA_ELEMENT, 0),))
+
+VECTOR_ATTRIBUTE_NAME: StaticSchema = (3, n0, _VAN, 0)
+
+VECTOR_ATTRIBUTE_DEFINITION: StaticSchema = (
+    18,
+    n0,
+    _VAD,
+    0,
+    (_AN,),
+    ((VECTOR_ATTRIBUTE_NAME, 1),),
+)
+
+VECTOR_INDEX_INFO: StaticSchema = (
+    18,
+    n0,
+    _VII,
+    0,
+    (_IN, _VA, _SSe, _P, _Di, _DF),
+    (
+        (INDEX_NAME, 0),
+        (VECTOR_ATTRIBUTE_DEFINITION, 0),
+        (SEARCH_SCHEMA, 0),
+        (PROJECTION, 0),
+        (POSITIVE_LONG_OBJECT, 0),
+        (VECTOR_DISTANCE_FUNCTION, 0),
+    ),
+)
+
+VECTOR_INDEXES: StaticSchema = (16, n0, _VI, 0, (_m,), ((VECTOR_INDEX_INFO, 0),))
+
+SOURCE_TABLE_FEATURE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _STFD,
+    0,
+    (_LSI, _GSI, _SD, _TTLD, _SSED, _VI),
+    (
+        (LOCAL_SECONDARY_INDEXES, 0),
+        (GLOBAL_SECONDARY_INDEXES, 0),
+        (STREAM_SPECIFICATION, 0),
+        (TIME_TO_LIVE_DESCRIPTION, 0),
+        (SSE_DESCRIPTION, 0),
+        (VECTOR_INDEXES, 0),
+    ),
+)
+
+BACKUP_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _BDa,
+    0,
+    (_BD, _STD, _STFD),
+    ((BACKUP_DETAILS, 0), (SOURCE_TABLE_DETAILS, 0), (SOURCE_TABLE_FEATURE_DETAILS, 0)),
+)
+
+ERROR_MESSAGE: StaticSchema = (3, n0, _EM, 0)
+
+BACKUP_IN_USE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _BIUE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+BACKUP_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _BNFE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+BACKUPS_INPUT_LIMIT: StaticSchema = (7, n0, _BIL, 0)
+
+BACKUP_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _BSa,
+    0,
+    (_TN, _TI, _TA, _BA, _BN, _BCDT, _BEDT, _BS, _BT, _BSB),
+    (
+        (TABLE_NAME, 0),
+        (TABLE_ID, 0),
+        (TABLE_ARN, 0),
+        (BACKUP_ARN, 0),
+        (BACKUP_NAME, 0),
+        (BACKUP_CREATION_DATE_TIME, 0),
+        (DATE, 0),
+        (BACKUP_STATUS, 0),
+        (BACKUP_TYPE, 0),
+        (BACKUP_SIZE_BYTES, 0),
+    ),
+)
+
+BACKUP_SUMMARIES: StaticSchema = (16, n0, _BSac, 0, (_m,), ((BACKUP_SUMMARY, 0),))
+
+BACKUP_TYPE_FILTER: StaticSchema = (
+    14,
+    n0,
+    _BTF,
+    0,
+    (_USER, _SYSTEM, _AB, _ALL),
+    ((-1, {_sV: _USER}), (-1, {_sV: _SYSTEM}), (-1, {_sV: _AB}), (-1, {_sV: _ALL})),
+)
+
+RETURN_CONSUMED_CAPACITY: StaticSchema = (
+    14,
+    n0,
+    _RCC,
+    0,
+    (_INDEXES, _TOTAL, _NONE),
+    ((-1, {_sV: _INDEXES}), (-1, {_sV: _TOTAL}), (-1, {_sV: _NONE})),
+)
+
+CONSISTENT_READ: StaticSchema = (2, n0, _CR, 0)
+
+RETURN_VALUES_ON_CONDITION_CHECK_FAILURE: StaticSchema = (
+    14,
+    n0,
+    _RVOCCF,
+    0,
+    (_AO, _NONE),
+    ((-1, {_sV: _AO}), (-1, {_sV: _NONE})),
+)
+
+PARTI_QL_STATEMENT: StaticSchema = (3, n0, _PQLS, 0)
+
+CONSUMED_CAPACITY_UNITS: StaticSchema = (10, n0, _CCU, 0)
+
+CAPACITY: StaticSchema = (
+    18,
+    n0,
+    _C,
+    0,
+    (_RCU, _WCU, _CU),
+    (
+        (CONSUMED_CAPACITY_UNITS, 0),
+        (CONSUMED_CAPACITY_UNITS, 0),
+        (CONSUMED_CAPACITY_UNITS, 0),
+    ),
+)
+
+SECONDARY_INDEXES_CAPACITY_MAP: StaticSchema = (
+    17,
+    n0,
+    _SICM,
+    0,
+    (_k, _v),
+    ((INDEX_NAME, 0), (CAPACITY, 0)),
+)
+
+VECTOR_CAPACITY: StaticSchema = (
+    18,
+    n0,
+    _VC,
+    0,
+    (_VSRB, _VWRB),
+    ((CONSUMED_CAPACITY_UNITS, 0), (CONSUMED_CAPACITY_UNITS, 0)),
+)
+
+VECTOR_INDEXES_CAPACITY_MAP: StaticSchema = (
+    17,
+    n0,
+    _VICM,
+    0,
+    (_k, _v),
+    ((INDEX_NAME, 0), (VECTOR_CAPACITY, 0)),
+)
+
+CONSUMED_CAPACITY: StaticSchema = (
+    18,
+    n0,
+    _CC,
+    0,
+    (_TN, _CU, _RCU, _WCU, _T, _LSI, _GSI, _VI),
+    (
+        (TABLE_ARN, 0),
+        (CONSUMED_CAPACITY_UNITS, 0),
+        (CONSUMED_CAPACITY_UNITS, 0),
+        (CONSUMED_CAPACITY_UNITS, 0),
+        (CAPACITY, 0),
+        (SECONDARY_INDEXES_CAPACITY_MAP, 0),
+        (SECONDARY_INDEXES_CAPACITY_MAP, 0),
+        (VECTOR_INDEXES_CAPACITY_MAP, 0),
+    ),
+)
+
+CONSUMED_CAPACITY_MULTIPLE: StaticSchema = (
+    16,
+    n0,
+    _CCM,
+    0,
+    (_m,),
+    ((CONSUMED_CAPACITY, 0),),
+)
+
+BATCH_STATEMENT_ERROR_CODE_ENUM: StaticSchema = (
+    14,
+    n0,
+    _BSECE,
+    0,
+    (_CCF, _ICSLE, _RLE, _VE, _PTE, _TC, _TE, _ISE, _RNF, _ADc, _DI),
+    (
+        (-1, {_sV: _CCF}),
+        (-1, {_sV: _ICSLE}),
+        (-1, {_sV: _RLE}),
+        (-1, {_sV: _VE}),
+        (-1, {_sV: _PTE}),
+        (-1, {_sV: _TC}),
+        (-1, {_sV: _TE}),
+        (-1, {_sV: _ISE}),
+        (-1, {_sV: _RNF}),
+        (-1, {_sV: _ADc}),
+        (-1, {_sV: _DI}),
+    ),
+)
+
+INTERNAL_SERVER_ERROR: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_sm: _se},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+REASON: StaticSchema = (3, n0, _R, 0)
+
+RESOURCE: StaticSchema = (3, n0, _Re, 0)
+
+THROTTLING_REASON: StaticSchema = (
+    18,
+    n0,
+    _TR,
+    0,
+    (_r, _re),
+    ((REASON, 0), (RESOURCE, 0)),
+)
+
+THROTTLING_REASON_LIST: StaticSchema = (
+    16,
+    n0,
+    _TRL,
+    0,
+    (_m,),
+    ((THROTTLING_REASON, 0),),
+)
+
+REQUEST_LIMIT_EXCEEDED: StaticSchema = (
+    18,
+    n0,
+    _RLE,
+    {_sm: _c},
+    (_me, _TRh),
+    ((ERROR_MESSAGE, 0), (THROTTLING_REASON_LIST, 0)),
+)
+
+THROTTLING_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TEh,
+    {_sm: _c, _sE: 400},
+    (_me, _tR),
+    ((AVAILABILITY_ERROR_MESSAGE, 0), (THROTTLING_REASON_LIST, 0)),
+)
+
+EXPRESSION_ATTRIBUTE_NAME_VARIABLE: StaticSchema = (3, n0, _EANV, 0)
+
+EXPRESSION_ATTRIBUTE_NAME_MAP: StaticSchema = (
+    17,
+    n0,
+    _EANM,
+    0,
+    (_k, _v),
+    ((EXPRESSION_ATTRIBUTE_NAME_VARIABLE, 0), (ATTRIBUTE_NAME, 0)),
+)
+
+PROJECTION_EXPRESSION: StaticSchema = (3, n0, _PE, 0)
+
+INVALID_ENDPOINT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IEE,
+    {_sm: _c, _sE: 421},
+    (_M,),
+    ((STRING, 0),),
+)
+
+PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _PTEE,
+    {_sm: _c},
+    (_me, _TRh),
+    ((ERROR_MESSAGE, 0), (THROTTLING_REASON_LIST, 0)),
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+RETURN_ITEM_COLLECTION_METRICS: StaticSchema = (
+    14,
+    n0,
+    _RICM,
+    0,
+    (_SIZE, _NONE),
+    ((-1, {_sV: _SIZE}), (-1, {_sV: _NONE})),
+)
+
+ITEM_COLLECTION_SIZE_ESTIMATE_BOUND: StaticSchema = (10, n0, _ICSEB, 0)
+
+ITEM_COLLECTION_SIZE_ESTIMATE_RANGE: StaticSchema = (
+    16,
+    n0,
+    _ICSER,
+    0,
+    (_m,),
+    ((ITEM_COLLECTION_SIZE_ESTIMATE_BOUND, 0),),
+)
+
+ITEM_COLLECTION_SIZE_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ICSLEE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+REPLICATED_WRITE_CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RWCE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+BILLED_SIZE_BYTES: StaticSchema = (8, n0, _BSBi, 0)
+
+BILLING_MODE_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _BMS,
+    0,
+    (_BM, _LUTPPRDT),
+    ((BILLING_MODE, 0), (DATE, 0)),
+)
+
+CODE: StaticSchema = (3, n0, _Co, 0)
+
+CLIENT_REQUEST_TOKEN: StaticSchema = (3, n0, _CRT, 0)
+
+CLIENT_TOKEN: StaticSchema = (3, n0, _CT, 0)
+
+CLOUD_WATCH_LOG_GROUP_ARN: StaticSchema = (3, n0, _CWLGA, 0)
+
+COMPARISON_OPERATOR: StaticSchema = (
+    14,
+    n0,
+    _CO,
+    0,
+    (_EQ, _NE, _IN_, _LE, _LT, _GE, _GT, _BETWEEN, _NN, _NULL, _CONTAINS, _NC, _BW),
+    (
+        (-1, {_sV: _EQ}),
+        (-1, {_sV: _NE}),
+        (-1, {_sV: _IN_}),
+        (-1, {_sV: _LE}),
+        (-1, {_sV: _LT}),
+        (-1, {_sV: _GE}),
+        (-1, {_sV: _GT}),
+        (-1, {_sV: _BETWEEN}),
+        (-1, {_sV: _NN}),
+        (-1, {_sV: _NULL}),
+        (-1, {_sV: _CONTAINS}),
+        (-1, {_sV: _NC}),
+        (-1, {_sV: _BW}),
+    ),
+)
+
+CONDITIONAL_OPERATOR: StaticSchema = (
+    14,
+    n0,
+    _COo,
+    0,
+    (_AND, _OR),
+    ((-1, {_sV: _AND}), (-1, {_sV: _OR})),
+)
+
+CONDITION_EXPRESSION: StaticSchema = (3, n0, _CE, 0)
+
+EXPRESSION_ATTRIBUTE_VALUE_VARIABLE: StaticSchema = (3, n0, _EAVV, 0)
+
+CONFIRM_REMOVE_SELF_RESOURCE_ACCESS: StaticSchema = (2, n0, _CRSRA, {_smi: False})
+
+CONTINUOUS_BACKUPS_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CBS,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+POINT_IN_TIME_RECOVERY_STATUS: StaticSchema = (
+    14,
+    n0,
+    _PITRS,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+RECOVERY_PERIOD_IN_DAYS: StaticSchema = (7, n0, _RPID, 0)
+
+POINT_IN_TIME_RECOVERY_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _PITRD,
+    0,
+    (_PITRS, _RPID, _ERDT, _LRDT),
+    (
+        (POINT_IN_TIME_RECOVERY_STATUS, 0),
+        (RECOVERY_PERIOD_IN_DAYS, 0),
+        (DATE, 0),
+        (DATE, 0),
+    ),
+)
+
+CONTINUOUS_BACKUPS_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _CBD,
+    0,
+    (_CBS, _PITRD),
+    ((CONTINUOUS_BACKUPS_STATUS, 1), (POINT_IN_TIME_RECOVERY_DESCRIPTION, 0)),
+)
+
+CONTINUOUS_BACKUPS_UNAVAILABLE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CBUE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CONTRIBUTOR_INSIGHTS_ACTION: StaticSchema = (
+    14,
+    n0,
+    _CIA,
+    0,
+    (_ENABLE, _DISABLE),
+    ((-1, {_sV: _ENABLE}), (-1, {_sV: _DISABLE})),
+)
+
+CONTRIBUTOR_INSIGHTS_MODE: StaticSchema = (
+    14,
+    n0,
+    _CIM,
+    0,
+    (_AATK, _TK),
+    ((-1, {_sV: _AATK}), (-1, {_sV: _TK})),
+)
+
+CONTRIBUTOR_INSIGHTS_RULE: StaticSchema = (3, n0, _CIR, 0)
+
+CONTRIBUTOR_INSIGHTS_RULE_LIST: StaticSchema = (
+    16,
+    n0,
+    _CIRL,
+    0,
+    (_m,),
+    ((CONTRIBUTOR_INSIGHTS_RULE, 0),),
+)
+
+CONTRIBUTOR_INSIGHTS_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CIS,
+    0,
+    (_ENABLING, _ENABLED, _DISABLING, _DISABLED, _FAILED),
+    (
+        (-1, {_sV: _ENABLING}),
+        (-1, {_sV: _ENABLED}),
+        (-1, {_sV: _DISABLING}),
+        (-1, {_sV: _DISABLED}),
+        (-1, {_sV: _FAILED}),
+    ),
+)
+
+CONTRIBUTOR_INSIGHTS_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _CISo,
+    0,
+    (_TN, _IN, _CIS, _CIM),
+    (
+        (TABLE_NAME, 0),
+        (INDEX_NAME, 0),
+        (CONTRIBUTOR_INSIGHTS_STATUS, 0),
+        (CONTRIBUTOR_INSIGHTS_MODE, 0),
+    ),
+)
+
+CONTRIBUTOR_INSIGHTS_SUMMARIES: StaticSchema = (
+    16,
+    n0,
+    _CISon,
+    0,
+    (_m,),
+    ((CONTRIBUTOR_INSIGHTS_SUMMARY, 0),),
+)
+
+CREATE_BACKUP_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CBI,
+    {_smit: None},
+    (_TN, _BN),
+    ((TABLE_ARN, 1), (BACKUP_NAME, 1)),
+)
+
+CREATE_BACKUP_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CBO,
+    {_smith: None},
+    (_BD,),
+    ((BACKUP_DETAILS, 0),),
+)
+
+LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LEE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+TABLE_IN_USE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TIUE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+TABLE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TNFE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CREATE_BACKUP: StaticOperationSchema = (
+    23,
+    n0,
+    _CB,
+    0,
+    CREATE_BACKUP_INPUT,
+    CREATE_BACKUP_OUTPUT,
+    (
+        BACKUP_IN_USE_EXCEPTION,
+        CONTINUOUS_BACKUPS_UNAVAILABLE_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        TABLE_IN_USE_EXCEPTION,
+        TABLE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+WARM_THROUGHPUT: StaticSchema = (
+    18,
+    n0,
+    _WT,
+    0,
+    (_RUPS, _WUPS),
+    ((LONG_OBJECT, 0), (LONG_OBJECT, 0)),
+)
+
+CREATE_GLOBAL_SECONDARY_INDEX_ACTION: StaticSchema = (
+    18,
+    n0,
+    _CGSIA,
+    0,
+    (_IN, _KS, _P, _PT, _ODT, _WT),
+    (
+        (INDEX_NAME, 1),
+        (KEY_SCHEMA, 1),
+        (PROJECTION, 1),
+        (PROVISIONED_THROUGHPUT, 0),
+        (ON_DEMAND_THROUGHPUT, 0),
+        (WARM_THROUGHPUT, 0),
+    ),
+)
+
+REGION_NAME: StaticSchema = (3, n0, _RN, 0)
+
+REPLICA: StaticSchema = (18, n0, _Rep, 0, (_RN,), ((REGION_NAME, 0),))
+
+REPLICA_LIST: StaticSchema = (16, n0, _RL, 0, (_m,), ((REPLICA, 0),))
+
+CREATE_GLOBAL_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CGTI,
+    {_smit: None},
+    (_GTN, _RG),
+    ((TABLE_NAME, 1), (REPLICA_LIST, 1)),
+)
+
+GLOBAL_TABLE_ARN_STRING: StaticSchema = (3, n0, _GTAS, 0)
+
+GLOBAL_TABLE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _GTS,
+    0,
+    (_CREATING, _ACTIVE, _DELETING, _UPDATING),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _UPDATING}),
+    ),
+)
+
+ON_DEMAND_THROUGHPUT_OVERRIDE: StaticSchema = (
+    18,
+    n0,
+    _ODTO,
+    0,
+    (_MRRU,),
+    ((LONG_OBJECT, 0),),
+)
+
+PROVISIONED_THROUGHPUT_OVERRIDE: StaticSchema = (
+    18,
+    n0,
+    _PTO,
+    0,
+    (_RCU,),
+    ((POSITIVE_LONG_OBJECT, 0),),
+)
+
+INDEX_STATUS: StaticSchema = (
+    14,
+    n0,
+    _IS,
+    0,
+    (_CREATING, _UPDATING, _DELETING, _ACTIVE),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _UPDATING}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _ACTIVE}),
+    ),
+)
+
+GLOBAL_SECONDARY_INDEX_WARM_THROUGHPUT_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _GSIWTD,
+    0,
+    (_RUPS, _WUPS, _Sta),
+    ((POSITIVE_LONG_OBJECT, 0), (POSITIVE_LONG_OBJECT, 0), (INDEX_STATUS, 0)),
+)
+
+REPLICA_GLOBAL_SECONDARY_INDEX_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _RGSID,
+    0,
+    (_IN, _PTO, _ODTO, _WT),
+    (
+        (INDEX_NAME, 0),
+        (PROVISIONED_THROUGHPUT_OVERRIDE, 0),
+        (ON_DEMAND_THROUGHPUT_OVERRIDE, 0),
+        (GLOBAL_SECONDARY_INDEX_WARM_THROUGHPUT_DESCRIPTION, 0),
+    ),
+)
+
+REPLICA_GLOBAL_SECONDARY_INDEX_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _RGSIDL,
+    0,
+    (_m,),
+    ((REPLICA_GLOBAL_SECONDARY_INDEX_DESCRIPTION, 0),),
+)
+
+GLOBAL_TABLE_SETTINGS_REPLICATION_MODE: StaticSchema = (
+    14,
+    n0,
+    _GTSRM,
+    0,
+    (_ENABLED, _DISABLED, _EWO),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED}), (-1, {_sV: _EWO})),
+)
+
+KMS_MASTER_KEY_ID: StaticSchema = (3, n0, _KMSMKI, 0)
+
+REPLICA_STATUS: StaticSchema = (
+    14,
+    n0,
+    _RS,
+    0,
+    (
+        _CREATING,
+        _CF,
+        _UPDATING,
+        _DELETING,
+        _ACTIVE,
+        _RD,
+        _IEC,
+        _ARCHIVING,
+        _ARCHIVED,
+        _RNA,
+    ),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _CF}),
+        (-1, {_sV: _UPDATING}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _RD}),
+        (-1, {_sV: _IEC}),
+        (-1, {_sV: _ARCHIVING}),
+        (-1, {_sV: _ARCHIVED}),
+        (-1, {_sV: _RNA}),
+    ),
+)
+
+REPLICA_STATUS_DESCRIPTION: StaticSchema = (3, n0, _RSD, 0)
+
+REPLICA_STATUS_PERCENT_PROGRESS: StaticSchema = (3, n0, _RSPP, 0)
+
+TABLE_CLASS: StaticSchema = (
+    14,
+    n0,
+    _TCa,
+    0,
+    (_STANDARD, _SIA),
+    ((-1, {_sV: _STANDARD}), (-1, {_sV: _SIA})),
+)
+
+TABLE_CLASS_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _TCS,
+    0,
+    (_TCa, _LUDT),
+    ((TABLE_CLASS, 0), (DATE, 0)),
+)
+
+TABLE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _TS,
+    0,
+    (_CREATING, _UPDATING, _DELETING, _ACTIVE, _IEC, _ARCHIVING, _ARCHIVED, _RNA),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _UPDATING}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _IEC}),
+        (-1, {_sV: _ARCHIVING}),
+        (-1, {_sV: _ARCHIVED}),
+        (-1, {_sV: _RNA}),
+    ),
+)
+
+TABLE_WARM_THROUGHPUT_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _TWTD,
+    0,
+    (_RUPS, _WUPS, _Sta),
+    ((POSITIVE_LONG_OBJECT, 0), (POSITIVE_LONG_OBJECT, 0), (TABLE_STATUS, 0)),
+)
+
+REPLICA_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _RDe,
+    0,
+    (_RN, _RS, _RA, _RSD, _RSPP, _KMSMKI, _PTO, _ODTO, _WT, _GSI, _RIDT, _RTCS, _GTSRM),
+    (
+        (REGION_NAME, 0),
+        (REPLICA_STATUS, 0),
+        (STRING, 0),
+        (REPLICA_STATUS_DESCRIPTION, 0),
+        (REPLICA_STATUS_PERCENT_PROGRESS, 0),
+        (KMS_MASTER_KEY_ID, 0),
+        (PROVISIONED_THROUGHPUT_OVERRIDE, 0),
+        (ON_DEMAND_THROUGHPUT_OVERRIDE, 0),
+        (TABLE_WARM_THROUGHPUT_DESCRIPTION, 0),
+        (REPLICA_GLOBAL_SECONDARY_INDEX_DESCRIPTION_LIST, 0),
+        (DATE, 0),
+        (TABLE_CLASS_SUMMARY, 0),
+        (GLOBAL_TABLE_SETTINGS_REPLICATION_MODE, 0),
+    ),
+)
+
+REPLICA_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _RDL,
+    0,
+    (_m,),
+    ((REPLICA_DESCRIPTION, 0),),
+)
+
+GLOBAL_TABLE_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _GTD,
+    0,
+    (_RG, _GTA, _CDT, _GTS, _GTN),
+    (
+        (REPLICA_DESCRIPTION_LIST, 0),
+        (GLOBAL_TABLE_ARN_STRING, 0),
+        (DATE, 0),
+        (GLOBAL_TABLE_STATUS, 0),
+        (TABLE_NAME, 0),
+    ),
+)
+
+CREATE_GLOBAL_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CGTO,
+    {_smith: None},
+    (_GTD,),
+    ((GLOBAL_TABLE_DESCRIPTION, 0),),
+)
+
+GLOBAL_TABLE_ALREADY_EXISTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _GTAEE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CREATE_GLOBAL_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _CGT,
+    0,
+    CREATE_GLOBAL_TABLE_INPUT,
+    CREATE_GLOBAL_TABLE_OUTPUT,
+    (
+        GLOBAL_TABLE_ALREADY_EXISTS_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        TABLE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+CREATE_GLOBAL_TABLE_WITNESS_GROUP_MEMBER_ACTION: StaticSchema = (
+    18,
+    n0,
+    _CGTWGMA,
+    0,
+    (_RN,),
+    ((REGION_NAME, 1),),
+)
+
+CREATE_REPLICA_ACTION: StaticSchema = (18, n0, _CRA, 0, (_RN,), ((REGION_NAME, 1),))
+
+REPLICA_GLOBAL_SECONDARY_INDEX: StaticSchema = (
+    18,
+    n0,
+    _RGSI,
+    0,
+    (_IN, _PTO, _ODTO),
+    (
+        (INDEX_NAME, 1),
+        (PROVISIONED_THROUGHPUT_OVERRIDE, 0),
+        (ON_DEMAND_THROUGHPUT_OVERRIDE, 0),
+    ),
+)
+
+REPLICA_GLOBAL_SECONDARY_INDEX_LIST: StaticSchema = (
+    16,
+    n0,
+    _RGSIL,
+    0,
+    (_m,),
+    ((REPLICA_GLOBAL_SECONDARY_INDEX, 0),),
+)
+
+CREATE_REPLICATION_GROUP_MEMBER_ACTION: StaticSchema = (
+    18,
+    n0,
+    _CRGMA,
+    0,
+    (_RN, _KMSMKI, _PTO, _ODTO, _GSI, _TCO),
+    (
+        (REGION_NAME, 1),
+        (KMS_MASTER_KEY_ID, 0),
+        (PROVISIONED_THROUGHPUT_OVERRIDE, 0),
+        (ON_DEMAND_THROUGHPUT_OVERRIDE, 0),
+        (REPLICA_GLOBAL_SECONDARY_INDEX_LIST, 0),
+        (TABLE_CLASS, 0),
+    ),
+)
+
+DELETION_PROTECTION_ENABLED: StaticSchema = (2, n0, _DPE, 0)
+
+GLOBAL_SECONDARY_INDEX: StaticSchema = (
+    18,
+    n0,
+    _GSIl,
+    0,
+    (_IN, _KS, _P, _PT, _ODT, _WT),
+    (
+        (INDEX_NAME, 1),
+        (KEY_SCHEMA, 1),
+        (PROJECTION, 1),
+        (PROVISIONED_THROUGHPUT, 0),
+        (ON_DEMAND_THROUGHPUT, 0),
+        (WARM_THROUGHPUT, 0),
+    ),
+)
+
+GLOBAL_SECONDARY_INDEX_LIST: StaticSchema = (
+    16,
+    n0,
+    _GSIL,
+    0,
+    (_m,),
+    ((GLOBAL_SECONDARY_INDEX, 0),),
+)
+
+LOCAL_SECONDARY_INDEX: StaticSchema = (
+    18,
+    n0,
+    _LSIo,
+    0,
+    (_IN, _KS, _P),
+    ((INDEX_NAME, 1), (KEY_SCHEMA, 1), (PROJECTION, 1)),
+)
+
+LOCAL_SECONDARY_INDEX_LIST: StaticSchema = (
+    16,
+    n0,
+    _LSIL,
+    0,
+    (_m,),
+    ((LOCAL_SECONDARY_INDEX, 0),),
+)
+
+RESOURCE_POLICY: StaticSchema = (3, n0, _RP, 0)
+
+SSE_ENABLED: StaticSchema = (2, n0, _SSEE, 0)
+
+SSE_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _SSESp,
+    0,
+    (_E, _SSET, _KMSMKI),
+    ((SSE_ENABLED, 0), (SSE_TYPE, 0), (KMS_MASTER_KEY_ID, 0)),
+)
+
+TAG_KEY_STRING: StaticSchema = (3, n0, _TKS, 0)
+
+TAG_VALUE_STRING: StaticSchema = (3, n0, _TVS, 0)
+
+TAG: StaticSchema = (
+    18,
+    n0,
+    _Ta,
+    0,
+    (_K, _V),
+    ((TAG_KEY_STRING, 1), (TAG_VALUE_STRING, 1)),
+)
+
+TAG_LIST: StaticSchema = (16, n0, _TL, 0, (_m,), ((TAG, 0),))
+
+VECTOR_INDEX: StaticSchema = (
+    18,
+    n0,
+    _VIe,
+    0,
+    (_IN, _VA, _SSe, _P, _Di, _DF),
+    (
+        (INDEX_NAME, 1),
+        (VECTOR_ATTRIBUTE_DEFINITION, 1),
+        (SEARCH_SCHEMA, 0),
+        (PROJECTION, 1),
+        (POSITIVE_LONG_OBJECT, 1),
+        (VECTOR_DISTANCE_FUNCTION, 1),
+    ),
+)
+
+VECTOR_INDEX_LIST: StaticSchema = (16, n0, _VIL, 0, (_m,), ((VECTOR_INDEX, 0),))
+
+CREATE_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CTI,
+    {_smit: None},
+    (
+        _ADt,
+        _TN,
+        _KS,
+        _LSI,
+        _GSI,
+        _BM,
+        _PT,
+        _SS,
+        _SSESp,
+        _Tag,
+        _TCa,
+        _DPE,
+        _WT,
+        _RP,
+        _ODT,
+        _GTSA,
+        _GTSRM,
+        _VI,
+    ),
+    (
+        (ATTRIBUTE_DEFINITIONS, 0),
+        (TABLE_ARN, 1),
+        (KEY_SCHEMA, 0),
+        (LOCAL_SECONDARY_INDEX_LIST, 0),
+        (GLOBAL_SECONDARY_INDEX_LIST, 0),
+        (BILLING_MODE, 0),
+        (PROVISIONED_THROUGHPUT, 0),
+        (STREAM_SPECIFICATION, 0),
+        (SSE_SPECIFICATION, 0),
+        (TAG_LIST, 0),
+        (TABLE_CLASS, 0),
+        (DELETION_PROTECTION_ENABLED, 0),
+        (WARM_THROUGHPUT, 0),
+        (RESOURCE_POLICY, 0),
+        (ON_DEMAND_THROUGHPUT, 0),
+        (TABLE_ARN, 0),
+        (GLOBAL_TABLE_SETTINGS_REPLICATION_MODE, 0),
+        (VECTOR_INDEX_LIST, 0),
+    ),
+)
+
+NON_NEGATIVE_LONG_OBJECT: StaticSchema = (8, n0, _NNLO, 0)
+
+PROVISIONED_THROUGHPUT_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _PTD,
+    0,
+    (_LIDT, _LDDT, _NODT, _RCU, _WCU),
+    (
+        (DATE, 0),
+        (DATE, 0),
+        (POSITIVE_LONG_OBJECT, 0),
+        (NON_NEGATIVE_LONG_OBJECT, 0),
+        (NON_NEGATIVE_LONG_OBJECT, 0),
+    ),
+)
+
+GLOBAL_SECONDARY_INDEX_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _GSID,
+    0,
+    (_IN, _KS, _P, _IS, _Ba, _PT, _ISB, _IC, _IA, _ODT, _WT),
+    (
+        (INDEX_NAME, 0),
+        (KEY_SCHEMA, 0),
+        (PROJECTION, 0),
+        (INDEX_STATUS, 0),
+        (BACKFILLING, 0),
+        (PROVISIONED_THROUGHPUT_DESCRIPTION, 0),
+        (LONG_OBJECT, 0),
+        (LONG_OBJECT, 0),
+        (STRING, 0),
+        (ON_DEMAND_THROUGHPUT, 0),
+        (GLOBAL_SECONDARY_INDEX_WARM_THROUGHPUT_DESCRIPTION, 0),
+    ),
+)
+
+GLOBAL_SECONDARY_INDEX_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _GSIDL,
+    0,
+    (_m,),
+    ((GLOBAL_SECONDARY_INDEX_DESCRIPTION, 0),),
+)
+
+WITNESS_STATUS: StaticSchema = (
+    14,
+    n0,
+    _WS,
+    0,
+    (_CREATING, _DELETING, _ACTIVE),
+    ((-1, {_sV: _CREATING}), (-1, {_sV: _DELETING}), (-1, {_sV: _ACTIVE})),
+)
+
+GLOBAL_TABLE_WITNESS_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _GTWD,
+    0,
+    (_RN, _WS),
+    ((REGION_NAME, 0), (WITNESS_STATUS, 0)),
+)
+
+GLOBAL_TABLE_WITNESS_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _GTWDL,
+    0,
+    (_m,),
+    ((GLOBAL_TABLE_WITNESS_DESCRIPTION, 0),),
+)
+
+STREAM_ARN: StaticSchema = (3, n0, _SA, 0)
+
+LOCAL_SECONDARY_INDEX_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _LSID,
+    0,
+    (_IN, _KS, _P, _ISB, _IC, _IA),
+    (
+        (INDEX_NAME, 0),
+        (KEY_SCHEMA, 0),
+        (PROJECTION, 0),
+        (LONG_OBJECT, 0),
+        (LONG_OBJECT, 0),
+        (STRING, 0),
+    ),
+)
+
+LOCAL_SECONDARY_INDEX_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _LSIDL,
+    0,
+    (_m,),
+    ((LOCAL_SECONDARY_INDEX_DESCRIPTION, 0),),
+)
+
+MULTI_REGION_CONSISTENCY: StaticSchema = (
+    14,
+    n0,
+    _MRC,
+    0,
+    (_EVENTUAL, _STRONG),
+    ((-1, {_sV: _EVENTUAL}), (-1, {_sV: _STRONG})),
+)
+
+RESTORE_IN_PROGRESS: StaticSchema = (2, n0, _RIP, 0)
+
+RESTORE_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _RSe,
+    0,
+    (_SBA, _STA, _RDT, _RIP),
+    ((BACKUP_ARN, 0), (TABLE_ARN, 0), (DATE, 1), (RESTORE_IN_PROGRESS, 1)),
+)
+
+VECTOR_INDEX_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _VID,
+    0,
+    (_IN, _SSe, _P, _VA, _Di, _DF, _IS, _Ba, _ISB, _IC, _IA),
+    (
+        (INDEX_NAME, 0),
+        (SEARCH_SCHEMA, 0),
+        (PROJECTION, 0),
+        (VECTOR_ATTRIBUTE_DEFINITION, 0),
+        (POSITIVE_LONG_OBJECT, 0),
+        (VECTOR_DISTANCE_FUNCTION, 0),
+        (INDEX_STATUS, 0),
+        (BACKFILLING, 0),
+        (LONG_OBJECT, 0),
+        (LONG_OBJECT, 0),
+        (STRING, 0),
+    ),
+)
+
+VECTOR_INDEX_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _VIDL,
+    0,
+    (_m,),
+    ((VECTOR_INDEX_DESCRIPTION, 0),),
+)
+
+TABLE_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _TD,
+    0,
+    (
+        _ADt,
+        _TN,
+        _KS,
+        _TS,
+        _CDT,
+        _PT,
+        _TSB,
+        _IC,
+        _TA,
+        _TI,
+        _BMS,
+        _LSI,
+        _GSI,
+        _SS,
+        _LSL,
+        _LSA,
+        _GTV,
+        _Repl,
+        _GTW,
+        _GTSRM,
+        _RSe,
+        _SSED,
+        _AS,
+        _TCS,
+        _DPE,
+        _ODT,
+        _WT,
+        _MRC,
+        _VI,
+    ),
+    (
+        (ATTRIBUTE_DEFINITIONS, 0),
+        (TABLE_NAME, 0),
+        (KEY_SCHEMA, 0),
+        (TABLE_STATUS, 0),
+        (DATE, 0),
+        (PROVISIONED_THROUGHPUT_DESCRIPTION, 0),
+        (LONG_OBJECT, 0),
+        (LONG_OBJECT, 0),
+        (STRING, 0),
+        (TABLE_ID, 0),
+        (BILLING_MODE_SUMMARY, 0),
+        (LOCAL_SECONDARY_INDEX_DESCRIPTION_LIST, 0),
+        (GLOBAL_SECONDARY_INDEX_DESCRIPTION_LIST, 0),
+        (STREAM_SPECIFICATION, 0),
+        (STRING, 0),
+        (STREAM_ARN, 0),
+        (STRING, 0),
+        (REPLICA_DESCRIPTION_LIST, 0),
+        (GLOBAL_TABLE_WITNESS_DESCRIPTION_LIST, 0),
+        (GLOBAL_TABLE_SETTINGS_REPLICATION_MODE, 0),
+        (RESTORE_SUMMARY, 0),
+        (SSE_DESCRIPTION, 0),
+        (ARCHIVAL_SUMMARY, 0),
+        (TABLE_CLASS_SUMMARY, 0),
+        (DELETION_PROTECTION_ENABLED, 0),
+        (ON_DEMAND_THROUGHPUT, 0),
+        (TABLE_WARM_THROUGHPUT_DESCRIPTION, 0),
+        (MULTI_REGION_CONSISTENCY, 0),
+        (VECTOR_INDEX_DESCRIPTION_LIST, 0),
+    ),
+)
+
+CREATE_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CTO,
+    {_smith: None},
+    (_TD,),
+    ((TABLE_DESCRIPTION, 0),),
+)
+
+RESOURCE_IN_USE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RIUE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CREATE_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _CTr,
+    0,
+    CREATE_TABLE_INPUT,
+    CREATE_TABLE_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+    ),
+)
+
+CREATE_VECTOR_INDEX_ACTION: StaticSchema = (
+    18,
+    n0,
+    _CVIA,
+    0,
+    (_IN, _VA, _SSe, _P, _Di, _DF),
+    (
+        (INDEX_NAME, 1),
+        (VECTOR_ATTRIBUTE_DEFINITION, 1),
+        (SEARCH_SCHEMA, 0),
+        (PROJECTION, 1),
+        (POSITIVE_LONG_OBJECT, 1),
+        (VECTOR_DISTANCE_FUNCTION, 1),
+    ),
+)
+
+CSV_DELIMITER: StaticSchema = (3, n0, _CD, 0)
+
+CSV_HEADER: StaticSchema = (3, n0, _CH, 0)
+
+CSV_HEADER_LIST: StaticSchema = (16, n0, _CHL, 0, (_m,), ((CSV_HEADER, 0),))
+
+CSV_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _COs,
+    0,
+    (_De, _HL),
+    ((CSV_DELIMITER, 0), (CSV_HEADER_LIST, 0)),
+)
+
+DELETE_BACKUP_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DBI,
+    {_smit: None},
+    (_BA,),
+    ((BACKUP_ARN, 1),),
+)
+
+DELETE_BACKUP_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DBO,
+    {_smith: None},
+    (_BDa,),
+    ((BACKUP_DESCRIPTION, 0),),
+)
+
+DELETE_BACKUP: StaticOperationSchema = (
+    23,
+    n0,
+    _DB,
+    0,
+    DELETE_BACKUP_INPUT,
+    DELETE_BACKUP_OUTPUT,
+    (
+        BACKUP_IN_USE_EXCEPTION,
+        BACKUP_NOT_FOUND_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+    ),
+)
+
+DELETE_GLOBAL_SECONDARY_INDEX_ACTION: StaticSchema = (
+    18,
+    n0,
+    _DGSIA,
+    0,
+    (_IN,),
+    ((INDEX_NAME, 1),),
+)
+
+DELETE_GLOBAL_TABLE_WITNESS_GROUP_MEMBER_ACTION: StaticSchema = (
+    18,
+    n0,
+    _DGTWGMA,
+    0,
+    (_RN,),
+    ((REGION_NAME, 1),),
+)
+
+RETURN_VALUE: StaticSchema = (
+    14,
+    n0,
+    _RV,
+    0,
+    (_NONE, _AO, _UO, _AN_, _UN),
+    (
+        (-1, {_sV: _NONE}),
+        (-1, {_sV: _AO}),
+        (-1, {_sV: _UO}),
+        (-1, {_sV: _AN_}),
+        (-1, {_sV: _UN}),
+    ),
+)
+
+TRANSACTION_CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TCE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+DELETE_REPLICA_ACTION: StaticSchema = (18, n0, _DRA, 0, (_RN,), ((REGION_NAME, 1),))
+
+DELETE_REPLICATION_GROUP_MEMBER_ACTION: StaticSchema = (
+    18,
+    n0,
+    _DRGMA,
+    0,
+    (_RN,),
+    ((REGION_NAME, 1),),
+)
+
+POLICY_REVISION_ID: StaticSchema = (3, n0, _PRI, 0)
+
+RESOURCE_ARN_STRING: StaticSchema = (3, n0, _RAS, 0)
+
+DELETE_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPI,
+    {_smit: None},
+    (_RAe, _ERI),
+    ((RESOURCE_ARN_STRING, 1), (POLICY_REVISION_ID, 0)),
+)
+
+DELETE_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPO,
+    {_smith: None},
+    (_RI,),
+    ((POLICY_REVISION_ID, 0),),
+)
+
+POLICY_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _PNFE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+DELETE_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _DRP,
+    0,
+    DELETE_RESOURCE_POLICY_INPUT,
+    DELETE_RESOURCE_POLICY_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        POLICY_NOT_FOUND_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+DELETE_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTI,
+    {_smit: None},
+    (_TN,),
+    ((TABLE_ARN, 1),),
+)
+
+DELETE_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTO,
+    {_smith: None},
+    (_TD,),
+    ((TABLE_DESCRIPTION, 0),),
+)
+
+DELETE_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _DT,
+    0,
+    DELETE_TABLE_INPUT,
+    DELETE_TABLE_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+DELETE_VECTOR_INDEX_ACTION: StaticSchema = (
+    18,
+    n0,
+    _DVIA,
+    0,
+    (_IN,),
+    ((INDEX_NAME, 1),),
+)
+
+DESCRIBE_BACKUP_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DBIe,
+    {_smit: None},
+    (_BA,),
+    ((BACKUP_ARN, 1),),
+)
+
+DESCRIBE_BACKUP_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DBOe,
+    {_smith: None},
+    (_BDa,),
+    ((BACKUP_DESCRIPTION, 0),),
+)
+
+DESCRIBE_BACKUP: StaticOperationSchema = (
+    23,
+    n0,
+    _DBe,
+    0,
+    DESCRIBE_BACKUP_INPUT,
+    DESCRIBE_BACKUP_OUTPUT,
+    (BACKUP_NOT_FOUND_EXCEPTION, INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION),
+)
+
+DESCRIBE_CONTINUOUS_BACKUPS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCBI,
+    {_smit: None},
+    (_TN,),
+    ((TABLE_ARN, 1),),
+)
+
+DESCRIBE_CONTINUOUS_BACKUPS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCBO,
+    {_smith: None},
+    (_CBD,),
+    ((CONTINUOUS_BACKUPS_DESCRIPTION, 0),),
+)
+
+DESCRIBE_CONTINUOUS_BACKUPS: StaticOperationSchema = (
+    23,
+    n0,
+    _DCB,
+    0,
+    DESCRIBE_CONTINUOUS_BACKUPS_INPUT,
+    DESCRIBE_CONTINUOUS_BACKUPS_OUTPUT,
+    (INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION, TABLE_NOT_FOUND_EXCEPTION),
+)
+
+DESCRIBE_CONTRIBUTOR_INSIGHTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCII,
+    {_smit: None},
+    (_TN, _IN),
+    ((TABLE_ARN, 1), (INDEX_NAME, 0)),
+)
+
+EXCEPTION_DESCRIPTION: StaticSchema = (3, n0, _ED, 0)
+
+EXCEPTION_NAME: StaticSchema = (3, n0, _EN, 0)
+
+FAILURE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _FE,
+    0,
+    (_EN, _ED),
+    ((EXCEPTION_NAME, 0), (EXCEPTION_DESCRIPTION, 0)),
+)
+
+LAST_UPDATE_DATE_TIME: StaticSchema = (4, n0, _LUDT, 0)
+
+DESCRIBE_CONTRIBUTOR_INSIGHTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCIO,
+    {_smith: None},
+    (_TN, _IN, _CIRL, _CIS, _LUDT, _FE, _CIM),
+    (
+        (TABLE_NAME, 0),
+        (INDEX_NAME, 0),
+        (CONTRIBUTOR_INSIGHTS_RULE_LIST, 0),
+        (CONTRIBUTOR_INSIGHTS_STATUS, 0),
+        (LAST_UPDATE_DATE_TIME, 0),
+        (FAILURE_EXCEPTION, 0),
+        (CONTRIBUTOR_INSIGHTS_MODE, 0),
+    ),
+)
+
+DESCRIBE_CONTRIBUTOR_INSIGHTS: StaticOperationSchema = (
+    23,
+    n0,
+    _DCI,
+    0,
+    DESCRIBE_CONTRIBUTOR_INSIGHTS_INPUT,
+    DESCRIBE_CONTRIBUTOR_INSIGHTS_OUTPUT,
+    (INTERNAL_SERVER_ERROR, RESOURCE_NOT_FOUND_EXCEPTION),
+)
+
+DESCRIBE_ENDPOINTS_INPUT: StaticSchema = (18, n0, _DEI, {_sSI: _cDER, _smit: None})
+
+LONG: StaticSchema = (8, n0, _L, {_smi: 0})
+
+ENDPOINT: StaticSchema = (
+    18,
+    n0,
+    _En,
+    0,
+    (_A, _CPIM),
+    ((STRING, 1), (LONG, {_smi: 0, _s: None})),
+)
+
+ENDPOINTS: StaticSchema = (16, n0, _End, 0, (_m,), ((ENDPOINT, 0),))
+
+DESCRIBE_ENDPOINTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DEO,
+    {_sSI: _cDERo, _smith: None},
+    (_End,),
+    ((ENDPOINTS, 1),),
+)
+
+DESCRIBE_ENDPOINTS: StaticOperationSchema = (
+    23,
+    n0,
+    _DE,
+    0,
+    DESCRIBE_ENDPOINTS_INPUT,
+    DESCRIBE_ENDPOINTS_OUTPUT,
+    (),
+)
+
+EXPORT_ARN: StaticSchema = (3, n0, _EA, 0)
+
+DESCRIBE_EXPORT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DEIe,
+    {_smit: None},
+    (_EA,),
+    ((EXPORT_ARN, 1),),
+)
+
+EXPORT_END_TIME: StaticSchema = (4, n0, _EET, 0)
+
+EXPORT_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _EF,
+    0,
+    (_DJ, _ION),
+    ((-1, {_sV: _DJ}), (-1, {_sV: _ION})),
+)
+
+EXPORT_MANIFEST: StaticSchema = (3, n0, _EMx, 0)
+
+EXPORT_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ES,
+    0,
+    (_IP, _COMPLETED, _FAILED),
+    ((-1, {_sV: _IP}), (-1, {_sV: _COMPLETED}), (-1, {_sV: _FAILED})),
+)
+
+EXPORT_TIME: StaticSchema = (4, n0, _ET, 0)
+
+EXPORT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ETx,
+    0,
+    (_FE_, _IE),
+    ((-1, {_sV: _FE_}), (-1, {_sV: _IE})),
+)
+
+FAILURE_CODE: StaticSchema = (3, n0, _FC, 0)
+
+FAILURE_MESSAGE: StaticSchema = (3, n0, _FM, 0)
+
+KEY_EXPRESSION: StaticSchema = (3, n0, _KE, 0)
+
+EXPORT_FROM_TIME: StaticSchema = (4, n0, _EFT, 0)
+
+EXPORT_TO_TIME: StaticSchema = (4, n0, _ETT, 0)
+
+EXPORT_VIEW_TYPE: StaticSchema = (
+    14,
+    n0,
+    _EVT,
+    0,
+    (_NI, _NAOI),
+    ((-1, {_sV: _NI}), (-1, {_sV: _NAOI})),
+)
+
+INCREMENTAL_EXPORT_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _IES,
+    0,
+    (_EFT, _ETT, _EVT),
+    ((EXPORT_FROM_TIME, 0), (EXPORT_TO_TIME, 0), (EXPORT_VIEW_TYPE, 0)),
+)
+
+S3_BUCKET: StaticSchema = (3, n0, _SB, 0)
+
+S3_BUCKET_OWNER: StaticSchema = (3, n0, _SBO, 0)
+
+S3_PREFIX: StaticSchema = (3, n0, _SPr, 0)
+
+S3_SSE_ALGORITHM: StaticSchema = (
+    14,
+    n0,
+    _SSA,
+    0,
+    (_AES, _KMS),
+    ((-1, {_sV: _AES}), (-1, {_sV: _KMS})),
+)
+
+S3_SSE_KMS_KEY_ID: StaticSchema = (3, n0, _SSKKI, 0)
+
+EXPORT_START_TIME: StaticSchema = (4, n0, _EST, 0)
+
+EXPORT_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ENFE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+DESCRIBE_GLOBAL_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DGTI,
+    {_smit: None},
+    (_GTN,),
+    ((TABLE_NAME, 1),),
+)
+
+DESCRIBE_GLOBAL_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DGTO,
+    {_smith: None},
+    (_GTD,),
+    ((GLOBAL_TABLE_DESCRIPTION, 0),),
+)
+
+GLOBAL_TABLE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _GTNFE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+DESCRIBE_GLOBAL_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _DGT,
+    0,
+    DESCRIBE_GLOBAL_TABLE_INPUT,
+    DESCRIBE_GLOBAL_TABLE_OUTPUT,
+    (
+        GLOBAL_TABLE_NOT_FOUND_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+    ),
+)
+
+DESCRIBE_GLOBAL_TABLE_SETTINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DGTSI,
+    {_smit: None},
+    (_GTN,),
+    ((TABLE_NAME, 1),),
+)
+
+REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _RGSISD,
+    0,
+    (_IN, _IS, _PRCU, _PRCASS, _PWCU, _PWCASS),
+    (
+        (INDEX_NAME, 1),
+        (INDEX_STATUS, 0),
+        (POSITIVE_LONG_OBJECT, 0),
+        (AUTO_SCALING_SETTINGS_DESCRIPTION, 0),
+        (POSITIVE_LONG_OBJECT, 0),
+        (AUTO_SCALING_SETTINGS_DESCRIPTION, 0),
+    ),
+)
+
+REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _RGSISDL,
+    0,
+    (_m,),
+    ((REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_DESCRIPTION, 0),),
+)
+
+REPLICA_SETTINGS_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _RSDe,
+    0,
+    (_RN, _RS, _RBMS, _RPRCU, _RPRCASS, _RPWCU, _RPWCASS, _RGSIS, _RTCS),
+    (
+        (REGION_NAME, 1),
+        (REPLICA_STATUS, 0),
+        (BILLING_MODE_SUMMARY, 0),
+        (NON_NEGATIVE_LONG_OBJECT, 0),
+        (AUTO_SCALING_SETTINGS_DESCRIPTION, 0),
+        (NON_NEGATIVE_LONG_OBJECT, 0),
+        (AUTO_SCALING_SETTINGS_DESCRIPTION, 0),
+        (REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_DESCRIPTION_LIST, 0),
+        (TABLE_CLASS_SUMMARY, 0),
+    ),
+)
+
+REPLICA_SETTINGS_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _RSDL,
+    0,
+    (_m,),
+    ((REPLICA_SETTINGS_DESCRIPTION, 0),),
+)
+
+DESCRIBE_GLOBAL_TABLE_SETTINGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DGTSO,
+    {_smith: None},
+    (_GTN, _RSep),
+    ((TABLE_NAME, 0), (REPLICA_SETTINGS_DESCRIPTION_LIST, 0)),
+)
+
+DESCRIBE_GLOBAL_TABLE_SETTINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _DGTS,
+    0,
+    DESCRIBE_GLOBAL_TABLE_SETTINGS_INPUT,
+    DESCRIBE_GLOBAL_TABLE_SETTINGS_OUTPUT,
+    (
+        GLOBAL_TABLE_NOT_FOUND_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+    ),
+)
+
+IMPORT_ARN: StaticSchema = (3, n0, _IAm, 0)
+
+DESCRIBE_IMPORT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DII,
+    {_smit: None},
+    (_IAm,),
+    ((IMPORT_ARN, 1),),
+)
+
+IMPORT_END_TIME: StaticSchema = (4, n0, _IET, 0)
+
+ERROR_COUNT: StaticSchema = (8, n0, _EC, {_smi: 0})
+
+IMPORTED_ITEM_COUNT: StaticSchema = (8, n0, _IIC, {_smi: 0})
+
+IMPORT_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ISm,
+    0,
+    (_IP, _COMPLETED, _CANCELLING, _CANCELLED, _FAILED),
+    (
+        (-1, {_sV: _IP}),
+        (-1, {_sV: _COMPLETED}),
+        (-1, {_sV: _CANCELLING}),
+        (-1, {_sV: _CANCELLED}),
+        (-1, {_sV: _FAILED}),
+    ),
+)
+
+INPUT_COMPRESSION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ICT,
+    0,
+    (_GZIP, _ZSTD, _NONE),
+    ((-1, {_sV: _GZIP}), (-1, {_sV: _ZSTD}), (-1, {_sV: _NONE})),
+)
+
+INPUT_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _IFn,
+    0,
+    (_DJ, _ION, _CSV),
+    ((-1, {_sV: _DJ}), (-1, {_sV: _ION}), (-1, {_sV: _CSV})),
+)
+
+INPUT_FORMAT_OPTIONS: StaticSchema = (18, n0, _IFO, 0, (_Cs,), ((CSV_OPTIONS, 0),))
+
+PROCESSED_ITEM_COUNT: StaticSchema = (8, n0, _PIC, {_smi: 0})
+
+S3_BUCKET_SOURCE: StaticSchema = (
+    18,
+    n0,
+    _SBS,
+    0,
+    (_SBO, _SB, _SKP),
+    ((S3_BUCKET_OWNER, 0), (S3_BUCKET, 1), (S3_PREFIX, 0)),
+)
+
+IMPORT_START_TIME: StaticSchema = (4, n0, _IST, 0)
+
+TABLE_CREATION_PARAMETERS: StaticSchema = (
+    18,
+    n0,
+    _TCP,
+    0,
+    (_TN, _ADt, _KS, _BM, _PT, _ODT, _SSESp, _GSI, _VI),
+    (
+        (TABLE_NAME, 1),
+        (ATTRIBUTE_DEFINITIONS, 1),
+        (KEY_SCHEMA, 1),
+        (BILLING_MODE, 0),
+        (PROVISIONED_THROUGHPUT, 0),
+        (ON_DEMAND_THROUGHPUT, 0),
+        (SSE_SPECIFICATION, 0),
+        (GLOBAL_SECONDARY_INDEX_LIST, 0),
+        (VECTOR_INDEX_LIST, 0),
+    ),
+)
+
+IMPORT_TABLE_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _ITD,
+    0,
+    (
+        _IAm,
+        _ISm,
+        _TA,
+        _TI,
+        _CT,
+        _SBS,
+        _EC,
+        _CWLGA,
+        _IFn,
+        _IFO,
+        _ICT,
+        _TCP,
+        _ST,
+        _ETn,
+        _PSB,
+        _PIC,
+        _IIC,
+        _FC,
+        _FM,
+    ),
+    (
+        (IMPORT_ARN, 0),
+        (IMPORT_STATUS, 0),
+        (TABLE_ARN, 0),
+        (TABLE_ID, 0),
+        (CLIENT_TOKEN, 0),
+        (S3_BUCKET_SOURCE, 0),
+        (ERROR_COUNT, {_smi: 0}),
+        (CLOUD_WATCH_LOG_GROUP_ARN, 0),
+        (INPUT_FORMAT, 0),
+        (INPUT_FORMAT_OPTIONS, 0),
+        (INPUT_COMPRESSION_TYPE, 0),
+        (TABLE_CREATION_PARAMETERS, 0),
+        (IMPORT_START_TIME, 0),
+        (IMPORT_END_TIME, 0),
+        (LONG_OBJECT, 0),
+        (PROCESSED_ITEM_COUNT, {_smi: 0}),
+        (IMPORTED_ITEM_COUNT, {_smi: 0}),
+        (FAILURE_CODE, 0),
+        (FAILURE_MESSAGE, 0),
+    ),
+)
+
+DESCRIBE_IMPORT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIO,
+    {_smith: None},
+    (_ITD,),
+    ((IMPORT_TABLE_DESCRIPTION, 1),),
+)
+
+IMPORT_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _INFE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+DESCRIBE_IMPORT: StaticOperationSchema = (
+    23,
+    n0,
+    _DIe,
+    0,
+    DESCRIBE_IMPORT_INPUT,
+    DESCRIBE_IMPORT_OUTPUT,
+    (IMPORT_NOT_FOUND_EXCEPTION,),
+)
+
+DESCRIBE_KINESIS_STREAMING_DESTINATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DKSDI,
+    {_smit: None},
+    (_TN,),
+    ((TABLE_ARN, 1),),
+)
+
+DESTINATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DS,
+    0,
+    (_ENABLING, _ACTIVE, _DISABLING, _DISABLED, _EF_, _UPDATING),
+    (
+        (-1, {_sV: _ENABLING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _DISABLING}),
+        (-1, {_sV: _DISABLED}),
+        (-1, {_sV: _EF_}),
+        (-1, {_sV: _UPDATING}),
+    ),
+)
+
+KINESIS_DATA_STREAM_DESTINATION: StaticSchema = (
+    18,
+    n0,
+    _KDSD,
+    0,
+    (_SA, _DS, _DSD, _ACDTP),
+    (
+        (STREAM_ARN, 0),
+        (DESTINATION_STATUS, 0),
+        (STRING, 0),
+        (APPROXIMATE_CREATION_DATE_TIME_PRECISION, 0),
+    ),
+)
+
+KINESIS_DATA_STREAM_DESTINATIONS: StaticSchema = (
+    16,
+    n0,
+    _KDSDi,
+    0,
+    (_m,),
+    ((KINESIS_DATA_STREAM_DESTINATION, 0),),
+)
+
+DESCRIBE_KINESIS_STREAMING_DESTINATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DKSDO,
+    {_smith: None},
+    (_TN, _KDSDi),
+    ((TABLE_NAME, 0), (KINESIS_DATA_STREAM_DESTINATIONS, 0)),
+)
+
+DESCRIBE_KINESIS_STREAMING_DESTINATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DKSD,
+    0,
+    DESCRIBE_KINESIS_STREAMING_DESTINATION_INPUT,
+    DESCRIBE_KINESIS_STREAMING_DESTINATION_OUTPUT,
+    (INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION, RESOURCE_NOT_FOUND_EXCEPTION),
+)
+
+DESCRIBE_LIMITS_INPUT: StaticSchema = (18, n0, _DLI, {_smit: None})
+
+DESCRIBE_LIMITS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DLO,
+    {_smith: None},
+    (_AMRCU, _AMWCU, _TMRCU, _TMWCU),
+    (
+        (POSITIVE_LONG_OBJECT, 0),
+        (POSITIVE_LONG_OBJECT, 0),
+        (POSITIVE_LONG_OBJECT, 0),
+        (POSITIVE_LONG_OBJECT, 0),
+    ),
+)
+
+DESCRIBE_LIMITS: StaticOperationSchema = (
+    23,
+    n0,
+    _DL,
+    0,
+    DESCRIBE_LIMITS_INPUT,
+    DESCRIBE_LIMITS_OUTPUT,
+    (INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION),
+)
+
+DESCRIBE_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTIe,
+    {_smit: None},
+    (_TN,),
+    ((TABLE_ARN, 1),),
+)
+
+DESCRIBE_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTOe,
+    {_smith: None},
+    (_T,),
+    ((TABLE_DESCRIPTION, 0),),
+)
+
+DESCRIBE_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _DTe,
+    0,
+    DESCRIBE_TABLE_INPUT,
+    DESCRIBE_TABLE_OUTPUT,
+    (INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION, RESOURCE_NOT_FOUND_EXCEPTION),
+)
+
+DESCRIBE_TABLE_REPLICA_AUTO_SCALING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTRASI,
+    {_smit: None},
+    (_TN,),
+    ((TABLE_ARN, 1),),
+)
+
+REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _RGSIASD,
+    0,
+    (_IN, _IS, _PRCASS, _PWCASS),
+    (
+        (INDEX_NAME, 0),
+        (INDEX_STATUS, 0),
+        (AUTO_SCALING_SETTINGS_DESCRIPTION, 0),
+        (AUTO_SCALING_SETTINGS_DESCRIPTION, 0),
+    ),
+)
+
+REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _RGSIASDL,
+    0,
+    (_m,),
+    ((REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_DESCRIPTION, 0),),
+)
+
+REPLICA_AUTO_SCALING_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _RASD,
+    0,
+    (_RN, _GSI, _RPRCASS, _RPWCASS, _RS),
+    (
+        (REGION_NAME, 0),
+        (REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_DESCRIPTION_LIST, 0),
+        (AUTO_SCALING_SETTINGS_DESCRIPTION, 0),
+        (AUTO_SCALING_SETTINGS_DESCRIPTION, 0),
+        (REPLICA_STATUS, 0),
+    ),
+)
+
+REPLICA_AUTO_SCALING_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _RASDL,
+    0,
+    (_m,),
+    ((REPLICA_AUTO_SCALING_DESCRIPTION, 0),),
+)
+
+TABLE_AUTO_SCALING_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _TASD,
+    0,
+    (_TN, _TS, _Repl),
+    ((TABLE_NAME, 0), (TABLE_STATUS, 0), (REPLICA_AUTO_SCALING_DESCRIPTION_LIST, 0)),
+)
+
+DESCRIBE_TABLE_REPLICA_AUTO_SCALING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTRASO,
+    {_smith: None},
+    (_TASD,),
+    ((TABLE_AUTO_SCALING_DESCRIPTION, 0),),
+)
+
+DESCRIBE_TABLE_REPLICA_AUTO_SCALING: StaticOperationSchema = (
+    23,
+    n0,
+    _DTRAS,
+    0,
+    DESCRIBE_TABLE_REPLICA_AUTO_SCALING_INPUT,
+    DESCRIBE_TABLE_REPLICA_AUTO_SCALING_OUTPUT,
+    (INTERNAL_SERVER_ERROR, RESOURCE_NOT_FOUND_EXCEPTION),
+)
+
+DESCRIBE_TIME_TO_LIVE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTTLI,
+    {_smit: None},
+    (_TN,),
+    ((TABLE_ARN, 1),),
+)
+
+DESCRIBE_TIME_TO_LIVE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTTLO,
+    {_smith: None},
+    (_TTLD,),
+    ((TIME_TO_LIVE_DESCRIPTION, 0),),
+)
+
+DESCRIBE_TIME_TO_LIVE: StaticOperationSchema = (
+    23,
+    n0,
+    _DTTL,
+    0,
+    DESCRIBE_TIME_TO_LIVE_INPUT,
+    DESCRIBE_TIME_TO_LIVE_OUTPUT,
+    (INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION, RESOURCE_NOT_FOUND_EXCEPTION),
+)
+
+ENABLE_KINESIS_STREAMING_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _EKSC,
+    0,
+    (_ACDTP,),
+    ((APPROXIMATE_CREATION_DATE_TIME_PRECISION, 0),),
+)
+
+DISABLE_KINESIS_STREAMING_DESTINATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DKSDIi,
+    {_sSI: _cKSDI, _smit: None},
+    (_TN, _SA, _EKSC),
+    ((TABLE_ARN, 1), (STREAM_ARN, 1), (ENABLE_KINESIS_STREAMING_CONFIGURATION, 0)),
+)
+
+DISABLE_KINESIS_STREAMING_DESTINATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DKSDOi,
+    {_sSI: _cKSDO, _smith: None},
+    (_TN, _SA, _DS, _EKSC),
+    (
+        (TABLE_NAME, 0),
+        (STREAM_ARN, 0),
+        (DESTINATION_STATUS, 0),
+        (ENABLE_KINESIS_STREAMING_CONFIGURATION, 0),
+    ),
+)
+
+DISABLE_KINESIS_STREAMING_DESTINATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DKSDi,
+    0,
+    DISABLE_KINESIS_STREAMING_DESTINATION_INPUT,
+    DISABLE_KINESIS_STREAMING_DESTINATION_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+DUPLICATE_ITEM_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _DIE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+ENABLE_KINESIS_STREAMING_DESTINATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EKSDI,
+    {_sSI: _cKSDI, _smit: None},
+    (_TN, _SA, _EKSC),
+    ((TABLE_ARN, 1), (STREAM_ARN, 1), (ENABLE_KINESIS_STREAMING_CONFIGURATION, 0)),
+)
+
+ENABLE_KINESIS_STREAMING_DESTINATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _EKSDO,
+    {_sSI: _cKSDO, _smith: None},
+    (_TN, _SA, _DS, _EKSC),
+    (
+        (TABLE_NAME, 0),
+        (STREAM_ARN, 0),
+        (DESTINATION_STATUS, 0),
+        (ENABLE_KINESIS_STREAMING_CONFIGURATION, 0),
+    ),
+)
+
+ENABLE_KINESIS_STREAMING_DESTINATION: StaticOperationSchema = (
+    23,
+    n0,
+    _EKSD,
+    0,
+    ENABLE_KINESIS_STREAMING_DESTINATION_INPUT,
+    ENABLE_KINESIS_STREAMING_DESTINATION_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+POSITIVE_INTEGER_OBJECT: StaticSchema = (7, n0, _PIO, 0)
+
+PARTI_QL_NEXT_TOKEN: StaticSchema = (3, n0, _PQLNT, 0)
+
+IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IPME,
+    {_sm: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+TRANSACTION_IN_PROGRESS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TIPE,
+    {_sm: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+EXPORT_CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ECE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_EXPORT_TIME_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IETE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+POINT_IN_TIME_RECOVERY_UNAVAILABLE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _PITRUE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+GET_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPI,
+    {_smit: None},
+    (_RAe,),
+    ((RESOURCE_ARN_STRING, 1),),
+)
+
+GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPO,
+    {_smith: None},
+    (_Po, _RI),
+    ((RESOURCE_POLICY, 0), (POLICY_REVISION_ID, 0)),
+)
+
+GET_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GRP,
+    0,
+    GET_RESOURCE_POLICY_INPUT,
+    GET_RESOURCE_POLICY_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        POLICY_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+IMPORT_CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ICE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+IMPORT_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ITI,
+    {_smit: None},
+    (_CT, _SBS, _IFn, _IFO, _ICT, _TCP),
+    (
+        (CLIENT_TOKEN, 2),
+        (S3_BUCKET_SOURCE, 1),
+        (INPUT_FORMAT, 1),
+        (INPUT_FORMAT_OPTIONS, 0),
+        (INPUT_COMPRESSION_TYPE, 0),
+        (TABLE_CREATION_PARAMETERS, 1),
+    ),
+)
+
+IMPORT_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ITO,
+    {_smith: None},
+    (_ITD,),
+    ((IMPORT_TABLE_DESCRIPTION, 1),),
+)
+
+IMPORT_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _IT,
+    0,
+    IMPORT_TABLE_INPUT,
+    IMPORT_TABLE_OUTPUT,
+    (IMPORT_CONFLICT_EXCEPTION, LIMIT_EXCEEDED_EXCEPTION, RESOURCE_IN_USE_EXCEPTION),
+)
+
+TIME_RANGE_LOWER_BOUND: StaticSchema = (4, n0, _TRLB, 0)
+
+TIME_RANGE_UPPER_BOUND: StaticSchema = (4, n0, _TRUB, 0)
+
+LIST_BACKUPS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LBI,
+    {_smit: None},
+    (_TN, _Li, _TRLB, _TRUB, _ESBA, _BT),
+    (
+        (TABLE_ARN, 0),
+        (BACKUPS_INPUT_LIMIT, 0),
+        (TIME_RANGE_LOWER_BOUND, 0),
+        (TIME_RANGE_UPPER_BOUND, 0),
+        (BACKUP_ARN, 0),
+        (BACKUP_TYPE_FILTER, 0),
+    ),
+)
+
+LIST_BACKUPS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LBO,
+    {_smith: None},
+    (_BSac, _LEBA),
+    ((BACKUP_SUMMARIES, 0), (BACKUP_ARN, 0)),
+)
+
+LIST_BACKUPS: StaticOperationSchema = (
+    23,
+    n0,
+    _LB,
+    0,
+    LIST_BACKUPS_INPUT,
+    LIST_BACKUPS_OUTPUT,
+    (INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION),
+)
+
+LIST_CONTRIBUTOR_INSIGHTS_LIMIT: StaticSchema = (7, n0, _LCIL, {_smi: 0})
+
+NEXT_TOKEN_STRING: StaticSchema = (3, n0, _NTS, 0)
+
+LIST_CONTRIBUTOR_INSIGHTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LCII,
+    {_smit: None},
+    (_TN, _NT, _MR),
+    (
+        (TABLE_ARN, 0),
+        (NEXT_TOKEN_STRING, 0),
+        (LIST_CONTRIBUTOR_INSIGHTS_LIMIT, {_smi: 0}),
+    ),
+)
+
+LIST_CONTRIBUTOR_INSIGHTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LCIO,
+    {_smith: None},
+    (_CISon, _NT),
+    ((CONTRIBUTOR_INSIGHTS_SUMMARIES, 0), (NEXT_TOKEN_STRING, 0)),
+)
+
+LIST_CONTRIBUTOR_INSIGHTS: StaticOperationSchema = (
+    23,
+    n0,
+    _LCI,
+    0,
+    LIST_CONTRIBUTOR_INSIGHTS_INPUT,
+    LIST_CONTRIBUTOR_INSIGHTS_OUTPUT,
+    (INTERNAL_SERVER_ERROR, RESOURCE_NOT_FOUND_EXCEPTION),
+)
+
+LIST_EXPORTS_MAX_LIMIT: StaticSchema = (7, n0, _LEML, 0)
+
+EXPORT_NEXT_TOKEN: StaticSchema = (3, n0, _ENT, 0)
+
+LIST_EXPORTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LEI,
+    {_smit: None},
+    (_TA, _MR, _NT),
+    ((TABLE_ARN, 0), (LIST_EXPORTS_MAX_LIMIT, 0), (EXPORT_NEXT_TOKEN, 0)),
+)
+
+EXPORT_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _ESx,
+    0,
+    (_EA, _ES, _ETx),
+    ((EXPORT_ARN, 0), (EXPORT_STATUS, 0), (EXPORT_TYPE, 0)),
+)
+
+EXPORT_SUMMARIES: StaticSchema = (16, n0, _ESxp, 0, (_m,), ((EXPORT_SUMMARY, 0),))
+
+LIST_EXPORTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LEO,
+    {_smith: None},
+    (_ESxp, _NT),
+    ((EXPORT_SUMMARIES, 0), (EXPORT_NEXT_TOKEN, 0)),
+)
+
+LIST_EXPORTS: StaticOperationSchema = (
+    23,
+    n0,
+    _LEi,
+    0,
+    LIST_EXPORTS_INPUT,
+    LIST_EXPORTS_OUTPUT,
+    (INTERNAL_SERVER_ERROR, LIMIT_EXCEEDED_EXCEPTION),
+)
+
+LIST_GLOBAL_TABLES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LGTI,
+    {_smit: None},
+    (_ESGTN, _Li, _RN),
+    ((TABLE_NAME, 0), (POSITIVE_INTEGER_OBJECT, 0), (REGION_NAME, 0)),
+)
+
+GLOBAL_TABLE: StaticSchema = (
+    18,
+    n0,
+    _GTl,
+    0,
+    (_GTN, _RG),
+    ((TABLE_NAME, 0), (REPLICA_LIST, 0)),
+)
+
+GLOBAL_TABLE_LIST: StaticSchema = (16, n0, _GTL, 0, (_m,), ((GLOBAL_TABLE, 0),))
+
+LIST_GLOBAL_TABLES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LGTO,
+    {_smith: None},
+    (_GTlo, _LEGTN),
+    ((GLOBAL_TABLE_LIST, 0), (TABLE_NAME, 0)),
+)
+
+LIST_GLOBAL_TABLES: StaticOperationSchema = (
+    23,
+    n0,
+    _LGT,
+    0,
+    LIST_GLOBAL_TABLES_INPUT,
+    LIST_GLOBAL_TABLES_OUTPUT,
+    (INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION),
+)
+
+IMPORT_NEXT_TOKEN: StaticSchema = (3, n0, _INT, 0)
+
+LIST_IMPORTS_MAX_LIMIT: StaticSchema = (7, n0, _LIML, 0)
+
+LIST_IMPORTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LII,
+    {_smit: None},
+    (_TA, _PS, _NT),
+    ((TABLE_ARN, 0), (LIST_IMPORTS_MAX_LIMIT, 0), (IMPORT_NEXT_TOKEN, 0)),
+)
+
+IMPORT_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _ISmp,
+    0,
+    (_IAm, _ISm, _TA, _SBS, _CWLGA, _IFn, _ST, _ETn),
+    (
+        (IMPORT_ARN, 0),
+        (IMPORT_STATUS, 0),
+        (TABLE_ARN, 0),
+        (S3_BUCKET_SOURCE, 0),
+        (CLOUD_WATCH_LOG_GROUP_ARN, 0),
+        (INPUT_FORMAT, 0),
+        (IMPORT_START_TIME, 0),
+        (IMPORT_END_TIME, 0),
+    ),
+)
+
+IMPORT_SUMMARY_LIST: StaticSchema = (16, n0, _ISL, 0, (_m,), ((IMPORT_SUMMARY, 0),))
+
+LIST_IMPORTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LIO,
+    {_smith: None},
+    (_ISL, _NT),
+    ((IMPORT_SUMMARY_LIST, 0), (IMPORT_NEXT_TOKEN, 0)),
+)
+
+LIST_IMPORTS: StaticOperationSchema = (
+    23,
+    n0,
+    _LI,
+    0,
+    LIST_IMPORTS_INPUT,
+    LIST_IMPORTS_OUTPUT,
+    (LIMIT_EXCEEDED_EXCEPTION,),
+)
+
+LIST_TABLES_INPUT_LIMIT: StaticSchema = (7, n0, _LTIL, 0)
+
+LIST_TABLES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTI,
+    {_smit: None},
+    (_ESTN, _Li),
+    ((TABLE_NAME, 0), (LIST_TABLES_INPUT_LIMIT, 0)),
+)
+
+TABLE_NAME_LIST: StaticSchema = (16, n0, _TNL, 0, (_m,), ((TABLE_NAME, 0),))
+
+LIST_TABLES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTO,
+    {_smith: None},
+    (_TNa, _LETN),
+    ((TABLE_NAME_LIST, 0), (TABLE_NAME, 0)),
+)
+
+LIST_TABLES: StaticOperationSchema = (
+    23,
+    n0,
+    _LTi,
+    0,
+    LIST_TABLES_INPUT,
+    LIST_TABLES_OUTPUT,
+    (INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION),
+)
+
+LIST_TAGS_OF_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTORI,
+    {_smit: None},
+    (_RAe, _NT),
+    ((RESOURCE_ARN_STRING, 1), (NEXT_TOKEN_STRING, 0)),
+)
+
+LIST_TAGS_OF_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTORO,
+    {_smith: None},
+    (_Tag, _NT),
+    ((TAG_LIST, 0), (NEXT_TOKEN_STRING, 0)),
+)
+
+LIST_TAGS_OF_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _LTOR,
+    0,
+    LIST_TAGS_OF_RESOURCE_INPUT,
+    LIST_TAGS_OF_RESOURCE_OUTPUT,
+    (INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION, RESOURCE_NOT_FOUND_EXCEPTION),
+)
+
+PUT_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PRPI,
+    {_smit: None},
+    (_RAe, _Po, _ERI, _CRSRA),
+    (
+        (RESOURCE_ARN_STRING, 1),
+        (RESOURCE_POLICY, 1),
+        (POLICY_REVISION_ID, 0),
+        (CONFIRM_REMOVE_SELF_RESOURCE_ACCESS, {_smi: False, _sH: _xacrsra}),
+    ),
+)
+
+PUT_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PRPO,
+    {_smith: None},
+    (_RI,),
+    ((POLICY_REVISION_ID, 0),),
+)
+
+PUT_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _PRP,
+    0,
+    PUT_RESOURCE_POLICY_INPUT,
+    PUT_RESOURCE_POLICY_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        POLICY_NOT_FOUND_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+SELECT: StaticSchema = (
+    14,
+    n0,
+    _Se,
+    0,
+    (_AA_, _APA, _SA_, _COUNT),
+    ((-1, {_sV: _AA_}), (-1, {_sV: _APA}), (-1, {_sV: _SA_}), (-1, {_sV: _COUNT})),
+)
+
+INTEGER: StaticSchema = (7, n0, _I, {_smi: 0})
+
+RESTORE_TABLE_FROM_BACKUP_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RTFBI,
+    {_smit: None},
+    (_TTN, _BA, _BMO, _GSIO, _LSIO, _PTO, _ODTO, _SSESO, _VIO),
+    (
+        (TABLE_NAME, 1),
+        (BACKUP_ARN, 1),
+        (BILLING_MODE, 0),
+        (GLOBAL_SECONDARY_INDEX_LIST, 0),
+        (LOCAL_SECONDARY_INDEX_LIST, 0),
+        (PROVISIONED_THROUGHPUT, 0),
+        (ON_DEMAND_THROUGHPUT, 0),
+        (SSE_SPECIFICATION, 0),
+        (VECTOR_INDEX_LIST, 0),
+    ),
+)
+
+RESTORE_TABLE_FROM_BACKUP_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RTFBO,
+    {_smith: None},
+    (_TD,),
+    ((TABLE_DESCRIPTION, 0),),
+)
+
+TABLE_ALREADY_EXISTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TAEE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+RESTORE_TABLE_FROM_BACKUP: StaticOperationSchema = (
+    23,
+    n0,
+    _RTFB,
+    0,
+    RESTORE_TABLE_FROM_BACKUP_INPUT,
+    RESTORE_TABLE_FROM_BACKUP_OUTPUT,
+    (
+        BACKUP_IN_USE_EXCEPTION,
+        BACKUP_NOT_FOUND_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        TABLE_ALREADY_EXISTS_EXCEPTION,
+        TABLE_IN_USE_EXCEPTION,
+    ),
+)
+
+INVALID_RESTORE_TIME_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IRTE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+RESTORE_TABLE_TO_POINT_IN_TIME_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RTTPITI,
+    {_smit: None},
+    (_STA, _STN, _TTN, _ULRT, _RDT, _BMO, _GSIO, _LSIO, _PTO, _ODTO, _SSESO, _VIO),
+    (
+        (TABLE_ARN, 0),
+        (TABLE_NAME, 0),
+        (TABLE_NAME, 1),
+        (BOOLEAN_OBJECT, 0),
+        (DATE, 0),
+        (BILLING_MODE, 0),
+        (GLOBAL_SECONDARY_INDEX_LIST, 0),
+        (LOCAL_SECONDARY_INDEX_LIST, 0),
+        (PROVISIONED_THROUGHPUT, 0),
+        (ON_DEMAND_THROUGHPUT, 0),
+        (SSE_SPECIFICATION, 0),
+        (VECTOR_INDEX_LIST, 0),
+    ),
+)
+
+RESTORE_TABLE_TO_POINT_IN_TIME_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RTTPITO,
+    {_smith: None},
+    (_TD,),
+    ((TABLE_DESCRIPTION, 0),),
+)
+
+RESTORE_TABLE_TO_POINT_IN_TIME: StaticOperationSchema = (
+    23,
+    n0,
+    _RTTPIT,
+    0,
+    RESTORE_TABLE_TO_POINT_IN_TIME_INPUT,
+    RESTORE_TABLE_TO_POINT_IN_TIME_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        INVALID_RESTORE_TIME_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        POINT_IN_TIME_RECOVERY_UNAVAILABLE_EXCEPTION,
+        TABLE_ALREADY_EXISTS_EXCEPTION,
+        TABLE_IN_USE_EXCEPTION,
+        TABLE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+SCAN_SEGMENT: StaticSchema = (7, n0, _SSc, 0)
+
+SCAN_TOTAL_SEGMENTS: StaticSchema = (7, n0, _STS, 0)
+
+TOP_K_INTEGER: StaticSchema = (7, n0, _TKI, 0)
+
+SCORE_NUMBER: StaticSchema = (10, n0, _SN, {_smi: 0})
+
+TAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TRI,
+    {_smit: None},
+    (_RAe, _Tag),
+    ((RESOURCE_ARN_STRING, 1), (TAG_LIST, 1)),
+)
+
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _sU, _smith: None})
+
+TAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _TRa,
+    0,
+    TAG_RESOURCE_INPUT,
+    TAG_RESOURCE_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+UPDATE_EXPRESSION: StaticSchema = (3, n0, _UE, 0)
+
+TAG_KEY_LIST: StaticSchema = (16, n0, _TKL, 0, (_m,), ((TAG_KEY_STRING, 0),))
+
+UNTAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URI,
+    {_smit: None},
+    (_RAe, _TKa),
+    ((RESOURCE_ARN_STRING, 1), (TAG_KEY_LIST, 1)),
+)
+
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _URO, {_sSI: _sU, _smith: None})
+
+UNTAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _UR,
+    0,
+    UNTAG_RESOURCE_INPUT,
+    UNTAG_RESOURCE_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+POINT_IN_TIME_RECOVERY_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _PITRSo,
+    0,
+    (_PITRE, _RPID),
+    ((BOOLEAN_OBJECT, 1), (RECOVERY_PERIOD_IN_DAYS, 0)),
+)
+
+UPDATE_CONTINUOUS_BACKUPS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UCBI,
+    {_smit: None},
+    (_TN, _PITRSo),
+    ((TABLE_ARN, 1), (POINT_IN_TIME_RECOVERY_SPECIFICATION, 1)),
+)
+
+UPDATE_CONTINUOUS_BACKUPS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UCBO,
+    {_smith: None},
+    (_CBD,),
+    ((CONTINUOUS_BACKUPS_DESCRIPTION, 0),),
+)
+
+UPDATE_CONTINUOUS_BACKUPS: StaticOperationSchema = (
+    23,
+    n0,
+    _UCB,
+    0,
+    UPDATE_CONTINUOUS_BACKUPS_INPUT,
+    UPDATE_CONTINUOUS_BACKUPS_OUTPUT,
+    (
+        CONTINUOUS_BACKUPS_UNAVAILABLE_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        TABLE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+UPDATE_CONTRIBUTOR_INSIGHTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UCII,
+    {_smit: None},
+    (_TN, _IN, _CIA, _CIM),
+    (
+        (TABLE_ARN, 1),
+        (INDEX_NAME, 0),
+        (CONTRIBUTOR_INSIGHTS_ACTION, 1),
+        (CONTRIBUTOR_INSIGHTS_MODE, 0),
+    ),
+)
+
+UPDATE_CONTRIBUTOR_INSIGHTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UCIO,
+    {_smith: None},
+    (_TN, _IN, _CIS, _CIM),
+    (
+        (TABLE_NAME, 0),
+        (INDEX_NAME, 0),
+        (CONTRIBUTOR_INSIGHTS_STATUS, 0),
+        (CONTRIBUTOR_INSIGHTS_MODE, 0),
+    ),
+)
+
+UPDATE_CONTRIBUTOR_INSIGHTS: StaticOperationSchema = (
+    23,
+    n0,
+    _UCI,
+    0,
+    UPDATE_CONTRIBUTOR_INSIGHTS_INPUT,
+    UPDATE_CONTRIBUTOR_INSIGHTS_OUTPUT,
+    (INTERNAL_SERVER_ERROR, RESOURCE_NOT_FOUND_EXCEPTION),
+)
+
+REPLICA_ALREADY_EXISTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RAEE,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+REPLICA_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFEe,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+REPLICA_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _RU,
+    0,
+    (_Cr, _Del),
+    ((CREATE_REPLICA_ACTION, 0), (DELETE_REPLICA_ACTION, 0)),
+)
+
+REPLICA_UPDATE_LIST: StaticSchema = (16, n0, _RUL, 0, (_m,), ((REPLICA_UPDATE, 0),))
+
+UPDATE_GLOBAL_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UGTI,
+    {_smit: None},
+    (_GTN, _RUe),
+    ((TABLE_NAME, 1), (REPLICA_UPDATE_LIST, 1)),
+)
+
+UPDATE_GLOBAL_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UGTO,
+    {_smith: None},
+    (_GTD,),
+    ((GLOBAL_TABLE_DESCRIPTION, 0),),
+)
+
+UPDATE_GLOBAL_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _UGT,
+    0,
+    UPDATE_GLOBAL_TABLE_INPUT,
+    UPDATE_GLOBAL_TABLE_OUTPUT,
+    (
+        GLOBAL_TABLE_NOT_FOUND_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        REPLICA_ALREADY_EXISTS_EXCEPTION,
+        REPLICA_NOT_FOUND_EXCEPTION,
+        TABLE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+INDEX_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _INFEn,
+    {_sm: _c},
+    (_me,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+GLOBAL_TABLE_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _GTGSISU,
+    0,
+    (_IN, _PWCU, _PWCASSU),
+    ((INDEX_NAME, 1), (POSITIVE_LONG_OBJECT, 0), (AUTO_SCALING_SETTINGS_UPDATE, 0)),
+)
+
+GLOBAL_TABLE_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE_LIST: StaticSchema = (
+    16,
+    n0,
+    _GTGSISUL,
+    0,
+    (_m,),
+    ((GLOBAL_TABLE_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE, 0),),
+)
+
+REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _RGSISU,
+    0,
+    (_IN, _PRCU, _PRCASSU),
+    ((INDEX_NAME, 1), (POSITIVE_LONG_OBJECT, 0), (AUTO_SCALING_SETTINGS_UPDATE, 0)),
+)
+
+REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE_LIST: StaticSchema = (
+    16,
+    n0,
+    _RGSISUL,
+    0,
+    (_m,),
+    ((REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE, 0),),
+)
+
+REPLICA_SETTINGS_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _RSU,
+    0,
+    (_RN, _RPRCU, _RPRCASSU, _RGSISU, _RTC),
+    (
+        (REGION_NAME, 1),
+        (POSITIVE_LONG_OBJECT, 0),
+        (AUTO_SCALING_SETTINGS_UPDATE, 0),
+        (REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE_LIST, 0),
+        (TABLE_CLASS, 0),
+    ),
+)
+
+REPLICA_SETTINGS_UPDATE_LIST: StaticSchema = (
+    16,
+    n0,
+    _RSUL,
+    0,
+    (_m,),
+    ((REPLICA_SETTINGS_UPDATE, 0),),
+)
+
+UPDATE_GLOBAL_TABLE_SETTINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UGTSI,
+    {_smit: None},
+    (_GTN, _GTBM, _GTPWCU, _GTPWCASSU, _GTGSISU, _RSU),
+    (
+        (TABLE_NAME, 1),
+        (BILLING_MODE, 0),
+        (POSITIVE_LONG_OBJECT, 0),
+        (AUTO_SCALING_SETTINGS_UPDATE, 0),
+        (GLOBAL_TABLE_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE_LIST, 0),
+        (REPLICA_SETTINGS_UPDATE_LIST, 0),
+    ),
+)
+
+UPDATE_GLOBAL_TABLE_SETTINGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UGTSO,
+    {_smith: None},
+    (_GTN, _RSep),
+    ((TABLE_NAME, 0), (REPLICA_SETTINGS_DESCRIPTION_LIST, 0)),
+)
+
+UPDATE_GLOBAL_TABLE_SETTINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _UGTS,
+    0,
+    UPDATE_GLOBAL_TABLE_SETTINGS_INPUT,
+    UPDATE_GLOBAL_TABLE_SETTINGS_OUTPUT,
+    (
+        GLOBAL_TABLE_NOT_FOUND_EXCEPTION,
+        INDEX_NOT_FOUND_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        REPLICA_NOT_FOUND_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+    ),
+)
+
+UPDATE_KINESIS_STREAMING_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _UKSC,
+    0,
+    (_ACDTP,),
+    ((APPROXIMATE_CREATION_DATE_TIME_PRECISION, 0),),
+)
+
+UPDATE_KINESIS_STREAMING_DESTINATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UKSDI,
+    {_smit: None},
+    (_TN, _SA, _UKSC),
+    ((TABLE_ARN, 1), (STREAM_ARN, 1), (UPDATE_KINESIS_STREAMING_CONFIGURATION, 0)),
+)
+
+UPDATE_KINESIS_STREAMING_DESTINATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UKSDO,
+    {_smith: None},
+    (_TN, _SA, _DS, _UKSC),
+    (
+        (TABLE_NAME, 0),
+        (STREAM_ARN, 0),
+        (DESTINATION_STATUS, 0),
+        (UPDATE_KINESIS_STREAMING_CONFIGURATION, 0),
+    ),
+)
+
+UPDATE_KINESIS_STREAMING_DESTINATION: StaticOperationSchema = (
+    23,
+    n0,
+    _UKSD,
+    0,
+    UPDATE_KINESIS_STREAMING_DESTINATION_INPUT,
+    UPDATE_KINESIS_STREAMING_DESTINATION_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+UPDATE_GLOBAL_SECONDARY_INDEX_ACTION: StaticSchema = (
+    18,
+    n0,
+    _UGSIA,
+    0,
+    (_IN, _PT, _ODT, _WT),
+    (
+        (INDEX_NAME, 1),
+        (PROVISIONED_THROUGHPUT, 0),
+        (ON_DEMAND_THROUGHPUT, 0),
+        (WARM_THROUGHPUT, 0),
+    ),
+)
+
+GLOBAL_SECONDARY_INDEX_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _GSIU,
+    0,
+    (_U, _Cr, _Del),
+    (
+        (UPDATE_GLOBAL_SECONDARY_INDEX_ACTION, 0),
+        (CREATE_GLOBAL_SECONDARY_INDEX_ACTION, 0),
+        (DELETE_GLOBAL_SECONDARY_INDEX_ACTION, 0),
+    ),
+)
+
+GLOBAL_SECONDARY_INDEX_UPDATE_LIST: StaticSchema = (
+    16,
+    n0,
+    _GSIUL,
+    0,
+    (_m,),
+    ((GLOBAL_SECONDARY_INDEX_UPDATE, 0),),
+)
+
+GLOBAL_TABLE_WITNESS_GROUP_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _GTWGU,
+    0,
+    (_Cr, _Del),
+    (
+        (CREATE_GLOBAL_TABLE_WITNESS_GROUP_MEMBER_ACTION, 0),
+        (DELETE_GLOBAL_TABLE_WITNESS_GROUP_MEMBER_ACTION, 0),
+    ),
+)
+
+GLOBAL_TABLE_WITNESS_GROUP_UPDATE_LIST: StaticSchema = (
+    16,
+    n0,
+    _GTWGUL,
+    0,
+    (_m,),
+    ((GLOBAL_TABLE_WITNESS_GROUP_UPDATE, 0),),
+)
+
+UPDATE_REPLICATION_GROUP_MEMBER_ACTION: StaticSchema = (
+    18,
+    n0,
+    _URGMA,
+    0,
+    (_RN, _KMSMKI, _PTO, _ODTO, _GSI, _TCO),
+    (
+        (REGION_NAME, 1),
+        (KMS_MASTER_KEY_ID, 0),
+        (PROVISIONED_THROUGHPUT_OVERRIDE, 0),
+        (ON_DEMAND_THROUGHPUT_OVERRIDE, 0),
+        (REPLICA_GLOBAL_SECONDARY_INDEX_LIST, 0),
+        (TABLE_CLASS, 0),
+    ),
+)
+
+REPLICATION_GROUP_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _RGU,
+    0,
+    (_Cr, _U, _Del),
+    (
+        (CREATE_REPLICATION_GROUP_MEMBER_ACTION, 0),
+        (UPDATE_REPLICATION_GROUP_MEMBER_ACTION, 0),
+        (DELETE_REPLICATION_GROUP_MEMBER_ACTION, 0),
+    ),
+)
+
+REPLICATION_GROUP_UPDATE_LIST: StaticSchema = (
+    16,
+    n0,
+    _RGUL,
+    0,
+    (_m,),
+    ((REPLICATION_GROUP_UPDATE, 0),),
+)
+
+VECTOR_INDEX_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _VIU,
+    0,
+    (_Cr, _Del),
+    ((CREATE_VECTOR_INDEX_ACTION, 0), (DELETE_VECTOR_INDEX_ACTION, 0)),
+)
+
+VECTOR_INDEX_UPDATE_LIST: StaticSchema = (
+    16,
+    n0,
+    _VIUL,
+    0,
+    (_m,),
+    ((VECTOR_INDEX_UPDATE, 0),),
+)
+
+UPDATE_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UTI,
+    {_smit: None},
+    (
+        _ADt,
+        _TN,
+        _BM,
+        _PT,
+        _GSIUl,
+        _SS,
+        _SSESp,
+        _RUe,
+        _TCa,
+        _DPE,
+        _MRC,
+        _GTWU,
+        _ODT,
+        _WT,
+        _GTSRM,
+        _VIUe,
+    ),
+    (
+        (ATTRIBUTE_DEFINITIONS, 0),
+        (TABLE_ARN, 1),
+        (BILLING_MODE, 0),
+        (PROVISIONED_THROUGHPUT, 0),
+        (GLOBAL_SECONDARY_INDEX_UPDATE_LIST, 0),
+        (STREAM_SPECIFICATION, 0),
+        (SSE_SPECIFICATION, 0),
+        (REPLICATION_GROUP_UPDATE_LIST, 0),
+        (TABLE_CLASS, 0),
+        (DELETION_PROTECTION_ENABLED, 0),
+        (MULTI_REGION_CONSISTENCY, 0),
+        (GLOBAL_TABLE_WITNESS_GROUP_UPDATE_LIST, 0),
+        (ON_DEMAND_THROUGHPUT, 0),
+        (WARM_THROUGHPUT, 0),
+        (GLOBAL_TABLE_SETTINGS_REPLICATION_MODE, 0),
+        (VECTOR_INDEX_UPDATE_LIST, 0),
+    ),
+)
+
+UPDATE_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UTO,
+    {_smith: None},
+    (_TD,),
+    ((TABLE_DESCRIPTION, 0),),
+)
+
+UPDATE_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _UT,
+    0,
+    UPDATE_TABLE_INPUT,
+    UPDATE_TABLE_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _GSIASU,
+    0,
+    (_IN, _PWCASU),
+    ((INDEX_NAME, 0), (AUTO_SCALING_SETTINGS_UPDATE, 0)),
+)
+
+GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE_LIST: StaticSchema = (
+    16,
+    n0,
+    _GSIASUL,
+    0,
+    (_m,),
+    ((GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE, 0),),
+)
+
+REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _RGSIASU,
+    0,
+    (_IN, _PRCASU),
+    ((INDEX_NAME, 0), (AUTO_SCALING_SETTINGS_UPDATE, 0)),
+)
+
+REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE_LIST: StaticSchema = (
+    16,
+    n0,
+    _RGSIASUL,
+    0,
+    (_m,),
+    ((REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE, 0),),
+)
+
+REPLICA_AUTO_SCALING_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _RASU,
+    0,
+    (_RN, _RGSIU, _RPRCASU),
+    (
+        (REGION_NAME, 1),
+        (REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE_LIST, 0),
+        (AUTO_SCALING_SETTINGS_UPDATE, 0),
+    ),
+)
+
+REPLICA_AUTO_SCALING_UPDATE_LIST: StaticSchema = (
+    16,
+    n0,
+    _RASUL,
+    0,
+    (_m,),
+    ((REPLICA_AUTO_SCALING_UPDATE, 0),),
+)
+
+UPDATE_TABLE_REPLICA_AUTO_SCALING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UTRASI,
+    {_smit: None},
+    (_GSIUl, _TN, _PWCASU, _RUe),
+    (
+        (GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE_LIST, 0),
+        (TABLE_ARN, 1),
+        (AUTO_SCALING_SETTINGS_UPDATE, 0),
+        (REPLICA_AUTO_SCALING_UPDATE_LIST, 0),
+    ),
+)
+
+UPDATE_TABLE_REPLICA_AUTO_SCALING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UTRASO,
+    {_smith: None},
+    (_TASD,),
+    ((TABLE_AUTO_SCALING_DESCRIPTION, 0),),
+)
+
+UPDATE_TABLE_REPLICA_AUTO_SCALING: StaticOperationSchema = (
+    23,
+    n0,
+    _UTRAS,
+    0,
+    UPDATE_TABLE_REPLICA_AUTO_SCALING_INPUT,
+    UPDATE_TABLE_REPLICA_AUTO_SCALING_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+TIME_TO_LIVE_ENABLED: StaticSchema = (2, n0, _TTLE, 0)
+
+TIME_TO_LIVE_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _TTLSi,
+    0,
+    (_E, _AN),
+    ((TIME_TO_LIVE_ENABLED, 1), (TIME_TO_LIVE_ATTRIBUTE_NAME, 1)),
+)
+
+UPDATE_TIME_TO_LIVE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UTTLI,
+    {_smit: None},
+    (_TN, _TTLSi),
+    ((TABLE_ARN, 1), (TIME_TO_LIVE_SPECIFICATION, 1)),
+)
+
+UPDATE_TIME_TO_LIVE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UTTLO,
+    {_smith: None},
+    (_TTLSi,),
+    ((TIME_TO_LIVE_SPECIFICATION, 0),),
+)
+
+UPDATE_TIME_TO_LIVE: StaticOperationSchema = (
+    23,
+    n0,
+    _UTTL,
+    0,
+    UPDATE_TIME_TO_LIVE_INPUT,
+    UPDATE_TIME_TO_LIVE_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+ATTRIBUTE_VALUE: StaticSchema = (
+    19,
+    n0,
+    _AV,
+    0,
+    (_S, _N, _B, _SS_, _NS, _BS_, _M_, _L_, _NULL, _BOOL),
+    (
+        (STRING_ATTRIBUTE_VALUE, 0),
+        (NUMBER_ATTRIBUTE_VALUE, 0),
+        (BINARY_ATTRIBUTE_VALUE, 0),
+        (STRING_SET_ATTRIBUTE_VALUE, 0),
+        (NUMBER_SET_ATTRIBUTE_VALUE, 0),
+        (BINARY_SET_ATTRIBUTE_VALUE, 0),
+        (lambda: MAP_ATTRIBUTE_VALUE, 0),
+        (lambda: LIST_ATTRIBUTE_VALUE, 0),
+        (NULL_ATTRIBUTE_VALUE, 0),
+        (BOOLEAN_ATTRIBUTE_VALUE, 0),
+    ),
+)
+
+LIST_ATTRIBUTE_VALUE: StaticSchema = (16, n0, _LAV, 0, (_m,), ((ATTRIBUTE_VALUE, 0),))
+
+MAP_ATTRIBUTE_VALUE: StaticSchema = (
+    17,
+    n0,
+    _MAV,
+    0,
+    (_k, _v),
+    ((ATTRIBUTE_NAME, 0), (ATTRIBUTE_VALUE, 0)),
+)
+
+ATTRIBUTE_MAP: StaticSchema = (
+    17,
+    n0,
+    _AM,
+    0,
+    (_k, _v),
+    ((ATTRIBUTE_NAME, 0), (ATTRIBUTE_VALUE, 0)),
+)
+
+ATTRIBUTE_VALUE_LIST: StaticSchema = (16, n0, _AVL, 0, (_m,), ((ATTRIBUTE_VALUE, 0),))
+
+ATTRIBUTE_VALUE_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _AVU,
+    0,
+    (_V, _Ac),
+    ((ATTRIBUTE_VALUE, 0), (ATTRIBUTE_ACTION, 0)),
+)
+
+EXPRESSION_ATTRIBUTE_VALUE_MAP: StaticSchema = (
+    17,
+    n0,
+    _EAVM,
+    0,
+    (_k, _v),
+    ((EXPRESSION_ATTRIBUTE_VALUE_VARIABLE, 0), (ATTRIBUTE_VALUE, 0)),
+)
+
+ITEM_COLLECTION_KEY_ATTRIBUTE_MAP: StaticSchema = (
+    17,
+    n0,
+    _ICKAM,
+    0,
+    (_k, _v),
+    ((ATTRIBUTE_NAME, 0), (ATTRIBUTE_VALUE, 0)),
+)
+
+KEY: StaticSchema = (
+    17,
+    n0,
+    _K,
+    0,
+    (_k, _v),
+    ((ATTRIBUTE_NAME, 0), (ATTRIBUTE_VALUE, 0)),
+)
+
+PREPARED_STATEMENT_PARAMETERS: StaticSchema = (
+    16,
+    n0,
+    _PSP,
+    0,
+    (_m,),
+    ((ATTRIBUTE_VALUE, 0),),
+)
+
+PUT_ITEM_INPUT_ATTRIBUTE_MAP: StaticSchema = (
+    17,
+    n0,
+    _PIIAM,
+    0,
+    (_k, _v),
+    ((ATTRIBUTE_NAME, 0), (ATTRIBUTE_VALUE, 0)),
+)
+
+SEARCH_VECTOR_LIST: StaticSchema = (16, n0, _SVL, 0, (_m,), ((ATTRIBUTE_VALUE, 0),))
+
+ATTRIBUTE_UPDATES: StaticSchema = (
+    17,
+    n0,
+    _AU,
+    0,
+    (_k, _v),
+    ((ATTRIBUTE_NAME, 0), (ATTRIBUTE_VALUE_UPDATE, 0)),
+)
+
+BATCH_STATEMENT_ERROR: StaticSchema = (
+    18,
+    n0,
+    _BSE,
+    0,
+    (_Co, _M, _It),
+    ((BATCH_STATEMENT_ERROR_CODE_ENUM, 0), (STRING, 0), (ATTRIBUTE_MAP, 0)),
+)
+
+BATCH_STATEMENT_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _BSR,
+    0,
+    (_Stat, _Pa, _CR, _RVOCCF),
+    (
+        (PARTI_QL_STATEMENT, 1),
+        (PREPARED_STATEMENT_PARAMETERS, 0),
+        (CONSISTENT_READ, 0),
+        (RETURN_VALUES_ON_CONDITION_CHECK_FAILURE, 0),
+    ),
+)
+
+CANCELLATION_REASON: StaticSchema = (
+    18,
+    n0,
+    _CRa,
+    0,
+    (_It, _Co, _M),
+    ((ATTRIBUTE_MAP, 0), (CODE, 0), (ERROR_MESSAGE, 0)),
+)
+
+CONDITION: StaticSchema = (
+    18,
+    n0,
+    _Con,
+    0,
+    (_AVL, _CO),
+    ((ATTRIBUTE_VALUE_LIST, 0), (COMPARISON_OPERATOR, 1)),
+)
+
+CONDITIONAL_CHECK_FAILED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CCFE,
+    {_sm: _c},
+    (_me, _It),
+    ((ERROR_MESSAGE, 0), (ATTRIBUTE_MAP, 0)),
+)
+
+DELETE_REQUEST: StaticSchema = (18, n0, _DR, 0, (_K,), ((KEY, 1),))
+
+EXECUTE_STATEMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ESI,
+    {_smit: None},
+    (_Stat, _Pa, _CR, _NT, _RCC, _Li, _RVOCCF),
+    (
+        (PARTI_QL_STATEMENT, 1),
+        (PREPARED_STATEMENT_PARAMETERS, 0),
+        (CONSISTENT_READ, 0),
+        (PARTI_QL_NEXT_TOKEN, 0),
+        (RETURN_CONSUMED_CAPACITY, 0),
+        (POSITIVE_INTEGER_OBJECT, 0),
+        (RETURN_VALUES_ON_CONDITION_CHECK_FAILURE, 0),
+    ),
+)
+
+FILTER_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _FS,
+    0,
+    (_FEi, _PE, _KCE, _EAN, _EAV),
+    (
+        (CONDITION_EXPRESSION, 0),
+        (PROJECTION_EXPRESSION, 0),
+        (KEY_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+        (EXPRESSION_ATTRIBUTE_VALUE_MAP, 0),
+    ),
+)
+
+GET: StaticSchema = (
+    18,
+    n0,
+    _G,
+    0,
+    (_K, _TN, _PE, _EAN),
+    (
+        (KEY, 1),
+        (TABLE_ARN, 1),
+        (PROJECTION_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+    ),
+)
+
+GET_ITEM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GII,
+    {_smit: None},
+    (_TN, _K, _ATG, _CR, _RCC, _PE, _EAN),
+    (
+        (TABLE_ARN, 1),
+        (KEY, 1),
+        (ATTRIBUTE_NAME_LIST, 0),
+        (CONSISTENT_READ, 0),
+        (RETURN_CONSUMED_CAPACITY, 0),
+        (PROJECTION_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+    ),
+)
+
+GET_ITEM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIO,
+    {_smith: None},
+    (_It, _CC),
+    ((ATTRIBUTE_MAP, 0), (CONSUMED_CAPACITY, 0)),
+)
+
+ITEM_COLLECTION_METRICS: StaticSchema = (
+    18,
+    n0,
+    _ICM,
+    0,
+    (_ICK, _SERGB),
+    ((ITEM_COLLECTION_KEY_ATTRIBUTE_MAP, 0), (ITEM_COLLECTION_SIZE_ESTIMATE_RANGE, 0)),
+)
+
+ITEM_LIST: StaticSchema = (16, n0, _IL, 0, (_m,), ((ATTRIBUTE_MAP, 0),))
+
+ITEM_RESPONSE: StaticSchema = (18, n0, _IR, 0, (_It,), ((ATTRIBUTE_MAP, 0),))
+
+KEY_LIST: StaticSchema = (16, n0, _KL, 0, (_m,), ((KEY, 0),))
+
+PARAMETERIZED_STATEMENT: StaticSchema = (
+    18,
+    n0,
+    _PSa,
+    0,
+    (_Stat, _Pa, _RVOCCF),
+    (
+        (PARTI_QL_STATEMENT, 1),
+        (PREPARED_STATEMENT_PARAMETERS, 0),
+        (RETURN_VALUES_ON_CONDITION_CHECK_FAILURE, 0),
+    ),
+)
+
+PUT_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _PR,
+    0,
+    (_It,),
+    ((PUT_ITEM_INPUT_ATTRIBUTE_MAP, 1),),
+)
+
+SEARCH_RESULT_ITEM: StaticSchema = (
+    18,
+    n0,
+    _SRI,
+    0,
+    (_It, _Sc),
+    ((ATTRIBUTE_MAP, 0), (SCORE_NUMBER, {_smi: 0})),
+)
+
+BATCH_GET_RESPONSE_MAP: StaticSchema = (
+    17,
+    n0,
+    _BGRM,
+    0,
+    (_k, _v),
+    ((TABLE_ARN, 0), (ITEM_LIST, 0)),
+)
+
+CANCELLATION_REASON_LIST: StaticSchema = (
+    16,
+    n0,
+    _CRL,
+    0,
+    (_m,),
+    ((CANCELLATION_REASON, 0),),
+)
+
+EXPORT_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _EDx,
+    0,
+    (
+        _EA,
+        _ES,
+        _ST,
+        _ETn,
+        _EMx,
+        _TA,
+        _TI,
+        _ET,
+        _CT,
+        _SB,
+        _SBO,
+        _SPr,
+        _SSA,
+        _SSKKI,
+        _FC,
+        _FM,
+        _EF,
+        _BSBi,
+        _IC,
+        _ETx,
+        _IES,
+        _FS,
+    ),
+    (
+        (EXPORT_ARN, 0),
+        (EXPORT_STATUS, 0),
+        (EXPORT_START_TIME, 0),
+        (EXPORT_END_TIME, 0),
+        (EXPORT_MANIFEST, 0),
+        (TABLE_ARN, 0),
+        (TABLE_ID, 0),
+        (EXPORT_TIME, 0),
+        (CLIENT_TOKEN, 0),
+        (S3_BUCKET, 0),
+        (S3_BUCKET_OWNER, 0),
+        (S3_PREFIX, 0),
+        (S3_SSE_ALGORITHM, 0),
+        (S3_SSE_KMS_KEY_ID, 0),
+        (FAILURE_CODE, 0),
+        (FAILURE_MESSAGE, 0),
+        (EXPORT_FORMAT, 0),
+        (BILLED_SIZE_BYTES, 0),
+        (ITEM_COUNT, 0),
+        (EXPORT_TYPE, 0),
+        (INCREMENTAL_EXPORT_SPECIFICATION, 0),
+        (FILTER_SPECIFICATION, 0),
+    ),
+)
+
+EXPORT_TABLE_TO_POINT_IN_TIME_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ETTPITI,
+    {_smit: None},
+    (_TA, _ET, _CT, _SB, _SBO, _SPr, _SSA, _SSKKI, _EF, _ETx, _IES, _FS),
+    (
+        (TABLE_ARN, 1),
+        (EXPORT_TIME, 0),
+        (CLIENT_TOKEN, 2),
+        (S3_BUCKET, 1),
+        (S3_BUCKET_OWNER, 0),
+        (S3_PREFIX, 0),
+        (S3_SSE_ALGORITHM, 0),
+        (S3_SSE_KMS_KEY_ID, 0),
+        (EXPORT_FORMAT, 0),
+        (EXPORT_TYPE, 0),
+        (INCREMENTAL_EXPORT_SPECIFICATION, 0),
+        (FILTER_SPECIFICATION, 0),
+    ),
+)
+
+FILTER_CONDITION_MAP: StaticSchema = (
+    17,
+    n0,
+    _FCM,
+    0,
+    (_k, _v),
+    ((ATTRIBUTE_NAME, 0), (CONDITION, 0)),
+)
+
+ITEM_COLLECTION_METRICS_MULTIPLE: StaticSchema = (
+    16,
+    n0,
+    _ICMM,
+    0,
+    (_m,),
+    ((ITEM_COLLECTION_METRICS, 0),),
+)
+
+ITEM_RESPONSE_LIST: StaticSchema = (16, n0, _IRL, 0, (_m,), ((ITEM_RESPONSE, 0),))
+
+KEY_CONDITIONS: StaticSchema = (
+    17,
+    n0,
+    _KC,
+    0,
+    (_k, _v),
+    ((ATTRIBUTE_NAME, 0), (CONDITION, 0)),
+)
+
+KEYS_AND_ATTRIBUTES: StaticSchema = (
+    18,
+    n0,
+    _KAA,
+    0,
+    (_Ke, _ATG, _CR, _PE, _EAN),
+    (
+        (KEY_LIST, 1),
+        (ATTRIBUTE_NAME_LIST, 0),
+        (CONSISTENT_READ, 0),
+        (PROJECTION_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+    ),
+)
+
+PARAMETERIZED_STATEMENTS: StaticSchema = (
+    16,
+    n0,
+    _PSar,
+    0,
+    (_m,),
+    ((PARAMETERIZED_STATEMENT, 0),),
+)
+
+PARTI_QL_BATCH_REQUEST: StaticSchema = (
+    16,
+    n0,
+    _PQLBR,
+    0,
+    (_m,),
+    ((BATCH_STATEMENT_REQUEST, 0),),
+)
+
+SEARCH_RESULT_LIST: StaticSchema = (16, n0, _SRL, 0, (_m,), ((SEARCH_RESULT_ITEM, 0),))
+
+TRANSACT_GET_ITEM: StaticSchema = (18, n0, _TGI, 0, (_G,), ((GET, 1),))
+
+BATCH_EXECUTE_STATEMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _BESI,
+    {_smit: None},
+    (_State, _RCC),
+    ((PARTI_QL_BATCH_REQUEST, 1), (RETURN_CONSUMED_CAPACITY, 0)),
+)
+
+BATCH_GET_REQUEST_MAP: StaticSchema = (
+    17,
+    n0,
+    _BGRMa,
+    0,
+    (_k, _v),
+    ((TABLE_ARN, 0), (KEYS_AND_ATTRIBUTES, 0)),
+)
+
+DESCRIBE_EXPORT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DEOe,
+    {_smith: None},
+    (_EDx,),
+    ((EXPORT_DESCRIPTION, 0),),
+)
+
+EXECUTE_TRANSACTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ETI,
+    {_smit: None},
+    (_TSr, _CRT, _RCC),
+    (
+        (PARAMETERIZED_STATEMENTS, 1),
+        (CLIENT_REQUEST_TOKEN, 2),
+        (RETURN_CONSUMED_CAPACITY, 0),
+    ),
+)
+
+EXECUTE_TRANSACTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ETO,
+    {_smith: None},
+    (_Res, _CC),
+    ((ITEM_RESPONSE_LIST, 0), (CONSUMED_CAPACITY_MULTIPLE, 0)),
+)
+
+EXPORT_TABLE_TO_POINT_IN_TIME_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ETTPITO,
+    {_smith: None},
+    (_EDx,),
+    ((EXPORT_DESCRIPTION, 0),),
+)
+
+ITEM_COLLECTION_METRICS_PER_TABLE: StaticSchema = (
+    17,
+    n0,
+    _ICMPT,
+    0,
+    (_k, _v),
+    ((TABLE_ARN, 0), (ITEM_COLLECTION_METRICS_MULTIPLE, 0)),
+)
+
+SEARCH_VECTORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SVO,
+    {_smith: None},
+    (_CC, _SR),
+    ((VECTOR_CAPACITY, 0), (SEARCH_RESULT_LIST, 0)),
+)
+
+TRANSACT_GET_ITEM_LIST: StaticSchema = (
+    16,
+    n0,
+    _TGIL,
+    0,
+    (_m,),
+    ((TRANSACT_GET_ITEM, 0),),
+)
+
+TRANSACT_GET_ITEMS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _TGIO,
+    {_smith: None},
+    (_CC, _Res),
+    ((CONSUMED_CAPACITY_MULTIPLE, 0), (ITEM_RESPONSE_LIST, 0)),
+)
+
+TRANSACTION_CANCELED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TCEr,
+    {_sm: _c},
+    (_M, _CRan),
+    ((ERROR_MESSAGE, 0), (CANCELLATION_REASON_LIST, 0)),
+)
+
+DESCRIBE_EXPORT: StaticOperationSchema = (
+    23,
+    n0,
+    _DEe,
+    0,
+    DESCRIBE_EXPORT_INPUT,
+    DESCRIBE_EXPORT_OUTPUT,
+    (EXPORT_NOT_FOUND_EXCEPTION, INTERNAL_SERVER_ERROR, LIMIT_EXCEEDED_EXCEPTION),
+)
+
+BATCH_GET_ITEM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _BGII,
+    {_smit: None},
+    (_RIe, _RCC),
+    ((BATCH_GET_REQUEST_MAP, 1), (RETURN_CONSUMED_CAPACITY, 0)),
+)
+
+EXPECTED_ATTRIBUTE_VALUE: StaticSchema = (
+    18,
+    n0,
+    _EAVx,
+    0,
+    (_V, _Ex, _CO, _AVL),
+    (
+        (ATTRIBUTE_VALUE, 0),
+        (BOOLEAN_OBJECT, 0),
+        (COMPARISON_OPERATOR, 0),
+        (ATTRIBUTE_VALUE_LIST, 0),
+    ),
+)
+
+TRANSACT_GET_ITEMS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TGII,
+    {_smit: None},
+    (_TIr, _RCC),
+    ((TRANSACT_GET_ITEM_LIST, 1), (RETURN_CONSUMED_CAPACITY, 0)),
+)
+
+TRANSACT_WRITE_ITEMS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _TWIO,
+    {_smith: None},
+    (_CC, _ICM),
+    ((CONSUMED_CAPACITY_MULTIPLE, 0), (ITEM_COLLECTION_METRICS_PER_TABLE, 0)),
+)
+
+CONDITION_CHECK: StaticSchema = (
+    18,
+    n0,
+    _CCo,
+    0,
+    (_K, _TN, _CE, _EAN, _EAV, _RVOCCF),
+    (
+        (KEY, 1),
+        (TABLE_ARN, 1),
+        (CONDITION_EXPRESSION, 1),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+        (EXPRESSION_ATTRIBUTE_VALUE_MAP, 0),
+        (RETURN_VALUES_ON_CONDITION_CHECK_FAILURE, 0),
+    ),
+)
+
+DELETE: StaticSchema = (
+    18,
+    n0,
+    _Del,
+    0,
+    (_K, _TN, _CE, _EAN, _EAV, _RVOCCF),
+    (
+        (KEY, 1),
+        (TABLE_ARN, 1),
+        (CONDITION_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+        (EXPRESSION_ATTRIBUTE_VALUE_MAP, 0),
+        (RETURN_VALUES_ON_CONDITION_CHECK_FAILURE, 0),
+    ),
+)
+
+PUT: StaticSchema = (
+    18,
+    n0,
+    _Pu,
+    0,
+    (_It, _TN, _CE, _EAN, _EAV, _RVOCCF),
+    (
+        (PUT_ITEM_INPUT_ATTRIBUTE_MAP, 1),
+        (TABLE_ARN, 1),
+        (CONDITION_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+        (EXPRESSION_ATTRIBUTE_VALUE_MAP, 0),
+        (RETURN_VALUES_ON_CONDITION_CHECK_FAILURE, 0),
+    ),
+)
+
+SEARCH_VECTORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SVI,
+    {_smit: None},
+    (_TN, _IN, _RCC, _EAN, _EAV, _PE, _SV, _SCE, _TKo),
+    (
+        (TABLE_ARN, 1),
+        (INDEX_NAME, 1),
+        (RETURN_CONSUMED_CAPACITY, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+        (EXPRESSION_ATTRIBUTE_VALUE_MAP, 0),
+        (PROJECTION_EXPRESSION, 0),
+        (SEARCH_VECTOR_LIST, 1),
+        (STRING, 0),
+        (TOP_K_INTEGER, 1),
+    ),
+)
+
+UPDATE: StaticSchema = (
+    18,
+    n0,
+    _U,
+    0,
+    (_K, _UE, _TN, _CE, _EAN, _EAV, _RVOCCF),
+    (
+        (KEY, 1),
+        (UPDATE_EXPRESSION, 1),
+        (TABLE_ARN, 1),
+        (CONDITION_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+        (EXPRESSION_ATTRIBUTE_VALUE_MAP, 0),
+        (RETURN_VALUES_ON_CONDITION_CHECK_FAILURE, 0),
+    ),
+)
+
+BATCH_STATEMENT_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _BSRa,
+    0,
+    (_Er, _TN, _It),
+    ((BATCH_STATEMENT_ERROR, 0), (TABLE_NAME, 0), (ATTRIBUTE_MAP, 0)),
+)
+
+DELETE_ITEM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIOe,
+    {_smith: None},
+    (_At, _CC, _ICM),
+    ((ATTRIBUTE_MAP, 0), (CONSUMED_CAPACITY, 0), (ITEM_COLLECTION_METRICS, 0)),
+)
+
+EXECUTE_STATEMENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ESO,
+    {_smith: None},
+    (_Ite, _NT, _CC, _LEK),
+    ((ITEM_LIST, 0), (PARTI_QL_NEXT_TOKEN, 0), (CONSUMED_CAPACITY, 0), (KEY, 0)),
+)
+
+EXPECTED_ATTRIBUTE_MAP: StaticSchema = (
+    17,
+    n0,
+    _EAM,
+    0,
+    (_k, _v),
+    ((ATTRIBUTE_NAME, 0), (EXPECTED_ATTRIBUTE_VALUE, 0)),
+)
+
+GET_ITEM: StaticOperationSchema = (
+    23,
+    n0,
+    _GI,
+    0,
+    GET_ITEM_INPUT,
+    GET_ITEM_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+    ),
+)
+
+PUT_ITEM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PIOu,
+    {_smith: None},
+    (_At, _CC, _ICM),
+    ((ATTRIBUTE_MAP, 0), (CONSUMED_CAPACITY, 0), (ITEM_COLLECTION_METRICS, 0)),
+)
+
+QUERY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _QO,
+    {_smith: None},
+    (_Ite, _Cou, _SC, _LEK, _CC),
+    (
+        (ITEM_LIST, 0),
+        (INTEGER, {_smi: 0}),
+        (INTEGER, {_smi: 0}),
+        (KEY, 0),
+        (CONSUMED_CAPACITY, 0),
+    ),
+)
+
+SCAN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SO,
+    {_smith: None},
+    (_Ite, _Cou, _SC, _LEK, _CC),
+    (
+        (ITEM_LIST, 0),
+        (INTEGER, {_smi: 0}),
+        (INTEGER, {_smi: 0}),
+        (KEY, 0),
+        (CONSUMED_CAPACITY, 0),
+    ),
+)
+
+UPDATE_ITEM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UIO,
+    {_smith: None},
+    (_At, _CC, _ICM),
+    ((ATTRIBUTE_MAP, 0), (CONSUMED_CAPACITY, 0), (ITEM_COLLECTION_METRICS, 0)),
+)
+
+WRITE_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _WR,
+    0,
+    (_PR, _DR),
+    ((PUT_REQUEST, 0), (DELETE_REQUEST, 0)),
+)
+
+PARTI_QL_BATCH_RESPONSE: StaticSchema = (
+    16,
+    n0,
+    _PQLBRa,
+    0,
+    (_m,),
+    ((BATCH_STATEMENT_RESPONSE, 0),),
+)
+
+EXPORT_TABLE_TO_POINT_IN_TIME: StaticOperationSchema = (
+    23,
+    n0,
+    _ETTPIT,
+    0,
+    EXPORT_TABLE_TO_POINT_IN_TIME_INPUT,
+    EXPORT_TABLE_TO_POINT_IN_TIME_OUTPUT,
+    (
+        EXPORT_CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_EXPORT_TIME_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        POINT_IN_TIME_RECOVERY_UNAVAILABLE_EXCEPTION,
+        TABLE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+WRITE_REQUESTS: StaticSchema = (16, n0, _WRr, 0, (_m,), ((WRITE_REQUEST, 0),))
+
+BATCH_EXECUTE_STATEMENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _BESO,
+    {_smith: None},
+    (_Res, _CC),
+    ((PARTI_QL_BATCH_RESPONSE, 0), (CONSUMED_CAPACITY_MULTIPLE, 0)),
+)
+
+BATCH_GET_ITEM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _BGIO,
+    {_smith: None},
+    (_Res, _UK, _CC),
+    (
+        (BATCH_GET_RESPONSE_MAP, 0),
+        (BATCH_GET_REQUEST_MAP, 0),
+        (CONSUMED_CAPACITY_MULTIPLE, 0),
+    ),
+)
+
+BATCH_WRITE_ITEM_REQUEST_MAP: StaticSchema = (
+    17,
+    n0,
+    _BWIRM,
+    0,
+    (_k, _v),
+    ((TABLE_ARN, 0), (WRITE_REQUESTS, 0)),
+)
+
+SCAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SI,
+    {_smit: None},
+    (
+        _TN,
+        _IN,
+        _ATG,
+        _Li,
+        _Se,
+        _SF,
+        _COo,
+        _ESK,
+        _RCC,
+        _TSo,
+        _Seg,
+        _PE,
+        _FEi,
+        _EAN,
+        _EAV,
+        _CR,
+    ),
+    (
+        (TABLE_ARN, 1),
+        (INDEX_NAME, 0),
+        (ATTRIBUTE_NAME_LIST, 0),
+        (POSITIVE_INTEGER_OBJECT, 0),
+        (SELECT, 0),
+        (FILTER_CONDITION_MAP, 0),
+        (CONDITIONAL_OPERATOR, 0),
+        (KEY, 0),
+        (RETURN_CONSUMED_CAPACITY, 0),
+        (SCAN_TOTAL_SEGMENTS, 0),
+        (SCAN_SEGMENT, 0),
+        (PROJECTION_EXPRESSION, 0),
+        (CONDITION_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+        (EXPRESSION_ATTRIBUTE_VALUE_MAP, 0),
+        (CONSISTENT_READ, 0),
+    ),
+)
+
+SEARCH_VECTORS: StaticOperationSchema = (
+    23,
+    n0,
+    _SVe,
+    0,
+    SEARCH_VECTORS_INPUT,
+    SEARCH_VECTORS_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+    ),
+)
+
+BATCH_WRITE_ITEM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _BWII,
+    {_smit: None},
+    (_RIe, _RCC, _RICM),
+    (
+        (BATCH_WRITE_ITEM_REQUEST_MAP, 1),
+        (RETURN_CONSUMED_CAPACITY, 0),
+        (RETURN_ITEM_COLLECTION_METRICS, 0),
+    ),
+)
+
+DELETE_ITEM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIIe,
+    {_smit: None},
+    (_TN, _K, _Exp, _COo, _RVe, _RCC, _RICM, _CE, _EAN, _EAV, _RVOCCF),
+    (
+        (TABLE_ARN, 1),
+        (KEY, 1),
+        (EXPECTED_ATTRIBUTE_MAP, 0),
+        (CONDITIONAL_OPERATOR, 0),
+        (RETURN_VALUE, 0),
+        (RETURN_CONSUMED_CAPACITY, 0),
+        (RETURN_ITEM_COLLECTION_METRICS, 0),
+        (CONDITION_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+        (EXPRESSION_ATTRIBUTE_VALUE_MAP, 0),
+        (RETURN_VALUES_ON_CONDITION_CHECK_FAILURE, 0),
+    ),
+)
+
+EXECUTE_STATEMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _ESxe,
+    0,
+    EXECUTE_STATEMENT_INPUT,
+    EXECUTE_STATEMENT_OUTPUT,
+    (
+        CONDITIONAL_CHECK_FAILED_EXCEPTION,
+        DUPLICATE_ITEM_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        ITEM_COLLECTION_SIZE_LIMIT_EXCEEDED_EXCEPTION,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRANSACTION_CONFLICT_EXCEPTION,
+    ),
+)
+
+PUT_ITEM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PII,
+    {_smit: None},
+    (_TN, _It, _Exp, _RVe, _RCC, _RICM, _COo, _CE, _EAN, _EAV, _RVOCCF),
+    (
+        (TABLE_ARN, 1),
+        (PUT_ITEM_INPUT_ATTRIBUTE_MAP, 1),
+        (EXPECTED_ATTRIBUTE_MAP, 0),
+        (RETURN_VALUE, 0),
+        (RETURN_CONSUMED_CAPACITY, 0),
+        (RETURN_ITEM_COLLECTION_METRICS, 0),
+        (CONDITIONAL_OPERATOR, 0),
+        (CONDITION_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+        (EXPRESSION_ATTRIBUTE_VALUE_MAP, 0),
+        (RETURN_VALUES_ON_CONDITION_CHECK_FAILURE, 0),
+    ),
+)
+
+EXECUTE_TRANSACTION: StaticOperationSchema = (
+    23,
+    n0,
+    _ETxe,
+    0,
+    EXECUTE_TRANSACTION_INPUT,
+    EXECUTE_TRANSACTION_OUTPUT,
+    (
+        IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRANSACTION_CANCELED_EXCEPTION,
+        TRANSACTION_IN_PROGRESS_EXCEPTION,
+    ),
+)
+
+QUERY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _QI,
+    {_smit: None},
+    (
+        _TN,
+        _IN,
+        _Se,
+        _ATG,
+        _Li,
+        _CR,
+        _KC,
+        _QF,
+        _COo,
+        _SIF,
+        _ESK,
+        _RCC,
+        _PE,
+        _FEi,
+        _KCE,
+        _EAN,
+        _EAV,
+    ),
+    (
+        (TABLE_ARN, 1),
+        (INDEX_NAME, 0),
+        (SELECT, 0),
+        (ATTRIBUTE_NAME_LIST, 0),
+        (POSITIVE_INTEGER_OBJECT, 0),
+        (CONSISTENT_READ, 0),
+        (KEY_CONDITIONS, 0),
+        (FILTER_CONDITION_MAP, 0),
+        (CONDITIONAL_OPERATOR, 0),
+        (BOOLEAN_OBJECT, 0),
+        (KEY, 0),
+        (RETURN_CONSUMED_CAPACITY, 0),
+        (PROJECTION_EXPRESSION, 0),
+        (CONDITION_EXPRESSION, 0),
+        (KEY_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+        (EXPRESSION_ATTRIBUTE_VALUE_MAP, 0),
+    ),
+)
+
+BATCH_EXECUTE_STATEMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _BES,
+    0,
+    BATCH_EXECUTE_STATEMENT_INPUT,
+    BATCH_EXECUTE_STATEMENT_OUTPUT,
+    (INTERNAL_SERVER_ERROR, REQUEST_LIMIT_EXCEEDED, THROTTLING_EXCEPTION),
+)
+
+TRANSACT_GET_ITEMS: StaticOperationSchema = (
+    23,
+    n0,
+    _TGIr,
+    0,
+    TRANSACT_GET_ITEMS_INPUT,
+    TRANSACT_GET_ITEMS_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRANSACTION_CANCELED_EXCEPTION,
+    ),
+)
+
+BATCH_GET_ITEM: StaticOperationSchema = (
+    23,
+    n0,
+    _BGI,
+    0,
+    BATCH_GET_ITEM_INPUT,
+    BATCH_GET_ITEM_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+    ),
+)
+
+BATCH_WRITE_ITEM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _BWIO,
+    {_smith: None},
+    (_UI, _ICM, _CC),
+    (
+        (BATCH_WRITE_ITEM_REQUEST_MAP, 0),
+        (ITEM_COLLECTION_METRICS_PER_TABLE, 0),
+        (CONSUMED_CAPACITY_MULTIPLE, 0),
+    ),
+)
+
+UPDATE_ITEM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UII,
+    {_smit: None},
+    (_TN, _K, _AU, _Exp, _COo, _RVe, _RCC, _RICM, _UE, _CE, _EAN, _EAV, _RVOCCF),
+    (
+        (TABLE_ARN, 1),
+        (KEY, 1),
+        (ATTRIBUTE_UPDATES, 0),
+        (EXPECTED_ATTRIBUTE_MAP, 0),
+        (CONDITIONAL_OPERATOR, 0),
+        (RETURN_VALUE, 0),
+        (RETURN_CONSUMED_CAPACITY, 0),
+        (RETURN_ITEM_COLLECTION_METRICS, 0),
+        (UPDATE_EXPRESSION, 0),
+        (CONDITION_EXPRESSION, 0),
+        (EXPRESSION_ATTRIBUTE_NAME_MAP, 0),
+        (EXPRESSION_ATTRIBUTE_VALUE_MAP, 0),
+        (RETURN_VALUES_ON_CONDITION_CHECK_FAILURE, 0),
+    ),
+)
+
+SCAN: StaticOperationSchema = (
+    23,
+    n0,
+    _Sca,
+    0,
+    SCAN_INPUT,
+    SCAN_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+    ),
+)
+
+QUERY: StaticOperationSchema = (
+    23,
+    n0,
+    _Q,
+    0,
+    QUERY_INPUT,
+    QUERY_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+    ),
+)
+
+DELETE_ITEM: StaticOperationSchema = (
+    23,
+    n0,
+    _DIel,
+    0,
+    DELETE_ITEM_INPUT,
+    DELETE_ITEM_OUTPUT,
+    (
+        CONDITIONAL_CHECK_FAILED_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        ITEM_COLLECTION_SIZE_LIMIT_EXCEEDED_EXCEPTION,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REPLICATED_WRITE_CONFLICT_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRANSACTION_CONFLICT_EXCEPTION,
+    ),
+)
+
+PUT_ITEM: StaticOperationSchema = (
+    23,
+    n0,
+    _PI,
+    0,
+    PUT_ITEM_INPUT,
+    PUT_ITEM_OUTPUT,
+    (
+        CONDITIONAL_CHECK_FAILED_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        ITEM_COLLECTION_SIZE_LIMIT_EXCEEDED_EXCEPTION,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REPLICATED_WRITE_CONFLICT_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRANSACTION_CONFLICT_EXCEPTION,
+    ),
+)
+
+TRANSACT_WRITE_ITEM: StaticSchema = (
+    18,
+    n0,
+    _TWI,
+    0,
+    (_CCo, _Pu, _Del, _U),
+    ((CONDITION_CHECK, 0), (PUT, 0), (DELETE, 0), (UPDATE, 0)),
+)
+
+UPDATE_ITEM: StaticOperationSchema = (
+    23,
+    n0,
+    _UIp,
+    0,
+    UPDATE_ITEM_INPUT,
+    UPDATE_ITEM_OUTPUT,
+    (
+        CONDITIONAL_CHECK_FAILED_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        ITEM_COLLECTION_SIZE_LIMIT_EXCEEDED_EXCEPTION,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REPLICATED_WRITE_CONFLICT_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRANSACTION_CONFLICT_EXCEPTION,
+    ),
+)
+
+BATCH_WRITE_ITEM: StaticOperationSchema = (
+    23,
+    n0,
+    _BWI,
+    0,
+    BATCH_WRITE_ITEM_INPUT,
+    BATCH_WRITE_ITEM_OUTPUT,
+    (
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        ITEM_COLLECTION_SIZE_LIMIT_EXCEEDED_EXCEPTION,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REPLICATED_WRITE_CONFLICT_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+    ),
+)
+
+TRANSACT_WRITE_ITEM_LIST: StaticSchema = (
+    16,
+    n0,
+    _TWIL,
+    0,
+    (_m,),
+    ((TRANSACT_WRITE_ITEM, 0),),
+)
+
+TRANSACT_WRITE_ITEMS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TWII,
+    {_smit: None},
+    (_TIr, _RCC, _RICM, _CRT),
+    (
+        (TRANSACT_WRITE_ITEM_LIST, 1),
+        (RETURN_CONSUMED_CAPACITY, 0),
+        (RETURN_ITEM_COLLECTION_METRICS, 0),
+        (CLIENT_REQUEST_TOKEN, 2),
+    ),
+)
+
+TRANSACT_WRITE_ITEMS: StaticOperationSchema = (
+    23,
+    n0,
+    _TWIr,
+    0,
+    TRANSACT_WRITE_ITEMS_INPUT,
+    TRANSACT_WRITE_ITEMS_OUTPUT,
+    (
+        IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION,
+        INTERNAL_SERVER_ERROR,
+        INVALID_ENDPOINT_EXCEPTION,
+        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
+        REQUEST_LIMIT_EXCEEDED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRANSACTION_CANCELED_EXCEPTION,
+        TRANSACTION_IN_PROGRESS_EXCEPTION,
+    ),
+)
+
+DYNAMO_DB_20120810: StaticSchema = (
+    21,
+    n0,
+    _D_,
+    {
+        _a: MappingProxyType({"name": "dynamodb"}),
+        _a_: None,
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                        "AccountId": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Auth::AccountId",
+                                "required": False,
+                                "documentation": "The AWS AccountId used for the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "AccountIdEndpointMode": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Auth::AccountIdEndpointMode",
+                                "required": False,
+                                "documentation": "The AccountId Endpoint Mode.",
+                                "type": "string",
+                            }
+                        ),
+                        "ResourceArn": MappingProxyType(
+                            {
+                                "required": False,
+                                "documentation": "ResourceArn containing arn of resource",
+                                "type": "string",
+                            }
+                        ),
+                        "ResourceArnList": MappingProxyType(
+                            {
+                                "required": False,
+                                "documentation": "ResourceArnList containing list of resource arns",
+                                "type": "stringArray",
+                            }
+                        ),
+                        "IsSearchOperation": MappingProxyType(
+                            {
+                                "required": False,
+                                "documentation": "Set to true for SearchVectors to route to the Search FQDN",
+                                "type": "boolean",
+                            }
+                        ),
+                    }
                 ),
-            ],
-        },
-    },
-)
-
-PUT_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PutResourcePolicyOutput"),
-    members={"RevisionId": {"target": POLICY_REVISION_ID}},
-)
-
-PUT_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#PutResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-SELECT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Select"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ALL_ATTRIBUTES": {"target": UNIT},
-        "ALL_PROJECTED_ATTRIBUTES": {"target": UNIT},
-        "SPECIFIC_ATTRIBUTES": {"target": UNIT},
-        "COUNT": {"target": UNIT},
-    },
-)
-
-INTEGER = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#Integer"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-RESTORE_TABLE_FROM_BACKUP_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#RestoreTableFromBackupInput"),
-    members={
-        "TargetTableName": {
-            "target": TABLE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "BackupArn": {
-            "target": BACKUP_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "BillingModeOverride": {"target": BILLING_MODE},
-        "GlobalSecondaryIndexOverride": {"target": GLOBAL_SECONDARY_INDEX_LIST},
-        "LocalSecondaryIndexOverride": {"target": LOCAL_SECONDARY_INDEX_LIST},
-        "ProvisionedThroughputOverride": {"target": PROVISIONED_THROUGHPUT},
-        "OnDemandThroughputOverride": {"target": ON_DEMAND_THROUGHPUT},
-        "SSESpecificationOverride": {"target": SSE_SPECIFICATION},
-        "VectorIndexOverride": {"target": VECTOR_INDEX_LIST},
-    },
-)
-
-RESTORE_TABLE_FROM_BACKUP_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#RestoreTableFromBackupOutput"),
-    members={"TableDescription": {"target": TABLE_DESCRIPTION}},
-)
-
-TABLE_ALREADY_EXISTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TableAlreadyExistsException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-RESTORE_TABLE_FROM_BACKUP = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#RestoreTableFromBackup"),
-    shape_type=ShapeType.OPERATION,
-)
-
-INVALID_RESTORE_TIME_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#InvalidRestoreTimeException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-RESTORE_TABLE_TO_POINT_IN_TIME_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#RestoreTableToPointInTimeInput"),
-    members={
-        "SourceTableArn": {"target": TABLE_ARN},
-        "SourceTableName": {"target": TABLE_NAME},
-        "TargetTableName": {
-            "target": TABLE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "UseLatestRestorableTime": {"target": BOOLEAN_OBJECT},
-        "RestoreDateTime": {"target": DATE},
-        "BillingModeOverride": {"target": BILLING_MODE},
-        "GlobalSecondaryIndexOverride": {"target": GLOBAL_SECONDARY_INDEX_LIST},
-        "LocalSecondaryIndexOverride": {"target": LOCAL_SECONDARY_INDEX_LIST},
-        "ProvisionedThroughputOverride": {"target": PROVISIONED_THROUGHPUT},
-        "OnDemandThroughputOverride": {"target": ON_DEMAND_THROUGHPUT},
-        "SSESpecificationOverride": {"target": SSE_SPECIFICATION},
-        "VectorIndexOverride": {"target": VECTOR_INDEX_LIST},
-    },
-)
-
-RESTORE_TABLE_TO_POINT_IN_TIME_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#RestoreTableToPointInTimeOutput"),
-    members={"TableDescription": {"target": TABLE_DESCRIPTION}},
-)
-
-RESTORE_TABLE_TO_POINT_IN_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#RestoreTableToPointInTime"),
-    shape_type=ShapeType.OPERATION,
-)
-
-SCAN_SEGMENT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ScanSegment"), shape_type=ShapeType.INTEGER
-)
-
-SCAN_TOTAL_SEGMENTS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ScanTotalSegments"), shape_type=ShapeType.INTEGER
-)
-
-TOP_K_INTEGER = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TopKInteger"), shape_type=ShapeType.INTEGER
-)
-
-SCORE_NUMBER = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ScoreNumber"),
-    shape_type=ShapeType.DOUBLE,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-TAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TagResourceInput"),
-    members={
-        "ResourceArn": {
-            "target": RESOURCE_ARN_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Tags": {
-            "target": TAG_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-TAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TagResource"), shape_type=ShapeType.OPERATION
-)
-
-UPDATE_EXPRESSION = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateExpression"), shape_type=ShapeType.STRING
-)
-
-TAG_KEY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TagKeyList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG_KEY_STRING}},
-)
-
-UNTAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UntagResourceInput"),
-    members={
-        "ResourceArn": {
-            "target": RESOURCE_ARN_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TagKeys": {
-            "target": TAG_KEY_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-UNTAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UntagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-UNTAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#UntagResource"), shape_type=ShapeType.OPERATION
-)
-
-POINT_IN_TIME_RECOVERY_SPECIFICATION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PointInTimeRecoverySpecification"),
-    members={
-        "PointInTimeRecoveryEnabled": {
-            "target": BOOLEAN_OBJECT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RecoveryPeriodInDays": {"target": RECOVERY_PERIOD_IN_DAYS},
-    },
-)
-
-UPDATE_CONTINUOUS_BACKUPS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateContinuousBackupsInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "PointInTimeRecoverySpecification": {
-            "target": POINT_IN_TIME_RECOVERY_SPECIFICATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-UPDATE_CONTINUOUS_BACKUPS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateContinuousBackupsOutput"),
-    members={
-        "ContinuousBackupsDescription": {"target": CONTINUOUS_BACKUPS_DESCRIPTION}
-    },
-)
-
-UPDATE_CONTINUOUS_BACKUPS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateContinuousBackups"),
-    shape_type=ShapeType.OPERATION,
-)
-
-UPDATE_CONTRIBUTOR_INSIGHTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateContributorInsightsInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IndexName": {"target": INDEX_NAME},
-        "ContributorInsightsAction": {
-            "target": CONTRIBUTOR_INSIGHTS_ACTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ContributorInsightsMode": {"target": CONTRIBUTOR_INSIGHTS_MODE},
-    },
-)
-
-UPDATE_CONTRIBUTOR_INSIGHTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateContributorInsightsOutput"),
-    members={
-        "TableName": {"target": TABLE_NAME},
-        "IndexName": {"target": INDEX_NAME},
-        "ContributorInsightsStatus": {"target": CONTRIBUTOR_INSIGHTS_STATUS},
-        "ContributorInsightsMode": {"target": CONTRIBUTOR_INSIGHTS_MODE},
-    },
-)
-
-UPDATE_CONTRIBUTOR_INSIGHTS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateContributorInsights"),
-    shape_type=ShapeType.OPERATION,
-)
-
-REPLICA_ALREADY_EXISTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaAlreadyExistsException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-REPLICA_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaNotFoundException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-REPLICA_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaUpdate"),
-    members={
-        "Create": {"target": CREATE_REPLICA_ACTION},
-        "Delete": {"target": DELETE_REPLICA_ACTION},
-    },
-)
-
-REPLICA_UPDATE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaUpdateList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_UPDATE}},
-)
-
-UPDATE_GLOBAL_TABLE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateGlobalTableInput"),
-    members={
-        "GlobalTableName": {
-            "target": TABLE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReplicaUpdates": {
-            "target": REPLICA_UPDATE_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-UPDATE_GLOBAL_TABLE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateGlobalTableOutput"),
-    members={"GlobalTableDescription": {"target": GLOBAL_TABLE_DESCRIPTION}},
-)
-
-UPDATE_GLOBAL_TABLE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateGlobalTable"),
-    shape_type=ShapeType.OPERATION,
-)
-
-INDEX_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#IndexNotFoundException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-GLOBAL_TABLE_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableGlobalSecondaryIndexSettingsUpdate"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ProvisionedWriteCapacityUnits": {"target": POSITIVE_LONG_OBJECT},
-        "ProvisionedWriteCapacityAutoScalingSettingsUpdate": {
-            "target": AUTO_SCALING_SETTINGS_UPDATE
-        },
-    },
-)
-
-GLOBAL_TABLE_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE_LIST = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.dynamodb#GlobalTableGlobalSecondaryIndexSettingsUpdateList"
-    ),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GLOBAL_TABLE_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE}},
-)
-
-REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexSettingsUpdate"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ProvisionedReadCapacityUnits": {"target": POSITIVE_LONG_OBJECT},
-        "ProvisionedReadCapacityAutoScalingSettingsUpdate": {
-            "target": AUTO_SCALING_SETTINGS_UPDATE
-        },
-    },
-)
-
-REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexSettingsUpdateList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE}},
-)
-
-REPLICA_SETTINGS_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaSettingsUpdate"),
-    members={
-        "RegionName": {
-            "target": REGION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReplicaProvisionedReadCapacityUnits": {"target": POSITIVE_LONG_OBJECT},
-        "ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate": {
-            "target": AUTO_SCALING_SETTINGS_UPDATE
-        },
-        "ReplicaGlobalSecondaryIndexSettingsUpdate": {
-            "target": REPLICA_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE_LIST
-        },
-        "ReplicaTableClass": {"target": TABLE_CLASS},
-    },
-)
-
-REPLICA_SETTINGS_UPDATE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaSettingsUpdateList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_SETTINGS_UPDATE}},
-)
-
-UPDATE_GLOBAL_TABLE_SETTINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateGlobalTableSettingsInput"),
-    members={
-        "GlobalTableName": {
-            "target": TABLE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "GlobalTableBillingMode": {"target": BILLING_MODE},
-        "GlobalTableProvisionedWriteCapacityUnits": {"target": POSITIVE_LONG_OBJECT},
-        "GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate": {
-            "target": AUTO_SCALING_SETTINGS_UPDATE
-        },
-        "GlobalTableGlobalSecondaryIndexSettingsUpdate": {
-            "target": GLOBAL_TABLE_GLOBAL_SECONDARY_INDEX_SETTINGS_UPDATE_LIST
-        },
-        "ReplicaSettingsUpdate": {"target": REPLICA_SETTINGS_UPDATE_LIST},
-    },
-)
-
-UPDATE_GLOBAL_TABLE_SETTINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateGlobalTableSettingsOutput"),
-    members={
-        "GlobalTableName": {"target": TABLE_NAME},
-        "ReplicaSettings": {"target": REPLICA_SETTINGS_DESCRIPTION_LIST},
-    },
-)
-
-UPDATE_GLOBAL_TABLE_SETTINGS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateGlobalTableSettings"),
-    shape_type=ShapeType.OPERATION,
-)
-
-UPDATE_KINESIS_STREAMING_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateKinesisStreamingConfiguration"),
-    members={
-        "ApproximateCreationDateTimePrecision": {
-            "target": APPROXIMATE_CREATION_DATE_TIME_PRECISION
-        }
-    },
-)
-
-UPDATE_KINESIS_STREAMING_DESTINATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateKinesisStreamingDestinationInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "StreamArn": {
-            "target": STREAM_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "UpdateKinesisStreamingConfiguration": {
-            "target": UPDATE_KINESIS_STREAMING_CONFIGURATION
-        },
-    },
-)
-
-UPDATE_KINESIS_STREAMING_DESTINATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateKinesisStreamingDestinationOutput"),
-    members={
-        "TableName": {"target": TABLE_NAME},
-        "StreamArn": {"target": STREAM_ARN},
-        "DestinationStatus": {"target": DESTINATION_STATUS},
-        "UpdateKinesisStreamingConfiguration": {
-            "target": UPDATE_KINESIS_STREAMING_CONFIGURATION
-        },
-    },
-)
-
-UPDATE_KINESIS_STREAMING_DESTINATION = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateKinesisStreamingDestination"),
-    shape_type=ShapeType.OPERATION,
-)
-
-UPDATE_GLOBAL_SECONDARY_INDEX_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateGlobalSecondaryIndexAction"),
-    members={
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ProvisionedThroughput": {"target": PROVISIONED_THROUGHPUT},
-        "OnDemandThroughput": {"target": ON_DEMAND_THROUGHPUT},
-        "WarmThroughput": {"target": WARM_THROUGHPUT},
-    },
-)
-
-GLOBAL_SECONDARY_INDEX_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalSecondaryIndexUpdate"),
-    members={
-        "Update": {"target": UPDATE_GLOBAL_SECONDARY_INDEX_ACTION},
-        "Create": {"target": CREATE_GLOBAL_SECONDARY_INDEX_ACTION},
-        "Delete": {"target": DELETE_GLOBAL_SECONDARY_INDEX_ACTION},
-    },
-)
-
-GLOBAL_SECONDARY_INDEX_UPDATE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalSecondaryIndexUpdateList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GLOBAL_SECONDARY_INDEX_UPDATE}},
-)
-
-GLOBAL_TABLE_WITNESS_GROUP_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableWitnessGroupUpdate"),
-    members={
-        "Create": {"target": CREATE_GLOBAL_TABLE_WITNESS_GROUP_MEMBER_ACTION},
-        "Delete": {"target": DELETE_GLOBAL_TABLE_WITNESS_GROUP_MEMBER_ACTION},
-    },
-)
-
-GLOBAL_TABLE_WITNESS_GROUP_UPDATE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalTableWitnessGroupUpdateList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GLOBAL_TABLE_WITNESS_GROUP_UPDATE}},
-)
-
-UPDATE_REPLICATION_GROUP_MEMBER_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateReplicationGroupMemberAction"),
-    members={
-        "RegionName": {
-            "target": REGION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "KMSMasterKeyId": {"target": KMS_MASTER_KEY_ID},
-        "ProvisionedThroughputOverride": {"target": PROVISIONED_THROUGHPUT_OVERRIDE},
-        "OnDemandThroughputOverride": {"target": ON_DEMAND_THROUGHPUT_OVERRIDE},
-        "GlobalSecondaryIndexes": {"target": REPLICA_GLOBAL_SECONDARY_INDEX_LIST},
-        "TableClassOverride": {"target": TABLE_CLASS},
-    },
-)
-
-REPLICATION_GROUP_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicationGroupUpdate"),
-    members={
-        "Create": {"target": CREATE_REPLICATION_GROUP_MEMBER_ACTION},
-        "Update": {"target": UPDATE_REPLICATION_GROUP_MEMBER_ACTION},
-        "Delete": {"target": DELETE_REPLICATION_GROUP_MEMBER_ACTION},
-    },
-)
-
-REPLICATION_GROUP_UPDATE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicationGroupUpdateList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICATION_GROUP_UPDATE}},
-)
-
-VECTOR_INDEX_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorIndexUpdate"),
-    members={
-        "Create": {"target": CREATE_VECTOR_INDEX_ACTION},
-        "Delete": {"target": DELETE_VECTOR_INDEX_ACTION},
-    },
-)
-
-VECTOR_INDEX_UPDATE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#VectorIndexUpdateList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VECTOR_INDEX_UPDATE}},
-)
-
-UPDATE_TABLE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateTableInput"),
-    members={
-        "AttributeDefinitions": {"target": ATTRIBUTE_DEFINITIONS},
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "BillingMode": {"target": BILLING_MODE},
-        "ProvisionedThroughput": {"target": PROVISIONED_THROUGHPUT},
-        "GlobalSecondaryIndexUpdates": {"target": GLOBAL_SECONDARY_INDEX_UPDATE_LIST},
-        "StreamSpecification": {"target": STREAM_SPECIFICATION},
-        "SSESpecification": {"target": SSE_SPECIFICATION},
-        "ReplicaUpdates": {"target": REPLICATION_GROUP_UPDATE_LIST},
-        "TableClass": {"target": TABLE_CLASS},
-        "DeletionProtectionEnabled": {"target": DELETION_PROTECTION_ENABLED},
-        "MultiRegionConsistency": {"target": MULTI_REGION_CONSISTENCY},
-        "GlobalTableWitnessUpdates": {"target": GLOBAL_TABLE_WITNESS_GROUP_UPDATE_LIST},
-        "OnDemandThroughput": {"target": ON_DEMAND_THROUGHPUT},
-        "WarmThroughput": {"target": WARM_THROUGHPUT},
-        "GlobalTableSettingsReplicationMode": {
-            "target": GLOBAL_TABLE_SETTINGS_REPLICATION_MODE
-        },
-        "VectorIndexUpdates": {"target": VECTOR_INDEX_UPDATE_LIST},
-    },
-)
-
-UPDATE_TABLE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateTableOutput"),
-    members={"TableDescription": {"target": TABLE_DESCRIPTION}},
-)
-
-UPDATE_TABLE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateTable"), shape_type=ShapeType.OPERATION
-)
-
-GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalSecondaryIndexAutoScalingUpdate"),
-    members={
-        "IndexName": {"target": INDEX_NAME},
-        "ProvisionedWriteCapacityAutoScalingUpdate": {
-            "target": AUTO_SCALING_SETTINGS_UPDATE
-        },
-    },
-)
-
-GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GlobalSecondaryIndexAutoScalingUpdateList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE}},
-)
-
-REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexAutoScalingUpdate"),
-    members={
-        "IndexName": {"target": INDEX_NAME},
-        "ProvisionedReadCapacityAutoScalingUpdate": {
-            "target": AUTO_SCALING_SETTINGS_UPDATE
-        },
-    },
-)
-
-REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE_LIST = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexAutoScalingUpdateList"
-    ),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE}},
-)
-
-REPLICA_AUTO_SCALING_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaAutoScalingUpdate"),
-    members={
-        "RegionName": {
-            "target": REGION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReplicaGlobalSecondaryIndexUpdates": {
-            "target": REPLICA_GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE_LIST
-        },
-        "ReplicaProvisionedReadCapacityAutoScalingUpdate": {
-            "target": AUTO_SCALING_SETTINGS_UPDATE
-        },
-    },
-)
-
-REPLICA_AUTO_SCALING_UPDATE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ReplicaAutoScalingUpdateList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_AUTO_SCALING_UPDATE}},
-)
-
-UPDATE_TABLE_REPLICA_AUTO_SCALING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateTableReplicaAutoScalingInput"),
-    members={
-        "GlobalSecondaryIndexUpdates": {
-            "target": GLOBAL_SECONDARY_INDEX_AUTO_SCALING_UPDATE_LIST
-        },
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ProvisionedWriteCapacityAutoScalingUpdate": {
-            "target": AUTO_SCALING_SETTINGS_UPDATE
-        },
-        "ReplicaUpdates": {"target": REPLICA_AUTO_SCALING_UPDATE_LIST},
-    },
-)
-
-UPDATE_TABLE_REPLICA_AUTO_SCALING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateTableReplicaAutoScalingOutput"),
-    members={"TableAutoScalingDescription": {"target": TABLE_AUTO_SCALING_DESCRIPTION}},
-)
-
-UPDATE_TABLE_REPLICA_AUTO_SCALING = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateTableReplicaAutoScaling"),
-    shape_type=ShapeType.OPERATION,
-)
-
-TIME_TO_LIVE_ENABLED = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TimeToLiveEnabled"), shape_type=ShapeType.BOOLEAN
-)
-
-TIME_TO_LIVE_SPECIFICATION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TimeToLiveSpecification"),
-    members={
-        "Enabled": {
-            "target": TIME_TO_LIVE_ENABLED,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributeName": {
-            "target": TIME_TO_LIVE_ATTRIBUTE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-UPDATE_TIME_TO_LIVE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateTimeToLiveInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TimeToLiveSpecification": {
-            "target": TIME_TO_LIVE_SPECIFICATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-UPDATE_TIME_TO_LIVE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateTimeToLiveOutput"),
-    members={"TimeToLiveSpecification": {"target": TIME_TO_LIVE_SPECIFICATION}},
-)
-
-UPDATE_TIME_TO_LIVE = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateTimeToLive"),
-    shape_type=ShapeType.OPERATION,
-)
-
-ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AttributeValue"),
-    shape_type=ShapeType.UNION,
-    members={
-        "S": {"target": STRING_ATTRIBUTE_VALUE},
-        "N": {"target": NUMBER_ATTRIBUTE_VALUE},
-        "B": {"target": BINARY_ATTRIBUTE_VALUE},
-        "SS": {"target": STRING_SET_ATTRIBUTE_VALUE},
-        "NS": {"target": NUMBER_SET_ATTRIBUTE_VALUE},
-        "BS": {"target": BINARY_SET_ATTRIBUTE_VALUE},
-        # This needs to reference a schema that isn't defined yet.
-        # It will be populated with a non-null value at the end of the file.
-        "M": None,
-        # This needs to reference a schema that isn't defined yet.
-        # It will be populated with a non-null value at the end of the file.
-        "L": None,
-        "NULL": {"target": NULL_ATTRIBUTE_VALUE},
-        "BOOL": {"target": BOOLEAN_ATTRIBUTE_VALUE},
-    },
-)
-
-LIST_ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ListAttributeValue"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ATTRIBUTE_VALUE}},
-)
-
-MAP_ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#MapAttributeValue"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": ATTRIBUTE_NAME}, "value": {"target": ATTRIBUTE_VALUE}},
-)
-
-ATTRIBUTE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AttributeMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": ATTRIBUTE_NAME}, "value": {"target": ATTRIBUTE_VALUE}},
-)
-
-ATTRIBUTE_VALUE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AttributeValueList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ATTRIBUTE_VALUE}},
-)
-
-ATTRIBUTE_VALUE_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AttributeValueUpdate"),
-    members={
-        "Value": {"target": ATTRIBUTE_VALUE},
-        "Action": {"target": ATTRIBUTE_ACTION},
-    },
-)
-
-EXPRESSION_ATTRIBUTE_VALUE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExpressionAttributeValueMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": EXPRESSION_ATTRIBUTE_VALUE_VARIABLE},
-        "value": {"target": ATTRIBUTE_VALUE},
-    },
-)
-
-ITEM_COLLECTION_KEY_ATTRIBUTE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ItemCollectionKeyAttributeMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": ATTRIBUTE_NAME}, "value": {"target": ATTRIBUTE_VALUE}},
-)
-
-KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Key"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": ATTRIBUTE_NAME}, "value": {"target": ATTRIBUTE_VALUE}},
-)
-
-PREPARED_STATEMENT_PARAMETERS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PreparedStatementParameters"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ATTRIBUTE_VALUE}},
-)
-
-PUT_ITEM_INPUT_ATTRIBUTE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PutItemInputAttributeMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": ATTRIBUTE_NAME}, "value": {"target": ATTRIBUTE_VALUE}},
-)
-
-SEARCH_VECTOR_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SearchVectorList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ATTRIBUTE_VALUE}},
-)
-
-ATTRIBUTE_UPDATES = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#AttributeUpdates"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": ATTRIBUTE_NAME},
-        "value": {"target": ATTRIBUTE_VALUE_UPDATE},
-    },
-)
-
-BATCH_STATEMENT_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchStatementError"),
-    members={
-        "Code": {"target": BATCH_STATEMENT_ERROR_CODE_ENUM},
-        "Message": {"target": STRING},
-        "Item": {"target": ATTRIBUTE_MAP},
-    },
-)
-
-BATCH_STATEMENT_REQUEST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchStatementRequest"),
-    members={
-        "Statement": {
-            "target": PARTI_QL_STATEMENT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Parameters": {"target": PREPARED_STATEMENT_PARAMETERS},
-        "ConsistentRead": {"target": CONSISTENT_READ},
-        "ReturnValuesOnConditionCheckFailure": {
-            "target": RETURN_VALUES_ON_CONDITION_CHECK_FAILURE
-        },
-    },
-)
-
-CANCELLATION_REASON = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CancellationReason"),
-    members={
-        "Item": {"target": ATTRIBUTE_MAP},
-        "Code": {"target": CODE},
-        "Message": {"target": ERROR_MESSAGE},
-    },
-)
-
-CONDITION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Condition"),
-    members={
-        "AttributeValueList": {"target": ATTRIBUTE_VALUE_LIST},
-        "ComparisonOperator": {
-            "target": COMPARISON_OPERATOR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CONDITIONAL_CHECK_FAILED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ConditionalCheckFailedException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": ERROR_MESSAGE}, "Item": {"target": ATTRIBUTE_MAP}},
-)
-
-DELETE_REQUEST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteRequest"),
-    members={
-        "Key": {"target": KEY, "traits": [Trait.new(id=ShapeID("smithy.api#required"))]}
-    },
-)
-
-EXECUTE_STATEMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExecuteStatementInput"),
-    members={
-        "Statement": {
-            "target": PARTI_QL_STATEMENT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Parameters": {"target": PREPARED_STATEMENT_PARAMETERS},
-        "ConsistentRead": {"target": CONSISTENT_READ},
-        "NextToken": {"target": PARTI_QL_NEXT_TOKEN},
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-        "Limit": {"target": POSITIVE_INTEGER_OBJECT},
-        "ReturnValuesOnConditionCheckFailure": {
-            "target": RETURN_VALUES_ON_CONDITION_CHECK_FAILURE
-        },
-    },
-)
-
-FILTER_SPECIFICATION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#FilterSpecification"),
-    members={
-        "FilterExpression": {"target": CONDITION_EXPRESSION},
-        "ProjectionExpression": {"target": PROJECTION_EXPRESSION},
-        "KeyConditionExpression": {"target": KEY_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-        "ExpressionAttributeValues": {"target": EXPRESSION_ATTRIBUTE_VALUE_MAP},
-    },
-)
-
-GET = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Get"),
-    members={
-        "Key": {
-            "target": KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ProjectionExpression": {"target": PROJECTION_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-    },
-)
-
-GET_ITEM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GetItemInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Key": {
-            "target": KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributesToGet": {"target": ATTRIBUTE_NAME_LIST},
-        "ConsistentRead": {"target": CONSISTENT_READ},
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-        "ProjectionExpression": {"target": PROJECTION_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-    },
-)
-
-GET_ITEM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#GetItemOutput"),
-    members={
-        "Item": {"target": ATTRIBUTE_MAP},
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY},
-    },
-)
-
-ITEM_COLLECTION_METRICS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ItemCollectionMetrics"),
-    members={
-        "ItemCollectionKey": {"target": ITEM_COLLECTION_KEY_ATTRIBUTE_MAP},
-        "SizeEstimateRangeGB": {"target": ITEM_COLLECTION_SIZE_ESTIMATE_RANGE},
-    },
-)
-
-ITEM_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ItemList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ATTRIBUTE_MAP}},
-)
-
-ITEM_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ItemResponse"),
-    members={"Item": {"target": ATTRIBUTE_MAP}},
-)
-
-KEY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#KeyList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": KEY}},
-)
-
-PARAMETERIZED_STATEMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ParameterizedStatement"),
-    members={
-        "Statement": {
-            "target": PARTI_QL_STATEMENT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Parameters": {"target": PREPARED_STATEMENT_PARAMETERS},
-        "ReturnValuesOnConditionCheckFailure": {
-            "target": RETURN_VALUES_ON_CONDITION_CHECK_FAILURE
-        },
-    },
-)
-
-PUT_REQUEST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PutRequest"),
-    members={
-        "Item": {
-            "target": PUT_ITEM_INPUT_ATTRIBUTE_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-SEARCH_RESULT_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SearchResultItem"),
-    members={
-        "Item": {"target": ATTRIBUTE_MAP},
-        "Score": {
-            "target": SCORE_NUMBER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-BATCH_GET_RESPONSE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchGetResponseMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": TABLE_ARN}, "value": {"target": ITEM_LIST}},
-)
-
-CANCELLATION_REASON_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#CancellationReasonList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CANCELLATION_REASON}},
-)
-
-EXPORT_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExportDescription"),
-    members={
-        "ExportArn": {"target": EXPORT_ARN},
-        "ExportStatus": {"target": EXPORT_STATUS},
-        "StartTime": {"target": EXPORT_START_TIME},
-        "EndTime": {"target": EXPORT_END_TIME},
-        "ExportManifest": {"target": EXPORT_MANIFEST},
-        "TableArn": {"target": TABLE_ARN},
-        "TableId": {"target": TABLE_ID},
-        "ExportTime": {"target": EXPORT_TIME},
-        "ClientToken": {"target": CLIENT_TOKEN},
-        "S3Bucket": {"target": S3_BUCKET},
-        "S3BucketOwner": {"target": S3_BUCKET_OWNER},
-        "S3Prefix": {"target": S3_PREFIX},
-        "S3SseAlgorithm": {"target": S3_SSE_ALGORITHM},
-        "S3SseKmsKeyId": {"target": S3_SSE_KMS_KEY_ID},
-        "FailureCode": {"target": FAILURE_CODE},
-        "FailureMessage": {"target": FAILURE_MESSAGE},
-        "ExportFormat": {"target": EXPORT_FORMAT},
-        "BilledSizeBytes": {"target": BILLED_SIZE_BYTES},
-        "ItemCount": {"target": ITEM_COUNT},
-        "ExportType": {"target": EXPORT_TYPE},
-        "IncrementalExportSpecification": {"target": INCREMENTAL_EXPORT_SPECIFICATION},
-        "FilterSpecification": {"target": FILTER_SPECIFICATION},
-    },
-)
-
-EXPORT_TABLE_TO_POINT_IN_TIME_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExportTableToPointInTimeInput"),
-    members={
-        "TableArn": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ExportTime": {"target": EXPORT_TIME},
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "S3Bucket": {
-            "target": S3_BUCKET,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "S3BucketOwner": {"target": S3_BUCKET_OWNER},
-        "S3Prefix": {"target": S3_PREFIX},
-        "S3SseAlgorithm": {"target": S3_SSE_ALGORITHM},
-        "S3SseKmsKeyId": {"target": S3_SSE_KMS_KEY_ID},
-        "ExportFormat": {"target": EXPORT_FORMAT},
-        "ExportType": {"target": EXPORT_TYPE},
-        "IncrementalExportSpecification": {"target": INCREMENTAL_EXPORT_SPECIFICATION},
-        "FilterSpecification": {"target": FILTER_SPECIFICATION},
-    },
-)
-
-FILTER_CONDITION_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#FilterConditionMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": ATTRIBUTE_NAME}, "value": {"target": CONDITION}},
-)
-
-ITEM_COLLECTION_METRICS_MULTIPLE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ItemCollectionMetricsMultiple"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ITEM_COLLECTION_METRICS}},
-)
-
-ITEM_RESPONSE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ItemResponseList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ITEM_RESPONSE}},
-)
-
-KEY_CONDITIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#KeyConditions"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": ATTRIBUTE_NAME}, "value": {"target": CONDITION}},
-)
-
-KEYS_AND_ATTRIBUTES = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#KeysAndAttributes"),
-    members={
-        "Keys": {
-            "target": KEY_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributesToGet": {"target": ATTRIBUTE_NAME_LIST},
-        "ConsistentRead": {"target": CONSISTENT_READ},
-        "ProjectionExpression": {"target": PROJECTION_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-    },
-)
-
-PARAMETERIZED_STATEMENTS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ParameterizedStatements"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PARAMETERIZED_STATEMENT}},
-)
-
-PARTI_QL_BATCH_REQUEST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PartiQLBatchRequest"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BATCH_STATEMENT_REQUEST}},
-)
-
-SEARCH_RESULT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SearchResultList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SEARCH_RESULT_ITEM}},
-)
-
-TRANSACT_GET_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TransactGetItem"),
-    members={
-        "Get": {"target": GET, "traits": [Trait.new(id=ShapeID("smithy.api#required"))]}
-    },
-)
-
-BATCH_EXECUTE_STATEMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchExecuteStatementInput"),
-    members={
-        "Statements": {
-            "target": PARTI_QL_BATCH_REQUEST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-    },
-)
-
-BATCH_GET_REQUEST_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchGetRequestMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": TABLE_ARN}, "value": {"target": KEYS_AND_ATTRIBUTES}},
-)
-
-DESCRIBE_EXPORT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeExportOutput"),
-    members={"ExportDescription": {"target": EXPORT_DESCRIPTION}},
-)
-
-EXECUTE_TRANSACTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExecuteTransactionInput"),
-    members={
-        "TransactStatements": {
-            "target": PARAMETERIZED_STATEMENTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ClientRequestToken": {
-            "target": CLIENT_REQUEST_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-    },
-)
-
-EXECUTE_TRANSACTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExecuteTransactionOutput"),
-    members={
-        "Responses": {"target": ITEM_RESPONSE_LIST},
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY_MULTIPLE},
-    },
-)
-
-EXPORT_TABLE_TO_POINT_IN_TIME_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExportTableToPointInTimeOutput"),
-    members={"ExportDescription": {"target": EXPORT_DESCRIPTION}},
-)
-
-ITEM_COLLECTION_METRICS_PER_TABLE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ItemCollectionMetricsPerTable"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": TABLE_ARN},
-        "value": {"target": ITEM_COLLECTION_METRICS_MULTIPLE},
-    },
-)
-
-SEARCH_VECTORS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SearchVectorsOutput"),
-    members={
-        "ConsumedCapacity": {"target": VECTOR_CAPACITY},
-        "SearchResults": {"target": SEARCH_RESULT_LIST},
-    },
-)
-
-TRANSACT_GET_ITEM_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TransactGetItemList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TRANSACT_GET_ITEM}},
-)
-
-TRANSACT_GET_ITEMS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TransactGetItemsOutput"),
-    members={
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY_MULTIPLE},
-        "Responses": {"target": ITEM_RESPONSE_LIST},
-    },
-)
-
-TRANSACTION_CANCELED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TransactionCanceledException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={
-        "Message": {"target": ERROR_MESSAGE},
-        "CancellationReasons": {"target": CANCELLATION_REASON_LIST},
-    },
-)
-
-DESCRIBE_EXPORT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DescribeExport"), shape_type=ShapeType.OPERATION
-)
-
-BATCH_GET_ITEM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchGetItemInput"),
-    members={
-        "RequestItems": {
-            "target": BATCH_GET_REQUEST_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-    },
-)
-
-EXPECTED_ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExpectedAttributeValue"),
-    members={
-        "Value": {"target": ATTRIBUTE_VALUE},
-        "Exists": {"target": BOOLEAN_OBJECT},
-        "ComparisonOperator": {"target": COMPARISON_OPERATOR},
-        "AttributeValueList": {"target": ATTRIBUTE_VALUE_LIST},
-    },
-)
-
-TRANSACT_GET_ITEMS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TransactGetItemsInput"),
-    members={
-        "TransactItems": {
-            "target": TRANSACT_GET_ITEM_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-    },
-)
-
-TRANSACT_WRITE_ITEMS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TransactWriteItemsOutput"),
-    members={
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY_MULTIPLE},
-        "ItemCollectionMetrics": {"target": ITEM_COLLECTION_METRICS_PER_TABLE},
-    },
-)
-
-CONDITION_CHECK = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ConditionCheck"),
-    members={
-        "Key": {
-            "target": KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ConditionExpression": {
-            "target": CONDITION_EXPRESSION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-        "ExpressionAttributeValues": {"target": EXPRESSION_ATTRIBUTE_VALUE_MAP},
-        "ReturnValuesOnConditionCheckFailure": {
-            "target": RETURN_VALUES_ON_CONDITION_CHECK_FAILURE
-        },
-    },
-)
-
-DELETE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Delete"),
-    members={
-        "Key": {
-            "target": KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ConditionExpression": {"target": CONDITION_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-        "ExpressionAttributeValues": {"target": EXPRESSION_ATTRIBUTE_VALUE_MAP},
-        "ReturnValuesOnConditionCheckFailure": {
-            "target": RETURN_VALUES_ON_CONDITION_CHECK_FAILURE
-        },
-    },
-)
-
-PUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Put"),
-    members={
-        "Item": {
-            "target": PUT_ITEM_INPUT_ATTRIBUTE_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ConditionExpression": {"target": CONDITION_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-        "ExpressionAttributeValues": {"target": EXPRESSION_ATTRIBUTE_VALUE_MAP},
-        "ReturnValuesOnConditionCheckFailure": {
-            "target": RETURN_VALUES_ON_CONDITION_CHECK_FAILURE
-        },
-    },
-)
-
-SEARCH_VECTORS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#SearchVectorsInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IndexName": {
-            "target": INDEX_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-        "ExpressionAttributeValues": {"target": EXPRESSION_ATTRIBUTE_VALUE_MAP},
-        "ProjectionExpression": {"target": PROJECTION_EXPRESSION},
-        "SearchVector": {
-            "target": SEARCH_VECTOR_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SearchConditionExpression": {"target": STRING},
-        "TopK": {
-            "target": TOP_K_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#Update"),
-    members={
-        "Key": {
-            "target": KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "UpdateExpression": {
-            "target": UPDATE_EXPRESSION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ConditionExpression": {"target": CONDITION_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-        "ExpressionAttributeValues": {"target": EXPRESSION_ATTRIBUTE_VALUE_MAP},
-        "ReturnValuesOnConditionCheckFailure": {
-            "target": RETURN_VALUES_ON_CONDITION_CHECK_FAILURE
-        },
-    },
-)
-
-BATCH_STATEMENT_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchStatementResponse"),
-    members={
-        "Error": {"target": BATCH_STATEMENT_ERROR},
-        "TableName": {"target": TABLE_NAME},
-        "Item": {"target": ATTRIBUTE_MAP},
-    },
-)
-
-DELETE_ITEM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteItemOutput"),
-    members={
-        "Attributes": {"target": ATTRIBUTE_MAP},
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY},
-        "ItemCollectionMetrics": {"target": ITEM_COLLECTION_METRICS},
-    },
-)
-
-EXECUTE_STATEMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExecuteStatementOutput"),
-    members={
-        "Items": {"target": ITEM_LIST},
-        "NextToken": {"target": PARTI_QL_NEXT_TOKEN},
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY},
-        "LastEvaluatedKey": {"target": KEY},
-    },
-)
-
-EXPECTED_ATTRIBUTE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ExpectedAttributeMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": ATTRIBUTE_NAME},
-        "value": {"target": EXPECTED_ATTRIBUTE_VALUE},
-    },
-)
-
-GET_ITEM = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#GetItem"), shape_type=ShapeType.OPERATION
-)
-
-PUT_ITEM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PutItemOutput"),
-    members={
-        "Attributes": {"target": ATTRIBUTE_MAP},
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY},
-        "ItemCollectionMetrics": {"target": ITEM_COLLECTION_METRICS},
-    },
-)
-
-QUERY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#QueryOutput"),
-    members={
-        "Items": {"target": ITEM_LIST},
-        "Count": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "ScannedCount": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "LastEvaluatedKey": {"target": KEY},
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY},
-    },
-)
-
-SCAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ScanOutput"),
-    members={
-        "Items": {"target": ITEM_LIST},
-        "Count": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "ScannedCount": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "LastEvaluatedKey": {"target": KEY},
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY},
-    },
-)
-
-UPDATE_ITEM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateItemOutput"),
-    members={
-        "Attributes": {"target": ATTRIBUTE_MAP},
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY},
-        "ItemCollectionMetrics": {"target": ITEM_COLLECTION_METRICS},
-    },
-)
-
-WRITE_REQUEST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#WriteRequest"),
-    members={
-        "PutRequest": {"target": PUT_REQUEST},
-        "DeleteRequest": {"target": DELETE_REQUEST},
-    },
-)
-
-PARTI_QL_BATCH_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PartiQLBatchResponse"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BATCH_STATEMENT_RESPONSE}},
-)
-
-EXPORT_TABLE_TO_POINT_IN_TIME = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExportTableToPointInTime"),
-    shape_type=ShapeType.OPERATION,
-)
-
-WRITE_REQUESTS = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#WriteRequests"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": WRITE_REQUEST}},
-)
-
-BATCH_EXECUTE_STATEMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchExecuteStatementOutput"),
-    members={
-        "Responses": {"target": PARTI_QL_BATCH_RESPONSE},
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY_MULTIPLE},
-    },
-)
-
-BATCH_GET_ITEM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchGetItemOutput"),
-    members={
-        "Responses": {"target": BATCH_GET_RESPONSE_MAP},
-        "UnprocessedKeys": {"target": BATCH_GET_REQUEST_MAP},
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY_MULTIPLE},
-    },
-)
-
-BATCH_WRITE_ITEM_REQUEST_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchWriteItemRequestMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": TABLE_ARN}, "value": {"target": WRITE_REQUESTS}},
-)
-
-SCAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#ScanInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IndexName": {"target": INDEX_NAME},
-        "AttributesToGet": {"target": ATTRIBUTE_NAME_LIST},
-        "Limit": {"target": POSITIVE_INTEGER_OBJECT},
-        "Select": {"target": SELECT},
-        "ScanFilter": {"target": FILTER_CONDITION_MAP},
-        "ConditionalOperator": {"target": CONDITIONAL_OPERATOR},
-        "ExclusiveStartKey": {"target": KEY},
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-        "TotalSegments": {"target": SCAN_TOTAL_SEGMENTS},
-        "Segment": {"target": SCAN_SEGMENT},
-        "ProjectionExpression": {"target": PROJECTION_EXPRESSION},
-        "FilterExpression": {"target": CONDITION_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-        "ExpressionAttributeValues": {"target": EXPRESSION_ATTRIBUTE_VALUE_MAP},
-        "ConsistentRead": {"target": CONSISTENT_READ},
-    },
-)
-
-SEARCH_VECTORS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#SearchVectors"), shape_type=ShapeType.OPERATION
-)
-
-BATCH_WRITE_ITEM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchWriteItemInput"),
-    members={
-        "RequestItems": {
-            "target": BATCH_WRITE_ITEM_REQUEST_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-        "ReturnItemCollectionMetrics": {"target": RETURN_ITEM_COLLECTION_METRICS},
-    },
-)
-
-DELETE_ITEM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteItemInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Key": {
-            "target": KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Expected": {"target": EXPECTED_ATTRIBUTE_MAP},
-        "ConditionalOperator": {"target": CONDITIONAL_OPERATOR},
-        "ReturnValues": {"target": RETURN_VALUE},
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-        "ReturnItemCollectionMetrics": {"target": RETURN_ITEM_COLLECTION_METRICS},
-        "ConditionExpression": {"target": CONDITION_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-        "ExpressionAttributeValues": {"target": EXPRESSION_ATTRIBUTE_VALUE_MAP},
-        "ReturnValuesOnConditionCheckFailure": {
-            "target": RETURN_VALUES_ON_CONDITION_CHECK_FAILURE
-        },
-    },
-)
-
-EXECUTE_STATEMENT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExecuteStatement"),
-    shape_type=ShapeType.OPERATION,
-)
-
-PUT_ITEM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#PutItemInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Item": {
-            "target": PUT_ITEM_INPUT_ATTRIBUTE_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Expected": {"target": EXPECTED_ATTRIBUTE_MAP},
-        "ReturnValues": {"target": RETURN_VALUE},
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-        "ReturnItemCollectionMetrics": {"target": RETURN_ITEM_COLLECTION_METRICS},
-        "ConditionalOperator": {"target": CONDITIONAL_OPERATOR},
-        "ConditionExpression": {"target": CONDITION_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-        "ExpressionAttributeValues": {"target": EXPRESSION_ATTRIBUTE_VALUE_MAP},
-        "ReturnValuesOnConditionCheckFailure": {
-            "target": RETURN_VALUES_ON_CONDITION_CHECK_FAILURE
-        },
-    },
-)
-
-EXECUTE_TRANSACTION = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#ExecuteTransaction"),
-    shape_type=ShapeType.OPERATION,
-)
-
-QUERY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#QueryInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IndexName": {"target": INDEX_NAME},
-        "Select": {"target": SELECT},
-        "AttributesToGet": {"target": ATTRIBUTE_NAME_LIST},
-        "Limit": {"target": POSITIVE_INTEGER_OBJECT},
-        "ConsistentRead": {"target": CONSISTENT_READ},
-        "KeyConditions": {"target": KEY_CONDITIONS},
-        "QueryFilter": {"target": FILTER_CONDITION_MAP},
-        "ConditionalOperator": {"target": CONDITIONAL_OPERATOR},
-        "ScanIndexForward": {"target": BOOLEAN_OBJECT},
-        "ExclusiveStartKey": {"target": KEY},
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-        "ProjectionExpression": {"target": PROJECTION_EXPRESSION},
-        "FilterExpression": {"target": CONDITION_EXPRESSION},
-        "KeyConditionExpression": {"target": KEY_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-        "ExpressionAttributeValues": {"target": EXPRESSION_ATTRIBUTE_VALUE_MAP},
-    },
-)
-
-BATCH_EXECUTE_STATEMENT = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BatchExecuteStatement"),
-    shape_type=ShapeType.OPERATION,
-)
-
-TRANSACT_GET_ITEMS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TransactGetItems"),
-    shape_type=ShapeType.OPERATION,
-)
-
-BATCH_GET_ITEM = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BatchGetItem"), shape_type=ShapeType.OPERATION
-)
-
-BATCH_WRITE_ITEM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#BatchWriteItemOutput"),
-    members={
-        "UnprocessedItems": {"target": BATCH_WRITE_ITEM_REQUEST_MAP},
-        "ItemCollectionMetrics": {"target": ITEM_COLLECTION_METRICS_PER_TABLE},
-        "ConsumedCapacity": {"target": CONSUMED_CAPACITY_MULTIPLE},
-    },
-)
-
-UPDATE_ITEM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateItemInput"),
-    members={
-        "TableName": {
-            "target": TABLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Key": {
-            "target": KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributeUpdates": {"target": ATTRIBUTE_UPDATES},
-        "Expected": {"target": EXPECTED_ATTRIBUTE_MAP},
-        "ConditionalOperator": {"target": CONDITIONAL_OPERATOR},
-        "ReturnValues": {"target": RETURN_VALUE},
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-        "ReturnItemCollectionMetrics": {"target": RETURN_ITEM_COLLECTION_METRICS},
-        "UpdateExpression": {"target": UPDATE_EXPRESSION},
-        "ConditionExpression": {"target": CONDITION_EXPRESSION},
-        "ExpressionAttributeNames": {"target": EXPRESSION_ATTRIBUTE_NAME_MAP},
-        "ExpressionAttributeValues": {"target": EXPRESSION_ATTRIBUTE_VALUE_MAP},
-        "ReturnValuesOnConditionCheckFailure": {
-            "target": RETURN_VALUES_ON_CONDITION_CHECK_FAILURE
-        },
-    },
-)
-
-SCAN = Schema(id=ShapeID("com.amazonaws.dynamodb#Scan"), shape_type=ShapeType.OPERATION)
-
-QUERY = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#Query"), shape_type=ShapeType.OPERATION
-)
-
-DELETE_ITEM = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DeleteItem"), shape_type=ShapeType.OPERATION
-)
-
-PUT_ITEM = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#PutItem"), shape_type=ShapeType.OPERATION
-)
-
-TRANSACT_WRITE_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TransactWriteItem"),
-    members={
-        "ConditionCheck": {"target": CONDITION_CHECK},
-        "Put": {"target": PUT},
-        "Delete": {"target": DELETE},
-        "Update": {"target": UPDATE},
-    },
-)
-
-UPDATE_ITEM = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#UpdateItem"), shape_type=ShapeType.OPERATION
-)
-
-BATCH_WRITE_ITEM = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#BatchWriteItem"), shape_type=ShapeType.OPERATION
-)
-
-TRANSACT_WRITE_ITEM_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TransactWriteItemList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TRANSACT_WRITE_ITEM}},
-)
-
-TRANSACT_WRITE_ITEMS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.dynamodb#TransactWriteItemsInput"),
-    members={
-        "TransactItems": {
-            "target": TRANSACT_WRITE_ITEM_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReturnConsumedCapacity": {"target": RETURN_CONSUMED_CAPACITY},
-        "ReturnItemCollectionMetrics": {"target": RETURN_ITEM_COLLECTION_METRICS},
-        "ClientRequestToken": {
-            "target": CLIENT_REQUEST_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-    },
-)
-
-TRANSACT_WRITE_ITEMS = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#TransactWriteItems"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DYNAMO_DB_20120810 = Schema(
-    id=ShapeID("com.amazonaws.dynamodb#DynamoDB_20120810"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "dynamodb"})
-        ),
-        Trait.new(id=ShapeID("aws.protocols#awsJson1_0")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+                "conditions": (
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                            "AccountId": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Auth::AccountId",
-                                    "required": False,
-                                    "documentation": "The AWS AccountId used for the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "AccountIdEndpointMode": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Auth::AccountIdEndpointMode",
-                                    "required": False,
-                                    "documentation": "The AccountId Endpoint Mode.",
-                                    "type": "string",
-                                }
-                            ),
-                            "ResourceArn": MappingProxyType(
-                                {
-                                    "required": False,
-                                    "documentation": "ResourceArn containing arn of resource",
-                                    "type": "string",
-                                }
-                            ),
-                            "ResourceArnList": MappingProxyType(
-                                {
-                                    "required": False,
-                                    "documentation": "ResourceArnList containing list of resource arns",
-                                    "type": "stringArray",
-                                }
-                            ),
-                            "IsSearchOperation": MappingProxyType(
-                                {
-                                    "required": False,
-                                    "documentation": "Set to true for SearchVectors to route to the Search FQDN",
-                                    "type": "boolean",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "local"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsFIPS",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (MappingProxyType({"ref": "Region"}), "local"),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "parseURL",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                                "assign": "parsedEndpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    "dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "parsedEndpoint"}
-                                                ),
-                                                "authority",
-                                            ),
-                                        }
-                                    ),
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    "search-dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "parsedEndpoint"}
-                                                ),
-                                                "authority",
-                                            ),
-                                        }
-                                    ),
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (
-                                    MappingProxyType({"ref": "AccountIdEndpointMode"}),
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "AccountIdEndpointMode"}),
-                                    "disabled",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "ResourceArn"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.parseArn",
-                                "argv": (MappingProxyType({"ref": "ResourceArn"}),),
-                                "assign": "ParsedArn_ssa_2",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "ParsedArn_ssa_2"}
-                                                ),
-                                                "region",
-                                            ),
-                                        }
-                                    ),
-                                    MappingProxyType({"ref": "Region"}),
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "ParsedArn_ssa_2"}
-                                                ),
-                                                "service",
-                                            ),
-                                        }
-                                    ),
-                                    "dynamodb",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isValidHostLabel",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "ParsedArn_ssa_2"}
-                                                ),
-                                                "region",
-                                            ),
-                                        }
-                                    ),
-                                    False,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isValidHostLabel",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "ParsedArn_ssa_2"}
-                                                ),
-                                                "accountId",
-                                            ),
-                                        }
-                                    ),
-                                    False,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "ResourceArnList"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "getAttr",
-                                "argv": (
-                                    MappingProxyType({"ref": "ResourceArnList"}),
-                                    "[0]",
-                                ),
-                                "assign": "FirstArn",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.parseArn",
-                                "argv": (MappingProxyType({"ref": "FirstArn"}),),
-                                "assign": "ParsedArn_ssa_1",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "ParsedArn_ssa_1"}
-                                                ),
-                                                "region",
-                                            ),
-                                        }
-                                    ),
-                                    MappingProxyType({"ref": "Region"}),
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "ParsedArn_ssa_1"}
-                                                ),
-                                                "service",
-                                            ),
-                                        }
-                                    ),
-                                    "dynamodb",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isValidHostLabel",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "ParsedArn_ssa_1"}
-                                                ),
-                                                "accountId",
-                                            ),
-                                        }
-                                    ),
-                                    False,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isValidHostLabel",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "ParsedArn_ssa_1"}
-                                                ),
-                                                "region",
-                                            ),
-                                        }
-                                    ),
-                                    False,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "AccountId"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "AccountIdEndpointMode"}),
-                                    "required",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isValidHostLabel",
-                                "argv": (MappingProxyType({"ref": "AccountId"}), False),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-us-gov",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "coalesce",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "IsSearchOperation"}
-                                                ),
-                                                False,
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
+                    MappingProxyType(
+                        {
+                            "fn": "parseURL",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                            "assign": "parsedEndpoint",
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                "dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                MappingProxyType(
                                     {
-                                        "url": "{Endpoint}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and local endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and local endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "http://localhost:8000",
-                                        "properties": MappingProxyType(
-                                            {
-                                                "authSchemes": (
-                                                    MappingProxyType(
-                                                        {
-                                                            "signingRegion": "us-east-1",
-                                                            "signingName": "dynamodb",
-                                                            "name": "sigv4",
-                                                        }
-                                                    ),
-                                                )
-                                            }
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType({"ref": "parsedEndpoint"}),
+                                            "authority",
                                         ),
-                                        "headers": MappingProxyType({}),
                                     }
                                 ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://search-dynamodb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://dynamodb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://search-dynamodb.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://dynamodb.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://search-dynamodb-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://dynamodb-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{ParsedArn_ssa_2#accountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{ParsedArn_ssa_2#accountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{ParsedArn_ssa_1#accountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{ParsedArn_ssa_1#accountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{AccountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{AccountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Credentials-sourced account ID parameter is invalid",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://search-dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{ParsedArn_ssa_2#accountId}.search-ddb.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{ParsedArn_ssa_2#accountId}.ddb.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{ParsedArn_ssa_1#accountId}.search-ddb.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{ParsedArn_ssa_1#accountId}.ddb.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{AccountId}.search-ddb.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{AccountId}.ddb.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {"metricValues": ("O",)}
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                            ),
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 82,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEjAAAAAgX14QEAAAAFAAAAAwX14QIF9eEEAAAAAQAAAE0AAAAHAAAAAgAAAD0AAAAIAAAAAwAAACIAAAAJAAAABAAAAAoF9eEjAAAABQX14QcAAAALAAAACwAAAAwAAABFAAAADAAAAA4AAAANAAAAHAX14RkAAABFAAAADQAAACEAAAAPAAAADgAAABAAAAAVAAAADwAAABEAAAAVAAAAEAAAABIAAAAVAAAAEQAAABMAAAAVAAAAEgAAABQAAAAVAAAAEwAAACAAAAAVAAAAFAAAABYAAAAcAAAAFQAAABcAAAAcAAAAFgAAABgAAAAcAAAAFwAAABkAAAAcAAAAGAAAABoAAAAcAAAAGQAAABsAAAAcAAAAGgAAAB8AAAAcAAAAGwAAAB0AAAAhAAAAHQAAAB4F9eEXAAAAHwX14SEF9eEiAAAAHwX14R8F9eEgAAAAHwX14R0F9eEeAAAAHAX14RgAAABFAAAABAAAACMF9eEjAAAABQX14QYAAAAkAAAACQAAACUF9eEcAAAACwAAACYAAAA8AAAADAAAACgAAAAnAAAAHAX14RkAAAA8AAAADQAAADsAAAApAAAADgAAACoAAAAvAAAADwAAACsAAAAvAAAAEAAAACwAAAAvAAAAEQAAAC0AAAAvAAAAEgAAAC4AAAAvAAAAEwAAADoAAAAvAAAAFAAAADAAAAA2AAAAFQAAADEAAAA2AAAAFgAAADIAAAA2AAAAFwAAADMAAAA2AAAAGAAAADQAAAA2AAAAGQAAADUAAAA2AAAAGgAAADkAAAA2AAAAGwAAADcAAAA7AAAAHQAAADgF9eEXAAAAHwX14RUF9eEWAAAAHwX14RMF9eEUAAAAHwX14REF9eESAAAAHAX14RgAAAA8AAAAHwX14RoF9eEbAAAAAwAAAEYAAAA+AAAABAAAAD8F9eEjAAAABQX14QUAAABAAAAABgAAAEEF9eEQAAAACwAAAEIAAABDAAAAHAX14QgAAABDAAAAHgAAAEUAAABEAAAAHwX14Q4F9eEPAAAAHwX14QwF9eENAAAABAAAAEcF9eEjAAAABQX14QUAAABIAAAABgAAAEkF9eELAAAACQAAAEoF9eELAAAACwAAAEsAAABMAAAAHAX14QgAAABMAAAAHwX14QkF9eEKAAAAAgX14QEAAABOAAAAAwX14QIAAABPAAAABAAAAFAF9eEEAAAABwAAAFEF9eEEAAAACAX14QMAAABSAAAACgX14QMF9eEE",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                "search-dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType({"ref": "parsedEndpoint"}),
+                                            "authority",
+                                        ),
+                                    }
+                                ),
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "isSet",
+                            "argv": (
+                                MappingProxyType({"ref": "AccountIdEndpointMode"}),
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "AccountIdEndpointMode"}),
+                                "disabled",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "ResourceArn"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.parseArn",
+                            "argv": (MappingProxyType({"ref": "ResourceArn"}),),
+                            "assign": "ParsedArn_ssa_2",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "ParsedArn_ssa_2"}
+                                            ),
+                                            "region",
+                                        ),
+                                    }
+                                ),
+                                MappingProxyType({"ref": "Region"}),
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "ParsedArn_ssa_2"}
+                                            ),
+                                            "service",
+                                        ),
+                                    }
+                                ),
+                                "dynamodb",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "isValidHostLabel",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "ParsedArn_ssa_2"}
+                                            ),
+                                            "region",
+                                        ),
+                                    }
+                                ),
+                                False,
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "isValidHostLabel",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "ParsedArn_ssa_2"}
+                                            ),
+                                            "accountId",
+                                        ),
+                                    }
+                                ),
+                                False,
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "ResourceArnList"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "getAttr",
+                            "argv": (
+                                MappingProxyType({"ref": "ResourceArnList"}),
+                                "[0]",
+                            ),
+                            "assign": "FirstArn",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.parseArn",
+                            "argv": (MappingProxyType({"ref": "FirstArn"}),),
+                            "assign": "ParsedArn_ssa_1",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "ParsedArn_ssa_1"}
+                                            ),
+                                            "region",
+                                        ),
+                                    }
+                                ),
+                                MappingProxyType({"ref": "Region"}),
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "ParsedArn_ssa_1"}
+                                            ),
+                                            "service",
+                                        ),
+                                    }
+                                ),
+                                "dynamodb",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "isValidHostLabel",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "ParsedArn_ssa_1"}
+                                            ),
+                                            "accountId",
+                                        ),
+                                    }
+                                ),
+                                False,
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "isValidHostLabel",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "ParsedArn_ssa_1"}
+                                            ),
+                                            "region",
+                                        ),
+                                    }
+                                ),
+                                False,
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "AccountId"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "AccountIdEndpointMode"}),
+                                "required",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "isValidHostLabel",
+                            "argv": (MappingProxyType({"ref": "AccountId"}), False),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-us-gov",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "coalesce",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "IsSearchOperation"}
+                                            ),
+                                            False,
+                                        ),
+                                    }
+                                ),
+                                True,
+                            ),
+                        }
+                    ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "{Endpoint}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and local endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and local endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "http://localhost:8000",
+                                    "properties": MappingProxyType(
+                                        {
+                                            "authSchemes": (
+                                                MappingProxyType(
+                                                    {
+                                                        "signingRegion": "us-east-1",
+                                                        "signingName": "dynamodb",
+                                                        "name": "sigv4",
+                                                    }
+                                                ),
+                                            )
+                                        }
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://search-dynamodb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://dynamodb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://search-dynamodb.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://dynamodb.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://search-dynamodb-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://dynamodb-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{ParsedArn_ssa_2#accountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{ParsedArn_ssa_2#accountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{ParsedArn_ssa_1#accountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{ParsedArn_ssa_1#accountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{AccountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{AccountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Credentials-sourced account ID parameter is invalid",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://search-dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{ParsedArn_ssa_2#accountId}.search-ddb.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{ParsedArn_ssa_2#accountId}.ddb.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{ParsedArn_ssa_1#accountId}.search-ddb.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{ParsedArn_ssa_1#accountId}.ddb.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{AccountId}.search-ddb.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{AccountId}.ddb.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {"metricValues": ("O",)}
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 82,
+                "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEjAAAAAgX14QEAAAAFAAAAAwX14QIF9eEEAAAAAQAAAE0AAAAHAAAAAgAAAD0AAAAIAAAAAwAAACIAAAAJAAAABAAAAAoF9eEjAAAABQX14QcAAAALAAAACwAAAAwAAABFAAAADAAAAA4AAAANAAAAHAX14RkAAABFAAAADQAAACEAAAAPAAAADgAAABAAAAAVAAAADwAAABEAAAAVAAAAEAAAABIAAAAVAAAAEQAAABMAAAAVAAAAEgAAABQAAAAVAAAAEwAAACAAAAAVAAAAFAAAABYAAAAcAAAAFQAAABcAAAAcAAAAFgAAABgAAAAcAAAAFwAAABkAAAAcAAAAGAAAABoAAAAcAAAAGQAAABsAAAAcAAAAGgAAAB8AAAAcAAAAGwAAAB0AAAAhAAAAHQAAAB4F9eEXAAAAHwX14SEF9eEiAAAAHwX14R8F9eEgAAAAHwX14R0F9eEeAAAAHAX14RgAAABFAAAABAAAACMF9eEjAAAABQX14QYAAAAkAAAACQAAACUF9eEcAAAACwAAACYAAAA8AAAADAAAACgAAAAnAAAAHAX14RkAAAA8AAAADQAAADsAAAApAAAADgAAACoAAAAvAAAADwAAACsAAAAvAAAAEAAAACwAAAAvAAAAEQAAAC0AAAAvAAAAEgAAAC4AAAAvAAAAEwAAADoAAAAvAAAAFAAAADAAAAA2AAAAFQAAADEAAAA2AAAAFgAAADIAAAA2AAAAFwAAADMAAAA2AAAAGAAAADQAAAA2AAAAGQAAADUAAAA2AAAAGgAAADkAAAA2AAAAGwAAADcAAAA7AAAAHQAAADgF9eEXAAAAHwX14RUF9eEWAAAAHwX14RMF9eEUAAAAHwX14REF9eESAAAAHAX14RgAAAA8AAAAHwX14RoF9eEbAAAAAwAAAEYAAAA+AAAABAAAAD8F9eEjAAAABQX14QUAAABAAAAABgAAAEEF9eEQAAAACwAAAEIAAABDAAAAHAX14QgAAABDAAAAHgAAAEUAAABEAAAAHwX14Q4F9eEPAAAAHwX14QwF9eENAAAABAAAAEcF9eEjAAAABQX14QUAAABIAAAABgAAAEkF9eELAAAACQAAAEoF9eELAAAACwAAAEsAAABMAAAAHAX14QgAAABMAAAAHwX14QkF9eEKAAAAAgX14QEAAABOAAAAAwX14QIAAABPAAAABAAAAFAF9eEEAAAABwAAAFEF9eEEAAAACAX14QMAAABSAAAACgX14QMF9eEE",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "DynamoDB",
-                    "arnNamespace": "dynamodb",
-                    "cloudFormationName": "DynamoDB",
-                    "cloudTrailEventSource": "dynamodb.amazonaws.com",
-                    "endpointPrefix": "dynamodb",
-                }
-            ),
+        _aw: MappingProxyType(
+            {
+                "sdkId": "DynamoDB",
+                "arnNamespace": "dynamodb",
+                "cloudFormationName": "DynamoDB",
+                "cloudTrailEventSource": "dynamodb.amazonaws.com",
+                "endpointPrefix": "dynamodb",
+            }
         ),
-        Trait.new(
-            id=ShapeID("smithy.api#xmlNamespace"),
-            value=MappingProxyType(
-                {"uri": "http://dynamodb.amazonaws.com/doc/2012-08-10/"}
-            ),
-        ),
-    ],
-)
-
-ATTRIBUTE_VALUE.members["L"] = Schema.member(
-    id=ATTRIBUTE_VALUE.id.with_member("L"), target=LIST_ATTRIBUTE_VALUE, index=7
-)
-
-ATTRIBUTE_VALUE.members["M"] = Schema.member(
-    id=ATTRIBUTE_VALUE.id.with_member("M"), target=MAP_ATTRIBUTE_VALUE, index=6
+        _sN: MappingProxyType({"uri": "http://dynamodb.amazonaws.com/doc/2012-08-10/"}),
+    },
 )

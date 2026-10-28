@@ -2,1569 +2,1920 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 
-ALPHABET = Schema(
-    id=ShapeID("com.amazonaws.polly#Alphabet"), shape_type=ShapeType.STRING
+n0 = "com.amazonaws.polly"
+_A = "Alphabet"
+_AC = "AudioChunk"
+_AE = "AudioEvent"
+_sP = "smithy.api#eventPayload"
+_AS = "AudioStream"
+_s = "smithy.api#streaming"
+_AEM = "AvailabilityErrorMessage"
+_CSE = "CloseStreamEvent"
+_CT = "ContentType"
+_CATR = "CoralAvailabilityThrottledResource"
+_CATRo = "CoralAvailabilityThrottlingReason"
+_DT = "DateTime"
+_LN = "LexiconName"
+_DLI = "DeleteLexiconInput"
+_sm = "smithy.api#input"
+_N = "Name"
+_smi = "smithy.api#required"
+_sL = "smithy.api#httpLabel"
+_DLO = "DeleteLexiconOutput"
+_smit = "smithy.api#output"
+_EM = "ErrorMessage"
+_LNFE = "LexiconNotFoundException"
+_smith = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_m = "message"
+_SFE = "ServiceFailureException"
+_se = "server"
+_DL = "DeleteLexicon"
+_smithy = "smithy.api#http"
+_E = "Engine"
+_STANDARD = "STANDARD"
+_sV = "smithy.api#enumValue"
+_st = "standard"
+_NEURAL = "NEURAL"
+_n = "neural"
+_LF = "LONG_FORM"
+_lf = "long-form"
+_GENERATIVE = "GENERATIVE"
+_g = "generative"
+_IALC = "IncludeAdditionalLanguageCodes"
+_smithya = "smithy.api#default"
+_LC = "LanguageCode"
+_a = "arb"
+_cC = "cmn_CN"
+_cC_ = "cmn-CN"
+_cG = "cy_GB"
+_cG_ = "cy-GB"
+_dD = "da_DK"
+_dD_ = "da-DK"
+_dD__ = "de_DE"
+_dD___ = "de-DE"
+_eA = "en_AU"
+_eA_ = "en-AU"
+_eG = "en_GB"
+_eG_ = "en-GB"
+_eGW = "en_GB_WLS"
+_eGW_ = "en-GB-WLS"
+_eI = "en_IN"
+_eI_ = "en-IN"
+_eU = "en_US"
+_eU_ = "en-US"
+_eE = "es_ES"
+_eE_ = "es-ES"
+_eM = "es_MX"
+_eM_ = "es-MX"
+_eU__ = "es_US"
+_eU___ = "es-US"
+_fC = "fr_CA"
+_fC_ = "fr-CA"
+_fF = "fr_FR"
+_fF_ = "fr-FR"
+_iI = "is_IS"
+_iI_ = "is-IS"
+_iI__ = "it_IT"
+_iI___ = "it-IT"
+_jJ = "ja_JP"
+_jJ_ = "ja-JP"
+_hI = "hi_IN"
+_hI_ = "hi-IN"
+_kK = "ko_KR"
+_kK_ = "ko-KR"
+_nN = "nb_NO"
+_nN_ = "nb-NO"
+_nN__ = "nl_NL"
+_nN___ = "nl-NL"
+_pP = "pl_PL"
+_pP_ = "pl-PL"
+_pB = "pt_BR"
+_pB_ = "pt-BR"
+_pP__ = "pt_PT"
+_pP___ = "pt-PT"
+_rR = "ro_RO"
+_rR_ = "ro-RO"
+_rR__ = "ru_RU"
+_rR___ = "ru-RU"
+_sS = "sv_SE"
+_sS_ = "sv-SE"
+_tT = "tr_TR"
+_tT_ = "tr-TR"
+_eN = "en_NZ"
+_eN_ = "en-NZ"
+_eZ = "en_ZA"
+_eZ_ = "en-ZA"
+_cE = "ca_ES"
+_cE_ = "ca-ES"
+_dA = "de_AT"
+_dA_ = "de-AT"
+_yC = "yue_CN"
+_yC_ = "yue-CN"
+_aA = "ar_AE"
+_aA_ = "ar-AE"
+_fF__ = "fi_FI"
+_fF___ = "fi-FI"
+_eI__ = "en_IE"
+_eI___ = "en-IE"
+_nB = "nl_BE"
+_nB_ = "nl-BE"
+_fB = "fr_BE"
+_fB_ = "fr-BE"
+_cC__ = "cs_CZ"
+_cC___ = "cs-CZ"
+_dC = "de_CH"
+_dC_ = "de-CH"
+_eS = "en_SG"
+_eS_ = "en-SG"
+_NT = "NextToken"
+_DVI = "DescribeVoicesInput"
+_sQ = "smithy.api#httpQuery"
+_LCL = "LanguageCodeList"
+_me = "member"
+_G = "Gender"
+_F = "Female"
+_M = "Male"
+_VI = "VoiceId"
+_Ad = "Aditi"
+_Am = "Amy"
+_As = "Astrid"
+_B = "Bianca"
+_Br = "Brian"
+_C = "Camila"
+_Ca = "Carla"
+_Car = "Carmen"
+_Ce = "Celine"
+_Ch = "Chantal"
+_Co = "Conchita"
+_Cr = "Cristiano"
+_D = "Dora"
+_Em = "Emma"
+_En = "Enrique"
+_Ew = "Ewa"
+_Fi = "Filiz"
+_Ga = "Gabrielle"
+_Ge = "Geraint"
+_Gi = "Giorgio"
+_Gw = "Gwyneth"
+_H = "Hans"
+_I = "Ines"
+_Iv = "Ivy"
+_J = "Jacek"
+_Ja = "Jan"
+_Jo = "Joanna"
+_Joe = "Joey"
+_Ju = "Justin"
+_K = "Karl"
+_Ke = "Kendra"
+_Kev = "Kevin"
+_Ki = "Kimberly"
+_L = "Lea"
+_Li = "Liv"
+_Lo = "Lotte"
+_Lu = "Lucia"
+_Lup = "Lupe"
+_Ma = "Mads"
+_Maj = "Maja"
+_Mar = "Marlene"
+_Mat = "Mathieu"
+_Matt = "Matthew"
+_Max = "Maxim"
+_Mi = "Mia"
+_Mig = "Miguel"
+_Miz = "Mizuki"
+_Na = "Naja"
+_Ni = "Nicole"
+_O = "Olivia"
+_P = "Penelope"
+_R = "Raveena"
+_Ri = "Ricardo"
+_Ru = "Ruben"
+_Rus = "Russell"
+_S = "Salli"
+_Se = "Seoyeon"
+_T = "Takumi"
+_Ta = "Tatyana"
+_V = "Vicki"
+_Vi = "Vitoria"
+_Z = "Zeina"
+_Zh = "Zhiyu"
+_Ar = "Aria"
+_Ay = "Ayanda"
+_Arl = "Arlet"
+_Ha = "Hannah"
+_Art = "Arthur"
+_Da = "Daniel"
+_Lia = "Liam"
+_Pe = "Pedro"
+_Ka = "Kajal"
+_Hi = "Hiujin"
+_La = "Laura"
+_El = "Elin"
+_Id = "Ida"
+_Su = "Suvi"
+_Ol = "Ola"
+_Hal = "Hala"
+_An = "Andres"
+_Ser = "Sergio"
+_Re = "Remi"
+_Adr = "Adriano"
+_Th = "Thiago"
+_Rut = "Ruth"
+_St = "Stephen"
+_Kaz = "Kazuha"
+_To = "Tomoko"
+_Nia = "Niamh"
+_So = "Sofie"
+_Lis = "Lisa"
+_Is = "Isabelle"
+_Za = "Zayd"
+_Dan = "Danielle"
+_Gr = "Gregory"
+_Bu = "Burcu"
+_Ji = "Jitka"
+_Sa = "Sabrina"
+_Jas = "Jasmine"
+_Jih = "Jihye"
+_Amb = "Ambre"
+_Be = "Beatrice"
+_Fl = "Florian"
+_Le = "Lennart"
+_Lor = "Lorenzo"
+_Ti = "Tiffany"
+_LNa = "LanguageName"
+_VN = "VoiceName"
+_EL = "EngineList"
+_Vo = "Voice"
+_Id_ = "Id"
+_ALC = "AdditionalLanguageCodes"
+_SE = "SupportedEngines"
+_VL = "VoiceList"
+_DVO = "DescribeVoicesOutput"
+_Voi = "Voices"
+_INTE = "InvalidNextTokenException"
+_DV = "DescribeVoices"
+_ENSE = "EngineNotSupportedException"
+_Fo = "Force"
+_FSC = "FlushStreamConfiguration"
+_GLI = "GetLexiconInput"
+_LCe = "LexiconContent"
+_smithyap = "smithy.api#sensitive"
+_Lex = "Lexicon"
+_Con = "Content"
+_LM = "LastModified"
+_LCex = "LexemesCount"
+_LA = "LexiconArn"
+_Si = "Size"
+_LAe = "LexiconAttributes"
+_GLO = "GetLexiconOutput"
+_GL = "GetLexicon"
+_TI = "TaskId"
+_GSSTI = "GetSpeechSynthesisTaskInput"
+_LNL = "LexiconNameList"
+_OF = "OutputFormat"
+_JSON = "JSON"
+_j = "json"
+_MP = "MP3"
+_mp = "mp3"
+_OO = "OGG_OPUS"
+_oo = "ogg_opus"
+_OV = "OGG_VORBIS"
+_ov = "ogg_vorbis"
+_PCM = "PCM"
+_p = "pcm"
+_MULAW = "MULAW"
+_mu = "mulaw"
+_ALAW = "ALAW"
+_al = "alaw"
+_OU = "OutputUri"
+_RC = "RequestCharacters"
+_SR = "SampleRate"
+_STA = "SnsTopicArn"
+_SMT = "SpeechMarkType"
+_SENTENCE = "SENTENCE"
+_sen = "sentence"
+_SSML = "SSML"
+_ss = "ssml"
+_VISEME = "VISEME"
+_v = "viseme"
+_WORD = "WORD"
+_w = "word"
+_SMTL = "SpeechMarkTypeList"
+_TS = "TaskStatus"
+_SCHEDULED = "SCHEDULED"
+_sc = "scheduled"
+_IP = "IN_PROGRESS"
+_iP = "inProgress"
+_COMPLETED = "COMPLETED"
+_co = "completed"
+_FAILED = "FAILED"
+_f = "failed"
+_TSR = "TaskStatusReason"
+_TT = "TextType"
+_TEXT = "TEXT"
+_t = "text"
+_ST = "SynthesisTask"
+_CTr = "CreationTime"
+_LNe = "LexiconNames"
+_SMTp = "SpeechMarkTypes"
+_GSSTO = "GetSpeechSynthesisTaskOutput"
+_ITIE = "InvalidTaskIdException"
+_STNFE = "SynthesisTaskNotFoundException"
+_GSST = "GetSpeechSynthesisTask"
+_ILE = "InvalidLexiconException"
+_ISBE = "InvalidS3BucketException"
+_ISKE = "InvalidS3KeyException"
+_ISRE = "InvalidSampleRateException"
+_ISTAE = "InvalidSnsTopicArnException"
+_ISE = "InvalidSsmlException"
+_LNSE = "LanguageNotSupportedException"
+_LD = "LexiconDescription"
+_At = "Attributes"
+_LDL = "LexiconDescriptionList"
+_LSEE = "LexiconSizeExceededException"
+_LLI = "ListLexiconsInput"
+_LLO = "ListLexiconsOutput"
+_Lexi = "Lexicons"
+_LL = "ListLexicons"
+_MR = "MaxResults"
+_LSSTI = "ListSpeechSynthesisTasksInput"
+_Sta = "Status"
+_STy = "SynthesisTasks"
+_LSSTO = "ListSpeechSynthesisTasksOutput"
+_LSST = "ListSpeechSynthesisTasks"
+_MNSFFE = "MarksNotSupportedForFormatException"
+_MLLEE = "MaxLexemeLengthExceededException"
+_MLNEE = "MaxLexiconsNumberExceededException"
+_OSBN = "OutputS3BucketName"
+_OSKP = "OutputS3KeyPrefix"
+_PLI = "PutLexiconInput"
+_PLO = "PutLexiconOutput"
+_UPAE = "UnsupportedPlsAlphabetException"
+_UPLE = "UnsupportedPlsLanguageException"
+_PL = "PutLexicon"
+_QC = "QuotaCode"
+_ISIET = "INPUT_STREAM_INBOUND_EVENT_TIMEOUT"
+_isiet = "input-stream-inbound-event-timeout"
+_IST = "INPUT_STREAM_TIMEOUT"
+_ist = "input-stream-timeout"
+_SC = "ServiceCode"
+_POLLY = "POLLY"
+_po = "polly"
+_SQEE = "ServiceQuotaExceededException"
+_qC = "quotaCode"
+_sC = "serviceCode"
+_Te = "Text"
+_TE = "TextEvent"
+_SSSSAS = "StartSpeechSynthesisStreamActionStream"
+_SSSSI = "StartSpeechSynthesisStreamInput"
+_sH = "smithy.api#httpHeader"
+_xaE = "x-amzn-Engine"
+_xaL = "x-amzn-LanguageCode"
+_xaL_ = "x-amzn-LexiconNames"
+_xaO = "x-amzn-OutputFormat"
+_xaS = "x-amzn-SampleRate"
+_xaV = "x-amzn-VoiceId"
+_ASc = "ActionStream"
+_sPm = "smithy.api#httpPayload"
+_SCE = "StreamClosedEvent"
+_TR = "ThrottlingReason"
+_r = "reason"
+_re = "resource"
+_TRL = "ThrottlingReasonList"
+_TEh = "ThrottlingException"
+_tR = "throttlingReasons"
+_VEFM = "ValidationExceptionFieldMessage"
+_VEFN = "ValidationExceptionFieldName"
+_VEF = "ValidationExceptionField"
+_na = "name"
+_VEFL = "ValidationExceptionFieldList"
+_VER = "ValidationExceptionReason"
+_UO = "UNSUPPORTED_OPERATION"
+_uO = "unsupportedOperation"
+_FVF = "FIELD_VALIDATION_FAILED"
+_fVF = "fieldValidationFailed"
+_OTHER = "OTHER"
+_o = "other"
+_IIE = "INVALID_INBOUND_EVENT"
+_iIE = "invalidInboundEvent"
+_VE = "ValidationException"
+_fi = "fields"
+_SSSSES = "StartSpeechSynthesisStreamEventStream"
+_SSSSO = "StartSpeechSynthesisStreamOutput"
+_ES = "EventStream"
+_SSSS = "StartSpeechSynthesisStream"
+_SMNSFTTE = "SsmlMarksNotSupportedForTextTypeException"
+_SSSTI = "StartSpeechSynthesisTaskInput"
+_SSSTO = "StartSpeechSynthesisTaskOutput"
+_TLEE = "TextLengthExceededException"
+_SSST = "StartSpeechSynthesisTask"
+_SSI = "SynthesizeSpeechInput"
+_SSO = "SynthesizeSpeechOutput"
+_v_ = ""
+_CT_ = "Content-Type"
+_xaR = "x-amzn-RequestCharacters"
+_SS = "SynthesizeSpeech"
+_Pv = "Parrot_v1"
+_aw = "aws.auth#sigv4"
+_sB = "smithy.rules#endpointBdd"
+_aws = "aws.api#service"
+_sN = "smithy.api#xmlNamespace"
+_aJ = "aws.protocols#restJson1"
+
+ALPHABET: StaticSchema = (3, n0, _A, 0)
+
+AUDIO_CHUNK: StaticSchema = (1, n0, _AC, 0)
+
+AUDIO_EVENT: StaticSchema = (18, n0, _AE, 0, (_AC,), ((AUDIO_CHUNK, {_sP: None}),))
+
+AUDIO_STREAM: StaticSchema = (1, n0, _AS, {_s: None})
+
+AVAILABILITY_ERROR_MESSAGE: StaticSchema = (3, n0, _AEM, 0)
+
+CLOSE_STREAM_EVENT: StaticSchema = (18, n0, _CSE, 0)
+
+CONTENT_TYPE: StaticSchema = (3, n0, _CT, 0)
+
+CORAL_AVAILABILITY_THROTTLED_RESOURCE: StaticSchema = (3, n0, _CATR, 0)
+
+CORAL_AVAILABILITY_THROTTLING_REASON: StaticSchema = (3, n0, _CATRo, 0)
+
+DATE_TIME: StaticSchema = (4, n0, _DT, 0)
+
+LEXICON_NAME: StaticSchema = (3, n0, _LN, 0)
+
+DELETE_LEXICON_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DLI,
+    {_sm: None},
+    (_N,),
+    ((LEXICON_NAME, 9),),
 )
 
-AUDIO_CHUNK = Schema(
-    id=ShapeID("com.amazonaws.polly#AudioChunk"), shape_type=ShapeType.BLOB
+DELETE_LEXICON_OUTPUT: StaticSchema = (18, n0, _DLO, {_smit: None})
+
+ERROR_MESSAGE: StaticSchema = (3, n0, _EM, 0)
+
+LEXICON_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LNFE,
+    {_smith: _c, _sE: 404},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
 )
 
-AUDIO_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#AudioEvent"),
-    members={
-        "AudioChunk": {
-            "target": AUDIO_CHUNK,
-            "traits": [Trait.new(id=ShapeID("smithy.api#eventPayload"))],
-        }
-    },
+SERVICE_FAILURE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SFE,
+    {_smith: _se, _sE: 500},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
 )
 
-AUDIO_STREAM = Schema(
-    id=ShapeID("com.amazonaws.polly#AudioStream"),
-    shape_type=ShapeType.BLOB,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-)
-
-AVAILABILITY_ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.polly#AvailabilityErrorMessage"),
-    shape_type=ShapeType.STRING,
-)
-
-CLOSE_STREAM_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#CloseStreamEvent")
-)
-
-CONTENT_TYPE = Schema(
-    id=ShapeID("com.amazonaws.polly#ContentType"), shape_type=ShapeType.STRING
-)
-
-CORAL_AVAILABILITY_THROTTLED_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.polly#CoralAvailabilityThrottledResource"),
-    shape_type=ShapeType.STRING,
-)
-
-CORAL_AVAILABILITY_THROTTLING_REASON = Schema(
-    id=ShapeID("com.amazonaws.polly#CoralAvailabilityThrottlingReason"),
-    shape_type=ShapeType.STRING,
-)
-
-DATE_TIME = Schema(
-    id=ShapeID("com.amazonaws.polly#DateTime"), shape_type=ShapeType.TIMESTAMP
-)
-
-LEXICON_NAME = Schema(
-    id=ShapeID("com.amazonaws.polly#LexiconName"), shape_type=ShapeType.STRING
-)
-
-DELETE_LEXICON_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#DeleteLexiconInput"),
-    members={
-        "Name": {
-            "target": LEXICON_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_LEXICON_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#DeleteLexiconOutput")
-)
-
-ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.polly#ErrorMessage"), shape_type=ShapeType.STRING
-)
-
-LEXICON_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#LexiconNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-SERVICE_FAILURE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ServiceFailureException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-DELETE_LEXICON = Schema(
-    id=ShapeID("com.amazonaws.polly#DeleteLexicon"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "DELETE", "uri": "/v1/lexicons/{Name}", "code": 200}
-            ),
+DELETE_LEXICON: StaticOperationSchema = (
+    23,
+    n0,
+    _DL,
+    {
+        _smithy: MappingProxyType(
+            {"method": "DELETE", "uri": "/v1/lexicons/{Name}", "code": 200}
         )
-    ],
-)
-
-ENGINE = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#Engine"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "STANDARD": {"target": UNIT},
-        "NEURAL": {"target": UNIT},
-        "LONG_FORM": {"target": UNIT},
-        "GENERATIVE": {"target": UNIT},
     },
+    DELETE_LEXICON_INPUT,
+    DELETE_LEXICON_OUTPUT,
+    (LEXICON_NOT_FOUND_EXCEPTION, SERVICE_FAILURE_EXCEPTION),
 )
 
-INCLUDE_ADDITIONAL_LANGUAGE_CODES = Schema(
-    id=ShapeID("com.amazonaws.polly#IncludeAdditionalLanguageCodes"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
+ENGINE: StaticSchema = (
+    14,
+    n0,
+    _E,
+    0,
+    (_STANDARD, _NEURAL, _LF, _GENERATIVE),
+    ((-1, {_sV: _st}), (-1, {_sV: _n}), (-1, {_sV: _lf}), (-1, {_sV: _g})),
 )
 
-LANGUAGE_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#LanguageCode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "arb": {"target": UNIT},
-        "cmn_CN": {"target": UNIT},
-        "cy_GB": {"target": UNIT},
-        "da_DK": {"target": UNIT},
-        "de_DE": {"target": UNIT},
-        "en_AU": {"target": UNIT},
-        "en_GB": {"target": UNIT},
-        "en_GB_WLS": {"target": UNIT},
-        "en_IN": {"target": UNIT},
-        "en_US": {"target": UNIT},
-        "es_ES": {"target": UNIT},
-        "es_MX": {"target": UNIT},
-        "es_US": {"target": UNIT},
-        "fr_CA": {"target": UNIT},
-        "fr_FR": {"target": UNIT},
-        "is_IS": {"target": UNIT},
-        "it_IT": {"target": UNIT},
-        "ja_JP": {"target": UNIT},
-        "hi_IN": {"target": UNIT},
-        "ko_KR": {"target": UNIT},
-        "nb_NO": {"target": UNIT},
-        "nl_NL": {"target": UNIT},
-        "pl_PL": {"target": UNIT},
-        "pt_BR": {"target": UNIT},
-        "pt_PT": {"target": UNIT},
-        "ro_RO": {"target": UNIT},
-        "ru_RU": {"target": UNIT},
-        "sv_SE": {"target": UNIT},
-        "tr_TR": {"target": UNIT},
-        "en_NZ": {"target": UNIT},
-        "en_ZA": {"target": UNIT},
-        "ca_ES": {"target": UNIT},
-        "de_AT": {"target": UNIT},
-        "yue_CN": {"target": UNIT},
-        "ar_AE": {"target": UNIT},
-        "fi_FI": {"target": UNIT},
-        "en_IE": {"target": UNIT},
-        "nl_BE": {"target": UNIT},
-        "fr_BE": {"target": UNIT},
-        "cs_CZ": {"target": UNIT},
-        "de_CH": {"target": UNIT},
-        "en_SG": {"target": UNIT},
+INCLUDE_ADDITIONAL_LANGUAGE_CODES: StaticSchema = (2, n0, _IALC, {_smithya: False})
+
+LANGUAGE_CODE: StaticSchema = (
+    14,
+    n0,
+    _LC,
+    0,
+    (
+        _a,
+        _cC,
+        _cG,
+        _dD,
+        _dD__,
+        _eA,
+        _eG,
+        _eGW,
+        _eI,
+        _eU,
+        _eE,
+        _eM,
+        _eU__,
+        _fC,
+        _fF,
+        _iI,
+        _iI__,
+        _jJ,
+        _hI,
+        _kK,
+        _nN,
+        _nN__,
+        _pP,
+        _pB,
+        _pP__,
+        _rR,
+        _rR__,
+        _sS,
+        _tT,
+        _eN,
+        _eZ,
+        _cE,
+        _dA,
+        _yC,
+        _aA,
+        _fF__,
+        _eI__,
+        _nB,
+        _fB,
+        _cC__,
+        _dC,
+        _eS,
+    ),
+    (
+        (-1, {_sV: _a}),
+        (-1, {_sV: _cC_}),
+        (-1, {_sV: _cG_}),
+        (-1, {_sV: _dD_}),
+        (-1, {_sV: _dD___}),
+        (-1, {_sV: _eA_}),
+        (-1, {_sV: _eG_}),
+        (-1, {_sV: _eGW_}),
+        (-1, {_sV: _eI_}),
+        (-1, {_sV: _eU_}),
+        (-1, {_sV: _eE_}),
+        (-1, {_sV: _eM_}),
+        (-1, {_sV: _eU___}),
+        (-1, {_sV: _fC_}),
+        (-1, {_sV: _fF_}),
+        (-1, {_sV: _iI_}),
+        (-1, {_sV: _iI___}),
+        (-1, {_sV: _jJ_}),
+        (-1, {_sV: _hI_}),
+        (-1, {_sV: _kK_}),
+        (-1, {_sV: _nN_}),
+        (-1, {_sV: _nN___}),
+        (-1, {_sV: _pP_}),
+        (-1, {_sV: _pB_}),
+        (-1, {_sV: _pP___}),
+        (-1, {_sV: _rR_}),
+        (-1, {_sV: _rR___}),
+        (-1, {_sV: _sS_}),
+        (-1, {_sV: _tT_}),
+        (-1, {_sV: _eN_}),
+        (-1, {_sV: _eZ_}),
+        (-1, {_sV: _cE_}),
+        (-1, {_sV: _dA_}),
+        (-1, {_sV: _yC_}),
+        (-1, {_sV: _aA_}),
+        (-1, {_sV: _fF___}),
+        (-1, {_sV: _eI___}),
+        (-1, {_sV: _nB_}),
+        (-1, {_sV: _fB_}),
+        (-1, {_sV: _cC___}),
+        (-1, {_sV: _dC_}),
+        (-1, {_sV: _eS_}),
+    ),
+)
+
+NEXT_TOKEN: StaticSchema = (3, n0, _NT, 0)
+
+DESCRIBE_VOICES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVI,
+    {_sm: None},
+    (_E, _LC, _IALC, _NT),
+    (
+        (ENGINE, {_sQ: _E}),
+        (LANGUAGE_CODE, {_sQ: _LC}),
+        (INCLUDE_ADDITIONAL_LANGUAGE_CODES, {_smithya: False, _sQ: _IALC}),
+        (NEXT_TOKEN, {_sQ: _NT}),
+    ),
+)
+
+LANGUAGE_CODE_LIST: StaticSchema = (16, n0, _LCL, 0, (_me,), ((LANGUAGE_CODE, 0),))
+
+GENDER: StaticSchema = (14, n0, _G, 0, (_F, _M), ((-1, {_sV: _F}), (-1, {_sV: _M})))
+
+VOICE_ID: StaticSchema = (
+    14,
+    n0,
+    _VI,
+    0,
+    (
+        _Ad,
+        _Am,
+        _As,
+        _B,
+        _Br,
+        _C,
+        _Ca,
+        _Car,
+        _Ce,
+        _Ch,
+        _Co,
+        _Cr,
+        _D,
+        _Em,
+        _En,
+        _Ew,
+        _Fi,
+        _Ga,
+        _Ge,
+        _Gi,
+        _Gw,
+        _H,
+        _I,
+        _Iv,
+        _J,
+        _Ja,
+        _Jo,
+        _Joe,
+        _Ju,
+        _K,
+        _Ke,
+        _Kev,
+        _Ki,
+        _L,
+        _Li,
+        _Lo,
+        _Lu,
+        _Lup,
+        _Ma,
+        _Maj,
+        _Mar,
+        _Mat,
+        _Matt,
+        _Max,
+        _Mi,
+        _Mig,
+        _Miz,
+        _Na,
+        _Ni,
+        _O,
+        _P,
+        _R,
+        _Ri,
+        _Ru,
+        _Rus,
+        _S,
+        _Se,
+        _T,
+        _Ta,
+        _V,
+        _Vi,
+        _Z,
+        _Zh,
+        _Ar,
+        _Ay,
+        _Arl,
+        _Ha,
+        _Art,
+        _Da,
+        _Lia,
+        _Pe,
+        _Ka,
+        _Hi,
+        _La,
+        _El,
+        _Id,
+        _Su,
+        _Ol,
+        _Hal,
+        _An,
+        _Ser,
+        _Re,
+        _Adr,
+        _Th,
+        _Rut,
+        _St,
+        _Kaz,
+        _To,
+        _Nia,
+        _So,
+        _Lis,
+        _Is,
+        _Za,
+        _Dan,
+        _Gr,
+        _Bu,
+        _Ji,
+        _Sa,
+        _Jas,
+        _Jih,
+        _Amb,
+        _Be,
+        _Fl,
+        _Le,
+        _Lor,
+        _Ti,
+    ),
+    (
+        (-1, {_sV: _Ad}),
+        (-1, {_sV: _Am}),
+        (-1, {_sV: _As}),
+        (-1, {_sV: _B}),
+        (-1, {_sV: _Br}),
+        (-1, {_sV: _C}),
+        (-1, {_sV: _Ca}),
+        (-1, {_sV: _Car}),
+        (-1, {_sV: _Ce}),
+        (-1, {_sV: _Ch}),
+        (-1, {_sV: _Co}),
+        (-1, {_sV: _Cr}),
+        (-1, {_sV: _D}),
+        (-1, {_sV: _Em}),
+        (-1, {_sV: _En}),
+        (-1, {_sV: _Ew}),
+        (-1, {_sV: _Fi}),
+        (-1, {_sV: _Ga}),
+        (-1, {_sV: _Ge}),
+        (-1, {_sV: _Gi}),
+        (-1, {_sV: _Gw}),
+        (-1, {_sV: _H}),
+        (-1, {_sV: _I}),
+        (-1, {_sV: _Iv}),
+        (-1, {_sV: _J}),
+        (-1, {_sV: _Ja}),
+        (-1, {_sV: _Jo}),
+        (-1, {_sV: _Joe}),
+        (-1, {_sV: _Ju}),
+        (-1, {_sV: _K}),
+        (-1, {_sV: _Ke}),
+        (-1, {_sV: _Kev}),
+        (-1, {_sV: _Ki}),
+        (-1, {_sV: _L}),
+        (-1, {_sV: _Li}),
+        (-1, {_sV: _Lo}),
+        (-1, {_sV: _Lu}),
+        (-1, {_sV: _Lup}),
+        (-1, {_sV: _Ma}),
+        (-1, {_sV: _Maj}),
+        (-1, {_sV: _Mar}),
+        (-1, {_sV: _Mat}),
+        (-1, {_sV: _Matt}),
+        (-1, {_sV: _Max}),
+        (-1, {_sV: _Mi}),
+        (-1, {_sV: _Mig}),
+        (-1, {_sV: _Miz}),
+        (-1, {_sV: _Na}),
+        (-1, {_sV: _Ni}),
+        (-1, {_sV: _O}),
+        (-1, {_sV: _P}),
+        (-1, {_sV: _R}),
+        (-1, {_sV: _Ri}),
+        (-1, {_sV: _Ru}),
+        (-1, {_sV: _Rus}),
+        (-1, {_sV: _S}),
+        (-1, {_sV: _Se}),
+        (-1, {_sV: _T}),
+        (-1, {_sV: _Ta}),
+        (-1, {_sV: _V}),
+        (-1, {_sV: _Vi}),
+        (-1, {_sV: _Z}),
+        (-1, {_sV: _Zh}),
+        (-1, {_sV: _Ar}),
+        (-1, {_sV: _Ay}),
+        (-1, {_sV: _Arl}),
+        (-1, {_sV: _Ha}),
+        (-1, {_sV: _Art}),
+        (-1, {_sV: _Da}),
+        (-1, {_sV: _Lia}),
+        (-1, {_sV: _Pe}),
+        (-1, {_sV: _Ka}),
+        (-1, {_sV: _Hi}),
+        (-1, {_sV: _La}),
+        (-1, {_sV: _El}),
+        (-1, {_sV: _Id}),
+        (-1, {_sV: _Su}),
+        (-1, {_sV: _Ol}),
+        (-1, {_sV: _Hal}),
+        (-1, {_sV: _An}),
+        (-1, {_sV: _Ser}),
+        (-1, {_sV: _Re}),
+        (-1, {_sV: _Adr}),
+        (-1, {_sV: _Th}),
+        (-1, {_sV: _Rut}),
+        (-1, {_sV: _St}),
+        (-1, {_sV: _Kaz}),
+        (-1, {_sV: _To}),
+        (-1, {_sV: _Nia}),
+        (-1, {_sV: _So}),
+        (-1, {_sV: _Lis}),
+        (-1, {_sV: _Is}),
+        (-1, {_sV: _Za}),
+        (-1, {_sV: _Dan}),
+        (-1, {_sV: _Gr}),
+        (-1, {_sV: _Bu}),
+        (-1, {_sV: _Ji}),
+        (-1, {_sV: _Sa}),
+        (-1, {_sV: _Jas}),
+        (-1, {_sV: _Jih}),
+        (-1, {_sV: _Amb}),
+        (-1, {_sV: _Be}),
+        (-1, {_sV: _Fl}),
+        (-1, {_sV: _Le}),
+        (-1, {_sV: _Lor}),
+        (-1, {_sV: _Ti}),
+    ),
+)
+
+LANGUAGE_NAME: StaticSchema = (3, n0, _LNa, 0)
+
+VOICE_NAME: StaticSchema = (3, n0, _VN, 0)
+
+ENGINE_LIST: StaticSchema = (16, n0, _EL, 0, (_me,), ((ENGINE, 0),))
+
+VOICE: StaticSchema = (
+    18,
+    n0,
+    _Vo,
+    0,
+    (_G, _Id_, _LC, _LNa, _N, _ALC, _SE),
+    (
+        (GENDER, 0),
+        (VOICE_ID, 0),
+        (LANGUAGE_CODE, 0),
+        (LANGUAGE_NAME, 0),
+        (VOICE_NAME, 0),
+        (LANGUAGE_CODE_LIST, 0),
+        (ENGINE_LIST, 0),
+    ),
+)
+
+VOICE_LIST: StaticSchema = (16, n0, _VL, 0, (_me,), ((VOICE, 0),))
+
+DESCRIBE_VOICES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVO,
+    {_smit: None},
+    (_Voi, _NT),
+    ((VOICE_LIST, 0), (NEXT_TOKEN, 0)),
+)
+
+INVALID_NEXT_TOKEN_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _INTE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+DESCRIBE_VOICES: StaticOperationSchema = (
+    23,
+    n0,
+    _DV,
+    {_smithy: MappingProxyType({"method": "GET", "uri": "/v1/voices", "code": 200})},
+    DESCRIBE_VOICES_INPUT,
+    DESCRIBE_VOICES_OUTPUT,
+    (INVALID_NEXT_TOKEN_EXCEPTION, SERVICE_FAILURE_EXCEPTION),
+)
+
+ENGINE_NOT_SUPPORTED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ENSE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+FORCE: StaticSchema = (2, n0, _Fo, {_smithya: False})
+
+FLUSH_STREAM_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _FSC,
+    0,
+    (_Fo,),
+    ((FORCE, {_smithya: False}),),
+)
+
+GET_LEXICON_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GLI,
+    {_sm: None},
+    (_N,),
+    ((LEXICON_NAME, 9),),
+)
+
+LEXICON_CONTENT: StaticSchema = (3, n0, _LCe, 4)
+
+LEXICON: StaticSchema = (
+    18,
+    n0,
+    _Lex,
+    0,
+    (_Con, _N),
+    ((LEXICON_CONTENT, 0), (LEXICON_NAME, 0)),
+)
+
+LAST_MODIFIED: StaticSchema = (4, n0, _LM, 0)
+
+LEXEMES_COUNT: StaticSchema = (7, n0, _LCex, {_smithya: 0})
+
+LEXICON_ARN: StaticSchema = (3, n0, _LA, 0)
+
+SIZE: StaticSchema = (7, n0, _Si, {_smithya: 0})
+
+LEXICON_ATTRIBUTES: StaticSchema = (
+    18,
+    n0,
+    _LAe,
+    0,
+    (_A, _LC, _LM, _LA, _LCex, _Si),
+    (
+        (ALPHABET, 0),
+        (LANGUAGE_CODE, 0),
+        (LAST_MODIFIED, 0),
+        (LEXICON_ARN, 0),
+        (LEXEMES_COUNT, {_smithya: 0}),
+        (SIZE, {_smithya: 0}),
+    ),
+)
+
+GET_LEXICON_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GLO,
+    {_smit: None},
+    (_Lex, _LAe),
+    ((LEXICON, 0), (LEXICON_ATTRIBUTES, 0)),
+)
+
+GET_LEXICON: StaticOperationSchema = (
+    23,
+    n0,
+    _GL,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/v1/lexicons/{Name}", "code": 200}
+        )
     },
+    GET_LEXICON_INPUT,
+    GET_LEXICON_OUTPUT,
+    (LEXICON_NOT_FOUND_EXCEPTION, SERVICE_FAILURE_EXCEPTION),
 )
 
-NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.polly#NextToken"), shape_type=ShapeType.STRING
+TASK_ID: StaticSchema = (3, n0, _TI, 0)
+
+GET_SPEECH_SYNTHESIS_TASK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSSTI,
+    {_sm: None},
+    (_TI,),
+    ((TASK_ID, 9),),
 )
 
-DESCRIBE_VOICES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#DescribeVoicesInput"),
-    members={
-        "Engine": {
-            "target": ENGINE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Engine")],
-        },
-        "LanguageCode": {
-            "target": LANGUAGE_CODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="LanguageCode")
-            ],
-        },
-        "IncludeAdditionalLanguageCodes": {
-            "target": INCLUDE_ADDITIONAL_LANGUAGE_CODES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpQuery"),
-                    value="IncludeAdditionalLanguageCodes",
+LEXICON_NAME_LIST: StaticSchema = (16, n0, _LNL, 0, (_me,), ((LEXICON_NAME, 0),))
+
+OUTPUT_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _OF,
+    0,
+    (_JSON, _MP, _OO, _OV, _PCM, _MULAW, _ALAW),
+    (
+        (-1, {_sV: _j}),
+        (-1, {_sV: _mp}),
+        (-1, {_sV: _oo}),
+        (-1, {_sV: _ov}),
+        (-1, {_sV: _p}),
+        (-1, {_sV: _mu}),
+        (-1, {_sV: _al}),
+    ),
+)
+
+OUTPUT_URI: StaticSchema = (3, n0, _OU, 0)
+
+REQUEST_CHARACTERS: StaticSchema = (7, n0, _RC, {_smithya: 0})
+
+SAMPLE_RATE: StaticSchema = (3, n0, _SR, 0)
+
+SNS_TOPIC_ARN: StaticSchema = (3, n0, _STA, 0)
+
+SPEECH_MARK_TYPE: StaticSchema = (
+    14,
+    n0,
+    _SMT,
+    0,
+    (_SENTENCE, _SSML, _VISEME, _WORD),
+    ((-1, {_sV: _sen}), (-1, {_sV: _ss}), (-1, {_sV: _v}), (-1, {_sV: _w})),
+)
+
+SPEECH_MARK_TYPE_LIST: StaticSchema = (
+    16,
+    n0,
+    _SMTL,
+    0,
+    (_me,),
+    ((SPEECH_MARK_TYPE, 0),),
+)
+
+TASK_STATUS: StaticSchema = (
+    14,
+    n0,
+    _TS,
+    0,
+    (_SCHEDULED, _IP, _COMPLETED, _FAILED),
+    ((-1, {_sV: _sc}), (-1, {_sV: _iP}), (-1, {_sV: _co}), (-1, {_sV: _f})),
+)
+
+TASK_STATUS_REASON: StaticSchema = (3, n0, _TSR, 0)
+
+TEXT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _TT,
+    0,
+    (_SSML, _TEXT),
+    ((-1, {_sV: _ss}), (-1, {_sV: _t})),
+)
+
+SYNTHESIS_TASK: StaticSchema = (
+    18,
+    n0,
+    _ST,
+    0,
+    (_E, _TI, _TS, _TSR, _OU, _CTr, _RC, _STA, _LNe, _OF, _SR, _SMTp, _TT, _VI, _LC),
+    (
+        (ENGINE, 0),
+        (TASK_ID, 0),
+        (TASK_STATUS, 0),
+        (TASK_STATUS_REASON, 0),
+        (OUTPUT_URI, 0),
+        (DATE_TIME, 0),
+        (REQUEST_CHARACTERS, {_smithya: 0}),
+        (SNS_TOPIC_ARN, 0),
+        (LEXICON_NAME_LIST, 0),
+        (OUTPUT_FORMAT, 0),
+        (SAMPLE_RATE, 0),
+        (SPEECH_MARK_TYPE_LIST, 0),
+        (TEXT_TYPE, 0),
+        (VOICE_ID, 0),
+        (LANGUAGE_CODE, 0),
+    ),
+)
+
+GET_SPEECH_SYNTHESIS_TASK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSSTO,
+    {_smit: None},
+    (_ST,),
+    ((SYNTHESIS_TASK, 0),),
+)
+
+INVALID_TASK_ID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ITIE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+SYNTHESIS_TASK_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _STNFE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+GET_SPEECH_SYNTHESIS_TASK: StaticOperationSchema = (
+    23,
+    n0,
+    _GSST,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/v1/synthesisTasks/{TaskId}", "code": 200}
+        )
+    },
+    GET_SPEECH_SYNTHESIS_TASK_INPUT,
+    GET_SPEECH_SYNTHESIS_TASK_OUTPUT,
+    (
+        INVALID_TASK_ID_EXCEPTION,
+        SERVICE_FAILURE_EXCEPTION,
+        SYNTHESIS_TASK_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+INVALID_LEXICON_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ILE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_S3_BUCKET_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISBE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_S3_KEY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISKE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_SAMPLE_RATE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISRE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_SNS_TOPIC_ARN_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISTAE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_SSML_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+LANGUAGE_NOT_SUPPORTED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LNSE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+LEXICON_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _LD,
+    0,
+    (_N, _At),
+    ((LEXICON_NAME, 0), (LEXICON_ATTRIBUTES, 0)),
+)
+
+LEXICON_DESCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _LDL,
+    0,
+    (_me,),
+    ((LEXICON_DESCRIPTION, 0),),
+)
+
+LEXICON_SIZE_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LSEE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+LIST_LEXICONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LLI,
+    {_sm: None},
+    (_NT,),
+    ((NEXT_TOKEN, {_sQ: _NT}),),
+)
+
+LIST_LEXICONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LLO,
+    {_smit: None},
+    (_Lexi, _NT),
+    ((LEXICON_DESCRIPTION_LIST, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_LEXICONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LL,
+    {_smithy: MappingProxyType({"method": "GET", "uri": "/v1/lexicons", "code": 200})},
+    LIST_LEXICONS_INPUT,
+    LIST_LEXICONS_OUTPUT,
+    (INVALID_NEXT_TOKEN_EXCEPTION, SERVICE_FAILURE_EXCEPTION),
+)
+
+MAX_RESULTS: StaticSchema = (7, n0, _MR, 0)
+
+LIST_SPEECH_SYNTHESIS_TASKS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LSSTI,
+    {_sm: None},
+    (_MR, _NT, _Sta),
+    ((MAX_RESULTS, {_sQ: _MR}), (NEXT_TOKEN, {_sQ: _NT}), (TASK_STATUS, {_sQ: _Sta})),
+)
+
+SYNTHESIS_TASKS: StaticSchema = (16, n0, _STy, 0, (_me,), ((SYNTHESIS_TASK, 0),))
+
+LIST_SPEECH_SYNTHESIS_TASKS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LSSTO,
+    {_smit: None},
+    (_NT, _STy),
+    ((NEXT_TOKEN, 0), (SYNTHESIS_TASKS, 0)),
+)
+
+LIST_SPEECH_SYNTHESIS_TASKS: StaticOperationSchema = (
+    23,
+    n0,
+    _LSST,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/v1/synthesisTasks", "code": 200}
+        )
+    },
+    LIST_SPEECH_SYNTHESIS_TASKS_INPUT,
+    LIST_SPEECH_SYNTHESIS_TASKS_OUTPUT,
+    (INVALID_NEXT_TOKEN_EXCEPTION, SERVICE_FAILURE_EXCEPTION),
+)
+
+MARKS_NOT_SUPPORTED_FOR_FORMAT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MNSFFE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+MAX_LEXEME_LENGTH_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MLLEE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+MAX_LEXICONS_NUMBER_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MLNEE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+OUTPUT_S3_BUCKET_NAME: StaticSchema = (3, n0, _OSBN, 0)
+
+OUTPUT_S3_KEY_PREFIX: StaticSchema = (3, n0, _OSKP, 0)
+
+PUT_LEXICON_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PLI,
+    {_sm: None},
+    (_N, _Con),
+    ((LEXICON_NAME, 9), (LEXICON_CONTENT, 1)),
+)
+
+PUT_LEXICON_OUTPUT: StaticSchema = (18, n0, _PLO, {_smit: None})
+
+UNSUPPORTED_PLS_ALPHABET_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _UPAE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+UNSUPPORTED_PLS_LANGUAGE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _UPLE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+PUT_LEXICON: StaticOperationSchema = (
+    23,
+    n0,
+    _PL,
+    {
+        _smithy: MappingProxyType(
+            {"method": "PUT", "uri": "/v1/lexicons/{Name}", "code": 200}
+        )
+    },
+    PUT_LEXICON_INPUT,
+    PUT_LEXICON_OUTPUT,
+    (
+        INVALID_LEXICON_EXCEPTION,
+        LEXICON_SIZE_EXCEEDED_EXCEPTION,
+        MAX_LEXEME_LENGTH_EXCEEDED_EXCEPTION,
+        MAX_LEXICONS_NUMBER_EXCEEDED_EXCEPTION,
+        SERVICE_FAILURE_EXCEPTION,
+        UNSUPPORTED_PLS_ALPHABET_EXCEPTION,
+        UNSUPPORTED_PLS_LANGUAGE_EXCEPTION,
+    ),
+)
+
+QUOTA_CODE: StaticSchema = (
+    14,
+    n0,
+    _QC,
+    0,
+    (_ISIET, _IST),
+    ((-1, {_sV: _isiet}), (-1, {_sV: _ist})),
+)
+
+SERVICE_CODE: StaticSchema = (14, n0, _SC, 0, (_POLLY,), ((-1, {_sV: _po}),))
+
+SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SQEE,
+    {_smith: _c, _sE: 402},
+    (_m, _qC, _sC),
+    ((ERROR_MESSAGE, 1), (QUOTA_CODE, 1), (SERVICE_CODE, 1)),
+)
+
+TEXT: StaticSchema = (3, n0, _Te, 0)
+
+TEXT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _TE,
+    0,
+    (_Te, _TT, _FSC),
+    ((TEXT, 1), (TEXT_TYPE, 0), (FLUSH_STREAM_CONFIGURATION, 0)),
+)
+
+START_SPEECH_SYNTHESIS_STREAM_ACTION_STREAM: StaticSchema = (
+    19,
+    n0,
+    _SSSSAS,
+    {_s: None},
+    (_TE, _CSE),
+    ((TEXT_EVENT, 0), (CLOSE_STREAM_EVENT, 0)),
+)
+
+START_SPEECH_SYNTHESIS_STREAM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SSSSI,
+    {_sm: None},
+    (_E, _LC, _LNe, _OF, _SR, _VI, _ASc),
+    (
+        (ENGINE, {_sH: _xaE, _smi: None}),
+        (LANGUAGE_CODE, {_sH: _xaL}),
+        (LEXICON_NAME_LIST, {_sH: _xaL_}),
+        (OUTPUT_FORMAT, {_sH: _xaO, _smi: None}),
+        (SAMPLE_RATE, {_sH: _xaS}),
+        (VOICE_ID, {_sH: _xaV, _smi: None}),
+        (START_SPEECH_SYNTHESIS_STREAM_ACTION_STREAM, 16),
+    ),
+)
+
+STREAM_CLOSED_EVENT: StaticSchema = (
+    18,
+    n0,
+    _SCE,
+    0,
+    (_RC,),
+    ((REQUEST_CHARACTERS, {_smithya: 0}),),
+)
+
+THROTTLING_REASON: StaticSchema = (
+    18,
+    n0,
+    _TR,
+    0,
+    (_r, _re),
+    (
+        (CORAL_AVAILABILITY_THROTTLING_REASON, 0),
+        (CORAL_AVAILABILITY_THROTTLED_RESOURCE, 0),
+    ),
+)
+
+THROTTLING_REASON_LIST: StaticSchema = (
+    16,
+    n0,
+    _TRL,
+    0,
+    (_me,),
+    ((THROTTLING_REASON, 0),),
+)
+
+THROTTLING_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TEh,
+    {_smith: _c, _sE: 400},
+    (_m, _tR),
+    ((AVAILABILITY_ERROR_MESSAGE, 0), (THROTTLING_REASON_LIST, 0)),
+)
+
+VALIDATION_EXCEPTION_FIELD_MESSAGE: StaticSchema = (3, n0, _VEFM, 0)
+
+VALIDATION_EXCEPTION_FIELD_NAME: StaticSchema = (3, n0, _VEFN, 0)
+
+VALIDATION_EXCEPTION_FIELD: StaticSchema = (
+    18,
+    n0,
+    _VEF,
+    0,
+    (_na, _m),
+    ((VALIDATION_EXCEPTION_FIELD_NAME, 1), (VALIDATION_EXCEPTION_FIELD_MESSAGE, 1)),
+)
+
+VALIDATION_EXCEPTION_FIELD_LIST: StaticSchema = (
+    16,
+    n0,
+    _VEFL,
+    0,
+    (_me,),
+    ((VALIDATION_EXCEPTION_FIELD, 0),),
+)
+
+VALIDATION_EXCEPTION_REASON: StaticSchema = (
+    14,
+    n0,
+    _VER,
+    0,
+    (_UO, _FVF, _OTHER, _IIE),
+    ((-1, {_sV: _uO}), (-1, {_sV: _fVF}), (-1, {_sV: _o}), (-1, {_sV: _iIE})),
+)
+
+VALIDATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _VE,
+    {_smith: _c, _sE: 400},
+    (_m, _r, _fi),
+    (
+        (ERROR_MESSAGE, 1),
+        (VALIDATION_EXCEPTION_REASON, 1),
+        (VALIDATION_EXCEPTION_FIELD_LIST, 0),
+    ),
+)
+
+START_SPEECH_SYNTHESIS_STREAM_EVENT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _SSSSES,
+    {_s: None},
+    (_AE, _SCE, _VE, _SQEE, _SFE, _TEh),
+    (
+        (AUDIO_EVENT, 0),
+        (STREAM_CLOSED_EVENT, 0),
+        (VALIDATION_EXCEPTION, 0),
+        (SERVICE_QUOTA_EXCEEDED_EXCEPTION, 0),
+        (SERVICE_FAILURE_EXCEPTION, 0),
+        (THROTTLING_EXCEPTION, 0),
+    ),
+)
+
+START_SPEECH_SYNTHESIS_STREAM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SSSSO,
+    {_smit: None},
+    (_ES,),
+    ((START_SPEECH_SYNTHESIS_STREAM_EVENT_STREAM, 16),),
+)
+
+START_SPEECH_SYNTHESIS_STREAM: StaticOperationSchema = (
+    23,
+    n0,
+    _SSSS,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/v1/synthesisStream", "code": 200}
+        )
+    },
+    START_SPEECH_SYNTHESIS_STREAM_INPUT,
+    START_SPEECH_SYNTHESIS_STREAM_OUTPUT,
+    (
+        SERVICE_FAILURE_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+SSML_MARKS_NOT_SUPPORTED_FOR_TEXT_TYPE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SMNSFTTE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+START_SPEECH_SYNTHESIS_TASK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SSSTI,
+    {_sm: None},
+    (_E, _LC, _LNe, _OF, _OSBN, _OSKP, _SR, _STA, _SMTp, _Te, _TT, _VI),
+    (
+        (ENGINE, 0),
+        (LANGUAGE_CODE, 0),
+        (LEXICON_NAME_LIST, 0),
+        (OUTPUT_FORMAT, 1),
+        (OUTPUT_S3_BUCKET_NAME, 1),
+        (OUTPUT_S3_KEY_PREFIX, 0),
+        (SAMPLE_RATE, 0),
+        (SNS_TOPIC_ARN, 0),
+        (SPEECH_MARK_TYPE_LIST, 0),
+        (TEXT, 1),
+        (TEXT_TYPE, 0),
+        (VOICE_ID, 1),
+    ),
+)
+
+START_SPEECH_SYNTHESIS_TASK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SSSTO,
+    {_smit: None},
+    (_ST,),
+    ((SYNTHESIS_TASK, 0),),
+)
+
+TEXT_LENGTH_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TLEE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+START_SPEECH_SYNTHESIS_TASK: StaticOperationSchema = (
+    23,
+    n0,
+    _SSST,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/v1/synthesisTasks", "code": 200}
+        )
+    },
+    START_SPEECH_SYNTHESIS_TASK_INPUT,
+    START_SPEECH_SYNTHESIS_TASK_OUTPUT,
+    (
+        ENGINE_NOT_SUPPORTED_EXCEPTION,
+        INVALID_S3_BUCKET_EXCEPTION,
+        INVALID_S3_KEY_EXCEPTION,
+        INVALID_SAMPLE_RATE_EXCEPTION,
+        INVALID_SNS_TOPIC_ARN_EXCEPTION,
+        INVALID_SSML_EXCEPTION,
+        LANGUAGE_NOT_SUPPORTED_EXCEPTION,
+        LEXICON_NOT_FOUND_EXCEPTION,
+        MARKS_NOT_SUPPORTED_FOR_FORMAT_EXCEPTION,
+        SERVICE_FAILURE_EXCEPTION,
+        SSML_MARKS_NOT_SUPPORTED_FOR_TEXT_TYPE_EXCEPTION,
+        TEXT_LENGTH_EXCEEDED_EXCEPTION,
+    ),
+)
+
+SYNTHESIZE_SPEECH_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SSI,
+    {_sm: None},
+    (_E, _LC, _LNe, _OF, _SR, _SMTp, _Te, _TT, _VI),
+    (
+        (ENGINE, 0),
+        (LANGUAGE_CODE, 0),
+        (LEXICON_NAME_LIST, 0),
+        (OUTPUT_FORMAT, 1),
+        (SAMPLE_RATE, 0),
+        (SPEECH_MARK_TYPE_LIST, 0),
+        (TEXT, 1),
+        (TEXT_TYPE, 0),
+        (VOICE_ID, 1),
+    ),
+)
+
+SYNTHESIZE_SPEECH_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SSO,
+    {_smit: None},
+    (_AS, _CT, _RC),
+    (
+        (AUDIO_STREAM, {_smithya: _v_, _sPm: None}),
+        (CONTENT_TYPE, {_sH: _CT_}),
+        (REQUEST_CHARACTERS, {_smithya: 0, _sH: _xaR}),
+    ),
+)
+
+SYNTHESIZE_SPEECH: StaticOperationSchema = (
+    23,
+    n0,
+    _SS,
+    {_smithy: MappingProxyType({"method": "POST", "uri": "/v1/speech", "code": 200})},
+    SYNTHESIZE_SPEECH_INPUT,
+    SYNTHESIZE_SPEECH_OUTPUT,
+    (
+        ENGINE_NOT_SUPPORTED_EXCEPTION,
+        INVALID_SAMPLE_RATE_EXCEPTION,
+        INVALID_SSML_EXCEPTION,
+        LANGUAGE_NOT_SUPPORTED_EXCEPTION,
+        LEXICON_NOT_FOUND_EXCEPTION,
+        MARKS_NOT_SUPPORTED_FOR_FORMAT_EXCEPTION,
+        SERVICE_FAILURE_EXCEPTION,
+        SSML_MARKS_NOT_SUPPORTED_FOR_TEXT_TYPE_EXCEPTION,
+        TEXT_LENGTH_EXCEEDED_EXCEPTION,
+    ),
+)
+
+PARROT_V1: StaticSchema = (
+    21,
+    n0,
+    _Pv,
+    {
+        _aw: MappingProxyType({"name": "polly"}),
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
                 ),
-            ],
-        },
-        "NextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="NextToken")
-            ],
-        },
-    },
-)
-
-LANGUAGE_CODE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#LanguageCodeList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LANGUAGE_CODE}},
-)
-
-GENDER = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#Gender"),
-    shape_type=ShapeType.ENUM,
-    members={"Female": {"target": UNIT}, "Male": {"target": UNIT}},
-)
-
-VOICE_ID = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#VoiceId"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "Aditi": {"target": UNIT},
-        "Amy": {"target": UNIT},
-        "Astrid": {"target": UNIT},
-        "Bianca": {"target": UNIT},
-        "Brian": {"target": UNIT},
-        "Camila": {"target": UNIT},
-        "Carla": {"target": UNIT},
-        "Carmen": {"target": UNIT},
-        "Celine": {"target": UNIT},
-        "Chantal": {"target": UNIT},
-        "Conchita": {"target": UNIT},
-        "Cristiano": {"target": UNIT},
-        "Dora": {"target": UNIT},
-        "Emma": {"target": UNIT},
-        "Enrique": {"target": UNIT},
-        "Ewa": {"target": UNIT},
-        "Filiz": {"target": UNIT},
-        "Gabrielle": {"target": UNIT},
-        "Geraint": {"target": UNIT},
-        "Giorgio": {"target": UNIT},
-        "Gwyneth": {"target": UNIT},
-        "Hans": {"target": UNIT},
-        "Ines": {"target": UNIT},
-        "Ivy": {"target": UNIT},
-        "Jacek": {"target": UNIT},
-        "Jan": {"target": UNIT},
-        "Joanna": {"target": UNIT},
-        "Joey": {"target": UNIT},
-        "Justin": {"target": UNIT},
-        "Karl": {"target": UNIT},
-        "Kendra": {"target": UNIT},
-        "Kevin": {"target": UNIT},
-        "Kimberly": {"target": UNIT},
-        "Lea": {"target": UNIT},
-        "Liv": {"target": UNIT},
-        "Lotte": {"target": UNIT},
-        "Lucia": {"target": UNIT},
-        "Lupe": {"target": UNIT},
-        "Mads": {"target": UNIT},
-        "Maja": {"target": UNIT},
-        "Marlene": {"target": UNIT},
-        "Mathieu": {"target": UNIT},
-        "Matthew": {"target": UNIT},
-        "Maxim": {"target": UNIT},
-        "Mia": {"target": UNIT},
-        "Miguel": {"target": UNIT},
-        "Mizuki": {"target": UNIT},
-        "Naja": {"target": UNIT},
-        "Nicole": {"target": UNIT},
-        "Olivia": {"target": UNIT},
-        "Penelope": {"target": UNIT},
-        "Raveena": {"target": UNIT},
-        "Ricardo": {"target": UNIT},
-        "Ruben": {"target": UNIT},
-        "Russell": {"target": UNIT},
-        "Salli": {"target": UNIT},
-        "Seoyeon": {"target": UNIT},
-        "Takumi": {"target": UNIT},
-        "Tatyana": {"target": UNIT},
-        "Vicki": {"target": UNIT},
-        "Vitoria": {"target": UNIT},
-        "Zeina": {"target": UNIT},
-        "Zhiyu": {"target": UNIT},
-        "Aria": {"target": UNIT},
-        "Ayanda": {"target": UNIT},
-        "Arlet": {"target": UNIT},
-        "Hannah": {"target": UNIT},
-        "Arthur": {"target": UNIT},
-        "Daniel": {"target": UNIT},
-        "Liam": {"target": UNIT},
-        "Pedro": {"target": UNIT},
-        "Kajal": {"target": UNIT},
-        "Hiujin": {"target": UNIT},
-        "Laura": {"target": UNIT},
-        "Elin": {"target": UNIT},
-        "Ida": {"target": UNIT},
-        "Suvi": {"target": UNIT},
-        "Ola": {"target": UNIT},
-        "Hala": {"target": UNIT},
-        "Andres": {"target": UNIT},
-        "Sergio": {"target": UNIT},
-        "Remi": {"target": UNIT},
-        "Adriano": {"target": UNIT},
-        "Thiago": {"target": UNIT},
-        "Ruth": {"target": UNIT},
-        "Stephen": {"target": UNIT},
-        "Kazuha": {"target": UNIT},
-        "Tomoko": {"target": UNIT},
-        "Niamh": {"target": UNIT},
-        "Sofie": {"target": UNIT},
-        "Lisa": {"target": UNIT},
-        "Isabelle": {"target": UNIT},
-        "Zayd": {"target": UNIT},
-        "Danielle": {"target": UNIT},
-        "Gregory": {"target": UNIT},
-        "Burcu": {"target": UNIT},
-        "Jitka": {"target": UNIT},
-        "Sabrina": {"target": UNIT},
-        "Jasmine": {"target": UNIT},
-        "Jihye": {"target": UNIT},
-        "Ambre": {"target": UNIT},
-        "Beatrice": {"target": UNIT},
-        "Florian": {"target": UNIT},
-        "Lennart": {"target": UNIT},
-        "Lorenzo": {"target": UNIT},
-        "Tiffany": {"target": UNIT},
-    },
-)
-
-LANGUAGE_NAME = Schema(
-    id=ShapeID("com.amazonaws.polly#LanguageName"), shape_type=ShapeType.STRING
-)
-
-VOICE_NAME = Schema(
-    id=ShapeID("com.amazonaws.polly#VoiceName"), shape_type=ShapeType.STRING
-)
-
-ENGINE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#EngineList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ENGINE}},
-)
-
-VOICE = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#Voice"),
-    members={
-        "Gender": {"target": GENDER},
-        "Id": {"target": VOICE_ID},
-        "LanguageCode": {"target": LANGUAGE_CODE},
-        "LanguageName": {"target": LANGUAGE_NAME},
-        "Name": {"target": VOICE_NAME},
-        "AdditionalLanguageCodes": {"target": LANGUAGE_CODE_LIST},
-        "SupportedEngines": {"target": ENGINE_LIST},
-    },
-)
-
-VOICE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#VoiceList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VOICE}},
-)
-
-DESCRIBE_VOICES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#DescribeVoicesOutput"),
-    members={"Voices": {"target": VOICE_LIST}, "NextToken": {"target": NEXT_TOKEN}},
-)
-
-INVALID_NEXT_TOKEN_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#InvalidNextTokenException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-DESCRIBE_VOICES = Schema(
-    id=ShapeID("com.amazonaws.polly#DescribeVoices"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "GET", "uri": "/v1/voices", "code": 200}),
-        )
-    ],
-)
-
-ENGINE_NOT_SUPPORTED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#EngineNotSupportedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-FORCE = Schema(
-    id=ShapeID("com.amazonaws.polly#Force"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-FLUSH_STREAM_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#FlushStreamConfiguration"),
-    members={
-        "Force": {
-            "target": FORCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        }
-    },
-)
-
-GET_LEXICON_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#GetLexiconInput"),
-    members={
-        "Name": {
-            "target": LEXICON_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-LEXICON_CONTENT = Schema(
-    id=ShapeID("com.amazonaws.polly#LexiconContent"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-LEXICON = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#Lexicon"),
-    members={"Content": {"target": LEXICON_CONTENT}, "Name": {"target": LEXICON_NAME}},
-)
-
-LAST_MODIFIED = Schema(
-    id=ShapeID("com.amazonaws.polly#LastModified"), shape_type=ShapeType.TIMESTAMP
-)
-
-LEXEMES_COUNT = Schema(
-    id=ShapeID("com.amazonaws.polly#LexemesCount"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-LEXICON_ARN = Schema(
-    id=ShapeID("com.amazonaws.polly#LexiconArn"), shape_type=ShapeType.STRING
-)
-
-SIZE = Schema(
-    id=ShapeID("com.amazonaws.polly#Size"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-LEXICON_ATTRIBUTES = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#LexiconAttributes"),
-    members={
-        "Alphabet": {"target": ALPHABET},
-        "LanguageCode": {"target": LANGUAGE_CODE},
-        "LastModified": {"target": LAST_MODIFIED},
-        "LexiconArn": {"target": LEXICON_ARN},
-        "LexemesCount": {
-            "target": LEXEMES_COUNT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Size": {
-            "target": SIZE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-GET_LEXICON_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#GetLexiconOutput"),
-    members={
-        "Lexicon": {"target": LEXICON},
-        "LexiconAttributes": {"target": LEXICON_ATTRIBUTES},
-    },
-)
-
-GET_LEXICON = Schema(
-    id=ShapeID("com.amazonaws.polly#GetLexicon"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/v1/lexicons/{Name}", "code": 200}
-            ),
-        )
-    ],
-)
-
-TASK_ID = Schema(id=ShapeID("com.amazonaws.polly#TaskId"), shape_type=ShapeType.STRING)
-
-GET_SPEECH_SYNTHESIS_TASK_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#GetSpeechSynthesisTaskInput"),
-    members={
-        "TaskId": {
-            "target": TASK_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-LEXICON_NAME_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#LexiconNameList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LEXICON_NAME}},
-)
-
-OUTPUT_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#OutputFormat"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "JSON": {"target": UNIT},
-        "MP3": {"target": UNIT},
-        "OGG_OPUS": {"target": UNIT},
-        "OGG_VORBIS": {"target": UNIT},
-        "PCM": {"target": UNIT},
-        "MULAW": {"target": UNIT},
-        "ALAW": {"target": UNIT},
-    },
-)
-
-OUTPUT_URI = Schema(
-    id=ShapeID("com.amazonaws.polly#OutputUri"), shape_type=ShapeType.STRING
-)
-
-REQUEST_CHARACTERS = Schema(
-    id=ShapeID("com.amazonaws.polly#RequestCharacters"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-SAMPLE_RATE = Schema(
-    id=ShapeID("com.amazonaws.polly#SampleRate"), shape_type=ShapeType.STRING
-)
-
-SNS_TOPIC_ARN = Schema(
-    id=ShapeID("com.amazonaws.polly#SnsTopicArn"), shape_type=ShapeType.STRING
-)
-
-SPEECH_MARK_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#SpeechMarkType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "SENTENCE": {"target": UNIT},
-        "SSML": {"target": UNIT},
-        "VISEME": {"target": UNIT},
-        "WORD": {"target": UNIT},
-    },
-)
-
-SPEECH_MARK_TYPE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#SpeechMarkTypeList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SPEECH_MARK_TYPE}},
-)
-
-TASK_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#TaskStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "SCHEDULED": {"target": UNIT},
-        "IN_PROGRESS": {"target": UNIT},
-        "COMPLETED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-    },
-)
-
-TASK_STATUS_REASON = Schema(
-    id=ShapeID("com.amazonaws.polly#TaskStatusReason"), shape_type=ShapeType.STRING
-)
-
-TEXT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#TextType"),
-    shape_type=ShapeType.ENUM,
-    members={"SSML": {"target": UNIT}, "TEXT": {"target": UNIT}},
-)
-
-SYNTHESIS_TASK = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#SynthesisTask"),
-    members={
-        "Engine": {"target": ENGINE},
-        "TaskId": {"target": TASK_ID},
-        "TaskStatus": {"target": TASK_STATUS},
-        "TaskStatusReason": {"target": TASK_STATUS_REASON},
-        "OutputUri": {"target": OUTPUT_URI},
-        "CreationTime": {"target": DATE_TIME},
-        "RequestCharacters": {
-            "target": REQUEST_CHARACTERS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "SnsTopicArn": {"target": SNS_TOPIC_ARN},
-        "LexiconNames": {"target": LEXICON_NAME_LIST},
-        "OutputFormat": {"target": OUTPUT_FORMAT},
-        "SampleRate": {"target": SAMPLE_RATE},
-        "SpeechMarkTypes": {"target": SPEECH_MARK_TYPE_LIST},
-        "TextType": {"target": TEXT_TYPE},
-        "VoiceId": {"target": VOICE_ID},
-        "LanguageCode": {"target": LANGUAGE_CODE},
-    },
-)
-
-GET_SPEECH_SYNTHESIS_TASK_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#GetSpeechSynthesisTaskOutput"),
-    members={"SynthesisTask": {"target": SYNTHESIS_TASK}},
-)
-
-INVALID_TASK_ID_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#InvalidTaskIdException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-SYNTHESIS_TASK_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#SynthesisTaskNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-GET_SPEECH_SYNTHESIS_TASK = Schema(
-    id=ShapeID("com.amazonaws.polly#GetSpeechSynthesisTask"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/v1/synthesisTasks/{TaskId}", "code": 200}
-            ),
-        )
-    ],
-)
-
-INVALID_LEXICON_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#InvalidLexiconException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_S3_BUCKET_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#InvalidS3BucketException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_S3_KEY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#InvalidS3KeyException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_SAMPLE_RATE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#InvalidSampleRateException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_SNS_TOPIC_ARN_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#InvalidSnsTopicArnException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_SSML_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#InvalidSsmlException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-LANGUAGE_NOT_SUPPORTED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#LanguageNotSupportedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-LEXICON_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#LexiconDescription"),
-    members={
-        "Name": {"target": LEXICON_NAME},
-        "Attributes": {"target": LEXICON_ATTRIBUTES},
-    },
-)
-
-LEXICON_DESCRIPTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#LexiconDescriptionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LEXICON_DESCRIPTION}},
-)
-
-LEXICON_SIZE_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#LexiconSizeExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-LIST_LEXICONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ListLexiconsInput"),
-    members={
-        "NextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="NextToken")
-            ],
-        }
-    },
-)
-
-LIST_LEXICONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ListLexiconsOutput"),
-    members={
-        "Lexicons": {"target": LEXICON_DESCRIPTION_LIST},
-        "NextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LIST_LEXICONS = Schema(
-    id=ShapeID("com.amazonaws.polly#ListLexicons"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/v1/lexicons", "code": 200}
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.polly#MaxResults"), shape_type=ShapeType.INTEGER
-)
-
-LIST_SPEECH_SYNTHESIS_TASKS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ListSpeechSynthesisTasksInput"),
-    members={
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxResults")
-            ],
-        },
-        "NextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="NextToken")
-            ],
-        },
-        "Status": {
-            "target": TASK_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Status")],
-        },
-    },
-)
-
-SYNTHESIS_TASKS = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#SynthesisTasks"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SYNTHESIS_TASK}},
-)
-
-LIST_SPEECH_SYNTHESIS_TASKS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ListSpeechSynthesisTasksOutput"),
-    members={
-        "NextToken": {"target": NEXT_TOKEN},
-        "SynthesisTasks": {"target": SYNTHESIS_TASKS},
-    },
-)
-
-LIST_SPEECH_SYNTHESIS_TASKS = Schema(
-    id=ShapeID("com.amazonaws.polly#ListSpeechSynthesisTasks"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/v1/synthesisTasks", "code": 200}
-            ),
-        )
-    ],
-)
-
-MARKS_NOT_SUPPORTED_FOR_FORMAT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#MarksNotSupportedForFormatException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-MAX_LEXEME_LENGTH_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#MaxLexemeLengthExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-MAX_LEXICONS_NUMBER_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#MaxLexiconsNumberExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-OUTPUT_S3_BUCKET_NAME = Schema(
-    id=ShapeID("com.amazonaws.polly#OutputS3BucketName"), shape_type=ShapeType.STRING
-)
-
-OUTPUT_S3_KEY_PREFIX = Schema(
-    id=ShapeID("com.amazonaws.polly#OutputS3KeyPrefix"), shape_type=ShapeType.STRING
-)
-
-PUT_LEXICON_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#PutLexiconInput"),
-    members={
-        "Name": {
-            "target": LEXICON_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Content": {
-            "target": LEXICON_CONTENT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PUT_LEXICON_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#PutLexiconOutput")
-)
-
-UNSUPPORTED_PLS_ALPHABET_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#UnsupportedPlsAlphabetException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-UNSUPPORTED_PLS_LANGUAGE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#UnsupportedPlsLanguageException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-PUT_LEXICON = Schema(
-    id=ShapeID("com.amazonaws.polly#PutLexicon"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "PUT", "uri": "/v1/lexicons/{Name}", "code": 200}
-            ),
-        )
-    ],
-)
-
-QUOTA_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#QuotaCode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "INPUT_STREAM_INBOUND_EVENT_TIMEOUT": {"target": UNIT},
-        "INPUT_STREAM_TIMEOUT": {"target": UNIT},
-    },
-)
-
-SERVICE_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ServiceCode"),
-    shape_type=ShapeType.ENUM,
-    members={"POLLY": {"target": UNIT}},
-)
-
-SERVICE_QUOTA_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ServiceQuotaExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=402),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "quotaCode": {
-            "target": QUOTA_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "serviceCode": {
-            "target": SERVICE_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TEXT = Schema(id=ShapeID("com.amazonaws.polly#Text"), shape_type=ShapeType.STRING)
-
-TEXT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#TextEvent"),
-    members={
-        "Text": {
-            "target": TEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TextType": {"target": TEXT_TYPE},
-        "FlushStreamConfiguration": {"target": FLUSH_STREAM_CONFIGURATION},
-    },
-)
-
-START_SPEECH_SYNTHESIS_STREAM_ACTION_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisStreamActionStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "TextEvent": {"target": TEXT_EVENT},
-        "CloseStreamEvent": {"target": CLOSE_STREAM_EVENT},
-    },
-)
-
-START_SPEECH_SYNTHESIS_STREAM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisStreamInput"),
-    members={
-        "Engine": {
-            "target": ENGINE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="x-amzn-Engine"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "LanguageCode": {
-            "target": LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amzn-LanguageCode"
-                )
-            ],
-        },
-        "LexiconNames": {
-            "target": LEXICON_NAME_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amzn-LexiconNames"
-                )
-            ],
-        },
-        "OutputFormat": {
-            "target": OUTPUT_FORMAT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amzn-OutputFormat"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "SampleRate": {
-            "target": SAMPLE_RATE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amzn-SampleRate"
-                )
-            ],
-        },
-        "VoiceId": {
-            "target": VOICE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="x-amzn-VoiceId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ActionStream": {
-            "target": START_SPEECH_SYNTHESIS_STREAM_ACTION_STREAM,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-    },
-)
-
-STREAM_CLOSED_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#StreamClosedEvent"),
-    members={
-        "RequestCharacters": {
-            "target": REQUEST_CHARACTERS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        }
-    },
-)
-
-THROTTLING_REASON = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ThrottlingReason"),
-    members={
-        "reason": {"target": CORAL_AVAILABILITY_THROTTLING_REASON},
-        "resource": {"target": CORAL_AVAILABILITY_THROTTLED_RESOURCE},
-    },
-)
-
-THROTTLING_REASON_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ThrottlingReasonList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": THROTTLING_REASON}},
-)
-
-THROTTLING_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ThrottlingException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "Throttling", "httpResponseCode": 400}),
-        ),
-    ],
-    members={
-        "message": {"target": AVAILABILITY_ERROR_MESSAGE},
-        "throttlingReasons": {"target": THROTTLING_REASON_LIST},
-    },
-)
-
-VALIDATION_EXCEPTION_FIELD_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.polly#ValidationExceptionFieldMessage"),
-    shape_type=ShapeType.STRING,
-)
-
-VALIDATION_EXCEPTION_FIELD_NAME = Schema(
-    id=ShapeID("com.amazonaws.polly#ValidationExceptionFieldName"),
-    shape_type=ShapeType.STRING,
-)
-
-VALIDATION_EXCEPTION_FIELD = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ValidationExceptionField"),
-    members={
-        "name": {
-            "target": VALIDATION_EXCEPTION_FIELD_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "message": {
-            "target": VALIDATION_EXCEPTION_FIELD_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-VALIDATION_EXCEPTION_FIELD_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ValidationExceptionFieldList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VALIDATION_EXCEPTION_FIELD}},
-)
-
-VALIDATION_EXCEPTION_REASON = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ValidationExceptionReason"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "UNSUPPORTED_OPERATION": {"target": UNIT},
-        "FIELD_VALIDATION_FAILED": {"target": UNIT},
-        "OTHER": {"target": UNIT},
-        "INVALID_INBOUND_EVENT": {"target": UNIT},
-    },
-)
-
-VALIDATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#ValidationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={
-        "message": {
-            "target": ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "reason": {
-            "target": VALIDATION_EXCEPTION_REASON,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "fields": {"target": VALIDATION_EXCEPTION_FIELD_LIST},
-    },
-)
-
-START_SPEECH_SYNTHESIS_STREAM_EVENT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisStreamEventStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "AudioEvent": {"target": AUDIO_EVENT},
-        "StreamClosedEvent": {"target": STREAM_CLOSED_EVENT},
-        "ValidationException": {"target": VALIDATION_EXCEPTION},
-        "ServiceQuotaExceededException": {"target": SERVICE_QUOTA_EXCEEDED_EXCEPTION},
-        "ServiceFailureException": {"target": SERVICE_FAILURE_EXCEPTION},
-        "ThrottlingException": {"target": THROTTLING_EXCEPTION},
-    },
-)
-
-START_SPEECH_SYNTHESIS_STREAM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisStreamOutput"),
-    members={
-        "EventStream": {
-            "target": START_SPEECH_SYNTHESIS_STREAM_EVENT_STREAM,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        }
-    },
-)
-
-START_SPEECH_SYNTHESIS_STREAM = Schema(
-    id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisStream"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/v1/synthesisStream", "code": 200}
-            ),
-        )
-    ],
-)
-
-SSML_MARKS_NOT_SUPPORTED_FOR_TEXT_TYPE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#SsmlMarksNotSupportedForTextTypeException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-START_SPEECH_SYNTHESIS_TASK_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisTaskInput"),
-    members={
-        "Engine": {"target": ENGINE},
-        "LanguageCode": {"target": LANGUAGE_CODE},
-        "LexiconNames": {"target": LEXICON_NAME_LIST},
-        "OutputFormat": {
-            "target": OUTPUT_FORMAT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "OutputS3BucketName": {
-            "target": OUTPUT_S3_BUCKET_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "OutputS3KeyPrefix": {"target": OUTPUT_S3_KEY_PREFIX},
-        "SampleRate": {"target": SAMPLE_RATE},
-        "SnsTopicArn": {"target": SNS_TOPIC_ARN},
-        "SpeechMarkTypes": {"target": SPEECH_MARK_TYPE_LIST},
-        "Text": {
-            "target": TEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TextType": {"target": TEXT_TYPE},
-        "VoiceId": {
-            "target": VOICE_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-START_SPEECH_SYNTHESIS_TASK_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisTaskOutput"),
-    members={"SynthesisTask": {"target": SYNTHESIS_TASK}},
-)
-
-TEXT_LENGTH_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#TextLengthExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": ERROR_MESSAGE}},
-)
-
-START_SPEECH_SYNTHESIS_TASK = Schema(
-    id=ShapeID("com.amazonaws.polly#StartSpeechSynthesisTask"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/v1/synthesisTasks", "code": 200}
-            ),
-        )
-    ],
-)
-
-SYNTHESIZE_SPEECH_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#SynthesizeSpeechInput"),
-    members={
-        "Engine": {"target": ENGINE},
-        "LanguageCode": {"target": LANGUAGE_CODE},
-        "LexiconNames": {"target": LEXICON_NAME_LIST},
-        "OutputFormat": {
-            "target": OUTPUT_FORMAT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SampleRate": {"target": SAMPLE_RATE},
-        "SpeechMarkTypes": {"target": SPEECH_MARK_TYPE_LIST},
-        "Text": {
-            "target": TEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TextType": {"target": TEXT_TYPE},
-        "VoiceId": {
-            "target": VOICE_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-SYNTHESIZE_SPEECH_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.polly#SynthesizeSpeechOutput"),
-    members={
-        "AudioStream": {
-            "target": AUDIO_STREAM,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=""),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-        "ContentType": {
-            "target": CONTENT_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Content-Type")
-            ],
-        },
-        "RequestCharacters": {
-            "target": REQUEST_CHARACTERS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=0),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-RequestCharacters",
-                ),
-            ],
-        },
-    },
-)
-
-SYNTHESIZE_SPEECH = Schema(
-    id=ShapeID("com.amazonaws.polly#SynthesizeSpeech"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/v1/speech", "code": 200}
-            ),
-        )
-    ],
-)
-
-PARROT_V1 = Schema(
-    id=ShapeID("com.amazonaws.polly#Parrot_v1"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "polly"})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsFIPS",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://polly-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://polly-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://polly.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://polly.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 13,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://polly-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://polly-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://polly.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://polly.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 13,
+                "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "Polly",
-                    "arnNamespace": "polly",
-                    "cloudFormationName": "Polly",
-                    "cloudTrailEventSource": "polly.amazonaws.com",
-                    "endpointPrefix": "polly",
-                }
-            ),
+        _aws: MappingProxyType(
+            {
+                "sdkId": "Polly",
+                "arnNamespace": "polly",
+                "cloudFormationName": "Polly",
+                "cloudTrailEventSource": "polly.amazonaws.com",
+                "endpointPrefix": "polly",
+            }
         ),
-        Trait.new(
-            id=ShapeID("smithy.api#xmlNamespace"),
-            value=MappingProxyType({"uri": "http://polly.amazonaws.com/doc/v1"}),
-        ),
-        Trait.new(
-            id=ShapeID("aws.protocols#restJson1"),
-            value=MappingProxyType(
-                {"http": ("http/1.1", "h2"), "eventStreamHttp": ("h2",)}
-            ),
-        ),
-    ],
+        _sN: MappingProxyType({"uri": "http://polly.amazonaws.com/doc/v1"}),
+        _aJ: MappingProxyType({"http": ("http/1.1", "h2"), "eventStreamHttp": ("h2",)}),
+    },
 )

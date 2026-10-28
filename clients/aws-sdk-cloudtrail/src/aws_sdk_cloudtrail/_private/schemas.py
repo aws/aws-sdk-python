@@ -2,5083 +2,5479 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
-
-
-ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ErrorMessage"), shape_type=ShapeType.STRING
-)
-
-ACCESS_DENIED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AccessDeniedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ResourceAccessDenied", "httpResponseCode": 403}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-ACCOUNT_HAS_ONGOING_IMPORT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AccountHasOngoingImportException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "AccountHasOngoingImport", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-ACCOUNT_ID = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#AccountId"), shape_type=ShapeType.STRING
-)
-
-ACCOUNT_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AccountNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "AccountNotFound", "httpResponseCode": 404}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-ACCOUNT_NOT_REGISTERED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AccountNotRegisteredException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "AccountNotRegistered", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-ACCOUNT_REGISTERED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AccountRegisteredException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "AccountRegistered", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-STRING = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#String"), shape_type=ShapeType.STRING
-)
-
-TAG_KEY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#TagKey"), shape_type=ShapeType.STRING
-)
-
-TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#TagValue"), shape_type=ShapeType.STRING
-)
-
-TAG = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Tag"),
-    members={
-        "Key": {
-            "target": TAG_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Value": {"target": TAG_VALUE},
-    },
-)
-
-TAGS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#TagsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG}},
-)
-
-ADD_TAGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AddTagsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#AddTagsRequest",
-        )
-    ],
-    members={
-        "ResourceId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TagsList": {
-            "target": TAGS_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-ADD_TAGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AddTagsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#AddTagsResponse",
-        )
-    ],
-)
-
-CHANNEL_ARN_INVALID_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ChannelARNInvalidException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ChannelARNInvalid", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CHANNEL_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ChannelNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ChannelNotFound", "httpResponseCode": 404}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CLOUD_TRAIL_ARN_INVALID_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CloudTrailARNInvalidException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "CloudTrailARNInvalid", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ConflictException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ConflictException", "httpResponseCode": 409}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-EVENT_DATA_STORE_ARN_INVALID_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "EventDataStoreARNInvalid", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-EVENT_DATA_STORE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "EventDataStoreNotFound", "httpResponseCode": 404}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INACTIVE_EVENT_DATA_STORE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InactiveEventDataStoreException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InactiveEventDataStore", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_TAG_PARAMETER_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidTagParameterException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidTagParameter", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_TRAIL_NAME_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidTrailNameException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidTrailName", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "NoManagementAccountSLRExists", "httpResponseCode": 403}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "NotOrganizationMasterAccount", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-OPERATION_NOT_PERMITTED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#OperationNotPermittedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "OperationNotPermitted", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ResourceNotFound", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-RESOURCE_TYPE_NOT_SUPPORTED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourceTypeNotSupportedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ResourceTypeNotSupported", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-TAGS_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#TagsLimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "TagsLimitExceeded", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-UNSUPPORTED_OPERATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#UnsupportedOperationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "UnsupportedOperation", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-ADD_TAGS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#AddTags"), shape_type=ShapeType.OPERATION
-)
-
-OPERATOR_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#OperatorValue"), shape_type=ShapeType.STRING
-)
-
-OPERATOR = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Operator"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": OPERATOR_VALUE}},
-)
-
-SELECTOR_FIELD = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#SelectorField"), shape_type=ShapeType.STRING
-)
-
-ADVANCED_FIELD_SELECTOR = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AdvancedFieldSelector"),
-    members={
-        "Field": {
-            "target": SELECTOR_FIELD,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Equals": {"target": OPERATOR},
-        "StartsWith": {"target": OPERATOR},
-        "EndsWith": {"target": OPERATOR},
-        "NotEquals": {"target": OPERATOR},
-        "NotStartsWith": {"target": OPERATOR},
-        "NotEndsWith": {"target": OPERATOR},
-    },
-)
-
-ADVANCED_FIELD_SELECTORS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AdvancedFieldSelectors"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ADVANCED_FIELD_SELECTOR}},
-)
-
-SELECTOR_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#SelectorName"), shape_type=ShapeType.STRING
-)
-
-ADVANCED_EVENT_SELECTOR = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AdvancedEventSelector"),
-    members={
-        "Name": {"target": SELECTOR_NAME},
-        "FieldSelectors": {
-            "target": ADVANCED_FIELD_SELECTORS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-ADVANCED_EVENT_SELECTORS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AdvancedEventSelectors"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ADVANCED_EVENT_SELECTOR}},
-)
-
-EVENT_CATEGORY_AGGREGATION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventCategoryAggregation"),
-    shape_type=ShapeType.ENUM,
-    members={"Data": {"target": UNIT}},
-)
-
-TEMPLATE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Template"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "API_ACTIVITY": {"target": UNIT},
-        "RESOURCE_ACCESS": {"target": UNIT},
-        "USER_ACTIONS": {"target": UNIT},
-    },
-)
-
-TEMPLATES = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Templates"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TEMPLATE}},
-)
-
-AGGREGATION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AggregationConfiguration"),
-    members={
-        "Templates": {
-            "target": TEMPLATES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EventCategory": {
-            "target": EVENT_CATEGORY_AGGREGATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-AGGREGATION_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#AggregationConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": AGGREGATION_CONFIGURATION}},
-)
-
-BILLING_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#BillingMode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EXTENDABLE_RETENTION_PRICING": {"target": UNIT},
-        "FIXED_RETENTION_PRICING": {"target": UNIT},
-    },
-)
-
-BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Boolean"), shape_type=ShapeType.BOOLEAN
-)
-
-BYTE_BUFFER = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ByteBuffer"), shape_type=ShapeType.BLOB
-)
-
-EVENT_DATA_STORE_ARN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreArn"),
-    shape_type=ShapeType.STRING,
-)
-
-UUID = Schema(id=ShapeID("com.amazonaws.cloudtrail#UUID"), shape_type=ShapeType.STRING)
-
-CANCEL_QUERY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CancelQueryInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#CancelQueryRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {"target": EVENT_DATA_STORE_ARN},
-        "QueryId": {
-            "target": UUID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EventDataStoreOwnerAccountId": {"target": ACCOUNT_ID},
-    },
-)
-
-QUERY_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "QUEUED": {"target": UNIT},
-        "RUNNING": {"target": UNIT},
-        "FINISHED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "CANCELLED": {"target": UNIT},
-        "TIMED_OUT": {"target": UNIT},
-    },
-)
-
-CANCEL_QUERY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CancelQueryOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#CancelQueryResponse",
-        )
-    ],
-    members={
-        "QueryId": {
-            "target": UUID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "QueryStatus": {
-            "target": QUERY_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EventDataStoreOwnerAccountId": {"target": ACCOUNT_ID},
-    },
-)
-
-INACTIVE_QUERY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InactiveQueryException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "InactiveQuery", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_PARAMETER_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidParameterException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidParameter", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-QUERY_ID_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryIdNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "QueryIdNotFound", "httpResponseCode": 404}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CANCEL_QUERY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#CancelQuery"), shape_type=ShapeType.OPERATION
-)
-
-CANNOT_DELEGATE_MANAGEMENT_ACCOUNT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CannotDelegateManagementAccountException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "CannotDelegateManagementAccount", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CHANNEL_ARN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ChannelArn"), shape_type=ShapeType.STRING
-)
-
-CHANNEL_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ChannelName"), shape_type=ShapeType.STRING
-)
-
-CHANNEL = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Channel"),
-    members={"ChannelArn": {"target": CHANNEL_ARN}, "Name": {"target": CHANNEL_NAME}},
-)
-
-CHANNEL_ALREADY_EXISTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ChannelAlreadyExistsException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ChannelAlreadyExists", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CHANNEL_EXISTS_FOR_EDS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ChannelExistsForEDSException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ChannelExistsForEDS", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CHANNEL_MAX_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ChannelMaxLimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ChannelMaxLimitExceeded", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CHANNELS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Channels"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CHANNEL}},
-)
-
-LOCATION = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Location"), shape_type=ShapeType.STRING
-)
-
-DESTINATION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DestinationType"),
-    shape_type=ShapeType.ENUM,
-    members={"EVENT_DATA_STORE": {"target": UNIT}, "AWS_SERVICE": {"target": UNIT}},
-)
-
-DESTINATION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Destination"),
-    members={
-        "Type": {
-            "target": DESTINATION_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-DESTINATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Destinations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DESTINATION}},
-)
-
-SOURCE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Source"), shape_type=ShapeType.STRING
-)
-
-CREATE_CHANNEL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateChannelInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#CreateChannelRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": CHANNEL_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Source": {
-            "target": SOURCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Destinations": {
-            "target": DESTINATIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Tags": {"target": TAGS_LIST},
-    },
-)
-
-CREATE_CHANNEL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateChannelOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#CreateChannelResponse",
-        )
-    ],
-    members={
-        "ChannelArn": {"target": CHANNEL_ARN},
-        "Name": {"target": CHANNEL_NAME},
-        "Source": {"target": SOURCE},
-        "Destinations": {"target": DESTINATIONS},
-        "Tags": {"target": TAGS_LIST},
-    },
-)
-
-INVALID_EVENT_DATA_STORE_CATEGORY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidEventDataStoreCategoryException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidEventDataStoreCategory", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_SOURCE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidSourceException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "InvalidSource", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CREATE_CHANNEL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateChannel"), shape_type=ShapeType.OPERATION
-)
-
-DASHBOARD_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DashboardName"), shape_type=ShapeType.STRING
-)
-
-REFRESH_SCHEDULE_FREQUENCY_UNIT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RefreshScheduleFrequencyUnit"),
-    shape_type=ShapeType.ENUM,
-    members={"HOURS": {"target": UNIT}, "DAYS": {"target": UNIT}},
-)
-
-REFRESH_SCHEDULE_FREQUENCY_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#RefreshScheduleFrequencyValue"),
-    shape_type=ShapeType.INTEGER,
-)
-
-REFRESH_SCHEDULE_FREQUENCY = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RefreshScheduleFrequency"),
-    members={
-        "Unit": {"target": REFRESH_SCHEDULE_FREQUENCY_UNIT},
-        "Value": {"target": REFRESH_SCHEDULE_FREQUENCY_VALUE},
-    },
-)
-
-REFRESH_SCHEDULE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RefreshScheduleStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-TIME_OF_DAY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#TimeOfDay"), shape_type=ShapeType.STRING
-)
-
-REFRESH_SCHEDULE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RefreshSchedule"),
-    members={
-        "Frequency": {"target": REFRESH_SCHEDULE_FREQUENCY},
-        "Status": {"target": REFRESH_SCHEDULE_STATUS},
-        "TimeOfDay": {"target": TIME_OF_DAY},
-    },
-)
-
-TERMINATION_PROTECTION_ENABLED = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#TerminationProtectionEnabled"),
-    shape_type=ShapeType.BOOLEAN,
-)
-
-QUERY_PARAMETER = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryParameter"), shape_type=ShapeType.STRING
-)
-
-QUERY_PARAMETERS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryParameters"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": QUERY_PARAMETER}},
-)
-
-QUERY_STATEMENT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryStatement"), shape_type=ShapeType.STRING
-)
-
-VIEW_PROPERTIES_KEY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ViewPropertiesKey"),
-    shape_type=ShapeType.STRING,
-)
-
-VIEW_PROPERTIES_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ViewPropertiesValue"),
-    shape_type=ShapeType.STRING,
-)
-
-VIEW_PROPERTIES_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ViewPropertiesMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": VIEW_PROPERTIES_KEY},
-        "value": {"target": VIEW_PROPERTIES_VALUE},
-    },
-)
-
-REQUEST_WIDGET = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RequestWidget"),
-    members={
-        "QueryStatement": {
-            "target": QUERY_STATEMENT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "QueryParameters": {"target": QUERY_PARAMETERS},
-        "ViewProperties": {
-            "target": VIEW_PROPERTIES_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-REQUEST_WIDGET_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RequestWidgetList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REQUEST_WIDGET}},
-)
-
-CREATE_DASHBOARD_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateDashboardInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#CreateDashboardRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": DASHBOARD_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RefreshSchedule": {"target": REFRESH_SCHEDULE},
-        "TagsList": {"target": TAGS_LIST},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-        "Widgets": {"target": REQUEST_WIDGET_LIST},
-    },
-)
-
-DASHBOARD_ARN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DashboardArn"), shape_type=ShapeType.STRING
-)
-
-DASHBOARD_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DashboardType"),
-    shape_type=ShapeType.ENUM,
-    members={"MANAGED": {"target": UNIT}, "CUSTOM": {"target": UNIT}},
-)
-
-QUERY_ALIAS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryAlias"), shape_type=ShapeType.STRING
-)
-
-WIDGET = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Widget"),
-    members={
-        "QueryAlias": {"target": QUERY_ALIAS},
-        "QueryStatement": {"target": QUERY_STATEMENT},
-        "QueryParameters": {"target": QUERY_PARAMETERS},
-        "ViewProperties": {"target": VIEW_PROPERTIES_MAP},
-    },
-)
-
-WIDGET_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#WidgetList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": WIDGET}},
-)
-
-CREATE_DASHBOARD_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateDashboardOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#CreateDashboardResponse",
-        )
-    ],
-    members={
-        "DashboardArn": {"target": DASHBOARD_ARN},
-        "Name": {"target": DASHBOARD_NAME},
-        "Type": {"target": DASHBOARD_TYPE},
-        "Widgets": {"target": WIDGET_LIST},
-        "TagsList": {"target": TAGS_LIST},
-        "RefreshSchedule": {"target": REFRESH_SCHEDULE},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-    },
-)
-
-INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InsufficientEncryptionPolicyException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InsufficientEncryptionPolicy", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_QUERY_STATEMENT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidQueryStatementException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidQueryStatement", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-SERVICE_QUOTA_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ServiceQuotaExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ServiceQuotaExceeded", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CREATE_DASHBOARD = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateDashboard"),
-    shape_type=ShapeType.OPERATION,
-)
-
-CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CloudTrailAccessNotEnabledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "CloudTrailAccessNotEnabled", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-EVENT_DATA_STORE_KMS_KEY_ID = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreKmsKeyId"),
-    shape_type=ShapeType.STRING,
-)
-
-EVENT_DATA_STORE_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreName"),
-    shape_type=ShapeType.STRING,
-)
-
-RETENTION_PERIOD = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#RetentionPeriod"), shape_type=ShapeType.INTEGER
-)
-
-CREATE_EVENT_DATA_STORE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateEventDataStoreInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#CreateEventDataStoreRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": EVENT_DATA_STORE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
-        "MultiRegionEnabled": {"target": BOOLEAN},
-        "OrganizationEnabled": {"target": BOOLEAN},
-        "RetentionPeriod": {"target": RETENTION_PERIOD},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-        "TagsList": {"target": TAGS_LIST},
-        "KmsKeyId": {"target": EVENT_DATA_STORE_KMS_KEY_ID},
-        "StartIngestion": {"target": BOOLEAN},
-        "BillingMode": {"target": BILLING_MODE},
-    },
-)
-
-DATE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Date"), shape_type=ShapeType.TIMESTAMP
-)
-
-EVENT_DATA_STORE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATED": {"target": UNIT},
-        "ENABLED": {"target": UNIT},
-        "PENDING_DELETION": {"target": UNIT},
-        "STARTING_INGESTION": {"target": UNIT},
-        "STOPPING_INGESTION": {"target": UNIT},
-        "STOPPED_INGESTION": {"target": UNIT},
-    },
-)
-
-CREATE_EVENT_DATA_STORE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateEventDataStoreOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#CreateEventDataStoreResponse",
-        )
-    ],
-    members={
-        "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
-        "Name": {"target": EVENT_DATA_STORE_NAME},
-        "Status": {"target": EVENT_DATA_STORE_STATUS},
-        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
-        "MultiRegionEnabled": {"target": BOOLEAN},
-        "OrganizationEnabled": {"target": BOOLEAN},
-        "RetentionPeriod": {"target": RETENTION_PERIOD},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-        "TagsList": {"target": TAGS_LIST},
-        "CreatedTimestamp": {"target": DATE},
-        "UpdatedTimestamp": {"target": DATE},
-        "KmsKeyId": {"target": EVENT_DATA_STORE_KMS_KEY_ID},
-        "BillingMode": {"target": BILLING_MODE},
-    },
-)
-
-EVENT_DATA_STORE_ALREADY_EXISTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreAlreadyExistsException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "EventDataStoreAlreadyExists", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-EVENT_DATA_STORE_MAX_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreMaxLimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "EventDataStoreMaxLimitExceeded", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
+
+
+n0 = "com.amazonaws.cloudtrail"
+_EM = "ErrorMessage"
+_ADE = "AccessDeniedException"
+_s = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_M = "Message"
+_AHOIE = "AccountHasOngoingImportException"
+_AI = "AccountId"
+_ANFE = "AccountNotFoundException"
+_ANRE = "AccountNotRegisteredException"
+_ARE = "AccountRegisteredException"
+_S = "String"
+_TK = "TagKey"
+_TV = "TagValue"
+_T = "Tag"
+_K = "Key"
+_sm = "smithy.api#required"
+_V = "Value"
+_TL = "TagsList"
+_m = "member"
+_ATI = "AddTagsInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cATR = "com.amazonaws.cloudtrail#AddTagsRequest"
+_smi = "smithy.api#input"
+_RI = "ResourceId"
+_ATO = "AddTagsOutput"
+_cATRo = "com.amazonaws.cloudtrail#AddTagsResponse"
+_smit = "smithy.api#output"
+_CARNIE = "ChannelARNInvalidException"
+_CNFE = "ChannelNotFoundException"
+_CTARNIE = "CloudTrailARNInvalidException"
+_CE = "ConflictException"
+_EDSARNIE = "EventDataStoreARNInvalidException"
+_EDSNFE = "EventDataStoreNotFoundException"
+_IEDSE = "InactiveEventDataStoreException"
+_ITPE = "InvalidTagParameterException"
+_ITNE = "InvalidTrailNameException"
+_NMASLREE = "NoManagementAccountSLRExistsException"
+_NOMAE = "NotOrganizationMasterAccountException"
+_ONPE = "OperationNotPermittedException"
+_RNFE = "ResourceNotFoundException"
+_RTNSE = "ResourceTypeNotSupportedException"
+_TLEE = "TagsLimitExceededException"
+_UOE = "UnsupportedOperationException"
+_AT = "AddTags"
+_OV = "OperatorValue"
+_O = "Operator"
+_SF = "SelectorField"
+_AFS = "AdvancedFieldSelector"
+_F = "Field"
+_E = "Equals"
+_SW = "StartsWith"
+_EW = "EndsWith"
+_NE = "NotEquals"
+_NSW = "NotStartsWith"
+_NEW = "NotEndsWith"
+_AFSd = "AdvancedFieldSelectors"
+_SN = "SelectorName"
+_AES = "AdvancedEventSelector"
+_N = "Name"
+_FS = "FieldSelectors"
+_AESd = "AdvancedEventSelectors"
+_ECA = "EventCategoryAggregation"
+_D = "Data"
+_sV = "smithy.api#enumValue"
+_Te = "Template"
+_AA = "API_ACTIVITY"
+_RA = "RESOURCE_ACCESS"
+_UA = "USER_ACTIONS"
+_Tem = "Templates"
+_AC = "AggregationConfiguration"
+_EC = "EventCategory"
+_ACg = "AggregationConfigurations"
+_BM = "BillingMode"
+_ERP = "EXTENDABLE_RETENTION_PRICING"
+_FRP = "FIXED_RETENTION_PRICING"
+_B = "Boolean"
+_BB = "ByteBuffer"
+_EDSA = "EventDataStoreArn"
+_UUID = "UUID"
+_CQI = "CancelQueryInput"
+_cCQR = "com.amazonaws.cloudtrail#CancelQueryRequest"
+_EDS = "EventDataStore"
+_QI = "QueryId"
+_EDSOAI = "EventDataStoreOwnerAccountId"
+_QS = "QueryStatus"
+_QUEUED = "QUEUED"
+_RUNNING = "RUNNING"
+_FINISHED = "FINISHED"
+_FAILED = "FAILED"
+_CANCELLED = "CANCELLED"
+_TO = "TIMED_OUT"
+_CQO = "CancelQueryOutput"
+_cCQRo = "com.amazonaws.cloudtrail#CancelQueryResponse"
+_IQE = "InactiveQueryException"
+_IPE = "InvalidParameterException"
+_QINFE = "QueryIdNotFoundException"
+_CQ = "CancelQuery"
+_CDMAE = "CannotDelegateManagementAccountException"
+_CA = "ChannelArn"
+_CN = "ChannelName"
+_C = "Channel"
+_CAEE = "ChannelAlreadyExistsException"
+_CEFEDSE = "ChannelExistsForEDSException"
+_CMLEE = "ChannelMaxLimitExceededException"
+_Ch = "Channels"
+_L = "Location"
+_DT = "DestinationType"
+_EDS_ = "EVENT_DATA_STORE"
+_AS = "AWS_SERVICE"
+_De = "Destination"
+_Ty = "Type"
+_Des = "Destinations"
+_So = "Source"
+_CCI = "CreateChannelInput"
+_cCCR = "com.amazonaws.cloudtrail#CreateChannelRequest"
+_Ta = "Tags"
+_CCO = "CreateChannelOutput"
+_cCCRo = "com.amazonaws.cloudtrail#CreateChannelResponse"
+_IEDSCE = "InvalidEventDataStoreCategoryException"
+_ISE = "InvalidSourceException"
+_CC = "CreateChannel"
+_DN = "DashboardName"
+_RSFU = "RefreshScheduleFrequencyUnit"
+_HOURS = "HOURS"
+_DAYS = "DAYS"
+_RSFV = "RefreshScheduleFrequencyValue"
+_RSF = "RefreshScheduleFrequency"
+_U = "Unit"
+_RSS = "RefreshScheduleStatus"
+_ENABLED = "ENABLED"
+_DISABLED = "DISABLED"
+_TOD = "TimeOfDay"
+_RS = "RefreshSchedule"
+_Fr = "Frequency"
+_St = "Status"
+_TPE = "TerminationProtectionEnabled"
+_QP = "QueryParameter"
+_QPu = "QueryParameters"
+_QSu = "QueryStatement"
+_VPK = "ViewPropertiesKey"
+_VPV = "ViewPropertiesValue"
+_VPM = "ViewPropertiesMap"
+_k = "key"
+_v = "value"
+_RW = "RequestWidget"
+_VP = "ViewProperties"
+_RWL = "RequestWidgetList"
+_CDI = "CreateDashboardInput"
+_cCDR = "com.amazonaws.cloudtrail#CreateDashboardRequest"
+_W = "Widgets"
+_DA = "DashboardArn"
+_DTa = "DashboardType"
+_MANAGED = "MANAGED"
+_CUSTOM = "CUSTOM"
+_QA = "QueryAlias"
+_Wi = "Widget"
+_WL = "WidgetList"
+_CDO = "CreateDashboardOutput"
+_cCDRo = "com.amazonaws.cloudtrail#CreateDashboardResponse"
+_IEPE = "InsufficientEncryptionPolicyException"
+_IQSE = "InvalidQueryStatementException"
+_SQEE = "ServiceQuotaExceededException"
+_CD = "CreateDashboard"
+_CTANEE = "CloudTrailAccessNotEnabledException"
+_EDSKKI = "EventDataStoreKmsKeyId"
+_EDSN = "EventDataStoreName"
+_RP = "RetentionPeriod"
+_CEDSI = "CreateEventDataStoreInput"
+_cCEDSR = "com.amazonaws.cloudtrail#CreateEventDataStoreRequest"
+_MRE = "MultiRegionEnabled"
+_OE = "OrganizationEnabled"
+_KKI = "KmsKeyId"
+_SI = "StartIngestion"
+_Da = "Date"
+_EDSS = "EventDataStoreStatus"
+_CREATED = "CREATED"
+_PD = "PENDING_DELETION"
+_SI_ = "STARTING_INGESTION"
+_SI__ = "STOPPING_INGESTION"
+_SI___ = "STOPPED_INGESTION"
+_CEDSO = "CreateEventDataStoreOutput"
+_cCEDSRo = "com.amazonaws.cloudtrail#CreateEventDataStoreResponse"
+_CT = "CreatedTimestamp"
+_UT = "UpdatedTimestamp"
+_EDSAEE = "EventDataStoreAlreadyExistsException"
+_EDSMLEE = "EventDataStoreMaxLimitExceededException"
+_IDSAPE = "InsufficientDependencyServiceAccessPermissionException"
+_IESE = "InvalidEventSelectorsException"
+_IKKIE = "InvalidKmsKeyIdException"
+_KE = "KmsException"
+_KKNFE = "KmsKeyNotFoundException"
+_ONIAFME = "OrganizationNotInAllFeaturesModeException"
+_ONIUE = "OrganizationsNotInUseException"
+_TE = "ThrottlingException"
+_CEDS = "CreateEventDataStore"
+_CTICTIE = "CloudTrailInvalidClientTokenIdException"
+_CWLDUE = "CloudWatchLogsDeliveryUnavailableException"
+_CTI = "CreateTrailInput"
+_cCTR = "com.amazonaws.cloudtrail#CreateTrailRequest"
+_SBN = "S3BucketName"
+_SKP = "S3KeyPrefix"
+_STN = "SnsTopicName"
+_IGSE = "IncludeGlobalServiceEvents"
+_IMRT = "IsMultiRegionTrail"
+_ELFV = "EnableLogFileValidation"
+_CWLLGA = "CloudWatchLogsLogGroupArn"
+_CWLRA = "CloudWatchLogsRoleArn"
+_IOT = "IsOrganizationTrail"
+_RL = "RecursiveLogging"
+_CTO = "CreateTrailOutput"
+_cCTRo = "com.amazonaws.cloudtrail#CreateTrailResponse"
+_STARN = "SnsTopicARN"
+_TARN = "TrailARN"
+_LFVE = "LogFileValidationEnabled"
+_ISBPE = "InsufficientS3BucketPolicyException"
+_ISTPE = "InsufficientSnsTopicPolicyException"
+_ICWLLGAE = "InvalidCloudWatchLogsLogGroupArnException"
+_ICWLRAE = "InvalidCloudWatchLogsRoleArnException"
+_IPCE = "InvalidParameterCombinationException"
+_ISBNE = "InvalidS3BucketNameException"
+_ISPE = "InvalidS3PrefixException"
+_ISTNE = "InvalidSnsTopicNameException"
+_KKDE = "KmsKeyDisabledException"
+_MNOTEE = "MaximumNumberOfTrailsExceededException"
+_SBDNEE = "S3BucketDoesNotExistException"
+_TAEE = "TrailAlreadyExistsException"
+_TNPE = "TrailNotProvidedException"
+_CTr = "CreateTrail"
+_DCI = "DeleteChannelInput"
+_cDCR = "com.amazonaws.cloudtrail#DeleteChannelRequest"
+_DCO = "DeleteChannelOutput"
+_cDCRo = "com.amazonaws.cloudtrail#DeleteChannelResponse"
+_DC = "DeleteChannel"
+_DDI = "DeleteDashboardInput"
+_cDDR = "com.amazonaws.cloudtrail#DeleteDashboardRequest"
+_DI = "DashboardId"
+_DDO = "DeleteDashboardOutput"
+_cDDRo = "com.amazonaws.cloudtrail#DeleteDashboardResponse"
+_DD = "DeleteDashboard"
+_DEDSI = "DeleteEventDataStoreInput"
+_cDEDSR = "com.amazonaws.cloudtrail#DeleteEventDataStoreRequest"
+_DEDSO = "DeleteEventDataStoreOutput"
+_cDEDSRo = "com.amazonaws.cloudtrail#DeleteEventDataStoreResponse"
+_EDSFEE = "EventDataStoreFederationEnabledException"
+_EDSHOIE = "EventDataStoreHasOngoingImportException"
+_EDSTPE = "EventDataStoreTerminationProtectedException"
+_DEDS = "DeleteEventDataStore"
+_RAe = "ResourceArn"
+_DRPI = "DeleteResourcePolicyInput"
+_cDRPR = "com.amazonaws.cloudtrail#DeleteResourcePolicyRequest"
+_DRPO = "DeleteResourcePolicyOutput"
+_cDRPRo = "com.amazonaws.cloudtrail#DeleteResourcePolicyResponse"
+_RARNNVE = "ResourceARNNotValidException"
+_RPNFE = "ResourcePolicyNotFoundException"
+_DRP = "DeleteResourcePolicy"
+_DTI = "DeleteTrailInput"
+_cDTR = "com.amazonaws.cloudtrail#DeleteTrailRequest"
+_DTO = "DeleteTrailOutput"
+_cDTRo = "com.amazonaws.cloudtrail#DeleteTrailResponse"
+_IHRE = "InvalidHomeRegionException"
+_TNFE = "TrailNotFoundException"
+_DTe = "DeleteTrail"
+_DODAI = "DeregisterOrganizationDelegatedAdminInput"
+_cDODAR = "com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminRequest"
+_DAAI = "DelegatedAdminAccountId"
+_DODAO = "DeregisterOrganizationDelegatedAdminOutput"
+_cDODARo = "com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminResponse"
+_NOMAEo = "NotOrganizationManagementAccountException"
+_DODA = "DeregisterOrganizationDelegatedAdmin"
+_RIe = "RefreshId"
+_DQI = "DescribeQueryInput"
+_cDQR = "com.amazonaws.cloudtrail#DescribeQueryRequest"
+_DSU = "DeliveryS3Uri"
+_DS = "DeliveryStatus"
+_SUCCESS = "SUCCESS"
+_FSF = "FAILED_SIGNING_FILE"
+_PENDING = "PENDING"
+_RNF = "RESOURCE_NOT_FOUND"
+_AD = "ACCESS_DENIED"
+_ADSF = "ACCESS_DENIED_SIGNING_FILE"
+_UNKNOWN = "UNKNOWN"
+_P = "Prompt"
+_Lo = "Long"
+_I = "Integer"
+_QSFDQ = "QueryStatisticsForDescribeQuery"
+_EMv = "EventsMatched"
+_ES = "EventsScanned"
+_BS = "BytesScanned"
+_ETIM = "ExecutionTimeInMillis"
+_CTre = "CreationTime"
+_DQO = "DescribeQueryOutput"
+_cDQRo = "com.amazonaws.cloudtrail#DescribeQueryResponse"
+_QSue = "QueryString"
+_QSuer = "QueryStatistics"
+_DQ = "DescribeQuery"
+_TNL = "TrailNameList"
+_DTIe = "DescribeTrailsInput"
+_cDTRom = "com.amazonaws.cloudtrail#DescribeTrailsRequest"
+_tNL = "trailNameList"
+_iST = "includeShadowTrails"
+_Tr = "Trail"
+_HR = "HomeRegion"
+_HCES = "HasCustomEventSelectors"
+_HIS = "HasInsightSelectors"
+_TLr = "TrailList"
+_DTOe = "DescribeTrailsOutput"
+_cDTRoma = "com.amazonaws.cloudtrail#DescribeTrailsResponse"
+_tL = "trailList"
+_DTes = "DescribeTrails"
+_CME = "ConcurrentModificationException"
+_DFI = "DisableFederationInput"
+_cDFR = "com.amazonaws.cloudtrail#DisableFederationRequest"
+_FSe = "FederationStatus"
+_ENABLING = "ENABLING"
+_DISABLING = "DISABLING"
+_DFO = "DisableFederationOutput"
+_cDFRo = "com.amazonaws.cloudtrail#DisableFederationResponse"
+_DF = "DisableFederation"
+_FRA = "FederationRoleArn"
+_EFI = "EnableFederationInput"
+_cEFR = "com.amazonaws.cloudtrail#EnableFederationRequest"
+_EFO = "EnableFederationOutput"
+_cEFRo = "com.amazonaws.cloudtrail#EnableFederationResponse"
+_EF = "EnableFederation"
+_EDSL = "EventDataStoreList"
+_GQI = "GenerateQueryInput"
+_cGQR = "com.amazonaws.cloudtrail#GenerateQueryRequest"
+_EDSv = "EventDataStores"
+_GQO = "GenerateQueryOutput"
+_cGQRo = "com.amazonaws.cloudtrail#GenerateQueryResponse"
+_GRE = "GenerateResponseException"
+_GQ = "GenerateQuery"
+_GCI = "GetChannelInput"
+_cGCR = "com.amazonaws.cloudtrail#GetChannelRequest"
+_IS = "IngestionStatus"
+_LIST = "LatestIngestionSuccessTime"
+_LISEID = "LatestIngestionSuccessEventID"
+_LIEC = "LatestIngestionErrorCode"
+_LIAT = "LatestIngestionAttemptTime"
+_LIAEID = "LatestIngestionAttemptEventID"
+_SC = "SourceConfig"
+_ATAR = "ApplyToAllRegions"
+_GCO = "GetChannelOutput"
+_cGCRo = "com.amazonaws.cloudtrail#GetChannelResponse"
+_GC = "GetChannel"
+_GDI = "GetDashboardInput"
+_cGDR = "com.amazonaws.cloudtrail#GetDashboardRequest"
+_DSa = "DashboardStatus"
+_CREATING = "CREATING"
+_UPDATING = "UPDATING"
+_UPDATED = "UPDATED"
+_DELETING = "DELETING"
+_GDO = "GetDashboardOutput"
+_cGDRo = "com.amazonaws.cloudtrail#GetDashboardResponse"
+_LRI = "LastRefreshId"
+_LRFR = "LastRefreshFailureReason"
+_GD = "GetDashboard"
+_GECI = "GetEventConfigurationInput"
+_cGECR = "com.amazonaws.cloudtrail#GetEventConfigurationRequest"
+_TN = "TrailName"
+_OTLM = "OperatorTargetListMember"
+_OTL = "OperatorTargetList"
+_TC = "TagContext"
+_RC = "RequestContext"
+_CKS = "ContextKeySelector"
+_CKSo = "ContextKeySelectors"
+_MES = "MaxEventSize"
+_Sta = "Standard"
+_La = "Large"
+_GECO = "GetEventConfigurationOutput"
+_cGECRo = "com.amazonaws.cloudtrail#GetEventConfigurationResponse"
+_IEDSSE = "InvalidEventDataStoreStatusException"
+_GEC = "GetEventConfiguration"
+_GEDSI = "GetEventDataStoreInput"
+_cGEDSR = "com.amazonaws.cloudtrail#GetEventDataStoreRequest"
+_PKN = "PartitionKeyName"
+_PKT = "PartitionKeyType"
+_PK = "PartitionKey"
+_PKL = "PartitionKeyList"
+_GEDSO = "GetEventDataStoreOutput"
+_cGEDSRo = "com.amazonaws.cloudtrail#GetEventDataStoreResponse"
+_PKa = "PartitionKeys"
+_GEDS = "GetEventDataStore"
+_GESI = "GetEventSelectorsInput"
+_cGESR = "com.amazonaws.cloudtrail#GetEventSelectorsRequest"
+_DRV = "DataResourceValues"
+_DR = "DataResource"
+_Va = "Values"
+_DRa = "DataResources"
+_EMES = "ExcludeManagementEventSources"
+_RWT = "ReadWriteType"
+_RO = "ReadOnly"
+_WO = "WriteOnly"
+_A = "All"
+_ESv = "EventSelector"
+_IME = "IncludeManagementEvents"
+_ESve = "EventSelectors"
+_GESO = "GetEventSelectorsOutput"
+_cGESRo = "com.amazonaws.cloudtrail#GetEventSelectorsResponse"
+_GES = "GetEventSelectors"
+_GII = "GetImportInput"
+_cGIR = "com.amazonaws.cloudtrail#GetImportRequest"
+_II = "ImportId"
+_ID = "ImportDestinations"
+_SIS = "S3ImportSource"
+_SLU = "S3LocationUri"
+_SBR = "S3BucketRegion"
+_SBARA = "S3BucketAccessRoleArn"
+_ISm = "ImportSource"
+_S_ = "S3"
+_ISmp = "ImportStatistics"
+_PF = "PrefixesFound"
+_PC = "PrefixesCompleted"
+_FC = "FilesCompleted"
+_ECv = "EventsCompleted"
+_FE = "FailedEntries"
+_ISmpo = "ImportStatus"
+_INITIALIZING = "INITIALIZING"
+_IP = "IN_PROGRESS"
+_STOPPED = "STOPPED"
+_COMPLETED = "COMPLETED"
+_GIO = "GetImportOutput"
+_cGIRo = "com.amazonaws.cloudtrail#GetImportResponse"
+_SET = "StartEventTime"
+_EET = "EndEventTime"
+_INFE = "ImportNotFoundException"
+_GI = "GetImport"
+_GISI = "GetInsightSelectorsInput"
+_cGISR = "com.amazonaws.cloudtrail#GetInsightSelectorsRequest"
+_SEC = "SourceEventCategory"
+_Ma = "Management"
+_SECo = "SourceEventCategories"
+_IT = "InsightType"
+_ACRI = "ApiCallRateInsight"
+_AERI = "ApiErrorRateInsight"
+_ISn = "InsightSelector"
+_ECve = "EventCategories"
+_ISns = "InsightSelectors"
+_GISO = "GetInsightSelectorsOutput"
+_cGISRo = "com.amazonaws.cloudtrail#GetInsightSelectorsResponse"
+_IDn = "InsightsDestination"
+_INEE = "InsightNotEnabledException"
+_GIS = "GetInsightSelectors"
+_MQR = "MaxQueryResults"
+_PT = "PaginationToken"
+_GQRI = "GetQueryResultsInput"
+_cGQRR = "com.amazonaws.cloudtrail#GetQueryResultsRequest"
+_NT = "NextToken"
+_QRK = "QueryResultKey"
+_QRV = "QueryResultValue"
+_QRC = "QueryResultColumn"
+_QRR = "QueryResultRow"
+_QRRu = "QueryResultRows"
+_RCe = "ResultsCount"
+_TRC = "TotalResultsCount"
+_GQRO = "GetQueryResultsOutput"
+_cGQRRo = "com.amazonaws.cloudtrail#GetQueryResultsResponse"
+_IMRE = "InvalidMaxResultsException"
+_INTE = "InvalidNextTokenException"
+_GQR = "GetQueryResults"
+_GRPI = "GetResourcePolicyInput"
+_cGRPR = "com.amazonaws.cloudtrail#GetResourcePolicyRequest"
+_RPe = "ResourcePolicy"
+_GRPO = "GetResourcePolicyOutput"
+_cGRPRo = "com.amazonaws.cloudtrail#GetResourcePolicyResponse"
+_DARP = "DelegatedAdminResourcePolicy"
+_GRP = "GetResourcePolicy"
+_GTI = "GetTrailInput"
+_cGTR = "com.amazonaws.cloudtrail#GetTrailRequest"
+_GTO = "GetTrailOutput"
+_cGTRo = "com.amazonaws.cloudtrail#GetTrailResponse"
+_GT = "GetTrail"
+_GTSI = "GetTrailStatusInput"
+_cGTSR = "com.amazonaws.cloudtrail#GetTrailStatusRequest"
+_GTSO = "GetTrailStatusOutput"
+_cGTSRo = "com.amazonaws.cloudtrail#GetTrailStatusResponse"
+_IL = "IsLogging"
+_LDE = "LatestDeliveryError"
+_LNE = "LatestNotificationError"
+_LDT = "LatestDeliveryTime"
+_LNT = "LatestNotificationTime"
+_SLT = "StartLoggingTime"
+_SLTt = "StopLoggingTime"
+_LCWLDE = "LatestCloudWatchLogsDeliveryError"
+_LCWLDT = "LatestCloudWatchLogsDeliveryTime"
+_LDDT = "LatestDigestDeliveryTime"
+_LDDE = "LatestDigestDeliveryError"
+_LDAT = "LatestDeliveryAttemptTime"
+_LNAT = "LatestNotificationAttemptTime"
+_LNAS = "LatestNotificationAttemptSucceeded"
+_LDAS = "LatestDeliveryAttemptSucceeded"
+_TLS = "TimeLoggingStarted"
+_TLSi = "TimeLoggingStopped"
+_GTS = "GetTrailStatus"
+_LCMRC = "ListChannelsMaxResultsCount"
+_LCI = "ListChannelsInput"
+_cLCR = "com.amazonaws.cloudtrail#ListChannelsRequest"
+_MR = "MaxResults"
+_LCO = "ListChannelsOutput"
+_cLCRo = "com.amazonaws.cloudtrail#ListChannelsResponse"
+_LC = "ListChannels"
+_LDMRC = "ListDashboardsMaxResultsCount"
+_LDI = "ListDashboardsInput"
+_cLDR = "com.amazonaws.cloudtrail#ListDashboardsRequest"
+_NP = "NamePrefix"
+_DDa = "DashboardDetail"
+_Das = "Dashboards"
+_LDO = "ListDashboardsOutput"
+_cLDRo = "com.amazonaws.cloudtrail#ListDashboardsResponse"
+_LD = "ListDashboards"
+_LEDSMRC = "ListEventDataStoresMaxResultsCount"
+_LEDSI = "ListEventDataStoresInput"
+_cLEDSR = "com.amazonaws.cloudtrail#ListEventDataStoresRequest"
+_LEDSO = "ListEventDataStoresOutput"
+_cLEDSRo = "com.amazonaws.cloudtrail#ListEventDataStoresResponse"
+_LEDS = "ListEventDataStores"
+_LIFMRC = "ListImportFailuresMaxResultsCount"
+_LIFI = "ListImportFailuresInput"
+_cLIFR = "com.amazonaws.cloudtrail#ListImportFailuresRequest"
+_IFS = "ImportFailureStatus"
+_RETRY = "RETRY"
+_SUCCEEDED = "SUCCEEDED"
+_IFLI = "ImportFailureListItem"
+_ET = "ErrorType"
+_LUT = "LastUpdatedTime"
+_IFL = "ImportFailureList"
+_LIFO = "ListImportFailuresOutput"
+_cLIFRo = "com.amazonaws.cloudtrail#ListImportFailuresResponse"
+_Fa = "Failures"
+_LIF = "ListImportFailures"
+_LIMRC = "ListImportsMaxResultsCount"
+_LII = "ListImportsInput"
+_cLIR = "com.amazonaws.cloudtrail#ListImportsRequest"
+_ILI = "ImportsListItem"
+_ILm = "ImportsList"
+_LIO = "ListImportsOutput"
+_cLIRo = "com.amazonaws.cloudtrail#ListImportsResponse"
+_Im = "Imports"
+_LI = "ListImports"
+_LIDT = "ListInsightsDataType"
+_IE = "INSIGHTS_EVENTS"
+_IEn = "InsightsEvents"
+_LIDDK = "ListInsightsDataDimensionKey"
+_EI = "EVENT_ID"
+_EIv = "EventId"
+_EN = "EVENT_NAME"
+_ENv = "EventName"
+_ES_ = "EVENT_SOURCE"
+_ESven = "EventSource"
+_LIDDV = "ListInsightsDataDimensionValue"
+_LIDD = "ListInsightsDataDimensions"
+_LIDMRC = "ListInsightsDataMaxResultsCount"
+_LIDI = "ListInsightsDataInput"
+_cLIDR = "com.amazonaws.cloudtrail#ListInsightsDataRequest"
+_ISnsi = "InsightSource"
+_DTat = "DataType"
+_Di = "Dimensions"
+_ST = "StartTime"
+_ETn = "EndTime"
+_R = "Resource"
+_RT = "ResourceType"
+_RN = "ResourceName"
+_RLe = "ResourceList"
+_Ev = "Event"
+_AKI = "AccessKeyId"
+_ETv = "EventTime"
+_Us = "Username"
+_Re = "Resources"
+_CTE = "CloudTrailEvent"
+_EL = "EventsList"
+_LIDO = "ListInsightsDataOutput"
+_cLIDRo = "com.amazonaws.cloudtrail#ListInsightsDataResponse"
+_Eve = "Events"
+_LID = "ListInsightsData"
+_IMDT = "InsightsMetricDataType"
+_FWZ = "FILL_WITH_ZEROS"
+_FWZi = "FillWithZeros"
+_NZD = "NON_ZERO_DATA"
+_NZDo = "NonZeroData"
+_ECr = "ErrorCode"
+_IMMR = "InsightsMetricMaxResults"
+_IMNT = "InsightsMetricNextToken"
+_IMP = "InsightsMetricPeriod"
+_LIMDI = "ListInsightsMetricDataInput"
+_cLIMDR = "com.amazonaws.cloudtrail#ListInsightsMetricDataRequest"
+_Pe = "Period"
+_Ti = "Timestamps"
+_Do = "Double"
+_IMV = "InsightsMetricValues"
+_LIMDO = "ListInsightsMetricDataOutput"
+_cLIMDRo = "com.amazonaws.cloudtrail#ListInsightsMetricDataResponse"
+_LIMD = "ListInsightsMetricData"
+_ITRE = "InvalidTimeRangeException"
+_ITE = "InvalidTokenException"
+_LPKI = "ListPublicKeysInput"
+_cLPKR = "com.amazonaws.cloudtrail#ListPublicKeysRequest"
+_PKu = "PublicKey"
+_VST = "ValidityStartTime"
+_VET = "ValidityEndTime"
+_Fi = "Fingerprint"
+_PKLu = "PublicKeyList"
+_LPKO = "ListPublicKeysOutput"
+_cLPKRo = "com.amazonaws.cloudtrail#ListPublicKeysResponse"
+_LPK = "ListPublicKeys"
+_IDRE = "InvalidDateRangeException"
+_IQSEn = "InvalidQueryStatusException"
+_LQMRC = "ListQueriesMaxResultsCount"
+_LQI = "ListQueriesInput"
+_cLQR = "com.amazonaws.cloudtrail#ListQueriesRequest"
+_Q = "Query"
+_Qu = "Queries"
+_LQO = "ListQueriesOutput"
+_cLQRo = "com.amazonaws.cloudtrail#ListQueriesResponse"
+_LQ = "ListQueries"
+_RIL = "ResourceIdList"
+_LTI = "ListTagsInput"
+_cLTR = "com.amazonaws.cloudtrail#ListTagsRequest"
+_RTe = "ResourceTag"
+_RTL = "ResourceTagList"
+_LTO = "ListTagsOutput"
+_cLTRo = "com.amazonaws.cloudtrail#ListTagsResponse"
+_LT = "ListTags"
+_LTIi = "ListTrailsInput"
+_cLTRom = "com.amazonaws.cloudtrail#ListTrailsRequest"
+_TI = "TrailInfo"
+_Tra = "Trails"
+_LTOi = "ListTrailsOutput"
+_cLTRoma = "com.amazonaws.cloudtrail#ListTrailsResponse"
+_LTi = "ListTrails"
+_IECE = "InvalidEventCategoryException"
+_ILAE = "InvalidLookupAttributesException"
+_In = "Insight"
+_i = "insight"
+_LAK = "LookupAttributeKey"
+_RO_ = "READ_ONLY"
+_USERNAME = "USERNAME"
+_RT_ = "RESOURCE_TYPE"
+_RN_ = "RESOURCE_NAME"
+_AKI_ = "ACCESS_KEY_ID"
+_LAV = "LookupAttributeValue"
+_LA = "LookupAttribute"
+_AK = "AttributeKey"
+_AV = "AttributeValue"
+_LAL = "LookupAttributesList"
+_LEI = "LookupEventsInput"
+_cLER = "com.amazonaws.cloudtrail#LookupEventsRequest"
+_LAo = "LookupAttributes"
+_LEO = "LookupEventsOutput"
+_cLERo = "com.amazonaws.cloudtrail#LookupEventsResponse"
+_LE = "LookupEvents"
+_IIAMAPE = "InsufficientIAMAccessPermissionException"
+_PECI = "PutEventConfigurationInput"
+_cPECR = "com.amazonaws.cloudtrail#PutEventConfigurationRequest"
+_PECO = "PutEventConfigurationOutput"
+_cPECRo = "com.amazonaws.cloudtrail#PutEventConfigurationResponse"
+_PEC = "PutEventConfiguration"
+_PESI = "PutEventSelectorsInput"
+_cPESR = "com.amazonaws.cloudtrail#PutEventSelectorsRequest"
+_PESO = "PutEventSelectorsOutput"
+_cPESRo = "com.amazonaws.cloudtrail#PutEventSelectorsResponse"
+_PES = "PutEventSelectors"
+_IISE = "InvalidInsightSelectorsException"
+_PISI = "PutInsightSelectorsInput"
+_cPISR = "com.amazonaws.cloudtrail#PutInsightSelectorsRequest"
+_PISO = "PutInsightSelectorsOutput"
+_cPISRo = "com.amazonaws.cloudtrail#PutInsightSelectorsResponse"
+_PIS = "PutInsightSelectors"
+_PRPI = "PutResourcePolicyInput"
+_cPRPR = "com.amazonaws.cloudtrail#PutResourcePolicyRequest"
+_PRPO = "PutResourcePolicyOutput"
+_cPRPRo = "com.amazonaws.cloudtrail#PutResourcePolicyResponse"
+_RPNVE = "ResourcePolicyNotValidException"
+_PRP = "PutResourcePolicy"
+_DAALEE = "DelegatedAdminAccountLimitExceededException"
+_RODAI = "RegisterOrganizationDelegatedAdminInput"
+_cRODAR = "com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminRequest"
+_MAI = "MemberAccountId"
+_RODAO = "RegisterOrganizationDelegatedAdminOutput"
+_cRODARo = "com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminResponse"
+_RODA = "RegisterOrganizationDelegatedAdmin"
+_RTI = "RemoveTagsInput"
+_cRTR = "com.amazonaws.cloudtrail#RemoveTagsRequest"
+_RTO = "RemoveTagsOutput"
+_cRTRo = "com.amazonaws.cloudtrail#RemoveTagsResponse"
+_RTem = "RemoveTags"
+_REDSI = "RestoreEventDataStoreInput"
+_cREDSR = "com.amazonaws.cloudtrail#RestoreEventDataStoreRequest"
+_REDSO = "RestoreEventDataStoreOutput"
+_cREDSRo = "com.amazonaws.cloudtrail#RestoreEventDataStoreResponse"
+_REDS = "RestoreEventDataStore"
+_SSQMR = "SearchSampleQueriesMaxResults"
+_SSQSP = "SearchSampleQueriesSearchPhrase"
+_SSQI = "SearchSampleQueriesInput"
+_cSSQR = "com.amazonaws.cloudtrail#SearchSampleQueriesRequest"
+_SP = "SearchPhrase"
+_SQD = "SampleQueryDescription"
+_SQN = "SampleQueryName"
+_SQR = "SampleQueryRelevance"
+_smith = "smithy.api#default"
+_SQSQL = "SampleQuerySQL"
+_SSQSR = "SearchSampleQueriesSearchResult"
+_Desc = "Description"
+_SQL = "SQL"
+_Rel = "Relevance"
+_SSQSRe = "SearchSampleQueriesSearchResults"
+_SSQO = "SearchSampleQueriesOutput"
+_cSSQRo = "com.amazonaws.cloudtrail#SearchSampleQueriesResponse"
+_SR = "SearchResults"
+_SSQ = "SearchSampleQueries"
+_QPK = "QueryParameterKey"
+_QPV = "QueryParameterValue"
+_QPVu = "QueryParameterValues"
+_SDRI = "StartDashboardRefreshInput"
+_cSDRR = "com.amazonaws.cloudtrail#StartDashboardRefreshRequest"
+_SDRO = "StartDashboardRefreshOutput"
+_cSDRRo = "com.amazonaws.cloudtrail#StartDashboardRefreshResponse"
+_SDR = "StartDashboardRefresh"
+_SEDSII = "StartEventDataStoreIngestionInput"
+_cSEDSIR = "com.amazonaws.cloudtrail#StartEventDataStoreIngestionRequest"
+_SEDSIO = "StartEventDataStoreIngestionOutput"
+_cSEDSIRo = "com.amazonaws.cloudtrail#StartEventDataStoreIngestionResponse"
+_SEDSI = "StartEventDataStoreIngestion"
+_IISEn = "InvalidImportSourceException"
+_SII = "StartImportInput"
+_cSIR = "com.amazonaws.cloudtrail#StartImportRequest"
+_SIO = "StartImportOutput"
+_cSIRo = "com.amazonaws.cloudtrail#StartImportResponse"
+_SIt = "StartImport"
+_SLI = "StartLoggingInput"
+_cSLR = "com.amazonaws.cloudtrail#StartLoggingRequest"
+_SLO = "StartLoggingOutput"
+_cSLRo = "com.amazonaws.cloudtrail#StartLoggingResponse"
+_SL = "StartLogging"
+_MCQE = "MaxConcurrentQueriesException"
+_SQI = "StartQueryInput"
+_cSQR = "com.amazonaws.cloudtrail#StartQueryRequest"
+_SQO = "StartQueryOutput"
+_cSQRo = "com.amazonaws.cloudtrail#StartQueryResponse"
+_SQ = "StartQuery"
+_SEDSIIt = "StopEventDataStoreIngestionInput"
+_cSEDSIRom = "com.amazonaws.cloudtrail#StopEventDataStoreIngestionRequest"
+_SEDSIOt = "StopEventDataStoreIngestionOutput"
+_cSEDSIRoma = "com.amazonaws.cloudtrail#StopEventDataStoreIngestionResponse"
+_SEDSIt = "StopEventDataStoreIngestion"
+_SIIt = "StopImportInput"
+_cSIRom = "com.amazonaws.cloudtrail#StopImportRequest"
+_SIOt = "StopImportOutput"
+_cSIRoma = "com.amazonaws.cloudtrail#StopImportResponse"
+_SIto = "StopImport"
+_SLIt = "StopLoggingInput"
+_cSLRom = "com.amazonaws.cloudtrail#StopLoggingRequest"
+_SLOt = "StopLoggingOutput"
+_cSLRoma = "com.amazonaws.cloudtrail#StopLoggingResponse"
+_SLt = "StopLogging"
+_UCI = "UpdateChannelInput"
+_cUCR = "com.amazonaws.cloudtrail#UpdateChannelRequest"
+_UCO = "UpdateChannelOutput"
+_cUCRo = "com.amazonaws.cloudtrail#UpdateChannelResponse"
+_UC = "UpdateChannel"
+_UDI = "UpdateDashboardInput"
+_cUDR = "com.amazonaws.cloudtrail#UpdateDashboardRequest"
+_UDO = "UpdateDashboardOutput"
+_cUDRo = "com.amazonaws.cloudtrail#UpdateDashboardResponse"
+_UD = "UpdateDashboard"
+_UEDSI = "UpdateEventDataStoreInput"
+_cUEDSR = "com.amazonaws.cloudtrail#UpdateEventDataStoreRequest"
+_UEDSO = "UpdateEventDataStoreOutput"
+_cUEDSRo = "com.amazonaws.cloudtrail#UpdateEventDataStoreResponse"
+_UEDS = "UpdateEventDataStore"
+_UTI = "UpdateTrailInput"
+_cUTR = "com.amazonaws.cloudtrail#UpdateTrailRequest"
+_UTO = "UpdateTrailOutput"
+_cUTRo = "com.amazonaws.cloudtrail#UpdateTrailResponse"
+_UTp = "UpdateTrail"
+_C_ = "CloudTrail_20131101"
+_a = "aws.auth#sigv4"
+_a_ = "aws.protocols#awsJson1_1"
+_sB = "smithy.rules#endpointBdd"
+_aw = "aws.api#service"
+_sN = "smithy.api#xmlNamespace"
+
+ERROR_MESSAGE: StaticSchema = (3, n0, _EM, 0)
+
+ACCESS_DENIED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ADE,
+    {_s: _c, _sE: 403},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+ACCOUNT_HAS_ONGOING_IMPORT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _AHOIE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+ACCOUNT_ID: StaticSchema = (3, n0, _AI, 0)
+
+ACCOUNT_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ANFE,
+    {_s: _c, _sE: 404},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+ACCOUNT_NOT_REGISTERED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ANRE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+ACCOUNT_REGISTERED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ARE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+STRING: StaticSchema = (3, n0, _S, 0)
+
+TAG_KEY: StaticSchema = (3, n0, _TK, 0)
+
+TAG_VALUE: StaticSchema = (3, n0, _TV, 0)
+
+TAG: StaticSchema = (18, n0, _T, 0, (_K, _V), ((TAG_KEY, 1), (TAG_VALUE, 0)))
+
+TAGS_LIST: StaticSchema = (16, n0, _TL, 0, (_m,), ((TAG, 0),))
+
+ADD_TAGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ATI,
+    {_sSI: _cATR, _smi: None},
+    (_RI, _TL),
+    ((STRING, 1), (TAGS_LIST, 1)),
+)
+
+ADD_TAGS_OUTPUT: StaticSchema = (18, n0, _ATO, {_sSI: _cATRo, _smit: None})
+
+CHANNEL_ARN_INVALID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CARNIE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CHANNEL_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CNFE,
+    {_s: _c, _sE: 404},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CLOUD_TRAIL_ARN_INVALID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CTARNIE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CE,
+    {_s: _c, _sE: 409},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+EVENT_DATA_STORE_ARN_INVALID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EDSARNIE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+EVENT_DATA_STORE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EDSNFE,
+    {_s: _c, _sE: 404},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INACTIVE_EVENT_DATA_STORE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IEDSE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_TAG_PARAMETER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ITPE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_TRAIL_NAME_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ITNE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _NMASLREE,
+    {_s: _c, _sE: 403},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _NOMAE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+OPERATION_NOT_PERMITTED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ONPE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+RESOURCE_TYPE_NOT_SUPPORTED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RTNSE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+TAGS_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TLEE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+UNSUPPORTED_OPERATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _UOE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+ADD_TAGS: StaticOperationSchema = (
+    23,
+    n0,
+    _AT,
+    0,
+    ADD_TAGS_INPUT,
+    ADD_TAGS_OUTPUT,
+    (
+        CHANNEL_ARN_INVALID_EXCEPTION,
+        CHANNEL_NOT_FOUND_EXCEPTION,
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INVALID_TAG_PARAMETER_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        RESOURCE_TYPE_NOT_SUPPORTED_EXCEPTION,
+        TAGS_LIMIT_EXCEEDED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
     ),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "InsufficientDependencyServiceAccessPermission",
-                    "httpResponseCode": 400,
-                }
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_EVENT_SELECTORS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidEventSelectorsException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidEventSelectors", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_KMS_KEY_ID_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidKmsKeyIdException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidKmsKeyId", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-KMS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#KmsException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "KmsException", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-KMS_KEY_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#KmsKeyNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "KmsKeyNotFound", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-ORGANIZATION_NOT_IN_ALL_FEATURES_MODE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#OrganizationNotInAllFeaturesModeException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "OrganizationNotInAllFeaturesMode", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-ORGANIZATIONS_NOT_IN_USE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#OrganizationsNotInUseException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "OrganizationsNotInUse", "httpResponseCode": 404}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
+)
+
+OPERATOR_VALUE: StaticSchema = (3, n0, _OV, 0)
+
+OPERATOR: StaticSchema = (16, n0, _O, 0, (_m,), ((OPERATOR_VALUE, 0),))
+
+SELECTOR_FIELD: StaticSchema = (3, n0, _SF, 0)
 
-THROTTLING_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ThrottlingException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ThrottlingException", "httpResponseCode": 429}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CREATE_EVENT_DATA_STORE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateEventDataStore"),
-    shape_type=ShapeType.OPERATION,
-)
-
-CLOUD_TRAIL_INVALID_CLIENT_TOKEN_ID_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CloudTrailInvalidClientTokenIdException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "CloudTrailInvalidClientTokenId", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CLOUD_WATCH_LOGS_DELIVERY_UNAVAILABLE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CloudWatchLogsDeliveryUnavailableException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "CloudWatchLogsDeliveryUnavailable", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CREATE_TRAIL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateTrailInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#CreateTrailRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "S3BucketName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "S3KeyPrefix": {"target": STRING},
-        "SnsTopicName": {"target": STRING},
-        "IncludeGlobalServiceEvents": {"target": BOOLEAN},
-        "IsMultiRegionTrail": {"target": BOOLEAN},
-        "EnableLogFileValidation": {"target": BOOLEAN},
-        "CloudWatchLogsLogGroupArn": {"target": STRING},
-        "CloudWatchLogsRoleArn": {"target": STRING},
-        "KmsKeyId": {"target": STRING},
-        "IsOrganizationTrail": {"target": BOOLEAN},
-        "TagsList": {"target": TAGS_LIST},
-        "RecursiveLogging": {"target": BOOLEAN},
-    },
-)
-
-CREATE_TRAIL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateTrailOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#CreateTrailResponse",
-        )
-    ],
-    members={
-        "Name": {"target": STRING},
-        "S3BucketName": {"target": STRING},
-        "S3KeyPrefix": {"target": STRING},
-        "SnsTopicName": {"target": STRING},
-        "SnsTopicARN": {"target": STRING},
-        "IncludeGlobalServiceEvents": {"target": BOOLEAN},
-        "IsMultiRegionTrail": {"target": BOOLEAN},
-        "TrailARN": {"target": STRING},
-        "LogFileValidationEnabled": {"target": BOOLEAN},
-        "CloudWatchLogsLogGroupArn": {"target": STRING},
-        "CloudWatchLogsRoleArn": {"target": STRING},
-        "KmsKeyId": {"target": STRING},
-        "IsOrganizationTrail": {"target": BOOLEAN},
-        "RecursiveLogging": {"target": BOOLEAN},
-    },
-)
-
-INSUFFICIENT_S3_BUCKET_POLICY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InsufficientS3BucketPolicyException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InsufficientS3BucketPolicy", "httpResponseCode": 403}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INSUFFICIENT_SNS_TOPIC_POLICY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InsufficientSnsTopicPolicyException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InsufficientSnsTopicPolicy", "httpResponseCode": 403}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_CLOUD_WATCH_LOGS_LOG_GROUP_ARN_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidCloudWatchLogsLogGroupArnException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidCloudWatchLogsLogGroupArn", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_CLOUD_WATCH_LOGS_ROLE_ARN_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidCloudWatchLogsRoleArnException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidCloudWatchLogsRoleArn", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_PARAMETER_COMBINATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidParameterCombinationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidParameterCombinationError", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_S3_BUCKET_NAME_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidS3BucketNameException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidS3BucketName", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_S3_PREFIX_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidS3PrefixException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidS3Prefix", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_SNS_TOPIC_NAME_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidSnsTopicNameException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidSnsTopicName", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-KMS_KEY_DISABLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#KmsKeyDisabledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "KmsKeyDisabled", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-MAXIMUM_NUMBER_OF_TRAILS_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#MaximumNumberOfTrailsExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "MaximumNumberOfTrailsExceeded", "httpResponseCode": 403}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-S3_BUCKET_DOES_NOT_EXIST_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#S3BucketDoesNotExistException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "S3BucketDoesNotExist", "httpResponseCode": 404}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-TRAIL_ALREADY_EXISTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#TrailAlreadyExistsException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "TrailAlreadyExists", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-TRAIL_NOT_PROVIDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#TrailNotProvidedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "TrailNotProvided", "httpResponseCode": 404}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CREATE_TRAIL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#CreateTrail"), shape_type=ShapeType.OPERATION
-)
-
-DELETE_CHANNEL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteChannelInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeleteChannelRequest",
-        )
-    ],
-    members={
-        "Channel": {
-            "target": CHANNEL_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_CHANNEL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteChannelOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeleteChannelResponse",
-        )
-    ],
-)
-
-DELETE_CHANNEL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteChannel"), shape_type=ShapeType.OPERATION
-)
-
-DELETE_DASHBOARD_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteDashboardInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeleteDashboardRequest",
-        )
-    ],
-    members={
-        "DashboardId": {
-            "target": DASHBOARD_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_DASHBOARD_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteDashboardOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeleteDashboardResponse",
-        )
-    ],
-)
-
-DELETE_DASHBOARD = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteDashboard"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DELETE_EVENT_DATA_STORE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteEventDataStoreInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeleteEventDataStoreRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_EVENT_DATA_STORE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteEventDataStoreOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeleteEventDataStoreResponse",
-        )
-    ],
-)
-
-EVENT_DATA_STORE_FEDERATION_ENABLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreFederationEnabledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "EventDataStoreFederationEnabled", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-EVENT_DATA_STORE_HAS_ONGOING_IMPORT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreHasOngoingImportException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "EventDataStoreHasOngoingImport", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-EVENT_DATA_STORE_TERMINATION_PROTECTED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreTerminationProtectedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "EventDataStoreTerminationProtectedException",
-                    "httpResponseCode": 400,
-                }
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-DELETE_EVENT_DATA_STORE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteEventDataStore"),
-    shape_type=ShapeType.OPERATION,
-)
-
-RESOURCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourceArn"), shape_type=ShapeType.STRING
-)
-
-DELETE_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteResourcePolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeleteResourcePolicyRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": RESOURCE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteResourcePolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeleteResourcePolicyResponse",
-        )
-    ],
-)
-
-RESOURCE_ARN_NOT_VALID_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourceARNNotValidException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ResourceARNNotValid", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-RESOURCE_POLICY_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourcePolicyNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ResourcePolicyNotFound", "httpResponseCode": 404}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-DELETE_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DELETE_TRAIL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteTrailInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeleteTrailRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_TRAIL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteTrailOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeleteTrailResponse",
-        )
-    ],
-)
-
-INVALID_HOME_REGION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidHomeRegionException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidHomeRegion", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-TRAIL_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#TrailNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "TrailNotFound", "httpResponseCode": 404}),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-DELETE_TRAIL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DeleteTrail"), shape_type=ShapeType.OPERATION
-)
-
-DEREGISTER_ORGANIZATION_DELEGATED_ADMIN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminRequest",
-        )
-    ],
-    members={
-        "DelegatedAdminAccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DEREGISTER_ORGANIZATION_DELEGATED_ADMIN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminResponse",
-        )
-    ],
-)
-
-NOT_ORGANIZATION_MANAGEMENT_ACCOUNT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#NotOrganizationManagementAccountException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "NotOrganizationManagementAccount", "httpResponseCode": 403}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-DEREGISTER_ORGANIZATION_DELEGATED_ADMIN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdmin"),
-    shape_type=ShapeType.OPERATION,
-)
-
-REFRESH_ID = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#RefreshId"), shape_type=ShapeType.STRING
-)
-
-DESCRIBE_QUERY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DescribeQueryInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DescribeQueryRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {"target": EVENT_DATA_STORE_ARN},
-        "QueryId": {"target": UUID},
-        "QueryAlias": {"target": QUERY_ALIAS},
-        "RefreshId": {"target": REFRESH_ID},
-        "EventDataStoreOwnerAccountId": {"target": ACCOUNT_ID},
-    },
-)
-
-DELIVERY_S3_URI = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DeliveryS3Uri"), shape_type=ShapeType.STRING
-)
-
-DELIVERY_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DeliveryStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "SUCCESS": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "FAILED_SIGNING_FILE": {"target": UNIT},
-        "PENDING": {"target": UNIT},
-        "RESOURCE_NOT_FOUND": {"target": UNIT},
-        "ACCESS_DENIED": {"target": UNIT},
-        "ACCESS_DENIED_SIGNING_FILE": {"target": UNIT},
-        "CANCELLED": {"target": UNIT},
-        "UNKNOWN": {"target": UNIT},
-    },
-)
-
-PROMPT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Prompt"), shape_type=ShapeType.STRING
-)
-
-LONG = Schema(id=ShapeID("com.amazonaws.cloudtrail#Long"), shape_type=ShapeType.LONG)
-
-INTEGER = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Integer"), shape_type=ShapeType.INTEGER
-)
-
-QUERY_STATISTICS_FOR_DESCRIBE_QUERY = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryStatisticsForDescribeQuery"),
-    members={
-        "EventsMatched": {"target": LONG},
-        "EventsScanned": {"target": LONG},
-        "BytesScanned": {"target": LONG},
-        "ExecutionTimeInMillis": {"target": INTEGER},
-        "CreationTime": {"target": DATE},
-    },
-)
-
-DESCRIBE_QUERY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DescribeQueryOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DescribeQueryResponse",
-        )
-    ],
-    members={
-        "QueryId": {"target": UUID},
-        "QueryString": {"target": QUERY_STATEMENT},
-        "QueryStatus": {"target": QUERY_STATUS},
-        "QueryStatistics": {"target": QUERY_STATISTICS_FOR_DESCRIBE_QUERY},
-        "ErrorMessage": {"target": ERROR_MESSAGE},
-        "DeliveryS3Uri": {"target": DELIVERY_S3_URI},
-        "DeliveryStatus": {"target": DELIVERY_STATUS},
-        "Prompt": {"target": PROMPT},
-        "EventDataStoreOwnerAccountId": {"target": ACCOUNT_ID},
-    },
-)
-
-DESCRIBE_QUERY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DescribeQuery"), shape_type=ShapeType.OPERATION
-)
-
-TRAIL_NAME_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#TrailNameList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-DESCRIBE_TRAILS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DescribeTrailsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DescribeTrailsRequest",
-        )
-    ],
-    members={
-        "trailNameList": {"target": TRAIL_NAME_LIST},
-        "includeShadowTrails": {"target": BOOLEAN},
-    },
-)
-
-TRAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Trail"),
-    members={
-        "Name": {"target": STRING},
-        "S3BucketName": {"target": STRING},
-        "S3KeyPrefix": {"target": STRING},
-        "SnsTopicName": {"target": STRING},
-        "SnsTopicARN": {"target": STRING},
-        "IncludeGlobalServiceEvents": {"target": BOOLEAN},
-        "IsMultiRegionTrail": {"target": BOOLEAN},
-        "HomeRegion": {"target": STRING},
-        "TrailARN": {"target": STRING},
-        "LogFileValidationEnabled": {"target": BOOLEAN},
-        "CloudWatchLogsLogGroupArn": {"target": STRING},
-        "CloudWatchLogsRoleArn": {"target": STRING},
-        "KmsKeyId": {"target": STRING},
-        "HasCustomEventSelectors": {"target": BOOLEAN},
-        "HasInsightSelectors": {"target": BOOLEAN},
-        "IsOrganizationTrail": {"target": BOOLEAN},
-        "RecursiveLogging": {"target": BOOLEAN},
-    },
-)
-
-TRAIL_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#TrailList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TRAIL}},
-)
-
-DESCRIBE_TRAILS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DescribeTrailsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DescribeTrailsResponse",
-        )
-    ],
-    members={"trailList": {"target": TRAIL_LIST}},
-)
-
-DESCRIBE_TRAILS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DescribeTrails"),
-    shape_type=ShapeType.OPERATION,
-)
-
-CONCURRENT_MODIFICATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ConcurrentModificationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ConcurrentModification", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-DISABLE_FEDERATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DisableFederationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DisableFederationRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-FEDERATION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#FederationStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ENABLING": {"target": UNIT},
-        "ENABLED": {"target": UNIT},
-        "DISABLING": {"target": UNIT},
-        "DISABLED": {"target": UNIT},
-    },
-)
-
-DISABLE_FEDERATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DisableFederationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#DisableFederationResponse",
-        )
-    ],
-    members={
-        "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
-        "FederationStatus": {"target": FEDERATION_STATUS},
-    },
-)
-
-DISABLE_FEDERATION = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#DisableFederation"),
-    shape_type=ShapeType.OPERATION,
-)
-
-FEDERATION_ROLE_ARN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#FederationRoleArn"),
-    shape_type=ShapeType.STRING,
-)
-
-ENABLE_FEDERATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EnableFederationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#EnableFederationRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FederationRoleArn": {
-            "target": FEDERATION_ROLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-ENABLE_FEDERATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EnableFederationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#EnableFederationResponse",
-        )
-    ],
-    members={
-        "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
-        "FederationStatus": {"target": FEDERATION_STATUS},
-        "FederationRoleArn": {"target": FEDERATION_ROLE_ARN},
-    },
-)
-
-ENABLE_FEDERATION = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#EnableFederation"),
-    shape_type=ShapeType.OPERATION,
-)
-
-EVENT_DATA_STORE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStoreList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EVENT_DATA_STORE_ARN}},
-)
-
-GENERATE_QUERY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GenerateQueryInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GenerateQueryRequest",
-        )
-    ],
-    members={
-        "EventDataStores": {
-            "target": EVENT_DATA_STORE_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Prompt": {
-            "target": PROMPT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-GENERATE_QUERY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GenerateQueryOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GenerateQueryResponse",
-        )
-    ],
-    members={
-        "QueryStatement": {"target": QUERY_STATEMENT},
-        "QueryAlias": {"target": QUERY_ALIAS},
-        "EventDataStoreOwnerAccountId": {"target": ACCOUNT_ID},
-    },
-)
-
-GENERATE_RESPONSE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GenerateResponseException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "GenerateResponse", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-GENERATE_QUERY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GenerateQuery"), shape_type=ShapeType.OPERATION
-)
-
-GET_CHANNEL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetChannelInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetChannelRequest",
-        )
-    ],
-    members={
-        "Channel": {
-            "target": CHANNEL_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-INGESTION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#IngestionStatus"),
-    members={
-        "LatestIngestionSuccessTime": {"target": DATE},
-        "LatestIngestionSuccessEventID": {"target": UUID},
-        "LatestIngestionErrorCode": {"target": ERROR_MESSAGE},
-        "LatestIngestionAttemptTime": {"target": DATE},
-        "LatestIngestionAttemptEventID": {"target": UUID},
-    },
-)
-
-SOURCE_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#SourceConfig"),
-    members={
-        "ApplyToAllRegions": {"target": BOOLEAN},
-        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
-    },
-)
-
-GET_CHANNEL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetChannelOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetChannelResponse",
-        )
-    ],
-    members={
-        "ChannelArn": {"target": CHANNEL_ARN},
-        "Name": {"target": CHANNEL_NAME},
-        "Source": {"target": SOURCE},
-        "SourceConfig": {"target": SOURCE_CONFIG},
-        "Destinations": {"target": DESTINATIONS},
-        "IngestionStatus": {"target": INGESTION_STATUS},
-    },
-)
-
-GET_CHANNEL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetChannel"), shape_type=ShapeType.OPERATION
-)
-
-GET_DASHBOARD_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetDashboardInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetDashboardRequest",
-        )
-    ],
-    members={
-        "DashboardId": {
-            "target": DASHBOARD_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DASHBOARD_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DashboardStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "CREATED": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-        "UPDATED": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-    },
-)
-
-GET_DASHBOARD_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetDashboardOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetDashboardResponse",
-        )
-    ],
-    members={
-        "DashboardArn": {"target": DASHBOARD_ARN},
-        "Type": {"target": DASHBOARD_TYPE},
-        "Status": {"target": DASHBOARD_STATUS},
-        "Widgets": {"target": WIDGET_LIST},
-        "RefreshSchedule": {"target": REFRESH_SCHEDULE},
-        "CreatedTimestamp": {"target": DATE},
-        "UpdatedTimestamp": {"target": DATE},
-        "LastRefreshId": {"target": REFRESH_ID},
-        "LastRefreshFailureReason": {"target": ERROR_MESSAGE},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-    },
-)
-
-GET_DASHBOARD = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetDashboard"), shape_type=ShapeType.OPERATION
-)
-
-GET_EVENT_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetEventConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetEventConfigurationRequest",
-        )
-    ],
-    members={"TrailName": {"target": STRING}, "EventDataStore": {"target": STRING}},
-)
-
-OPERATOR_TARGET_LIST_MEMBER = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#OperatorTargetListMember"),
-    shape_type=ShapeType.STRING,
-)
-
-OPERATOR_TARGET_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#OperatorTargetList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": OPERATOR_TARGET_LIST_MEMBER}},
-)
-
-TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Type"),
-    shape_type=ShapeType.ENUM,
-    members={"TagContext": {"target": UNIT}, "RequestContext": {"target": UNIT}},
-)
-
-CONTEXT_KEY_SELECTOR = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ContextKeySelector"),
-    members={
-        "Type": {
-            "target": TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Equals": {
-            "target": OPERATOR_TARGET_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CONTEXT_KEY_SELECTORS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ContextKeySelectors"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CONTEXT_KEY_SELECTOR}},
-)
-
-MAX_EVENT_SIZE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#MaxEventSize"),
-    shape_type=ShapeType.ENUM,
-    members={"Standard": {"target": UNIT}, "Large": {"target": UNIT}},
-)
-
-GET_EVENT_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetEventConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetEventConfigurationResponse",
-        )
-    ],
-    members={
-        "TrailARN": {"target": STRING},
-        "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
-        "MaxEventSize": {"target": MAX_EVENT_SIZE},
-        "ContextKeySelectors": {"target": CONTEXT_KEY_SELECTORS},
-        "AggregationConfigurations": {"target": AGGREGATION_CONFIGURATIONS},
-    },
-)
-
-INVALID_EVENT_DATA_STORE_STATUS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidEventDataStoreStatusException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidEventDataStoreStatus", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-GET_EVENT_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetEventConfiguration"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_EVENT_DATA_STORE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetEventDataStoreInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetEventDataStoreRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-PARTITION_KEY_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#PartitionKeyName"), shape_type=ShapeType.STRING
-)
-
-PARTITION_KEY_TYPE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#PartitionKeyType"), shape_type=ShapeType.STRING
-)
-
-PARTITION_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PartitionKey"),
-    members={
-        "Name": {
-            "target": PARTITION_KEY_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Type": {
-            "target": PARTITION_KEY_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PARTITION_KEY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PartitionKeyList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PARTITION_KEY}},
-)
-
-GET_EVENT_DATA_STORE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetEventDataStoreOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetEventDataStoreResponse",
-        )
-    ],
-    members={
-        "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
-        "Name": {"target": EVENT_DATA_STORE_NAME},
-        "Status": {"target": EVENT_DATA_STORE_STATUS},
-        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
-        "MultiRegionEnabled": {"target": BOOLEAN},
-        "OrganizationEnabled": {"target": BOOLEAN},
-        "RetentionPeriod": {"target": RETENTION_PERIOD},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-        "CreatedTimestamp": {"target": DATE},
-        "UpdatedTimestamp": {"target": DATE},
-        "KmsKeyId": {"target": EVENT_DATA_STORE_KMS_KEY_ID},
-        "BillingMode": {"target": BILLING_MODE},
-        "FederationStatus": {"target": FEDERATION_STATUS},
-        "FederationRoleArn": {"target": FEDERATION_ROLE_ARN},
-        "PartitionKeys": {"target": PARTITION_KEY_LIST},
-    },
-)
-
-GET_EVENT_DATA_STORE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetEventDataStore"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_EVENT_SELECTORS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetEventSelectorsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetEventSelectorsRequest",
-        )
-    ],
-    members={
-        "TrailName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DATA_RESOURCE_VALUES = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DataResourceValues"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-DATA_RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DataResource"),
-    members={"Type": {"target": STRING}, "Values": {"target": DATA_RESOURCE_VALUES}},
-)
-
-DATA_RESOURCES = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DataResources"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DATA_RESOURCE}},
-)
-
-EXCLUDE_MANAGEMENT_EVENT_SOURCES = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ExcludeManagementEventSources"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-READ_WRITE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ReadWriteType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ReadOnly": {"target": UNIT},
-        "WriteOnly": {"target": UNIT},
-        "All": {"target": UNIT},
-    },
-)
-
-EVENT_SELECTOR = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventSelector"),
-    members={
-        "ReadWriteType": {"target": READ_WRITE_TYPE},
-        "IncludeManagementEvents": {"target": BOOLEAN},
-        "DataResources": {"target": DATA_RESOURCES},
-        "ExcludeManagementEventSources": {"target": EXCLUDE_MANAGEMENT_EVENT_SOURCES},
-    },
-)
-
-EVENT_SELECTORS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventSelectors"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EVENT_SELECTOR}},
-)
-
-GET_EVENT_SELECTORS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetEventSelectorsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetEventSelectorsResponse",
-        )
-    ],
-    members={
-        "TrailARN": {"target": STRING},
-        "EventSelectors": {"target": EVENT_SELECTORS},
-        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
-    },
-)
-
-GET_EVENT_SELECTORS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetEventSelectors"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_IMPORT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetImportInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetImportRequest",
-        )
-    ],
-    members={
-        "ImportId": {
-            "target": UUID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-IMPORT_DESTINATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ImportDestinations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EVENT_DATA_STORE_ARN}},
-)
-
-S3_IMPORT_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#S3ImportSource"),
-    members={
-        "S3LocationUri": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "S3BucketRegion": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "S3BucketAccessRoleArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-IMPORT_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ImportSource"),
-    members={
-        "S3": {
-            "target": S3_IMPORT_SOURCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-IMPORT_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ImportStatistics"),
-    members={
-        "PrefixesFound": {"target": LONG},
-        "PrefixesCompleted": {"target": LONG},
-        "FilesCompleted": {"target": LONG},
-        "EventsCompleted": {"target": LONG},
-        "FailedEntries": {"target": LONG},
-    },
-)
-
-IMPORT_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ImportStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "INITIALIZING": {"target": UNIT},
-        "IN_PROGRESS": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "STOPPED": {"target": UNIT},
-        "COMPLETED": {"target": UNIT},
-    },
-)
-
-GET_IMPORT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetImportOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetImportResponse",
-        )
-    ],
-    members={
-        "ImportId": {"target": UUID},
-        "Destinations": {"target": IMPORT_DESTINATIONS},
-        "ImportSource": {"target": IMPORT_SOURCE},
-        "StartEventTime": {"target": DATE},
-        "EndEventTime": {"target": DATE},
-        "ImportStatus": {"target": IMPORT_STATUS},
-        "CreatedTimestamp": {"target": DATE},
-        "UpdatedTimestamp": {"target": DATE},
-        "ImportStatistics": {"target": IMPORT_STATISTICS},
-    },
-)
-
-IMPORT_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ImportNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "ImportNotFound", "httpResponseCode": 404}),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-GET_IMPORT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetImport"), shape_type=ShapeType.OPERATION
-)
-
-GET_INSIGHT_SELECTORS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetInsightSelectorsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetInsightSelectorsRequest",
-        )
-    ],
-    members={
-        "TrailName": {"target": STRING},
-        "EventDataStore": {"target": EVENT_DATA_STORE_ARN},
-    },
-)
-
-SOURCE_EVENT_CATEGORY = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#SourceEventCategory"),
-    shape_type=ShapeType.ENUM,
-    members={"Management": {"target": UNIT}, "Data": {"target": UNIT}},
-)
-
-SOURCE_EVENT_CATEGORIES = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#SourceEventCategories"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SOURCE_EVENT_CATEGORY}},
-)
-
-INSIGHT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InsightType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ApiCallRateInsight": {"target": UNIT},
-        "ApiErrorRateInsight": {"target": UNIT},
-    },
-)
-
-INSIGHT_SELECTOR = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InsightSelector"),
-    members={
-        "InsightType": {"target": INSIGHT_TYPE},
-        "EventCategories": {"target": SOURCE_EVENT_CATEGORIES},
-    },
-)
-
-INSIGHT_SELECTORS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InsightSelectors"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": INSIGHT_SELECTOR}},
-)
-
-GET_INSIGHT_SELECTORS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetInsightSelectorsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetInsightSelectorsResponse",
-        )
-    ],
-    members={
-        "TrailARN": {"target": STRING},
-        "InsightSelectors": {"target": INSIGHT_SELECTORS},
-        "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
-        "InsightsDestination": {"target": EVENT_DATA_STORE_ARN},
-    },
-)
-
-INSIGHT_NOT_ENABLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InsightNotEnabledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InsightNotEnabled", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-GET_INSIGHT_SELECTORS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetInsightSelectors"),
-    shape_type=ShapeType.OPERATION,
-)
-
-MAX_QUERY_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#MaxQueryResults"), shape_type=ShapeType.INTEGER
-)
-
-PAGINATION_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#PaginationToken"), shape_type=ShapeType.STRING
-)
-
-GET_QUERY_RESULTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetQueryResultsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetQueryResultsRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {"target": EVENT_DATA_STORE_ARN},
-        "QueryId": {
-            "target": UUID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextToken": {"target": PAGINATION_TOKEN},
-        "MaxQueryResults": {"target": MAX_QUERY_RESULTS},
-        "EventDataStoreOwnerAccountId": {"target": ACCOUNT_ID},
-    },
-)
-
-QUERY_RESULT_KEY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryResultKey"), shape_type=ShapeType.STRING
-)
-
-QUERY_RESULT_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryResultValue"), shape_type=ShapeType.STRING
-)
-
-QUERY_RESULT_COLUMN = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryResultColumn"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": QUERY_RESULT_KEY},
-        "value": {"target": QUERY_RESULT_VALUE},
-    },
-)
-
-QUERY_RESULT_ROW = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryResultRow"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": QUERY_RESULT_COLUMN}},
-)
-
-QUERY_RESULT_ROWS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryResultRows"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": QUERY_RESULT_ROW}},
-)
-
-QUERY_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryStatistics"),
-    members={
-        "ResultsCount": {"target": INTEGER},
-        "TotalResultsCount": {"target": INTEGER},
-        "BytesScanned": {"target": LONG},
-    },
-)
-
-GET_QUERY_RESULTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetQueryResultsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetQueryResultsResponse",
-        )
-    ],
-    members={
-        "QueryStatus": {"target": QUERY_STATUS},
-        "QueryStatistics": {"target": QUERY_STATISTICS},
-        "QueryResultRows": {"target": QUERY_RESULT_ROWS},
-        "NextToken": {"target": PAGINATION_TOKEN},
-        "ErrorMessage": {"target": ERROR_MESSAGE},
-    },
-)
-
-INVALID_MAX_RESULTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidMaxResultsException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidMaxResults", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_NEXT_TOKEN_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidNextTokenException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidNextToken", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-GET_QUERY_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetQueryResults"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetResourcePolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetResourcePolicyRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": RESOURCE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourcePolicy"), shape_type=ShapeType.STRING
-)
-
-GET_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetResourcePolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetResourcePolicyResponse",
-        )
-    ],
-    members={
-        "ResourceArn": {"target": RESOURCE_ARN},
-        "ResourcePolicy": {"target": RESOURCE_POLICY},
-        "DelegatedAdminResourcePolicy": {"target": RESOURCE_POLICY},
-    },
-)
-
-GET_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_TRAIL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetTrailInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetTrailRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-GET_TRAIL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetTrailOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetTrailResponse",
-        )
-    ],
-    members={"Trail": {"target": TRAIL}},
-)
-
-GET_TRAIL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetTrail"), shape_type=ShapeType.OPERATION
-)
-
-GET_TRAIL_STATUS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetTrailStatusInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetTrailStatusRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-GET_TRAIL_STATUS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#GetTrailStatusOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#GetTrailStatusResponse",
-        )
-    ],
-    members={
-        "IsLogging": {"target": BOOLEAN},
-        "LatestDeliveryError": {"target": STRING},
-        "LatestNotificationError": {"target": STRING},
-        "LatestDeliveryTime": {"target": DATE},
-        "LatestNotificationTime": {"target": DATE},
-        "StartLoggingTime": {"target": DATE},
-        "StopLoggingTime": {"target": DATE},
-        "LatestCloudWatchLogsDeliveryError": {"target": STRING},
-        "LatestCloudWatchLogsDeliveryTime": {"target": DATE},
-        "LatestDigestDeliveryTime": {"target": DATE},
-        "LatestDigestDeliveryError": {"target": STRING},
-        "LatestDeliveryAttemptTime": {"target": STRING},
-        "LatestNotificationAttemptTime": {"target": STRING},
-        "LatestNotificationAttemptSucceeded": {"target": STRING},
-        "LatestDeliveryAttemptSucceeded": {"target": STRING},
-        "TimeLoggingStarted": {"target": STRING},
-        "TimeLoggingStopped": {"target": STRING},
-    },
-)
-
-GET_TRAIL_STATUS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#GetTrailStatus"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_CHANNELS_MAX_RESULTS_COUNT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListChannelsMaxResultsCount"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_CHANNELS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListChannelsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListChannelsRequest",
-        )
-    ],
-    members={
-        "MaxResults": {"target": LIST_CHANNELS_MAX_RESULTS_COUNT},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-LIST_CHANNELS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListChannelsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListChannelsResponse",
-        )
-    ],
-    members={
-        "Channels": {"target": CHANNELS},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-LIST_CHANNELS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListChannels"), shape_type=ShapeType.OPERATION
-)
-
-LIST_DASHBOARDS_MAX_RESULTS_COUNT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListDashboardsMaxResultsCount"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_DASHBOARDS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListDashboardsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListDashboardsRequest",
-        )
-    ],
-    members={
-        "NamePrefix": {"target": DASHBOARD_NAME},
-        "Type": {"target": DASHBOARD_TYPE},
-        "NextToken": {"target": PAGINATION_TOKEN},
-        "MaxResults": {"target": LIST_DASHBOARDS_MAX_RESULTS_COUNT},
-    },
-)
-
-DASHBOARD_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DashboardDetail"),
-    members={
-        "DashboardArn": {"target": DASHBOARD_ARN},
-        "Type": {"target": DASHBOARD_TYPE},
-    },
-)
-
-DASHBOARDS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Dashboards"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DASHBOARD_DETAIL}},
-)
-
-LIST_DASHBOARDS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListDashboardsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListDashboardsResponse",
-        )
-    ],
-    members={
-        "Dashboards": {"target": DASHBOARDS},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-LIST_DASHBOARDS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListDashboards"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_EVENT_DATA_STORES_MAX_RESULTS_COUNT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListEventDataStoresMaxResultsCount"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_EVENT_DATA_STORES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListEventDataStoresInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListEventDataStoresRequest",
-        )
-    ],
-    members={
-        "NextToken": {"target": PAGINATION_TOKEN},
-        "MaxResults": {"target": LIST_EVENT_DATA_STORES_MAX_RESULTS_COUNT},
-    },
-)
-
-EVENT_DATA_STORE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStore"),
-    members={
-        "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
-        "Name": {"target": EVENT_DATA_STORE_NAME},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-        "Status": {"target": EVENT_DATA_STORE_STATUS},
-        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
-        "MultiRegionEnabled": {"target": BOOLEAN},
-        "OrganizationEnabled": {"target": BOOLEAN},
-        "RetentionPeriod": {"target": RETENTION_PERIOD},
-        "CreatedTimestamp": {"target": DATE},
-        "UpdatedTimestamp": {"target": DATE},
-    },
-)
-
-EVENT_DATA_STORES = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventDataStores"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EVENT_DATA_STORE}},
-)
-
-LIST_EVENT_DATA_STORES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListEventDataStoresOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListEventDataStoresResponse",
-        )
-    ],
-    members={
-        "EventDataStores": {"target": EVENT_DATA_STORES},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-LIST_EVENT_DATA_STORES = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListEventDataStores"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_IMPORT_FAILURES_MAX_RESULTS_COUNT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListImportFailuresMaxResultsCount"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_IMPORT_FAILURES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListImportFailuresInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListImportFailuresRequest",
-        )
-    ],
-    members={
-        "ImportId": {
-            "target": UUID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MaxResults": {"target": LIST_IMPORT_FAILURES_MAX_RESULTS_COUNT},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-IMPORT_FAILURE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ImportFailureStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FAILED": {"target": UNIT},
-        "RETRY": {"target": UNIT},
-        "SUCCEEDED": {"target": UNIT},
-    },
-)
-
-IMPORT_FAILURE_LIST_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ImportFailureListItem"),
-    members={
-        "Location": {"target": STRING},
-        "Status": {"target": IMPORT_FAILURE_STATUS},
-        "ErrorType": {"target": STRING},
-        "ErrorMessage": {"target": STRING},
-        "LastUpdatedTime": {"target": DATE},
-    },
-)
-
-IMPORT_FAILURE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ImportFailureList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": IMPORT_FAILURE_LIST_ITEM}},
-)
-
-LIST_IMPORT_FAILURES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListImportFailuresOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListImportFailuresResponse",
-        )
-    ],
-    members={
-        "Failures": {"target": IMPORT_FAILURE_LIST},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-LIST_IMPORT_FAILURES = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListImportFailures"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_IMPORTS_MAX_RESULTS_COUNT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListImportsMaxResultsCount"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_IMPORTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListImportsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListImportsRequest",
-        )
-    ],
-    members={
-        "MaxResults": {"target": LIST_IMPORTS_MAX_RESULTS_COUNT},
-        "Destination": {"target": EVENT_DATA_STORE_ARN},
-        "ImportStatus": {"target": IMPORT_STATUS},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-IMPORTS_LIST_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ImportsListItem"),
-    members={
-        "ImportId": {"target": UUID},
-        "ImportStatus": {"target": IMPORT_STATUS},
-        "Destinations": {"target": IMPORT_DESTINATIONS},
-        "CreatedTimestamp": {"target": DATE},
-        "UpdatedTimestamp": {"target": DATE},
-    },
-)
-
-IMPORTS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ImportsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": IMPORTS_LIST_ITEM}},
-)
-
-LIST_IMPORTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListImportsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListImportsResponse",
-        )
-    ],
-    members={
-        "Imports": {"target": IMPORTS_LIST},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-LIST_IMPORTS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListImports"), shape_type=ShapeType.OPERATION
-)
-
-LIST_INSIGHTS_DATA_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataType"),
-    shape_type=ShapeType.ENUM,
-    members={"INSIGHTS_EVENTS": {"target": UNIT}},
-)
-
-LIST_INSIGHTS_DATA_DIMENSION_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataDimensionKey"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EVENT_ID": {"target": UNIT},
-        "EVENT_NAME": {"target": UNIT},
-        "EVENT_SOURCE": {"target": UNIT},
-    },
-)
-
-LIST_INSIGHTS_DATA_DIMENSION_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataDimensionValue"),
-    shape_type=ShapeType.STRING,
-)
-
-LIST_INSIGHTS_DATA_DIMENSIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataDimensions"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": LIST_INSIGHTS_DATA_DIMENSION_KEY},
-        "value": {"target": LIST_INSIGHTS_DATA_DIMENSION_VALUE},
-    },
-)
-
-LIST_INSIGHTS_DATA_MAX_RESULTS_COUNT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataMaxResultsCount"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_INSIGHTS_DATA_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListInsightsDataRequest",
-        )
-    ],
-    members={
-        "InsightSource": {
-            "target": RESOURCE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DataType": {
-            "target": LIST_INSIGHTS_DATA_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Dimensions": {"target": LIST_INSIGHTS_DATA_DIMENSIONS},
-        "StartTime": {"target": DATE},
-        "EndTime": {"target": DATE},
-        "MaxResults": {"target": LIST_INSIGHTS_DATA_MAX_RESULTS_COUNT},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Resource"),
-    members={"ResourceType": {"target": STRING}, "ResourceName": {"target": STRING}},
-)
-
-RESOURCE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourceList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RESOURCE}},
-)
-
-EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Event"),
-    members={
-        "EventId": {"target": STRING},
-        "EventName": {"target": STRING},
-        "ReadOnly": {"target": STRING},
-        "AccessKeyId": {"target": STRING},
-        "EventTime": {"target": DATE},
-        "EventSource": {"target": STRING},
-        "Username": {"target": STRING},
-        "Resources": {"target": RESOURCE_LIST},
-        "CloudTrailEvent": {"target": STRING},
-    },
-)
-
-EVENTS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EVENT}},
-)
-
-LIST_INSIGHTS_DATA_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListInsightsDataOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListInsightsDataResponse",
-        )
-    ],
-    members={
-        "Events": {"target": EVENTS_LIST},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-LIST_INSIGHTS_DATA = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListInsightsData"),
-    shape_type=ShapeType.OPERATION,
-)
-
-INSIGHTS_METRIC_DATA_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InsightsMetricDataType"),
-    shape_type=ShapeType.ENUM,
-    members={"FILL_WITH_ZEROS": {"target": UNIT}, "NON_ZERO_DATA": {"target": UNIT}},
-)
-
-ERROR_CODE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ErrorCode"), shape_type=ShapeType.STRING
-)
-
-EVENT_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#EventName"), shape_type=ShapeType.STRING
-)
-
-EVENT_SOURCE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#EventSource"), shape_type=ShapeType.STRING
-)
-
-INSIGHTS_METRIC_MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#InsightsMetricMaxResults"),
-    shape_type=ShapeType.INTEGER,
-)
-
-INSIGHTS_METRIC_NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#InsightsMetricNextToken"),
-    shape_type=ShapeType.STRING,
-)
-
-INSIGHTS_METRIC_PERIOD = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#InsightsMetricPeriod"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_INSIGHTS_METRIC_DATA_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListInsightsMetricDataInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListInsightsMetricDataRequest",
-        )
-    ],
-    members={
-        "TrailName": {"target": STRING},
-        "EventSource": {
-            "target": EVENT_SOURCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EventName": {
-            "target": EVENT_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "InsightType": {
-            "target": INSIGHT_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ErrorCode": {"target": ERROR_CODE},
-        "StartTime": {"target": DATE},
-        "EndTime": {"target": DATE},
-        "Period": {"target": INSIGHTS_METRIC_PERIOD},
-        "DataType": {"target": INSIGHTS_METRIC_DATA_TYPE},
-        "MaxResults": {"target": INSIGHTS_METRIC_MAX_RESULTS},
-        "NextToken": {"target": INSIGHTS_METRIC_NEXT_TOKEN},
-    },
-)
-
-TIMESTAMPS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Timestamps"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DATE}},
-)
-
-DOUBLE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#Double"), shape_type=ShapeType.DOUBLE
-)
-
-INSIGHTS_METRIC_VALUES = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InsightsMetricValues"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOUBLE}},
-)
-
-LIST_INSIGHTS_METRIC_DATA_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListInsightsMetricDataOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListInsightsMetricDataResponse",
-        )
-    ],
-    members={
-        "TrailARN": {"target": STRING},
-        "EventSource": {"target": EVENT_SOURCE},
-        "EventName": {"target": EVENT_NAME},
-        "InsightType": {"target": INSIGHT_TYPE},
-        "ErrorCode": {"target": ERROR_CODE},
-        "Timestamps": {"target": TIMESTAMPS},
-        "Values": {"target": INSIGHTS_METRIC_VALUES},
-        "NextToken": {"target": INSIGHTS_METRIC_NEXT_TOKEN},
-    },
-)
-
-LIST_INSIGHTS_METRIC_DATA = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListInsightsMetricData"),
-    shape_type=ShapeType.OPERATION,
-)
-
-INVALID_TIME_RANGE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidTimeRangeException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidTimeRange", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_TOKEN_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidTokenException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "InvalidToken", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-LIST_PUBLIC_KEYS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListPublicKeysInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListPublicKeysRequest",
-        )
-    ],
-    members={
-        "StartTime": {"target": DATE},
-        "EndTime": {"target": DATE},
-        "NextToken": {"target": STRING},
-    },
-)
-
-PUBLIC_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PublicKey"),
-    members={
-        "Value": {"target": BYTE_BUFFER},
-        "ValidityStartTime": {"target": DATE},
-        "ValidityEndTime": {"target": DATE},
-        "Fingerprint": {"target": STRING},
-    },
-)
-
-PUBLIC_KEY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PublicKeyList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PUBLIC_KEY}},
-)
-
-LIST_PUBLIC_KEYS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListPublicKeysOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListPublicKeysResponse",
-        )
-    ],
-    members={
-        "PublicKeyList": {"target": PUBLIC_KEY_LIST},
-        "NextToken": {"target": STRING},
-    },
-)
-
-LIST_PUBLIC_KEYS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListPublicKeys"),
-    shape_type=ShapeType.OPERATION,
-)
-
-INVALID_DATE_RANGE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidDateRangeException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidDateRange", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_QUERY_STATUS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidQueryStatusException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidQueryStatus", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-LIST_QUERIES_MAX_RESULTS_COUNT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListQueriesMaxResultsCount"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_QUERIES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListQueriesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListQueriesRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextToken": {"target": PAGINATION_TOKEN},
-        "MaxResults": {"target": LIST_QUERIES_MAX_RESULTS_COUNT},
-        "StartTime": {"target": DATE},
-        "EndTime": {"target": DATE},
-        "QueryStatus": {"target": QUERY_STATUS},
-    },
-)
-
-QUERY = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Query"),
-    members={
-        "QueryId": {"target": UUID},
-        "QueryStatus": {"target": QUERY_STATUS},
-        "CreationTime": {"target": DATE},
-    },
-)
-
-QUERIES = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Queries"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": QUERY}},
-)
-
-LIST_QUERIES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListQueriesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListQueriesResponse",
-        )
-    ],
-    members={"Queries": {"target": QUERIES}, "NextToken": {"target": PAGINATION_TOKEN}},
-)
-
-LIST_QUERIES = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListQueries"), shape_type=ShapeType.OPERATION
-)
-
-RESOURCE_ID_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourceIdList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-LIST_TAGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListTagsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListTagsRequest",
-        )
-    ],
-    members={
-        "ResourceIdList": {
-            "target": RESOURCE_ID_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextToken": {"target": STRING},
-    },
-)
-
-RESOURCE_TAG = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourceTag"),
-    members={"ResourceId": {"target": STRING}, "TagsList": {"target": TAGS_LIST}},
-)
-
-RESOURCE_TAG_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourceTagList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RESOURCE_TAG}},
-)
-
-LIST_TAGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListTagsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListTagsResponse",
-        )
-    ],
-    members={
-        "ResourceTagList": {"target": RESOURCE_TAG_LIST},
-        "NextToken": {"target": STRING},
-    },
-)
-
-LIST_TAGS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListTags"), shape_type=ShapeType.OPERATION
-)
-
-LIST_TRAILS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListTrailsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListTrailsRequest",
-        )
-    ],
-    members={"NextToken": {"target": STRING}},
-)
-
-TRAIL_INFO = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#TrailInfo"),
-    members={
-        "TrailARN": {"target": STRING},
-        "Name": {"target": STRING},
-        "HomeRegion": {"target": STRING},
-    },
-)
-
-TRAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#Trails"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TRAIL_INFO}},
-)
-
-LIST_TRAILS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ListTrailsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#ListTrailsResponse",
-        )
-    ],
-    members={"Trails": {"target": TRAILS}, "NextToken": {"target": STRING}},
-)
-
-LIST_TRAILS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#ListTrails"), shape_type=ShapeType.OPERATION
-)
-
-INVALID_EVENT_CATEGORY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidEventCategoryException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidEventCategory", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_LOOKUP_ATTRIBUTES_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidLookupAttributesException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidLookupAttributes", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-EVENT_CATEGORY = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#EventCategory"),
-    shape_type=ShapeType.ENUM,
-    members={"Insight": {"target": UNIT}},
-)
-
-LOOKUP_ATTRIBUTE_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#LookupAttributeKey"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EVENT_ID": {"target": UNIT},
-        "EVENT_NAME": {"target": UNIT},
-        "READ_ONLY": {"target": UNIT},
-        "USERNAME": {"target": UNIT},
-        "RESOURCE_TYPE": {"target": UNIT},
-        "RESOURCE_NAME": {"target": UNIT},
-        "EVENT_SOURCE": {"target": UNIT},
-        "ACCESS_KEY_ID": {"target": UNIT},
-    },
-)
-
-LOOKUP_ATTRIBUTE_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#LookupAttributeValue"),
-    shape_type=ShapeType.STRING,
-)
-
-LOOKUP_ATTRIBUTE = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#LookupAttribute"),
-    members={
-        "AttributeKey": {
-            "target": LOOKUP_ATTRIBUTE_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributeValue": {
-            "target": LOOKUP_ATTRIBUTE_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-LOOKUP_ATTRIBUTES_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#LookupAttributesList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LOOKUP_ATTRIBUTE}},
-)
-
-MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#MaxResults"), shape_type=ShapeType.INTEGER
-)
-
-NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#NextToken"), shape_type=ShapeType.STRING
-)
-
-LOOKUP_EVENTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#LookupEventsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#LookupEventsRequest",
-        )
-    ],
-    members={
-        "LookupAttributes": {"target": LOOKUP_ATTRIBUTES_LIST},
-        "StartTime": {"target": DATE},
-        "EndTime": {"target": DATE},
-        "EventCategory": {"target": EVENT_CATEGORY},
-        "MaxResults": {"target": MAX_RESULTS},
-        "NextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LOOKUP_EVENTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#LookupEventsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#LookupEventsResponse",
-        )
-    ],
-    members={"Events": {"target": EVENTS_LIST}, "NextToken": {"target": NEXT_TOKEN}},
-)
-
-LOOKUP_EVENTS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#LookupEvents"), shape_type=ShapeType.OPERATION
-)
-
-INSUFFICIENT_IAM_ACCESS_PERMISSION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InsufficientIAMAccessPermissionException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InsufficientIAMAccessPermission", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-PUT_EVENT_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PutEventConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#PutEventConfigurationRequest",
-        )
-    ],
-    members={
-        "TrailName": {"target": STRING},
-        "EventDataStore": {"target": STRING},
-        "MaxEventSize": {"target": MAX_EVENT_SIZE},
-        "ContextKeySelectors": {"target": CONTEXT_KEY_SELECTORS},
-        "AggregationConfigurations": {"target": AGGREGATION_CONFIGURATIONS},
-    },
-)
-
-PUT_EVENT_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PutEventConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#PutEventConfigurationResponse",
-        )
-    ],
-    members={
-        "TrailARN": {"target": STRING},
-        "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
-        "MaxEventSize": {"target": MAX_EVENT_SIZE},
-        "ContextKeySelectors": {"target": CONTEXT_KEY_SELECTORS},
-        "AggregationConfigurations": {"target": AGGREGATION_CONFIGURATIONS},
-    },
-)
-
-PUT_EVENT_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#PutEventConfiguration"),
-    shape_type=ShapeType.OPERATION,
-)
-
-PUT_EVENT_SELECTORS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PutEventSelectorsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#PutEventSelectorsRequest",
-        )
-    ],
-    members={
-        "TrailName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EventSelectors": {"target": EVENT_SELECTORS},
-        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
-    },
-)
-
-PUT_EVENT_SELECTORS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PutEventSelectorsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#PutEventSelectorsResponse",
-        )
-    ],
-    members={
-        "TrailARN": {"target": STRING},
-        "EventSelectors": {"target": EVENT_SELECTORS},
-        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
-    },
-)
-
-PUT_EVENT_SELECTORS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#PutEventSelectors"),
-    shape_type=ShapeType.OPERATION,
-)
-
-INVALID_INSIGHT_SELECTORS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidInsightSelectorsException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidInsightSelectors", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-PUT_INSIGHT_SELECTORS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PutInsightSelectorsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#PutInsightSelectorsRequest",
-        )
-    ],
-    members={
-        "TrailName": {"target": STRING},
-        "InsightSelectors": {
-            "target": INSIGHT_SELECTORS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EventDataStore": {"target": EVENT_DATA_STORE_ARN},
-        "InsightsDestination": {"target": EVENT_DATA_STORE_ARN},
-    },
-)
-
-PUT_INSIGHT_SELECTORS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PutInsightSelectorsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#PutInsightSelectorsResponse",
-        )
-    ],
-    members={
-        "TrailARN": {"target": STRING},
-        "InsightSelectors": {"target": INSIGHT_SELECTORS},
-        "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
-        "InsightsDestination": {"target": EVENT_DATA_STORE_ARN},
-    },
-)
-
-PUT_INSIGHT_SELECTORS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#PutInsightSelectors"),
-    shape_type=ShapeType.OPERATION,
-)
-
-PUT_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PutResourcePolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#PutResourcePolicyRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": RESOURCE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ResourcePolicy": {
-            "target": RESOURCE_POLICY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PUT_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#PutResourcePolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#PutResourcePolicyResponse",
-        )
-    ],
-    members={
-        "ResourceArn": {"target": RESOURCE_ARN},
-        "ResourcePolicy": {"target": RESOURCE_POLICY},
-        "DelegatedAdminResourcePolicy": {"target": RESOURCE_POLICY},
-    },
-)
-
-RESOURCE_POLICY_NOT_VALID_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#ResourcePolicyNotValidException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ResourcePolicyNotValid", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-PUT_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#PutResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DELEGATED_ADMIN_ACCOUNT_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#DelegatedAdminAccountLimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "DelegatedAdminAccountLimitExceeded", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-REGISTER_ORGANIZATION_DELEGATED_ADMIN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminRequest",
-        )
-    ],
-    members={
-        "MemberAccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-REGISTER_ORGANIZATION_DELEGATED_ADMIN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminResponse",
-        )
-    ],
-)
-
-REGISTER_ORGANIZATION_DELEGATED_ADMIN = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdmin"),
-    shape_type=ShapeType.OPERATION,
-)
-
-REMOVE_TAGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RemoveTagsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#RemoveTagsRequest",
-        )
-    ],
-    members={
-        "ResourceId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TagsList": {
-            "target": TAGS_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-REMOVE_TAGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RemoveTagsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#RemoveTagsResponse",
-        )
-    ],
-)
-
-REMOVE_TAGS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#RemoveTags"), shape_type=ShapeType.OPERATION
-)
-
-RESTORE_EVENT_DATA_STORE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RestoreEventDataStoreInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#RestoreEventDataStoreRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-RESTORE_EVENT_DATA_STORE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#RestoreEventDataStoreOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#RestoreEventDataStoreResponse",
-        )
-    ],
-    members={
-        "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
-        "Name": {"target": EVENT_DATA_STORE_NAME},
-        "Status": {"target": EVENT_DATA_STORE_STATUS},
-        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
-        "MultiRegionEnabled": {"target": BOOLEAN},
-        "OrganizationEnabled": {"target": BOOLEAN},
-        "RetentionPeriod": {"target": RETENTION_PERIOD},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-        "CreatedTimestamp": {"target": DATE},
-        "UpdatedTimestamp": {"target": DATE},
-        "KmsKeyId": {"target": EVENT_DATA_STORE_KMS_KEY_ID},
-        "BillingMode": {"target": BILLING_MODE},
-    },
-)
-
-RESTORE_EVENT_DATA_STORE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#RestoreEventDataStore"),
-    shape_type=ShapeType.OPERATION,
-)
-
-SEARCH_SAMPLE_QUERIES_MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#SearchSampleQueriesMaxResults"),
-    shape_type=ShapeType.INTEGER,
-)
-
-SEARCH_SAMPLE_QUERIES_SEARCH_PHRASE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#SearchSampleQueriesSearchPhrase"),
-    shape_type=ShapeType.STRING,
-)
-
-SEARCH_SAMPLE_QUERIES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#SearchSampleQueriesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#SearchSampleQueriesRequest",
-        )
-    ],
-    members={
-        "SearchPhrase": {
-            "target": SEARCH_SAMPLE_QUERIES_SEARCH_PHRASE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MaxResults": {"target": SEARCH_SAMPLE_QUERIES_MAX_RESULTS},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-SAMPLE_QUERY_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#SampleQueryDescription"),
-    shape_type=ShapeType.STRING,
-)
-
-SAMPLE_QUERY_NAME = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#SampleQueryName"), shape_type=ShapeType.STRING
-)
-
-SAMPLE_QUERY_RELEVANCE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#SampleQueryRelevance"),
-    shape_type=ShapeType.FLOAT,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-SAMPLE_QUERY_SQL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#SampleQuerySQL"), shape_type=ShapeType.STRING
-)
-
-SEARCH_SAMPLE_QUERIES_SEARCH_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#SearchSampleQueriesSearchResult"),
-    members={
-        "Name": {"target": SAMPLE_QUERY_NAME},
-        "Description": {"target": SAMPLE_QUERY_DESCRIPTION},
-        "SQL": {"target": SAMPLE_QUERY_SQL},
-        "Relevance": {
-            "target": SAMPLE_QUERY_RELEVANCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-SEARCH_SAMPLE_QUERIES_SEARCH_RESULTS = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#SearchSampleQueriesSearchResults"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SEARCH_SAMPLE_QUERIES_SEARCH_RESULT}},
-)
-
-SEARCH_SAMPLE_QUERIES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#SearchSampleQueriesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#SearchSampleQueriesResponse",
-        )
-    ],
-    members={
-        "SearchResults": {"target": SEARCH_SAMPLE_QUERIES_SEARCH_RESULTS},
-        "NextToken": {"target": PAGINATION_TOKEN},
-    },
-)
-
-SEARCH_SAMPLE_QUERIES = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#SearchSampleQueries"),
-    shape_type=ShapeType.OPERATION,
-)
-
-QUERY_PARAMETER_KEY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryParameterKey"),
-    shape_type=ShapeType.STRING,
-)
-
-QUERY_PARAMETER_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryParameterValue"),
-    shape_type=ShapeType.STRING,
-)
-
-QUERY_PARAMETER_VALUES = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#QueryParameterValues"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": QUERY_PARAMETER_KEY},
-        "value": {"target": QUERY_PARAMETER_VALUE},
-    },
-)
-
-START_DASHBOARD_REFRESH_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StartDashboardRefreshInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StartDashboardRefreshRequest",
-        )
-    ],
-    members={
-        "DashboardId": {
-            "target": DASHBOARD_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "QueryParameterValues": {"target": QUERY_PARAMETER_VALUES},
-    },
-)
-
-START_DASHBOARD_REFRESH_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StartDashboardRefreshOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StartDashboardRefreshResponse",
-        )
-    ],
-    members={"RefreshId": {"target": REFRESH_ID}},
-)
-
-START_DASHBOARD_REFRESH = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#StartDashboardRefresh"),
-    shape_type=ShapeType.OPERATION,
-)
-
-START_EVENT_DATA_STORE_INGESTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StartEventDataStoreIngestionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StartEventDataStoreIngestionRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-START_EVENT_DATA_STORE_INGESTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StartEventDataStoreIngestionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StartEventDataStoreIngestionResponse",
-        )
-    ],
-)
-
-START_EVENT_DATA_STORE_INGESTION = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#StartEventDataStoreIngestion"),
-    shape_type=ShapeType.OPERATION,
-)
-
-INVALID_IMPORT_SOURCE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#InvalidImportSourceException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidImportSource", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-START_IMPORT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StartImportInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StartImportRequest",
-        )
-    ],
-    members={
-        "Destinations": {"target": IMPORT_DESTINATIONS},
-        "ImportSource": {"target": IMPORT_SOURCE},
-        "StartEventTime": {"target": DATE},
-        "EndEventTime": {"target": DATE},
-        "ImportId": {"target": UUID},
-    },
-)
-
-START_IMPORT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StartImportOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StartImportResponse",
-        )
-    ],
-    members={
-        "ImportId": {"target": UUID},
-        "Destinations": {"target": IMPORT_DESTINATIONS},
-        "ImportSource": {"target": IMPORT_SOURCE},
-        "StartEventTime": {"target": DATE},
-        "EndEventTime": {"target": DATE},
-        "ImportStatus": {"target": IMPORT_STATUS},
-        "CreatedTimestamp": {"target": DATE},
-        "UpdatedTimestamp": {"target": DATE},
-    },
-)
-
-START_IMPORT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#StartImport"), shape_type=ShapeType.OPERATION
-)
-
-START_LOGGING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StartLoggingInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StartLoggingRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-START_LOGGING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StartLoggingOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StartLoggingResponse",
-        )
-    ],
-)
-
-START_LOGGING = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#StartLogging"), shape_type=ShapeType.OPERATION
-)
-
-MAX_CONCURRENT_QUERIES_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#MaxConcurrentQueriesException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "MaxConcurrentQueries", "httpResponseCode": 429}
-            ),
-        ),
-    ],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-START_QUERY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StartQueryInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StartQueryRequest",
-        )
-    ],
-    members={
-        "QueryStatement": {"target": QUERY_STATEMENT},
-        "DeliveryS3Uri": {"target": DELIVERY_S3_URI},
-        "QueryAlias": {"target": QUERY_ALIAS},
-        "QueryParameters": {"target": QUERY_PARAMETERS},
-        "EventDataStoreOwnerAccountId": {"target": ACCOUNT_ID},
-    },
-)
-
-START_QUERY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StartQueryOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StartQueryResponse",
-        )
-    ],
-    members={
-        "QueryId": {"target": UUID},
-        "EventDataStoreOwnerAccountId": {"target": ACCOUNT_ID},
-    },
-)
-
-START_QUERY = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#StartQuery"), shape_type=ShapeType.OPERATION
-)
-
-STOP_EVENT_DATA_STORE_INGESTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StopEventDataStoreIngestionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StopEventDataStoreIngestionRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-STOP_EVENT_DATA_STORE_INGESTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StopEventDataStoreIngestionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StopEventDataStoreIngestionResponse",
-        )
-    ],
-)
-
-STOP_EVENT_DATA_STORE_INGESTION = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#StopEventDataStoreIngestion"),
-    shape_type=ShapeType.OPERATION,
-)
-
-STOP_IMPORT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StopImportInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StopImportRequest",
-        )
-    ],
-    members={
-        "ImportId": {
-            "target": UUID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-STOP_IMPORT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StopImportOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StopImportResponse",
-        )
-    ],
-    members={
-        "ImportId": {"target": UUID},
-        "ImportSource": {"target": IMPORT_SOURCE},
-        "Destinations": {"target": IMPORT_DESTINATIONS},
-        "ImportStatus": {"target": IMPORT_STATUS},
-        "CreatedTimestamp": {"target": DATE},
-        "UpdatedTimestamp": {"target": DATE},
-        "StartEventTime": {"target": DATE},
-        "EndEventTime": {"target": DATE},
-        "ImportStatistics": {"target": IMPORT_STATISTICS},
-    },
-)
-
-STOP_IMPORT = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#StopImport"), shape_type=ShapeType.OPERATION
-)
-
-STOP_LOGGING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StopLoggingInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StopLoggingRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-STOP_LOGGING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#StopLoggingOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#StopLoggingResponse",
-        )
-    ],
-)
-
-STOP_LOGGING = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#StopLogging"), shape_type=ShapeType.OPERATION
-)
-
-UPDATE_CHANNEL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateChannelInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#UpdateChannelRequest",
-        )
-    ],
-    members={
-        "Channel": {
-            "target": CHANNEL_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Destinations": {"target": DESTINATIONS},
-        "Name": {"target": CHANNEL_NAME},
-    },
-)
-
-UPDATE_CHANNEL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateChannelOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#UpdateChannelResponse",
-        )
-    ],
-    members={
-        "ChannelArn": {"target": CHANNEL_ARN},
-        "Name": {"target": CHANNEL_NAME},
-        "Source": {"target": SOURCE},
-        "Destinations": {"target": DESTINATIONS},
-    },
-)
-
-UPDATE_CHANNEL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateChannel"), shape_type=ShapeType.OPERATION
-)
-
-UPDATE_DASHBOARD_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateDashboardInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#UpdateDashboardRequest",
-        )
-    ],
-    members={
-        "DashboardId": {
-            "target": DASHBOARD_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Widgets": {"target": REQUEST_WIDGET_LIST},
-        "RefreshSchedule": {"target": REFRESH_SCHEDULE},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-    },
-)
-
-UPDATE_DASHBOARD_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateDashboardOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#UpdateDashboardResponse",
-        )
-    ],
-    members={
-        "DashboardArn": {"target": DASHBOARD_ARN},
-        "Name": {"target": DASHBOARD_NAME},
-        "Type": {"target": DASHBOARD_TYPE},
-        "Widgets": {"target": WIDGET_LIST},
-        "RefreshSchedule": {"target": REFRESH_SCHEDULE},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-        "CreatedTimestamp": {"target": DATE},
-        "UpdatedTimestamp": {"target": DATE},
-    },
-)
-
-UPDATE_DASHBOARD = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateDashboard"),
-    shape_type=ShapeType.OPERATION,
-)
-
-UPDATE_EVENT_DATA_STORE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateEventDataStoreInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#UpdateEventDataStoreRequest",
-        )
-    ],
-    members={
-        "EventDataStore": {
-            "target": EVENT_DATA_STORE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Name": {"target": EVENT_DATA_STORE_NAME},
-        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
-        "MultiRegionEnabled": {"target": BOOLEAN},
-        "OrganizationEnabled": {"target": BOOLEAN},
-        "RetentionPeriod": {"target": RETENTION_PERIOD},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-        "KmsKeyId": {"target": EVENT_DATA_STORE_KMS_KEY_ID},
-        "BillingMode": {"target": BILLING_MODE},
-    },
-)
-
-UPDATE_EVENT_DATA_STORE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateEventDataStoreOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#UpdateEventDataStoreResponse",
-        )
-    ],
-    members={
-        "EventDataStoreArn": {"target": EVENT_DATA_STORE_ARN},
-        "Name": {"target": EVENT_DATA_STORE_NAME},
-        "Status": {"target": EVENT_DATA_STORE_STATUS},
-        "AdvancedEventSelectors": {"target": ADVANCED_EVENT_SELECTORS},
-        "MultiRegionEnabled": {"target": BOOLEAN},
-        "OrganizationEnabled": {"target": BOOLEAN},
-        "RetentionPeriod": {"target": RETENTION_PERIOD},
-        "TerminationProtectionEnabled": {"target": TERMINATION_PROTECTION_ENABLED},
-        "CreatedTimestamp": {"target": DATE},
-        "UpdatedTimestamp": {"target": DATE},
-        "KmsKeyId": {"target": EVENT_DATA_STORE_KMS_KEY_ID},
-        "BillingMode": {"target": BILLING_MODE},
-        "FederationStatus": {"target": FEDERATION_STATUS},
-        "FederationRoleArn": {"target": FEDERATION_ROLE_ARN},
-    },
-)
-
-UPDATE_EVENT_DATA_STORE = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateEventDataStore"),
-    shape_type=ShapeType.OPERATION,
-)
-
-UPDATE_TRAIL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateTrailInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#UpdateTrailRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "S3BucketName": {"target": STRING},
-        "S3KeyPrefix": {"target": STRING},
-        "SnsTopicName": {"target": STRING},
-        "IncludeGlobalServiceEvents": {"target": BOOLEAN},
-        "IsMultiRegionTrail": {"target": BOOLEAN},
-        "EnableLogFileValidation": {"target": BOOLEAN},
-        "CloudWatchLogsLogGroupArn": {"target": STRING},
-        "CloudWatchLogsRoleArn": {"target": STRING},
-        "KmsKeyId": {"target": STRING},
-        "IsOrganizationTrail": {"target": BOOLEAN},
-        "RecursiveLogging": {"target": BOOLEAN},
-    },
-)
-
-UPDATE_TRAIL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateTrailOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cloudtrail#UpdateTrailResponse",
-        )
-    ],
-    members={
-        "Name": {"target": STRING},
-        "S3BucketName": {"target": STRING},
-        "S3KeyPrefix": {"target": STRING},
-        "SnsTopicName": {"target": STRING},
-        "SnsTopicARN": {"target": STRING},
-        "IncludeGlobalServiceEvents": {"target": BOOLEAN},
-        "IsMultiRegionTrail": {"target": BOOLEAN},
-        "TrailARN": {"target": STRING},
-        "LogFileValidationEnabled": {"target": BOOLEAN},
-        "CloudWatchLogsLogGroupArn": {"target": STRING},
-        "CloudWatchLogsRoleArn": {"target": STRING},
-        "KmsKeyId": {"target": STRING},
-        "IsOrganizationTrail": {"target": BOOLEAN},
-        "RecursiveLogging": {"target": BOOLEAN},
-    },
-)
-
-UPDATE_TRAIL = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#UpdateTrail"), shape_type=ShapeType.OPERATION
-)
-
-CLOUD_TRAIL_20131101 = Schema(
-    id=ShapeID("com.amazonaws.cloudtrail#CloudTrail_20131101"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "cloudtrail"})
-        ),
-        Trait.new(id=ShapeID("aws.protocols#awsJson1_1")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+ADVANCED_FIELD_SELECTOR: StaticSchema = (
+    18,
+    n0,
+    _AFS,
+    0,
+    (_F, _E, _SW, _EW, _NE, _NSW, _NEW),
+    (
+        (SELECTOR_FIELD, 1),
+        (OPERATOR, 0),
+        (OPERATOR, 0),
+        (OPERATOR, 0),
+        (OPERATOR, 0),
+        (OPERATOR, 0),
+        (OPERATOR, 0),
+    ),
+)
+
+ADVANCED_FIELD_SELECTORS: StaticSchema = (
+    16,
+    n0,
+    _AFSd,
+    0,
+    (_m,),
+    ((ADVANCED_FIELD_SELECTOR, 0),),
+)
+
+SELECTOR_NAME: StaticSchema = (3, n0, _SN, 0)
+
+ADVANCED_EVENT_SELECTOR: StaticSchema = (
+    18,
+    n0,
+    _AES,
+    0,
+    (_N, _FS),
+    ((SELECTOR_NAME, 0), (ADVANCED_FIELD_SELECTORS, 1)),
+)
+
+ADVANCED_EVENT_SELECTORS: StaticSchema = (
+    16,
+    n0,
+    _AESd,
+    0,
+    (_m,),
+    ((ADVANCED_EVENT_SELECTOR, 0),),
+)
+
+EVENT_CATEGORY_AGGREGATION: StaticSchema = (14, n0, _ECA, 0, (_D,), ((-1, {_sV: _D}),))
+
+TEMPLATE: StaticSchema = (
+    14,
+    n0,
+    _Te,
+    0,
+    (_AA, _RA, _UA),
+    ((-1, {_sV: _AA}), (-1, {_sV: _RA}), (-1, {_sV: _UA})),
+)
+
+TEMPLATES: StaticSchema = (16, n0, _Tem, 0, (_m,), ((TEMPLATE, 0),))
+
+AGGREGATION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _AC,
+    0,
+    (_Tem, _EC),
+    ((TEMPLATES, 1), (EVENT_CATEGORY_AGGREGATION, 1)),
+)
+
+AGGREGATION_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _ACg,
+    0,
+    (_m,),
+    ((AGGREGATION_CONFIGURATION, 0),),
+)
+
+BILLING_MODE: StaticSchema = (
+    14,
+    n0,
+    _BM,
+    0,
+    (_ERP, _FRP),
+    ((-1, {_sV: _ERP}), (-1, {_sV: _FRP})),
+)
+
+BOOLEAN: StaticSchema = (2, n0, _B, 0)
+
+BYTE_BUFFER: StaticSchema = (1, n0, _BB, 0)
+
+EVENT_DATA_STORE_ARN: StaticSchema = (3, n0, _EDSA, 0)
+
+UUID: StaticSchema = (3, n0, _UUID, 0)
+
+CANCEL_QUERY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CQI,
+    {_sSI: _cCQR, _smi: None},
+    (_EDS, _QI, _EDSOAI),
+    ((EVENT_DATA_STORE_ARN, 0), (UUID, 1), (ACCOUNT_ID, 0)),
+)
+
+QUERY_STATUS: StaticSchema = (
+    14,
+    n0,
+    _QS,
+    0,
+    (_QUEUED, _RUNNING, _FINISHED, _FAILED, _CANCELLED, _TO),
+    (
+        (-1, {_sV: _QUEUED}),
+        (-1, {_sV: _RUNNING}),
+        (-1, {_sV: _FINISHED}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _CANCELLED}),
+        (-1, {_sV: _TO}),
+    ),
+)
+
+CANCEL_QUERY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CQO,
+    {_sSI: _cCQRo, _smit: None},
+    (_QI, _QS, _EDSOAI),
+    ((UUID, 1), (QUERY_STATUS, 1), (ACCOUNT_ID, 0)),
+)
+
+INACTIVE_QUERY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IQE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_PARAMETER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IPE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+QUERY_ID_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _QINFE,
+    {_s: _c, _sE: 404},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CANCEL_QUERY: StaticOperationSchema = (
+    23,
+    n0,
+    _CQ,
+    0,
+    CANCEL_QUERY_INPUT,
+    CANCEL_QUERY_OUTPUT,
+    (
+        CONFLICT_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INACTIVE_QUERY_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        QUERY_ID_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+CANNOT_DELEGATE_MANAGEMENT_ACCOUNT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CDMAE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CHANNEL_ARN: StaticSchema = (3, n0, _CA, 0)
+
+CHANNEL_NAME: StaticSchema = (3, n0, _CN, 0)
+
+CHANNEL: StaticSchema = (
+    18,
+    n0,
+    _C,
+    0,
+    (_CA, _N),
+    ((CHANNEL_ARN, 0), (CHANNEL_NAME, 0)),
+)
+
+CHANNEL_ALREADY_EXISTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CAEE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CHANNEL_EXISTS_FOR_EDS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CEFEDSE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CHANNEL_MAX_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CMLEE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CHANNELS: StaticSchema = (16, n0, _Ch, 0, (_m,), ((CHANNEL, 0),))
+
+LOCATION: StaticSchema = (3, n0, _L, 0)
+
+DESTINATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _DT,
+    0,
+    (_EDS_, _AS),
+    ((-1, {_sV: _EDS_}), (-1, {_sV: _AS})),
+)
+
+DESTINATION: StaticSchema = (
+    18,
+    n0,
+    _De,
+    0,
+    (_Ty, _L),
+    ((DESTINATION_TYPE, 1), (LOCATION, 1)),
+)
+
+DESTINATIONS: StaticSchema = (16, n0, _Des, 0, (_m,), ((DESTINATION, 0),))
+
+SOURCE: StaticSchema = (3, n0, _So, 0)
+
+CREATE_CHANNEL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CCI,
+    {_sSI: _cCCR, _smi: None},
+    (_N, _So, _Des, _Ta),
+    ((CHANNEL_NAME, 1), (SOURCE, 1), (DESTINATIONS, 1), (TAGS_LIST, 0)),
+)
+
+CREATE_CHANNEL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CCO,
+    {_sSI: _cCCRo, _smit: None},
+    (_CA, _N, _So, _Des, _Ta),
+    (
+        (CHANNEL_ARN, 0),
+        (CHANNEL_NAME, 0),
+        (SOURCE, 0),
+        (DESTINATIONS, 0),
+        (TAGS_LIST, 0),
+    ),
+)
+
+INVALID_EVENT_DATA_STORE_CATEGORY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IEDSCE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_SOURCE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CREATE_CHANNEL: StaticOperationSchema = (
+    23,
+    n0,
+    _CC,
+    0,
+    CREATE_CHANNEL_INPUT,
+    CREATE_CHANNEL_OUTPUT,
+    (
+        CHANNEL_ALREADY_EXISTS_EXCEPTION,
+        CHANNEL_MAX_LIMIT_EXCEEDED_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_CATEGORY_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_SOURCE_EXCEPTION,
+        INVALID_TAG_PARAMETER_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        TAGS_LIMIT_EXCEEDED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+DASHBOARD_NAME: StaticSchema = (3, n0, _DN, 0)
+
+REFRESH_SCHEDULE_FREQUENCY_UNIT: StaticSchema = (
+    14,
+    n0,
+    _RSFU,
+    0,
+    (_HOURS, _DAYS),
+    ((-1, {_sV: _HOURS}), (-1, {_sV: _DAYS})),
+)
+
+REFRESH_SCHEDULE_FREQUENCY_VALUE: StaticSchema = (7, n0, _RSFV, 0)
+
+REFRESH_SCHEDULE_FREQUENCY: StaticSchema = (
+    18,
+    n0,
+    _RSF,
+    0,
+    (_U, _V),
+    ((REFRESH_SCHEDULE_FREQUENCY_UNIT, 0), (REFRESH_SCHEDULE_FREQUENCY_VALUE, 0)),
+)
+
+REFRESH_SCHEDULE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _RSS,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+TIME_OF_DAY: StaticSchema = (3, n0, _TOD, 0)
+
+REFRESH_SCHEDULE: StaticSchema = (
+    18,
+    n0,
+    _RS,
+    0,
+    (_Fr, _St, _TOD),
+    ((REFRESH_SCHEDULE_FREQUENCY, 0), (REFRESH_SCHEDULE_STATUS, 0), (TIME_OF_DAY, 0)),
+)
+
+TERMINATION_PROTECTION_ENABLED: StaticSchema = (2, n0, _TPE, 0)
+
+QUERY_PARAMETER: StaticSchema = (3, n0, _QP, 0)
+
+QUERY_PARAMETERS: StaticSchema = (16, n0, _QPu, 0, (_m,), ((QUERY_PARAMETER, 0),))
+
+QUERY_STATEMENT: StaticSchema = (3, n0, _QSu, 0)
+
+VIEW_PROPERTIES_KEY: StaticSchema = (3, n0, _VPK, 0)
+
+VIEW_PROPERTIES_VALUE: StaticSchema = (3, n0, _VPV, 0)
+
+VIEW_PROPERTIES_MAP: StaticSchema = (
+    17,
+    n0,
+    _VPM,
+    0,
+    (_k, _v),
+    ((VIEW_PROPERTIES_KEY, 0), (VIEW_PROPERTIES_VALUE, 0)),
+)
+
+REQUEST_WIDGET: StaticSchema = (
+    18,
+    n0,
+    _RW,
+    0,
+    (_QSu, _QPu, _VP),
+    ((QUERY_STATEMENT, 1), (QUERY_PARAMETERS, 0), (VIEW_PROPERTIES_MAP, 1)),
+)
+
+REQUEST_WIDGET_LIST: StaticSchema = (16, n0, _RWL, 0, (_m,), ((REQUEST_WIDGET, 0),))
+
+CREATE_DASHBOARD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDI,
+    {_sSI: _cCDR, _smi: None},
+    (_N, _RS, _TL, _TPE, _W),
+    (
+        (DASHBOARD_NAME, 1),
+        (REFRESH_SCHEDULE, 0),
+        (TAGS_LIST, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+        (REQUEST_WIDGET_LIST, 0),
+    ),
+)
+
+DASHBOARD_ARN: StaticSchema = (3, n0, _DA, 0)
+
+DASHBOARD_TYPE: StaticSchema = (
+    14,
+    n0,
+    _DTa,
+    0,
+    (_MANAGED, _CUSTOM),
+    ((-1, {_sV: _MANAGED}), (-1, {_sV: _CUSTOM})),
+)
+
+QUERY_ALIAS: StaticSchema = (3, n0, _QA, 0)
+
+WIDGET: StaticSchema = (
+    18,
+    n0,
+    _Wi,
+    0,
+    (_QA, _QSu, _QPu, _VP),
+    (
+        (QUERY_ALIAS, 0),
+        (QUERY_STATEMENT, 0),
+        (QUERY_PARAMETERS, 0),
+        (VIEW_PROPERTIES_MAP, 0),
+    ),
+)
+
+WIDGET_LIST: StaticSchema = (16, n0, _WL, 0, (_m,), ((WIDGET, 0),))
+
+CREATE_DASHBOARD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDO,
+    {_sSI: _cCDRo, _smit: None},
+    (_DA, _N, _Ty, _W, _TL, _RS, _TPE),
+    (
+        (DASHBOARD_ARN, 0),
+        (DASHBOARD_NAME, 0),
+        (DASHBOARD_TYPE, 0),
+        (WIDGET_LIST, 0),
+        (TAGS_LIST, 0),
+        (REFRESH_SCHEDULE, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+    ),
+)
+
+INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IEPE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_QUERY_STATEMENT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IQSE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SQEE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CREATE_DASHBOARD: StaticOperationSchema = (
+    23,
+    n0,
+    _CD,
+    0,
+    CREATE_DASHBOARD_INPUT,
+    CREATE_DASHBOARD_OUTPUT,
+    (
+        CONFLICT_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION,
+        INVALID_QUERY_STATEMENT_EXCEPTION,
+        INVALID_TAG_PARAMETER_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CTANEE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+EVENT_DATA_STORE_KMS_KEY_ID: StaticSchema = (3, n0, _EDSKKI, 0)
+
+EVENT_DATA_STORE_NAME: StaticSchema = (3, n0, _EDSN, 0)
+
+RETENTION_PERIOD: StaticSchema = (7, n0, _RP, 0)
+
+CREATE_EVENT_DATA_STORE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CEDSI,
+    {_sSI: _cCEDSR, _smi: None},
+    (_N, _AESd, _MRE, _OE, _RP, _TPE, _TL, _KKI, _SI, _BM),
+    (
+        (EVENT_DATA_STORE_NAME, 1),
+        (ADVANCED_EVENT_SELECTORS, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (RETENTION_PERIOD, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+        (TAGS_LIST, 0),
+        (EVENT_DATA_STORE_KMS_KEY_ID, 0),
+        (BOOLEAN, 0),
+        (BILLING_MODE, 0),
+    ),
+)
+
+DATE: StaticSchema = (4, n0, _Da, 0)
+
+EVENT_DATA_STORE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _EDSS,
+    0,
+    (_CREATED, _ENABLED, _PD, _SI_, _SI__, _SI___),
+    (
+        (-1, {_sV: _CREATED}),
+        (-1, {_sV: _ENABLED}),
+        (-1, {_sV: _PD}),
+        (-1, {_sV: _SI_}),
+        (-1, {_sV: _SI__}),
+        (-1, {_sV: _SI___}),
+    ),
+)
+
+CREATE_EVENT_DATA_STORE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CEDSO,
+    {_sSI: _cCEDSRo, _smit: None},
+    (_EDSA, _N, _St, _AESd, _MRE, _OE, _RP, _TPE, _TL, _CT, _UT, _KKI, _BM),
+    (
+        (EVENT_DATA_STORE_ARN, 0),
+        (EVENT_DATA_STORE_NAME, 0),
+        (EVENT_DATA_STORE_STATUS, 0),
+        (ADVANCED_EVENT_SELECTORS, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (RETENTION_PERIOD, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+        (TAGS_LIST, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (EVENT_DATA_STORE_KMS_KEY_ID, 0),
+        (BILLING_MODE, 0),
+    ),
+)
+
+EVENT_DATA_STORE_ALREADY_EXISTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EDSAEE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+EVENT_DATA_STORE_MAX_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EDSMLEE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IDSAPE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_EVENT_SELECTORS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IESE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_KMS_KEY_ID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IKKIE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+KMS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+KMS_KEY_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KKNFE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+ORGANIZATION_NOT_IN_ALL_FEATURES_MODE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ONIAFME,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+ORGANIZATIONS_NOT_IN_USE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ONIUE,
+    {_s: _c, _sE: 404},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+THROTTLING_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TE,
+    {_s: _c, _sE: 429},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CREATE_EVENT_DATA_STORE: StaticOperationSchema = (
+    23,
+    n0,
+    _CEDS,
+    0,
+    CREATE_EVENT_DATA_STORE_INPUT,
+    CREATE_EVENT_DATA_STORE_OUTPUT,
+    (
+        CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        EVENT_DATA_STORE_ALREADY_EXISTS_EXCEPTION,
+        EVENT_DATA_STORE_MAX_LIMIT_EXCEEDED_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION,
+        INVALID_EVENT_SELECTORS_EXCEPTION,
+        INVALID_KMS_KEY_ID_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_TAG_PARAMETER_EXCEPTION,
+        KMS_EXCEPTION,
+        KMS_KEY_NOT_FOUND_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        ORGANIZATION_NOT_IN_ALL_FEATURES_MODE_EXCEPTION,
+        ORGANIZATIONS_NOT_IN_USE_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+CLOUD_TRAIL_INVALID_CLIENT_TOKEN_ID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CTICTIE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CLOUD_WATCH_LOGS_DELIVERY_UNAVAILABLE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CWLDUE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CREATE_TRAIL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CTI,
+    {_sSI: _cCTR, _smi: None},
+    (_N, _SBN, _SKP, _STN, _IGSE, _IMRT, _ELFV, _CWLLGA, _CWLRA, _KKI, _IOT, _TL, _RL),
+    (
+        (STRING, 1),
+        (STRING, 1),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (TAGS_LIST, 0),
+        (BOOLEAN, 0),
+    ),
+)
+
+CREATE_TRAIL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CTO,
+    {_sSI: _cCTRo, _smit: None},
+    (
+        _N,
+        _SBN,
+        _SKP,
+        _STN,
+        _STARN,
+        _IGSE,
+        _IMRT,
+        _TARN,
+        _LFVE,
+        _CWLLGA,
+        _CWLRA,
+        _KKI,
+        _IOT,
+        _RL,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+    ),
+)
+
+INSUFFICIENT_S3_BUCKET_POLICY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISBPE,
+    {_s: _c, _sE: 403},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INSUFFICIENT_SNS_TOPIC_POLICY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISTPE,
+    {_s: _c, _sE: 403},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_CLOUD_WATCH_LOGS_LOG_GROUP_ARN_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ICWLLGAE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_CLOUD_WATCH_LOGS_ROLE_ARN_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ICWLRAE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_PARAMETER_COMBINATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IPCE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_S3_BUCKET_NAME_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISBNE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_S3_PREFIX_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISPE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_SNS_TOPIC_NAME_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISTNE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+KMS_KEY_DISABLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KKDE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+MAXIMUM_NUMBER_OF_TRAILS_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MNOTEE,
+    {_s: _c, _sE: 403},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+S3_BUCKET_DOES_NOT_EXIST_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SBDNEE,
+    {_s: _c, _sE: 404},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+TRAIL_ALREADY_EXISTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TAEE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+TRAIL_NOT_PROVIDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TNPE,
+    {_s: _c, _sE: 404},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CREATE_TRAIL: StaticOperationSchema = (
+    23,
+    n0,
+    _CTr,
+    0,
+    CREATE_TRAIL_INPUT,
+    CREATE_TRAIL_OUTPUT,
+    (
+        CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION,
+        CLOUD_TRAIL_INVALID_CLIENT_TOKEN_ID_EXCEPTION,
+        CLOUD_WATCH_LOGS_DELIVERY_UNAVAILABLE_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION,
+        INSUFFICIENT_S3_BUCKET_POLICY_EXCEPTION,
+        INSUFFICIENT_SNS_TOPIC_POLICY_EXCEPTION,
+        INVALID_CLOUD_WATCH_LOGS_LOG_GROUP_ARN_EXCEPTION,
+        INVALID_CLOUD_WATCH_LOGS_ROLE_ARN_EXCEPTION,
+        INVALID_KMS_KEY_ID_EXCEPTION,
+        INVALID_PARAMETER_COMBINATION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_S3_BUCKET_NAME_EXCEPTION,
+        INVALID_S3_PREFIX_EXCEPTION,
+        INVALID_SNS_TOPIC_NAME_EXCEPTION,
+        INVALID_TAG_PARAMETER_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        KMS_EXCEPTION,
+        KMS_KEY_DISABLED_EXCEPTION,
+        KMS_KEY_NOT_FOUND_EXCEPTION,
+        MAXIMUM_NUMBER_OF_TRAILS_EXCEEDED_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        ORGANIZATION_NOT_IN_ALL_FEATURES_MODE_EXCEPTION,
+        ORGANIZATIONS_NOT_IN_USE_EXCEPTION,
+        S3_BUCKET_DOES_NOT_EXIST_EXCEPTION,
+        TAGS_LIMIT_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRAIL_ALREADY_EXISTS_EXCEPTION,
+        TRAIL_NOT_PROVIDED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+DELETE_CHANNEL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCI,
+    {_sSI: _cDCR, _smi: None},
+    (_C,),
+    ((CHANNEL_ARN, 1),),
+)
+
+DELETE_CHANNEL_OUTPUT: StaticSchema = (18, n0, _DCO, {_sSI: _cDCRo, _smit: None})
+
+DELETE_CHANNEL: StaticOperationSchema = (
+    23,
+    n0,
+    _DC,
+    0,
+    DELETE_CHANNEL_INPUT,
+    DELETE_CHANNEL_OUTPUT,
+    (
+        CHANNEL_ARN_INVALID_EXCEPTION,
+        CHANNEL_NOT_FOUND_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+DELETE_DASHBOARD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDI,
+    {_sSI: _cDDR, _smi: None},
+    (_DI,),
+    ((DASHBOARD_ARN, 1),),
+)
+
+DELETE_DASHBOARD_OUTPUT: StaticSchema = (18, n0, _DDO, {_sSI: _cDDRo, _smit: None})
+
+DELETE_DASHBOARD: StaticOperationSchema = (
+    23,
+    n0,
+    _DD,
+    0,
+    DELETE_DASHBOARD_INPUT,
+    DELETE_DASHBOARD_OUTPUT,
+    (CONFLICT_EXCEPTION, RESOURCE_NOT_FOUND_EXCEPTION, UNSUPPORTED_OPERATION_EXCEPTION),
+)
+
+DELETE_EVENT_DATA_STORE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DEDSI,
+    {_sSI: _cDEDSR, _smi: None},
+    (_EDS,),
+    ((EVENT_DATA_STORE_ARN, 1),),
+)
+
+DELETE_EVENT_DATA_STORE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DEDSO,
+    {_sSI: _cDEDSRo, _smit: None},
+)
+
+EVENT_DATA_STORE_FEDERATION_ENABLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EDSFEE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+EVENT_DATA_STORE_HAS_ONGOING_IMPORT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EDSHOIE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+EVENT_DATA_STORE_TERMINATION_PROTECTED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EDSTPE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+DELETE_EVENT_DATA_STORE: StaticOperationSchema = (
+    23,
+    n0,
+    _DEDS,
+    0,
+    DELETE_EVENT_DATA_STORE_INPUT,
+    DELETE_EVENT_DATA_STORE_OUTPUT,
+    (
+        CHANNEL_EXISTS_FOR_EDS_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_FEDERATION_ENABLED_EXCEPTION,
+        EVENT_DATA_STORE_HAS_ONGOING_IMPORT_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        EVENT_DATA_STORE_TERMINATION_PROTECTED_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+RESOURCE_ARN: StaticSchema = (3, n0, _RAe, 0)
+
+DELETE_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPI,
+    {_sSI: _cDRPR, _smi: None},
+    (_RAe,),
+    ((RESOURCE_ARN, 1),),
+)
+
+DELETE_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPO,
+    {_sSI: _cDRPRo, _smit: None},
+)
+
+RESOURCE_ARN_NOT_VALID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RARNNVE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+RESOURCE_POLICY_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RPNFE,
+    {_s: _c, _sE: 404},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+DELETE_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _DRP,
+    0,
+    DELETE_RESOURCE_POLICY_INPUT,
+    DELETE_RESOURCE_POLICY_OUTPUT,
+    (
+        CONFLICT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        RESOURCE_ARN_NOT_VALID_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        RESOURCE_POLICY_NOT_FOUND_EXCEPTION,
+        RESOURCE_TYPE_NOT_SUPPORTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+DELETE_TRAIL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTI,
+    {_sSI: _cDTR, _smi: None},
+    (_N,),
+    ((STRING, 1),),
+)
+
+DELETE_TRAIL_OUTPUT: StaticSchema = (18, n0, _DTO, {_sSI: _cDTRo, _smit: None})
+
+INVALID_HOME_REGION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IHRE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+TRAIL_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TNFE,
+    {_s: _c, _sE: 404},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+DELETE_TRAIL: StaticOperationSchema = (
+    23,
+    n0,
+    _DTe,
+    0,
+    DELETE_TRAIL_INPUT,
+    DELETE_TRAIL_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_HOME_REGION_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+DEREGISTER_ORGANIZATION_DELEGATED_ADMIN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DODAI,
+    {_sSI: _cDODAR, _smi: None},
+    (_DAAI,),
+    ((ACCOUNT_ID, 1),),
+)
+
+DEREGISTER_ORGANIZATION_DELEGATED_ADMIN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DODAO,
+    {_sSI: _cDODARo, _smit: None},
+)
+
+NOT_ORGANIZATION_MANAGEMENT_ACCOUNT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _NOMAEo,
+    {_s: _c, _sE: 403},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+DEREGISTER_ORGANIZATION_DELEGATED_ADMIN: StaticOperationSchema = (
+    23,
+    n0,
+    _DODA,
+    0,
+    DEREGISTER_ORGANIZATION_DELEGATED_ADMIN_INPUT,
+    DEREGISTER_ORGANIZATION_DELEGATED_ADMIN_OUTPUT,
+    (
+        ACCOUNT_NOT_FOUND_EXCEPTION,
+        ACCOUNT_NOT_REGISTERED_EXCEPTION,
+        CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_ORGANIZATION_MANAGEMENT_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        ORGANIZATION_NOT_IN_ALL_FEATURES_MODE_EXCEPTION,
+        ORGANIZATIONS_NOT_IN_USE_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+REFRESH_ID: StaticSchema = (3, n0, _RIe, 0)
+
+DESCRIBE_QUERY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DQI,
+    {_sSI: _cDQR, _smi: None},
+    (_EDS, _QI, _QA, _RIe, _EDSOAI),
+    (
+        (EVENT_DATA_STORE_ARN, 0),
+        (UUID, 0),
+        (QUERY_ALIAS, 0),
+        (REFRESH_ID, 0),
+        (ACCOUNT_ID, 0),
+    ),
+)
+
+DELIVERY_S3_URI: StaticSchema = (3, n0, _DSU, 0)
+
+DELIVERY_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DS,
+    0,
+    (_SUCCESS, _FAILED, _FSF, _PENDING, _RNF, _AD, _ADSF, _CANCELLED, _UNKNOWN),
+    (
+        (-1, {_sV: _SUCCESS}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _FSF}),
+        (-1, {_sV: _PENDING}),
+        (-1, {_sV: _RNF}),
+        (-1, {_sV: _AD}),
+        (-1, {_sV: _ADSF}),
+        (-1, {_sV: _CANCELLED}),
+        (-1, {_sV: _UNKNOWN}),
+    ),
+)
+
+PROMPT: StaticSchema = (3, n0, _P, 0)
+
+LONG: StaticSchema = (8, n0, _Lo, 0)
+
+INTEGER: StaticSchema = (7, n0, _I, 0)
+
+QUERY_STATISTICS_FOR_DESCRIBE_QUERY: StaticSchema = (
+    18,
+    n0,
+    _QSFDQ,
+    0,
+    (_EMv, _ES, _BS, _ETIM, _CTre),
+    ((LONG, 0), (LONG, 0), (LONG, 0), (INTEGER, 0), (DATE, 0)),
+)
+
+DESCRIBE_QUERY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DQO,
+    {_sSI: _cDQRo, _smit: None},
+    (_QI, _QSue, _QS, _QSuer, _EM, _DSU, _DS, _P, _EDSOAI),
+    (
+        (UUID, 0),
+        (QUERY_STATEMENT, 0),
+        (QUERY_STATUS, 0),
+        (QUERY_STATISTICS_FOR_DESCRIBE_QUERY, 0),
+        (ERROR_MESSAGE, 0),
+        (DELIVERY_S3_URI, 0),
+        (DELIVERY_STATUS, 0),
+        (PROMPT, 0),
+        (ACCOUNT_ID, 0),
+    ),
+)
+
+DESCRIBE_QUERY: StaticOperationSchema = (
+    23,
+    n0,
+    _DQ,
+    0,
+    DESCRIBE_QUERY_INPUT,
+    DESCRIBE_QUERY_OUTPUT,
+    (
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        QUERY_ID_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+TRAIL_NAME_LIST: StaticSchema = (16, n0, _TNL, 0, (_m,), ((STRING, 0),))
+
+DESCRIBE_TRAILS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTIe,
+    {_sSI: _cDTRom, _smi: None},
+    (_tNL, _iST),
+    ((TRAIL_NAME_LIST, 0), (BOOLEAN, 0)),
+)
+
+TRAIL: StaticSchema = (
+    18,
+    n0,
+    _Tr,
+    0,
+    (
+        _N,
+        _SBN,
+        _SKP,
+        _STN,
+        _STARN,
+        _IGSE,
+        _IMRT,
+        _HR,
+        _TARN,
+        _LFVE,
+        _CWLLGA,
+        _CWLRA,
+        _KKI,
+        _HCES,
+        _HIS,
+        _IOT,
+        _RL,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+    ),
+)
+
+TRAIL_LIST: StaticSchema = (16, n0, _TLr, 0, (_m,), ((TRAIL, 0),))
+
+DESCRIBE_TRAILS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTOe,
+    {_sSI: _cDTRoma, _smit: None},
+    (_tL,),
+    ((TRAIL_LIST, 0),),
+)
+
+DESCRIBE_TRAILS: StaticOperationSchema = (
+    23,
+    n0,
+    _DTes,
+    0,
+    DESCRIBE_TRAILS_INPUT,
+    DESCRIBE_TRAILS_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+CONCURRENT_MODIFICATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CME,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+DISABLE_FEDERATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFI,
+    {_sSI: _cDFR, _smi: None},
+    (_EDS,),
+    ((EVENT_DATA_STORE_ARN, 1),),
+)
+
+FEDERATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _FSe,
+    0,
+    (_ENABLING, _ENABLED, _DISABLING, _DISABLED),
+    (
+        (-1, {_sV: _ENABLING}),
+        (-1, {_sV: _ENABLED}),
+        (-1, {_sV: _DISABLING}),
+        (-1, {_sV: _DISABLED}),
+    ),
+)
+
+DISABLE_FEDERATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DFO,
+    {_sSI: _cDFRo, _smit: None},
+    (_EDSA, _FSe),
+    ((EVENT_DATA_STORE_ARN, 0), (FEDERATION_STATUS, 0)),
+)
+
+DISABLE_FEDERATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DF,
+    0,
+    DISABLE_FEDERATION_INPUT,
+    DISABLE_FEDERATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION,
+        CONCURRENT_MODIFICATION_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        ORGANIZATION_NOT_IN_ALL_FEATURES_MODE_EXCEPTION,
+        ORGANIZATIONS_NOT_IN_USE_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+FEDERATION_ROLE_ARN: StaticSchema = (3, n0, _FRA, 0)
+
+ENABLE_FEDERATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EFI,
+    {_sSI: _cEFR, _smi: None},
+    (_EDS, _FRA),
+    ((EVENT_DATA_STORE_ARN, 1), (FEDERATION_ROLE_ARN, 1)),
+)
+
+ENABLE_FEDERATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _EFO,
+    {_sSI: _cEFRo, _smit: None},
+    (_EDSA, _FSe, _FRA),
+    ((EVENT_DATA_STORE_ARN, 0), (FEDERATION_STATUS, 0), (FEDERATION_ROLE_ARN, 0)),
+)
+
+ENABLE_FEDERATION: StaticOperationSchema = (
+    23,
+    n0,
+    _EF,
+    0,
+    ENABLE_FEDERATION_INPUT,
+    ENABLE_FEDERATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION,
+        CONCURRENT_MODIFICATION_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_FEDERATION_ENABLED_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        ORGANIZATION_NOT_IN_ALL_FEATURES_MODE_EXCEPTION,
+        ORGANIZATIONS_NOT_IN_USE_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+EVENT_DATA_STORE_LIST: StaticSchema = (
+    16,
+    n0,
+    _EDSL,
+    0,
+    (_m,),
+    ((EVENT_DATA_STORE_ARN, 0),),
+)
+
+GENERATE_QUERY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GQI,
+    {_sSI: _cGQR, _smi: None},
+    (_EDSv, _P),
+    ((EVENT_DATA_STORE_LIST, 1), (PROMPT, 1)),
+)
+
+GENERATE_QUERY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GQO,
+    {_sSI: _cGQRo, _smit: None},
+    (_QSu, _QA, _EDSOAI),
+    ((QUERY_STATEMENT, 0), (QUERY_ALIAS, 0), (ACCOUNT_ID, 0)),
+)
+
+GENERATE_RESPONSE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _GRE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+GENERATE_QUERY: StaticOperationSchema = (
+    23,
+    n0,
+    _GQ,
+    0,
+    GENERATE_QUERY_INPUT,
+    GENERATE_QUERY_OUTPUT,
+    (
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        GENERATE_RESPONSE_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+GET_CHANNEL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCI,
+    {_sSI: _cGCR, _smi: None},
+    (_C,),
+    ((CHANNEL_ARN, 1),),
+)
+
+INGESTION_STATUS: StaticSchema = (
+    18,
+    n0,
+    _IS,
+    0,
+    (_LIST, _LISEID, _LIEC, _LIAT, _LIAEID),
+    ((DATE, 0), (UUID, 0), (ERROR_MESSAGE, 0), (DATE, 0), (UUID, 0)),
+)
+
+SOURCE_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _SC,
+    0,
+    (_ATAR, _AESd),
+    ((BOOLEAN, 0), (ADVANCED_EVENT_SELECTORS, 0)),
+)
+
+GET_CHANNEL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCO,
+    {_sSI: _cGCRo, _smit: None},
+    (_CA, _N, _So, _SC, _Des, _IS),
+    (
+        (CHANNEL_ARN, 0),
+        (CHANNEL_NAME, 0),
+        (SOURCE, 0),
+        (SOURCE_CONFIG, 0),
+        (DESTINATIONS, 0),
+        (INGESTION_STATUS, 0),
+    ),
+)
+
+GET_CHANNEL: StaticOperationSchema = (
+    23,
+    n0,
+    _GC,
+    0,
+    GET_CHANNEL_INPUT,
+    GET_CHANNEL_OUTPUT,
+    (
+        CHANNEL_ARN_INVALID_EXCEPTION,
+        CHANNEL_NOT_FOUND_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+GET_DASHBOARD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDI,
+    {_sSI: _cGDR, _smi: None},
+    (_DI,),
+    ((DASHBOARD_ARN, 1),),
+)
+
+DASHBOARD_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DSa,
+    0,
+    (_CREATING, _CREATED, _UPDATING, _UPDATED, _DELETING),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _CREATED}),
+        (-1, {_sV: _UPDATING}),
+        (-1, {_sV: _UPDATED}),
+        (-1, {_sV: _DELETING}),
+    ),
+)
+
+GET_DASHBOARD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDO,
+    {_sSI: _cGDRo, _smit: None},
+    (_DA, _Ty, _St, _W, _RS, _CT, _UT, _LRI, _LRFR, _TPE),
+    (
+        (DASHBOARD_ARN, 0),
+        (DASHBOARD_TYPE, 0),
+        (DASHBOARD_STATUS, 0),
+        (WIDGET_LIST, 0),
+        (REFRESH_SCHEDULE, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (REFRESH_ID, 0),
+        (ERROR_MESSAGE, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+    ),
+)
+
+GET_DASHBOARD: StaticOperationSchema = (
+    23,
+    n0,
+    _GD,
+    0,
+    GET_DASHBOARD_INPUT,
+    GET_DASHBOARD_OUTPUT,
+    (RESOURCE_NOT_FOUND_EXCEPTION, UNSUPPORTED_OPERATION_EXCEPTION),
+)
+
+GET_EVENT_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GECI,
+    {_sSI: _cGECR, _smi: None},
+    (_TN, _EDS),
+    ((STRING, 0), (STRING, 0)),
+)
+
+OPERATOR_TARGET_LIST_MEMBER: StaticSchema = (3, n0, _OTLM, 0)
+
+OPERATOR_TARGET_LIST: StaticSchema = (
+    16,
+    n0,
+    _OTL,
+    0,
+    (_m,),
+    ((OPERATOR_TARGET_LIST_MEMBER, 0),),
+)
+
+TYPE: StaticSchema = (14, n0, _Ty, 0, (_TC, _RC), ((-1, {_sV: _TC}), (-1, {_sV: _RC})))
+
+CONTEXT_KEY_SELECTOR: StaticSchema = (
+    18,
+    n0,
+    _CKS,
+    0,
+    (_Ty, _E),
+    ((TYPE, 1), (OPERATOR_TARGET_LIST, 1)),
+)
+
+CONTEXT_KEY_SELECTORS: StaticSchema = (
+    16,
+    n0,
+    _CKSo,
+    0,
+    (_m,),
+    ((CONTEXT_KEY_SELECTOR, 0),),
+)
+
+MAX_EVENT_SIZE: StaticSchema = (
+    14,
+    n0,
+    _MES,
+    0,
+    (_Sta, _La),
+    ((-1, {_sV: _Sta}), (-1, {_sV: _La})),
+)
+
+GET_EVENT_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GECO,
+    {_sSI: _cGECRo, _smit: None},
+    (_TARN, _EDSA, _MES, _CKSo, _ACg),
+    (
+        (STRING, 0),
+        (EVENT_DATA_STORE_ARN, 0),
+        (MAX_EVENT_SIZE, 0),
+        (CONTEXT_KEY_SELECTORS, 0),
+        (AGGREGATION_CONFIGURATIONS, 0),
+    ),
+)
+
+INVALID_EVENT_DATA_STORE_STATUS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IEDSSE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+GET_EVENT_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _GEC,
+    0,
+    GET_EVENT_CONFIGURATION_INPUT,
+    GET_EVENT_CONFIGURATION_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_CATEGORY_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_STATUS_EXCEPTION,
+        INVALID_PARAMETER_COMBINATION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+GET_EVENT_DATA_STORE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GEDSI,
+    {_sSI: _cGEDSR, _smi: None},
+    (_EDS,),
+    ((EVENT_DATA_STORE_ARN, 1),),
+)
+
+PARTITION_KEY_NAME: StaticSchema = (3, n0, _PKN, 0)
+
+PARTITION_KEY_TYPE: StaticSchema = (3, n0, _PKT, 0)
+
+PARTITION_KEY: StaticSchema = (
+    18,
+    n0,
+    _PK,
+    0,
+    (_N, _Ty),
+    ((PARTITION_KEY_NAME, 1), (PARTITION_KEY_TYPE, 1)),
+)
+
+PARTITION_KEY_LIST: StaticSchema = (16, n0, _PKL, 0, (_m,), ((PARTITION_KEY, 0),))
+
+GET_EVENT_DATA_STORE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GEDSO,
+    {_sSI: _cGEDSRo, _smit: None},
+    (
+        _EDSA,
+        _N,
+        _St,
+        _AESd,
+        _MRE,
+        _OE,
+        _RP,
+        _TPE,
+        _CT,
+        _UT,
+        _KKI,
+        _BM,
+        _FSe,
+        _FRA,
+        _PKa,
+    ),
+    (
+        (EVENT_DATA_STORE_ARN, 0),
+        (EVENT_DATA_STORE_NAME, 0),
+        (EVENT_DATA_STORE_STATUS, 0),
+        (ADVANCED_EVENT_SELECTORS, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (RETENTION_PERIOD, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (EVENT_DATA_STORE_KMS_KEY_ID, 0),
+        (BILLING_MODE, 0),
+        (FEDERATION_STATUS, 0),
+        (FEDERATION_ROLE_ARN, 0),
+        (PARTITION_KEY_LIST, 0),
+    ),
+)
+
+GET_EVENT_DATA_STORE: StaticOperationSchema = (
+    23,
+    n0,
+    _GEDS,
+    0,
+    GET_EVENT_DATA_STORE_INPUT,
+    GET_EVENT_DATA_STORE_OUTPUT,
+    (
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+GET_EVENT_SELECTORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GESI,
+    {_sSI: _cGESR, _smi: None},
+    (_TN,),
+    ((STRING, 1),),
+)
+
+DATA_RESOURCE_VALUES: StaticSchema = (16, n0, _DRV, 0, (_m,), ((STRING, 0),))
+
+DATA_RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _DR,
+    0,
+    (_Ty, _Va),
+    ((STRING, 0), (DATA_RESOURCE_VALUES, 0)),
+)
+
+DATA_RESOURCES: StaticSchema = (16, n0, _DRa, 0, (_m,), ((DATA_RESOURCE, 0),))
+
+EXCLUDE_MANAGEMENT_EVENT_SOURCES: StaticSchema = (
+    16,
+    n0,
+    _EMES,
+    0,
+    (_m,),
+    ((STRING, 0),),
+)
+
+READ_WRITE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RWT,
+    0,
+    (_RO, _WO, _A),
+    ((-1, {_sV: _RO}), (-1, {_sV: _WO}), (-1, {_sV: _A})),
+)
+
+EVENT_SELECTOR: StaticSchema = (
+    18,
+    n0,
+    _ESv,
+    0,
+    (_RWT, _IME, _DRa, _EMES),
+    (
+        (READ_WRITE_TYPE, 0),
+        (BOOLEAN, 0),
+        (DATA_RESOURCES, 0),
+        (EXCLUDE_MANAGEMENT_EVENT_SOURCES, 0),
+    ),
+)
+
+EVENT_SELECTORS: StaticSchema = (16, n0, _ESve, 0, (_m,), ((EVENT_SELECTOR, 0),))
+
+GET_EVENT_SELECTORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GESO,
+    {_sSI: _cGESRo, _smit: None},
+    (_TARN, _ESve, _AESd),
+    ((STRING, 0), (EVENT_SELECTORS, 0), (ADVANCED_EVENT_SELECTORS, 0)),
+)
+
+GET_EVENT_SELECTORS: StaticOperationSchema = (
+    23,
+    n0,
+    _GES,
+    0,
+    GET_EVENT_SELECTORS_INPUT,
+    GET_EVENT_SELECTORS_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+GET_IMPORT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GII,
+    {_sSI: _cGIR, _smi: None},
+    (_II,),
+    ((UUID, 1),),
+)
+
+IMPORT_DESTINATIONS: StaticSchema = (
+    16,
+    n0,
+    _ID,
+    0,
+    (_m,),
+    ((EVENT_DATA_STORE_ARN, 0),),
+)
+
+S3_IMPORT_SOURCE: StaticSchema = (
+    18,
+    n0,
+    _SIS,
+    0,
+    (_SLU, _SBR, _SBARA),
+    ((STRING, 1), (STRING, 1), (STRING, 1)),
+)
+
+IMPORT_SOURCE: StaticSchema = (18, n0, _ISm, 0, (_S_,), ((S3_IMPORT_SOURCE, 1),))
+
+IMPORT_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _ISmp,
+    0,
+    (_PF, _PC, _FC, _ECv, _FE),
+    ((LONG, 0), (LONG, 0), (LONG, 0), (LONG, 0), (LONG, 0)),
+)
+
+IMPORT_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ISmpo,
+    0,
+    (_INITIALIZING, _IP, _FAILED, _STOPPED, _COMPLETED),
+    (
+        (-1, {_sV: _INITIALIZING}),
+        (-1, {_sV: _IP}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _STOPPED}),
+        (-1, {_sV: _COMPLETED}),
+    ),
+)
+
+GET_IMPORT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIO,
+    {_sSI: _cGIRo, _smit: None},
+    (_II, _Des, _ISm, _SET, _EET, _ISmpo, _CT, _UT, _ISmp),
+    (
+        (UUID, 0),
+        (IMPORT_DESTINATIONS, 0),
+        (IMPORT_SOURCE, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (IMPORT_STATUS, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (IMPORT_STATISTICS, 0),
+    ),
+)
+
+IMPORT_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _INFE,
+    {_s: _c, _sE: 404},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+GET_IMPORT: StaticOperationSchema = (
+    23,
+    n0,
+    _GI,
+    0,
+    GET_IMPORT_INPUT,
+    GET_IMPORT_OUTPUT,
+    (
+        IMPORT_NOT_FOUND_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+GET_INSIGHT_SELECTORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GISI,
+    {_sSI: _cGISR, _smi: None},
+    (_TN, _EDS),
+    ((STRING, 0), (EVENT_DATA_STORE_ARN, 0)),
+)
+
+SOURCE_EVENT_CATEGORY: StaticSchema = (
+    14,
+    n0,
+    _SEC,
+    0,
+    (_Ma, _D),
+    ((-1, {_sV: _Ma}), (-1, {_sV: _D})),
+)
+
+SOURCE_EVENT_CATEGORIES: StaticSchema = (
+    16,
+    n0,
+    _SECo,
+    0,
+    (_m,),
+    ((SOURCE_EVENT_CATEGORY, 0),),
+)
+
+INSIGHT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _IT,
+    0,
+    (_ACRI, _AERI),
+    ((-1, {_sV: _ACRI}), (-1, {_sV: _AERI})),
+)
+
+INSIGHT_SELECTOR: StaticSchema = (
+    18,
+    n0,
+    _ISn,
+    0,
+    (_IT, _ECve),
+    ((INSIGHT_TYPE, 0), (SOURCE_EVENT_CATEGORIES, 0)),
+)
+
+INSIGHT_SELECTORS: StaticSchema = (16, n0, _ISns, 0, (_m,), ((INSIGHT_SELECTOR, 0),))
+
+GET_INSIGHT_SELECTORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GISO,
+    {_sSI: _cGISRo, _smit: None},
+    (_TARN, _ISns, _EDSA, _IDn),
+    (
+        (STRING, 0),
+        (INSIGHT_SELECTORS, 0),
+        (EVENT_DATA_STORE_ARN, 0),
+        (EVENT_DATA_STORE_ARN, 0),
+    ),
+)
+
+INSIGHT_NOT_ENABLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _INEE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+GET_INSIGHT_SELECTORS: StaticOperationSchema = (
+    23,
+    n0,
+    _GIS,
+    0,
+    GET_INSIGHT_SELECTORS_INPUT,
+    GET_INSIGHT_SELECTORS_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        INSIGHT_NOT_ENABLED_EXCEPTION,
+        INVALID_PARAMETER_COMBINATION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+MAX_QUERY_RESULTS: StaticSchema = (7, n0, _MQR, 0)
+
+PAGINATION_TOKEN: StaticSchema = (3, n0, _PT, 0)
+
+GET_QUERY_RESULTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GQRI,
+    {_sSI: _cGQRR, _smi: None},
+    (_EDS, _QI, _NT, _MQR, _EDSOAI),
+    (
+        (EVENT_DATA_STORE_ARN, 0),
+        (UUID, 1),
+        (PAGINATION_TOKEN, 0),
+        (MAX_QUERY_RESULTS, 0),
+        (ACCOUNT_ID, 0),
+    ),
+)
+
+QUERY_RESULT_KEY: StaticSchema = (3, n0, _QRK, 0)
+
+QUERY_RESULT_VALUE: StaticSchema = (3, n0, _QRV, 0)
+
+QUERY_RESULT_COLUMN: StaticSchema = (
+    17,
+    n0,
+    _QRC,
+    0,
+    (_k, _v),
+    ((QUERY_RESULT_KEY, 0), (QUERY_RESULT_VALUE, 0)),
+)
+
+QUERY_RESULT_ROW: StaticSchema = (16, n0, _QRR, 0, (_m,), ((QUERY_RESULT_COLUMN, 0),))
+
+QUERY_RESULT_ROWS: StaticSchema = (16, n0, _QRRu, 0, (_m,), ((QUERY_RESULT_ROW, 0),))
+
+QUERY_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _QSuer,
+    0,
+    (_RCe, _TRC, _BS),
+    ((INTEGER, 0), (INTEGER, 0), (LONG, 0)),
+)
+
+GET_QUERY_RESULTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GQRO,
+    {_sSI: _cGQRRo, _smit: None},
+    (_QS, _QSuer, _QRRu, _NT, _EM),
+    (
+        (QUERY_STATUS, 0),
+        (QUERY_STATISTICS, 0),
+        (QUERY_RESULT_ROWS, 0),
+        (PAGINATION_TOKEN, 0),
+        (ERROR_MESSAGE, 0),
+    ),
+)
+
+INVALID_MAX_RESULTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IMRE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_NEXT_TOKEN_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _INTE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+GET_QUERY_RESULTS: StaticOperationSchema = (
+    23,
+    n0,
+    _GQR,
+    0,
+    GET_QUERY_RESULTS_INPUT,
+    GET_QUERY_RESULTS_OUTPUT,
+    (
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION,
+        INVALID_MAX_RESULTS_EXCEPTION,
+        INVALID_NEXT_TOKEN_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        QUERY_ID_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+GET_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPI,
+    {_sSI: _cGRPR, _smi: None},
+    (_RAe,),
+    ((RESOURCE_ARN, 1),),
+)
+
+RESOURCE_POLICY: StaticSchema = (3, n0, _RPe, 0)
+
+GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPO,
+    {_sSI: _cGRPRo, _smit: None},
+    (_RAe, _RPe, _DARP),
+    ((RESOURCE_ARN, 0), (RESOURCE_POLICY, 0), (RESOURCE_POLICY, 0)),
+)
+
+GET_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GRP,
+    0,
+    GET_RESOURCE_POLICY_INPUT,
+    GET_RESOURCE_POLICY_OUTPUT,
+    (
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        RESOURCE_ARN_NOT_VALID_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        RESOURCE_POLICY_NOT_FOUND_EXCEPTION,
+        RESOURCE_TYPE_NOT_SUPPORTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+GET_TRAIL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GTI,
+    {_sSI: _cGTR, _smi: None},
+    (_N,),
+    ((STRING, 1),),
+)
+
+GET_TRAIL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GTO,
+    {_sSI: _cGTRo, _smit: None},
+    (_Tr,),
+    ((TRAIL, 0),),
+)
+
+GET_TRAIL: StaticOperationSchema = (
+    23,
+    n0,
+    _GT,
+    0,
+    GET_TRAIL_INPUT,
+    GET_TRAIL_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+GET_TRAIL_STATUS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GTSI,
+    {_sSI: _cGTSR, _smi: None},
+    (_N,),
+    ((STRING, 1),),
+)
+
+GET_TRAIL_STATUS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GTSO,
+    {_sSI: _cGTSRo, _smit: None},
+    (
+        _IL,
+        _LDE,
+        _LNE,
+        _LDT,
+        _LNT,
+        _SLT,
+        _SLTt,
+        _LCWLDE,
+        _LCWLDT,
+        _LDDT,
+        _LDDE,
+        _LDAT,
+        _LNAT,
+        _LNAS,
+        _LDAS,
+        _TLS,
+        _TLSi,
+    ),
+    (
+        (BOOLEAN, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (STRING, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+    ),
+)
+
+GET_TRAIL_STATUS: StaticOperationSchema = (
+    23,
+    n0,
+    _GTS,
+    0,
+    GET_TRAIL_STATUS_INPUT,
+    GET_TRAIL_STATUS_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+LIST_CHANNELS_MAX_RESULTS_COUNT: StaticSchema = (7, n0, _LCMRC, 0)
+
+LIST_CHANNELS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LCI,
+    {_sSI: _cLCR, _smi: None},
+    (_MR, _NT),
+    ((LIST_CHANNELS_MAX_RESULTS_COUNT, 0), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_CHANNELS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LCO,
+    {_sSI: _cLCRo, _smit: None},
+    (_Ch, _NT),
+    ((CHANNELS, 0), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_CHANNELS: StaticOperationSchema = (
+    23,
+    n0,
+    _LC,
+    0,
+    LIST_CHANNELS_INPUT,
+    LIST_CHANNELS_OUTPUT,
+    (
+        INVALID_NEXT_TOKEN_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+LIST_DASHBOARDS_MAX_RESULTS_COUNT: StaticSchema = (7, n0, _LDMRC, 0)
+
+LIST_DASHBOARDS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDI,
+    {_sSI: _cLDR, _smi: None},
+    (_NP, _Ty, _NT, _MR),
+    (
+        (DASHBOARD_NAME, 0),
+        (DASHBOARD_TYPE, 0),
+        (PAGINATION_TOKEN, 0),
+        (LIST_DASHBOARDS_MAX_RESULTS_COUNT, 0),
+    ),
+)
+
+DASHBOARD_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _DDa,
+    0,
+    (_DA, _Ty),
+    ((DASHBOARD_ARN, 0), (DASHBOARD_TYPE, 0)),
+)
+
+DASHBOARDS: StaticSchema = (16, n0, _Das, 0, (_m,), ((DASHBOARD_DETAIL, 0),))
+
+LIST_DASHBOARDS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDO,
+    {_sSI: _cLDRo, _smit: None},
+    (_Das, _NT),
+    ((DASHBOARDS, 0), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_DASHBOARDS: StaticOperationSchema = (
+    23,
+    n0,
+    _LD,
+    0,
+    LIST_DASHBOARDS_INPUT,
+    LIST_DASHBOARDS_OUTPUT,
+    (UNSUPPORTED_OPERATION_EXCEPTION,),
+)
+
+LIST_EVENT_DATA_STORES_MAX_RESULTS_COUNT: StaticSchema = (7, n0, _LEDSMRC, 0)
+
+LIST_EVENT_DATA_STORES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LEDSI,
+    {_sSI: _cLEDSR, _smi: None},
+    (_NT, _MR),
+    ((PAGINATION_TOKEN, 0), (LIST_EVENT_DATA_STORES_MAX_RESULTS_COUNT, 0)),
+)
+
+EVENT_DATA_STORE: StaticSchema = (
+    18,
+    n0,
+    _EDS,
+    0,
+    (_EDSA, _N, _TPE, _St, _AESd, _MRE, _OE, _RP, _CT, _UT),
+    (
+        (EVENT_DATA_STORE_ARN, 0),
+        (EVENT_DATA_STORE_NAME, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+        (EVENT_DATA_STORE_STATUS, 0),
+        (ADVANCED_EVENT_SELECTORS, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (RETENTION_PERIOD, 0),
+        (DATE, 0),
+        (DATE, 0),
+    ),
+)
+
+EVENT_DATA_STORES: StaticSchema = (16, n0, _EDSv, 0, (_m,), ((EVENT_DATA_STORE, 0),))
+
+LIST_EVENT_DATA_STORES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LEDSO,
+    {_sSI: _cLEDSRo, _smit: None},
+    (_EDSv, _NT),
+    ((EVENT_DATA_STORES, 0), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_EVENT_DATA_STORES: StaticOperationSchema = (
+    23,
+    n0,
+    _LEDS,
+    0,
+    LIST_EVENT_DATA_STORES_INPUT,
+    LIST_EVENT_DATA_STORES_OUTPUT,
+    (
+        INVALID_MAX_RESULTS_EXCEPTION,
+        INVALID_NEXT_TOKEN_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+LIST_IMPORT_FAILURES_MAX_RESULTS_COUNT: StaticSchema = (7, n0, _LIFMRC, 0)
+
+LIST_IMPORT_FAILURES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LIFI,
+    {_sSI: _cLIFR, _smi: None},
+    (_II, _MR, _NT),
+    ((UUID, 1), (LIST_IMPORT_FAILURES_MAX_RESULTS_COUNT, 0), (PAGINATION_TOKEN, 0)),
+)
+
+IMPORT_FAILURE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _IFS,
+    0,
+    (_FAILED, _RETRY, _SUCCEEDED),
+    ((-1, {_sV: _FAILED}), (-1, {_sV: _RETRY}), (-1, {_sV: _SUCCEEDED})),
+)
+
+IMPORT_FAILURE_LIST_ITEM: StaticSchema = (
+    18,
+    n0,
+    _IFLI,
+    0,
+    (_L, _St, _ET, _EM, _LUT),
+    ((STRING, 0), (IMPORT_FAILURE_STATUS, 0), (STRING, 0), (STRING, 0), (DATE, 0)),
+)
+
+IMPORT_FAILURE_LIST: StaticSchema = (
+    16,
+    n0,
+    _IFL,
+    0,
+    (_m,),
+    ((IMPORT_FAILURE_LIST_ITEM, 0),),
+)
+
+LIST_IMPORT_FAILURES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LIFO,
+    {_sSI: _cLIFRo, _smit: None},
+    (_Fa, _NT),
+    ((IMPORT_FAILURE_LIST, 0), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_IMPORT_FAILURES: StaticOperationSchema = (
+    23,
+    n0,
+    _LIF,
+    0,
+    LIST_IMPORT_FAILURES_INPUT,
+    LIST_IMPORT_FAILURES_OUTPUT,
+    (
+        INVALID_NEXT_TOKEN_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+LIST_IMPORTS_MAX_RESULTS_COUNT: StaticSchema = (7, n0, _LIMRC, 0)
+
+LIST_IMPORTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LII,
+    {_sSI: _cLIR, _smi: None},
+    (_MR, _De, _ISmpo, _NT),
+    (
+        (LIST_IMPORTS_MAX_RESULTS_COUNT, 0),
+        (EVENT_DATA_STORE_ARN, 0),
+        (IMPORT_STATUS, 0),
+        (PAGINATION_TOKEN, 0),
+    ),
+)
+
+IMPORTS_LIST_ITEM: StaticSchema = (
+    18,
+    n0,
+    _ILI,
+    0,
+    (_II, _ISmpo, _Des, _CT, _UT),
+    ((UUID, 0), (IMPORT_STATUS, 0), (IMPORT_DESTINATIONS, 0), (DATE, 0), (DATE, 0)),
+)
+
+IMPORTS_LIST: StaticSchema = (16, n0, _ILm, 0, (_m,), ((IMPORTS_LIST_ITEM, 0),))
+
+LIST_IMPORTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LIO,
+    {_sSI: _cLIRo, _smit: None},
+    (_Im, _NT),
+    ((IMPORTS_LIST, 0), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_IMPORTS: StaticOperationSchema = (
+    23,
+    n0,
+    _LI,
+    0,
+    LIST_IMPORTS_INPUT,
+    LIST_IMPORTS_OUTPUT,
+    (
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        INVALID_NEXT_TOKEN_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+LIST_INSIGHTS_DATA_TYPE: StaticSchema = (14, n0, _LIDT, 0, (_IE,), ((-1, {_sV: _IEn}),))
+
+LIST_INSIGHTS_DATA_DIMENSION_KEY: StaticSchema = (
+    14,
+    n0,
+    _LIDDK,
+    0,
+    (_EI, _EN, _ES_),
+    ((-1, {_sV: _EIv}), (-1, {_sV: _ENv}), (-1, {_sV: _ESven})),
+)
+
+LIST_INSIGHTS_DATA_DIMENSION_VALUE: StaticSchema = (3, n0, _LIDDV, 0)
+
+LIST_INSIGHTS_DATA_DIMENSIONS: StaticSchema = (
+    17,
+    n0,
+    _LIDD,
+    0,
+    (_k, _v),
+    ((LIST_INSIGHTS_DATA_DIMENSION_KEY, 0), (LIST_INSIGHTS_DATA_DIMENSION_VALUE, 0)),
+)
+
+LIST_INSIGHTS_DATA_MAX_RESULTS_COUNT: StaticSchema = (7, n0, _LIDMRC, 0)
+
+LIST_INSIGHTS_DATA_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LIDI,
+    {_sSI: _cLIDR, _smi: None},
+    (_ISnsi, _DTat, _Di, _ST, _ETn, _MR, _NT),
+    (
+        (RESOURCE_ARN, 1),
+        (LIST_INSIGHTS_DATA_TYPE, 1),
+        (LIST_INSIGHTS_DATA_DIMENSIONS, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (LIST_INSIGHTS_DATA_MAX_RESULTS_COUNT, 0),
+        (PAGINATION_TOKEN, 0),
+    ),
+)
+
+RESOURCE: StaticSchema = (18, n0, _R, 0, (_RT, _RN), ((STRING, 0), (STRING, 0)))
+
+RESOURCE_LIST: StaticSchema = (16, n0, _RLe, 0, (_m,), ((RESOURCE, 0),))
+
+EVENT: StaticSchema = (
+    18,
+    n0,
+    _Ev,
+    0,
+    (_EIv, _ENv, _RO, _AKI, _ETv, _ESven, _Us, _Re, _CTE),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (DATE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (RESOURCE_LIST, 0),
+        (STRING, 0),
+    ),
+)
+
+EVENTS_LIST: StaticSchema = (16, n0, _EL, 0, (_m,), ((EVENT, 0),))
+
+LIST_INSIGHTS_DATA_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LIDO,
+    {_sSI: _cLIDRo, _smit: None},
+    (_Eve, _NT),
+    ((EVENTS_LIST, 0), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_INSIGHTS_DATA: StaticOperationSchema = (
+    23,
+    n0,
+    _LID,
+    0,
+    LIST_INSIGHTS_DATA_INPUT,
+    LIST_INSIGHTS_DATA_OUTPUT,
+    (
+        INVALID_PARAMETER_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+INSIGHTS_METRIC_DATA_TYPE: StaticSchema = (
+    14,
+    n0,
+    _IMDT,
+    0,
+    (_FWZ, _NZD),
+    ((-1, {_sV: _FWZi}), (-1, {_sV: _NZDo})),
+)
+
+ERROR_CODE: StaticSchema = (3, n0, _ECr, 0)
+
+EVENT_NAME: StaticSchema = (3, n0, _ENv, 0)
+
+EVENT_SOURCE: StaticSchema = (3, n0, _ESven, 0)
+
+INSIGHTS_METRIC_MAX_RESULTS: StaticSchema = (7, n0, _IMMR, 0)
+
+INSIGHTS_METRIC_NEXT_TOKEN: StaticSchema = (3, n0, _IMNT, 0)
+
+INSIGHTS_METRIC_PERIOD: StaticSchema = (7, n0, _IMP, 0)
+
+LIST_INSIGHTS_METRIC_DATA_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LIMDI,
+    {_sSI: _cLIMDR, _smi: None},
+    (_TN, _ESven, _ENv, _IT, _ECr, _ST, _ETn, _Pe, _DTat, _MR, _NT),
+    (
+        (STRING, 0),
+        (EVENT_SOURCE, 1),
+        (EVENT_NAME, 1),
+        (INSIGHT_TYPE, 1),
+        (ERROR_CODE, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (INSIGHTS_METRIC_PERIOD, 0),
+        (INSIGHTS_METRIC_DATA_TYPE, 0),
+        (INSIGHTS_METRIC_MAX_RESULTS, 0),
+        (INSIGHTS_METRIC_NEXT_TOKEN, 0),
+    ),
+)
+
+TIMESTAMPS: StaticSchema = (16, n0, _Ti, 0, (_m,), ((DATE, 0),))
+
+DOUBLE: StaticSchema = (10, n0, _Do, 0)
+
+INSIGHTS_METRIC_VALUES: StaticSchema = (16, n0, _IMV, 0, (_m,), ((DOUBLE, 0),))
+
+LIST_INSIGHTS_METRIC_DATA_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LIMDO,
+    {_sSI: _cLIMDRo, _smit: None},
+    (_TARN, _ESven, _ENv, _IT, _ECr, _Ti, _Va, _NT),
+    (
+        (STRING, 0),
+        (EVENT_SOURCE, 0),
+        (EVENT_NAME, 0),
+        (INSIGHT_TYPE, 0),
+        (ERROR_CODE, 0),
+        (TIMESTAMPS, 0),
+        (INSIGHTS_METRIC_VALUES, 0),
+        (INSIGHTS_METRIC_NEXT_TOKEN, 0),
+    ),
+)
+
+LIST_INSIGHTS_METRIC_DATA: StaticOperationSchema = (
+    23,
+    n0,
+    _LIMD,
+    0,
+    LIST_INSIGHTS_METRIC_DATA_INPUT,
+    LIST_INSIGHTS_METRIC_DATA_OUTPUT,
+    (
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+INVALID_TIME_RANGE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ITRE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_TOKEN_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ITE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+LIST_PUBLIC_KEYS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LPKI,
+    {_sSI: _cLPKR, _smi: None},
+    (_ST, _ETn, _NT),
+    ((DATE, 0), (DATE, 0), (STRING, 0)),
+)
+
+PUBLIC_KEY: StaticSchema = (
+    18,
+    n0,
+    _PKu,
+    0,
+    (_V, _VST, _VET, _Fi),
+    ((BYTE_BUFFER, 0), (DATE, 0), (DATE, 0), (STRING, 0)),
+)
+
+PUBLIC_KEY_LIST: StaticSchema = (16, n0, _PKLu, 0, (_m,), ((PUBLIC_KEY, 0),))
+
+LIST_PUBLIC_KEYS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LPKO,
+    {_sSI: _cLPKRo, _smit: None},
+    (_PKLu, _NT),
+    ((PUBLIC_KEY_LIST, 0), (STRING, 0)),
+)
+
+LIST_PUBLIC_KEYS: StaticOperationSchema = (
+    23,
+    n0,
+    _LPK,
+    0,
+    LIST_PUBLIC_KEYS_INPUT,
+    LIST_PUBLIC_KEYS_OUTPUT,
+    (
+        INVALID_TIME_RANGE_EXCEPTION,
+        INVALID_TOKEN_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+INVALID_DATE_RANGE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IDRE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_QUERY_STATUS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IQSEn,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+LIST_QUERIES_MAX_RESULTS_COUNT: StaticSchema = (7, n0, _LQMRC, 0)
+
+LIST_QUERIES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LQI,
+    {_sSI: _cLQR, _smi: None},
+    (_EDS, _NT, _MR, _ST, _ETn, _QS),
+    (
+        (EVENT_DATA_STORE_ARN, 1),
+        (PAGINATION_TOKEN, 0),
+        (LIST_QUERIES_MAX_RESULTS_COUNT, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (QUERY_STATUS, 0),
+    ),
+)
+
+QUERY: StaticSchema = (
+    18,
+    n0,
+    _Q,
+    0,
+    (_QI, _QS, _CTre),
+    ((UUID, 0), (QUERY_STATUS, 0), (DATE, 0)),
+)
+
+QUERIES: StaticSchema = (16, n0, _Qu, 0, (_m,), ((QUERY, 0),))
+
+LIST_QUERIES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LQO,
+    {_sSI: _cLQRo, _smit: None},
+    (_Qu, _NT),
+    ((QUERIES, 0), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_QUERIES: StaticOperationSchema = (
+    23,
+    n0,
+    _LQ,
+    0,
+    LIST_QUERIES_INPUT,
+    LIST_QUERIES_OUTPUT,
+    (
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INVALID_DATE_RANGE_EXCEPTION,
+        INVALID_MAX_RESULTS_EXCEPTION,
+        INVALID_NEXT_TOKEN_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_QUERY_STATUS_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+RESOURCE_ID_LIST: StaticSchema = (16, n0, _RIL, 0, (_m,), ((STRING, 0),))
+
+LIST_TAGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTI,
+    {_sSI: _cLTR, _smi: None},
+    (_RIL, _NT),
+    ((RESOURCE_ID_LIST, 1), (STRING, 0)),
+)
+
+RESOURCE_TAG: StaticSchema = (
+    18,
+    n0,
+    _RTe,
+    0,
+    (_RI, _TL),
+    ((STRING, 0), (TAGS_LIST, 0)),
+)
+
+RESOURCE_TAG_LIST: StaticSchema = (16, n0, _RTL, 0, (_m,), ((RESOURCE_TAG, 0),))
+
+LIST_TAGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTO,
+    {_sSI: _cLTRo, _smit: None},
+    (_RTL, _NT),
+    ((RESOURCE_TAG_LIST, 0), (STRING, 0)),
+)
+
+LIST_TAGS: StaticOperationSchema = (
+    23,
+    n0,
+    _LT,
+    0,
+    LIST_TAGS_INPUT,
+    LIST_TAGS_OUTPUT,
+    (
+        CHANNEL_ARN_INVALID_EXCEPTION,
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INVALID_TOKEN_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        RESOURCE_TYPE_NOT_SUPPORTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+LIST_TRAILS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTIi,
+    {_sSI: _cLTRom, _smi: None},
+    (_NT,),
+    ((STRING, 0),),
+)
+
+TRAIL_INFO: StaticSchema = (
+    18,
+    n0,
+    _TI,
+    0,
+    (_TARN, _N, _HR),
+    ((STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+TRAILS: StaticSchema = (16, n0, _Tra, 0, (_m,), ((TRAIL_INFO, 0),))
+
+LIST_TRAILS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTOi,
+    {_sSI: _cLTRoma, _smit: None},
+    (_Tra, _NT),
+    ((TRAILS, 0), (STRING, 0)),
+)
+
+LIST_TRAILS: StaticOperationSchema = (
+    23,
+    n0,
+    _LTi,
+    0,
+    LIST_TRAILS_INPUT,
+    LIST_TRAILS_OUTPUT,
+    (OPERATION_NOT_PERMITTED_EXCEPTION, UNSUPPORTED_OPERATION_EXCEPTION),
+)
+
+INVALID_EVENT_CATEGORY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IECE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_LOOKUP_ATTRIBUTES_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ILAE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+EVENT_CATEGORY: StaticSchema = (14, n0, _EC, 0, (_In,), ((-1, {_sV: _i}),))
+
+LOOKUP_ATTRIBUTE_KEY: StaticSchema = (
+    14,
+    n0,
+    _LAK,
+    0,
+    (_EI, _EN, _RO_, _USERNAME, _RT_, _RN_, _ES_, _AKI_),
+    (
+        (-1, {_sV: _EIv}),
+        (-1, {_sV: _ENv}),
+        (-1, {_sV: _RO}),
+        (-1, {_sV: _Us}),
+        (-1, {_sV: _RT}),
+        (-1, {_sV: _RN}),
+        (-1, {_sV: _ESven}),
+        (-1, {_sV: _AKI}),
+    ),
+)
+
+LOOKUP_ATTRIBUTE_VALUE: StaticSchema = (3, n0, _LAV, 0)
+
+LOOKUP_ATTRIBUTE: StaticSchema = (
+    18,
+    n0,
+    _LA,
+    0,
+    (_AK, _AV),
+    ((LOOKUP_ATTRIBUTE_KEY, 1), (LOOKUP_ATTRIBUTE_VALUE, 1)),
+)
+
+LOOKUP_ATTRIBUTES_LIST: StaticSchema = (
+    16,
+    n0,
+    _LAL,
+    0,
+    (_m,),
+    ((LOOKUP_ATTRIBUTE, 0),),
+)
+
+MAX_RESULTS: StaticSchema = (7, n0, _MR, 0)
+
+NEXT_TOKEN: StaticSchema = (3, n0, _NT, 0)
+
+LOOKUP_EVENTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LEI,
+    {_sSI: _cLER, _smi: None},
+    (_LAo, _ST, _ETn, _EC, _MR, _NT),
+    (
+        (LOOKUP_ATTRIBUTES_LIST, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (EVENT_CATEGORY, 0),
+        (MAX_RESULTS, 0),
+        (NEXT_TOKEN, 0),
+    ),
+)
+
+LOOKUP_EVENTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LEO,
+    {_sSI: _cLERo, _smit: None},
+    (_Eve, _NT),
+    ((EVENTS_LIST, 0), (NEXT_TOKEN, 0)),
+)
+
+LOOKUP_EVENTS: StaticOperationSchema = (
+    23,
+    n0,
+    _LE,
+    0,
+    LOOKUP_EVENTS_INPUT,
+    LOOKUP_EVENTS_OUTPUT,
+    (
+        INVALID_EVENT_CATEGORY_EXCEPTION,
+        INVALID_LOOKUP_ATTRIBUTES_EXCEPTION,
+        INVALID_MAX_RESULTS_EXCEPTION,
+        INVALID_NEXT_TOKEN_EXCEPTION,
+        INVALID_TIME_RANGE_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+INSUFFICIENT_IAM_ACCESS_PERMISSION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IIAMAPE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+PUT_EVENT_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PECI,
+    {_sSI: _cPECR, _smi: None},
+    (_TN, _EDS, _MES, _CKSo, _ACg),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (MAX_EVENT_SIZE, 0),
+        (CONTEXT_KEY_SELECTORS, 0),
+        (AGGREGATION_CONFIGURATIONS, 0),
+    ),
+)
+
+PUT_EVENT_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PECO,
+    {_sSI: _cPECRo, _smit: None},
+    (_TARN, _EDSA, _MES, _CKSo, _ACg),
+    (
+        (STRING, 0),
+        (EVENT_DATA_STORE_ARN, 0),
+        (MAX_EVENT_SIZE, 0),
+        (CONTEXT_KEY_SELECTORS, 0),
+        (AGGREGATION_CONFIGURATIONS, 0),
+    ),
+)
+
+PUT_EVENT_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _PEC,
+    0,
+    PUT_EVENT_CONFIGURATION_INPUT,
+    PUT_EVENT_CONFIGURATION_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INSUFFICIENT_IAM_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_CATEGORY_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_STATUS_EXCEPTION,
+        INVALID_HOME_REGION_EXCEPTION,
+        INVALID_PARAMETER_COMBINATION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+PUT_EVENT_SELECTORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PESI,
+    {_sSI: _cPESR, _smi: None},
+    (_TN, _ESve, _AESd),
+    ((STRING, 1), (EVENT_SELECTORS, 0), (ADVANCED_EVENT_SELECTORS, 0)),
+)
+
+PUT_EVENT_SELECTORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PESO,
+    {_sSI: _cPESRo, _smit: None},
+    (_TARN, _ESve, _AESd),
+    ((STRING, 0), (EVENT_SELECTORS, 0), (ADVANCED_EVENT_SELECTORS, 0)),
+)
+
+PUT_EVENT_SELECTORS: StaticOperationSchema = (
+    23,
+    n0,
+    _PES,
+    0,
+    PUT_EVENT_SELECTORS_INPUT,
+    PUT_EVENT_SELECTORS_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_EVENT_SELECTORS_EXCEPTION,
+        INVALID_HOME_REGION_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+INVALID_INSIGHT_SELECTORS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IISE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+PUT_INSIGHT_SELECTORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PISI,
+    {_sSI: _cPISR, _smi: None},
+    (_TN, _ISns, _EDS, _IDn),
+    (
+        (STRING, 0),
+        (INSIGHT_SELECTORS, 1),
+        (EVENT_DATA_STORE_ARN, 0),
+        (EVENT_DATA_STORE_ARN, 0),
+    ),
+)
+
+PUT_INSIGHT_SELECTORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PISO,
+    {_sSI: _cPISRo, _smit: None},
+    (_TARN, _ISns, _EDSA, _IDn),
+    (
+        (STRING, 0),
+        (INSIGHT_SELECTORS, 0),
+        (EVENT_DATA_STORE_ARN, 0),
+        (EVENT_DATA_STORE_ARN, 0),
+    ),
+)
+
+PUT_INSIGHT_SELECTORS: StaticOperationSchema = (
+    23,
+    n0,
+    _PIS,
+    0,
+    PUT_INSIGHT_SELECTORS_INPUT,
+    PUT_INSIGHT_SELECTORS_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION,
+        INSUFFICIENT_S3_BUCKET_POLICY_EXCEPTION,
+        INVALID_HOME_REGION_EXCEPTION,
+        INVALID_INSIGHT_SELECTORS_EXCEPTION,
+        INVALID_PARAMETER_COMBINATION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        KMS_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        S3_BUCKET_DOES_NOT_EXIST_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+PUT_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PRPI,
+    {_sSI: _cPRPR, _smi: None},
+    (_RAe, _RPe),
+    ((RESOURCE_ARN, 1), (RESOURCE_POLICY, 1)),
+)
+
+PUT_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PRPO,
+    {_sSI: _cPRPRo, _smit: None},
+    (_RAe, _RPe, _DARP),
+    ((RESOURCE_ARN, 0), (RESOURCE_POLICY, 0), (RESOURCE_POLICY, 0)),
+)
+
+RESOURCE_POLICY_NOT_VALID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RPNVE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+PUT_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _PRP,
+    0,
+    PUT_RESOURCE_POLICY_INPUT,
+    PUT_RESOURCE_POLICY_OUTPUT,
+    (
+        CONFLICT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        RESOURCE_ARN_NOT_VALID_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        RESOURCE_POLICY_NOT_VALID_EXCEPTION,
+        RESOURCE_TYPE_NOT_SUPPORTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+DELEGATED_ADMIN_ACCOUNT_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _DAALEE,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+REGISTER_ORGANIZATION_DELEGATED_ADMIN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RODAI,
+    {_sSI: _cRODAR, _smi: None},
+    (_MAI,),
+    ((ACCOUNT_ID, 1),),
+)
+
+REGISTER_ORGANIZATION_DELEGATED_ADMIN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RODAO,
+    {_sSI: _cRODARo, _smit: None},
+)
+
+REGISTER_ORGANIZATION_DELEGATED_ADMIN: StaticOperationSchema = (
+    23,
+    n0,
+    _RODA,
+    0,
+    REGISTER_ORGANIZATION_DELEGATED_ADMIN_INPUT,
+    REGISTER_ORGANIZATION_DELEGATED_ADMIN_OUTPUT,
+    (
+        ACCOUNT_NOT_FOUND_EXCEPTION,
+        ACCOUNT_REGISTERED_EXCEPTION,
+        CANNOT_DELEGATE_MANAGEMENT_ACCOUNT_EXCEPTION,
+        CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        DELEGATED_ADMIN_ACCOUNT_LIMIT_EXCEEDED_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INSUFFICIENT_IAM_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_ORGANIZATION_MANAGEMENT_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        ORGANIZATION_NOT_IN_ALL_FEATURES_MODE_EXCEPTION,
+        ORGANIZATIONS_NOT_IN_USE_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+REMOVE_TAGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RTI,
+    {_sSI: _cRTR, _smi: None},
+    (_RI, _TL),
+    ((STRING, 1), (TAGS_LIST, 1)),
+)
+
+REMOVE_TAGS_OUTPUT: StaticSchema = (18, n0, _RTO, {_sSI: _cRTRo, _smit: None})
+
+REMOVE_TAGS: StaticOperationSchema = (
+    23,
+    n0,
+    _RTem,
+    0,
+    REMOVE_TAGS_INPUT,
+    REMOVE_TAGS_OUTPUT,
+    (
+        CHANNEL_ARN_INVALID_EXCEPTION,
+        CHANNEL_NOT_FOUND_EXCEPTION,
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INVALID_TAG_PARAMETER_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        RESOURCE_TYPE_NOT_SUPPORTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+RESTORE_EVENT_DATA_STORE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _REDSI,
+    {_sSI: _cREDSR, _smi: None},
+    (_EDS,),
+    ((EVENT_DATA_STORE_ARN, 1),),
+)
+
+RESTORE_EVENT_DATA_STORE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _REDSO,
+    {_sSI: _cREDSRo, _smit: None},
+    (_EDSA, _N, _St, _AESd, _MRE, _OE, _RP, _TPE, _CT, _UT, _KKI, _BM),
+    (
+        (EVENT_DATA_STORE_ARN, 0),
+        (EVENT_DATA_STORE_NAME, 0),
+        (EVENT_DATA_STORE_STATUS, 0),
+        (ADVANCED_EVENT_SELECTORS, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (RETENTION_PERIOD, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (EVENT_DATA_STORE_KMS_KEY_ID, 0),
+        (BILLING_MODE, 0),
+    ),
+)
+
+RESTORE_EVENT_DATA_STORE: StaticOperationSchema = (
+    23,
+    n0,
+    _REDS,
+    0,
+    RESTORE_EVENT_DATA_STORE_INPUT,
+    RESTORE_EVENT_DATA_STORE_OUTPUT,
+    (
+        CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_MAX_LIMIT_EXCEEDED_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_STATUS_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        ORGANIZATION_NOT_IN_ALL_FEATURES_MODE_EXCEPTION,
+        ORGANIZATIONS_NOT_IN_USE_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+SEARCH_SAMPLE_QUERIES_MAX_RESULTS: StaticSchema = (7, n0, _SSQMR, 0)
+
+SEARCH_SAMPLE_QUERIES_SEARCH_PHRASE: StaticSchema = (3, n0, _SSQSP, 0)
+
+SEARCH_SAMPLE_QUERIES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SSQI,
+    {_sSI: _cSSQR, _smi: None},
+    (_SP, _MR, _NT),
+    (
+        (SEARCH_SAMPLE_QUERIES_SEARCH_PHRASE, 1),
+        (SEARCH_SAMPLE_QUERIES_MAX_RESULTS, 0),
+        (PAGINATION_TOKEN, 0),
+    ),
+)
+
+SAMPLE_QUERY_DESCRIPTION: StaticSchema = (3, n0, _SQD, 0)
+
+SAMPLE_QUERY_NAME: StaticSchema = (3, n0, _SQN, 0)
+
+SAMPLE_QUERY_RELEVANCE: StaticSchema = (9, n0, _SQR, {_smith: 0})
+
+SAMPLE_QUERY_SQL: StaticSchema = (3, n0, _SQSQL, 0)
+
+SEARCH_SAMPLE_QUERIES_SEARCH_RESULT: StaticSchema = (
+    18,
+    n0,
+    _SSQSR,
+    0,
+    (_N, _Desc, _SQL, _Rel),
+    (
+        (SAMPLE_QUERY_NAME, 0),
+        (SAMPLE_QUERY_DESCRIPTION, 0),
+        (SAMPLE_QUERY_SQL, 0),
+        (SAMPLE_QUERY_RELEVANCE, {_smith: 0}),
+    ),
+)
+
+SEARCH_SAMPLE_QUERIES_SEARCH_RESULTS: StaticSchema = (
+    16,
+    n0,
+    _SSQSRe,
+    0,
+    (_m,),
+    ((SEARCH_SAMPLE_QUERIES_SEARCH_RESULT, 0),),
+)
+
+SEARCH_SAMPLE_QUERIES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SSQO,
+    {_sSI: _cSSQRo, _smit: None},
+    (_SR, _NT),
+    ((SEARCH_SAMPLE_QUERIES_SEARCH_RESULTS, 0), (PAGINATION_TOKEN, 0)),
+)
+
+SEARCH_SAMPLE_QUERIES: StaticOperationSchema = (
+    23,
+    n0,
+    _SSQ,
+    0,
+    SEARCH_SAMPLE_QUERIES_INPUT,
+    SEARCH_SAMPLE_QUERIES_OUTPUT,
+    (
+        INVALID_PARAMETER_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+QUERY_PARAMETER_KEY: StaticSchema = (3, n0, _QPK, 0)
+
+QUERY_PARAMETER_VALUE: StaticSchema = (3, n0, _QPV, 0)
+
+QUERY_PARAMETER_VALUES: StaticSchema = (
+    17,
+    n0,
+    _QPVu,
+    0,
+    (_k, _v),
+    ((QUERY_PARAMETER_KEY, 0), (QUERY_PARAMETER_VALUE, 0)),
+)
+
+START_DASHBOARD_REFRESH_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SDRI,
+    {_sSI: _cSDRR, _smi: None},
+    (_DI, _QPVu),
+    ((DASHBOARD_ARN, 1), (QUERY_PARAMETER_VALUES, 0)),
+)
+
+START_DASHBOARD_REFRESH_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SDRO,
+    {_sSI: _cSDRRo, _smit: None},
+    (_RIe,),
+    ((REFRESH_ID, 0),),
+)
+
+START_DASHBOARD_REFRESH: StaticOperationSchema = (
+    23,
+    n0,
+    _SDR,
+    0,
+    START_DASHBOARD_REFRESH_INPUT,
+    START_DASHBOARD_REFRESH_OUTPUT,
+    (
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+START_EVENT_DATA_STORE_INGESTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SEDSII,
+    {_sSI: _cSEDSIR, _smi: None},
+    (_EDS,),
+    ((EVENT_DATA_STORE_ARN, 1),),
+)
+
+START_EVENT_DATA_STORE_INGESTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SEDSIO,
+    {_sSI: _cSEDSIRo, _smit: None},
+)
+
+START_EVENT_DATA_STORE_INGESTION: StaticOperationSchema = (
+    23,
+    n0,
+    _SEDSI,
+    0,
+    START_EVENT_DATA_STORE_INGESTION_INPUT,
+    START_EVENT_DATA_STORE_INGESTION_OUTPUT,
+    (
+        CONFLICT_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_CATEGORY_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_STATUS_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+INVALID_IMPORT_SOURCE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IISEn,
+    {_s: _c, _sE: 400},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+START_IMPORT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SII,
+    {_sSI: _cSIR, _smi: None},
+    (_Des, _ISm, _SET, _EET, _II),
+    ((IMPORT_DESTINATIONS, 0), (IMPORT_SOURCE, 0), (DATE, 0), (DATE, 0), (UUID, 0)),
+)
+
+START_IMPORT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SIO,
+    {_sSI: _cSIRo, _smit: None},
+    (_II, _Des, _ISm, _SET, _EET, _ISmpo, _CT, _UT),
+    (
+        (UUID, 0),
+        (IMPORT_DESTINATIONS, 0),
+        (IMPORT_SOURCE, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (IMPORT_STATUS, 0),
+        (DATE, 0),
+        (DATE, 0),
+    ),
+)
+
+START_IMPORT: StaticOperationSchema = (
+    23,
+    n0,
+    _SIt,
+    0,
+    START_IMPORT_INPUT,
+    START_IMPORT_OUTPUT,
+    (
+        ACCOUNT_HAS_ONGOING_IMPORT_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        IMPORT_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_CATEGORY_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_STATUS_EXCEPTION,
+        INVALID_IMPORT_SOURCE_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+START_LOGGING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SLI,
+    {_sSI: _cSLR, _smi: None},
+    (_N,),
+    ((STRING, 1),),
+)
+
+START_LOGGING_OUTPUT: StaticSchema = (18, n0, _SLO, {_sSI: _cSLRo, _smit: None})
+
+START_LOGGING: StaticOperationSchema = (
+    23,
+    n0,
+    _SL,
+    0,
+    START_LOGGING_INPUT,
+    START_LOGGING_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_HOME_REGION_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+MAX_CONCURRENT_QUERIES_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MCQE,
+    {_s: _c, _sE: 429},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+START_QUERY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SQI,
+    {_sSI: _cSQR, _smi: None},
+    (_QSu, _DSU, _QA, _QPu, _EDSOAI),
+    (
+        (QUERY_STATEMENT, 0),
+        (DELIVERY_S3_URI, 0),
+        (QUERY_ALIAS, 0),
+        (QUERY_PARAMETERS, 0),
+        (ACCOUNT_ID, 0),
+    ),
+)
+
+START_QUERY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SQO,
+    {_sSI: _cSQRo, _smit: None},
+    (_QI, _EDSOAI),
+    ((UUID, 0), (ACCOUNT_ID, 0)),
+)
+
+START_QUERY: StaticOperationSchema = (
+    23,
+    n0,
+    _SQ,
+    0,
+    START_QUERY_INPUT,
+    START_QUERY_OUTPUT,
+    (
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION,
+        INSUFFICIENT_S3_BUCKET_POLICY_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_QUERY_STATEMENT_EXCEPTION,
+        INVALID_S3_BUCKET_NAME_EXCEPTION,
+        INVALID_S3_PREFIX_EXCEPTION,
+        MAX_CONCURRENT_QUERIES_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        S3_BUCKET_DOES_NOT_EXIST_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+STOP_EVENT_DATA_STORE_INGESTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SEDSIIt,
+    {_sSI: _cSEDSIRom, _smi: None},
+    (_EDS,),
+    ((EVENT_DATA_STORE_ARN, 1),),
+)
+
+STOP_EVENT_DATA_STORE_INGESTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SEDSIOt,
+    {_sSI: _cSEDSIRoma, _smit: None},
+)
+
+STOP_EVENT_DATA_STORE_INGESTION: StaticOperationSchema = (
+    23,
+    n0,
+    _SEDSIt,
+    0,
+    STOP_EVENT_DATA_STORE_INGESTION_INPUT,
+    STOP_EVENT_DATA_STORE_INGESTION_OUTPUT,
+    (
+        CONFLICT_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_CATEGORY_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_STATUS_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+STOP_IMPORT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SIIt,
+    {_sSI: _cSIRom, _smi: None},
+    (_II,),
+    ((UUID, 1),),
+)
+
+STOP_IMPORT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SIOt,
+    {_sSI: _cSIRoma, _smit: None},
+    (_II, _ISm, _Des, _ISmpo, _CT, _UT, _SET, _EET, _ISmp),
+    (
+        (UUID, 0),
+        (IMPORT_SOURCE, 0),
+        (IMPORT_DESTINATIONS, 0),
+        (IMPORT_STATUS, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (IMPORT_STATISTICS, 0),
+    ),
+)
+
+STOP_IMPORT: StaticOperationSchema = (
+    23,
+    n0,
+    _SIto,
+    0,
+    STOP_IMPORT_INPUT,
+    STOP_IMPORT_OUTPUT,
+    (
+        IMPORT_NOT_FOUND_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+STOP_LOGGING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SLIt,
+    {_sSI: _cSLRom, _smi: None},
+    (_N,),
+    ((STRING, 1),),
+)
+
+STOP_LOGGING_OUTPUT: StaticSchema = (18, n0, _SLOt, {_sSI: _cSLRoma, _smit: None})
+
+STOP_LOGGING: StaticOperationSchema = (
+    23,
+    n0,
+    _SLt,
+    0,
+    STOP_LOGGING_INPUT,
+    STOP_LOGGING_OUTPUT,
+    (
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INVALID_HOME_REGION_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+UPDATE_CHANNEL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UCI,
+    {_sSI: _cUCR, _smi: None},
+    (_C, _Des, _N),
+    ((CHANNEL_ARN, 1), (DESTINATIONS, 0), (CHANNEL_NAME, 0)),
+)
+
+UPDATE_CHANNEL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UCO,
+    {_sSI: _cUCRo, _smit: None},
+    (_CA, _N, _So, _Des),
+    ((CHANNEL_ARN, 0), (CHANNEL_NAME, 0), (SOURCE, 0), (DESTINATIONS, 0)),
+)
+
+UPDATE_CHANNEL: StaticOperationSchema = (
+    23,
+    n0,
+    _UC,
+    0,
+    UPDATE_CHANNEL_INPUT,
+    UPDATE_CHANNEL_OUTPUT,
+    (
+        CHANNEL_ALREADY_EXISTS_EXCEPTION,
+        CHANNEL_ARN_INVALID_EXCEPTION,
+        CHANNEL_NOT_FOUND_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INVALID_EVENT_DATA_STORE_CATEGORY_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+UPDATE_DASHBOARD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UDI,
+    {_sSI: _cUDR, _smi: None},
+    (_DI, _W, _RS, _TPE),
+    (
+        (DASHBOARD_ARN, 1),
+        (REQUEST_WIDGET_LIST, 0),
+        (REFRESH_SCHEDULE, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+    ),
+)
+
+UPDATE_DASHBOARD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UDO,
+    {_sSI: _cUDRo, _smit: None},
+    (_DA, _N, _Ty, _W, _RS, _TPE, _CT, _UT),
+    (
+        (DASHBOARD_ARN, 0),
+        (DASHBOARD_NAME, 0),
+        (DASHBOARD_TYPE, 0),
+        (WIDGET_LIST, 0),
+        (REFRESH_SCHEDULE, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+        (DATE, 0),
+        (DATE, 0),
+    ),
+)
+
+UPDATE_DASHBOARD: StaticOperationSchema = (
+    23,
+    n0,
+    _UD,
+    0,
+    UPDATE_DASHBOARD_INPUT,
+    UPDATE_DASHBOARD_OUTPUT,
+    (
+        CONFLICT_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION,
+        INVALID_QUERY_STATEMENT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+UPDATE_EVENT_DATA_STORE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UEDSI,
+    {_sSI: _cUEDSR, _smi: None},
+    (_EDS, _N, _AESd, _MRE, _OE, _RP, _TPE, _KKI, _BM),
+    (
+        (EVENT_DATA_STORE_ARN, 1),
+        (EVENT_DATA_STORE_NAME, 0),
+        (ADVANCED_EVENT_SELECTORS, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (RETENTION_PERIOD, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+        (EVENT_DATA_STORE_KMS_KEY_ID, 0),
+        (BILLING_MODE, 0),
+    ),
+)
+
+UPDATE_EVENT_DATA_STORE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UEDSO,
+    {_sSI: _cUEDSRo, _smit: None},
+    (_EDSA, _N, _St, _AESd, _MRE, _OE, _RP, _TPE, _CT, _UT, _KKI, _BM, _FSe, _FRA),
+    (
+        (EVENT_DATA_STORE_ARN, 0),
+        (EVENT_DATA_STORE_NAME, 0),
+        (EVENT_DATA_STORE_STATUS, 0),
+        (ADVANCED_EVENT_SELECTORS, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (RETENTION_PERIOD, 0),
+        (TERMINATION_PROTECTION_ENABLED, 0),
+        (DATE, 0),
+        (DATE, 0),
+        (EVENT_DATA_STORE_KMS_KEY_ID, 0),
+        (BILLING_MODE, 0),
+        (FEDERATION_STATUS, 0),
+        (FEDERATION_ROLE_ARN, 0),
+    ),
+)
+
+UPDATE_EVENT_DATA_STORE: StaticOperationSchema = (
+    23,
+    n0,
+    _UEDS,
+    0,
+    UPDATE_EVENT_DATA_STORE_INPUT,
+    UPDATE_EVENT_DATA_STORE_OUTPUT,
+    (
+        CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        EVENT_DATA_STORE_ALREADY_EXISTS_EXCEPTION,
+        EVENT_DATA_STORE_ARN_INVALID_EXCEPTION,
+        EVENT_DATA_STORE_HAS_ONGOING_IMPORT_EXCEPTION,
+        EVENT_DATA_STORE_NOT_FOUND_EXCEPTION,
+        INACTIVE_EVENT_DATA_STORE_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION,
+        INVALID_EVENT_SELECTORS_EXCEPTION,
+        INVALID_INSIGHT_SELECTORS_EXCEPTION,
+        INVALID_KMS_KEY_ID_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        KMS_EXCEPTION,
+        KMS_KEY_NOT_FOUND_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        ORGANIZATION_NOT_IN_ALL_FEATURES_MODE_EXCEPTION,
+        ORGANIZATIONS_NOT_IN_USE_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+UPDATE_TRAIL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UTI,
+    {_sSI: _cUTR, _smi: None},
+    (_N, _SBN, _SKP, _STN, _IGSE, _IMRT, _ELFV, _CWLLGA, _CWLRA, _KKI, _IOT, _RL),
+    (
+        (STRING, 1),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+    ),
+)
+
+UPDATE_TRAIL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UTO,
+    {_sSI: _cUTRo, _smit: None},
+    (
+        _N,
+        _SBN,
+        _SKP,
+        _STN,
+        _STARN,
+        _IGSE,
+        _IMRT,
+        _TARN,
+        _LFVE,
+        _CWLLGA,
+        _CWLRA,
+        _KKI,
+        _IOT,
+        _RL,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, 0),
+        (BOOLEAN, 0),
+    ),
+)
+
+UPDATE_TRAIL: StaticOperationSchema = (
+    23,
+    n0,
+    _UTp,
+    0,
+    UPDATE_TRAIL_INPUT,
+    UPDATE_TRAIL_OUTPUT,
+    (
+        CLOUD_TRAIL_ACCESS_NOT_ENABLED_EXCEPTION,
+        CLOUD_TRAIL_ARN_INVALID_EXCEPTION,
+        CLOUD_TRAIL_INVALID_CLIENT_TOKEN_ID_EXCEPTION,
+        CLOUD_WATCH_LOGS_DELIVERY_UNAVAILABLE_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_EXCEPTION,
+        INSUFFICIENT_ENCRYPTION_POLICY_EXCEPTION,
+        INSUFFICIENT_S3_BUCKET_POLICY_EXCEPTION,
+        INSUFFICIENT_SNS_TOPIC_POLICY_EXCEPTION,
+        INVALID_CLOUD_WATCH_LOGS_LOG_GROUP_ARN_EXCEPTION,
+        INVALID_CLOUD_WATCH_LOGS_ROLE_ARN_EXCEPTION,
+        INVALID_EVENT_SELECTORS_EXCEPTION,
+        INVALID_HOME_REGION_EXCEPTION,
+        INVALID_KMS_KEY_ID_EXCEPTION,
+        INVALID_PARAMETER_COMBINATION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_S3_BUCKET_NAME_EXCEPTION,
+        INVALID_S3_PREFIX_EXCEPTION,
+        INVALID_SNS_TOPIC_NAME_EXCEPTION,
+        INVALID_TRAIL_NAME_EXCEPTION,
+        KMS_EXCEPTION,
+        KMS_KEY_DISABLED_EXCEPTION,
+        KMS_KEY_NOT_FOUND_EXCEPTION,
+        NO_MANAGEMENT_ACCOUNT_SLR_EXISTS_EXCEPTION,
+        NOT_ORGANIZATION_MASTER_ACCOUNT_EXCEPTION,
+        OPERATION_NOT_PERMITTED_EXCEPTION,
+        ORGANIZATION_NOT_IN_ALL_FEATURES_MODE_EXCEPTION,
+        ORGANIZATIONS_NOT_IN_USE_EXCEPTION,
+        S3_BUCKET_DOES_NOT_EXIST_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TRAIL_NOT_FOUND_EXCEPTION,
+        TRAIL_NOT_PROVIDED_EXCEPTION,
+        UNSUPPORTED_OPERATION_EXCEPTION,
+    ),
+)
+
+CLOUD_TRAIL_20131101: StaticSchema = (
+    21,
+    n0,
+    _C_,
+    {
+        _a: MappingProxyType({"name": "cloudtrail"}),
+        _a_: None,
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
+                ),
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsFIPS",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-gov-east-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-gov-west-1",
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cloudtrail-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cloudtrail.us-gov-east-1.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cloudtrail.us-gov-west-1.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cloudtrail-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cloudtrail.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cloudtrail.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "Region"}),
+                                "us-gov-east-1",
+                            ),
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 15,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEMAAAABQX14QoF9eELAAAABAAAAAwAAAAJAAAABgAAAAoF9eEJAAAABwX14QYAAAALAAAACAX14QcF9eEIAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "Region"}),
+                                "us-gov-west-1",
+                            ),
+                        }
+                    ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cloudtrail-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cloudtrail.us-gov-east-1.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cloudtrail.us-gov-west-1.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cloudtrail-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cloudtrail.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cloudtrail.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 15,
+                "nodes": "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEMAAAABQX14QoF9eELAAAABAAAAAwAAAAJAAAABgAAAAoF9eEJAAAABwX14QYAAAALAAAACAX14QcF9eEIAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "CloudTrail",
-                    "arnNamespace": "cloudtrail",
-                    "cloudFormationName": "CloudTrail",
-                    "cloudTrailEventSource": "cloudtrail.amazonaws.com",
-                    "endpointPrefix": "cloudtrail",
-                }
-            ),
+        _aw: MappingProxyType(
+            {
+                "sdkId": "CloudTrail",
+                "arnNamespace": "cloudtrail",
+                "cloudFormationName": "CloudTrail",
+                "cloudTrailEventSource": "cloudtrail.amazonaws.com",
+                "endpointPrefix": "cloudtrail",
+            }
         ),
-        Trait.new(
-            id=ShapeID("smithy.api#xmlNamespace"),
-            value=MappingProxyType(
-                {"uri": "http://cloudtrail.amazonaws.com/doc/2013-11-01/"}
-            ),
+        _sN: MappingProxyType(
+            {"uri": "http://cloudtrail.amazonaws.com/doc/2013-11-01/"}
         ),
-    ],
+    },
 )

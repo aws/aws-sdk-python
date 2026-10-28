@@ -6,11 +6,12 @@ from urllib.parse import urlsplit
 
 from smithy_aws_core.identity import AWSCredentialsIdentity
 from smithy_aws_core.identity.chain import Standard, StandardProvider
-from smithy_aws_core.identity.chain.provider import ChainSetup
+from smithy_aws_core.aio.identity.chain.provider import ChainSetup
 from smithy_core import URI
 from smithy_core.interfaces.identity import Identity
 
-from .client import IMDSConfig, IMDSConfigurationError
+from ..client import IMDSConfigurationError
+from .client import IMDSConfig
 from .resolvers import IMDSCredentialsResolver
 
 _DISABLED_ENV = "AWS_EC2_METADATA_DISABLED"

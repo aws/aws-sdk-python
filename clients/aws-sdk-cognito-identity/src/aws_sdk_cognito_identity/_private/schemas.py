@@ -2,1696 +2,1856 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 
-ACCESS_KEY_STRING = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#AccessKeyString"),
-    shape_type=ShapeType.STRING,
+n0 = "com.amazonaws.cognitoidentity"
+_AKS = "AccessKeyString"
+_AI = "AccountId"
+_ARRT = "AmbiguousRoleResolutionType"
+_AR = "AUTHENTICATED_ROLE"
+_sV = "smithy.api#enumValue"
+_ARu = "AuthenticatedRole"
+_DENY = "DENY"
+_D = "Deny"
+_ARNS = "ARNString"
+_CF = "ClassicFlow"
+_IPU = "IdentityPoolUnauthenticated"
+_s = "smithy.api#default"
+_CIPCI = "CognitoIdentityProviderClientId"
+_CIPN = "CognitoIdentityProviderName"
+_CIPTC = "CognitoIdentityProviderTokenCheck"
+_CIP = "CognitoIdentityProvider"
+_PN = "ProviderName"
+_CI = "ClientId"
+_SSTC = "ServerSideTokenCheck"
+_CIPL = "CognitoIdentityProviderList"
+_m = "member"
+_DPN = "DeveloperProviderName"
+_IPN = "IdentityPoolName"
+_TKT = "TagKeysType"
+_TVT = "TagValueType"
+_IPTT = "IdentityPoolTagsType"
+_k = "key"
+_v = "value"
+_OIDCPL = "OIDCProviderList"
+_SAMLPL = "SAMLProviderList"
+_IPNd = "IdentityProviderName"
+_IPI = "IdentityProviderId"
+_IP = "IdentityProviders"
+_CIPI = "CreateIdentityPoolInput"
+_sm = "smithy.api#input"
+_smi = "smithy.api#required"
+_AUI = "AllowUnauthenticatedIdentities"
+_ACF = "AllowClassicFlow"
+_SLP = "SupportedLoginProviders"
+_OICPARN = "OpenIdConnectProviderARNs"
+_CIPo = "CognitoIdentityProviders"
+_SPARN = "SamlProviderARNs"
+_IPT = "IdentityPoolTags"
+_IPId = "IdentityPoolId"
+_CIPO = "CreateIdentityPoolOutput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cIP = "com.amazonaws.cognitoidentity#IdentityPool"
+_smit = "smithy.api#output"
+_S = "String"
+_IEE = "InternalErrorException"
+_smith = "smithy.api#error"
+_se = "server"
+_me = "message"
+_IPE = "InvalidParameterException"
+_c = "client"
+_sE = "smithy.api#httpError"
+_LEE = "LimitExceededException"
+_NAE = "NotAuthorizedException"
+_RCE = "ResourceConflictException"
+_TMRE = "TooManyRequestsException"
+_CIPr = "CreateIdentityPool"
+_II = "IdentityId"
+_IIL = "IdentityIdList"
+_DII = "DeleteIdentitiesInput"
+_IITD = "IdentityIdsToDelete"
+_EC = "ErrorCode"
+_AD = "ACCESS_DENIED"
+_ADc = "AccessDenied"
+_ISE = "INTERNAL_SERVER_ERROR"
+_ISEn = "InternalServerError"
+_UII = "UnprocessedIdentityId"
+_UIIL = "UnprocessedIdentityIdList"
+_DIO = "DeleteIdentitiesOutput"
+_cDIR = "com.amazonaws.cognitoidentity#DeleteIdentitiesResponse"
+_UIIn = "UnprocessedIdentityIds"
+_DI = "DeleteIdentities"
+_DIPI = "DeleteIdentityPoolInput"
+_DIPO = "DeleteIdentityPoolOutput"
+_sU = "smithy.api#Unit"
+_RNFE = "ResourceNotFoundException"
+_DIP = "DeleteIdentityPool"
+_DIIe = "DescribeIdentityInput"
+_DT = "DateType"
+_LL = "LoginsList"
+_DIOe = "DescribeIdentityOutput"
+_cID = "com.amazonaws.cognitoidentity#IdentityDescription"
+_L = "Logins"
+_CD = "CreationDate"
+_LMD = "LastModifiedDate"
+_DIe = "DescribeIdentity"
+_DIPIe = "DescribeIdentityPoolInput"
+_DIPOe = "DescribeIdentityPoolOutput"
+_DIPe = "DescribeIdentityPool"
+_ESE = "ExternalServiceException"
+_IPTd = "IdentityProviderToken"
+_smithy = "smithy.api#sensitive"
+_LM = "LoginsMap"
+_GCFII = "GetCredentialsForIdentityInput"
+_CRA = "CustomRoleArn"
+_SKS = "SecretKeyString"
+_STS = "SessionTokenString"
+_C = "Credentials"
+_AKI = "AccessKeyId"
+_SK = "SecretKey"
+_ST = "SessionToken"
+_E = "Expiration"
+_GCFIO = "GetCredentialsForIdentityOutput"
+_cGCFIR = "com.amazonaws.cognitoidentity#GetCredentialsForIdentityResponse"
+_IIPCE = "InvalidIdentityPoolConfigurationException"
+_GCFI = "GetCredentialsForIdentity"
+_GII = "GetIdInput"
+_GIO = "GetIdOutput"
+_cGIR = "com.amazonaws.cognitoidentity#GetIdResponse"
+_GI = "GetId"
+_GIPRI = "GetIdentityPoolRolesInput"
+_CN = "ClaimName"
+_MRMT = "MappingRuleMatchType"
+_EQUALS = "EQUALS"
+_Eq = "Equals"
+_CONTAINS = "CONTAINS"
+_Co = "Contains"
+_SW = "STARTS_WITH"
+_SWt = "StartsWith"
+_NE = "NOT_EQUAL"
+_NEo = "NotEqual"
+_CV = "ClaimValue"
+_MR = "MappingRule"
+_Cl = "Claim"
+_MT = "MatchType"
+_V = "Value"
+_RARN = "RoleARN"
+_MRL = "MappingRulesList"
+_RCT = "RulesConfigurationType"
+_R = "Rules"
+_RMT = "RoleMappingType"
+_TOKEN = "TOKEN"
+_T = "Token"
+_RULES = "RULES"
+_RM = "RoleMapping"
+_Ty = "Type"
+_ARR = "AmbiguousRoleResolution"
+_RC = "RulesConfiguration"
+_RMM = "RoleMappingMap"
+_RT = "RoleType"
+_RMo = "RolesMap"
+_GIPRO = "GetIdentityPoolRolesOutput"
+_cGIPRR = "com.amazonaws.cognitoidentity#GetIdentityPoolRolesResponse"
+_Ro = "Roles"
+_RMol = "RoleMappings"
+_GIPR = "GetIdentityPoolRoles"
+_GOITI = "GetOpenIdTokenInput"
+_OIDCT = "OIDCToken"
+_GOITO = "GetOpenIdTokenOutput"
+_cGOITR = "com.amazonaws.cognitoidentity#GetOpenIdTokenResponse"
+_GOIT = "GetOpenIdToken"
+_DUARE = "DeveloperUserAlreadyRegisteredException"
+_PTID = "PrincipalTagID"
+_PTV = "PrincipalTagValue"
+_PT = "PrincipalTags"
+_TD = "TokenDuration"
+_GOITFDII = "GetOpenIdTokenForDeveloperIdentityInput"
+_GOITFDIO = "GetOpenIdTokenForDeveloperIdentityOutput"
+_cGOITFDIR = "com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentityResponse"
+_GOITFDI = "GetOpenIdTokenForDeveloperIdentity"
+_GPTAMI = "GetPrincipalTagAttributeMapInput"
+_UD = "UseDefaults"
+_GPTAMO = "GetPrincipalTagAttributeMapOutput"
+_cGPTAMR = "com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMapResponse"
+_GPTAM = "GetPrincipalTagAttributeMap"
+_HD = "HideDisabled"
+_QL = "QueryLimit"
+_PK = "PaginationKey"
+_LII = "ListIdentitiesInput"
+_MRa = "MaxResults"
+_NT = "NextToken"
+_ID = "IdentityDescription"
+_IL = "IdentitiesList"
+_LIO = "ListIdentitiesOutput"
+_cLIR = "com.amazonaws.cognitoidentity#ListIdentitiesResponse"
+_I = "Identities"
+_LI = "ListIdentities"
+_LIPI = "ListIdentityPoolsInput"
+_IPSD = "IdentityPoolShortDescription"
+_IPL = "IdentityPoolsList"
+_LIPO = "ListIdentityPoolsOutput"
+_cLIPR = "com.amazonaws.cognitoidentity#ListIdentityPoolsResponse"
+_IPd = "IdentityPools"
+_LIP = "ListIdentityPools"
+_LTFRI = "ListTagsForResourceInput"
+_RA = "ResourceArn"
+_LTFRO = "ListTagsForResourceOutput"
+_cLTFRR = "com.amazonaws.cognitoidentity#ListTagsForResourceResponse"
+_Ta = "Tags"
+_LTFR = "ListTagsForResource"
+_DUI = "DeveloperUserIdentifier"
+_LDII = "LookupDeveloperIdentityInput"
+_DUIL = "DeveloperUserIdentifierList"
+_LDIO = "LookupDeveloperIdentityOutput"
+_cLDIR = "com.amazonaws.cognitoidentity#LookupDeveloperIdentityResponse"
+_LDI = "LookupDeveloperIdentity"
+_MDII = "MergeDeveloperIdentitiesInput"
+_SUI = "SourceUserIdentifier"
+_DUIe = "DestinationUserIdentifier"
+_MDIO = "MergeDeveloperIdentitiesOutput"
+_cMDIR = "com.amazonaws.cognitoidentity#MergeDeveloperIdentitiesResponse"
+_MDI = "MergeDeveloperIdentities"
+_CME = "ConcurrentModificationException"
+_SIPRI = "SetIdentityPoolRolesInput"
+_SIPRO = "SetIdentityPoolRolesOutput"
+_SIPR = "SetIdentityPoolRoles"
+_SPTAMI = "SetPrincipalTagAttributeMapInput"
+_SPTAMO = "SetPrincipalTagAttributeMapOutput"
+_cSPTAMR = "com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMapResponse"
+_SPTAM = "SetPrincipalTagAttributeMap"
+_TRI = "TagResourceInput"
+_TRO = "TagResourceOutput"
+_cTRR = "com.amazonaws.cognitoidentity#TagResourceResponse"
+_TR = "TagResource"
+_UDII = "UnlinkDeveloperIdentityInput"
+_UDIO = "UnlinkDeveloperIdentityOutput"
+_UDI = "UnlinkDeveloperIdentity"
+_UIInl = "UnlinkIdentityInput"
+_LTR = "LoginsToRemove"
+_UIO = "UnlinkIdentityOutput"
+_UI = "UnlinkIdentity"
+_IPTLT = "IdentityPoolTagsListType"
+_URI = "UntagResourceInput"
+_TK = "TagKeys"
+_URO = "UntagResourceOutput"
+_cURR = "com.amazonaws.cognitoidentity#UntagResourceResponse"
+_UR = "UntagResource"
+_UIPI = "UpdateIdentityPoolInput"
+_UIPO = "UpdateIdentityPoolOutput"
+_UIP = "UpdateIdentityPool"
+_AWSCIS = "AWSCognitoIdentityService"
+_a = "aws.auth#sigv4"
+_a_ = "aws.protocols#awsJson1_1"
+_sB = "smithy.rules#endpointBdd"
+_aw = "aws.api#service"
+_sN = "smithy.api#xmlNamespace"
+
+ACCESS_KEY_STRING: StaticSchema = (3, n0, _AKS, 0)
+
+ACCOUNT_ID: StaticSchema = (3, n0, _AI, 0)
+
+AMBIGUOUS_ROLE_RESOLUTION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ARRT,
+    0,
+    (_AR, _DENY),
+    ((-1, {_sV: _ARu}), (-1, {_sV: _D})),
 )
 
-ACCOUNT_ID = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#AccountId"), shape_type=ShapeType.STRING
-)
+ARN_STRING: StaticSchema = (3, n0, _ARNS, 0)
 
-AMBIGUOUS_ROLE_RESOLUTION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#AmbiguousRoleResolutionType"),
-    shape_type=ShapeType.ENUM,
-    members={"AUTHENTICATED_ROLE": {"target": UNIT}, "DENY": {"target": UNIT}},
-)
+CLASSIC_FLOW: StaticSchema = (2, n0, _CF, 0)
 
-ARN_STRING = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#ARNString"), shape_type=ShapeType.STRING
-)
+IDENTITY_POOL_UNAUTHENTICATED: StaticSchema = (2, n0, _IPU, {_s: False})
 
-CLASSIC_FLOW = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#ClassicFlow"),
-    shape_type=ShapeType.BOOLEAN,
-)
+COGNITO_IDENTITY_PROVIDER_CLIENT_ID: StaticSchema = (3, n0, _CIPCI, 0)
 
-IDENTITY_POOL_UNAUTHENTICATED = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityPoolUnauthenticated"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
+COGNITO_IDENTITY_PROVIDER_NAME: StaticSchema = (3, n0, _CIPN, 0)
 
-COGNITO_IDENTITY_PROVIDER_CLIENT_ID = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#CognitoIdentityProviderClientId"),
-    shape_type=ShapeType.STRING,
-)
+COGNITO_IDENTITY_PROVIDER_TOKEN_CHECK: StaticSchema = (2, n0, _CIPTC, {_s: False})
 
-COGNITO_IDENTITY_PROVIDER_NAME = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#CognitoIdentityProviderName"),
-    shape_type=ShapeType.STRING,
-)
-
-COGNITO_IDENTITY_PROVIDER_TOKEN_CHECK = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#CognitoIdentityProviderTokenCheck"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-COGNITO_IDENTITY_PROVIDER = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#CognitoIdentityProvider"),
-    members={
-        "ProviderName": {"target": COGNITO_IDENTITY_PROVIDER_NAME},
-        "ClientId": {"target": COGNITO_IDENTITY_PROVIDER_CLIENT_ID},
-        "ServerSideTokenCheck": {
-            "target": COGNITO_IDENTITY_PROVIDER_TOKEN_CHECK,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-    },
-)
-
-COGNITO_IDENTITY_PROVIDER_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#CognitoIdentityProviderList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": COGNITO_IDENTITY_PROVIDER}},
-)
-
-DEVELOPER_PROVIDER_NAME = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#DeveloperProviderName"),
-    shape_type=ShapeType.STRING,
-)
-
-IDENTITY_POOL_NAME = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityPoolName"),
-    shape_type=ShapeType.STRING,
-)
-
-TAG_KEYS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#TagKeysType"), shape_type=ShapeType.STRING
-)
-
-TAG_VALUE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#TagValueType"),
-    shape_type=ShapeType.STRING,
-)
-
-IDENTITY_POOL_TAGS_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityPoolTagsType"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": TAG_KEYS_TYPE}, "value": {"target": TAG_VALUE_TYPE}},
-)
-
-OIDC_PROVIDER_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#OIDCProviderList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ARN_STRING}},
-)
-
-SAML_PROVIDER_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#SAMLProviderList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ARN_STRING}},
-)
-
-IDENTITY_PROVIDER_NAME = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityProviderName"),
-    shape_type=ShapeType.STRING,
-)
-
-IDENTITY_PROVIDER_ID = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityProviderId"),
-    shape_type=ShapeType.STRING,
-)
-
-IDENTITY_PROVIDERS = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityProviders"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": IDENTITY_PROVIDER_NAME},
-        "value": {"target": IDENTITY_PROVIDER_ID},
-    },
-)
-
-CREATE_IDENTITY_POOL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#CreateIdentityPoolInput"),
-    members={
-        "IdentityPoolName": {
-            "target": IDENTITY_POOL_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AllowUnauthenticatedIdentities": {
-            "target": IDENTITY_POOL_UNAUTHENTICATED,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "AllowClassicFlow": {"target": CLASSIC_FLOW},
-        "SupportedLoginProviders": {"target": IDENTITY_PROVIDERS},
-        "DeveloperProviderName": {"target": DEVELOPER_PROVIDER_NAME},
-        "OpenIdConnectProviderARNs": {"target": OIDC_PROVIDER_LIST},
-        "CognitoIdentityProviders": {"target": COGNITO_IDENTITY_PROVIDER_LIST},
-        "SamlProviderARNs": {"target": SAML_PROVIDER_LIST},
-        "IdentityPoolTags": {"target": IDENTITY_POOL_TAGS_TYPE},
-    },
-)
-
-IDENTITY_POOL_ID = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityPoolId"),
-    shape_type=ShapeType.STRING,
-)
-
-CREATE_IDENTITY_POOL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#CreateIdentityPoolOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#IdentityPool",
-        )
-    ],
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IdentityPoolName": {
-            "target": IDENTITY_POOL_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AllowUnauthenticatedIdentities": {
-            "target": IDENTITY_POOL_UNAUTHENTICATED,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "AllowClassicFlow": {"target": CLASSIC_FLOW},
-        "SupportedLoginProviders": {"target": IDENTITY_PROVIDERS},
-        "DeveloperProviderName": {"target": DEVELOPER_PROVIDER_NAME},
-        "OpenIdConnectProviderARNs": {"target": OIDC_PROVIDER_LIST},
-        "CognitoIdentityProviders": {"target": COGNITO_IDENTITY_PROVIDER_LIST},
-        "SamlProviderARNs": {"target": SAML_PROVIDER_LIST},
-        "IdentityPoolTags": {"target": IDENTITY_POOL_TAGS_TYPE},
-    },
-)
-
-STRING = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#String"), shape_type=ShapeType.STRING
-)
-
-INTERNAL_ERROR_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#InternalErrorException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="server")],
-    members={"message": {"target": STRING}},
-)
-
-INVALID_PARAMETER_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#InvalidParameterException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#LimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-NOT_AUTHORIZED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#NotAuthorizedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-RESOURCE_CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#ResourceConflictException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-TOO_MANY_REQUESTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#TooManyRequestsException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-CREATE_IDENTITY_POOL = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#CreateIdentityPool"),
-    shape_type=ShapeType.OPERATION,
-)
-
-IDENTITY_ID = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityId"), shape_type=ShapeType.STRING
-)
-
-IDENTITY_ID_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityIdList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": IDENTITY_ID}},
-)
-
-DELETE_IDENTITIES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#DeleteIdentitiesInput"),
-    members={
-        "IdentityIdsToDelete": {
-            "target": IDENTITY_ID_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-ERROR_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#ErrorCode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ACCESS_DENIED": {"target": UNIT},
-        "INTERNAL_SERVER_ERROR": {"target": UNIT},
-    },
-)
-
-UNPROCESSED_IDENTITY_ID = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#UnprocessedIdentityId"),
-    members={
-        "IdentityId": {"target": IDENTITY_ID},
-        "ErrorCode": {"target": ERROR_CODE},
-    },
-)
-
-UNPROCESSED_IDENTITY_ID_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#UnprocessedIdentityIdList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": UNPROCESSED_IDENTITY_ID}},
-)
-
-DELETE_IDENTITIES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#DeleteIdentitiesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#DeleteIdentitiesResponse",
-        )
-    ],
-    members={"UnprocessedIdentityIds": {"target": UNPROCESSED_IDENTITY_ID_LIST}},
-)
-
-DELETE_IDENTITIES = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#DeleteIdentities"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DELETE_IDENTITY_POOL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#DeleteIdentityPoolInput"),
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_IDENTITY_POOL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#DeleteIdentityPoolOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-DELETE_IDENTITY_POOL = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#DeleteIdentityPool"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DESCRIBE_IDENTITY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#DescribeIdentityInput"),
-    members={
-        "IdentityId": {
-            "target": IDENTITY_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DATE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#DateType"), shape_type=ShapeType.TIMESTAMP
-)
-
-LOGINS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#LoginsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": IDENTITY_PROVIDER_NAME}},
-)
-
-DESCRIBE_IDENTITY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#DescribeIdentityOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#IdentityDescription",
-        )
-    ],
-    members={
-        "IdentityId": {"target": IDENTITY_ID},
-        "Logins": {"target": LOGINS_LIST},
-        "CreationDate": {"target": DATE_TYPE},
-        "LastModifiedDate": {"target": DATE_TYPE},
-    },
-)
-
-DESCRIBE_IDENTITY = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#DescribeIdentity"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DESCRIBE_IDENTITY_POOL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#DescribeIdentityPoolInput"),
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DESCRIBE_IDENTITY_POOL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#DescribeIdentityPoolOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#IdentityPool",
-        )
-    ],
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IdentityPoolName": {
-            "target": IDENTITY_POOL_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AllowUnauthenticatedIdentities": {
-            "target": IDENTITY_POOL_UNAUTHENTICATED,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "AllowClassicFlow": {"target": CLASSIC_FLOW},
-        "SupportedLoginProviders": {"target": IDENTITY_PROVIDERS},
-        "DeveloperProviderName": {"target": DEVELOPER_PROVIDER_NAME},
-        "OpenIdConnectProviderARNs": {"target": OIDC_PROVIDER_LIST},
-        "CognitoIdentityProviders": {"target": COGNITO_IDENTITY_PROVIDER_LIST},
-        "SamlProviderARNs": {"target": SAML_PROVIDER_LIST},
-        "IdentityPoolTags": {"target": IDENTITY_POOL_TAGS_TYPE},
-    },
-)
-
-DESCRIBE_IDENTITY_POOL = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#DescribeIdentityPool"),
-    shape_type=ShapeType.OPERATION,
-)
-
-EXTERNAL_SERVICE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#ExternalServiceException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-IDENTITY_PROVIDER_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityProviderToken"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-LOGINS_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#LoginsMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": IDENTITY_PROVIDER_NAME},
-        "value": {"target": IDENTITY_PROVIDER_TOKEN},
-    },
-)
-
-GET_CREDENTIALS_FOR_IDENTITY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetCredentialsForIdentityInput"),
-    members={
-        "IdentityId": {
-            "target": IDENTITY_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Logins": {"target": LOGINS_MAP},
-        "CustomRoleArn": {"target": ARN_STRING},
-    },
-)
-
-SECRET_KEY_STRING = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#SecretKeyString"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-SESSION_TOKEN_STRING = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#SessionTokenString"),
-    shape_type=ShapeType.STRING,
-)
-
-CREDENTIALS = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#Credentials"),
-    members={
-        "AccessKeyId": {"target": ACCESS_KEY_STRING},
-        "SecretKey": {"target": SECRET_KEY_STRING},
-        "SessionToken": {"target": SESSION_TOKEN_STRING},
-        "Expiration": {"target": DATE_TYPE},
-    },
-)
-
-GET_CREDENTIALS_FOR_IDENTITY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetCredentialsForIdentityOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#GetCredentialsForIdentityResponse",
-        )
-    ],
-    members={
-        "IdentityId": {"target": IDENTITY_ID},
-        "Credentials": {"target": CREDENTIALS},
-    },
-)
-
-INVALID_IDENTITY_POOL_CONFIGURATION_EXCEPTION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.cognitoidentity#InvalidIdentityPoolConfigurationException"
+COGNITO_IDENTITY_PROVIDER: StaticSchema = (
+    18,
+    n0,
+    _CIP,
+    0,
+    (_PN, _CI, _SSTC),
+    (
+        (COGNITO_IDENTITY_PROVIDER_NAME, 0),
+        (COGNITO_IDENTITY_PROVIDER_CLIENT_ID, 0),
+        (COGNITO_IDENTITY_PROVIDER_TOKEN_CHECK, {_s: None}),
     ),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": STRING}},
 )
 
-GET_CREDENTIALS_FOR_IDENTITY = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetCredentialsForIdentity"),
-    shape_type=ShapeType.OPERATION,
+COGNITO_IDENTITY_PROVIDER_LIST: StaticSchema = (
+    16,
+    n0,
+    _CIPL,
+    0,
+    (_m,),
+    ((COGNITO_IDENTITY_PROVIDER, 0),),
 )
 
-GET_ID_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetIdInput"),
-    members={
-        "AccountId": {"target": ACCOUNT_ID},
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Logins": {"target": LOGINS_MAP},
-    },
+DEVELOPER_PROVIDER_NAME: StaticSchema = (3, n0, _DPN, 0)
+
+IDENTITY_POOL_NAME: StaticSchema = (3, n0, _IPN, 0)
+
+TAG_KEYS_TYPE: StaticSchema = (3, n0, _TKT, 0)
+
+TAG_VALUE_TYPE: StaticSchema = (3, n0, _TVT, 0)
+
+IDENTITY_POOL_TAGS_TYPE: StaticSchema = (
+    17,
+    n0,
+    _IPTT,
+    0,
+    (_k, _v),
+    ((TAG_KEYS_TYPE, 0), (TAG_VALUE_TYPE, 0)),
 )
 
-GET_ID_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetIdOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#GetIdResponse",
-        )
-    ],
-    members={"IdentityId": {"target": IDENTITY_ID}},
+OIDC_PROVIDER_LIST: StaticSchema = (16, n0, _OIDCPL, 0, (_m,), ((ARN_STRING, 0),))
+
+SAML_PROVIDER_LIST: StaticSchema = (16, n0, _SAMLPL, 0, (_m,), ((ARN_STRING, 0),))
+
+IDENTITY_PROVIDER_NAME: StaticSchema = (3, n0, _IPNd, 0)
+
+IDENTITY_PROVIDER_ID: StaticSchema = (3, n0, _IPI, 0)
+
+IDENTITY_PROVIDERS: StaticSchema = (
+    17,
+    n0,
+    _IP,
+    0,
+    (_k, _v),
+    ((IDENTITY_PROVIDER_NAME, 0), (IDENTITY_PROVIDER_ID, 0)),
 )
 
-GET_ID = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetId"), shape_type=ShapeType.OPERATION
-)
-
-GET_IDENTITY_POOL_ROLES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetIdentityPoolRolesInput"),
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CLAIM_NAME = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#ClaimName"), shape_type=ShapeType.STRING
-)
-
-MAPPING_RULE_MATCH_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#MappingRuleMatchType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EQUALS": {"target": UNIT},
-        "CONTAINS": {"target": UNIT},
-        "STARTS_WITH": {"target": UNIT},
-        "NOT_EQUAL": {"target": UNIT},
-    },
-)
-
-CLAIM_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#ClaimValue"), shape_type=ShapeType.STRING
-)
-
-MAPPING_RULE = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#MappingRule"),
-    members={
-        "Claim": {
-            "target": CLAIM_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MatchType": {
-            "target": MAPPING_RULE_MATCH_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Value": {
-            "target": CLAIM_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RoleARN": {
-            "target": ARN_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-MAPPING_RULES_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#MappingRulesList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MAPPING_RULE}},
-)
-
-RULES_CONFIGURATION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#RulesConfigurationType"),
-    members={
-        "Rules": {
-            "target": MAPPING_RULES_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-ROLE_MAPPING_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#RoleMappingType"),
-    shape_type=ShapeType.ENUM,
-    members={"TOKEN": {"target": UNIT}, "RULES": {"target": UNIT}},
-)
-
-ROLE_MAPPING = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#RoleMapping"),
-    members={
-        "Type": {
-            "target": ROLE_MAPPING_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AmbiguousRoleResolution": {"target": AMBIGUOUS_ROLE_RESOLUTION_TYPE},
-        "RulesConfiguration": {"target": RULES_CONFIGURATION_TYPE},
-    },
-)
-
-ROLE_MAPPING_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#RoleMappingMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": IDENTITY_PROVIDER_NAME},
-        "value": {"target": ROLE_MAPPING},
-    },
-)
-
-ROLE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#RoleType"), shape_type=ShapeType.STRING
-)
-
-ROLES_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#RolesMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": ROLE_TYPE}, "value": {"target": ARN_STRING}},
-)
-
-GET_IDENTITY_POOL_ROLES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetIdentityPoolRolesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#GetIdentityPoolRolesResponse",
-        )
-    ],
-    members={
-        "IdentityPoolId": {"target": IDENTITY_POOL_ID},
-        "Roles": {"target": ROLES_MAP},
-        "RoleMappings": {"target": ROLE_MAPPING_MAP},
-    },
-)
-
-GET_IDENTITY_POOL_ROLES = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetIdentityPoolRoles"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_OPEN_ID_TOKEN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetOpenIdTokenInput"),
-    members={
-        "IdentityId": {
-            "target": IDENTITY_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Logins": {"target": LOGINS_MAP},
-    },
-)
-
-OIDC_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#OIDCToken"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-GET_OPEN_ID_TOKEN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetOpenIdTokenOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#GetOpenIdTokenResponse",
-        )
-    ],
-    members={"IdentityId": {"target": IDENTITY_ID}, "Token": {"target": OIDC_TOKEN}},
-)
-
-GET_OPEN_ID_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetOpenIdToken"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DEVELOPER_USER_ALREADY_REGISTERED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#DeveloperUserAlreadyRegisteredException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-PRINCIPAL_TAG_ID = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#PrincipalTagID"),
-    shape_type=ShapeType.STRING,
-)
-
-PRINCIPAL_TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#PrincipalTagValue"),
-    shape_type=ShapeType.STRING,
-)
-
-PRINCIPAL_TAGS = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#PrincipalTags"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": PRINCIPAL_TAG_ID},
-        "value": {"target": PRINCIPAL_TAG_VALUE},
-    },
-)
-
-TOKEN_DURATION = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#TokenDuration"), shape_type=ShapeType.LONG
-)
-
-GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentityInput"),
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IdentityId": {"target": IDENTITY_ID},
-        "Logins": {
-            "target": LOGINS_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "PrincipalTags": {"target": PRINCIPAL_TAGS},
-        "TokenDuration": {"target": TOKEN_DURATION},
-    },
-)
-
-GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY_OUTPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentityOutput"
+CREATE_IDENTITY_POOL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CIPI,
+    {_sm: None},
+    (_IPN, _AUI, _ACF, _SLP, _DPN, _OICPARN, _CIPo, _SPARN, _IPT),
+    (
+        (IDENTITY_POOL_NAME, 1),
+        (IDENTITY_POOL_UNAUTHENTICATED, {_s: False, _smi: None}),
+        (CLASSIC_FLOW, 0),
+        (IDENTITY_PROVIDERS, 0),
+        (DEVELOPER_PROVIDER_NAME, 0),
+        (OIDC_PROVIDER_LIST, 0),
+        (COGNITO_IDENTITY_PROVIDER_LIST, 0),
+        (SAML_PROVIDER_LIST, 0),
+        (IDENTITY_POOL_TAGS_TYPE, 0),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentityResponse",
-        )
-    ],
-    members={"IdentityId": {"target": IDENTITY_ID}, "Token": {"target": OIDC_TOKEN}},
 )
 
-GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentity"),
-    shape_type=ShapeType.OPERATION,
+IDENTITY_POOL_ID: StaticSchema = (3, n0, _IPId, 0)
+
+CREATE_IDENTITY_POOL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CIPO,
+    {_sSI: _cIP, _smit: None},
+    (_IPId, _IPN, _AUI, _ACF, _SLP, _DPN, _OICPARN, _CIPo, _SPARN, _IPT),
+    (
+        (IDENTITY_POOL_ID, 1),
+        (IDENTITY_POOL_NAME, 1),
+        (IDENTITY_POOL_UNAUTHENTICATED, {_s: False, _smi: None}),
+        (CLASSIC_FLOW, 0),
+        (IDENTITY_PROVIDERS, 0),
+        (DEVELOPER_PROVIDER_NAME, 0),
+        (OIDC_PROVIDER_LIST, 0),
+        (COGNITO_IDENTITY_PROVIDER_LIST, 0),
+        (SAML_PROVIDER_LIST, 0),
+        (IDENTITY_POOL_TAGS_TYPE, 0),
+    ),
 )
 
-GET_PRINCIPAL_TAG_ATTRIBUTE_MAP_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMapInput"),
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IdentityProviderName": {
-            "target": IDENTITY_PROVIDER_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+STRING: StaticSchema = (3, n0, _S, 0)
+
+INTERNAL_ERROR_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IEE,
+    {_smith: _se},
+    (_me,),
+    ((STRING, 0),),
 )
 
-USE_DEFAULTS = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#UseDefaults"),
-    shape_type=ShapeType.BOOLEAN,
+INVALID_PARAMETER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IPE,
+    {_smith: _c, _sE: 400},
+    (_me,),
+    ((STRING, 0),),
 )
 
-GET_PRINCIPAL_TAG_ATTRIBUTE_MAP_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMapOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMapResponse",
-        )
-    ],
-    members={
-        "IdentityPoolId": {"target": IDENTITY_POOL_ID},
-        "IdentityProviderName": {"target": IDENTITY_PROVIDER_NAME},
-        "UseDefaults": {"target": USE_DEFAULTS},
-        "PrincipalTags": {"target": PRINCIPAL_TAGS},
-    },
+LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LEE,
+    {_smith: _c, _sE: 400},
+    (_me,),
+    ((STRING, 0),),
 )
 
-GET_PRINCIPAL_TAG_ATTRIBUTE_MAP = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMap"),
-    shape_type=ShapeType.OPERATION,
+NOT_AUTHORIZED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _NAE,
+    {_smith: _c, _sE: 403},
+    (_me,),
+    ((STRING, 0),),
 )
 
-HIDE_DISABLED = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#HideDisabled"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
+RESOURCE_CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RCE,
+    {_smith: _c, _sE: 409},
+    (_me,),
+    ((STRING, 0),),
 )
 
-QUERY_LIMIT = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#QueryLimit"), shape_type=ShapeType.INTEGER
+TOO_MANY_REQUESTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TMRE,
+    {_smith: _c, _sE: 429},
+    (_me,),
+    ((STRING, 0),),
 )
 
-PAGINATION_KEY = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#PaginationKey"),
-    shape_type=ShapeType.STRING,
+CREATE_IDENTITY_POOL: StaticOperationSchema = (
+    23,
+    n0,
+    _CIPr,
+    0,
+    CREATE_IDENTITY_POOL_INPUT,
+    CREATE_IDENTITY_POOL_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
 )
 
-LIST_IDENTITIES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#ListIdentitiesInput"),
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MaxResults": {
-            "target": QUERY_LIMIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextToken": {"target": PAGINATION_KEY},
-        "HideDisabled": {
-            "target": HIDE_DISABLED,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
+IDENTITY_ID: StaticSchema = (3, n0, _II, 0)
+
+IDENTITY_ID_LIST: StaticSchema = (16, n0, _IIL, 0, (_m,), ((IDENTITY_ID, 0),))
+
+DELETE_IDENTITIES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DII,
+    {_sm: None},
+    (_IITD,),
+    ((IDENTITY_ID_LIST, 1),),
 )
 
-IDENTITY_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityDescription"),
-    members={
-        "IdentityId": {"target": IDENTITY_ID},
-        "Logins": {"target": LOGINS_LIST},
-        "CreationDate": {"target": DATE_TYPE},
-        "LastModifiedDate": {"target": DATE_TYPE},
-    },
+ERROR_CODE: StaticSchema = (
+    14,
+    n0,
+    _EC,
+    0,
+    (_AD, _ISE),
+    ((-1, {_sV: _ADc}), (-1, {_sV: _ISEn})),
 )
 
-IDENTITIES_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentitiesList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": IDENTITY_DESCRIPTION}},
+UNPROCESSED_IDENTITY_ID: StaticSchema = (
+    18,
+    n0,
+    _UII,
+    0,
+    (_II, _EC),
+    ((IDENTITY_ID, 0), (ERROR_CODE, 0)),
 )
 
-LIST_IDENTITIES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#ListIdentitiesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#ListIdentitiesResponse",
-        )
-    ],
-    members={
-        "IdentityPoolId": {"target": IDENTITY_POOL_ID},
-        "Identities": {"target": IDENTITIES_LIST},
-        "NextToken": {"target": PAGINATION_KEY},
-    },
+UNPROCESSED_IDENTITY_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _UIIL,
+    0,
+    (_m,),
+    ((UNPROCESSED_IDENTITY_ID, 0),),
 )
 
-LIST_IDENTITIES = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#ListIdentities"),
-    shape_type=ShapeType.OPERATION,
+DELETE_IDENTITIES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIO,
+    {_sSI: _cDIR, _smit: None},
+    (_UIIn,),
+    ((UNPROCESSED_IDENTITY_ID_LIST, 0),),
 )
 
-LIST_IDENTITY_POOLS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#ListIdentityPoolsInput"),
-    members={
-        "MaxResults": {
-            "target": QUERY_LIMIT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextToken": {"target": PAGINATION_KEY},
-    },
+DELETE_IDENTITIES: StaticOperationSchema = (
+    23,
+    n0,
+    _DI,
+    0,
+    DELETE_IDENTITIES_INPUT,
+    DELETE_IDENTITIES_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
 )
 
-IDENTITY_POOL_SHORT_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityPoolShortDescription"),
-    members={
-        "IdentityPoolId": {"target": IDENTITY_POOL_ID},
-        "IdentityPoolName": {"target": IDENTITY_POOL_NAME},
-    },
+DELETE_IDENTITY_POOL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIPI,
+    {_sm: None},
+    (_IPId,),
+    ((IDENTITY_POOL_ID, 1),),
 )
 
-IDENTITY_POOLS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityPoolsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": IDENTITY_POOL_SHORT_DESCRIPTION}},
+DELETE_IDENTITY_POOL_OUTPUT: StaticSchema = (18, n0, _DIPO, {_sSI: _sU, _smit: None})
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_smith: _c, _sE: 404},
+    (_me,),
+    ((STRING, 0),),
 )
 
-LIST_IDENTITY_POOLS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#ListIdentityPoolsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#ListIdentityPoolsResponse",
-        )
-    ],
-    members={
-        "IdentityPools": {"target": IDENTITY_POOLS_LIST},
-        "NextToken": {"target": PAGINATION_KEY},
-    },
+DELETE_IDENTITY_POOL: StaticOperationSchema = (
+    23,
+    n0,
+    _DIP,
+    0,
+    DELETE_IDENTITY_POOL_INPUT,
+    DELETE_IDENTITY_POOL_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
 )
 
-LIST_IDENTITY_POOLS = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#ListIdentityPools"),
-    shape_type=ShapeType.OPERATION,
+DESCRIBE_IDENTITY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIIe,
+    {_sm: None},
+    (_II,),
+    ((IDENTITY_ID, 1),),
 )
 
-LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#ListTagsForResourceInput"),
-    members={
-        "ResourceArn": {
-            "target": ARN_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
+DATE_TYPE: StaticSchema = (4, n0, _DT, 0)
+
+LOGINS_LIST: StaticSchema = (16, n0, _LL, 0, (_m,), ((IDENTITY_PROVIDER_NAME, 0),))
+
+DESCRIBE_IDENTITY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIOe,
+    {_sSI: _cID, _smit: None},
+    (_II, _L, _CD, _LMD),
+    ((IDENTITY_ID, 0), (LOGINS_LIST, 0), (DATE_TYPE, 0), (DATE_TYPE, 0)),
 )
 
-LIST_TAGS_FOR_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#ListTagsForResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#ListTagsForResourceResponse",
-        )
-    ],
-    members={"Tags": {"target": IDENTITY_POOL_TAGS_TYPE}},
+DESCRIBE_IDENTITY: StaticOperationSchema = (
+    23,
+    n0,
+    _DIe,
+    0,
+    DESCRIBE_IDENTITY_INPUT,
+    DESCRIBE_IDENTITY_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
 )
 
-LIST_TAGS_FOR_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#ListTagsForResource"),
-    shape_type=ShapeType.OPERATION,
+DESCRIBE_IDENTITY_POOL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIPIe,
+    {_sm: None},
+    (_IPId,),
+    ((IDENTITY_POOL_ID, 1),),
 )
 
-DEVELOPER_USER_IDENTIFIER = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#DeveloperUserIdentifier"),
-    shape_type=ShapeType.STRING,
+DESCRIBE_IDENTITY_POOL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIPOe,
+    {_sSI: _cIP, _smit: None},
+    (_IPId, _IPN, _AUI, _ACF, _SLP, _DPN, _OICPARN, _CIPo, _SPARN, _IPT),
+    (
+        (IDENTITY_POOL_ID, 1),
+        (IDENTITY_POOL_NAME, 1),
+        (IDENTITY_POOL_UNAUTHENTICATED, {_s: False, _smi: None}),
+        (CLASSIC_FLOW, 0),
+        (IDENTITY_PROVIDERS, 0),
+        (DEVELOPER_PROVIDER_NAME, 0),
+        (OIDC_PROVIDER_LIST, 0),
+        (COGNITO_IDENTITY_PROVIDER_LIST, 0),
+        (SAML_PROVIDER_LIST, 0),
+        (IDENTITY_POOL_TAGS_TYPE, 0),
+    ),
 )
 
-LOOKUP_DEVELOPER_IDENTITY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#LookupDeveloperIdentityInput"),
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IdentityId": {"target": IDENTITY_ID},
-        "DeveloperUserIdentifier": {"target": DEVELOPER_USER_IDENTIFIER},
-        "MaxResults": {"target": QUERY_LIMIT},
-        "NextToken": {"target": PAGINATION_KEY},
-    },
+DESCRIBE_IDENTITY_POOL: StaticOperationSchema = (
+    23,
+    n0,
+    _DIPe,
+    0,
+    DESCRIBE_IDENTITY_POOL_INPUT,
+    DESCRIBE_IDENTITY_POOL_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
 )
 
-DEVELOPER_USER_IDENTIFIER_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#DeveloperUserIdentifierList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DEVELOPER_USER_IDENTIFIER}},
+EXTERNAL_SERVICE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ESE,
+    {_smith: _c, _sE: 400},
+    (_me,),
+    ((STRING, 0),),
 )
 
-LOOKUP_DEVELOPER_IDENTITY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#LookupDeveloperIdentityOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#LookupDeveloperIdentityResponse",
-        )
-    ],
-    members={
-        "IdentityId": {"target": IDENTITY_ID},
-        "DeveloperUserIdentifierList": {"target": DEVELOPER_USER_IDENTIFIER_LIST},
-        "NextToken": {"target": PAGINATION_KEY},
-    },
+IDENTITY_PROVIDER_TOKEN: StaticSchema = (3, n0, _IPTd, 4)
+
+LOGINS_MAP: StaticSchema = (
+    17,
+    n0,
+    _LM,
+    0,
+    (_k, _v),
+    ((IDENTITY_PROVIDER_NAME, 0), (IDENTITY_PROVIDER_TOKEN, 0)),
 )
 
-LOOKUP_DEVELOPER_IDENTITY = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#LookupDeveloperIdentity"),
-    shape_type=ShapeType.OPERATION,
+GET_CREDENTIALS_FOR_IDENTITY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCFII,
+    {_sm: None},
+    (_II, _L, _CRA),
+    ((IDENTITY_ID, 1), (LOGINS_MAP, 0), (ARN_STRING, 0)),
 )
 
-MERGE_DEVELOPER_IDENTITIES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#MergeDeveloperIdentitiesInput"),
-    members={
-        "SourceUserIdentifier": {
-            "target": DEVELOPER_USER_IDENTIFIER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DestinationUserIdentifier": {
-            "target": DEVELOPER_USER_IDENTIFIER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DeveloperProviderName": {
-            "target": DEVELOPER_PROVIDER_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+SECRET_KEY_STRING: StaticSchema = (3, n0, _SKS, 4)
+
+SESSION_TOKEN_STRING: StaticSchema = (3, n0, _STS, 0)
+
+CREDENTIALS: StaticSchema = (
+    18,
+    n0,
+    _C,
+    0,
+    (_AKI, _SK, _ST, _E),
+    (
+        (ACCESS_KEY_STRING, 0),
+        (SECRET_KEY_STRING, 0),
+        (SESSION_TOKEN_STRING, 0),
+        (DATE_TYPE, 0),
+    ),
 )
 
-MERGE_DEVELOPER_IDENTITIES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#MergeDeveloperIdentitiesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#MergeDeveloperIdentitiesResponse",
-        )
-    ],
-    members={"IdentityId": {"target": IDENTITY_ID}},
+GET_CREDENTIALS_FOR_IDENTITY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCFIO,
+    {_sSI: _cGCFIR, _smit: None},
+    (_II, _C),
+    ((IDENTITY_ID, 0), (CREDENTIALS, 0)),
 )
 
-MERGE_DEVELOPER_IDENTITIES = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#MergeDeveloperIdentities"),
-    shape_type=ShapeType.OPERATION,
+INVALID_IDENTITY_POOL_CONFIGURATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IIPCE,
+    {_smith: _c, _sE: 400},
+    (_me,),
+    ((STRING, 0),),
 )
 
-CONCURRENT_MODIFICATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#ConcurrentModificationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": STRING}},
+GET_CREDENTIALS_FOR_IDENTITY: StaticOperationSchema = (
+    23,
+    n0,
+    _GCFI,
+    0,
+    GET_CREDENTIALS_FOR_IDENTITY_INPUT,
+    GET_CREDENTIALS_FOR_IDENTITY_OUTPUT,
+    (
+        EXTERNAL_SERVICE_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_IDENTITY_POOL_CONFIGURATION_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
 )
 
-SET_IDENTITY_POOL_ROLES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#SetIdentityPoolRolesInput"),
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Roles": {
-            "target": ROLES_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RoleMappings": {"target": ROLE_MAPPING_MAP},
-    },
+GET_ID_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GII,
+    {_sm: None},
+    (_AI, _IPId, _L),
+    ((ACCOUNT_ID, 0), (IDENTITY_POOL_ID, 1), (LOGINS_MAP, 0)),
 )
 
-SET_IDENTITY_POOL_ROLES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#SetIdentityPoolRolesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
+GET_ID_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIO,
+    {_sSI: _cGIR, _smit: None},
+    (_II,),
+    ((IDENTITY_ID, 0),),
 )
 
-SET_IDENTITY_POOL_ROLES = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#SetIdentityPoolRoles"),
-    shape_type=ShapeType.OPERATION,
+GET_ID: StaticOperationSchema = (
+    23,
+    n0,
+    _GI,
+    0,
+    GET_ID_INPUT,
+    GET_ID_OUTPUT,
+    (
+        EXTERNAL_SERVICE_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
 )
 
-SET_PRINCIPAL_TAG_ATTRIBUTE_MAP_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMapInput"),
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IdentityProviderName": {
-            "target": IDENTITY_PROVIDER_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "UseDefaults": {"target": USE_DEFAULTS},
-        "PrincipalTags": {"target": PRINCIPAL_TAGS},
-    },
+GET_IDENTITY_POOL_ROLES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GIPRI,
+    {_sm: None},
+    (_IPId,),
+    ((IDENTITY_POOL_ID, 1),),
 )
 
-SET_PRINCIPAL_TAG_ATTRIBUTE_MAP_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMapOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMapResponse",
-        )
-    ],
-    members={
-        "IdentityPoolId": {"target": IDENTITY_POOL_ID},
-        "IdentityProviderName": {"target": IDENTITY_PROVIDER_NAME},
-        "UseDefaults": {"target": USE_DEFAULTS},
-        "PrincipalTags": {"target": PRINCIPAL_TAGS},
-    },
+CLAIM_NAME: StaticSchema = (3, n0, _CN, 0)
+
+MAPPING_RULE_MATCH_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MRMT,
+    0,
+    (_EQUALS, _CONTAINS, _SW, _NE),
+    ((-1, {_sV: _Eq}), (-1, {_sV: _Co}), (-1, {_sV: _SWt}), (-1, {_sV: _NEo})),
 )
 
-SET_PRINCIPAL_TAG_ATTRIBUTE_MAP = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMap"),
-    shape_type=ShapeType.OPERATION,
+CLAIM_VALUE: StaticSchema = (3, n0, _CV, 0)
+
+MAPPING_RULE: StaticSchema = (
+    18,
+    n0,
+    _MR,
+    0,
+    (_Cl, _MT, _V, _RARN),
+    ((CLAIM_NAME, 1), (MAPPING_RULE_MATCH_TYPE, 1), (CLAIM_VALUE, 1), (ARN_STRING, 1)),
 )
 
-TAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#TagResourceInput"),
-    members={
-        "ResourceArn": {
-            "target": ARN_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Tags": {
-            "target": IDENTITY_POOL_TAGS_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+MAPPING_RULES_LIST: StaticSchema = (16, n0, _MRL, 0, (_m,), ((MAPPING_RULE, 0),))
+
+RULES_CONFIGURATION_TYPE: StaticSchema = (
+    18,
+    n0,
+    _RCT,
+    0,
+    (_R,),
+    ((MAPPING_RULES_LIST, 1),),
 )
 
-TAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#TagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#TagResourceResponse",
-        )
-    ],
+ROLE_MAPPING_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RMT,
+    0,
+    (_TOKEN, _RULES),
+    ((-1, {_sV: _T}), (-1, {_sV: _R})),
 )
 
-TAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#TagResource"),
-    shape_type=ShapeType.OPERATION,
+ROLE_MAPPING: StaticSchema = (
+    18,
+    n0,
+    _RM,
+    0,
+    (_Ty, _ARR, _RC),
+    (
+        (ROLE_MAPPING_TYPE, 1),
+        (AMBIGUOUS_ROLE_RESOLUTION_TYPE, 0),
+        (RULES_CONFIGURATION_TYPE, 0),
+    ),
 )
 
-UNLINK_DEVELOPER_IDENTITY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#UnlinkDeveloperIdentityInput"),
-    members={
-        "IdentityId": {
-            "target": IDENTITY_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DeveloperProviderName": {
-            "target": DEVELOPER_PROVIDER_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DeveloperUserIdentifier": {
-            "target": DEVELOPER_USER_IDENTIFIER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+ROLE_MAPPING_MAP: StaticSchema = (
+    17,
+    n0,
+    _RMM,
+    0,
+    (_k, _v),
+    ((IDENTITY_PROVIDER_NAME, 0), (ROLE_MAPPING, 0)),
 )
 
-UNLINK_DEVELOPER_IDENTITY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#UnlinkDeveloperIdentityOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
+ROLE_TYPE: StaticSchema = (3, n0, _RT, 0)
+
+ROLES_MAP: StaticSchema = (17, n0, _RMo, 0, (_k, _v), ((ROLE_TYPE, 0), (ARN_STRING, 0)))
+
+GET_IDENTITY_POOL_ROLES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIPRO,
+    {_sSI: _cGIPRR, _smit: None},
+    (_IPId, _Ro, _RMol),
+    ((IDENTITY_POOL_ID, 0), (ROLES_MAP, 0), (ROLE_MAPPING_MAP, 0)),
 )
 
-UNLINK_DEVELOPER_IDENTITY = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#UnlinkDeveloperIdentity"),
-    shape_type=ShapeType.OPERATION,
+GET_IDENTITY_POOL_ROLES: StaticOperationSchema = (
+    23,
+    n0,
+    _GIPR,
+    0,
+    GET_IDENTITY_POOL_ROLES_INPUT,
+    GET_IDENTITY_POOL_ROLES_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
 )
 
-UNLINK_IDENTITY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#UnlinkIdentityInput"),
-    members={
-        "IdentityId": {
-            "target": IDENTITY_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Logins": {
-            "target": LOGINS_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "LoginsToRemove": {
-            "target": LOGINS_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+GET_OPEN_ID_TOKEN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GOITI,
+    {_sm: None},
+    (_II, _L),
+    ((IDENTITY_ID, 1), (LOGINS_MAP, 0)),
 )
 
-UNLINK_IDENTITY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#UnlinkIdentityOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
+OIDC_TOKEN: StaticSchema = (3, n0, _OIDCT, 4)
+
+GET_OPEN_ID_TOKEN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GOITO,
+    {_sSI: _cGOITR, _smit: None},
+    (_II, _T),
+    ((IDENTITY_ID, 0), (OIDC_TOKEN, 0)),
 )
 
-UNLINK_IDENTITY = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#UnlinkIdentity"),
-    shape_type=ShapeType.OPERATION,
+GET_OPEN_ID_TOKEN: StaticOperationSchema = (
+    23,
+    n0,
+    _GOIT,
+    0,
+    GET_OPEN_ID_TOKEN_INPUT,
+    GET_OPEN_ID_TOKEN_OUTPUT,
+    (
+        EXTERNAL_SERVICE_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
 )
 
-IDENTITY_POOL_TAGS_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#IdentityPoolTagsListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG_KEYS_TYPE}},
+DEVELOPER_USER_ALREADY_REGISTERED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _DUARE,
+    {_smith: _c, _sE: 400},
+    (_me,),
+    ((STRING, 0),),
 )
 
-UNTAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#UntagResourceInput"),
-    members={
-        "ResourceArn": {
-            "target": ARN_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TagKeys": {
-            "target": IDENTITY_POOL_TAGS_LIST_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+PRINCIPAL_TAG_ID: StaticSchema = (3, n0, _PTID, 0)
+
+PRINCIPAL_TAG_VALUE: StaticSchema = (3, n0, _PTV, 0)
+
+PRINCIPAL_TAGS: StaticSchema = (
+    17,
+    n0,
+    _PT,
+    0,
+    (_k, _v),
+    ((PRINCIPAL_TAG_ID, 0), (PRINCIPAL_TAG_VALUE, 0)),
 )
 
-UNTAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#UntagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#UntagResourceResponse",
-        )
-    ],
+TOKEN_DURATION: StaticSchema = (8, n0, _TD, 0)
+
+GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GOITFDII,
+    {_sm: None},
+    (_IPId, _II, _L, _PT, _TD),
+    (
+        (IDENTITY_POOL_ID, 1),
+        (IDENTITY_ID, 0),
+        (LOGINS_MAP, 1),
+        (PRINCIPAL_TAGS, 0),
+        (TOKEN_DURATION, 0),
+    ),
 )
 
-UNTAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#UntagResource"),
-    shape_type=ShapeType.OPERATION,
+GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GOITFDIO,
+    {_sSI: _cGOITFDIR, _smit: None},
+    (_II, _T),
+    ((IDENTITY_ID, 0), (OIDC_TOKEN, 0)),
 )
 
-UPDATE_IDENTITY_POOL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#UpdateIdentityPoolInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#IdentityPool",
-        )
-    ],
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IdentityPoolName": {
-            "target": IDENTITY_POOL_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AllowUnauthenticatedIdentities": {
-            "target": IDENTITY_POOL_UNAUTHENTICATED,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "AllowClassicFlow": {"target": CLASSIC_FLOW},
-        "SupportedLoginProviders": {"target": IDENTITY_PROVIDERS},
-        "DeveloperProviderName": {"target": DEVELOPER_PROVIDER_NAME},
-        "OpenIdConnectProviderARNs": {"target": OIDC_PROVIDER_LIST},
-        "CognitoIdentityProviders": {"target": COGNITO_IDENTITY_PROVIDER_LIST},
-        "SamlProviderARNs": {"target": SAML_PROVIDER_LIST},
-        "IdentityPoolTags": {"target": IDENTITY_POOL_TAGS_TYPE},
-    },
+GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY: StaticOperationSchema = (
+    23,
+    n0,
+    _GOITFDI,
+    0,
+    GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY_INPUT,
+    GET_OPEN_ID_TOKEN_FOR_DEVELOPER_IDENTITY_OUTPUT,
+    (
+        DEVELOPER_USER_ALREADY_REGISTERED_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
 )
 
-UPDATE_IDENTITY_POOL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.cognitoidentity#UpdateIdentityPoolOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.cognitoidentity#IdentityPool",
-        )
-    ],
-    members={
-        "IdentityPoolId": {
-            "target": IDENTITY_POOL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "IdentityPoolName": {
-            "target": IDENTITY_POOL_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AllowUnauthenticatedIdentities": {
-            "target": IDENTITY_POOL_UNAUTHENTICATED,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "AllowClassicFlow": {"target": CLASSIC_FLOW},
-        "SupportedLoginProviders": {"target": IDENTITY_PROVIDERS},
-        "DeveloperProviderName": {"target": DEVELOPER_PROVIDER_NAME},
-        "OpenIdConnectProviderARNs": {"target": OIDC_PROVIDER_LIST},
-        "CognitoIdentityProviders": {"target": COGNITO_IDENTITY_PROVIDER_LIST},
-        "SamlProviderARNs": {"target": SAML_PROVIDER_LIST},
-        "IdentityPoolTags": {"target": IDENTITY_POOL_TAGS_TYPE},
-    },
+GET_PRINCIPAL_TAG_ATTRIBUTE_MAP_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GPTAMI,
+    {_sm: None},
+    (_IPId, _IPNd),
+    ((IDENTITY_POOL_ID, 1), (IDENTITY_PROVIDER_NAME, 1)),
 )
 
-UPDATE_IDENTITY_POOL = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#UpdateIdentityPool"),
-    shape_type=ShapeType.OPERATION,
+USE_DEFAULTS: StaticSchema = (2, n0, _UD, 0)
+
+GET_PRINCIPAL_TAG_ATTRIBUTE_MAP_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GPTAMO,
+    {_sSI: _cGPTAMR, _smit: None},
+    (_IPId, _IPNd, _UD, _PT),
+    (
+        (IDENTITY_POOL_ID, 0),
+        (IDENTITY_PROVIDER_NAME, 0),
+        (USE_DEFAULTS, 0),
+        (PRINCIPAL_TAGS, 0),
+    ),
 )
 
-AWS_COGNITO_IDENTITY_SERVICE = Schema(
-    id=ShapeID("com.amazonaws.cognitoidentity#AWSCognitoIdentityService"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"),
-            value=MappingProxyType({"name": "cognito-identity"}),
-        ),
-        Trait.new(id=ShapeID("aws.protocols#awsJson1_1")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+GET_PRINCIPAL_TAG_ATTRIBUTE_MAP: StaticOperationSchema = (
+    23,
+    n0,
+    _GPTAM,
+    0,
+    GET_PRINCIPAL_TAG_ATTRIBUTE_MAP_INPUT,
+    GET_PRINCIPAL_TAG_ATTRIBUTE_MAP_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+HIDE_DISABLED: StaticSchema = (2, n0, _HD, {_s: False})
+
+QUERY_LIMIT: StaticSchema = (7, n0, _QL, 0)
+
+PAGINATION_KEY: StaticSchema = (3, n0, _PK, 0)
+
+LIST_IDENTITIES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LII,
+    {_sm: None},
+    (_IPId, _MRa, _NT, _HD),
+    (
+        (IDENTITY_POOL_ID, 1),
+        (QUERY_LIMIT, 1),
+        (PAGINATION_KEY, 0),
+        (HIDE_DISABLED, {_s: False}),
+    ),
+)
+
+IDENTITY_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _ID,
+    0,
+    (_II, _L, _CD, _LMD),
+    ((IDENTITY_ID, 0), (LOGINS_LIST, 0), (DATE_TYPE, 0), (DATE_TYPE, 0)),
+)
+
+IDENTITIES_LIST: StaticSchema = (16, n0, _IL, 0, (_m,), ((IDENTITY_DESCRIPTION, 0),))
+
+LIST_IDENTITIES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LIO,
+    {_sSI: _cLIR, _smit: None},
+    (_IPId, _I, _NT),
+    ((IDENTITY_POOL_ID, 0), (IDENTITIES_LIST, 0), (PAGINATION_KEY, 0)),
+)
+
+LIST_IDENTITIES: StaticOperationSchema = (
+    23,
+    n0,
+    _LI,
+    0,
+    LIST_IDENTITIES_INPUT,
+    LIST_IDENTITIES_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+LIST_IDENTITY_POOLS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LIPI,
+    {_sm: None},
+    (_MRa, _NT),
+    ((QUERY_LIMIT, 1), (PAGINATION_KEY, 0)),
+)
+
+IDENTITY_POOL_SHORT_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _IPSD,
+    0,
+    (_IPId, _IPN),
+    ((IDENTITY_POOL_ID, 0), (IDENTITY_POOL_NAME, 0)),
+)
+
+IDENTITY_POOLS_LIST: StaticSchema = (
+    16,
+    n0,
+    _IPL,
+    0,
+    (_m,),
+    ((IDENTITY_POOL_SHORT_DESCRIPTION, 0),),
+)
+
+LIST_IDENTITY_POOLS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LIPO,
+    {_sSI: _cLIPR, _smit: None},
+    (_IPd, _NT),
+    ((IDENTITY_POOLS_LIST, 0), (PAGINATION_KEY, 0)),
+)
+
+LIST_IDENTITY_POOLS: StaticOperationSchema = (
+    23,
+    n0,
+    _LIP,
+    0,
+    LIST_IDENTITY_POOLS_INPUT,
+    LIST_IDENTITY_POOLS_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+LIST_TAGS_FOR_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRI,
+    {_sm: None},
+    (_RA,),
+    ((ARN_STRING, 1),),
+)
+
+LIST_TAGS_FOR_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRO,
+    {_sSI: _cLTFRR, _smit: None},
+    (_Ta,),
+    ((IDENTITY_POOL_TAGS_TYPE, 0),),
+)
+
+LIST_TAGS_FOR_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _LTFR,
+    0,
+    LIST_TAGS_FOR_RESOURCE_INPUT,
+    LIST_TAGS_FOR_RESOURCE_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+DEVELOPER_USER_IDENTIFIER: StaticSchema = (3, n0, _DUI, 0)
+
+LOOKUP_DEVELOPER_IDENTITY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDII,
+    {_sm: None},
+    (_IPId, _II, _DUI, _MRa, _NT),
+    (
+        (IDENTITY_POOL_ID, 1),
+        (IDENTITY_ID, 0),
+        (DEVELOPER_USER_IDENTIFIER, 0),
+        (QUERY_LIMIT, 0),
+        (PAGINATION_KEY, 0),
+    ),
+)
+
+DEVELOPER_USER_IDENTIFIER_LIST: StaticSchema = (
+    16,
+    n0,
+    _DUIL,
+    0,
+    (_m,),
+    ((DEVELOPER_USER_IDENTIFIER, 0),),
+)
+
+LOOKUP_DEVELOPER_IDENTITY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDIO,
+    {_sSI: _cLDIR, _smit: None},
+    (_II, _DUIL, _NT),
+    ((IDENTITY_ID, 0), (DEVELOPER_USER_IDENTIFIER_LIST, 0), (PAGINATION_KEY, 0)),
+)
+
+LOOKUP_DEVELOPER_IDENTITY: StaticOperationSchema = (
+    23,
+    n0,
+    _LDI,
+    0,
+    LOOKUP_DEVELOPER_IDENTITY_INPUT,
+    LOOKUP_DEVELOPER_IDENTITY_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+MERGE_DEVELOPER_IDENTITIES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _MDII,
+    {_sm: None},
+    (_SUI, _DUIe, _DPN, _IPId),
+    (
+        (DEVELOPER_USER_IDENTIFIER, 1),
+        (DEVELOPER_USER_IDENTIFIER, 1),
+        (DEVELOPER_PROVIDER_NAME, 1),
+        (IDENTITY_POOL_ID, 1),
+    ),
+)
+
+MERGE_DEVELOPER_IDENTITIES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _MDIO,
+    {_sSI: _cMDIR, _smit: None},
+    (_II,),
+    ((IDENTITY_ID, 0),),
+)
+
+MERGE_DEVELOPER_IDENTITIES: StaticOperationSchema = (
+    23,
+    n0,
+    _MDI,
+    0,
+    MERGE_DEVELOPER_IDENTITIES_INPUT,
+    MERGE_DEVELOPER_IDENTITIES_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+CONCURRENT_MODIFICATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CME,
+    {_smith: _c, _sE: 400},
+    (_me,),
+    ((STRING, 0),),
+)
+
+SET_IDENTITY_POOL_ROLES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SIPRI,
+    {_sm: None},
+    (_IPId, _Ro, _RMol),
+    ((IDENTITY_POOL_ID, 1), (ROLES_MAP, 1), (ROLE_MAPPING_MAP, 0)),
+)
+
+SET_IDENTITY_POOL_ROLES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SIPRO,
+    {_sSI: _sU, _smit: None},
+)
+
+SET_IDENTITY_POOL_ROLES: StaticOperationSchema = (
+    23,
+    n0,
+    _SIPR,
+    0,
+    SET_IDENTITY_POOL_ROLES_INPUT,
+    SET_IDENTITY_POOL_ROLES_OUTPUT,
+    (
+        CONCURRENT_MODIFICATION_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+SET_PRINCIPAL_TAG_ATTRIBUTE_MAP_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SPTAMI,
+    {_sm: None},
+    (_IPId, _IPNd, _UD, _PT),
+    (
+        (IDENTITY_POOL_ID, 1),
+        (IDENTITY_PROVIDER_NAME, 1),
+        (USE_DEFAULTS, 0),
+        (PRINCIPAL_TAGS, 0),
+    ),
+)
+
+SET_PRINCIPAL_TAG_ATTRIBUTE_MAP_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SPTAMO,
+    {_sSI: _cSPTAMR, _smit: None},
+    (_IPId, _IPNd, _UD, _PT),
+    (
+        (IDENTITY_POOL_ID, 0),
+        (IDENTITY_PROVIDER_NAME, 0),
+        (USE_DEFAULTS, 0),
+        (PRINCIPAL_TAGS, 0),
+    ),
+)
+
+SET_PRINCIPAL_TAG_ATTRIBUTE_MAP: StaticOperationSchema = (
+    23,
+    n0,
+    _SPTAM,
+    0,
+    SET_PRINCIPAL_TAG_ATTRIBUTE_MAP_INPUT,
+    SET_PRINCIPAL_TAG_ATTRIBUTE_MAP_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+TAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TRI,
+    {_sm: None},
+    (_RA, _Ta),
+    ((ARN_STRING, 1), (IDENTITY_POOL_TAGS_TYPE, 1)),
+)
+
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _cTRR, _smit: None})
+
+TAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _TR,
+    0,
+    TAG_RESOURCE_INPUT,
+    TAG_RESOURCE_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+UNLINK_DEVELOPER_IDENTITY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UDII,
+    {_sm: None},
+    (_II, _IPId, _DPN, _DUI),
+    (
+        (IDENTITY_ID, 1),
+        (IDENTITY_POOL_ID, 1),
+        (DEVELOPER_PROVIDER_NAME, 1),
+        (DEVELOPER_USER_IDENTIFIER, 1),
+    ),
+)
+
+UNLINK_DEVELOPER_IDENTITY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UDIO,
+    {_sSI: _sU, _smit: None},
+)
+
+UNLINK_DEVELOPER_IDENTITY: StaticOperationSchema = (
+    23,
+    n0,
+    _UDI,
+    0,
+    UNLINK_DEVELOPER_IDENTITY_INPUT,
+    UNLINK_DEVELOPER_IDENTITY_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+UNLINK_IDENTITY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UIInl,
+    {_sm: None},
+    (_II, _L, _LTR),
+    ((IDENTITY_ID, 1), (LOGINS_MAP, 1), (LOGINS_LIST, 1)),
+)
+
+UNLINK_IDENTITY_OUTPUT: StaticSchema = (18, n0, _UIO, {_sSI: _sU, _smit: None})
+
+UNLINK_IDENTITY: StaticOperationSchema = (
+    23,
+    n0,
+    _UI,
+    0,
+    UNLINK_IDENTITY_INPUT,
+    UNLINK_IDENTITY_OUTPUT,
+    (
+        EXTERNAL_SERVICE_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+IDENTITY_POOL_TAGS_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _IPTLT,
+    0,
+    (_m,),
+    ((TAG_KEYS_TYPE, 0),),
+)
+
+UNTAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URI,
+    {_sm: None},
+    (_RA, _TK),
+    ((ARN_STRING, 1), (IDENTITY_POOL_TAGS_LIST_TYPE, 1)),
+)
+
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _URO, {_sSI: _cURR, _smit: None})
+
+UNTAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _UR,
+    0,
+    UNTAG_RESOURCE_INPUT,
+    UNTAG_RESOURCE_OUTPUT,
+    (
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+UPDATE_IDENTITY_POOL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UIPI,
+    {_sSI: _cIP, _sm: None},
+    (_IPId, _IPN, _AUI, _ACF, _SLP, _DPN, _OICPARN, _CIPo, _SPARN, _IPT),
+    (
+        (IDENTITY_POOL_ID, 1),
+        (IDENTITY_POOL_NAME, 1),
+        (IDENTITY_POOL_UNAUTHENTICATED, {_s: False, _smi: None}),
+        (CLASSIC_FLOW, 0),
+        (IDENTITY_PROVIDERS, 0),
+        (DEVELOPER_PROVIDER_NAME, 0),
+        (OIDC_PROVIDER_LIST, 0),
+        (COGNITO_IDENTITY_PROVIDER_LIST, 0),
+        (SAML_PROVIDER_LIST, 0),
+        (IDENTITY_POOL_TAGS_TYPE, 0),
+    ),
+)
+
+UPDATE_IDENTITY_POOL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UIPO,
+    {_sSI: _cIP, _smit: None},
+    (_IPId, _IPN, _AUI, _ACF, _SLP, _DPN, _OICPARN, _CIPo, _SPARN, _IPT),
+    (
+        (IDENTITY_POOL_ID, 1),
+        (IDENTITY_POOL_NAME, 1),
+        (IDENTITY_POOL_UNAUTHENTICATED, {_s: False, _smi: None}),
+        (CLASSIC_FLOW, 0),
+        (IDENTITY_PROVIDERS, 0),
+        (DEVELOPER_PROVIDER_NAME, 0),
+        (OIDC_PROVIDER_LIST, 0),
+        (COGNITO_IDENTITY_PROVIDER_LIST, 0),
+        (SAML_PROVIDER_LIST, 0),
+        (IDENTITY_POOL_TAGS_TYPE, 0),
+    ),
+)
+
+UPDATE_IDENTITY_POOL: StaticOperationSchema = (
+    23,
+    n0,
+    _UIP,
+    0,
+    UPDATE_IDENTITY_POOL_INPUT,
+    UPDATE_IDENTITY_POOL_OUTPUT,
+    (
+        CONCURRENT_MODIFICATION_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_AUTHORIZED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+AWS_COGNITO_IDENTITY_SERVICE: StaticSchema = (
+    21,
+    n0,
+    _AWSCIS,
+    {
+        _a: MappingProxyType({"name": "cognito-identity"}),
+        _a_: None,
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
+                ),
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsFIPS",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-east-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-east-2",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-west-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-west-2",
-                                ),
-                            }
-                        ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
                                     {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
                                     }
                                 ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cognito-identity-fips.us-east-1.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cognito-identity-fips.us-east-2.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cognito-identity-fips.us-west-1.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cognito-identity-fips.us-west-2.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cognito-identity-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cognito-identity-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cognito-identity.{Region}.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cognito-identity.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://cognito-identity.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 18,
-                    "nodes": "/////wAAAAH/////AAAAAAAAABEAAAADAAAAAQAAAAQF9eEQAAAAAgAAAAUF9eEQAAAAAwAAAAkAAAAGAAAABQAAAAcF9eEPAAAABgAAAAgF9eEOAAAABwX14QwF9eENAAAABAAAAAsAAAAKAAAABQX14QkF9eELAAAABQAAAAwF9eEKAAAABgAAAA0F9eEJAAAACAX14QQAAAAOAAAACQX14QUAAAAPAAAACgX14QYAAAAQAAAACwX14QcF9eEIAAAAAwX14QEAAAASAAAABQX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "us-east-1"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "us-east-2"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "us-west-1"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "us-west-2"),
+                        }
+                    ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cognito-identity-fips.us-east-1.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cognito-identity-fips.us-east-2.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cognito-identity-fips.us-west-1.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cognito-identity-fips.us-west-2.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cognito-identity-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cognito-identity-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cognito-identity.{Region}.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cognito-identity.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://cognito-identity.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 18,
+                "nodes": "/////wAAAAH/////AAAAAAAAABEAAAADAAAAAQAAAAQF9eEQAAAAAgAAAAUF9eEQAAAAAwAAAAkAAAAGAAAABQAAAAcF9eEPAAAABgAAAAgF9eEOAAAABwX14QwF9eENAAAABAAAAAsAAAAKAAAABQX14QkF9eELAAAABQAAAAwF9eEKAAAABgAAAA0F9eEJAAAACAX14QQAAAAOAAAACQX14QUAAAAPAAAACgX14QYAAAAQAAAACwX14QcF9eEIAAAAAwX14QEAAAASAAAABQX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "Cognito Identity",
-                    "arnNamespace": "cognito-identity",
-                    "cloudFormationName": "Cognito",
-                    "cloudTrailEventSource": "cognito-identity.amazonaws.com",
-                    "endpointPrefix": "cognito-identity",
-                }
-            ),
+        _aw: MappingProxyType(
+            {
+                "sdkId": "Cognito Identity",
+                "arnNamespace": "cognito-identity",
+                "cloudFormationName": "Cognito",
+                "cloudTrailEventSource": "cognito-identity.amazonaws.com",
+                "endpointPrefix": "cognito-identity",
+            }
         ),
-        Trait.new(
-            id=ShapeID("smithy.api#xmlNamespace"),
-            value=MappingProxyType(
-                {"uri": "http://cognito-identity.amazonaws.com/doc/2014-06-30/"}
-            ),
+        _sN: MappingProxyType(
+            {"uri": "http://cognito-identity.amazonaws.com/doc/2014-06-30/"}
         ),
-    ],
+    },
 )

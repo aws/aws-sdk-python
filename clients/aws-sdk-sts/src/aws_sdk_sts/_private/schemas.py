@@ -2,1502 +2,1457 @@
 
 from types import MappingProxyType
 
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 
-ACCESS_KEY_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#accessKeyIdType"), shape_type=ShapeType.STRING
+n0 = "com.amazonaws.sts"
+_aKIT = "accessKeyIdType"
+_aKST = "accessKeySecretType"
+_s = "smithy.api#sensitive"
+_aT = "accountType"
+_aTr = "arnType"
+_aRIT = "assumedRoleIdType"
+_ARU = "AssumedRoleUser"
+_ARI = "AssumedRoleId"
+_sm = "smithy.api#required"
+_A = "Arn"
+_rDST = "roleDurationSecondsType"
+_eIT = "externalIdType"
+_mSTST = "minimumSessionTokenSizeType"
+_uSPDT = "unrestrictedSessionPolicyDocumentType"
+_PDT = "PolicyDescriptorType"
+_a = "arn"
+_pDLT = "policyDescriptorListType"
+_m = "member"
+_cAT = "contextAssertionType"
+_PC = "ProvidedContext"
+_PA = "ProviderArn"
+_CA = "ContextAssertion"
+_PCLT = "ProvidedContextsListType"
+_rSNT = "roleSessionNameType"
+_sNT = "serialNumberType"
+_sIT = "sourceIdentityType"
+_tKT = "tagKeyType"
+_tVT = "tagValueType"
+_T = "Tag"
+_K = "Key"
+_V = "Value"
+_tLT = "tagListType"
+_tCT = "tokenCodeType"
+_tKLT = "tagKeyListType"
+_ARIs = "AssumeRoleInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cARR = "com.amazonaws.sts#AssumeRoleRequest"
+_smi = "smithy.api#input"
+_RA = "RoleArn"
+_RSN = "RoleSessionName"
+_PAo = "PolicyArns"
+_P = "Policy"
+_DS = "DurationSeconds"
+_Ta = "Tags"
+_TTK = "TransitiveTagKeys"
+_EI = "ExternalId"
+_SN = "SerialNumber"
+_TC = "TokenCode"
+_SI = "SourceIdentity"
+_PCr = "ProvidedContexts"
+_MSTS = "MinimumSessionTokenSize"
+_dT = "dateType"
+_tT = "tokenType"
+_C = "Credentials"
+_AKI = "AccessKeyId"
+_SAK = "SecretAccessKey"
+_ST = "SessionToken"
+_E = "Expiration"
+_nNIT = "nonNegativeIntegerType"
+_sTST = "sessionTokenSizeType"
+_sTUT = "sessionTokenUtilizationType"
+_ARO = "AssumeRoleOutput"
+_cARRo = "com.amazonaws.sts#AssumeRoleResponse"
+_smit = "smithy.api#output"
+_PPS = "PackedPolicySize"
+_STU = "SessionTokenUtilization"
+_STS = "SessionTokenSize"
+_eITM = "expiredIdentityTokenMessage"
+_ETE = "ExpiredTokenException"
+_smith = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_aQE = "aws.protocols#awsQueryError"
+_me = "message"
+_mPDM = "malformedPolicyDocumentMessage"
+_MPDE = "MalformedPolicyDocumentException"
+_pPTLM = "packedPolicyTooLargeMessage"
+_PPTLE = "PackedPolicyTooLargeException"
+_rDM = "regionDisabledMessage"
+_RDE = "RegionDisabledException"
+_AR = "AssumeRole"
+_sPDT = "sessionPolicyDocumentType"
+_SAMLAT = "SAMLAssertionType"
+_ARWSAMLI = "AssumeRoleWithSAMLInput"
+_cARWSAMLR = "com.amazonaws.sts#AssumeRoleWithSAMLRequest"
+_PAr = "PrincipalArn"
+_SAMLA = "SAMLAssertion"
+_Au = "Audience"
+_I = "Issuer"
+_NQ = "NameQualifier"
+_S = "Subject"
+_STu = "SubjectType"
+_ARWSAMLO = "AssumeRoleWithSAMLOutput"
+_cARWSAMLRo = "com.amazonaws.sts#AssumeRoleWithSAMLResponse"
+_iRCM = "idpRejectedClaimMessage"
+_IDPRCE = "IDPRejectedClaimException"
+_iITM = "invalidIdentityTokenMessage"
+_IITE = "InvalidIdentityTokenException"
+_ARWSAML = "AssumeRoleWithSAML"
+_uT = "urlType"
+_cTT = "clientTokenType"
+_ARWWII = "AssumeRoleWithWebIdentityInput"
+_cARWWIR = "com.amazonaws.sts#AssumeRoleWithWebIdentityRequest"
+_WIT = "WebIdentityToken"
+_PI = "ProviderId"
+_wIST = "webIdentitySubjectType"
+_ARWWIO = "AssumeRoleWithWebIdentityOutput"
+_cARWWIRo = "com.amazonaws.sts#AssumeRoleWithWebIdentityResponse"
+_SFWIT = "SubjectFromWebIdentityToken"
+_Pr = "Provider"
+_iCEM = "idpCommunicationErrorMessage"
+_IDPCEE = "IDPCommunicationErrorException"
+_ARWWI = "AssumeRoleWithWebIdentity"
+_RDST = "RootDurationSecondsType"
+_TPT = "TargetPrincipalType"
+_ARIss = "AssumeRootInput"
+_cARRom = "com.amazonaws.sts#AssumeRootRequest"
+_TP = "TargetPrincipal"
+_TPA = "TaskPolicyArn"
+_AROs = "AssumeRootOutput"
+_cARRoma = "com.amazonaws.sts#AssumeRootResponse"
+_ARs = "AssumeRoot"
+_eMT = "encodedMessageType"
+_DAMI = "DecodeAuthorizationMessageInput"
+_cDAMR = "com.amazonaws.sts#DecodeAuthorizationMessageRequest"
+_EM = "EncodedMessage"
+_dMT = "decodedMessageType"
+_DAMO = "DecodeAuthorizationMessageOutput"
+_cDAMRo = "com.amazonaws.sts#DecodeAuthorizationMessageResponse"
+_DM = "DecodedMessage"
+_iAM = "invalidAuthorizationMessage"
+_IAME = "InvalidAuthorizationMessageException"
+_DAM = "DecodeAuthorizationMessage"
+_GAKII = "GetAccessKeyInfoInput"
+_cGAKIR = "com.amazonaws.sts#GetAccessKeyInfoRequest"
+_GAKIO = "GetAccessKeyInfoOutput"
+_cGAKIRo = "com.amazonaws.sts#GetAccessKeyInfoResponse"
+_Ac = "Account"
+_GAKI = "GetAccessKeyInfo"
+_GCII = "GetCallerIdentityInput"
+_cGCIR = "com.amazonaws.sts#GetCallerIdentityRequest"
+_uIT = "userIdType"
+_GCIO = "GetCallerIdentityOutput"
+_cGCIRo = "com.amazonaws.sts#GetCallerIdentityResponse"
+_UI = "UserId"
+_GCI = "GetCallerIdentity"
+_eTITEM = "expiredTradeInTokenExceptionMessage"
+_ETITE = "ExpiredTradeInTokenException"
+_tITT = "tradeInTokenType"
+_GDATI = "GetDelegatedAccessTokenInput"
+_cGDATR = "com.amazonaws.sts#GetDelegatedAccessTokenRequest"
+_TIT = "TradeInToken"
+_GDATO = "GetDelegatedAccessTokenOutput"
+_cGDATRo = "com.amazonaws.sts#GetDelegatedAccessTokenResponse"
+_AP = "AssumedPrincipal"
+_GDAT = "GetDelegatedAccessToken"
+_dST = "durationSecondsType"
+_uNT = "userNameType"
+_GFTI = "GetFederationTokenInput"
+_cGFTR = "com.amazonaws.sts#GetFederationTokenRequest"
+_N = "Name"
+_fIT = "federatedIdType"
+_FU = "FederatedUser"
+_FUI = "FederatedUserId"
+_GFTO = "GetFederationTokenOutput"
+_cGFTRo = "com.amazonaws.sts#GetFederationTokenResponse"
+_GFT = "GetFederationToken"
+_GSTI = "GetSessionTokenInput"
+_cGSTR = "com.amazonaws.sts#GetSessionTokenRequest"
+_GSTO = "GetSessionTokenOutput"
+_cGSTRo = "com.amazonaws.sts#GetSessionTokenResponse"
+_GST = "GetSessionToken"
+_wITAST = "webIdentityTokenAudienceStringType"
+_wITALT = "webIdentityTokenAudienceListType"
+_wITDST = "webIdentityTokenDurationSecondsType"
+_jAT = "jwtAlgorithmType"
+_GWITI = "GetWebIdentityTokenInput"
+_cGWITR = "com.amazonaws.sts#GetWebIdentityTokenRequest"
+_SA = "SigningAlgorithm"
+_wITT = "webIdentityTokenType"
+_GWITO = "GetWebIdentityTokenOutput"
+_cGWITRo = "com.amazonaws.sts#GetWebIdentityTokenResponse"
+_JWTPSEE = "JWTPayloadSizeExceededException2"
+_JWTPSEEa = "JWTPayloadSizeExceededException"
+_OWIFDE = "OutboundWebIdentityFederationDisabledException2"
+_OWIFDEu = "OutboundWebIdentityFederationDisabledException"
+_SDEE = "SessionDurationEscalationException2"
+_SDEEe = "SessionDurationEscalationException"
+_GWIT = "GetWebIdentityToken"
+_AWSSTSV = "AWSSecurityTokenServiceV20110615"
+_aw = "aws.auth#sigv4"
+_aws = "aws.auth#sigv4a"
+_aQ = "aws.protocols#awsQuery"
+_sB = "smithy.rules#endpointBdd"
+_awsa = "aws.api#service"
+_sN = "smithy.api#xmlNamespace"
+
+ACCESS_KEY_ID_TYPE: StaticSchema = (3, n0, _aKIT, 0)
+
+ACCESS_KEY_SECRET_TYPE: StaticSchema = (3, n0, _aKST, 4)
+
+ACCOUNT_TYPE: StaticSchema = (3, n0, _aT, 0)
+
+ARN_TYPE: StaticSchema = (3, n0, _aTr, 0)
+
+ASSUMED_ROLE_ID_TYPE: StaticSchema = (3, n0, _aRIT, 0)
+
+ASSUMED_ROLE_USER: StaticSchema = (
+    18,
+    n0,
+    _ARU,
+    0,
+    (_ARI, _A),
+    ((ASSUMED_ROLE_ID_TYPE, 1), (ARN_TYPE, 1)),
 )
 
-ACCESS_KEY_SECRET_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#accessKeySecretType"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+ROLE_DURATION_SECONDS_TYPE: StaticSchema = (7, n0, _rDST, 0)
+
+EXTERNAL_ID_TYPE: StaticSchema = (3, n0, _eIT, 0)
+
+MINIMUM_SESSION_TOKEN_SIZE_TYPE: StaticSchema = (7, n0, _mSTST, 0)
+
+UNRESTRICTED_SESSION_POLICY_DOCUMENT_TYPE: StaticSchema = (3, n0, _uSPDT, 0)
+
+POLICY_DESCRIPTOR_TYPE: StaticSchema = (18, n0, _PDT, 0, (_a,), ((ARN_TYPE, 0),))
+
+POLICY_DESCRIPTOR_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _pDLT,
+    0,
+    (_m,),
+    ((POLICY_DESCRIPTOR_TYPE, 0),),
 )
 
-ACCOUNT_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#accountType"), shape_type=ShapeType.STRING
+CONTEXT_ASSERTION_TYPE: StaticSchema = (3, n0, _cAT, 0)
+
+PROVIDED_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _PC,
+    0,
+    (_PA, _CA),
+    ((ARN_TYPE, 0), (CONTEXT_ASSERTION_TYPE, 0)),
 )
 
-ARN_TYPE = Schema(id=ShapeID("com.amazonaws.sts#arnType"), shape_type=ShapeType.STRING)
-
-ASSUMED_ROLE_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#assumedRoleIdType"), shape_type=ShapeType.STRING
+PROVIDED_CONTEXTS_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _PCLT,
+    0,
+    (_m,),
+    ((PROVIDED_CONTEXT, 0),),
 )
 
-ASSUMED_ROLE_USER = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#AssumedRoleUser"),
-    members={
-        "AssumedRoleId": {
-            "target": ASSUMED_ROLE_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Arn": {
-            "target": ARN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+ROLE_SESSION_NAME_TYPE: StaticSchema = (3, n0, _rSNT, 0)
+
+SERIAL_NUMBER_TYPE: StaticSchema = (3, n0, _sNT, 0)
+
+SOURCE_IDENTITY_TYPE: StaticSchema = (3, n0, _sIT, 0)
+
+TAG_KEY_TYPE: StaticSchema = (3, n0, _tKT, 0)
+
+TAG_VALUE_TYPE: StaticSchema = (3, n0, _tVT, 0)
+
+TAG: StaticSchema = (18, n0, _T, 0, (_K, _V), ((TAG_KEY_TYPE, 1), (TAG_VALUE_TYPE, 1)))
+
+TAG_LIST_TYPE: StaticSchema = (16, n0, _tLT, 0, (_m,), ((TAG, 0),))
+
+TOKEN_CODE_TYPE: StaticSchema = (3, n0, _tCT, 0)
+
+TAG_KEY_LIST_TYPE: StaticSchema = (16, n0, _tKLT, 0, (_m,), ((TAG_KEY_TYPE, 0),))
+
+ASSUME_ROLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ARIs,
+    {_sSI: _cARR, _smi: None},
+    (_RA, _RSN, _PAo, _P, _DS, _Ta, _TTK, _EI, _SN, _TC, _SI, _PCr, _MSTS),
+    (
+        (ARN_TYPE, 1),
+        (ROLE_SESSION_NAME_TYPE, 1),
+        (POLICY_DESCRIPTOR_LIST_TYPE, 0),
+        (UNRESTRICTED_SESSION_POLICY_DOCUMENT_TYPE, 0),
+        (ROLE_DURATION_SECONDS_TYPE, 0),
+        (TAG_LIST_TYPE, 0),
+        (TAG_KEY_LIST_TYPE, 0),
+        (EXTERNAL_ID_TYPE, 0),
+        (SERIAL_NUMBER_TYPE, 0),
+        (TOKEN_CODE_TYPE, 0),
+        (SOURCE_IDENTITY_TYPE, 0),
+        (PROVIDED_CONTEXTS_LIST_TYPE, 0),
+        (MINIMUM_SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
 )
 
-ROLE_DURATION_SECONDS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#roleDurationSecondsType"),
-    shape_type=ShapeType.INTEGER,
+DATE_TYPE: StaticSchema = (4, n0, _dT, 0)
+
+TOKEN_TYPE: StaticSchema = (3, n0, _tT, 0)
+
+CREDENTIALS: StaticSchema = (
+    18,
+    n0,
+    _C,
+    0,
+    (_AKI, _SAK, _ST, _E),
+    (
+        (ACCESS_KEY_ID_TYPE, 1),
+        (ACCESS_KEY_SECRET_TYPE, 1),
+        (TOKEN_TYPE, 1),
+        (DATE_TYPE, 1),
+    ),
 )
 
-EXTERNAL_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#externalIdType"), shape_type=ShapeType.STRING
+NON_NEGATIVE_INTEGER_TYPE: StaticSchema = (7, n0, _nNIT, 0)
+
+SESSION_TOKEN_SIZE_TYPE: StaticSchema = (7, n0, _sTST, 0)
+
+SESSION_TOKEN_UTILIZATION_TYPE: StaticSchema = (7, n0, _sTUT, 0)
+
+ASSUME_ROLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ARO,
+    {_sSI: _cARRo, _smit: None},
+    (_C, _ARU, _PPS, _SI, _STU, _STS),
+    (
+        (CREDENTIALS, 0),
+        (ASSUMED_ROLE_USER, 0),
+        (NON_NEGATIVE_INTEGER_TYPE, 0),
+        (SOURCE_IDENTITY_TYPE, 0),
+        (SESSION_TOKEN_UTILIZATION_TYPE, 0),
+        (SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
 )
 
-MINIMUM_SESSION_TOKEN_SIZE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#minimumSessionTokenSizeType"),
-    shape_type=ShapeType.INTEGER,
-)
+EXPIRED_IDENTITY_TOKEN_MESSAGE: StaticSchema = (3, n0, _eITM, 0)
 
-UNRESTRICTED_SESSION_POLICY_DOCUMENT_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#unrestrictedSessionPolicyDocumentType"),
-    shape_type=ShapeType.STRING,
-)
-
-POLICY_DESCRIPTOR_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#PolicyDescriptorType"),
-    members={"arn": {"target": ARN_TYPE}},
-)
-
-POLICY_DESCRIPTOR_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#policyDescriptorListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": POLICY_DESCRIPTOR_TYPE}},
-)
-
-CONTEXT_ASSERTION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#contextAssertionType"), shape_type=ShapeType.STRING
-)
-
-PROVIDED_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#ProvidedContext"),
-    members={
-        "ProviderArn": {"target": ARN_TYPE},
-        "ContextAssertion": {"target": CONTEXT_ASSERTION_TYPE},
-    },
-)
-
-PROVIDED_CONTEXTS_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#ProvidedContextsListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PROVIDED_CONTEXT}},
-)
-
-ROLE_SESSION_NAME_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#roleSessionNameType"), shape_type=ShapeType.STRING
-)
-
-SERIAL_NUMBER_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#serialNumberType"), shape_type=ShapeType.STRING
-)
-
-SOURCE_IDENTITY_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#sourceIdentityType"), shape_type=ShapeType.STRING
-)
-
-TAG_KEY_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#tagKeyType"), shape_type=ShapeType.STRING
-)
-
-TAG_VALUE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#tagValueType"), shape_type=ShapeType.STRING
-)
-
-TAG = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#Tag"),
-    members={
-        "Key": {
-            "target": TAG_KEY_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Value": {
-            "target": TAG_VALUE_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAG_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#tagListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG}},
-)
-
-TOKEN_CODE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#tokenCodeType"), shape_type=ShapeType.STRING
-)
-
-TAG_KEY_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#tagKeyListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG_KEY_TYPE}},
-)
-
-ASSUME_ROLE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#AssumeRoleInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#AssumeRoleRequest",
-        )
-    ],
-    members={
-        "RoleArn": {
-            "target": ARN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RoleSessionName": {
-            "target": ROLE_SESSION_NAME_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "PolicyArns": {"target": POLICY_DESCRIPTOR_LIST_TYPE},
-        "Policy": {"target": UNRESTRICTED_SESSION_POLICY_DOCUMENT_TYPE},
-        "DurationSeconds": {"target": ROLE_DURATION_SECONDS_TYPE},
-        "Tags": {"target": TAG_LIST_TYPE},
-        "TransitiveTagKeys": {"target": TAG_KEY_LIST_TYPE},
-        "ExternalId": {"target": EXTERNAL_ID_TYPE},
-        "SerialNumber": {"target": SERIAL_NUMBER_TYPE},
-        "TokenCode": {"target": TOKEN_CODE_TYPE},
-        "SourceIdentity": {"target": SOURCE_IDENTITY_TYPE},
-        "ProvidedContexts": {"target": PROVIDED_CONTEXTS_LIST_TYPE},
-        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
-    },
-)
-
-DATE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#dateType"), shape_type=ShapeType.TIMESTAMP
-)
-
-TOKEN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#tokenType"), shape_type=ShapeType.STRING
-)
-
-CREDENTIALS = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#Credentials"),
-    members={
-        "AccessKeyId": {
-            "target": ACCESS_KEY_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SecretAccessKey": {
-            "target": ACCESS_KEY_SECRET_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SessionToken": {
-            "target": TOKEN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Expiration": {
-            "target": DATE_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-NON_NEGATIVE_INTEGER_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#nonNegativeIntegerType"), shape_type=ShapeType.INTEGER
-)
-
-SESSION_TOKEN_SIZE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#sessionTokenSizeType"), shape_type=ShapeType.INTEGER
-)
-
-SESSION_TOKEN_UTILIZATION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#sessionTokenUtilizationType"),
-    shape_type=ShapeType.INTEGER,
-)
-
-ASSUME_ROLE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#AssumeRoleOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#AssumeRoleResponse",
-        )
-    ],
-    members={
-        "Credentials": {"target": CREDENTIALS},
-        "AssumedRoleUser": {"target": ASSUMED_ROLE_USER},
-        "PackedPolicySize": {"target": NON_NEGATIVE_INTEGER_TYPE},
-        "SourceIdentity": {"target": SOURCE_IDENTITY_TYPE},
-        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
-        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
-    },
-)
-
-EXPIRED_IDENTITY_TOKEN_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sts#expiredIdentityTokenMessage"),
-    shape_type=ShapeType.STRING,
-)
-
-EXPIRED_TOKEN_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#ExpiredTokenException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ExpiredTokenException", "httpResponseCode": 400}
-            ),
+EXPIRED_TOKEN_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ETE,
+    {
+        _smith: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "ExpiredTokenException", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": EXPIRED_IDENTITY_TOKEN_MESSAGE}},
+    },
+    (_me,),
+    ((EXPIRED_IDENTITY_TOKEN_MESSAGE, 0),),
 )
 
-MALFORMED_POLICY_DOCUMENT_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sts#malformedPolicyDocumentMessage"),
-    shape_type=ShapeType.STRING,
-)
+MALFORMED_POLICY_DOCUMENT_MESSAGE: StaticSchema = (3, n0, _mPDM, 0)
 
-MALFORMED_POLICY_DOCUMENT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#MalformedPolicyDocumentException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "MalformedPolicyDocument", "httpResponseCode": 400}
-            ),
+MALFORMED_POLICY_DOCUMENT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MPDE,
+    {
+        _smith: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "MalformedPolicyDocument", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": MALFORMED_POLICY_DOCUMENT_MESSAGE}},
+    },
+    (_me,),
+    ((MALFORMED_POLICY_DOCUMENT_MESSAGE, 0),),
 )
 
-PACKED_POLICY_TOO_LARGE_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sts#packedPolicyTooLargeMessage"),
-    shape_type=ShapeType.STRING,
-)
+PACKED_POLICY_TOO_LARGE_MESSAGE: StaticSchema = (3, n0, _pPTLM, 0)
 
-PACKED_POLICY_TOO_LARGE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#PackedPolicyTooLargeException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "PackedPolicyTooLarge", "httpResponseCode": 400}
-            ),
+PACKED_POLICY_TOO_LARGE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _PPTLE,
+    {
+        _smith: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "PackedPolicyTooLarge", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": PACKED_POLICY_TOO_LARGE_MESSAGE}},
+    },
+    (_me,),
+    ((PACKED_POLICY_TOO_LARGE_MESSAGE, 0),),
 )
 
-REGION_DISABLED_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sts#regionDisabledMessage"), shape_type=ShapeType.STRING
-)
+REGION_DISABLED_MESSAGE: StaticSchema = (3, n0, _rDM, 0)
 
-REGION_DISABLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#RegionDisabledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "RegionDisabledException", "httpResponseCode": 403}
-            ),
+REGION_DISABLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RDE,
+    {
+        _smith: _c,
+        _sE: 403,
+        _aQE: MappingProxyType(
+            {"code": "RegionDisabledException", "httpResponseCode": 403}
         ),
-    ],
-    members={"message": {"target": REGION_DISABLED_MESSAGE}},
-)
-
-ASSUME_ROLE = Schema(
-    id=ShapeID("com.amazonaws.sts#AssumeRole"), shape_type=ShapeType.OPERATION
-)
-
-SESSION_POLICY_DOCUMENT_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#sessionPolicyDocumentType"),
-    shape_type=ShapeType.STRING,
-)
-
-SAML_ASSERTION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#SAMLAssertionType"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-ASSUME_ROLE_WITH_SAML_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#AssumeRoleWithSAMLInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#AssumeRoleWithSAMLRequest",
-        )
-    ],
-    members={
-        "RoleArn": {
-            "target": ARN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "PrincipalArn": {
-            "target": ARN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SAMLAssertion": {
-            "target": SAML_ASSERTION_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "PolicyArns": {"target": POLICY_DESCRIPTOR_LIST_TYPE},
-        "Policy": {"target": SESSION_POLICY_DOCUMENT_TYPE},
-        "DurationSeconds": {"target": ROLE_DURATION_SECONDS_TYPE},
-        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
     },
+    (_me,),
+    ((REGION_DISABLED_MESSAGE, 0),),
 )
 
-AUDIENCE = Schema(id=ShapeID("com.amazonaws.sts#Audience"), shape_type=ShapeType.STRING)
-
-ISSUER = Schema(id=ShapeID("com.amazonaws.sts#Issuer"), shape_type=ShapeType.STRING)
-
-NAME_QUALIFIER = Schema(
-    id=ShapeID("com.amazonaws.sts#NameQualifier"), shape_type=ShapeType.STRING
+ASSUME_ROLE: StaticOperationSchema = (
+    23,
+    n0,
+    _AR,
+    0,
+    ASSUME_ROLE_INPUT,
+    ASSUME_ROLE_OUTPUT,
+    (
+        EXPIRED_TOKEN_EXCEPTION,
+        MALFORMED_POLICY_DOCUMENT_EXCEPTION,
+        PACKED_POLICY_TOO_LARGE_EXCEPTION,
+        REGION_DISABLED_EXCEPTION,
+    ),
 )
 
-SUBJECT = Schema(id=ShapeID("com.amazonaws.sts#Subject"), shape_type=ShapeType.STRING)
+SESSION_POLICY_DOCUMENT_TYPE: StaticSchema = (3, n0, _sPDT, 0)
 
-SUBJECT_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#SubjectType"), shape_type=ShapeType.STRING
+SAML_ASSERTION_TYPE: StaticSchema = (3, n0, _SAMLAT, 4)
+
+ASSUME_ROLE_WITH_SAML_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ARWSAMLI,
+    {_sSI: _cARWSAMLR, _smi: None},
+    (_RA, _PAr, _SAMLA, _PAo, _P, _DS, _MSTS),
+    (
+        (ARN_TYPE, 1),
+        (ARN_TYPE, 1),
+        (SAML_ASSERTION_TYPE, 1),
+        (POLICY_DESCRIPTOR_LIST_TYPE, 0),
+        (SESSION_POLICY_DOCUMENT_TYPE, 0),
+        (ROLE_DURATION_SECONDS_TYPE, 0),
+        (MINIMUM_SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
 )
 
-ASSUME_ROLE_WITH_SAML_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#AssumeRoleWithSAMLOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#AssumeRoleWithSAMLResponse",
-        )
-    ],
-    members={
-        "Credentials": {"target": CREDENTIALS},
-        "AssumedRoleUser": {"target": ASSUMED_ROLE_USER},
-        "PackedPolicySize": {"target": NON_NEGATIVE_INTEGER_TYPE},
-        "Subject": {"target": SUBJECT},
-        "SubjectType": {"target": SUBJECT_TYPE},
-        "Issuer": {"target": ISSUER},
-        "Audience": {"target": AUDIENCE},
-        "NameQualifier": {"target": NAME_QUALIFIER},
-        "SourceIdentity": {"target": SOURCE_IDENTITY_TYPE},
-        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
-        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
+AUDIENCE: StaticSchema = (3, n0, _Au, 0)
+
+ISSUER: StaticSchema = (3, n0, _I, 0)
+
+NAME_QUALIFIER: StaticSchema = (3, n0, _NQ, 0)
+
+SUBJECT: StaticSchema = (3, n0, _S, 0)
+
+SUBJECT_TYPE: StaticSchema = (3, n0, _STu, 0)
+
+ASSUME_ROLE_WITH_SAML_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ARWSAMLO,
+    {_sSI: _cARWSAMLRo, _smit: None},
+    (_C, _ARU, _PPS, _S, _STu, _I, _Au, _NQ, _SI, _STU, _STS),
+    (
+        (CREDENTIALS, 0),
+        (ASSUMED_ROLE_USER, 0),
+        (NON_NEGATIVE_INTEGER_TYPE, 0),
+        (SUBJECT, 0),
+        (SUBJECT_TYPE, 0),
+        (ISSUER, 0),
+        (AUDIENCE, 0),
+        (NAME_QUALIFIER, 0),
+        (SOURCE_IDENTITY_TYPE, 0),
+        (SESSION_TOKEN_UTILIZATION_TYPE, 0),
+        (SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
+)
+
+IDP_REJECTED_CLAIM_MESSAGE: StaticSchema = (3, n0, _iRCM, 0)
+
+IDP_REJECTED_CLAIM_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IDPRCE,
+    {
+        _smith: _c,
+        _sE: 403,
+        _aQE: MappingProxyType({"code": "IDPRejectedClaim", "httpResponseCode": 403}),
     },
+    (_me,),
+    ((IDP_REJECTED_CLAIM_MESSAGE, 0),),
 )
 
-IDP_REJECTED_CLAIM_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sts#idpRejectedClaimMessage"), shape_type=ShapeType.STRING
-)
+INVALID_IDENTITY_TOKEN_MESSAGE: StaticSchema = (3, n0, _iITM, 0)
 
-IDP_REJECTED_CLAIM_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#IDPRejectedClaimException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "IDPRejectedClaim", "httpResponseCode": 403}
-            ),
+INVALID_IDENTITY_TOKEN_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IITE,
+    {
+        _smith: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "InvalidIdentityToken", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": IDP_REJECTED_CLAIM_MESSAGE}},
+    },
+    (_me,),
+    ((INVALID_IDENTITY_TOKEN_MESSAGE, 0),),
 )
 
-INVALID_IDENTITY_TOKEN_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sts#invalidIdentityTokenMessage"),
-    shape_type=ShapeType.STRING,
+ASSUME_ROLE_WITH_SAML: StaticOperationSchema = (
+    23,
+    n0,
+    _ARWSAML,
+    0,
+    ASSUME_ROLE_WITH_SAML_INPUT,
+    ASSUME_ROLE_WITH_SAML_OUTPUT,
+    (
+        EXPIRED_TOKEN_EXCEPTION,
+        IDP_REJECTED_CLAIM_EXCEPTION,
+        INVALID_IDENTITY_TOKEN_EXCEPTION,
+        MALFORMED_POLICY_DOCUMENT_EXCEPTION,
+        PACKED_POLICY_TOO_LARGE_EXCEPTION,
+        REGION_DISABLED_EXCEPTION,
+    ),
 )
 
-INVALID_IDENTITY_TOKEN_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#InvalidIdentityTokenException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidIdentityToken", "httpResponseCode": 400}
-            ),
+URL_TYPE: StaticSchema = (3, n0, _uT, 0)
+
+CLIENT_TOKEN_TYPE: StaticSchema = (3, n0, _cTT, 4)
+
+ASSUME_ROLE_WITH_WEB_IDENTITY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ARWWII,
+    {_sSI: _cARWWIR, _smi: None},
+    (_RA, _RSN, _WIT, _PI, _PAo, _P, _DS, _MSTS),
+    (
+        (ARN_TYPE, 1),
+        (ROLE_SESSION_NAME_TYPE, 1),
+        (CLIENT_TOKEN_TYPE, 1),
+        (URL_TYPE, 0),
+        (POLICY_DESCRIPTOR_LIST_TYPE, 0),
+        (SESSION_POLICY_DOCUMENT_TYPE, 0),
+        (ROLE_DURATION_SECONDS_TYPE, 0),
+        (MINIMUM_SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
+)
+
+WEB_IDENTITY_SUBJECT_TYPE: StaticSchema = (3, n0, _wIST, 0)
+
+ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ARWWIO,
+    {_sSI: _cARWWIRo, _smit: None},
+    (_C, _SFWIT, _ARU, _PPS, _Pr, _Au, _SI, _STU, _STS),
+    (
+        (CREDENTIALS, 0),
+        (WEB_IDENTITY_SUBJECT_TYPE, 0),
+        (ASSUMED_ROLE_USER, 0),
+        (NON_NEGATIVE_INTEGER_TYPE, 0),
+        (ISSUER, 0),
+        (AUDIENCE, 0),
+        (SOURCE_IDENTITY_TYPE, 0),
+        (SESSION_TOKEN_UTILIZATION_TYPE, 0),
+        (SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
+)
+
+IDP_COMMUNICATION_ERROR_MESSAGE: StaticSchema = (3, n0, _iCEM, 0)
+
+IDP_COMMUNICATION_ERROR_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IDPCEE,
+    {
+        _smith: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "IDPCommunicationError", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": INVALID_IDENTITY_TOKEN_MESSAGE}},
-)
-
-ASSUME_ROLE_WITH_SAML = Schema(
-    id=ShapeID("com.amazonaws.sts#AssumeRoleWithSAML"), shape_type=ShapeType.OPERATION
-)
-
-URL_TYPE = Schema(id=ShapeID("com.amazonaws.sts#urlType"), shape_type=ShapeType.STRING)
-
-CLIENT_TOKEN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#clientTokenType"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-ASSUME_ROLE_WITH_WEB_IDENTITY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#AssumeRoleWithWebIdentityInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#AssumeRoleWithWebIdentityRequest",
-        )
-    ],
-    members={
-        "RoleArn": {
-            "target": ARN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RoleSessionName": {
-            "target": ROLE_SESSION_NAME_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "WebIdentityToken": {
-            "target": CLIENT_TOKEN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ProviderId": {"target": URL_TYPE},
-        "PolicyArns": {"target": POLICY_DESCRIPTOR_LIST_TYPE},
-        "Policy": {"target": SESSION_POLICY_DOCUMENT_TYPE},
-        "DurationSeconds": {"target": ROLE_DURATION_SECONDS_TYPE},
-        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
     },
+    (_me,),
+    ((IDP_COMMUNICATION_ERROR_MESSAGE, 0),),
 )
 
-WEB_IDENTITY_SUBJECT_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#webIdentitySubjectType"), shape_type=ShapeType.STRING
+ASSUME_ROLE_WITH_WEB_IDENTITY: StaticOperationSchema = (
+    23,
+    n0,
+    _ARWWI,
+    0,
+    ASSUME_ROLE_WITH_WEB_IDENTITY_INPUT,
+    ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT,
+    (
+        EXPIRED_TOKEN_EXCEPTION,
+        IDP_COMMUNICATION_ERROR_EXCEPTION,
+        IDP_REJECTED_CLAIM_EXCEPTION,
+        INVALID_IDENTITY_TOKEN_EXCEPTION,
+        MALFORMED_POLICY_DOCUMENT_EXCEPTION,
+        PACKED_POLICY_TOO_LARGE_EXCEPTION,
+        REGION_DISABLED_EXCEPTION,
+    ),
 )
 
-ASSUME_ROLE_WITH_WEB_IDENTITY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#AssumeRoleWithWebIdentityOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#AssumeRoleWithWebIdentityResponse",
-        )
-    ],
-    members={
-        "Credentials": {"target": CREDENTIALS},
-        "SubjectFromWebIdentityToken": {"target": WEB_IDENTITY_SUBJECT_TYPE},
-        "AssumedRoleUser": {"target": ASSUMED_ROLE_USER},
-        "PackedPolicySize": {"target": NON_NEGATIVE_INTEGER_TYPE},
-        "Provider": {"target": ISSUER},
-        "Audience": {"target": AUDIENCE},
-        "SourceIdentity": {"target": SOURCE_IDENTITY_TYPE},
-        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
-        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
-    },
+ROOT_DURATION_SECONDS_TYPE: StaticSchema = (7, n0, _RDST, 0)
+
+TARGET_PRINCIPAL_TYPE: StaticSchema = (3, n0, _TPT, 0)
+
+ASSUME_ROOT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ARIss,
+    {_sSI: _cARRom, _smi: None},
+    (_TP, _TPA, _DS, _MSTS),
+    (
+        (TARGET_PRINCIPAL_TYPE, 1),
+        (POLICY_DESCRIPTOR_TYPE, 1),
+        (ROOT_DURATION_SECONDS_TYPE, 0),
+        (MINIMUM_SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
 )
 
-IDP_COMMUNICATION_ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sts#idpCommunicationErrorMessage"),
-    shape_type=ShapeType.STRING,
+ASSUME_ROOT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _AROs,
+    {_sSI: _cARRoma, _smit: None},
+    (_C, _SI, _STU, _STS),
+    (
+        (CREDENTIALS, 0),
+        (SOURCE_IDENTITY_TYPE, 0),
+        (SESSION_TOKEN_UTILIZATION_TYPE, 0),
+        (SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
 )
 
-IDP_COMMUNICATION_ERROR_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#IDPCommunicationErrorException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "IDPCommunicationError", "httpResponseCode": 400}
-            ),
+ASSUME_ROOT: StaticOperationSchema = (
+    23,
+    n0,
+    _ARs,
+    0,
+    ASSUME_ROOT_INPUT,
+    ASSUME_ROOT_OUTPUT,
+    (EXPIRED_TOKEN_EXCEPTION, REGION_DISABLED_EXCEPTION),
+)
+
+ENCODED_MESSAGE_TYPE: StaticSchema = (3, n0, _eMT, 0)
+
+DECODE_AUTHORIZATION_MESSAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DAMI,
+    {_sSI: _cDAMR, _smi: None},
+    (_EM,),
+    ((ENCODED_MESSAGE_TYPE, 1),),
+)
+
+DECODED_MESSAGE_TYPE: StaticSchema = (3, n0, _dMT, 0)
+
+DECODE_AUTHORIZATION_MESSAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DAMO,
+    {_sSI: _cDAMRo, _smit: None},
+    (_DM,),
+    ((DECODED_MESSAGE_TYPE, 0),),
+)
+
+INVALID_AUTHORIZATION_MESSAGE: StaticSchema = (3, n0, _iAM, 0)
+
+INVALID_AUTHORIZATION_MESSAGE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IAME,
+    {
+        _smith: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "InvalidAuthorizationMessageException", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": IDP_COMMUNICATION_ERROR_MESSAGE}},
-)
-
-ASSUME_ROLE_WITH_WEB_IDENTITY = Schema(
-    id=ShapeID("com.amazonaws.sts#AssumeRoleWithWebIdentity"),
-    shape_type=ShapeType.OPERATION,
-)
-
-ROOT_DURATION_SECONDS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#RootDurationSecondsType"),
-    shape_type=ShapeType.INTEGER,
-)
-
-TARGET_PRINCIPAL_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#TargetPrincipalType"), shape_type=ShapeType.STRING
-)
-
-ASSUME_ROOT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#AssumeRootInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#AssumeRootRequest",
-        )
-    ],
-    members={
-        "TargetPrincipal": {
-            "target": TARGET_PRINCIPAL_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TaskPolicyArn": {
-            "target": POLICY_DESCRIPTOR_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DurationSeconds": {"target": ROOT_DURATION_SECONDS_TYPE},
-        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
     },
+    (_me,),
+    ((INVALID_AUTHORIZATION_MESSAGE, 0),),
 )
 
-ASSUME_ROOT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#AssumeRootOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#AssumeRootResponse",
-        )
-    ],
-    members={
-        "Credentials": {"target": CREDENTIALS},
-        "SourceIdentity": {"target": SOURCE_IDENTITY_TYPE},
-        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
-        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
-    },
+DECODE_AUTHORIZATION_MESSAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _DAM,
+    0,
+    DECODE_AUTHORIZATION_MESSAGE_INPUT,
+    DECODE_AUTHORIZATION_MESSAGE_OUTPUT,
+    (INVALID_AUTHORIZATION_MESSAGE_EXCEPTION,),
 )
 
-ASSUME_ROOT = Schema(
-    id=ShapeID("com.amazonaws.sts#AssumeRoot"), shape_type=ShapeType.OPERATION
+GET_ACCESS_KEY_INFO_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GAKII,
+    {_sSI: _cGAKIR, _smi: None},
+    (_AKI,),
+    ((ACCESS_KEY_ID_TYPE, 1),),
 )
 
-ENCODED_MESSAGE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#encodedMessageType"), shape_type=ShapeType.STRING
+GET_ACCESS_KEY_INFO_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GAKIO,
+    {_sSI: _cGAKIRo, _smit: None},
+    (_Ac,),
+    ((ACCOUNT_TYPE, 0),),
 )
 
-DECODE_AUTHORIZATION_MESSAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#DecodeAuthorizationMessageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#DecodeAuthorizationMessageRequest",
-        )
-    ],
-    members={
-        "EncodedMessage": {
-            "target": ENCODED_MESSAGE_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
+GET_ACCESS_KEY_INFO: StaticOperationSchema = (
+    23,
+    n0,
+    _GAKI,
+    0,
+    GET_ACCESS_KEY_INFO_INPUT,
+    GET_ACCESS_KEY_INFO_OUTPUT,
+    (),
 )
 
-DECODED_MESSAGE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#decodedMessageType"), shape_type=ShapeType.STRING
+GET_CALLER_IDENTITY_INPUT: StaticSchema = (18, n0, _GCII, {_sSI: _cGCIR, _smi: None})
+
+USER_ID_TYPE: StaticSchema = (3, n0, _uIT, 0)
+
+GET_CALLER_IDENTITY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCIO,
+    {_sSI: _cGCIRo, _smit: None},
+    (_UI, _Ac, _A),
+    ((USER_ID_TYPE, 0), (ACCOUNT_TYPE, 0), (ARN_TYPE, 0)),
 )
 
-DECODE_AUTHORIZATION_MESSAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#DecodeAuthorizationMessageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#DecodeAuthorizationMessageResponse",
-        )
-    ],
-    members={"DecodedMessage": {"target": DECODED_MESSAGE_TYPE}},
+GET_CALLER_IDENTITY: StaticOperationSchema = (
+    23,
+    n0,
+    _GCI,
+    0,
+    GET_CALLER_IDENTITY_INPUT,
+    GET_CALLER_IDENTITY_OUTPUT,
+    (),
 )
 
-INVALID_AUTHORIZATION_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sts#invalidAuthorizationMessage"),
-    shape_type=ShapeType.STRING,
-)
+EXPIRED_TRADE_IN_TOKEN_EXCEPTION_MESSAGE: StaticSchema = (3, n0, _eTITEM, 0)
 
-INVALID_AUTHORIZATION_MESSAGE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#InvalidAuthorizationMessageException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "InvalidAuthorizationMessageException",
-                    "httpResponseCode": 400,
-                }
-            ),
+EXPIRED_TRADE_IN_TOKEN_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ETITE,
+    {
+        _smith: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "ExpiredTradeInTokenException", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": INVALID_AUTHORIZATION_MESSAGE}},
-)
-
-DECODE_AUTHORIZATION_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sts#DecodeAuthorizationMessage"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_ACCESS_KEY_INFO_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetAccessKeyInfoInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetAccessKeyInfoRequest",
-        )
-    ],
-    members={
-        "AccessKeyId": {
-            "target": ACCESS_KEY_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
     },
+    (_me,),
+    ((EXPIRED_TRADE_IN_TOKEN_EXCEPTION_MESSAGE, 0),),
 )
 
-GET_ACCESS_KEY_INFO_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetAccessKeyInfoOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetAccessKeyInfoResponse",
-        )
-    ],
-    members={"Account": {"target": ACCOUNT_TYPE}},
+TRADE_IN_TOKEN_TYPE: StaticSchema = (3, n0, _tITT, 4)
+
+GET_DELEGATED_ACCESS_TOKEN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDATI,
+    {_sSI: _cGDATR, _smi: None},
+    (_TIT,),
+    ((TRADE_IN_TOKEN_TYPE, 1),),
 )
 
-GET_ACCESS_KEY_INFO = Schema(
-    id=ShapeID("com.amazonaws.sts#GetAccessKeyInfo"), shape_type=ShapeType.OPERATION
+GET_DELEGATED_ACCESS_TOKEN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDATO,
+    {_sSI: _cGDATRo, _smit: None},
+    (_C, _PPS, _AP),
+    ((CREDENTIALS, 0), (NON_NEGATIVE_INTEGER_TYPE, 0), (ARN_TYPE, 0)),
 )
 
-GET_CALLER_IDENTITY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetCallerIdentityInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetCallerIdentityRequest",
-        )
-    ],
+GET_DELEGATED_ACCESS_TOKEN: StaticOperationSchema = (
+    23,
+    n0,
+    _GDAT,
+    0,
+    GET_DELEGATED_ACCESS_TOKEN_INPUT,
+    GET_DELEGATED_ACCESS_TOKEN_OUTPUT,
+    (
+        EXPIRED_TRADE_IN_TOKEN_EXCEPTION,
+        PACKED_POLICY_TOO_LARGE_EXCEPTION,
+        REGION_DISABLED_EXCEPTION,
+    ),
 )
 
-USER_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#userIdType"), shape_type=ShapeType.STRING
+DURATION_SECONDS_TYPE: StaticSchema = (7, n0, _dST, 0)
+
+USER_NAME_TYPE: StaticSchema = (3, n0, _uNT, 0)
+
+GET_FEDERATION_TOKEN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFTI,
+    {_sSI: _cGFTR, _smi: None},
+    (_N, _P, _PAo, _DS, _Ta, _MSTS),
+    (
+        (USER_NAME_TYPE, 1),
+        (SESSION_POLICY_DOCUMENT_TYPE, 0),
+        (POLICY_DESCRIPTOR_LIST_TYPE, 0),
+        (DURATION_SECONDS_TYPE, 0),
+        (TAG_LIST_TYPE, 0),
+        (MINIMUM_SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
 )
 
-GET_CALLER_IDENTITY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetCallerIdentityOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetCallerIdentityResponse",
-        )
-    ],
-    members={
-        "UserId": {"target": USER_ID_TYPE},
-        "Account": {"target": ACCOUNT_TYPE},
-        "Arn": {"target": ARN_TYPE},
-    },
+FEDERATED_ID_TYPE: StaticSchema = (3, n0, _fIT, 0)
+
+FEDERATED_USER: StaticSchema = (
+    18,
+    n0,
+    _FU,
+    0,
+    (_FUI, _A),
+    ((FEDERATED_ID_TYPE, 1), (ARN_TYPE, 1)),
 )
 
-GET_CALLER_IDENTITY = Schema(
-    id=ShapeID("com.amazonaws.sts#GetCallerIdentity"), shape_type=ShapeType.OPERATION
+GET_FEDERATION_TOKEN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFTO,
+    {_sSI: _cGFTRo, _smit: None},
+    (_C, _FU, _PPS, _STU, _STS),
+    (
+        (CREDENTIALS, 0),
+        (FEDERATED_USER, 0),
+        (NON_NEGATIVE_INTEGER_TYPE, 0),
+        (SESSION_TOKEN_UTILIZATION_TYPE, 0),
+        (SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
 )
 
-EXPIRED_TRADE_IN_TOKEN_EXCEPTION_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sts#expiredTradeInTokenExceptionMessage"),
-    shape_type=ShapeType.STRING,
+GET_FEDERATION_TOKEN: StaticOperationSchema = (
+    23,
+    n0,
+    _GFT,
+    0,
+    GET_FEDERATION_TOKEN_INPUT,
+    GET_FEDERATION_TOKEN_OUTPUT,
+    (
+        MALFORMED_POLICY_DOCUMENT_EXCEPTION,
+        PACKED_POLICY_TOO_LARGE_EXCEPTION,
+        REGION_DISABLED_EXCEPTION,
+    ),
 )
 
-EXPIRED_TRADE_IN_TOKEN_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#ExpiredTradeInTokenException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ExpiredTradeInTokenException", "httpResponseCode": 400}
-            ),
+GET_SESSION_TOKEN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSTI,
+    {_sSI: _cGSTR, _smi: None},
+    (_DS, _SN, _TC, _MSTS),
+    (
+        (DURATION_SECONDS_TYPE, 0),
+        (SERIAL_NUMBER_TYPE, 0),
+        (TOKEN_CODE_TYPE, 0),
+        (MINIMUM_SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
+)
+
+GET_SESSION_TOKEN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSTO,
+    {_sSI: _cGSTRo, _smit: None},
+    (_C, _STU, _STS),
+    (
+        (CREDENTIALS, 0),
+        (SESSION_TOKEN_UTILIZATION_TYPE, 0),
+        (SESSION_TOKEN_SIZE_TYPE, 0),
+    ),
+)
+
+GET_SESSION_TOKEN: StaticOperationSchema = (
+    23,
+    n0,
+    _GST,
+    0,
+    GET_SESSION_TOKEN_INPUT,
+    GET_SESSION_TOKEN_OUTPUT,
+    (REGION_DISABLED_EXCEPTION,),
+)
+
+WEB_IDENTITY_TOKEN_AUDIENCE_STRING_TYPE: StaticSchema = (3, n0, _wITAST, 0)
+
+WEB_IDENTITY_TOKEN_AUDIENCE_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _wITALT,
+    0,
+    (_m,),
+    ((WEB_IDENTITY_TOKEN_AUDIENCE_STRING_TYPE, 0),),
+)
+
+WEB_IDENTITY_TOKEN_DURATION_SECONDS_TYPE: StaticSchema = (7, n0, _wITDST, 0)
+
+JWT_ALGORITHM_TYPE: StaticSchema = (3, n0, _jAT, 0)
+
+GET_WEB_IDENTITY_TOKEN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GWITI,
+    {_sSI: _cGWITR, _smi: None},
+    (_Au, _DS, _SA, _Ta),
+    (
+        (WEB_IDENTITY_TOKEN_AUDIENCE_LIST_TYPE, 1),
+        (WEB_IDENTITY_TOKEN_DURATION_SECONDS_TYPE, 0),
+        (JWT_ALGORITHM_TYPE, 1),
+        (TAG_LIST_TYPE, 0),
+    ),
+)
+
+WEB_IDENTITY_TOKEN_TYPE: StaticSchema = (3, n0, _wITT, 4)
+
+GET_WEB_IDENTITY_TOKEN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GWITO,
+    {_sSI: _cGWITRo, _smit: None},
+    (_WIT, _E),
+    ((WEB_IDENTITY_TOKEN_TYPE, 0), (DATE_TYPE, 0)),
+)
+
+JWT_PAYLOAD_SIZE_EXCEEDED_EXCEPTION2: StaticSchema = (3, n0, _JWTPSEE, 0)
+
+JWT_PAYLOAD_SIZE_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _JWTPSEEa,
+    {
+        _smith: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "JWTPayloadSizeExceededException", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": EXPIRED_TRADE_IN_TOKEN_EXCEPTION_MESSAGE}},
-)
-
-TRADE_IN_TOKEN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#tradeInTokenType"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-GET_DELEGATED_ACCESS_TOKEN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetDelegatedAccessTokenInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetDelegatedAccessTokenRequest",
-        )
-    ],
-    members={
-        "TradeInToken": {
-            "target": TRADE_IN_TOKEN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
     },
+    (_me,),
+    ((JWT_PAYLOAD_SIZE_EXCEEDED_EXCEPTION2, 0),),
 )
 
-GET_DELEGATED_ACCESS_TOKEN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetDelegatedAccessTokenOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetDelegatedAccessTokenResponse",
-        )
-    ],
-    members={
-        "Credentials": {"target": CREDENTIALS},
-        "PackedPolicySize": {"target": NON_NEGATIVE_INTEGER_TYPE},
-        "AssumedPrincipal": {"target": ARN_TYPE},
-    },
-)
+OUTBOUND_WEB_IDENTITY_FEDERATION_DISABLED_EXCEPTION2: StaticSchema = (3, n0, _OWIFDE, 0)
 
-GET_DELEGATED_ACCESS_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.sts#GetDelegatedAccessToken"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DURATION_SECONDS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#durationSecondsType"), shape_type=ShapeType.INTEGER
-)
-
-USER_NAME_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#userNameType"), shape_type=ShapeType.STRING
-)
-
-GET_FEDERATION_TOKEN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetFederationTokenInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetFederationTokenRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": USER_NAME_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Policy": {"target": SESSION_POLICY_DOCUMENT_TYPE},
-        "PolicyArns": {"target": POLICY_DESCRIPTOR_LIST_TYPE},
-        "DurationSeconds": {"target": DURATION_SECONDS_TYPE},
-        "Tags": {"target": TAG_LIST_TYPE},
-        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
-    },
-)
-
-FEDERATED_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#federatedIdType"), shape_type=ShapeType.STRING
-)
-
-FEDERATED_USER = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#FederatedUser"),
-    members={
-        "FederatedUserId": {
-            "target": FEDERATED_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Arn": {
-            "target": ARN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-GET_FEDERATION_TOKEN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetFederationTokenOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetFederationTokenResponse",
-        )
-    ],
-    members={
-        "Credentials": {"target": CREDENTIALS},
-        "FederatedUser": {"target": FEDERATED_USER},
-        "PackedPolicySize": {"target": NON_NEGATIVE_INTEGER_TYPE},
-        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
-        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
-    },
-)
-
-GET_FEDERATION_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.sts#GetFederationToken"), shape_type=ShapeType.OPERATION
-)
-
-GET_SESSION_TOKEN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetSessionTokenInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetSessionTokenRequest",
-        )
-    ],
-    members={
-        "DurationSeconds": {"target": DURATION_SECONDS_TYPE},
-        "SerialNumber": {"target": SERIAL_NUMBER_TYPE},
-        "TokenCode": {"target": TOKEN_CODE_TYPE},
-        "MinimumSessionTokenSize": {"target": MINIMUM_SESSION_TOKEN_SIZE_TYPE},
-    },
-)
-
-GET_SESSION_TOKEN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetSessionTokenOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetSessionTokenResponse",
-        )
-    ],
-    members={
-        "Credentials": {"target": CREDENTIALS},
-        "SessionTokenUtilization": {"target": SESSION_TOKEN_UTILIZATION_TYPE},
-        "SessionTokenSize": {"target": SESSION_TOKEN_SIZE_TYPE},
-    },
-)
-
-GET_SESSION_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.sts#GetSessionToken"), shape_type=ShapeType.OPERATION
-)
-
-WEB_IDENTITY_TOKEN_AUDIENCE_STRING_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#webIdentityTokenAudienceStringType"),
-    shape_type=ShapeType.STRING,
-)
-
-WEB_IDENTITY_TOKEN_AUDIENCE_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#webIdentityTokenAudienceListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": WEB_IDENTITY_TOKEN_AUDIENCE_STRING_TYPE}},
-)
-
-WEB_IDENTITY_TOKEN_DURATION_SECONDS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#webIdentityTokenDurationSecondsType"),
-    shape_type=ShapeType.INTEGER,
-)
-
-JWT_ALGORITHM_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#jwtAlgorithmType"), shape_type=ShapeType.STRING
-)
-
-GET_WEB_IDENTITY_TOKEN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetWebIdentityTokenInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetWebIdentityTokenRequest",
-        )
-    ],
-    members={
-        "Audience": {
-            "target": WEB_IDENTITY_TOKEN_AUDIENCE_LIST_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DurationSeconds": {"target": WEB_IDENTITY_TOKEN_DURATION_SECONDS_TYPE},
-        "SigningAlgorithm": {
-            "target": JWT_ALGORITHM_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Tags": {"target": TAG_LIST_TYPE},
-    },
-)
-
-WEB_IDENTITY_TOKEN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.sts#webIdentityTokenType"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-GET_WEB_IDENTITY_TOKEN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#GetWebIdentityTokenOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sts#GetWebIdentityTokenResponse",
-        )
-    ],
-    members={
-        "WebIdentityToken": {"target": WEB_IDENTITY_TOKEN_TYPE},
-        "Expiration": {"target": DATE_TYPE},
-    },
-)
-
-JWT_PAYLOAD_SIZE_EXCEEDED_EXCEPTION2 = Schema(
-    id=ShapeID("com.amazonaws.sts#JWTPayloadSizeExceededException2"),
-    shape_type=ShapeType.STRING,
-)
-
-JWT_PAYLOAD_SIZE_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#JWTPayloadSizeExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "JWTPayloadSizeExceededException", "httpResponseCode": 400}
-            ),
+OUTBOUND_WEB_IDENTITY_FEDERATION_DISABLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _OWIFDEu,
+    {
+        _smith: _c,
+        _sE: 403,
+        _aQE: MappingProxyType(
+            {
+                "code": "OutboundWebIdentityFederationDisabledException",
+                "httpResponseCode": 403,
+            }
         ),
-    ],
-    members={"message": {"target": JWT_PAYLOAD_SIZE_EXCEEDED_EXCEPTION2}},
-)
-
-OUTBOUND_WEB_IDENTITY_FEDERATION_DISABLED_EXCEPTION2 = Schema(
-    id=ShapeID("com.amazonaws.sts#OutboundWebIdentityFederationDisabledException2"),
-    shape_type=ShapeType.STRING,
-)
-
-OUTBOUND_WEB_IDENTITY_FEDERATION_DISABLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#OutboundWebIdentityFederationDisabledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "OutboundWebIdentityFederationDisabledException",
-                    "httpResponseCode": 403,
-                }
-            ),
-        ),
-    ],
-    members={
-        "message": {"target": OUTBOUND_WEB_IDENTITY_FEDERATION_DISABLED_EXCEPTION2}
     },
+    (_me,),
+    ((OUTBOUND_WEB_IDENTITY_FEDERATION_DISABLED_EXCEPTION2, 0),),
 )
 
-SESSION_DURATION_ESCALATION_EXCEPTION2 = Schema(
-    id=ShapeID("com.amazonaws.sts#SessionDurationEscalationException2"),
-    shape_type=ShapeType.STRING,
-)
+SESSION_DURATION_ESCALATION_EXCEPTION2: StaticSchema = (3, n0, _SDEE, 0)
 
-SESSION_DURATION_ESCALATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sts#SessionDurationEscalationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "SessionDurationEscalationException", "httpResponseCode": 403}
-            ),
+SESSION_DURATION_ESCALATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SDEEe,
+    {
+        _smith: _c,
+        _sE: 403,
+        _aQE: MappingProxyType(
+            {"code": "SessionDurationEscalationException", "httpResponseCode": 403}
         ),
-    ],
-    members={"message": {"target": SESSION_DURATION_ESCALATION_EXCEPTION2}},
+    },
+    (_me,),
+    ((SESSION_DURATION_ESCALATION_EXCEPTION2, 0),),
 )
 
-GET_WEB_IDENTITY_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.sts#GetWebIdentityToken"), shape_type=ShapeType.OPERATION
+GET_WEB_IDENTITY_TOKEN: StaticOperationSchema = (
+    23,
+    n0,
+    _GWIT,
+    0,
+    GET_WEB_IDENTITY_TOKEN_INPUT,
+    GET_WEB_IDENTITY_TOKEN_OUTPUT,
+    (
+        JWT_PAYLOAD_SIZE_EXCEEDED_EXCEPTION,
+        OUTBOUND_WEB_IDENTITY_FEDERATION_DISABLED_EXCEPTION,
+        SESSION_DURATION_ESCALATION_EXCEPTION,
+    ),
 )
 
-AWS_SECURITY_TOKEN_SERVICE_V20110615 = Schema(
-    id=ShapeID("com.amazonaws.sts#AWSSecurityTokenServiceV20110615"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "sts"})
-        ),
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4a"), value=MappingProxyType({"name": "sts"})
-        ),
-        Trait.new(id=ShapeID("aws.protocols#awsQuery")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+AWS_SECURITY_TOKEN_SERVICE_V20110615: StaticSchema = (
+    21,
+    n0,
+    _AWSSTSV,
+    {
+        _aw: MappingProxyType({"name": "sts"}),
+        _aws: MappingProxyType({"name": "sts"}),
+        _aQ: None,
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                        "UseGlobalEndpoint": MappingProxyType(
+                            {
+                                "builtIn": "AWS::STS::UseGlobalEndpoint",
+                                "required": True,
+                                "default": False,
+                                "documentation": "Whether the global endpoint should be used, rather then the regional endpoint for us-east-1.",
+                                "type": "boolean",
+                            }
+                        ),
+                    }
+                ),
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseGlobalEndpoint": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::STS::UseGlobalEndpoint",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "Whether the global endpoint should be used, rather then the regional endpoint for us-east-1.",
-                                    "type": "boolean",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "aws-global"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "UseGlobalEndpoint"}),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "aws-global",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseGlobalEndpoint"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "eu-central-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "ap-south-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "eu-north-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "eu-west-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "eu-west-2",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "eu-west-3",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "sa-east-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-east-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-east-2",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-west-2",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-west-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "ca-central-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "ap-southeast-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "ap-northeast-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "ap-southeast-2",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-us-gov",
-                                ),
-                            }
-                        ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "Region"}),
+                                "eu-central-1",
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
                                     {
-                                        "url": "https://sts.amazonaws.com",
-                                        "properties": MappingProxyType(
-                                            {
-                                                "authSchemes": (
-                                                    MappingProxyType(
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingName": "sts",
-                                                            "signingRegion": "us-east-1",
-                                                        }
-                                                    ),
-                                                )
-                                            }
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
                                         ),
-                                        "headers": MappingProxyType({}),
                                     }
                                 ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sts.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {
-                                                "authSchemes": (
-                                                    MappingProxyType(
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingName": "sts",
-                                                            "signingRegion": "{Region}",
-                                                        }
-                                                    ),
-                                                )
-                                            }
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sts-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sts.{Region}.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sts-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sts.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sts.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 31,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAB4AAAADAAAAAQAAAAQF9eEOAAAAAgAAAAUF9eEOAAAAAwAAABkAAAAGAAAABAAAABgAAAAHAAAABQX14QEAAAAIAAAABgAAAAkF9eENAAAABwX14QEAAAAKAAAACgX14QEAAAALAAAACwX14QEAAAAMAAAADAX14QEAAAANAAAADQX14QEAAAAOAAAADgX14QEAAAAPAAAADwX14QEAAAAQAAAAEAX14QEAAAARAAAAEQX14QEAAAASAAAAEgX14QEAAAATAAAAEwX14QEAAAAUAAAAFAX14QEAAAAVAAAAFQX14QEAAAAWAAAAFgX14QEAAAAXAAAAFwX14QEF9eECAAAACAX14QsF9eEMAAAABAAAABwAAAAaAAAACQAAABsF9eEKAAAAGAX14QgF9eEJAAAACAAAAB0F9eEHAAAACQX14QYF9eEHAAAAAwX14QMAAAAfAAAABAX14QQF9eEF",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsFIPS",
+                                        ),
+                                    }
+                                ),
+                                True,
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "ap-south-1"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "eu-north-1"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "eu-west-1"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "eu-west-2"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "eu-west-3"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "sa-east-1"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "us-east-1"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "us-east-2"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "us-west-2"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (MappingProxyType({"ref": "Region"}), "us-west-1"),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "Region"}),
+                                "ca-central-1",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "Region"}),
+                                "ap-southeast-1",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "Region"}),
+                                "ap-northeast-1",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "Region"}),
+                                "ap-southeast-2",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-us-gov",
+                            ),
+                        }
+                    ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sts.amazonaws.com",
+                                    "properties": MappingProxyType(
+                                        {
+                                            "authSchemes": (
+                                                MappingProxyType(
+                                                    {
+                                                        "name": "sigv4",
+                                                        "signingName": "sts",
+                                                        "signingRegion": "us-east-1",
+                                                    }
+                                                ),
+                                            )
+                                        }
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sts.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {
+                                            "authSchemes": (
+                                                MappingProxyType(
+                                                    {
+                                                        "name": "sigv4",
+                                                        "signingName": "sts",
+                                                        "signingRegion": "{Region}",
+                                                    }
+                                                ),
+                                            )
+                                        }
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sts-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sts.{Region}.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sts-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sts.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sts.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 31,
+                "nodes": "/////wAAAAH/////AAAAAAAAAB4AAAADAAAAAQAAAAQF9eEOAAAAAgAAAAUF9eEOAAAAAwAAABkAAAAGAAAABAAAABgAAAAHAAAABQX14QEAAAAIAAAABgAAAAkF9eENAAAABwX14QEAAAAKAAAACgX14QEAAAALAAAACwX14QEAAAAMAAAADAX14QEAAAANAAAADQX14QEAAAAOAAAADgX14QEAAAAPAAAADwX14QEAAAAQAAAAEAX14QEAAAARAAAAEQX14QEAAAASAAAAEgX14QEAAAATAAAAEwX14QEAAAAUAAAAFAX14QEAAAAVAAAAFQX14QEAAAAWAAAAFgX14QEAAAAXAAAAFwX14QEF9eECAAAACAX14QsF9eEMAAAABAAAABwAAAAaAAAACQAAABsF9eEKAAAAGAX14QgF9eEJAAAACAAAAB0F9eEHAAAACQX14QYF9eEHAAAAAwX14QMAAAAfAAAABAX14QQF9eEF",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "STS",
-                    "arnNamespace": "sts",
-                    "cloudFormationName": "STS",
-                    "cloudTrailEventSource": "sts.amazonaws.com",
-                    "endpointPrefix": "sts",
-                }
-            ),
+        _awsa: MappingProxyType(
+            {
+                "sdkId": "STS",
+                "arnNamespace": "sts",
+                "cloudFormationName": "STS",
+                "cloudTrailEventSource": "sts.amazonaws.com",
+                "endpointPrefix": "sts",
+            }
         ),
-        Trait.new(
-            id=ShapeID("smithy.api#xmlNamespace"),
-            value=MappingProxyType(
-                {"uri": "https://sts.amazonaws.com/doc/2011-06-15/"}
-            ),
-        ),
-    ],
+        _sN: MappingProxyType({"uri": "https://sts.amazonaws.com/doc/2011-06-15/"}),
+    },
 )

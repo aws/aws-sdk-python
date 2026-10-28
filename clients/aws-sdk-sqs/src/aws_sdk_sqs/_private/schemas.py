@@ -2,2219 +2,2043 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 
-STRING = Schema(id=ShapeID("com.amazonaws.sqs#String"), shape_type=ShapeType.STRING)
+n0 = "com.amazonaws.sqs"
+_S = "String"
+_ANL = "ActionNameList"
+_m = "member"
+_AWSAIL = "AWSAccountIdList"
+_API = "AddPermissionInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cAPR = "com.amazonaws.sqs#AddPermissionRequest"
+_s = "smithy.api#input"
+_QU = "QueueUrl"
+_sm = "smithy.api#required"
+_L = "Label"
+_AWSAI = "AWSAccountIds"
+_sN = "smithy.api#xmlName"
+_AWSAIc = "AWSAccountId"
+_sF = "smithy.api#xmlFlattened"
+_A = "Actions"
+_AN = "ActionName"
+_APO = "AddPermissionOutput"
+_sU = "smithy.api#Unit"
+_smi = "smithy.api#output"
+_EM = "ExceptionMessage"
+_IA = "InvalidAddress"
+_smit = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_me = "message"
+_IS = "InvalidSecurity"
+_OL = "OverLimit"
+_QDNE = "QueueDoesNotExist"
+_RT = "RequestThrottled"
+_UO = "UnsupportedOperation"
+_AP = "AddPermission"
+_CMMTI = "CancelMessageMoveTaskInput"
+_cCMMTR = "com.amazonaws.sqs#CancelMessageMoveTaskRequest"
+_TH = "TaskHandle"
+_Lo = "Long"
+_smith = "smithy.api#default"
+_CMMTO = "CancelMessageMoveTaskOutput"
+_cCMMTRo = "com.amazonaws.sqs#CancelMessageMoveTaskResult"
+_ANOMM = "ApproximateNumberOfMessagesMoved"
+_RNFE = "ResourceNotFoundException"
+_CMMT = "CancelMessageMoveTask"
+_NI = "NullableInteger"
+_CMVI = "ChangeMessageVisibilityInput"
+_cCMVR = "com.amazonaws.sqs#ChangeMessageVisibilityRequest"
+_RH = "ReceiptHandle"
+_VT = "VisibilityTimeout"
+_CMVO = "ChangeMessageVisibilityOutput"
+_MNI = "MessageNotInflight"
+_RHII = "ReceiptHandleIsInvalid"
+_CMV = "ChangeMessageVisibility"
+_BEIND = "BatchEntryIdsNotDistinct"
+_CMVBRE = "ChangeMessageVisibilityBatchRequestEntry"
+_I = "Id"
+_CMVBREL = "ChangeMessageVisibilityBatchRequestEntryList"
+_CMVBI = "ChangeMessageVisibilityBatchInput"
+_cCMVBR = "com.amazonaws.sqs#ChangeMessageVisibilityBatchRequest"
+_E = "Entries"
+_B = "Boolean"
+_BREE = "BatchResultErrorEntry"
+_SF = "SenderFault"
+_C = "Code"
+_M = "Message"
+_BREEL = "BatchResultErrorEntryList"
+_CMVBREh = "ChangeMessageVisibilityBatchResultEntry"
+_CMVBRELh = "ChangeMessageVisibilityBatchResultEntryList"
+_CMVBO = "ChangeMessageVisibilityBatchOutput"
+_cCMVBRo = "com.amazonaws.sqs#ChangeMessageVisibilityBatchResult"
+_Su = "Successful"
+_F = "Failed"
+_EBR = "EmptyBatchRequest"
+_IBEI = "InvalidBatchEntryId"
+_TMEIBR = "TooManyEntriesInBatchRequest"
+_CMVB = "ChangeMessageVisibilityBatch"
+_QAN = "QueueAttributeName"
+_Al = "All"
+_sV = "smithy.api#enumValue"
+_P = "Policy"
+_MMS = "MaximumMessageSize"
+_MRP = "MessageRetentionPeriod"
+_ANOM = "ApproximateNumberOfMessages"
+_ANOMNV = "ApproximateNumberOfMessagesNotVisible"
+_CT = "CreatedTimestamp"
+_LMT = "LastModifiedTimestamp"
+_QA = "QueueArn"
+_ANOMD = "ApproximateNumberOfMessagesDelayed"
+_DS = "DelaySeconds"
+_RMWTS = "ReceiveMessageWaitTimeSeconds"
+_RP = "RedrivePolicy"
+_FQ = "FifoQueue"
+_CBD = "ContentBasedDeduplication"
+_KMKI = "KmsMasterKeyId"
+_KDKRPS = "KmsDataKeyReusePeriodSeconds"
+_DSe = "DeduplicationScope"
+_FTL = "FifoThroughputLimit"
+_RAP = "RedriveAllowPolicy"
+_SMSE = "SqsManagedSseEnabled"
+_QAM = "QueueAttributeMap"
+_k = "key"
+_N = "Name"
+_v = "value"
+_V = "Value"
+_TK = "TagKey"
+_TV = "TagValue"
+_TM = "TagMap"
+_K = "Key"
+_CQI = "CreateQueueInput"
+_cCQR = "com.amazonaws.sqs#CreateQueueRequest"
+_QN = "QueueName"
+_At = "Attributes"
+_Att = "Attribute"
+_t = "tags"
+_T = "Tag"
+_CQO = "CreateQueueOutput"
+_cCQRo = "com.amazonaws.sqs#CreateQueueResult"
+_IAN = "InvalidAttributeName"
+_IAV = "InvalidAttributeValue"
+_QDR = "QueueDeletedRecently"
+_QNE = "QueueNameExists"
+_CQ = "CreateQueue"
+_DMI = "DeleteMessageInput"
+_cDMR = "com.amazonaws.sqs#DeleteMessageRequest"
+_DMO = "DeleteMessageOutput"
+_IIF = "InvalidIdFormat"
+_DM = "DeleteMessage"
+_DMBRE = "DeleteMessageBatchRequestEntry"
+_DMBREL = "DeleteMessageBatchRequestEntryList"
+_DMBI = "DeleteMessageBatchInput"
+_cDMBR = "com.amazonaws.sqs#DeleteMessageBatchRequest"
+_DMBREe = "DeleteMessageBatchResultEntry"
+_DMBRELe = "DeleteMessageBatchResultEntryList"
+_DMBO = "DeleteMessageBatchOutput"
+_cDMBRo = "com.amazonaws.sqs#DeleteMessageBatchResult"
+_DMB = "DeleteMessageBatch"
+_DQI = "DeleteQueueInput"
+_cDQR = "com.amazonaws.sqs#DeleteQueueRequest"
+_DQO = "DeleteQueueOutput"
+_DQ = "DeleteQueue"
+_ANLt = "AttributeNameList"
+_GQAI = "GetQueueAttributesInput"
+_cGQAR = "com.amazonaws.sqs#GetQueueAttributesRequest"
+_ANt = "AttributeNames"
+_ANtt = "AttributeName"
+_GQAO = "GetQueueAttributesOutput"
+_cGQARo = "com.amazonaws.sqs#GetQueueAttributesResult"
+_GQA = "GetQueueAttributes"
+_GQUI = "GetQueueUrlInput"
+_cGQUR = "com.amazonaws.sqs#GetQueueUrlRequest"
+_QOAWSAI = "QueueOwnerAWSAccountId"
+_GQUO = "GetQueueUrlOutput"
+_cGQURo = "com.amazonaws.sqs#GetQueueUrlResult"
+_GQU = "GetQueueUrl"
+_BI = "BoxedInteger"
+_To = "Token"
+_LDLSQI = "ListDeadLetterSourceQueuesInput"
+_cLDLSQR = "com.amazonaws.sqs#ListDeadLetterSourceQueuesRequest"
+_NT = "NextToken"
+_MR = "MaxResults"
+_QUL = "QueueUrlList"
+_LDLSQO = "ListDeadLetterSourceQueuesOutput"
+_cLDLSQRo = "com.amazonaws.sqs#ListDeadLetterSourceQueuesResult"
+_qU = "queueUrls"
+_LDLSQ = "ListDeadLetterSourceQueues"
+_LMMTI = "ListMessageMoveTasksInput"
+_cLMMTR = "com.amazonaws.sqs#ListMessageMoveTasksRequest"
+_SA = "SourceArn"
+_NL = "NullableLong"
+_LMMTRE = "ListMessageMoveTasksResultEntry"
+_St = "Status"
+_DA = "DestinationArn"
+_MNOMPS = "MaxNumberOfMessagesPerSecond"
+_ANOMTM = "ApproximateNumberOfMessagesToMove"
+_FR = "FailureReason"
+_ST = "StartedTimestamp"
+_LMMTREL = "ListMessageMoveTasksResultEntryList"
+_LMMTO = "ListMessageMoveTasksOutput"
+_LMMTR = "ListMessageMoveTasksResult"
+_cLMMTRo = "com.amazonaws.sqs#ListMessageMoveTasksResult"
+_R = "Results"
+_LMMT = "ListMessageMoveTasks"
+_LQI = "ListQueuesInput"
+_cLQR = "com.amazonaws.sqs#ListQueuesRequest"
+_QNP = "QueueNamePrefix"
+_LQO = "ListQueuesOutput"
+_cLQRo = "com.amazonaws.sqs#ListQueuesResult"
+_QUu = "QueueUrls"
+_LQ = "ListQueues"
+_LQTI = "ListQueueTagsInput"
+_cLQTR = "com.amazonaws.sqs#ListQueueTagsRequest"
+_LQTO = "ListQueueTagsOutput"
+_cLQTRo = "com.amazonaws.sqs#ListQueueTagsResult"
+_Ta = "Tags"
+_LQT = "ListQueueTags"
+_PQIP = "PurgeQueueInProgress"
+_PQI = "PurgeQueueInput"
+_cPQR = "com.amazonaws.sqs#PurgeQueueRequest"
+_PQO = "PurgeQueueOutput"
+_PQ = "PurgeQueue"
+_KAD = "KmsAccessDenied"
+_KD = "KmsDisabled"
+_KIKU = "KmsInvalidKeyUsage"
+_KIS = "KmsInvalidState"
+_KNF = "KmsNotFound"
+_KOIR = "KmsOptInRequired"
+_KT = "KmsThrottled"
+_MAN = "MessageAttributeName"
+_MANL = "MessageAttributeNameList"
+_MSAN = "MessageSystemAttributeName"
+_SI = "SenderId"
+_STe = "SentTimestamp"
+_ARC = "ApproximateReceiveCount"
+_AFRT = "ApproximateFirstReceiveTimestamp"
+_SN = "SequenceNumber"
+_MDI = "MessageDeduplicationId"
+_MGI = "MessageGroupId"
+_AWSTH = "AWSTraceHeader"
+_DLQSA = "DeadLetterQueueSourceArn"
+_MSAL = "MessageSystemAttributeList"
+_RMI = "ReceiveMessageInput"
+_cRMR = "com.amazonaws.sqs#ReceiveMessageRequest"
+_MSANe = "MessageSystemAttributeNames"
+_MANe = "MessageAttributeNames"
+_MNOM = "MaxNumberOfMessages"
+_WTS = "WaitTimeSeconds"
+_RRAI = "ReceiveRequestAttemptId"
+_MSAM = "MessageSystemAttributeMap"
+_Bi = "Binary"
+_BL = "BinaryList"
+_BLV = "BinaryListValue"
+_SL = "StringList"
+_SLV = "StringListValue"
+_MAV = "MessageAttributeValue"
+_SV = "StringValue"
+_BV = "BinaryValue"
+_SLVt = "StringListValues"
+_BLVi = "BinaryListValues"
+_DT = "DataType"
+_MBAM = "MessageBodyAttributeMap"
+_MI = "MessageId"
+_MDOB = "MD5OfBody"
+_Bo = "Body"
+_MDOMA = "MD5OfMessageAttributes"
+_MA = "MessageAttributes"
+_MAe = "MessageAttribute"
+_ML = "MessageList"
+_RMO = "ReceiveMessageOutput"
+_cRMRo = "com.amazonaws.sqs#ReceiveMessageResult"
+_Me = "Messages"
+_RM = "ReceiveMessage"
+_RPI = "RemovePermissionInput"
+_cRPR = "com.amazonaws.sqs#RemovePermissionRequest"
+_RPO = "RemovePermissionOutput"
+_RPe = "RemovePermission"
+_IMC = "InvalidMessageContents"
+_MSANFS = "MessageSystemAttributeNameForSends"
+_MSAV = "MessageSystemAttributeValue"
+_MBSAM = "MessageBodySystemAttributeMap"
+_SMI = "SendMessageInput"
+_cSMR = "com.amazonaws.sqs#SendMessageRequest"
+_MB = "MessageBody"
+_MSA = "MessageSystemAttributes"
+_MSAe = "MessageSystemAttribute"
+_SMO = "SendMessageOutput"
+_cSMRo = "com.amazonaws.sqs#SendMessageResult"
+_MDOMB = "MD5OfMessageBody"
+_MDOMSA = "MD5OfMessageSystemAttributes"
+_SM = "SendMessage"
+_BRTL = "BatchRequestTooLong"
+_SMBRE = "SendMessageBatchRequestEntry"
+_SMBREL = "SendMessageBatchRequestEntryList"
+_SMBI = "SendMessageBatchInput"
+_cSMBR = "com.amazonaws.sqs#SendMessageBatchRequest"
+_SMBREe = "SendMessageBatchResultEntry"
+_SMBRELe = "SendMessageBatchResultEntryList"
+_SMBO = "SendMessageBatchOutput"
+_cSMBRo = "com.amazonaws.sqs#SendMessageBatchResult"
+_SMB = "SendMessageBatch"
+_SQAI = "SetQueueAttributesInput"
+_cSQAR = "com.amazonaws.sqs#SetQueueAttributesRequest"
+_SQAO = "SetQueueAttributesOutput"
+_SQA = "SetQueueAttributes"
+_SMMTI = "StartMessageMoveTaskInput"
+_cSMMTR = "com.amazonaws.sqs#StartMessageMoveTaskRequest"
+_SMMTO = "StartMessageMoveTaskOutput"
+_cSMMTRo = "com.amazonaws.sqs#StartMessageMoveTaskResult"
+_SMMT = "StartMessageMoveTask"
+_TQI = "TagQueueInput"
+_cTQR = "com.amazonaws.sqs#TagQueueRequest"
+_TQO = "TagQueueOutput"
+_TQ = "TagQueue"
+_TKL = "TagKeyList"
+_UQI = "UntagQueueInput"
+_cUQR = "com.amazonaws.sqs#UntagQueueRequest"
+_TKa = "TagKeys"
+_UQO = "UntagQueueOutput"
+_UQ = "UntagQueue"
+_ASQS = "AmazonSQS"
+_a = "aws.auth#sigv4"
+_a_ = "aws.protocols#awsJson1_0"
+_sB = "smithy.rules#endpointBdd"
+_aw = "aws.api#service"
 
-ACTION_NAME_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ActionNameList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
+STRING: StaticSchema = (3, n0, _S, 0)
+
+ACTION_NAME_LIST: StaticSchema = (16, n0, _ANL, 0, (_m,), ((STRING, 0),))
+
+AWS_ACCOUNT_ID_LIST: StaticSchema = (16, n0, _AWSAIL, 0, (_m,), ((STRING, 0),))
+
+ADD_PERMISSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _API,
+    {_sSI: _cAPR, _s: None},
+    (_QU, _L, _AWSAI, _A),
+    (
+        (STRING, 1),
+        (STRING, 1),
+        (AWS_ACCOUNT_ID_LIST, {_sN: _AWSAIc, _sF: None, _sm: None}),
+        (ACTION_NAME_LIST, {_sN: _AN, _sF: None, _sm: None}),
+    ),
 )
 
-AWS_ACCOUNT_ID_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#AWSAccountIdList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
+ADD_PERMISSION_OUTPUT: StaticSchema = (18, n0, _APO, {_sSI: _sU, _smi: None})
+
+EXCEPTION_MESSAGE: StaticSchema = (3, n0, _EM, 0)
+
+INVALID_ADDRESS: StaticSchema = (
+    18,
+    n0,
+    _IA,
+    {_smit: _c, _sE: 404},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
 )
 
-ADD_PERMISSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#AddPermissionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#AddPermissionRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Label": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AWSAccountIds": {
-            "target": AWS_ACCOUNT_ID_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="AWSAccountId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "Actions": {
-            "target": ACTION_NAME_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="ActionName"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
+INVALID_SECURITY: StaticSchema = (
+    18,
+    n0,
+    _IS,
+    {_smit: _c, _sE: 403},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
 )
 
-ADD_PERMISSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#AddPermissionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
+OVER_LIMIT: StaticSchema = (
+    18,
+    n0,
+    _OL,
+    {_smit: _c, _sE: 403},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
 )
 
-EXCEPTION_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sqs#ExceptionMessage"), shape_type=ShapeType.STRING
+QUEUE_DOES_NOT_EXIST: StaticSchema = (
+    18,
+    n0,
+    _QDNE,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
 )
 
-INVALID_ADDRESS = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#InvalidAddress"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "InvalidAddress", "httpResponseCode": 404}),
+REQUEST_THROTTLED: StaticSchema = (
+    18,
+    n0,
+    _RT,
+    {_smit: _c, _sE: 403},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+UNSUPPORTED_OPERATION: StaticSchema = (
+    18,
+    n0,
+    _UO,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+ADD_PERMISSION: StaticOperationSchema = (
+    23,
+    n0,
+    _AP,
+    0,
+    ADD_PERMISSION_INPUT,
+    ADD_PERMISSION_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        OVER_LIMIT,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+CANCEL_MESSAGE_MOVE_TASK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CMMTI,
+    {_sSI: _cCMMTR, _s: None},
+    (_TH,),
+    ((STRING, 1),),
+)
+
+LONG: StaticSchema = (8, n0, _Lo, {_smith: 0})
+
+CANCEL_MESSAGE_MOVE_TASK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CMMTO,
+    {_sSI: _cCMMTRo, _smi: None},
+    (_ANOMM,),
+    ((LONG, {_smith: 0}),),
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_smit: _c, _sE: 404},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+CANCEL_MESSAGE_MOVE_TASK: StaticOperationSchema = (
+    23,
+    n0,
+    _CMMT,
+    0,
+    CANCEL_MESSAGE_MOVE_TASK_INPUT,
+    CANCEL_MESSAGE_MOVE_TASK_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        REQUEST_THROTTLED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+NULLABLE_INTEGER: StaticSchema = (7, n0, _NI, 0)
+
+CHANGE_MESSAGE_VISIBILITY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CMVI,
+    {_sSI: _cCMVR, _s: None},
+    (_QU, _RH, _VT),
+    ((STRING, 1), (STRING, 1), (NULLABLE_INTEGER, 1)),
+)
+
+CHANGE_MESSAGE_VISIBILITY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CMVO,
+    {_sSI: _sU, _smi: None},
+)
+
+MESSAGE_NOT_INFLIGHT: StaticSchema = (18, n0, _MNI, {_smit: _c, _sE: 400})
+
+RECEIPT_HANDLE_IS_INVALID: StaticSchema = (
+    18,
+    n0,
+    _RHII,
+    {_smit: _c, _sE: 404},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+CHANGE_MESSAGE_VISIBILITY: StaticOperationSchema = (
+    23,
+    n0,
+    _CMV,
+    0,
+    CHANGE_MESSAGE_VISIBILITY_INPUT,
+    CHANGE_MESSAGE_VISIBILITY_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        MESSAGE_NOT_INFLIGHT,
+        QUEUE_DOES_NOT_EXIST,
+        RECEIPT_HANDLE_IS_INVALID,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+BATCH_ENTRY_IDS_NOT_DISTINCT: StaticSchema = (
+    18,
+    n0,
+    _BEIND,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+CHANGE_MESSAGE_VISIBILITY_BATCH_REQUEST_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _CMVBRE,
+    0,
+    (_I, _RH, _VT),
+    ((STRING, 1), (STRING, 1), (NULLABLE_INTEGER, 0)),
+)
+
+CHANGE_MESSAGE_VISIBILITY_BATCH_REQUEST_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _CMVBREL,
+    0,
+    (_m,),
+    ((CHANGE_MESSAGE_VISIBILITY_BATCH_REQUEST_ENTRY, 0),),
+)
+
+CHANGE_MESSAGE_VISIBILITY_BATCH_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CMVBI,
+    {_sSI: _cCMVBR, _s: None},
+    (_QU, _E),
+    (
+        (STRING, 1),
+        (
+            CHANGE_MESSAGE_VISIBILITY_BATCH_REQUEST_ENTRY_LIST,
+            {_sN: _CMVBRE, _sF: None, _sm: None},
         ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
+    ),
 )
 
-INVALID_SECURITY = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#InvalidSecurity"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidSecurity", "httpResponseCode": 403}
-            ),
+BOOLEAN: StaticSchema = (2, n0, _B, {_smith: False})
+
+BATCH_RESULT_ERROR_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _BREE,
+    0,
+    (_I, _SF, _C, _M),
+    ((STRING, 1), (BOOLEAN, {_smith: False, _sm: None}), (STRING, 1), (STRING, 0)),
+)
+
+BATCH_RESULT_ERROR_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _BREEL,
+    0,
+    (_m,),
+    ((BATCH_RESULT_ERROR_ENTRY, 0),),
+)
+
+CHANGE_MESSAGE_VISIBILITY_BATCH_RESULT_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _CMVBREh,
+    0,
+    (_I,),
+    ((STRING, 1),),
+)
+
+CHANGE_MESSAGE_VISIBILITY_BATCH_RESULT_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _CMVBRELh,
+    0,
+    (_m,),
+    ((CHANGE_MESSAGE_VISIBILITY_BATCH_RESULT_ENTRY, 0),),
+)
+
+CHANGE_MESSAGE_VISIBILITY_BATCH_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CMVBO,
+    {_sSI: _cCMVBRo, _smi: None},
+    (_Su, _F),
+    (
+        (
+            CHANGE_MESSAGE_VISIBILITY_BATCH_RESULT_ENTRY_LIST,
+            {_sN: _CMVBREh, _sF: None, _sm: None},
         ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
+        (BATCH_RESULT_ERROR_ENTRY_LIST, {_sN: _BREE, _sF: None, _sm: None}),
+    ),
 )
 
-OVER_LIMIT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#OverLimit"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "OverLimit", "httpResponseCode": 403}),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
+EMPTY_BATCH_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _EBR,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
 )
 
-QUEUE_DOES_NOT_EXIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#QueueDoesNotExist"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "AWS.SimpleQueueService.NonExistentQueue",
-                    "httpResponseCode": 400,
-                }
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
+INVALID_BATCH_ENTRY_ID: StaticSchema = (
+    18,
+    n0,
+    _IBEI,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
 )
 
-REQUEST_THROTTLED = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#RequestThrottled"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "RequestThrottled", "httpResponseCode": 403}
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
+TOO_MANY_ENTRIES_IN_BATCH_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _TMEIBR,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
 )
 
-UNSUPPORTED_OPERATION = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#UnsupportedOperation"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "AWS.SimpleQueueService.UnsupportedOperation",
-                    "httpResponseCode": 400,
-                }
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
+CHANGE_MESSAGE_VISIBILITY_BATCH: StaticOperationSchema = (
+    23,
+    n0,
+    _CMVB,
+    0,
+    CHANGE_MESSAGE_VISIBILITY_BATCH_INPUT,
+    CHANGE_MESSAGE_VISIBILITY_BATCH_OUTPUT,
+    (
+        BATCH_ENTRY_IDS_NOT_DISTINCT,
+        EMPTY_BATCH_REQUEST,
+        INVALID_ADDRESS,
+        INVALID_BATCH_ENTRY_ID,
+        INVALID_SECURITY,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        TOO_MANY_ENTRIES_IN_BATCH_REQUEST,
+        UNSUPPORTED_OPERATION,
+    ),
 )
 
-ADD_PERMISSION = Schema(
-    id=ShapeID("com.amazonaws.sqs#AddPermission"), shape_type=ShapeType.OPERATION
+QUEUE_ATTRIBUTE_NAME: StaticSchema = (
+    14,
+    n0,
+    _QAN,
+    0,
+    (
+        _Al,
+        _P,
+        _VT,
+        _MMS,
+        _MRP,
+        _ANOM,
+        _ANOMNV,
+        _CT,
+        _LMT,
+        _QA,
+        _ANOMD,
+        _DS,
+        _RMWTS,
+        _RP,
+        _FQ,
+        _CBD,
+        _KMKI,
+        _KDKRPS,
+        _DSe,
+        _FTL,
+        _RAP,
+        _SMSE,
+    ),
+    (
+        (-1, {_sV: _Al}),
+        (-1, {_sV: _P}),
+        (-1, {_sV: _VT}),
+        (-1, {_sV: _MMS}),
+        (-1, {_sV: _MRP}),
+        (-1, {_sV: _ANOM}),
+        (-1, {_sV: _ANOMNV}),
+        (-1, {_sV: _CT}),
+        (-1, {_sV: _LMT}),
+        (-1, {_sV: _QA}),
+        (-1, {_sV: _ANOMD}),
+        (-1, {_sV: _DS}),
+        (-1, {_sV: _RMWTS}),
+        (-1, {_sV: _RP}),
+        (-1, {_sV: _FQ}),
+        (-1, {_sV: _CBD}),
+        (-1, {_sV: _KMKI}),
+        (-1, {_sV: _KDKRPS}),
+        (-1, {_sV: _DSe}),
+        (-1, {_sV: _FTL}),
+        (-1, {_sV: _RAP}),
+        (-1, {_sV: _SMSE}),
+    ),
 )
 
-CANCEL_MESSAGE_MOVE_TASK_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#CancelMessageMoveTaskInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#CancelMessageMoveTaskRequest",
-        )
-    ],
-    members={
-        "TaskHandle": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
+QUEUE_ATTRIBUTE_MAP: StaticSchema = (
+    17,
+    n0,
+    _QAM,
+    0,
+    (_k, _v),
+    ((QUEUE_ATTRIBUTE_NAME, {_sN: _N}), (STRING, {_sN: _V})),
 )
 
-LONG = Schema(
-    id=ShapeID("com.amazonaws.sqs#Long"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
+TAG_KEY: StaticSchema = (3, n0, _TK, 0)
+
+TAG_VALUE: StaticSchema = (3, n0, _TV, 0)
+
+TAG_MAP: StaticSchema = (
+    17,
+    n0,
+    _TM,
+    0,
+    (_k, _v),
+    ((TAG_KEY, {_sN: _K}), (TAG_VALUE, {_sN: _V})),
 )
 
-CANCEL_MESSAGE_MOVE_TASK_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#CancelMessageMoveTaskOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#CancelMessageMoveTaskResult",
-        )
-    ],
-    members={
-        "ApproximateNumberOfMessagesMoved": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        }
-    },
+CREATE_QUEUE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CQI,
+    {_sSI: _cCQR, _s: None},
+    (_QN, _At, _t),
+    (
+        (STRING, 1),
+        (QUEUE_ATTRIBUTE_MAP, {_sN: _Att, _sF: None}),
+        (TAG_MAP, {_sN: _T, _sF: None}),
+    ),
 )
 
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ResourceNotFoundException", "httpResponseCode": 404}
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
+CREATE_QUEUE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CQO,
+    {_sSI: _cCQRo, _smi: None},
+    (_QU,),
+    ((STRING, 0),),
 )
 
-CANCEL_MESSAGE_MOVE_TASK = Schema(
-    id=ShapeID("com.amazonaws.sqs#CancelMessageMoveTask"),
-    shape_type=ShapeType.OPERATION,
+INVALID_ATTRIBUTE_NAME: StaticSchema = (
+    18,
+    n0,
+    _IAN,
+    {_smit: _c},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
 )
 
-NULLABLE_INTEGER = Schema(
-    id=ShapeID("com.amazonaws.sqs#NullableInteger"), shape_type=ShapeType.INTEGER
+INVALID_ATTRIBUTE_VALUE: StaticSchema = (
+    18,
+    n0,
+    _IAV,
+    {_smit: _c},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
 )
 
-CHANGE_MESSAGE_VISIBILITY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ChangeMessageVisibilityInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ChangeMessageVisibilityRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReceiptHandle": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "VisibilityTimeout": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+QUEUE_DELETED_RECENTLY: StaticSchema = (
+    18,
+    n0,
+    _QDR,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
 )
 
-CHANGE_MESSAGE_VISIBILITY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ChangeMessageVisibilityOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
+QUEUE_NAME_EXISTS: StaticSchema = (
+    18,
+    n0,
+    _QNE,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
 )
 
-MESSAGE_NOT_INFLIGHT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#MessageNotInflight"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "AWS.SimpleQueueService.MessageNotInflight",
-                    "httpResponseCode": 400,
-                }
-            ),
-        ),
-    ],
+CREATE_QUEUE: StaticOperationSchema = (
+    23,
+    n0,
+    _CQ,
+    0,
+    CREATE_QUEUE_INPUT,
+    CREATE_QUEUE_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_ATTRIBUTE_NAME,
+        INVALID_ATTRIBUTE_VALUE,
+        INVALID_SECURITY,
+        QUEUE_DELETED_RECENTLY,
+        QUEUE_NAME_EXISTS,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
 )
 
-RECEIPT_HANDLE_IS_INVALID = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ReceiptHandleIsInvalid"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ReceiptHandleIsInvalid", "httpResponseCode": 404}
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
+DELETE_MESSAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMI,
+    {_sSI: _cDMR, _s: None},
+    (_QU, _RH),
+    ((STRING, 1), (STRING, 1)),
 )
 
-CHANGE_MESSAGE_VISIBILITY = Schema(
-    id=ShapeID("com.amazonaws.sqs#ChangeMessageVisibility"),
-    shape_type=ShapeType.OPERATION,
+DELETE_MESSAGE_OUTPUT: StaticSchema = (18, n0, _DMO, {_sSI: _sU, _smi: None})
+
+INVALID_ID_FORMAT: StaticSchema = (18, n0, _IIF, {_smit: _c})
+
+DELETE_MESSAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _DM,
+    0,
+    DELETE_MESSAGE_INPUT,
+    DELETE_MESSAGE_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_ID_FORMAT,
+        INVALID_SECURITY,
+        QUEUE_DOES_NOT_EXIST,
+        RECEIPT_HANDLE_IS_INVALID,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
 )
 
-BATCH_ENTRY_IDS_NOT_DISTINCT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#BatchEntryIdsNotDistinct"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "AWS.SimpleQueueService.BatchEntryIdsNotDistinct",
-                    "httpResponseCode": 400,
-                }
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
+DELETE_MESSAGE_BATCH_REQUEST_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _DMBRE,
+    0,
+    (_I, _RH),
+    ((STRING, 1), (STRING, 1)),
 )
 
-CHANGE_MESSAGE_VISIBILITY_BATCH_REQUEST_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ChangeMessageVisibilityBatchRequestEntry"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReceiptHandle": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "VisibilityTimeout": {"target": NULLABLE_INTEGER},
-    },
+DELETE_MESSAGE_BATCH_REQUEST_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _DMBREL,
+    0,
+    (_m,),
+    ((DELETE_MESSAGE_BATCH_REQUEST_ENTRY, 0),),
 )
 
-CHANGE_MESSAGE_VISIBILITY_BATCH_REQUEST_ENTRY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ChangeMessageVisibilityBatchRequestEntryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CHANGE_MESSAGE_VISIBILITY_BATCH_REQUEST_ENTRY}},
+DELETE_MESSAGE_BATCH_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMBI,
+    {_sSI: _cDMBR, _s: None},
+    (_QU, _E),
+    (
+        (STRING, 1),
+        (DELETE_MESSAGE_BATCH_REQUEST_ENTRY_LIST, {_sN: _DMBRE, _sF: None, _sm: None}),
+    ),
 )
 
-CHANGE_MESSAGE_VISIBILITY_BATCH_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ChangeMessageVisibilityBatchInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ChangeMessageVisibilityBatchRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Entries": {
-            "target": CHANGE_MESSAGE_VISIBILITY_BATCH_REQUEST_ENTRY_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"),
-                    value="ChangeMessageVisibilityBatchRequestEntry",
+DELETE_MESSAGE_BATCH_RESULT_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _DMBREe,
+    0,
+    (_I,),
+    ((STRING, 1),),
+)
+
+DELETE_MESSAGE_BATCH_RESULT_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _DMBRELe,
+    0,
+    (_m,),
+    ((DELETE_MESSAGE_BATCH_RESULT_ENTRY, 0),),
+)
+
+DELETE_MESSAGE_BATCH_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DMBO,
+    {_sSI: _cDMBRo, _smi: None},
+    (_Su, _F),
+    (
+        (DELETE_MESSAGE_BATCH_RESULT_ENTRY_LIST, {_sN: _DMBREe, _sF: None, _sm: None}),
+        (BATCH_RESULT_ERROR_ENTRY_LIST, {_sN: _BREE, _sF: None, _sm: None}),
+    ),
+)
+
+DELETE_MESSAGE_BATCH: StaticOperationSchema = (
+    23,
+    n0,
+    _DMB,
+    0,
+    DELETE_MESSAGE_BATCH_INPUT,
+    DELETE_MESSAGE_BATCH_OUTPUT,
+    (
+        BATCH_ENTRY_IDS_NOT_DISTINCT,
+        EMPTY_BATCH_REQUEST,
+        INVALID_ADDRESS,
+        INVALID_BATCH_ENTRY_ID,
+        INVALID_SECURITY,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        TOO_MANY_ENTRIES_IN_BATCH_REQUEST,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+DELETE_QUEUE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DQI,
+    {_sSI: _cDQR, _s: None},
+    (_QU,),
+    ((STRING, 1),),
+)
+
+DELETE_QUEUE_OUTPUT: StaticSchema = (18, n0, _DQO, {_sSI: _sU, _smi: None})
+
+DELETE_QUEUE: StaticOperationSchema = (
+    23,
+    n0,
+    _DQ,
+    0,
+    DELETE_QUEUE_INPUT,
+    DELETE_QUEUE_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+ATTRIBUTE_NAME_LIST: StaticSchema = (
+    16,
+    n0,
+    _ANLt,
+    0,
+    (_m,),
+    ((QUEUE_ATTRIBUTE_NAME, 0),),
+)
+
+GET_QUEUE_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GQAI,
+    {_sSI: _cGQAR, _s: None},
+    (_QU, _ANt),
+    ((STRING, 1), (ATTRIBUTE_NAME_LIST, {_sN: _ANtt, _sF: None})),
+)
+
+GET_QUEUE_ATTRIBUTES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GQAO,
+    {_sSI: _cGQARo, _smi: None},
+    (_At,),
+    ((QUEUE_ATTRIBUTE_MAP, {_sN: _Att, _sF: None}),),
+)
+
+GET_QUEUE_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _GQA,
+    0,
+    GET_QUEUE_ATTRIBUTES_INPUT,
+    GET_QUEUE_ATTRIBUTES_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_ATTRIBUTE_NAME,
+        INVALID_SECURITY,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+GET_QUEUE_URL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GQUI,
+    {_sSI: _cGQUR, _s: None},
+    (_QN, _QOAWSAI),
+    ((STRING, 1), (STRING, 0)),
+)
+
+GET_QUEUE_URL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GQUO,
+    {_sSI: _cGQURo, _smi: None},
+    (_QU,),
+    ((STRING, 0),),
+)
+
+GET_QUEUE_URL: StaticOperationSchema = (
+    23,
+    n0,
+    _GQU,
+    0,
+    GET_QUEUE_URL_INPUT,
+    GET_QUEUE_URL_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+BOXED_INTEGER: StaticSchema = (7, n0, _BI, 0)
+
+TOKEN: StaticSchema = (3, n0, _To, 0)
+
+LIST_DEAD_LETTER_SOURCE_QUEUES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDLSQI,
+    {_sSI: _cLDLSQR, _s: None},
+    (_QU, _NT, _MR),
+    ((STRING, 1), (TOKEN, 0), (BOXED_INTEGER, 0)),
+)
+
+QUEUE_URL_LIST: StaticSchema = (16, n0, _QUL, 0, (_m,), ((STRING, 0),))
+
+LIST_DEAD_LETTER_SOURCE_QUEUES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDLSQO,
+    {_sSI: _cLDLSQRo, _smi: None},
+    (_qU, _NT),
+    ((QUEUE_URL_LIST, {_sN: _QU, _sF: None, _sm: None}), (TOKEN, 0)),
+)
+
+LIST_DEAD_LETTER_SOURCE_QUEUES: StaticOperationSchema = (
+    23,
+    n0,
+    _LDLSQ,
+    0,
+    LIST_DEAD_LETTER_SOURCE_QUEUES_INPUT,
+    LIST_DEAD_LETTER_SOURCE_QUEUES_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+LIST_MESSAGE_MOVE_TASKS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LMMTI,
+    {_sSI: _cLMMTR, _s: None},
+    (_SA, _MR),
+    ((STRING, 1), (NULLABLE_INTEGER, 0)),
+)
+
+NULLABLE_LONG: StaticSchema = (8, n0, _NL, 0)
+
+LIST_MESSAGE_MOVE_TASKS_RESULT_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _LMMTRE,
+    0,
+    (_TH, _St, _SA, _DA, _MNOMPS, _ANOMM, _ANOMTM, _FR, _ST),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (NULLABLE_INTEGER, 0),
+        (LONG, {_smith: 0}),
+        (NULLABLE_LONG, 0),
+        (STRING, 0),
+        (LONG, {_smith: 0}),
+    ),
+)
+
+LIST_MESSAGE_MOVE_TASKS_RESULT_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _LMMTREL,
+    0,
+    (_m,),
+    ((LIST_MESSAGE_MOVE_TASKS_RESULT_ENTRY, 0),),
+)
+
+LIST_MESSAGE_MOVE_TASKS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LMMTO,
+    {_sN: _LMMTR, _sSI: _cLMMTRo, _smi: None},
+    (_R,),
+    ((LIST_MESSAGE_MOVE_TASKS_RESULT_ENTRY_LIST, {_sN: _LMMTRE, _sF: None}),),
+)
+
+LIST_MESSAGE_MOVE_TASKS: StaticOperationSchema = (
+    23,
+    n0,
+    _LMMT,
+    0,
+    LIST_MESSAGE_MOVE_TASKS_INPUT,
+    LIST_MESSAGE_MOVE_TASKS_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        REQUEST_THROTTLED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+LIST_QUEUES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LQI,
+    {_sSI: _cLQR, _s: None},
+    (_QNP, _NT, _MR),
+    ((STRING, 0), (TOKEN, 0), (BOXED_INTEGER, 0)),
+)
+
+LIST_QUEUES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LQO,
+    {_sSI: _cLQRo, _smi: None},
+    (_QUu, _NT),
+    ((QUEUE_URL_LIST, {_sN: _QU, _sF: None}), (TOKEN, 0)),
+)
+
+LIST_QUEUES: StaticOperationSchema = (
+    23,
+    n0,
+    _LQ,
+    0,
+    LIST_QUEUES_INPUT,
+    LIST_QUEUES_OUTPUT,
+    (INVALID_ADDRESS, INVALID_SECURITY, REQUEST_THROTTLED, UNSUPPORTED_OPERATION),
+)
+
+LIST_QUEUE_TAGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LQTI,
+    {_sSI: _cLQTR, _s: None},
+    (_QU,),
+    ((STRING, 1),),
+)
+
+LIST_QUEUE_TAGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LQTO,
+    {_sSI: _cLQTRo, _smi: None},
+    (_Ta,),
+    ((TAG_MAP, {_sN: _T, _sF: None}),),
+)
+
+LIST_QUEUE_TAGS: StaticOperationSchema = (
+    23,
+    n0,
+    _LQT,
+    0,
+    LIST_QUEUE_TAGS_INPUT,
+    LIST_QUEUE_TAGS_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+PURGE_QUEUE_IN_PROGRESS: StaticSchema = (
+    18,
+    n0,
+    _PQIP,
+    {_smit: _c, _sE: 403},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+PURGE_QUEUE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PQI,
+    {_sSI: _cPQR, _s: None},
+    (_QU,),
+    ((STRING, 1),),
+)
+
+PURGE_QUEUE_OUTPUT: StaticSchema = (18, n0, _PQO, {_sSI: _sU, _smi: None})
+
+PURGE_QUEUE: StaticOperationSchema = (
+    23,
+    n0,
+    _PQ,
+    0,
+    PURGE_QUEUE_INPUT,
+    PURGE_QUEUE_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        PURGE_QUEUE_IN_PROGRESS,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+KMS_ACCESS_DENIED: StaticSchema = (
+    18,
+    n0,
+    _KAD,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+KMS_DISABLED: StaticSchema = (
+    18,
+    n0,
+    _KD,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+KMS_INVALID_KEY_USAGE: StaticSchema = (
+    18,
+    n0,
+    _KIKU,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+KMS_INVALID_STATE: StaticSchema = (
+    18,
+    n0,
+    _KIS,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+KMS_NOT_FOUND: StaticSchema = (
+    18,
+    n0,
+    _KNF,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+KMS_OPT_IN_REQUIRED: StaticSchema = (
+    18,
+    n0,
+    _KOIR,
+    {_smit: _c, _sE: 403},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+KMS_THROTTLED: StaticSchema = (
+    18,
+    n0,
+    _KT,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+MESSAGE_ATTRIBUTE_NAME: StaticSchema = (3, n0, _MAN, 0)
+
+MESSAGE_ATTRIBUTE_NAME_LIST: StaticSchema = (
+    16,
+    n0,
+    _MANL,
+    0,
+    (_m,),
+    ((MESSAGE_ATTRIBUTE_NAME, 0),),
+)
+
+MESSAGE_SYSTEM_ATTRIBUTE_NAME: StaticSchema = (
+    14,
+    n0,
+    _MSAN,
+    0,
+    (_Al, _SI, _STe, _ARC, _AFRT, _SN, _MDI, _MGI, _AWSTH, _DLQSA),
+    (
+        (-1, {_sV: _Al}),
+        (-1, {_sV: _SI}),
+        (-1, {_sV: _STe}),
+        (-1, {_sV: _ARC}),
+        (-1, {_sV: _AFRT}),
+        (-1, {_sV: _SN}),
+        (-1, {_sV: _MDI}),
+        (-1, {_sV: _MGI}),
+        (-1, {_sV: _AWSTH}),
+        (-1, {_sV: _DLQSA}),
+    ),
+)
+
+MESSAGE_SYSTEM_ATTRIBUTE_LIST: StaticSchema = (
+    16,
+    n0,
+    _MSAL,
+    0,
+    (_m,),
+    ((MESSAGE_SYSTEM_ATTRIBUTE_NAME, 0),),
+)
+
+RECEIVE_MESSAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RMI,
+    {_sSI: _cRMR, _s: None},
+    (_QU, _ANt, _MSANe, _MANe, _MNOM, _VT, _WTS, _RRAI),
+    (
+        (STRING, 1),
+        (ATTRIBUTE_NAME_LIST, {_sN: _ANtt, _sF: None}),
+        (MESSAGE_SYSTEM_ATTRIBUTE_LIST, {_sN: _ANtt, _sF: None}),
+        (MESSAGE_ATTRIBUTE_NAME_LIST, {_sN: _MAN, _sF: None}),
+        (NULLABLE_INTEGER, 0),
+        (NULLABLE_INTEGER, 0),
+        (NULLABLE_INTEGER, 0),
+        (STRING, 0),
+    ),
+)
+
+MESSAGE_SYSTEM_ATTRIBUTE_MAP: StaticSchema = (
+    17,
+    n0,
+    _MSAM,
+    0,
+    (_k, _v),
+    ((MESSAGE_SYSTEM_ATTRIBUTE_NAME, {_sN: _N}), (STRING, {_sN: _V})),
+)
+
+BINARY: StaticSchema = (1, n0, _Bi, 0)
+
+BINARY_LIST: StaticSchema = (16, n0, _BL, 0, (_m,), ((BINARY, {_sN: _BLV}),))
+
+STRING_LIST: StaticSchema = (16, n0, _SL, 0, (_m,), ((STRING, {_sN: _SLV}),))
+
+MESSAGE_ATTRIBUTE_VALUE: StaticSchema = (
+    18,
+    n0,
+    _MAV,
+    0,
+    (_SV, _BV, _SLVt, _BLVi, _DT),
+    (
+        (STRING, 0),
+        (BINARY, 0),
+        (STRING_LIST, {_sN: _SLV, _sF: None}),
+        (BINARY_LIST, {_sN: _BLV, _sF: None}),
+        (STRING, 1),
+    ),
+)
+
+MESSAGE_BODY_ATTRIBUTE_MAP: StaticSchema = (
+    17,
+    n0,
+    _MBAM,
+    0,
+    (_k, _v),
+    ((STRING, {_sN: _N}), (MESSAGE_ATTRIBUTE_VALUE, {_sN: _V})),
+)
+
+MESSAGE: StaticSchema = (
+    18,
+    n0,
+    _M,
+    0,
+    (_MI, _RH, _MDOB, _Bo, _At, _MDOMA, _MA),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MESSAGE_SYSTEM_ATTRIBUTE_MAP, {_sN: _Att, _sF: None}),
+        (STRING, 0),
+        (MESSAGE_BODY_ATTRIBUTE_MAP, {_sN: _MAe, _sF: None}),
+    ),
+)
+
+MESSAGE_LIST: StaticSchema = (16, n0, _ML, 0, (_m,), ((MESSAGE, 0),))
+
+RECEIVE_MESSAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RMO,
+    {_sSI: _cRMRo, _smi: None},
+    (_Me,),
+    ((MESSAGE_LIST, {_sN: _M, _sF: None}),),
+)
+
+RECEIVE_MESSAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _RM,
+    0,
+    RECEIVE_MESSAGE_INPUT,
+    RECEIVE_MESSAGE_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        KMS_ACCESS_DENIED,
+        KMS_DISABLED,
+        KMS_INVALID_KEY_USAGE,
+        KMS_INVALID_STATE,
+        KMS_NOT_FOUND,
+        KMS_OPT_IN_REQUIRED,
+        KMS_THROTTLED,
+        OVER_LIMIT,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+REMOVE_PERMISSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RPI,
+    {_sSI: _cRPR, _s: None},
+    (_QU, _L),
+    ((STRING, 1), (STRING, 1)),
+)
+
+REMOVE_PERMISSION_OUTPUT: StaticSchema = (18, n0, _RPO, {_sSI: _sU, _smi: None})
+
+REMOVE_PERMISSION: StaticOperationSchema = (
+    23,
+    n0,
+    _RPe,
+    0,
+    REMOVE_PERMISSION_INPUT,
+    REMOVE_PERMISSION_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+INVALID_MESSAGE_CONTENTS: StaticSchema = (
+    18,
+    n0,
+    _IMC,
+    {_smit: _c},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+MESSAGE_SYSTEM_ATTRIBUTE_NAME_FOR_SENDS: StaticSchema = (
+    14,
+    n0,
+    _MSANFS,
+    0,
+    (_AWSTH,),
+    ((-1, {_sV: _AWSTH}),),
+)
+
+MESSAGE_SYSTEM_ATTRIBUTE_VALUE: StaticSchema = (
+    18,
+    n0,
+    _MSAV,
+    0,
+    (_SV, _BV, _SLVt, _BLVi, _DT),
+    (
+        (STRING, 0),
+        (BINARY, 0),
+        (STRING_LIST, {_sN: _SLV, _sF: None}),
+        (BINARY_LIST, {_sN: _BLV, _sF: None}),
+        (STRING, 1),
+    ),
+)
+
+MESSAGE_BODY_SYSTEM_ATTRIBUTE_MAP: StaticSchema = (
+    17,
+    n0,
+    _MBSAM,
+    0,
+    (_k, _v),
+    (
+        (MESSAGE_SYSTEM_ATTRIBUTE_NAME_FOR_SENDS, {_sN: _N}),
+        (MESSAGE_SYSTEM_ATTRIBUTE_VALUE, {_sN: _V}),
+    ),
+)
+
+SEND_MESSAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SMI,
+    {_sSI: _cSMR, _s: None},
+    (_QU, _MB, _DS, _MA, _MSA, _MDI, _MGI),
+    (
+        (STRING, 1),
+        (STRING, 1),
+        (NULLABLE_INTEGER, 0),
+        (MESSAGE_BODY_ATTRIBUTE_MAP, {_sN: _MAe, _sF: None}),
+        (MESSAGE_BODY_SYSTEM_ATTRIBUTE_MAP, {_sN: _MSAe, _sF: None}),
+        (STRING, 0),
+        (STRING, 0),
+    ),
+)
+
+SEND_MESSAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SMO,
+    {_sSI: _cSMRo, _smi: None},
+    (_MDOMB, _MDOMA, _MDOMSA, _MI, _SN),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+SEND_MESSAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _SM,
+    0,
+    SEND_MESSAGE_INPUT,
+    SEND_MESSAGE_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_MESSAGE_CONTENTS,
+        INVALID_SECURITY,
+        KMS_ACCESS_DENIED,
+        KMS_DISABLED,
+        KMS_INVALID_KEY_USAGE,
+        KMS_INVALID_STATE,
+        KMS_NOT_FOUND,
+        KMS_OPT_IN_REQUIRED,
+        KMS_THROTTLED,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+BATCH_REQUEST_TOO_LONG: StaticSchema = (
+    18,
+    n0,
+    _BRTL,
+    {_smit: _c, _sE: 400},
+    (_me,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+SEND_MESSAGE_BATCH_REQUEST_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _SMBRE,
+    0,
+    (_I, _MB, _DS, _MA, _MSA, _MDI, _MGI),
+    (
+        (STRING, 1),
+        (STRING, 1),
+        (NULLABLE_INTEGER, 0),
+        (MESSAGE_BODY_ATTRIBUTE_MAP, {_sN: _MAe, _sF: None}),
+        (MESSAGE_BODY_SYSTEM_ATTRIBUTE_MAP, {_sN: _MSAe, _sF: None}),
+        (STRING, 0),
+        (STRING, 0),
+    ),
+)
+
+SEND_MESSAGE_BATCH_REQUEST_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _SMBREL,
+    0,
+    (_m,),
+    ((SEND_MESSAGE_BATCH_REQUEST_ENTRY, 0),),
+)
+
+SEND_MESSAGE_BATCH_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SMBI,
+    {_sSI: _cSMBR, _s: None},
+    (_QU, _E),
+    (
+        (STRING, 1),
+        (SEND_MESSAGE_BATCH_REQUEST_ENTRY_LIST, {_sN: _SMBRE, _sF: None, _sm: None}),
+    ),
+)
+
+SEND_MESSAGE_BATCH_RESULT_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _SMBREe,
+    0,
+    (_I, _MI, _MDOMB, _MDOMA, _MDOMSA, _SN),
+    ((STRING, 1), (STRING, 1), (STRING, 1), (STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+SEND_MESSAGE_BATCH_RESULT_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _SMBRELe,
+    0,
+    (_m,),
+    ((SEND_MESSAGE_BATCH_RESULT_ENTRY, 0),),
+)
+
+SEND_MESSAGE_BATCH_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SMBO,
+    {_sSI: _cSMBRo, _smi: None},
+    (_Su, _F),
+    (
+        (SEND_MESSAGE_BATCH_RESULT_ENTRY_LIST, {_sN: _SMBREe, _sF: None, _sm: None}),
+        (BATCH_RESULT_ERROR_ENTRY_LIST, {_sN: _BREE, _sF: None, _sm: None}),
+    ),
+)
+
+SEND_MESSAGE_BATCH: StaticOperationSchema = (
+    23,
+    n0,
+    _SMB,
+    0,
+    SEND_MESSAGE_BATCH_INPUT,
+    SEND_MESSAGE_BATCH_OUTPUT,
+    (
+        BATCH_ENTRY_IDS_NOT_DISTINCT,
+        BATCH_REQUEST_TOO_LONG,
+        EMPTY_BATCH_REQUEST,
+        INVALID_ADDRESS,
+        INVALID_BATCH_ENTRY_ID,
+        INVALID_SECURITY,
+        KMS_ACCESS_DENIED,
+        KMS_DISABLED,
+        KMS_INVALID_KEY_USAGE,
+        KMS_INVALID_STATE,
+        KMS_NOT_FOUND,
+        KMS_OPT_IN_REQUIRED,
+        KMS_THROTTLED,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        TOO_MANY_ENTRIES_IN_BATCH_REQUEST,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+SET_QUEUE_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SQAI,
+    {_sSI: _cSQAR, _s: None},
+    (_QU, _At),
+    ((STRING, 1), (QUEUE_ATTRIBUTE_MAP, {_sN: _Att, _sF: None, _sm: None})),
+)
+
+SET_QUEUE_ATTRIBUTES_OUTPUT: StaticSchema = (18, n0, _SQAO, {_sSI: _sU, _smi: None})
+
+SET_QUEUE_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _SQA,
+    0,
+    SET_QUEUE_ATTRIBUTES_INPUT,
+    SET_QUEUE_ATTRIBUTES_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_ATTRIBUTE_NAME,
+        INVALID_ATTRIBUTE_VALUE,
+        INVALID_SECURITY,
+        OVER_LIMIT,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+START_MESSAGE_MOVE_TASK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SMMTI,
+    {_sSI: _cSMMTR, _s: None},
+    (_SA, _DA, _MNOMPS),
+    ((STRING, 1), (STRING, 0), (NULLABLE_INTEGER, 0)),
+)
+
+START_MESSAGE_MOVE_TASK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SMMTO,
+    {_sSI: _cSMMTRo, _smi: None},
+    (_TH,),
+    ((STRING, 0),),
+)
+
+START_MESSAGE_MOVE_TASK: StaticOperationSchema = (
+    23,
+    n0,
+    _SMMT,
+    0,
+    START_MESSAGE_MOVE_TASK_INPUT,
+    START_MESSAGE_MOVE_TASK_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        REQUEST_THROTTLED,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+TAG_QUEUE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TQI,
+    {_sSI: _cTQR, _s: None},
+    (_QU, _Ta),
+    ((STRING, 1), (TAG_MAP, {_sN: _T, _sF: None, _sm: None})),
+)
+
+TAG_QUEUE_OUTPUT: StaticSchema = (18, n0, _TQO, {_sSI: _sU, _smi: None})
+
+TAG_QUEUE: StaticOperationSchema = (
+    23,
+    n0,
+    _TQ,
+    0,
+    TAG_QUEUE_INPUT,
+    TAG_QUEUE_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+TAG_KEY_LIST: StaticSchema = (16, n0, _TKL, 0, (_m,), ((TAG_KEY, 0),))
+
+UNTAG_QUEUE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UQI,
+    {_sSI: _cUQR, _s: None},
+    (_QU, _TKa),
+    ((STRING, 1), (TAG_KEY_LIST, {_sN: _TK, _sF: None, _sm: None})),
+)
+
+UNTAG_QUEUE_OUTPUT: StaticSchema = (18, n0, _UQO, {_sSI: _sU, _smi: None})
+
+UNTAG_QUEUE: StaticOperationSchema = (
+    23,
+    n0,
+    _UQ,
+    0,
+    UNTAG_QUEUE_INPUT,
+    UNTAG_QUEUE_OUTPUT,
+    (
+        INVALID_ADDRESS,
+        INVALID_SECURITY,
+        QUEUE_DOES_NOT_EXIST,
+        REQUEST_THROTTLED,
+        UNSUPPORTED_OPERATION,
+    ),
+)
+
+AMAZON_SQS: StaticSchema = (
+    21,
+    n0,
+    _ASQS,
+    {
+        _a: MappingProxyType({"name": "sqs"}),
+        _a_: None,
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
                 ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.sqs#Boolean"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-BATCH_RESULT_ERROR_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#BatchResultErrorEntry"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SenderFault": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Code": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Message": {"target": STRING},
-    },
-)
-
-BATCH_RESULT_ERROR_ENTRY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#BatchResultErrorEntryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BATCH_RESULT_ERROR_ENTRY}},
-)
-
-CHANGE_MESSAGE_VISIBILITY_BATCH_RESULT_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ChangeMessageVisibilityBatchResultEntry"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CHANGE_MESSAGE_VISIBILITY_BATCH_RESULT_ENTRY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ChangeMessageVisibilityBatchResultEntryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CHANGE_MESSAGE_VISIBILITY_BATCH_RESULT_ENTRY}},
-)
-
-CHANGE_MESSAGE_VISIBILITY_BATCH_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ChangeMessageVisibilityBatchOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ChangeMessageVisibilityBatchResult",
-        )
-    ],
-    members={
-        "Successful": {
-            "target": CHANGE_MESSAGE_VISIBILITY_BATCH_RESULT_ENTRY_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"),
-                    value="ChangeMessageVisibilityBatchResultEntry",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "Failed": {
-            "target": BATCH_RESULT_ERROR_ENTRY_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"), value="BatchResultErrorEntry"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-EMPTY_BATCH_REQUEST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#EmptyBatchRequest"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "AWS.SimpleQueueService.EmptyBatchRequest",
-                    "httpResponseCode": 400,
-                }
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-INVALID_BATCH_ENTRY_ID = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#InvalidBatchEntryId"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "AWS.SimpleQueueService.InvalidBatchEntryId",
-                    "httpResponseCode": 400,
-                }
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-TOO_MANY_ENTRIES_IN_BATCH_REQUEST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#TooManyEntriesInBatchRequest"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "AWS.SimpleQueueService.TooManyEntriesInBatchRequest",
-                    "httpResponseCode": 400,
-                }
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-CHANGE_MESSAGE_VISIBILITY_BATCH = Schema(
-    id=ShapeID("com.amazonaws.sqs#ChangeMessageVisibilityBatch"),
-    shape_type=ShapeType.OPERATION,
-)
-
-QUEUE_ATTRIBUTE_NAME = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#QueueAttributeName"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "All": {"target": UNIT},
-        "Policy": {"target": UNIT},
-        "VisibilityTimeout": {"target": UNIT},
-        "MaximumMessageSize": {"target": UNIT},
-        "MessageRetentionPeriod": {"target": UNIT},
-        "ApproximateNumberOfMessages": {"target": UNIT},
-        "ApproximateNumberOfMessagesNotVisible": {"target": UNIT},
-        "CreatedTimestamp": {"target": UNIT},
-        "LastModifiedTimestamp": {"target": UNIT},
-        "QueueArn": {"target": UNIT},
-        "ApproximateNumberOfMessagesDelayed": {"target": UNIT},
-        "DelaySeconds": {"target": UNIT},
-        "ReceiveMessageWaitTimeSeconds": {"target": UNIT},
-        "RedrivePolicy": {"target": UNIT},
-        "FifoQueue": {"target": UNIT},
-        "ContentBasedDeduplication": {"target": UNIT},
-        "KmsMasterKeyId": {"target": UNIT},
-        "KmsDataKeyReusePeriodSeconds": {"target": UNIT},
-        "DeduplicationScope": {"target": UNIT},
-        "FifoThroughputLimit": {"target": UNIT},
-        "RedriveAllowPolicy": {"target": UNIT},
-        "SqsManagedSseEnabled": {"target": UNIT},
-    },
-)
-
-QUEUE_ATTRIBUTE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#QueueAttributeMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {
-            "target": QUEUE_ATTRIBUTE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Name")],
-        },
-        "value": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Value")],
-        },
-    },
-)
-
-TAG_KEY = Schema(id=ShapeID("com.amazonaws.sqs#TagKey"), shape_type=ShapeType.STRING)
-
-TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.sqs#TagValue"), shape_type=ShapeType.STRING
-)
-
-TAG_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#TagMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {
-            "target": TAG_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Key")],
-        },
-        "value": {
-            "target": TAG_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Value")],
-        },
-    },
-)
-
-CREATE_QUEUE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#CreateQueueInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#CreateQueueRequest",
-        )
-    ],
-    members={
-        "QueueName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Attributes": {
-            "target": QUEUE_ATTRIBUTE_MAP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="Attribute"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "tags": {
-            "target": TAG_MAP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="Tag"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-CREATE_QUEUE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#CreateQueueOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#CreateQueueResult",
-        )
-    ],
-    members={"QueueUrl": {"target": STRING}},
-)
-
-INVALID_ATTRIBUTE_NAME = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#InvalidAttributeName"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-INVALID_ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#InvalidAttributeValue"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-QUEUE_DELETED_RECENTLY = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#QueueDeletedRecently"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "AWS.SimpleQueueService.QueueDeletedRecently",
-                    "httpResponseCode": 400,
-                }
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-QUEUE_NAME_EXISTS = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#QueueNameExists"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "QueueAlreadyExists", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-CREATE_QUEUE = Schema(
-    id=ShapeID("com.amazonaws.sqs#CreateQueue"), shape_type=ShapeType.OPERATION
-)
-
-DELETE_MESSAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#DeleteMessageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#DeleteMessageRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReceiptHandle": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-DELETE_MESSAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#DeleteMessageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-INVALID_ID_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#InvalidIdFormat"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-)
-
-DELETE_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sqs#DeleteMessage"), shape_type=ShapeType.OPERATION
-)
-
-DELETE_MESSAGE_BATCH_REQUEST_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#DeleteMessageBatchRequestEntry"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ReceiptHandle": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-DELETE_MESSAGE_BATCH_REQUEST_ENTRY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#DeleteMessageBatchRequestEntryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DELETE_MESSAGE_BATCH_REQUEST_ENTRY}},
-)
-
-DELETE_MESSAGE_BATCH_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#DeleteMessageBatchInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#DeleteMessageBatchRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Entries": {
-            "target": DELETE_MESSAGE_BATCH_REQUEST_ENTRY_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"),
-                    value="DeleteMessageBatchRequestEntry",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-DELETE_MESSAGE_BATCH_RESULT_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#DeleteMessageBatchResultEntry"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_MESSAGE_BATCH_RESULT_ENTRY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#DeleteMessageBatchResultEntryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DELETE_MESSAGE_BATCH_RESULT_ENTRY}},
-)
-
-DELETE_MESSAGE_BATCH_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#DeleteMessageBatchOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#DeleteMessageBatchResult",
-        )
-    ],
-    members={
-        "Successful": {
-            "target": DELETE_MESSAGE_BATCH_RESULT_ENTRY_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"),
-                    value="DeleteMessageBatchResultEntry",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "Failed": {
-            "target": BATCH_RESULT_ERROR_ENTRY_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"), value="BatchResultErrorEntry"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-DELETE_MESSAGE_BATCH = Schema(
-    id=ShapeID("com.amazonaws.sqs#DeleteMessageBatch"), shape_type=ShapeType.OPERATION
-)
-
-DELETE_QUEUE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#DeleteQueueInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#DeleteQueueRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_QUEUE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#DeleteQueueOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_QUEUE = Schema(
-    id=ShapeID("com.amazonaws.sqs#DeleteQueue"), shape_type=ShapeType.OPERATION
-)
-
-ATTRIBUTE_NAME_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#AttributeNameList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": QUEUE_ATTRIBUTE_NAME}},
-)
-
-GET_QUEUE_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#GetQueueAttributesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#GetQueueAttributesRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributeNames": {
-            "target": ATTRIBUTE_NAME_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="AttributeName"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-GET_QUEUE_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#GetQueueAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#GetQueueAttributesResult",
-        )
-    ],
-    members={
-        "Attributes": {
-            "target": QUEUE_ATTRIBUTE_MAP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="Attribute"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        }
-    },
-)
-
-GET_QUEUE_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sqs#GetQueueAttributes"), shape_type=ShapeType.OPERATION
-)
-
-GET_QUEUE_URL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#GetQueueUrlInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#GetQueueUrlRequest",
-        )
-    ],
-    members={
-        "QueueName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "QueueOwnerAWSAccountId": {"target": STRING},
-    },
-)
-
-GET_QUEUE_URL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#GetQueueUrlOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#GetQueueUrlResult",
-        )
-    ],
-    members={"QueueUrl": {"target": STRING}},
-)
-
-GET_QUEUE_URL = Schema(
-    id=ShapeID("com.amazonaws.sqs#GetQueueUrl"), shape_type=ShapeType.OPERATION
-)
-
-BOXED_INTEGER = Schema(
-    id=ShapeID("com.amazonaws.sqs#BoxedInteger"), shape_type=ShapeType.INTEGER
-)
-
-TOKEN = Schema(id=ShapeID("com.amazonaws.sqs#Token"), shape_type=ShapeType.STRING)
-
-LIST_DEAD_LETTER_SOURCE_QUEUES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ListDeadLetterSourceQueuesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ListDeadLetterSourceQueuesRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextToken": {"target": TOKEN},
-        "MaxResults": {"target": BOXED_INTEGER},
-    },
-)
-
-QUEUE_URL_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#QueueUrlList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-LIST_DEAD_LETTER_SOURCE_QUEUES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ListDeadLetterSourceQueuesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ListDeadLetterSourceQueuesResult",
-        )
-    ],
-    members={
-        "queueUrls": {
-            "target": QUEUE_URL_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="QueueUrl"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "NextToken": {"target": TOKEN},
-    },
-)
-
-LIST_DEAD_LETTER_SOURCE_QUEUES = Schema(
-    id=ShapeID("com.amazonaws.sqs#ListDeadLetterSourceQueues"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_MESSAGE_MOVE_TASKS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ListMessageMoveTasksInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ListMessageMoveTasksRequest",
-        )
-    ],
-    members={
-        "SourceArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MaxResults": {"target": NULLABLE_INTEGER},
-    },
-)
-
-NULLABLE_LONG = Schema(
-    id=ShapeID("com.amazonaws.sqs#NullableLong"), shape_type=ShapeType.LONG
-)
-
-LIST_MESSAGE_MOVE_TASKS_RESULT_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ListMessageMoveTasksResultEntry"),
-    members={
-        "TaskHandle": {"target": STRING},
-        "Status": {"target": STRING},
-        "SourceArn": {"target": STRING},
-        "DestinationArn": {"target": STRING},
-        "MaxNumberOfMessagesPerSecond": {"target": NULLABLE_INTEGER},
-        "ApproximateNumberOfMessagesMoved": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "ApproximateNumberOfMessagesToMove": {"target": NULLABLE_LONG},
-        "FailureReason": {"target": STRING},
-        "StartedTimestamp": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-LIST_MESSAGE_MOVE_TASKS_RESULT_ENTRY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ListMessageMoveTasksResultEntryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LIST_MESSAGE_MOVE_TASKS_RESULT_ENTRY}},
-)
-
-LIST_MESSAGE_MOVE_TASKS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ListMessageMoveTasksOutput"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#xmlName"), value="ListMessageMoveTasksResult"),
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ListMessageMoveTasksResult",
-        ),
-    ],
-    members={
-        "Results": {
-            "target": LIST_MESSAGE_MOVE_TASKS_RESULT_ENTRY_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"),
-                    value="ListMessageMoveTasksResultEntry",
-                ),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        }
-    },
-)
-
-LIST_MESSAGE_MOVE_TASKS = Schema(
-    id=ShapeID("com.amazonaws.sqs#ListMessageMoveTasks"), shape_type=ShapeType.OPERATION
-)
-
-LIST_QUEUES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ListQueuesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ListQueuesRequest",
-        )
-    ],
-    members={
-        "QueueNamePrefix": {"target": STRING},
-        "NextToken": {"target": TOKEN},
-        "MaxResults": {"target": BOXED_INTEGER},
-    },
-)
-
-LIST_QUEUES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ListQueuesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ListQueuesResult",
-        )
-    ],
-    members={
-        "QueueUrls": {
-            "target": QUEUE_URL_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="QueueUrl"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "NextToken": {"target": TOKEN},
-    },
-)
-
-LIST_QUEUES = Schema(
-    id=ShapeID("com.amazonaws.sqs#ListQueues"), shape_type=ShapeType.OPERATION
-)
-
-LIST_QUEUE_TAGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ListQueueTagsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ListQueueTagsRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-LIST_QUEUE_TAGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ListQueueTagsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ListQueueTagsResult",
-        )
-    ],
-    members={
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="Tag"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        }
-    },
-)
-
-LIST_QUEUE_TAGS = Schema(
-    id=ShapeID("com.amazonaws.sqs#ListQueueTags"), shape_type=ShapeType.OPERATION
-)
-
-PURGE_QUEUE_IN_PROGRESS = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#PurgeQueueInProgress"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "AWS.SimpleQueueService.PurgeQueueInProgress",
-                    "httpResponseCode": 403,
-                }
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-PURGE_QUEUE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#PurgeQueueInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#PurgeQueueRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-PURGE_QUEUE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#PurgeQueueOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-PURGE_QUEUE = Schema(
-    id=ShapeID("com.amazonaws.sqs#PurgeQueue"), shape_type=ShapeType.OPERATION
-)
-
-KMS_ACCESS_DENIED = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#KmsAccessDenied"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "KMS.AccessDeniedException", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-KMS_DISABLED = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#KmsDisabled"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "KMS.DisabledException", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-KMS_INVALID_KEY_USAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#KmsInvalidKeyUsage"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "KMS.InvalidKeyUsageException", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-KMS_INVALID_STATE = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#KmsInvalidState"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "KMS.InvalidStateException", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-KMS_NOT_FOUND = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#KmsNotFound"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "KMS.NotFoundException", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-KMS_OPT_IN_REQUIRED = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#KmsOptInRequired"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "KMS.OptInRequired", "httpResponseCode": 403}
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-KMS_THROTTLED = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#KmsThrottled"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "KMS.ThrottlingException", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-MESSAGE_ATTRIBUTE_NAME = Schema(
-    id=ShapeID("com.amazonaws.sqs#MessageAttributeName"), shape_type=ShapeType.STRING
-)
-
-MESSAGE_ATTRIBUTE_NAME_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#MessageAttributeNameList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MESSAGE_ATTRIBUTE_NAME}},
-)
-
-MESSAGE_SYSTEM_ATTRIBUTE_NAME = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#MessageSystemAttributeName"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "All": {"target": UNIT},
-        "SenderId": {"target": UNIT},
-        "SentTimestamp": {"target": UNIT},
-        "ApproximateReceiveCount": {"target": UNIT},
-        "ApproximateFirstReceiveTimestamp": {"target": UNIT},
-        "SequenceNumber": {"target": UNIT},
-        "MessageDeduplicationId": {"target": UNIT},
-        "MessageGroupId": {"target": UNIT},
-        "AWSTraceHeader": {"target": UNIT},
-        "DeadLetterQueueSourceArn": {"target": UNIT},
-    },
-)
-
-MESSAGE_SYSTEM_ATTRIBUTE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#MessageSystemAttributeList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MESSAGE_SYSTEM_ATTRIBUTE_NAME}},
-)
-
-RECEIVE_MESSAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ReceiveMessageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ReceiveMessageRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributeNames": {
-            "target": ATTRIBUTE_NAME_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="AttributeName"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "MessageSystemAttributeNames": {
-            "target": MESSAGE_SYSTEM_ATTRIBUTE_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="AttributeName"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "MessageAttributeNames": {
-            "target": MESSAGE_ATTRIBUTE_NAME_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"), value="MessageAttributeName"
-                ),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "MaxNumberOfMessages": {"target": NULLABLE_INTEGER},
-        "VisibilityTimeout": {"target": NULLABLE_INTEGER},
-        "WaitTimeSeconds": {"target": NULLABLE_INTEGER},
-        "ReceiveRequestAttemptId": {"target": STRING},
-    },
-)
-
-MESSAGE_SYSTEM_ATTRIBUTE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#MessageSystemAttributeMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {
-            "target": MESSAGE_SYSTEM_ATTRIBUTE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Name")],
-        },
-        "value": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Value")],
-        },
-    },
-)
-
-BINARY = Schema(id=ShapeID("com.amazonaws.sqs#Binary"), shape_type=ShapeType.BLOB)
-
-BINARY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#BinaryList"),
-    shape_type=ShapeType.LIST,
-    members={
-        "member": {
-            "target": BINARY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="BinaryListValue")
-            ],
-        }
-    },
-)
-
-STRING_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#StringList"),
-    shape_type=ShapeType.LIST,
-    members={
-        "member": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="StringListValue")
-            ],
-        }
-    },
-)
-
-MESSAGE_ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#MessageAttributeValue"),
-    members={
-        "StringValue": {"target": STRING},
-        "BinaryValue": {"target": BINARY},
-        "StringListValues": {
-            "target": STRING_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="StringListValue"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "BinaryListValues": {
-            "target": BINARY_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="BinaryListValue"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "DataType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-MESSAGE_BODY_ATTRIBUTE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#MessageBodyAttributeMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Name")],
-        },
-        "value": {
-            "target": MESSAGE_ATTRIBUTE_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Value")],
-        },
-    },
-)
-
-MESSAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#Message"),
-    members={
-        "MessageId": {"target": STRING},
-        "ReceiptHandle": {"target": STRING},
-        "MD5OfBody": {"target": STRING},
-        "Body": {"target": STRING},
-        "Attributes": {
-            "target": MESSAGE_SYSTEM_ATTRIBUTE_MAP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="Attribute"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "MD5OfMessageAttributes": {"target": STRING},
-        "MessageAttributes": {
-            "target": MESSAGE_BODY_ATTRIBUTE_MAP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="MessageAttribute"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-MESSAGE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#MessageList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MESSAGE}},
-)
-
-RECEIVE_MESSAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#ReceiveMessageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#ReceiveMessageResult",
-        )
-    ],
-    members={
-        "Messages": {
-            "target": MESSAGE_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="Message"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        }
-    },
-)
-
-RECEIVE_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sqs#ReceiveMessage"), shape_type=ShapeType.OPERATION
-)
-
-REMOVE_PERMISSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#RemovePermissionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#RemovePermissionRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Label": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-REMOVE_PERMISSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#RemovePermissionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-REMOVE_PERMISSION = Schema(
-    id=ShapeID("com.amazonaws.sqs#RemovePermission"), shape_type=ShapeType.OPERATION
-)
-
-INVALID_MESSAGE_CONTENTS = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#InvalidMessageContents"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-MESSAGE_SYSTEM_ATTRIBUTE_NAME_FOR_SENDS = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#MessageSystemAttributeNameForSends"),
-    shape_type=ShapeType.ENUM,
-    members={"AWSTraceHeader": {"target": UNIT}},
-)
-
-MESSAGE_SYSTEM_ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#MessageSystemAttributeValue"),
-    members={
-        "StringValue": {"target": STRING},
-        "BinaryValue": {"target": BINARY},
-        "StringListValues": {
-            "target": STRING_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="StringListValue"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "BinaryListValues": {
-            "target": BINARY_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="BinaryListValue"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "DataType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-MESSAGE_BODY_SYSTEM_ATTRIBUTE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#MessageBodySystemAttributeMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {
-            "target": MESSAGE_SYSTEM_ATTRIBUTE_NAME_FOR_SENDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Name")],
-        },
-        "value": {
-            "target": MESSAGE_SYSTEM_ATTRIBUTE_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Value")],
-        },
-    },
-)
-
-SEND_MESSAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#SendMessageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#SendMessageRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MessageBody": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DelaySeconds": {"target": NULLABLE_INTEGER},
-        "MessageAttributes": {
-            "target": MESSAGE_BODY_ATTRIBUTE_MAP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="MessageAttribute"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "MessageSystemAttributes": {
-            "target": MESSAGE_BODY_SYSTEM_ATTRIBUTE_MAP,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"), value="MessageSystemAttribute"
-                ),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "MessageDeduplicationId": {"target": STRING},
-        "MessageGroupId": {"target": STRING},
-    },
-)
-
-SEND_MESSAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#SendMessageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#SendMessageResult",
-        )
-    ],
-    members={
-        "MD5OfMessageBody": {"target": STRING},
-        "MD5OfMessageAttributes": {"target": STRING},
-        "MD5OfMessageSystemAttributes": {"target": STRING},
-        "MessageId": {"target": STRING},
-        "SequenceNumber": {"target": STRING},
-    },
-)
-
-SEND_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.sqs#SendMessage"), shape_type=ShapeType.OPERATION
-)
-
-BATCH_REQUEST_TOO_LONG = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#BatchRequestTooLong"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {
-                    "code": "AWS.SimpleQueueService.BatchRequestTooLong",
-                    "httpResponseCode": 400,
-                }
-            ),
-        ),
-    ],
-    members={"message": {"target": EXCEPTION_MESSAGE}},
-)
-
-SEND_MESSAGE_BATCH_REQUEST_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#SendMessageBatchRequestEntry"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MessageBody": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DelaySeconds": {"target": NULLABLE_INTEGER},
-        "MessageAttributes": {
-            "target": MESSAGE_BODY_ATTRIBUTE_MAP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="MessageAttribute"),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "MessageSystemAttributes": {
-            "target": MESSAGE_BODY_SYSTEM_ATTRIBUTE_MAP,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"), value="MessageSystemAttribute"
-                ),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "MessageDeduplicationId": {"target": STRING},
-        "MessageGroupId": {"target": STRING},
-    },
-)
-
-SEND_MESSAGE_BATCH_REQUEST_ENTRY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#SendMessageBatchRequestEntryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SEND_MESSAGE_BATCH_REQUEST_ENTRY}},
-)
-
-SEND_MESSAGE_BATCH_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#SendMessageBatchInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#SendMessageBatchRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Entries": {
-            "target": SEND_MESSAGE_BATCH_REQUEST_ENTRY_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"),
-                    value="SendMessageBatchRequestEntry",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-SEND_MESSAGE_BATCH_RESULT_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#SendMessageBatchResultEntry"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MessageId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MD5OfMessageBody": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MD5OfMessageAttributes": {"target": STRING},
-        "MD5OfMessageSystemAttributes": {"target": STRING},
-        "SequenceNumber": {"target": STRING},
-    },
-)
-
-SEND_MESSAGE_BATCH_RESULT_ENTRY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#SendMessageBatchResultEntryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SEND_MESSAGE_BATCH_RESULT_ENTRY}},
-)
-
-SEND_MESSAGE_BATCH_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#SendMessageBatchOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#SendMessageBatchResult",
-        )
-    ],
-    members={
-        "Successful": {
-            "target": SEND_MESSAGE_BATCH_RESULT_ENTRY_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"),
-                    value="SendMessageBatchResultEntry",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-        "Failed": {
-            "target": BATCH_RESULT_ERROR_ENTRY_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#xmlName"), value="BatchResultErrorEntry"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-SEND_MESSAGE_BATCH = Schema(
-    id=ShapeID("com.amazonaws.sqs#SendMessageBatch"), shape_type=ShapeType.OPERATION
-)
-
-SET_QUEUE_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#SetQueueAttributesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#SetQueueAttributesRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Attributes": {
-            "target": QUEUE_ATTRIBUTE_MAP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="Attribute"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-SET_QUEUE_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#SetQueueAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-SET_QUEUE_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sqs#SetQueueAttributes"), shape_type=ShapeType.OPERATION
-)
-
-START_MESSAGE_MOVE_TASK_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#StartMessageMoveTaskInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#StartMessageMoveTaskRequest",
-        )
-    ],
-    members={
-        "SourceArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DestinationArn": {"target": STRING},
-        "MaxNumberOfMessagesPerSecond": {"target": NULLABLE_INTEGER},
-    },
-)
-
-START_MESSAGE_MOVE_TASK_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#StartMessageMoveTaskOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#StartMessageMoveTaskResult",
-        )
-    ],
-    members={"TaskHandle": {"target": STRING}},
-)
-
-START_MESSAGE_MOVE_TASK = Schema(
-    id=ShapeID("com.amazonaws.sqs#StartMessageMoveTask"), shape_type=ShapeType.OPERATION
-)
-
-TAG_QUEUE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#TagQueueInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#TagQueueRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="Tag"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-TAG_QUEUE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#TagQueueOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-TAG_QUEUE = Schema(
-    id=ShapeID("com.amazonaws.sqs#TagQueue"), shape_type=ShapeType.OPERATION
-)
-
-TAG_KEY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#TagKeyList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG_KEY}},
-)
-
-UNTAG_QUEUE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#UntagQueueInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sqs#UntagQueueRequest",
-        )
-    ],
-    members={
-        "QueueUrl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TagKeys": {
-            "target": TAG_KEY_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#xmlName"), value="TagKey"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#xmlFlattened")),
-            ],
-        },
-    },
-)
-
-UNTAG_QUEUE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sqs#UntagQueueOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-UNTAG_QUEUE = Schema(
-    id=ShapeID("com.amazonaws.sqs#UntagQueue"), shape_type=ShapeType.OPERATION
-)
-
-AMAZON_SQS = Schema(
-    id=ShapeID("com.amazonaws.sqs#AmazonSQS"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "sqs"})
-        ),
-        Trait.new(id=ShapeID("aws.protocols#awsJson1_0")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsFIPS",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-us-gov",
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
                                     {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
                                     }
                                 ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sqs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sqs.{Region}.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sqs-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sqs.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sqs.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                                "aws-us-gov",
+                            ),
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 14,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED",
-                }
-            ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sqs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sqs.{Region}.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sqs-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sqs.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sqs.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 14,
+                "nodes": "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "SQS",
-                    "arnNamespace": "sqs",
-                    "cloudFormationName": "SQS",
-                    "cloudTrailEventSource": "sqs.amazonaws.com",
-                    "endpointPrefix": "sqs",
-                }
-            ),
+        _aw: MappingProxyType(
+            {
+                "sdkId": "SQS",
+                "arnNamespace": "sqs",
+                "cloudFormationName": "SQS",
+                "cloudTrailEventSource": "sqs.amazonaws.com",
+                "endpointPrefix": "sqs",
+            }
         ),
-    ],
+    },
 )

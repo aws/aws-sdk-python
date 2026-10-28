@@ -4,7 +4,7 @@ import os
 
 from smithy_aws_core.identity import AWSCredentialsIdentity
 from smithy_aws_core.identity.chain import Standard, StandardProvider
-from smithy_aws_core.identity.chain.provider import ChainSetup
+from smithy_aws_core.aio.identity.chain.provider import ChainSetup
 from smithy_core.interfaces.identity import Identity
 
 from .resolvers import ContainerCredentialsResolver

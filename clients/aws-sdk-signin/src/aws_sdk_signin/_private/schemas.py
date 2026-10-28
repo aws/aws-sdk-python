@@ -2,1700 +2,1567 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import BOOLEAN, LONG, STRING, UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 
-O_AUTH2_ERROR_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#OAuth2ErrorCode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "TOKEN_EXPIRED": {"target": UNIT},
-        "USER_CREDENTIALS_CHANGED": {"target": UNIT},
-        "INSUFFICIENT_PERMISSIONS": {"target": UNIT},
-        "AUTHCODE_EXPIRED": {"target": UNIT},
-        "SERVER_ERROR": {"target": UNIT},
-        "INVALID_REQUEST": {"target": UNIT},
-        "RESOURCE_NOT_FOUND": {"target": UNIT},
-        "CONFLICT": {"target": UNIT},
-        "SERVICE_QUOTA_EXCEEDED": {"target": UNIT},
-    },
+n0 = "com.amazonaws.signin"
+_OAEC = "OAuth2ErrorCode"
+_TE = "TOKEN_EXPIRED"
+_sV = "smithy.api#enumValue"
+_UCC = "USER_CREDENTIALS_CHANGED"
+_IP = "INSUFFICIENT_PERMISSIONS"
+_AE = "AUTHCODE_EXPIRED"
+_SE = "SERVER_ERROR"
+_se = "server_error"
+_IR = "INVALID_REQUEST"
+_RNF = "RESOURCE_NOT_FOUND"
+_CONFLICT = "CONFLICT"
+_SQE = "SERVICE_QUOTA_EXCEEDED"
+_ADE = "AccessDeniedException"
+_s = "smithy.api#error"
+_c = "client"
+_e = "error"
+_sm = "smithy.api#required"
+_m = "message"
+_AT = "AccessToken"
+_smi = "smithy.api#sensitive"
+_aKI = "accessKeyId"
+_sN = "smithy.api#jsonName"
+_sAK = "secretAccessKey"
+_sT = "sessionToken"
+_AI = "AccountId"
+_AC = "AuthorizationCode"
+_BTT = "BearerTokenType"
+_CCGT = "ClientCredentialsGrantType"
+_CI = "ClientId"
+_CT = "ClientToken"
+_CV = "CodeVerifier"
+_CVo = "ConditionValues"
+_me = "member"
+_C = "Condition"
+_k = "key"
+_v = "value"
+_CTo = "ConditionType"
+_CB = "ConditionBlock"
+_CE = "ConflictException"
+_sE = "smithy.api#httpError"
+_CPMR = "ConsolePermissionMaxResults"
+_GT = "GrantType"
+_RU = "RedirectUri"
+_RT = "RefreshToken"
+_COATRB = "CreateOAuth2TokenRequestBody"
+_cI = "clientId"
+_gT = "grantType"
+_co = "code"
+_rU = "redirectUri"
+_cV = "codeVerifier"
+_rT = "refreshToken"
+_COATI = "CreateOAuth2TokenInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cCOATR = "com.amazonaws.signin#CreateOAuth2TokenRequest"
+_smit = "smithy.api#input"
+_tI = "tokenInput"
+_sP = "smithy.api#httpPayload"
+_EI = "ExpiresIn"
+_IT = "IdToken"
+_TT = "TokenType"
+_COATRBr = "CreateOAuth2TokenResponseBody"
+_aT = "accessToken"
+_tT = "tokenType"
+_eI = "expiresIn"
+_iT = "idToken"
+_COATO = "CreateOAuth2TokenOutput"
+_cCOATRo = "com.amazonaws.signin#CreateOAuth2TokenResponse"
+_smith = "smithy.api#output"
+_tO = "tokenOutput"
+_ISE = "InternalServerException"
+_ser = "server"
+_TMRE = "TooManyRequestsError"
+_VE = "ValidationException"
+_COAT = "CreateOAuth2Token"
+_smithy = "smithy.api#http"
+_COATWIAMI = "CreateOAuth2TokenWithIAMInput"
+_cCOATWIAMR = "com.amazonaws.signin#CreateOAuth2TokenWithIAMRequest"
+_gt = "grant_type"
+_r = "resource"
+_OAAT = "OAuthAccessToken"
+_TEI = "TokenExpiresIn"
+_COATWIAMO = "CreateOAuth2TokenWithIAMOutput"
+_cCOATWIAMRo = "com.amazonaws.signin#CreateOAuth2TokenWithIAMResponse"
+_at = "access_token"
+_tt = "token_type"
+_ei = "expires_in"
+_COATWIAM = "CreateOAuth2TokenWithIAM"
+_TI = "TargetId"
+_DCACI = "DeleteConsoleAuthorizationConfigurationInput"
+_tIa = "targetId"
+_DCACO = "DeleteConsoleAuthorizationConfigurationOutput"
+_sc = "scope"
+_cAE = "consoleAuthorizationEnabled"
+_RNFE = "ResourceNotFoundException"
+_DCAC = "DeleteConsoleAuthorizationConfiguration"
+_SI = "StatementId"
+_DRPSI = "DeleteResourcePermissionStatementInput"
+_sI = "statementId"
+_cT = "clientToken"
+_sTm = "smithy.api#idempotencyToken"
+_DRPSO = "DeleteResourcePermissionStatementOutput"
+_DRPS = "DeleteResourcePermissionStatement"
+_EP = "ExcludedPrincipal"
+_GCACI = "GetConsoleAuthorizationConfigurationInput"
+_GCACO = "GetConsoleAuthorizationConfigurationOutput"
+_GCAC = "GetConsoleAuthorizationConfiguration"
+_GRPI = "GetResourcePolicyInput"
+_PA = "PolicyActions"
+_P = "Principal"
+_PS = "PolicyStatement"
+_ef = "effect"
+_E = "Effect"
+_p = "principal"
+_a = "action"
+_A = "Action"
+_R = "Resource"
+_con = "condition"
+_PSo = "PolicyStatements"
+_SRBP = "SigninResourceBasedPolicy"
+_ve = "version"
+_V = "Version"
+_st = "statement"
+_S = "Statement"
+_GRPO = "GetResourcePolicyOutput"
+_sRBP = "signinResourceBasedPolicy"
+_GRP = "GetResourcePolicy"
+_ITT = "IntrospectedTokenType"
+_ITn = "IntrospectionToken"
+_TTH = "TokenTypeHint"
+_IOATWIAMI = "IntrospectOAuth2TokenWithIAMInput"
+_cIOATWIAMR = "com.amazonaws.signin#IntrospectOAuth2TokenWithIAMRequest"
+_t = "token"
+_tTH = "tokenTypeHint"
+_tth = "token_type_hint"
+_IOATWIAMO = "IntrospectOAuth2TokenWithIAMOutput"
+_cIOATWIAMRo = "com.amazonaws.signin#IntrospectOAuth2TokenWithIAMResponse"
+_ac = "active"
+_ci = "client_id"
+_uI = "userId"
+_ui = "user_id"
+_ex = "exp"
+_i = "iat"
+_n = "nbf"
+_su = "sub"
+_au = "aud"
+_is = "iss"
+_j = "jti"
+_aI = "accountId"
+_ai = "account_id"
+_sS = "signinSession"
+_ss = "signin_session"
+_IOATWIAM = "IntrospectOAuth2TokenWithIAM"
+_NT = "NextToken"
+_LRPSI = "ListResourcePermissionStatementsInput"
+_mR = "maxResults"
+_nT = "nextToken"
+_PSS = "PermissionStatementSummary"
+_si = "sid"
+_PSSe = "PermissionStatementSummaries"
+_LRPSO = "ListResourcePermissionStatementsOutput"
+_pS = "permissionStatements"
+_LRPS = "ListResourcePermissionStatements"
+_PCACI = "PutConsoleAuthorizationConfigurationInput"
+_PCACO = "PutConsoleAuthorizationConfigurationOutput"
+_PCAC = "PutConsoleAuthorizationConfiguration"
+_SV = "SourceVpce"
+_RR = "RequestedRegion"
+_SIo = "SourceIp"
+_SVo = "SourceVpc"
+_VSI = "VpcSourceIp"
+_PRPSI = "PutResourcePermissionStatementInput"
+_sVo = "sourceVpc"
+_sSV = "signinSourceVpce"
+_cSV = "consoleSourceVpce"
+_vSI = "vpcSourceIp"
+_sIo = "sourceIp"
+_rR = "requestedRegion"
+_eP = "excludedPrincipal"
+_PRPSO = "PutResourcePermissionStatementOutput"
+_SQEE = "ServiceQuotaExceededException"
+_PRPS = "PutResourcePermissionStatement"
+_RTe = "RevocationToken"
+_ROATWIAMI = "RevokeOAuth2TokenWithIAMInput"
+_cROATWIAMR = "com.amazonaws.signin#RevokeOAuth2TokenWithIAMRequest"
+_ROATWIAMO = "RevokeOAuth2TokenWithIAMOutput"
+_cROATWIAMRo = "com.amazonaws.signin#RevokeOAuth2TokenWithIAMResponse"
+_ROATWIAM = "RevokeOAuth2TokenWithIAM"
+_Si = "Signin"
+_aw = "aws.auth#sigv4"
+_sB = "smithy.rules#endpointBdd"
+_aws = "aws.api#service"
+_aJ = "aws.protocols#restJson1"
+
+O_AUTH2_ERROR_CODE: StaticSchema = (
+    14,
+    n0,
+    _OAEC,
+    0,
+    (_TE, _UCC, _IP, _AE, _SE, _IR, _RNF, _CONFLICT, _SQE),
+    (
+        (-1, {_sV: _TE}),
+        (-1, {_sV: _UCC}),
+        (-1, {_sV: _IP}),
+        (-1, {_sV: _AE}),
+        (-1, {_sV: _se}),
+        (-1, {_sV: _IR}),
+        (-1, {_sV: _RNF}),
+        (-1, {_sV: _CONFLICT}),
+        (-1, {_sV: _SQE}),
+    ),
 )
 
-ACCESS_DENIED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#AccessDeniedException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={
-        "error": {
-            "target": O_AUTH2_ERROR_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+ACCESS_DENIED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ADE,
+    {_s: _c},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
 )
 
-ACCESS_TOKEN = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#AccessToken"),
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-    members={
-        "accessKeyId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accessKeyId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "secretAccessKey": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="secretAccessKey"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "sessionToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sessionToken"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
+ACCESS_TOKEN: StaticSchema = (
+    18,
+    n0,
+    _AT,
+    4,
+    (_aKI, _sAK, _sT),
+    (
+        (3, {_sN: _aKI, _sm: None}),
+        (3, {_sN: _sAK, _sm: None}),
+        (3, {_sN: _sT, _sm: None}),
+    ),
 )
 
-ACCOUNT_ID = Schema(
-    id=ShapeID("com.amazonaws.signin#AccountId"), shape_type=ShapeType.STRING
+ACCOUNT_ID: StaticSchema = (3, n0, _AI, 0)
+
+AUTHORIZATION_CODE: StaticSchema = (3, n0, _AC, 0)
+
+BEARER_TOKEN_TYPE: StaticSchema = (3, n0, _BTT, 0)
+
+CLIENT_CREDENTIALS_GRANT_TYPE: StaticSchema = (3, n0, _CCGT, 0)
+
+CLIENT_ID: StaticSchema = (3, n0, _CI, 0)
+
+CLIENT_TOKEN: StaticSchema = (3, n0, _CT, 0)
+
+CODE_VERIFIER: StaticSchema = (3, n0, _CV, 0)
+
+CONDITION_VALUES: StaticSchema = (16, n0, _CVo, 0, (_me,), ((3, 0),))
+
+CONDITION: StaticSchema = (17, n0, _C, 0, (_k, _v), ((3, 0), (CONDITION_VALUES, 0)))
+
+CONDITION_TYPE: StaticSchema = (3, n0, _CTo, 0)
+
+CONDITION_BLOCK: StaticSchema = (
+    17,
+    n0,
+    _CB,
+    0,
+    (_k, _v),
+    ((CONDITION_TYPE, 0), (CONDITION, 0)),
 )
 
-AUTHORIZATION_CODE = Schema(
-    id=ShapeID("com.amazonaws.signin#AuthorizationCode"), shape_type=ShapeType.STRING
+CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CE,
+    {_s: _c, _sE: 409},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
 )
 
-BEARER_TOKEN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.signin#BearerTokenType"), shape_type=ShapeType.STRING
+CONSOLE_PERMISSION_MAX_RESULTS: StaticSchema = (7, n0, _CPMR, 0)
+
+GRANT_TYPE: StaticSchema = (3, n0, _GT, 0)
+
+REDIRECT_URI: StaticSchema = (3, n0, _RU, 0)
+
+REFRESH_TOKEN: StaticSchema = (3, n0, _RT, 4)
+
+CREATE_O_AUTH2_TOKEN_REQUEST_BODY: StaticSchema = (
+    18,
+    n0,
+    _COATRB,
+    0,
+    (_cI, _gT, _co, _rU, _cV, _rT),
+    (
+        (CLIENT_ID, {_sN: _cI, _sm: None}),
+        (GRANT_TYPE, {_sN: _gT, _sm: None}),
+        (AUTHORIZATION_CODE, 0),
+        (REDIRECT_URI, {_sN: _rU}),
+        (CODE_VERIFIER, {_sN: _cV}),
+        (REFRESH_TOKEN, {_sN: _rT}),
+    ),
 )
 
-CLIENT_CREDENTIALS_GRANT_TYPE = Schema(
-    id=ShapeID("com.amazonaws.signin#ClientCredentialsGrantType"),
-    shape_type=ShapeType.STRING,
+CREATE_O_AUTH2_TOKEN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _COATI,
+    {_sSI: _cCOATR, _smit: None},
+    (_tI,),
+    ((CREATE_O_AUTH2_TOKEN_REQUEST_BODY, 17),),
 )
 
-CLIENT_ID = Schema(
-    id=ShapeID("com.amazonaws.signin#ClientId"), shape_type=ShapeType.STRING
+EXPIRES_IN: StaticSchema = (7, n0, _EI, 0)
+
+ID_TOKEN: StaticSchema = (3, n0, _IT, 0)
+
+TOKEN_TYPE: StaticSchema = (3, n0, _TT, 0)
+
+CREATE_O_AUTH2_TOKEN_RESPONSE_BODY: StaticSchema = (
+    18,
+    n0,
+    _COATRBr,
+    0,
+    (_aT, _tT, _eI, _rT, _iT),
+    (
+        (ACCESS_TOKEN, {_sN: _aT, _sm: None}),
+        (TOKEN_TYPE, {_sN: _tT, _sm: None}),
+        (EXPIRES_IN, {_sN: _eI, _sm: None}),
+        (REFRESH_TOKEN, {_sN: _rT, _sm: None}),
+        (ID_TOKEN, {_sN: _iT}),
+    ),
 )
 
-CLIENT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.signin#ClientToken"), shape_type=ShapeType.STRING
+CREATE_O_AUTH2_TOKEN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _COATO,
+    {_sSI: _cCOATRo, _smith: None},
+    (_tO,),
+    ((CREATE_O_AUTH2_TOKEN_RESPONSE_BODY, 17),),
 )
 
-CODE_VERIFIER = Schema(
-    id=ShapeID("com.amazonaws.signin#CodeVerifier"), shape_type=ShapeType.STRING
+INTERNAL_SERVER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_s: _ser, _sE: 500},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
 )
 
-CONDITION_VALUES = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#ConditionValues"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
+TOO_MANY_REQUESTS_ERROR: StaticSchema = (
+    18,
+    n0,
+    _TMRE,
+    {_s: _c, _sE: 429},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
 )
 
-CONDITION = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#Condition"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": CONDITION_VALUES}},
+VALIDATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _VE,
+    {_s: _c, _sE: 400},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
 )
 
-CONDITION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.signin#ConditionType"), shape_type=ShapeType.STRING
+CREATE_O_AUTH2_TOKEN: StaticOperationSchema = (
+    23,
+    n0,
+    _COAT,
+    {_smithy: MappingProxyType({"method": "POST", "uri": "/v1/token"})},
+    CREATE_O_AUTH2_TOKEN_INPUT,
+    CREATE_O_AUTH2_TOKEN_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-CONDITION_BLOCK = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#ConditionBlock"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": CONDITION_TYPE}, "value": {"target": CONDITION}},
+CREATE_O_AUTH2_TOKEN_WITH_IAM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _COATWIAMI,
+    {_sSI: _cCOATWIAMR, _smit: None},
+    (_gT, _r),
+    ((CLIENT_CREDENTIALS_GRANT_TYPE, {_sN: _gt, _sm: None}), (3, 1)),
 )
 
-CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#ConflictException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={
-        "error": {
-            "target": O_AUTH2_ERROR_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+O_AUTH_ACCESS_TOKEN: StaticSchema = (3, n0, _OAAT, 4)
+
+TOKEN_EXPIRES_IN: StaticSchema = (7, n0, _TEI, 0)
+
+CREATE_O_AUTH2_TOKEN_WITH_IAM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _COATWIAMO,
+    {_sSI: _cCOATWIAMRo, _smith: None},
+    (_aT, _tT, _eI),
+    (
+        (O_AUTH_ACCESS_TOKEN, {_sN: _at, _sm: None}),
+        (BEARER_TOKEN_TYPE, {_sN: _tt, _sm: None}),
+        (TOKEN_EXPIRES_IN, {_sN: _ei, _sm: None}),
+    ),
 )
 
-CONSOLE_PERMISSION_MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.signin#ConsolePermissionMaxResults"),
-    shape_type=ShapeType.INTEGER,
-)
-
-GRANT_TYPE = Schema(
-    id=ShapeID("com.amazonaws.signin#GrantType"), shape_type=ShapeType.STRING
-)
-
-REDIRECT_URI = Schema(
-    id=ShapeID("com.amazonaws.signin#RedirectUri"), shape_type=ShapeType.STRING
-)
-
-REFRESH_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.signin#RefreshToken"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-CREATE_O_AUTH2_TOKEN_REQUEST_BODY = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#CreateOAuth2TokenRequestBody"),
-    members={
-        "clientId": {
-            "target": CLIENT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "grantType": {
-            "target": GRANT_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="grantType"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "code": {"target": AUTHORIZATION_CODE},
-        "redirectUri": {
-            "target": REDIRECT_URI,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="redirectUri")
-            ],
-        },
-        "codeVerifier": {
-            "target": CODE_VERIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="codeVerifier")
-            ],
-        },
-        "refreshToken": {
-            "target": REFRESH_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="refreshToken")
-            ],
-        },
-    },
-)
-
-CREATE_O_AUTH2_TOKEN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#CreateOAuth2TokenInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.signin#CreateOAuth2TokenRequest",
+CREATE_O_AUTH2_TOKEN_WITH_IAM: StaticOperationSchema = (
+    23,
+    n0,
+    _COATWIAM,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/v1/token?x-amz-client-auth-method=iam"}
         )
-    ],
-    members={
-        "tokenInput": {
-            "target": CREATE_O_AUTH2_TOKEN_REQUEST_BODY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        }
     },
+    CREATE_O_AUTH2_TOKEN_WITH_IAM_INPUT,
+    CREATE_O_AUTH2_TOKEN_WITH_IAM_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-EXPIRES_IN = Schema(
-    id=ShapeID("com.amazonaws.signin#ExpiresIn"), shape_type=ShapeType.INTEGER
+TARGET_ID: StaticSchema = (3, n0, _TI, 0)
+
+DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCACI,
+    {_smit: None},
+    (_tIa,),
+    ((TARGET_ID, 0),),
 )
 
-ID_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.signin#IdToken"), shape_type=ShapeType.STRING
+DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCACO,
+    {_smith: None},
+    (_tIa, _sc, _cAE),
+    ((TARGET_ID, 1), (3, 1), (2, 1)),
 )
 
-TOKEN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.signin#TokenType"), shape_type=ShapeType.STRING
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_s: _c, _sE: 404},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
 )
 
-CREATE_O_AUTH2_TOKEN_RESPONSE_BODY = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#CreateOAuth2TokenResponseBody"),
-    members={
-        "accessToken": {
-            "target": ACCESS_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accessToken"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "tokenType": {
-            "target": TOKEN_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="tokenType"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "expiresIn": {
-            "target": EXPIRES_IN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="expiresIn"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "refreshToken": {
-            "target": REFRESH_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="refreshToken"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "idToken": {
-            "target": ID_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="idToken")],
-        },
-    },
-)
-
-CREATE_O_AUTH2_TOKEN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#CreateOAuth2TokenOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.signin#CreateOAuth2TokenResponse",
+DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DCAC,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/delete-console-authorization-configuration"}
         )
-    ],
-    members={
-        "tokenOutput": {
-            "target": CREATE_O_AUTH2_TOKEN_RESPONSE_BODY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        }
     },
+    DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT,
+    DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-INTERNAL_SERVER_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#InternalServerException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-    ],
-    members={
-        "error": {
-            "target": O_AUTH2_ERROR_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+STATEMENT_ID: StaticSchema = (3, n0, _SI, 0)
+
+DELETE_RESOURCE_PERMISSION_STATEMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPSI,
+    {_smit: None},
+    (_sI, _cT),
+    ((STATEMENT_ID, 1), (CLIENT_TOKEN, 2)),
 )
 
-TOO_MANY_REQUESTS_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#TooManyRequestsError"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-    ],
-    members={
-        "error": {
-            "target": O_AUTH2_ERROR_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+DELETE_RESOURCE_PERMISSION_STATEMENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPSO,
+    {_smith: None},
 )
 
-VALIDATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#ValidationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={
-        "error": {
-            "target": O_AUTH2_ERROR_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CREATE_O_AUTH2_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.signin#CreateOAuth2Token"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "POST", "uri": "/v1/token"}),
+DELETE_RESOURCE_PERMISSION_STATEMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _DRPS,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/delete-resource-permission-statement"}
         )
-    ],
+    },
+    DELETE_RESOURCE_PERMISSION_STATEMENT_INPUT,
+    DELETE_RESOURCE_PERMISSION_STATEMENT_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-CREATE_O_AUTH2_TOKEN_WITH_IAM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#CreateOAuth2TokenWithIAMInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.signin#CreateOAuth2TokenWithIAMRequest",
+EXCLUDED_PRINCIPAL: StaticSchema = (3, n0, _EP, 0)
+
+GET_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCACI,
+    {_smit: None},
+    (_tIa,),
+    ((TARGET_ID, 0),),
+)
+
+GET_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCACO,
+    {_smith: None},
+    (_tIa, _sc, _cAE),
+    ((TARGET_ID, 1), (3, 1), (2, 1)),
+)
+
+GET_CONSOLE_AUTHORIZATION_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _GCAC,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/get-console-authorization-configuration"}
         )
-    ],
-    members={
-        "grantType": {
-            "target": CLIENT_CREDENTIALS_GRANT_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="grant_type"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "resource": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
     },
+    GET_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT,
+    GET_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-O_AUTH_ACCESS_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.signin#OAuthAccessToken"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+GET_RESOURCE_POLICY_INPUT: StaticSchema = (18, n0, _GRPI, {_smit: None})
+
+POLICY_ACTIONS: StaticSchema = (16, n0, _PA, 0, (_me,), ((3, 0),))
+
+PRINCIPAL: StaticSchema = (17, n0, _P, 0, (_k, _v), ((3, 0), (3, 0)))
+
+POLICY_STATEMENT: StaticSchema = (
+    18,
+    n0,
+    _PS,
+    0,
+    (_ef, _p, _a, _r, _con),
+    (
+        (3, {_sN: _E}),
+        (PRINCIPAL, {_sN: _P}),
+        (POLICY_ACTIONS, {_sN: _A}),
+        (3, {_sN: _R}),
+        (CONDITION_BLOCK, {_sN: _C}),
+    ),
 )
 
-TOKEN_EXPIRES_IN = Schema(
-    id=ShapeID("com.amazonaws.signin#TokenExpiresIn"), shape_type=ShapeType.INTEGER
+POLICY_STATEMENTS: StaticSchema = (16, n0, _PSo, 0, (_me,), ((POLICY_STATEMENT, 0),))
+
+SIGNIN_RESOURCE_BASED_POLICY: StaticSchema = (
+    18,
+    n0,
+    _SRBP,
+    0,
+    (_ve, _st),
+    ((3, {_sN: _V}), (POLICY_STATEMENTS, {_sN: _S})),
 )
 
-CREATE_O_AUTH2_TOKEN_WITH_IAM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#CreateOAuth2TokenWithIAMOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.signin#CreateOAuth2TokenWithIAMResponse",
+GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPO,
+    {_smith: None},
+    (_sRBP,),
+    ((SIGNIN_RESOURCE_BASED_POLICY, 1),),
+)
+
+GET_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GRP,
+    {_smithy: MappingProxyType({"method": "POST", "uri": "/get-resource-policy"})},
+    GET_RESOURCE_POLICY_INPUT,
+    GET_RESOURCE_POLICY_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+    ),
+)
+
+INTROSPECTED_TOKEN_TYPE: StaticSchema = (3, n0, _ITT, 0)
+
+INTROSPECTION_TOKEN: StaticSchema = (3, n0, _ITn, 4)
+
+TOKEN_TYPE_HINT: StaticSchema = (3, n0, _TTH, 0)
+
+INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IOATWIAMI,
+    {_sSI: _cIOATWIAMR, _smit: None},
+    (_t, _tTH),
+    ((INTROSPECTION_TOKEN, {_sN: _t, _sm: None}), (TOKEN_TYPE_HINT, {_sN: _tth})),
+)
+
+INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IOATWIAMO,
+    {_sSI: _cIOATWIAMRo, _smith: None},
+    (_ac, _cI, _uI, _tT, _ex, _i, _n, _su, _au, _is, _j, _aI, _sS, _r),
+    (
+        (2, 1),
+        (3, {_sN: _ci}),
+        (3, {_sN: _ui}),
+        (INTROSPECTED_TOKEN_TYPE, {_sN: _tt}),
+        (8, {_sN: _ex}),
+        (8, {_sN: _i}),
+        (8, {_sN: _n}),
+        (3, {_sN: _su}),
+        (3, {_sN: _au}),
+        (3, {_sN: _is}),
+        (3, {_sN: _j}),
+        (ACCOUNT_ID, {_sN: _ai}),
+        (3, {_sN: _ss}),
+        (3, {_sN: _r}),
+    ),
+)
+
+INTROSPECT_O_AUTH2_TOKEN_WITH_IAM: StaticOperationSchema = (
+    23,
+    n0,
+    _IOATWIAM,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/v1/introspect?x-amz-client-auth-method=iam"}
         )
-    ],
-    members={
-        "accessToken": {
-            "target": O_AUTH_ACCESS_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="access_token"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "tokenType": {
-            "target": BEARER_TOKEN_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="token_type"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "expiresIn": {
-            "target": TOKEN_EXPIRES_IN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="expires_in"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
     },
+    INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_INPUT,
+    INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-CREATE_O_AUTH2_TOKEN_WITH_IAM = Schema(
-    id=ShapeID("com.amazonaws.signin#CreateOAuth2TokenWithIAM"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/v1/token?x-amz-client-auth-method=iam"}
-            ),
+NEXT_TOKEN: StaticSchema = (3, n0, _NT, 0)
+
+LIST_RESOURCE_PERMISSION_STATEMENTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LRPSI,
+    {_smit: None},
+    (_mR, _nT),
+    ((CONSOLE_PERMISSION_MAX_RESULTS, 0), (NEXT_TOKEN, 0)),
+)
+
+PERMISSION_STATEMENT_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _PSS,
+    0,
+    (_si, _con),
+    ((STATEMENT_ID, 1), (CONDITION_BLOCK, 0)),
+)
+
+PERMISSION_STATEMENT_SUMMARIES: StaticSchema = (
+    16,
+    n0,
+    _PSSe,
+    0,
+    (_me,),
+    ((PERMISSION_STATEMENT_SUMMARY, 0),),
+)
+
+LIST_RESOURCE_PERMISSION_STATEMENTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LRPSO,
+    {_smith: None},
+    (_pS, _nT),
+    ((PERMISSION_STATEMENT_SUMMARIES, 1), (NEXT_TOKEN, 0)),
+)
+
+LIST_RESOURCE_PERMISSION_STATEMENTS: StaticOperationSchema = (
+    23,
+    n0,
+    _LRPS,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/list-resource-permission-statements"}
         )
-    ],
-)
-
-TARGET_ID = Schema(
-    id=ShapeID("com.amazonaws.signin#TargetId"), shape_type=ShapeType.STRING
-)
-
-DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#DeleteConsoleAuthorizationConfigurationInput"),
-    members={"targetId": {"target": TARGET_ID}},
-)
-
-DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#DeleteConsoleAuthorizationConfigurationOutput"),
-    members={
-        "targetId": {
-            "target": TARGET_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "scope": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "consoleAuthorizationEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
     },
+    LIST_RESOURCE_PERMISSION_STATEMENTS_INPUT,
+    LIST_RESOURCE_PERMISSION_STATEMENTS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={
-        "error": {
-            "target": O_AUTH2_ERROR_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+PUT_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PCACI,
+    {_smit: None},
+    (_tIa,),
+    ((TARGET_ID, 0),),
 )
 
-DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.signin#DeleteConsoleAuthorizationConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/delete-console-authorization-configuration"}
-            ),
+PUT_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PCACO,
+    {_smith: None},
+    (_tIa, _sc, _cAE),
+    ((TARGET_ID, 1), (3, 1), (2, 1)),
+)
+
+PUT_CONSOLE_AUTHORIZATION_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _PCAC,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/put-console-authorization-configuration"}
         )
-    ],
-)
-
-STATEMENT_ID = Schema(
-    id=ShapeID("com.amazonaws.signin#StatementId"), shape_type=ShapeType.STRING
-)
-
-DELETE_RESOURCE_PERMISSION_STATEMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#DeleteResourcePermissionStatementInput"),
-    members={
-        "statementId": {
-            "target": STATEMENT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
     },
+    PUT_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT,
+    PUT_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-DELETE_RESOURCE_PERMISSION_STATEMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#DeleteResourcePermissionStatementOutput")
+SOURCE_VPCE: StaticSchema = (3, n0, _SV, 0)
+
+REQUESTED_REGION: StaticSchema = (3, n0, _RR, 0)
+
+SOURCE_IP: StaticSchema = (3, n0, _SIo, 0)
+
+SOURCE_VPC: StaticSchema = (3, n0, _SVo, 0)
+
+VPC_SOURCE_IP: StaticSchema = (3, n0, _VSI, 0)
+
+PUT_RESOURCE_PERMISSION_STATEMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PRPSI,
+    {_smit: None},
+    (_sVo, _sSV, _cSV, _vSI, _sIo, _rR, _eP, _cT),
+    (
+        (SOURCE_VPC, 0),
+        (SOURCE_VPCE, 0),
+        (SOURCE_VPCE, 0),
+        (VPC_SOURCE_IP, 0),
+        (SOURCE_IP, 0),
+        (REQUESTED_REGION, 0),
+        (EXCLUDED_PRINCIPAL, 0),
+        (CLIENT_TOKEN, 2),
+    ),
 )
 
-DELETE_RESOURCE_PERMISSION_STATEMENT = Schema(
-    id=ShapeID("com.amazonaws.signin#DeleteResourcePermissionStatement"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/delete-resource-permission-statement"}
-            ),
+PUT_RESOURCE_PERMISSION_STATEMENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PRPSO,
+    {_smith: None},
+    (_sI,),
+    ((STATEMENT_ID, 1),),
+)
+
+SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SQEE,
+    {_s: _c, _sE: 402},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
+)
+
+PUT_RESOURCE_PERMISSION_STATEMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _PRPS,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/put-resource-permission-statement"}
         )
-    ],
-)
-
-EXCLUDED_PRINCIPAL = Schema(
-    id=ShapeID("com.amazonaws.signin#ExcludedPrincipal"), shape_type=ShapeType.STRING
-)
-
-GET_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#GetConsoleAuthorizationConfigurationInput"),
-    members={"targetId": {"target": TARGET_ID}},
-)
-
-GET_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#GetConsoleAuthorizationConfigurationOutput"),
-    members={
-        "targetId": {
-            "target": TARGET_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "scope": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "consoleAuthorizationEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
     },
+    PUT_RESOURCE_PERMISSION_STATEMENT_INPUT,
+    PUT_RESOURCE_PERMISSION_STATEMENT_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-GET_CONSOLE_AUTHORIZATION_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.signin#GetConsoleAuthorizationConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/get-console-authorization-configuration"}
-            ),
+REVOCATION_TOKEN: StaticSchema = (3, n0, _RTe, 4)
+
+REVOKE_O_AUTH2_TOKEN_WITH_IAM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ROATWIAMI,
+    {_sSI: _cROATWIAMR, _smit: None},
+    (_t,),
+    ((REVOCATION_TOKEN, {_sN: _t, _sm: None}),),
+)
+
+REVOKE_O_AUTH2_TOKEN_WITH_IAM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ROATWIAMO,
+    {_sSI: _cROATWIAMRo, _smith: None},
+)
+
+REVOKE_O_AUTH2_TOKEN_WITH_IAM: StaticOperationSchema = (
+    23,
+    n0,
+    _ROATWIAM,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/v1/revoke?x-amz-client-auth-method=iam"}
         )
-    ],
-)
-
-GET_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#GetResourcePolicyInput")
-)
-
-POLICY_ACTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#PolicyActions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-PRINCIPAL = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#Principal"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": STRING}},
-)
-
-POLICY_STATEMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#PolicyStatement"),
-    members={
-        "effect": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="Effect")],
-        },
-        "principal": {
-            "target": PRINCIPAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="Principal")],
-        },
-        "action": {
-            "target": POLICY_ACTIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="Action")],
-        },
-        "resource": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="Resource")],
-        },
-        "condition": {
-            "target": CONDITION_BLOCK,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="Condition")],
-        },
     },
+    REVOKE_O_AUTH2_TOKEN_WITH_IAM_INPUT,
+    REVOKE_O_AUTH2_TOKEN_WITH_IAM_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-POLICY_STATEMENTS = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#PolicyStatements"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": POLICY_STATEMENT}},
-)
-
-SIGNIN_RESOURCE_BASED_POLICY = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#SigninResourceBasedPolicy"),
-    members={
-        "version": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="Version")],
-        },
-        "statement": {
-            "target": POLICY_STATEMENTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="Statement")],
-        },
-    },
-)
-
-GET_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#GetResourcePolicyOutput"),
-    members={
-        "signinResourceBasedPolicy": {
-            "target": SIGNIN_RESOURCE_BASED_POLICY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-GET_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.signin#GetResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "POST", "uri": "/get-resource-policy"}),
-        )
-    ],
-)
-
-INTROSPECTED_TOKEN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.signin#IntrospectedTokenType"),
-    shape_type=ShapeType.STRING,
-)
-
-INTROSPECTION_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.signin#IntrospectionToken"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-TOKEN_TYPE_HINT = Schema(
-    id=ShapeID("com.amazonaws.signin#TokenTypeHint"), shape_type=ShapeType.STRING
-)
-
-INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#IntrospectOAuth2TokenWithIAMInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.signin#IntrospectOAuth2TokenWithIAMRequest",
-        )
-    ],
-    members={
-        "token": {
-            "target": INTROSPECTION_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="token"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "tokenTypeHint": {
-            "target": TOKEN_TYPE_HINT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="token_type_hint")
-            ],
-        },
-    },
-)
-
-INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#IntrospectOAuth2TokenWithIAMOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.signin#IntrospectOAuth2TokenWithIAMResponse",
-        )
-    ],
-    members={
-        "active": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "clientId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="client_id")],
-        },
-        "userId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="user_id")],
-        },
-        "tokenType": {
-            "target": INTROSPECTED_TOKEN_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="token_type")
-            ],
-        },
-        "exp": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="exp")],
-        },
-        "iat": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="iat")],
-        },
-        "nbf": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nbf")],
-        },
-        "sub": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="sub")],
-        },
-        "aud": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="aud")],
-        },
-        "iss": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="iss")],
-        },
-        "jti": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="jti")],
-        },
-        "accountId": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="account_id")
-            ],
-        },
-        "signinSession": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="signin_session")
-            ],
-        },
-        "resource": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="resource")],
-        },
-    },
-)
-
-INTROSPECT_O_AUTH2_TOKEN_WITH_IAM = Schema(
-    id=ShapeID("com.amazonaws.signin#IntrospectOAuth2TokenWithIAM"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/v1/introspect?x-amz-client-auth-method=iam"}
-            ),
-        )
-    ],
-)
-
-NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.signin#NextToken"), shape_type=ShapeType.STRING
-)
-
-LIST_RESOURCE_PERMISSION_STATEMENTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#ListResourcePermissionStatementsInput"),
-    members={
-        "maxResults": {"target": CONSOLE_PERMISSION_MAX_RESULTS},
-        "nextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-PERMISSION_STATEMENT_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#PermissionStatementSummary"),
-    members={
-        "sid": {
-            "target": STATEMENT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "condition": {"target": CONDITION_BLOCK},
-    },
-)
-
-PERMISSION_STATEMENT_SUMMARIES = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#PermissionStatementSummaries"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PERMISSION_STATEMENT_SUMMARY}},
-)
-
-LIST_RESOURCE_PERMISSION_STATEMENTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#ListResourcePermissionStatementsOutput"),
-    members={
-        "permissionStatements": {
-            "target": PERMISSION_STATEMENT_SUMMARIES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "nextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LIST_RESOURCE_PERMISSION_STATEMENTS = Schema(
-    id=ShapeID("com.amazonaws.signin#ListResourcePermissionStatements"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/list-resource-permission-statements"}
-            ),
-        )
-    ],
-)
-
-PUT_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#PutConsoleAuthorizationConfigurationInput"),
-    members={"targetId": {"target": TARGET_ID}},
-)
-
-PUT_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#PutConsoleAuthorizationConfigurationOutput"),
-    members={
-        "targetId": {
-            "target": TARGET_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "scope": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "consoleAuthorizationEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PUT_CONSOLE_AUTHORIZATION_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.signin#PutConsoleAuthorizationConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/put-console-authorization-configuration"}
-            ),
-        )
-    ],
-)
-
-SOURCE_VPCE = Schema(
-    id=ShapeID("com.amazonaws.signin#SourceVpce"), shape_type=ShapeType.STRING
-)
-
-REQUESTED_REGION = Schema(
-    id=ShapeID("com.amazonaws.signin#RequestedRegion"), shape_type=ShapeType.STRING
-)
-
-SOURCE_IP = Schema(
-    id=ShapeID("com.amazonaws.signin#SourceIp"), shape_type=ShapeType.STRING
-)
-
-SOURCE_VPC = Schema(
-    id=ShapeID("com.amazonaws.signin#SourceVpc"), shape_type=ShapeType.STRING
-)
-
-VPC_SOURCE_IP = Schema(
-    id=ShapeID("com.amazonaws.signin#VpcSourceIp"), shape_type=ShapeType.STRING
-)
-
-PUT_RESOURCE_PERMISSION_STATEMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#PutResourcePermissionStatementInput"),
-    members={
-        "sourceVpc": {"target": SOURCE_VPC},
-        "signinSourceVpce": {"target": SOURCE_VPCE},
-        "consoleSourceVpce": {"target": SOURCE_VPCE},
-        "vpcSourceIp": {"target": VPC_SOURCE_IP},
-        "sourceIp": {"target": SOURCE_IP},
-        "requestedRegion": {"target": REQUESTED_REGION},
-        "excludedPrincipal": {"target": EXCLUDED_PRINCIPAL},
-        "clientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-    },
-)
-
-PUT_RESOURCE_PERMISSION_STATEMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#PutResourcePermissionStatementOutput"),
-    members={
-        "statementId": {
-            "target": STATEMENT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-SERVICE_QUOTA_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#ServiceQuotaExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=402),
-    ],
-    members={
-        "error": {
-            "target": O_AUTH2_ERROR_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PUT_RESOURCE_PERMISSION_STATEMENT = Schema(
-    id=ShapeID("com.amazonaws.signin#PutResourcePermissionStatement"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/put-resource-permission-statement"}
-            ),
-        )
-    ],
-)
-
-REVOCATION_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.signin#RevocationToken"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-REVOKE_O_AUTH2_TOKEN_WITH_IAM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#RevokeOAuth2TokenWithIAMInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.signin#RevokeOAuth2TokenWithIAMRequest",
-        )
-    ],
-    members={
-        "token": {
-            "target": REVOCATION_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="token"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-REVOKE_O_AUTH2_TOKEN_WITH_IAM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.signin#RevokeOAuth2TokenWithIAMOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.signin#RevokeOAuth2TokenWithIAMResponse",
-        )
-    ],
-)
-
-REVOKE_O_AUTH2_TOKEN_WITH_IAM = Schema(
-    id=ShapeID("com.amazonaws.signin#RevokeOAuth2TokenWithIAM"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/v1/revoke?x-amz-client-auth-method=iam"}
-            ),
-        )
-    ],
-)
-
-SIGNIN = Schema(
-    id=ShapeID("com.amazonaws.signin#Signin"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "signin"})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+SIGNIN: StaticSchema = (
+    21,
+    n0,
+    _Si,
+    {
+        _aw: MappingProxyType({"name": "signin"}),
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "IsControlPlane": MappingProxyType(
+                            {
+                                "required": False,
+                                "documentation": "Indicates if the operation targets the control plane endpoint",
+                                "type": "boolean",
+                            }
+                        ),
+                        "IsOAuthEndpoint": MappingProxyType(
+                            {
+                                "required": False,
+                                "documentation": "Indicates if the operation targets the OAuth token endpoint",
+                                "type": "boolean",
+                            }
+                        ),
+                    }
+                ),
+                "conditions": (
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
                         {
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "IsControlPlane": MappingProxyType(
-                                {
-                                    "required": False,
-                                    "documentation": "Indicates if the operation targets the control plane endpoint",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "IsOAuthEndpoint": MappingProxyType(
-                                {
-                                    "required": False,
-                                    "documentation": "Indicates if the operation targets the OAuth token endpoint",
-                                    "type": "boolean",
-                                }
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "coalesce",
+                                        "argv": (
+                                            MappingProxyType({"ref": "IsControlPlane"}),
+                                            False,
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "coalesce",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "IsControlPlane"}
-                                                ),
-                                                False,
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "coalesce",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "IsOAuthEndpoint"}
-                                                ),
-                                                False,
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-cn",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-gov-west-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-us-gov",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-iso",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-iso-b",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-iso-f",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-iso-e",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-eusc",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
+                    MappingProxyType(
+                        {
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://signin.{Region}.api.aws",
-                                        "properties": MappingProxyType(
-                                            {
-                                                "authSchemes": (
-                                                    MappingProxyType(
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingName": "signin",
-                                                            "signingRegion": "{Region}",
-                                                        }
-                                                    ),
-                                                )
-                                            }
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://signin.{Region}.api.amazonwebservices.com.cn",
-                                        "properties": MappingProxyType(
-                                            {
-                                                "authSchemes": (
-                                                    MappingProxyType(
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingName": "signin",
-                                                            "signingRegion": "{Region}",
-                                                        }
-                                                    ),
-                                                )
-                                            }
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://signin.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType(
-                                            {
-                                                "authSchemes": (
-                                                    MappingProxyType(
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingName": "signin",
-                                                            "signingRegion": "{Region}",
-                                                        }
-                                                    ),
-                                                )
-                                            }
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation.",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{Region}.oauth.signin.aws",
-                                        "properties": MappingProxyType(
-                                            {
-                                                "authSchemes": (
-                                                    MappingProxyType(
-                                                        {
-                                                            "name": "sigv4",
-                                                            "signingName": "signin",
-                                                            "signingRegion": "{Region}",
-                                                        }
-                                                    ),
-                                                )
-                                            }
-                                        ),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{Region}.signin.aws.amazon.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{Region}.signin.amazonaws.cn",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{Region}.signin.amazonaws-us-gov.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{Region}.signin.c2shome.ic.gov",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{Region}.signin.sc2shome.sgov.gov",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{Region}.signin.csphome.hci.ic.gov",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{Region}.signin.csphome.adc-e.uk",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{Region}.signin.amazonaws-eusc.eu",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://signin-fips.amazonaws-us-gov.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{Region}.signin-fips.amazonaws-us-gov.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://{Region}.signin.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://signin-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://signin-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://signin.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://signin.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 40,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAgAAACQAAAAEAAAABAAAAAUF9eEbAAAABgX14QQF9eEbAAAAAQAAAB0AAAAHAAAAAgAAACQAAAAIAAAAAwAAAAkAAAAfAAAABAAAABYAAAAKAAAABQAAABMAAAALAAAABwAAABUAAAAMAAAACAX14QcAAAANAAAACgX14QgAAAAOAAAADAX14QkAAAAPAAAADQX14QoAAAAQAAAADgX14QsAAAARAAAADwX14QwAAAASAAAAEAX14Q0F9eEQAAAABgX14QUAAAAUAAAABwAAABUF9eEGAAAAEQX14RgF9eEZAAAABgX14QQAAAAXAAAABwAAABsAAAAYAAAACQX14Q4AAAAZAAAACgX14Q8AAAAaAAAACwX14RYF9eEXAAAACwAAABwF9eEVAAAAEQX14RQF9eEVAAAAAgAAACMAAAAeAAAAAwAAACcAAAAfAAAABAAAACAF9eEbAAAABgX14QQAAAAhAAAABwX14RsAAAAiAAAACQX14Q4F9eEbAAAAAwAAACcAAAAkAAAABAAAACYAAAAlAAAABwX14RIF9eETAAAABgX14QQF9eERAAAABQX14QEAAAAoAAAACAX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "coalesce",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "IsOAuthEndpoint"}
+                                            ),
+                                            False,
+                                        ),
+                                    }
+                                ),
+                                True,
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-cn",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "Region"}),
+                                "us-gov-west-1",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-us-gov",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsFIPS",
+                                        ),
+                                    }
+                                ),
+                                True,
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-iso",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-iso-b",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-iso-f",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-iso-e",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-eusc",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
+                            ),
+                        }
+                    ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://signin.{Region}.api.aws",
+                                    "properties": MappingProxyType(
+                                        {
+                                            "authSchemes": (
+                                                MappingProxyType(
+                                                    {
+                                                        "name": "sigv4",
+                                                        "signingName": "signin",
+                                                        "signingRegion": "{Region}",
+                                                    }
+                                                ),
+                                            )
+                                        }
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://signin.{Region}.api.amazonwebservices.com.cn",
+                                    "properties": MappingProxyType(
+                                        {
+                                            "authSchemes": (
+                                                MappingProxyType(
+                                                    {
+                                                        "name": "sigv4",
+                                                        "signingName": "signin",
+                                                        "signingRegion": "{Region}",
+                                                    }
+                                                ),
+                                            )
+                                        }
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://signin.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType(
+                                        {
+                                            "authSchemes": (
+                                                MappingProxyType(
+                                                    {
+                                                        "name": "sigv4",
+                                                        "signingName": "signin",
+                                                        "signingRegion": "{Region}",
+                                                    }
+                                                ),
+                                            )
+                                        }
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation.",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{Region}.oauth.signin.aws",
+                                    "properties": MappingProxyType(
+                                        {
+                                            "authSchemes": (
+                                                MappingProxyType(
+                                                    {
+                                                        "name": "sigv4",
+                                                        "signingName": "signin",
+                                                        "signingRegion": "{Region}",
+                                                    }
+                                                ),
+                                            )
+                                        }
+                                    ),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{Region}.signin.aws.amazon.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{Region}.signin.amazonaws.cn",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{Region}.signin.amazonaws-us-gov.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{Region}.signin.c2shome.ic.gov",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{Region}.signin.sc2shome.sgov.gov",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{Region}.signin.csphome.hci.ic.gov",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{Region}.signin.csphome.adc-e.uk",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{Region}.signin.amazonaws-eusc.eu",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://signin-fips.amazonaws-us-gov.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{Region}.signin-fips.amazonaws-us-gov.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://{Region}.signin.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://signin-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://signin-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://signin.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://signin.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 40,
+                "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAgAAACQAAAAEAAAABAAAAAUF9eEbAAAABgX14QQF9eEbAAAAAQAAAB0AAAAHAAAAAgAAACQAAAAIAAAAAwAAAAkAAAAfAAAABAAAABYAAAAKAAAABQAAABMAAAALAAAABwAAABUAAAAMAAAACAX14QcAAAANAAAACgX14QgAAAAOAAAADAX14QkAAAAPAAAADQX14QoAAAAQAAAADgX14QsAAAARAAAADwX14QwAAAASAAAAEAX14Q0F9eEQAAAABgX14QUAAAAUAAAABwAAABUF9eEGAAAAEQX14RgF9eEZAAAABgX14QQAAAAXAAAABwAAABsAAAAYAAAACQX14Q4AAAAZAAAACgX14Q8AAAAaAAAACwX14RYF9eEXAAAACwAAABwF9eEVAAAAEQX14RQF9eEVAAAAAgAAACMAAAAeAAAAAwAAACcAAAAfAAAABAAAACAF9eEbAAAABgX14QQAAAAhAAAABwX14RsAAAAiAAAACQX14Q4F9eEbAAAAAwAAACcAAAAkAAAABAAAACYAAAAlAAAABwX14RIF9eETAAAABgX14QQF9eERAAAABQX14QEAAAAoAAAACAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "Signin",
-                    "arnNamespace": "signin",
-                    "endpointPrefix": "signin",
-                }
-            ),
+        _aws: MappingProxyType(
+            {"sdkId": "Signin", "arnNamespace": "signin", "endpointPrefix": "signin"}
         ),
-        Trait.new(id=ShapeID("aws.protocols#restJson1")),
-    ],
+        _aJ: None,
+    },
 )

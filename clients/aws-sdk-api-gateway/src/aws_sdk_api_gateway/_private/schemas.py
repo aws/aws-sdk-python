@@ -2,9131 +2,8401 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
-
-
-ACCESS_ASSOCIATION_SOURCE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#AccessAssociationSourceType"),
-    shape_type=ShapeType.ENUM,
-    members={"VPCE": {"target": UNIT}},
-)
-
-STRING = Schema(
-    id=ShapeID("com.amazonaws.apigateway#String"), shape_type=ShapeType.STRING
-)
-
-ACCESS_LOG_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#AccessLogSettings"),
-    members={"format": {"target": STRING}, "destinationArn": {"target": STRING}},
-)
-
-LIST_OF_STRING = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfString"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-INTEGER = Schema(
-    id=ShapeID("com.amazonaws.apigateway#Integer"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-DOUBLE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#Double"),
-    shape_type=ShapeType.DOUBLE,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-THROTTLE_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ThrottleSettings"),
-    members={
-        "burstLimit": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "rateLimit": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-TIMESTAMP = Schema(
-    id=ShapeID("com.amazonaws.apigateway#Timestamp"), shape_type=ShapeType.TIMESTAMP
-)
-
-BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.apigateway#Boolean"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-MAP_OF_STRING_TO_STRING = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MapOfStringToString"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": STRING}},
-)
-
-API_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ApiKey"),
-    members={
-        "id": {"target": STRING},
-        "value": {"target": STRING},
-        "name": {"target": STRING},
-        "customerId": {"target": STRING},
-        "description": {"target": STRING},
-        "enabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "createdDate": {"target": TIMESTAMP},
-        "lastUpdatedDate": {"target": TIMESTAMP},
-        "stageKeys": {"target": LIST_OF_STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-API_KEYS_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ApiKeysFormat"),
-    shape_type=ShapeType.ENUM,
-    members={"csv": {"target": UNIT}},
-)
-
-API_KEY_SOURCE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ApiKeySourceType"),
-    shape_type=ShapeType.ENUM,
-    members={"HEADER": {"target": UNIT}, "AUTHORIZER": {"target": UNIT}},
-)
-
-MAP_OF_API_STAGE_THROTTLE_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MapOfApiStageThrottleSettings"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": THROTTLE_SETTINGS}},
-)
-
-API_STAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ApiStage"),
-    members={
-        "apiId": {"target": STRING},
-        "stage": {"target": STRING},
-        "throttle": {"target": MAP_OF_API_STAGE_THROTTLE_SETTINGS},
-    },
-)
-
-API_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ApiStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "UPDATING": {"target": UNIT},
-        "AVAILABLE": {"target": UNIT},
-        "PENDING": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-    },
-)
-
-NULLABLE_INTEGER = Schema(
-    id=ShapeID("com.amazonaws.apigateway#NullableInteger"), shape_type=ShapeType.INTEGER
-)
-
-PROVIDER_ARN = Schema(
-    id=ShapeID("com.amazonaws.apigateway#ProviderARN"), shape_type=ShapeType.STRING
-)
-
-LIST_OF_AR_NS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfARNs"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PROVIDER_ARN}},
-)
-
-AUTHORIZER_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#AuthorizerType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "TOKEN": {"target": UNIT},
-        "REQUEST": {"target": UNIT},
-        "COGNITO_USER_POOLS": {"target": UNIT},
-    },
-)
-
-AUTHORIZER = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#Authorizer"),
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "type": {"target": AUTHORIZER_TYPE},
-        "providerARNs": {"target": LIST_OF_AR_NS},
-        "authType": {"target": STRING},
-        "authorizerUri": {"target": STRING},
-        "authorizerCredentials": {"target": STRING},
-        "identitySource": {"target": STRING},
-        "identityValidationExpression": {"target": STRING},
-        "authorizerResultTtlInSeconds": {"target": NULLABLE_INTEGER},
-    },
-)
-
-BAD_REQUEST_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#BadRequestException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ConflictException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-STAGE_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#StageKey"),
-    members={"restApiId": {"target": STRING}, "stageName": {"target": STRING}},
-)
-
-LIST_OF_STAGE_KEYS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfStageKeys"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STAGE_KEY}},
-)
-
-CREATE_API_KEY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateApiKeyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateApiKeyRequest",
-        )
-    ],
-    members={
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "enabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "generateDistinctId": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "value": {"target": STRING},
-        "stageKeys": {"target": LIST_OF_STAGE_KEYS},
-        "customerId": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-CREATE_API_KEY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateApiKeyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ApiKey",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "value": {"target": STRING},
-        "name": {"target": STRING},
-        "customerId": {"target": STRING},
-        "description": {"target": STRING},
-        "enabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "createdDate": {"target": TIMESTAMP},
-        "lastUpdatedDate": {"target": TIMESTAMP},
-        "stageKeys": {"target": LIST_OF_STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#LimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-    ],
-    members={
-        "retryAfterSeconds": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Retry-After")
-            ],
-        },
-        "message": {"target": STRING},
-    },
-)
-
-NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#NotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-TOO_MANY_REQUESTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#TooManyRequestsException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-    ],
-    members={
-        "retryAfterSeconds": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Retry-After")
-            ],
-        },
-        "message": {"target": STRING},
-    },
-)
-
-UNAUTHORIZED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UnauthorizedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=401),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-CREATE_API_KEY = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateApiKey"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "POST", "uri": "/apikeys", "code": 201}),
-        )
-    ],
-)
-
-CREATE_AUTHORIZER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateAuthorizerInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateAuthorizerRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "type": {
-            "target": AUTHORIZER_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "providerARNs": {"target": LIST_OF_AR_NS},
-        "authType": {"target": STRING},
-        "authorizerUri": {"target": STRING},
-        "authorizerCredentials": {"target": STRING},
-        "identitySource": {"target": STRING},
-        "identityValidationExpression": {"target": STRING},
-        "authorizerResultTtlInSeconds": {"target": NULLABLE_INTEGER},
-    },
-)
-
-CREATE_AUTHORIZER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateAuthorizerOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Authorizer",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "type": {"target": AUTHORIZER_TYPE},
-        "providerARNs": {"target": LIST_OF_AR_NS},
-        "authType": {"target": STRING},
-        "authorizerUri": {"target": STRING},
-        "authorizerCredentials": {"target": STRING},
-        "identitySource": {"target": STRING},
-        "identityValidationExpression": {"target": STRING},
-        "authorizerResultTtlInSeconds": {"target": NULLABLE_INTEGER},
-    },
-)
-
-CREATE_AUTHORIZER = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateAuthorizer"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/restapis/{restApiId}/authorizers",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-CREATE_BASE_PATH_MAPPING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateBasePathMappingInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateBasePathMappingRequest",
-        )
-    ],
-    members={
-        "domainName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "domainNameId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="domainNameId")
-            ],
-        },
-        "basePath": {"target": STRING},
-        "restApiId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "stage": {"target": STRING},
-    },
-)
-
-CREATE_BASE_PATH_MAPPING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateBasePathMappingOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#BasePathMapping",
-        )
-    ],
-    members={
-        "basePath": {"target": STRING},
-        "restApiId": {"target": STRING},
-        "stage": {"target": STRING},
-    },
-)
-
-CREATE_BASE_PATH_MAPPING = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateBasePathMapping"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/domainnames/{domainName}/basepathmappings",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-NULLABLE_BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.apigateway#NullableBoolean"), shape_type=ShapeType.BOOLEAN
-)
-
-CACHE_CLUSTER_SIZE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CacheClusterSize"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "SIZE_0_POINT_5_GB": {"target": UNIT},
-        "SIZE_1_POINT_6_GB": {"target": UNIT},
-        "SIZE_6_POINT_1_GB": {"target": UNIT},
-        "SIZE_13_POINT_5_GB": {"target": UNIT},
-        "SIZE_28_POINT_4_GB": {"target": UNIT},
-        "SIZE_58_POINT_2_GB": {"target": UNIT},
-        "SIZE_118_GB": {"target": UNIT},
-        "SIZE_237_GB": {"target": UNIT},
-    },
-)
-
-DEPLOYMENT_CANARY_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeploymentCanarySettings"),
-    members={
-        "percentTraffic": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "stageVariableOverrides": {"target": MAP_OF_STRING_TO_STRING},
-        "useStageCache": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-CREATE_DEPLOYMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateDeploymentInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateDeploymentRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "stageName": {"target": STRING},
-        "stageDescription": {"target": STRING},
-        "description": {"target": STRING},
-        "cacheClusterEnabled": {"target": NULLABLE_BOOLEAN},
-        "cacheClusterSize": {"target": CACHE_CLUSTER_SIZE},
-        "variables": {"target": MAP_OF_STRING_TO_STRING},
-        "canarySettings": {"target": DEPLOYMENT_CANARY_SETTINGS},
-        "tracingEnabled": {"target": NULLABLE_BOOLEAN},
-    },
-)
-
-METHOD_SNAPSHOT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MethodSnapshot"),
-    members={
-        "authorizationType": {"target": STRING},
-        "apiKeyRequired": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-MAP_OF_METHOD_SNAPSHOT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MapOfMethodSnapshot"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": METHOD_SNAPSHOT}},
-)
-
-PATH_TO_MAP_OF_METHOD_SNAPSHOT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PathToMapOfMethodSnapshot"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": MAP_OF_METHOD_SNAPSHOT}},
-)
-
-CREATE_DEPLOYMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateDeploymentOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Deployment",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "description": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "apiSummary": {"target": PATH_TO_MAP_OF_METHOD_SNAPSHOT},
-    },
-)
-
-SERVICE_UNAVAILABLE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ServiceUnavailableException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=503),
-    ],
-    members={
-        "retryAfterSeconds": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Retry-After")
-            ],
-        },
-        "message": {"target": STRING},
-    },
-)
-
-CREATE_DEPLOYMENT = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateDeployment"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/restapis/{restApiId}/deployments",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-DOCUMENTATION_PART_LOCATION_STATUS_CODE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DocumentationPartLocationStatusCode"),
-    shape_type=ShapeType.STRING,
-)
-
-DOCUMENTATION_PART_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DocumentationPartType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "API": {"target": UNIT},
-        "AUTHORIZER": {"target": UNIT},
-        "MODEL": {"target": UNIT},
-        "RESOURCE": {"target": UNIT},
-        "METHOD": {"target": UNIT},
-        "PATH_PARAMETER": {"target": UNIT},
-        "QUERY_PARAMETER": {"target": UNIT},
-        "REQUEST_HEADER": {"target": UNIT},
-        "REQUEST_BODY": {"target": UNIT},
-        "RESPONSE": {"target": UNIT},
-        "RESPONSE_HEADER": {"target": UNIT},
-        "RESPONSE_BODY": {"target": UNIT},
-    },
-)
-
-DOCUMENTATION_PART_LOCATION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DocumentationPartLocation"),
-    members={
-        "type": {
-            "target": DOCUMENTATION_PART_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "path": {"target": STRING},
-        "method": {"target": STRING},
-        "statusCode": {"target": DOCUMENTATION_PART_LOCATION_STATUS_CODE},
-        "name": {"target": STRING},
-    },
-)
-
-CREATE_DOCUMENTATION_PART_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateDocumentationPartInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateDocumentationPartRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "location": {
-            "target": DOCUMENTATION_PART_LOCATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "properties": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CREATE_DOCUMENTATION_PART_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateDocumentationPartOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DocumentationPart",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "location": {"target": DOCUMENTATION_PART_LOCATION},
-        "properties": {"target": STRING},
-    },
-)
-
-CREATE_DOCUMENTATION_PART = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateDocumentationPart"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/restapis/{restApiId}/documentation/parts",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-CREATE_DOCUMENTATION_VERSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateDocumentationVersionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateDocumentationVersionRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "documentationVersion": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "stageName": {"target": STRING},
-        "description": {"target": STRING},
-    },
-)
-
-CREATE_DOCUMENTATION_VERSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateDocumentationVersionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DocumentationVersion",
-        )
-    ],
-    members={
-        "version": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "description": {"target": STRING},
-    },
-)
-
-CREATE_DOCUMENTATION_VERSION = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateDocumentationVersion"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/restapis/{restApiId}/documentation/versions",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-ENDPOINT_ACCESS_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#EndpointAccessMode"),
-    shape_type=ShapeType.ENUM,
-    members={"BASIC": {"target": UNIT}, "STRICT": {"target": UNIT}},
-)
-
-IP_ADDRESS_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#IpAddressType"),
-    shape_type=ShapeType.ENUM,
-    members={"ipv4": {"target": UNIT}, "dualstack": {"target": UNIT}},
-)
-
-ENDPOINT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#EndpointType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "REGIONAL": {"target": UNIT},
-        "EDGE": {"target": UNIT},
-        "PRIVATE": {"target": UNIT},
-    },
-)
-
-LIST_OF_ENDPOINT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfEndpointType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ENDPOINT_TYPE}},
-)
-
-ENDPOINT_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#EndpointConfiguration"),
-    members={
-        "types": {"target": LIST_OF_ENDPOINT_TYPE},
-        "ipAddressType": {"target": IP_ADDRESS_TYPE},
-        "vpcEndpointIds": {"target": LIST_OF_STRING},
-    },
-)
-
-MUTUAL_TLS_AUTHENTICATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MutualTlsAuthenticationInput"),
-    members={
-        "truststoreUri": {"target": STRING},
-        "truststoreVersion": {"target": STRING},
-    },
-)
-
-ROUTING_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#RoutingMode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "BASE_PATH_MAPPING_ONLY": {"target": UNIT},
-        "ROUTING_RULE_ONLY": {"target": UNIT},
-        "ROUTING_RULE_THEN_BASE_PATH_MAPPING": {"target": UNIT},
-    },
-)
-
-SECURITY_POLICY = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#SecurityPolicy"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "TLS_1_0": {"target": UNIT},
-        "TLS_1_2": {"target": UNIT},
-        "SecurityPolicy_TLS13_1_3_2025_09": {"target": UNIT},
-        "SecurityPolicy_TLS13_1_3_FIPS_2025_09": {"target": UNIT},
-        "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09": {"target": UNIT},
-        "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09": {"target": UNIT},
-        "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09": {"target": UNIT},
-        "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09": {"target": UNIT},
-        "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09": {"target": UNIT},
-        "SecurityPolicy_TLS13_1_2_PQ_2025_09": {"target": UNIT},
-        "SecurityPolicy_TLS13_1_2_2021_06": {"target": UNIT},
-        "SecurityPolicy_TLS13_2025_EDGE": {"target": UNIT},
-        "SecurityPolicy_TLS12_PFS_2025_EDGE": {"target": UNIT},
-        "SecurityPolicy_TLS12_2018_EDGE": {"target": UNIT},
-    },
-)
-
-CREATE_DOMAIN_NAME_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateDomainNameInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateDomainNameRequest",
-        )
-    ],
-    members={
-        "domainName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "certificateName": {"target": STRING},
-        "certificateBody": {"target": STRING},
-        "certificatePrivateKey": {"target": STRING},
-        "certificateChain": {"target": STRING},
-        "certificateArn": {"target": STRING},
-        "regionalCertificateName": {"target": STRING},
-        "regionalCertificateArn": {"target": STRING},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-        "mutualTlsAuthentication": {"target": MUTUAL_TLS_AUTHENTICATION_INPUT},
-        "ownershipVerificationCertificateArn": {"target": STRING},
-        "policy": {"target": STRING},
-        "routingMode": {"target": ROUTING_MODE},
-    },
-)
-
-DOMAIN_NAME_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DomainNameStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "AVAILABLE": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-        "PENDING": {"target": UNIT},
-        "PENDING_CERTIFICATE_REIMPORT": {"target": UNIT},
-        "PENDING_OWNERSHIP_VERIFICATION": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-    },
-)
-
-MUTUAL_TLS_AUTHENTICATION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MutualTlsAuthentication"),
-    members={
-        "truststoreUri": {"target": STRING},
-        "truststoreVersion": {"target": STRING},
-        "truststoreWarnings": {"target": LIST_OF_STRING},
-    },
-)
-
-CREATE_DOMAIN_NAME_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateDomainNameOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DomainName",
-        )
-    ],
-    members={
-        "domainName": {"target": STRING},
-        "domainNameId": {"target": STRING},
-        "domainNameArn": {"target": STRING},
-        "certificateName": {"target": STRING},
-        "certificateArn": {"target": STRING},
-        "certificateUploadDate": {"target": TIMESTAMP},
-        "regionalDomainName": {"target": STRING},
-        "regionalHostedZoneId": {"target": STRING},
-        "regionalCertificateName": {"target": STRING},
-        "regionalCertificateArn": {"target": STRING},
-        "distributionDomainName": {"target": STRING},
-        "distributionHostedZoneId": {"target": STRING},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "domainNameStatus": {"target": DOMAIN_NAME_STATUS},
-        "domainNameStatusMessage": {"target": STRING},
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "mutualTlsAuthentication": {"target": MUTUAL_TLS_AUTHENTICATION},
-        "ownershipVerificationCertificateArn": {"target": STRING},
-        "managementPolicy": {"target": STRING},
-        "policy": {"target": STRING},
-        "routingMode": {"target": ROUTING_MODE},
-    },
-)
-
-CREATE_DOMAIN_NAME = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateDomainName"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/domainnames", "code": 201}
-            ),
-        )
-    ],
-)
-
-CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateDomainNameAccessAssociationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateDomainNameAccessAssociationRequest",
-        )
-    ],
-    members={
-        "domainNameArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "accessAssociationSourceType": {
-            "target": ACCESS_ASSOCIATION_SOURCE_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "accessAssociationSource": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateDomainNameAccessAssociationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DomainNameAccessAssociation",
-        )
-    ],
-    members={
-        "domainNameAccessAssociationArn": {"target": STRING},
-        "domainNameArn": {"target": STRING},
-        "accessAssociationSourceType": {"target": ACCESS_ASSOCIATION_SOURCE_TYPE},
-        "accessAssociationSource": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateDomainNameAccessAssociation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/domainnameaccessassociations", "code": 201}
-            ),
-        )
-    ],
-)
-
-CREATE_MODEL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateModelInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateModelRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "description": {"target": STRING},
-        "schema": {"target": STRING},
-        "contentType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CREATE_MODEL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateModelOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Model",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "schema": {"target": STRING},
-        "contentType": {"target": STRING},
-    },
-)
-
-CREATE_MODEL = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateModel"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/restapis/{restApiId}/models", "code": 201}
-            ),
-        )
-    ],
-)
-
-CREATE_REQUEST_VALIDATOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateRequestValidatorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateRequestValidatorRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "name": {"target": STRING},
-        "validateRequestBody": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "validateRequestParameters": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-CREATE_REQUEST_VALIDATOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateRequestValidatorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#RequestValidator",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "validateRequestBody": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "validateRequestParameters": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-CREATE_REQUEST_VALIDATOR = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateRequestValidator"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/restapis/{restApiId}/requestvalidators",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-CREATE_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateResourceRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "parentId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "pathPart": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CONNECTION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ConnectionType"),
-    shape_type=ShapeType.ENUM,
-    members={"INTERNET": {"target": UNIT}, "VPC_LINK": {"target": UNIT}},
-)
-
-CONTENT_HANDLING_STRATEGY = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ContentHandlingStrategy"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CONVERT_TO_BINARY": {"target": UNIT},
-        "CONVERT_TO_TEXT": {"target": UNIT},
-    },
-)
-
-STATUS_CODE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#StatusCode"), shape_type=ShapeType.STRING
-)
-
-INTEGRATION_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#IntegrationResponse"),
-    members={
-        "statusCode": {"target": STATUS_CODE},
-        "selectionPattern": {"target": STRING},
-        "responseParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "responseTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "contentHandling": {"target": CONTENT_HANDLING_STRATEGY},
-    },
-)
-
-MAP_OF_INTEGRATION_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MapOfIntegrationResponse"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": INTEGRATION_RESPONSE}},
-)
-
-RESPONSE_TRANSFER_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ResponseTransferMode"),
-    shape_type=ShapeType.ENUM,
-    members={"BUFFERED": {"target": UNIT}, "STREAM": {"target": UNIT}},
-)
-
-TLS_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#TlsConfig"),
-    members={
-        "insecureSkipVerification": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        }
-    },
-)
-
-INTEGRATION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#IntegrationType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "HTTP": {"target": UNIT},
-        "AWS": {"target": UNIT},
-        "MOCK": {"target": UNIT},
-        "HTTP_PROXY": {"target": UNIT},
-        "AWS_PROXY": {"target": UNIT},
-    },
-)
-
-INTEGRATION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#Integration"),
-    members={
-        "type": {"target": INTEGRATION_TYPE},
-        "httpMethod": {"target": STRING},
-        "uri": {"target": STRING},
-        "connectionType": {"target": CONNECTION_TYPE},
-        "connectionId": {"target": STRING},
-        "credentials": {"target": STRING},
-        "requestParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "requestTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "passthroughBehavior": {"target": STRING},
-        "contentHandling": {"target": CONTENT_HANDLING_STRATEGY},
-        "timeoutInMillis": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "cacheNamespace": {"target": STRING},
-        "cacheKeyParameters": {"target": LIST_OF_STRING},
-        "integrationResponses": {"target": MAP_OF_INTEGRATION_RESPONSE},
-        "tlsConfig": {"target": TLS_CONFIG},
-        "responseTransferMode": {"target": RESPONSE_TRANSFER_MODE},
-        "integrationTarget": {"target": STRING},
-    },
-)
-
-MAP_OF_STRING_TO_BOOLEAN = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MapOfStringToBoolean"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": NULLABLE_BOOLEAN}},
-)
-
-METHOD_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MethodResponse"),
-    members={
-        "statusCode": {"target": STATUS_CODE},
-        "responseParameters": {"target": MAP_OF_STRING_TO_BOOLEAN},
-        "responseModels": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-MAP_OF_METHOD_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MapOfMethodResponse"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": METHOD_RESPONSE}},
-)
-
-METHOD = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#Method"),
-    members={
-        "httpMethod": {"target": STRING},
-        "authorizationType": {"target": STRING},
-        "authorizerId": {"target": STRING},
-        "apiKeyRequired": {"target": NULLABLE_BOOLEAN},
-        "requestValidatorId": {"target": STRING},
-        "operationName": {"target": STRING},
-        "requestParameters": {"target": MAP_OF_STRING_TO_BOOLEAN},
-        "requestModels": {"target": MAP_OF_STRING_TO_STRING},
-        "methodResponses": {"target": MAP_OF_METHOD_RESPONSE},
-        "methodIntegration": {"target": INTEGRATION},
-        "authorizationScopes": {"target": LIST_OF_STRING},
-    },
-)
-
-MAP_OF_METHOD = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MapOfMethod"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": METHOD}},
-)
-
-CREATE_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Resource",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "parentId": {"target": STRING},
-        "pathPart": {"target": STRING},
-        "path": {"target": STRING},
-        "resourceMethods": {"target": MAP_OF_METHOD},
-    },
-)
-
-CREATE_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/restapis/{restApiId}/resources/{parentId}",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-CREATE_REST_API_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateRestApiInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateRestApiRequest",
-        )
-    ],
-    members={
-        "name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "description": {"target": STRING},
-        "version": {"target": STRING},
-        "cloneFrom": {"target": STRING},
-        "binaryMediaTypes": {"target": LIST_OF_STRING},
-        "minimumCompressionSize": {"target": NULLABLE_INTEGER},
-        "apiKeySource": {"target": API_KEY_SOURCE_TYPE},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "policy": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "disableExecuteApiEndpoint": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-    },
-)
-
-CREATE_REST_API_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateRestApiOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#RestApi",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "version": {"target": STRING},
-        "warnings": {"target": LIST_OF_STRING},
-        "binaryMediaTypes": {"target": LIST_OF_STRING},
-        "minimumCompressionSize": {"target": NULLABLE_INTEGER},
-        "apiKeySource": {"target": API_KEY_SOURCE_TYPE},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "policy": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "disableExecuteApiEndpoint": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "rootResourceId": {"target": STRING},
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-        "apiStatus": {"target": API_STATUS},
-        "apiStatusMessage": {"target": STRING},
-    },
-)
-
-CREATE_REST_API = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateRestApi"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "POST", "uri": "/restapis", "code": 201}),
-        )
-    ],
-)
-
-CANARY_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CanarySettings"),
-    members={
-        "percentTraffic": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "deploymentId": {"target": STRING},
-        "stageVariableOverrides": {"target": MAP_OF_STRING_TO_STRING},
-        "useStageCache": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-CREATE_STAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateStageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateStageRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "stageName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "deploymentId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "description": {"target": STRING},
-        "cacheClusterEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "cacheClusterSize": {"target": CACHE_CLUSTER_SIZE},
-        "variables": {"target": MAP_OF_STRING_TO_STRING},
-        "documentationVersion": {"target": STRING},
-        "canarySettings": {"target": CANARY_SETTINGS},
-        "tracingEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-CACHE_CLUSTER_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CacheClusterStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATE_IN_PROGRESS": {"target": UNIT},
-        "AVAILABLE": {"target": UNIT},
-        "DELETE_IN_PROGRESS": {"target": UNIT},
-        "NOT_AVAILABLE": {"target": UNIT},
-        "FLUSH_IN_PROGRESS": {"target": UNIT},
-    },
-)
-
-UNAUTHORIZED_CACHE_CONTROL_HEADER_STRATEGY = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UnauthorizedCacheControlHeaderStrategy"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FAIL_WITH_403": {"target": UNIT},
-        "SUCCEED_WITH_RESPONSE_HEADER": {"target": UNIT},
-        "SUCCEED_WITHOUT_RESPONSE_HEADER": {"target": UNIT},
-    },
-)
-
-METHOD_SETTING = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MethodSetting"),
-    members={
-        "metricsEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "loggingLevel": {"target": STRING},
-        "dataTraceEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "throttlingBurstLimit": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "throttlingRateLimit": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "cachingEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "cacheTtlInSeconds": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "cacheDataEncrypted": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "requireAuthorizationForCacheControl": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "unauthorizedCacheControlHeaderStrategy": {
-            "target": UNAUTHORIZED_CACHE_CONTROL_HEADER_STRATEGY
-        },
-    },
-)
-
-MAP_OF_METHOD_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MapOfMethodSettings"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": METHOD_SETTING}},
-)
-
-CREATE_STAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateStageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Stage",
-        )
-    ],
-    members={
-        "deploymentId": {"target": STRING},
-        "clientCertificateId": {"target": STRING},
-        "stageName": {"target": STRING},
-        "description": {"target": STRING},
-        "cacheClusterEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "cacheClusterSize": {"target": CACHE_CLUSTER_SIZE},
-        "cacheClusterStatus": {"target": CACHE_CLUSTER_STATUS},
-        "methodSettings": {"target": MAP_OF_METHOD_SETTINGS},
-        "variables": {"target": MAP_OF_STRING_TO_STRING},
-        "documentationVersion": {"target": STRING},
-        "accessLogSettings": {"target": ACCESS_LOG_SETTINGS},
-        "canarySettings": {"target": CANARY_SETTINGS},
-        "tracingEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "webAclArn": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "lastUpdatedDate": {"target": TIMESTAMP},
-    },
-)
-
-CREATE_STAGE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateStage"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/restapis/{restApiId}/stages", "code": 201}
-            ),
-        )
-    ],
-)
-
-LIST_OF_API_STAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfApiStage"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": API_STAGE}},
-)
-
-QUOTA_PERIOD_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#QuotaPeriodType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "DAY": {"target": UNIT},
-        "WEEK": {"target": UNIT},
-        "MONTH": {"target": UNIT},
-    },
-)
-
-QUOTA_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#QuotaSettings"),
-    members={
-        "limit": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "offset": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "period": {"target": QUOTA_PERIOD_TYPE},
-    },
-)
-
-CREATE_USAGE_PLAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateUsagePlanInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateUsagePlanRequest",
-        )
-    ],
-    members={
-        "name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "description": {"target": STRING},
-        "apiStages": {"target": LIST_OF_API_STAGE},
-        "throttle": {"target": THROTTLE_SETTINGS},
-        "quota": {"target": QUOTA_SETTINGS},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-CREATE_USAGE_PLAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateUsagePlanOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UsagePlan",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "apiStages": {"target": LIST_OF_API_STAGE},
-        "throttle": {"target": THROTTLE_SETTINGS},
-        "quota": {"target": QUOTA_SETTINGS},
-        "productCode": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-CREATE_USAGE_PLAN = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateUsagePlan"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/usageplans", "code": 201}
-            ),
-        )
-    ],
-)
-
-CREATE_USAGE_PLAN_KEY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateUsagePlanKeyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateUsagePlanKeyRequest",
-        )
-    ],
-    members={
-        "usagePlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "keyId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "keyType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CREATE_USAGE_PLAN_KEY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateUsagePlanKeyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UsagePlanKey",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "type": {"target": STRING},
-        "value": {"target": STRING},
-        "name": {"target": STRING},
-    },
-)
-
-CREATE_USAGE_PLAN_KEY = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateUsagePlanKey"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/usageplans/{usagePlanId}/keys", "code": 201}
-            ),
-        )
-    ],
-)
-
-CREATE_VPC_LINK_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateVpcLinkInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#CreateVpcLinkRequest",
-        )
-    ],
-    members={
-        "name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "description": {"target": STRING},
-        "targetArns": {
-            "target": LIST_OF_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-VPC_LINK_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#VpcLinkStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "AVAILABLE": {"target": UNIT},
-        "PENDING": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-    },
-)
-
-CREATE_VPC_LINK_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#CreateVpcLinkOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#VpcLink",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "targetArns": {"target": LIST_OF_STRING},
-        "status": {"target": VPC_LINK_STATUS},
-        "statusMessage": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-CREATE_VPC_LINK = Schema(
-    id=ShapeID("com.amazonaws.apigateway#CreateVpcLink"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "POST", "uri": "/vpclinks", "code": 202}),
-        )
-    ],
-)
-
-DELETE_API_KEY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteApiKeyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteApiKeyRequest",
-        )
-    ],
-    members={
-        "apiKey": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_API_KEY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteApiKeyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_API_KEY = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteApiKey"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "DELETE", "uri": "/apikeys/{apiKey}", "code": 202}
-            ),
-        )
-    ],
-)
-
-DELETE_AUTHORIZER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteAuthorizerInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteAuthorizerRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "authorizerId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_AUTHORIZER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteAuthorizerOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_AUTHORIZER = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteAuthorizer"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/authorizers/{authorizerId}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_BASE_PATH_MAPPING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteBasePathMappingInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteBasePathMappingRequest",
-        )
-    ],
-    members={
-        "domainName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "domainNameId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="domainNameId")
-            ],
-        },
-        "basePath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_BASE_PATH_MAPPING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteBasePathMappingOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_BASE_PATH_MAPPING = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteBasePathMapping"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/domainnames/{domainName}/basepathmappings/{basePath}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_CLIENT_CERTIFICATE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteClientCertificateInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteClientCertificateRequest",
-        )
-    ],
-    members={
-        "clientCertificateId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_CLIENT_CERTIFICATE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteClientCertificateOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_CLIENT_CERTIFICATE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteClientCertificate"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/clientcertificates/{clientCertificateId}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_DEPLOYMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDeploymentInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteDeploymentRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "deploymentId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_DEPLOYMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDeploymentOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_DEPLOYMENT = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDeployment"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/deployments/{deploymentId}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_DOCUMENTATION_PART_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDocumentationPartInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteDocumentationPartRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "documentationPartId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_DOCUMENTATION_PART_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDocumentationPartOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_DOCUMENTATION_PART = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDocumentationPart"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/documentation/parts/{documentationPartId}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_DOCUMENTATION_VERSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDocumentationVersionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteDocumentationVersionRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "documentationVersion": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_DOCUMENTATION_VERSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDocumentationVersionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_DOCUMENTATION_VERSION = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDocumentationVersion"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/documentation/versions/{documentationVersion}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_DOMAIN_NAME_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDomainNameInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteDomainNameRequest",
-        )
-    ],
-    members={
-        "domainName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "domainNameId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="domainNameId")
-            ],
-        },
-    },
-)
-
-DELETE_DOMAIN_NAME_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDomainNameOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_DOMAIN_NAME = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDomainName"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "DELETE", "uri": "/domainnames/{domainName}", "code": 202}
-            ),
-        )
-    ],
-)
-
-DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDomainNameAccessAssociationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteDomainNameAccessAssociationRequest",
-        )
-    ],
-    members={
-        "domainNameAccessAssociationArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDomainNameAccessAssociationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteDomainNameAccessAssociation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/domainnameaccessassociations/{domainNameAccessAssociationArn}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-GATEWAY_RESPONSE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GatewayResponseType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "DEFAULT_4XX": {"target": UNIT},
-        "DEFAULT_5XX": {"target": UNIT},
-        "RESOURCE_NOT_FOUND": {"target": UNIT},
-        "UNAUTHORIZED": {"target": UNIT},
-        "INVALID_API_KEY": {"target": UNIT},
-        "ACCESS_DENIED": {"target": UNIT},
-        "AUTHORIZER_FAILURE": {"target": UNIT},
-        "AUTHORIZER_CONFIGURATION_ERROR": {"target": UNIT},
-        "INVALID_SIGNATURE": {"target": UNIT},
-        "EXPIRED_TOKEN": {"target": UNIT},
-        "MISSING_AUTHENTICATION_TOKEN": {"target": UNIT},
-        "INTEGRATION_FAILURE": {"target": UNIT},
-        "INTEGRATION_TIMEOUT": {"target": UNIT},
-        "API_CONFIGURATION_ERROR": {"target": UNIT},
-        "UNSUPPORTED_MEDIA_TYPE": {"target": UNIT},
-        "BAD_REQUEST_PARAMETERS": {"target": UNIT},
-        "BAD_REQUEST_BODY": {"target": UNIT},
-        "REQUEST_TOO_LARGE": {"target": UNIT},
-        "THROTTLED": {"target": UNIT},
-        "QUOTA_EXCEEDED": {"target": UNIT},
-        "WAF_FILTERED": {"target": UNIT},
-    },
-)
-
-DELETE_GATEWAY_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteGatewayResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteGatewayResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "responseType": {
-            "target": GATEWAY_RESPONSE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_GATEWAY_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteGatewayResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_GATEWAY_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteGatewayResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/gatewayresponses/{responseType}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_INTEGRATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteIntegrationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteIntegrationRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_INTEGRATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteIntegrationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_INTEGRATION = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteIntegration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_INTEGRATION_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteIntegrationResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteIntegrationResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "statusCode": {
-            "target": STATUS_CODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_INTEGRATION_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteIntegrationResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_INTEGRATION_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteIntegrationResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration/responses/{statusCode}",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_METHOD_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteMethodInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteMethodRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_METHOD_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteMethodOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_METHOD = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteMethod"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_METHOD_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteMethodResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteMethodResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "statusCode": {
-            "target": STATUS_CODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_METHOD_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteMethodResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_METHOD_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteMethodResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/responses/{statusCode}",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_MODEL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteModelInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteModelRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "modelName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_MODEL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteModelOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_MODEL = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteModel"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/models/{modelName}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_REQUEST_VALIDATOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteRequestValidatorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteRequestValidatorRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "requestValidatorId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_REQUEST_VALIDATOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteRequestValidatorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_REQUEST_VALIDATOR = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteRequestValidator"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/requestvalidators/{requestValidatorId}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteResourceRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_REST_API_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteRestApiInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteRestApiRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_REST_API_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteRestApiOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_REST_API = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteRestApi"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "DELETE", "uri": "/restapis/{restApiId}", "code": 202}
-            ),
-        )
-    ],
-)
-
-DELETE_STAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteStageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteStageRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "stageName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_STAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteStageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_STAGE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteStage"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/stages/{stageName}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_USAGE_PLAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteUsagePlanInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteUsagePlanRequest",
-        )
-    ],
-    members={
-        "usagePlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_USAGE_PLAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteUsagePlanOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_USAGE_PLAN = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteUsagePlan"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "DELETE", "uri": "/usageplans/{usagePlanId}", "code": 202}
-            ),
-        )
-    ],
-)
-
-DELETE_USAGE_PLAN_KEY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteUsagePlanKeyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteUsagePlanKeyRequest",
-        )
-    ],
-    members={
-        "usagePlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "keyId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_USAGE_PLAN_KEY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteUsagePlanKeyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_USAGE_PLAN_KEY = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteUsagePlanKey"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/usageplans/{usagePlanId}/keys/{keyId}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_VPC_LINK_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteVpcLinkInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DeleteVpcLinkRequest",
-        )
-    ],
-    members={
-        "vpcLinkId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_VPC_LINK_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DeleteVpcLinkOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_VPC_LINK = Schema(
-    id=ShapeID("com.amazonaws.apigateway#DeleteVpcLink"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "DELETE", "uri": "/vpclinks/{vpcLinkId}", "code": 202}
-            ),
-        )
-    ],
-)
-
-FLUSH_STAGE_AUTHORIZERS_CACHE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#FlushStageAuthorizersCacheInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#FlushStageAuthorizersCacheRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "stageName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-FLUSH_STAGE_AUTHORIZERS_CACHE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#FlushStageAuthorizersCacheOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-FLUSH_STAGE_AUTHORIZERS_CACHE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#FlushStageAuthorizersCache"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/stages/{stageName}/cache/authorizers",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-FLUSH_STAGE_CACHE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#FlushStageCacheInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#FlushStageCacheRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "stageName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-FLUSH_STAGE_CACHE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#FlushStageCacheOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-FLUSH_STAGE_CACHE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#FlushStageCache"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/restapis/{restApiId}/stages/{stageName}/cache/data",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-GENERATE_CLIENT_CERTIFICATE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GenerateClientCertificateInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GenerateClientCertificateRequest",
-        )
-    ],
-    members={
-        "description": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-GENERATE_CLIENT_CERTIFICATE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GenerateClientCertificateOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ClientCertificate",
-        )
-    ],
-    members={
-        "clientCertificateId": {"target": STRING},
-        "description": {"target": STRING},
-        "pemEncodedCertificate": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "expirationDate": {"target": TIMESTAMP},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-GENERATE_CLIENT_CERTIFICATE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GenerateClientCertificate"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/clientcertificates", "code": 201}
-            ),
-        )
-    ],
-)
-
-GET_ACCOUNT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetAccountInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetAccountRequest",
-        )
-    ],
-)
-
-GET_ACCOUNT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetAccountOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Account",
-        )
-    ],
-    members={
-        "cloudwatchRoleArn": {"target": STRING},
-        "throttleSettings": {"target": THROTTLE_SETTINGS},
-        "features": {"target": LIST_OF_STRING},
-        "apiKeyVersion": {"target": STRING},
-    },
-)
-
-GET_ACCOUNT = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetAccount"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "GET", "uri": "/account", "code": 200}),
-        )
-    ],
-)
-
-GET_API_KEY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetApiKeyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetApiKeyRequest",
-        )
-    ],
-    members={
-        "apiKey": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "includeValue": {
-            "target": NULLABLE_BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="includeValue")
-            ],
-        },
-    },
-)
-
-GET_API_KEY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetApiKeyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ApiKey",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "value": {"target": STRING},
-        "name": {"target": STRING},
-        "customerId": {"target": STRING},
-        "description": {"target": STRING},
-        "enabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "createdDate": {"target": TIMESTAMP},
-        "lastUpdatedDate": {"target": TIMESTAMP},
-        "stageKeys": {"target": LIST_OF_STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-GET_API_KEY = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetApiKey"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/apikeys/{apiKey}", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_API_KEYS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetApiKeysInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetApiKeysRequest",
-        )
-    ],
-    members={
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-        "nameQuery": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="name")],
-        },
-        "customerId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="customerId")
-            ],
-        },
-        "includeValues": {
-            "target": NULLABLE_BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="includeValues")
-            ],
-        },
-    },
-)
-
-LIST_OF_API_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfApiKey"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": API_KEY}},
-)
-
-GET_API_KEYS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetApiKeysOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ApiKeys",
-        )
-    ],
-    members={
-        "warnings": {"target": LIST_OF_STRING},
-        "items": {
-            "target": LIST_OF_API_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_API_KEYS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetApiKeys"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "GET", "uri": "/apikeys", "code": 200}),
-        )
-    ],
-)
-
-GET_AUTHORIZER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetAuthorizerInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetAuthorizerRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "authorizerId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_AUTHORIZER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetAuthorizerOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Authorizer",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "type": {"target": AUTHORIZER_TYPE},
-        "providerARNs": {"target": LIST_OF_AR_NS},
-        "authType": {"target": STRING},
-        "authorizerUri": {"target": STRING},
-        "authorizerCredentials": {"target": STRING},
-        "identitySource": {"target": STRING},
-        "identityValidationExpression": {"target": STRING},
-        "authorizerResultTtlInSeconds": {"target": NULLABLE_INTEGER},
-    },
-)
-
-GET_AUTHORIZER = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetAuthorizer"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/authorizers/{authorizerId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_AUTHORIZERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetAuthorizersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetAuthorizersRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-LIST_OF_AUTHORIZER = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfAuthorizer"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": AUTHORIZER}},
-)
-
-GET_AUTHORIZERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetAuthorizersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Authorizers",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_AUTHORIZER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_AUTHORIZERS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetAuthorizers"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/authorizers",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_BASE_PATH_MAPPING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetBasePathMappingInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetBasePathMappingRequest",
-        )
-    ],
-    members={
-        "domainName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "domainNameId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="domainNameId")
-            ],
-        },
-        "basePath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_BASE_PATH_MAPPING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetBasePathMappingOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#BasePathMapping",
-        )
-    ],
-    members={
-        "basePath": {"target": STRING},
-        "restApiId": {"target": STRING},
-        "stage": {"target": STRING},
-    },
-)
-
-GET_BASE_PATH_MAPPING = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetBasePathMapping"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/domainnames/{domainName}/basepathmappings/{basePath}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_BASE_PATH_MAPPINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetBasePathMappingsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetBasePathMappingsRequest",
-        )
-    ],
-    members={
-        "domainName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "domainNameId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="domainNameId")
-            ],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-BASE_PATH_MAPPING = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#BasePathMapping"),
-    members={
-        "basePath": {"target": STRING},
-        "restApiId": {"target": STRING},
-        "stage": {"target": STRING},
-    },
-)
-
-LIST_OF_BASE_PATH_MAPPING = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfBasePathMapping"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BASE_PATH_MAPPING}},
-)
-
-GET_BASE_PATH_MAPPINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetBasePathMappingsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#BasePathMappings",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_BASE_PATH_MAPPING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_BASE_PATH_MAPPINGS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetBasePathMappings"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/domainnames/{domainName}/basepathmappings",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_CLIENT_CERTIFICATE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetClientCertificateInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetClientCertificateRequest",
-        )
-    ],
-    members={
-        "clientCertificateId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_CLIENT_CERTIFICATE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetClientCertificateOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ClientCertificate",
-        )
-    ],
-    members={
-        "clientCertificateId": {"target": STRING},
-        "description": {"target": STRING},
-        "pemEncodedCertificate": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "expirationDate": {"target": TIMESTAMP},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-GET_CLIENT_CERTIFICATE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetClientCertificate"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/clientcertificates/{clientCertificateId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_CLIENT_CERTIFICATES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetClientCertificatesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetClientCertificatesRequest",
-        )
-    ],
-    members={
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-CLIENT_CERTIFICATE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ClientCertificate"),
-    members={
-        "clientCertificateId": {"target": STRING},
-        "description": {"target": STRING},
-        "pemEncodedCertificate": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "expirationDate": {"target": TIMESTAMP},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-LIST_OF_CLIENT_CERTIFICATE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfClientCertificate"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CLIENT_CERTIFICATE}},
-)
-
-GET_CLIENT_CERTIFICATES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetClientCertificatesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ClientCertificates",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_CLIENT_CERTIFICATE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_CLIENT_CERTIFICATES = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetClientCertificates"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/clientcertificates", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_DEPLOYMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDeploymentInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetDeploymentRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "deploymentId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "embed": {
-            "target": LIST_OF_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="embed")],
-        },
-    },
-)
-
-GET_DEPLOYMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDeploymentOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Deployment",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "description": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "apiSummary": {"target": PATH_TO_MAP_OF_METHOD_SNAPSHOT},
-    },
-)
-
-GET_DEPLOYMENT = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetDeployment"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/deployments/{deploymentId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_DEPLOYMENTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDeploymentsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetDeploymentsRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-DEPLOYMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#Deployment"),
-    members={
-        "id": {"target": STRING},
-        "description": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "apiSummary": {"target": PATH_TO_MAP_OF_METHOD_SNAPSHOT},
-    },
-)
-
-LIST_OF_DEPLOYMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfDeployment"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DEPLOYMENT}},
-)
-
-GET_DEPLOYMENTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDeploymentsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Deployments",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_DEPLOYMENT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_DEPLOYMENTS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetDeployments"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/deployments",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_DOCUMENTATION_PART_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationPartInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetDocumentationPartRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "documentationPartId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_DOCUMENTATION_PART_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationPartOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DocumentationPart",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "location": {"target": DOCUMENTATION_PART_LOCATION},
-        "properties": {"target": STRING},
-    },
-)
-
-GET_DOCUMENTATION_PART = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationPart"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/documentation/parts/{documentationPartId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LOCATION_STATUS_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#LocationStatusType"),
-    shape_type=ShapeType.ENUM,
-    members={"DOCUMENTED": {"target": UNIT}, "UNDOCUMENTED": {"target": UNIT}},
-)
-
-GET_DOCUMENTATION_PARTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationPartsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetDocumentationPartsRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "type": {
-            "target": DOCUMENTATION_PART_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="type")],
-        },
-        "nameQuery": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="name")],
-        },
-        "path": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="path")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-        "locationStatus": {
-            "target": LOCATION_STATUS_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="locationStatus")
-            ],
-        },
-    },
-)
-
-DOCUMENTATION_PART = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DocumentationPart"),
-    members={
-        "id": {"target": STRING},
-        "location": {"target": DOCUMENTATION_PART_LOCATION},
-        "properties": {"target": STRING},
-    },
-)
-
-LIST_OF_DOCUMENTATION_PART = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfDocumentationPart"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOCUMENTATION_PART}},
-)
-
-GET_DOCUMENTATION_PARTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationPartsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DocumentationParts",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_DOCUMENTATION_PART,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_DOCUMENTATION_PARTS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationParts"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/documentation/parts",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_DOCUMENTATION_VERSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationVersionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetDocumentationVersionRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "documentationVersion": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_DOCUMENTATION_VERSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationVersionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DocumentationVersion",
-        )
-    ],
-    members={
-        "version": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "description": {"target": STRING},
-    },
-)
-
-GET_DOCUMENTATION_VERSION = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationVersion"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/documentation/versions/{documentationVersion}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_DOCUMENTATION_VERSIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationVersionsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetDocumentationVersionsRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-DOCUMENTATION_VERSION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DocumentationVersion"),
-    members={
-        "version": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "description": {"target": STRING},
-    },
-)
-
-LIST_OF_DOCUMENTATION_VERSION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfDocumentationVersion"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOCUMENTATION_VERSION}},
-)
-
-GET_DOCUMENTATION_VERSIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationVersionsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DocumentationVersions",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_DOCUMENTATION_VERSION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_DOCUMENTATION_VERSIONS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetDocumentationVersions"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/documentation/versions",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_DOMAIN_NAME_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDomainNameInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetDomainNameRequest",
-        )
-    ],
-    members={
-        "domainName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "domainNameId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="domainNameId")
-            ],
-        },
-    },
-)
-
-GET_DOMAIN_NAME_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDomainNameOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DomainName",
-        )
-    ],
-    members={
-        "domainName": {"target": STRING},
-        "domainNameId": {"target": STRING},
-        "domainNameArn": {"target": STRING},
-        "certificateName": {"target": STRING},
-        "certificateArn": {"target": STRING},
-        "certificateUploadDate": {"target": TIMESTAMP},
-        "regionalDomainName": {"target": STRING},
-        "regionalHostedZoneId": {"target": STRING},
-        "regionalCertificateName": {"target": STRING},
-        "regionalCertificateArn": {"target": STRING},
-        "distributionDomainName": {"target": STRING},
-        "distributionHostedZoneId": {"target": STRING},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "domainNameStatus": {"target": DOMAIN_NAME_STATUS},
-        "domainNameStatusMessage": {"target": STRING},
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "mutualTlsAuthentication": {"target": MUTUAL_TLS_AUTHENTICATION},
-        "ownershipVerificationCertificateArn": {"target": STRING},
-        "managementPolicy": {"target": STRING},
-        "policy": {"target": STRING},
-        "routingMode": {"target": ROUTING_MODE},
-    },
-)
-
-GET_DOMAIN_NAME = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetDomainName"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/domainnames/{domainName}", "code": 200}
-            ),
-        )
-    ],
-)
-
-RESOURCE_OWNER = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ResourceOwner"),
-    shape_type=ShapeType.ENUM,
-    members={"SELF": {"target": UNIT}, "OTHER_ACCOUNTS": {"target": UNIT}},
-)
-
-GET_DOMAIN_NAME_ACCESS_ASSOCIATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDomainNameAccessAssociationsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetDomainNameAccessAssociationsRequest",
-        )
-    ],
-    members={
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-        "resourceOwner": {
-            "target": RESOURCE_OWNER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="resourceOwner")
-            ],
-        },
-    },
-)
-
-DOMAIN_NAME_ACCESS_ASSOCIATION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DomainNameAccessAssociation"),
-    members={
-        "domainNameAccessAssociationArn": {"target": STRING},
-        "domainNameArn": {"target": STRING},
-        "accessAssociationSourceType": {"target": ACCESS_ASSOCIATION_SOURCE_TYPE},
-        "accessAssociationSource": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-LIST_OF_DOMAIN_NAME_ACCESS_ASSOCIATION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfDomainNameAccessAssociation"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOMAIN_NAME_ACCESS_ASSOCIATION}},
-)
-
-GET_DOMAIN_NAME_ACCESS_ASSOCIATIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDomainNameAccessAssociationsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DomainNameAccessAssociations",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_DOMAIN_NAME_ACCESS_ASSOCIATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_DOMAIN_NAME_ACCESS_ASSOCIATIONS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetDomainNameAccessAssociations"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/domainnameaccessassociations", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_DOMAIN_NAMES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDomainNamesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetDomainNamesRequest",
-        )
-    ],
-    members={
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-        "resourceOwner": {
-            "target": RESOURCE_OWNER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="resourceOwner")
-            ],
-        },
-    },
-)
-
-DOMAIN_NAME = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#DomainName"),
-    members={
-        "domainName": {"target": STRING},
-        "domainNameId": {"target": STRING},
-        "domainNameArn": {"target": STRING},
-        "certificateName": {"target": STRING},
-        "certificateArn": {"target": STRING},
-        "certificateUploadDate": {"target": TIMESTAMP},
-        "regionalDomainName": {"target": STRING},
-        "regionalHostedZoneId": {"target": STRING},
-        "regionalCertificateName": {"target": STRING},
-        "regionalCertificateArn": {"target": STRING},
-        "distributionDomainName": {"target": STRING},
-        "distributionHostedZoneId": {"target": STRING},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "domainNameStatus": {"target": DOMAIN_NAME_STATUS},
-        "domainNameStatusMessage": {"target": STRING},
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "mutualTlsAuthentication": {"target": MUTUAL_TLS_AUTHENTICATION},
-        "ownershipVerificationCertificateArn": {"target": STRING},
-        "managementPolicy": {"target": STRING},
-        "policy": {"target": STRING},
-        "routingMode": {"target": ROUTING_MODE},
-    },
-)
-
-LIST_OF_DOMAIN_NAME = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfDomainName"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOMAIN_NAME}},
-)
-
-GET_DOMAIN_NAMES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetDomainNamesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DomainNames",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_DOMAIN_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_DOMAIN_NAMES = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetDomainNames"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/domainnames", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_EXPORT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetExportInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetExportRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "stageName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "exportType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "parameters": {
-            "target": MAP_OF_STRING_TO_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQueryParams"))],
-        },
-        "accepts": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Accept")],
-        },
-    },
-)
-
-BLOB = Schema(id=ShapeID("com.amazonaws.apigateway#Blob"), shape_type=ShapeType.BLOB)
-
-GET_EXPORT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetExportOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ExportResponse",
-        )
-    ],
-    members={
-        "contentType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Content-Type")
-            ],
-        },
-        "contentDisposition": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="Content-Disposition"
-                )
-            ],
-        },
-        "body": {
-            "target": BLOB,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-    },
-)
-
-GET_EXPORT = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetExport"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/stages/{stageName}/exports/{exportType}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_GATEWAY_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetGatewayResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetGatewayResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "responseType": {
-            "target": GATEWAY_RESPONSE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_GATEWAY_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetGatewayResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GatewayResponse",
-        )
-    ],
-    members={
-        "responseType": {"target": GATEWAY_RESPONSE_TYPE},
-        "statusCode": {"target": STATUS_CODE},
-        "responseParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "responseTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "defaultResponse": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-GET_GATEWAY_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetGatewayResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/gatewayresponses/{responseType}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_GATEWAY_RESPONSES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetGatewayResponsesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetGatewayResponsesRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-GATEWAY_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GatewayResponse"),
-    members={
-        "responseType": {"target": GATEWAY_RESPONSE_TYPE},
-        "statusCode": {"target": STATUS_CODE},
-        "responseParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "responseTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "defaultResponse": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-LIST_OF_GATEWAY_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfGatewayResponse"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": GATEWAY_RESPONSE}},
-)
-
-GET_GATEWAY_RESPONSES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetGatewayResponsesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GatewayResponses",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_GATEWAY_RESPONSE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_GATEWAY_RESPONSES = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetGatewayResponses"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/gatewayresponses",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_INTEGRATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetIntegrationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetIntegrationRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_INTEGRATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetIntegrationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Integration",
-        )
-    ],
-    members={
-        "type": {"target": INTEGRATION_TYPE},
-        "httpMethod": {"target": STRING},
-        "uri": {"target": STRING},
-        "connectionType": {"target": CONNECTION_TYPE},
-        "connectionId": {"target": STRING},
-        "credentials": {"target": STRING},
-        "requestParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "requestTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "passthroughBehavior": {"target": STRING},
-        "contentHandling": {"target": CONTENT_HANDLING_STRATEGY},
-        "timeoutInMillis": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "cacheNamespace": {"target": STRING},
-        "cacheKeyParameters": {"target": LIST_OF_STRING},
-        "integrationResponses": {"target": MAP_OF_INTEGRATION_RESPONSE},
-        "tlsConfig": {"target": TLS_CONFIG},
-        "responseTransferMode": {"target": RESPONSE_TRANSFER_MODE},
-        "integrationTarget": {"target": STRING},
-    },
-)
-
-GET_INTEGRATION = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetIntegration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_INTEGRATION_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetIntegrationResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetIntegrationResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "statusCode": {
-            "target": STATUS_CODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_INTEGRATION_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetIntegrationResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#IntegrationResponse",
-        )
-    ],
-    members={
-        "statusCode": {"target": STATUS_CODE},
-        "selectionPattern": {"target": STRING},
-        "responseParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "responseTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "contentHandling": {"target": CONTENT_HANDLING_STRATEGY},
-    },
-)
-
-GET_INTEGRATION_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetIntegrationResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration/responses/{statusCode}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_METHOD_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetMethodInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetMethodRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_METHOD_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetMethodOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Method",
-        )
-    ],
-    members={
-        "httpMethod": {"target": STRING},
-        "authorizationType": {"target": STRING},
-        "authorizerId": {"target": STRING},
-        "apiKeyRequired": {"target": NULLABLE_BOOLEAN},
-        "requestValidatorId": {"target": STRING},
-        "operationName": {"target": STRING},
-        "requestParameters": {"target": MAP_OF_STRING_TO_BOOLEAN},
-        "requestModels": {"target": MAP_OF_STRING_TO_STRING},
-        "methodResponses": {"target": MAP_OF_METHOD_RESPONSE},
-        "methodIntegration": {"target": INTEGRATION},
-        "authorizationScopes": {"target": LIST_OF_STRING},
-    },
-)
-
-GET_METHOD = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetMethod"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_METHOD_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetMethodResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetMethodResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "statusCode": {
-            "target": STATUS_CODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_METHOD_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetMethodResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#MethodResponse",
-        )
-    ],
-    members={
-        "statusCode": {"target": STATUS_CODE},
-        "responseParameters": {"target": MAP_OF_STRING_TO_BOOLEAN},
-        "responseModels": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-GET_METHOD_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetMethodResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/responses/{statusCode}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_MODEL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetModelInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetModelRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "modelName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "flatten": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="flatten"),
-            ],
-        },
-    },
-)
-
-GET_MODEL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetModelOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Model",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "schema": {"target": STRING},
-        "contentType": {"target": STRING},
-    },
-)
-
-GET_MODEL = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetModel"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/models/{modelName}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_MODELS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetModelsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetModelsRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-MODEL = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#Model"),
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "schema": {"target": STRING},
-        "contentType": {"target": STRING},
-    },
-)
-
-LIST_OF_MODEL = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfModel"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MODEL}},
-)
-
-GET_MODELS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetModelsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Models",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_MODEL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_MODELS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetModels"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/restapis/{restApiId}/models", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_MODEL_TEMPLATE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetModelTemplateInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetModelTemplateRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "modelName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_MODEL_TEMPLATE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetModelTemplateOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Template",
-        )
-    ],
-    members={"value": {"target": STRING}},
-)
-
-GET_MODEL_TEMPLATE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetModelTemplate"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/models/{modelName}/default_template",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_REQUEST_VALIDATOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetRequestValidatorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetRequestValidatorRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "requestValidatorId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_REQUEST_VALIDATOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetRequestValidatorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#RequestValidator",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "validateRequestBody": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "validateRequestParameters": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-GET_REQUEST_VALIDATOR = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetRequestValidator"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/requestvalidators/{requestValidatorId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_REQUEST_VALIDATORS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetRequestValidatorsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetRequestValidatorsRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-REQUEST_VALIDATOR = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#RequestValidator"),
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "validateRequestBody": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "validateRequestParameters": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-LIST_OF_REQUEST_VALIDATOR = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfRequestValidator"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REQUEST_VALIDATOR}},
-)
-
-GET_REQUEST_VALIDATORS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetRequestValidatorsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#RequestValidators",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_REQUEST_VALIDATOR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_REQUEST_VALIDATORS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetRequestValidators"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/requestvalidators",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetResourceRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "embed": {
-            "target": LIST_OF_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="embed")],
-        },
-    },
-)
-
-GET_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Resource",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "parentId": {"target": STRING},
-        "pathPart": {"target": STRING},
-        "path": {"target": STRING},
-        "resourceMethods": {"target": MAP_OF_METHOD},
-    },
-)
-
-GET_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_RESOURCES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetResourcesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetResourcesRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-        "embed": {
-            "target": LIST_OF_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="embed")],
-        },
-    },
-)
-
-RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#Resource"),
-    members={
-        "id": {"target": STRING},
-        "parentId": {"target": STRING},
-        "pathPart": {"target": STRING},
-        "path": {"target": STRING},
-        "resourceMethods": {"target": MAP_OF_METHOD},
-    },
-)
-
-LIST_OF_RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfResource"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RESOURCE}},
-)
-
-GET_RESOURCES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetResourcesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Resources",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_RESOURCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_RESOURCES = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetResources"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/restapis/{restApiId}/resources", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_REST_API_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetRestApiInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetRestApiRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_REST_API_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetRestApiOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#RestApi",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "version": {"target": STRING},
-        "warnings": {"target": LIST_OF_STRING},
-        "binaryMediaTypes": {"target": LIST_OF_STRING},
-        "minimumCompressionSize": {"target": NULLABLE_INTEGER},
-        "apiKeySource": {"target": API_KEY_SOURCE_TYPE},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "policy": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "disableExecuteApiEndpoint": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "rootResourceId": {"target": STRING},
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-        "apiStatus": {"target": API_STATUS},
-        "apiStatusMessage": {"target": STRING},
-    },
-)
-
-GET_REST_API = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetRestApi"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/restapis/{restApiId}", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_REST_APIS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetRestApisInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetRestApisRequest",
-        )
-    ],
-    members={
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-REST_API = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#RestApi"),
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "version": {"target": STRING},
-        "warnings": {"target": LIST_OF_STRING},
-        "binaryMediaTypes": {"target": LIST_OF_STRING},
-        "minimumCompressionSize": {"target": NULLABLE_INTEGER},
-        "apiKeySource": {"target": API_KEY_SOURCE_TYPE},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "policy": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "disableExecuteApiEndpoint": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "rootResourceId": {"target": STRING},
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-        "apiStatus": {"target": API_STATUS},
-        "apiStatusMessage": {"target": STRING},
-    },
-)
-
-LIST_OF_REST_API = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfRestApi"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REST_API}},
-)
-
-GET_REST_APIS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetRestApisOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#RestApis",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_REST_API,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_REST_APIS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetRestApis"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "GET", "uri": "/restapis", "code": 200}),
-        )
-    ],
-)
-
-GET_SDK_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetSdkInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetSdkRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "stageName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "sdkType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "parameters": {
-            "target": MAP_OF_STRING_TO_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQueryParams"))],
-        },
-    },
-)
-
-GET_SDK_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetSdkOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#SdkResponse",
-        )
-    ],
-    members={
-        "contentType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Content-Type")
-            ],
-        },
-        "contentDisposition": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="Content-Disposition"
-                )
-            ],
-        },
-        "body": {
-            "target": BLOB,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-    },
-)
-
-GET_SDK = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetSdk"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/stages/{stageName}/sdks/{sdkType}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_SDK_TYPE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetSdkTypeInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetSdkTypeRequest",
-        )
-    ],
-    members={
-        "id": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-SDK_CONFIGURATION_PROPERTY = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#SdkConfigurationProperty"),
-    members={
-        "name": {"target": STRING},
-        "friendlyName": {"target": STRING},
-        "description": {"target": STRING},
-        "required": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "defaultValue": {"target": STRING},
-    },
-)
-
-LIST_OF_SDK_CONFIGURATION_PROPERTY = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfSdkConfigurationProperty"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SDK_CONFIGURATION_PROPERTY}},
-)
-
-GET_SDK_TYPE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetSdkTypeOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#SdkType",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "friendlyName": {"target": STRING},
-        "description": {"target": STRING},
-        "configurationProperties": {"target": LIST_OF_SDK_CONFIGURATION_PROPERTY},
-    },
-)
-
-GET_SDK_TYPE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetSdkType"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/sdktypes/{id}", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_SDK_TYPES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetSdkTypesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetSdkTypesRequest",
-        )
-    ],
-    members={
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-SDK_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#SdkType"),
-    members={
-        "id": {"target": STRING},
-        "friendlyName": {"target": STRING},
-        "description": {"target": STRING},
-        "configurationProperties": {"target": LIST_OF_SDK_CONFIGURATION_PROPERTY},
-    },
-)
-
-LIST_OF_SDK_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfSdkType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SDK_TYPE}},
-)
-
-GET_SDK_TYPES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetSdkTypesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#SdkTypes",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_SDK_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        }
-    },
-)
-
-GET_SDK_TYPES = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetSdkTypes"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "GET", "uri": "/sdktypes", "code": 200}),
-        )
-    ],
-)
-
-GET_STAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetStageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetStageRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "stageName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_STAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetStageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Stage",
-        )
-    ],
-    members={
-        "deploymentId": {"target": STRING},
-        "clientCertificateId": {"target": STRING},
-        "stageName": {"target": STRING},
-        "description": {"target": STRING},
-        "cacheClusterEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "cacheClusterSize": {"target": CACHE_CLUSTER_SIZE},
-        "cacheClusterStatus": {"target": CACHE_CLUSTER_STATUS},
-        "methodSettings": {"target": MAP_OF_METHOD_SETTINGS},
-        "variables": {"target": MAP_OF_STRING_TO_STRING},
-        "documentationVersion": {"target": STRING},
-        "accessLogSettings": {"target": ACCESS_LOG_SETTINGS},
-        "canarySettings": {"target": CANARY_SETTINGS},
-        "tracingEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "webAclArn": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "lastUpdatedDate": {"target": TIMESTAMP},
-    },
-)
-
-GET_STAGE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetStage"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/restapis/{restApiId}/stages/{stageName}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_STAGES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetStagesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetStagesRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "deploymentId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="deploymentId")
-            ],
-        },
-    },
-)
-
-STAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#Stage"),
-    members={
-        "deploymentId": {"target": STRING},
-        "clientCertificateId": {"target": STRING},
-        "stageName": {"target": STRING},
-        "description": {"target": STRING},
-        "cacheClusterEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "cacheClusterSize": {"target": CACHE_CLUSTER_SIZE},
-        "cacheClusterStatus": {"target": CACHE_CLUSTER_STATUS},
-        "methodSettings": {"target": MAP_OF_METHOD_SETTINGS},
-        "variables": {"target": MAP_OF_STRING_TO_STRING},
-        "documentationVersion": {"target": STRING},
-        "accessLogSettings": {"target": ACCESS_LOG_SETTINGS},
-        "canarySettings": {"target": CANARY_SETTINGS},
-        "tracingEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "webAclArn": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "lastUpdatedDate": {"target": TIMESTAMP},
-    },
-)
-
-LIST_OF_STAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfStage"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STAGE}},
-)
-
-GET_STAGES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetStagesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Stages",
-        )
-    ],
-    members={"item": {"target": LIST_OF_STAGE}},
-)
-
-GET_STAGES = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetStages"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/restapis/{restApiId}/stages", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_TAGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetTagsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetTagsRequest",
-        )
-    ],
-    members={
-        "resourceArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-GET_TAGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetTagsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Tags",
-        )
-    ],
-    members={"tags": {"target": MAP_OF_STRING_TO_STRING}},
-)
-
-GET_TAGS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetTags"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/tags/{resourceArn}", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_USAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetUsageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetUsageRequest",
-        )
-    ],
-    members={
-        "usagePlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "keyId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="keyId")],
-        },
-        "startDate": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="startDate"),
-            ],
-        },
-        "endDate": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="endDate"),
-            ],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-LONG = Schema(
-    id=ShapeID("com.amazonaws.apigateway#Long"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-LIST_OF_LONG = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfLong"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LONG}},
-)
-
-LIST_OF_USAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfUsage"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LIST_OF_LONG}},
-)
-
-MAP_OF_KEY_USAGES = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MapOfKeyUsages"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": LIST_OF_USAGE}},
-)
-
-GET_USAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetUsageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Usage",
-        )
-    ],
-    members={
-        "usagePlanId": {"target": STRING},
-        "startDate": {"target": STRING},
-        "endDate": {"target": STRING},
-        "items": {
-            "target": MAP_OF_KEY_USAGES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="values")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_USAGE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetUsage"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/usageplans/{usagePlanId}/usage", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_USAGE_PLAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlanInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetUsagePlanRequest",
-        )
-    ],
-    members={
-        "usagePlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_USAGE_PLAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlanOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UsagePlan",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "apiStages": {"target": LIST_OF_API_STAGE},
-        "throttle": {"target": THROTTLE_SETTINGS},
-        "quota": {"target": QUOTA_SETTINGS},
-        "productCode": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-GET_USAGE_PLAN = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlan"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/usageplans/{usagePlanId}", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_USAGE_PLAN_KEY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlanKeyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetUsagePlanKeyRequest",
-        )
-    ],
-    members={
-        "usagePlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "keyId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_USAGE_PLAN_KEY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlanKeyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UsagePlanKey",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "type": {"target": STRING},
-        "value": {"target": STRING},
-        "name": {"target": STRING},
-    },
-)
-
-GET_USAGE_PLAN_KEY = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlanKey"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/usageplans/{usagePlanId}/keys/{keyId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_USAGE_PLAN_KEYS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlanKeysInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetUsagePlanKeysRequest",
-        )
-    ],
-    members={
-        "usagePlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-        "nameQuery": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="name")],
-        },
-    },
-)
-
-USAGE_PLAN_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UsagePlanKey"),
-    members={
-        "id": {"target": STRING},
-        "type": {"target": STRING},
-        "value": {"target": STRING},
-        "name": {"target": STRING},
-    },
-)
-
-LIST_OF_USAGE_PLAN_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfUsagePlanKey"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": USAGE_PLAN_KEY}},
-)
-
-GET_USAGE_PLAN_KEYS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlanKeysOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UsagePlanKeys",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_USAGE_PLAN_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_USAGE_PLAN_KEYS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlanKeys"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/usageplans/{usagePlanId}/keys", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_USAGE_PLANS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlansInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetUsagePlansRequest",
-        )
-    ],
-    members={
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "keyId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="keyId")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-USAGE_PLAN = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UsagePlan"),
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "apiStages": {"target": LIST_OF_API_STAGE},
-        "throttle": {"target": THROTTLE_SETTINGS},
-        "quota": {"target": QUOTA_SETTINGS},
-        "productCode": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-LIST_OF_USAGE_PLAN = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfUsagePlan"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": USAGE_PLAN}},
-)
-
-GET_USAGE_PLANS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlansOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UsagePlans",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_USAGE_PLAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_USAGE_PLANS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetUsagePlans"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/usageplans", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_VPC_LINK_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetVpcLinkInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetVpcLinkRequest",
-        )
-    ],
-    members={
-        "vpcLinkId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_VPC_LINK_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetVpcLinkOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#VpcLink",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "targetArns": {"target": LIST_OF_STRING},
-        "status": {"target": VPC_LINK_STATUS},
-        "statusMessage": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-GET_VPC_LINK = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetVpcLink"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/vpclinks/{vpcLinkId}", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_VPC_LINKS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetVpcLinksInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GetVpcLinksRequest",
-        )
-    ],
-    members={
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-        "limit": {
-            "target": NULLABLE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="limit")],
-        },
-    },
-)
-
-VPC_LINK = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#VpcLink"),
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "targetArns": {"target": LIST_OF_STRING},
-        "status": {"target": VPC_LINK_STATUS},
-        "statusMessage": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-LIST_OF_VPC_LINK = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfVpcLink"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VPC_LINK}},
-)
-
-GET_VPC_LINKS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#GetVpcLinksOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#VpcLinks",
-        )
-    ],
-    members={
-        "items": {
-            "target": LIST_OF_VPC_LINK,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="item")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-GET_VPC_LINKS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#GetVpcLinks"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "GET", "uri": "/vpclinks", "code": 200}),
-        )
-    ],
-)
-
-IMPORT_API_KEYS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ImportApiKeysInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ImportApiKeysRequest",
-        )
-    ],
-    members={
-        "body": {
-            "target": BLOB,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-        "format": {
-            "target": API_KEYS_FORMAT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="format"),
-            ],
-        },
-        "failOnWarnings": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="failonwarnings"),
-            ],
-        },
-    },
-)
-
-IMPORT_API_KEYS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ImportApiKeysOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ApiKeyIds",
-        )
-    ],
-    members={"ids": {"target": LIST_OF_STRING}, "warnings": {"target": LIST_OF_STRING}},
-)
-
-IMPORT_API_KEYS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#ImportApiKeys"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/apikeys?mode=import", "code": 201}
-            ),
-        )
-    ],
-)
-
-PUT_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutMode"),
-    shape_type=ShapeType.ENUM,
-    members={"Merge": {"target": UNIT}, "Overwrite": {"target": UNIT}},
-)
-
-IMPORT_DOCUMENTATION_PARTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ImportDocumentationPartsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ImportDocumentationPartsRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "mode": {
-            "target": PUT_MODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="mode")],
-        },
-        "failOnWarnings": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="failonwarnings"),
-            ],
-        },
-        "body": {
-            "target": BLOB,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-    },
-)
-
-IMPORT_DOCUMENTATION_PARTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ImportDocumentationPartsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DocumentationPartIds",
-        )
-    ],
-    members={"ids": {"target": LIST_OF_STRING}, "warnings": {"target": LIST_OF_STRING}},
-)
-
-IMPORT_DOCUMENTATION_PARTS = Schema(
-    id=ShapeID("com.amazonaws.apigateway#ImportDocumentationParts"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/restapis/{restApiId}/documentation/parts",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-IMPORT_REST_API_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ImportRestApiInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ImportRestApiRequest",
-        )
-    ],
-    members={
-        "failOnWarnings": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="failonwarnings"),
-            ],
-        },
-        "parameters": {
-            "target": MAP_OF_STRING_TO_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQueryParams"))],
-        },
-        "body": {
-            "target": BLOB,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-    },
-)
-
-IMPORT_REST_API_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ImportRestApiOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#RestApi",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "version": {"target": STRING},
-        "warnings": {"target": LIST_OF_STRING},
-        "binaryMediaTypes": {"target": LIST_OF_STRING},
-        "minimumCompressionSize": {"target": NULLABLE_INTEGER},
-        "apiKeySource": {"target": API_KEY_SOURCE_TYPE},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "policy": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "disableExecuteApiEndpoint": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "rootResourceId": {"target": STRING},
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-        "apiStatus": {"target": API_STATUS},
-        "apiStatusMessage": {"target": STRING},
-    },
-)
-
-IMPORT_REST_API = Schema(
-    id=ShapeID("com.amazonaws.apigateway#ImportRestApi"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/restapis?mode=import", "code": 201}
-            ),
-        )
-    ],
-)
-
-PUT_GATEWAY_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutGatewayResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#PutGatewayResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "responseType": {
-            "target": GATEWAY_RESPONSE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "statusCode": {"target": STATUS_CODE},
-        "responseParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "responseTemplates": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-PUT_GATEWAY_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutGatewayResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GatewayResponse",
-        )
-    ],
-    members={
-        "responseType": {"target": GATEWAY_RESPONSE_TYPE},
-        "statusCode": {"target": STATUS_CODE},
-        "responseParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "responseTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "defaultResponse": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-PUT_GATEWAY_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#PutGatewayResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/restapis/{restApiId}/gatewayresponses/{responseType}",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_INTEGRATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutIntegrationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#PutIntegrationRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="requestHttpMethod"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "type": {
-            "target": INTEGRATION_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "integrationHttpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="httpMethod")
-            ],
-        },
-        "uri": {"target": STRING},
-        "connectionType": {"target": CONNECTION_TYPE},
-        "connectionId": {"target": STRING},
-        "credentials": {"target": STRING},
-        "requestParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "requestTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "passthroughBehavior": {"target": STRING},
-        "cacheNamespace": {"target": STRING},
-        "cacheKeyParameters": {"target": LIST_OF_STRING},
-        "contentHandling": {"target": CONTENT_HANDLING_STRATEGY},
-        "timeoutInMillis": {"target": NULLABLE_INTEGER},
-        "tlsConfig": {"target": TLS_CONFIG},
-        "responseTransferMode": {"target": RESPONSE_TRANSFER_MODE},
-        "integrationTarget": {"target": STRING},
-    },
-)
-
-PUT_INTEGRATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutIntegrationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Integration",
-        )
-    ],
-    members={
-        "type": {"target": INTEGRATION_TYPE},
-        "httpMethod": {"target": STRING},
-        "uri": {"target": STRING},
-        "connectionType": {"target": CONNECTION_TYPE},
-        "connectionId": {"target": STRING},
-        "credentials": {"target": STRING},
-        "requestParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "requestTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "passthroughBehavior": {"target": STRING},
-        "contentHandling": {"target": CONTENT_HANDLING_STRATEGY},
-        "timeoutInMillis": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "cacheNamespace": {"target": STRING},
-        "cacheKeyParameters": {"target": LIST_OF_STRING},
-        "integrationResponses": {"target": MAP_OF_INTEGRATION_RESPONSE},
-        "tlsConfig": {"target": TLS_CONFIG},
-        "responseTransferMode": {"target": RESPONSE_TRANSFER_MODE},
-        "integrationTarget": {"target": STRING},
-    },
-)
-
-PUT_INTEGRATION = Schema(
-    id=ShapeID("com.amazonaws.apigateway#PutIntegration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_INTEGRATION_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutIntegrationResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#PutIntegrationResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "statusCode": {
-            "target": STATUS_CODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "selectionPattern": {"target": STRING},
-        "responseParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "responseTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "contentHandling": {"target": CONTENT_HANDLING_STRATEGY},
-    },
-)
-
-PUT_INTEGRATION_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutIntegrationResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#IntegrationResponse",
-        )
-    ],
-    members={
-        "statusCode": {"target": STATUS_CODE},
-        "selectionPattern": {"target": STRING},
-        "responseParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "responseTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "contentHandling": {"target": CONTENT_HANDLING_STRATEGY},
-    },
-)
-
-PUT_INTEGRATION_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#PutIntegrationResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration/responses/{statusCode}",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_METHOD_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutMethodInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#PutMethodRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "authorizationType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "authorizerId": {"target": STRING},
-        "apiKeyRequired": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "operationName": {"target": STRING},
-        "requestParameters": {"target": MAP_OF_STRING_TO_BOOLEAN},
-        "requestModels": {"target": MAP_OF_STRING_TO_STRING},
-        "requestValidatorId": {"target": STRING},
-        "authorizationScopes": {"target": LIST_OF_STRING},
-    },
-)
-
-PUT_METHOD_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutMethodOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Method",
-        )
-    ],
-    members={
-        "httpMethod": {"target": STRING},
-        "authorizationType": {"target": STRING},
-        "authorizerId": {"target": STRING},
-        "apiKeyRequired": {"target": NULLABLE_BOOLEAN},
-        "requestValidatorId": {"target": STRING},
-        "operationName": {"target": STRING},
-        "requestParameters": {"target": MAP_OF_STRING_TO_BOOLEAN},
-        "requestModels": {"target": MAP_OF_STRING_TO_STRING},
-        "methodResponses": {"target": MAP_OF_METHOD_RESPONSE},
-        "methodIntegration": {"target": INTEGRATION},
-        "authorizationScopes": {"target": LIST_OF_STRING},
-    },
-)
-
-PUT_METHOD = Schema(
-    id=ShapeID("com.amazonaws.apigateway#PutMethod"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_METHOD_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutMethodResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#PutMethodResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "statusCode": {
-            "target": STATUS_CODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "responseParameters": {"target": MAP_OF_STRING_TO_BOOLEAN},
-        "responseModels": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-PUT_METHOD_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutMethodResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#MethodResponse",
-        )
-    ],
-    members={
-        "statusCode": {"target": STATUS_CODE},
-        "responseParameters": {"target": MAP_OF_STRING_TO_BOOLEAN},
-        "responseModels": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-PUT_METHOD_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#PutMethodResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/responses/{statusCode}",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_REST_API_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutRestApiInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#PutRestApiRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "mode": {
-            "target": PUT_MODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="mode")],
-        },
-        "failOnWarnings": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="failonwarnings"),
-            ],
-        },
-        "parameters": {
-            "target": MAP_OF_STRING_TO_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQueryParams"))],
-        },
-        "body": {
-            "target": BLOB,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-    },
-)
-
-PUT_REST_API_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PutRestApiOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#RestApi",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "version": {"target": STRING},
-        "warnings": {"target": LIST_OF_STRING},
-        "binaryMediaTypes": {"target": LIST_OF_STRING},
-        "minimumCompressionSize": {"target": NULLABLE_INTEGER},
-        "apiKeySource": {"target": API_KEY_SOURCE_TYPE},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "policy": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "disableExecuteApiEndpoint": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "rootResourceId": {"target": STRING},
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-        "apiStatus": {"target": API_STATUS},
-        "apiStatusMessage": {"target": STRING},
-    },
-)
-
-PUT_REST_API = Schema(
-    id=ShapeID("com.amazonaws.apigateway#PutRestApi"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "PUT", "uri": "/restapis/{restApiId}", "code": 200}
-            ),
-        )
-    ],
-)
-
-REJECT_DOMAIN_NAME_ACCESS_ASSOCIATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#RejectDomainNameAccessAssociationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#RejectDomainNameAccessAssociationRequest",
-        )
-    ],
-    members={
-        "domainNameAccessAssociationArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpQuery"),
-                    value="domainNameAccessAssociationArn",
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
+
+
+n0 = "com.amazonaws.apigateway"
+_AAST = "AccessAssociationSourceType"
+_VPCE = "VPCE"
+_sV = "smithy.api#enumValue"
+_S = "String"
+_ALS = "AccessLogSettings"
+_f = "format"
+_dA = "destinationArn"
+_LOS = "ListOfString"
+_m = "member"
+_I = "Integer"
+_s = "smithy.api#default"
+_D = "Double"
+_TS = "ThrottleSettings"
+_bL = "burstLimit"
+_rL = "rateLimit"
+_T = "Timestamp"
+_B = "Boolean"
+_MOSTS = "MapOfStringToString"
+_k = "key"
+_v = "value"
+_AK = "ApiKey"
+_i = "id"
+_n = "name"
+_cI = "customerId"
+_d = "description"
+_e = "enabled"
+_cD = "createdDate"
+_lUD = "lastUpdatedDate"
+_sK = "stageKeys"
+_t = "tags"
+_AKF = "ApiKeysFormat"
+_c = "csv"
+_AKST = "ApiKeySourceType"
+_HEADER = "HEADER"
+_AUTHORIZER = "AUTHORIZER"
+_MOASTS = "MapOfApiStageThrottleSettings"
+_AS = "ApiStage"
+_aI = "apiId"
+_st = "stage"
+_th = "throttle"
+_ASp = "ApiStatus"
+_UPDATING = "UPDATING"
+_AVAILABLE = "AVAILABLE"
+_PENDING = "PENDING"
+_FAILED = "FAILED"
+_NI = "NullableInteger"
+_PARN = "ProviderARN"
+_LOARN = "ListOfARNs"
+_AT = "AuthorizerType"
+_TOKEN = "TOKEN"
+_REQUEST = "REQUEST"
+_CUP = "COGNITO_USER_POOLS"
+_A = "Authorizer"
+_ty = "type"
+_pARN = "providerARNs"
+_aT = "authType"
+_aU = "authorizerUri"
+_aC = "authorizerCredentials"
+_iS = "identitySource"
+_iVE = "identityValidationExpression"
+_aRTIS = "authorizerResultTtlInSeconds"
+_BRE = "BadRequestException"
+_sm = "smithy.api#error"
+_cl = "client"
+_sE = "smithy.api#httpError"
+_me = "message"
+_CE = "ConflictException"
+_SK = "StageKey"
+_rAI = "restApiId"
+_sN = "stageName"
+_LOSK = "ListOfStageKeys"
+_CAKI = "CreateApiKeyInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cCAKR = "com.amazonaws.apigateway#CreateApiKeyRequest"
+_smi = "smithy.api#input"
+_gDI = "generateDistinctId"
+_CAKO = "CreateApiKeyOutput"
+_cAK = "com.amazonaws.apigateway#ApiKey"
+_smit = "smithy.api#output"
+_LEE = "LimitExceededException"
+_rAS = "retryAfterSeconds"
+_sH = "smithy.api#httpHeader"
+_RA = "Retry-After"
+_NFE = "NotFoundException"
+_TMRE = "TooManyRequestsException"
+_UE = "UnauthorizedException"
+_CAK = "CreateApiKey"
+_smith = "smithy.api#http"
+_CAI = "CreateAuthorizerInput"
+_cCAR = "com.amazonaws.apigateway#CreateAuthorizerRequest"
+_smithy = "smithy.api#required"
+_sL = "smithy.api#httpLabel"
+_CAO = "CreateAuthorizerOutput"
+_cA = "com.amazonaws.apigateway#Authorizer"
+_CA = "CreateAuthorizer"
+_CBPMI = "CreateBasePathMappingInput"
+_cCBPMR = "com.amazonaws.apigateway#CreateBasePathMappingRequest"
+_dN = "domainName"
+_dNI = "domainNameId"
+_sQ = "smithy.api#httpQuery"
+_bP = "basePath"
+_CBPMO = "CreateBasePathMappingOutput"
+_cBPM = "com.amazonaws.apigateway#BasePathMapping"
+_CBPM = "CreateBasePathMapping"
+_NB = "NullableBoolean"
+_CCS = "CacheClusterSize"
+_SPG = "SIZE_0_POINT_5_GB"
+_v_ = "0.5"
+_SPG_ = "SIZE_1_POINT_6_GB"
+_v__ = "1.6"
+_SPG__ = "SIZE_6_POINT_1_GB"
+_v___ = "6.1"
+_SPG___ = "SIZE_13_POINT_5_GB"
+_v____ = "13.5"
+_SPG____ = "SIZE_28_POINT_4_GB"
+_v_____ = "28.4"
+_SPG_____ = "SIZE_58_POINT_2_GB"
+_v______ = "58.2"
+_SG = "SIZE_118_GB"
+_v_______ = "118"
+_SG_ = "SIZE_237_GB"
+_v________ = "237"
+_DCS = "DeploymentCanarySettings"
+_pT = "percentTraffic"
+_sVO = "stageVariableOverrides"
+_uSC = "useStageCache"
+_CDI = "CreateDeploymentInput"
+_cCDR = "com.amazonaws.apigateway#CreateDeploymentRequest"
+_sD = "stageDescription"
+_cCE = "cacheClusterEnabled"
+_cCS = "cacheClusterSize"
+_va = "variables"
+_cS = "canarySettings"
+_tE = "tracingEnabled"
+_MS = "MethodSnapshot"
+_aTu = "authorizationType"
+_aKR = "apiKeyRequired"
+_MOMS = "MapOfMethodSnapshot"
+_PTMOMS = "PathToMapOfMethodSnapshot"
+_CDO = "CreateDeploymentOutput"
+_cDo = "com.amazonaws.apigateway#Deployment"
+_aS = "apiSummary"
+_SUE = "ServiceUnavailableException"
+_se = "server"
+_CD = "CreateDeployment"
+_DPLSC = "DocumentationPartLocationStatusCode"
+_DPT = "DocumentationPartType"
+_API = "API"
+_MODEL = "MODEL"
+_RESOURCE = "RESOURCE"
+_METHOD = "METHOD"
+_PP = "PATH_PARAMETER"
+_QP = "QUERY_PARAMETER"
+_RH = "REQUEST_HEADER"
+_RB = "REQUEST_BODY"
+_RESPONSE = "RESPONSE"
+_RH_ = "RESPONSE_HEADER"
+_RB_ = "RESPONSE_BODY"
+_DPL = "DocumentationPartLocation"
+_p = "path"
+_met = "method"
+_sC = "statusCode"
+_CDPI = "CreateDocumentationPartInput"
+_cCDPR = "com.amazonaws.apigateway#CreateDocumentationPartRequest"
+_l = "location"
+_pr = "properties"
+_CDPO = "CreateDocumentationPartOutput"
+_cDP = "com.amazonaws.apigateway#DocumentationPart"
+_CDP = "CreateDocumentationPart"
+_CDVI = "CreateDocumentationVersionInput"
+_cCDVR = "com.amazonaws.apigateway#CreateDocumentationVersionRequest"
+_dV = "documentationVersion"
+_CDVO = "CreateDocumentationVersionOutput"
+_cDV = "com.amazonaws.apigateway#DocumentationVersion"
+_ve = "version"
+_CDV = "CreateDocumentationVersion"
+_EAM = "EndpointAccessMode"
+_BASIC = "BASIC"
+_STRICT = "STRICT"
+_IAT = "IpAddressType"
+_ip = "ipv4"
+_du = "dualstack"
+_ET = "EndpointType"
+_REGIONAL = "REGIONAL"
+_EDGE = "EDGE"
+_PRIVATE = "PRIVATE"
+_LOET = "ListOfEndpointType"
+_EC = "EndpointConfiguration"
+_typ = "types"
+_iAT = "ipAddressType"
+_vEI = "vpcEndpointIds"
+_MTAI = "MutualTlsAuthenticationInput"
+_tU = "truststoreUri"
+_tV = "truststoreVersion"
+_RM = "RoutingMode"
+_BPMO = "BASE_PATH_MAPPING_ONLY"
+_RRO = "ROUTING_RULE_ONLY"
+_RRTBPM = "ROUTING_RULE_THEN_BASE_PATH_MAPPING"
+_SP = "SecurityPolicy"
+_T_ = "TLS_1_0"
+_T__ = "TLS_1_2"
+_ST = "SecurityPolicy_TLS13_1_3_2025_09"
+_STF = "SecurityPolicy_TLS13_1_3_FIPS_2025_09"
+_STPP = "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09"
+_STFP = "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09"
+_STFPP = "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09"
+_STEP = "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09"
+_STEFP = "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09"
+_STP = "SecurityPolicy_TLS13_1_2_PQ_2025_09"
+_ST_ = "SecurityPolicy_TLS13_1_2_2021_06"
+_STE = "SecurityPolicy_TLS13_2025_EDGE"
+_STPE = "SecurityPolicy_TLS12_PFS_2025_EDGE"
+_STE_ = "SecurityPolicy_TLS12_2018_EDGE"
+_CDNI = "CreateDomainNameInput"
+_cCDNR = "com.amazonaws.apigateway#CreateDomainNameRequest"
+_cN = "certificateName"
+_cB = "certificateBody"
+_cPK = "certificatePrivateKey"
+_cC = "certificateChain"
+_cAe = "certificateArn"
+_rCN = "regionalCertificateName"
+_rCA = "regionalCertificateArn"
+_eC = "endpointConfiguration"
+_sP = "securityPolicy"
+_eAM = "endpointAccessMode"
+_mTA = "mutualTlsAuthentication"
+_oVCA = "ownershipVerificationCertificateArn"
+_po = "policy"
+_rM = "routingMode"
+_DNS = "DomainNameStatus"
+_PCR = "PENDING_CERTIFICATE_REIMPORT"
+_POV = "PENDING_OWNERSHIP_VERIFICATION"
+_MTA = "MutualTlsAuthentication"
+_tW = "truststoreWarnings"
+_CDNO = "CreateDomainNameOutput"
+_cDN = "com.amazonaws.apigateway#DomainName"
+_dNA = "domainNameArn"
+_cUD = "certificateUploadDate"
+_rDN = "regionalDomainName"
+_rHZI = "regionalHostedZoneId"
+_dDN = "distributionDomainName"
+_dHZI = "distributionHostedZoneId"
+_dNS = "domainNameStatus"
+_dNSM = "domainNameStatusMessage"
+_mP = "managementPolicy"
+_CDN = "CreateDomainName"
+_CDNAAI = "CreateDomainNameAccessAssociationInput"
+_cCDNAAR = "com.amazonaws.apigateway#CreateDomainNameAccessAssociationRequest"
+_aAST = "accessAssociationSourceType"
+_aAS = "accessAssociationSource"
+_CDNAAO = "CreateDomainNameAccessAssociationOutput"
+_cDNAA = "com.amazonaws.apigateway#DomainNameAccessAssociation"
+_dNAAA = "domainNameAccessAssociationArn"
+_CDNAA = "CreateDomainNameAccessAssociation"
+_CMI = "CreateModelInput"
+_cCMR = "com.amazonaws.apigateway#CreateModelRequest"
+_sc = "schema"
+_cT = "contentType"
+_CMO = "CreateModelOutput"
+_cM = "com.amazonaws.apigateway#Model"
+_CM = "CreateModel"
+_CRVI = "CreateRequestValidatorInput"
+_cCRVR = "com.amazonaws.apigateway#CreateRequestValidatorRequest"
+_vRB = "validateRequestBody"
+_vRP = "validateRequestParameters"
+_CRVO = "CreateRequestValidatorOutput"
+_cRV = "com.amazonaws.apigateway#RequestValidator"
+_CRV = "CreateRequestValidator"
+_CRI = "CreateResourceInput"
+_cCRR = "com.amazonaws.apigateway#CreateResourceRequest"
+_pI = "parentId"
+_pP = "pathPart"
+_CT = "ConnectionType"
+_INTERNET = "INTERNET"
+_VL = "VPC_LINK"
+_CHS = "ContentHandlingStrategy"
+_CTB = "CONVERT_TO_BINARY"
+_CTT = "CONVERT_TO_TEXT"
+_SC = "StatusCode"
+_IR = "IntegrationResponse"
+_sPe = "selectionPattern"
+_rP = "responseParameters"
+_rT = "responseTemplates"
+_cH = "contentHandling"
+_MOIR = "MapOfIntegrationResponse"
+_RTM = "ResponseTransferMode"
+_BUFFERED = "BUFFERED"
+_STREAM = "STREAM"
+_TC = "TlsConfig"
+_iSV = "insecureSkipVerification"
+_IT = "IntegrationType"
+_HTTP = "HTTP"
+_AWS = "AWS"
+_MOCK = "MOCK"
+_HP = "HTTP_PROXY"
+_AP = "AWS_PROXY"
+_In = "Integration"
+_hM = "httpMethod"
+_u = "uri"
+_cTo = "connectionType"
+_cIo = "connectionId"
+_cr = "credentials"
+_rPe = "requestParameters"
+_rTe = "requestTemplates"
+_pB = "passthroughBehavior"
+_tIM = "timeoutInMillis"
+_cNa = "cacheNamespace"
+_cKP = "cacheKeyParameters"
+_iR = "integrationResponses"
+_tC = "tlsConfig"
+_rTM = "responseTransferMode"
+_iT = "integrationTarget"
+_MOSTB = "MapOfStringToBoolean"
+_MR = "MethodResponse"
+_rMe = "responseModels"
+_MOMR = "MapOfMethodResponse"
+_M = "Method"
+_aIu = "authorizerId"
+_rVI = "requestValidatorId"
+_oN = "operationName"
+_rMeq = "requestModels"
+_mR = "methodResponses"
+_mI = "methodIntegration"
+_aSu = "authorizationScopes"
+_MOM = "MapOfMethod"
+_CRO = "CreateResourceOutput"
+_cR = "com.amazonaws.apigateway#Resource"
+_rMes = "resourceMethods"
+_CR = "CreateResource"
+_CRAI = "CreateRestApiInput"
+_cCRAR = "com.amazonaws.apigateway#CreateRestApiRequest"
+_cF = "cloneFrom"
+_bMT = "binaryMediaTypes"
+_mCS = "minimumCompressionSize"
+_aKS = "apiKeySource"
+_dEAE = "disableExecuteApiEndpoint"
+_CRAO = "CreateRestApiOutput"
+_cRA = "com.amazonaws.apigateway#RestApi"
+_w = "warnings"
+_rRI = "rootResourceId"
+_aSp = "apiStatus"
+_aSM = "apiStatusMessage"
+_CRA = "CreateRestApi"
+_CS = "CanarySettings"
+_dI = "deploymentId"
+_CSI = "CreateStageInput"
+_cCSR = "com.amazonaws.apigateway#CreateStageRequest"
+_CCSa = "CacheClusterStatus"
+_CIP = "CREATE_IN_PROGRESS"
+_DIP = "DELETE_IN_PROGRESS"
+_NA = "NOT_AVAILABLE"
+_FIP = "FLUSH_IN_PROGRESS"
+_UCCHS = "UnauthorizedCacheControlHeaderStrategy"
+_FW = "FAIL_WITH_403"
+_SWRH = "SUCCEED_WITH_RESPONSE_HEADER"
+_SWRH_ = "SUCCEED_WITHOUT_RESPONSE_HEADER"
+_MSe = "MethodSetting"
+_mE = "metricsEnabled"
+_lL = "loggingLevel"
+_dTE = "dataTraceEnabled"
+_tBL = "throttlingBurstLimit"
+_tRL = "throttlingRateLimit"
+_cE = "cachingEnabled"
+_cTIS = "cacheTtlInSeconds"
+_cDE = "cacheDataEncrypted"
+_rAFCC = "requireAuthorizationForCacheControl"
+_uCCHS = "unauthorizedCacheControlHeaderStrategy"
+_MOMSa = "MapOfMethodSettings"
+_CSO = "CreateStageOutput"
+_cSo = "com.amazonaws.apigateway#Stage"
+_cCI = "clientCertificateId"
+_cCSa = "cacheClusterStatus"
+_mS = "methodSettings"
+_aLS = "accessLogSettings"
+_wAA = "webAclArn"
+_CSr = "CreateStage"
+_LOAS = "ListOfApiStage"
+_QPT = "QuotaPeriodType"
+_DAY = "DAY"
+_WEEK = "WEEK"
+_MONTH = "MONTH"
+_QS = "QuotaSettings"
+_li = "limit"
+_o = "offset"
+_pe = "period"
+_CUPI = "CreateUsagePlanInput"
+_cCUPR = "com.amazonaws.apigateway#CreateUsagePlanRequest"
+_aSpi = "apiStages"
+_q = "quota"
+_CUPO = "CreateUsagePlanOutput"
+_cUP = "com.amazonaws.apigateway#UsagePlan"
+_pC = "productCode"
+_CUPr = "CreateUsagePlan"
+_CUPKI = "CreateUsagePlanKeyInput"
+_cCUPKR = "com.amazonaws.apigateway#CreateUsagePlanKeyRequest"
+_uPI = "usagePlanId"
+_kI = "keyId"
+_kT = "keyType"
+_CUPKO = "CreateUsagePlanKeyOutput"
+_cUPK = "com.amazonaws.apigateway#UsagePlanKey"
+_CUPK = "CreateUsagePlanKey"
+_CVLI = "CreateVpcLinkInput"
+_cCVLR = "com.amazonaws.apigateway#CreateVpcLinkRequest"
+_tA = "targetArns"
+_VLS = "VpcLinkStatus"
+_DELETING = "DELETING"
+_CVLO = "CreateVpcLinkOutput"
+_cVL = "com.amazonaws.apigateway#VpcLink"
+_sta = "status"
+_sM = "statusMessage"
+_CVL = "CreateVpcLink"
+_DAKI = "DeleteApiKeyInput"
+_cDAKR = "com.amazonaws.apigateway#DeleteApiKeyRequest"
+_aK = "apiKey"
+_DAKO = "DeleteApiKeyOutput"
+_sU = "smithy.api#Unit"
+_DAK = "DeleteApiKey"
+_DAI = "DeleteAuthorizerInput"
+_cDAR = "com.amazonaws.apigateway#DeleteAuthorizerRequest"
+_DAO = "DeleteAuthorizerOutput"
+_DA = "DeleteAuthorizer"
+_DBPMI = "DeleteBasePathMappingInput"
+_cDBPMR = "com.amazonaws.apigateway#DeleteBasePathMappingRequest"
+_DBPMO = "DeleteBasePathMappingOutput"
+_DBPM = "DeleteBasePathMapping"
+_DCCI = "DeleteClientCertificateInput"
+_cDCCR = "com.amazonaws.apigateway#DeleteClientCertificateRequest"
+_DCCO = "DeleteClientCertificateOutput"
+_DCC = "DeleteClientCertificate"
+_DDI = "DeleteDeploymentInput"
+_cDDR = "com.amazonaws.apigateway#DeleteDeploymentRequest"
+_DDO = "DeleteDeploymentOutput"
+_DD = "DeleteDeployment"
+_DDPI = "DeleteDocumentationPartInput"
+_cDDPR = "com.amazonaws.apigateway#DeleteDocumentationPartRequest"
+_dPI = "documentationPartId"
+_DDPO = "DeleteDocumentationPartOutput"
+_DDP = "DeleteDocumentationPart"
+_DDVI = "DeleteDocumentationVersionInput"
+_cDDVR = "com.amazonaws.apigateway#DeleteDocumentationVersionRequest"
+_DDVO = "DeleteDocumentationVersionOutput"
+_DDV = "DeleteDocumentationVersion"
+_DDNI = "DeleteDomainNameInput"
+_cDDNR = "com.amazonaws.apigateway#DeleteDomainNameRequest"
+_DDNO = "DeleteDomainNameOutput"
+_DDN = "DeleteDomainName"
+_DDNAAI = "DeleteDomainNameAccessAssociationInput"
+_cDDNAAR = "com.amazonaws.apigateway#DeleteDomainNameAccessAssociationRequest"
+_DDNAAO = "DeleteDomainNameAccessAssociationOutput"
+_DDNAA = "DeleteDomainNameAccessAssociation"
+_GRT = "GatewayResponseType"
+_D_ = "DEFAULT_4XX"
+_D__ = "DEFAULT_5XX"
+_RNF = "RESOURCE_NOT_FOUND"
+_UNAUTHORIZED = "UNAUTHORIZED"
+_IAK = "INVALID_API_KEY"
+_AD = "ACCESS_DENIED"
+_AF = "AUTHORIZER_FAILURE"
+_ACE = "AUTHORIZER_CONFIGURATION_ERROR"
+_IS = "INVALID_SIGNATURE"
+_ET_ = "EXPIRED_TOKEN"
+_MAT = "MISSING_AUTHENTICATION_TOKEN"
+_IF = "INTEGRATION_FAILURE"
+_IT_ = "INTEGRATION_TIMEOUT"
+_ACE_ = "API_CONFIGURATION_ERROR"
+_UMT = "UNSUPPORTED_MEDIA_TYPE"
+_BRP = "BAD_REQUEST_PARAMETERS"
+_BRB = "BAD_REQUEST_BODY"
+_RTL = "REQUEST_TOO_LARGE"
+_THROTTLED = "THROTTLED"
+_QE = "QUOTA_EXCEEDED"
+_WF = "WAF_FILTERED"
+_DGRI = "DeleteGatewayResponseInput"
+_cDGRR = "com.amazonaws.apigateway#DeleteGatewayResponseRequest"
+_rTes = "responseType"
+_DGRO = "DeleteGatewayResponseOutput"
+_DGR = "DeleteGatewayResponse"
+_DII = "DeleteIntegrationInput"
+_cDIR = "com.amazonaws.apigateway#DeleteIntegrationRequest"
+_rI = "resourceId"
+_DIO = "DeleteIntegrationOutput"
+_DI = "DeleteIntegration"
+_DIRI = "DeleteIntegrationResponseInput"
+_cDIRR = "com.amazonaws.apigateway#DeleteIntegrationResponseRequest"
+_DIRO = "DeleteIntegrationResponseOutput"
+_DIR = "DeleteIntegrationResponse"
+_DMI = "DeleteMethodInput"
+_cDMR = "com.amazonaws.apigateway#DeleteMethodRequest"
+_DMO = "DeleteMethodOutput"
+_DM = "DeleteMethod"
+_DMRI = "DeleteMethodResponseInput"
+_cDMRR = "com.amazonaws.apigateway#DeleteMethodResponseRequest"
+_DMRO = "DeleteMethodResponseOutput"
+_DMR = "DeleteMethodResponse"
+_DMIe = "DeleteModelInput"
+_cDMRo = "com.amazonaws.apigateway#DeleteModelRequest"
+_mN = "modelName"
+_DMOe = "DeleteModelOutput"
+_DMe = "DeleteModel"
+_DRVI = "DeleteRequestValidatorInput"
+_cDRVR = "com.amazonaws.apigateway#DeleteRequestValidatorRequest"
+_DRVO = "DeleteRequestValidatorOutput"
+_DRV = "DeleteRequestValidator"
+_DRI = "DeleteResourceInput"
+_cDRR = "com.amazonaws.apigateway#DeleteResourceRequest"
+_DRO = "DeleteResourceOutput"
+_DR = "DeleteResource"
+_DRAI = "DeleteRestApiInput"
+_cDRAR = "com.amazonaws.apigateway#DeleteRestApiRequest"
+_DRAO = "DeleteRestApiOutput"
+_DRA = "DeleteRestApi"
+_DSI = "DeleteStageInput"
+_cDSR = "com.amazonaws.apigateway#DeleteStageRequest"
+_DSO = "DeleteStageOutput"
+_DS = "DeleteStage"
+_DUPI = "DeleteUsagePlanInput"
+_cDUPR = "com.amazonaws.apigateway#DeleteUsagePlanRequest"
+_DUPO = "DeleteUsagePlanOutput"
+_DUP = "DeleteUsagePlan"
+_DUPKI = "DeleteUsagePlanKeyInput"
+_cDUPKR = "com.amazonaws.apigateway#DeleteUsagePlanKeyRequest"
+_DUPKO = "DeleteUsagePlanKeyOutput"
+_DUPK = "DeleteUsagePlanKey"
+_DVLI = "DeleteVpcLinkInput"
+_cDVLR = "com.amazonaws.apigateway#DeleteVpcLinkRequest"
+_vLI = "vpcLinkId"
+_DVLO = "DeleteVpcLinkOutput"
+_DVL = "DeleteVpcLink"
+_FSACI = "FlushStageAuthorizersCacheInput"
+_cFSACR = "com.amazonaws.apigateway#FlushStageAuthorizersCacheRequest"
+_FSACO = "FlushStageAuthorizersCacheOutput"
+_FSAC = "FlushStageAuthorizersCache"
+_FSCI = "FlushStageCacheInput"
+_cFSCR = "com.amazonaws.apigateway#FlushStageCacheRequest"
+_FSCO = "FlushStageCacheOutput"
+_FSC = "FlushStageCache"
+_GCCI = "GenerateClientCertificateInput"
+_cGCCR = "com.amazonaws.apigateway#GenerateClientCertificateRequest"
+_GCCO = "GenerateClientCertificateOutput"
+_cCC = "com.amazonaws.apigateway#ClientCertificate"
+_pEC = "pemEncodedCertificate"
+_eD = "expirationDate"
+_GCC = "GenerateClientCertificate"
+_GAI = "GetAccountInput"
+_cGAR = "com.amazonaws.apigateway#GetAccountRequest"
+_GAO = "GetAccountOutput"
+_cAo = "com.amazonaws.apigateway#Account"
+_cRAl = "cloudwatchRoleArn"
+_tS = "throttleSettings"
+_fe = "features"
+_aKV = "apiKeyVersion"
+_GA = "GetAccount"
+_GAKI = "GetApiKeyInput"
+_cGAKR = "com.amazonaws.apigateway#GetApiKeyRequest"
+_iV = "includeValue"
+_GAKO = "GetApiKeyOutput"
+_GAK = "GetApiKey"
+_GAKIe = "GetApiKeysInput"
+_cGAKRo = "com.amazonaws.apigateway#GetApiKeysRequest"
+_pos = "position"
+_nQ = "nameQuery"
+_iVn = "includeValues"
+_LOAK = "ListOfApiKey"
+_GAKOe = "GetApiKeysOutput"
+_cAKo = "com.amazonaws.apigateway#ApiKeys"
+_it = "items"
+_sNm = "smithy.api#jsonName"
+_ite = "item"
+_GAKe = "GetApiKeys"
+_GAIe = "GetAuthorizerInput"
+_cGARo = "com.amazonaws.apigateway#GetAuthorizerRequest"
+_GAOe = "GetAuthorizerOutput"
+_GAe = "GetAuthorizer"
+_GAIet = "GetAuthorizersInput"
+_cGARom = "com.amazonaws.apigateway#GetAuthorizersRequest"
+_LOA = "ListOfAuthorizer"
+_GAOet = "GetAuthorizersOutput"
+_cAom = "com.amazonaws.apigateway#Authorizers"
+_GAet = "GetAuthorizers"
+_GBPMI = "GetBasePathMappingInput"
+_cGBPMR = "com.amazonaws.apigateway#GetBasePathMappingRequest"
+_GBPMO = "GetBasePathMappingOutput"
+_GBPM = "GetBasePathMapping"
+_GBPMIe = "GetBasePathMappingsInput"
+_cGBPMRo = "com.amazonaws.apigateway#GetBasePathMappingsRequest"
+_BPM = "BasePathMapping"
+_LOBPM = "ListOfBasePathMapping"
+_GBPMOe = "GetBasePathMappingsOutput"
+_cBPMo = "com.amazonaws.apigateway#BasePathMappings"
+_GBPMe = "GetBasePathMappings"
+_GCCIe = "GetClientCertificateInput"
+_cGCCRo = "com.amazonaws.apigateway#GetClientCertificateRequest"
+_GCCOe = "GetClientCertificateOutput"
+_GCCe = "GetClientCertificate"
+_GCCIet = "GetClientCertificatesInput"
+_cGCCRom = "com.amazonaws.apigateway#GetClientCertificatesRequest"
+_CC = "ClientCertificate"
+_LOCC = "ListOfClientCertificate"
+_GCCOet = "GetClientCertificatesOutput"
+_cCCo = "com.amazonaws.apigateway#ClientCertificates"
+_GCCet = "GetClientCertificates"
+_GDI = "GetDeploymentInput"
+_cGDR = "com.amazonaws.apigateway#GetDeploymentRequest"
+_em = "embed"
+_GDO = "GetDeploymentOutput"
+_GD = "GetDeployment"
+_GDIe = "GetDeploymentsInput"
+_cGDRo = "com.amazonaws.apigateway#GetDeploymentsRequest"
+_De = "Deployment"
+_LOD = "ListOfDeployment"
+_GDOe = "GetDeploymentsOutput"
+_cDom = "com.amazonaws.apigateway#Deployments"
+_GDe = "GetDeployments"
+_GDPI = "GetDocumentationPartInput"
+_cGDPR = "com.amazonaws.apigateway#GetDocumentationPartRequest"
+_GDPO = "GetDocumentationPartOutput"
+_GDP = "GetDocumentationPart"
+_LST = "LocationStatusType"
+_DOCUMENTED = "DOCUMENTED"
+_UNDOCUMENTED = "UNDOCUMENTED"
+_GDPIe = "GetDocumentationPartsInput"
+_cGDPRo = "com.amazonaws.apigateway#GetDocumentationPartsRequest"
+_lS = "locationStatus"
+_DP = "DocumentationPart"
+_LODP = "ListOfDocumentationPart"
+_GDPOe = "GetDocumentationPartsOutput"
+_cDPo = "com.amazonaws.apigateway#DocumentationParts"
+_GDPe = "GetDocumentationParts"
+_GDVI = "GetDocumentationVersionInput"
+_cGDVR = "com.amazonaws.apigateway#GetDocumentationVersionRequest"
+_GDVO = "GetDocumentationVersionOutput"
+_GDV = "GetDocumentationVersion"
+_GDVIe = "GetDocumentationVersionsInput"
+_cGDVRo = "com.amazonaws.apigateway#GetDocumentationVersionsRequest"
+_DV = "DocumentationVersion"
+_LODV = "ListOfDocumentationVersion"
+_GDVOe = "GetDocumentationVersionsOutput"
+_cDVo = "com.amazonaws.apigateway#DocumentationVersions"
+_GDVe = "GetDocumentationVersions"
+_GDNI = "GetDomainNameInput"
+_cGDNR = "com.amazonaws.apigateway#GetDomainNameRequest"
+_GDNO = "GetDomainNameOutput"
+_GDN = "GetDomainName"
+_RO = "ResourceOwner"
+_SELF = "SELF"
+_OA = "OTHER_ACCOUNTS"
+_GDNAAI = "GetDomainNameAccessAssociationsInput"
+_cGDNAAR = "com.amazonaws.apigateway#GetDomainNameAccessAssociationsRequest"
+_rO = "resourceOwner"
+_DNAA = "DomainNameAccessAssociation"
+_LODNAA = "ListOfDomainNameAccessAssociation"
+_GDNAAO = "GetDomainNameAccessAssociationsOutput"
+_cDNAAo = "com.amazonaws.apigateway#DomainNameAccessAssociations"
+_GDNAA = "GetDomainNameAccessAssociations"
+_GDNIe = "GetDomainNamesInput"
+_cGDNRo = "com.amazonaws.apigateway#GetDomainNamesRequest"
+_DN = "DomainName"
+_LODN = "ListOfDomainName"
+_GDNOe = "GetDomainNamesOutput"
+_cDNo = "com.amazonaws.apigateway#DomainNames"
+_GDNe = "GetDomainNames"
+_GEI = "GetExportInput"
+_cGER = "com.amazonaws.apigateway#GetExportRequest"
+_eT = "exportType"
+_pa = "parameters"
+_sQP = "smithy.api#httpQueryParams"
+_a = "accepts"
+_Ac = "Accept"
+_Bl = "Blob"
+_GEO = "GetExportOutput"
+_cER = "com.amazonaws.apigateway#ExportResponse"
+_CT_ = "Content-Type"
+_cDon = "contentDisposition"
+_CD_ = "Content-Disposition"
+_b = "body"
+_sPm = "smithy.api#httpPayload"
+_GE = "GetExport"
+_GGRI = "GetGatewayResponseInput"
+_cGGRR = "com.amazonaws.apigateway#GetGatewayResponseRequest"
+_GGRO = "GetGatewayResponseOutput"
+_cGR = "com.amazonaws.apigateway#GatewayResponse"
+_dR = "defaultResponse"
+_GGR = "GetGatewayResponse"
+_GGRIe = "GetGatewayResponsesInput"
+_cGGRRo = "com.amazonaws.apigateway#GetGatewayResponsesRequest"
+_GR = "GatewayResponse"
+_LOGR = "ListOfGatewayResponse"
+_GGROe = "GetGatewayResponsesOutput"
+_cGRo = "com.amazonaws.apigateway#GatewayResponses"
+_GGRe = "GetGatewayResponses"
+_GII = "GetIntegrationInput"
+_cGIR = "com.amazonaws.apigateway#GetIntegrationRequest"
+_GIO = "GetIntegrationOutput"
+_cIom = "com.amazonaws.apigateway#Integration"
+_GI = "GetIntegration"
+_GIRI = "GetIntegrationResponseInput"
+_cGIRR = "com.amazonaws.apigateway#GetIntegrationResponseRequest"
+_GIRO = "GetIntegrationResponseOutput"
+_cIR = "com.amazonaws.apigateway#IntegrationResponse"
+_GIR = "GetIntegrationResponse"
+_GMI = "GetMethodInput"
+_cGMR = "com.amazonaws.apigateway#GetMethodRequest"
+_GMO = "GetMethodOutput"
+_cMo = "com.amazonaws.apigateway#Method"
+_GM = "GetMethod"
+_GMRI = "GetMethodResponseInput"
+_cGMRR = "com.amazonaws.apigateway#GetMethodResponseRequest"
+_GMRO = "GetMethodResponseOutput"
+_cMR = "com.amazonaws.apigateway#MethodResponse"
+_GMR = "GetMethodResponse"
+_GMIe = "GetModelInput"
+_cGMRo = "com.amazonaws.apigateway#GetModelRequest"
+_fl = "flatten"
+_GMOe = "GetModelOutput"
+_GMe = "GetModel"
+_GMIet = "GetModelsInput"
+_cGMRom = "com.amazonaws.apigateway#GetModelsRequest"
+_Mo = "Model"
+_LOM = "ListOfModel"
+_GMOet = "GetModelsOutput"
+_cMom = "com.amazonaws.apigateway#Models"
+_GMet = "GetModels"
+_GMTI = "GetModelTemplateInput"
+_cGMTR = "com.amazonaws.apigateway#GetModelTemplateRequest"
+_GMTO = "GetModelTemplateOutput"
+_cTom = "com.amazonaws.apigateway#Template"
+_GMT = "GetModelTemplate"
+_GRVI = "GetRequestValidatorInput"
+_cGRVR = "com.amazonaws.apigateway#GetRequestValidatorRequest"
+_GRVO = "GetRequestValidatorOutput"
+_GRV = "GetRequestValidator"
+_GRVIe = "GetRequestValidatorsInput"
+_cGRVRo = "com.amazonaws.apigateway#GetRequestValidatorsRequest"
+_RV = "RequestValidator"
+_LORV = "ListOfRequestValidator"
+_GRVOe = "GetRequestValidatorsOutput"
+_cRVo = "com.amazonaws.apigateway#RequestValidators"
+_GRVe = "GetRequestValidators"
+_GRI = "GetResourceInput"
+_cGRR = "com.amazonaws.apigateway#GetResourceRequest"
+_GRO = "GetResourceOutput"
+_GRe = "GetResource"
+_GRIe = "GetResourcesInput"
+_cGRRo = "com.amazonaws.apigateway#GetResourcesRequest"
+_R = "Resource"
+_LOR = "ListOfResource"
+_GROe = "GetResourcesOutput"
+_cRo = "com.amazonaws.apigateway#Resources"
+_GRet = "GetResources"
+_GRAI = "GetRestApiInput"
+_cGRAR = "com.amazonaws.apigateway#GetRestApiRequest"
+_GRAO = "GetRestApiOutput"
+_GRA = "GetRestApi"
+_GRAIe = "GetRestApisInput"
+_cGRARo = "com.amazonaws.apigateway#GetRestApisRequest"
+_RAe = "RestApi"
+_LORA = "ListOfRestApi"
+_GRAOe = "GetRestApisOutput"
+_cRAo = "com.amazonaws.apigateway#RestApis"
+_GRAe = "GetRestApis"
+_GSI = "GetSdkInput"
+_cGSR = "com.amazonaws.apigateway#GetSdkRequest"
+_sT = "sdkType"
+_GSO = "GetSdkOutput"
+_cSR = "com.amazonaws.apigateway#SdkResponse"
+_GS = "GetSdk"
+_GSTI = "GetSdkTypeInput"
+_cGSTR = "com.amazonaws.apigateway#GetSdkTypeRequest"
+_SCP = "SdkConfigurationProperty"
+_fN = "friendlyName"
+_r = "required"
+_dVe = "defaultValue"
+_LOSCP = "ListOfSdkConfigurationProperty"
+_GSTO = "GetSdkTypeOutput"
+_cST = "com.amazonaws.apigateway#SdkType"
+_cP = "configurationProperties"
+_GST = "GetSdkType"
+_GSTIe = "GetSdkTypesInput"
+_cGSTRo = "com.amazonaws.apigateway#GetSdkTypesRequest"
+_STd = "SdkType"
+_LOST = "ListOfSdkType"
+_GSTOe = "GetSdkTypesOutput"
+_cSTo = "com.amazonaws.apigateway#SdkTypes"
+_GSTe = "GetSdkTypes"
+_GSIe = "GetStageInput"
+_cGSRo = "com.amazonaws.apigateway#GetStageRequest"
+_GSOe = "GetStageOutput"
+_GSe = "GetStage"
+_GSIet = "GetStagesInput"
+_cGSRom = "com.amazonaws.apigateway#GetStagesRequest"
+_St = "Stage"
+_LOSi = "ListOfStage"
+_GSOet = "GetStagesOutput"
+_cSom = "com.amazonaws.apigateway#Stages"
+_GSet = "GetStages"
+_GTI = "GetTagsInput"
+_cGTR = "com.amazonaws.apigateway#GetTagsRequest"
+_rA = "resourceArn"
+_GTO = "GetTagsOutput"
+_cToma = "com.amazonaws.apigateway#Tags"
+_GT = "GetTags"
+_GUI = "GetUsageInput"
+_cGUR = "com.amazonaws.apigateway#GetUsageRequest"
+_sDt = "startDate"
+_eDn = "endDate"
+_L = "Long"
+_LOL = "ListOfLong"
+_LOU = "ListOfUsage"
+_MOKU = "MapOfKeyUsages"
+_GUO = "GetUsageOutput"
+_cU = "com.amazonaws.apigateway#Usage"
+_val = "values"
+_GU = "GetUsage"
+_GUPI = "GetUsagePlanInput"
+_cGUPR = "com.amazonaws.apigateway#GetUsagePlanRequest"
+_GUPO = "GetUsagePlanOutput"
+_GUP = "GetUsagePlan"
+_GUPKI = "GetUsagePlanKeyInput"
+_cGUPKR = "com.amazonaws.apigateway#GetUsagePlanKeyRequest"
+_GUPKO = "GetUsagePlanKeyOutput"
+_GUPK = "GetUsagePlanKey"
+_GUPKIe = "GetUsagePlanKeysInput"
+_cGUPKRo = "com.amazonaws.apigateway#GetUsagePlanKeysRequest"
+_UPK = "UsagePlanKey"
+_LOUPK = "ListOfUsagePlanKey"
+_GUPKOe = "GetUsagePlanKeysOutput"
+_cUPKo = "com.amazonaws.apigateway#UsagePlanKeys"
+_GUPKe = "GetUsagePlanKeys"
+_GUPIe = "GetUsagePlansInput"
+_cGUPRo = "com.amazonaws.apigateway#GetUsagePlansRequest"
+_UP = "UsagePlan"
+_LOUP = "ListOfUsagePlan"
+_GUPOe = "GetUsagePlansOutput"
+_cUPo = "com.amazonaws.apigateway#UsagePlans"
+_GUPe = "GetUsagePlans"
+_GVLI = "GetVpcLinkInput"
+_cGVLR = "com.amazonaws.apigateway#GetVpcLinkRequest"
+_GVLO = "GetVpcLinkOutput"
+_GVL = "GetVpcLink"
+_GVLIe = "GetVpcLinksInput"
+_cGVLRo = "com.amazonaws.apigateway#GetVpcLinksRequest"
+_VLp = "VpcLink"
+_LOVL = "ListOfVpcLink"
+_GVLOe = "GetVpcLinksOutput"
+_cVLo = "com.amazonaws.apigateway#VpcLinks"
+_GVLe = "GetVpcLinks"
+_IAKI = "ImportApiKeysInput"
+_cIAKR = "com.amazonaws.apigateway#ImportApiKeysRequest"
+_fOW = "failOnWarnings"
+_fa = "failonwarnings"
+_IAKO = "ImportApiKeysOutput"
+_cAKI = "com.amazonaws.apigateway#ApiKeyIds"
+_id = "ids"
+_IAKm = "ImportApiKeys"
+_PM = "PutMode"
+_Me = "Merge"
+_mer = "merge"
+_O = "Overwrite"
+_ov = "overwrite"
+_IDPI = "ImportDocumentationPartsInput"
+_cIDPR = "com.amazonaws.apigateway#ImportDocumentationPartsRequest"
+_mo = "mode"
+_IDPO = "ImportDocumentationPartsOutput"
+_cDPI = "com.amazonaws.apigateway#DocumentationPartIds"
+_IDP = "ImportDocumentationParts"
+_IRAI = "ImportRestApiInput"
+_cIRAR = "com.amazonaws.apigateway#ImportRestApiRequest"
+_IRAO = "ImportRestApiOutput"
+_IRA = "ImportRestApi"
+_PGRI = "PutGatewayResponseInput"
+_cPGRR = "com.amazonaws.apigateway#PutGatewayResponseRequest"
+_PGRO = "PutGatewayResponseOutput"
+_PGR = "PutGatewayResponse"
+_PII = "PutIntegrationInput"
+_cPIR = "com.amazonaws.apigateway#PutIntegrationRequest"
+_rHM = "requestHttpMethod"
+_iHM = "integrationHttpMethod"
+_PIO = "PutIntegrationOutput"
+_PI = "PutIntegration"
+_PIRI = "PutIntegrationResponseInput"
+_cPIRR = "com.amazonaws.apigateway#PutIntegrationResponseRequest"
+_PIRO = "PutIntegrationResponseOutput"
+_PIR = "PutIntegrationResponse"
+_PMI = "PutMethodInput"
+_cPMR = "com.amazonaws.apigateway#PutMethodRequest"
+_PMO = "PutMethodOutput"
+_PMu = "PutMethod"
+_PMRI = "PutMethodResponseInput"
+_cPMRR = "com.amazonaws.apigateway#PutMethodResponseRequest"
+_PMRO = "PutMethodResponseOutput"
+_PMR = "PutMethodResponse"
+_PRAI = "PutRestApiInput"
+_cPRAR = "com.amazonaws.apigateway#PutRestApiRequest"
+_PRAO = "PutRestApiOutput"
+_PRA = "PutRestApi"
+_RDNAAI = "RejectDomainNameAccessAssociationInput"
+_cRDNAAR = "com.amazonaws.apigateway#RejectDomainNameAccessAssociationRequest"
+_RDNAAO = "RejectDomainNameAccessAssociationOutput"
+_RDNAA = "RejectDomainNameAccessAssociation"
+_TRI = "TagResourceInput"
+_cTRR = "com.amazonaws.apigateway#TagResourceRequest"
+_TRO = "TagResourceOutput"
+_TR = "TagResource"
+_MOSTL = "MapOfStringToList"
+_TIAI = "TestInvokeAuthorizerInput"
+_cTIAR = "com.amazonaws.apigateway#TestInvokeAuthorizerRequest"
+_h = "headers"
+_mVH = "multiValueHeaders"
+_pWQS = "pathWithQueryString"
+_sVt = "stageVariables"
+_aCd = "additionalContext"
+_TIAO = "TestInvokeAuthorizerOutput"
+_cTIARo = "com.amazonaws.apigateway#TestInvokeAuthorizerResponse"
+_cSl = "clientStatus"
+_lo = "log"
+_la = "latency"
+_pIr = "principalId"
+_au = "authorization"
+_cla = "claims"
+_TIA = "TestInvokeAuthorizer"
+_TIMI = "TestInvokeMethodInput"
+_cTIMR = "com.amazonaws.apigateway#TestInvokeMethodRequest"
+_TIMO = "TestInvokeMethodOutput"
+_cTIMRo = "com.amazonaws.apigateway#TestInvokeMethodResponse"
+_TIM = "TestInvokeMethod"
+_URI = "UntagResourceInput"
+_cURR = "com.amazonaws.apigateway#UntagResourceRequest"
+_tK = "tagKeys"
+_URO = "UntagResourceOutput"
+_UR = "UntagResource"
+_Op = "Op"
+_ad = "add"
+_re = "remove"
+_rep = "replace"
+_mov = "move"
+_co = "copy"
+_te = "test"
+_PO = "PatchOperation"
+_op = "op"
+_fr = "from"
+_LOPO = "ListOfPatchOperation"
+_UAI = "UpdateAccountInput"
+_cUAR = "com.amazonaws.apigateway#UpdateAccountRequest"
+_pO = "patchOperations"
+_UAO = "UpdateAccountOutput"
+_UA = "UpdateAccount"
+_UAKI = "UpdateApiKeyInput"
+_cUAKR = "com.amazonaws.apigateway#UpdateApiKeyRequest"
+_UAKO = "UpdateApiKeyOutput"
+_UAK = "UpdateApiKey"
+_UAIp = "UpdateAuthorizerInput"
+_cUARo = "com.amazonaws.apigateway#UpdateAuthorizerRequest"
+_UAOp = "UpdateAuthorizerOutput"
+_UAp = "UpdateAuthorizer"
+_UBPMI = "UpdateBasePathMappingInput"
+_cUBPMR = "com.amazonaws.apigateway#UpdateBasePathMappingRequest"
+_UBPMO = "UpdateBasePathMappingOutput"
+_UBPM = "UpdateBasePathMapping"
+_UCCI = "UpdateClientCertificateInput"
+_cUCCR = "com.amazonaws.apigateway#UpdateClientCertificateRequest"
+_UCCO = "UpdateClientCertificateOutput"
+_UCC = "UpdateClientCertificate"
+_UDI = "UpdateDeploymentInput"
+_cUDR = "com.amazonaws.apigateway#UpdateDeploymentRequest"
+_UDO = "UpdateDeploymentOutput"
+_UD = "UpdateDeployment"
+_UDPI = "UpdateDocumentationPartInput"
+_cUDPR = "com.amazonaws.apigateway#UpdateDocumentationPartRequest"
+_UDPO = "UpdateDocumentationPartOutput"
+_UDP = "UpdateDocumentationPart"
+_UDVI = "UpdateDocumentationVersionInput"
+_cUDVR = "com.amazonaws.apigateway#UpdateDocumentationVersionRequest"
+_UDVO = "UpdateDocumentationVersionOutput"
+_UDV = "UpdateDocumentationVersion"
+_UDNI = "UpdateDomainNameInput"
+_cUDNR = "com.amazonaws.apigateway#UpdateDomainNameRequest"
+_UDNO = "UpdateDomainNameOutput"
+_UDN = "UpdateDomainName"
+_UGRI = "UpdateGatewayResponseInput"
+_cUGRR = "com.amazonaws.apigateway#UpdateGatewayResponseRequest"
+_UGRO = "UpdateGatewayResponseOutput"
+_UGR = "UpdateGatewayResponse"
+_UII = "UpdateIntegrationInput"
+_cUIR = "com.amazonaws.apigateway#UpdateIntegrationRequest"
+_UIO = "UpdateIntegrationOutput"
+_UI = "UpdateIntegration"
+_UIRI = "UpdateIntegrationResponseInput"
+_cUIRR = "com.amazonaws.apigateway#UpdateIntegrationResponseRequest"
+_UIRO = "UpdateIntegrationResponseOutput"
+_UIR = "UpdateIntegrationResponse"
+_UMI = "UpdateMethodInput"
+_cUMR = "com.amazonaws.apigateway#UpdateMethodRequest"
+_UMO = "UpdateMethodOutput"
+_UM = "UpdateMethod"
+_UMRI = "UpdateMethodResponseInput"
+_cUMRR = "com.amazonaws.apigateway#UpdateMethodResponseRequest"
+_UMRO = "UpdateMethodResponseOutput"
+_UMR = "UpdateMethodResponse"
+_UMIp = "UpdateModelInput"
+_cUMRo = "com.amazonaws.apigateway#UpdateModelRequest"
+_UMOp = "UpdateModelOutput"
+_UMp = "UpdateModel"
+_URVI = "UpdateRequestValidatorInput"
+_cURVR = "com.amazonaws.apigateway#UpdateRequestValidatorRequest"
+_URVO = "UpdateRequestValidatorOutput"
+_URV = "UpdateRequestValidator"
+_URIp = "UpdateResourceInput"
+_cURRo = "com.amazonaws.apigateway#UpdateResourceRequest"
+_UROp = "UpdateResourceOutput"
+_URp = "UpdateResource"
+_URAI = "UpdateRestApiInput"
+_cURAR = "com.amazonaws.apigateway#UpdateRestApiRequest"
+_URAO = "UpdateRestApiOutput"
+_URA = "UpdateRestApi"
+_USI = "UpdateStageInput"
+_cUSR = "com.amazonaws.apigateway#UpdateStageRequest"
+_USO = "UpdateStageOutput"
+_US = "UpdateStage"
+_UUI = "UpdateUsageInput"
+_cUUR = "com.amazonaws.apigateway#UpdateUsageRequest"
+_UUO = "UpdateUsageOutput"
+_UU = "UpdateUsage"
+_UUPI = "UpdateUsagePlanInput"
+_cUUPR = "com.amazonaws.apigateway#UpdateUsagePlanRequest"
+_UUPO = "UpdateUsagePlanOutput"
+_UUP = "UpdateUsagePlan"
+_UVLI = "UpdateVpcLinkInput"
+_cUVLR = "com.amazonaws.apigateway#UpdateVpcLinkRequest"
+_UVLO = "UpdateVpcLinkOutput"
+_UVL = "UpdateVpcLink"
+_BCS = "BackplaneControlService"
+_aw = "aws.auth#sigv4"
+_sB = "smithy.rules#endpointBdd"
+_aws = "aws.api#service"
+_aJ = "aws.protocols#restJson1"
+
+ACCESS_ASSOCIATION_SOURCE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _AAST,
+    0,
+    (_VPCE,),
+    ((-1, {_sV: _VPCE}),),
+)
+
+STRING: StaticSchema = (3, n0, _S, 0)
+
+ACCESS_LOG_SETTINGS: StaticSchema = (
+    18,
+    n0,
+    _ALS,
+    0,
+    (_f, _dA),
+    ((STRING, 0), (STRING, 0)),
+)
+
+LIST_OF_STRING: StaticSchema = (16, n0, _LOS, 0, (_m,), ((STRING, 0),))
+
+INTEGER: StaticSchema = (7, n0, _I, {_s: 0})
+
+DOUBLE: StaticSchema = (10, n0, _D, {_s: 0})
+
+THROTTLE_SETTINGS: StaticSchema = (
+    18,
+    n0,
+    _TS,
+    0,
+    (_bL, _rL),
+    ((INTEGER, {_s: 0}), (DOUBLE, {_s: 0})),
+)
+
+TIMESTAMP: StaticSchema = (4, n0, _T, 0)
+
+BOOLEAN: StaticSchema = (2, n0, _B, {_s: False})
+
+MAP_OF_STRING_TO_STRING: StaticSchema = (
+    17,
+    n0,
+    _MOSTS,
+    0,
+    (_k, _v),
+    ((STRING, 0), (STRING, 0)),
+)
+
+API_KEY: StaticSchema = (
+    18,
+    n0,
+    _AK,
+    0,
+    (_i, _v, _n, _cI, _d, _e, _cD, _lUD, _sK, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (LIST_OF_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+API_KEYS_FORMAT: StaticSchema = (14, n0, _AKF, 0, (_c,), ((-1, {_sV: _c}),))
+
+API_KEY_SOURCE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _AKST,
+    0,
+    (_HEADER, _AUTHORIZER),
+    ((-1, {_sV: _HEADER}), (-1, {_sV: _AUTHORIZER})),
+)
+
+MAP_OF_API_STAGE_THROTTLE_SETTINGS: StaticSchema = (
+    17,
+    n0,
+    _MOASTS,
+    0,
+    (_k, _v),
+    ((STRING, 0), (THROTTLE_SETTINGS, 0)),
+)
+
+API_STAGE: StaticSchema = (
+    18,
+    n0,
+    _AS,
+    0,
+    (_aI, _st, _th),
+    ((STRING, 0), (STRING, 0), (MAP_OF_API_STAGE_THROTTLE_SETTINGS, 0)),
+)
+
+API_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ASp,
+    0,
+    (_UPDATING, _AVAILABLE, _PENDING, _FAILED),
+    (
+        (-1, {_sV: _UPDATING}),
+        (-1, {_sV: _AVAILABLE}),
+        (-1, {_sV: _PENDING}),
+        (-1, {_sV: _FAILED}),
+    ),
+)
+
+NULLABLE_INTEGER: StaticSchema = (7, n0, _NI, 0)
+
+PROVIDER_ARN: StaticSchema = (3, n0, _PARN, 0)
+
+LIST_OF_AR_NS: StaticSchema = (16, n0, _LOARN, 0, (_m,), ((PROVIDER_ARN, 0),))
+
+AUTHORIZER_TYPE: StaticSchema = (
+    14,
+    n0,
+    _AT,
+    0,
+    (_TOKEN, _REQUEST, _CUP),
+    ((-1, {_sV: _TOKEN}), (-1, {_sV: _REQUEST}), (-1, {_sV: _CUP})),
+)
+
+AUTHORIZER: StaticSchema = (
+    18,
+    n0,
+    _A,
+    0,
+    (_i, _n, _ty, _pARN, _aT, _aU, _aC, _iS, _iVE, _aRTIS),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (AUTHORIZER_TYPE, 0),
+        (LIST_OF_AR_NS, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (NULLABLE_INTEGER, 0),
+    ),
+)
+
+BAD_REQUEST_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _BRE,
+    {_sm: _cl, _sE: 400},
+    (_me,),
+    ((STRING, 0),),
+)
+
+CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CE,
+    {_sm: _cl, _sE: 409},
+    (_me,),
+    ((STRING, 0),),
+)
+
+STAGE_KEY: StaticSchema = (18, n0, _SK, 0, (_rAI, _sN), ((STRING, 0), (STRING, 0)))
+
+LIST_OF_STAGE_KEYS: StaticSchema = (16, n0, _LOSK, 0, (_m,), ((STAGE_KEY, 0),))
+
+CREATE_API_KEY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CAKI,
+    {_sSI: _cCAKR, _smi: None},
+    (_n, _d, _e, _gDI, _v, _sK, _cI, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (LIST_OF_STAGE_KEYS, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+CREATE_API_KEY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CAKO,
+    {_sSI: _cAK, _smit: None},
+    (_i, _v, _n, _cI, _d, _e, _cD, _lUD, _sK, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (LIST_OF_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LEE,
+    {_sm: _cl, _sE: 429},
+    (_rAS, _me),
+    ((STRING, {_sH: _RA}), (STRING, 0)),
+)
+
+NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _NFE,
+    {_sm: _cl, _sE: 404},
+    (_me,),
+    ((STRING, 0),),
+)
+
+TOO_MANY_REQUESTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TMRE,
+    {_sm: _cl, _sE: 429},
+    (_rAS, _me),
+    ((STRING, {_sH: _RA}), (STRING, 0)),
+)
+
+UNAUTHORIZED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _UE,
+    {_sm: _cl, _sE: 401},
+    (_me,),
+    ((STRING, 0),),
+)
+
+CREATE_API_KEY: StaticOperationSchema = (
+    23,
+    n0,
+    _CAK,
+    {_smith: MappingProxyType({"method": "POST", "uri": "/apikeys", "code": 201})},
+    CREATE_API_KEY_INPUT,
+    CREATE_API_KEY_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CREATE_AUTHORIZER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CAI,
+    {_sSI: _cCAR, _smi: None},
+    (_rAI, _n, _ty, _pARN, _aT, _aU, _aC, _iS, _iVE, _aRTIS),
+    (
+        (STRING, 9),
+        (STRING, 1),
+        (AUTHORIZER_TYPE, 1),
+        (LIST_OF_AR_NS, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (NULLABLE_INTEGER, 0),
+    ),
+)
+
+CREATE_AUTHORIZER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CAO,
+    {_sSI: _cA, _smit: None},
+    (_i, _n, _ty, _pARN, _aT, _aU, _aC, _iS, _iVE, _aRTIS),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (AUTHORIZER_TYPE, 0),
+        (LIST_OF_AR_NS, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (NULLABLE_INTEGER, 0),
+    ),
+)
+
+CREATE_AUTHORIZER: StaticOperationSchema = (
+    23,
+    n0,
+    _CA,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/restapis/{restApiId}/authorizers", "code": 201}
+        )
+    },
+    CREATE_AUTHORIZER_INPUT,
+    CREATE_AUTHORIZER_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CREATE_BASE_PATH_MAPPING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CBPMI,
+    {_sSI: _cCBPMR, _smi: None},
+    (_dN, _dNI, _bP, _rAI, _st),
+    ((STRING, 9), (STRING, {_sQ: _dNI}), (STRING, 0), (STRING, 1), (STRING, 0)),
+)
+
+CREATE_BASE_PATH_MAPPING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CBPMO,
+    {_sSI: _cBPM, _smit: None},
+    (_bP, _rAI, _st),
+    ((STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+CREATE_BASE_PATH_MAPPING: StaticOperationSchema = (
+    23,
+    n0,
+    _CBPM,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/domainnames/{domainName}/basepathmappings",
+                "code": 201,
+            }
+        )
+    },
+    CREATE_BASE_PATH_MAPPING_INPUT,
+    CREATE_BASE_PATH_MAPPING_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+NULLABLE_BOOLEAN: StaticSchema = (2, n0, _NB, 0)
+
+CACHE_CLUSTER_SIZE: StaticSchema = (
+    14,
+    n0,
+    _CCS,
+    0,
+    (_SPG, _SPG_, _SPG__, _SPG___, _SPG____, _SPG_____, _SG, _SG_),
+    (
+        (-1, {_sV: _v_}),
+        (-1, {_sV: _v__}),
+        (-1, {_sV: _v___}),
+        (-1, {_sV: _v____}),
+        (-1, {_sV: _v_____}),
+        (-1, {_sV: _v______}),
+        (-1, {_sV: _v_______}),
+        (-1, {_sV: _v________}),
+    ),
+)
+
+DEPLOYMENT_CANARY_SETTINGS: StaticSchema = (
+    18,
+    n0,
+    _DCS,
+    0,
+    (_pT, _sVO, _uSC),
+    ((DOUBLE, {_s: 0}), (MAP_OF_STRING_TO_STRING, 0), (BOOLEAN, {_s: False})),
+)
+
+CREATE_DEPLOYMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDI,
+    {_sSI: _cCDR, _smi: None},
+    (_rAI, _sN, _sD, _d, _cCE, _cCS, _va, _cS, _tE),
+    (
+        (STRING, 9),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (NULLABLE_BOOLEAN, 0),
+        (CACHE_CLUSTER_SIZE, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (DEPLOYMENT_CANARY_SETTINGS, 0),
+        (NULLABLE_BOOLEAN, 0),
+    ),
+)
+
+METHOD_SNAPSHOT: StaticSchema = (
+    18,
+    n0,
+    _MS,
+    0,
+    (_aTu, _aKR),
+    ((STRING, 0), (BOOLEAN, {_s: False})),
+)
+
+MAP_OF_METHOD_SNAPSHOT: StaticSchema = (
+    17,
+    n0,
+    _MOMS,
+    0,
+    (_k, _v),
+    ((STRING, 0), (METHOD_SNAPSHOT, 0)),
+)
+
+PATH_TO_MAP_OF_METHOD_SNAPSHOT: StaticSchema = (
+    17,
+    n0,
+    _PTMOMS,
+    0,
+    (_k, _v),
+    ((STRING, 0), (MAP_OF_METHOD_SNAPSHOT, 0)),
+)
+
+CREATE_DEPLOYMENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDO,
+    {_sSI: _cDo, _smit: None},
+    (_i, _d, _cD, _aS),
+    ((STRING, 0), (STRING, 0), (TIMESTAMP, 0), (PATH_TO_MAP_OF_METHOD_SNAPSHOT, 0)),
+)
+
+SERVICE_UNAVAILABLE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SUE,
+    {_sm: _se, _sE: 503},
+    (_rAS, _me),
+    ((STRING, {_sH: _RA}), (STRING, 0)),
+)
+
+CREATE_DEPLOYMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _CD,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/restapis/{restApiId}/deployments", "code": 201}
+        )
+    },
+    CREATE_DEPLOYMENT_INPUT,
+    CREATE_DEPLOYMENT_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        SERVICE_UNAVAILABLE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DOCUMENTATION_PART_LOCATION_STATUS_CODE: StaticSchema = (3, n0, _DPLSC, 0)
+
+DOCUMENTATION_PART_TYPE: StaticSchema = (
+    14,
+    n0,
+    _DPT,
+    0,
+    (
+        _API,
+        _AUTHORIZER,
+        _MODEL,
+        _RESOURCE,
+        _METHOD,
+        _PP,
+        _QP,
+        _RH,
+        _RB,
+        _RESPONSE,
+        _RH_,
+        _RB_,
+    ),
+    (
+        (-1, {_sV: _API}),
+        (-1, {_sV: _AUTHORIZER}),
+        (-1, {_sV: _MODEL}),
+        (-1, {_sV: _RESOURCE}),
+        (-1, {_sV: _METHOD}),
+        (-1, {_sV: _PP}),
+        (-1, {_sV: _QP}),
+        (-1, {_sV: _RH}),
+        (-1, {_sV: _RB}),
+        (-1, {_sV: _RESPONSE}),
+        (-1, {_sV: _RH_}),
+        (-1, {_sV: _RB_}),
+    ),
+)
+
+DOCUMENTATION_PART_LOCATION: StaticSchema = (
+    18,
+    n0,
+    _DPL,
+    0,
+    (_ty, _p, _met, _sC, _n),
+    (
+        (DOCUMENTATION_PART_TYPE, 1),
+        (STRING, 0),
+        (STRING, 0),
+        (DOCUMENTATION_PART_LOCATION_STATUS_CODE, 0),
+        (STRING, 0),
+    ),
+)
+
+CREATE_DOCUMENTATION_PART_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDPI,
+    {_sSI: _cCDPR, _smi: None},
+    (_rAI, _l, _pr),
+    ((STRING, 9), (DOCUMENTATION_PART_LOCATION, 1), (STRING, 1)),
+)
+
+CREATE_DOCUMENTATION_PART_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDPO,
+    {_sSI: _cDP, _smit: None},
+    (_i, _l, _pr),
+    ((STRING, 0), (DOCUMENTATION_PART_LOCATION, 0), (STRING, 0)),
+)
+
+CREATE_DOCUMENTATION_PART: StaticOperationSchema = (
+    23,
+    n0,
+    _CDP,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/restapis/{restApiId}/documentation/parts",
+                "code": 201,
+            }
+        )
+    },
+    CREATE_DOCUMENTATION_PART_INPUT,
+    CREATE_DOCUMENTATION_PART_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CREATE_DOCUMENTATION_VERSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDVI,
+    {_sSI: _cCDVR, _smi: None},
+    (_rAI, _dV, _sN, _d),
+    ((STRING, 9), (STRING, 1), (STRING, 0), (STRING, 0)),
+)
+
+CREATE_DOCUMENTATION_VERSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDVO,
+    {_sSI: _cDV, _smit: None},
+    (_ve, _cD, _d),
+    ((STRING, 0), (TIMESTAMP, 0), (STRING, 0)),
+)
+
+CREATE_DOCUMENTATION_VERSION: StaticOperationSchema = (
+    23,
+    n0,
+    _CDV,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/restapis/{restApiId}/documentation/versions",
+                "code": 201,
+            }
+        )
+    },
+    CREATE_DOCUMENTATION_VERSION_INPUT,
+    CREATE_DOCUMENTATION_VERSION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+ENDPOINT_ACCESS_MODE: StaticSchema = (
+    14,
+    n0,
+    _EAM,
+    0,
+    (_BASIC, _STRICT),
+    ((-1, {_sV: _BASIC}), (-1, {_sV: _STRICT})),
+)
+
+IP_ADDRESS_TYPE: StaticSchema = (
+    14,
+    n0,
+    _IAT,
+    0,
+    (_ip, _du),
+    ((-1, {_sV: _ip}), (-1, {_sV: _du})),
+)
+
+ENDPOINT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ET,
+    0,
+    (_REGIONAL, _EDGE, _PRIVATE),
+    ((-1, {_sV: _REGIONAL}), (-1, {_sV: _EDGE}), (-1, {_sV: _PRIVATE})),
+)
+
+LIST_OF_ENDPOINT_TYPE: StaticSchema = (16, n0, _LOET, 0, (_m,), ((ENDPOINT_TYPE, 0),))
+
+ENDPOINT_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _EC,
+    0,
+    (_typ, _iAT, _vEI),
+    ((LIST_OF_ENDPOINT_TYPE, 0), (IP_ADDRESS_TYPE, 0), (LIST_OF_STRING, 0)),
+)
+
+MUTUAL_TLS_AUTHENTICATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _MTAI,
+    0,
+    (_tU, _tV),
+    ((STRING, 0), (STRING, 0)),
+)
+
+ROUTING_MODE: StaticSchema = (
+    14,
+    n0,
+    _RM,
+    0,
+    (_BPMO, _RRO, _RRTBPM),
+    ((-1, {_sV: _BPMO}), (-1, {_sV: _RRO}), (-1, {_sV: _RRTBPM})),
+)
+
+SECURITY_POLICY: StaticSchema = (
+    14,
+    n0,
+    _SP,
+    0,
+    (
+        _T_,
+        _T__,
+        _ST,
+        _STF,
+        _STPP,
+        _STFP,
+        _STFPP,
+        _STEP,
+        _STEFP,
+        _STP,
+        _ST_,
+        _STE,
+        _STPE,
+        _STE_,
+    ),
+    (
+        (-1, {_sV: _T_}),
+        (-1, {_sV: _T__}),
+        (-1, {_sV: _ST}),
+        (-1, {_sV: _STF}),
+        (-1, {_sV: _STPP}),
+        (-1, {_sV: _STFP}),
+        (-1, {_sV: _STFPP}),
+        (-1, {_sV: _STEP}),
+        (-1, {_sV: _STEFP}),
+        (-1, {_sV: _STP}),
+        (-1, {_sV: _ST_}),
+        (-1, {_sV: _STE}),
+        (-1, {_sV: _STPE}),
+        (-1, {_sV: _STE_}),
+    ),
+)
+
+CREATE_DOMAIN_NAME_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDNI,
+    {_sSI: _cCDNR, _smi: None},
+    (
+        _dN,
+        _cN,
+        _cB,
+        _cPK,
+        _cC,
+        _cAe,
+        _rCN,
+        _rCA,
+        _eC,
+        _t,
+        _sP,
+        _eAM,
+        _mTA,
+        _oVCA,
+        _po,
+        _rM,
+    ),
+    (
+        (STRING, 1),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+        (MUTUAL_TLS_AUTHENTICATION_INPUT, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (ROUTING_MODE, 0),
+    ),
+)
+
+DOMAIN_NAME_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DNS,
+    0,
+    (_AVAILABLE, _UPDATING, _PENDING, _PCR, _POV, _FAILED),
+    (
+        (-1, {_sV: _AVAILABLE}),
+        (-1, {_sV: _UPDATING}),
+        (-1, {_sV: _PENDING}),
+        (-1, {_sV: _PCR}),
+        (-1, {_sV: _POV}),
+        (-1, {_sV: _FAILED}),
+    ),
+)
+
+MUTUAL_TLS_AUTHENTICATION: StaticSchema = (
+    18,
+    n0,
+    _MTA,
+    0,
+    (_tU, _tV, _tW),
+    ((STRING, 0), (STRING, 0), (LIST_OF_STRING, 0)),
+)
+
+CREATE_DOMAIN_NAME_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDNO,
+    {_sSI: _cDN, _smit: None},
+    (
+        _dN,
+        _dNI,
+        _dNA,
+        _cN,
+        _cAe,
+        _cUD,
+        _rDN,
+        _rHZI,
+        _rCN,
+        _rCA,
+        _dDN,
+        _dHZI,
+        _eC,
+        _dNS,
+        _dNSM,
+        _sP,
+        _eAM,
+        _t,
+        _mTA,
+        _oVCA,
+        _mP,
+        _po,
+        _rM,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (DOMAIN_NAME_STATUS, 0),
+        (STRING, 0),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MUTUAL_TLS_AUTHENTICATION, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (ROUTING_MODE, 0),
+    ),
+)
+
+CREATE_DOMAIN_NAME: StaticOperationSchema = (
+    23,
+    n0,
+    _CDN,
+    {_smith: MappingProxyType({"method": "POST", "uri": "/domainnames", "code": 201})},
+    CREATE_DOMAIN_NAME_INPUT,
+    CREATE_DOMAIN_NAME_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDNAAI,
+    {_sSI: _cCDNAAR, _smi: None},
+    (_dNA, _aAST, _aAS, _t),
+    (
+        (STRING, 1),
+        (ACCESS_ASSOCIATION_SOURCE_TYPE, 1),
+        (STRING, 1),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDNAAO,
+    {_sSI: _cDNAA, _smit: None},
+    (_dNAAA, _dNA, _aAST, _aAS, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (ACCESS_ASSOCIATION_SOURCE_TYPE, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION: StaticOperationSchema = (
+    23,
+    n0,
+    _CDNAA,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/domainnameaccessassociations", "code": 201}
+        )
+    },
+    CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION_INPUT,
+    CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CREATE_MODEL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CMI,
+    {_sSI: _cCMR, _smi: None},
+    (_rAI, _n, _d, _sc, _cT),
+    ((STRING, 9), (STRING, 1), (STRING, 0), (STRING, 0), (STRING, 1)),
+)
+
+CREATE_MODEL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CMO,
+    {_sSI: _cM, _smit: None},
+    (_i, _n, _d, _sc, _cT),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+CREATE_MODEL: StaticOperationSchema = (
+    23,
+    n0,
+    _CM,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/restapis/{restApiId}/models", "code": 201}
+        )
+    },
+    CREATE_MODEL_INPUT,
+    CREATE_MODEL_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CREATE_REQUEST_VALIDATOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CRVI,
+    {_sSI: _cCRVR, _smi: None},
+    (_rAI, _n, _vRB, _vRP),
+    ((STRING, 9), (STRING, 0), (BOOLEAN, {_s: False}), (BOOLEAN, {_s: False})),
+)
+
+CREATE_REQUEST_VALIDATOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CRVO,
+    {_sSI: _cRV, _smit: None},
+    (_i, _n, _vRB, _vRP),
+    ((STRING, 0), (STRING, 0), (BOOLEAN, {_s: False}), (BOOLEAN, {_s: False})),
+)
+
+CREATE_REQUEST_VALIDATOR: StaticOperationSchema = (
+    23,
+    n0,
+    _CRV,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/restapis/{restApiId}/requestvalidators",
+                "code": 201,
+            }
+        )
+    },
+    CREATE_REQUEST_VALIDATOR_INPUT,
+    CREATE_REQUEST_VALIDATOR_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CREATE_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CRI,
+    {_sSI: _cCRR, _smi: None},
+    (_rAI, _pI, _pP),
+    ((STRING, 9), (STRING, 9), (STRING, 1)),
+)
+
+CONNECTION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CT,
+    0,
+    (_INTERNET, _VL),
+    ((-1, {_sV: _INTERNET}), (-1, {_sV: _VL})),
+)
+
+CONTENT_HANDLING_STRATEGY: StaticSchema = (
+    14,
+    n0,
+    _CHS,
+    0,
+    (_CTB, _CTT),
+    ((-1, {_sV: _CTB}), (-1, {_sV: _CTT})),
+)
+
+STATUS_CODE: StaticSchema = (3, n0, _SC, 0)
+
+INTEGRATION_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _IR,
+    0,
+    (_sC, _sPe, _rP, _rT, _cH),
+    (
+        (STATUS_CODE, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+    ),
+)
+
+MAP_OF_INTEGRATION_RESPONSE: StaticSchema = (
+    17,
+    n0,
+    _MOIR,
+    0,
+    (_k, _v),
+    ((STRING, 0), (INTEGRATION_RESPONSE, 0)),
+)
+
+RESPONSE_TRANSFER_MODE: StaticSchema = (
+    14,
+    n0,
+    _RTM,
+    0,
+    (_BUFFERED, _STREAM),
+    ((-1, {_sV: _BUFFERED}), (-1, {_sV: _STREAM})),
+)
+
+TLS_CONFIG: StaticSchema = (18, n0, _TC, 0, (_iSV,), ((BOOLEAN, {_s: False}),))
+
+INTEGRATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _IT,
+    0,
+    (_HTTP, _AWS, _MOCK, _HP, _AP),
+    (
+        (-1, {_sV: _HTTP}),
+        (-1, {_sV: _AWS}),
+        (-1, {_sV: _MOCK}),
+        (-1, {_sV: _HP}),
+        (-1, {_sV: _AP}),
+    ),
+)
+
+INTEGRATION: StaticSchema = (
+    18,
+    n0,
+    _In,
+    0,
+    (
+        _ty,
+        _hM,
+        _u,
+        _cTo,
+        _cIo,
+        _cr,
+        _rPe,
+        _rTe,
+        _pB,
+        _cH,
+        _tIM,
+        _cNa,
+        _cKP,
+        _iR,
+        _tC,
+        _rTM,
+        _iT,
+    ),
+    (
+        (INTEGRATION_TYPE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (CONNECTION_TYPE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+        (INTEGER, {_s: 0}),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (MAP_OF_INTEGRATION_RESPONSE, 0),
+        (TLS_CONFIG, 0),
+        (RESPONSE_TRANSFER_MODE, 0),
+        (STRING, 0),
+    ),
+)
+
+MAP_OF_STRING_TO_BOOLEAN: StaticSchema = (
+    17,
+    n0,
+    _MOSTB,
+    0,
+    (_k, _v),
+    ((STRING, 0), (NULLABLE_BOOLEAN, 0)),
+)
+
+METHOD_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _MR,
+    0,
+    (_sC, _rP, _rMe),
+    ((STATUS_CODE, 0), (MAP_OF_STRING_TO_BOOLEAN, 0), (MAP_OF_STRING_TO_STRING, 0)),
+)
+
+MAP_OF_METHOD_RESPONSE: StaticSchema = (
+    17,
+    n0,
+    _MOMR,
+    0,
+    (_k, _v),
+    ((STRING, 0), (METHOD_RESPONSE, 0)),
+)
+
+METHOD: StaticSchema = (
+    18,
+    n0,
+    _M,
+    0,
+    (_hM, _aTu, _aIu, _aKR, _rVI, _oN, _rPe, _rMeq, _mR, _mI, _aSu),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (NULLABLE_BOOLEAN, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_BOOLEAN, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_METHOD_RESPONSE, 0),
+        (INTEGRATION, 0),
+        (LIST_OF_STRING, 0),
+    ),
+)
+
+MAP_OF_METHOD: StaticSchema = (17, n0, _MOM, 0, (_k, _v), ((STRING, 0), (METHOD, 0)))
+
+CREATE_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CRO,
+    {_sSI: _cR, _smit: None},
+    (_i, _pI, _pP, _p, _rMes),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0), (MAP_OF_METHOD, 0)),
+)
+
+CREATE_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _CR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/restapis/{restApiId}/resources/{parentId}",
+                "code": 201,
+            }
+        )
+    },
+    CREATE_RESOURCE_INPUT,
+    CREATE_RESOURCE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CREATE_REST_API_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CRAI,
+    {_sSI: _cCRAR, _smi: None},
+    (_n, _d, _ve, _cF, _bMT, _mCS, _aKS, _eC, _po, _t, _dEAE, _sP, _eAM),
+    (
+        (STRING, 1),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (NULLABLE_INTEGER, 0),
+        (API_KEY_SOURCE_TYPE, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+    ),
+)
+
+CREATE_REST_API_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CRAO,
+    {_sSI: _cRA, _smit: None},
+    (
+        _i,
+        _n,
+        _d,
+        _cD,
+        _ve,
+        _w,
+        _bMT,
+        _mCS,
+        _aKS,
+        _eC,
+        _po,
+        _t,
+        _dEAE,
+        _rRI,
+        _sP,
+        _eAM,
+        _aSp,
+        _aSM,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (LIST_OF_STRING, 0),
+        (NULLABLE_INTEGER, 0),
+        (API_KEY_SOURCE_TYPE, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+        (API_STATUS, 0),
+        (STRING, 0),
+    ),
+)
+
+CREATE_REST_API: StaticOperationSchema = (
+    23,
+    n0,
+    _CRA,
+    {_smith: MappingProxyType({"method": "POST", "uri": "/restapis", "code": 201})},
+    CREATE_REST_API_INPUT,
+    CREATE_REST_API_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CANARY_SETTINGS: StaticSchema = (
+    18,
+    n0,
+    _CS,
+    0,
+    (_pT, _dI, _sVO, _uSC),
+    (
+        (DOUBLE, {_s: 0}),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+    ),
+)
+
+CREATE_STAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSI,
+    {_sSI: _cCSR, _smi: None},
+    (_rAI, _sN, _dI, _d, _cCE, _cCS, _va, _dV, _cS, _tE, _t),
+    (
+        (STRING, 9),
+        (STRING, 1),
+        (STRING, 1),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (CACHE_CLUSTER_SIZE, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (STRING, 0),
+        (CANARY_SETTINGS, 0),
+        (BOOLEAN, {_s: False}),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+CACHE_CLUSTER_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CCSa,
+    0,
+    (_CIP, _AVAILABLE, _DIP, _NA, _FIP),
+    (
+        (-1, {_sV: _CIP}),
+        (-1, {_sV: _AVAILABLE}),
+        (-1, {_sV: _DIP}),
+        (-1, {_sV: _NA}),
+        (-1, {_sV: _FIP}),
+    ),
+)
+
+UNAUTHORIZED_CACHE_CONTROL_HEADER_STRATEGY: StaticSchema = (
+    14,
+    n0,
+    _UCCHS,
+    0,
+    (_FW, _SWRH, _SWRH_),
+    ((-1, {_sV: _FW}), (-1, {_sV: _SWRH}), (-1, {_sV: _SWRH_})),
+)
+
+METHOD_SETTING: StaticSchema = (
+    18,
+    n0,
+    _MSe,
+    0,
+    (_mE, _lL, _dTE, _tBL, _tRL, _cE, _cTIS, _cDE, _rAFCC, _uCCHS),
+    (
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (INTEGER, {_s: 0}),
+        (DOUBLE, {_s: 0}),
+        (BOOLEAN, {_s: False}),
+        (INTEGER, {_s: 0}),
+        (BOOLEAN, {_s: False}),
+        (BOOLEAN, {_s: False}),
+        (UNAUTHORIZED_CACHE_CONTROL_HEADER_STRATEGY, 0),
+    ),
+)
+
+MAP_OF_METHOD_SETTINGS: StaticSchema = (
+    17,
+    n0,
+    _MOMSa,
+    0,
+    (_k, _v),
+    ((STRING, 0), (METHOD_SETTING, 0)),
+)
+
+CREATE_STAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CSO,
+    {_sSI: _cSo, _smit: None},
+    (
+        _dI,
+        _cCI,
+        _sN,
+        _d,
+        _cCE,
+        _cCS,
+        _cCSa,
+        _mS,
+        _va,
+        _dV,
+        _aLS,
+        _cS,
+        _tE,
+        _wAA,
+        _t,
+        _cD,
+        _lUD,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (CACHE_CLUSTER_SIZE, 0),
+        (CACHE_CLUSTER_STATUS, 0),
+        (MAP_OF_METHOD_SETTINGS, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (STRING, 0),
+        (ACCESS_LOG_SETTINGS, 0),
+        (CANARY_SETTINGS, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+CREATE_STAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _CSr,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/restapis/{restApiId}/stages", "code": 201}
+        )
+    },
+    CREATE_STAGE_INPUT,
+    CREATE_STAGE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+LIST_OF_API_STAGE: StaticSchema = (16, n0, _LOAS, 0, (_m,), ((API_STAGE, 0),))
+
+QUOTA_PERIOD_TYPE: StaticSchema = (
+    14,
+    n0,
+    _QPT,
+    0,
+    (_DAY, _WEEK, _MONTH),
+    ((-1, {_sV: _DAY}), (-1, {_sV: _WEEK}), (-1, {_sV: _MONTH})),
+)
+
+QUOTA_SETTINGS: StaticSchema = (
+    18,
+    n0,
+    _QS,
+    0,
+    (_li, _o, _pe),
+    ((INTEGER, {_s: 0}), (INTEGER, {_s: 0}), (QUOTA_PERIOD_TYPE, 0)),
+)
+
+CREATE_USAGE_PLAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CUPI,
+    {_sSI: _cCUPR, _smi: None},
+    (_n, _d, _aSpi, _th, _q, _t),
+    (
+        (STRING, 1),
+        (STRING, 0),
+        (LIST_OF_API_STAGE, 0),
+        (THROTTLE_SETTINGS, 0),
+        (QUOTA_SETTINGS, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+CREATE_USAGE_PLAN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CUPO,
+    {_sSI: _cUP, _smit: None},
+    (_i, _n, _d, _aSpi, _th, _q, _pC, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (LIST_OF_API_STAGE, 0),
+        (THROTTLE_SETTINGS, 0),
+        (QUOTA_SETTINGS, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+CREATE_USAGE_PLAN: StaticOperationSchema = (
+    23,
+    n0,
+    _CUPr,
+    {_smith: MappingProxyType({"method": "POST", "uri": "/usageplans", "code": 201})},
+    CREATE_USAGE_PLAN_INPUT,
+    CREATE_USAGE_PLAN_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CREATE_USAGE_PLAN_KEY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CUPKI,
+    {_sSI: _cCUPKR, _smi: None},
+    (_uPI, _kI, _kT),
+    ((STRING, 9), (STRING, 1), (STRING, 1)),
+)
+
+CREATE_USAGE_PLAN_KEY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CUPKO,
+    {_sSI: _cUPK, _smit: None},
+    (_i, _ty, _v, _n),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+CREATE_USAGE_PLAN_KEY: StaticOperationSchema = (
+    23,
+    n0,
+    _CUPK,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/usageplans/{usagePlanId}/keys", "code": 201}
+        )
+    },
+    CREATE_USAGE_PLAN_KEY_INPUT,
+    CREATE_USAGE_PLAN_KEY_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CREATE_VPC_LINK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CVLI,
+    {_sSI: _cCVLR, _smi: None},
+    (_n, _d, _tA, _t),
+    ((STRING, 1), (STRING, 0), (LIST_OF_STRING, 1), (MAP_OF_STRING_TO_STRING, 0)),
+)
+
+VPC_LINK_STATUS: StaticSchema = (
+    14,
+    n0,
+    _VLS,
+    0,
+    (_AVAILABLE, _PENDING, _DELETING, _FAILED),
+    (
+        (-1, {_sV: _AVAILABLE}),
+        (-1, {_sV: _PENDING}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _FAILED}),
+    ),
+)
+
+CREATE_VPC_LINK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CVLO,
+    {_sSI: _cVL, _smit: None},
+    (_i, _n, _d, _tA, _sta, _sM, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (VPC_LINK_STATUS, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+CREATE_VPC_LINK: StaticOperationSchema = (
+    23,
+    n0,
+    _CVL,
+    {_smith: MappingProxyType({"method": "POST", "uri": "/vpclinks", "code": 202})},
+    CREATE_VPC_LINK_INPUT,
+    CREATE_VPC_LINK_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_API_KEY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DAKI,
+    {_sSI: _cDAKR, _smi: None},
+    (_aK,),
+    ((STRING, 9),),
+)
+
+DELETE_API_KEY_OUTPUT: StaticSchema = (18, n0, _DAKO, {_sSI: _sU, _smit: None})
+
+DELETE_API_KEY: StaticOperationSchema = (
+    23,
+    n0,
+    _DAK,
+    {
+        _smith: MappingProxyType(
+            {"method": "DELETE", "uri": "/apikeys/{apiKey}", "code": 202}
+        )
+    },
+    DELETE_API_KEY_INPUT,
+    DELETE_API_KEY_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_AUTHORIZER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DAI,
+    {_sSI: _cDAR, _smi: None},
+    (_rAI, _aIu),
+    ((STRING, 9), (STRING, 9)),
+)
+
+DELETE_AUTHORIZER_OUTPUT: StaticSchema = (18, n0, _DAO, {_sSI: _sU, _smit: None})
+
+DELETE_AUTHORIZER: StaticOperationSchema = (
+    23,
+    n0,
+    _DA,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/authorizers/{authorizerId}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_AUTHORIZER_INPUT,
+    DELETE_AUTHORIZER_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_BASE_PATH_MAPPING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DBPMI,
+    {_sSI: _cDBPMR, _smi: None},
+    (_dN, _dNI, _bP),
+    ((STRING, 9), (STRING, {_sQ: _dNI}), (STRING, 9)),
+)
+
+DELETE_BASE_PATH_MAPPING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DBPMO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_BASE_PATH_MAPPING: StaticOperationSchema = (
+    23,
+    n0,
+    _DBPM,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/domainnames/{domainName}/basepathmappings/{basePath}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_BASE_PATH_MAPPING_INPUT,
+    DELETE_BASE_PATH_MAPPING_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_CLIENT_CERTIFICATE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCCI,
+    {_sSI: _cDCCR, _smi: None},
+    (_cCI,),
+    ((STRING, 9),),
+)
+
+DELETE_CLIENT_CERTIFICATE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCCO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_CLIENT_CERTIFICATE: StaticOperationSchema = (
+    23,
+    n0,
+    _DCC,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/clientcertificates/{clientCertificateId}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_CLIENT_CERTIFICATE_INPUT,
+    DELETE_CLIENT_CERTIFICATE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_DEPLOYMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDI,
+    {_sSI: _cDDR, _smi: None},
+    (_rAI, _dI),
+    ((STRING, 9), (STRING, 9)),
+)
+
+DELETE_DEPLOYMENT_OUTPUT: StaticSchema = (18, n0, _DDO, {_sSI: _sU, _smit: None})
+
+DELETE_DEPLOYMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _DD,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/deployments/{deploymentId}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_DEPLOYMENT_INPUT,
+    DELETE_DEPLOYMENT_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_DOCUMENTATION_PART_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDPI,
+    {_sSI: _cDDPR, _smi: None},
+    (_rAI, _dPI),
+    ((STRING, 9), (STRING, 9)),
+)
+
+DELETE_DOCUMENTATION_PART_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DDPO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_DOCUMENTATION_PART: StaticOperationSchema = (
+    23,
+    n0,
+    _DDP,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/documentation/parts/{documentationPartId}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_DOCUMENTATION_PART_INPUT,
+    DELETE_DOCUMENTATION_PART_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_DOCUMENTATION_VERSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDVI,
+    {_sSI: _cDDVR, _smi: None},
+    (_rAI, _dV),
+    ((STRING, 9), (STRING, 9)),
+)
+
+DELETE_DOCUMENTATION_VERSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DDVO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_DOCUMENTATION_VERSION: StaticOperationSchema = (
+    23,
+    n0,
+    _DDV,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/documentation/versions/{documentationVersion}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_DOCUMENTATION_VERSION_INPUT,
+    DELETE_DOCUMENTATION_VERSION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_DOMAIN_NAME_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDNI,
+    {_sSI: _cDDNR, _smi: None},
+    (_dN, _dNI),
+    ((STRING, 9), (STRING, {_sQ: _dNI})),
+)
+
+DELETE_DOMAIN_NAME_OUTPUT: StaticSchema = (18, n0, _DDNO, {_sSI: _sU, _smit: None})
+
+DELETE_DOMAIN_NAME: StaticOperationSchema = (
+    23,
+    n0,
+    _DDN,
+    {
+        _smith: MappingProxyType(
+            {"method": "DELETE", "uri": "/domainnames/{domainName}", "code": 202}
+        )
+    },
+    DELETE_DOMAIN_NAME_INPUT,
+    DELETE_DOMAIN_NAME_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDNAAI,
+    {_sSI: _cDDNAAR, _smi: None},
+    (_dNAAA,),
+    ((STRING, 9),),
+)
+
+DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DDNAAO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DDNAA,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/domainnameaccessassociations/{domainNameAccessAssociationArn}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION_INPUT,
+    DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GATEWAY_RESPONSE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _GRT,
+    0,
+    (
+        _D_,
+        _D__,
+        _RNF,
+        _UNAUTHORIZED,
+        _IAK,
+        _AD,
+        _AF,
+        _ACE,
+        _IS,
+        _ET_,
+        _MAT,
+        _IF,
+        _IT_,
+        _ACE_,
+        _UMT,
+        _BRP,
+        _BRB,
+        _RTL,
+        _THROTTLED,
+        _QE,
+        _WF,
+    ),
+    (
+        (-1, {_sV: _D_}),
+        (-1, {_sV: _D__}),
+        (-1, {_sV: _RNF}),
+        (-1, {_sV: _UNAUTHORIZED}),
+        (-1, {_sV: _IAK}),
+        (-1, {_sV: _AD}),
+        (-1, {_sV: _AF}),
+        (-1, {_sV: _ACE}),
+        (-1, {_sV: _IS}),
+        (-1, {_sV: _ET_}),
+        (-1, {_sV: _MAT}),
+        (-1, {_sV: _IF}),
+        (-1, {_sV: _IT_}),
+        (-1, {_sV: _ACE_}),
+        (-1, {_sV: _UMT}),
+        (-1, {_sV: _BRP}),
+        (-1, {_sV: _BRB}),
+        (-1, {_sV: _RTL}),
+        (-1, {_sV: _THROTTLED}),
+        (-1, {_sV: _QE}),
+        (-1, {_sV: _WF}),
+    ),
+)
+
+DELETE_GATEWAY_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DGRI,
+    {_sSI: _cDGRR, _smi: None},
+    (_rAI, _rTes),
+    ((STRING, 9), (GATEWAY_RESPONSE_TYPE, 9)),
+)
+
+DELETE_GATEWAY_RESPONSE_OUTPUT: StaticSchema = (18, n0, _DGRO, {_sSI: _sU, _smit: None})
+
+DELETE_GATEWAY_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _DGR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/gatewayresponses/{responseType}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_GATEWAY_RESPONSE_INPUT,
+    DELETE_GATEWAY_RESPONSE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_INTEGRATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DII,
+    {_sSI: _cDIR, _smi: None},
+    (_rAI, _rI, _hM),
+    ((STRING, 9), (STRING, 9), (STRING, 9)),
+)
+
+DELETE_INTEGRATION_OUTPUT: StaticSchema = (18, n0, _DIO, {_sSI: _sU, _smit: None})
+
+DELETE_INTEGRATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DI,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_INTEGRATION_INPUT,
+    DELETE_INTEGRATION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_INTEGRATION_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIRI,
+    {_sSI: _cDIRR, _smi: None},
+    (_rAI, _rI, _hM, _sC),
+    ((STRING, 9), (STRING, 9), (STRING, 9), (STATUS_CODE, 9)),
+)
+
+DELETE_INTEGRATION_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIRO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_INTEGRATION_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _DIR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration/responses/{statusCode}",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_INTEGRATION_RESPONSE_INPUT,
+    DELETE_INTEGRATION_RESPONSE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_METHOD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMI,
+    {_sSI: _cDMR, _smi: None},
+    (_rAI, _rI, _hM),
+    ((STRING, 9), (STRING, 9), (STRING, 9)),
+)
+
+DELETE_METHOD_OUTPUT: StaticSchema = (18, n0, _DMO, {_sSI: _sU, _smit: None})
+
+DELETE_METHOD: StaticOperationSchema = (
+    23,
+    n0,
+    _DM,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_METHOD_INPUT,
+    DELETE_METHOD_OUTPUT,
+    (
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_METHOD_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMRI,
+    {_sSI: _cDMRR, _smi: None},
+    (_rAI, _rI, _hM, _sC),
+    ((STRING, 9), (STRING, 9), (STRING, 9), (STATUS_CODE, 9)),
+)
+
+DELETE_METHOD_RESPONSE_OUTPUT: StaticSchema = (18, n0, _DMRO, {_sSI: _sU, _smit: None})
+
+DELETE_METHOD_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _DMR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/responses/{statusCode}",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_METHOD_RESPONSE_INPUT,
+    DELETE_METHOD_RESPONSE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_MODEL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMIe,
+    {_sSI: _cDMRo, _smi: None},
+    (_rAI, _mN),
+    ((STRING, 9), (STRING, 9)),
+)
+
+DELETE_MODEL_OUTPUT: StaticSchema = (18, n0, _DMOe, {_sSI: _sU, _smit: None})
+
+DELETE_MODEL: StaticOperationSchema = (
+    23,
+    n0,
+    _DMe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/models/{modelName}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_MODEL_INPUT,
+    DELETE_MODEL_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_REQUEST_VALIDATOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRVI,
+    {_sSI: _cDRVR, _smi: None},
+    (_rAI, _rVI),
+    ((STRING, 9), (STRING, 9)),
+)
+
+DELETE_REQUEST_VALIDATOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DRVO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_REQUEST_VALIDATOR: StaticOperationSchema = (
+    23,
+    n0,
+    _DRV,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/requestvalidators/{requestValidatorId}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_REQUEST_VALIDATOR_INPUT,
+    DELETE_REQUEST_VALIDATOR_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRI,
+    {_sSI: _cDRR, _smi: None},
+    (_rAI, _rI),
+    ((STRING, 9), (STRING, 9)),
+)
+
+DELETE_RESOURCE_OUTPUT: StaticSchema = (18, n0, _DRO, {_sSI: _sU, _smit: None})
+
+DELETE_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _DR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_RESOURCE_INPUT,
+    DELETE_RESOURCE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_REST_API_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRAI,
+    {_sSI: _cDRAR, _smi: None},
+    (_rAI,),
+    ((STRING, 9),),
+)
+
+DELETE_REST_API_OUTPUT: StaticSchema = (18, n0, _DRAO, {_sSI: _sU, _smit: None})
+
+DELETE_REST_API: StaticOperationSchema = (
+    23,
+    n0,
+    _DRA,
+    {
+        _smith: MappingProxyType(
+            {"method": "DELETE", "uri": "/restapis/{restApiId}", "code": 202}
+        )
+    },
+    DELETE_REST_API_INPUT,
+    DELETE_REST_API_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_STAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSI,
+    {_sSI: _cDSR, _smi: None},
+    (_rAI, _sN),
+    ((STRING, 9), (STRING, 9)),
+)
+
+DELETE_STAGE_OUTPUT: StaticSchema = (18, n0, _DSO, {_sSI: _sU, _smit: None})
+
+DELETE_STAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _DS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/stages/{stageName}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_STAGE_INPUT,
+    DELETE_STAGE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_USAGE_PLAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DUPI,
+    {_sSI: _cDUPR, _smi: None},
+    (_uPI,),
+    ((STRING, 9),),
+)
+
+DELETE_USAGE_PLAN_OUTPUT: StaticSchema = (18, n0, _DUPO, {_sSI: _sU, _smit: None})
+
+DELETE_USAGE_PLAN: StaticOperationSchema = (
+    23,
+    n0,
+    _DUP,
+    {
+        _smith: MappingProxyType(
+            {"method": "DELETE", "uri": "/usageplans/{usagePlanId}", "code": 202}
+        )
+    },
+    DELETE_USAGE_PLAN_INPUT,
+    DELETE_USAGE_PLAN_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_USAGE_PLAN_KEY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DUPKI,
+    {_sSI: _cDUPKR, _smi: None},
+    (_uPI, _kI),
+    ((STRING, 9), (STRING, 9)),
+)
+
+DELETE_USAGE_PLAN_KEY_OUTPUT: StaticSchema = (18, n0, _DUPKO, {_sSI: _sU, _smit: None})
+
+DELETE_USAGE_PLAN_KEY: StaticOperationSchema = (
+    23,
+    n0,
+    _DUPK,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/usageplans/{usagePlanId}/keys/{keyId}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_USAGE_PLAN_KEY_INPUT,
+    DELETE_USAGE_PLAN_KEY_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DELETE_VPC_LINK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVLI,
+    {_sSI: _cDVLR, _smi: None},
+    (_vLI,),
+    ((STRING, 9),),
+)
+
+DELETE_VPC_LINK_OUTPUT: StaticSchema = (18, n0, _DVLO, {_sSI: _sU, _smit: None})
+
+DELETE_VPC_LINK: StaticOperationSchema = (
+    23,
+    n0,
+    _DVL,
+    {
+        _smith: MappingProxyType(
+            {"method": "DELETE", "uri": "/vpclinks/{vpcLinkId}", "code": 202}
+        )
+    },
+    DELETE_VPC_LINK_INPUT,
+    DELETE_VPC_LINK_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+FLUSH_STAGE_AUTHORIZERS_CACHE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _FSACI,
+    {_sSI: _cFSACR, _smi: None},
+    (_rAI, _sN),
+    ((STRING, 9), (STRING, 9)),
+)
+
+FLUSH_STAGE_AUTHORIZERS_CACHE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _FSACO,
+    {_sSI: _sU, _smit: None},
+)
+
+FLUSH_STAGE_AUTHORIZERS_CACHE: StaticOperationSchema = (
+    23,
+    n0,
+    _FSAC,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/stages/{stageName}/cache/authorizers",
+                "code": 202,
+            }
+        )
+    },
+    FLUSH_STAGE_AUTHORIZERS_CACHE_INPUT,
+    FLUSH_STAGE_AUTHORIZERS_CACHE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+FLUSH_STAGE_CACHE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _FSCI,
+    {_sSI: _cFSCR, _smi: None},
+    (_rAI, _sN),
+    ((STRING, 9), (STRING, 9)),
+)
+
+FLUSH_STAGE_CACHE_OUTPUT: StaticSchema = (18, n0, _FSCO, {_sSI: _sU, _smit: None})
+
+FLUSH_STAGE_CACHE: StaticOperationSchema = (
+    23,
+    n0,
+    _FSC,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/restapis/{restApiId}/stages/{stageName}/cache/data",
+                "code": 202,
+            }
+        )
+    },
+    FLUSH_STAGE_CACHE_INPUT,
+    FLUSH_STAGE_CACHE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GENERATE_CLIENT_CERTIFICATE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCCI,
+    {_sSI: _cGCCR, _smi: None},
+    (_d, _t),
+    ((STRING, 0), (MAP_OF_STRING_TO_STRING, 0)),
+)
+
+GENERATE_CLIENT_CERTIFICATE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCCO,
+    {_sSI: _cCC, _smit: None},
+    (_cCI, _d, _pEC, _cD, _eD, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+GENERATE_CLIENT_CERTIFICATE: StaticOperationSchema = (
+    23,
+    n0,
+    _GCC,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/clientcertificates", "code": 201}
+        )
+    },
+    GENERATE_CLIENT_CERTIFICATE_INPUT,
+    GENERATE_CLIENT_CERTIFICATE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_ACCOUNT_INPUT: StaticSchema = (18, n0, _GAI, {_sSI: _cGAR, _smi: None})
+
+GET_ACCOUNT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GAO,
+    {_sSI: _cAo, _smit: None},
+    (_cRAl, _tS, _fe, _aKV),
+    ((STRING, 0), (THROTTLE_SETTINGS, 0), (LIST_OF_STRING, 0), (STRING, 0)),
+)
+
+GET_ACCOUNT: StaticOperationSchema = (
+    23,
+    n0,
+    _GA,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/account", "code": 200})},
+    GET_ACCOUNT_INPUT,
+    GET_ACCOUNT_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_API_KEY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GAKI,
+    {_sSI: _cGAKR, _smi: None},
+    (_aK, _iV),
+    ((STRING, 9), (NULLABLE_BOOLEAN, {_sQ: _iV})),
+)
+
+GET_API_KEY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GAKO,
+    {_sSI: _cAK, _smit: None},
+    (_i, _v, _n, _cI, _d, _e, _cD, _lUD, _sK, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (LIST_OF_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+GET_API_KEY: StaticOperationSchema = (
+    23,
+    n0,
+    _GAK,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/apikeys/{apiKey}", "code": 200}
+        )
+    },
+    GET_API_KEY_INPUT,
+    GET_API_KEY_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_API_KEYS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GAKIe,
+    {_sSI: _cGAKRo, _smi: None},
+    (_pos, _li, _nQ, _cI, _iVn),
+    (
+        (STRING, {_sQ: _pos}),
+        (NULLABLE_INTEGER, {_sQ: _li}),
+        (STRING, {_sQ: _n}),
+        (STRING, {_sQ: _cI}),
+        (NULLABLE_BOOLEAN, {_sQ: _iVn}),
+    ),
+)
+
+LIST_OF_API_KEY: StaticSchema = (16, n0, _LOAK, 0, (_m,), ((API_KEY, 0),))
+
+GET_API_KEYS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GAKOe,
+    {_sSI: _cAKo, _smit: None},
+    (_w, _it, _pos),
+    ((LIST_OF_STRING, 0), (LIST_OF_API_KEY, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_API_KEYS: StaticOperationSchema = (
+    23,
+    n0,
+    _GAKe,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/apikeys", "code": 200})},
+    GET_API_KEYS_INPUT,
+    GET_API_KEYS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_AUTHORIZER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GAIe,
+    {_sSI: _cGARo, _smi: None},
+    (_rAI, _aIu),
+    ((STRING, 9), (STRING, 9)),
+)
+
+GET_AUTHORIZER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GAOe,
+    {_sSI: _cA, _smit: None},
+    (_i, _n, _ty, _pARN, _aT, _aU, _aC, _iS, _iVE, _aRTIS),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (AUTHORIZER_TYPE, 0),
+        (LIST_OF_AR_NS, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (NULLABLE_INTEGER, 0),
+    ),
+)
+
+GET_AUTHORIZER: StaticOperationSchema = (
+    23,
+    n0,
+    _GAe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/authorizers/{authorizerId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_AUTHORIZER_INPUT,
+    GET_AUTHORIZER_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_AUTHORIZERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GAIet,
+    {_sSI: _cGARom, _smi: None},
+    (_rAI, _pos, _li),
+    ((STRING, 9), (STRING, {_sQ: _pos}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+LIST_OF_AUTHORIZER: StaticSchema = (16, n0, _LOA, 0, (_m,), ((AUTHORIZER, 0),))
+
+GET_AUTHORIZERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GAOet,
+    {_sSI: _cAom, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_AUTHORIZER, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_AUTHORIZERS: StaticOperationSchema = (
+    23,
+    n0,
+    _GAet,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/restapis/{restApiId}/authorizers", "code": 200}
+        )
+    },
+    GET_AUTHORIZERS_INPUT,
+    GET_AUTHORIZERS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_BASE_PATH_MAPPING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GBPMI,
+    {_sSI: _cGBPMR, _smi: None},
+    (_dN, _dNI, _bP),
+    ((STRING, 9), (STRING, {_sQ: _dNI}), (STRING, 9)),
+)
+
+GET_BASE_PATH_MAPPING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GBPMO,
+    {_sSI: _cBPM, _smit: None},
+    (_bP, _rAI, _st),
+    ((STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+GET_BASE_PATH_MAPPING: StaticOperationSchema = (
+    23,
+    n0,
+    _GBPM,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/domainnames/{domainName}/basepathmappings/{basePath}",
+                "code": 200,
+            }
+        )
+    },
+    GET_BASE_PATH_MAPPING_INPUT,
+    GET_BASE_PATH_MAPPING_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_BASE_PATH_MAPPINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GBPMIe,
+    {_sSI: _cGBPMRo, _smi: None},
+    (_dN, _dNI, _pos, _li),
+    (
+        (STRING, 9),
+        (STRING, {_sQ: _dNI}),
+        (STRING, {_sQ: _pos}),
+        (NULLABLE_INTEGER, {_sQ: _li}),
+    ),
+)
+
+BASE_PATH_MAPPING: StaticSchema = (
+    18,
+    n0,
+    _BPM,
+    0,
+    (_bP, _rAI, _st),
+    ((STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+LIST_OF_BASE_PATH_MAPPING: StaticSchema = (
+    16,
+    n0,
+    _LOBPM,
+    0,
+    (_m,),
+    ((BASE_PATH_MAPPING, 0),),
+)
+
+GET_BASE_PATH_MAPPINGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GBPMOe,
+    {_sSI: _cBPMo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_BASE_PATH_MAPPING, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_BASE_PATH_MAPPINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _GBPMe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/domainnames/{domainName}/basepathmappings",
+                "code": 200,
+            }
+        )
+    },
+    GET_BASE_PATH_MAPPINGS_INPUT,
+    GET_BASE_PATH_MAPPINGS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_CLIENT_CERTIFICATE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCCIe,
+    {_sSI: _cGCCRo, _smi: None},
+    (_cCI,),
+    ((STRING, 9),),
+)
+
+GET_CLIENT_CERTIFICATE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCCOe,
+    {_sSI: _cCC, _smit: None},
+    (_cCI, _d, _pEC, _cD, _eD, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+GET_CLIENT_CERTIFICATE: StaticOperationSchema = (
+    23,
+    n0,
+    _GCCe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/clientcertificates/{clientCertificateId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_CLIENT_CERTIFICATE_INPUT,
+    GET_CLIENT_CERTIFICATE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_CLIENT_CERTIFICATES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCCIet,
+    {_sSI: _cGCCRom, _smi: None},
+    (_pos, _li),
+    ((STRING, {_sQ: _pos}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+CLIENT_CERTIFICATE: StaticSchema = (
+    18,
+    n0,
+    _CC,
+    0,
+    (_cCI, _d, _pEC, _cD, _eD, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+LIST_OF_CLIENT_CERTIFICATE: StaticSchema = (
+    16,
+    n0,
+    _LOCC,
+    0,
+    (_m,),
+    ((CLIENT_CERTIFICATE, 0),),
+)
+
+GET_CLIENT_CERTIFICATES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCCOet,
+    {_sSI: _cCCo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_CLIENT_CERTIFICATE, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_CLIENT_CERTIFICATES: StaticOperationSchema = (
+    23,
+    n0,
+    _GCCet,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/clientcertificates", "code": 200}
+        )
+    },
+    GET_CLIENT_CERTIFICATES_INPUT,
+    GET_CLIENT_CERTIFICATES_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_DEPLOYMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDI,
+    {_sSI: _cGDR, _smi: None},
+    (_rAI, _dI, _em),
+    ((STRING, 9), (STRING, 9), (LIST_OF_STRING, {_sQ: _em})),
+)
+
+GET_DEPLOYMENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDO,
+    {_sSI: _cDo, _smit: None},
+    (_i, _d, _cD, _aS),
+    ((STRING, 0), (STRING, 0), (TIMESTAMP, 0), (PATH_TO_MAP_OF_METHOD_SNAPSHOT, 0)),
+)
+
+GET_DEPLOYMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _GD,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/deployments/{deploymentId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_DEPLOYMENT_INPUT,
+    GET_DEPLOYMENT_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        SERVICE_UNAVAILABLE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_DEPLOYMENTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDIe,
+    {_sSI: _cGDRo, _smi: None},
+    (_rAI, _pos, _li),
+    ((STRING, 9), (STRING, {_sQ: _pos}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+DEPLOYMENT: StaticSchema = (
+    18,
+    n0,
+    _De,
+    0,
+    (_i, _d, _cD, _aS),
+    ((STRING, 0), (STRING, 0), (TIMESTAMP, 0), (PATH_TO_MAP_OF_METHOD_SNAPSHOT, 0)),
+)
+
+LIST_OF_DEPLOYMENT: StaticSchema = (16, n0, _LOD, 0, (_m,), ((DEPLOYMENT, 0),))
+
+GET_DEPLOYMENTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDOe,
+    {_sSI: _cDom, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_DEPLOYMENT, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_DEPLOYMENTS: StaticOperationSchema = (
+    23,
+    n0,
+    _GDe,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/restapis/{restApiId}/deployments", "code": 200}
+        )
+    },
+    GET_DEPLOYMENTS_INPUT,
+    GET_DEPLOYMENTS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        SERVICE_UNAVAILABLE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_DOCUMENTATION_PART_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDPI,
+    {_sSI: _cGDPR, _smi: None},
+    (_rAI, _dPI),
+    ((STRING, 9), (STRING, 9)),
+)
+
+GET_DOCUMENTATION_PART_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDPO,
+    {_sSI: _cDP, _smit: None},
+    (_i, _l, _pr),
+    ((STRING, 0), (DOCUMENTATION_PART_LOCATION, 0), (STRING, 0)),
+)
+
+GET_DOCUMENTATION_PART: StaticOperationSchema = (
+    23,
+    n0,
+    _GDP,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/documentation/parts/{documentationPartId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_DOCUMENTATION_PART_INPUT,
+    GET_DOCUMENTATION_PART_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+LOCATION_STATUS_TYPE: StaticSchema = (
+    14,
+    n0,
+    _LST,
+    0,
+    (_DOCUMENTED, _UNDOCUMENTED),
+    ((-1, {_sV: _DOCUMENTED}), (-1, {_sV: _UNDOCUMENTED})),
+)
+
+GET_DOCUMENTATION_PARTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDPIe,
+    {_sSI: _cGDPRo, _smi: None},
+    (_rAI, _ty, _nQ, _p, _pos, _li, _lS),
+    (
+        (STRING, 9),
+        (DOCUMENTATION_PART_TYPE, {_sQ: _ty}),
+        (STRING, {_sQ: _n}),
+        (STRING, {_sQ: _p}),
+        (STRING, {_sQ: _pos}),
+        (NULLABLE_INTEGER, {_sQ: _li}),
+        (LOCATION_STATUS_TYPE, {_sQ: _lS}),
+    ),
+)
+
+DOCUMENTATION_PART: StaticSchema = (
+    18,
+    n0,
+    _DP,
+    0,
+    (_i, _l, _pr),
+    ((STRING, 0), (DOCUMENTATION_PART_LOCATION, 0), (STRING, 0)),
+)
+
+LIST_OF_DOCUMENTATION_PART: StaticSchema = (
+    16,
+    n0,
+    _LODP,
+    0,
+    (_m,),
+    ((DOCUMENTATION_PART, 0),),
+)
+
+GET_DOCUMENTATION_PARTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDPOe,
+    {_sSI: _cDPo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_DOCUMENTATION_PART, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_DOCUMENTATION_PARTS: StaticOperationSchema = (
+    23,
+    n0,
+    _GDPe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/documentation/parts",
+                "code": 200,
+            }
+        )
+    },
+    GET_DOCUMENTATION_PARTS_INPUT,
+    GET_DOCUMENTATION_PARTS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_DOCUMENTATION_VERSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDVI,
+    {_sSI: _cGDVR, _smi: None},
+    (_rAI, _dV),
+    ((STRING, 9), (STRING, 9)),
+)
+
+GET_DOCUMENTATION_VERSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDVO,
+    {_sSI: _cDV, _smit: None},
+    (_ve, _cD, _d),
+    ((STRING, 0), (TIMESTAMP, 0), (STRING, 0)),
+)
+
+GET_DOCUMENTATION_VERSION: StaticOperationSchema = (
+    23,
+    n0,
+    _GDV,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/documentation/versions/{documentationVersion}",
+                "code": 200,
+            }
+        )
+    },
+    GET_DOCUMENTATION_VERSION_INPUT,
+    GET_DOCUMENTATION_VERSION_OUTPUT,
+    (NOT_FOUND_EXCEPTION, TOO_MANY_REQUESTS_EXCEPTION, UNAUTHORIZED_EXCEPTION),
+)
+
+GET_DOCUMENTATION_VERSIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDVIe,
+    {_sSI: _cGDVRo, _smi: None},
+    (_rAI, _pos, _li),
+    ((STRING, 9), (STRING, {_sQ: _pos}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+DOCUMENTATION_VERSION: StaticSchema = (
+    18,
+    n0,
+    _DV,
+    0,
+    (_ve, _cD, _d),
+    ((STRING, 0), (TIMESTAMP, 0), (STRING, 0)),
+)
+
+LIST_OF_DOCUMENTATION_VERSION: StaticSchema = (
+    16,
+    n0,
+    _LODV,
+    0,
+    (_m,),
+    ((DOCUMENTATION_VERSION, 0),),
+)
+
+GET_DOCUMENTATION_VERSIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDVOe,
+    {_sSI: _cDVo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_DOCUMENTATION_VERSION, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_DOCUMENTATION_VERSIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _GDVe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/documentation/versions",
+                "code": 200,
+            }
+        )
+    },
+    GET_DOCUMENTATION_VERSIONS_INPUT,
+    GET_DOCUMENTATION_VERSIONS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_DOMAIN_NAME_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDNI,
+    {_sSI: _cGDNR, _smi: None},
+    (_dN, _dNI),
+    ((STRING, 9), (STRING, {_sQ: _dNI})),
+)
+
+GET_DOMAIN_NAME_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDNO,
+    {_sSI: _cDN, _smit: None},
+    (
+        _dN,
+        _dNI,
+        _dNA,
+        _cN,
+        _cAe,
+        _cUD,
+        _rDN,
+        _rHZI,
+        _rCN,
+        _rCA,
+        _dDN,
+        _dHZI,
+        _eC,
+        _dNS,
+        _dNSM,
+        _sP,
+        _eAM,
+        _t,
+        _mTA,
+        _oVCA,
+        _mP,
+        _po,
+        _rM,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (DOMAIN_NAME_STATUS, 0),
+        (STRING, 0),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MUTUAL_TLS_AUTHENTICATION, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (ROUTING_MODE, 0),
+    ),
+)
+
+GET_DOMAIN_NAME: StaticOperationSchema = (
+    23,
+    n0,
+    _GDN,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/domainnames/{domainName}", "code": 200}
+        )
+    },
+    GET_DOMAIN_NAME_INPUT,
+    GET_DOMAIN_NAME_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+RESOURCE_OWNER: StaticSchema = (
+    14,
+    n0,
+    _RO,
+    0,
+    (_SELF, _OA),
+    ((-1, {_sV: _SELF}), (-1, {_sV: _OA})),
+)
+
+GET_DOMAIN_NAME_ACCESS_ASSOCIATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDNAAI,
+    {_sSI: _cGDNAAR, _smi: None},
+    (_pos, _li, _rO),
+    (
+        (STRING, {_sQ: _pos}),
+        (NULLABLE_INTEGER, {_sQ: _li}),
+        (RESOURCE_OWNER, {_sQ: _rO}),
+    ),
+)
+
+DOMAIN_NAME_ACCESS_ASSOCIATION: StaticSchema = (
+    18,
+    n0,
+    _DNAA,
+    0,
+    (_dNAAA, _dNA, _aAST, _aAS, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (ACCESS_ASSOCIATION_SOURCE_TYPE, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+LIST_OF_DOMAIN_NAME_ACCESS_ASSOCIATION: StaticSchema = (
+    16,
+    n0,
+    _LODNAA,
+    0,
+    (_m,),
+    ((DOMAIN_NAME_ACCESS_ASSOCIATION, 0),),
+)
+
+GET_DOMAIN_NAME_ACCESS_ASSOCIATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDNAAO,
+    {_sSI: _cDNAAo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_DOMAIN_NAME_ACCESS_ASSOCIATION, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_DOMAIN_NAME_ACCESS_ASSOCIATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _GDNAA,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/domainnameaccessassociations", "code": 200}
+        )
+    },
+    GET_DOMAIN_NAME_ACCESS_ASSOCIATIONS_INPUT,
+    GET_DOMAIN_NAME_ACCESS_ASSOCIATIONS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_DOMAIN_NAMES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDNIe,
+    {_sSI: _cGDNRo, _smi: None},
+    (_pos, _li, _rO),
+    (
+        (STRING, {_sQ: _pos}),
+        (NULLABLE_INTEGER, {_sQ: _li}),
+        (RESOURCE_OWNER, {_sQ: _rO}),
+    ),
+)
+
+DOMAIN_NAME: StaticSchema = (
+    18,
+    n0,
+    _DN,
+    0,
+    (
+        _dN,
+        _dNI,
+        _dNA,
+        _cN,
+        _cAe,
+        _cUD,
+        _rDN,
+        _rHZI,
+        _rCN,
+        _rCA,
+        _dDN,
+        _dHZI,
+        _eC,
+        _dNS,
+        _dNSM,
+        _sP,
+        _eAM,
+        _t,
+        _mTA,
+        _oVCA,
+        _mP,
+        _po,
+        _rM,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (DOMAIN_NAME_STATUS, 0),
+        (STRING, 0),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MUTUAL_TLS_AUTHENTICATION, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (ROUTING_MODE, 0),
+    ),
+)
+
+LIST_OF_DOMAIN_NAME: StaticSchema = (16, n0, _LODN, 0, (_m,), ((DOMAIN_NAME, 0),))
+
+GET_DOMAIN_NAMES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDNOe,
+    {_sSI: _cDNo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_DOMAIN_NAME, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_DOMAIN_NAMES: StaticOperationSchema = (
+    23,
+    n0,
+    _GDNe,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/domainnames", "code": 200})},
+    GET_DOMAIN_NAMES_INPUT,
+    GET_DOMAIN_NAMES_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_EXPORT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GEI,
+    {_sSI: _cGER, _smi: None},
+    (_rAI, _sN, _eT, _pa, _a),
+    (
+        (STRING, 9),
+        (STRING, 9),
+        (STRING, 9),
+        (MAP_OF_STRING_TO_STRING, 1024),
+        (STRING, {_sH: _Ac}),
+    ),
+)
+
+BLOB: StaticSchema = (1, n0, _Bl, 0)
+
+GET_EXPORT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GEO,
+    {_sSI: _cER, _smit: None},
+    (_cT, _cDon, _b),
+    ((STRING, {_sH: _CT_}), (STRING, {_sH: _CD_}), (BLOB, 16)),
+)
+
+GET_EXPORT: StaticOperationSchema = (
+    23,
+    n0,
+    _GE,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/stages/{stageName}/exports/{exportType}",
+                "code": 200,
+            }
+        )
+    },
+    GET_EXPORT_INPUT,
+    GET_EXPORT_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_GATEWAY_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GGRI,
+    {_sSI: _cGGRR, _smi: None},
+    (_rAI, _rTes),
+    ((STRING, 9), (GATEWAY_RESPONSE_TYPE, 9)),
+)
+
+GET_GATEWAY_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GGRO,
+    {_sSI: _cGR, _smit: None},
+    (_rTes, _sC, _rP, _rT, _dR),
+    (
+        (GATEWAY_RESPONSE_TYPE, 0),
+        (STATUS_CODE, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+    ),
+)
+
+GET_GATEWAY_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _GGR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/gatewayresponses/{responseType}",
+                "code": 200,
+            }
+        )
+    },
+    GET_GATEWAY_RESPONSE_INPUT,
+    GET_GATEWAY_RESPONSE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_GATEWAY_RESPONSES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GGRIe,
+    {_sSI: _cGGRRo, _smi: None},
+    (_rAI, _pos, _li),
+    ((STRING, 9), (STRING, {_sQ: _pos}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+GATEWAY_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _GR,
+    0,
+    (_rTes, _sC, _rP, _rT, _dR),
+    (
+        (GATEWAY_RESPONSE_TYPE, 0),
+        (STATUS_CODE, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+    ),
+)
+
+LIST_OF_GATEWAY_RESPONSE: StaticSchema = (
+    16,
+    n0,
+    _LOGR,
+    0,
+    (_m,),
+    ((GATEWAY_RESPONSE, 0),),
+)
+
+GET_GATEWAY_RESPONSES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GGROe,
+    {_sSI: _cGRo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_GATEWAY_RESPONSE, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_GATEWAY_RESPONSES: StaticOperationSchema = (
+    23,
+    n0,
+    _GGRe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/gatewayresponses",
+                "code": 200,
+            }
+        )
+    },
+    GET_GATEWAY_RESPONSES_INPUT,
+    GET_GATEWAY_RESPONSES_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_INTEGRATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GII,
+    {_sSI: _cGIR, _smi: None},
+    (_rAI, _rI, _hM),
+    ((STRING, 9), (STRING, 9), (STRING, 9)),
+)
+
+GET_INTEGRATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIO,
+    {_sSI: _cIom, _smit: None},
+    (
+        _ty,
+        _hM,
+        _u,
+        _cTo,
+        _cIo,
+        _cr,
+        _rPe,
+        _rTe,
+        _pB,
+        _cH,
+        _tIM,
+        _cNa,
+        _cKP,
+        _iR,
+        _tC,
+        _rTM,
+        _iT,
+    ),
+    (
+        (INTEGRATION_TYPE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (CONNECTION_TYPE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+        (INTEGER, {_s: 0}),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (MAP_OF_INTEGRATION_RESPONSE, 0),
+        (TLS_CONFIG, 0),
+        (RESPONSE_TRANSFER_MODE, 0),
+        (STRING, 0),
+    ),
+)
+
+GET_INTEGRATION: StaticOperationSchema = (
+    23,
+    n0,
+    _GI,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration",
+                "code": 200,
+            }
+        )
+    },
+    GET_INTEGRATION_INPUT,
+    GET_INTEGRATION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_INTEGRATION_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GIRI,
+    {_sSI: _cGIRR, _smi: None},
+    (_rAI, _rI, _hM, _sC),
+    ((STRING, 9), (STRING, 9), (STRING, 9), (STATUS_CODE, 9)),
+)
+
+GET_INTEGRATION_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIRO,
+    {_sSI: _cIR, _smit: None},
+    (_sC, _sPe, _rP, _rT, _cH),
+    (
+        (STATUS_CODE, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+    ),
+)
+
+GET_INTEGRATION_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _GIR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration/responses/{statusCode}",
+                "code": 200,
+            }
+        )
+    },
+    GET_INTEGRATION_RESPONSE_INPUT,
+    GET_INTEGRATION_RESPONSE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_METHOD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMI,
+    {_sSI: _cGMR, _smi: None},
+    (_rAI, _rI, _hM),
+    ((STRING, 9), (STRING, 9), (STRING, 9)),
+)
+
+GET_METHOD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMO,
+    {_sSI: _cMo, _smit: None},
+    (_hM, _aTu, _aIu, _aKR, _rVI, _oN, _rPe, _rMeq, _mR, _mI, _aSu),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (NULLABLE_BOOLEAN, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_BOOLEAN, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_METHOD_RESPONSE, 0),
+        (INTEGRATION, 0),
+        (LIST_OF_STRING, 0),
+    ),
+)
+
+GET_METHOD: StaticOperationSchema = (
+    23,
+    n0,
+    _GM,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
+                "code": 200,
+            }
+        )
+    },
+    GET_METHOD_INPUT,
+    GET_METHOD_OUTPUT,
+    (NOT_FOUND_EXCEPTION, TOO_MANY_REQUESTS_EXCEPTION, UNAUTHORIZED_EXCEPTION),
+)
+
+GET_METHOD_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMRI,
+    {_sSI: _cGMRR, _smi: None},
+    (_rAI, _rI, _hM, _sC),
+    ((STRING, 9), (STRING, 9), (STRING, 9), (STATUS_CODE, 9)),
+)
+
+GET_METHOD_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMRO,
+    {_sSI: _cMR, _smit: None},
+    (_sC, _rP, _rMe),
+    ((STATUS_CODE, 0), (MAP_OF_STRING_TO_BOOLEAN, 0), (MAP_OF_STRING_TO_STRING, 0)),
+)
+
+GET_METHOD_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _GMR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/responses/{statusCode}",
+                "code": 200,
+            }
+        )
+    },
+    GET_METHOD_RESPONSE_INPUT,
+    GET_METHOD_RESPONSE_OUTPUT,
+    (NOT_FOUND_EXCEPTION, TOO_MANY_REQUESTS_EXCEPTION, UNAUTHORIZED_EXCEPTION),
+)
+
+GET_MODEL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMIe,
+    {_sSI: _cGMRo, _smi: None},
+    (_rAI, _mN, _fl),
+    ((STRING, 9), (STRING, 9), (BOOLEAN, {_s: False, _sQ: _fl})),
+)
+
+GET_MODEL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMOe,
+    {_sSI: _cM, _smit: None},
+    (_i, _n, _d, _sc, _cT),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+GET_MODEL: StaticOperationSchema = (
+    23,
+    n0,
+    _GMe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/models/{modelName}",
+                "code": 200,
+            }
+        )
+    },
+    GET_MODEL_INPUT,
+    GET_MODEL_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_MODELS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMIet,
+    {_sSI: _cGMRom, _smi: None},
+    (_rAI, _pos, _li),
+    ((STRING, 9), (STRING, {_sQ: _pos}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+MODEL: StaticSchema = (
+    18,
+    n0,
+    _Mo,
+    0,
+    (_i, _n, _d, _sc, _cT),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+LIST_OF_MODEL: StaticSchema = (16, n0, _LOM, 0, (_m,), ((MODEL, 0),))
+
+GET_MODELS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMOet,
+    {_sSI: _cMom, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_MODEL, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_MODELS: StaticOperationSchema = (
+    23,
+    n0,
+    _GMet,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/restapis/{restApiId}/models", "code": 200}
+        )
+    },
+    GET_MODELS_INPUT,
+    GET_MODELS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_MODEL_TEMPLATE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMTI,
+    {_sSI: _cGMTR, _smi: None},
+    (_rAI, _mN),
+    ((STRING, 9), (STRING, 9)),
+)
+
+GET_MODEL_TEMPLATE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMTO,
+    {_sSI: _cTom, _smit: None},
+    (_v,),
+    ((STRING, 0),),
+)
+
+GET_MODEL_TEMPLATE: StaticOperationSchema = (
+    23,
+    n0,
+    _GMT,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/models/{modelName}/default_template",
+                "code": 200,
+            }
+        )
+    },
+    GET_MODEL_TEMPLATE_INPUT,
+    GET_MODEL_TEMPLATE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_REQUEST_VALIDATOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRVI,
+    {_sSI: _cGRVR, _smi: None},
+    (_rAI, _rVI),
+    ((STRING, 9), (STRING, 9)),
+)
+
+GET_REQUEST_VALIDATOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRVO,
+    {_sSI: _cRV, _smit: None},
+    (_i, _n, _vRB, _vRP),
+    ((STRING, 0), (STRING, 0), (BOOLEAN, {_s: False}), (BOOLEAN, {_s: False})),
+)
+
+GET_REQUEST_VALIDATOR: StaticOperationSchema = (
+    23,
+    n0,
+    _GRV,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/requestvalidators/{requestValidatorId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_REQUEST_VALIDATOR_INPUT,
+    GET_REQUEST_VALIDATOR_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_REQUEST_VALIDATORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRVIe,
+    {_sSI: _cGRVRo, _smi: None},
+    (_rAI, _pos, _li),
+    ((STRING, 9), (STRING, {_sQ: _pos}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+REQUEST_VALIDATOR: StaticSchema = (
+    18,
+    n0,
+    _RV,
+    0,
+    (_i, _n, _vRB, _vRP),
+    ((STRING, 0), (STRING, 0), (BOOLEAN, {_s: False}), (BOOLEAN, {_s: False})),
+)
+
+LIST_OF_REQUEST_VALIDATOR: StaticSchema = (
+    16,
+    n0,
+    _LORV,
+    0,
+    (_m,),
+    ((REQUEST_VALIDATOR, 0),),
+)
+
+GET_REQUEST_VALIDATORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRVOe,
+    {_sSI: _cRVo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_REQUEST_VALIDATOR, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_REQUEST_VALIDATORS: StaticOperationSchema = (
+    23,
+    n0,
+    _GRVe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/requestvalidators",
+                "code": 200,
+            }
+        )
+    },
+    GET_REQUEST_VALIDATORS_INPUT,
+    GET_REQUEST_VALIDATORS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRI,
+    {_sSI: _cGRR, _smi: None},
+    (_rAI, _rI, _em),
+    ((STRING, 9), (STRING, 9), (LIST_OF_STRING, {_sQ: _em})),
+)
+
+GET_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRO,
+    {_sSI: _cR, _smit: None},
+    (_i, _pI, _pP, _p, _rMes),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0), (MAP_OF_METHOD, 0)),
+)
+
+GET_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _GRe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_RESOURCE_INPUT,
+    GET_RESOURCE_OUTPUT,
+    (NOT_FOUND_EXCEPTION, TOO_MANY_REQUESTS_EXCEPTION, UNAUTHORIZED_EXCEPTION),
+)
+
+GET_RESOURCES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRIe,
+    {_sSI: _cGRRo, _smi: None},
+    (_rAI, _pos, _li, _em),
+    (
+        (STRING, 9),
+        (STRING, {_sQ: _pos}),
+        (NULLABLE_INTEGER, {_sQ: _li}),
+        (LIST_OF_STRING, {_sQ: _em}),
+    ),
+)
+
+RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _R,
+    0,
+    (_i, _pI, _pP, _p, _rMes),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0), (MAP_OF_METHOD, 0)),
+)
+
+LIST_OF_RESOURCE: StaticSchema = (16, n0, _LOR, 0, (_m,), ((RESOURCE, 0),))
+
+GET_RESOURCES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GROe,
+    {_sSI: _cRo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_RESOURCE, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_RESOURCES: StaticOperationSchema = (
+    23,
+    n0,
+    _GRet,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/restapis/{restApiId}/resources", "code": 200}
+        )
+    },
+    GET_RESOURCES_INPUT,
+    GET_RESOURCES_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_REST_API_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRAI,
+    {_sSI: _cGRAR, _smi: None},
+    (_rAI,),
+    ((STRING, 9),),
+)
+
+GET_REST_API_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRAO,
+    {_sSI: _cRA, _smit: None},
+    (
+        _i,
+        _n,
+        _d,
+        _cD,
+        _ve,
+        _w,
+        _bMT,
+        _mCS,
+        _aKS,
+        _eC,
+        _po,
+        _t,
+        _dEAE,
+        _rRI,
+        _sP,
+        _eAM,
+        _aSp,
+        _aSM,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (LIST_OF_STRING, 0),
+        (NULLABLE_INTEGER, 0),
+        (API_KEY_SOURCE_TYPE, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+        (API_STATUS, 0),
+        (STRING, 0),
+    ),
+)
+
+GET_REST_API: StaticOperationSchema = (
+    23,
+    n0,
+    _GRA,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/restapis/{restApiId}", "code": 200}
+        )
+    },
+    GET_REST_API_INPUT,
+    GET_REST_API_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_REST_APIS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRAIe,
+    {_sSI: _cGRARo, _smi: None},
+    (_pos, _li),
+    ((STRING, {_sQ: _pos}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+REST_API: StaticSchema = (
+    18,
+    n0,
+    _RAe,
+    0,
+    (
+        _i,
+        _n,
+        _d,
+        _cD,
+        _ve,
+        _w,
+        _bMT,
+        _mCS,
+        _aKS,
+        _eC,
+        _po,
+        _t,
+        _dEAE,
+        _rRI,
+        _sP,
+        _eAM,
+        _aSp,
+        _aSM,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (LIST_OF_STRING, 0),
+        (NULLABLE_INTEGER, 0),
+        (API_KEY_SOURCE_TYPE, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+        (API_STATUS, 0),
+        (STRING, 0),
+    ),
+)
+
+LIST_OF_REST_API: StaticSchema = (16, n0, _LORA, 0, (_m,), ((REST_API, 0),))
+
+GET_REST_APIS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRAOe,
+    {_sSI: _cRAo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_REST_API, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_REST_APIS: StaticOperationSchema = (
+    23,
+    n0,
+    _GRAe,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/restapis", "code": 200})},
+    GET_REST_APIS_INPUT,
+    GET_REST_APIS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_SDK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSI,
+    {_sSI: _cGSR, _smi: None},
+    (_rAI, _sN, _sT, _pa),
+    ((STRING, 9), (STRING, 9), (STRING, 9), (MAP_OF_STRING_TO_STRING, 1024)),
+)
+
+GET_SDK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSO,
+    {_sSI: _cSR, _smit: None},
+    (_cT, _cDon, _b),
+    ((STRING, {_sH: _CT_}), (STRING, {_sH: _CD_}), (BLOB, 16)),
+)
+
+GET_SDK: StaticOperationSchema = (
+    23,
+    n0,
+    _GS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/stages/{stageName}/sdks/{sdkType}",
+                "code": 200,
+            }
+        )
+    },
+    GET_SDK_INPUT,
+    GET_SDK_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_SDK_TYPE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSTI,
+    {_sSI: _cGSTR, _smi: None},
+    (_i,),
+    ((STRING, 9),),
+)
+
+SDK_CONFIGURATION_PROPERTY: StaticSchema = (
+    18,
+    n0,
+    _SCP,
+    0,
+    (_n, _fN, _d, _r, _dVe),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (BOOLEAN, {_s: False}), (STRING, 0)),
+)
+
+LIST_OF_SDK_CONFIGURATION_PROPERTY: StaticSchema = (
+    16,
+    n0,
+    _LOSCP,
+    0,
+    (_m,),
+    ((SDK_CONFIGURATION_PROPERTY, 0),),
+)
+
+GET_SDK_TYPE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSTO,
+    {_sSI: _cST, _smit: None},
+    (_i, _fN, _d, _cP),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (LIST_OF_SDK_CONFIGURATION_PROPERTY, 0)),
+)
+
+GET_SDK_TYPE: StaticOperationSchema = (
+    23,
+    n0,
+    _GST,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/sdktypes/{id}", "code": 200})},
+    GET_SDK_TYPE_INPUT,
+    GET_SDK_TYPE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_SDK_TYPES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSTIe,
+    {_sSI: _cGSTRo, _smi: None},
+    (_pos, _li),
+    ((STRING, {_sQ: _pos}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+SDK_TYPE: StaticSchema = (
+    18,
+    n0,
+    _STd,
+    0,
+    (_i, _fN, _d, _cP),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (LIST_OF_SDK_CONFIGURATION_PROPERTY, 0)),
+)
+
+LIST_OF_SDK_TYPE: StaticSchema = (16, n0, _LOST, 0, (_m,), ((SDK_TYPE, 0),))
+
+GET_SDK_TYPES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSTOe,
+    {_sSI: _cSTo, _smit: None},
+    (_it,),
+    ((LIST_OF_SDK_TYPE, {_sNm: _ite}),),
+)
+
+GET_SDK_TYPES: StaticOperationSchema = (
+    23,
+    n0,
+    _GSTe,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/sdktypes", "code": 200})},
+    GET_SDK_TYPES_INPUT,
+    GET_SDK_TYPES_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_STAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSIe,
+    {_sSI: _cGSRo, _smi: None},
+    (_rAI, _sN),
+    ((STRING, 9), (STRING, 9)),
+)
+
+GET_STAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSOe,
+    {_sSI: _cSo, _smit: None},
+    (
+        _dI,
+        _cCI,
+        _sN,
+        _d,
+        _cCE,
+        _cCS,
+        _cCSa,
+        _mS,
+        _va,
+        _dV,
+        _aLS,
+        _cS,
+        _tE,
+        _wAA,
+        _t,
+        _cD,
+        _lUD,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (CACHE_CLUSTER_SIZE, 0),
+        (CACHE_CLUSTER_STATUS, 0),
+        (MAP_OF_METHOD_SETTINGS, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (STRING, 0),
+        (ACCESS_LOG_SETTINGS, 0),
+        (CANARY_SETTINGS, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+GET_STAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _GSe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/stages/{stageName}",
+                "code": 200,
+            }
+        )
+    },
+    GET_STAGE_INPUT,
+    GET_STAGE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_STAGES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSIet,
+    {_sSI: _cGSRom, _smi: None},
+    (_rAI, _dI),
+    ((STRING, 9), (STRING, {_sQ: _dI})),
+)
+
+STAGE: StaticSchema = (
+    18,
+    n0,
+    _St,
+    0,
+    (
+        _dI,
+        _cCI,
+        _sN,
+        _d,
+        _cCE,
+        _cCS,
+        _cCSa,
+        _mS,
+        _va,
+        _dV,
+        _aLS,
+        _cS,
+        _tE,
+        _wAA,
+        _t,
+        _cD,
+        _lUD,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (CACHE_CLUSTER_SIZE, 0),
+        (CACHE_CLUSTER_STATUS, 0),
+        (MAP_OF_METHOD_SETTINGS, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (STRING, 0),
+        (ACCESS_LOG_SETTINGS, 0),
+        (CANARY_SETTINGS, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+LIST_OF_STAGE: StaticSchema = (16, n0, _LOSi, 0, (_m,), ((STAGE, 0),))
+
+GET_STAGES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSOet,
+    {_sSI: _cSom, _smit: None},
+    (_ite,),
+    ((LIST_OF_STAGE, 0),),
+)
+
+GET_STAGES: StaticOperationSchema = (
+    23,
+    n0,
+    _GSet,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/restapis/{restApiId}/stages", "code": 200}
+        )
+    },
+    GET_STAGES_INPUT,
+    GET_STAGES_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_TAGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GTI,
+    {_sSI: _cGTR, _smi: None},
+    (_rA, _pos, _li),
+    ((STRING, 9), (STRING, {_sQ: _pos}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+GET_TAGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GTO,
+    {_sSI: _cToma, _smit: None},
+    (_t,),
+    ((MAP_OF_STRING_TO_STRING, 0),),
+)
+
+GET_TAGS: StaticOperationSchema = (
+    23,
+    n0,
+    _GT,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/tags/{resourceArn}", "code": 200}
+        )
+    },
+    GET_TAGS_INPUT,
+    GET_TAGS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_USAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GUI,
+    {_sSI: _cGUR, _smi: None},
+    (_uPI, _kI, _sDt, _eDn, _pos, _li),
+    (
+        (STRING, 9),
+        (STRING, {_sQ: _kI}),
+        (STRING, {_sQ: _sDt, _smithy: None}),
+        (STRING, {_sQ: _eDn, _smithy: None}),
+        (STRING, {_sQ: _pos}),
+        (NULLABLE_INTEGER, {_sQ: _li}),
+    ),
+)
+
+LONG: StaticSchema = (8, n0, _L, {_s: 0})
+
+LIST_OF_LONG: StaticSchema = (16, n0, _LOL, 0, (_m,), ((LONG, 0),))
+
+LIST_OF_USAGE: StaticSchema = (16, n0, _LOU, 0, (_m,), ((LIST_OF_LONG, 0),))
+
+MAP_OF_KEY_USAGES: StaticSchema = (
+    17,
+    n0,
+    _MOKU,
+    0,
+    (_k, _v),
+    ((STRING, 0), (LIST_OF_USAGE, 0)),
+)
+
+GET_USAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GUO,
+    {_sSI: _cU, _smit: None},
+    (_uPI, _sDt, _eDn, _it, _pos),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_KEY_USAGES, {_sNm: _val}),
+        (STRING, {_sQ: _pos}),
+    ),
+)
+
+GET_USAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _GU,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/usageplans/{usagePlanId}/usage", "code": 200}
+        )
+    },
+    GET_USAGE_INPUT,
+    GET_USAGE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_USAGE_PLAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GUPI,
+    {_sSI: _cGUPR, _smi: None},
+    (_uPI,),
+    ((STRING, 9),),
+)
+
+GET_USAGE_PLAN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GUPO,
+    {_sSI: _cUP, _smit: None},
+    (_i, _n, _d, _aSpi, _th, _q, _pC, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (LIST_OF_API_STAGE, 0),
+        (THROTTLE_SETTINGS, 0),
+        (QUOTA_SETTINGS, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+GET_USAGE_PLAN: StaticOperationSchema = (
+    23,
+    n0,
+    _GUP,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/usageplans/{usagePlanId}", "code": 200}
+        )
+    },
+    GET_USAGE_PLAN_INPUT,
+    GET_USAGE_PLAN_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_USAGE_PLAN_KEY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GUPKI,
+    {_sSI: _cGUPKR, _smi: None},
+    (_uPI, _kI),
+    ((STRING, 9), (STRING, 9)),
+)
+
+GET_USAGE_PLAN_KEY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GUPKO,
+    {_sSI: _cUPK, _smit: None},
+    (_i, _ty, _v, _n),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+GET_USAGE_PLAN_KEY: StaticOperationSchema = (
+    23,
+    n0,
+    _GUPK,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/usageplans/{usagePlanId}/keys/{keyId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_USAGE_PLAN_KEY_INPUT,
+    GET_USAGE_PLAN_KEY_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_USAGE_PLAN_KEYS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GUPKIe,
+    {_sSI: _cGUPKRo, _smi: None},
+    (_uPI, _pos, _li, _nQ),
+    (
+        (STRING, 9),
+        (STRING, {_sQ: _pos}),
+        (NULLABLE_INTEGER, {_sQ: _li}),
+        (STRING, {_sQ: _n}),
+    ),
+)
+
+USAGE_PLAN_KEY: StaticSchema = (
+    18,
+    n0,
+    _UPK,
+    0,
+    (_i, _ty, _v, _n),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+LIST_OF_USAGE_PLAN_KEY: StaticSchema = (
+    16,
+    n0,
+    _LOUPK,
+    0,
+    (_m,),
+    ((USAGE_PLAN_KEY, 0),),
+)
+
+GET_USAGE_PLAN_KEYS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GUPKOe,
+    {_sSI: _cUPKo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_USAGE_PLAN_KEY, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_USAGE_PLAN_KEYS: StaticOperationSchema = (
+    23,
+    n0,
+    _GUPKe,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/usageplans/{usagePlanId}/keys", "code": 200}
+        )
+    },
+    GET_USAGE_PLAN_KEYS_INPUT,
+    GET_USAGE_PLAN_KEYS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_USAGE_PLANS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GUPIe,
+    {_sSI: _cGUPRo, _smi: None},
+    (_pos, _kI, _li),
+    ((STRING, {_sQ: _pos}), (STRING, {_sQ: _kI}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+USAGE_PLAN: StaticSchema = (
+    18,
+    n0,
+    _UP,
+    0,
+    (_i, _n, _d, _aSpi, _th, _q, _pC, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (LIST_OF_API_STAGE, 0),
+        (THROTTLE_SETTINGS, 0),
+        (QUOTA_SETTINGS, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+LIST_OF_USAGE_PLAN: StaticSchema = (16, n0, _LOUP, 0, (_m,), ((USAGE_PLAN, 0),))
+
+GET_USAGE_PLANS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GUPOe,
+    {_sSI: _cUPo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_USAGE_PLAN, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_USAGE_PLANS: StaticOperationSchema = (
+    23,
+    n0,
+    _GUPe,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/usageplans", "code": 200})},
+    GET_USAGE_PLANS_INPUT,
+    GET_USAGE_PLANS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_VPC_LINK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GVLI,
+    {_sSI: _cGVLR, _smi: None},
+    (_vLI,),
+    ((STRING, 9),),
+)
+
+GET_VPC_LINK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GVLO,
+    {_sSI: _cVL, _smit: None},
+    (_i, _n, _d, _tA, _sta, _sM, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (VPC_LINK_STATUS, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+GET_VPC_LINK: StaticOperationSchema = (
+    23,
+    n0,
+    _GVL,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/vpclinks/{vpcLinkId}", "code": 200}
+        )
+    },
+    GET_VPC_LINK_INPUT,
+    GET_VPC_LINK_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_VPC_LINKS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GVLIe,
+    {_sSI: _cGVLRo, _smi: None},
+    (_pos, _li),
+    ((STRING, {_sQ: _pos}), (NULLABLE_INTEGER, {_sQ: _li})),
+)
+
+VPC_LINK: StaticSchema = (
+    18,
+    n0,
+    _VLp,
+    0,
+    (_i, _n, _d, _tA, _sta, _sM, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (VPC_LINK_STATUS, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+LIST_OF_VPC_LINK: StaticSchema = (16, n0, _LOVL, 0, (_m,), ((VPC_LINK, 0),))
+
+GET_VPC_LINKS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GVLOe,
+    {_sSI: _cVLo, _smit: None},
+    (_it, _pos),
+    ((LIST_OF_VPC_LINK, {_sNm: _ite}), (STRING, {_sQ: _pos})),
+)
+
+GET_VPC_LINKS: StaticOperationSchema = (
+    23,
+    n0,
+    _GVLe,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/vpclinks", "code": 200})},
+    GET_VPC_LINKS_INPUT,
+    GET_VPC_LINKS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+IMPORT_API_KEYS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IAKI,
+    {_sSI: _cIAKR, _smi: None},
+    (_b, _f, _fOW),
+    (
+        (BLOB, 17),
+        (API_KEYS_FORMAT, {_sQ: _f, _smithy: None}),
+        (BOOLEAN, {_s: False, _sQ: _fa}),
+    ),
+)
+
+IMPORT_API_KEYS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IAKO,
+    {_sSI: _cAKI, _smit: None},
+    (_id, _w),
+    ((LIST_OF_STRING, 0), (LIST_OF_STRING, 0)),
+)
+
+IMPORT_API_KEYS: StaticOperationSchema = (
+    23,
+    n0,
+    _IAKm,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/apikeys?mode=import", "code": 201}
+        )
+    },
+    IMPORT_API_KEYS_INPUT,
+    IMPORT_API_KEYS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+PUT_MODE: StaticSchema = (
+    14,
+    n0,
+    _PM,
+    0,
+    (_Me, _O),
+    ((-1, {_sV: _mer}), (-1, {_sV: _ov})),
+)
+
+IMPORT_DOCUMENTATION_PARTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IDPI,
+    {_sSI: _cIDPR, _smi: None},
+    (_rAI, _mo, _fOW, _b),
+    ((STRING, 9), (PUT_MODE, {_sQ: _mo}), (BOOLEAN, {_s: False, _sQ: _fa}), (BLOB, 17)),
+)
+
+IMPORT_DOCUMENTATION_PARTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IDPO,
+    {_sSI: _cDPI, _smit: None},
+    (_id, _w),
+    ((LIST_OF_STRING, 0), (LIST_OF_STRING, 0)),
+)
+
+IMPORT_DOCUMENTATION_PARTS: StaticOperationSchema = (
+    23,
+    n0,
+    _IDP,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/restapis/{restApiId}/documentation/parts",
+                "code": 200,
+            }
+        )
+    },
+    IMPORT_DOCUMENTATION_PARTS_INPUT,
+    IMPORT_DOCUMENTATION_PARTS_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+IMPORT_REST_API_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IRAI,
+    {_sSI: _cIRAR, _smi: None},
+    (_fOW, _pa, _b),
+    ((BOOLEAN, {_s: False, _sQ: _fa}), (MAP_OF_STRING_TO_STRING, 1024), (BLOB, 17)),
+)
+
+IMPORT_REST_API_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IRAO,
+    {_sSI: _cRA, _smit: None},
+    (
+        _i,
+        _n,
+        _d,
+        _cD,
+        _ve,
+        _w,
+        _bMT,
+        _mCS,
+        _aKS,
+        _eC,
+        _po,
+        _t,
+        _dEAE,
+        _rRI,
+        _sP,
+        _eAM,
+        _aSp,
+        _aSM,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (LIST_OF_STRING, 0),
+        (NULLABLE_INTEGER, 0),
+        (API_KEY_SOURCE_TYPE, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+        (API_STATUS, 0),
+        (STRING, 0),
+    ),
+)
+
+IMPORT_REST_API: StaticOperationSchema = (
+    23,
+    n0,
+    _IRA,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/restapis?mode=import", "code": 201}
+        )
+    },
+    IMPORT_REST_API_INPUT,
+    IMPORT_REST_API_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+PUT_GATEWAY_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PGRI,
+    {_sSI: _cPGRR, _smi: None},
+    (_rAI, _rTes, _sC, _rP, _rT),
+    (
+        (STRING, 9),
+        (GATEWAY_RESPONSE_TYPE, 9),
+        (STATUS_CODE, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+PUT_GATEWAY_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PGRO,
+    {_sSI: _cGR, _smit: None},
+    (_rTes, _sC, _rP, _rT, _dR),
+    (
+        (GATEWAY_RESPONSE_TYPE, 0),
+        (STATUS_CODE, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+    ),
+)
+
+PUT_GATEWAY_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _PGR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/restapis/{restApiId}/gatewayresponses/{responseType}",
+                "code": 201,
+            }
+        )
+    },
+    PUT_GATEWAY_RESPONSE_INPUT,
+    PUT_GATEWAY_RESPONSE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+PUT_INTEGRATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PII,
+    {_sSI: _cPIR, _smi: None},
+    (
+        _rAI,
+        _rI,
+        _hM,
+        _ty,
+        _iHM,
+        _u,
+        _cTo,
+        _cIo,
+        _cr,
+        _rPe,
+        _rTe,
+        _pB,
+        _cNa,
+        _cKP,
+        _cH,
+        _tIM,
+        _tC,
+        _rTM,
+        _iT,
+    ),
+    (
+        (STRING, 9),
+        (STRING, 9),
+        (STRING, {_sNm: _rHM, _smithy: None, _sL: None}),
+        (INTEGRATION_TYPE, 1),
+        (STRING, {_sNm: _hM}),
+        (STRING, 0),
+        (CONNECTION_TYPE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+        (NULLABLE_INTEGER, 0),
+        (TLS_CONFIG, 0),
+        (RESPONSE_TRANSFER_MODE, 0),
+        (STRING, 0),
+    ),
+)
+
+PUT_INTEGRATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PIO,
+    {_sSI: _cIom, _smit: None},
+    (
+        _ty,
+        _hM,
+        _u,
+        _cTo,
+        _cIo,
+        _cr,
+        _rPe,
+        _rTe,
+        _pB,
+        _cH,
+        _tIM,
+        _cNa,
+        _cKP,
+        _iR,
+        _tC,
+        _rTM,
+        _iT,
+    ),
+    (
+        (INTEGRATION_TYPE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (CONNECTION_TYPE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+        (INTEGER, {_s: 0}),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (MAP_OF_INTEGRATION_RESPONSE, 0),
+        (TLS_CONFIG, 0),
+        (RESPONSE_TRANSFER_MODE, 0),
+        (STRING, 0),
+    ),
+)
+
+PUT_INTEGRATION: StaticOperationSchema = (
+    23,
+    n0,
+    _PI,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration",
+                "code": 201,
+            }
+        )
+    },
+    PUT_INTEGRATION_INPUT,
+    PUT_INTEGRATION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+PUT_INTEGRATION_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PIRI,
+    {_sSI: _cPIRR, _smi: None},
+    (_rAI, _rI, _hM, _sC, _sPe, _rP, _rT, _cH),
+    (
+        (STRING, 9),
+        (STRING, 9),
+        (STRING, 9),
+        (STATUS_CODE, 9),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+    ),
+)
+
+PUT_INTEGRATION_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PIRO,
+    {_sSI: _cIR, _smit: None},
+    (_sC, _sPe, _rP, _rT, _cH),
+    (
+        (STATUS_CODE, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+    ),
+)
+
+PUT_INTEGRATION_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _PIR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration/responses/{statusCode}",
+                "code": 201,
+            }
+        )
+    },
+    PUT_INTEGRATION_RESPONSE_INPUT,
+    PUT_INTEGRATION_RESPONSE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+PUT_METHOD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PMI,
+    {_sSI: _cPMR, _smi: None},
+    (_rAI, _rI, _hM, _aTu, _aIu, _aKR, _oN, _rPe, _rMeq, _rVI, _aSu),
+    (
+        (STRING, 9),
+        (STRING, 9),
+        (STRING, 9),
+        (STRING, 1),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_BOOLEAN, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+    ),
+)
+
+PUT_METHOD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PMO,
+    {_sSI: _cMo, _smit: None},
+    (_hM, _aTu, _aIu, _aKR, _rVI, _oN, _rPe, _rMeq, _mR, _mI, _aSu),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (NULLABLE_BOOLEAN, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_BOOLEAN, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_METHOD_RESPONSE, 0),
+        (INTEGRATION, 0),
+        (LIST_OF_STRING, 0),
+    ),
+)
+
+PUT_METHOD: StaticOperationSchema = (
+    23,
+    n0,
+    _PMu,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
+                "code": 201,
+            }
+        )
+    },
+    PUT_METHOD_INPUT,
+    PUT_METHOD_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+PUT_METHOD_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PMRI,
+    {_sSI: _cPMRR, _smi: None},
+    (_rAI, _rI, _hM, _sC, _rP, _rMe),
+    (
+        (STRING, 9),
+        (STRING, 9),
+        (STRING, 9),
+        (STATUS_CODE, 9),
+        (MAP_OF_STRING_TO_BOOLEAN, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+PUT_METHOD_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PMRO,
+    {_sSI: _cMR, _smit: None},
+    (_sC, _rP, _rMe),
+    ((STATUS_CODE, 0), (MAP_OF_STRING_TO_BOOLEAN, 0), (MAP_OF_STRING_TO_STRING, 0)),
+)
+
+PUT_METHOD_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _PMR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/responses/{statusCode}",
+                "code": 201,
+            }
+        )
+    },
+    PUT_METHOD_RESPONSE_INPUT,
+    PUT_METHOD_RESPONSE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+PUT_REST_API_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PRAI,
+    {_sSI: _cPRAR, _smi: None},
+    (_rAI, _mo, _fOW, _pa, _b),
+    (
+        (STRING, 9),
+        (PUT_MODE, {_sQ: _mo}),
+        (BOOLEAN, {_s: False, _sQ: _fa}),
+        (MAP_OF_STRING_TO_STRING, 1024),
+        (BLOB, 17),
+    ),
+)
+
+PUT_REST_API_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PRAO,
+    {_sSI: _cRA, _smit: None},
+    (
+        _i,
+        _n,
+        _d,
+        _cD,
+        _ve,
+        _w,
+        _bMT,
+        _mCS,
+        _aKS,
+        _eC,
+        _po,
+        _t,
+        _dEAE,
+        _rRI,
+        _sP,
+        _eAM,
+        _aSp,
+        _aSM,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (LIST_OF_STRING, 0),
+        (NULLABLE_INTEGER, 0),
+        (API_KEY_SOURCE_TYPE, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+        (API_STATUS, 0),
+        (STRING, 0),
+    ),
+)
+
+PUT_REST_API: StaticOperationSchema = (
+    23,
+    n0,
+    _PRA,
+    {
+        _smith: MappingProxyType(
+            {"method": "PUT", "uri": "/restapis/{restApiId}", "code": 200}
+        )
+    },
+    PUT_REST_API_INPUT,
+    PUT_REST_API_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+REJECT_DOMAIN_NAME_ACCESS_ASSOCIATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RDNAAI,
+    {_sSI: _cRDNAAR, _smi: None},
+    (_dNAAA, _dNA),
+    ((STRING, {_sQ: _dNAAA, _smithy: None}), (STRING, {_sQ: _dNA, _smithy: None})),
+)
+
+REJECT_DOMAIN_NAME_ACCESS_ASSOCIATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RDNAAO,
+    {_sSI: _sU, _smit: None},
+)
+
+REJECT_DOMAIN_NAME_ACCESS_ASSOCIATION: StaticOperationSchema = (
+    23,
+    n0,
+    _RDNAA,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/rejectdomainnameaccessassociations",
+                "code": 202,
+            }
+        )
+    },
+    REJECT_DOMAIN_NAME_ACCESS_ASSOCIATION_INPUT,
+    REJECT_DOMAIN_NAME_ACCESS_ASSOCIATION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+TAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TRI,
+    {_sSI: _cTRR, _smi: None},
+    (_rA, _t),
+    ((STRING, 9), (MAP_OF_STRING_TO_STRING, 1)),
+)
+
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _sU, _smit: None})
+
+TAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _TR,
+    {
+        _smith: MappingProxyType(
+            {"method": "PUT", "uri": "/tags/{resourceArn}", "code": 204}
+        )
+    },
+    TAG_RESOURCE_INPUT,
+    TAG_RESOURCE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+MAP_OF_STRING_TO_LIST: StaticSchema = (
+    17,
+    n0,
+    _MOSTL,
+    0,
+    (_k, _v),
+    ((STRING, 0), (LIST_OF_STRING, 0)),
+)
+
+TEST_INVOKE_AUTHORIZER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TIAI,
+    {_sSI: _cTIAR, _smi: None},
+    (_rAI, _aIu, _h, _mVH, _pWQS, _b, _sVt, _aCd),
+    (
+        (STRING, 9),
+        (STRING, 9),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_LIST, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+TEST_INVOKE_AUTHORIZER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _TIAO,
+    {_sSI: _cTIARo, _smit: None},
+    (_cSl, _lo, _la, _pIr, _po, _au, _cla),
+    (
+        (INTEGER, {_s: 0}),
+        (STRING, 0),
+        (LONG, {_s: 0}),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_LIST, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+TEST_INVOKE_AUTHORIZER: StaticOperationSchema = (
+    23,
+    n0,
+    _TIA,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/restapis/{restApiId}/authorizers/{authorizerId}",
+                "code": 200,
+            }
+        )
+    },
+    TEST_INVOKE_AUTHORIZER_INPUT,
+    TEST_INVOKE_AUTHORIZER_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+TEST_INVOKE_METHOD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TIMI,
+    {_sSI: _cTIMR, _smi: None},
+    (_rAI, _rI, _hM, _pWQS, _b, _h, _mVH, _cCI, _sVt),
+    (
+        (STRING, 9),
+        (STRING, 9),
+        (STRING, 9),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_LIST, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+TEST_INVOKE_METHOD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _TIMO,
+    {_sSI: _cTIMRo, _smit: None},
+    (_sta, _b, _h, _mVH, _lo, _la),
+    (
+        (INTEGER, {_s: 0}),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_LIST, 0),
+        (STRING, 0),
+        (LONG, {_s: 0}),
+    ),
+)
+
+TEST_INVOKE_METHOD: StaticOperationSchema = (
+    23,
+    n0,
+    _TIM,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
+                "code": 200,
+            }
+        )
+    },
+    TEST_INVOKE_METHOD_INPUT,
+    TEST_INVOKE_METHOD_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UNTAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URI,
+    {_sSI: _cURR, _smi: None},
+    (_rA, _tK),
+    ((STRING, 9), (LIST_OF_STRING, {_sQ: _tK, _smithy: None})),
+)
+
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _URO, {_sSI: _sU, _smit: None})
+
+UNTAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _UR,
+    {
+        _smith: MappingProxyType(
+            {"method": "DELETE", "uri": "/tags/{resourceArn}", "code": 204}
+        )
+    },
+    UNTAG_RESOURCE_INPUT,
+    UNTAG_RESOURCE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+OP: StaticSchema = (
+    14,
+    n0,
+    _Op,
+    0,
+    (_ad, _re, _rep, _mov, _co, _te),
+    (
+        (-1, {_sV: _ad}),
+        (-1, {_sV: _re}),
+        (-1, {_sV: _rep}),
+        (-1, {_sV: _mov}),
+        (-1, {_sV: _co}),
+        (-1, {_sV: _te}),
+    ),
+)
+
+PATCH_OPERATION: StaticSchema = (
+    18,
+    n0,
+    _PO,
+    0,
+    (_op, _p, _v, _fr),
+    ((OP, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+LIST_OF_PATCH_OPERATION: StaticSchema = (
+    16,
+    n0,
+    _LOPO,
+    0,
+    (_m,),
+    ((PATCH_OPERATION, 0),),
+)
+
+UPDATE_ACCOUNT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UAI,
+    {_sSI: _cUAR, _smi: None},
+    (_pO,),
+    ((LIST_OF_PATCH_OPERATION, 0),),
+)
+
+UPDATE_ACCOUNT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UAO,
+    {_sSI: _cAo, _smit: None},
+    (_cRAl, _tS, _fe, _aKV),
+    ((STRING, 0), (THROTTLE_SETTINGS, 0), (LIST_OF_STRING, 0), (STRING, 0)),
+)
+
+UPDATE_ACCOUNT: StaticOperationSchema = (
+    23,
+    n0,
+    _UA,
+    {_smith: MappingProxyType({"method": "PATCH", "uri": "/account", "code": 200})},
+    UPDATE_ACCOUNT_INPUT,
+    UPDATE_ACCOUNT_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_API_KEY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UAKI,
+    {_sSI: _cUAKR, _smi: None},
+    (_aK, _pO),
+    ((STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_API_KEY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UAKO,
+    {_sSI: _cAK, _smit: None},
+    (_i, _v, _n, _cI, _d, _e, _cD, _lUD, _sK, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (LIST_OF_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+UPDATE_API_KEY: StaticOperationSchema = (
+    23,
+    n0,
+    _UAK,
+    {
+        _smith: MappingProxyType(
+            {"method": "PATCH", "uri": "/apikeys/{apiKey}", "code": 200}
+        )
+    },
+    UPDATE_API_KEY_INPUT,
+    UPDATE_API_KEY_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_AUTHORIZER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UAIp,
+    {_sSI: _cUARo, _smi: None},
+    (_rAI, _aIu, _pO),
+    ((STRING, 9), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_AUTHORIZER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UAOp,
+    {_sSI: _cA, _smit: None},
+    (_i, _n, _ty, _pARN, _aT, _aU, _aC, _iS, _iVE, _aRTIS),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (AUTHORIZER_TYPE, 0),
+        (LIST_OF_AR_NS, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (NULLABLE_INTEGER, 0),
+    ),
+)
+
+UPDATE_AUTHORIZER: StaticOperationSchema = (
+    23,
+    n0,
+    _UAp,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/authorizers/{authorizerId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_AUTHORIZER_INPUT,
+    UPDATE_AUTHORIZER_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_BASE_PATH_MAPPING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UBPMI,
+    {_sSI: _cUBPMR, _smi: None},
+    (_dN, _dNI, _bP, _pO),
+    ((STRING, 9), (STRING, {_sQ: _dNI}), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_BASE_PATH_MAPPING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UBPMO,
+    {_sSI: _cBPM, _smit: None},
+    (_bP, _rAI, _st),
+    ((STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+UPDATE_BASE_PATH_MAPPING: StaticOperationSchema = (
+    23,
+    n0,
+    _UBPM,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/domainnames/{domainName}/basepathmappings/{basePath}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_BASE_PATH_MAPPING_INPUT,
+    UPDATE_BASE_PATH_MAPPING_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_CLIENT_CERTIFICATE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UCCI,
+    {_sSI: _cUCCR, _smi: None},
+    (_cCI, _pO),
+    ((STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_CLIENT_CERTIFICATE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UCCO,
+    {_sSI: _cCC, _smit: None},
+    (_cCI, _d, _pEC, _cD, _eD, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+UPDATE_CLIENT_CERTIFICATE: StaticOperationSchema = (
+    23,
+    n0,
+    _UCC,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/clientcertificates/{clientCertificateId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_CLIENT_CERTIFICATE_INPUT,
+    UPDATE_CLIENT_CERTIFICATE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_DEPLOYMENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UDI,
+    {_sSI: _cUDR, _smi: None},
+    (_rAI, _dI, _pO),
+    ((STRING, 9), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_DEPLOYMENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UDO,
+    {_sSI: _cDo, _smit: None},
+    (_i, _d, _cD, _aS),
+    ((STRING, 0), (STRING, 0), (TIMESTAMP, 0), (PATH_TO_MAP_OF_METHOD_SNAPSHOT, 0)),
+)
+
+UPDATE_DEPLOYMENT: StaticOperationSchema = (
+    23,
+    n0,
+    _UD,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/deployments/{deploymentId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_DEPLOYMENT_INPUT,
+    UPDATE_DEPLOYMENT_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        SERVICE_UNAVAILABLE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_DOCUMENTATION_PART_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UDPI,
+    {_sSI: _cUDPR, _smi: None},
+    (_rAI, _dPI, _pO),
+    ((STRING, 9), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_DOCUMENTATION_PART_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UDPO,
+    {_sSI: _cDP, _smit: None},
+    (_i, _l, _pr),
+    ((STRING, 0), (DOCUMENTATION_PART_LOCATION, 0), (STRING, 0)),
+)
+
+UPDATE_DOCUMENTATION_PART: StaticOperationSchema = (
+    23,
+    n0,
+    _UDP,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/documentation/parts/{documentationPartId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_DOCUMENTATION_PART_INPUT,
+    UPDATE_DOCUMENTATION_PART_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_DOCUMENTATION_VERSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UDVI,
+    {_sSI: _cUDVR, _smi: None},
+    (_rAI, _dV, _pO),
+    ((STRING, 9), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_DOCUMENTATION_VERSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UDVO,
+    {_sSI: _cDV, _smit: None},
+    (_ve, _cD, _d),
+    ((STRING, 0), (TIMESTAMP, 0), (STRING, 0)),
+)
+
+UPDATE_DOCUMENTATION_VERSION: StaticOperationSchema = (
+    23,
+    n0,
+    _UDV,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/documentation/versions/{documentationVersion}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_DOCUMENTATION_VERSION_INPUT,
+    UPDATE_DOCUMENTATION_VERSION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_DOMAIN_NAME_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UDNI,
+    {_sSI: _cUDNR, _smi: None},
+    (_dN, _dNI, _pO),
+    ((STRING, 9), (STRING, {_sQ: _dNI}), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_DOMAIN_NAME_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UDNO,
+    {_sSI: _cDN, _smit: None},
+    (
+        _dN,
+        _dNI,
+        _dNA,
+        _cN,
+        _cAe,
+        _cUD,
+        _rDN,
+        _rHZI,
+        _rCN,
+        _rCA,
+        _dDN,
+        _dHZI,
+        _eC,
+        _dNS,
+        _dNSM,
+        _sP,
+        _eAM,
+        _t,
+        _mTA,
+        _oVCA,
+        _mP,
+        _po,
+        _rM,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (DOMAIN_NAME_STATUS, 0),
+        (STRING, 0),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MUTUAL_TLS_AUTHENTICATION, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (ROUTING_MODE, 0),
+    ),
+)
+
+UPDATE_DOMAIN_NAME: StaticOperationSchema = (
+    23,
+    n0,
+    _UDN,
+    {
+        _smith: MappingProxyType(
+            {"method": "PATCH", "uri": "/domainnames/{domainName}", "code": 200}
+        )
+    },
+    UPDATE_DOMAIN_NAME_INPUT,
+    UPDATE_DOMAIN_NAME_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_GATEWAY_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UGRI,
+    {_sSI: _cUGRR, _smi: None},
+    (_rAI, _rTes, _pO),
+    ((STRING, 9), (GATEWAY_RESPONSE_TYPE, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_GATEWAY_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UGRO,
+    {_sSI: _cGR, _smit: None},
+    (_rTes, _sC, _rP, _rT, _dR),
+    (
+        (GATEWAY_RESPONSE_TYPE, 0),
+        (STATUS_CODE, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+    ),
+)
+
+UPDATE_GATEWAY_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _UGR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/gatewayresponses/{responseType}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_GATEWAY_RESPONSE_INPUT,
+    UPDATE_GATEWAY_RESPONSE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_INTEGRATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UII,
+    {_sSI: _cUIR, _smi: None},
+    (_rAI, _rI, _hM, _pO),
+    ((STRING, 9), (STRING, 9), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_INTEGRATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UIO,
+    {_sSI: _cIom, _smit: None},
+    (
+        _ty,
+        _hM,
+        _u,
+        _cTo,
+        _cIo,
+        _cr,
+        _rPe,
+        _rTe,
+        _pB,
+        _cH,
+        _tIM,
+        _cNa,
+        _cKP,
+        _iR,
+        _tC,
+        _rTM,
+        _iT,
+    ),
+    (
+        (INTEGRATION_TYPE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (CONNECTION_TYPE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+        (INTEGER, {_s: 0}),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (MAP_OF_INTEGRATION_RESPONSE, 0),
+        (TLS_CONFIG, 0),
+        (RESPONSE_TRANSFER_MODE, 0),
+        (STRING, 0),
+    ),
+)
+
+UPDATE_INTEGRATION: StaticOperationSchema = (
+    23,
+    n0,
+    _UI,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_INTEGRATION_INPUT,
+    UPDATE_INTEGRATION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_INTEGRATION_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UIRI,
+    {_sSI: _cUIRR, _smi: None},
+    (_rAI, _rI, _hM, _sC, _pO),
+    (
+        (STRING, 9),
+        (STRING, 9),
+        (STRING, 9),
+        (STATUS_CODE, 9),
+        (LIST_OF_PATCH_OPERATION, 0),
+    ),
+)
+
+UPDATE_INTEGRATION_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UIRO,
+    {_sSI: _cIR, _smit: None},
+    (_sC, _sPe, _rP, _rT, _cH),
+    (
+        (STATUS_CODE, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+    ),
+)
+
+UPDATE_INTEGRATION_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _UIR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration/responses/{statusCode}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_INTEGRATION_RESPONSE_INPUT,
+    UPDATE_INTEGRATION_RESPONSE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_METHOD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UMI,
+    {_sSI: _cUMR, _smi: None},
+    (_rAI, _rI, _hM, _pO),
+    ((STRING, 9), (STRING, 9), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_METHOD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UMO,
+    {_sSI: _cMo, _smit: None},
+    (_hM, _aTu, _aIu, _aKR, _rVI, _oN, _rPe, _rMeq, _mR, _mI, _aSu),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (NULLABLE_BOOLEAN, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_BOOLEAN, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_METHOD_RESPONSE, 0),
+        (INTEGRATION, 0),
+        (LIST_OF_STRING, 0),
+    ),
+)
+
+UPDATE_METHOD: StaticOperationSchema = (
+    23,
+    n0,
+    _UM,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_METHOD_INPUT,
+    UPDATE_METHOD_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_METHOD_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UMRI,
+    {_sSI: _cUMRR, _smi: None},
+    (_rAI, _rI, _hM, _sC, _pO),
+    (
+        (STRING, 9),
+        (STRING, 9),
+        (STRING, 9),
+        (STATUS_CODE, 9),
+        (LIST_OF_PATCH_OPERATION, 0),
+    ),
+)
+
+UPDATE_METHOD_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UMRO,
+    {_sSI: _cMR, _smit: None},
+    (_sC, _rP, _rMe),
+    ((STATUS_CODE, 0), (MAP_OF_STRING_TO_BOOLEAN, 0), (MAP_OF_STRING_TO_STRING, 0)),
+)
+
+UPDATE_METHOD_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _UMR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/responses/{statusCode}",
+                "code": 201,
+            }
+        )
+    },
+    UPDATE_METHOD_RESPONSE_INPUT,
+    UPDATE_METHOD_RESPONSE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_MODEL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UMIp,
+    {_sSI: _cUMRo, _smi: None},
+    (_rAI, _mN, _pO),
+    ((STRING, 9), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_MODEL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UMOp,
+    {_sSI: _cM, _smit: None},
+    (_i, _n, _d, _sc, _cT),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+UPDATE_MODEL: StaticOperationSchema = (
+    23,
+    n0,
+    _UMp,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/models/{modelName}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_MODEL_INPUT,
+    UPDATE_MODEL_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_REQUEST_VALIDATOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URVI,
+    {_sSI: _cURVR, _smi: None},
+    (_rAI, _rVI, _pO),
+    ((STRING, 9), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_REQUEST_VALIDATOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _URVO,
+    {_sSI: _cRV, _smit: None},
+    (_i, _n, _vRB, _vRP),
+    ((STRING, 0), (STRING, 0), (BOOLEAN, {_s: False}), (BOOLEAN, {_s: False})),
+)
+
+UPDATE_REQUEST_VALIDATOR: StaticOperationSchema = (
+    23,
+    n0,
+    _URV,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/requestvalidators/{requestValidatorId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_REQUEST_VALIDATOR_INPUT,
+    UPDATE_REQUEST_VALIDATOR_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URIp,
+    {_sSI: _cURRo, _smi: None},
+    (_rAI, _rI, _pO),
+    ((STRING, 9), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UROp,
+    {_sSI: _cR, _smit: None},
+    (_i, _pI, _pP, _p, _rMes),
+    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0), (MAP_OF_METHOD, 0)),
+)
+
+UPDATE_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _URp,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_RESOURCE_INPUT,
+    UPDATE_RESOURCE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_REST_API_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URAI,
+    {_sSI: _cURAR, _smi: None},
+    (_rAI, _pO),
+    ((STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_REST_API_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _URAO,
+    {_sSI: _cRA, _smit: None},
+    (
+        _i,
+        _n,
+        _d,
+        _cD,
+        _ve,
+        _w,
+        _bMT,
+        _mCS,
+        _aKS,
+        _eC,
+        _po,
+        _t,
+        _dEAE,
+        _rRI,
+        _sP,
+        _eAM,
+        _aSp,
+        _aSM,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (LIST_OF_STRING, 0),
+        (NULLABLE_INTEGER, 0),
+        (API_KEY_SOURCE_TYPE, 0),
+        (ENDPOINT_CONFIGURATION, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (SECURITY_POLICY, 0),
+        (ENDPOINT_ACCESS_MODE, 0),
+        (API_STATUS, 0),
+        (STRING, 0),
+    ),
+)
+
+UPDATE_REST_API: StaticOperationSchema = (
+    23,
+    n0,
+    _URA,
+    {
+        _smith: MappingProxyType(
+            {"method": "PATCH", "uri": "/restapis/{restApiId}", "code": 200}
+        )
+    },
+    UPDATE_REST_API_INPUT,
+    UPDATE_REST_API_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_STAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _USI,
+    {_sSI: _cUSR, _smi: None},
+    (_rAI, _sN, _pO),
+    ((STRING, 9), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_STAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _USO,
+    {_sSI: _cSo, _smit: None},
+    (
+        _dI,
+        _cCI,
+        _sN,
+        _d,
+        _cCE,
+        _cCS,
+        _cCSa,
+        _mS,
+        _va,
+        _dV,
+        _aLS,
+        _cS,
+        _tE,
+        _wAA,
+        _t,
+        _cD,
+        _lUD,
+    ),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (CACHE_CLUSTER_SIZE, 0),
+        (CACHE_CLUSTER_STATUS, 0),
+        (MAP_OF_METHOD_SETTINGS, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (STRING, 0),
+        (ACCESS_LOG_SETTINGS, 0),
+        (CANARY_SETTINGS, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+        (TIMESTAMP, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+UPDATE_STAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _US,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/restapis/{restApiId}/stages/{stageName}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_STAGE_INPUT,
+    UPDATE_STAGE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_USAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UUI,
+    {_sSI: _cUUR, _smi: None},
+    (_uPI, _kI, _pO),
+    ((STRING, 9), (STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_USAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UUO,
+    {_sSI: _cU, _smit: None},
+    (_uPI, _sDt, _eDn, _it, _pos),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (MAP_OF_KEY_USAGES, {_sNm: _val}),
+        (STRING, {_sQ: _pos}),
+    ),
+)
+
+UPDATE_USAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _UU,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/usageplans/{usagePlanId}/keys/{keyId}/usage",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_USAGE_INPUT,
+    UPDATE_USAGE_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_USAGE_PLAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UUPI,
+    {_sSI: _cUUPR, _smi: None},
+    (_uPI, _pO),
+    ((STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_USAGE_PLAN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UUPO,
+    {_sSI: _cUP, _smit: None},
+    (_i, _n, _d, _aSpi, _th, _q, _pC, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (LIST_OF_API_STAGE, 0),
+        (THROTTLE_SETTINGS, 0),
+        (QUOTA_SETTINGS, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+UPDATE_USAGE_PLAN: StaticOperationSchema = (
+    23,
+    n0,
+    _UUP,
+    {
+        _smith: MappingProxyType(
+            {"method": "PATCH", "uri": "/usageplans/{usagePlanId}", "code": 200}
+        )
+    },
+    UPDATE_USAGE_PLAN_INPUT,
+    UPDATE_USAGE_PLAN_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+UPDATE_VPC_LINK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UVLI,
+    {_sSI: _cUVLR, _smi: None},
+    (_vLI, _pO),
+    ((STRING, 9), (LIST_OF_PATCH_OPERATION, 0)),
+)
+
+UPDATE_VPC_LINK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UVLO,
+    {_sSI: _cVL, _smit: None},
+    (_i, _n, _d, _tA, _sta, _sM, _t),
+    (
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (LIST_OF_STRING, 0),
+        (VPC_LINK_STATUS, 0),
+        (STRING, 0),
+        (MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+UPDATE_VPC_LINK: StaticOperationSchema = (
+    23,
+    n0,
+    _UVL,
+    {
+        _smith: MappingProxyType(
+            {"method": "PATCH", "uri": "/vpclinks/{vpcLinkId}", "code": 200}
+        )
+    },
+    UPDATE_VPC_LINK_INPUT,
+    UPDATE_VPC_LINK_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+BACKPLANE_CONTROL_SERVICE: StaticSchema = (
+    21,
+    n0,
+    _BCS,
+    {
+        _aw: MappingProxyType({"name": "apigateway"}),
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
                 ),
-            ],
-        },
-        "domainNameArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="domainNameArn"),
-            ],
-        },
-    },
-)
-
-REJECT_DOMAIN_NAME_ACCESS_ASSOCIATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#RejectDomainNameAccessAssociationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-REJECT_DOMAIN_NAME_ACCESS_ASSOCIATION = Schema(
-    id=ShapeID("com.amazonaws.apigateway#RejectDomainNameAccessAssociation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/rejectdomainnameaccessassociations",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-TAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#TagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#TagResourceRequest",
-        )
-    ],
-    members={
-        "resourceArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "tags": {
-            "target": MAP_OF_STRING_TO_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#TagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-TAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#TagResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "PUT", "uri": "/tags/{resourceArn}", "code": 204}
-            ),
-        )
-    ],
-)
-
-MAP_OF_STRING_TO_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#MapOfStringToList"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": LIST_OF_STRING}},
-)
-
-TEST_INVOKE_AUTHORIZER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#TestInvokeAuthorizerInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#TestInvokeAuthorizerRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "authorizerId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "headers": {"target": MAP_OF_STRING_TO_STRING},
-        "multiValueHeaders": {"target": MAP_OF_STRING_TO_LIST},
-        "pathWithQueryString": {"target": STRING},
-        "body": {"target": STRING},
-        "stageVariables": {"target": MAP_OF_STRING_TO_STRING},
-        "additionalContext": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-TEST_INVOKE_AUTHORIZER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#TestInvokeAuthorizerOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#TestInvokeAuthorizerResponse",
-        )
-    ],
-    members={
-        "clientStatus": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "log": {"target": STRING},
-        "latency": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "principalId": {"target": STRING},
-        "policy": {"target": STRING},
-        "authorization": {"target": MAP_OF_STRING_TO_LIST},
-        "claims": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-TEST_INVOKE_AUTHORIZER = Schema(
-    id=ShapeID("com.amazonaws.apigateway#TestInvokeAuthorizer"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/restapis/{restApiId}/authorizers/{authorizerId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-TEST_INVOKE_METHOD_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#TestInvokeMethodInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#TestInvokeMethodRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "pathWithQueryString": {"target": STRING},
-        "body": {"target": STRING},
-        "headers": {"target": MAP_OF_STRING_TO_STRING},
-        "multiValueHeaders": {"target": MAP_OF_STRING_TO_LIST},
-        "clientCertificateId": {"target": STRING},
-        "stageVariables": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-TEST_INVOKE_METHOD_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#TestInvokeMethodOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#TestInvokeMethodResponse",
-        )
-    ],
-    members={
-        "status": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "body": {"target": STRING},
-        "headers": {"target": MAP_OF_STRING_TO_STRING},
-        "multiValueHeaders": {"target": MAP_OF_STRING_TO_LIST},
-        "log": {"target": STRING},
-        "latency": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-TEST_INVOKE_METHOD = Schema(
-    id=ShapeID("com.amazonaws.apigateway#TestInvokeMethod"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UNTAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UntagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UntagResourceRequest",
-        )
-    ],
-    members={
-        "resourceArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "tagKeys": {
-            "target": LIST_OF_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="tagKeys"),
-            ],
-        },
-    },
-)
-
-UNTAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UntagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-UNTAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UntagResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "DELETE", "uri": "/tags/{resourceArn}", "code": 204}
-            ),
-        )
-    ],
-)
-
-OP = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#Op"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "add": {"target": UNIT},
-        "remove": {"target": UNIT},
-        "replace": {"target": UNIT},
-        "move": {"target": UNIT},
-        "copy": {"target": UNIT},
-        "test": {"target": UNIT},
-    },
-)
-
-PATCH_OPERATION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#PatchOperation"),
-    members={
-        "op": {"target": OP},
-        "path": {"target": STRING},
-        "value": {"target": STRING},
-        "from": {"target": STRING},
-    },
-)
-
-LIST_OF_PATCH_OPERATION = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#ListOfPatchOperation"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PATCH_OPERATION}},
-)
-
-UPDATE_ACCOUNT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateAccountInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateAccountRequest",
-        )
-    ],
-    members={"patchOperations": {"target": LIST_OF_PATCH_OPERATION}},
-)
-
-UPDATE_ACCOUNT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateAccountOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Account",
-        )
-    ],
-    members={
-        "cloudwatchRoleArn": {"target": STRING},
-        "throttleSettings": {"target": THROTTLE_SETTINGS},
-        "features": {"target": LIST_OF_STRING},
-        "apiKeyVersion": {"target": STRING},
-    },
-)
-
-UPDATE_ACCOUNT = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateAccount"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "PATCH", "uri": "/account", "code": 200}),
-        )
-    ],
-)
-
-UPDATE_API_KEY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateApiKeyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateApiKeyRequest",
-        )
-    ],
-    members={
-        "apiKey": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_API_KEY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateApiKeyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ApiKey",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "value": {"target": STRING},
-        "name": {"target": STRING},
-        "customerId": {"target": STRING},
-        "description": {"target": STRING},
-        "enabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "createdDate": {"target": TIMESTAMP},
-        "lastUpdatedDate": {"target": TIMESTAMP},
-        "stageKeys": {"target": LIST_OF_STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-UPDATE_API_KEY = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateApiKey"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "PATCH", "uri": "/apikeys/{apiKey}", "code": 200}
-            ),
-        )
-    ],
-)
-
-UPDATE_AUTHORIZER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateAuthorizerInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateAuthorizerRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "authorizerId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_AUTHORIZER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateAuthorizerOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Authorizer",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "type": {"target": AUTHORIZER_TYPE},
-        "providerARNs": {"target": LIST_OF_AR_NS},
-        "authType": {"target": STRING},
-        "authorizerUri": {"target": STRING},
-        "authorizerCredentials": {"target": STRING},
-        "identitySource": {"target": STRING},
-        "identityValidationExpression": {"target": STRING},
-        "authorizerResultTtlInSeconds": {"target": NULLABLE_INTEGER},
-    },
-)
-
-UPDATE_AUTHORIZER = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateAuthorizer"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/authorizers/{authorizerId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_BASE_PATH_MAPPING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateBasePathMappingInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateBasePathMappingRequest",
-        )
-    ],
-    members={
-        "domainName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "domainNameId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="domainNameId")
-            ],
-        },
-        "basePath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_BASE_PATH_MAPPING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateBasePathMappingOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#BasePathMapping",
-        )
-    ],
-    members={
-        "basePath": {"target": STRING},
-        "restApiId": {"target": STRING},
-        "stage": {"target": STRING},
-    },
-)
-
-UPDATE_BASE_PATH_MAPPING = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateBasePathMapping"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/domainnames/{domainName}/basepathmappings/{basePath}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_CLIENT_CERTIFICATE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateClientCertificateInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateClientCertificateRequest",
-        )
-    ],
-    members={
-        "clientCertificateId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_CLIENT_CERTIFICATE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateClientCertificateOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#ClientCertificate",
-        )
-    ],
-    members={
-        "clientCertificateId": {"target": STRING},
-        "description": {"target": STRING},
-        "pemEncodedCertificate": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "expirationDate": {"target": TIMESTAMP},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-UPDATE_CLIENT_CERTIFICATE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateClientCertificate"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/clientcertificates/{clientCertificateId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_DEPLOYMENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDeploymentInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateDeploymentRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "deploymentId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_DEPLOYMENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDeploymentOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Deployment",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "description": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "apiSummary": {"target": PATH_TO_MAP_OF_METHOD_SNAPSHOT},
-    },
-)
-
-UPDATE_DEPLOYMENT = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDeployment"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/deployments/{deploymentId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_DOCUMENTATION_PART_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDocumentationPartInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateDocumentationPartRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "documentationPartId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_DOCUMENTATION_PART_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDocumentationPartOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DocumentationPart",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "location": {"target": DOCUMENTATION_PART_LOCATION},
-        "properties": {"target": STRING},
-    },
-)
-
-UPDATE_DOCUMENTATION_PART = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDocumentationPart"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/documentation/parts/{documentationPartId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_DOCUMENTATION_VERSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDocumentationVersionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateDocumentationVersionRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "documentationVersion": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_DOCUMENTATION_VERSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDocumentationVersionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DocumentationVersion",
-        )
-    ],
-    members={
-        "version": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "description": {"target": STRING},
-    },
-)
-
-UPDATE_DOCUMENTATION_VERSION = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDocumentationVersion"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/documentation/versions/{documentationVersion}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_DOMAIN_NAME_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDomainNameInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateDomainNameRequest",
-        )
-    ],
-    members={
-        "domainName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "domainNameId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="domainNameId")
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_DOMAIN_NAME_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDomainNameOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#DomainName",
-        )
-    ],
-    members={
-        "domainName": {"target": STRING},
-        "domainNameId": {"target": STRING},
-        "domainNameArn": {"target": STRING},
-        "certificateName": {"target": STRING},
-        "certificateArn": {"target": STRING},
-        "certificateUploadDate": {"target": TIMESTAMP},
-        "regionalDomainName": {"target": STRING},
-        "regionalHostedZoneId": {"target": STRING},
-        "regionalCertificateName": {"target": STRING},
-        "regionalCertificateArn": {"target": STRING},
-        "distributionDomainName": {"target": STRING},
-        "distributionHostedZoneId": {"target": STRING},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "domainNameStatus": {"target": DOMAIN_NAME_STATUS},
-        "domainNameStatusMessage": {"target": STRING},
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "mutualTlsAuthentication": {"target": MUTUAL_TLS_AUTHENTICATION},
-        "ownershipVerificationCertificateArn": {"target": STRING},
-        "managementPolicy": {"target": STRING},
-        "policy": {"target": STRING},
-        "routingMode": {"target": ROUTING_MODE},
-    },
-)
-
-UPDATE_DOMAIN_NAME = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateDomainName"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "PATCH", "uri": "/domainnames/{domainName}", "code": 200}
-            ),
-        )
-    ],
-)
-
-UPDATE_GATEWAY_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateGatewayResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateGatewayResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "responseType": {
-            "target": GATEWAY_RESPONSE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_GATEWAY_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateGatewayResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#GatewayResponse",
-        )
-    ],
-    members={
-        "responseType": {"target": GATEWAY_RESPONSE_TYPE},
-        "statusCode": {"target": STATUS_CODE},
-        "responseParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "responseTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "defaultResponse": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-UPDATE_GATEWAY_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateGatewayResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/gatewayresponses/{responseType}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_INTEGRATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateIntegrationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateIntegrationRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_INTEGRATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateIntegrationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Integration",
-        )
-    ],
-    members={
-        "type": {"target": INTEGRATION_TYPE},
-        "httpMethod": {"target": STRING},
-        "uri": {"target": STRING},
-        "connectionType": {"target": CONNECTION_TYPE},
-        "connectionId": {"target": STRING},
-        "credentials": {"target": STRING},
-        "requestParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "requestTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "passthroughBehavior": {"target": STRING},
-        "contentHandling": {"target": CONTENT_HANDLING_STRATEGY},
-        "timeoutInMillis": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "cacheNamespace": {"target": STRING},
-        "cacheKeyParameters": {"target": LIST_OF_STRING},
-        "integrationResponses": {"target": MAP_OF_INTEGRATION_RESPONSE},
-        "tlsConfig": {"target": TLS_CONFIG},
-        "responseTransferMode": {"target": RESPONSE_TRANSFER_MODE},
-        "integrationTarget": {"target": STRING},
-    },
-)
-
-UPDATE_INTEGRATION = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateIntegration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_INTEGRATION_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateIntegrationResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateIntegrationResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "statusCode": {
-            "target": STATUS_CODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_INTEGRATION_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateIntegrationResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#IntegrationResponse",
-        )
-    ],
-    members={
-        "statusCode": {"target": STATUS_CODE},
-        "selectionPattern": {"target": STRING},
-        "responseParameters": {"target": MAP_OF_STRING_TO_STRING},
-        "responseTemplates": {"target": MAP_OF_STRING_TO_STRING},
-        "contentHandling": {"target": CONTENT_HANDLING_STRATEGY},
-    },
-)
-
-UPDATE_INTEGRATION_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateIntegrationResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration/responses/{statusCode}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_METHOD_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateMethodInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateMethodRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_METHOD_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateMethodOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Method",
-        )
-    ],
-    members={
-        "httpMethod": {"target": STRING},
-        "authorizationType": {"target": STRING},
-        "authorizerId": {"target": STRING},
-        "apiKeyRequired": {"target": NULLABLE_BOOLEAN},
-        "requestValidatorId": {"target": STRING},
-        "operationName": {"target": STRING},
-        "requestParameters": {"target": MAP_OF_STRING_TO_BOOLEAN},
-        "requestModels": {"target": MAP_OF_STRING_TO_STRING},
-        "methodResponses": {"target": MAP_OF_METHOD_RESPONSE},
-        "methodIntegration": {"target": INTEGRATION},
-        "authorizationScopes": {"target": LIST_OF_STRING},
-    },
-)
-
-UPDATE_METHOD = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateMethod"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_METHOD_RESPONSE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateMethodResponseInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateMethodResponseRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "httpMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "statusCode": {
-            "target": STATUS_CODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_METHOD_RESPONSE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateMethodResponseOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#MethodResponse",
-        )
-    ],
-    members={
-        "statusCode": {"target": STATUS_CODE},
-        "responseParameters": {"target": MAP_OF_STRING_TO_BOOLEAN},
-        "responseModels": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-UPDATE_METHOD_RESPONSE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateMethodResponse"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/responses/{statusCode}",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_MODEL_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateModelInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateModelRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "modelName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_MODEL_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateModelOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Model",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "schema": {"target": STRING},
-        "contentType": {"target": STRING},
-    },
-)
-
-UPDATE_MODEL = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateModel"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/models/{modelName}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_REQUEST_VALIDATOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateRequestValidatorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateRequestValidatorRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "requestValidatorId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_REQUEST_VALIDATOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateRequestValidatorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#RequestValidator",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "validateRequestBody": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "validateRequestParameters": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-UPDATE_REQUEST_VALIDATOR = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateRequestValidator"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/requestvalidators/{requestValidatorId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateResourceRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "resourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Resource",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "parentId": {"target": STRING},
-        "pathPart": {"target": STRING},
-        "path": {"target": STRING},
-        "resourceMethods": {"target": MAP_OF_METHOD},
-    },
-)
-
-UPDATE_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/resources/{resourceId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_REST_API_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateRestApiInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateRestApiRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_REST_API_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateRestApiOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#RestApi",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "version": {"target": STRING},
-        "warnings": {"target": LIST_OF_STRING},
-        "binaryMediaTypes": {"target": LIST_OF_STRING},
-        "minimumCompressionSize": {"target": NULLABLE_INTEGER},
-        "apiKeySource": {"target": API_KEY_SOURCE_TYPE},
-        "endpointConfiguration": {"target": ENDPOINT_CONFIGURATION},
-        "policy": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "disableExecuteApiEndpoint": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "rootResourceId": {"target": STRING},
-        "securityPolicy": {"target": SECURITY_POLICY},
-        "endpointAccessMode": {"target": ENDPOINT_ACCESS_MODE},
-        "apiStatus": {"target": API_STATUS},
-        "apiStatusMessage": {"target": STRING},
-    },
-)
-
-UPDATE_REST_API = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateRestApi"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "PATCH", "uri": "/restapis/{restApiId}", "code": 200}
-            ),
-        )
-    ],
-)
-
-UPDATE_STAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateStageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateStageRequest",
-        )
-    ],
-    members={
-        "restApiId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "stageName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_STAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateStageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Stage",
-        )
-    ],
-    members={
-        "deploymentId": {"target": STRING},
-        "clientCertificateId": {"target": STRING},
-        "stageName": {"target": STRING},
-        "description": {"target": STRING},
-        "cacheClusterEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "cacheClusterSize": {"target": CACHE_CLUSTER_SIZE},
-        "cacheClusterStatus": {"target": CACHE_CLUSTER_STATUS},
-        "methodSettings": {"target": MAP_OF_METHOD_SETTINGS},
-        "variables": {"target": MAP_OF_STRING_TO_STRING},
-        "documentationVersion": {"target": STRING},
-        "accessLogSettings": {"target": ACCESS_LOG_SETTINGS},
-        "canarySettings": {"target": CANARY_SETTINGS},
-        "tracingEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "webAclArn": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-        "createdDate": {"target": TIMESTAMP},
-        "lastUpdatedDate": {"target": TIMESTAMP},
-    },
-)
-
-UPDATE_STAGE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateStage"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/restapis/{restApiId}/stages/{stageName}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_USAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateUsageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateUsageRequest",
-        )
-    ],
-    members={
-        "usagePlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "keyId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_USAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateUsageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#Usage",
-        )
-    ],
-    members={
-        "usagePlanId": {"target": STRING},
-        "startDate": {"target": STRING},
-        "endDate": {"target": STRING},
-        "items": {
-            "target": MAP_OF_KEY_USAGES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="values")],
-        },
-        "position": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="position")],
-        },
-    },
-)
-
-UPDATE_USAGE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateUsage"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/usageplans/{usagePlanId}/keys/{keyId}/usage",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_USAGE_PLAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateUsagePlanInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateUsagePlanRequest",
-        )
-    ],
-    members={
-        "usagePlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_USAGE_PLAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateUsagePlanOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UsagePlan",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "apiStages": {"target": LIST_OF_API_STAGE},
-        "throttle": {"target": THROTTLE_SETTINGS},
-        "quota": {"target": QUOTA_SETTINGS},
-        "productCode": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-UPDATE_USAGE_PLAN = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateUsagePlan"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "PATCH", "uri": "/usageplans/{usagePlanId}", "code": 200}
-            ),
-        )
-    ],
-)
-
-UPDATE_VPC_LINK_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateVpcLinkInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#UpdateVpcLinkRequest",
-        )
-    ],
-    members={
-        "vpcLinkId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patchOperations": {"target": LIST_OF_PATCH_OPERATION},
-    },
-)
-
-UPDATE_VPC_LINK_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.apigateway#UpdateVpcLinkOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.apigateway#VpcLink",
-        )
-    ],
-    members={
-        "id": {"target": STRING},
-        "name": {"target": STRING},
-        "description": {"target": STRING},
-        "targetArns": {"target": LIST_OF_STRING},
-        "status": {"target": VPC_LINK_STATUS},
-        "statusMessage": {"target": STRING},
-        "tags": {"target": MAP_OF_STRING_TO_STRING},
-    },
-)
-
-UPDATE_VPC_LINK = Schema(
-    id=ShapeID("com.amazonaws.apigateway#UpdateVpcLink"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "PATCH", "uri": "/vpclinks/{vpcLinkId}", "code": 200}
-            ),
-        )
-    ],
-)
-
-BACKPLANE_CONTROL_SERVICE = Schema(
-    id=ShapeID("com.amazonaws.apigateway#BackplaneControlService"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "apigateway"})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsFIPS",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://apigateway-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://apigateway-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://apigateway.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://apigateway.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 13,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://apigateway-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://apigateway-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://apigateway.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://apigateway.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 13,
+                "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "API Gateway",
-                    "arnNamespace": "apigateway",
-                    "cloudFormationName": "ApiGateway",
-                    "cloudTrailEventSource": "apigateway.amazonaws.com",
-                    "docId": "apigateway-2015-07-09",
-                    "endpointPrefix": "apigateway",
-                }
-            ),
+        _aws: MappingProxyType(
+            {
+                "sdkId": "API Gateway",
+                "arnNamespace": "apigateway",
+                "cloudFormationName": "ApiGateway",
+                "cloudTrailEventSource": "apigateway.amazonaws.com",
+                "docId": "apigateway-2015-07-09",
+                "endpointPrefix": "apigateway",
+            }
         ),
-        Trait.new(id=ShapeID("aws.protocols#restJson1")),
-    ],
+        _aJ: None,
+    },
 )

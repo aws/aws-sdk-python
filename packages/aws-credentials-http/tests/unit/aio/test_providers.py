@@ -5,10 +5,10 @@ from collections.abc import Awaitable, Callable
 from typing import Any
 
 import pytest
-from aws_credentials_http import ContainerCredentialsResolver, EcsContainerProvider
+from aws_credentials_http.aio import ContainerCredentialsResolver, EcsContainerProvider
 from smithy_aws_core.identity import AWSCredentialsIdentity
 from smithy_aws_core.identity.chain import Standard, StandardProvider
-from smithy_aws_core.identity.chain.provider import ChainSetup
+from smithy_aws_core.aio.identity.chain.provider import ChainSetup
 from smithy_core.interfaces.identity import Identity
 
 _RELATIVE_URI = "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"

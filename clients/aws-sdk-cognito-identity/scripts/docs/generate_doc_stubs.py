@@ -126,7 +126,9 @@ class ClientInfo:
 class DocStubGenerator:
     """Generate markdown API Reference stubs for AWS SDK for Python v4 clients."""
 
-    def __init__(self, client_dir: Path, output_dir: Path, service_name: str | None = None) -> None:
+    def __init__(
+        self, client_dir: Path, output_dir: Path, service_name: str | None = None
+    ) -> None:
         """
         Initialize the documentation generator.
 
@@ -190,7 +192,9 @@ class DocStubGenerator:
         required = ("client", "config", "models")
         missing = [name for name in required if not package.modules.get(name)]
         if missing:
-            raise ValueError(f"Missing required modules in {package_name}: {', '.join(missing)}")
+            raise ValueError(
+                f"Missing required modules in {package_name}: {', '.join(missing)}"
+            )
 
         # Parse submodules
         client_module = package.modules["client"]
@@ -199,11 +203,15 @@ class DocStubGenerator:
 
         client_class = self._find_class_with_suffix(client_module, "Client")
         if not client_class:
-            raise ValueError(f"No class ending with 'Client' found in {package_name}.client")
+            raise ValueError(
+                f"No class ending with 'Client' found in {package_name}.client"
+            )
 
         config_class = self._find_class_with_suffix(config_module, "Config")
         if not config_class:
-            raise ValueError(f"No class ending with 'Config' found in {package_name}.config")
+            raise ValueError(
+                f"No class ending with 'Config' found in {package_name}.config"
+            )
 
         plugin_alias = config_module.members.get("Plugin")
         if not plugin_alias:
@@ -288,7 +296,9 @@ class DocStubGenerator:
 
         if output_type in stream_type_map:
             stream_type = stream_type_map[output_type]
-            stream_args = self._get_subscript_elements(returns, f"'{operation.name}' stream type")
+            stream_args = self._get_subscript_elements(
+                returns, f"'{operation.name}' stream type"
+            )
 
             if stream_type in (StreamType.INPUT, StreamType.DUPLEX):
                 event_input_type = stream_args[0].canonical_name
@@ -316,7 +326,9 @@ class DocStubGenerator:
     def _get_expr(self, annotation: str | Expr | None, context: str) -> Expr:
         """Extract and validate an Expr from an annotation."""
         if not isinstance(annotation, Expr):
-            raise TypeError(f"{context}: expected Expr, got {type(annotation).__name__}")
+            raise TypeError(
+                f"{context}: expected Expr, got {type(annotation).__name__}"
+            )
         return annotation
 
     def _get_subscript_elements(self, expr: Expr, context: str) -> list[Expr]:
@@ -330,7 +342,9 @@ class DocStubGenerator:
             return [el for el in slice_expr.elements if isinstance(el, Expr)]
         return [slice_expr]
 
-    def _extract_models(self, models_module: Module, operations: list[OperationInfo]) -> ModelsInfo:
+    def _extract_models(
+        self, models_module: Module, operations: list[OperationInfo]
+    ) -> ModelsInfo:
         """Extract structures, unions, enums, and errors from models module."""
         structures, unions, enums, errors = [], [], [], []
 
@@ -356,14 +370,16 @@ class DocStubGenerator:
 
         duplicates = []
         for structure in structures:
-            if self._is_operation_io_type(structure.name, operations) or self._is_union_member(
-                structure.name, unions
-            ):
+            if self._is_operation_io_type(
+                structure.name, operations
+            ) or self._is_union_member(structure.name, unions):
                 duplicates.append(structure)
 
         structures = [struct for struct in structures if struct not in duplicates]
 
-        return ModelsInfo(structures=structures, unions=unions, enums=enums, errors=errors)
+        return ModelsInfo(
+            structures=structures, unions=unions, enums=enums, errors=errors
+        )
 
     def _is_union(self, member: Object | Alias) -> TypeGuard[Attribute]:
         """Check if a module member is a union type."""
@@ -399,7 +415,9 @@ class DocStubGenerator:
         for name in member_names:
             if not (member_object := models_module.members.get(name)):
                 raise ValueError(f"Union member '{name}' not found in models module")
-            members.append(TypeInfo(name=member_object.name, module_path=member_object.path))
+            members.append(
+                TypeInfo(name=member_object.name, module_path=member_object.path)
+            )
 
         return members
 
@@ -408,7 +426,8 @@ class DocStubGenerator:
         if not isinstance(member, Class):
             return False
         return any(
-            isinstance(base, ExprName) and base.name in ENUM_BASE_CLASSES for base in member.bases
+            isinstance(base, ExprName) and base.name in ENUM_BASE_CLASSES
+            for base in member.bases
         )
 
     def _is_error(self, member: Object | Alias) -> TypeGuard[Class]:
@@ -416,10 +435,13 @@ class DocStubGenerator:
         if not isinstance(member, Class):
             return False
         return any(
-            isinstance(base, ExprName) and base.name in ERROR_BASE_CLASSES for base in member.bases
+            isinstance(base, ExprName) and base.name in ERROR_BASE_CLASSES
+            for base in member.bases
         )
 
-    def _is_operation_io_type(self, type_name: str, operations: list[OperationInfo]) -> bool:
+    def _is_operation_io_type(
+        self, type_name: str, operations: list[OperationInfo]
+    ) -> bool:
         """Check if a type is used as operation input/output."""
         return any(type_name in (op.input.name, op.output.name) for op in operations)
 
@@ -437,8 +459,12 @@ class DocStubGenerator:
             self._generate_type_stubs(
                 client_info.models.structures, "structures", "Structure Class"
             )
-            self._generate_type_stubs(client_info.models.errors, "errors", "Error Class")
-            self._generate_type_stubs(client_info.models.enums, "enums", "Enum Class", members=True)
+            self._generate_type_stubs(
+                client_info.models.errors, "errors", "Error Class"
+            )
+            self._generate_type_stubs(
+                client_info.models.enums, "enums", "Enum Class", members=True
+            )
             self._generate_union_stubs(client_info.models.unions)
         except OSError as e:
             logger.error(f"Failed to write documentation files: {e}")
@@ -470,7 +496,9 @@ class DocStubGenerator:
         ]
 
         for method in sorted(client_info.client_methods, key=lambda x: x.name):
-            lines.extend([*self._mkdocs_directive(method.module_path, heading_level=4), ""])
+            lines.extend(
+                [*self._mkdocs_directive(method.module_path, heading_level=4), ""]
+            )
 
         # Operations section
         if client_info.operations:
@@ -578,7 +606,9 @@ class DocStubGenerator:
 
             output_path = self.output_dir / "operations" / f"{op.name}.md"
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(self._breadcrumb("Operations", op.name) + "\n".join(lines))
+            output_path.write_text(
+                self._breadcrumb("Operations", op.name) + "\n".join(lines)
+            )
 
         logger.info(f"Wrote {len(operations)} operation file(s)")
 
@@ -600,7 +630,9 @@ class DocStubGenerator:
 
             output_path = self.output_dir / category / f"{item.name}.md"
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(self._breadcrumb(category.title(), item.name) + "\n".join(lines))
+            output_path.write_text(
+                self._breadcrumb(category.title(), item.name) + "\n".join(lines)
+            )
 
         logger.info(f"Wrote {len(items)} {category} file(s)")
 
@@ -624,7 +656,9 @@ class DocStubGenerator:
 
             output_path = self.output_dir / "unions" / f"{union.name}.md"
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(self._breadcrumb("Unions", union.name) + "\n".join(lines))
+            output_path.write_text(
+                self._breadcrumb("Unions", union.name) + "\n".join(lines)
+            )
 
         logger.info(f"Wrote {len(unions)} union file(s)")
 

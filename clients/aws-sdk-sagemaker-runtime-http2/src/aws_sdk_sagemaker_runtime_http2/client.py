@@ -4,16 +4,16 @@ from copy import deepcopy
 import logging
 from typing import Any, cast
 
+from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
 from smithy_aws_core.config import ConfigSource
 from smithy_aws_core.identity import AWSCredentialsIdentity
-from smithy_aws_core.identity.chain import IdentityChain
-from smithy_core.aio.client import AsyncClient, ClientCall, RequestPipeline
-from smithy_core.aio.eventstream import DuplexEventStream
+from smithy_core.aio.client import AsyncClient, AsyncClientCall, AsyncRequestPipeline
+from smithy_core.aio.eventstream import AsyncDuplexEventStream
 from smithy_core.deserializers import DeserializeableShape
 from smithy_core.exceptions import ExpectationNotMetError
 from smithy_core.schemas import APIOperation
 from smithy_core.serializers import SerializeableShape
-from smithy_http.aio.interfaces import HTTPClient
+from smithy_http.aio.interfaces import AsyncHTTPClient
 from smithy_http.plugins import user_agent_plugin
 
 from .config import AsyncSageMakerRuntimeHTTP2Config, Plugin
@@ -92,12 +92,12 @@ class AsyncSageMakerRuntimeHTTP2Client(AsyncClient):
                 config_file = await config_context.parsed_profiles()
                 if config_context.profile_source is ConfigSource.OVERRIDE:
                     profile_name = config_context.profile_name
-            config.aws_credentials_identity_resolver = await IdentityChain.create(
+            config.aws_credentials_identity_resolver = await AsyncIdentityChain.create(
                 AWSCredentialsIdentity,
                 config_file=config_file,
                 profile_name=profile_name,
                 region_override=config.region,
-                http_client=cast(HTTPClient | None, config.transport),
+                http_client=cast(AsyncHTTPClient | None, config.transport),
             )
 
     async def _prepare_call[I: SerializeableShape, O: DeserializeableShape](
@@ -106,7 +106,7 @@ class AsyncSageMakerRuntimeHTTP2Client(AsyncClient):
         operation: APIOperation[I, O],
         default_plugins: list[Plugin],
         plugins: list[Plugin] | None,
-    ) -> tuple[RequestPipeline[Any, Any], ClientCall[I, O]]:
+    ) -> tuple[AsyncRequestPipeline[Any, Any], AsyncClientCall[I, O]]:
         if self._closed:
             raise RuntimeError(
                 "Cannot invoke an operation on a client that has been closed."
@@ -144,7 +144,7 @@ class AsyncSageMakerRuntimeHTTP2Client(AsyncClient):
         self,
         input: InvokeEndpointWithBidirectionalStreamInput,
         plugins: list[Plugin] | None = None,
-    ) -> DuplexEventStream[
+    ) -> AsyncDuplexEventStream[
         RequestStreamEvent,
         ResponseStreamEvent,
         InvokeEndpointWithBidirectionalStreamOutput,
@@ -196,7 +196,7 @@ class AsyncSageMakerRuntimeHTTP2Client(AsyncClient):
                 invocations.
 
         Returns:
-            A `DuplexEventStream` for bidirectional streaming.
+            An `AsyncDuplexEventStream` for bidirectional streaming.
         """
         pipeline, call = await self._prepare_call(
             input, INVOKE_ENDPOINT_WITH_BIDIRECTIONAL_STREAM, [], plugins

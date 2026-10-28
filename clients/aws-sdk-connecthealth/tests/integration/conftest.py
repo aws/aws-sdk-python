@@ -118,7 +118,7 @@ def _create_s3_bucket(s3_client: Any, bucket_name: str) -> None:
     s3_client.create_bucket(
         Bucket=bucket_name,
         CreateBucketConfiguration={
-            "Tags": [{"Key": k, "Value": v} for k, v in _TAGS.items()],
+            "Tags": [{"Key": k, "Value": v} for k, v in _TAGS.items()]
         },
     )
 
@@ -152,7 +152,7 @@ async def connecthealth_resources():
     domain_name = f"integ-test-connecthealth-domain-{unique_suffix}"
     bucket_name = f"integ-test-connecthealth-bucket-{unique_suffix}"
 
-    s3_client = boto3.client("s3", region_name=REGION)
+    s3_client = boto3.client("s3", region_name=REGION)  # pyright: ignore[reportUnknownMemberType]
     async with await create_connecthealth_client(REGION) as client:
         domain_id: str | None = None
         subscription_id: str | None = None

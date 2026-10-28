@@ -21,7 +21,7 @@ To use this resolver explicitly, set the `aws_credentials_identity_resolver`
 property on a service client's config to an `IMDSCredentialsResolver` instance:
 
 ```python
-from aws_credentials_imds import IMDSCredentialsResolver
+from aws_credentials_imds.aio import IMDSCredentialsResolver
 
 service_client = ServiceClient(
     config=ServiceClientConfig(
@@ -34,7 +34,7 @@ Endpoint mode, token TTL, and other options can be customized through an
 `IMDSConfig`:
 
 ```python
-from aws_credentials_imds import IMDSConfig, IMDSCredentialsResolver
+from aws_credentials_imds.aio import IMDSConfig, IMDSCredentialsResolver
 
 resolver = IMDSCredentialsResolver(
     config=IMDSConfig(endpoint_mode="IPv6", token_ttl=300),
@@ -48,7 +48,7 @@ The resolver can also be used on its own to fetch credentials directly:
 ```python
 import asyncio
 
-from aws_credentials_imds import IMDSCredentialsResolver
+from aws_credentials_imds.aio import IMDSCredentialsResolver
 
 
 async def main() -> None:

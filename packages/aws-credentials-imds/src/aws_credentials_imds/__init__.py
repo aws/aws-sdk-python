@@ -2,13 +2,6 @@
 # SPDX-License-Identifier: Apache-2.0
 __version__ = "0.4.0"
 
-from .client import IMDSConfig, IMDSConfigurationError
-from .providers import Ec2InstanceMetadataProvider
-from .resolvers import IMDSCredentialsResolver
+from .client import IMDSConfigurationError
 
-__all__ = (
-    "Ec2InstanceMetadataProvider",
-    "IMDSConfig",
-    "IMDSConfigurationError",
-    "IMDSCredentialsResolver",
-)
+__all__ = ("IMDSConfigurationError",)

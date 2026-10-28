@@ -7,7 +7,7 @@ from pathlib import Path
 from unittest.mock import AsyncMock, patch
 
 import pytest
-from aws_credentials_http import ContainerCredentialsResolver
+from aws_credentials_http.aio import ContainerCredentialsResolver
 from smithy_aws_core.identity import AWSCredentialsIdentity
 from smithy_core import URI
 from smithy_core.exceptions import SmithyIdentityError
