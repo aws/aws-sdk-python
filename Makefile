@@ -4,7 +4,7 @@ PYTHON_VERSION := 3.12
 # Colocated smithy-python checkout that provides the codegen jars.
 SMITHY_PYTHON ?= ../smithy-python
 
-.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen publish-codegen
+.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen publish-codegen aio-check
 
 # Publishes the smithy-python codegen jars to the local Maven cache so `gen`
 # can resolve them. Run once, and again whenever the generator changes.
@@ -21,6 +21,10 @@ gen:
 ifeq (gen,$(firstword $(MAKECMDGOALS)))
 $(eval $(filter-out gen,$(MAKECMDGOALS)):;@:)
 endif
+
+# Enforces aio naming and separation in package and client sources.
+aio-check:
+	uv run --no-project --python $(PYTHON_VERSION) python scripts/aio-naming/aio_naming.py
 
 venv:
 	uv venv --python $(PYTHON_VERSION)
