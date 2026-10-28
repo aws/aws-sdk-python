@@ -2,881 +2,887 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import BLOB, BOOLEAN, INTEGER, LONG, STRING, TIMESTAMP, UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 
-NON_BLANK_STRING = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#NonBlankString"),
-    shape_type=ShapeType.STRING,
+n0 = "com.amazonaws.bedrockdataautomationruntime"
+_NBS = "NonBlankString"
+_ADE = "AccessDeniedException"
+_s = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_m = "message"
+_IA = "InvocationArn"
+_GDASI = "GetDataAutomationStatusInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cGDASR = "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusRequest"
+_sm = "smithy.api#input"
+_iA = "invocationArn"
+_smi = "smithy.api#required"
+_sL = "smithy.api#httpLabel"
+_SU = "S3Uri"
+_OC = "OutputConfiguration"
+_sU = "s3Uri"
+_AJS = "AutomationJobStatus"
+_CREATED = "CREATED"
+_sV = "smithy.api#enumValue"
+_C = "Created"
+_IP = "IN_PROGRESS"
+_IPn = "InProgress"
+_SUCCESS = "SUCCESS"
+_S = "Success"
+_SE = "SERVICE_ERROR"
+_SEe = "ServiceError"
+_CE = "CLIENT_ERROR"
+_CEl = "ClientError"
+_GDASO = "GetDataAutomationStatusOutput"
+_cGDASRo = "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusResponse"
+_smit = "smithy.api#output"
+_st = "status"
+_eT = "errorType"
+_eM = "errorMessage"
+_oC = "outputConfiguration"
+_jST = "jobSubmissionTime"
+_sF = "smithy.api#timestampFormat"
+_dt = "date-time"
+_jCT = "jobCompletionTime"
+_jDIS = "jobDurationInSeconds"
+_ISE = "InternalServerException"
+_se = "server"
+_RNFE = "ResourceNotFoundException"
+_TE = "ThrottlingException"
+_VE = "ValidationException"
+_GDAS = "GetDataAutomationStatus"
+_BA = "BlueprintArn"
+_BS = "BlueprintStage"
+_DEVELOPMENT = "DEVELOPMENT"
+_LIVE = "LIVE"
+_BV = "BlueprintVersion"
+_B = "Blueprint"
+_bA = "blueprintArn"
+_v = "version"
+_sta = "stage"
+_BL = "BlueprintList"
+_me = "member"
+_IT = "IdempotencyToken"
+_DAA = "DataAutomationArn"
+_DAS = "DataAutomationStage"
+_DAC = "DataAutomationConfiguration"
+_dAPA = "dataAutomationProjectArn"
+_DAPA = "DataAutomationProfileArn"
+_ECK = "EncryptionContextKey"
+_ECV = "EncryptionContextValue"
+_ECM = "EncryptionContextMap"
+_k = "key"
+_va = "value"
+_KMSKI = "KMSKeyId"
+_EC = "EncryptionConfiguration"
+_kKI = "kmsKeyId"
+_kEC = "kmsEncryptionContext"
+_TS = "TimestampSegment"
+_sTM = "startTimeMillis"
+_eTM = "endTimeMillis"
+_VSC = "VideoSegmentConfiguration"
+_tS = "timestampSegment"
+_VAPC = "VideoAssetProcessingConfiguration"
+_sC = "segmentConfiguration"
+_APC = "AssetProcessingConfiguration"
+_vi = "video"
+_IC = "InputConfiguration"
+_aPC = "assetProcessingConfiguration"
+_EBC = "EventBridgeConfiguration"
+_eBE = "eventBridgeEnabled"
+_NC = "NotificationConfiguration"
+_eBC = "eventBridgeConfiguration"
+_TK = "TagKey"
+_TV = "TagValue"
+_T = "Tag"
+_TL = "TagList"
+_IDAAI = "InvokeDataAutomationAsyncInput"
+_cIDAAR = "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncRequest"
+_cT = "clientToken"
+_sT = "smithy.api#idempotencyToken"
+_iC = "inputConfiguration"
+_dAC = "dataAutomationConfiguration"
+_eC = "encryptionConfiguration"
+_nC = "notificationConfiguration"
+_b = "blueprints"
+_dAPAa = "dataAutomationProfileArn"
+_t = "tags"
+_IDAAO = "InvokeDataAutomationAsyncOutput"
+_cIDAARo = (
+    "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncResponse"
+)
+_SQEE = "ServiceQuotaExceededException"
+_IDAA = "InvokeDataAutomationAsync"
+_SIC = "SyncInputConfiguration"
+_by = "bytes"
+_IDAI = "InvokeDataAutomationInput"
+_cIDAR = "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationRequest"
+_COS = "CustomOutputStatus"
+_MATCH = "MATCH"
+_NM = "NO_MATCH"
+_OS = "OutputSegment"
+_cOS = "customOutputStatus"
+_cO = "customOutput"
+_sO = "standardOutput"
+_OSL = "OutputSegmentList"
+_SM = "SemanticModality"
+_DOCUMENT = "DOCUMENT"
+_IMAGE = "IMAGE"
+_AUDIO = "AUDIO"
+_VIDEO = "VIDEO"
+_IDAO = "InvokeDataAutomationOutput"
+_cIDARo = "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationResponse"
+_sM = "semanticModality"
+_oS = "outputSegments"
+_smith = "smithy.api#default"
+_SUE = "ServiceUnavailableException"
+_IDA = "InvokeDataAutomation"
+_TRA = "TaggableResourceArn"
+_LTFRI = "ListTagsForResourceInput"
+_cLTFRR = "com.amazonaws.bedrockdataautomationruntime#ListTagsForResourceRequest"
+_rARN = "resourceARN"
+_LTFRO = "ListTagsForResourceOutput"
+_cLTFRRo = "com.amazonaws.bedrockdataautomationruntime#ListTagsForResourceResponse"
+_LTFR = "ListTagsForResource"
+_TRI = "TagResourceInput"
+_cTRR = "com.amazonaws.bedrockdataautomationruntime#TagResourceRequest"
+_TRO = "TagResourceOutput"
+_cTRRo = "com.amazonaws.bedrockdataautomationruntime#TagResourceResponse"
+_TR = "TagResource"
+_TKL = "TagKeyList"
+_URI = "UntagResourceInput"
+_cURR = "com.amazonaws.bedrockdataautomationruntime#UntagResourceRequest"
+_tK = "tagKeys"
+_URO = "UntagResourceOutput"
+_cURRo = "com.amazonaws.bedrockdataautomationruntime#UntagResourceResponse"
+_UR = "UntagResource"
+_ABKRS = "AmazonBedrockKeystoneRuntimeService"
+_a = "aws.auth#sigv4"
+_a_ = "aws.protocols#awsJson1_1"
+_sB = "smithy.rules#endpointBdd"
+_aw = "aws.api#service"
+
+NON_BLANK_STRING: StaticSchema = (3, n0, _NBS, 0)
+
+ACCESS_DENIED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ADE,
+    {_s: _c, _sE: 403},
+    (_m,),
+    ((NON_BLANK_STRING, 0),),
 )
 
-ACCESS_DENIED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#AccessDeniedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-    ],
-    members={"message": {"target": NON_BLANK_STRING}},
+INVOCATION_ARN: StaticSchema = (3, n0, _IA, 0)
+
+GET_DATA_AUTOMATION_STATUS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDASI,
+    {_sSI: _cGDASR, _sm: None},
+    (_iA,),
+    ((INVOCATION_ARN, 9),),
 )
 
-INVOCATION_ARN = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#InvocationArn"),
-    shape_type=ShapeType.STRING,
-)
+S3_URI: StaticSchema = (3, n0, _SU, 0)
 
-GET_DATA_AUTOMATION_STATUS_INPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusInput"
+OUTPUT_CONFIGURATION: StaticSchema = (18, n0, _OC, 0, (_sU,), ((S3_URI, 1),))
+
+AUTOMATION_JOB_STATUS: StaticSchema = (
+    14,
+    n0,
+    _AJS,
+    0,
+    (_CREATED, _IP, _SUCCESS, _SE, _CE),
+    (
+        (-1, {_sV: _C}),
+        (-1, {_sV: _IPn}),
+        (-1, {_sV: _S}),
+        (-1, {_sV: _SEe}),
+        (-1, {_sV: _CEl}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusRequest",
-        )
-    ],
-    members={
-        "invocationArn": {
-            "target": INVOCATION_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
 )
 
-S3_URI = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#S3Uri"),
-    shape_type=ShapeType.STRING,
-)
-
-OUTPUT_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#OutputConfiguration"),
-    members={
-        "s3Uri": {
-            "target": S3_URI,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-AUTOMATION_JOB_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#AutomationJobStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATED": {"target": UNIT},
-        "IN_PROGRESS": {"target": UNIT},
-        "SUCCESS": {"target": UNIT},
-        "SERVICE_ERROR": {"target": UNIT},
-        "CLIENT_ERROR": {"target": UNIT},
-    },
-)
-
-GET_DATA_AUTOMATION_STATUS_OUTPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusOutput"
+GET_DATA_AUTOMATION_STATUS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDASO,
+    {_sSI: _cGDASRo, _smit: None},
+    (_st, _eT, _eM, _oC, _jST, _jCT, _jDIS),
+    (
+        (AUTOMATION_JOB_STATUS, 0),
+        (3, 0),
+        (3, 0),
+        (OUTPUT_CONFIGURATION, 0),
+        (4, {_sF: _dt}),
+        (4, {_sF: _dt}),
+        (7, 0),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatusResponse",
-        )
-    ],
-    members={
-        "status": {"target": AUTOMATION_JOB_STATUS},
-        "errorType": {"target": STRING},
-        "errorMessage": {"target": STRING},
-        "outputConfiguration": {"target": OUTPUT_CONFIGURATION},
-        "jobSubmissionTime": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#timestampFormat"), value="date-time")
-            ],
-        },
-        "jobCompletionTime": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#timestampFormat"), value="date-time")
-            ],
-        },
-        "jobDurationInSeconds": {"target": INTEGER},
-    },
 )
 
-INTERNAL_SERVER_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#InternalServerException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-    ],
-    members={"message": {"target": NON_BLANK_STRING}},
+INTERNAL_SERVER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_s: _se, _sE: 500},
+    (_m,),
+    ((NON_BLANK_STRING, 0),),
 )
 
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={"message": {"target": NON_BLANK_STRING}},
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_s: _c, _sE: 404},
+    (_m,),
+    ((NON_BLANK_STRING, 0),),
 )
 
-THROTTLING_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#ThrottlingException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-    ],
-    members={"message": {"target": NON_BLANK_STRING}},
+THROTTLING_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TE,
+    {_s: _c, _sE: 429},
+    (_m,),
+    ((NON_BLANK_STRING, 0),),
 )
 
-VALIDATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#ValidationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": NON_BLANK_STRING}},
+VALIDATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _VE,
+    {_s: _c, _sE: 400},
+    (_m,),
+    ((NON_BLANK_STRING, 0),),
 )
 
-GET_DATA_AUTOMATION_STATUS = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#GetDataAutomationStatus"),
-    shape_type=ShapeType.OPERATION,
-)
-
-BLUEPRINT_ARN = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#BlueprintArn"),
-    shape_type=ShapeType.STRING,
-)
-
-BLUEPRINT_STAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#BlueprintStage"),
-    shape_type=ShapeType.ENUM,
-    members={"DEVELOPMENT": {"target": UNIT}, "LIVE": {"target": UNIT}},
-)
-
-BLUEPRINT_VERSION = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#BlueprintVersion"),
-    shape_type=ShapeType.STRING,
-)
-
-BLUEPRINT = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#Blueprint"),
-    members={
-        "blueprintArn": {
-            "target": BLUEPRINT_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "version": {"target": BLUEPRINT_VERSION},
-        "stage": {"target": BLUEPRINT_STAGE},
-    },
-)
-
-BLUEPRINT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#BlueprintList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BLUEPRINT}},
-)
-
-IDEMPOTENCY_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#IdempotencyToken"),
-    shape_type=ShapeType.STRING,
-)
-
-DATA_AUTOMATION_ARN = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#DataAutomationArn"),
-    shape_type=ShapeType.STRING,
-)
-
-DATA_AUTOMATION_STAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#DataAutomationStage"),
-    shape_type=ShapeType.ENUM,
-    members={"LIVE": {"target": UNIT}, "DEVELOPMENT": {"target": UNIT}},
-)
-
-DATA_AUTOMATION_CONFIGURATION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.bedrockdataautomationruntime#DataAutomationConfiguration"
+GET_DATA_AUTOMATION_STATUS: StaticOperationSchema = (
+    23,
+    n0,
+    _GDAS,
+    0,
+    GET_DATA_AUTOMATION_STATUS_INPUT,
+    GET_DATA_AUTOMATION_STATUS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
     ),
-    members={
-        "dataAutomationProjectArn": {
-            "target": DATA_AUTOMATION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "stage": {"target": DATA_AUTOMATION_STAGE},
-    },
 )
 
-DATA_AUTOMATION_PROFILE_ARN = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#DataAutomationProfileArn"),
-    shape_type=ShapeType.STRING,
+BLUEPRINT_ARN: StaticSchema = (3, n0, _BA, 0)
+
+BLUEPRINT_STAGE: StaticSchema = (
+    14,
+    n0,
+    _BS,
+    0,
+    (_DEVELOPMENT, _LIVE),
+    ((-1, {_sV: _DEVELOPMENT}), (-1, {_sV: _LIVE})),
 )
 
-ENCRYPTION_CONTEXT_KEY = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#EncryptionContextKey"),
-    shape_type=ShapeType.STRING,
+BLUEPRINT_VERSION: StaticSchema = (3, n0, _BV, 0)
+
+BLUEPRINT: StaticSchema = (
+    18,
+    n0,
+    _B,
+    0,
+    (_bA, _v, _sta),
+    ((BLUEPRINT_ARN, 1), (BLUEPRINT_VERSION, 0), (BLUEPRINT_STAGE, 0)),
 )
 
-ENCRYPTION_CONTEXT_VALUE = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#EncryptionContextValue"),
-    shape_type=ShapeType.STRING,
+BLUEPRINT_LIST: StaticSchema = (16, n0, _BL, 0, (_me,), ((BLUEPRINT, 0),))
+
+IDEMPOTENCY_TOKEN: StaticSchema = (3, n0, _IT, 0)
+
+DATA_AUTOMATION_ARN: StaticSchema = (3, n0, _DAA, 0)
+
+DATA_AUTOMATION_STAGE: StaticSchema = (
+    14,
+    n0,
+    _DAS,
+    0,
+    (_LIVE, _DEVELOPMENT),
+    ((-1, {_sV: _LIVE}), (-1, {_sV: _DEVELOPMENT})),
 )
 
-ENCRYPTION_CONTEXT_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#EncryptionContextMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": ENCRYPTION_CONTEXT_KEY},
-        "value": {"target": ENCRYPTION_CONTEXT_VALUE},
-    },
+DATA_AUTOMATION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _DAC,
+    0,
+    (_dAPA, _sta),
+    ((DATA_AUTOMATION_ARN, 1), (DATA_AUTOMATION_STAGE, 0)),
 )
 
-KMS_KEY_ID = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#KMSKeyId"),
-    shape_type=ShapeType.STRING,
+DATA_AUTOMATION_PROFILE_ARN: StaticSchema = (3, n0, _DAPA, 0)
+
+ENCRYPTION_CONTEXT_KEY: StaticSchema = (3, n0, _ECK, 0)
+
+ENCRYPTION_CONTEXT_VALUE: StaticSchema = (3, n0, _ECV, 0)
+
+ENCRYPTION_CONTEXT_MAP: StaticSchema = (
+    17,
+    n0,
+    _ECM,
+    0,
+    (_k, _va),
+    ((ENCRYPTION_CONTEXT_KEY, 0), (ENCRYPTION_CONTEXT_VALUE, 0)),
 )
 
-ENCRYPTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#EncryptionConfiguration"),
-    members={
-        "kmsKeyId": {
-            "target": KMS_KEY_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "kmsEncryptionContext": {"target": ENCRYPTION_CONTEXT_MAP},
-    },
+KMS_KEY_ID: StaticSchema = (3, n0, _KMSKI, 0)
+
+ENCRYPTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _EC,
+    0,
+    (_kKI, _kEC),
+    ((KMS_KEY_ID, 1), (ENCRYPTION_CONTEXT_MAP, 0)),
 )
 
-TIMESTAMP_SEGMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#TimestampSegment"),
-    members={
-        "startTimeMillis": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "endTimeMillis": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+TIMESTAMP_SEGMENT: StaticSchema = (18, n0, _TS, 0, (_sTM, _eTM), ((8, 1), (8, 1)))
+
+VIDEO_SEGMENT_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _VSC,
+    0,
+    (_tS,),
+    ((TIMESTAMP_SEGMENT, 0),),
 )
 
-VIDEO_SEGMENT_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#VideoSegmentConfiguration"),
-    shape_type=ShapeType.UNION,
-    members={"timestampSegment": {"target": TIMESTAMP_SEGMENT}},
+VIDEO_ASSET_PROCESSING_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _VAPC,
+    0,
+    (_sC,),
+    ((VIDEO_SEGMENT_CONFIGURATION, 0),),
 )
 
-VIDEO_ASSET_PROCESSING_CONFIGURATION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.bedrockdataautomationruntime#VideoAssetProcessingConfiguration"
+ASSET_PROCESSING_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _APC,
+    0,
+    (_vi,),
+    ((VIDEO_ASSET_PROCESSING_CONFIGURATION, 0),),
+)
+
+INPUT_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _IC,
+    0,
+    (_sU, _aPC),
+    ((S3_URI, 1), (ASSET_PROCESSING_CONFIGURATION, 0)),
+)
+
+EVENT_BRIDGE_CONFIGURATION: StaticSchema = (18, n0, _EBC, 0, (_eBE,), ((2, 1),))
+
+NOTIFICATION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _NC,
+    0,
+    (_eBC,),
+    ((EVENT_BRIDGE_CONFIGURATION, 1),),
+)
+
+TAG_KEY: StaticSchema = (3, n0, _TK, 0)
+
+TAG_VALUE: StaticSchema = (3, n0, _TV, 0)
+
+TAG: StaticSchema = (18, n0, _T, 0, (_k, _va), ((TAG_KEY, 1), (TAG_VALUE, 1)))
+
+TAG_LIST: StaticSchema = (16, n0, _TL, 0, (_me,), ((TAG, 0),))
+
+INVOKE_DATA_AUTOMATION_ASYNC_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IDAAI,
+    {_sSI: _cIDAAR, _sm: None},
+    (_cT, _iC, _oC, _dAC, _eC, _nC, _b, _dAPAa, _t),
+    (
+        (IDEMPOTENCY_TOKEN, 2),
+        (INPUT_CONFIGURATION, 1),
+        (OUTPUT_CONFIGURATION, 1),
+        (DATA_AUTOMATION_CONFIGURATION, 0),
+        (ENCRYPTION_CONFIGURATION, 0),
+        (NOTIFICATION_CONFIGURATION, 0),
+        (BLUEPRINT_LIST, 0),
+        (DATA_AUTOMATION_PROFILE_ARN, 1),
+        (TAG_LIST, 0),
     ),
-    members={"segmentConfiguration": {"target": VIDEO_SEGMENT_CONFIGURATION}},
 )
 
-ASSET_PROCESSING_CONFIGURATION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.bedrockdataautomationruntime#AssetProcessingConfiguration"
+INVOKE_DATA_AUTOMATION_ASYNC_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IDAAO,
+    {_sSI: _cIDAARo, _smit: None},
+    (_iA,),
+    ((INVOCATION_ARN, 1),),
+)
+
+SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SQEE,
+    {_s: _c, _sE: 402},
+    (_m,),
+    ((NON_BLANK_STRING, 0),),
+)
+
+INVOKE_DATA_AUTOMATION_ASYNC: StaticOperationSchema = (
+    23,
+    n0,
+    _IDAA,
+    0,
+    INVOKE_DATA_AUTOMATION_ASYNC_INPUT,
+    INVOKE_DATA_AUTOMATION_ASYNC_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
     ),
-    members={"video": {"target": VIDEO_ASSET_PROCESSING_CONFIGURATION}},
 )
 
-INPUT_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#InputConfiguration"),
-    members={
-        "s3Uri": {
-            "target": S3_URI,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "assetProcessingConfiguration": {"target": ASSET_PROCESSING_CONFIGURATION},
-    },
+SYNC_INPUT_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SIC,
+    0,
+    (_by, _sU),
+    ((1, 0), (S3_URI, 0)),
 )
 
-EVENT_BRIDGE_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#EventBridgeConfiguration"),
-    members={
-        "eventBridgeEnabled": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-NOTIFICATION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#NotificationConfiguration"),
-    members={
-        "eventBridgeConfiguration": {
-            "target": EVENT_BRIDGE_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-TAG_KEY = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#TagKey"),
-    shape_type=ShapeType.STRING,
-)
-
-TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#TagValue"),
-    shape_type=ShapeType.STRING,
-)
-
-TAG = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#Tag"),
-    members={
-        "key": {
-            "target": TAG_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "value": {
-            "target": TAG_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAG_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#TagList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG}},
-)
-
-INVOKE_DATA_AUTOMATION_ASYNC_INPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncInput"
+INVOKE_DATA_AUTOMATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IDAI,
+    {_sSI: _cIDAR, _sm: None},
+    (_iC, _dAC, _b, _dAPAa, _eC, _oC),
+    (
+        (SYNC_INPUT_CONFIGURATION, 1),
+        (DATA_AUTOMATION_CONFIGURATION, 0),
+        (BLUEPRINT_LIST, 0),
+        (DATA_AUTOMATION_PROFILE_ARN, 1),
+        (ENCRYPTION_CONFIGURATION, 0),
+        (OUTPUT_CONFIGURATION, 0),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncRequest",
-        )
-    ],
-    members={
-        "clientToken": {
-            "target": IDEMPOTENCY_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "inputConfiguration": {
-            "target": INPUT_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "outputConfiguration": {
-            "target": OUTPUT_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "dataAutomationConfiguration": {"target": DATA_AUTOMATION_CONFIGURATION},
-        "encryptionConfiguration": {"target": ENCRYPTION_CONFIGURATION},
-        "notificationConfiguration": {"target": NOTIFICATION_CONFIGURATION},
-        "blueprints": {"target": BLUEPRINT_LIST},
-        "dataAutomationProfileArn": {
-            "target": DATA_AUTOMATION_PROFILE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "tags": {"target": TAG_LIST},
-    },
 )
 
-INVOKE_DATA_AUTOMATION_ASYNC_OUTPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncOutput"
+CUSTOM_OUTPUT_STATUS: StaticSchema = (
+    14,
+    n0,
+    _COS,
+    0,
+    (_MATCH, _NM),
+    ((-1, {_sV: _MATCH}), (-1, {_sV: _NM})),
+)
+
+OUTPUT_SEGMENT: StaticSchema = (
+    18,
+    n0,
+    _OS,
+    0,
+    (_cOS, _cO, _sO),
+    ((CUSTOM_OUTPUT_STATUS, 0), (3, 0), (3, 0)),
+)
+
+OUTPUT_SEGMENT_LIST: StaticSchema = (16, n0, _OSL, 0, (_me,), ((OUTPUT_SEGMENT, 0),))
+
+SEMANTIC_MODALITY: StaticSchema = (
+    14,
+    n0,
+    _SM,
+    0,
+    (_DOCUMENT, _IMAGE, _AUDIO, _VIDEO),
+    (
+        (-1, {_sV: _DOCUMENT}),
+        (-1, {_sV: _IMAGE}),
+        (-1, {_sV: _AUDIO}),
+        (-1, {_sV: _VIDEO}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsyncResponse",
-        )
-    ],
-    members={
-        "invocationArn": {
-            "target": INVOCATION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
 )
 
-SERVICE_QUOTA_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.bedrockdataautomationruntime#ServiceQuotaExceededException"
+INVOKE_DATA_AUTOMATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IDAO,
+    {_sSI: _cIDARo, _smit: None},
+    (_oC, _sM, _oS),
+    (
+        (OUTPUT_CONFIGURATION, 0),
+        (SEMANTIC_MODALITY, 1),
+        (OUTPUT_SEGMENT_LIST, {_smith: ()}),
     ),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=402),
-    ],
-    members={"message": {"target": NON_BLANK_STRING}},
 )
 
-INVOKE_DATA_AUTOMATION_ASYNC = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationAsync"),
-    shape_type=ShapeType.OPERATION,
+SERVICE_UNAVAILABLE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SUE,
+    {_s: _se, _sE: 503},
+    (_m,),
+    ((NON_BLANK_STRING, 0),),
 )
 
-SYNC_INPUT_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#SyncInputConfiguration"),
-    members={"bytes": {"target": BLOB}, "s3Uri": {"target": S3_URI}},
-)
-
-INVOKE_DATA_AUTOMATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationRequest",
-        )
-    ],
-    members={
-        "inputConfiguration": {
-            "target": SYNC_INPUT_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "dataAutomationConfiguration": {"target": DATA_AUTOMATION_CONFIGURATION},
-        "blueprints": {"target": BLUEPRINT_LIST},
-        "dataAutomationProfileArn": {
-            "target": DATA_AUTOMATION_PROFILE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "encryptionConfiguration": {"target": ENCRYPTION_CONFIGURATION},
-        "outputConfiguration": {"target": OUTPUT_CONFIGURATION},
-    },
-)
-
-CUSTOM_OUTPUT_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#CustomOutputStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"MATCH": {"target": UNIT}, "NO_MATCH": {"target": UNIT}},
-)
-
-OUTPUT_SEGMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#OutputSegment"),
-    members={
-        "customOutputStatus": {"target": CUSTOM_OUTPUT_STATUS},
-        "customOutput": {"target": STRING},
-        "standardOutput": {"target": STRING},
-    },
-)
-
-OUTPUT_SEGMENT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#OutputSegmentList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": OUTPUT_SEGMENT}},
-)
-
-SEMANTIC_MODALITY = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#SemanticModality"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "DOCUMENT": {"target": UNIT},
-        "IMAGE": {"target": UNIT},
-        "AUDIO": {"target": UNIT},
-        "VIDEO": {"target": UNIT},
-    },
-)
-
-INVOKE_DATA_AUTOMATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomationResponse",
-        )
-    ],
-    members={
-        "outputConfiguration": {"target": OUTPUT_CONFIGURATION},
-        "semanticModality": {
-            "target": SEMANTIC_MODALITY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "outputSegments": {
-            "target": OUTPUT_SEGMENT_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=())],
-        },
-    },
-)
-
-SERVICE_UNAVAILABLE_EXCEPTION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.bedrockdataautomationruntime#ServiceUnavailableException"
+INVOKE_DATA_AUTOMATION: StaticOperationSchema = (
+    23,
+    n0,
+    _IDA,
+    0,
+    INVOKE_DATA_AUTOMATION_INPUT,
+    INVOKE_DATA_AUTOMATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        SERVICE_UNAVAILABLE_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
     ),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=503),
-    ],
-    members={"message": {"target": NON_BLANK_STRING}},
 )
 
-INVOKE_DATA_AUTOMATION = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#InvokeDataAutomation"),
-    shape_type=ShapeType.OPERATION,
+TAGGABLE_RESOURCE_ARN: StaticSchema = (3, n0, _TRA, 0)
+
+LIST_TAGS_FOR_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRI,
+    {_sSI: _cLTFRR, _sm: None},
+    (_rARN,),
+    ((TAGGABLE_RESOURCE_ARN, 1),),
 )
 
-TAGGABLE_RESOURCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#TaggableResourceArn"),
-    shape_type=ShapeType.STRING,
+LIST_TAGS_FOR_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRO,
+    {_sSI: _cLTFRRo, _smit: None},
+    (_t,),
+    ((TAG_LIST, 0),),
 )
 
-LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#ListTagsForResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#ListTagsForResourceRequest",
-        )
-    ],
-    members={
-        "resourceARN": {
-            "target": TAGGABLE_RESOURCE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-LIST_TAGS_FOR_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#ListTagsForResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#ListTagsForResourceResponse",
-        )
-    ],
-    members={"tags": {"target": TAG_LIST}},
-)
-
-LIST_TAGS_FOR_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#ListTagsForResource"),
-    shape_type=ShapeType.OPERATION,
-)
-
-TAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#TagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#TagResourceRequest",
-        )
-    ],
-    members={
-        "resourceARN": {
-            "target": TAGGABLE_RESOURCE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "tags": {
-            "target": TAG_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#TagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#TagResourceResponse",
-        )
-    ],
-)
-
-TAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#TagResource"),
-    shape_type=ShapeType.OPERATION,
-)
-
-TAG_KEY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#TagKeyList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG_KEY}},
-)
-
-UNTAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#UntagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#UntagResourceRequest",
-        )
-    ],
-    members={
-        "resourceARN": {
-            "target": TAGGABLE_RESOURCE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "tagKeys": {
-            "target": TAG_KEY_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-UNTAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#UntagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.bedrockdataautomationruntime#UntagResourceResponse",
-        )
-    ],
-)
-
-UNTAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.bedrockdataautomationruntime#UntagResource"),
-    shape_type=ShapeType.OPERATION,
-)
-
-AMAZON_BEDROCK_KEYSTONE_RUNTIME_SERVICE = Schema(
-    id=ShapeID(
-        "com.amazonaws.bedrockdataautomationruntime#AmazonBedrockKeystoneRuntimeService"
+LIST_TAGS_FOR_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _LTFR,
+    0,
+    LIST_TAGS_FOR_RESOURCE_INPUT,
+    LIST_TAGS_FOR_RESOURCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
     ),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "bedrock"})
-        ),
-        Trait.new(id=ShapeID("aws.protocols#awsJson1_1")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+)
+
+TAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TRI,
+    {_sSI: _cTRR, _sm: None},
+    (_rARN, _t),
+    ((TAGGABLE_RESOURCE_ARN, 1), (TAG_LIST, 1)),
+)
+
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _cTRRo, _smit: None})
+
+TAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _TR,
+    0,
+    TAG_RESOURCE_INPUT,
+    TAG_RESOURCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+TAG_KEY_LIST: StaticSchema = (16, n0, _TKL, 0, (_me,), ((TAG_KEY, 0),))
+
+UNTAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URI,
+    {_sSI: _cURR, _sm: None},
+    (_rARN, _tK),
+    ((TAGGABLE_RESOURCE_ARN, 1), (TAG_KEY_LIST, 1)),
+)
+
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _URO, {_sSI: _cURRo, _smit: None})
+
+UNTAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _UR,
+    0,
+    UNTAG_RESOURCE_INPUT,
+    UNTAG_RESOURCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+AMAZON_BEDROCK_KEYSTONE_RUNTIME_SERVICE: StaticSchema = (
+    21,
+    n0,
+    _ABKRS,
+    {
+        _a: MappingProxyType({"name": "bedrock"}),
+        _a_: None,
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
+                ),
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsFIPS",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://bedrock-data-automation-runtime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://bedrock-data-automation-runtime-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://bedrock-data-automation-runtime.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://bedrock-data-automation-runtime.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 13,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://bedrock-data-automation-runtime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://bedrock-data-automation-runtime-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://bedrock-data-automation-runtime.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://bedrock-data-automation-runtime.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 13,
+                "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "Bedrock Data Automation Runtime",
-                    "arnNamespace": "bedrock",
-                    "endpointPrefix": "bedrock-data-automation-runtime",
-                    "cloudTrailEventSource": "bedrock.amazonaws.com",
-                }
-            ),
+        _aw: MappingProxyType(
+            {
+                "sdkId": "Bedrock Data Automation Runtime",
+                "arnNamespace": "bedrock",
+                "endpointPrefix": "bedrock-data-automation-runtime",
+                "cloudTrailEventSource": "bedrock.amazonaws.com",
+            }
         ),
-    ],
+    },
 )

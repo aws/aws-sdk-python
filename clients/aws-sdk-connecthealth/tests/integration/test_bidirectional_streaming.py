@@ -7,7 +7,7 @@ import asyncio
 import time
 import uuid
 
-from smithy_core.aio.eventstream import DuplexEventStream
+from smithy_core.aio.eventstream import AsyncDuplexEventStream
 from smithy_http.aio.crt import AWSCRTHTTPClient
 
 from aws_sdk_connecthealth.models import (
@@ -48,7 +48,7 @@ CHUNK_SIZE = 1024 * 8
 
 
 async def _send_events(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         MedicalScribeInputStream,
         MedicalScribeOutputStream,
         StartMedicalScribeListeningSessionOutput,
@@ -105,7 +105,7 @@ async def _send_events(
 
 
 async def _receive_events(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         MedicalScribeInputStream,
         MedicalScribeOutputStream,
         StartMedicalScribeListeningSessionOutput,
@@ -155,7 +155,9 @@ async def _receive_events(
     return got_transcript
 
 
-async def test_start_medical_scribe_listening_session(connecthealth_resources) -> None:
+async def test_start_medical_scribe_listening_session(
+    connecthealth_resources: tuple[str, str, str],
+) -> None:
     """Test bidirectional streaming with audio input and transcript output."""
     domain_id, subscription_id, output_s3_uri = connecthealth_resources
 

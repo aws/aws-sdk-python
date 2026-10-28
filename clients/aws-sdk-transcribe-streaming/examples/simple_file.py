@@ -30,8 +30,11 @@ import time
 from pathlib import Path
 
 import aiofile
-from smithy_aws_core.identity import EnvironmentCredentialsResolver
-from smithy_core.aio.interfaces.eventstream import EventPublisher, EventReceiver
+from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
+from smithy_core.aio.interfaces.eventstream import (
+    AsyncEventPublisher,
+    AsyncEventReceiver,
+)
 from smithy_http.aio.crt import AWSCRTHTTPClient
 
 from aws_sdk_transcribe_streaming.client import (
@@ -58,7 +61,7 @@ CHUNK_SIZE = 1024 * 8
 
 
 async def apply_realtime_delay(
-    audio_stream: EventPublisher[AudioStream],
+    audio_stream: AsyncEventPublisher[AudioStream],
     reader,
     bytes_per_sample: int,
     sample_rate: float,
@@ -82,7 +85,7 @@ async def apply_realtime_delay(
 
 
 class TranscriptResultStreamHandler:
-    def __init__(self, stream: EventReceiver[TranscriptResultStream]):
+    def __init__(self, stream: AsyncEventReceiver[TranscriptResultStream]):
         self.stream = stream
 
     async def handle_events(self):
@@ -105,7 +108,7 @@ class TranscriptResultStreamHandler:
                     print(alt.transcript)
 
 
-async def write_chunks(audio_stream: EventPublisher[AudioStream]):
+async def write_chunks(audio_stream: AsyncEventPublisher[AudioStream]):
     # NOTE: For pre-recorded files longer than 5 minutes, the sent audio
     # chunks should be rate limited to match the realtime bitrate of the
     # audio stream to avoid signing issues.
@@ -124,7 +127,7 @@ async def main():
         config=await AsyncTranscribeStreamingConfig.resolve(
             endpoint_uri=ENDPOINT_URI,
             region=AWS_REGION,
-            aws_credentials_identity_resolver=EnvironmentCredentialsResolver(),
+            aws_credentials_identity_resolver=AsyncEnvironmentCredentialsResolver(),
             transport=AWSCRTHTTPClient(),
         )
     ) as client:

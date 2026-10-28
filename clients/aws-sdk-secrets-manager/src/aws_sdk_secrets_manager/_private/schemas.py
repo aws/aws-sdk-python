@@ -2,1912 +2,2090 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
-
-
-KMS_KEY_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#KmsKeyIdType"), shape_type=ShapeType.STRING
-)
-
-REGION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RegionType"), shape_type=ShapeType.STRING
-)
-
-REPLICA_REGION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ReplicaRegionType"),
-    members={
-        "Region": {"target": REGION_TYPE},
-        "KmsKeyId": {"target": KMS_KEY_ID_TYPE},
-    },
-)
-
-ADD_REPLICA_REGION_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#AddReplicaRegionListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICA_REGION_TYPE}},
-)
-
-ERROR_CODE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ErrorCode"), shape_type=ShapeType.STRING
-)
-
-ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ErrorMessage"), shape_type=ShapeType.STRING
-)
-
-SECRET_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretIdType"), shape_type=ShapeType.STRING
-)
-
-API_ERROR_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#APIErrorType"),
-    members={
-        "SecretId": {"target": SECRET_ID_TYPE},
-        "ErrorCode": {"target": ERROR_CODE},
-        "Message": {"target": ERROR_MESSAGE},
-    },
-)
-
-API_ERROR_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#APIErrorListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": API_ERROR_TYPE}},
-)
-
-AUTOMATICALLY_ROTATE_AFTER_DAYS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#AutomaticallyRotateAfterDaysType"),
-    shape_type=ShapeType.LONG,
-)
-
-FILTER_NAME_STRING_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#FilterNameStringType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "description": {"target": UNIT},
-        "name": {"target": UNIT},
-        "tag_key": {"target": UNIT},
-        "tag_value": {"target": UNIT},
-        "primary_region": {"target": UNIT},
-        "owning_service": {"target": UNIT},
-        "all": {"target": UNIT},
-    },
-)
-
-FILTER_VALUE_STRING_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#FilterValueStringType"),
-    shape_type=ShapeType.STRING,
-)
-
-FILTER_VALUES_STRING_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#FilterValuesStringList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FILTER_VALUE_STRING_TYPE}},
-)
-
-FILTER = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#Filter"),
-    members={
-        "Key": {"target": FILTER_NAME_STRING_TYPE},
-        "Values": {"target": FILTER_VALUES_STRING_LIST},
-    },
-)
-
-FILTERS_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#FiltersListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FILTER}},
-)
-
-MAX_RESULTS_BATCH_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#MaxResultsBatchType"),
-    shape_type=ShapeType.INTEGER,
-)
-
-NEXT_TOKEN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#NextTokenType"),
-    shape_type=ShapeType.STRING,
-)
-
-SECRET_ID_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretIdListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SECRET_ID_TYPE}},
-)
-
-BATCH_GET_SECRET_VALUE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#BatchGetSecretValueInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#BatchGetSecretValueRequest",
-        )
-    ],
-    members={
-        "SecretIdList": {"target": SECRET_ID_LIST_TYPE},
-        "Filters": {"target": FILTERS_LIST_TYPE},
-        "MaxResults": {"target": MAX_RESULTS_BATCH_TYPE},
-        "NextToken": {"target": NEXT_TOKEN_TYPE},
-    },
-)
-
-SECRET_ARN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretARNType"),
-    shape_type=ShapeType.STRING,
-)
-
-CREATED_DATE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#CreatedDateType"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-SECRET_NAME_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretNameType"),
-    shape_type=ShapeType.STRING,
-)
-
-SECRET_BINARY_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretBinaryType"),
-    shape_type=ShapeType.BLOB,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-SECRET_STRING_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretStringType"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-SECRET_VERSION_ID_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretVersionIdType"),
-    shape_type=ShapeType.STRING,
-)
-
-SECRET_VERSION_STAGE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretVersionStageType"),
-    shape_type=ShapeType.STRING,
-)
-
-SECRET_VERSION_STAGES_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretVersionStagesType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SECRET_VERSION_STAGE_TYPE}},
-)
-
-SECRET_VALUE_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretValueEntry"),
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": SECRET_NAME_TYPE},
-        "VersionId": {"target": SECRET_VERSION_ID_TYPE},
-        "SecretBinary": {"target": SECRET_BINARY_TYPE},
-        "SecretString": {"target": SECRET_STRING_TYPE},
-        "VersionStages": {"target": SECRET_VERSION_STAGES_TYPE},
-        "CreatedDate": {"target": CREATED_DATE_TYPE},
-    },
-)
-
-SECRET_VALUES_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretValuesType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SECRET_VALUE_ENTRY}},
-)
-
-BATCH_GET_SECRET_VALUE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#BatchGetSecretValueOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#BatchGetSecretValueResponse",
-        )
-    ],
-    members={
-        "SecretValues": {"target": SECRET_VALUES_TYPE},
-        "NextToken": {"target": NEXT_TOKEN_TYPE},
-        "Errors": {"target": API_ERROR_LIST_TYPE},
-    },
-)
-
-DECRYPTION_FAILURE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#DecryptionFailure"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INTERNAL_SERVICE_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#InternalServiceError"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="server")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_NEXT_TOKEN_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#InvalidNextTokenException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_PARAMETER_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#InvalidParameterException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-INVALID_REQUEST_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#InvalidRequestException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ResourceNotFoundException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-BATCH_GET_SECRET_VALUE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#BatchGetSecretValue"),
-    shape_type=ShapeType.OPERATION,
-)
-
-BOOLEAN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#BooleanType"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-CANCEL_ROTATE_SECRET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#CancelRotateSecretInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#CancelRotateSecretRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CANCEL_ROTATE_SECRET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#CancelRotateSecretOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#CancelRotateSecretResponse",
-        )
-    ],
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": SECRET_NAME_TYPE},
-        "VersionId": {"target": SECRET_VERSION_ID_TYPE},
-    },
-)
-
-CANCEL_ROTATE_SECRET = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#CancelRotateSecret"),
-    shape_type=ShapeType.OPERATION,
-)
-
-CLIENT_REQUEST_TOKEN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ClientRequestTokenType"),
-    shape_type=ShapeType.STRING,
-)
-
-DESCRIPTION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#DescriptionType"),
-    shape_type=ShapeType.STRING,
-)
-
-NAME_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#NameType"), shape_type=ShapeType.STRING
-)
-
-TAG_KEY_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#TagKeyType"), shape_type=ShapeType.STRING
-)
-
-TAG_VALUE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#TagValueType"), shape_type=ShapeType.STRING
-)
-
-TAG = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#Tag"),
-    members={"Key": {"target": TAG_KEY_TYPE}, "Value": {"target": TAG_VALUE_TYPE}},
-)
-
-TAG_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#TagListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG}},
-)
-
-MEDEA_TYPE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#MedeaTypeType"),
-    shape_type=ShapeType.STRING,
-)
-
-CREATE_SECRET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#CreateSecretInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#CreateSecretRequest",
-        )
-    ],
-    members={
-        "Name": {
-            "target": NAME_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ClientRequestToken": {
-            "target": CLIENT_REQUEST_TOKEN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "Description": {"target": DESCRIPTION_TYPE},
-        "KmsKeyId": {"target": KMS_KEY_ID_TYPE},
-        "SecretBinary": {"target": SECRET_BINARY_TYPE},
-        "SecretString": {"target": SECRET_STRING_TYPE},
-        "Tags": {"target": TAG_LIST_TYPE},
-        "AddReplicaRegions": {"target": ADD_REPLICA_REGION_LIST_TYPE},
-        "ForceOverwriteReplicaSecret": {
-            "target": BOOLEAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "Type": {"target": MEDEA_TYPE_TYPE},
-    },
-)
-
-LAST_ACCESSED_DATE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#LastAccessedDateType"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-STATUS_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#StatusType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "InSync": {"target": UNIT},
-        "Failed": {"target": UNIT},
-        "InProgress": {"target": UNIT},
-    },
-)
-
-STATUS_MESSAGE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#StatusMessageType"),
-    shape_type=ShapeType.STRING,
-)
-
-REPLICATION_STATUS_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ReplicationStatusType"),
-    members={
-        "Region": {"target": REGION_TYPE},
-        "KmsKeyId": {"target": KMS_KEY_ID_TYPE},
-        "Status": {"target": STATUS_TYPE},
-        "StatusMessage": {"target": STATUS_MESSAGE_TYPE},
-        "LastAccessedDate": {"target": LAST_ACCESSED_DATE_TYPE},
-    },
-)
-
-REPLICATION_STATUS_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ReplicationStatusListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REPLICATION_STATUS_TYPE}},
-)
-
-CREATE_SECRET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#CreateSecretOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#CreateSecretResponse",
-        )
-    ],
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": SECRET_NAME_TYPE},
-        "VersionId": {"target": SECRET_VERSION_ID_TYPE},
-        "ReplicationStatus": {"target": REPLICATION_STATUS_LIST_TYPE},
-    },
-)
-
-ENCRYPTION_FAILURE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#EncryptionFailure"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#LimitExceededException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-MALFORMED_POLICY_DOCUMENT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#MalformedPolicyDocumentException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-PRECONDITION_NOT_MET_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#PreconditionNotMetException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-RESOURCE_EXISTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ResourceExistsException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-CREATE_SECRET = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#CreateSecret"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DELETED_DATE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#DeletedDateType"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-DELETE_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#DeleteResourcePolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#DeleteResourcePolicyRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#DeleteResourcePolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#DeleteResourcePolicyResponse",
-        )
-    ],
-    members={"ARN": {"target": SECRET_ARN_TYPE}, "Name": {"target": NAME_TYPE}},
-)
-
-DELETE_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#DeleteResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-RECOVERY_WINDOW_IN_DAYS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RecoveryWindowInDaysType"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-DELETE_SECRET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#DeleteSecretInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#DeleteSecretRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RecoveryWindowInDays": {
-            "target": RECOVERY_WINDOW_IN_DAYS_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-        "ForceDeleteWithoutRecovery": {
-            "target": BOOLEAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-    },
-)
-
-DELETION_DATE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#DeletionDateType"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-DELETE_SECRET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#DeleteSecretOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#DeleteSecretResponse",
-        )
-    ],
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": SECRET_NAME_TYPE},
-        "DeletionDate": {"target": DELETION_DATE_TYPE},
-    },
-)
-
-DELETE_SECRET = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#DeleteSecret"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DESCRIBE_SECRET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#DescribeSecretInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#DescribeSecretRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-TIMESTAMP_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#TimestampType"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-EXTERNAL_SECRET_ROTATION_METADATA_ITEM_KEY_TYPE = Schema(
-    id=ShapeID(
-        "com.amazonaws.secretsmanager#ExternalSecretRotationMetadataItemKeyType"
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
+
+
+n0 = "com.amazonaws.secretsmanager"
+_KKIT = "KmsKeyIdType"
+_RT = "RegionType"
+_RRT = "ReplicaRegionType"
+_R = "Region"
+_KKI = "KmsKeyId"
+_ARRLT = "AddReplicaRegionListType"
+_m = "member"
+_EC = "ErrorCode"
+_EM = "ErrorMessage"
+_SIT = "SecretIdType"
+_APIET = "APIErrorType"
+_SI = "SecretId"
+_M = "Message"
+_APIELT = "APIErrorListType"
+_ARADT = "AutomaticallyRotateAfterDaysType"
+_FNST = "FilterNameStringType"
+_d = "description"
+_sV = "smithy.api#enumValue"
+_n = "name"
+_tk = "tag_key"
+_tk_ = "tag-key"
+_tv = "tag_value"
+_tv_ = "tag-value"
+_pr = "primary_region"
+_pr_ = "primary-region"
+_os = "owning_service"
+_os_ = "owning-service"
+_a = "all"
+_FVST = "FilterValueStringType"
+_FVSL = "FilterValuesStringList"
+_F = "Filter"
+_K = "Key"
+_V = "Values"
+_FLT = "FiltersListType"
+_MRBT = "MaxResultsBatchType"
+_NTT = "NextTokenType"
+_SILT = "SecretIdListType"
+_BGSVI = "BatchGetSecretValueInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cBGSVR = "com.amazonaws.secretsmanager#BatchGetSecretValueRequest"
+_s = "smithy.api#input"
+_SIL = "SecretIdList"
+_Fi = "Filters"
+_MR = "MaxResults"
+_NT = "NextToken"
+_SARNT = "SecretARNType"
+_CDT = "CreatedDateType"
+_SNT = "SecretNameType"
+_SBT = "SecretBinaryType"
+_sm = "smithy.api#sensitive"
+_SST = "SecretStringType"
+_SVIT = "SecretVersionIdType"
+_SVST = "SecretVersionStageType"
+_SVSTe = "SecretVersionStagesType"
+_SVE = "SecretValueEntry"
+_ARN = "ARN"
+_N = "Name"
+_VI = "VersionId"
+_SB = "SecretBinary"
+_SS = "SecretString"
+_VS = "VersionStages"
+_CD = "CreatedDate"
+_SVT = "SecretValuesType"
+_BGSVO = "BatchGetSecretValueOutput"
+_cBGSVRo = "com.amazonaws.secretsmanager#BatchGetSecretValueResponse"
+_smi = "smithy.api#output"
+_SV = "SecretValues"
+_E = "Errors"
+_DF = "DecryptionFailure"
+_smit = "smithy.api#error"
+_c = "client"
+_ISE = "InternalServiceError"
+_se = "server"
+_INTE = "InvalidNextTokenException"
+_IPE = "InvalidParameterException"
+_IRE = "InvalidRequestException"
+_RNFE = "ResourceNotFoundException"
+_BGSV = "BatchGetSecretValue"
+_BT = "BooleanType"
+_smith = "smithy.api#default"
+_CRSI = "CancelRotateSecretInput"
+_cCRSR = "com.amazonaws.secretsmanager#CancelRotateSecretRequest"
+_smithy = "smithy.api#required"
+_CRSO = "CancelRotateSecretOutput"
+_cCRSRo = "com.amazonaws.secretsmanager#CancelRotateSecretResponse"
+_CRS = "CancelRotateSecret"
+_CRTT = "ClientRequestTokenType"
+_DT = "DescriptionType"
+_NTa = "NameType"
+_TKT = "TagKeyType"
+_TVT = "TagValueType"
+_T = "Tag"
+_Va = "Value"
+_TLT = "TagListType"
+_MTT = "MedeaTypeType"
+_CSI = "CreateSecretInput"
+_cCSR = "com.amazonaws.secretsmanager#CreateSecretRequest"
+_CRT = "ClientRequestToken"
+_sT = "smithy.api#idempotencyToken"
+_D = "Description"
+_Ta = "Tags"
+_ARR = "AddReplicaRegions"
+_FORS = "ForceOverwriteReplicaSecret"
+_Ty = "Type"
+_LADT = "LastAccessedDateType"
+_ST = "StatusType"
+_IS = "InSync"
+_Fa = "Failed"
+_IP = "InProgress"
+_SMT = "StatusMessageType"
+_RST = "ReplicationStatusType"
+_S = "Status"
+_SM = "StatusMessage"
+_LAD = "LastAccessedDate"
+_RSLT = "ReplicationStatusListType"
+_CSO = "CreateSecretOutput"
+_cCSRo = "com.amazonaws.secretsmanager#CreateSecretResponse"
+_RS = "ReplicationStatus"
+_EF = "EncryptionFailure"
+_LEE = "LimitExceededException"
+_MPDE = "MalformedPolicyDocumentException"
+_PNME = "PreconditionNotMetException"
+_REE = "ResourceExistsException"
+_CS = "CreateSecret"
+_DDT = "DeletedDateType"
+_DRPI = "DeleteResourcePolicyInput"
+_cDRPR = "com.amazonaws.secretsmanager#DeleteResourcePolicyRequest"
+_DRPO = "DeleteResourcePolicyOutput"
+_cDRPRo = "com.amazonaws.secretsmanager#DeleteResourcePolicyResponse"
+_DRP = "DeleteResourcePolicy"
+_RWIDT = "RecoveryWindowInDaysType"
+_DSI = "DeleteSecretInput"
+_cDSR = "com.amazonaws.secretsmanager#DeleteSecretRequest"
+_RWID = "RecoveryWindowInDays"
+_FDWR = "ForceDeleteWithoutRecovery"
+_DDTe = "DeletionDateType"
+_DSO = "DeleteSecretOutput"
+_cDSRo = "com.amazonaws.secretsmanager#DeleteSecretResponse"
+_DD = "DeletionDate"
+_DS = "DeleteSecret"
+_DSIe = "DescribeSecretInput"
+_cDSRom = "com.amazonaws.secretsmanager#DescribeSecretRequest"
+_TT = "TimestampType"
+_ESRMIKT = "ExternalSecretRotationMetadataItemKeyType"
+_ESRMIVT = "ExternalSecretRotationMetadataItemValueType"
+_ESRMI = "ExternalSecretRotationMetadataItem"
+_ESRMT = "ExternalSecretRotationMetadataType"
+_RARNT = "RoleARNType"
+_LCDT = "LastChangedDateType"
+_LRDT = "LastRotatedDateType"
+_NRDT = "NextRotationDateType"
+_OST = "OwningServiceType"
+_RET = "RotationEnabledType"
+_RLARNT = "RotationLambdaARNType"
+_DTu = "DurationType"
+_SET = "ScheduleExpressionType"
+_RRTo = "RotationRulesType"
+_AAD = "AutomaticallyAfterDays"
+_Du = "Duration"
+_SE = "ScheduleExpression"
+_SVTSMT = "SecretVersionsToStagesMapType"
+_k = "key"
+_v = "value"
+_DSOe = "DescribeSecretOutput"
+_cDSRoma = "com.amazonaws.secretsmanager#DescribeSecretResponse"
+_RE = "RotationEnabled"
+_RLARN = "RotationLambdaARN"
+_RR = "RotationRules"
+_ESRM = "ExternalSecretRotationMetadata"
+_ESRRA = "ExternalSecretRotationRoleArn"
+_LRD = "LastRotatedDate"
+_LCD = "LastChangedDate"
+_DDe = "DeletedDate"
+_NRD = "NextRotationDate"
+_VITS = "VersionIdsToStages"
+_OS = "OwningService"
+_PR = "PrimaryRegion"
+_DSe = "DescribeSecret"
+_ECT = "ExcludeCharactersType"
+_ELT = "ExcludeLowercaseType"
+_ENT = "ExcludeNumbersType"
+_EPT = "ExcludePunctuationType"
+_EUT = "ExcludeUppercaseType"
+_IST = "IncludeSpaceType"
+_PLT = "PasswordLengthType"
+_REITT = "RequireEachIncludedTypeType"
+_GRPI = "GetRandomPasswordInput"
+_cGRPR = "com.amazonaws.secretsmanager#GetRandomPasswordRequest"
+_PL = "PasswordLength"
+_ECx = "ExcludeCharacters"
+_EN = "ExcludeNumbers"
+_EP = "ExcludePunctuation"
+_EU = "ExcludeUppercase"
+_EL = "ExcludeLowercase"
+_ISn = "IncludeSpace"
+_REIT = "RequireEachIncludedType"
+_RPT = "RandomPasswordType"
+_GRPO = "GetRandomPasswordOutput"
+_cGRPRo = "com.amazonaws.secretsmanager#GetRandomPasswordResponse"
+_RP = "RandomPassword"
+_GRP = "GetRandomPassword"
+_GRPIe = "GetResourcePolicyInput"
+_cGRPRom = "com.amazonaws.secretsmanager#GetResourcePolicyRequest"
+_NERPT = "NonEmptyResourcePolicyType"
+_GRPOe = "GetResourcePolicyOutput"
+_cGRPRoma = "com.amazonaws.secretsmanager#GetResourcePolicyResponse"
+_RPe = "ResourcePolicy"
+_GRPe = "GetResourcePolicy"
+_GSVI = "GetSecretValueInput"
+_cGSVR = "com.amazonaws.secretsmanager#GetSecretValueRequest"
+_VSe = "VersionStage"
+_GSVO = "GetSecretValueOutput"
+_cGSVRo = "com.amazonaws.secretsmanager#GetSecretValueResponse"
+_GSV = "GetSecretValue"
+_KKILT = "KmsKeyIdListType"
+_MRT = "MaxResultsType"
+_SBTo = "SortByType"
+_cd = "created_date"
+_cd_ = "created-date"
+_lad = "last_accessed_date"
+_lad_ = "last-accessed-date"
+_lcd = "last_changed_date"
+_lcd_ = "last-changed-date"
+_SOT = "SortOrderType"
+_as = "asc"
+_de = "desc"
+_LSI = "ListSecretsInput"
+_cLSR = "com.amazonaws.secretsmanager#ListSecretsRequest"
+_IPD = "IncludePlannedDeletion"
+_SO = "SortOrder"
+_SBo = "SortBy"
+_SLE = "SecretListEntry"
+_SVTS = "SecretVersionsToStages"
+_SLT = "SecretListType"
+_LSO = "ListSecretsOutput"
+_cLSRo = "com.amazonaws.secretsmanager#ListSecretsResponse"
+_SL = "SecretList"
+_LS = "ListSecrets"
+_LSVII = "ListSecretVersionIdsInput"
+_cLSVIR = "com.amazonaws.secretsmanager#ListSecretVersionIdsRequest"
+_ID = "IncludeDeprecated"
+_SVLE = "SecretVersionsListEntry"
+_KKIm = "KmsKeyIds"
+_SVLT = "SecretVersionsListType"
+_LSVIO = "ListSecretVersionIdsOutput"
+_cLSVIRo = "com.amazonaws.secretsmanager#ListSecretVersionIdsResponse"
+_Ve = "Versions"
+_LSVI = "ListSecretVersionIds"
+_PPE = "PublicPolicyException"
+_PRPI = "PutResourcePolicyInput"
+_cPRPR = "com.amazonaws.secretsmanager#PutResourcePolicyRequest"
+_BPP = "BlockPublicPolicy"
+_PRPO = "PutResourcePolicyOutput"
+_cPRPRo = "com.amazonaws.secretsmanager#PutResourcePolicyResponse"
+_PRP = "PutResourcePolicy"
+_RTT = "RotationTokenType"
+_PSVI = "PutSecretValueInput"
+_cPSVR = "com.amazonaws.secretsmanager#PutSecretValueRequest"
+_RTo = "RotationToken"
+_PSVO = "PutSecretValueOutput"
+_cPSVRo = "com.amazonaws.secretsmanager#PutSecretValueResponse"
+_PSV = "PutSecretValue"
+_RRRLT = "RemoveReplicaRegionListType"
+_RRFRI = "RemoveRegionsFromReplicationInput"
+_cRRFRR = "com.amazonaws.secretsmanager#RemoveRegionsFromReplicationRequest"
+_RRR = "RemoveReplicaRegions"
+_RRFRO = "RemoveRegionsFromReplicationOutput"
+_cRRFRRo = "com.amazonaws.secretsmanager#RemoveRegionsFromReplicationResponse"
+_RRFR = "RemoveRegionsFromReplication"
+_RSTRI = "ReplicateSecretToRegionsInput"
+_cRSTRR = "com.amazonaws.secretsmanager#ReplicateSecretToRegionsRequest"
+_RSTRO = "ReplicateSecretToRegionsOutput"
+_cRSTRRo = "com.amazonaws.secretsmanager#ReplicateSecretToRegionsResponse"
+_RSTR = "ReplicateSecretToRegions"
+_RSI = "RestoreSecretInput"
+_cRSR = "com.amazonaws.secretsmanager#RestoreSecretRequest"
+_RSO = "RestoreSecretOutput"
+_cRSRo = "com.amazonaws.secretsmanager#RestoreSecretResponse"
+_RSe = "RestoreSecret"
+_RSIo = "RotateSecretInput"
+_cRSRom = "com.amazonaws.secretsmanager#RotateSecretRequest"
+_RI = "RotateImmediately"
+_RSOo = "RotateSecretOutput"
+_cRSRoma = "com.amazonaws.secretsmanager#RotateSecretResponse"
+_RSo = "RotateSecret"
+_SRTRI = "StopReplicationToReplicaInput"
+_cSRTRR = "com.amazonaws.secretsmanager#StopReplicationToReplicaRequest"
+_SRTRO = "StopReplicationToReplicaOutput"
+_cSRTRRo = "com.amazonaws.secretsmanager#StopReplicationToReplicaResponse"
+_SRTR = "StopReplicationToReplica"
+_TRI = "TagResourceInput"
+_cTRR = "com.amazonaws.secretsmanager#TagResourceRequest"
+_TRO = "TagResourceOutput"
+_sU = "smithy.api#Unit"
+_TR = "TagResource"
+_TKLT = "TagKeyListType"
+_URI = "UntagResourceInput"
+_cURR = "com.amazonaws.secretsmanager#UntagResourceRequest"
+_TK = "TagKeys"
+_URO = "UntagResourceOutput"
+_UR = "UntagResource"
+_USI = "UpdateSecretInput"
+_cUSR = "com.amazonaws.secretsmanager#UpdateSecretRequest"
+_USO = "UpdateSecretOutput"
+_cUSRo = "com.amazonaws.secretsmanager#UpdateSecretResponse"
+_US = "UpdateSecret"
+_USVSI = "UpdateSecretVersionStageInput"
+_cUSVSR = "com.amazonaws.secretsmanager#UpdateSecretVersionStageRequest"
+_RFVI = "RemoveFromVersionId"
+_MTVI = "MoveToVersionId"
+_USVSO = "UpdateSecretVersionStageOutput"
+_cUSVSRo = "com.amazonaws.secretsmanager#UpdateSecretVersionStageResponse"
+_USVS = "UpdateSecretVersionStage"
+_VRPI = "ValidateResourcePolicyInput"
+_cVRPR = "com.amazonaws.secretsmanager#ValidateResourcePolicyRequest"
+_VEE = "ValidationErrorsEntry"
+_CN = "CheckName"
+_VET = "ValidationErrorsType"
+_VRPO = "ValidateResourcePolicyOutput"
+_cVRPRo = "com.amazonaws.secretsmanager#ValidateResourcePolicyResponse"
+_PVP = "PolicyValidationPassed"
+_VE = "ValidationErrors"
+_VRP = "ValidateResourcePolicy"
+_sec = "secretsmanager"
+_aw = "aws.auth#sigv4"
+_a_ = "aws.protocols#awsJson1_1"
+_sB = "smithy.rules#endpointBdd"
+_aws = "aws.api#service"
+
+KMS_KEY_ID_TYPE: StaticSchema = (3, n0, _KKIT, 0)
+
+REGION_TYPE: StaticSchema = (3, n0, _RT, 0)
+
+REPLICA_REGION_TYPE: StaticSchema = (
+    18,
+    n0,
+    _RRT,
+    0,
+    (_R, _KKI),
+    ((REGION_TYPE, 0), (KMS_KEY_ID_TYPE, 0)),
+)
+
+ADD_REPLICA_REGION_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _ARRLT,
+    0,
+    (_m,),
+    ((REPLICA_REGION_TYPE, 0),),
+)
+
+ERROR_CODE: StaticSchema = (3, n0, _EC, 0)
+
+ERROR_MESSAGE: StaticSchema = (3, n0, _EM, 0)
+
+SECRET_ID_TYPE: StaticSchema = (3, n0, _SIT, 0)
+
+API_ERROR_TYPE: StaticSchema = (
+    18,
+    n0,
+    _APIET,
+    0,
+    (_SI, _EC, _M),
+    ((SECRET_ID_TYPE, 0), (ERROR_CODE, 0), (ERROR_MESSAGE, 0)),
+)
+
+API_ERROR_LIST_TYPE: StaticSchema = (16, n0, _APIELT, 0, (_m,), ((API_ERROR_TYPE, 0),))
+
+AUTOMATICALLY_ROTATE_AFTER_DAYS_TYPE: StaticSchema = (8, n0, _ARADT, 0)
+
+FILTER_NAME_STRING_TYPE: StaticSchema = (
+    14,
+    n0,
+    _FNST,
+    0,
+    (_d, _n, _tk, _tv, _pr, _os, _a),
+    (
+        (-1, {_sV: _d}),
+        (-1, {_sV: _n}),
+        (-1, {_sV: _tk_}),
+        (-1, {_sV: _tv_}),
+        (-1, {_sV: _pr_}),
+        (-1, {_sV: _os_}),
+        (-1, {_sV: _a}),
     ),
-    shape_type=ShapeType.STRING,
 )
 
-EXTERNAL_SECRET_ROTATION_METADATA_ITEM_VALUE_TYPE = Schema(
-    id=ShapeID(
-        "com.amazonaws.secretsmanager#ExternalSecretRotationMetadataItemValueType"
+FILTER_VALUE_STRING_TYPE: StaticSchema = (3, n0, _FVST, 0)
+
+FILTER_VALUES_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _FVSL,
+    0,
+    (_m,),
+    ((FILTER_VALUE_STRING_TYPE, 0),),
+)
+
+FILTER: StaticSchema = (
+    18,
+    n0,
+    _F,
+    0,
+    (_K, _V),
+    ((FILTER_NAME_STRING_TYPE, 0), (FILTER_VALUES_STRING_LIST, 0)),
+)
+
+FILTERS_LIST_TYPE: StaticSchema = (16, n0, _FLT, 0, (_m,), ((FILTER, 0),))
+
+MAX_RESULTS_BATCH_TYPE: StaticSchema = (7, n0, _MRBT, 0)
+
+NEXT_TOKEN_TYPE: StaticSchema = (3, n0, _NTT, 0)
+
+SECRET_ID_LIST_TYPE: StaticSchema = (16, n0, _SILT, 0, (_m,), ((SECRET_ID_TYPE, 0),))
+
+BATCH_GET_SECRET_VALUE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _BGSVI,
+    {_sSI: _cBGSVR, _s: None},
+    (_SIL, _Fi, _MR, _NT),
+    (
+        (SECRET_ID_LIST_TYPE, 0),
+        (FILTERS_LIST_TYPE, 0),
+        (MAX_RESULTS_BATCH_TYPE, 0),
+        (NEXT_TOKEN_TYPE, 0),
     ),
-    shape_type=ShapeType.STRING,
 )
 
-EXTERNAL_SECRET_ROTATION_METADATA_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ExternalSecretRotationMetadataItem"),
-    members={
-        "Key": {"target": EXTERNAL_SECRET_ROTATION_METADATA_ITEM_KEY_TYPE},
-        "Value": {"target": EXTERNAL_SECRET_ROTATION_METADATA_ITEM_VALUE_TYPE},
-    },
-)
-
-EXTERNAL_SECRET_ROTATION_METADATA_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ExternalSecretRotationMetadataType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EXTERNAL_SECRET_ROTATION_METADATA_ITEM}},
-)
-
-ROLE_ARN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RoleARNType"), shape_type=ShapeType.STRING
-)
-
-LAST_CHANGED_DATE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#LastChangedDateType"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-LAST_ROTATED_DATE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#LastRotatedDateType"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-NEXT_ROTATION_DATE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#NextRotationDateType"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-OWNING_SERVICE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#OwningServiceType"),
-    shape_type=ShapeType.STRING,
-)
-
-ROTATION_ENABLED_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RotationEnabledType"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
+SECRET_ARN_TYPE: StaticSchema = (3, n0, _SARNT, 0)
 
-ROTATION_LAMBDA_ARN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RotationLambdaARNType"),
-    shape_type=ShapeType.STRING,
-)
-
-DURATION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#DurationType"), shape_type=ShapeType.STRING
-)
+CREATED_DATE_TYPE: StaticSchema = (4, n0, _CDT, 0)
+
+SECRET_NAME_TYPE: StaticSchema = (3, n0, _SNT, 0)
 
-SCHEDULE_EXPRESSION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ScheduleExpressionType"),
-    shape_type=ShapeType.STRING,
-)
+SECRET_BINARY_TYPE: StaticSchema = (1, n0, _SBT, 4)
 
-ROTATION_RULES_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#RotationRulesType"),
-    members={
-        "AutomaticallyAfterDays": {"target": AUTOMATICALLY_ROTATE_AFTER_DAYS_TYPE},
-        "Duration": {"target": DURATION_TYPE},
-        "ScheduleExpression": {"target": SCHEDULE_EXPRESSION_TYPE},
-    },
-)
+SECRET_STRING_TYPE: StaticSchema = (3, n0, _SST, 4)
 
-SECRET_VERSIONS_TO_STAGES_MAP_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretVersionsToStagesMapType"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": SECRET_VERSION_ID_TYPE},
-        "value": {"target": SECRET_VERSION_STAGES_TYPE},
-    },
+SECRET_VERSION_ID_TYPE: StaticSchema = (3, n0, _SVIT, 0)
+
+SECRET_VERSION_STAGE_TYPE: StaticSchema = (3, n0, _SVST, 0)
+
+SECRET_VERSION_STAGES_TYPE: StaticSchema = (
+    16,
+    n0,
+    _SVSTe,
+    0,
+    (_m,),
+    ((SECRET_VERSION_STAGE_TYPE, 0),),
+)
+
+SECRET_VALUE_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _SVE,
+    0,
+    (_ARN, _N, _VI, _SB, _SS, _VS, _CD),
+    (
+        (SECRET_ARN_TYPE, 0),
+        (SECRET_NAME_TYPE, 0),
+        (SECRET_VERSION_ID_TYPE, 0),
+        (SECRET_BINARY_TYPE, 0),
+        (SECRET_STRING_TYPE, 0),
+        (SECRET_VERSION_STAGES_TYPE, 0),
+        (CREATED_DATE_TYPE, 0),
+    ),
+)
+
+SECRET_VALUES_TYPE: StaticSchema = (16, n0, _SVT, 0, (_m,), ((SECRET_VALUE_ENTRY, 0),))
+
+BATCH_GET_SECRET_VALUE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _BGSVO,
+    {_sSI: _cBGSVRo, _smi: None},
+    (_SV, _NT, _E),
+    ((SECRET_VALUES_TYPE, 0), (NEXT_TOKEN_TYPE, 0), (API_ERROR_LIST_TYPE, 0)),
+)
+
+DECRYPTION_FAILURE: StaticSchema = (
+    18,
+    n0,
+    _DF,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INTERNAL_SERVICE_ERROR: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_smit: _se},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_NEXT_TOKEN_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _INTE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
 )
 
-DESCRIBE_SECRET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#DescribeSecretOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#DescribeSecretResponse",
-        )
-    ],
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": SECRET_NAME_TYPE},
-        "Type": {"target": MEDEA_TYPE_TYPE},
-        "Description": {"target": DESCRIPTION_TYPE},
-        "KmsKeyId": {"target": KMS_KEY_ID_TYPE},
-        "RotationEnabled": {
-            "target": ROTATION_ENABLED_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-        "RotationLambdaARN": {"target": ROTATION_LAMBDA_ARN_TYPE},
-        "RotationRules": {"target": ROTATION_RULES_TYPE},
-        "ExternalSecretRotationMetadata": {
-            "target": EXTERNAL_SECRET_ROTATION_METADATA_TYPE
-        },
-        "ExternalSecretRotationRoleArn": {"target": ROLE_ARN_TYPE},
-        "LastRotatedDate": {"target": LAST_ROTATED_DATE_TYPE},
-        "LastChangedDate": {"target": LAST_CHANGED_DATE_TYPE},
-        "LastAccessedDate": {"target": LAST_ACCESSED_DATE_TYPE},
-        "DeletedDate": {"target": DELETED_DATE_TYPE},
-        "NextRotationDate": {"target": NEXT_ROTATION_DATE_TYPE},
-        "Tags": {"target": TAG_LIST_TYPE},
-        "VersionIdsToStages": {"target": SECRET_VERSIONS_TO_STAGES_MAP_TYPE},
-        "OwningService": {"target": OWNING_SERVICE_TYPE},
-        "CreatedDate": {"target": TIMESTAMP_TYPE},
-        "PrimaryRegion": {"target": REGION_TYPE},
-        "ReplicationStatus": {"target": REPLICATION_STATUS_LIST_TYPE},
-    },
-)
-
-DESCRIBE_SECRET = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#DescribeSecret"),
-    shape_type=ShapeType.OPERATION,
-)
-
-EXCLUDE_CHARACTERS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ExcludeCharactersType"),
-    shape_type=ShapeType.STRING,
-)
-
-EXCLUDE_LOWERCASE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ExcludeLowercaseType"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-EXCLUDE_NUMBERS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ExcludeNumbersType"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-EXCLUDE_PUNCTUATION_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ExcludePunctuationType"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-EXCLUDE_UPPERCASE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ExcludeUppercaseType"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-INCLUDE_SPACE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#IncludeSpaceType"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-PASSWORD_LENGTH_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#PasswordLengthType"),
-    shape_type=ShapeType.LONG,
-)
-
-REQUIRE_EACH_INCLUDED_TYPE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RequireEachIncludedTypeType"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-GET_RANDOM_PASSWORD_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#GetRandomPasswordInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#GetRandomPasswordRequest",
-        )
-    ],
-    members={
-        "PasswordLength": {"target": PASSWORD_LENGTH_TYPE},
-        "ExcludeCharacters": {"target": EXCLUDE_CHARACTERS_TYPE},
-        "ExcludeNumbers": {
-            "target": EXCLUDE_NUMBERS_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-        "ExcludePunctuation": {
-            "target": EXCLUDE_PUNCTUATION_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-        "ExcludeUppercase": {
-            "target": EXCLUDE_UPPERCASE_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-        "ExcludeLowercase": {
-            "target": EXCLUDE_LOWERCASE_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-        "IncludeSpace": {
-            "target": INCLUDE_SPACE_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-        "RequireEachIncludedType": {
-            "target": REQUIRE_EACH_INCLUDED_TYPE_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-    },
-)
-
-RANDOM_PASSWORD_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RandomPasswordType"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-GET_RANDOM_PASSWORD_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#GetRandomPasswordOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#GetRandomPasswordResponse",
-        )
-    ],
-    members={"RandomPassword": {"target": RANDOM_PASSWORD_TYPE}},
-)
-
-GET_RANDOM_PASSWORD = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#GetRandomPassword"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#GetResourcePolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#GetResourcePolicyRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-NON_EMPTY_RESOURCE_POLICY_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#NonEmptyResourcePolicyType"),
-    shape_type=ShapeType.STRING,
-)
-
-GET_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#GetResourcePolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#GetResourcePolicyResponse",
-        )
-    ],
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": NAME_TYPE},
-        "ResourcePolicy": {"target": NON_EMPTY_RESOURCE_POLICY_TYPE},
-    },
-)
-
-GET_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#GetResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_SECRET_VALUE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#GetSecretValueInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#GetSecretValueRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "VersionId": {"target": SECRET_VERSION_ID_TYPE},
-        "VersionStage": {"target": SECRET_VERSION_STAGE_TYPE},
-    },
-)
-
-GET_SECRET_VALUE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#GetSecretValueOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#GetSecretValueResponse",
-        )
-    ],
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": SECRET_NAME_TYPE},
-        "VersionId": {"target": SECRET_VERSION_ID_TYPE},
-        "SecretBinary": {"target": SECRET_BINARY_TYPE},
-        "SecretString": {"target": SECRET_STRING_TYPE},
-        "VersionStages": {"target": SECRET_VERSION_STAGES_TYPE},
-        "CreatedDate": {"target": CREATED_DATE_TYPE},
-    },
-)
-
-GET_SECRET_VALUE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#GetSecretValue"),
-    shape_type=ShapeType.OPERATION,
-)
-
-KMS_KEY_ID_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#KmsKeyIdListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": KMS_KEY_ID_TYPE}},
-)
-
-MAX_RESULTS_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#MaxResultsType"),
-    shape_type=ShapeType.INTEGER,
-)
-
-SORT_BY_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#SortByType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "created_date": {"target": UNIT},
-        "last_accessed_date": {"target": UNIT},
-        "last_changed_date": {"target": UNIT},
-        "name": {"target": UNIT},
-    },
-)
-
-SORT_ORDER_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#SortOrderType"),
-    shape_type=ShapeType.ENUM,
-    members={"asc": {"target": UNIT}, "desc": {"target": UNIT}},
-)
-
-LIST_SECRETS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ListSecretsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#ListSecretsRequest",
-        )
-    ],
-    members={
-        "IncludePlannedDeletion": {
-            "target": BOOLEAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-        "MaxResults": {"target": MAX_RESULTS_TYPE},
-        "NextToken": {"target": NEXT_TOKEN_TYPE},
-        "Filters": {"target": FILTERS_LIST_TYPE},
-        "SortOrder": {"target": SORT_ORDER_TYPE},
-        "SortBy": {"target": SORT_BY_TYPE},
-    },
-)
-
-SECRET_LIST_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretListEntry"),
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": SECRET_NAME_TYPE},
-        "Type": {"target": MEDEA_TYPE_TYPE},
-        "Description": {"target": DESCRIPTION_TYPE},
-        "KmsKeyId": {"target": KMS_KEY_ID_TYPE},
-        "RotationEnabled": {
-            "target": ROTATION_ENABLED_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-        "RotationLambdaARN": {"target": ROTATION_LAMBDA_ARN_TYPE},
-        "RotationRules": {"target": ROTATION_RULES_TYPE},
-        "ExternalSecretRotationMetadata": {
-            "target": EXTERNAL_SECRET_ROTATION_METADATA_TYPE
-        },
-        "ExternalSecretRotationRoleArn": {"target": ROLE_ARN_TYPE},
-        "LastRotatedDate": {"target": LAST_ROTATED_DATE_TYPE},
-        "LastChangedDate": {"target": LAST_CHANGED_DATE_TYPE},
-        "LastAccessedDate": {"target": LAST_ACCESSED_DATE_TYPE},
-        "DeletedDate": {"target": DELETED_DATE_TYPE},
-        "NextRotationDate": {"target": NEXT_ROTATION_DATE_TYPE},
-        "Tags": {"target": TAG_LIST_TYPE},
-        "SecretVersionsToStages": {"target": SECRET_VERSIONS_TO_STAGES_MAP_TYPE},
-        "OwningService": {"target": OWNING_SERVICE_TYPE},
-        "CreatedDate": {"target": TIMESTAMP_TYPE},
-        "PrimaryRegion": {"target": REGION_TYPE},
-    },
-)
-
-SECRET_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SECRET_LIST_ENTRY}},
-)
-
-LIST_SECRETS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ListSecretsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#ListSecretsResponse",
-        )
-    ],
-    members={
-        "SecretList": {"target": SECRET_LIST_TYPE},
-        "NextToken": {"target": NEXT_TOKEN_TYPE},
-    },
-)
-
-LIST_SECRETS = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ListSecrets"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_SECRET_VERSION_IDS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ListSecretVersionIdsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#ListSecretVersionIdsRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MaxResults": {"target": MAX_RESULTS_TYPE},
-        "NextToken": {"target": NEXT_TOKEN_TYPE},
-        "IncludeDeprecated": {
-            "target": BOOLEAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-    },
-)
-
-SECRET_VERSIONS_LIST_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretVersionsListEntry"),
-    members={
-        "VersionId": {"target": SECRET_VERSION_ID_TYPE},
-        "VersionStages": {"target": SECRET_VERSION_STAGES_TYPE},
-        "LastAccessedDate": {"target": LAST_ACCESSED_DATE_TYPE},
-        "CreatedDate": {"target": CREATED_DATE_TYPE},
-        "KmsKeyIds": {"target": KMS_KEY_ID_LIST_TYPE},
-    },
-)
-
-SECRET_VERSIONS_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#SecretVersionsListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SECRET_VERSIONS_LIST_ENTRY}},
-)
-
-LIST_SECRET_VERSION_IDS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ListSecretVersionIdsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#ListSecretVersionIdsResponse",
-        )
-    ],
-    members={
-        "Versions": {"target": SECRET_VERSIONS_LIST_TYPE},
-        "NextToken": {"target": NEXT_TOKEN_TYPE},
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": SECRET_NAME_TYPE},
-    },
-)
-
-LIST_SECRET_VERSION_IDS = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ListSecretVersionIds"),
-    shape_type=ShapeType.OPERATION,
-)
-
-PUBLIC_POLICY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#PublicPolicyException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": ERROR_MESSAGE}},
-)
-
-PUT_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#PutResourcePolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#PutResourcePolicyRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ResourcePolicy": {
-            "target": NON_EMPTY_RESOURCE_POLICY_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "BlockPublicPolicy": {
-            "target": BOOLEAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-    },
-)
-
-PUT_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#PutResourcePolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#PutResourcePolicyResponse",
-        )
-    ],
-    members={"ARN": {"target": SECRET_ARN_TYPE}, "Name": {"target": NAME_TYPE}},
-)
-
-PUT_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#PutResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-ROTATION_TOKEN_TYPE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RotationTokenType"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-PUT_SECRET_VALUE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#PutSecretValueInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#PutSecretValueRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ClientRequestToken": {
-            "target": CLIENT_REQUEST_TOKEN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "SecretBinary": {"target": SECRET_BINARY_TYPE},
-        "SecretString": {"target": SECRET_STRING_TYPE},
-        "VersionStages": {"target": SECRET_VERSION_STAGES_TYPE},
-        "RotationToken": {"target": ROTATION_TOKEN_TYPE},
-    },
-)
-
-PUT_SECRET_VALUE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#PutSecretValueOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#PutSecretValueResponse",
-        )
-    ],
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": SECRET_NAME_TYPE},
-        "VersionId": {"target": SECRET_VERSION_ID_TYPE},
-        "VersionStages": {"target": SECRET_VERSION_STAGES_TYPE},
-    },
-)
-
-PUT_SECRET_VALUE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#PutSecretValue"),
-    shape_type=ShapeType.OPERATION,
-)
-
-REMOVE_REPLICA_REGION_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#RemoveReplicaRegionListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": REGION_TYPE}},
-)
-
-REMOVE_REGIONS_FROM_REPLICATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#RemoveRegionsFromReplicationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#RemoveRegionsFromReplicationRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RemoveReplicaRegions": {
-            "target": REMOVE_REPLICA_REGION_LIST_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-REMOVE_REGIONS_FROM_REPLICATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#RemoveRegionsFromReplicationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#RemoveRegionsFromReplicationResponse",
-        )
-    ],
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "ReplicationStatus": {"target": REPLICATION_STATUS_LIST_TYPE},
-    },
-)
-
-REMOVE_REGIONS_FROM_REPLICATION = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RemoveRegionsFromReplication"),
-    shape_type=ShapeType.OPERATION,
-)
-
-REPLICATE_SECRET_TO_REGIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ReplicateSecretToRegionsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#ReplicateSecretToRegionsRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AddReplicaRegions": {
-            "target": ADD_REPLICA_REGION_LIST_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ForceOverwriteReplicaSecret": {
-            "target": BOOLEAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-REPLICATE_SECRET_TO_REGIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ReplicateSecretToRegionsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#ReplicateSecretToRegionsResponse",
-        )
-    ],
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "ReplicationStatus": {"target": REPLICATION_STATUS_LIST_TYPE},
-    },
-)
-
-REPLICATE_SECRET_TO_REGIONS = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ReplicateSecretToRegions"),
-    shape_type=ShapeType.OPERATION,
-)
-
-RESTORE_SECRET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#RestoreSecretInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#RestoreSecretRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-RESTORE_SECRET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#RestoreSecretOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#RestoreSecretResponse",
-        )
-    ],
-    members={"ARN": {"target": SECRET_ARN_TYPE}, "Name": {"target": SECRET_NAME_TYPE}},
-)
-
-RESTORE_SECRET = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RestoreSecret"),
-    shape_type=ShapeType.OPERATION,
-)
-
-ROTATE_SECRET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#RotateSecretInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#RotateSecretRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ClientRequestToken": {
-            "target": CLIENT_REQUEST_TOKEN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "RotationLambdaARN": {"target": ROTATION_LAMBDA_ARN_TYPE},
-        "RotationRules": {"target": ROTATION_RULES_TYPE},
-        "ExternalSecretRotationMetadata": {
-            "target": EXTERNAL_SECRET_ROTATION_METADATA_TYPE
-        },
-        "ExternalSecretRotationRoleArn": {"target": ROLE_ARN_TYPE},
-        "RotateImmediately": {
-            "target": BOOLEAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=None)],
-        },
-    },
-)
-
-ROTATE_SECRET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#RotateSecretOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#RotateSecretResponse",
-        )
-    ],
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": SECRET_NAME_TYPE},
-        "VersionId": {"target": SECRET_VERSION_ID_TYPE},
-    },
-)
-
-ROTATE_SECRET = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#RotateSecret"),
-    shape_type=ShapeType.OPERATION,
-)
-
-STOP_REPLICATION_TO_REPLICA_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#StopReplicationToReplicaInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#StopReplicationToReplicaRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-STOP_REPLICATION_TO_REPLICA_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#StopReplicationToReplicaOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#StopReplicationToReplicaResponse",
-        )
-    ],
-    members={"ARN": {"target": SECRET_ARN_TYPE}},
-)
-
-STOP_REPLICATION_TO_REPLICA = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#StopReplicationToReplica"),
-    shape_type=ShapeType.OPERATION,
-)
-
-TAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#TagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#TagResourceRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Tags": {
-            "target": TAG_LIST_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#TagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-TAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#TagResource"),
-    shape_type=ShapeType.OPERATION,
-)
-
-TAG_KEY_LIST_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#TagKeyListType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG_KEY_TYPE}},
-)
-
-UNTAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#UntagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#UntagResourceRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TagKeys": {
-            "target": TAG_KEY_LIST_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-UNTAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#UntagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-UNTAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#UntagResource"),
-    shape_type=ShapeType.OPERATION,
-)
-
-UPDATE_SECRET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#UpdateSecretInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#UpdateSecretRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ClientRequestToken": {
-            "target": CLIENT_REQUEST_TOKEN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-        "Description": {"target": DESCRIPTION_TYPE},
-        "KmsKeyId": {"target": KMS_KEY_ID_TYPE},
-        "SecretBinary": {"target": SECRET_BINARY_TYPE},
-        "SecretString": {"target": SECRET_STRING_TYPE},
-        "Type": {"target": MEDEA_TYPE_TYPE},
-    },
-)
-
-UPDATE_SECRET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#UpdateSecretOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#UpdateSecretResponse",
-        )
-    ],
-    members={
-        "ARN": {"target": SECRET_ARN_TYPE},
-        "Name": {"target": SECRET_NAME_TYPE},
-        "VersionId": {"target": SECRET_VERSION_ID_TYPE},
-    },
-)
-
-UPDATE_SECRET = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#UpdateSecret"),
-    shape_type=ShapeType.OPERATION,
-)
-
-UPDATE_SECRET_VERSION_STAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#UpdateSecretVersionStageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#UpdateSecretVersionStageRequest",
-        )
-    ],
-    members={
-        "SecretId": {
-            "target": SECRET_ID_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "VersionStage": {
-            "target": SECRET_VERSION_STAGE_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RemoveFromVersionId": {"target": SECRET_VERSION_ID_TYPE},
-        "MoveToVersionId": {"target": SECRET_VERSION_ID_TYPE},
-    },
-)
-
-UPDATE_SECRET_VERSION_STAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#UpdateSecretVersionStageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#UpdateSecretVersionStageResponse",
-        )
-    ],
-    members={"ARN": {"target": SECRET_ARN_TYPE}, "Name": {"target": SECRET_NAME_TYPE}},
-)
-
-UPDATE_SECRET_VERSION_STAGE = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#UpdateSecretVersionStage"),
-    shape_type=ShapeType.OPERATION,
-)
-
-VALIDATE_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ValidateResourcePolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#ValidateResourcePolicyRequest",
-        )
-    ],
-    members={
-        "SecretId": {"target": SECRET_ID_TYPE},
-        "ResourcePolicy": {
-            "target": NON_EMPTY_RESOURCE_POLICY_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-VALIDATION_ERRORS_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ValidationErrorsEntry"),
-    members={
-        "CheckName": {"target": NAME_TYPE},
-        "ErrorMessage": {"target": ERROR_MESSAGE},
-    },
-)
-
-VALIDATION_ERRORS_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ValidationErrorsType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VALIDATION_ERRORS_ENTRY}},
-)
-
-VALIDATE_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.secretsmanager#ValidateResourcePolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.secretsmanager#ValidateResourcePolicyResponse",
-        )
-    ],
-    members={
-        "PolicyValidationPassed": {
-            "target": BOOLEAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "ValidationErrors": {"target": VALIDATION_ERRORS_TYPE},
-    },
-)
-
-VALIDATE_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#ValidateResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-SECRETSMANAGER = Schema(
-    id=ShapeID("com.amazonaws.secretsmanager#secretsmanager"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"),
-            value=MappingProxyType({"name": "secretsmanager"}),
-        ),
-        Trait.new(id=ShapeID("aws.protocols#awsJson1_1")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+INVALID_PARAMETER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IPE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+INVALID_REQUEST_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IRE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+BATCH_GET_SECRET_VALUE: StaticOperationSchema = (
+    23,
+    n0,
+    _BGSV,
+    0,
+    BATCH_GET_SECRET_VALUE_INPUT,
+    BATCH_GET_SECRET_VALUE_OUTPUT,
+    (
+        DECRYPTION_FAILURE,
+        INTERNAL_SERVICE_ERROR,
+        INVALID_NEXT_TOKEN_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+BOOLEAN_TYPE: StaticSchema = (2, n0, _BT, {_smith: False})
+
+CANCEL_ROTATE_SECRET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CRSI,
+    {_sSI: _cCRSR, _s: None},
+    (_SI,),
+    ((SECRET_ID_TYPE, 1),),
+)
+
+CANCEL_ROTATE_SECRET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CRSO,
+    {_sSI: _cCRSRo, _smi: None},
+    (_ARN, _N, _VI),
+    ((SECRET_ARN_TYPE, 0), (SECRET_NAME_TYPE, 0), (SECRET_VERSION_ID_TYPE, 0)),
+)
+
+CANCEL_ROTATE_SECRET: StaticOperationSchema = (
+    23,
+    n0,
+    _CRS,
+    0,
+    CANCEL_ROTATE_SECRET_INPUT,
+    CANCEL_ROTATE_SECRET_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+CLIENT_REQUEST_TOKEN_TYPE: StaticSchema = (3, n0, _CRTT, 0)
+
+DESCRIPTION_TYPE: StaticSchema = (3, n0, _DT, 0)
+
+NAME_TYPE: StaticSchema = (3, n0, _NTa, 0)
+
+TAG_KEY_TYPE: StaticSchema = (3, n0, _TKT, 0)
+
+TAG_VALUE_TYPE: StaticSchema = (3, n0, _TVT, 0)
+
+TAG: StaticSchema = (18, n0, _T, 0, (_K, _Va), ((TAG_KEY_TYPE, 0), (TAG_VALUE_TYPE, 0)))
+
+TAG_LIST_TYPE: StaticSchema = (16, n0, _TLT, 0, (_m,), ((TAG, 0),))
+
+MEDEA_TYPE_TYPE: StaticSchema = (3, n0, _MTT, 0)
+
+CREATE_SECRET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSI,
+    {_sSI: _cCSR, _s: None},
+    (_N, _CRT, _D, _KKI, _SB, _SS, _Ta, _ARR, _FORS, _Ty),
+    (
+        (NAME_TYPE, 1),
+        (CLIENT_REQUEST_TOKEN_TYPE, 2),
+        (DESCRIPTION_TYPE, 0),
+        (KMS_KEY_ID_TYPE, 0),
+        (SECRET_BINARY_TYPE, 0),
+        (SECRET_STRING_TYPE, 0),
+        (TAG_LIST_TYPE, 0),
+        (ADD_REPLICA_REGION_LIST_TYPE, 0),
+        (BOOLEAN_TYPE, {_smith: False}),
+        (MEDEA_TYPE_TYPE, 0),
+    ),
+)
+
+LAST_ACCESSED_DATE_TYPE: StaticSchema = (4, n0, _LADT, 0)
+
+STATUS_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ST,
+    0,
+    (_IS, _Fa, _IP),
+    ((-1, {_sV: _IS}), (-1, {_sV: _Fa}), (-1, {_sV: _IP})),
+)
+
+STATUS_MESSAGE_TYPE: StaticSchema = (3, n0, _SMT, 0)
+
+REPLICATION_STATUS_TYPE: StaticSchema = (
+    18,
+    n0,
+    _RST,
+    0,
+    (_R, _KKI, _S, _SM, _LAD),
+    (
+        (REGION_TYPE, 0),
+        (KMS_KEY_ID_TYPE, 0),
+        (STATUS_TYPE, 0),
+        (STATUS_MESSAGE_TYPE, 0),
+        (LAST_ACCESSED_DATE_TYPE, 0),
+    ),
+)
+
+REPLICATION_STATUS_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _RSLT,
+    0,
+    (_m,),
+    ((REPLICATION_STATUS_TYPE, 0),),
+)
+
+CREATE_SECRET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CSO,
+    {_sSI: _cCSRo, _smi: None},
+    (_ARN, _N, _VI, _RS),
+    (
+        (SECRET_ARN_TYPE, 0),
+        (SECRET_NAME_TYPE, 0),
+        (SECRET_VERSION_ID_TYPE, 0),
+        (REPLICATION_STATUS_LIST_TYPE, 0),
+    ),
+)
+
+ENCRYPTION_FAILURE: StaticSchema = (
+    18,
+    n0,
+    _EF,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LEE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+MALFORMED_POLICY_DOCUMENT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MPDE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+PRECONDITION_NOT_MET_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _PNME,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+RESOURCE_EXISTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _REE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+CREATE_SECRET: StaticOperationSchema = (
+    23,
+    n0,
+    _CS,
+    0,
+    CREATE_SECRET_INPUT,
+    CREATE_SECRET_OUTPUT,
+    (
+        DECRYPTION_FAILURE,
+        ENCRYPTION_FAILURE,
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        MALFORMED_POLICY_DOCUMENT_EXCEPTION,
+        PRECONDITION_NOT_MET_EXCEPTION,
+        RESOURCE_EXISTS_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+DELETED_DATE_TYPE: StaticSchema = (4, n0, _DDT, 0)
+
+DELETE_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPI,
+    {_sSI: _cDRPR, _s: None},
+    (_SI,),
+    ((SECRET_ID_TYPE, 1),),
+)
+
+DELETE_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPO,
+    {_sSI: _cDRPRo, _smi: None},
+    (_ARN, _N),
+    ((SECRET_ARN_TYPE, 0), (NAME_TYPE, 0)),
+)
+
+DELETE_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _DRP,
+    0,
+    DELETE_RESOURCE_POLICY_INPUT,
+    DELETE_RESOURCE_POLICY_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+RECOVERY_WINDOW_IN_DAYS_TYPE: StaticSchema = (8, n0, _RWIDT, {_smith: 0})
+
+DELETE_SECRET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSI,
+    {_sSI: _cDSR, _s: None},
+    (_SI, _RWID, _FDWR),
+    (
+        (SECRET_ID_TYPE, 1),
+        (RECOVERY_WINDOW_IN_DAYS_TYPE, {_smith: None}),
+        (BOOLEAN_TYPE, {_smith: None}),
+    ),
+)
+
+DELETION_DATE_TYPE: StaticSchema = (4, n0, _DDTe, 0)
+
+DELETE_SECRET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSO,
+    {_sSI: _cDSRo, _smi: None},
+    (_ARN, _N, _DD),
+    ((SECRET_ARN_TYPE, 0), (SECRET_NAME_TYPE, 0), (DELETION_DATE_TYPE, 0)),
+)
+
+DELETE_SECRET: StaticOperationSchema = (
+    23,
+    n0,
+    _DS,
+    0,
+    DELETE_SECRET_INPUT,
+    DELETE_SECRET_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+DESCRIBE_SECRET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSIe,
+    {_sSI: _cDSRom, _s: None},
+    (_SI,),
+    ((SECRET_ID_TYPE, 1),),
+)
+
+TIMESTAMP_TYPE: StaticSchema = (4, n0, _TT, 0)
+
+EXTERNAL_SECRET_ROTATION_METADATA_ITEM_KEY_TYPE: StaticSchema = (3, n0, _ESRMIKT, 0)
+
+EXTERNAL_SECRET_ROTATION_METADATA_ITEM_VALUE_TYPE: StaticSchema = (3, n0, _ESRMIVT, 0)
+
+EXTERNAL_SECRET_ROTATION_METADATA_ITEM: StaticSchema = (
+    18,
+    n0,
+    _ESRMI,
+    0,
+    (_K, _Va),
+    (
+        (EXTERNAL_SECRET_ROTATION_METADATA_ITEM_KEY_TYPE, 0),
+        (EXTERNAL_SECRET_ROTATION_METADATA_ITEM_VALUE_TYPE, 0),
+    ),
+)
+
+EXTERNAL_SECRET_ROTATION_METADATA_TYPE: StaticSchema = (
+    16,
+    n0,
+    _ESRMT,
+    0,
+    (_m,),
+    ((EXTERNAL_SECRET_ROTATION_METADATA_ITEM, 0),),
+)
+
+ROLE_ARN_TYPE: StaticSchema = (3, n0, _RARNT, 0)
+
+LAST_CHANGED_DATE_TYPE: StaticSchema = (4, n0, _LCDT, 0)
+
+LAST_ROTATED_DATE_TYPE: StaticSchema = (4, n0, _LRDT, 0)
+
+NEXT_ROTATION_DATE_TYPE: StaticSchema = (4, n0, _NRDT, 0)
+
+OWNING_SERVICE_TYPE: StaticSchema = (3, n0, _OST, 0)
+
+ROTATION_ENABLED_TYPE: StaticSchema = (2, n0, _RET, {_smith: False})
+
+ROTATION_LAMBDA_ARN_TYPE: StaticSchema = (3, n0, _RLARNT, 0)
+
+DURATION_TYPE: StaticSchema = (3, n0, _DTu, 0)
+
+SCHEDULE_EXPRESSION_TYPE: StaticSchema = (3, n0, _SET, 0)
+
+ROTATION_RULES_TYPE: StaticSchema = (
+    18,
+    n0,
+    _RRTo,
+    0,
+    (_AAD, _Du, _SE),
+    (
+        (AUTOMATICALLY_ROTATE_AFTER_DAYS_TYPE, 0),
+        (DURATION_TYPE, 0),
+        (SCHEDULE_EXPRESSION_TYPE, 0),
+    ),
+)
+
+SECRET_VERSIONS_TO_STAGES_MAP_TYPE: StaticSchema = (
+    17,
+    n0,
+    _SVTSMT,
+    0,
+    (_k, _v),
+    ((SECRET_VERSION_ID_TYPE, 0), (SECRET_VERSION_STAGES_TYPE, 0)),
+)
+
+DESCRIBE_SECRET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSOe,
+    {_sSI: _cDSRoma, _smi: None},
+    (
+        _ARN,
+        _N,
+        _Ty,
+        _D,
+        _KKI,
+        _RE,
+        _RLARN,
+        _RR,
+        _ESRM,
+        _ESRRA,
+        _LRD,
+        _LCD,
+        _LAD,
+        _DDe,
+        _NRD,
+        _Ta,
+        _VITS,
+        _OS,
+        _CD,
+        _PR,
+        _RS,
+    ),
+    (
+        (SECRET_ARN_TYPE, 0),
+        (SECRET_NAME_TYPE, 0),
+        (MEDEA_TYPE_TYPE, 0),
+        (DESCRIPTION_TYPE, 0),
+        (KMS_KEY_ID_TYPE, 0),
+        (ROTATION_ENABLED_TYPE, {_smith: None}),
+        (ROTATION_LAMBDA_ARN_TYPE, 0),
+        (ROTATION_RULES_TYPE, 0),
+        (EXTERNAL_SECRET_ROTATION_METADATA_TYPE, 0),
+        (ROLE_ARN_TYPE, 0),
+        (LAST_ROTATED_DATE_TYPE, 0),
+        (LAST_CHANGED_DATE_TYPE, 0),
+        (LAST_ACCESSED_DATE_TYPE, 0),
+        (DELETED_DATE_TYPE, 0),
+        (NEXT_ROTATION_DATE_TYPE, 0),
+        (TAG_LIST_TYPE, 0),
+        (SECRET_VERSIONS_TO_STAGES_MAP_TYPE, 0),
+        (OWNING_SERVICE_TYPE, 0),
+        (TIMESTAMP_TYPE, 0),
+        (REGION_TYPE, 0),
+        (REPLICATION_STATUS_LIST_TYPE, 0),
+    ),
+)
+
+DESCRIBE_SECRET: StaticOperationSchema = (
+    23,
+    n0,
+    _DSe,
+    0,
+    DESCRIBE_SECRET_INPUT,
+    DESCRIBE_SECRET_OUTPUT,
+    (INTERNAL_SERVICE_ERROR, INVALID_PARAMETER_EXCEPTION, RESOURCE_NOT_FOUND_EXCEPTION),
+)
+
+EXCLUDE_CHARACTERS_TYPE: StaticSchema = (3, n0, _ECT, 0)
+
+EXCLUDE_LOWERCASE_TYPE: StaticSchema = (2, n0, _ELT, {_smith: False})
+
+EXCLUDE_NUMBERS_TYPE: StaticSchema = (2, n0, _ENT, {_smith: False})
+
+EXCLUDE_PUNCTUATION_TYPE: StaticSchema = (2, n0, _EPT, {_smith: False})
+
+EXCLUDE_UPPERCASE_TYPE: StaticSchema = (2, n0, _EUT, {_smith: False})
+
+INCLUDE_SPACE_TYPE: StaticSchema = (2, n0, _IST, {_smith: False})
+
+PASSWORD_LENGTH_TYPE: StaticSchema = (8, n0, _PLT, 0)
+
+REQUIRE_EACH_INCLUDED_TYPE_TYPE: StaticSchema = (2, n0, _REITT, {_smith: False})
+
+GET_RANDOM_PASSWORD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPI,
+    {_sSI: _cGRPR, _s: None},
+    (_PL, _ECx, _EN, _EP, _EU, _EL, _ISn, _REIT),
+    (
+        (PASSWORD_LENGTH_TYPE, 0),
+        (EXCLUDE_CHARACTERS_TYPE, 0),
+        (EXCLUDE_NUMBERS_TYPE, {_smith: None}),
+        (EXCLUDE_PUNCTUATION_TYPE, {_smith: None}),
+        (EXCLUDE_UPPERCASE_TYPE, {_smith: None}),
+        (EXCLUDE_LOWERCASE_TYPE, {_smith: None}),
+        (INCLUDE_SPACE_TYPE, {_smith: None}),
+        (REQUIRE_EACH_INCLUDED_TYPE_TYPE, {_smith: None}),
+    ),
+)
+
+RANDOM_PASSWORD_TYPE: StaticSchema = (3, n0, _RPT, 4)
+
+GET_RANDOM_PASSWORD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPO,
+    {_sSI: _cGRPRo, _smi: None},
+    (_RP,),
+    ((RANDOM_PASSWORD_TYPE, 0),),
+)
+
+GET_RANDOM_PASSWORD: StaticOperationSchema = (
+    23,
+    n0,
+    _GRP,
+    0,
+    GET_RANDOM_PASSWORD_INPUT,
+    GET_RANDOM_PASSWORD_OUTPUT,
+    (INTERNAL_SERVICE_ERROR, INVALID_PARAMETER_EXCEPTION, INVALID_REQUEST_EXCEPTION),
+)
+
+GET_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPIe,
+    {_sSI: _cGRPRom, _s: None},
+    (_SI,),
+    ((SECRET_ID_TYPE, 1),),
+)
+
+NON_EMPTY_RESOURCE_POLICY_TYPE: StaticSchema = (3, n0, _NERPT, 0)
+
+GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPOe,
+    {_sSI: _cGRPRoma, _smi: None},
+    (_ARN, _N, _RPe),
+    ((SECRET_ARN_TYPE, 0), (NAME_TYPE, 0), (NON_EMPTY_RESOURCE_POLICY_TYPE, 0)),
+)
+
+GET_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GRPe,
+    0,
+    GET_RESOURCE_POLICY_INPUT,
+    GET_RESOURCE_POLICY_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+GET_SECRET_VALUE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSVI,
+    {_sSI: _cGSVR, _s: None},
+    (_SI, _VI, _VSe),
+    ((SECRET_ID_TYPE, 1), (SECRET_VERSION_ID_TYPE, 0), (SECRET_VERSION_STAGE_TYPE, 0)),
+)
+
+GET_SECRET_VALUE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSVO,
+    {_sSI: _cGSVRo, _smi: None},
+    (_ARN, _N, _VI, _SB, _SS, _VS, _CD),
+    (
+        (SECRET_ARN_TYPE, 0),
+        (SECRET_NAME_TYPE, 0),
+        (SECRET_VERSION_ID_TYPE, 0),
+        (SECRET_BINARY_TYPE, 0),
+        (SECRET_STRING_TYPE, 0),
+        (SECRET_VERSION_STAGES_TYPE, 0),
+        (CREATED_DATE_TYPE, 0),
+    ),
+)
+
+GET_SECRET_VALUE: StaticOperationSchema = (
+    23,
+    n0,
+    _GSV,
+    0,
+    GET_SECRET_VALUE_INPUT,
+    GET_SECRET_VALUE_OUTPUT,
+    (
+        DECRYPTION_FAILURE,
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+KMS_KEY_ID_LIST_TYPE: StaticSchema = (16, n0, _KKILT, 0, (_m,), ((KMS_KEY_ID_TYPE, 0),))
+
+MAX_RESULTS_TYPE: StaticSchema = (7, n0, _MRT, 0)
+
+SORT_BY_TYPE: StaticSchema = (
+    14,
+    n0,
+    _SBTo,
+    0,
+    (_cd, _lad, _lcd, _n),
+    ((-1, {_sV: _cd_}), (-1, {_sV: _lad_}), (-1, {_sV: _lcd_}), (-1, {_sV: _n})),
+)
+
+SORT_ORDER_TYPE: StaticSchema = (
+    14,
+    n0,
+    _SOT,
+    0,
+    (_as, _de),
+    ((-1, {_sV: _as}), (-1, {_sV: _de})),
+)
+
+LIST_SECRETS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LSI,
+    {_sSI: _cLSR, _s: None},
+    (_IPD, _MR, _NT, _Fi, _SO, _SBo),
+    (
+        (BOOLEAN_TYPE, {_smith: None}),
+        (MAX_RESULTS_TYPE, 0),
+        (NEXT_TOKEN_TYPE, 0),
+        (FILTERS_LIST_TYPE, 0),
+        (SORT_ORDER_TYPE, 0),
+        (SORT_BY_TYPE, 0),
+    ),
+)
+
+SECRET_LIST_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _SLE,
+    0,
+    (
+        _ARN,
+        _N,
+        _Ty,
+        _D,
+        _KKI,
+        _RE,
+        _RLARN,
+        _RR,
+        _ESRM,
+        _ESRRA,
+        _LRD,
+        _LCD,
+        _LAD,
+        _DDe,
+        _NRD,
+        _Ta,
+        _SVTS,
+        _OS,
+        _CD,
+        _PR,
+    ),
+    (
+        (SECRET_ARN_TYPE, 0),
+        (SECRET_NAME_TYPE, 0),
+        (MEDEA_TYPE_TYPE, 0),
+        (DESCRIPTION_TYPE, 0),
+        (KMS_KEY_ID_TYPE, 0),
+        (ROTATION_ENABLED_TYPE, {_smith: None}),
+        (ROTATION_LAMBDA_ARN_TYPE, 0),
+        (ROTATION_RULES_TYPE, 0),
+        (EXTERNAL_SECRET_ROTATION_METADATA_TYPE, 0),
+        (ROLE_ARN_TYPE, 0),
+        (LAST_ROTATED_DATE_TYPE, 0),
+        (LAST_CHANGED_DATE_TYPE, 0),
+        (LAST_ACCESSED_DATE_TYPE, 0),
+        (DELETED_DATE_TYPE, 0),
+        (NEXT_ROTATION_DATE_TYPE, 0),
+        (TAG_LIST_TYPE, 0),
+        (SECRET_VERSIONS_TO_STAGES_MAP_TYPE, 0),
+        (OWNING_SERVICE_TYPE, 0),
+        (TIMESTAMP_TYPE, 0),
+        (REGION_TYPE, 0),
+    ),
+)
+
+SECRET_LIST_TYPE: StaticSchema = (16, n0, _SLT, 0, (_m,), ((SECRET_LIST_ENTRY, 0),))
+
+LIST_SECRETS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LSO,
+    {_sSI: _cLSRo, _smi: None},
+    (_SL, _NT),
+    ((SECRET_LIST_TYPE, 0), (NEXT_TOKEN_TYPE, 0)),
+)
+
+LIST_SECRETS: StaticOperationSchema = (
+    23,
+    n0,
+    _LS,
+    0,
+    LIST_SECRETS_INPUT,
+    LIST_SECRETS_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_NEXT_TOKEN_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+    ),
+)
+
+LIST_SECRET_VERSION_IDS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LSVII,
+    {_sSI: _cLSVIR, _s: None},
+    (_SI, _MR, _NT, _ID),
+    (
+        (SECRET_ID_TYPE, 1),
+        (MAX_RESULTS_TYPE, 0),
+        (NEXT_TOKEN_TYPE, 0),
+        (BOOLEAN_TYPE, {_smith: None}),
+    ),
+)
+
+SECRET_VERSIONS_LIST_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _SVLE,
+    0,
+    (_VI, _VS, _LAD, _CD, _KKIm),
+    (
+        (SECRET_VERSION_ID_TYPE, 0),
+        (SECRET_VERSION_STAGES_TYPE, 0),
+        (LAST_ACCESSED_DATE_TYPE, 0),
+        (CREATED_DATE_TYPE, 0),
+        (KMS_KEY_ID_LIST_TYPE, 0),
+    ),
+)
+
+SECRET_VERSIONS_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _SVLT,
+    0,
+    (_m,),
+    ((SECRET_VERSIONS_LIST_ENTRY, 0),),
+)
+
+LIST_SECRET_VERSION_IDS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LSVIO,
+    {_sSI: _cLSVIRo, _smi: None},
+    (_Ve, _NT, _ARN, _N),
+    (
+        (SECRET_VERSIONS_LIST_TYPE, 0),
+        (NEXT_TOKEN_TYPE, 0),
+        (SECRET_ARN_TYPE, 0),
+        (SECRET_NAME_TYPE, 0),
+    ),
+)
+
+LIST_SECRET_VERSION_IDS: StaticOperationSchema = (
+    23,
+    n0,
+    _LSVI,
+    0,
+    LIST_SECRET_VERSION_IDS_INPUT,
+    LIST_SECRET_VERSION_IDS_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_NEXT_TOKEN_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+PUBLIC_POLICY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _PPE,
+    {_smit: _c},
+    (_M,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+PUT_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PRPI,
+    {_sSI: _cPRPR, _s: None},
+    (_SI, _RPe, _BPP),
+    (
+        (SECRET_ID_TYPE, 1),
+        (NON_EMPTY_RESOURCE_POLICY_TYPE, 1),
+        (BOOLEAN_TYPE, {_smith: None}),
+    ),
+)
+
+PUT_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PRPO,
+    {_sSI: _cPRPRo, _smi: None},
+    (_ARN, _N),
+    ((SECRET_ARN_TYPE, 0), (NAME_TYPE, 0)),
+)
+
+PUT_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _PRP,
+    0,
+    PUT_RESOURCE_POLICY_INPUT,
+    PUT_RESOURCE_POLICY_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        MALFORMED_POLICY_DOCUMENT_EXCEPTION,
+        PUBLIC_POLICY_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+ROTATION_TOKEN_TYPE: StaticSchema = (3, n0, _RTT, 4)
+
+PUT_SECRET_VALUE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PSVI,
+    {_sSI: _cPSVR, _s: None},
+    (_SI, _CRT, _SB, _SS, _VS, _RTo),
+    (
+        (SECRET_ID_TYPE, 1),
+        (CLIENT_REQUEST_TOKEN_TYPE, 2),
+        (SECRET_BINARY_TYPE, 0),
+        (SECRET_STRING_TYPE, 0),
+        (SECRET_VERSION_STAGES_TYPE, 0),
+        (ROTATION_TOKEN_TYPE, 0),
+    ),
+)
+
+PUT_SECRET_VALUE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PSVO,
+    {_sSI: _cPSVRo, _smi: None},
+    (_ARN, _N, _VI, _VS),
+    (
+        (SECRET_ARN_TYPE, 0),
+        (SECRET_NAME_TYPE, 0),
+        (SECRET_VERSION_ID_TYPE, 0),
+        (SECRET_VERSION_STAGES_TYPE, 0),
+    ),
+)
+
+PUT_SECRET_VALUE: StaticOperationSchema = (
+    23,
+    n0,
+    _PSV,
+    0,
+    PUT_SECRET_VALUE_INPUT,
+    PUT_SECRET_VALUE_OUTPUT,
+    (
+        DECRYPTION_FAILURE,
+        ENCRYPTION_FAILURE,
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_EXISTS_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+REMOVE_REPLICA_REGION_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _RRRLT,
+    0,
+    (_m,),
+    ((REGION_TYPE, 0),),
+)
+
+REMOVE_REGIONS_FROM_REPLICATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RRFRI,
+    {_sSI: _cRRFRR, _s: None},
+    (_SI, _RRR),
+    ((SECRET_ID_TYPE, 1), (REMOVE_REPLICA_REGION_LIST_TYPE, 1)),
+)
+
+REMOVE_REGIONS_FROM_REPLICATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RRFRO,
+    {_sSI: _cRRFRRo, _smi: None},
+    (_ARN, _RS),
+    ((SECRET_ARN_TYPE, 0), (REPLICATION_STATUS_LIST_TYPE, 0)),
+)
+
+REMOVE_REGIONS_FROM_REPLICATION: StaticOperationSchema = (
+    23,
+    n0,
+    _RRFR,
+    0,
+    REMOVE_REGIONS_FROM_REPLICATION_INPUT,
+    REMOVE_REGIONS_FROM_REPLICATION_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+REPLICATE_SECRET_TO_REGIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RSTRI,
+    {_sSI: _cRSTRR, _s: None},
+    (_SI, _ARR, _FORS),
+    (
+        (SECRET_ID_TYPE, 1),
+        (ADD_REPLICA_REGION_LIST_TYPE, 1),
+        (BOOLEAN_TYPE, {_smith: False}),
+    ),
+)
+
+REPLICATE_SECRET_TO_REGIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RSTRO,
+    {_sSI: _cRSTRRo, _smi: None},
+    (_ARN, _RS),
+    ((SECRET_ARN_TYPE, 0), (REPLICATION_STATUS_LIST_TYPE, 0)),
+)
+
+REPLICATE_SECRET_TO_REGIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _RSTR,
+    0,
+    REPLICATE_SECRET_TO_REGIONS_INPUT,
+    REPLICATE_SECRET_TO_REGIONS_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+RESTORE_SECRET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RSI,
+    {_sSI: _cRSR, _s: None},
+    (_SI,),
+    ((SECRET_ID_TYPE, 1),),
+)
+
+RESTORE_SECRET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RSO,
+    {_sSI: _cRSRo, _smi: None},
+    (_ARN, _N),
+    ((SECRET_ARN_TYPE, 0), (SECRET_NAME_TYPE, 0)),
+)
+
+RESTORE_SECRET: StaticOperationSchema = (
+    23,
+    n0,
+    _RSe,
+    0,
+    RESTORE_SECRET_INPUT,
+    RESTORE_SECRET_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+ROTATE_SECRET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RSIo,
+    {_sSI: _cRSRom, _s: None},
+    (_SI, _CRT, _RLARN, _RR, _ESRM, _ESRRA, _RI),
+    (
+        (SECRET_ID_TYPE, 1),
+        (CLIENT_REQUEST_TOKEN_TYPE, 2),
+        (ROTATION_LAMBDA_ARN_TYPE, 0),
+        (ROTATION_RULES_TYPE, 0),
+        (EXTERNAL_SECRET_ROTATION_METADATA_TYPE, 0),
+        (ROLE_ARN_TYPE, 0),
+        (BOOLEAN_TYPE, {_smith: None}),
+    ),
+)
+
+ROTATE_SECRET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RSOo,
+    {_sSI: _cRSRoma, _smi: None},
+    (_ARN, _N, _VI),
+    ((SECRET_ARN_TYPE, 0), (SECRET_NAME_TYPE, 0), (SECRET_VERSION_ID_TYPE, 0)),
+)
+
+ROTATE_SECRET: StaticOperationSchema = (
+    23,
+    n0,
+    _RSo,
+    0,
+    ROTATE_SECRET_INPUT,
+    ROTATE_SECRET_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+STOP_REPLICATION_TO_REPLICA_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SRTRI,
+    {_sSI: _cSRTRR, _s: None},
+    (_SI,),
+    ((SECRET_ID_TYPE, 1),),
+)
+
+STOP_REPLICATION_TO_REPLICA_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SRTRO,
+    {_sSI: _cSRTRRo, _smi: None},
+    (_ARN,),
+    ((SECRET_ARN_TYPE, 0),),
+)
+
+STOP_REPLICATION_TO_REPLICA: StaticOperationSchema = (
+    23,
+    n0,
+    _SRTR,
+    0,
+    STOP_REPLICATION_TO_REPLICA_INPUT,
+    STOP_REPLICATION_TO_REPLICA_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+TAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TRI,
+    {_sSI: _cTRR, _s: None},
+    (_SI, _Ta),
+    ((SECRET_ID_TYPE, 1), (TAG_LIST_TYPE, 1)),
+)
+
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _sU, _smi: None})
+
+TAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _TR,
+    0,
+    TAG_RESOURCE_INPUT,
+    TAG_RESOURCE_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+TAG_KEY_LIST_TYPE: StaticSchema = (16, n0, _TKLT, 0, (_m,), ((TAG_KEY_TYPE, 0),))
+
+UNTAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URI,
+    {_sSI: _cURR, _s: None},
+    (_SI, _TK),
+    ((SECRET_ID_TYPE, 1), (TAG_KEY_LIST_TYPE, 1)),
+)
+
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _URO, {_sSI: _sU, _smi: None})
+
+UNTAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _UR,
+    0,
+    UNTAG_RESOURCE_INPUT,
+    UNTAG_RESOURCE_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+UPDATE_SECRET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _USI,
+    {_sSI: _cUSR, _s: None},
+    (_SI, _CRT, _D, _KKI, _SB, _SS, _Ty),
+    (
+        (SECRET_ID_TYPE, 1),
+        (CLIENT_REQUEST_TOKEN_TYPE, 2),
+        (DESCRIPTION_TYPE, 0),
+        (KMS_KEY_ID_TYPE, 0),
+        (SECRET_BINARY_TYPE, 0),
+        (SECRET_STRING_TYPE, 0),
+        (MEDEA_TYPE_TYPE, 0),
+    ),
+)
+
+UPDATE_SECRET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _USO,
+    {_sSI: _cUSRo, _smi: None},
+    (_ARN, _N, _VI),
+    ((SECRET_ARN_TYPE, 0), (SECRET_NAME_TYPE, 0), (SECRET_VERSION_ID_TYPE, 0)),
+)
+
+UPDATE_SECRET: StaticOperationSchema = (
+    23,
+    n0,
+    _US,
+    0,
+    UPDATE_SECRET_INPUT,
+    UPDATE_SECRET_OUTPUT,
+    (
+        DECRYPTION_FAILURE,
+        ENCRYPTION_FAILURE,
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        MALFORMED_POLICY_DOCUMENT_EXCEPTION,
+        PRECONDITION_NOT_MET_EXCEPTION,
+        RESOURCE_EXISTS_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+UPDATE_SECRET_VERSION_STAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _USVSI,
+    {_sSI: _cUSVSR, _s: None},
+    (_SI, _VSe, _RFVI, _MTVI),
+    (
+        (SECRET_ID_TYPE, 1),
+        (SECRET_VERSION_STAGE_TYPE, 1),
+        (SECRET_VERSION_ID_TYPE, 0),
+        (SECRET_VERSION_ID_TYPE, 0),
+    ),
+)
+
+UPDATE_SECRET_VERSION_STAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _USVSO,
+    {_sSI: _cUSVSRo, _smi: None},
+    (_ARN, _N),
+    ((SECRET_ARN_TYPE, 0), (SECRET_NAME_TYPE, 0)),
+)
+
+UPDATE_SECRET_VERSION_STAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _USVS,
+    0,
+    UPDATE_SECRET_VERSION_STAGE_INPUT,
+    UPDATE_SECRET_VERSION_STAGE_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+VALIDATE_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _VRPI,
+    {_sSI: _cVRPR, _s: None},
+    (_SI, _RPe),
+    ((SECRET_ID_TYPE, 0), (NON_EMPTY_RESOURCE_POLICY_TYPE, 1)),
+)
+
+VALIDATION_ERRORS_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _VEE,
+    0,
+    (_CN, _EM),
+    ((NAME_TYPE, 0), (ERROR_MESSAGE, 0)),
+)
+
+VALIDATION_ERRORS_TYPE: StaticSchema = (
+    16,
+    n0,
+    _VET,
+    0,
+    (_m,),
+    ((VALIDATION_ERRORS_ENTRY, 0),),
+)
+
+VALIDATE_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _VRPO,
+    {_sSI: _cVRPRo, _smi: None},
+    (_PVP, _VE),
+    ((BOOLEAN_TYPE, {_smith: False}), (VALIDATION_ERRORS_TYPE, 0)),
+)
+
+VALIDATE_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _VRP,
+    0,
+    VALIDATE_RESOURCE_POLICY_INPUT,
+    VALIDATE_RESOURCE_POLICY_OUTPUT,
+    (
+        INTERNAL_SERVICE_ERROR,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_REQUEST_EXCEPTION,
+        MALFORMED_POLICY_DOCUMENT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+SECRETSMANAGER: StaticSchema = (
+    21,
+    n0,
+    _sec,
+    {
+        _aw: MappingProxyType({"name": "secretsmanager"}),
+        _a_: None,
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
+                ),
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsFIPS",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-cn",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-us-gov",
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
                                     {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
                                     }
                                 ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://secretsmanager-fips.{Region}.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://secretsmanager-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://secretsmanager-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://secretsmanager.{Region}.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://secretsmanager.{Region}.amazonaws.com.cn",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://secretsmanager.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://secretsmanager.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                                "aws",
+                            ),
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 18,
-                    "nodes": "/////wAAAAH/////AAAAAAAAABEAAAADAAAAAQAAAAQF9eEOAAAAAgAAAAUF9eEOAAAAAwAAAAsAAAAGAAAABAAAAAcF9eENAAAABQAAAAgF9eEMAAAABwX14QkAAAAJAAAACAX14QoAAAAKAAAACQX14QkF9eELAAAABAAAAA0AAAAMAAAABgX14QcF9eEIAAAABQAAAA4F9eEGAAAABgAAAA8F9eEGAAAABwX14QQAAAAQAAAACQX14QQF9eEFAAAAAwX14QEAAAASAAAABAX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-cn",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-us-gov",
+                            ),
+                        }
+                    ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://secretsmanager-fips.{Region}.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://secretsmanager-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://secretsmanager-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://secretsmanager.{Region}.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://secretsmanager.{Region}.amazonaws.com.cn",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://secretsmanager.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://secretsmanager.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 18,
+                "nodes": "/////wAAAAH/////AAAAAAAAABEAAAADAAAAAQAAAAQF9eEOAAAAAgAAAAUF9eEOAAAAAwAAAAsAAAAGAAAABAAAAAcF9eENAAAABQAAAAgF9eEMAAAABwX14QkAAAAJAAAACAX14QoAAAAKAAAACQX14QkF9eELAAAABAAAAA0AAAAMAAAABgX14QcF9eEIAAAABQAAAA4F9eEGAAAABgAAAA8F9eEGAAAABwX14QQAAAAQAAAACQX14QQF9eEFAAAAAwX14QEAAAASAAAABAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "Secrets Manager",
-                    "arnNamespace": "secretsmanager",
-                    "cloudFormationName": "SecretsManager",
-                    "cloudTrailEventSource": "secretsmanager.amazonaws.com",
-                    "docId": "secretsmanager-2017-10-17",
-                    "endpointPrefix": "secretsmanager",
-                }
-            ),
+        _aws: MappingProxyType(
+            {
+                "sdkId": "Secrets Manager",
+                "arnNamespace": "secretsmanager",
+                "cloudFormationName": "SecretsManager",
+                "cloudTrailEventSource": "secretsmanager.amazonaws.com",
+                "docId": "secretsmanager-2017-10-17",
+                "endpointPrefix": "secretsmanager",
+            }
         ),
-    ],
+    },
 )

@@ -144,9 +144,9 @@ def lex_bot():
     role_name = f"integ-test-lex-runtime-v2-role-{unique_suffix}"
     bot_name = f"integ-test-lex-runtime-v2-bot-{unique_suffix}"
 
-    iam_client = boto3.client("iam")
-    lex_client = boto3.client("lexv2-models", region_name=REGION)
-    sts_client = boto3.client("sts")
+    iam_client = boto3.client("iam")  # pyright: ignore[reportUnknownMemberType]
+    lex_client = boto3.client("lexv2-models", region_name=REGION)  # pyright: ignore[reportUnknownMemberType]
+    sts_client = boto3.client("sts")  # pyright: ignore[reportUnknownMemberType]
 
     bot_id = None
     try:

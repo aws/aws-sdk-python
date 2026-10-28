@@ -26,13 +26,13 @@ property on a service client's config to an `AssumeRoleCredentialsResolver`
 instance. It assumes `role_arn` using credentials from the `source_resolver`:
 
 ```python
-from aws_credentials_sts import AssumeRoleCredentialsResolver
-from smithy_aws_core.identity import EnvironmentCredentialsResolver
+from aws_credentials_sts.aio import AssumeRoleCredentialsResolver
+from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
 
 service_client = ServiceClient(
     config=ServiceClientConfig(
         aws_credentials_identity_resolver=AssumeRoleCredentialsResolver(
-            source_resolver=EnvironmentCredentialsResolver(),
+            source_resolver=AsyncEnvironmentCredentialsResolver(),
             role_arn="arn:aws:iam::123456789012:role/example-role",
         ),
     )
@@ -44,8 +44,8 @@ To assume the role defined in a named profile instead, use
 shared config/credentials files:
 
 ```python
-from aws_credentials_sts import ProfileAssumeRoleCredentialsResolver
-from smithy_aws_core.config import load_config
+from aws_credentials_sts.aio import ProfileAssumeRoleCredentialsResolver
+from smithy_aws_core.aio.config import load_config_async
 
 
 async def build_client() -> ServiceClient:
@@ -53,7 +53,7 @@ async def build_client() -> ServiceClient:
         config=ServiceClientConfig(
             aws_credentials_identity_resolver=ProfileAssumeRoleCredentialsResolver(
                 profile_name="my-profile",
-                config_file=await load_config(),
+                config_file=await load_config_async(),
             ),
         )
     )
@@ -66,13 +66,13 @@ Either resolver can also be used on its own to fetch credentials directly:
 ```python
 import asyncio
 
-from aws_credentials_sts import AssumeRoleCredentialsResolver
-from smithy_aws_core.identity import EnvironmentCredentialsResolver
+from aws_credentials_sts.aio import AssumeRoleCredentialsResolver
+from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
 
 
 async def main() -> None:
     resolver = AssumeRoleCredentialsResolver(
-        source_resolver=EnvironmentCredentialsResolver(),
+        source_resolver=AsyncEnvironmentCredentialsResolver(),
         role_arn="arn:aws:iam::123456789012:role/example-role",
     )
     identity = await resolver.get_identity(properties={})

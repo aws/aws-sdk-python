@@ -3,9 +3,9 @@
 
 from pathlib import Path
 
-from smithy_aws_core.config import AwsConfigOverrides
-from smithy_aws_core.identity import EnvironmentCredentialsResolver
-from smithy_http.aio.interfaces import HTTPClient
+from smithy_aws_core.aio.config import AwsConfigOverrides
+from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
+from smithy_http.aio.interfaces import AsyncHTTPClient
 
 from aws_sdk_connecthealth.client import AsyncConnectHealthClient
 from aws_sdk_connecthealth.config import AsyncConnectHealthConfig, Plugin
@@ -15,12 +15,12 @@ AUDIO_FILE = Path(__file__).parent / "assets" / "test.wav"
 
 
 async def create_connecthealth_client(
-    region: str, *, transport: HTTPClient | None = None
+    region: str, *, transport: AsyncHTTPClient | None = None
 ) -> AsyncConnectHealthClient:
     overrides: AwsConfigOverrides = {
         "endpoint_uri": f"https://health-agent.{region}.api.aws",
         "region": region,
-        "aws_credentials_identity_resolver": EnvironmentCredentialsResolver(),
+        "aws_credentials_identity_resolver": AsyncEnvironmentCredentialsResolver(),
     }
     if transport is not None:
         overrides["transport"] = transport

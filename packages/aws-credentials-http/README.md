@@ -21,7 +21,7 @@ property on a service client's config to a `ContainerCredentialsResolver`
 instance:
 
 ```python
-from aws_credentials_http import ContainerCredentialsResolver
+from aws_credentials_http.aio import ContainerCredentialsResolver
 
 service_client = ServiceClient(
     config=ServiceClientConfig(
@@ -37,7 +37,7 @@ The resolver can also be used on its own to fetch credentials directly:
 ```python
 import asyncio
 
-from aws_credentials_http import ContainerCredentialsResolver
+from aws_credentials_http.aio import ContainerCredentialsResolver
 
 
 async def main() -> None:

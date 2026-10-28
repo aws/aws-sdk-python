@@ -7,11 +7,11 @@ from urllib.parse import urlparse
 
 from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
 from smithy_core import URI
-from smithy_core.aio.interfaces.identity import IdentityResolver
+from smithy_core.aio.interfaces.identity import AsyncIdentityResolver
 from smithy_core.exceptions import SmithyIdentityError
 from smithy_http import Field, Fields
 from smithy_http.aio.aiohttp import AIOHTTPClient
-from smithy_http.aio.interfaces import HTTPClient
+from smithy_http.aio.interfaces import AsyncHTTPClient
 
 from .client import HttpCredentialsClient
 
@@ -21,7 +21,7 @@ _DEFAULT_RETRIES = 3
 
 
 class ContainerCredentialsResolver(
-    IdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
+    AsyncIdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
 ):
     """Resolves AWS credentials from container HTTP endpoints."""
 
@@ -32,7 +32,7 @@ class ContainerCredentialsResolver(
 
     def __init__(
         self,
-        http_client: HTTPClient | None = None,
+        http_client: AsyncHTTPClient | None = None,
         *,
         timeout: int = _DEFAULT_TIMEOUT,
         retries: int = _DEFAULT_RETRIES,

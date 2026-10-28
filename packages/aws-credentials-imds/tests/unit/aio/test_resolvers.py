@@ -7,8 +7,8 @@ from datetime import UTC, datetime, timedelta
 from unittest.mock import AsyncMock
 
 import pytest
-from aws_credentials_imds.client import IMDSConfig
-from aws_credentials_imds.resolvers import IMDSCredentialsResolver
+from aws_credentials_imds.aio.client import IMDSConfig
+from aws_credentials_imds.aio.resolvers import IMDSCredentialsResolver
 from smithy_core.exceptions import SmithyIdentityError
 
 ISO8601 = "%Y-%m-%dT%H:%M:%SZ"

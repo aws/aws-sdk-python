@@ -2,663 +2,623 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import INTEGER, STRING
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 
-INPUT_VALIDATION_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#InputValidationError"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Message": {"target": STRING}, "ErrorCode": {"target": STRING}},
+n0 = "com.amazonaws.sagemakerruntimehttp2"
+_IVE = "InputValidationError"
+_s = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_M = "Message"
+_EC = "ErrorCode"
+_ISE = "InternalServerError"
+_se = "server"
+_ISF = "InternalStreamFailure"
+_SB = "SensitiveBlob"
+_sm = "smithy.api#sensitive"
+_RPP = "RequestPayloadPart"
+_B = "Bytes"
+_sP = "smithy.api#eventPayload"
+_DT = "DataType"
+_sH = "smithy.api#eventHeader"
+_CS = "CompletionState"
+_P = "P"
+_RSE = "RequestStreamEvent"
+_smi = "smithy.api#streaming"
+_PP = "PayloadPart"
+_IEWBSI = "InvokeEndpointWithBidirectionalStreamInput"
+_smit = "smithy.api#input"
+_EN = "EndpointName"
+_smith = "smithy.api#required"
+_sL = "smithy.api#httpLabel"
+_Bo = "Body"
+_sPm = "smithy.api#httpPayload"
+_TV = "TargetVariant"
+_sHm = "smithy.api#httpHeader"
+_XASTV = "X-Amzn-SageMaker-Target-Variant"
+_MIP = "ModelInvocationPath"
+_XASMIP = "X-Amzn-SageMaker-Model-Invocation-Path"
+_MQS = "ModelQueryString"
+_XASMQS = "X-Amzn-SageMaker-Model-Query-String"
+_MSE = "ModelStreamError"
+_RPPe = "ResponsePayloadPart"
+_RSEe = "ResponseStreamEvent"
+_IEWBSO = "InvokeEndpointWithBidirectionalStreamOutput"
+_smithy = "smithy.api#output"
+_IPV = "InvokedProductionVariant"
+_XAIPV = "X-Amzn-Invoked-Production-Variant"
+_ME = "ModelError"
+_OSC = "OriginalStatusCode"
+_OM = "OriginalMessage"
+_LSA = "LogStreamArn"
+_SUE = "ServiceUnavailableError"
+_IEWBS = "InvokeEndpointWithBidirectionalStream"
+_smithya = "smithy.api#http"
+_ASMRH = "AmazonSageMakerRuntimeHttp2"
+_a = "aws.auth#sigv4"
+_sB = "smithy.rules#endpointBdd"
+_aw = "aws.api#service"
+_aJ = "aws.protocols#restJson1"
+
+INPUT_VALIDATION_ERROR: StaticSchema = (
+    18,
+    n0,
+    _IVE,
+    {_s: _c, _sE: 400},
+    (_M, _EC),
+    ((3, 0), (3, 0)),
 )
 
-INTERNAL_SERVER_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#InternalServerError"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-    ],
-    members={"Message": {"target": STRING}, "ErrorCode": {"target": STRING}},
+INTERNAL_SERVER_ERROR: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_s: _se, _sE: 500},
+    (_M, _EC),
+    ((3, 0), (3, 0)),
 )
 
-INTERNAL_STREAM_FAILURE = Schema.collection(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#InternalStreamFailure"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="server")],
-    members={"Message": {"target": STRING}},
-)
+INTERNAL_STREAM_FAILURE: StaticSchema = (18, n0, _ISF, {_s: _se}, (_M,), ((3, 0),))
 
-SENSITIVE_BLOB = Schema(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#SensitiveBlob"),
-    shape_type=ShapeType.BLOB,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
+SENSITIVE_BLOB: StaticSchema = (1, n0, _SB, 4)
 
-REQUEST_PAYLOAD_PART = Schema.collection(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#RequestPayloadPart"),
-    members={
-        "Bytes": {
-            "target": SENSITIVE_BLOB,
-            "traits": [Trait.new(id=ShapeID("smithy.api#eventPayload"))],
-        },
-        "DataType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#eventHeader"))],
-        },
-        "CompletionState": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#eventHeader"))],
-        },
-        "P": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#eventHeader"))],
-        },
-    },
-)
-
-REQUEST_STREAM_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#RequestStreamEvent"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={"PayloadPart": {"target": REQUEST_PAYLOAD_PART}},
-)
-
-INVOKE_ENDPOINT_WITH_BIDIRECTIONAL_STREAM_INPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.sagemakerruntimehttp2#InvokeEndpointWithBidirectionalStreamInput"
+REQUEST_PAYLOAD_PART: StaticSchema = (
+    18,
+    n0,
+    _RPP,
+    0,
+    (_B, _DT, _CS, _P),
+    (
+        (SENSITIVE_BLOB, {_sP: None}),
+        (3, {_sH: None}),
+        (3, {_sH: None}),
+        (3, {_sH: None}),
     ),
-    members={
-        "EndpointName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Body": {
-            "target": REQUEST_STREAM_EVENT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-        "TargetVariant": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="X-Amzn-SageMaker-Target-Variant",
-                )
-            ],
-        },
-        "ModelInvocationPath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="X-Amzn-SageMaker-Model-Invocation-Path",
-                )
-            ],
-        },
-        "ModelQueryString": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="X-Amzn-SageMaker-Model-Query-String",
-                )
-            ],
-        },
-    },
 )
 
-MODEL_STREAM_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#ModelStreamError"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={"Message": {"target": STRING}, "ErrorCode": {"target": STRING}},
+REQUEST_STREAM_EVENT: StaticSchema = (
+    19,
+    n0,
+    _RSE,
+    {_smi: None},
+    (_PP,),
+    ((REQUEST_PAYLOAD_PART, 0),),
 )
 
-RESPONSE_PAYLOAD_PART = Schema.collection(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#ResponsePayloadPart"),
-    members={
-        "Bytes": {
-            "target": SENSITIVE_BLOB,
-            "traits": [Trait.new(id=ShapeID("smithy.api#eventPayload"))],
-        },
-        "DataType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#eventHeader"))],
-        },
-        "CompletionState": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#eventHeader"))],
-        },
-        "P": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#eventHeader"))],
-        },
-    },
-)
-
-RESPONSE_STREAM_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#ResponseStreamEvent"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "PayloadPart": {"target": RESPONSE_PAYLOAD_PART},
-        "ModelStreamError": {"target": MODEL_STREAM_ERROR},
-        "InternalStreamFailure": {"target": INTERNAL_STREAM_FAILURE},
-    },
-)
-
-INVOKE_ENDPOINT_WITH_BIDIRECTIONAL_STREAM_OUTPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.sagemakerruntimehttp2#InvokeEndpointWithBidirectionalStreamOutput"
+INVOKE_ENDPOINT_WITH_BIDIRECTIONAL_STREAM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IEWBSI,
+    {_smit: None},
+    (_EN, _Bo, _TV, _MIP, _MQS),
+    (
+        (3, 9),
+        (REQUEST_STREAM_EVENT, 17),
+        (3, {_sHm: _XASTV}),
+        (3, {_sHm: _XASMIP}),
+        (3, {_sHm: _XASMQS}),
     ),
-    members={
-        "Body": {
-            "target": RESPONSE_STREAM_EVENT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-        "InvokedProductionVariant": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="X-Amzn-Invoked-Production-Variant",
-                )
-            ],
-        },
-    },
 )
 
-MODEL_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#ModelError"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=424),
-    ],
-    members={
-        "Message": {"target": STRING},
-        "OriginalStatusCode": {"target": INTEGER},
-        "OriginalMessage": {"target": STRING},
-        "LogStreamArn": {"target": STRING},
-        "ErrorCode": {"target": STRING},
-    },
-)
+MODEL_STREAM_ERROR: StaticSchema = (18, n0, _MSE, {_s: _c}, (_M, _EC), ((3, 0), (3, 0)))
 
-SERVICE_UNAVAILABLE_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#ServiceUnavailableError"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=503),
-    ],
-    members={"Message": {"target": STRING}, "ErrorCode": {"target": STRING}},
-)
-
-INVOKE_ENDPOINT_WITH_BIDIRECTIONAL_STREAM = Schema(
-    id=ShapeID(
-        "com.amazonaws.sagemakerruntimehttp2#InvokeEndpointWithBidirectionalStream"
+RESPONSE_PAYLOAD_PART: StaticSchema = (
+    18,
+    n0,
+    _RPPe,
+    0,
+    (_B, _DT, _CS, _P),
+    (
+        (SENSITIVE_BLOB, {_sP: None}),
+        (3, {_sH: None}),
+        (3, {_sH: None}),
+        (3, {_sH: None}),
     ),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/endpoints/{EndpointName}/invocations-bidirectional-stream",
-                }
-            ),
+)
+
+RESPONSE_STREAM_EVENT: StaticSchema = (
+    19,
+    n0,
+    _RSEe,
+    {_smi: None},
+    (_PP, _MSE, _ISF),
+    ((RESPONSE_PAYLOAD_PART, 0), (MODEL_STREAM_ERROR, 0), (INTERNAL_STREAM_FAILURE, 0)),
+)
+
+INVOKE_ENDPOINT_WITH_BIDIRECTIONAL_STREAM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IEWBSO,
+    {_smithy: None},
+    (_Bo, _IPV),
+    ((RESPONSE_STREAM_EVENT, 17), (3, {_sHm: _XAIPV})),
+)
+
+MODEL_ERROR: StaticSchema = (
+    18,
+    n0,
+    _ME,
+    {_s: _c, _sE: 424},
+    (_M, _OSC, _OM, _LSA, _EC),
+    ((3, 0), (7, 0), (3, 0), (3, 0), (3, 0)),
+)
+
+SERVICE_UNAVAILABLE_ERROR: StaticSchema = (
+    18,
+    n0,
+    _SUE,
+    {_s: _se, _sE: 503},
+    (_M, _EC),
+    ((3, 0), (3, 0)),
+)
+
+INVOKE_ENDPOINT_WITH_BIDIRECTIONAL_STREAM: StaticOperationSchema = (
+    23,
+    n0,
+    _IEWBS,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/endpoints/{EndpointName}/invocations-bidirectional-stream",
+            }
         )
-    ],
+    },
+    INVOKE_ENDPOINT_WITH_BIDIRECTIONAL_STREAM_INPUT,
+    INVOKE_ENDPOINT_WITH_BIDIRECTIONAL_STREAM_OUTPUT,
+    (
+        INPUT_VALIDATION_ERROR,
+        INTERNAL_SERVER_ERROR,
+        INTERNAL_STREAM_FAILURE,
+        MODEL_ERROR,
+        MODEL_STREAM_ERROR,
+        SERVICE_UNAVAILABLE_ERROR,
+    ),
 )
 
-AMAZON_SAGE_MAKER_RUNTIME_HTTP2 = Schema(
-    id=ShapeID("com.amazonaws.sagemakerruntimehttp2#AmazonSageMakerRuntimeHttp2"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "sagemaker"})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+AMAZON_SAGE_MAKER_RUNTIME_HTTP2: StaticSchema = (
+    21,
+    n0,
+    _ASMRH,
+    {
+        _a: MappingProxyType({"name": "sagemaker"}),
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                    }
+                ),
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws",
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    "aws",
+                                            "name",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-cn",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-us-gov",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-iso",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-iso-b",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-eusc",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-iso-f",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
+                                "aws-cn",
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
                                     {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
                                     }
                                 ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime.sagemaker.{Region}.{PartitionResult#dnsSuffix}:8443",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}:8443",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime-fips.sagemaker.{Region}.{PartitionResult#dnsSuffix}:8443",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime-fips.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}:8443",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime.sagemaker-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime.sagemaker.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                                "aws-us-gov",
+                            ),
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 23,
-                    "nodes": "/////wAAAAH/////AAAAAAAAABYAAAADAAAAAQAAAAQF9eEPAAAAAgAAAAUF9eEPAAAAAwAAABMAAAAGAAAABAAAABMAAAAHAAAABQAAABMAAAAIAAAABgAAABMAAAAJAAAABwAAABMAAAAKAAAACAAAABMAAAALAAAACQAAABMAAAAMAAAACgAAAA8AAAANAAAADAAAAA4F9eEOAAAADQX14QwF9eENAAAACwAAABEAAAAQAAAADAX14QkF9eELAAAADAAAABIF9eEKAAAADQX14QgF9eEJAAAACgAAABUAAAAUAAAADAX14QUF9eEEAAAADAX14QcF9eEGAAAACgX14QEAAAAXAAAADAX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-iso",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-iso-b",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-eusc",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
+                                    }
+                                ),
+                                "aws-iso-f",
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsFIPS",
+                                        ),
+                                    }
+                                ),
+                                True,
+                            ),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
+                            ),
+                        }
+                    ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime.sagemaker.{Region}.{PartitionResult#dnsSuffix}:8443",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}:8443",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime-fips.sagemaker.{Region}.{PartitionResult#dnsSuffix}:8443",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime-fips.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}:8443",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime.sagemaker-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime.sagemaker.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 23,
+                "nodes": "/////wAAAAH/////AAAAAAAAABYAAAADAAAAAQAAAAQF9eEPAAAAAgAAAAUF9eEPAAAAAwAAABMAAAAGAAAABAAAABMAAAAHAAAABQAAABMAAAAIAAAABgAAABMAAAAJAAAABwAAABMAAAAKAAAACAAAABMAAAALAAAACQAAABMAAAAMAAAACgAAAA8AAAANAAAADAAAAA4F9eEOAAAADQX14QwF9eENAAAACwAAABEAAAAQAAAADAX14QkF9eELAAAADAAAABIF9eEKAAAADQX14QgF9eEJAAAACgAAABUAAAAUAAAADAX14QUF9eEEAAAADAX14QcF9eEGAAAACgX14QEAAAAXAAAADAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "SageMaker Runtime HTTP2",
-                    "arnNamespace": "sagemaker",
-                    "cloudFormationName": "SageMakerRuntime",
-                    "endpointPrefix": "runtime.sagemaker",
-                }
-            ),
+        _aw: MappingProxyType(
+            {
+                "sdkId": "SageMaker Runtime HTTP2",
+                "arnNamespace": "sagemaker",
+                "cloudFormationName": "SageMakerRuntime",
+                "endpointPrefix": "runtime.sagemaker",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.protocols#restJson1"),
-            value=MappingProxyType({"http": ("h2",), "eventStreamHttp": ("h2",)}),
-        ),
-    ],
+        _aJ: MappingProxyType({"http": ("h2",), "eventStreamHttp": ("h2",)}),
+    },
 )

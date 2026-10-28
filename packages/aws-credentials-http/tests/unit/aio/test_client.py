@@ -4,7 +4,7 @@ import json
 from unittest.mock import AsyncMock, patch
 
 import pytest
-from aws_credentials_http.client import HttpCredentialsClient
+from aws_credentials_http.aio.client import HttpCredentialsClient
 from smithy_core import URI
 from smithy_core.exceptions import SmithyIdentityError
 from smithy_http import Fields
@@ -114,7 +114,7 @@ async def test_client_retries() -> None:
     http_client.send.side_effect = Exception()
 
     with patch(
-        "aws_credentials_http.client.asyncio.sleep", new_callable=AsyncMock
+        "aws_credentials_http.aio.client.asyncio.sleep", new_callable=AsyncMock
     ) as sleep:
         with pytest.raises(SmithyIdentityError):
             await client.get_credentials(uri, Fields())

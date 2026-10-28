@@ -2,1744 +2,1507 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 
-STRING = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#String"), shape_type=ShapeType.STRING
+n0 = "com.amazonaws.lexruntimev2"
+_S = "String"
+_ADE = "AccessDeniedException"
+_s = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_m = "message"
+_sm = "smithy.api#required"
+_PN = "ParameterName"
+_T = "Text"
+_smi = "smithy.api#sensitive"
+_ACPM = "ActiveContextParametersMap"
+_k = "key"
+_v = "value"
+_ACN = "ActiveContextName"
+_ACTTLIS = "ActiveContextTimeToLiveInSeconds"
+_ACTTL = "ActiveContextTurnsToLive"
+_ACTTLc = "ActiveContextTimeToLive"
+_tTLIS = "timeToLiveInSeconds"
+_tTL = "turnsToLive"
+_AC = "ActiveContext"
+_n = "name"
+_tTLi = "timeToLive"
+_cA = "contextAttributes"
+_ACL = "ActiveContextsList"
+_me = "member"
+_AT = "AttachmentTitle"
+_AU = "AttachmentUrl"
+_ACu = "AudioChunk"
+_EM = "EpochMillis"
+_smit = "smithy.api#default"
+_NES = "NonEmptyString"
+_EI = "EventId"
+_AIE = "AudioInputEvent"
+_aC = "audioChunk"
+_cT = "contentType"
+_eI = "eventId"
+_cTM = "clientTimestampMillis"
+_ARE = "AudioResponseEvent"
+_CE = "ConflictException"
+_BAI = "BotAliasIdentifier"
+_BI = "BotIdentifier"
+_LI = "LocaleId"
+_SI = "SessionId"
+_DSI = "DeleteSessionInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cDSR = "com.amazonaws.lexruntimev2#DeleteSessionRequest"
+_smith = "smithy.api#input"
+_bI = "botId"
+_sL = "smithy.api#httpLabel"
+_bAI = "botAliasId"
+_lI = "localeId"
+_sI = "sessionId"
+_DSO = "DeleteSessionOutput"
+_cDSRo = "com.amazonaws.lexruntimev2#DeleteSessionResponse"
+_smithy = "smithy.api#output"
+_ISE = "InternalServerException"
+_se = "server"
+_RNFE = "ResourceNotFoundException"
+_TE = "ThrottlingException"
+_VE = "ValidationException"
+_DS = "DeleteSession"
+_smithya = "smithy.api#http"
+_GSI = "GetSessionInput"
+_cGSR = "com.amazonaws.lexruntimev2#GetSessionRequest"
+_CS = "ConfirmationState"
+_CONFIRMED = "CONFIRMED"
+_sV = "smithy.api#enumValue"
+_C = "Confirmed"
+_DENIED = "DENIED"
+_D = "Denied"
+_NONE = "NONE"
+_N = "None"
+_Sh = "Shape"
+_SCALAR = "SCALAR"
+_Sc = "Scalar"
+_LIST = "LIST"
+_L = "List"
+_COMPOSITE = "COMPOSITE"
+_Co = "Composite"
+_SL = "StringList"
+_V = "Value"
+_oV = "originalValue"
+_iV = "interpretedValue"
+_rV = "resolvedValues"
+_IS = "IntentState"
+_FAILED = "FAILED"
+_F = "Failed"
+_FULFILLED = "FULFILLED"
+_Fu = "Fulfilled"
+_IP = "IN_PROGRESS"
+_IPn = "InProgress"
+_RFF = "READY_FOR_FULFILLMENT"
+_RFFe = "ReadyForFulfillment"
+_WAITING = "WAITING"
+_W = "Waiting"
+_FIP = "FULFILLMENT_IN_PROGRESS"
+_FIPu = "FulfillmentInProgress"
+_ISn = "InterpretationSource"
+_BEDROCK = "BEDROCK"
+_B = "Bedrock"
+_LEX = "LEX"
+_Le = "Lex"
+_Do = "Double"
+_CSo = "ConfidenceScore"
+_sc = "score"
+_ST = "SentimentType"
+_MIXED = "MIXED"
+_NEGATIVE = "NEGATIVE"
+_NEUTRAL = "NEUTRAL"
+_POSITIVE = "POSITIVE"
+_SS = "SentimentScore"
+_p = "positive"
+_ne = "negative"
+_neu = "neutral"
+_mi = "mixed"
+_SR = "SentimentResponse"
+_sen = "sentiment"
+_sS = "sentimentScore"
+_MCT = "MessageContentType"
+_CP = "CUSTOM_PAYLOAD"
+_CPu = "CustomPayload"
+_IRC = "IMAGE_RESPONSE_CARD"
+_IRCm = "ImageResponseCard"
+_PT = "PLAIN_TEXT"
+_PTl = "PlainText"
+_SSML = "SSML"
+_BT = "ButtonText"
+_BV = "ButtonValue"
+_Bu = "Button"
+_t = "text"
+_BL = "ButtonsList"
+_ti = "title"
+_su = "subtitle"
+_iU = "imageUrl"
+_b = "buttons"
+_M = "Message"
+_co = "content"
+_iRC = "imageResponseCard"
+_Me = "Messages"
+_STt = "StyleType"
+_DEFAULT = "DEFAULT"
+_De = "Default"
+_SBL = "SPELL_BY_LETTER"
+_SBLp = "SpellByLetter"
+_SBW = "SPELL_BY_WORD"
+_SBWp = "SpellByWord"
+_DAT = "DialogActionType"
+_CLOSE = "CLOSE"
+_Cl = "Close"
+_CI = "CONFIRM_INTENT"
+_CIo = "ConfirmIntent"
+_DELEGATE = "DELEGATE"
+_Del = "Delegate"
+_EI_ = "ELICIT_INTENT"
+_EIl = "ElicitIntent"
+_ES = "ELICIT_SLOT"
+_ESl = "ElicitSlot"
+_Na = "Name"
+_RHP = "RuntimeHintPhrase"
+_RHV = "RuntimeHintValue"
+_ph = "phrase"
+_RHVL = "RuntimeHintValuesList"
+_SM = "StringMap"
+_BGE = "BadGatewayException"
+_DFE = "DependencyFailedException"
+_BS = "BlobStream"
+_smithyap = "smithy.api#streaming"
+_PSO = "PutSessionOutput"
+_cPSR = "com.amazonaws.lexruntimev2#PutSessionResponse"
+_sH = "smithy.api#httpHeader"
+_CT = "Content-Type"
+_mes = "messages"
+_xalm = "x-amz-lex-messages"
+_sSe = "sessionState"
+_xalss = "x-amz-lex-session-state"
+_rA = "requestAttributes"
+_xalra = "x-amz-lex-request-attributes"
+_xalsi = "x-amz-lex-session-id"
+_aS = "audioStream"
+_v_ = ""
+_sP = "smithy.api#httpPayload"
+_RBM = "RecognizedBotMember"
+_bN = "botName"
+_SNES = "SensitiveNonEmptyString"
+_RUI = "RecognizeUtteranceInput"
+_cRUR = "com.amazonaws.lexruntimev2#RecognizeUtteranceRequest"
+_rCT = "requestContentType"
+_rCTe = "responseContentType"
+_RCT = "Response-Content-Type"
+_iS = "inputStream"
+_RUO = "RecognizeUtteranceOutput"
+_cRURo = "com.amazonaws.lexruntimev2#RecognizeUtteranceResponse"
+_iM = "inputMode"
+_xalim = "x-amz-lex-input-mode"
+_i = "interpretations"
+_xali = "x-amz-lex-interpretations"
+_iT = "inputTranscript"
+_xalit = "x-amz-lex-input-transcript"
+_rBM = "recognizedBotMember"
+_xalrbm = "x-amz-lex-recognized-bot-member"
+_RU = "RecognizeUtterance"
+_aP = "aws.auth#unsignedPayload"
+_CM = "ConversationMode"
+_AUDIO = "AUDIO"
+_TEXT = "TEXT"
+_Bo = "Boolean"
+_DE = "DisconnectionEvent"
+_DTMFR = "DTMFRegex"
+_DTMFIE = "DTMFInputEvent"
+_iC = "inputCharacter"
+_PCE = "PlaybackCompletionEvent"
+_TIE = "TextInputEvent"
+_HE = "HeartbeatEvent"
+_IM = "InputMode"
+_SPEECH = "SPEECH"
+_Sp = "Speech"
+_DTMF = "DTMF"
+_PIR = "PlaybackInterruptionReason"
+_DSD = "DTMF_START_DETECTED"
+_TD = "TEXT_DETECTED"
+_VSD = "VOICE_START_DETECTED"
+_PIE = "PlaybackInterruptionEvent"
+_eR = "eventReason"
+_cBEI = "causedByEventId"
+_TRE = "TextResponseEvent"
+_TEr = "TranscriptEvent"
+_tr = "transcript"
+_ESS = "ElicitSubSlot"
+_sSTE = "subSlotToElicit"
+_DA = "DialogAction"
+_ty = "type"
+_sTE = "slotToElicit"
+_sES = "slotElicitationStyle"
+_RHD = "RuntimeHintDetails"
+_rHV = "runtimeHintValues"
+_sSH = "subSlotHints"
+_SHSM = "SlotHintsSlotMap"
+_SHIM = "SlotHintsIntentMap"
+_RH = "RuntimeHints"
+_sHl = "slotHints"
+_Sl = "Slot"
+_sh = "shape"
+_va = "values"
+_sSu = "subSlots"
+_Slo = "Slots"
+_Va = "Values"
+_I = "Intent"
+_sl = "slots"
+_st = "state"
+_cS = "confirmationState"
+_In = "Interpretation"
+_nC = "nluConfidence"
+_sR = "sentimentResponse"
+_in = "intent"
+_iSn = "interpretationSource"
+_Int = "Interpretations"
+_SSe = "SessionState"
+_dA = "dialogAction"
+_aCc = "activeContexts"
+_sA = "sessionAttributes"
+_oRI = "originatingRequestId"
+_rH = "runtimeHints"
+_CEo = "ConfigurationEvent"
+_wM = "welcomeMessages"
+_dP = "disablePlayback"
+_PSI = "PutSessionInput"
+_cPSRo = "com.amazonaws.lexruntimev2#PutSessionRequest"
+_RCTe = "ResponseContentType"
+_RTI = "RecognizeTextInput"
+_cRTR = "com.amazonaws.lexruntimev2#RecognizeTextRequest"
+_PS = "PutSession"
+_SCRES = "StartConversationRequestEventStream"
+_SCI = "StartConversationInput"
+_cSCR = "com.amazonaws.lexruntimev2#StartConversationRequest"
+_cM = "conversationMode"
+_xalcm = "x-amz-lex-conversation-mode"
+_rES = "requestEventStream"
+_GSO = "GetSessionOutput"
+_cGSRo = "com.amazonaws.lexruntimev2#GetSessionResponse"
+_IRE = "IntentResultEvent"
+_RTO = "RecognizeTextOutput"
+_cRTRo = "com.amazonaws.lexruntimev2#RecognizeTextResponse"
+_GS = "GetSession"
+_SCRESt = "StartConversationResponseEventStream"
+_SCO = "StartConversationOutput"
+_cSCRo = "com.amazonaws.lexruntimev2#StartConversationResponse"
+_rESe = "responseEventStream"
+_RT = "RecognizeText"
+_SC = "StartConversation"
+_A = "AWSDeepSenseRunTimeServiceApi2_0"
+_a = "aws.auth#sigv4"
+_sB = "smithy.rules#endpointBdd"
+_aw = "aws.api#service"
+_aJ = "aws.protocols#restJson1"
+
+STRING: StaticSchema = (3, n0, _S, 0)
+
+ACCESS_DENIED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ADE,
+    {_s: _c, _sE: 403},
+    (_m,),
+    ((STRING, 1),),
 )
 
-ACCESS_DENIED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#AccessDeniedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-    ],
-    members={
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
+PARAMETER_NAME: StaticSchema = (3, n0, _PN, 0)
+
+TEXT: StaticSchema = (3, n0, _T, 4)
+
+ACTIVE_CONTEXT_PARAMETERS_MAP: StaticSchema = (
+    17,
+    n0,
+    _ACPM,
+    0,
+    (_k, _v),
+    ((PARAMETER_NAME, 0), (TEXT, 0)),
 )
 
-PARAMETER_NAME = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#ParameterName"), shape_type=ShapeType.STRING
+ACTIVE_CONTEXT_NAME: StaticSchema = (3, n0, _ACN, 0)
+
+ACTIVE_CONTEXT_TIME_TO_LIVE_IN_SECONDS: StaticSchema = (7, n0, _ACTTLIS, 0)
+
+ACTIVE_CONTEXT_TURNS_TO_LIVE: StaticSchema = (7, n0, _ACTTL, 0)
+
+ACTIVE_CONTEXT_TIME_TO_LIVE: StaticSchema = (
+    18,
+    n0,
+    _ACTTLc,
+    0,
+    (_tTLIS, _tTL),
+    ((ACTIVE_CONTEXT_TIME_TO_LIVE_IN_SECONDS, 1), (ACTIVE_CONTEXT_TURNS_TO_LIVE, 1)),
 )
 
-TEXT = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#Text"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+ACTIVE_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _AC,
+    0,
+    (_n, _tTLi, _cA),
+    (
+        (ACTIVE_CONTEXT_NAME, 1),
+        (ACTIVE_CONTEXT_TIME_TO_LIVE, 1),
+        (ACTIVE_CONTEXT_PARAMETERS_MAP, 1),
+    ),
 )
 
-ACTIVE_CONTEXT_PARAMETERS_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ActiveContextParametersMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": PARAMETER_NAME}, "value": {"target": TEXT}},
+ACTIVE_CONTEXTS_LIST: StaticSchema = (16, n0, _ACL, 0, (_me,), ((ACTIVE_CONTEXT, 0),))
+
+ATTACHMENT_TITLE: StaticSchema = (3, n0, _AT, 0)
+
+ATTACHMENT_URL: StaticSchema = (3, n0, _AU, 0)
+
+AUDIO_CHUNK: StaticSchema = (1, n0, _ACu, 0)
+
+EPOCH_MILLIS: StaticSchema = (8, n0, _EM, {_smit: 0})
+
+NON_EMPTY_STRING: StaticSchema = (3, n0, _NES, 0)
+
+EVENT_ID: StaticSchema = (3, n0, _EI, 0)
+
+AUDIO_INPUT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _AIE,
+    0,
+    (_aC, _cT, _eI, _cTM),
+    (
+        (AUDIO_CHUNK, 0),
+        (NON_EMPTY_STRING, 1),
+        (EVENT_ID, 0),
+        (EPOCH_MILLIS, {_smit: 0}),
+    ),
 )
 
-ACTIVE_CONTEXT_NAME = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#ActiveContextName"),
-    shape_type=ShapeType.STRING,
+AUDIO_RESPONSE_EVENT: StaticSchema = (
+    18,
+    n0,
+    _ARE,
+    0,
+    (_aC, _cT, _eI),
+    ((AUDIO_CHUNK, 0), (NON_EMPTY_STRING, 0), (EVENT_ID, 0)),
 )
 
-ACTIVE_CONTEXT_TIME_TO_LIVE_IN_SECONDS = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#ActiveContextTimeToLiveInSeconds"),
-    shape_type=ShapeType.INTEGER,
+CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CE,
+    {_s: _c, _sE: 409},
+    (_m,),
+    ((STRING, 1),),
 )
 
-ACTIVE_CONTEXT_TURNS_TO_LIVE = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#ActiveContextTurnsToLive"),
-    shape_type=ShapeType.INTEGER,
+BOT_ALIAS_IDENTIFIER: StaticSchema = (3, n0, _BAI, 0)
+
+BOT_IDENTIFIER: StaticSchema = (3, n0, _BI, 0)
+
+LOCALE_ID: StaticSchema = (3, n0, _LI, 0)
+
+SESSION_ID: StaticSchema = (3, n0, _SI, 0)
+
+DELETE_SESSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSI,
+    {_sSI: _cDSR, _smith: None},
+    (_bI, _bAI, _lI, _sI),
+    ((BOT_IDENTIFIER, 9), (BOT_ALIAS_IDENTIFIER, 9), (LOCALE_ID, 9), (SESSION_ID, 9)),
 )
 
-ACTIVE_CONTEXT_TIME_TO_LIVE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ActiveContextTimeToLive"),
-    members={
-        "timeToLiveInSeconds": {
-            "target": ACTIVE_CONTEXT_TIME_TO_LIVE_IN_SECONDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "turnsToLive": {
-            "target": ACTIVE_CONTEXT_TURNS_TO_LIVE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+DELETE_SESSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSO,
+    {_sSI: _cDSRo, _smithy: None},
+    (_bI, _bAI, _lI, _sI),
+    ((BOT_IDENTIFIER, 0), (BOT_ALIAS_IDENTIFIER, 0), (LOCALE_ID, 0), (SESSION_ID, 0)),
 )
 
-ACTIVE_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ActiveContext"),
-    members={
-        "name": {
-            "target": ACTIVE_CONTEXT_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "timeToLive": {
-            "target": ACTIVE_CONTEXT_TIME_TO_LIVE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "contextAttributes": {
-            "target": ACTIVE_CONTEXT_PARAMETERS_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+INTERNAL_SERVER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_s: _se, _sE: 500},
+    (_m,),
+    ((STRING, 1),),
 )
 
-ACTIVE_CONTEXTS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ActiveContextsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACTIVE_CONTEXT}},
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_s: _c, _sE: 404},
+    (_m,),
+    ((STRING, 1),),
 )
 
-ATTACHMENT_TITLE = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#AttachmentTitle"),
-    shape_type=ShapeType.STRING,
+THROTTLING_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TE,
+    {_s: _c, _sE: 429},
+    (_m,),
+    ((STRING, 1),),
 )
 
-ATTACHMENT_URL = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#AttachmentUrl"), shape_type=ShapeType.STRING
+VALIDATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _VE,
+    {_s: _c, _sE: 400},
+    (_m,),
+    ((STRING, 1),),
 )
 
-AUDIO_CHUNK = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#AudioChunk"), shape_type=ShapeType.BLOB
-)
-
-EPOCH_MILLIS = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#EpochMillis"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-NON_EMPTY_STRING = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#NonEmptyString"), shape_type=ShapeType.STRING
-)
-
-EVENT_ID = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#EventId"), shape_type=ShapeType.STRING
-)
-
-AUDIO_INPUT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#AudioInputEvent"),
-    members={
-        "audioChunk": {"target": AUDIO_CHUNK},
-        "contentType": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "eventId": {"target": EVENT_ID},
-        "clientTimestampMillis": {
-            "target": EPOCH_MILLIS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-AUDIO_RESPONSE_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#AudioResponseEvent"),
-    members={
-        "audioChunk": {"target": AUDIO_CHUNK},
-        "contentType": {"target": NON_EMPTY_STRING},
-        "eventId": {"target": EVENT_ID},
-    },
-)
-
-CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ConflictException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-BOT_ALIAS_IDENTIFIER = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#BotAliasIdentifier"),
-    shape_type=ShapeType.STRING,
-)
-
-BOT_IDENTIFIER = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#BotIdentifier"), shape_type=ShapeType.STRING
-)
-
-LOCALE_ID = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#LocaleId"), shape_type=ShapeType.STRING
-)
-
-SESSION_ID = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#SessionId"), shape_type=ShapeType.STRING
-)
-
-DELETE_SESSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#DeleteSessionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#DeleteSessionRequest",
+DELETE_SESSION: StaticOperationSchema = (
+    23,
+    n0,
+    _DS,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
+                "code": 200,
+            }
         )
-    ],
-    members={
-        "botId": {
-            "target": BOT_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "botAliasId": {
-            "target": BOT_ALIAS_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "localeId": {
-            "target": LOCALE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "sessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
     },
+    DELETE_SESSION_INPUT,
+    DELETE_SESSION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-DELETE_SESSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#DeleteSessionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#DeleteSessionResponse",
-        )
-    ],
-    members={
-        "botId": {"target": BOT_IDENTIFIER},
-        "botAliasId": {"target": BOT_ALIAS_IDENTIFIER},
-        "localeId": {"target": LOCALE_ID},
-        "sessionId": {"target": SESSION_ID},
-    },
+GET_SESSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSI,
+    {_sSI: _cGSR, _smith: None},
+    (_bI, _bAI, _lI, _sI),
+    ((BOT_IDENTIFIER, 9), (BOT_ALIAS_IDENTIFIER, 9), (LOCALE_ID, 9), (SESSION_ID, 9)),
 )
 
-INTERNAL_SERVER_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#InternalServerException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-    ],
-    members={
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
+CONFIRMATION_STATE: StaticSchema = (
+    14,
+    n0,
+    _CS,
+    0,
+    (_CONFIRMED, _DENIED, _NONE),
+    ((-1, {_sV: _C}), (-1, {_sV: _D}), (-1, {_sV: _N})),
 )
 
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
+SHAPE: StaticSchema = (
+    14,
+    n0,
+    _Sh,
+    0,
+    (_SCALAR, _LIST, _COMPOSITE),
+    ((-1, {_sV: _Sc}), (-1, {_sV: _L}), (-1, {_sV: _Co})),
 )
 
-THROTTLING_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ThrottlingException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-    ],
-    members={
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
+STRING_LIST: StaticSchema = (16, n0, _SL, 0, (_me,), ((NON_EMPTY_STRING, 0),))
+
+VALUE: StaticSchema = (
+    18,
+    n0,
+    _V,
+    0,
+    (_oV, _iV, _rV),
+    ((NON_EMPTY_STRING, 0), (NON_EMPTY_STRING, 1), (STRING_LIST, 0)),
 )
 
-VALIDATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ValidationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
+INTENT_STATE: StaticSchema = (
+    14,
+    n0,
+    _IS,
+    0,
+    (_FAILED, _FULFILLED, _IP, _RFF, _WAITING, _FIP),
+    (
+        (-1, {_sV: _F}),
+        (-1, {_sV: _Fu}),
+        (-1, {_sV: _IPn}),
+        (-1, {_sV: _RFFe}),
+        (-1, {_sV: _W}),
+        (-1, {_sV: _FIPu}),
+    ),
 )
 
-DELETE_SESSION = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#DeleteSession"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
+INTERPRETATION_SOURCE: StaticSchema = (
+    14,
+    n0,
+    _ISn,
+    0,
+    (_BEDROCK, _LEX),
+    ((-1, {_sV: _B}), (-1, {_sV: _Le})),
 )
 
-GET_SESSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#GetSessionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#GetSessionRequest",
-        )
-    ],
-    members={
-        "botId": {
-            "target": BOT_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "botAliasId": {
-            "target": BOT_ALIAS_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "localeId": {
-            "target": LOCALE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "sessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
+DOUBLE: StaticSchema = (10, n0, _Do, {_smit: 0})
+
+CONFIDENCE_SCORE: StaticSchema = (18, n0, _CSo, 0, (_sc,), ((DOUBLE, {_smit: 0}),))
+
+SENTIMENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ST,
+    0,
+    (_MIXED, _NEGATIVE, _NEUTRAL, _POSITIVE),
+    (
+        (-1, {_sV: _MIXED}),
+        (-1, {_sV: _NEGATIVE}),
+        (-1, {_sV: _NEUTRAL}),
+        (-1, {_sV: _POSITIVE}),
+    ),
 )
 
-CONFIRMATION_STATE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ConfirmationState"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CONFIRMED": {"target": UNIT},
-        "DENIED": {"target": UNIT},
-        "NONE": {"target": UNIT},
-    },
+SENTIMENT_SCORE: StaticSchema = (
+    18,
+    n0,
+    _SS,
+    0,
+    (_p, _ne, _neu, _mi),
+    (
+        (DOUBLE, {_smit: 0}),
+        (DOUBLE, {_smit: 0}),
+        (DOUBLE, {_smit: 0}),
+        (DOUBLE, {_smit: 0}),
+    ),
 )
 
-SHAPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#Shape"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "SCALAR": {"target": UNIT},
-        "LIST": {"target": UNIT},
-        "COMPOSITE": {"target": UNIT},
-    },
+SENTIMENT_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _SR,
+    0,
+    (_sen, _sS),
+    ((SENTIMENT_TYPE, 0), (SENTIMENT_SCORE, 0)),
 )
 
-STRING_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#StringList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": NON_EMPTY_STRING}},
+MESSAGE_CONTENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MCT,
+    0,
+    (_CP, _IRC, _PT, _SSML),
+    ((-1, {_sV: _CPu}), (-1, {_sV: _IRCm}), (-1, {_sV: _PTl}), (-1, {_sV: _SSML})),
 )
 
-VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#Value"),
-    members={
-        "originalValue": {"target": NON_EMPTY_STRING},
-        "interpretedValue": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "resolvedValues": {"target": STRING_LIST},
-    },
+BUTTON_TEXT: StaticSchema = (3, n0, _BT, 0)
+
+BUTTON_VALUE: StaticSchema = (3, n0, _BV, 0)
+
+BUTTON: StaticSchema = (18, n0, _Bu, 0, (_t, _v), ((BUTTON_TEXT, 1), (BUTTON_VALUE, 1)))
+
+BUTTONS_LIST: StaticSchema = (16, n0, _BL, 0, (_me,), ((BUTTON, 0),))
+
+IMAGE_RESPONSE_CARD: StaticSchema = (
+    18,
+    n0,
+    _IRCm,
+    0,
+    (_ti, _su, _iU, _b),
+    (
+        (ATTACHMENT_TITLE, 1),
+        (ATTACHMENT_TITLE, 0),
+        (ATTACHMENT_URL, 0),
+        (BUTTONS_LIST, 0),
+    ),
 )
 
-INTENT_STATE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#IntentState"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FAILED": {"target": UNIT},
-        "FULFILLED": {"target": UNIT},
-        "IN_PROGRESS": {"target": UNIT},
-        "READY_FOR_FULFILLMENT": {"target": UNIT},
-        "WAITING": {"target": UNIT},
-        "FULFILLMENT_IN_PROGRESS": {"target": UNIT},
-    },
+MESSAGE: StaticSchema = (
+    18,
+    n0,
+    _M,
+    0,
+    (_co, _cT, _iRC),
+    ((TEXT, 0), (MESSAGE_CONTENT_TYPE, 1), (IMAGE_RESPONSE_CARD, 0)),
 )
 
-INTERPRETATION_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#InterpretationSource"),
-    shape_type=ShapeType.ENUM,
-    members={"BEDROCK": {"target": UNIT}, "LEX": {"target": UNIT}},
+MESSAGES: StaticSchema = (16, n0, _Me, 0, (_me,), ((MESSAGE, 0),))
+
+STYLE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _STt,
+    0,
+    (_DEFAULT, _SBL, _SBW),
+    ((-1, {_sV: _De}), (-1, {_sV: _SBLp}), (-1, {_sV: _SBWp})),
 )
 
-DOUBLE = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#Double"),
-    shape_type=ShapeType.DOUBLE,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
+DIALOG_ACTION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _DAT,
+    0,
+    (_CLOSE, _CI, _DELEGATE, _EI_, _ES, _NONE),
+    (
+        (-1, {_sV: _Cl}),
+        (-1, {_sV: _CIo}),
+        (-1, {_sV: _Del}),
+        (-1, {_sV: _EIl}),
+        (-1, {_sV: _ESl}),
+        (-1, {_sV: _N}),
+    ),
 )
 
-CONFIDENCE_SCORE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ConfidenceScore"),
-    members={
-        "score": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        }
-    },
+NAME: StaticSchema = (3, n0, _Na, 0)
+
+RUNTIME_HINT_PHRASE: StaticSchema = (3, n0, _RHP, 0)
+
+RUNTIME_HINT_VALUE: StaticSchema = (
+    18,
+    n0,
+    _RHV,
+    0,
+    (_ph,),
+    ((RUNTIME_HINT_PHRASE, 1),),
 )
 
-SENTIMENT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#SentimentType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "MIXED": {"target": UNIT},
-        "NEGATIVE": {"target": UNIT},
-        "NEUTRAL": {"target": UNIT},
-        "POSITIVE": {"target": UNIT},
-    },
+RUNTIME_HINT_VALUES_LIST: StaticSchema = (
+    16,
+    n0,
+    _RHVL,
+    0,
+    (_me,),
+    ((RUNTIME_HINT_VALUE, 0),),
 )
 
-SENTIMENT_SCORE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#SentimentScore"),
-    members={
-        "positive": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "negative": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "neutral": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "mixed": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
+STRING_MAP: StaticSchema = (
+    17,
+    n0,
+    _SM,
+    0,
+    (_k, _v),
+    ((NON_EMPTY_STRING, 0), (STRING, 0)),
 )
 
-SENTIMENT_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#SentimentResponse"),
-    members={
-        "sentiment": {"target": SENTIMENT_TYPE},
-        "sentimentScore": {"target": SENTIMENT_SCORE},
-    },
+BAD_GATEWAY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _BGE,
+    {_s: _se, _sE: 502},
+    (_m,),
+    ((STRING, 1),),
 )
 
-MESSAGE_CONTENT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#MessageContentType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CUSTOM_PAYLOAD": {"target": UNIT},
-        "IMAGE_RESPONSE_CARD": {"target": UNIT},
-        "PLAIN_TEXT": {"target": UNIT},
-        "SSML": {"target": UNIT},
-    },
+DEPENDENCY_FAILED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _DFE,
+    {_s: _c, _sE: 424},
+    (_m,),
+    ((STRING, 1),),
 )
 
-BUTTON_TEXT = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#ButtonText"), shape_type=ShapeType.STRING
+BLOB_STREAM: StaticSchema = (1, n0, _BS, {_smithyap: None})
+
+PUT_SESSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PSO,
+    {_sSI: _cPSR, _smithy: None},
+    (_cT, _mes, _sSe, _rA, _sI, _aS),
+    (
+        (NON_EMPTY_STRING, {_sH: _CT}),
+        (NON_EMPTY_STRING, {_sH: _xalm}),
+        (NON_EMPTY_STRING, {_sH: _xalss}),
+        (NON_EMPTY_STRING, {_sH: _xalra}),
+        (SESSION_ID, {_sH: _xalsi}),
+        (BLOB_STREAM, {_smit: _v_, _sP: None}),
+    ),
 )
 
-BUTTON_VALUE = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#ButtonValue"), shape_type=ShapeType.STRING
+RECOGNIZED_BOT_MEMBER: StaticSchema = (
+    18,
+    n0,
+    _RBM,
+    0,
+    (_bI, _bN),
+    ((BOT_IDENTIFIER, 1), (NAME, 0)),
 )
 
-BUTTON = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#Button"),
-    members={
-        "text": {
-            "target": BUTTON_TEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "value": {
-            "target": BUTTON_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+SENSITIVE_NON_EMPTY_STRING: StaticSchema = (3, n0, _SNES, 4)
+
+RECOGNIZE_UTTERANCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RUI,
+    {_sSI: _cRUR, _smith: None},
+    (_bI, _bAI, _lI, _sI, _sSe, _rA, _rCT, _rCTe, _iS),
+    (
+        (BOT_IDENTIFIER, 9),
+        (BOT_ALIAS_IDENTIFIER, 9),
+        (LOCALE_ID, 9),
+        (SESSION_ID, 9),
+        (SENSITIVE_NON_EMPTY_STRING, {_sH: _xalss}),
+        (SENSITIVE_NON_EMPTY_STRING, {_sH: _xalra}),
+        (NON_EMPTY_STRING, {_sH: _CT, _sm: None}),
+        (NON_EMPTY_STRING, {_sH: _RCT}),
+        (BLOB_STREAM, {_smit: _v_, _sP: None}),
+    ),
 )
 
-BUTTONS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ButtonsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BUTTON}},
+RECOGNIZE_UTTERANCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RUO,
+    {_sSI: _cRURo, _smithy: None},
+    (_iM, _cT, _mes, _i, _sSe, _rA, _sI, _iT, _aS, _rBM),
+    (
+        (NON_EMPTY_STRING, {_sH: _xalim}),
+        (NON_EMPTY_STRING, {_sH: _CT}),
+        (NON_EMPTY_STRING, {_sH: _xalm}),
+        (NON_EMPTY_STRING, {_sH: _xali}),
+        (NON_EMPTY_STRING, {_sH: _xalss}),
+        (NON_EMPTY_STRING, {_sH: _xalra}),
+        (SESSION_ID, {_sH: _xalsi}),
+        (NON_EMPTY_STRING, {_sH: _xalit}),
+        (BLOB_STREAM, {_smit: _v_, _sP: None}),
+        (NON_EMPTY_STRING, {_sH: _xalrbm}),
+    ),
 )
 
-IMAGE_RESPONSE_CARD = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ImageResponseCard"),
-    members={
-        "title": {
-            "target": ATTACHMENT_TITLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "subtitle": {"target": ATTACHMENT_TITLE},
-        "imageUrl": {"target": ATTACHMENT_URL},
-        "buttons": {"target": BUTTONS_LIST},
-    },
-)
-
-MESSAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#Message"),
-    members={
-        "content": {"target": TEXT},
-        "contentType": {
-            "target": MESSAGE_CONTENT_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "imageResponseCard": {"target": IMAGE_RESPONSE_CARD},
-    },
-)
-
-MESSAGES = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#Messages"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MESSAGE}},
-)
-
-STYLE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#StyleType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "DEFAULT": {"target": UNIT},
-        "SPELL_BY_LETTER": {"target": UNIT},
-        "SPELL_BY_WORD": {"target": UNIT},
-    },
-)
-
-DIALOG_ACTION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#DialogActionType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CLOSE": {"target": UNIT},
-        "CONFIRM_INTENT": {"target": UNIT},
-        "DELEGATE": {"target": UNIT},
-        "ELICIT_INTENT": {"target": UNIT},
-        "ELICIT_SLOT": {"target": UNIT},
-        "NONE": {"target": UNIT},
-    },
-)
-
-NAME = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#Name"), shape_type=ShapeType.STRING
-)
-
-RUNTIME_HINT_PHRASE = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#RuntimeHintPhrase"),
-    shape_type=ShapeType.STRING,
-)
-
-RUNTIME_HINT_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#RuntimeHintValue"),
-    members={
-        "phrase": {
-            "target": RUNTIME_HINT_PHRASE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-RUNTIME_HINT_VALUES_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#RuntimeHintValuesList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RUNTIME_HINT_VALUE}},
-)
-
-STRING_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#StringMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": NON_EMPTY_STRING}, "value": {"target": STRING}},
-)
-
-BAD_GATEWAY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#BadGatewayException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DEPENDENCY_FAILED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#DependencyFailedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=424),
-    ],
-    members={
-        "message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-BLOB_STREAM = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#BlobStream"),
-    shape_type=ShapeType.BLOB,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-)
-
-PUT_SESSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#PutSessionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#PutSessionResponse",
-        )
-    ],
-    members={
-        "contentType": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Content-Type")
-            ],
-        },
-        "messages": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amz-lex-messages"
-                )
-            ],
-        },
-        "sessionState": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amz-lex-session-state"
-                )
-            ],
-        },
-        "requestAttributes": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amz-lex-request-attributes",
-                )
-            ],
-        },
-        "sessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amz-lex-session-id"
-                )
-            ],
-        },
-        "audioStream": {
-            "target": BLOB_STREAM,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=""),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-    },
-)
-
-RECOGNIZED_BOT_MEMBER = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#RecognizedBotMember"),
-    members={
-        "botId": {
-            "target": BOT_IDENTIFIER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "botName": {"target": NAME},
-    },
-)
-
-SENSITIVE_NON_EMPTY_STRING = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#SensitiveNonEmptyString"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-RECOGNIZE_UTTERANCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#RecognizeUtteranceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#RecognizeUtteranceRequest",
-        )
-    ],
-    members={
-        "botId": {
-            "target": BOT_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "botAliasId": {
-            "target": BOT_ALIAS_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "localeId": {
-            "target": LOCALE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "sessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "sessionState": {
-            "target": SENSITIVE_NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amz-lex-session-state"
-                )
-            ],
-        },
-        "requestAttributes": {
-            "target": SENSITIVE_NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amz-lex-request-attributes",
-                )
-            ],
-        },
-        "requestContentType": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Content-Type"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "responseContentType": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="Response-Content-Type"
-                )
-            ],
-        },
-        "inputStream": {
-            "target": BLOB_STREAM,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=""),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-    },
-)
-
-RECOGNIZE_UTTERANCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#RecognizeUtteranceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#RecognizeUtteranceResponse",
-        )
-    ],
-    members={
-        "inputMode": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amz-lex-input-mode"
-                )
-            ],
-        },
-        "contentType": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Content-Type")
-            ],
-        },
-        "messages": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amz-lex-messages"
-                )
-            ],
-        },
-        "interpretations": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amz-lex-interpretations",
-                )
-            ],
-        },
-        "sessionState": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amz-lex-session-state"
-                )
-            ],
-        },
-        "requestAttributes": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amz-lex-request-attributes",
-                )
-            ],
-        },
-        "sessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amz-lex-session-id"
-                )
-            ],
-        },
-        "inputTranscript": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amz-lex-input-transcript",
-                )
-            ],
-        },
-        "audioStream": {
-            "target": BLOB_STREAM,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=""),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-        "recognizedBotMember": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amz-lex-recognized-bot-member",
-                )
-            ],
-        },
-    },
-)
-
-RECOGNIZE_UTTERANCE = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#RecognizeUtterance"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(id=ShapeID("aws.auth#unsignedPayload")),
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/utterance",
-                    "code": 200,
-                }
-            ),
+RECOGNIZE_UTTERANCE: StaticOperationSchema = (
+    23,
+    n0,
+    _RU,
+    {
+        _aP: None,
+        _smithya: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/utterance",
+                "code": 200,
+            }
         ),
-    ],
-)
-
-CONVERSATION_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ConversationMode"),
-    shape_type=ShapeType.ENUM,
-    members={"AUDIO": {"target": UNIT}, "TEXT": {"target": UNIT}},
-)
-
-BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#Boolean"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-DISCONNECTION_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#DisconnectionEvent"),
-    members={
-        "eventId": {"target": EVENT_ID},
-        "clientTimestampMillis": {
-            "target": EPOCH_MILLIS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
     },
+    RECOGNIZE_UTTERANCE_INPUT,
+    RECOGNIZE_UTTERANCE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_GATEWAY_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        DEPENDENCY_FAILED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-DTMF_REGEX = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#DTMFRegex"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+CONVERSATION_MODE: StaticSchema = (
+    14,
+    n0,
+    _CM,
+    0,
+    (_AUDIO, _TEXT),
+    ((-1, {_sV: _AUDIO}), (-1, {_sV: _TEXT})),
 )
 
-DTMF_INPUT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#DTMFInputEvent"),
-    members={
-        "inputCharacter": {
-            "target": DTMF_REGEX,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "eventId": {"target": EVENT_ID},
-        "clientTimestampMillis": {
-            "target": EPOCH_MILLIS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
+BOOLEAN: StaticSchema = (2, n0, _Bo, {_smit: False})
+
+DISCONNECTION_EVENT: StaticSchema = (
+    18,
+    n0,
+    _DE,
+    0,
+    (_eI, _cTM),
+    ((EVENT_ID, 0), (EPOCH_MILLIS, {_smit: 0})),
 )
 
-PLAYBACK_COMPLETION_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#PlaybackCompletionEvent"),
-    members={
-        "eventId": {"target": EVENT_ID},
-        "clientTimestampMillis": {
-            "target": EPOCH_MILLIS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
+DTMF_REGEX: StaticSchema = (3, n0, _DTMFR, 4)
+
+DTMF_INPUT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _DTMFIE,
+    0,
+    (_iC, _eI, _cTM),
+    ((DTMF_REGEX, 1), (EVENT_ID, 0), (EPOCH_MILLIS, {_smit: 0})),
 )
 
-TEXT_INPUT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#TextInputEvent"),
-    members={
-        "text": {
-            "target": TEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "eventId": {"target": EVENT_ID},
-        "clientTimestampMillis": {
-            "target": EPOCH_MILLIS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
+PLAYBACK_COMPLETION_EVENT: StaticSchema = (
+    18,
+    n0,
+    _PCE,
+    0,
+    (_eI, _cTM),
+    ((EVENT_ID, 0), (EPOCH_MILLIS, {_smit: 0})),
 )
 
-HEARTBEAT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#HeartbeatEvent"),
-    members={"eventId": {"target": EVENT_ID}},
+TEXT_INPUT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _TIE,
+    0,
+    (_t, _eI, _cTM),
+    ((TEXT, 1), (EVENT_ID, 0), (EPOCH_MILLIS, {_smit: 0})),
 )
 
-INPUT_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#InputMode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "TEXT": {"target": UNIT},
-        "SPEECH": {"target": UNIT},
-        "DTMF": {"target": UNIT},
-    },
+HEARTBEAT_EVENT: StaticSchema = (18, n0, _HE, 0, (_eI,), ((EVENT_ID, 0),))
+
+INPUT_MODE: StaticSchema = (
+    14,
+    n0,
+    _IM,
+    0,
+    (_TEXT, _SPEECH, _DTMF),
+    ((-1, {_sV: _T}), (-1, {_sV: _Sp}), (-1, {_sV: _DTMF})),
 )
 
-PLAYBACK_INTERRUPTION_REASON = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#PlaybackInterruptionReason"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "DTMF_START_DETECTED": {"target": UNIT},
-        "TEXT_DETECTED": {"target": UNIT},
-        "VOICE_START_DETECTED": {"target": UNIT},
-    },
+PLAYBACK_INTERRUPTION_REASON: StaticSchema = (
+    14,
+    n0,
+    _PIR,
+    0,
+    (_DSD, _TD, _VSD),
+    ((-1, {_sV: _DSD}), (-1, {_sV: _TD}), (-1, {_sV: _VSD})),
 )
 
-PLAYBACK_INTERRUPTION_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#PlaybackInterruptionEvent"),
-    members={
-        "eventReason": {"target": PLAYBACK_INTERRUPTION_REASON},
-        "causedByEventId": {"target": EVENT_ID},
-        "eventId": {"target": EVENT_ID},
-    },
+PLAYBACK_INTERRUPTION_EVENT: StaticSchema = (
+    18,
+    n0,
+    _PIE,
+    0,
+    (_eR, _cBEI, _eI),
+    ((PLAYBACK_INTERRUPTION_REASON, 0), (EVENT_ID, 0), (EVENT_ID, 0)),
 )
 
-TEXT_RESPONSE_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#TextResponseEvent"),
-    members={"messages": {"target": MESSAGES}, "eventId": {"target": EVENT_ID}},
+TEXT_RESPONSE_EVENT: StaticSchema = (
+    18,
+    n0,
+    _TRE,
+    0,
+    (_mes, _eI),
+    ((MESSAGES, 0), (EVENT_ID, 0)),
 )
 
-TRANSCRIPT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#TranscriptEvent"),
-    members={"transcript": {"target": STRING}, "eventId": {"target": EVENT_ID}},
+TRANSCRIPT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _TEr,
+    0,
+    (_tr, _eI),
+    ((STRING, 0), (EVENT_ID, 0)),
 )
 
-ELICIT_SUB_SLOT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ElicitSubSlot"),
-    members={
-        "name": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        # This needs to reference a schema that isn't defined yet.
-        # It will be populated with a non-null value at the end of the file.
-        "subSlotToElicit": None,
-    },
+ELICIT_SUB_SLOT: StaticSchema = (
+    18,
+    n0,
+    _ESS,
+    0,
+    (_n, _sSTE),
+    ((NON_EMPTY_STRING, 1), (lambda: ELICIT_SUB_SLOT, 0)),
 )
 
-DIALOG_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#DialogAction"),
-    members={
-        "type": {
-            "target": DIALOG_ACTION_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "slotToElicit": {"target": NON_EMPTY_STRING},
-        "slotElicitationStyle": {"target": STYLE_TYPE},
-        "subSlotToElicit": {"target": ELICIT_SUB_SLOT},
-    },
+DIALOG_ACTION: StaticSchema = (
+    18,
+    n0,
+    _DA,
+    0,
+    (_ty, _sTE, _sES, _sSTE),
+    (
+        (DIALOG_ACTION_TYPE, 1),
+        (NON_EMPTY_STRING, 0),
+        (STYLE_TYPE, 0),
+        (ELICIT_SUB_SLOT, 0),
+    ),
 )
 
-RUNTIME_HINT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#RuntimeHintDetails"),
-    members={
-        "runtimeHintValues": {"target": RUNTIME_HINT_VALUES_LIST},
-        # This needs to reference a schema that isn't defined yet.
-        # It will be populated with a non-null value at the end of the file.
-        "subSlotHints": None,
-    },
+RUNTIME_HINT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RHD,
+    0,
+    (_rHV, _sSH),
+    ((RUNTIME_HINT_VALUES_LIST, 0), (lambda: SLOT_HINTS_SLOT_MAP, 0)),
 )
 
-SLOT_HINTS_SLOT_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#SlotHintsSlotMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": NAME}, "value": {"target": RUNTIME_HINT_DETAILS}},
+SLOT_HINTS_SLOT_MAP: StaticSchema = (
+    17,
+    n0,
+    _SHSM,
+    0,
+    (_k, _v),
+    ((NAME, 0), (RUNTIME_HINT_DETAILS, 0)),
 )
 
-SLOT_HINTS_INTENT_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#SlotHintsIntentMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": NAME}, "value": {"target": SLOT_HINTS_SLOT_MAP}},
+SLOT_HINTS_INTENT_MAP: StaticSchema = (
+    17,
+    n0,
+    _SHIM,
+    0,
+    (_k, _v),
+    ((NAME, 0), (SLOT_HINTS_SLOT_MAP, 0)),
 )
 
-RUNTIME_HINTS = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#RuntimeHints"),
-    members={"slotHints": {"target": SLOT_HINTS_INTENT_MAP}},
+RUNTIME_HINTS: StaticSchema = (18, n0, _RH, 0, (_sHl,), ((SLOT_HINTS_INTENT_MAP, 0),))
+
+SLOT: StaticSchema = (
+    18,
+    n0,
+    _Sl,
+    0,
+    (_v, _sh, _va, _sSu),
+    ((VALUE, 0), (SHAPE, 0), (lambda: VALUES, 0), (lambda: SLOTS, 0)),
 )
 
-SLOT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#Slot"),
-    members={
-        "value": {"target": VALUE},
-        "shape": {"target": SHAPE},
-        # This needs to reference a schema that isn't defined yet.
-        # It will be populated with a non-null value at the end of the file.
-        "values": None,
-        # This needs to reference a schema that isn't defined yet.
-        # It will be populated with a non-null value at the end of the file.
-        "subSlots": None,
-    },
+SLOTS: StaticSchema = (17, n0, _Slo, 0, (_k, _v), ((NON_EMPTY_STRING, 0), (SLOT, 0)))
+
+VALUES: StaticSchema = (16, n0, _Va, 0, (_me,), ((SLOT, 0),))
+
+INTENT: StaticSchema = (
+    18,
+    n0,
+    _I,
+    0,
+    (_n, _sl, _st, _cS),
+    ((NON_EMPTY_STRING, 1), (SLOTS, 0), (INTENT_STATE, 0), (CONFIRMATION_STATE, 0)),
 )
 
-SLOTS = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#Slots"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": NON_EMPTY_STRING}, "value": {"target": SLOT}},
+INTERPRETATION: StaticSchema = (
+    18,
+    n0,
+    _In,
+    0,
+    (_nC, _sR, _in, _iSn),
+    (
+        (CONFIDENCE_SCORE, 0),
+        (SENTIMENT_RESPONSE, 0),
+        (INTENT, 0),
+        (INTERPRETATION_SOURCE, 0),
+    ),
 )
 
-VALUES = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#Values"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SLOT}},
+INTERPRETATIONS: StaticSchema = (16, n0, _Int, 0, (_me,), ((INTERPRETATION, 0),))
+
+SESSION_STATE: StaticSchema = (
+    18,
+    n0,
+    _SSe,
+    0,
+    (_dA, _in, _aCc, _sA, _oRI, _rH),
+    (
+        (DIALOG_ACTION, 0),
+        (INTENT, 0),
+        (ACTIVE_CONTEXTS_LIST, 0),
+        (STRING_MAP, 0),
+        (NON_EMPTY_STRING, 0),
+        (RUNTIME_HINTS, 0),
+    ),
 )
 
-INTENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#Intent"),
-    members={
-        "name": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "slots": {"target": SLOTS},
-        "state": {"target": INTENT_STATE},
-        "confirmationState": {"target": CONFIRMATION_STATE},
-    },
+CONFIGURATION_EVENT: StaticSchema = (
+    18,
+    n0,
+    _CEo,
+    0,
+    (_rA, _rCTe, _sSe, _wM, _dP, _eI, _cTM),
+    (
+        (STRING_MAP, 0),
+        (NON_EMPTY_STRING, 1),
+        (SESSION_STATE, 0),
+        (MESSAGES, 0),
+        (BOOLEAN, {_smit: False}),
+        (EVENT_ID, 0),
+        (EPOCH_MILLIS, {_smit: 0}),
+    ),
 )
 
-INTERPRETATION = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#Interpretation"),
-    members={
-        "nluConfidence": {"target": CONFIDENCE_SCORE},
-        "sentimentResponse": {"target": SENTIMENT_RESPONSE},
-        "intent": {"target": INTENT},
-        "interpretationSource": {"target": INTERPRETATION_SOURCE},
-    },
+PUT_SESSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PSI,
+    {_sSI: _cPSRo, _smith: None},
+    (_bI, _bAI, _lI, _sI, _mes, _sSe, _rA, _rCTe),
+    (
+        (BOT_IDENTIFIER, 9),
+        (BOT_ALIAS_IDENTIFIER, 9),
+        (LOCALE_ID, 9),
+        (SESSION_ID, 9),
+        (MESSAGES, 0),
+        (SESSION_STATE, 1),
+        (STRING_MAP, 0),
+        (NON_EMPTY_STRING, {_sH: _RCTe}),
+    ),
 )
 
-INTERPRETATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#Interpretations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": INTERPRETATION}},
+RECOGNIZE_TEXT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RTI,
+    {_sSI: _cRTR, _smith: None},
+    (_bI, _bAI, _lI, _sI, _t, _sSe, _rA),
+    (
+        (BOT_IDENTIFIER, 9),
+        (BOT_ALIAS_IDENTIFIER, 9),
+        (LOCALE_ID, 9),
+        (SESSION_ID, 9),
+        (TEXT, 1),
+        (SESSION_STATE, 0),
+        (STRING_MAP, 0),
+    ),
 )
 
-SESSION_STATE = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#SessionState"),
-    members={
-        "dialogAction": {"target": DIALOG_ACTION},
-        "intent": {"target": INTENT},
-        "activeContexts": {"target": ACTIVE_CONTEXTS_LIST},
-        "sessionAttributes": {"target": STRING_MAP},
-        "originatingRequestId": {"target": NON_EMPTY_STRING},
-        "runtimeHints": {"target": RUNTIME_HINTS},
-    },
-)
-
-CONFIGURATION_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#ConfigurationEvent"),
-    members={
-        "requestAttributes": {"target": STRING_MAP},
-        "responseContentType": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "sessionState": {"target": SESSION_STATE},
-        "welcomeMessages": {"target": MESSAGES},
-        "disablePlayback": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "eventId": {"target": EVENT_ID},
-        "clientTimestampMillis": {
-            "target": EPOCH_MILLIS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-PUT_SESSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#PutSessionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#PutSessionRequest",
+PUT_SESSION: StaticOperationSchema = (
+    23,
+    n0,
+    _PS,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
+                "code": 200,
+            }
         )
-    ],
-    members={
-        "botId": {
-            "target": BOT_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "botAliasId": {
-            "target": BOT_ALIAS_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "localeId": {
-            "target": LOCALE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "sessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "messages": {"target": MESSAGES},
-        "sessionState": {
-            "target": SESSION_STATE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "requestAttributes": {"target": STRING_MAP},
-        "responseContentType": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="ResponseContentType"
-                )
-            ],
-        },
     },
+    PUT_SESSION_INPUT,
+    PUT_SESSION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_GATEWAY_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        DEPENDENCY_FAILED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-RECOGNIZE_TEXT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#RecognizeTextInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#RecognizeTextRequest",
+START_CONVERSATION_REQUEST_EVENT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _SCRES,
+    {_smithyap: None},
+    (_CEo, _AIE, _DTMFIE, _TIE, _PCE, _DE),
+    (
+        (CONFIGURATION_EVENT, 0),
+        (AUDIO_INPUT_EVENT, 0),
+        (DTMF_INPUT_EVENT, 0),
+        (TEXT_INPUT_EVENT, 0),
+        (PLAYBACK_COMPLETION_EVENT, 0),
+        (DISCONNECTION_EVENT, 0),
+    ),
+)
+
+START_CONVERSATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SCI,
+    {_sSI: _cSCR, _smith: None},
+    (_bI, _bAI, _lI, _sI, _cM, _rES),
+    (
+        (BOT_IDENTIFIER, 9),
+        (BOT_ALIAS_IDENTIFIER, 9),
+        (LOCALE_ID, 9),
+        (SESSION_ID, 9),
+        (CONVERSATION_MODE, {_sH: _xalcm}),
+        (START_CONVERSATION_REQUEST_EVENT_STREAM, 17),
+    ),
+)
+
+GET_SESSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSO,
+    {_sSI: _cGSRo, _smithy: None},
+    (_sI, _mes, _i, _sSe),
+    ((NON_EMPTY_STRING, 0), (MESSAGES, 0), (INTERPRETATIONS, 0), (SESSION_STATE, 0)),
+)
+
+INTENT_RESULT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _IRE,
+    0,
+    (_iM, _i, _sSe, _rA, _sI, _eI, _rBM),
+    (
+        (INPUT_MODE, 0),
+        (INTERPRETATIONS, 0),
+        (SESSION_STATE, 0),
+        (STRING_MAP, 0),
+        (SESSION_ID, 0),
+        (EVENT_ID, 0),
+        (RECOGNIZED_BOT_MEMBER, 0),
+    ),
+)
+
+RECOGNIZE_TEXT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RTO,
+    {_sSI: _cRTRo, _smithy: None},
+    (_mes, _sSe, _i, _rA, _sI, _rBM),
+    (
+        (MESSAGES, 0),
+        (SESSION_STATE, 0),
+        (INTERPRETATIONS, 0),
+        (STRING_MAP, 0),
+        (SESSION_ID, 0),
+        (RECOGNIZED_BOT_MEMBER, 0),
+    ),
+)
+
+GET_SESSION: StaticOperationSchema = (
+    23,
+    n0,
+    _GS,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
+                "code": 200,
+            }
         )
-    ],
-    members={
-        "botId": {
-            "target": BOT_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "botAliasId": {
-            "target": BOT_ALIAS_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "localeId": {
-            "target": LOCALE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "sessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "text": {
-            "target": TEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "sessionState": {"target": SESSION_STATE},
-        "requestAttributes": {"target": STRING_MAP},
     },
+    GET_SESSION_INPUT,
+    GET_SESSION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-PUT_SESSION = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#PutSession"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
-                    "code": 200,
-                }
-            ),
+START_CONVERSATION_RESPONSE_EVENT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _SCRESt,
+    {_smithyap: None},
+    (_PIE, _TEr, _IRE, _TRE, _ARE, _HE, _ADE, _RNFE, _VE, _TE, _ISE, _CE, _DFE, _BGE),
+    (
+        (PLAYBACK_INTERRUPTION_EVENT, 0),
+        (TRANSCRIPT_EVENT, 0),
+        (INTENT_RESULT_EVENT, 0),
+        (TEXT_RESPONSE_EVENT, 0),
+        (AUDIO_RESPONSE_EVENT, 0),
+        (HEARTBEAT_EVENT, 0),
+        (ACCESS_DENIED_EXCEPTION, 0),
+        (RESOURCE_NOT_FOUND_EXCEPTION, 0),
+        (VALIDATION_EXCEPTION, 0),
+        (THROTTLING_EXCEPTION, 0),
+        (INTERNAL_SERVER_EXCEPTION, 0),
+        (CONFLICT_EXCEPTION, 0),
+        (DEPENDENCY_FAILED_EXCEPTION, 0),
+        (BAD_GATEWAY_EXCEPTION, 0),
+    ),
+)
+
+START_CONVERSATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SCO,
+    {_sSI: _cSCRo, _smithy: None},
+    (_rESe,),
+    ((START_CONVERSATION_RESPONSE_EVENT_STREAM, 16),),
+)
+
+RECOGNIZE_TEXT: StaticOperationSchema = (
+    23,
+    n0,
+    _RT,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/text",
+                "code": 200,
+            }
         )
-    ],
-)
-
-START_CONVERSATION_REQUEST_EVENT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#StartConversationRequestEventStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "ConfigurationEvent": {"target": CONFIGURATION_EVENT},
-        "AudioInputEvent": {"target": AUDIO_INPUT_EVENT},
-        "DTMFInputEvent": {"target": DTMF_INPUT_EVENT},
-        "TextInputEvent": {"target": TEXT_INPUT_EVENT},
-        "PlaybackCompletionEvent": {"target": PLAYBACK_COMPLETION_EVENT},
-        "DisconnectionEvent": {"target": DISCONNECTION_EVENT},
     },
+    RECOGNIZE_TEXT_INPUT,
+    RECOGNIZE_TEXT_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_GATEWAY_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        DEPENDENCY_FAILED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-START_CONVERSATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#StartConversationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#StartConversationRequest",
+START_CONVERSATION: StaticOperationSchema = (
+    23,
+    n0,
+    _SC,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/conversation",
+                "code": 200,
+            }
         )
-    ],
-    members={
-        "botId": {
-            "target": BOT_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "botAliasId": {
-            "target": BOT_ALIAS_IDENTIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "localeId": {
-            "target": LOCALE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "sessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "conversationMode": {
-            "target": CONVERSATION_MODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amz-lex-conversation-mode",
-                )
-            ],
-        },
-        "requestEventStream": {
-            "target": START_CONVERSATION_REQUEST_EVENT_STREAM,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
     },
+    START_CONVERSATION_INPUT,
+    START_CONVERSATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-GET_SESSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#GetSessionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#GetSessionResponse",
-        )
-    ],
-    members={
-        "sessionId": {"target": NON_EMPTY_STRING},
-        "messages": {"target": MESSAGES},
-        "interpretations": {"target": INTERPRETATIONS},
-        "sessionState": {"target": SESSION_STATE},
-    },
-)
-
-INTENT_RESULT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#IntentResultEvent"),
-    members={
-        "inputMode": {"target": INPUT_MODE},
-        "interpretations": {"target": INTERPRETATIONS},
-        "sessionState": {"target": SESSION_STATE},
-        "requestAttributes": {"target": STRING_MAP},
-        "sessionId": {"target": SESSION_ID},
-        "eventId": {"target": EVENT_ID},
-        "recognizedBotMember": {"target": RECOGNIZED_BOT_MEMBER},
-    },
-)
-
-RECOGNIZE_TEXT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#RecognizeTextOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#RecognizeTextResponse",
-        )
-    ],
-    members={
-        "messages": {"target": MESSAGES},
-        "sessionState": {"target": SESSION_STATE},
-        "interpretations": {"target": INTERPRETATIONS},
-        "requestAttributes": {"target": STRING_MAP},
-        "sessionId": {"target": SESSION_ID},
-        "recognizedBotMember": {"target": RECOGNIZED_BOT_MEMBER},
-    },
-)
-
-GET_SESSION = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#GetSession"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-START_CONVERSATION_RESPONSE_EVENT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#StartConversationResponseEventStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "PlaybackInterruptionEvent": {"target": PLAYBACK_INTERRUPTION_EVENT},
-        "TranscriptEvent": {"target": TRANSCRIPT_EVENT},
-        "IntentResultEvent": {"target": INTENT_RESULT_EVENT},
-        "TextResponseEvent": {"target": TEXT_RESPONSE_EVENT},
-        "AudioResponseEvent": {"target": AUDIO_RESPONSE_EVENT},
-        "HeartbeatEvent": {"target": HEARTBEAT_EVENT},
-        "AccessDeniedException": {"target": ACCESS_DENIED_EXCEPTION},
-        "ResourceNotFoundException": {"target": RESOURCE_NOT_FOUND_EXCEPTION},
-        "ValidationException": {"target": VALIDATION_EXCEPTION},
-        "ThrottlingException": {"target": THROTTLING_EXCEPTION},
-        "InternalServerException": {"target": INTERNAL_SERVER_EXCEPTION},
-        "ConflictException": {"target": CONFLICT_EXCEPTION},
-        "DependencyFailedException": {"target": DEPENDENCY_FAILED_EXCEPTION},
-        "BadGatewayException": {"target": BAD_GATEWAY_EXCEPTION},
-    },
-)
-
-START_CONVERSATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lexruntimev2#StartConversationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lexruntimev2#StartConversationResponse",
-        )
-    ],
-    members={
-        "responseEventStream": {
-            "target": START_CONVERSATION_RESPONSE_EVENT_STREAM,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        }
-    },
-)
-
-RECOGNIZE_TEXT = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#RecognizeText"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/text",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-START_CONVERSATION = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#StartConversation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/conversation",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-AWS_DEEP_SENSE_RUN_TIME_SERVICE_API2_0 = Schema(
-    id=ShapeID("com.amazonaws.lexruntimev2#AWSDeepSenseRunTimeServiceApi2_0"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "lex"})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+AWS_DEEP_SENSE_RUN_TIME_SERVICE_API2_0: StaticSchema = (
+    21,
+    n0,
+    _A,
+    {
+        _a: MappingProxyType({"name": "lex"}),
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
+                ),
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsFIPS",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime-v2-lex-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime-v2-lex-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime-v2-lex.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://runtime-v2-lex.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 13,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime-v2-lex-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime-v2-lex-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime-v2-lex.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://runtime-v2-lex.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 13,
+                "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "Lex Runtime V2",
-                    "arnNamespace": "lex",
-                    "cloudFormationName": "LexRuntimeV2",
-                    "cloudTrailEventSource": "lexruntimev2.amazonaws.com",
-                    "docId": "runtime.lex.v2-2020-08-07",
-                    "endpointPrefix": "runtime-v2-lex",
-                }
-            ),
+        _aw: MappingProxyType(
+            {
+                "sdkId": "Lex Runtime V2",
+                "arnNamespace": "lex",
+                "cloudFormationName": "LexRuntimeV2",
+                "cloudTrailEventSource": "lexruntimev2.amazonaws.com",
+                "docId": "runtime.lex.v2-2020-08-07",
+                "endpointPrefix": "runtime-v2-lex",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.protocols#restJson1"),
-            value=MappingProxyType(
-                {"http": ("http/1.1", "h2"), "eventStreamHttp": ("h2",)}
-            ),
-        ),
-    ],
-)
-
-ELICIT_SUB_SLOT.members["subSlotToElicit"] = Schema.member(
-    id=ELICIT_SUB_SLOT.id.with_member("subSlotToElicit"),
-    target=ELICIT_SUB_SLOT,
-    index=1,
-)
-
-RUNTIME_HINT_DETAILS.members["subSlotHints"] = Schema.member(
-    id=RUNTIME_HINT_DETAILS.id.with_member("subSlotHints"),
-    target=SLOT_HINTS_SLOT_MAP,
-    index=1,
-)
-
-SLOT.members["subSlots"] = Schema.member(
-    id=SLOT.id.with_member("subSlots"), target=SLOTS, index=3
-)
-
-SLOT.members["values"] = Schema.member(
-    id=SLOT.id.with_member("values"), target=VALUES, index=2
+        _aJ: MappingProxyType({"http": ("http/1.1", "h2"), "eventStreamHttp": ("h2",)}),
+    },
 )

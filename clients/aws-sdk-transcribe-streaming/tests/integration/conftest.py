@@ -140,9 +140,9 @@ def healthscribe_resources():
     role_name = f"integ-test-transcribe-streaming-role-{unique_suffix}"
     bucket_name = f"integ-test-transcribe-streaming-bucket-{unique_suffix}"
 
-    iam_client = boto3.client("iam")
-    s3_client = boto3.client("s3", region_name=REGION)
-    sts_client = boto3.client("sts")
+    iam_client = boto3.client("iam")  # pyright: ignore[reportUnknownMemberType]
+    s3_client = boto3.client("s3", region_name=REGION)  # pyright: ignore[reportUnknownMemberType]
+    sts_client = boto3.client("sts")  # pyright: ignore[reportUnknownMemberType]
 
     try:
         role_arn = _create_healthscribe_resources(

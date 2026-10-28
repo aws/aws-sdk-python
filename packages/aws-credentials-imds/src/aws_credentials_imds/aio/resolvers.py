@@ -4,23 +4,25 @@ import json
 from datetime import UTC, datetime
 
 from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
-from smithy_core.aio.interfaces.identity import IdentityResolver
+from smithy_core.aio.interfaces.identity import AsyncIdentityResolver
 from smithy_core.exceptions import SmithyIdentityError
 from smithy_http.aio.aiohttp import AIOHTTPClient
-from smithy_http.aio.interfaces import HTTPClient
+from smithy_http.aio.interfaces import AsyncHTTPClient
 
 from .client import IMDSClient, IMDSConfig
 
 
 class IMDSCredentialsResolver(
-    IdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
+    AsyncIdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
 ):
     """Resolves AWS credentials from the EC2 Instance Metadata Service."""
 
     _METADATA_PATH_BASE = "/latest/meta-data/iam/security-credentials"
 
     def __init__(
-        self, http_client: HTTPClient | None = None, config: IMDSConfig | None = None
+        self,
+        http_client: AsyncHTTPClient | None = None,
+        config: IMDSConfig | None = None,
     ):
         self._http_client = http_client or AIOHTTPClient()
         self._imds_client = IMDSClient(http_client=self._http_client, config=config)

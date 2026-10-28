@@ -2,2836 +2,2406 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
-
-
-STRING = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#String"), shape_type=ShapeType.STRING
-)
-
-CONFIDENCE = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#Confidence"),
-    shape_type=ShapeType.DOUBLE,
-)
-
-DOUBLE = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#Double"),
-    shape_type=ShapeType.DOUBLE,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-ENTITY = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#Entity"),
-    members={
-        "StartTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "EndTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Category": {"target": STRING},
-        "Type": {"target": STRING},
-        "Content": {"target": STRING},
-        "Confidence": {"target": CONFIDENCE},
-    },
-)
-
-ENTITY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#EntityList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ENTITY}},
-)
-
-STABLE = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#Stable"), shape_type=ShapeType.BOOLEAN
-)
-
-ITEM_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ItemType"),
-    shape_type=ShapeType.ENUM,
-    members={"PRONUNCIATION": {"target": UNIT}, "PUNCTUATION": {"target": UNIT}},
-)
-
-BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#Boolean"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#Item"),
-    members={
-        "StartTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "EndTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Type": {"target": ITEM_TYPE},
-        "Content": {"target": STRING},
-        "VocabularyFilterMatch": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "Speaker": {"target": STRING},
-        "Confidence": {"target": CONFIDENCE},
-        "Stable": {"target": STABLE},
-    },
-)
-
-ITEM_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ItemList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ITEM}},
-)
-
-ALTERNATIVE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#Alternative"),
-    members={
-        "Transcript": {"target": STRING},
-        "Items": {"target": ITEM_LIST},
-        "Entities": {"target": ENTITY_LIST},
-    },
-)
-
-ALTERNATIVE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#AlternativeList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ALTERNATIVE}},
-)
-
-AUDIO_CHUNK = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#AudioChunk"),
-    shape_type=ShapeType.BLOB,
-)
-
-AUDIO_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#AudioEvent"),
-    members={
-        "AudioChunk": {
-            "target": AUDIO_CHUNK,
-            "traits": [Trait.new(id=ShapeID("smithy.api#eventPayload"))],
-        }
-    },
-)
-
-CHANNEL_ID = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#ChannelId"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-PARTICIPANT_ROLE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ParticipantRole"),
-    shape_type=ShapeType.ENUM,
-    members={"AGENT": {"target": UNIT}, "CUSTOMER": {"target": UNIT}},
-)
-
-CHANNEL_DEFINITION = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ChannelDefinition"),
-    members={
-        "ChannelId": {
-            "target": CHANNEL_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=0),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ParticipantRole": {
-            "target": PARTICIPANT_ROLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CHANNEL_DEFINITIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ChannelDefinitions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CHANNEL_DEFINITION}},
-)
-
-CONTENT_REDACTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ContentRedactionOutput"),
-    shape_type=ShapeType.ENUM,
-    members={"REDACTED": {"target": UNIT}, "REDACTED_AND_UNREDACTED": {"target": UNIT}},
-)
-
-POST_CALL_ANALYTICS_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#PostCallAnalyticsSettings"),
-    members={
-        "OutputLocation": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DataAccessRoleArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ContentRedactionOutput": {"target": CONTENT_REDACTION_OUTPUT},
-        "OutputEncryptionKMSKeyId": {"target": STRING},
-    },
-)
-
-CONFIGURATION_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ConfigurationEvent"),
-    members={
-        "ChannelDefinitions": {"target": CHANNEL_DEFINITIONS},
-        "PostCallAnalyticsSettings": {"target": POST_CALL_ANALYTICS_SETTINGS},
-    },
-)
-
-AUDIO_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#AudioStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "AudioEvent": {"target": AUDIO_EVENT},
-        "ConfigurationEvent": {"target": CONFIGURATION_EVENT},
-    },
-)
-
-BAD_REQUEST_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#BadRequestException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Message": {"target": STRING}},
-)
-
-BUCKET_NAME = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#BucketName"),
-    shape_type=ShapeType.STRING,
-)
-
-LONG = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#Long"), shape_type=ShapeType.LONG
-)
-
-CALL_ANALYTICS_ENTITY = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#CallAnalyticsEntity"),
-    members={
-        "BeginOffsetMillis": {"target": LONG},
-        "EndOffsetMillis": {"target": LONG},
-        "Category": {"target": STRING},
-        "Type": {"target": STRING},
-        "Content": {"target": STRING},
-        "Confidence": {"target": CONFIDENCE},
-    },
-)
-
-CALL_ANALYTICS_ENTITY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#CallAnalyticsEntityList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CALL_ANALYTICS_ENTITY}},
-)
-
-CALL_ANALYTICS_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#CallAnalyticsItem"),
-    members={
-        "BeginOffsetMillis": {"target": LONG},
-        "EndOffsetMillis": {"target": LONG},
-        "Type": {"target": ITEM_TYPE},
-        "Content": {"target": STRING},
-        "Confidence": {"target": CONFIDENCE},
-        "VocabularyFilterMatch": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "Stable": {"target": STABLE},
-    },
-)
-
-CALL_ANALYTICS_ITEM_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#CallAnalyticsItemList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CALL_ANALYTICS_ITEM}},
-)
-
-CALL_ANALYTICS_LANGUAGE_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#CallAnalyticsLanguageCode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EN_US": {"target": UNIT},
-        "EN_GB": {"target": UNIT},
-        "ES_US": {"target": UNIT},
-        "FR_CA": {"target": UNIT},
-        "FR_FR": {"target": UNIT},
-        "EN_AU": {"target": UNIT},
-        "IT_IT": {"target": UNIT},
-        "DE_DE": {"target": UNIT},
-        "PT_BR": {"target": UNIT},
-    },
-)
-
-CALL_ANALYTICS_LANGUAGE_WITH_SCORE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#CallAnalyticsLanguageWithScore"),
-    members={
-        "LanguageCode": {"target": CALL_ANALYTICS_LANGUAGE_CODE},
-        "Score": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-CALL_ANALYTICS_LANGUAGE_IDENTIFICATION = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#CallAnalyticsLanguageIdentification"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CALL_ANALYTICS_LANGUAGE_WITH_SCORE}},
-)
-
-STRING_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#StringList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-TIMESTAMP_RANGE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#TimestampRange"),
-    members={
-        "BeginOffsetMillis": {"target": LONG},
-        "EndOffsetMillis": {"target": LONG},
-    },
-)
-
-TIMESTAMP_RANGES = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#TimestampRanges"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TIMESTAMP_RANGE}},
-)
-
-POINTS_OF_INTEREST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#PointsOfInterest"),
-    members={"TimestampRanges": {"target": TIMESTAMP_RANGES}},
-)
-
-MATCHED_CATEGORY_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MatchedCategoryDetails"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": POINTS_OF_INTEREST}},
-)
-
-CATEGORY_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#CategoryEvent"),
-    members={
-        "MatchedCategories": {"target": STRING_LIST},
-        "MatchedDetails": {"target": MATCHED_CATEGORY_DETAILS},
-    },
-)
-
-CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ConflictException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={"Message": {"target": STRING}},
-)
-
-INTERNAL_FAILURE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#InternalFailureException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-    ],
-    members={"Message": {"target": STRING}},
-)
-
-LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#LimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-    ],
-    members={"Message": {"target": STRING}},
-)
-
-SERVICE_UNAVAILABLE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ServiceUnavailableException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=503),
-    ],
-    members={"Message": {"target": STRING}},
-)
-
-INTEGER = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#Integer"),
-    shape_type=ShapeType.INTEGER,
-)
-
-CHARACTER_OFFSETS = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#CharacterOffsets"),
-    members={"Begin": {"target": INTEGER}, "End": {"target": INTEGER}},
-)
-
-ISSUE_DETECTED = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#IssueDetected"),
-    members={"CharacterOffsets": {"target": CHARACTER_OFFSETS}},
-)
-
-ISSUES_DETECTED = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#IssuesDetected"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ISSUE_DETECTED}},
-)
-
-SENTIMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#Sentiment"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "POSITIVE": {"target": UNIT},
-        "NEGATIVE": {"target": UNIT},
-        "MIXED": {"target": UNIT},
-        "NEUTRAL": {"target": UNIT},
-    },
-)
-
-UTTERANCE_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#UtteranceEvent"),
-    members={
-        "UtteranceId": {"target": STRING},
-        "IsPartial": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "ParticipantRole": {"target": PARTICIPANT_ROLE},
-        "BeginOffsetMillis": {"target": LONG},
-        "EndOffsetMillis": {"target": LONG},
-        "Transcript": {"target": STRING},
-        "Items": {"target": CALL_ANALYTICS_ITEM_LIST},
-        "Entities": {"target": CALL_ANALYTICS_ENTITY_LIST},
-        "Sentiment": {"target": SENTIMENT},
-        "IssuesDetected": {"target": ISSUES_DETECTED},
-        "LanguageCode": {"target": CALL_ANALYTICS_LANGUAGE_CODE},
-        "LanguageIdentification": {"target": CALL_ANALYTICS_LANGUAGE_IDENTIFICATION},
-    },
-)
-
-CALL_ANALYTICS_TRANSCRIPT_RESULT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#CallAnalyticsTranscriptResultStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "UtteranceEvent": {"target": UTTERANCE_EVENT},
-        "CategoryEvent": {"target": CATEGORY_EVENT},
-        "BadRequestException": {"target": BAD_REQUEST_EXCEPTION},
-        "LimitExceededException": {"target": LIMIT_EXCEEDED_EXCEPTION},
-        "InternalFailureException": {"target": INTERNAL_FAILURE_EXCEPTION},
-        "ConflictException": {"target": CONFLICT_EXCEPTION},
-        "ServiceUnavailableException": {"target": SERVICE_UNAVAILABLE_EXCEPTION},
-    },
-)
-
-URI = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#Uri"), shape_type=ShapeType.STRING
-)
-
-CLINICAL_NOTE_GENERATION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ClinicalNoteGenerationStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "IN_PROGRESS": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "COMPLETED": {"target": UNIT},
-    },
-)
-
-CLINICAL_NOTE_GENERATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ClinicalNoteGenerationResult"),
-    members={
-        "ClinicalNoteOutputLocation": {"target": URI},
-        "TranscriptOutputLocation": {"target": URI},
-        "Status": {"target": CLINICAL_NOTE_GENERATION_STATUS},
-        "FailureReason": {"target": STRING},
-    },
-)
-
-MEDICAL_SCRIBE_NOTE_TEMPLATE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeNoteTemplate"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "HISTORY_AND_PHYSICAL": {"target": UNIT},
-        "GIRPP": {"target": UNIT},
-        "DAP": {"target": UNIT},
-        "SIRP": {"target": UNIT},
-        "BIRP": {"target": UNIT},
-        "BEHAVIORAL_SOAP": {"target": UNIT},
-        "PHYSICAL_SOAP": {"target": UNIT},
-    },
-)
-
-CLINICAL_NOTE_GENERATION_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ClinicalNoteGenerationSettings"),
-    members={
-        "OutputBucketName": {
-            "target": BUCKET_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NoteTemplate": {"target": MEDICAL_SCRIBE_NOTE_TEMPLATE},
-    },
-)
-
-CONTENT_IDENTIFICATION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ContentIdentificationType"),
-    shape_type=ShapeType.ENUM,
-    members={"PII": {"target": UNIT}},
-)
-
-CONTENT_REDACTION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ContentRedactionType"),
-    shape_type=ShapeType.ENUM,
-    members={"PII": {"target": UNIT}},
-)
-
-DATE_TIME = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#DateTime"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-SESSION_ID = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#SessionId"),
-    shape_type=ShapeType.STRING,
-)
-
-GET_MEDICAL_SCRIBE_STREAM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#GetMedicalScribeStreamInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.transcribestreaming#GetMedicalScribeStreamRequest",
-        )
-    ],
-    members={
-        "SessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-MEDICAL_SCRIBE_CHANNEL_ID = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeChannelId"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-MEDICAL_SCRIBE_PARTICIPANT_ROLE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeParticipantRole"),
-    shape_type=ShapeType.ENUM,
-    members={"PATIENT": {"target": UNIT}, "CLINICIAN": {"target": UNIT}},
-)
-
-MEDICAL_SCRIBE_CHANNEL_DEFINITION = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeChannelDefinition"),
-    members={
-        "ChannelId": {
-            "target": MEDICAL_SCRIBE_CHANNEL_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=0),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ParticipantRole": {
-            "target": MEDICAL_SCRIBE_PARTICIPANT_ROLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-MEDICAL_SCRIBE_CHANNEL_DEFINITIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeChannelDefinitions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEDICAL_SCRIBE_CHANNEL_DEFINITION}},
-)
-
-NON_EMPTY_STRING = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#NonEmptyString"),
-    shape_type=ShapeType.STRING,
-)
-
-KMS_ENCRYPTION_CONTEXT_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#KMSEncryptionContextMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": NON_EMPTY_STRING},
-        "value": {"target": NON_EMPTY_STRING},
-    },
-)
-
-KMS_KEY_ID = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#KMSKeyId"),
-    shape_type=ShapeType.STRING,
-)
-
-MEDICAL_SCRIBE_ENCRYPTION_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeEncryptionSettings"),
-    members={
-        "KmsEncryptionContext": {"target": KMS_ENCRYPTION_CONTEXT_MAP},
-        "KmsKeyId": {
-            "target": KMS_KEY_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-MEDICAL_SCRIBE_LANGUAGE_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeLanguageCode"),
-    shape_type=ShapeType.ENUM,
-    members={"EN_US": {"target": UNIT}},
-)
-
-MEDICAL_SCRIBE_MEDIA_ENCODING = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeMediaEncoding"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "PCM": {"target": UNIT},
-        "OGG_OPUS": {"target": UNIT},
-        "FLAC": {"target": UNIT},
-    },
-)
-
-MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeMediaSampleRateHertz"),
-    shape_type=ShapeType.INTEGER,
-)
-
-NULLABLE_BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#NullableBoolean"),
-    shape_type=ShapeType.BOOLEAN,
-)
-
-MEDICAL_SCRIBE_POST_STREAM_ANALYTICS_RESULT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.transcribestreaming#MedicalScribePostStreamAnalyticsResult"
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
+
+
+n0 = "com.amazonaws.transcribestreaming"
+_S = "String"
+_C = "Confidence"
+_D = "Double"
+_s = "smithy.api#default"
+_E = "Entity"
+_ST = "StartTime"
+_ET = "EndTime"
+_Ca = "Category"
+_T = "Type"
+_Co = "Content"
+_EL = "EntityList"
+_m = "member"
+_St = "Stable"
+_IT = "ItemType"
+_PRONUNCIATION = "PRONUNCIATION"
+_sV = "smithy.api#enumValue"
+_p = "pronunciation"
+_PUNCTUATION = "PUNCTUATION"
+_pu = "punctuation"
+_B = "Boolean"
+_I = "Item"
+_VFM = "VocabularyFilterMatch"
+_Sp = "Speaker"
+_IL = "ItemList"
+_A = "Alternative"
+_Tr = "Transcript"
+_It = "Items"
+_En = "Entities"
+_AL = "AlternativeList"
+_AC = "AudioChunk"
+_AE = "AudioEvent"
+_sP = "smithy.api#eventPayload"
+_CI = "ChannelId"
+_PR = "ParticipantRole"
+_AGENT = "AGENT"
+_CUSTOMER = "CUSTOMER"
+_CD = "ChannelDefinition"
+_sm = "smithy.api#required"
+_CDh = "ChannelDefinitions"
+_CRO = "ContentRedactionOutput"
+_REDACTED = "REDACTED"
+_r = "redacted"
+_RAU = "REDACTED_AND_UNREDACTED"
+_rau = "redacted_and_unredacted"
+_PCAS = "PostCallAnalyticsSettings"
+_OL = "OutputLocation"
+_DARA = "DataAccessRoleArn"
+_OEKMSKI = "OutputEncryptionKMSKeyId"
+_CE = "ConfigurationEvent"
+_AS = "AudioStream"
+_smi = "smithy.api#streaming"
+_BRE = "BadRequestException"
+_smit = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_M = "Message"
+_BN = "BucketName"
+_L = "Long"
+_CAE = "CallAnalyticsEntity"
+_BOM = "BeginOffsetMillis"
+_EOM = "EndOffsetMillis"
+_CAEL = "CallAnalyticsEntityList"
+_CAI = "CallAnalyticsItem"
+_CAIL = "CallAnalyticsItemList"
+_CALC = "CallAnalyticsLanguageCode"
+_EU = "EN_US"
+_eU = "en-US"
+_EG = "EN_GB"
+_eG = "en-GB"
+_EU_ = "ES_US"
+_eU_ = "es-US"
+_FC = "FR_CA"
+_fC = "fr-CA"
+_FF = "FR_FR"
+_fF = "fr-FR"
+_EA = "EN_AU"
+_eA = "en-AU"
+_II = "IT_IT"
+_iI = "it-IT"
+_DD = "DE_DE"
+_dD = "de-DE"
+_PB = "PT_BR"
+_pB = "pt-BR"
+_CALWS = "CallAnalyticsLanguageWithScore"
+_LC = "LanguageCode"
+_Sc = "Score"
+_CALI = "CallAnalyticsLanguageIdentification"
+_SL = "StringList"
+_TR = "TimestampRange"
+_TRi = "TimestampRanges"
+_POI = "PointsOfInterest"
+_MCD = "MatchedCategoryDetails"
+_k = "key"
+_v = "value"
+_CEa = "CategoryEvent"
+_MC = "MatchedCategories"
+_MD = "MatchedDetails"
+_CEo = "ConflictException"
+_IFE = "InternalFailureException"
+_se = "server"
+_LEE = "LimitExceededException"
+_SUE = "ServiceUnavailableException"
+_In = "Integer"
+_CO = "CharacterOffsets"
+_Be = "Begin"
+_End = "End"
+_ID = "IssueDetected"
+_IDs = "IssuesDetected"
+_Se = "Sentiment"
+_POSITIVE = "POSITIVE"
+_NEGATIVE = "NEGATIVE"
+_MIXED = "MIXED"
+_NEUTRAL = "NEUTRAL"
+_UE = "UtteranceEvent"
+_UI = "UtteranceId"
+_IP = "IsPartial"
+_LI = "LanguageIdentification"
+_CATRS = "CallAnalyticsTranscriptResultStream"
+_U = "Uri"
+_CNGS = "ClinicalNoteGenerationStatus"
+_IP_ = "IN_PROGRESS"
+_FAILED = "FAILED"
+_COMPLETED = "COMPLETED"
+_CNGR = "ClinicalNoteGenerationResult"
+_CNOL = "ClinicalNoteOutputLocation"
+_TOL = "TranscriptOutputLocation"
+_Sta = "Status"
+_FR = "FailureReason"
+_MSNT = "MedicalScribeNoteTemplate"
+_HAP = "HISTORY_AND_PHYSICAL"
+_GIRPP = "GIRPP"
+_DAP = "DAP"
+_SIRP = "SIRP"
+_BIRP = "BIRP"
+_BS = "BEHAVIORAL_SOAP"
+_PS = "PHYSICAL_SOAP"
+_CNGSl = "ClinicalNoteGenerationSettings"
+_OBN = "OutputBucketName"
+_NT = "NoteTemplate"
+_CIT = "ContentIdentificationType"
+_PII = "PII"
+_CRT = "ContentRedactionType"
+_DT = "DateTime"
+_SI = "SessionId"
+_GMSSI = "GetMedicalScribeStreamInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cGMSSR = "com.amazonaws.transcribestreaming#GetMedicalScribeStreamRequest"
+_smith = "smithy.api#input"
+_sL = "smithy.api#httpLabel"
+_MSCI = "MedicalScribeChannelId"
+_MSPR = "MedicalScribeParticipantRole"
+_PATIENT = "PATIENT"
+_CLINICIAN = "CLINICIAN"
+_MSCD = "MedicalScribeChannelDefinition"
+_MSCDe = "MedicalScribeChannelDefinitions"
+_NES = "NonEmptyString"
+_KMSECM = "KMSEncryptionContextMap"
+_KMSKI = "KMSKeyId"
+_MSES = "MedicalScribeEncryptionSettings"
+_KEC = "KmsEncryptionContext"
+_KKI = "KmsKeyId"
+_MSLC = "MedicalScribeLanguageCode"
+_MSME = "MedicalScribeMediaEncoding"
+_PCM = "PCM"
+_pc = "pcm"
+_OO = "OGG_OPUS"
+_oo = "ogg-opus"
+_FLAC = "FLAC"
+_f = "flac"
+_MSMSRH = "MedicalScribeMediaSampleRateHertz"
+_NB = "NullableBoolean"
+_MSPSAR = "MedicalScribePostStreamAnalyticsResult"
+_MSPSAS = "MedicalScribePostStreamAnalyticsSettings"
+_IRA = "IamRoleArn"
+_MSSS = "MedicalScribeStreamStatus"
+_PAUSED = "PAUSED"
+_MSVFM = "MedicalScribeVocabularyFilterMethod"
+_REMOVE = "REMOVE"
+_re = "remove"
+_MASK = "MASK"
+_ma = "mask"
+_TAG = "TAG"
+_t = "tag"
+_VFN = "VocabularyFilterName"
+_VN = "VocabularyName"
+_MSSD = "MedicalScribeStreamDetails"
+_SCA = "StreamCreatedAt"
+_SEA = "StreamEndedAt"
+_MSRH = "MediaSampleRateHertz"
+_ME = "MediaEncoding"
+_VFMo = "VocabularyFilterMethod"
+_RARA = "ResourceAccessRoleArn"
+_ES = "EncryptionSettings"
+_SS = "StreamStatus"
+_PSAS = "PostStreamAnalyticsSettings"
+_PSAR = "PostStreamAnalyticsResult"
+_MSCP = "MedicalScribeContextProvided"
+_GMSSO = "GetMedicalScribeStreamOutput"
+_cGMSSRo = "com.amazonaws.transcribestreaming#GetMedicalScribeStreamResponse"
+_smithy = "smithy.api#output"
+_RNFE = "ResourceNotFoundException"
+_GMSS = "GetMedicalScribeStream"
+_smithya = "smithy.api#http"
+_JJ = "JA_JP"
+_jJ = "ja-JP"
+_KK = "KO_KR"
+_kK = "ko-KR"
+_ZC = "ZH_CN"
+_zC = "zh-CN"
+_TT = "TH_TH"
+_tT = "th-TH"
+_EE = "ES_ES"
+_eE = "es-ES"
+_AS_ = "AR_SA"
+_aS = "ar-SA"
+_PP = "PT_PT"
+_pP = "pt-PT"
+_CE_ = "CA_ES"
+_cE = "ca-ES"
+_AA = "AR_AE"
+_aA = "ar-AE"
+_HI = "HI_IN"
+_hI = "hi-IN"
+_ZH = "ZH_HK"
+_zH = "zh-HK"
+_NN = "NL_NL"
+_nN = "nl-NL"
+_NN_ = "NO_NO"
+_nN_ = "no-NO"
+_SS_ = "SV_SE"
+_sS = "sv-SE"
+_PP_ = "PL_PL"
+_pP_ = "pl-PL"
+_FF_ = "FI_FI"
+_fF_ = "fi-FI"
+_ZT = "ZH_TW"
+_zT = "zh-TW"
+_EI = "EN_IN"
+_eI = "en-IN"
+_EI_ = "EN_IE"
+_eI_ = "en-IE"
+_EN = "EN_NZ"
+_eN = "en-NZ"
+_EA_ = "EN_AB"
+_eA_ = "en-AB"
+_EZ = "EN_ZA"
+_eZ = "en-ZA"
+_EW = "EN_WL"
+_eW = "en-WL"
+_DC = "DE_CH"
+_dC = "de-CH"
+_AZ = "AF_ZA"
+_aZ = "af-ZA"
+_EE_ = "EU_ES"
+_eE_ = "eu-ES"
+_HH = "HR_HR"
+_hH = "hr-HR"
+_CC = "CS_CZ"
+_cC = "cs-CZ"
+_DD_ = "DA_DK"
+_dD_ = "da-DK"
+_FI = "FA_IR"
+_fI = "fa-IR"
+_GE = "GL_ES"
+_gE = "gl-ES"
+_EG_ = "EL_GR"
+_eG_ = "el-GR"
+_HI_ = "HE_IL"
+_hI_ = "he-IL"
+_II_ = "ID_ID"
+_iI_ = "id-ID"
+_LL = "LV_LV"
+_lL = "lv-LV"
+_MM = "MS_MY"
+_mM = "ms-MY"
+_RR = "RO_RO"
+_rR = "ro-RO"
+_RR_ = "RU_RU"
+_rR_ = "ru-RU"
+_SR = "SR_RS"
+_sR = "sr-RS"
+_SS__ = "SK_SK"
+_sS_ = "sk-SK"
+_SS___ = "SO_SO"
+_sS__ = "so-SO"
+_TP = "TL_PH"
+_tP = "tl-PH"
+_UU = "UK_UA"
+_uU = "uk-UA"
+_VV = "VI_VN"
+_vV = "vi-VN"
+_ZZ = "ZU_ZA"
+_zZ = "zu-ZA"
+_AE_ = "AM_ET"
+_aE = "am-ET"
+_BB = "BE_BY"
+_bB = "be-BY"
+_BB_ = "BG_BG"
+_bB_ = "bg-BG"
+_BI = "BN_IN"
+_bI = "bn-IN"
+_BB__ = "BS_BA"
+_bB__ = "bs-BA"
+_CI_ = "CKB_IQ"
+_cI = "ckb-IQ"
+_CI__ = "CKB_IR"
+_cI_ = "ckb-IR"
+_CW = "CY_WL"
+_cW = "cy-WL"
+_EM = "ES_MX"
+_eM = "es-MX"
+_EE__ = "ET_ET"
+_eE__ = "et-ET"
+_FA = "FA_AF"
+_fA = "fa-AF"
+_GI = "GU_IN"
+_gI = "gu-IN"
+_HH_ = "HT_HT"
+_hH_ = "ht-HT"
+_HH__ = "HU_HU"
+_hH__ = "hu-HU"
+_HA = "HY_AM"
+_hA = "hy-AM"
+_II__ = "IS_IS"
+_iI__ = "is-IS"
+_JI = "JV_ID"
+_jI = "jv-ID"
+_KG = "KA_GE"
+_kG = "ka-GE"
+_KD = "KAB_DZ"
+_kD = "kab-DZ"
+_KK_ = "KK_KZ"
+_kK_ = "kk-KZ"
+_KK__ = "KM_KH"
+_kK__ = "km-KH"
+_KI = "KN_IN"
+_kI = "kn-IN"
+_LI_ = "LG_IN"
+_lI = "lg-IN"
+_LL_ = "LT_LT"
+_lL_ = "lt-LT"
+_MM_ = "MK_MK"
+_mM_ = "mk-MK"
+_MI = "ML_IN"
+_mI = "ml-IN"
+_MI_ = "MR_IN"
+_mI_ = "mr-IN"
+_MM__ = "MY_MM"
+_mM__ = "my-MM"
+_NN__ = "NE_NP"
+_nN__ = "ne-NP"
+_OI = "OR_IN"
+_oI = "or-IN"
+_PI = "PA_IN"
+_pI = "pa-IN"
+_PA = "PS_AF"
+_pA = "ps-AF"
+_SL_ = "SI_LK"
+_sL_ = "si-LK"
+_SS____ = "SL_SI"
+_sS___ = "sl-SI"
+_SA = "SQ_AL"
+_sA = "sq-AL"
+_SI_ = "SU_ID"
+_sI = "su-ID"
+_SB = "SW_BI"
+_sB = "sw-BI"
+_SK = "SW_KE"
+_sK = "sw-KE"
+_SR_ = "SW_RW"
+_sR_ = "sw-RW"
+_ST_ = "SW_TZ"
+_sT = "sw-TZ"
+_SU = "SW_UG"
+_sU = "sw-UG"
+_TI = "TA_IN"
+_tI = "ta-IN"
+_TI_ = "TE_IN"
+_tI_ = "te-IN"
+_TT_ = "TR_TR"
+_tT_ = "tr-TR"
+_UU_ = "UZ_UZ"
+_uU_ = "uz-UZ"
+_LWS = "LanguageWithScore"
+_LO = "LanguageOptions"
+_GA = "G711_ALAW"
+_ga = "g711-alaw"
+_GU = "G711_ULAW"
+_gu = "g711-ulaw"
+_G = "G729"
+_g = "g729"
+_MEe = "MedicalEntity"
+_MEL = "MedicalEntityList"
+_MIe = "MedicalItem"
+_MIL = "MedicalItemList"
+_MA = "MedicalAlternative"
+_MAL = "MedicalAlternativeList"
+_MCIT = "MedicalContentIdentificationType"
+_PHI = "PHI"
+_MR = "MedicalResult"
+_RI = "ResultId"
+_Al = "Alternatives"
+_MRL = "MedicalResultList"
+_MSAE = "MedicalScribeAudioEvent"
+_P = "Pronouns"
+_smithyap = "smithy.api#sensitive"
+_HH___ = "HE_HIM"
+_SH = "SHE_HER"
+_TT__ = "THEY_THEM"
+_MSPC = "MedicalScribePatientContext"
+_MSC = "MedicalScribeContext"
+_PC = "PatientContext"
+_MSCE = "MedicalScribeConfigurationEvent"
+_MSSCET = "MedicalScribeSessionControlEventType"
+_EOS = "END_OF_SESSION"
+_MSSCE = "MedicalScribeSessionControlEvent"
+_MSIS = "MedicalScribeInputStream"
+_SCE = "SessionControlEvent"
+_MSTIT = "MedicalScribeTranscriptItemType"
+_MSTI = "MedicalScribeTranscriptItem"
+_BAT = "BeginAudioTime"
+_EAT = "EndAudioTime"
+_MSTIL = "MedicalScribeTranscriptItemList"
+_MSTS = "MedicalScribeTranscriptSegment"
+_SIe = "SegmentId"
+_MSTE = "MedicalScribeTranscriptEvent"
+_TS = "TranscriptSegment"
+_MSRS = "MedicalScribeResultStream"
+_TE = "TranscriptEvent"
+_MT = "MedicalTranscript"
+_R = "Results"
+_MTE = "MedicalTranscriptEvent"
+_MTRS = "MedicalTranscriptResultStream"
+_MN = "ModelName"
+_NOC = "NumberOfChannels"
+_PRS = "PartialResultsStability"
+_HIGH = "HIGH"
+_h = "high"
+_MEDIUM = "MEDIUM"
+_me = "medium"
+_LOW = "LOW"
+_l = "low"
+_PET = "PiiEntityTypes"
+_RIe = "RequestId"
+_Re = "Result"
+_RL = "ResultList"
+_SRW = "SessionResumeWindow"
+_Spe = "Specialty"
+_PRIMARYCARE = "PRIMARYCARE"
+_CARDIOLOGY = "CARDIOLOGY"
+_NEUROLOGY = "NEUROLOGY"
+_ONCOLOGY = "ONCOLOGY"
+_RADIOLOGY = "RADIOLOGY"
+_UROLOGY = "UROLOGY"
+_VFNo = "VocabularyFilterNames"
+_VNo = "VocabularyNames"
+_SCASTI = "StartCallAnalyticsStreamTranscriptionInput"
+_cSCASTR = (
+    "com.amazonaws.transcribestreaming#StartCallAnalyticsStreamTranscriptionRequest"
+)
+_sH = "smithy.api#httpHeader"
+_xatlc = "x-amzn-transcribe-language-code"
+_xatsr = "x-amzn-transcribe-sample-rate"
+_xatme = "x-amzn-transcribe-media-encoding"
+_xatvn = "x-amzn-transcribe-vocabulary-name"
+_xatsi = "x-amzn-transcribe-session-id"
+_sPm = "smithy.api#httpPayload"
+_xatvfn = "x-amzn-transcribe-vocabulary-filter-name"
+_xatvfm = "x-amzn-transcribe-vocabulary-filter-method"
+_LMN = "LanguageModelName"
+_xatlmn = "x-amzn-transcribe-language-model-name"
+_ILd = "IdentifyLanguage"
+_xatil = "x-amzn-transcribe-identify-language"
+_xatlo = "x-amzn-transcribe-language-options"
+_PL = "PreferredLanguage"
+_xatpl = "x-amzn-transcribe-preferred-language"
+_xatvn_ = "x-amzn-transcribe-vocabulary-names"
+_xatvfn_ = "x-amzn-transcribe-vocabulary-filter-names"
+_EPRS = "EnablePartialResultsStabilization"
+_xateprs = "x-amzn-transcribe-enable-partial-results-stabilization"
+_xatprs = "x-amzn-transcribe-partial-results-stability"
+_xatcit = "x-amzn-transcribe-content-identification-type"
+_xatcrt = "x-amzn-transcribe-content-redaction-type"
+_xatpet = "x-amzn-transcribe-pii-entity-types"
+_SCASTO = "StartCallAnalyticsStreamTranscriptionOutput"
+_cSCASTRo = (
+    "com.amazonaws.transcribestreaming#StartCallAnalyticsStreamTranscriptionResponse"
+)
+_xari = "x-amzn-request-id"
+_SCAST = "StartCallAnalyticsStreamTranscription"
+_SMSSI = "StartMedicalScribeStreamInput"
+_cSMSSR = "com.amazonaws.transcribestreaming#StartMedicalScribeStreamRequest"
+_IS = "InputStream"
+_SMSSO = "StartMedicalScribeStreamOutput"
+_cSMSSRo = "com.amazonaws.transcribestreaming#StartMedicalScribeStreamResponse"
+_RS = "ResultStream"
+_SMSS = "StartMedicalScribeStream"
+_CONVERSATION = "CONVERSATION"
+_DICTATION = "DICTATION"
+_SMSTI = "StartMedicalStreamTranscriptionInput"
+_cSMSTR = "com.amazonaws.transcribestreaming#StartMedicalStreamTranscriptionRequest"
+_xats = "x-amzn-transcribe-specialty"
+_xatt = "x-amzn-transcribe-type"
+_SSL = "ShowSpeakerLabel"
+_xatssl = "x-amzn-transcribe-show-speaker-label"
+_ECI = "EnableChannelIdentification"
+_xateci = "x-amzn-transcribe-enable-channel-identification"
+_xatnoc = "x-amzn-transcribe-number-of-channels"
+_SMSTO = "StartMedicalStreamTranscriptionOutput"
+_cSMSTRo = "com.amazonaws.transcribestreaming#StartMedicalStreamTranscriptionResponse"
+_TRS = "TranscriptResultStream"
+_SMST = "StartMedicalStreamTranscription"
+_TF = "TranscriptFormat"
+_SPOKEN = "SPOKEN"
+_sp = "spoken"
+_WRITTEN = "WRITTEN"
+_w = "written"
+_SSTI = "StartStreamTranscriptionInput"
+_cSSTR = "com.amazonaws.transcribestreaming#StartStreamTranscriptionRequest"
+_IML = "IdentifyMultipleLanguages"
+_xatiml = "x-amzn-transcribe-identify-multiple-languages"
+_xatsrw = "x-amzn-transcribe-session-resume-window"
+_xattf = "x-amzn-transcribe-transcript-format"
+_SSTO = "StartStreamTranscriptionOutput"
+_cSSTRo = "com.amazonaws.transcribestreaming#StartStreamTranscriptionResponse"
+_SST = "StartStreamTranscription"
+_Tra = "Transcribe"
+_a = "aws.auth#sigv4"
+_sBm = "smithy.rules#endpointBdd"
+_aw = "aws.api#service"
+_aJ = "aws.protocols#restJson1"
+
+STRING: StaticSchema = (3, n0, _S, 0)
+
+CONFIDENCE: StaticSchema = (10, n0, _C, 0)
+
+DOUBLE: StaticSchema = (10, n0, _D, {_s: 0})
+
+ENTITY: StaticSchema = (
+    18,
+    n0,
+    _E,
+    0,
+    (_ST, _ET, _Ca, _T, _Co, _C),
+    (
+        (DOUBLE, {_s: 0}),
+        (DOUBLE, {_s: 0}),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (CONFIDENCE, 0),
     ),
-    members={
-        "ClinicalNoteGenerationResult": {"target": CLINICAL_NOTE_GENERATION_RESULT}
-    },
 )
 
-MEDICAL_SCRIBE_POST_STREAM_ANALYTICS_SETTINGS = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.transcribestreaming#MedicalScribePostStreamAnalyticsSettings"
+ENTITY_LIST: StaticSchema = (16, n0, _EL, 0, (_m,), ((ENTITY, 0),))
+
+STABLE: StaticSchema = (2, n0, _St, 0)
+
+ITEM_TYPE: StaticSchema = (
+    14,
+    n0,
+    _IT,
+    0,
+    (_PRONUNCIATION, _PUNCTUATION),
+    ((-1, {_sV: _p}), (-1, {_sV: _pu})),
+)
+
+BOOLEAN: StaticSchema = (2, n0, _B, {_s: False})
+
+ITEM: StaticSchema = (
+    18,
+    n0,
+    _I,
+    0,
+    (_ST, _ET, _T, _Co, _VFM, _Sp, _C, _St),
+    (
+        (DOUBLE, {_s: 0}),
+        (DOUBLE, {_s: 0}),
+        (ITEM_TYPE, 0),
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (CONFIDENCE, 0),
+        (STABLE, 0),
     ),
-    members={
-        "ClinicalNoteGenerationSettings": {
-            "target": CLINICAL_NOTE_GENERATION_SETTINGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
 )
 
-IAM_ROLE_ARN = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#IamRoleArn"),
-    shape_type=ShapeType.STRING,
+ITEM_LIST: StaticSchema = (16, n0, _IL, 0, (_m,), ((ITEM, 0),))
+
+ALTERNATIVE: StaticSchema = (
+    18,
+    n0,
+    _A,
+    0,
+    (_Tr, _It, _En),
+    ((STRING, 0), (ITEM_LIST, 0), (ENTITY_LIST, 0)),
 )
 
-MEDICAL_SCRIBE_STREAM_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeStreamStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "IN_PROGRESS": {"target": UNIT},
-        "PAUSED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "COMPLETED": {"target": UNIT},
-    },
+ALTERNATIVE_LIST: StaticSchema = (16, n0, _AL, 0, (_m,), ((ALTERNATIVE, 0),))
+
+AUDIO_CHUNK: StaticSchema = (1, n0, _AC, 0)
+
+AUDIO_EVENT: StaticSchema = (18, n0, _AE, 0, (_AC,), ((AUDIO_CHUNK, {_sP: None}),))
+
+CHANNEL_ID: StaticSchema = (7, n0, _CI, {_s: 0})
+
+PARTICIPANT_ROLE: StaticSchema = (
+    14,
+    n0,
+    _PR,
+    0,
+    (_AGENT, _CUSTOMER),
+    ((-1, {_sV: _AGENT}), (-1, {_sV: _CUSTOMER})),
 )
 
-MEDICAL_SCRIBE_VOCABULARY_FILTER_METHOD = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeVocabularyFilterMethod"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "REMOVE": {"target": UNIT},
-        "MASK": {"target": UNIT},
-        "TAG": {"target": UNIT},
-    },
+CHANNEL_DEFINITION: StaticSchema = (
+    18,
+    n0,
+    _CD,
+    0,
+    (_CI, _PR),
+    ((CHANNEL_ID, {_s: 0, _sm: None}), (PARTICIPANT_ROLE, 1)),
 )
 
-VOCABULARY_FILTER_NAME = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#VocabularyFilterName"),
-    shape_type=ShapeType.STRING,
+CHANNEL_DEFINITIONS: StaticSchema = (16, n0, _CDh, 0, (_m,), ((CHANNEL_DEFINITION, 0),))
+
+CONTENT_REDACTION_OUTPUT: StaticSchema = (
+    14,
+    n0,
+    _CRO,
+    0,
+    (_REDACTED, _RAU),
+    ((-1, {_sV: _r}), (-1, {_sV: _rau})),
 )
 
-VOCABULARY_NAME = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#VocabularyName"),
-    shape_type=ShapeType.STRING,
+POST_CALL_ANALYTICS_SETTINGS: StaticSchema = (
+    18,
+    n0,
+    _PCAS,
+    0,
+    (_OL, _DARA, _CRO, _OEKMSKI),
+    ((STRING, 1), (STRING, 1), (CONTENT_REDACTION_OUTPUT, 0), (STRING, 0)),
 )
 
-MEDICAL_SCRIBE_STREAM_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeStreamDetails"),
-    members={
-        "SessionId": {"target": SESSION_ID},
-        "StreamCreatedAt": {"target": DATE_TIME},
-        "StreamEndedAt": {"target": DATE_TIME},
-        "LanguageCode": {"target": MEDICAL_SCRIBE_LANGUAGE_CODE},
-        "MediaSampleRateHertz": {"target": MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ},
-        "MediaEncoding": {"target": MEDICAL_SCRIBE_MEDIA_ENCODING},
-        "VocabularyName": {"target": VOCABULARY_NAME},
-        "VocabularyFilterName": {"target": VOCABULARY_FILTER_NAME},
-        "VocabularyFilterMethod": {"target": MEDICAL_SCRIBE_VOCABULARY_FILTER_METHOD},
-        "ResourceAccessRoleArn": {"target": IAM_ROLE_ARN},
-        "ChannelDefinitions": {"target": MEDICAL_SCRIBE_CHANNEL_DEFINITIONS},
-        "EncryptionSettings": {"target": MEDICAL_SCRIBE_ENCRYPTION_SETTINGS},
-        "StreamStatus": {"target": MEDICAL_SCRIBE_STREAM_STATUS},
-        "PostStreamAnalyticsSettings": {
-            "target": MEDICAL_SCRIBE_POST_STREAM_ANALYTICS_SETTINGS
-        },
-        "PostStreamAnalyticsResult": {
-            "target": MEDICAL_SCRIBE_POST_STREAM_ANALYTICS_RESULT
-        },
-        "MedicalScribeContextProvided": {"target": NULLABLE_BOOLEAN},
-    },
+CONFIGURATION_EVENT: StaticSchema = (
+    18,
+    n0,
+    _CE,
+    0,
+    (_CDh, _PCAS),
+    ((CHANNEL_DEFINITIONS, 0), (POST_CALL_ANALYTICS_SETTINGS, 0)),
 )
 
-GET_MEDICAL_SCRIBE_STREAM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#GetMedicalScribeStreamOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.transcribestreaming#GetMedicalScribeStreamResponse",
-        )
-    ],
-    members={"MedicalScribeStreamDetails": {"target": MEDICAL_SCRIBE_STREAM_DETAILS}},
+AUDIO_STREAM: StaticSchema = (
+    19,
+    n0,
+    _AS,
+    {_smi: None},
+    (_AE, _CE),
+    ((AUDIO_EVENT, 0), (CONFIGURATION_EVENT, 0)),
 )
 
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={"Message": {"target": STRING}},
+BAD_REQUEST_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _BRE,
+    {_smit: _c, _sE: 400},
+    (_M,),
+    ((STRING, 0),),
 )
 
-GET_MEDICAL_SCRIBE_STREAM = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#GetMedicalScribeStream"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/medical-scribe-stream/{SessionId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
+BUCKET_NAME: StaticSchema = (3, n0, _BN, 0)
+
+LONG: StaticSchema = (8, n0, _L, 0)
+
+CALL_ANALYTICS_ENTITY: StaticSchema = (
+    18,
+    n0,
+    _CAE,
+    0,
+    (_BOM, _EOM, _Ca, _T, _Co, _C),
+    ((LONG, 0), (LONG, 0), (STRING, 0), (STRING, 0), (STRING, 0), (CONFIDENCE, 0)),
 )
 
-LANGUAGE_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#LanguageCode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EN_US": {"target": UNIT},
-        "EN_GB": {"target": UNIT},
-        "ES_US": {"target": UNIT},
-        "FR_CA": {"target": UNIT},
-        "FR_FR": {"target": UNIT},
-        "EN_AU": {"target": UNIT},
-        "IT_IT": {"target": UNIT},
-        "DE_DE": {"target": UNIT},
-        "PT_BR": {"target": UNIT},
-        "JA_JP": {"target": UNIT},
-        "KO_KR": {"target": UNIT},
-        "ZH_CN": {"target": UNIT},
-        "TH_TH": {"target": UNIT},
-        "ES_ES": {"target": UNIT},
-        "AR_SA": {"target": UNIT},
-        "PT_PT": {"target": UNIT},
-        "CA_ES": {"target": UNIT},
-        "AR_AE": {"target": UNIT},
-        "HI_IN": {"target": UNIT},
-        "ZH_HK": {"target": UNIT},
-        "NL_NL": {"target": UNIT},
-        "NO_NO": {"target": UNIT},
-        "SV_SE": {"target": UNIT},
-        "PL_PL": {"target": UNIT},
-        "FI_FI": {"target": UNIT},
-        "ZH_TW": {"target": UNIT},
-        "EN_IN": {"target": UNIT},
-        "EN_IE": {"target": UNIT},
-        "EN_NZ": {"target": UNIT},
-        "EN_AB": {"target": UNIT},
-        "EN_ZA": {"target": UNIT},
-        "EN_WL": {"target": UNIT},
-        "DE_CH": {"target": UNIT},
-        "AF_ZA": {"target": UNIT},
-        "EU_ES": {"target": UNIT},
-        "HR_HR": {"target": UNIT},
-        "CS_CZ": {"target": UNIT},
-        "DA_DK": {"target": UNIT},
-        "FA_IR": {"target": UNIT},
-        "GL_ES": {"target": UNIT},
-        "EL_GR": {"target": UNIT},
-        "HE_IL": {"target": UNIT},
-        "ID_ID": {"target": UNIT},
-        "LV_LV": {"target": UNIT},
-        "MS_MY": {"target": UNIT},
-        "RO_RO": {"target": UNIT},
-        "RU_RU": {"target": UNIT},
-        "SR_RS": {"target": UNIT},
-        "SK_SK": {"target": UNIT},
-        "SO_SO": {"target": UNIT},
-        "TL_PH": {"target": UNIT},
-        "UK_UA": {"target": UNIT},
-        "VI_VN": {"target": UNIT},
-        "ZU_ZA": {"target": UNIT},
-        "AM_ET": {"target": UNIT},
-        "BE_BY": {"target": UNIT},
-        "BG_BG": {"target": UNIT},
-        "BN_IN": {"target": UNIT},
-        "BS_BA": {"target": UNIT},
-        "CKB_IQ": {"target": UNIT},
-        "CKB_IR": {"target": UNIT},
-        "CY_WL": {"target": UNIT},
-        "ES_MX": {"target": UNIT},
-        "ET_ET": {"target": UNIT},
-        "FA_AF": {"target": UNIT},
-        "GU_IN": {"target": UNIT},
-        "HT_HT": {"target": UNIT},
-        "HU_HU": {"target": UNIT},
-        "HY_AM": {"target": UNIT},
-        "IS_IS": {"target": UNIT},
-        "JV_ID": {"target": UNIT},
-        "KA_GE": {"target": UNIT},
-        "KAB_DZ": {"target": UNIT},
-        "KK_KZ": {"target": UNIT},
-        "KM_KH": {"target": UNIT},
-        "KN_IN": {"target": UNIT},
-        "LG_IN": {"target": UNIT},
-        "LT_LT": {"target": UNIT},
-        "MK_MK": {"target": UNIT},
-        "ML_IN": {"target": UNIT},
-        "MR_IN": {"target": UNIT},
-        "MY_MM": {"target": UNIT},
-        "NE_NP": {"target": UNIT},
-        "OR_IN": {"target": UNIT},
-        "PA_IN": {"target": UNIT},
-        "PS_AF": {"target": UNIT},
-        "SI_LK": {"target": UNIT},
-        "SL_SI": {"target": UNIT},
-        "SQ_AL": {"target": UNIT},
-        "SU_ID": {"target": UNIT},
-        "SW_BI": {"target": UNIT},
-        "SW_KE": {"target": UNIT},
-        "SW_RW": {"target": UNIT},
-        "SW_TZ": {"target": UNIT},
-        "SW_UG": {"target": UNIT},
-        "TA_IN": {"target": UNIT},
-        "TE_IN": {"target": UNIT},
-        "TR_TR": {"target": UNIT},
-        "UZ_UZ": {"target": UNIT},
-    },
+CALL_ANALYTICS_ENTITY_LIST: StaticSchema = (
+    16,
+    n0,
+    _CAEL,
+    0,
+    (_m,),
+    ((CALL_ANALYTICS_ENTITY, 0),),
 )
 
-LANGUAGE_WITH_SCORE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#LanguageWithScore"),
-    members={
-        "LanguageCode": {"target": LANGUAGE_CODE},
-        "Score": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-LANGUAGE_IDENTIFICATION = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#LanguageIdentification"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LANGUAGE_WITH_SCORE}},
-)
-
-LANGUAGE_OPTIONS = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#LanguageOptions"),
-    shape_type=ShapeType.STRING,
-)
-
-MEDIA_ENCODING = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MediaEncoding"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "PCM": {"target": UNIT},
-        "OGG_OPUS": {"target": UNIT},
-        "FLAC": {"target": UNIT},
-        "G711_ALAW": {"target": UNIT},
-        "G711_ULAW": {"target": UNIT},
-        "G729": {"target": UNIT},
-    },
-)
-
-MEDIA_SAMPLE_RATE_HERTZ = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#MediaSampleRateHertz"),
-    shape_type=ShapeType.INTEGER,
-)
-
-MEDICAL_ENTITY = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalEntity"),
-    members={
-        "StartTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "EndTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Category": {"target": STRING},
-        "Content": {"target": STRING},
-        "Confidence": {"target": CONFIDENCE},
-    },
-)
-
-MEDICAL_ENTITY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalEntityList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEDICAL_ENTITY}},
-)
-
-MEDICAL_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalItem"),
-    members={
-        "StartTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "EndTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Type": {"target": ITEM_TYPE},
-        "Content": {"target": STRING},
-        "Confidence": {"target": CONFIDENCE},
-        "Speaker": {"target": STRING},
-    },
-)
-
-MEDICAL_ITEM_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalItemList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEDICAL_ITEM}},
-)
-
-MEDICAL_ALTERNATIVE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalAlternative"),
-    members={
-        "Transcript": {"target": STRING},
-        "Items": {"target": MEDICAL_ITEM_LIST},
-        "Entities": {"target": MEDICAL_ENTITY_LIST},
-    },
-)
-
-MEDICAL_ALTERNATIVE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalAlternativeList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEDICAL_ALTERNATIVE}},
-)
-
-MEDICAL_CONTENT_IDENTIFICATION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalContentIdentificationType"),
-    shape_type=ShapeType.ENUM,
-    members={"PHI": {"target": UNIT}},
-)
-
-MEDICAL_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalResult"),
-    members={
-        "ResultId": {"target": STRING},
-        "StartTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "EndTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "IsPartial": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "Alternatives": {"target": MEDICAL_ALTERNATIVE_LIST},
-        "ChannelId": {"target": STRING},
-    },
-)
-
-MEDICAL_RESULT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalResultList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEDICAL_RESULT}},
-)
-
-MEDICAL_SCRIBE_AUDIO_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeAudioEvent"),
-    members={
-        "AudioChunk": {
-            "target": AUDIO_CHUNK,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#eventPayload")),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-PRONOUNS = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#Pronouns"),
-    shape_type=ShapeType.ENUM,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-    members={
-        "HE_HIM": {"target": UNIT},
-        "SHE_HER": {"target": UNIT},
-        "THEY_THEM": {"target": UNIT},
-    },
-)
-
-MEDICAL_SCRIBE_PATIENT_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribePatientContext"),
-    members={"Pronouns": {"target": PRONOUNS}},
-)
-
-MEDICAL_SCRIBE_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeContext"),
-    members={"PatientContext": {"target": MEDICAL_SCRIBE_PATIENT_CONTEXT}},
-)
-
-MEDICAL_SCRIBE_CONFIGURATION_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeConfigurationEvent"),
-    members={
-        "VocabularyName": {"target": VOCABULARY_NAME},
-        "VocabularyFilterName": {"target": VOCABULARY_FILTER_NAME},
-        "VocabularyFilterMethod": {"target": MEDICAL_SCRIBE_VOCABULARY_FILTER_METHOD},
-        "ResourceAccessRoleArn": {
-            "target": IAM_ROLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ChannelDefinitions": {"target": MEDICAL_SCRIBE_CHANNEL_DEFINITIONS},
-        "EncryptionSettings": {"target": MEDICAL_SCRIBE_ENCRYPTION_SETTINGS},
-        "PostStreamAnalyticsSettings": {
-            "target": MEDICAL_SCRIBE_POST_STREAM_ANALYTICS_SETTINGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "MedicalScribeContext": {"target": MEDICAL_SCRIBE_CONTEXT},
-    },
-)
-
-MEDICAL_SCRIBE_SESSION_CONTROL_EVENT_TYPE = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.transcribestreaming#MedicalScribeSessionControlEventType"
+CALL_ANALYTICS_ITEM: StaticSchema = (
+    18,
+    n0,
+    _CAI,
+    0,
+    (_BOM, _EOM, _T, _Co, _C, _VFM, _St),
+    (
+        (LONG, 0),
+        (LONG, 0),
+        (ITEM_TYPE, 0),
+        (STRING, 0),
+        (CONFIDENCE, 0),
+        (BOOLEAN, {_s: False}),
+        (STABLE, 0),
     ),
-    shape_type=ShapeType.ENUM,
-    members={"END_OF_SESSION": {"target": UNIT}},
 )
 
-MEDICAL_SCRIBE_SESSION_CONTROL_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeSessionControlEvent"),
-    members={
-        "Type": {
-            "target": MEDICAL_SCRIBE_SESSION_CONTROL_EVENT_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
+CALL_ANALYTICS_ITEM_LIST: StaticSchema = (
+    16,
+    n0,
+    _CAIL,
+    0,
+    (_m,),
+    ((CALL_ANALYTICS_ITEM, 0),),
 )
 
-MEDICAL_SCRIBE_INPUT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeInputStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "AudioEvent": {"target": MEDICAL_SCRIBE_AUDIO_EVENT},
-        "SessionControlEvent": {"target": MEDICAL_SCRIBE_SESSION_CONTROL_EVENT},
-        "ConfigurationEvent": {"target": MEDICAL_SCRIBE_CONFIGURATION_EVENT},
-    },
-)
-
-MEDICAL_SCRIBE_TRANSCRIPT_ITEM_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeTranscriptItemType"),
-    shape_type=ShapeType.ENUM,
-    members={"PRONUNCIATION": {"target": UNIT}, "PUNCTUATION": {"target": UNIT}},
-)
-
-MEDICAL_SCRIBE_TRANSCRIPT_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeTranscriptItem"),
-    members={
-        "BeginAudioTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "EndAudioTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Type": {"target": MEDICAL_SCRIBE_TRANSCRIPT_ITEM_TYPE},
-        "Confidence": {"target": CONFIDENCE},
-        "Content": {"target": STRING},
-        "VocabularyFilterMatch": {"target": NULLABLE_BOOLEAN},
-    },
-)
-
-MEDICAL_SCRIBE_TRANSCRIPT_ITEM_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeTranscriptItemList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEDICAL_SCRIBE_TRANSCRIPT_ITEM}},
-)
-
-MEDICAL_SCRIBE_TRANSCRIPT_SEGMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeTranscriptSegment"),
-    members={
-        "SegmentId": {"target": STRING},
-        "BeginAudioTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "EndAudioTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Content": {"target": STRING},
-        "Items": {"target": MEDICAL_SCRIBE_TRANSCRIPT_ITEM_LIST},
-        "IsPartial": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "ChannelId": {"target": STRING},
-    },
-)
-
-MEDICAL_SCRIBE_TRANSCRIPT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeTranscriptEvent"),
-    members={"TranscriptSegment": {"target": MEDICAL_SCRIBE_TRANSCRIPT_SEGMENT}},
-)
-
-MEDICAL_SCRIBE_RESULT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalScribeResultStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "TranscriptEvent": {"target": MEDICAL_SCRIBE_TRANSCRIPT_EVENT},
-        "BadRequestException": {"target": BAD_REQUEST_EXCEPTION},
-        "LimitExceededException": {"target": LIMIT_EXCEEDED_EXCEPTION},
-        "InternalFailureException": {"target": INTERNAL_FAILURE_EXCEPTION},
-        "ConflictException": {"target": CONFLICT_EXCEPTION},
-        "ServiceUnavailableException": {"target": SERVICE_UNAVAILABLE_EXCEPTION},
-    },
-)
-
-MEDICAL_TRANSCRIPT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalTranscript"),
-    members={"Results": {"target": MEDICAL_RESULT_LIST}},
-)
-
-MEDICAL_TRANSCRIPT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalTranscriptEvent"),
-    members={"Transcript": {"target": MEDICAL_TRANSCRIPT}},
-)
-
-MEDICAL_TRANSCRIPT_RESULT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#MedicalTranscriptResultStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "TranscriptEvent": {"target": MEDICAL_TRANSCRIPT_EVENT},
-        "BadRequestException": {"target": BAD_REQUEST_EXCEPTION},
-        "LimitExceededException": {"target": LIMIT_EXCEEDED_EXCEPTION},
-        "InternalFailureException": {"target": INTERNAL_FAILURE_EXCEPTION},
-        "ConflictException": {"target": CONFLICT_EXCEPTION},
-        "ServiceUnavailableException": {"target": SERVICE_UNAVAILABLE_EXCEPTION},
-    },
-)
-
-MODEL_NAME = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#ModelName"),
-    shape_type=ShapeType.STRING,
-)
-
-NUMBER_OF_CHANNELS = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#NumberOfChannels"),
-    shape_type=ShapeType.INTEGER,
-)
-
-PARTIAL_RESULTS_STABILITY = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#PartialResultsStability"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "HIGH": {"target": UNIT},
-        "MEDIUM": {"target": UNIT},
-        "LOW": {"target": UNIT},
-    },
-)
-
-PII_ENTITY_TYPES = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#PiiEntityTypes"),
-    shape_type=ShapeType.STRING,
-)
-
-REQUEST_ID = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#RequestId"),
-    shape_type=ShapeType.STRING,
-)
-
-RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#Result"),
-    members={
-        "ResultId": {"target": STRING},
-        "StartTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "EndTime": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "IsPartial": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "Alternatives": {"target": ALTERNATIVE_LIST},
-        "ChannelId": {"target": STRING},
-        "LanguageCode": {"target": LANGUAGE_CODE},
-        "LanguageIdentification": {"target": LANGUAGE_IDENTIFICATION},
-    },
-)
-
-RESULT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#ResultList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RESULT}},
-)
-
-SESSION_RESUME_WINDOW = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#SessionResumeWindow"),
-    shape_type=ShapeType.INTEGER,
-)
-
-SPECIALTY = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#Specialty"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "PRIMARYCARE": {"target": UNIT},
-        "CARDIOLOGY": {"target": UNIT},
-        "NEUROLOGY": {"target": UNIT},
-        "ONCOLOGY": {"target": UNIT},
-        "RADIOLOGY": {"target": UNIT},
-        "UROLOGY": {"target": UNIT},
-    },
-)
-
-VOCABULARY_FILTER_METHOD = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#VocabularyFilterMethod"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "REMOVE": {"target": UNIT},
-        "MASK": {"target": UNIT},
-        "TAG": {"target": UNIT},
-    },
-)
-
-VOCABULARY_FILTER_NAMES = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#VocabularyFilterNames"),
-    shape_type=ShapeType.STRING,
-)
-
-VOCABULARY_NAMES = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#VocabularyNames"),
-    shape_type=ShapeType.STRING,
-)
-
-START_CALL_ANALYTICS_STREAM_TRANSCRIPTION_INPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.transcribestreaming#StartCallAnalyticsStreamTranscriptionInput"
+CALL_ANALYTICS_LANGUAGE_CODE: StaticSchema = (
+    14,
+    n0,
+    _CALC,
+    0,
+    (_EU, _EG, _EU_, _FC, _FF, _EA, _II, _DD, _PB),
+    (
+        (-1, {_sV: _eU}),
+        (-1, {_sV: _eG}),
+        (-1, {_sV: _eU_}),
+        (-1, {_sV: _fC}),
+        (-1, {_sV: _fF}),
+        (-1, {_sV: _eA}),
+        (-1, {_sV: _iI}),
+        (-1, {_sV: _dD}),
+        (-1, {_sV: _pB}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.transcribestreaming#StartCallAnalyticsStreamTranscriptionRequest",
-        )
-    ],
-    members={
-        "LanguageCode": {
-            "target": CALL_ANALYTICS_LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-code",
-                )
-            ],
-        },
-        "MediaSampleRateHertz": {
-            "target": MEDIA_SAMPLE_RATE_HERTZ,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-sample-rate",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "MediaEncoding": {
-            "target": MEDIA_ENCODING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-media-encoding",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "VocabularyName": {
-            "target": VOCABULARY_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-name",
-                )
-            ],
-        },
-        "SessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-session-id",
-                )
-            ],
-        },
-        "AudioStream": {
-            "target": AUDIO_STREAM,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-        "VocabularyFilterName": {
-            "target": VOCABULARY_FILTER_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-name",
-                )
-            ],
-        },
-        "VocabularyFilterMethod": {
-            "target": VOCABULARY_FILTER_METHOD,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-method",
-                )
-            ],
-        },
-        "LanguageModelName": {
-            "target": MODEL_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-model-name",
-                )
-            ],
-        },
-        "IdentifyLanguage": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-identify-language",
-                ),
-            ],
-        },
-        "LanguageOptions": {
-            "target": LANGUAGE_OPTIONS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-options",
-                )
-            ],
-        },
-        "PreferredLanguage": {
-            "target": CALL_ANALYTICS_LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-preferred-language",
-                )
-            ],
-        },
-        "VocabularyNames": {
-            "target": VOCABULARY_NAMES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-names",
-                )
-            ],
-        },
-        "VocabularyFilterNames": {
-            "target": VOCABULARY_FILTER_NAMES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-names",
-                )
-            ],
-        },
-        "EnablePartialResultsStabilization": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-enable-partial-results-stabilization",
-                ),
-            ],
-        },
-        "PartialResultsStability": {
-            "target": PARTIAL_RESULTS_STABILITY,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-partial-results-stability",
-                )
-            ],
-        },
-        "ContentIdentificationType": {
-            "target": CONTENT_IDENTIFICATION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-content-identification-type",
-                )
-            ],
-        },
-        "ContentRedactionType": {
-            "target": CONTENT_REDACTION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-content-redaction-type",
-                )
-            ],
-        },
-        "PiiEntityTypes": {
-            "target": PII_ENTITY_TYPES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-pii-entity-types",
-                )
-            ],
-        },
-    },
 )
 
-START_CALL_ANALYTICS_STREAM_TRANSCRIPTION_OUTPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.transcribestreaming#StartCallAnalyticsStreamTranscriptionOutput"
+CALL_ANALYTICS_LANGUAGE_WITH_SCORE: StaticSchema = (
+    18,
+    n0,
+    _CALWS,
+    0,
+    (_LC, _Sc),
+    ((CALL_ANALYTICS_LANGUAGE_CODE, 0), (DOUBLE, {_s: 0})),
+)
+
+CALL_ANALYTICS_LANGUAGE_IDENTIFICATION: StaticSchema = (
+    16,
+    n0,
+    _CALI,
+    0,
+    (_m,),
+    ((CALL_ANALYTICS_LANGUAGE_WITH_SCORE, 0),),
+)
+
+STRING_LIST: StaticSchema = (16, n0, _SL, 0, (_m,), ((STRING, 0),))
+
+TIMESTAMP_RANGE: StaticSchema = (18, n0, _TR, 0, (_BOM, _EOM), ((LONG, 0), (LONG, 0)))
+
+TIMESTAMP_RANGES: StaticSchema = (16, n0, _TRi, 0, (_m,), ((TIMESTAMP_RANGE, 0),))
+
+POINTS_OF_INTEREST: StaticSchema = (18, n0, _POI, 0, (_TRi,), ((TIMESTAMP_RANGES, 0),))
+
+MATCHED_CATEGORY_DETAILS: StaticSchema = (
+    17,
+    n0,
+    _MCD,
+    0,
+    (_k, _v),
+    ((STRING, 0), (POINTS_OF_INTEREST, 0)),
+)
+
+CATEGORY_EVENT: StaticSchema = (
+    18,
+    n0,
+    _CEa,
+    0,
+    (_MC, _MD),
+    ((STRING_LIST, 0), (MATCHED_CATEGORY_DETAILS, 0)),
+)
+
+CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CEo,
+    {_smit: _c, _sE: 409},
+    (_M,),
+    ((STRING, 0),),
+)
+
+INTERNAL_FAILURE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IFE,
+    {_smit: _se, _sE: 500},
+    (_M,),
+    ((STRING, 0),),
+)
+
+LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LEE,
+    {_smit: _c, _sE: 429},
+    (_M,),
+    ((STRING, 0),),
+)
+
+SERVICE_UNAVAILABLE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SUE,
+    {_smit: _se, _sE: 503},
+    (_M,),
+    ((STRING, 0),),
+)
+
+INTEGER: StaticSchema = (7, n0, _In, 0)
+
+CHARACTER_OFFSETS: StaticSchema = (
+    18,
+    n0,
+    _CO,
+    0,
+    (_Be, _End),
+    ((INTEGER, 0), (INTEGER, 0)),
+)
+
+ISSUE_DETECTED: StaticSchema = (18, n0, _ID, 0, (_CO,), ((CHARACTER_OFFSETS, 0),))
+
+ISSUES_DETECTED: StaticSchema = (16, n0, _IDs, 0, (_m,), ((ISSUE_DETECTED, 0),))
+
+SENTIMENT: StaticSchema = (
+    14,
+    n0,
+    _Se,
+    0,
+    (_POSITIVE, _NEGATIVE, _MIXED, _NEUTRAL),
+    (
+        (-1, {_sV: _POSITIVE}),
+        (-1, {_sV: _NEGATIVE}),
+        (-1, {_sV: _MIXED}),
+        (-1, {_sV: _NEUTRAL}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.transcribestreaming#StartCallAnalyticsStreamTranscriptionResponse",
-        )
-    ],
-    members={
-        "RequestId": {
-            "target": REQUEST_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amzn-request-id"
-                )
-            ],
-        },
-        "LanguageCode": {
-            "target": CALL_ANALYTICS_LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-code",
-                )
-            ],
-        },
-        "MediaSampleRateHertz": {
-            "target": MEDIA_SAMPLE_RATE_HERTZ,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-sample-rate",
-                )
-            ],
-        },
-        "MediaEncoding": {
-            "target": MEDIA_ENCODING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-media-encoding",
-                )
-            ],
-        },
-        "VocabularyName": {
-            "target": VOCABULARY_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-name",
-                )
-            ],
-        },
-        "SessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-session-id",
-                )
-            ],
-        },
-        "CallAnalyticsTranscriptResultStream": {
-            "target": CALL_ANALYTICS_TRANSCRIPT_RESULT_STREAM,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-        "VocabularyFilterName": {
-            "target": VOCABULARY_FILTER_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-name",
-                )
-            ],
-        },
-        "VocabularyFilterMethod": {
-            "target": VOCABULARY_FILTER_METHOD,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-method",
-                )
-            ],
-        },
-        "LanguageModelName": {
-            "target": MODEL_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-model-name",
-                )
-            ],
-        },
-        "IdentifyLanguage": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-identify-language",
-                ),
-            ],
-        },
-        "LanguageOptions": {
-            "target": LANGUAGE_OPTIONS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-options",
-                )
-            ],
-        },
-        "PreferredLanguage": {
-            "target": CALL_ANALYTICS_LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-preferred-language",
-                )
-            ],
-        },
-        "VocabularyNames": {
-            "target": VOCABULARY_NAMES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-names",
-                )
-            ],
-        },
-        "VocabularyFilterNames": {
-            "target": VOCABULARY_FILTER_NAMES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-names",
-                )
-            ],
-        },
-        "EnablePartialResultsStabilization": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-enable-partial-results-stabilization",
-                ),
-            ],
-        },
-        "PartialResultsStability": {
-            "target": PARTIAL_RESULTS_STABILITY,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-partial-results-stability",
-                )
-            ],
-        },
-        "ContentIdentificationType": {
-            "target": CONTENT_IDENTIFICATION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-content-identification-type",
-                )
-            ],
-        },
-        "ContentRedactionType": {
-            "target": CONTENT_REDACTION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-content-redaction-type",
-                )
-            ],
-        },
-        "PiiEntityTypes": {
-            "target": PII_ENTITY_TYPES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-pii-entity-types",
-                )
-            ],
-        },
-    },
 )
 
-START_CALL_ANALYTICS_STREAM_TRANSCRIPTION = Schema(
-    id=ShapeID(
-        "com.amazonaws.transcribestreaming#StartCallAnalyticsStreamTranscription"
+UTTERANCE_EVENT: StaticSchema = (
+    18,
+    n0,
+    _UE,
+    0,
+    (_UI, _IP, _PR, _BOM, _EOM, _Tr, _It, _En, _Se, _IDs, _LC, _LI),
+    (
+        (STRING, 0),
+        (BOOLEAN, {_s: False}),
+        (PARTICIPANT_ROLE, 0),
+        (LONG, 0),
+        (LONG, 0),
+        (STRING, 0),
+        (CALL_ANALYTICS_ITEM_LIST, 0),
+        (CALL_ANALYTICS_ENTITY_LIST, 0),
+        (SENTIMENT, 0),
+        (ISSUES_DETECTED, 0),
+        (CALL_ANALYTICS_LANGUAGE_CODE, 0),
+        (CALL_ANALYTICS_LANGUAGE_IDENTIFICATION, 0),
     ),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/call-analytics-stream-transcription",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
 )
 
-START_MEDICAL_SCRIBE_STREAM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#StartMedicalScribeStreamInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.transcribestreaming#StartMedicalScribeStreamRequest",
-        )
-    ],
-    members={
-        "SessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-session-id",
-                )
-            ],
-        },
-        "LanguageCode": {
-            "target": MEDICAL_SCRIBE_LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-code",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "MediaSampleRateHertz": {
-            "target": MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-sample-rate",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "MediaEncoding": {
-            "target": MEDICAL_SCRIBE_MEDIA_ENCODING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-media-encoding",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "InputStream": {
-            "target": MEDICAL_SCRIBE_INPUT_STREAM,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-    },
-)
-
-START_MEDICAL_SCRIBE_STREAM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#StartMedicalScribeStreamOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.transcribestreaming#StartMedicalScribeStreamResponse",
-        )
-    ],
-    members={
-        "SessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-session-id",
-                )
-            ],
-        },
-        "RequestId": {
-            "target": REQUEST_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amzn-request-id"
-                )
-            ],
-        },
-        "LanguageCode": {
-            "target": MEDICAL_SCRIBE_LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-code",
-                )
-            ],
-        },
-        "MediaSampleRateHertz": {
-            "target": MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-sample-rate",
-                )
-            ],
-        },
-        "MediaEncoding": {
-            "target": MEDICAL_SCRIBE_MEDIA_ENCODING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-media-encoding",
-                )
-            ],
-        },
-        "ResultStream": {
-            "target": MEDICAL_SCRIBE_RESULT_STREAM,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-    },
-)
-
-START_MEDICAL_SCRIBE_STREAM = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#StartMedicalScribeStream"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/medical-scribe-stream", "code": 200}
-            ),
-        )
-    ],
-)
-
-TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#Type"),
-    shape_type=ShapeType.ENUM,
-    members={"CONVERSATION": {"target": UNIT}, "DICTATION": {"target": UNIT}},
-)
-
-START_MEDICAL_STREAM_TRANSCRIPTION_INPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.transcribestreaming#StartMedicalStreamTranscriptionInput"
+CALL_ANALYTICS_TRANSCRIPT_RESULT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _CATRS,
+    {_smi: None},
+    (_UE, _CEa, _BRE, _LEE, _IFE, _CEo, _SUE),
+    (
+        (UTTERANCE_EVENT, 0),
+        (CATEGORY_EVENT, 0),
+        (BAD_REQUEST_EXCEPTION, 0),
+        (LIMIT_EXCEEDED_EXCEPTION, 0),
+        (INTERNAL_FAILURE_EXCEPTION, 0),
+        (CONFLICT_EXCEPTION, 0),
+        (SERVICE_UNAVAILABLE_EXCEPTION, 0),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.transcribestreaming#StartMedicalStreamTranscriptionRequest",
-        )
-    ],
-    members={
-        "LanguageCode": {
-            "target": LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-code",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "MediaSampleRateHertz": {
-            "target": MEDIA_SAMPLE_RATE_HERTZ,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-sample-rate",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "MediaEncoding": {
-            "target": MEDIA_ENCODING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-media-encoding",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "VocabularyName": {
-            "target": VOCABULARY_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-name",
-                )
-            ],
-        },
-        "Specialty": {
-            "target": SPECIALTY,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-specialty",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Type": {
-            "target": TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amzn-transcribe-type"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ShowSpeakerLabel": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-show-speaker-label",
-                ),
-            ],
-        },
-        "SessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-session-id",
-                )
-            ],
-        },
-        "AudioStream": {
-            "target": AUDIO_STREAM,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-        "EnableChannelIdentification": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-enable-channel-identification",
-                ),
-            ],
-        },
-        "NumberOfChannels": {
-            "target": NUMBER_OF_CHANNELS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-number-of-channels",
-                )
-            ],
-        },
-        "ContentIdentificationType": {
-            "target": MEDICAL_CONTENT_IDENTIFICATION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-content-identification-type",
-                )
-            ],
-        },
-    },
 )
 
-START_MEDICAL_STREAM_TRANSCRIPTION_OUTPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.transcribestreaming#StartMedicalStreamTranscriptionOutput"
+URI: StaticSchema = (3, n0, _U, 0)
+
+CLINICAL_NOTE_GENERATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CNGS,
+    0,
+    (_IP_, _FAILED, _COMPLETED),
+    ((-1, {_sV: _IP_}), (-1, {_sV: _FAILED}), (-1, {_sV: _COMPLETED})),
+)
+
+CLINICAL_NOTE_GENERATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _CNGR,
+    0,
+    (_CNOL, _TOL, _Sta, _FR),
+    ((URI, 0), (URI, 0), (CLINICAL_NOTE_GENERATION_STATUS, 0), (STRING, 0)),
+)
+
+MEDICAL_SCRIBE_NOTE_TEMPLATE: StaticSchema = (
+    14,
+    n0,
+    _MSNT,
+    0,
+    (_HAP, _GIRPP, _DAP, _SIRP, _BIRP, _BS, _PS),
+    (
+        (-1, {_sV: _HAP}),
+        (-1, {_sV: _GIRPP}),
+        (-1, {_sV: _DAP}),
+        (-1, {_sV: _SIRP}),
+        (-1, {_sV: _BIRP}),
+        (-1, {_sV: _BS}),
+        (-1, {_sV: _PS}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.transcribestreaming#StartMedicalStreamTranscriptionResponse",
+)
+
+CLINICAL_NOTE_GENERATION_SETTINGS: StaticSchema = (
+    18,
+    n0,
+    _CNGSl,
+    0,
+    (_OBN, _NT),
+    ((BUCKET_NAME, 1), (MEDICAL_SCRIBE_NOTE_TEMPLATE, 0)),
+)
+
+CONTENT_IDENTIFICATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CIT,
+    0,
+    (_PII,),
+    ((-1, {_sV: _PII}),),
+)
+
+CONTENT_REDACTION_TYPE: StaticSchema = (14, n0, _CRT, 0, (_PII,), ((-1, {_sV: _PII}),))
+
+DATE_TIME: StaticSchema = (4, n0, _DT, 0)
+
+SESSION_ID: StaticSchema = (3, n0, _SI, 0)
+
+GET_MEDICAL_SCRIBE_STREAM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMSSI,
+    {_sSI: _cGMSSR, _smith: None},
+    (_SI,),
+    ((SESSION_ID, 9),),
+)
+
+MEDICAL_SCRIBE_CHANNEL_ID: StaticSchema = (7, n0, _MSCI, {_s: 0})
+
+MEDICAL_SCRIBE_PARTICIPANT_ROLE: StaticSchema = (
+    14,
+    n0,
+    _MSPR,
+    0,
+    (_PATIENT, _CLINICIAN),
+    ((-1, {_sV: _PATIENT}), (-1, {_sV: _CLINICIAN})),
+)
+
+MEDICAL_SCRIBE_CHANNEL_DEFINITION: StaticSchema = (
+    18,
+    n0,
+    _MSCD,
+    0,
+    (_CI, _PR),
+    (
+        (MEDICAL_SCRIBE_CHANNEL_ID, {_s: 0, _sm: None}),
+        (MEDICAL_SCRIBE_PARTICIPANT_ROLE, 1),
+    ),
+)
+
+MEDICAL_SCRIBE_CHANNEL_DEFINITIONS: StaticSchema = (
+    16,
+    n0,
+    _MSCDe,
+    0,
+    (_m,),
+    ((MEDICAL_SCRIBE_CHANNEL_DEFINITION, 0),),
+)
+
+NON_EMPTY_STRING: StaticSchema = (3, n0, _NES, 0)
+
+KMS_ENCRYPTION_CONTEXT_MAP: StaticSchema = (
+    17,
+    n0,
+    _KMSECM,
+    0,
+    (_k, _v),
+    ((NON_EMPTY_STRING, 0), (NON_EMPTY_STRING, 0)),
+)
+
+KMS_KEY_ID: StaticSchema = (3, n0, _KMSKI, 0)
+
+MEDICAL_SCRIBE_ENCRYPTION_SETTINGS: StaticSchema = (
+    18,
+    n0,
+    _MSES,
+    0,
+    (_KEC, _KKI),
+    ((KMS_ENCRYPTION_CONTEXT_MAP, 0), (KMS_KEY_ID, 1)),
+)
+
+MEDICAL_SCRIBE_LANGUAGE_CODE: StaticSchema = (
+    14,
+    n0,
+    _MSLC,
+    0,
+    (_EU,),
+    ((-1, {_sV: _eU}),),
+)
+
+MEDICAL_SCRIBE_MEDIA_ENCODING: StaticSchema = (
+    14,
+    n0,
+    _MSME,
+    0,
+    (_PCM, _OO, _FLAC),
+    ((-1, {_sV: _pc}), (-1, {_sV: _oo}), (-1, {_sV: _f})),
+)
+
+MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ: StaticSchema = (7, n0, _MSMSRH, 0)
+
+NULLABLE_BOOLEAN: StaticSchema = (2, n0, _NB, 0)
+
+MEDICAL_SCRIBE_POST_STREAM_ANALYTICS_RESULT: StaticSchema = (
+    18,
+    n0,
+    _MSPSAR,
+    0,
+    (_CNGR,),
+    ((CLINICAL_NOTE_GENERATION_RESULT, 0),),
+)
+
+MEDICAL_SCRIBE_POST_STREAM_ANALYTICS_SETTINGS: StaticSchema = (
+    18,
+    n0,
+    _MSPSAS,
+    0,
+    (_CNGSl,),
+    ((CLINICAL_NOTE_GENERATION_SETTINGS, 1),),
+)
+
+IAM_ROLE_ARN: StaticSchema = (3, n0, _IRA, 0)
+
+MEDICAL_SCRIBE_STREAM_STATUS: StaticSchema = (
+    14,
+    n0,
+    _MSSS,
+    0,
+    (_IP_, _PAUSED, _FAILED, _COMPLETED),
+    (
+        (-1, {_sV: _IP_}),
+        (-1, {_sV: _PAUSED}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _COMPLETED}),
+    ),
+)
+
+MEDICAL_SCRIBE_VOCABULARY_FILTER_METHOD: StaticSchema = (
+    14,
+    n0,
+    _MSVFM,
+    0,
+    (_REMOVE, _MASK, _TAG),
+    ((-1, {_sV: _re}), (-1, {_sV: _ma}), (-1, {_sV: _t})),
+)
+
+VOCABULARY_FILTER_NAME: StaticSchema = (3, n0, _VFN, 0)
+
+VOCABULARY_NAME: StaticSchema = (3, n0, _VN, 0)
+
+MEDICAL_SCRIBE_STREAM_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _MSSD,
+    0,
+    (
+        _SI,
+        _SCA,
+        _SEA,
+        _LC,
+        _MSRH,
+        _ME,
+        _VN,
+        _VFN,
+        _VFMo,
+        _RARA,
+        _CDh,
+        _ES,
+        _SS,
+        _PSAS,
+        _PSAR,
+        _MSCP,
+    ),
+    (
+        (SESSION_ID, 0),
+        (DATE_TIME, 0),
+        (DATE_TIME, 0),
+        (MEDICAL_SCRIBE_LANGUAGE_CODE, 0),
+        (MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ, 0),
+        (MEDICAL_SCRIBE_MEDIA_ENCODING, 0),
+        (VOCABULARY_NAME, 0),
+        (VOCABULARY_FILTER_NAME, 0),
+        (MEDICAL_SCRIBE_VOCABULARY_FILTER_METHOD, 0),
+        (IAM_ROLE_ARN, 0),
+        (MEDICAL_SCRIBE_CHANNEL_DEFINITIONS, 0),
+        (MEDICAL_SCRIBE_ENCRYPTION_SETTINGS, 0),
+        (MEDICAL_SCRIBE_STREAM_STATUS, 0),
+        (MEDICAL_SCRIBE_POST_STREAM_ANALYTICS_SETTINGS, 0),
+        (MEDICAL_SCRIBE_POST_STREAM_ANALYTICS_RESULT, 0),
+        (NULLABLE_BOOLEAN, 0),
+    ),
+)
+
+GET_MEDICAL_SCRIBE_STREAM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMSSO,
+    {_sSI: _cGMSSRo, _smithy: None},
+    (_MSSD,),
+    ((MEDICAL_SCRIBE_STREAM_DETAILS, 0),),
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_smit: _c, _sE: 404},
+    (_M,),
+    ((STRING, 0),),
+)
+
+GET_MEDICAL_SCRIBE_STREAM: StaticOperationSchema = (
+    23,
+    n0,
+    _GMSS,
+    {
+        _smithya: MappingProxyType(
+            {"method": "GET", "uri": "/medical-scribe-stream/{SessionId}", "code": 200}
         )
-    ],
-    members={
-        "RequestId": {
-            "target": REQUEST_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amzn-request-id"
-                )
-            ],
-        },
-        "LanguageCode": {
-            "target": LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-code",
-                )
-            ],
-        },
-        "MediaSampleRateHertz": {
-            "target": MEDIA_SAMPLE_RATE_HERTZ,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-sample-rate",
-                )
-            ],
-        },
-        "MediaEncoding": {
-            "target": MEDIA_ENCODING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-media-encoding",
-                )
-            ],
-        },
-        "VocabularyName": {
-            "target": VOCABULARY_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-name",
-                )
-            ],
-        },
-        "Specialty": {
-            "target": SPECIALTY,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-specialty",
-                )
-            ],
-        },
-        "Type": {
-            "target": TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amzn-transcribe-type"
-                )
-            ],
-        },
-        "ShowSpeakerLabel": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-show-speaker-label",
-                ),
-            ],
-        },
-        "SessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-session-id",
-                )
-            ],
-        },
-        "TranscriptResultStream": {
-            "target": MEDICAL_TRANSCRIPT_RESULT_STREAM,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-        "EnableChannelIdentification": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-enable-channel-identification",
-                ),
-            ],
-        },
-        "NumberOfChannels": {
-            "target": NUMBER_OF_CHANNELS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-number-of-channels",
-                )
-            ],
-        },
-        "ContentIdentificationType": {
-            "target": MEDICAL_CONTENT_IDENTIFICATION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-content-identification-type",
-                )
-            ],
-        },
     },
+    GET_MEDICAL_SCRIBE_STREAM_INPUT,
+    GET_MEDICAL_SCRIBE_STREAM_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        INTERNAL_FAILURE_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
 )
 
-START_MEDICAL_STREAM_TRANSCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#StartMedicalStreamTranscription"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/medical-stream-transcription", "code": 200}
-            ),
+LANGUAGE_CODE: StaticSchema = (
+    14,
+    n0,
+    _LC,
+    0,
+    (
+        _EU,
+        _EG,
+        _EU_,
+        _FC,
+        _FF,
+        _EA,
+        _II,
+        _DD,
+        _PB,
+        _JJ,
+        _KK,
+        _ZC,
+        _TT,
+        _EE,
+        _AS_,
+        _PP,
+        _CE_,
+        _AA,
+        _HI,
+        _ZH,
+        _NN,
+        _NN_,
+        _SS_,
+        _PP_,
+        _FF_,
+        _ZT,
+        _EI,
+        _EI_,
+        _EN,
+        _EA_,
+        _EZ,
+        _EW,
+        _DC,
+        _AZ,
+        _EE_,
+        _HH,
+        _CC,
+        _DD_,
+        _FI,
+        _GE,
+        _EG_,
+        _HI_,
+        _II_,
+        _LL,
+        _MM,
+        _RR,
+        _RR_,
+        _SR,
+        _SS__,
+        _SS___,
+        _TP,
+        _UU,
+        _VV,
+        _ZZ,
+        _AE_,
+        _BB,
+        _BB_,
+        _BI,
+        _BB__,
+        _CI_,
+        _CI__,
+        _CW,
+        _EM,
+        _EE__,
+        _FA,
+        _GI,
+        _HH_,
+        _HH__,
+        _HA,
+        _II__,
+        _JI,
+        _KG,
+        _KD,
+        _KK_,
+        _KK__,
+        _KI,
+        _LI_,
+        _LL_,
+        _MM_,
+        _MI,
+        _MI_,
+        _MM__,
+        _NN__,
+        _OI,
+        _PI,
+        _PA,
+        _SL_,
+        _SS____,
+        _SA,
+        _SI_,
+        _SB,
+        _SK,
+        _SR_,
+        _ST_,
+        _SU,
+        _TI,
+        _TI_,
+        _TT_,
+        _UU_,
+    ),
+    (
+        (-1, {_sV: _eU}),
+        (-1, {_sV: _eG}),
+        (-1, {_sV: _eU_}),
+        (-1, {_sV: _fC}),
+        (-1, {_sV: _fF}),
+        (-1, {_sV: _eA}),
+        (-1, {_sV: _iI}),
+        (-1, {_sV: _dD}),
+        (-1, {_sV: _pB}),
+        (-1, {_sV: _jJ}),
+        (-1, {_sV: _kK}),
+        (-1, {_sV: _zC}),
+        (-1, {_sV: _tT}),
+        (-1, {_sV: _eE}),
+        (-1, {_sV: _aS}),
+        (-1, {_sV: _pP}),
+        (-1, {_sV: _cE}),
+        (-1, {_sV: _aA}),
+        (-1, {_sV: _hI}),
+        (-1, {_sV: _zH}),
+        (-1, {_sV: _nN}),
+        (-1, {_sV: _nN_}),
+        (-1, {_sV: _sS}),
+        (-1, {_sV: _pP_}),
+        (-1, {_sV: _fF_}),
+        (-1, {_sV: _zT}),
+        (-1, {_sV: _eI}),
+        (-1, {_sV: _eI_}),
+        (-1, {_sV: _eN}),
+        (-1, {_sV: _eA_}),
+        (-1, {_sV: _eZ}),
+        (-1, {_sV: _eW}),
+        (-1, {_sV: _dC}),
+        (-1, {_sV: _aZ}),
+        (-1, {_sV: _eE_}),
+        (-1, {_sV: _hH}),
+        (-1, {_sV: _cC}),
+        (-1, {_sV: _dD_}),
+        (-1, {_sV: _fI}),
+        (-1, {_sV: _gE}),
+        (-1, {_sV: _eG_}),
+        (-1, {_sV: _hI_}),
+        (-1, {_sV: _iI_}),
+        (-1, {_sV: _lL}),
+        (-1, {_sV: _mM}),
+        (-1, {_sV: _rR}),
+        (-1, {_sV: _rR_}),
+        (-1, {_sV: _sR}),
+        (-1, {_sV: _sS_}),
+        (-1, {_sV: _sS__}),
+        (-1, {_sV: _tP}),
+        (-1, {_sV: _uU}),
+        (-1, {_sV: _vV}),
+        (-1, {_sV: _zZ}),
+        (-1, {_sV: _aE}),
+        (-1, {_sV: _bB}),
+        (-1, {_sV: _bB_}),
+        (-1, {_sV: _bI}),
+        (-1, {_sV: _bB__}),
+        (-1, {_sV: _cI}),
+        (-1, {_sV: _cI_}),
+        (-1, {_sV: _cW}),
+        (-1, {_sV: _eM}),
+        (-1, {_sV: _eE__}),
+        (-1, {_sV: _fA}),
+        (-1, {_sV: _gI}),
+        (-1, {_sV: _hH_}),
+        (-1, {_sV: _hH__}),
+        (-1, {_sV: _hA}),
+        (-1, {_sV: _iI__}),
+        (-1, {_sV: _jI}),
+        (-1, {_sV: _kG}),
+        (-1, {_sV: _kD}),
+        (-1, {_sV: _kK_}),
+        (-1, {_sV: _kK__}),
+        (-1, {_sV: _kI}),
+        (-1, {_sV: _lI}),
+        (-1, {_sV: _lL_}),
+        (-1, {_sV: _mM_}),
+        (-1, {_sV: _mI}),
+        (-1, {_sV: _mI_}),
+        (-1, {_sV: _mM__}),
+        (-1, {_sV: _nN__}),
+        (-1, {_sV: _oI}),
+        (-1, {_sV: _pI}),
+        (-1, {_sV: _pA}),
+        (-1, {_sV: _sL_}),
+        (-1, {_sV: _sS___}),
+        (-1, {_sV: _sA}),
+        (-1, {_sV: _sI}),
+        (-1, {_sV: _sB}),
+        (-1, {_sV: _sK}),
+        (-1, {_sV: _sR_}),
+        (-1, {_sV: _sT}),
+        (-1, {_sV: _sU}),
+        (-1, {_sV: _tI}),
+        (-1, {_sV: _tI_}),
+        (-1, {_sV: _tT_}),
+        (-1, {_sV: _uU_}),
+    ),
+)
+
+LANGUAGE_WITH_SCORE: StaticSchema = (
+    18,
+    n0,
+    _LWS,
+    0,
+    (_LC, _Sc),
+    ((LANGUAGE_CODE, 0), (DOUBLE, {_s: 0})),
+)
+
+LANGUAGE_IDENTIFICATION: StaticSchema = (
+    16,
+    n0,
+    _LI,
+    0,
+    (_m,),
+    ((LANGUAGE_WITH_SCORE, 0),),
+)
+
+LANGUAGE_OPTIONS: StaticSchema = (3, n0, _LO, 0)
+
+MEDIA_ENCODING: StaticSchema = (
+    14,
+    n0,
+    _ME,
+    0,
+    (_PCM, _OO, _FLAC, _GA, _GU, _G),
+    (
+        (-1, {_sV: _pc}),
+        (-1, {_sV: _oo}),
+        (-1, {_sV: _f}),
+        (-1, {_sV: _ga}),
+        (-1, {_sV: _gu}),
+        (-1, {_sV: _g}),
+    ),
+)
+
+MEDIA_SAMPLE_RATE_HERTZ: StaticSchema = (7, n0, _MSRH, 0)
+
+MEDICAL_ENTITY: StaticSchema = (
+    18,
+    n0,
+    _MEe,
+    0,
+    (_ST, _ET, _Ca, _Co, _C),
+    ((DOUBLE, {_s: 0}), (DOUBLE, {_s: 0}), (STRING, 0), (STRING, 0), (CONFIDENCE, 0)),
+)
+
+MEDICAL_ENTITY_LIST: StaticSchema = (16, n0, _MEL, 0, (_m,), ((MEDICAL_ENTITY, 0),))
+
+MEDICAL_ITEM: StaticSchema = (
+    18,
+    n0,
+    _MIe,
+    0,
+    (_ST, _ET, _T, _Co, _C, _Sp),
+    (
+        (DOUBLE, {_s: 0}),
+        (DOUBLE, {_s: 0}),
+        (ITEM_TYPE, 0),
+        (STRING, 0),
+        (CONFIDENCE, 0),
+        (STRING, 0),
+    ),
+)
+
+MEDICAL_ITEM_LIST: StaticSchema = (16, n0, _MIL, 0, (_m,), ((MEDICAL_ITEM, 0),))
+
+MEDICAL_ALTERNATIVE: StaticSchema = (
+    18,
+    n0,
+    _MA,
+    0,
+    (_Tr, _It, _En),
+    ((STRING, 0), (MEDICAL_ITEM_LIST, 0), (MEDICAL_ENTITY_LIST, 0)),
+)
+
+MEDICAL_ALTERNATIVE_LIST: StaticSchema = (
+    16,
+    n0,
+    _MAL,
+    0,
+    (_m,),
+    ((MEDICAL_ALTERNATIVE, 0),),
+)
+
+MEDICAL_CONTENT_IDENTIFICATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MCIT,
+    0,
+    (_PHI,),
+    ((-1, {_sV: _PHI}),),
+)
+
+MEDICAL_RESULT: StaticSchema = (
+    18,
+    n0,
+    _MR,
+    0,
+    (_RI, _ST, _ET, _IP, _Al, _CI),
+    (
+        (STRING, 0),
+        (DOUBLE, {_s: 0}),
+        (DOUBLE, {_s: 0}),
+        (BOOLEAN, {_s: False}),
+        (MEDICAL_ALTERNATIVE_LIST, 0),
+        (STRING, 0),
+    ),
+)
+
+MEDICAL_RESULT_LIST: StaticSchema = (16, n0, _MRL, 0, (_m,), ((MEDICAL_RESULT, 0),))
+
+MEDICAL_SCRIBE_AUDIO_EVENT: StaticSchema = (
+    18,
+    n0,
+    _MSAE,
+    0,
+    (_AC,),
+    ((AUDIO_CHUNK, {_sP: None, _sm: None}),),
+)
+
+PRONOUNS: StaticSchema = (
+    14,
+    n0,
+    _P,
+    4,
+    (_HH___, _SH, _TT__),
+    ((-1, {_sV: _HH___}), (-1, {_sV: _SH}), (-1, {_sV: _TT__})),
+)
+
+MEDICAL_SCRIBE_PATIENT_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _MSPC,
+    0,
+    (_P,),
+    ((PRONOUNS, 0),),
+)
+
+MEDICAL_SCRIBE_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _MSC,
+    0,
+    (_PC,),
+    ((MEDICAL_SCRIBE_PATIENT_CONTEXT, 0),),
+)
+
+MEDICAL_SCRIBE_CONFIGURATION_EVENT: StaticSchema = (
+    18,
+    n0,
+    _MSCE,
+    0,
+    (_VN, _VFN, _VFMo, _RARA, _CDh, _ES, _PSAS, _MSC),
+    (
+        (VOCABULARY_NAME, 0),
+        (VOCABULARY_FILTER_NAME, 0),
+        (MEDICAL_SCRIBE_VOCABULARY_FILTER_METHOD, 0),
+        (IAM_ROLE_ARN, 1),
+        (MEDICAL_SCRIBE_CHANNEL_DEFINITIONS, 0),
+        (MEDICAL_SCRIBE_ENCRYPTION_SETTINGS, 0),
+        (MEDICAL_SCRIBE_POST_STREAM_ANALYTICS_SETTINGS, 1),
+        (MEDICAL_SCRIBE_CONTEXT, 0),
+    ),
+)
+
+MEDICAL_SCRIBE_SESSION_CONTROL_EVENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MSSCET,
+    0,
+    (_EOS,),
+    ((-1, {_sV: _EOS}),),
+)
+
+MEDICAL_SCRIBE_SESSION_CONTROL_EVENT: StaticSchema = (
+    18,
+    n0,
+    _MSSCE,
+    0,
+    (_T,),
+    ((MEDICAL_SCRIBE_SESSION_CONTROL_EVENT_TYPE, 1),),
+)
+
+MEDICAL_SCRIBE_INPUT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _MSIS,
+    {_smi: None},
+    (_AE, _SCE, _CE),
+    (
+        (MEDICAL_SCRIBE_AUDIO_EVENT, 0),
+        (MEDICAL_SCRIBE_SESSION_CONTROL_EVENT, 0),
+        (MEDICAL_SCRIBE_CONFIGURATION_EVENT, 0),
+    ),
+)
+
+MEDICAL_SCRIBE_TRANSCRIPT_ITEM_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MSTIT,
+    0,
+    (_PRONUNCIATION, _PUNCTUATION),
+    ((-1, {_sV: _p}), (-1, {_sV: _pu})),
+)
+
+MEDICAL_SCRIBE_TRANSCRIPT_ITEM: StaticSchema = (
+    18,
+    n0,
+    _MSTI,
+    0,
+    (_BAT, _EAT, _T, _C, _Co, _VFM),
+    (
+        (DOUBLE, {_s: 0}),
+        (DOUBLE, {_s: 0}),
+        (MEDICAL_SCRIBE_TRANSCRIPT_ITEM_TYPE, 0),
+        (CONFIDENCE, 0),
+        (STRING, 0),
+        (NULLABLE_BOOLEAN, 0),
+    ),
+)
+
+MEDICAL_SCRIBE_TRANSCRIPT_ITEM_LIST: StaticSchema = (
+    16,
+    n0,
+    _MSTIL,
+    0,
+    (_m,),
+    ((MEDICAL_SCRIBE_TRANSCRIPT_ITEM, 0),),
+)
+
+MEDICAL_SCRIBE_TRANSCRIPT_SEGMENT: StaticSchema = (
+    18,
+    n0,
+    _MSTS,
+    0,
+    (_SIe, _BAT, _EAT, _Co, _It, _IP, _CI),
+    (
+        (STRING, 0),
+        (DOUBLE, {_s: 0}),
+        (DOUBLE, {_s: 0}),
+        (STRING, 0),
+        (MEDICAL_SCRIBE_TRANSCRIPT_ITEM_LIST, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+    ),
+)
+
+MEDICAL_SCRIBE_TRANSCRIPT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _MSTE,
+    0,
+    (_TS,),
+    ((MEDICAL_SCRIBE_TRANSCRIPT_SEGMENT, 0),),
+)
+
+MEDICAL_SCRIBE_RESULT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _MSRS,
+    {_smi: None},
+    (_TE, _BRE, _LEE, _IFE, _CEo, _SUE),
+    (
+        (MEDICAL_SCRIBE_TRANSCRIPT_EVENT, 0),
+        (BAD_REQUEST_EXCEPTION, 0),
+        (LIMIT_EXCEEDED_EXCEPTION, 0),
+        (INTERNAL_FAILURE_EXCEPTION, 0),
+        (CONFLICT_EXCEPTION, 0),
+        (SERVICE_UNAVAILABLE_EXCEPTION, 0),
+    ),
+)
+
+MEDICAL_TRANSCRIPT: StaticSchema = (18, n0, _MT, 0, (_R,), ((MEDICAL_RESULT_LIST, 0),))
+
+MEDICAL_TRANSCRIPT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _MTE,
+    0,
+    (_Tr,),
+    ((MEDICAL_TRANSCRIPT, 0),),
+)
+
+MEDICAL_TRANSCRIPT_RESULT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _MTRS,
+    {_smi: None},
+    (_TE, _BRE, _LEE, _IFE, _CEo, _SUE),
+    (
+        (MEDICAL_TRANSCRIPT_EVENT, 0),
+        (BAD_REQUEST_EXCEPTION, 0),
+        (LIMIT_EXCEEDED_EXCEPTION, 0),
+        (INTERNAL_FAILURE_EXCEPTION, 0),
+        (CONFLICT_EXCEPTION, 0),
+        (SERVICE_UNAVAILABLE_EXCEPTION, 0),
+    ),
+)
+
+MODEL_NAME: StaticSchema = (3, n0, _MN, 0)
+
+NUMBER_OF_CHANNELS: StaticSchema = (7, n0, _NOC, 0)
+
+PARTIAL_RESULTS_STABILITY: StaticSchema = (
+    14,
+    n0,
+    _PRS,
+    0,
+    (_HIGH, _MEDIUM, _LOW),
+    ((-1, {_sV: _h}), (-1, {_sV: _me}), (-1, {_sV: _l})),
+)
+
+PII_ENTITY_TYPES: StaticSchema = (3, n0, _PET, 0)
+
+REQUEST_ID: StaticSchema = (3, n0, _RIe, 0)
+
+RESULT: StaticSchema = (
+    18,
+    n0,
+    _Re,
+    0,
+    (_RI, _ST, _ET, _IP, _Al, _CI, _LC, _LI),
+    (
+        (STRING, 0),
+        (DOUBLE, {_s: 0}),
+        (DOUBLE, {_s: 0}),
+        (BOOLEAN, {_s: False}),
+        (ALTERNATIVE_LIST, 0),
+        (STRING, 0),
+        (LANGUAGE_CODE, 0),
+        (LANGUAGE_IDENTIFICATION, 0),
+    ),
+)
+
+RESULT_LIST: StaticSchema = (16, n0, _RL, 0, (_m,), ((RESULT, 0),))
+
+SESSION_RESUME_WINDOW: StaticSchema = (7, n0, _SRW, 0)
+
+SPECIALTY: StaticSchema = (
+    14,
+    n0,
+    _Spe,
+    0,
+    (_PRIMARYCARE, _CARDIOLOGY, _NEUROLOGY, _ONCOLOGY, _RADIOLOGY, _UROLOGY),
+    (
+        (-1, {_sV: _PRIMARYCARE}),
+        (-1, {_sV: _CARDIOLOGY}),
+        (-1, {_sV: _NEUROLOGY}),
+        (-1, {_sV: _ONCOLOGY}),
+        (-1, {_sV: _RADIOLOGY}),
+        (-1, {_sV: _UROLOGY}),
+    ),
+)
+
+VOCABULARY_FILTER_METHOD: StaticSchema = (
+    14,
+    n0,
+    _VFMo,
+    0,
+    (_REMOVE, _MASK, _TAG),
+    ((-1, {_sV: _re}), (-1, {_sV: _ma}), (-1, {_sV: _t})),
+)
+
+VOCABULARY_FILTER_NAMES: StaticSchema = (3, n0, _VFNo, 0)
+
+VOCABULARY_NAMES: StaticSchema = (3, n0, _VNo, 0)
+
+START_CALL_ANALYTICS_STREAM_TRANSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SCASTI,
+    {_sSI: _cSCASTR, _smith: None},
+    (
+        _LC,
+        _MSRH,
+        _ME,
+        _VN,
+        _SI,
+        _AS,
+        _VFN,
+        _VFMo,
+        _LMN,
+        _ILd,
+        _LO,
+        _PL,
+        _VNo,
+        _VFNo,
+        _EPRS,
+        _PRS,
+        _CIT,
+        _CRT,
+        _PET,
+    ),
+    (
+        (CALL_ANALYTICS_LANGUAGE_CODE, {_sH: _xatlc}),
+        (MEDIA_SAMPLE_RATE_HERTZ, {_sH: _xatsr, _sm: None}),
+        (MEDIA_ENCODING, {_sH: _xatme, _sm: None}),
+        (VOCABULARY_NAME, {_sH: _xatvn}),
+        (SESSION_ID, {_sH: _xatsi}),
+        (AUDIO_STREAM, 17),
+        (VOCABULARY_FILTER_NAME, {_sH: _xatvfn}),
+        (VOCABULARY_FILTER_METHOD, {_sH: _xatvfm}),
+        (MODEL_NAME, {_sH: _xatlmn}),
+        (BOOLEAN, {_s: False, _sH: _xatil}),
+        (LANGUAGE_OPTIONS, {_sH: _xatlo}),
+        (CALL_ANALYTICS_LANGUAGE_CODE, {_sH: _xatpl}),
+        (VOCABULARY_NAMES, {_sH: _xatvn_}),
+        (VOCABULARY_FILTER_NAMES, {_sH: _xatvfn_}),
+        (BOOLEAN, {_s: False, _sH: _xateprs}),
+        (PARTIAL_RESULTS_STABILITY, {_sH: _xatprs}),
+        (CONTENT_IDENTIFICATION_TYPE, {_sH: _xatcit}),
+        (CONTENT_REDACTION_TYPE, {_sH: _xatcrt}),
+        (PII_ENTITY_TYPES, {_sH: _xatpet}),
+    ),
+)
+
+START_CALL_ANALYTICS_STREAM_TRANSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SCASTO,
+    {_sSI: _cSCASTRo, _smithy: None},
+    (
+        _RIe,
+        _LC,
+        _MSRH,
+        _ME,
+        _VN,
+        _SI,
+        _CATRS,
+        _VFN,
+        _VFMo,
+        _LMN,
+        _ILd,
+        _LO,
+        _PL,
+        _VNo,
+        _VFNo,
+        _EPRS,
+        _PRS,
+        _CIT,
+        _CRT,
+        _PET,
+    ),
+    (
+        (REQUEST_ID, {_sH: _xari}),
+        (CALL_ANALYTICS_LANGUAGE_CODE, {_sH: _xatlc}),
+        (MEDIA_SAMPLE_RATE_HERTZ, {_sH: _xatsr}),
+        (MEDIA_ENCODING, {_sH: _xatme}),
+        (VOCABULARY_NAME, {_sH: _xatvn}),
+        (SESSION_ID, {_sH: _xatsi}),
+        (CALL_ANALYTICS_TRANSCRIPT_RESULT_STREAM, 16),
+        (VOCABULARY_FILTER_NAME, {_sH: _xatvfn}),
+        (VOCABULARY_FILTER_METHOD, {_sH: _xatvfm}),
+        (MODEL_NAME, {_sH: _xatlmn}),
+        (BOOLEAN, {_s: False, _sH: _xatil}),
+        (LANGUAGE_OPTIONS, {_sH: _xatlo}),
+        (CALL_ANALYTICS_LANGUAGE_CODE, {_sH: _xatpl}),
+        (VOCABULARY_NAMES, {_sH: _xatvn_}),
+        (VOCABULARY_FILTER_NAMES, {_sH: _xatvfn_}),
+        (BOOLEAN, {_s: False, _sH: _xateprs}),
+        (PARTIAL_RESULTS_STABILITY, {_sH: _xatprs}),
+        (CONTENT_IDENTIFICATION_TYPE, {_sH: _xatcit}),
+        (CONTENT_REDACTION_TYPE, {_sH: _xatcrt}),
+        (PII_ENTITY_TYPES, {_sH: _xatpet}),
+    ),
+)
+
+START_CALL_ANALYTICS_STREAM_TRANSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _SCAST,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/call-analytics-stream-transcription",
+                "code": 200,
+            }
         )
-    ],
-)
-
-TRANSCRIPT_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#TranscriptFormat"),
-    shape_type=ShapeType.ENUM,
-    members={"SPOKEN": {"target": UNIT}, "WRITTEN": {"target": UNIT}},
-)
-
-START_STREAM_TRANSCRIPTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#StartStreamTranscriptionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.transcribestreaming#StartStreamTranscriptionRequest",
-        )
-    ],
-    members={
-        "LanguageCode": {
-            "target": LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-code",
-                )
-            ],
-        },
-        "MediaSampleRateHertz": {
-            "target": MEDIA_SAMPLE_RATE_HERTZ,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-sample-rate",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "MediaEncoding": {
-            "target": MEDIA_ENCODING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-media-encoding",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "VocabularyName": {
-            "target": VOCABULARY_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-name",
-                )
-            ],
-        },
-        "SessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-session-id",
-                )
-            ],
-        },
-        "AudioStream": {
-            "target": AUDIO_STREAM,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-        "VocabularyFilterName": {
-            "target": VOCABULARY_FILTER_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-name",
-                )
-            ],
-        },
-        "VocabularyFilterMethod": {
-            "target": VOCABULARY_FILTER_METHOD,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-method",
-                )
-            ],
-        },
-        "ShowSpeakerLabel": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-show-speaker-label",
-                ),
-            ],
-        },
-        "EnableChannelIdentification": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-enable-channel-identification",
-                ),
-            ],
-        },
-        "NumberOfChannels": {
-            "target": NUMBER_OF_CHANNELS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-number-of-channels",
-                )
-            ],
-        },
-        "EnablePartialResultsStabilization": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-enable-partial-results-stabilization",
-                ),
-            ],
-        },
-        "PartialResultsStability": {
-            "target": PARTIAL_RESULTS_STABILITY,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-partial-results-stability",
-                )
-            ],
-        },
-        "ContentIdentificationType": {
-            "target": CONTENT_IDENTIFICATION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-content-identification-type",
-                )
-            ],
-        },
-        "ContentRedactionType": {
-            "target": CONTENT_REDACTION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-content-redaction-type",
-                )
-            ],
-        },
-        "PiiEntityTypes": {
-            "target": PII_ENTITY_TYPES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-pii-entity-types",
-                )
-            ],
-        },
-        "LanguageModelName": {
-            "target": MODEL_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-model-name",
-                )
-            ],
-        },
-        "IdentifyLanguage": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-identify-language",
-                ),
-            ],
-        },
-        "LanguageOptions": {
-            "target": LANGUAGE_OPTIONS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-options",
-                )
-            ],
-        },
-        "PreferredLanguage": {
-            "target": LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-preferred-language",
-                )
-            ],
-        },
-        "IdentifyMultipleLanguages": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-identify-multiple-languages",
-                ),
-            ],
-        },
-        "VocabularyNames": {
-            "target": VOCABULARY_NAMES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-names",
-                )
-            ],
-        },
-        "VocabularyFilterNames": {
-            "target": VOCABULARY_FILTER_NAMES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-names",
-                )
-            ],
-        },
-        "SessionResumeWindow": {
-            "target": SESSION_RESUME_WINDOW,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-session-resume-window",
-                )
-            ],
-        },
-        "TranscriptFormat": {
-            "target": TRANSCRIPT_FORMAT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-transcript-format",
-                )
-            ],
-        },
     },
+    START_CALL_ANALYTICS_STREAM_TRANSCRIPTION_INPUT,
+    START_CALL_ANALYTICS_STREAM_TRANSCRIPTION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_FAILURE_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        SERVICE_UNAVAILABLE_EXCEPTION,
+    ),
 )
 
-TRANSCRIPT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#Transcript"),
-    members={"Results": {"target": RESULT_LIST}},
+START_MEDICAL_SCRIBE_STREAM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SMSSI,
+    {_sSI: _cSMSSR, _smith: None},
+    (_SI, _LC, _MSRH, _ME, _IS),
+    (
+        (SESSION_ID, {_sH: _xatsi}),
+        (MEDICAL_SCRIBE_LANGUAGE_CODE, {_sH: _xatlc, _sm: None}),
+        (MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ, {_sH: _xatsr, _sm: None}),
+        (MEDICAL_SCRIBE_MEDIA_ENCODING, {_sH: _xatme, _sm: None}),
+        (MEDICAL_SCRIBE_INPUT_STREAM, 17),
+    ),
 )
 
-TRANSCRIPT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#TranscriptEvent"),
-    members={"Transcript": {"target": TRANSCRIPT}},
+START_MEDICAL_SCRIBE_STREAM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SMSSO,
+    {_sSI: _cSMSSRo, _smithy: None},
+    (_SI, _RIe, _LC, _MSRH, _ME, _RS),
+    (
+        (SESSION_ID, {_sH: _xatsi}),
+        (REQUEST_ID, {_sH: _xari}),
+        (MEDICAL_SCRIBE_LANGUAGE_CODE, {_sH: _xatlc}),
+        (MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ, {_sH: _xatsr}),
+        (MEDICAL_SCRIBE_MEDIA_ENCODING, {_sH: _xatme}),
+        (MEDICAL_SCRIBE_RESULT_STREAM, 16),
+    ),
 )
 
-TRANSCRIPT_RESULT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#TranscriptResultStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "TranscriptEvent": {"target": TRANSCRIPT_EVENT},
-        "BadRequestException": {"target": BAD_REQUEST_EXCEPTION},
-        "LimitExceededException": {"target": LIMIT_EXCEEDED_EXCEPTION},
-        "InternalFailureException": {"target": INTERNAL_FAILURE_EXCEPTION},
-        "ConflictException": {"target": CONFLICT_EXCEPTION},
-        "ServiceUnavailableException": {"target": SERVICE_UNAVAILABLE_EXCEPTION},
-    },
-)
-
-START_STREAM_TRANSCRIPTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.transcribestreaming#StartStreamTranscriptionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.transcribestreaming#StartStreamTranscriptionResponse",
+START_MEDICAL_SCRIBE_STREAM: StaticOperationSchema = (
+    23,
+    n0,
+    _SMSS,
+    {
+        _smithya: MappingProxyType(
+            {"method": "POST", "uri": "/medical-scribe-stream", "code": 200}
         )
-    ],
-    members={
-        "RequestId": {
-            "target": REQUEST_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amzn-request-id"
-                )
-            ],
-        },
-        "LanguageCode": {
-            "target": LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-code",
-                )
-            ],
-        },
-        "MediaSampleRateHertz": {
-            "target": MEDIA_SAMPLE_RATE_HERTZ,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-sample-rate",
-                )
-            ],
-        },
-        "MediaEncoding": {
-            "target": MEDIA_ENCODING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-media-encoding",
-                )
-            ],
-        },
-        "VocabularyName": {
-            "target": VOCABULARY_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-name",
-                )
-            ],
-        },
-        "SessionId": {
-            "target": SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-session-id",
-                )
-            ],
-        },
-        "TranscriptResultStream": {
-            "target": TRANSCRIPT_RESULT_STREAM,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-        "VocabularyFilterName": {
-            "target": VOCABULARY_FILTER_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-name",
-                )
-            ],
-        },
-        "VocabularyFilterMethod": {
-            "target": VOCABULARY_FILTER_METHOD,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-method",
-                )
-            ],
-        },
-        "ShowSpeakerLabel": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-show-speaker-label",
-                ),
-            ],
-        },
-        "EnableChannelIdentification": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-enable-channel-identification",
-                ),
-            ],
-        },
-        "NumberOfChannels": {
-            "target": NUMBER_OF_CHANNELS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-number-of-channels",
-                )
-            ],
-        },
-        "EnablePartialResultsStabilization": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-enable-partial-results-stabilization",
-                ),
-            ],
-        },
-        "PartialResultsStability": {
-            "target": PARTIAL_RESULTS_STABILITY,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-partial-results-stability",
-                )
-            ],
-        },
-        "ContentIdentificationType": {
-            "target": CONTENT_IDENTIFICATION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-content-identification-type",
-                )
-            ],
-        },
-        "ContentRedactionType": {
-            "target": CONTENT_REDACTION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-content-redaction-type",
-                )
-            ],
-        },
-        "PiiEntityTypes": {
-            "target": PII_ENTITY_TYPES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-pii-entity-types",
-                )
-            ],
-        },
-        "LanguageModelName": {
-            "target": MODEL_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-model-name",
-                )
-            ],
-        },
-        "IdentifyLanguage": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-identify-language",
-                ),
-            ],
-        },
-        "LanguageOptions": {
-            "target": LANGUAGE_OPTIONS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-language-options",
-                )
-            ],
-        },
-        "PreferredLanguage": {
-            "target": LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-preferred-language",
-                )
-            ],
-        },
-        "IdentifyMultipleLanguages": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-identify-multiple-languages",
-                ),
-            ],
-        },
-        "VocabularyNames": {
-            "target": VOCABULARY_NAMES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-names",
-                )
-            ],
-        },
-        "VocabularyFilterNames": {
-            "target": VOCABULARY_FILTER_NAMES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-vocabulary-filter-names",
-                )
-            ],
-        },
-        "SessionResumeWindow": {
-            "target": SESSION_RESUME_WINDOW,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-session-resume-window",
-                )
-            ],
-        },
-        "TranscriptFormat": {
-            "target": TRANSCRIPT_FORMAT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-transcribe-transcript-format",
-                )
-            ],
-        },
     },
+    START_MEDICAL_SCRIBE_STREAM_INPUT,
+    START_MEDICAL_SCRIBE_STREAM_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_FAILURE_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        SERVICE_UNAVAILABLE_EXCEPTION,
+    ),
 )
 
-START_STREAM_TRANSCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#StartStreamTranscription"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/stream-transcription", "code": 200}
-            ),
+TYPE: StaticSchema = (
+    14,
+    n0,
+    _T,
+    0,
+    (_CONVERSATION, _DICTATION),
+    ((-1, {_sV: _CONVERSATION}), (-1, {_sV: _DICTATION})),
+)
+
+START_MEDICAL_STREAM_TRANSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SMSTI,
+    {_sSI: _cSMSTR, _smith: None},
+    (_LC, _MSRH, _ME, _VN, _Spe, _T, _SSL, _SI, _AS, _ECI, _NOC, _CIT),
+    (
+        (LANGUAGE_CODE, {_sH: _xatlc, _sm: None}),
+        (MEDIA_SAMPLE_RATE_HERTZ, {_sH: _xatsr, _sm: None}),
+        (MEDIA_ENCODING, {_sH: _xatme, _sm: None}),
+        (VOCABULARY_NAME, {_sH: _xatvn}),
+        (SPECIALTY, {_sH: _xats, _sm: None}),
+        (TYPE, {_sH: _xatt, _sm: None}),
+        (BOOLEAN, {_s: False, _sH: _xatssl}),
+        (SESSION_ID, {_sH: _xatsi}),
+        (AUDIO_STREAM, 17),
+        (BOOLEAN, {_s: False, _sH: _xateci}),
+        (NUMBER_OF_CHANNELS, {_sH: _xatnoc}),
+        (MEDICAL_CONTENT_IDENTIFICATION_TYPE, {_sH: _xatcit}),
+    ),
+)
+
+START_MEDICAL_STREAM_TRANSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SMSTO,
+    {_sSI: _cSMSTRo, _smithy: None},
+    (_RIe, _LC, _MSRH, _ME, _VN, _Spe, _T, _SSL, _SI, _TRS, _ECI, _NOC, _CIT),
+    (
+        (REQUEST_ID, {_sH: _xari}),
+        (LANGUAGE_CODE, {_sH: _xatlc}),
+        (MEDIA_SAMPLE_RATE_HERTZ, {_sH: _xatsr}),
+        (MEDIA_ENCODING, {_sH: _xatme}),
+        (VOCABULARY_NAME, {_sH: _xatvn}),
+        (SPECIALTY, {_sH: _xats}),
+        (TYPE, {_sH: _xatt}),
+        (BOOLEAN, {_s: False, _sH: _xatssl}),
+        (SESSION_ID, {_sH: _xatsi}),
+        (MEDICAL_TRANSCRIPT_RESULT_STREAM, 16),
+        (BOOLEAN, {_s: False, _sH: _xateci}),
+        (NUMBER_OF_CHANNELS, {_sH: _xatnoc}),
+        (MEDICAL_CONTENT_IDENTIFICATION_TYPE, {_sH: _xatcit}),
+    ),
+)
+
+START_MEDICAL_STREAM_TRANSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _SMST,
+    {
+        _smithya: MappingProxyType(
+            {"method": "POST", "uri": "/medical-stream-transcription", "code": 200}
         )
-    ],
+    },
+    START_MEDICAL_STREAM_TRANSCRIPTION_INPUT,
+    START_MEDICAL_STREAM_TRANSCRIPTION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_FAILURE_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        SERVICE_UNAVAILABLE_EXCEPTION,
+    ),
 )
 
-TRANSCRIBE = Schema(
-    id=ShapeID("com.amazonaws.transcribestreaming#Transcribe"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "transcribe"})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+TRANSCRIPT_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _TF,
+    0,
+    (_SPOKEN, _WRITTEN),
+    ((-1, {_sV: _sp}), (-1, {_sV: _w})),
+)
+
+START_STREAM_TRANSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SSTI,
+    {_sSI: _cSSTR, _smith: None},
+    (
+        _LC,
+        _MSRH,
+        _ME,
+        _VN,
+        _SI,
+        _AS,
+        _VFN,
+        _VFMo,
+        _SSL,
+        _ECI,
+        _NOC,
+        _EPRS,
+        _PRS,
+        _CIT,
+        _CRT,
+        _PET,
+        _LMN,
+        _ILd,
+        _LO,
+        _PL,
+        _IML,
+        _VNo,
+        _VFNo,
+        _SRW,
+        _TF,
+    ),
+    (
+        (LANGUAGE_CODE, {_sH: _xatlc}),
+        (MEDIA_SAMPLE_RATE_HERTZ, {_sH: _xatsr, _sm: None}),
+        (MEDIA_ENCODING, {_sH: _xatme, _sm: None}),
+        (VOCABULARY_NAME, {_sH: _xatvn}),
+        (SESSION_ID, {_sH: _xatsi}),
+        (AUDIO_STREAM, 17),
+        (VOCABULARY_FILTER_NAME, {_sH: _xatvfn}),
+        (VOCABULARY_FILTER_METHOD, {_sH: _xatvfm}),
+        (BOOLEAN, {_s: False, _sH: _xatssl}),
+        (BOOLEAN, {_s: False, _sH: _xateci}),
+        (NUMBER_OF_CHANNELS, {_sH: _xatnoc}),
+        (BOOLEAN, {_s: False, _sH: _xateprs}),
+        (PARTIAL_RESULTS_STABILITY, {_sH: _xatprs}),
+        (CONTENT_IDENTIFICATION_TYPE, {_sH: _xatcit}),
+        (CONTENT_REDACTION_TYPE, {_sH: _xatcrt}),
+        (PII_ENTITY_TYPES, {_sH: _xatpet}),
+        (MODEL_NAME, {_sH: _xatlmn}),
+        (BOOLEAN, {_s: False, _sH: _xatil}),
+        (LANGUAGE_OPTIONS, {_sH: _xatlo}),
+        (LANGUAGE_CODE, {_sH: _xatpl}),
+        (BOOLEAN, {_s: False, _sH: _xatiml}),
+        (VOCABULARY_NAMES, {_sH: _xatvn_}),
+        (VOCABULARY_FILTER_NAMES, {_sH: _xatvfn_}),
+        (SESSION_RESUME_WINDOW, {_sH: _xatsrw}),
+        (TRANSCRIPT_FORMAT, {_sH: _xattf}),
+    ),
+)
+
+TRANSCRIPT: StaticSchema = (18, n0, _Tr, 0, (_R,), ((RESULT_LIST, 0),))
+
+TRANSCRIPT_EVENT: StaticSchema = (18, n0, _TE, 0, (_Tr,), ((TRANSCRIPT, 0),))
+
+TRANSCRIPT_RESULT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _TRS,
+    {_smi: None},
+    (_TE, _BRE, _LEE, _IFE, _CEo, _SUE),
+    (
+        (TRANSCRIPT_EVENT, 0),
+        (BAD_REQUEST_EXCEPTION, 0),
+        (LIMIT_EXCEEDED_EXCEPTION, 0),
+        (INTERNAL_FAILURE_EXCEPTION, 0),
+        (CONFLICT_EXCEPTION, 0),
+        (SERVICE_UNAVAILABLE_EXCEPTION, 0),
+    ),
+)
+
+START_STREAM_TRANSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SSTO,
+    {_sSI: _cSSTRo, _smithy: None},
+    (
+        _RIe,
+        _LC,
+        _MSRH,
+        _ME,
+        _VN,
+        _SI,
+        _TRS,
+        _VFN,
+        _VFMo,
+        _SSL,
+        _ECI,
+        _NOC,
+        _EPRS,
+        _PRS,
+        _CIT,
+        _CRT,
+        _PET,
+        _LMN,
+        _ILd,
+        _LO,
+        _PL,
+        _IML,
+        _VNo,
+        _VFNo,
+        _SRW,
+        _TF,
+    ),
+    (
+        (REQUEST_ID, {_sH: _xari}),
+        (LANGUAGE_CODE, {_sH: _xatlc}),
+        (MEDIA_SAMPLE_RATE_HERTZ, {_sH: _xatsr}),
+        (MEDIA_ENCODING, {_sH: _xatme}),
+        (VOCABULARY_NAME, {_sH: _xatvn}),
+        (SESSION_ID, {_sH: _xatsi}),
+        (TRANSCRIPT_RESULT_STREAM, 16),
+        (VOCABULARY_FILTER_NAME, {_sH: _xatvfn}),
+        (VOCABULARY_FILTER_METHOD, {_sH: _xatvfm}),
+        (BOOLEAN, {_s: False, _sH: _xatssl}),
+        (BOOLEAN, {_s: False, _sH: _xateci}),
+        (NUMBER_OF_CHANNELS, {_sH: _xatnoc}),
+        (BOOLEAN, {_s: False, _sH: _xateprs}),
+        (PARTIAL_RESULTS_STABILITY, {_sH: _xatprs}),
+        (CONTENT_IDENTIFICATION_TYPE, {_sH: _xatcit}),
+        (CONTENT_REDACTION_TYPE, {_sH: _xatcrt}),
+        (PII_ENTITY_TYPES, {_sH: _xatpet}),
+        (MODEL_NAME, {_sH: _xatlmn}),
+        (BOOLEAN, {_s: False, _sH: _xatil}),
+        (LANGUAGE_OPTIONS, {_sH: _xatlo}),
+        (LANGUAGE_CODE, {_sH: _xatpl}),
+        (BOOLEAN, {_s: False, _sH: _xatiml}),
+        (VOCABULARY_NAMES, {_sH: _xatvn_}),
+        (VOCABULARY_FILTER_NAMES, {_sH: _xatvfn_}),
+        (SESSION_RESUME_WINDOW, {_sH: _xatsrw}),
+        (TRANSCRIPT_FORMAT, {_sH: _xattf}),
+    ),
+)
+
+START_STREAM_TRANSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _SST,
+    {
+        _smithya: MappingProxyType(
+            {"method": "POST", "uri": "/stream-transcription", "code": 200}
+        )
+    },
+    START_STREAM_TRANSCRIPTION_INPUT,
+    START_STREAM_TRANSCRIPTION_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_FAILURE_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        SERVICE_UNAVAILABLE_EXCEPTION,
+    ),
+)
+
+TRANSCRIBE: StaticSchema = (
+    21,
+    n0,
+    _Tra,
+    {
+        _a: MappingProxyType({"name": "transcribe"}),
+        _sBm: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
+                ),
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsFIPS",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://transcribestreaming-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://transcribestreaming-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://transcribestreaming.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://transcribestreaming.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 13,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://transcribestreaming-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://transcribestreaming-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://transcribestreaming.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://transcribestreaming.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 13,
+                "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "Transcribe Streaming",
-                    "arnNamespace": "transcribe",
-                    "cloudFormationName": "TranscribeStreaming",
-                    "cloudTrailEventSource": "transcribestreaming.amazonaws.com",
-                    "endpointPrefix": "transcribestreaming",
-                }
-            ),
+        _aw: MappingProxyType(
+            {
+                "sdkId": "Transcribe Streaming",
+                "arnNamespace": "transcribe",
+                "cloudFormationName": "TranscribeStreaming",
+                "cloudTrailEventSource": "transcribestreaming.amazonaws.com",
+                "endpointPrefix": "transcribestreaming",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.protocols#restJson1"),
-            value=MappingProxyType(
-                {"http": ("http/1.1", "h2"), "eventStreamHttp": ("h2",)}
-            ),
-        ),
-    ],
+        _aJ: MappingProxyType({"http": ("http/1.1", "h2"), "eventStreamHttp": ("h2",)}),
+    },
 )

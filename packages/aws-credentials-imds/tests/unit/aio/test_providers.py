@@ -7,13 +7,13 @@ from typing import Any
 
 import pytest
 from aws_credentials_imds.client import IMDSConfigurationError
-from aws_credentials_imds.providers import Ec2InstanceMetadataProvider
-from aws_credentials_imds.resolvers import IMDSCredentialsResolver
+from aws_credentials_imds.aio.providers import Ec2InstanceMetadataProvider
+from aws_credentials_imds.aio.resolvers import IMDSCredentialsResolver
 from smithy_aws_core.config.file_parser import Section, StandardizedOutput
 from smithy_aws_core.config.merged_config import MergedConfig
 from smithy_aws_core.identity import AWSCredentialsIdentity
 from smithy_aws_core.identity.chain import Standard, StandardProvider
-from smithy_aws_core.identity.chain.provider import ChainSetup
+from smithy_aws_core.aio.identity.chain.provider import ChainSetup
 from smithy_core.interfaces.identity import Identity
 
 _ENDPOINT_ENV = "AWS_EC2_METADATA_SERVICE_ENDPOINT"

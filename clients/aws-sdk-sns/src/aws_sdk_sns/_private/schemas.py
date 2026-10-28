@@ -2,2380 +2,2806 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 
-ACCOUNT = Schema(id=ShapeID("com.amazonaws.sns#account"), shape_type=ShapeType.STRING)
+n0 = "com.amazonaws.sns"
+_a = "account"
+_ac = "action"
+_AL = "ActionsList"
+_m = "member"
+_d = "delegate"
+_DL = "DelegatesList"
+_l = "label"
+_tARN = "topicARN"
+_API = "AddPermissionInput"
+_s = "smithy.api#input"
+_TA = "TopicArn"
+_sm = "smithy.api#required"
+_L = "Label"
+_AWSAI = "AWSAccountId"
+_AN = "ActionName"
+_APO = "AddPermissionOutput"
+_sSI = "smithy.synthetic#originalShapeId"
+_sU = "smithy.api#Unit"
+_smi = "smithy.api#output"
+_S = "String"
+_AEE = "AuthorizationErrorException"
+_smit = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_aQE = "aws.protocols#awsQueryError"
+_me = "message"
+_IEE = "InternalErrorException"
+_se = "server"
+_IPE = "InvalidParameterException"
+_NFE = "NotFoundException"
+_AP = "AddPermission"
+_ARN = "AmazonResourceName"
+_PN = "PhoneNumber"
+_smith = "smithy.api#sensitive"
+_CIPNIOOI = "CheckIfPhoneNumberIsOptedOutInput"
+_pN = "phoneNumber"
+_b = "boolean"
+_smithy = "smithy.api#default"
+_CIPNIOOO = "CheckIfPhoneNumberIsOptedOutOutput"
+_cCIPNIOOR = "com.amazonaws.sns#CheckIfPhoneNumberIsOptedOutResponse"
+_iOO = "isOptedOut"
+_TE = "ThrottledException"
+_CIPNIOO = "CheckIfPhoneNumberIsOptedOut"
+_aOU = "authenticateOnUnsubscribe"
+_t = "token"
+_CSI = "ConfirmSubscriptionInput"
+_T = "Token"
+_AOU = "AuthenticateOnUnsubscribe"
+_sARN = "subscriptionARN"
+_CSO = "ConfirmSubscriptionOutput"
+_cCSR = "com.amazonaws.sns#ConfirmSubscriptionResponse"
+_SA = "SubscriptionArn"
+_FPLEE = "FilterPolicyLimitExceededException"
+_RLEE = "ReplayLimitExceededException"
+_SLEE = "SubscriptionLimitExceededException"
+_CS = "ConfirmSubscription"
+_MSTS = "MapStringToString"
+_k = "key"
+_v = "value"
+_CPAI = "CreatePlatformApplicationInput"
+_N = "Name"
+_P = "Platform"
+_A = "Attributes"
+_CPAO = "CreatePlatformApplicationOutput"
+_cCPAR = "com.amazonaws.sns#CreatePlatformApplicationResponse"
+_PAA = "PlatformApplicationArn"
+_CPA = "CreatePlatformApplication"
+_CPEI = "CreatePlatformEndpointInput"
+_CUD = "CustomUserData"
+_CPEO = "CreatePlatformEndpointOutput"
+_cCER = "com.amazonaws.sns#CreateEndpointResponse"
+_EA = "EndpointArn"
+_CPE = "CreatePlatformEndpoint"
+_LCS = "LanguageCodeString"
+_eU = "en_US"
+_sV = "smithy.api#enumValue"
+_eU_ = "en-US"
+_eG = "en_GB"
+_eG_ = "en-GB"
+_e = "es_419"
+_e_ = "es-419"
+_eE = "es_ES"
+_eE_ = "es-ES"
+_dD = "de_DE"
+_dD_ = "de-DE"
+_fC = "fr_CA"
+_fC_ = "fr-CA"
+_fF = "fr_FR"
+_fF_ = "fr-FR"
+_iI = "it_IT"
+_iI_ = "it-IT"
+_jJ = "jp_JP"
+_jJ_ = "ja-JP"
+_pB = "pt_BR"
+_pB_ = "pt-BR"
+_kK = "kr_KR"
+_kK_ = "kr-KR"
+_zC = "zh_CN"
+_zC_ = "zh-CN"
+_zT = "zh_TW"
+_zT_ = "zh-TW"
+_PNS = "PhoneNumberString"
+_CSMSSPNI = "CreateSMSSandboxPhoneNumberInput"
+_LC = "LanguageCode"
+_CSMSSPNO = "CreateSMSSandboxPhoneNumberOutput"
+_cCSMSSPNR = "com.amazonaws.sns#CreateSMSSandboxPhoneNumberResult"
+_OOE = "OptedOutException"
+_UEE = "UserErrorException"
+_CSMSSPN = "CreateSMSSandboxPhoneNumber"
+_CAE = "ConcurrentAccessException"
+_aN = "attributeName"
+_aV = "attributeValue"
+_TAM = "TopicAttributesMap"
+_tN = "topicName"
+_TK = "TagKey"
+_TV = "TagValue"
+_Ta = "Tag"
+_K = "Key"
+_V = "Value"
+_TL = "TagList"
+_CTI = "CreateTopicInput"
+_Tag = "Tags"
+_DPP = "DataProtectionPolicy"
+_CTO = "CreateTopicOutput"
+_cCTR = "com.amazonaws.sns#CreateTopicResponse"
+_ISE = "InvalidSecurityException"
+_STE = "StaleTagException"
+_TLEE = "TagLimitExceededException"
+_TPE = "TagPolicyException"
+_TLEEo = "TopicLimitExceededException"
+_CT = "CreateTopic"
+_DEI = "DeleteEndpointInput"
+_DEO = "DeleteEndpointOutput"
+_DE = "DeleteEndpoint"
+_DPAI = "DeletePlatformApplicationInput"
+_DPAO = "DeletePlatformApplicationOutput"
+_DPA = "DeletePlatformApplication"
+_DSMSSPNI = "DeleteSMSSandboxPhoneNumberInput"
+_DSMSSPNO = "DeleteSMSSandboxPhoneNumberOutput"
+_cDSMSSPNR = "com.amazonaws.sns#DeleteSMSSandboxPhoneNumberResult"
+_RNFE = "ResourceNotFoundException"
+_DSMSSPN = "DeleteSMSSandboxPhoneNumber"
+_DTI = "DeleteTopicInput"
+_DTO = "DeleteTopicOutput"
+_ISEn = "InvalidStateException"
+_DT = "DeleteTopic"
+_GDPPI = "GetDataProtectionPolicyInput"
+_RA = "ResourceArn"
+_GDPPO = "GetDataProtectionPolicyOutput"
+_cGDPPR = "com.amazonaws.sns#GetDataProtectionPolicyResponse"
+_GDPP = "GetDataProtectionPolicy"
+_GEAI = "GetEndpointAttributesInput"
+_GEAO = "GetEndpointAttributesOutput"
+_cGEAR = "com.amazonaws.sns#GetEndpointAttributesResponse"
+_GEA = "GetEndpointAttributes"
+_GPAAI = "GetPlatformApplicationAttributesInput"
+_GPAAO = "GetPlatformApplicationAttributesOutput"
+_cGPAAR = "com.amazonaws.sns#GetPlatformApplicationAttributesResponse"
+_GPAA = "GetPlatformApplicationAttributes"
+_LS = "ListString"
+_GSMSAI = "GetSMSAttributesInput"
+_at = "attributes"
+_GSMSAO = "GetSMSAttributesOutput"
+_cGSMSAR = "com.amazonaws.sns#GetSMSAttributesResponse"
+_GSMSA = "GetSMSAttributes"
+_GSMSSASI = "GetSMSSandboxAccountStatusInput"
+_GSMSSASO = "GetSMSSandboxAccountStatusOutput"
+_cGSMSSASR = "com.amazonaws.sns#GetSMSSandboxAccountStatusResult"
+_IIS = "IsInSandbox"
+_GSMSSAS = "GetSMSSandboxAccountStatus"
+_GSAI = "GetSubscriptionAttributesInput"
+_SAM = "SubscriptionAttributesMap"
+_GSAO = "GetSubscriptionAttributesOutput"
+_cGSAR = "com.amazonaws.sns#GetSubscriptionAttributesResponse"
+_GSA = "GetSubscriptionAttributes"
+_GTAI = "GetTopicAttributesInput"
+_GTAO = "GetTopicAttributesOutput"
+_cGTAR = "com.amazonaws.sns#GetTopicAttributesResponse"
+_GTA = "GetTopicAttributes"
+_LEBPAI = "ListEndpointsByPlatformApplicationInput"
+_NT = "NextToken"
+_E = "Endpoint"
+_LOE = "ListOfEndpoints"
+_LEBPAO = "ListEndpointsByPlatformApplicationOutput"
+_cLEBPAR = "com.amazonaws.sns#ListEndpointsByPlatformApplicationResponse"
+_En = "Endpoints"
+_LEBPA = "ListEndpointsByPlatformApplication"
+_MILON = "MaxItemsListOriginationNumbers"
+_nT = "nextToken"
+_LONI = "ListOriginationNumbersInput"
+_cLONR = "com.amazonaws.sns#ListOriginationNumbersRequest"
+_MR = "MaxResults"
+_Ti = "Timestamp"
+_ICC = "Iso2CountryCode"
+_NC = "NumberCapability"
+_SMS = "SMS"
+_MMS = "MMS"
+_VOICE = "VOICE"
+_NCL = "NumberCapabilityList"
+_RT = "RouteType"
+_Tr = "Transactional"
+_Pr = "Promotional"
+_Pre = "Premium"
+_PNI = "PhoneNumberInformation"
+_CA = "CreatedAt"
+_St = "Status"
+_NCu = "NumberCapabilities"
+_PNIL = "PhoneNumberInformationList"
+_LONO = "ListOriginationNumbersOutput"
+_cLONRo = "com.amazonaws.sns#ListOriginationNumbersResult"
+_PNh = "PhoneNumbers"
+_VE = "ValidationException"
+_M = "Message"
+_LON = "ListOriginationNumbers"
+_LPNOOI = "ListPhoneNumbersOptedOutInput"
+_PNL = "PhoneNumberList"
+_LPNOOO = "ListPhoneNumbersOptedOutOutput"
+_cLPNOOR = "com.amazonaws.sns#ListPhoneNumbersOptedOutResponse"
+_pNh = "phoneNumbers"
+_LPNOO = "ListPhoneNumbersOptedOut"
+_LPAI = "ListPlatformApplicationsInput"
+_PA = "PlatformApplication"
+_LOPA = "ListOfPlatformApplications"
+_LPAO = "ListPlatformApplicationsOutput"
+_cLPAR = "com.amazonaws.sns#ListPlatformApplicationsResponse"
+_PAl = "PlatformApplications"
+_LPA = "ListPlatformApplications"
+_MI = "MaxItems"
+_LSMSSPNI = "ListSMSSandboxPhoneNumbersInput"
+_SMSSPNVS = "SMSSandboxPhoneNumberVerificationStatus"
+_Pe = "Pending"
+_Ve = "Verified"
+_SMSSPN = "SMSSandboxPhoneNumber"
+_SMSSPNL = "SMSSandboxPhoneNumberList"
+_LSMSSPNO = "ListSMSSandboxPhoneNumbersOutput"
+_cLSMSSPNR = "com.amazonaws.sns#ListSMSSandboxPhoneNumbersResult"
+_LSMSSPN = "ListSMSSandboxPhoneNumbers"
+_LSI = "ListSubscriptionsInput"
+_End = "Endpoint2"
+_p = "protocol"
+_Su = "Subscription"
+_O = "Owner"
+_Pro = "Protocol"
+_SL = "SubscriptionsList"
+_LSO = "ListSubscriptionsOutput"
+_cLSR = "com.amazonaws.sns#ListSubscriptionsResponse"
+_Sub = "Subscriptions"
+_LSi = "ListSubscriptions"
+_LSBTI = "ListSubscriptionsByTopicInput"
+_LSBTO = "ListSubscriptionsByTopicOutput"
+_cLSBTR = "com.amazonaws.sns#ListSubscriptionsByTopicResponse"
+_LSBT = "ListSubscriptionsByTopic"
+_LTFRI = "ListTagsForResourceInput"
+_cLTFRR = "com.amazonaws.sns#ListTagsForResourceRequest"
+_LTFRO = "ListTagsForResourceOutput"
+_cLTFRRo = "com.amazonaws.sns#ListTagsForResourceResponse"
+_LTFR = "ListTagsForResource"
+_LTI = "ListTopicsInput"
+_To = "Topic"
+_TLo = "TopicsList"
+_LTO = "ListTopicsOutput"
+_cLTR = "com.amazonaws.sns#ListTopicsResponse"
+_Top = "Topics"
+_LT = "ListTopics"
+_OIPNI = "OptInPhoneNumberInput"
+_OIPNO = "OptInPhoneNumberOutput"
+_cOIPNR = "com.amazonaws.sns#OptInPhoneNumberResponse"
+_OIPN = "OptInPhoneNumber"
+_EDE = "EndpointDisabledException"
+_IPVE = "InvalidParameterValueException"
+_KMSADE = "KMSAccessDeniedException"
+_KMSDE = "KMSDisabledException"
+_KMSISE = "KMSInvalidStateException"
+_KMSNFE = "KMSNotFoundException"
+_KMSOIR = "KMSOptInRequired"
+_KMSTE = "KMSThrottlingException"
+_PADE = "PlatformApplicationDisabledException"
+_B = "Binary"
+_MAV = "MessageAttributeValue"
+_DTa = "DataType"
+_SV = "StringValue"
+_BV = "BinaryValue"
+_MAM = "MessageAttributeMap"
+_sN = "smithy.api#xmlName"
+_mS = "messageStructure"
+_su = "subject"
+_PI = "PublishInput"
+_TAa = "TargetArn"
+_Subj = "Subject"
+_MS = "MessageStructure"
+_MA = "MessageAttributes"
+_MDI = "MessageDeduplicationId"
+_MGI = "MessageGroupId"
+_mI = "messageId"
+_PO = "PublishOutput"
+_cPR = "com.amazonaws.sns#PublishResponse"
+_MIe = "MessageId"
+_SN = "SequenceNumber"
+_Pu = "Publish"
+_BEINDE = "BatchEntryIdsNotDistinctException"
+_BRTLE = "BatchRequestTooLongException"
+_EBRE = "EmptyBatchRequestException"
+_IBEIE = "InvalidBatchEntryIdException"
+_PBRE = "PublishBatchRequestEntry"
+_I = "Id"
+_PBREL = "PublishBatchRequestEntryList"
+_PBI = "PublishBatchInput"
+_PBREu = "PublishBatchRequestEntries"
+_BREE = "BatchResultErrorEntry"
+_C = "Code"
+_SF = "SenderFault"
+_BREEL = "BatchResultErrorEntryList"
+_PBREub = "PublishBatchResultEntry"
+_PBRELu = "PublishBatchResultEntryList"
+_PBO = "PublishBatchOutput"
+_cPBR = "com.amazonaws.sns#PublishBatchResponse"
+_Suc = "Successful"
+_F = "Failed"
+_TMEIBRE = "TooManyEntriesInBatchRequestException"
+_PB = "PublishBatch"
+_PDPPI = "PutDataProtectionPolicyInput"
+_PDPPO = "PutDataProtectionPolicyOutput"
+_PDPP = "PutDataProtectionPolicy"
+_RPI = "RemovePermissionInput"
+_RPO = "RemovePermissionOutput"
+_RP = "RemovePermission"
+_SEAI = "SetEndpointAttributesInput"
+_SEAO = "SetEndpointAttributesOutput"
+_SEA = "SetEndpointAttributes"
+_SPAAI = "SetPlatformApplicationAttributesInput"
+_SPAAO = "SetPlatformApplicationAttributesOutput"
+_SPAA = "SetPlatformApplicationAttributes"
+_SSMSAI = "SetSMSAttributesInput"
+_SSMSAO = "SetSMSAttributesOutput"
+_cSSMSAR = "com.amazonaws.sns#SetSMSAttributesResponse"
+_SSMSA = "SetSMSAttributes"
+_SSAI = "SetSubscriptionAttributesInput"
+_ANt = "AttributeName"
+_AV = "AttributeValue"
+_SSAO = "SetSubscriptionAttributesOutput"
+_SSA = "SetSubscriptionAttributes"
+_STAI = "SetTopicAttributesInput"
+_STAO = "SetTopicAttributesOutput"
+_STA = "SetTopicAttributes"
+_SI = "SubscribeInput"
+_RSA = "ReturnSubscriptionArn"
+_SO = "SubscribeOutput"
+_cSR = "com.amazonaws.sns#SubscribeResponse"
+_Subs = "Subscribe"
+_TRI = "TagResourceInput"
+_cTRR = "com.amazonaws.sns#TagResourceRequest"
+_TRO = "TagResourceOutput"
+_cTRRo = "com.amazonaws.sns#TagResourceResponse"
+_TR = "TagResource"
+_UI = "UnsubscribeInput"
+_UO = "UnsubscribeOutput"
+_U = "Unsubscribe"
+_TKL = "TagKeyList"
+_URI = "UntagResourceInput"
+_cURR = "com.amazonaws.sns#UntagResourceRequest"
+_TKa = "TagKeys"
+_URO = "UntagResourceOutput"
+_cURRo = "com.amazonaws.sns#UntagResourceResponse"
+_UR = "UntagResource"
+_VEe = "VerificationException"
+_OTPC = "OTPCode"
+_VSMSSPNI = "VerifySMSSandboxPhoneNumberInput"
+_OTP = "OneTimePassword"
+_VSMSSPNO = "VerifySMSSandboxPhoneNumberOutput"
+_cVSMSSPNR = "com.amazonaws.sns#VerifySMSSandboxPhoneNumberResult"
+_VSMSSPN = "VerifySMSSandboxPhoneNumber"
+_ASNS = "AmazonSimpleNotificationService"
+_aw = "aws.auth#sigv4"
+_aQ = "aws.protocols#awsQuery"
+_sB = "smithy.rules#endpointBdd"
+_aws = "aws.api#service"
+_sNm = "smithy.api#xmlNamespace"
 
-ACTION = Schema(id=ShapeID("com.amazonaws.sns#action"), shape_type=ShapeType.STRING)
+ACCOUNT: StaticSchema = (3, n0, _a, 0)
 
-ACTIONS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ActionsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACTION}},
+ACTION: StaticSchema = (3, n0, _ac, 0)
+
+ACTIONS_LIST: StaticSchema = (16, n0, _AL, 0, (_m,), ((ACTION, 0),))
+
+DELEGATE: StaticSchema = (3, n0, _d, 0)
+
+DELEGATES_LIST: StaticSchema = (16, n0, _DL, 0, (_m,), ((DELEGATE, 0),))
+
+LABEL: StaticSchema = (3, n0, _l, 0)
+
+TOPIC_ARN: StaticSchema = (3, n0, _tARN, 0)
+
+ADD_PERMISSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _API,
+    {_s: None},
+    (_TA, _L, _AWSAI, _AN),
+    ((TOPIC_ARN, 1), (LABEL, 1), (DELEGATES_LIST, 1), (ACTIONS_LIST, 1)),
 )
 
-DELEGATE = Schema(id=ShapeID("com.amazonaws.sns#delegate"), shape_type=ShapeType.STRING)
+ADD_PERMISSION_OUTPUT: StaticSchema = (18, n0, _APO, {_sSI: _sU, _smi: None})
 
-DELEGATES_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#DelegatesList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DELEGATE}},
-)
+STRING: StaticSchema = (3, n0, _S, 0)
 
-LABEL = Schema(id=ShapeID("com.amazonaws.sns#label"), shape_type=ShapeType.STRING)
-
-TOPIC_ARN = Schema(
-    id=ShapeID("com.amazonaws.sns#topicARN"), shape_type=ShapeType.STRING
-)
-
-ADD_PERMISSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#AddPermissionInput"),
-    members={
-        "TopicArn": {
-            "target": TOPIC_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Label": {
-            "target": LABEL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AWSAccountId": {
-            "target": DELEGATES_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ActionName": {
-            "target": ACTIONS_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
+AUTHORIZATION_ERROR_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _AEE,
+    {
+        _smit: _c,
+        _sE: 403,
+        _aQE: MappingProxyType({"code": "AuthorizationError", "httpResponseCode": 403}),
     },
+    (_me,),
+    ((STRING, 0),),
 )
 
-ADD_PERMISSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#AddPermissionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
+INTERNAL_ERROR_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IEE,
+    {
+        _smit: _se,
+        _sE: 500,
+        _aQE: MappingProxyType({"code": "InternalError", "httpResponseCode": 500}),
+    },
+    (_me,),
+    ((STRING, 0),),
 )
 
-STRING = Schema(id=ShapeID("com.amazonaws.sns#String"), shape_type=ShapeType.STRING)
+INVALID_PARAMETER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IPE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "InvalidParameter", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
 
-AUTHORIZATION_ERROR_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#AuthorizationErrorException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "AuthorizationError", "httpResponseCode": 403}
-            ),
+NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _NFE,
+    {
+        _smit: _c,
+        _sE: 404,
+        _aQE: MappingProxyType({"code": "NotFound", "httpResponseCode": 404}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+ADD_PERMISSION: StaticOperationSchema = (
+    23,
+    n0,
+    _AP,
+    0,
+    ADD_PERMISSION_INPUT,
+    ADD_PERMISSION_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+AMAZON_RESOURCE_NAME: StaticSchema = (3, n0, _ARN, 0)
+
+PHONE_NUMBER: StaticSchema = (3, n0, _PN, 4)
+
+CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CIPNIOOI,
+    {_s: None},
+    (_pN,),
+    ((PHONE_NUMBER, 1),),
+)
+
+BOOLEAN: StaticSchema = (2, n0, _b, {_smithy: False})
+
+CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CIPNIOOO,
+    {_sSI: _cCIPNIOOR, _smi: None},
+    (_iOO,),
+    ((BOOLEAN, {_smithy: False}),),
+)
+
+THROTTLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TE,
+    {
+        _smit: _c,
+        _sE: 429,
+        _aQE: MappingProxyType({"code": "Throttled", "httpResponseCode": 429}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT: StaticOperationSchema = (
+    23,
+    n0,
+    _CIPNIOO,
+    0,
+    CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT_INPUT,
+    CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        THROTTLED_EXCEPTION,
+    ),
+)
+
+AUTHENTICATE_ON_UNSUBSCRIBE: StaticSchema = (3, n0, _aOU, 0)
+
+TOKEN: StaticSchema = (3, n0, _t, 0)
+
+CONFIRM_SUBSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSI,
+    {_s: None},
+    (_TA, _T, _AOU),
+    ((TOPIC_ARN, 1), (TOKEN, 1), (AUTHENTICATE_ON_UNSUBSCRIBE, 0)),
+)
+
+SUBSCRIPTION_ARN: StaticSchema = (3, n0, _sARN, 0)
+
+CONFIRM_SUBSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CSO,
+    {_sSI: _cCSR, _smi: None},
+    (_SA,),
+    ((SUBSCRIPTION_ARN, 0),),
+)
+
+FILTER_POLICY_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _FPLEE,
+    {
+        _smit: _c,
+        _sE: 403,
+        _aQE: MappingProxyType(
+            {"code": "FilterPolicyLimitExceeded", "httpResponseCode": 403}
         ),
-    ],
-    members={"message": {"target": STRING}},
+    },
+    (_me,),
+    ((STRING, 0),),
 )
 
-INTERNAL_ERROR_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#InternalErrorException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "InternalError", "httpResponseCode": 500}),
+REPLAY_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RLEE,
+    {
+        _smit: _c,
+        _sE: 403,
+        _aQE: MappingProxyType(
+            {"code": "ReplayLimitExceeded", "httpResponseCode": 403}
         ),
-    ],
-    members={"message": {"target": STRING}},
+    },
+    (_me,),
+    ((STRING, 0),),
 )
 
-INVALID_PARAMETER_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#InvalidParameterException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidParameter", "httpResponseCode": 400}
-            ),
+SUBSCRIPTION_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SLEE,
+    {
+        _smit: _c,
+        _sE: 403,
+        _aQE: MappingProxyType(
+            {"code": "SubscriptionLimitExceeded", "httpResponseCode": 403}
         ),
-    ],
-    members={"message": {"target": STRING}},
+    },
+    (_me,),
+    ((STRING, 0),),
 )
 
-NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#NotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "NotFound", "httpResponseCode": 404}),
+CONFIRM_SUBSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _CS,
+    0,
+    CONFIRM_SUBSCRIPTION_INPUT,
+    CONFIRM_SUBSCRIPTION_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        FILTER_POLICY_LIMIT_EXCEEDED_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        REPLAY_LIMIT_EXCEEDED_EXCEPTION,
+        SUBSCRIPTION_LIMIT_EXCEEDED_EXCEPTION,
+    ),
+)
+
+MAP_STRING_TO_STRING: StaticSchema = (
+    17,
+    n0,
+    _MSTS,
+    0,
+    (_k, _v),
+    ((STRING, 0), (STRING, 0)),
+)
+
+CREATE_PLATFORM_APPLICATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CPAI,
+    {_s: None},
+    (_N, _P, _A),
+    ((STRING, 1), (STRING, 1), (MAP_STRING_TO_STRING, 1)),
+)
+
+CREATE_PLATFORM_APPLICATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CPAO,
+    {_sSI: _cCPAR, _smi: None},
+    (_PAA,),
+    ((STRING, 0),),
+)
+
+CREATE_PLATFORM_APPLICATION: StaticOperationSchema = (
+    23,
+    n0,
+    _CPA,
+    0,
+    CREATE_PLATFORM_APPLICATION_INPUT,
+    CREATE_PLATFORM_APPLICATION_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+    ),
+)
+
+CREATE_PLATFORM_ENDPOINT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CPEI,
+    {_s: None},
+    (_PAA, _T, _CUD, _A),
+    ((STRING, 1), (STRING, 1), (STRING, 0), (MAP_STRING_TO_STRING, 0)),
+)
+
+CREATE_PLATFORM_ENDPOINT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CPEO,
+    {_sSI: _cCER, _smi: None},
+    (_EA,),
+    ((STRING, 0),),
+)
+
+CREATE_PLATFORM_ENDPOINT: StaticOperationSchema = (
+    23,
+    n0,
+    _CPE,
+    0,
+    CREATE_PLATFORM_ENDPOINT_INPUT,
+    CREATE_PLATFORM_ENDPOINT_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+LANGUAGE_CODE_STRING: StaticSchema = (
+    14,
+    n0,
+    _LCS,
+    0,
+    (_eU, _eG, _e, _eE, _dD, _fC, _fF, _iI, _jJ, _pB, _kK, _zC, _zT),
+    (
+        (-1, {_sV: _eU_}),
+        (-1, {_sV: _eG_}),
+        (-1, {_sV: _e_}),
+        (-1, {_sV: _eE_}),
+        (-1, {_sV: _dD_}),
+        (-1, {_sV: _fC_}),
+        (-1, {_sV: _fF_}),
+        (-1, {_sV: _iI_}),
+        (-1, {_sV: _jJ_}),
+        (-1, {_sV: _pB_}),
+        (-1, {_sV: _kK_}),
+        (-1, {_sV: _zC_}),
+        (-1, {_sV: _zT_}),
+    ),
+)
+
+PHONE_NUMBER_STRING: StaticSchema = (3, n0, _PNS, 4)
+
+CREATE_SMS_SANDBOX_PHONE_NUMBER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSMSSPNI,
+    {_s: None},
+    (_PN, _LC),
+    ((PHONE_NUMBER_STRING, 1), (LANGUAGE_CODE_STRING, 0)),
+)
+
+CREATE_SMS_SANDBOX_PHONE_NUMBER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CSMSSPNO,
+    {_sSI: _cCSMSSPNR, _smi: None},
+)
+
+OPTED_OUT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _OOE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "OptedOut", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+USER_ERROR_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _UEE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "UserError", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+CREATE_SMS_SANDBOX_PHONE_NUMBER: StaticOperationSchema = (
+    23,
+    n0,
+    _CSMSSPN,
+    0,
+    CREATE_SMS_SANDBOX_PHONE_NUMBER_INPUT,
+    CREATE_SMS_SANDBOX_PHONE_NUMBER_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        OPTED_OUT_EXCEPTION,
+        THROTTLED_EXCEPTION,
+        USER_ERROR_EXCEPTION,
+    ),
+)
+
+CONCURRENT_ACCESS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CAE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "ConcurrentAccess", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+ATTRIBUTE_NAME: StaticSchema = (3, n0, _aN, 0)
+
+ATTRIBUTE_VALUE: StaticSchema = (3, n0, _aV, 0)
+
+TOPIC_ATTRIBUTES_MAP: StaticSchema = (
+    17,
+    n0,
+    _TAM,
+    0,
+    (_k, _v),
+    ((ATTRIBUTE_NAME, 0), (ATTRIBUTE_VALUE, 0)),
+)
+
+TOPIC_NAME: StaticSchema = (3, n0, _tN, 0)
+
+TAG_KEY: StaticSchema = (3, n0, _TK, 0)
+
+TAG_VALUE: StaticSchema = (3, n0, _TV, 0)
+
+TAG: StaticSchema = (18, n0, _Ta, 0, (_K, _V), ((TAG_KEY, 1), (TAG_VALUE, 1)))
+
+TAG_LIST: StaticSchema = (16, n0, _TL, 0, (_m,), ((TAG, 0),))
+
+CREATE_TOPIC_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CTI,
+    {_s: None},
+    (_N, _A, _Tag, _DPP),
+    ((TOPIC_NAME, 1), (TOPIC_ATTRIBUTES_MAP, 0), (TAG_LIST, 0), (ATTRIBUTE_VALUE, 0)),
+)
+
+CREATE_TOPIC_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CTO,
+    {_sSI: _cCTR, _smi: None},
+    (_TA,),
+    ((TOPIC_ARN, 0),),
+)
+
+INVALID_SECURITY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {
+        _smit: _c,
+        _sE: 403,
+        _aQE: MappingProxyType({"code": "InvalidSecurity", "httpResponseCode": 403}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+STALE_TAG_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _STE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "StaleTag", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+TAG_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TLEE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "TagLimitExceeded", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+TAG_POLICY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TPE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "TagPolicy", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+TOPIC_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TLEEo,
+    {
+        _smit: _c,
+        _sE: 403,
+        _aQE: MappingProxyType({"code": "TopicLimitExceeded", "httpResponseCode": 403}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+CREATE_TOPIC: StaticOperationSchema = (
+    23,
+    n0,
+    _CT,
+    0,
+    CREATE_TOPIC_INPUT,
+    CREATE_TOPIC_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        CONCURRENT_ACCESS_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_SECURITY_EXCEPTION,
+        STALE_TAG_EXCEPTION,
+        TAG_LIMIT_EXCEEDED_EXCEPTION,
+        TAG_POLICY_EXCEPTION,
+        TOPIC_LIMIT_EXCEEDED_EXCEPTION,
+    ),
+)
+
+DELETE_ENDPOINT_INPUT: StaticSchema = (18, n0, _DEI, {_s: None}, (_EA,), ((STRING, 1),))
+
+DELETE_ENDPOINT_OUTPUT: StaticSchema = (18, n0, _DEO, {_sSI: _sU, _smi: None})
+
+DELETE_ENDPOINT: StaticOperationSchema = (
+    23,
+    n0,
+    _DE,
+    0,
+    DELETE_ENDPOINT_INPUT,
+    DELETE_ENDPOINT_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+    ),
+)
+
+DELETE_PLATFORM_APPLICATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DPAI,
+    {_s: None},
+    (_PAA,),
+    ((STRING, 1),),
+)
+
+DELETE_PLATFORM_APPLICATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DPAO,
+    {_sSI: _sU, _smi: None},
+)
+
+DELETE_PLATFORM_APPLICATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DPA,
+    0,
+    DELETE_PLATFORM_APPLICATION_INPUT,
+    DELETE_PLATFORM_APPLICATION_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+    ),
+)
+
+DELETE_SMS_SANDBOX_PHONE_NUMBER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSMSSPNI,
+    {_s: None},
+    (_PN,),
+    ((PHONE_NUMBER_STRING, 1),),
+)
+
+DELETE_SMS_SANDBOX_PHONE_NUMBER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSMSSPNO,
+    {_sSI: _cDSMSSPNR, _smi: None},
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {
+        _smit: _c,
+        _sE: 404,
+        _aQE: MappingProxyType({"code": "ResourceNotFound", "httpResponseCode": 404}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+DELETE_SMS_SANDBOX_PHONE_NUMBER: StaticOperationSchema = (
+    23,
+    n0,
+    _DSMSSPN,
+    0,
+    DELETE_SMS_SANDBOX_PHONE_NUMBER_INPUT,
+    DELETE_SMS_SANDBOX_PHONE_NUMBER_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLED_EXCEPTION,
+        USER_ERROR_EXCEPTION,
+    ),
+)
+
+DELETE_TOPIC_INPUT: StaticSchema = (18, n0, _DTI, {_s: None}, (_TA,), ((TOPIC_ARN, 1),))
+
+DELETE_TOPIC_OUTPUT: StaticSchema = (18, n0, _DTO, {_sSI: _sU, _smi: None})
+
+INVALID_STATE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISEn,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "InvalidState", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+DELETE_TOPIC: StaticOperationSchema = (
+    23,
+    n0,
+    _DT,
+    0,
+    DELETE_TOPIC_INPUT,
+    DELETE_TOPIC_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        CONCURRENT_ACCESS_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_STATE_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        STALE_TAG_EXCEPTION,
+        TAG_POLICY_EXCEPTION,
+    ),
+)
+
+GET_DATA_PROTECTION_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDPPI,
+    {_s: None},
+    (_RA,),
+    ((TOPIC_ARN, 1),),
+)
+
+GET_DATA_PROTECTION_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDPPO,
+    {_sSI: _cGDPPR, _smi: None},
+    (_DPP,),
+    ((ATTRIBUTE_VALUE, 0),),
+)
+
+GET_DATA_PROTECTION_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GDPP,
+    0,
+    GET_DATA_PROTECTION_POLICY_INPUT,
+    GET_DATA_PROTECTION_POLICY_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_SECURITY_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+GET_ENDPOINT_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GEAI,
+    {_s: None},
+    (_EA,),
+    ((STRING, 1),),
+)
+
+GET_ENDPOINT_ATTRIBUTES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GEAO,
+    {_sSI: _cGEAR, _smi: None},
+    (_A,),
+    ((MAP_STRING_TO_STRING, 0),),
+)
+
+GET_ENDPOINT_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _GEA,
+    0,
+    GET_ENDPOINT_ATTRIBUTES_INPUT,
+    GET_ENDPOINT_ATTRIBUTES_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+GET_PLATFORM_APPLICATION_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GPAAI,
+    {_s: None},
+    (_PAA,),
+    ((STRING, 1),),
+)
+
+GET_PLATFORM_APPLICATION_ATTRIBUTES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GPAAO,
+    {_sSI: _cGPAAR, _smi: None},
+    (_A,),
+    ((MAP_STRING_TO_STRING, 0),),
+)
+
+GET_PLATFORM_APPLICATION_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _GPAA,
+    0,
+    GET_PLATFORM_APPLICATION_ATTRIBUTES_INPUT,
+    GET_PLATFORM_APPLICATION_ATTRIBUTES_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+LIST_STRING: StaticSchema = (16, n0, _LS, 0, (_m,), ((STRING, 0),))
+
+GET_SMS_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSMSAI,
+    {_s: None},
+    (_at,),
+    ((LIST_STRING, 0),),
+)
+
+GET_SMS_ATTRIBUTES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSMSAO,
+    {_sSI: _cGSMSAR, _smi: None},
+    (_at,),
+    ((MAP_STRING_TO_STRING, 0),),
+)
+
+GET_SMS_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _GSMSA,
+    0,
+    GET_SMS_ATTRIBUTES_INPUT,
+    GET_SMS_ATTRIBUTES_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        THROTTLED_EXCEPTION,
+    ),
+)
+
+GET_SMS_SANDBOX_ACCOUNT_STATUS_INPUT: StaticSchema = (18, n0, _GSMSSASI, {_s: None})
+
+GET_SMS_SANDBOX_ACCOUNT_STATUS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSMSSASO,
+    {_sSI: _cGSMSSASR, _smi: None},
+    (_IIS,),
+    ((BOOLEAN, {_smithy: False, _sm: None}),),
+)
+
+GET_SMS_SANDBOX_ACCOUNT_STATUS: StaticOperationSchema = (
+    23,
+    n0,
+    _GSMSSAS,
+    0,
+    GET_SMS_SANDBOX_ACCOUNT_STATUS_INPUT,
+    GET_SMS_SANDBOX_ACCOUNT_STATUS_OUTPUT,
+    (AUTHORIZATION_ERROR_EXCEPTION, INTERNAL_ERROR_EXCEPTION, THROTTLED_EXCEPTION),
+)
+
+GET_SUBSCRIPTION_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSAI,
+    {_s: None},
+    (_SA,),
+    ((SUBSCRIPTION_ARN, 1),),
+)
+
+SUBSCRIPTION_ATTRIBUTES_MAP: StaticSchema = (
+    17,
+    n0,
+    _SAM,
+    0,
+    (_k, _v),
+    ((ATTRIBUTE_NAME, 0), (ATTRIBUTE_VALUE, 0)),
+)
+
+GET_SUBSCRIPTION_ATTRIBUTES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSAO,
+    {_sSI: _cGSAR, _smi: None},
+    (_A,),
+    ((SUBSCRIPTION_ATTRIBUTES_MAP, 0),),
+)
+
+GET_SUBSCRIPTION_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _GSA,
+    0,
+    GET_SUBSCRIPTION_ATTRIBUTES_INPUT,
+    GET_SUBSCRIPTION_ATTRIBUTES_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+GET_TOPIC_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GTAI,
+    {_s: None},
+    (_TA,),
+    ((TOPIC_ARN, 1),),
+)
+
+GET_TOPIC_ATTRIBUTES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GTAO,
+    {_sSI: _cGTAR, _smi: None},
+    (_A,),
+    ((TOPIC_ATTRIBUTES_MAP, 0),),
+)
+
+GET_TOPIC_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _GTA,
+    0,
+    GET_TOPIC_ATTRIBUTES_INPUT,
+    GET_TOPIC_ATTRIBUTES_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_SECURITY_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+LIST_ENDPOINTS_BY_PLATFORM_APPLICATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LEBPAI,
+    {_s: None},
+    (_PAA, _NT),
+    ((STRING, 1), (STRING, 0)),
+)
+
+ENDPOINT: StaticSchema = (
+    18,
+    n0,
+    _E,
+    0,
+    (_EA, _A),
+    ((STRING, 0), (MAP_STRING_TO_STRING, 0)),
+)
+
+LIST_OF_ENDPOINTS: StaticSchema = (16, n0, _LOE, 0, (_m,), ((ENDPOINT, 0),))
+
+LIST_ENDPOINTS_BY_PLATFORM_APPLICATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LEBPAO,
+    {_sSI: _cLEBPAR, _smi: None},
+    (_En, _NT),
+    ((LIST_OF_ENDPOINTS, 0), (STRING, 0)),
+)
+
+LIST_ENDPOINTS_BY_PLATFORM_APPLICATION: StaticOperationSchema = (
+    23,
+    n0,
+    _LEBPA,
+    0,
+    LIST_ENDPOINTS_BY_PLATFORM_APPLICATION_INPUT,
+    LIST_ENDPOINTS_BY_PLATFORM_APPLICATION_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+MAX_ITEMS_LIST_ORIGINATION_NUMBERS: StaticSchema = (7, n0, _MILON, 0)
+
+NEXT_TOKEN: StaticSchema = (3, n0, _nT, 0)
+
+LIST_ORIGINATION_NUMBERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LONI,
+    {_sSI: _cLONR, _s: None},
+    (_NT, _MR),
+    ((NEXT_TOKEN, 0), (MAX_ITEMS_LIST_ORIGINATION_NUMBERS, 0)),
+)
+
+TIMESTAMP: StaticSchema = (4, n0, _Ti, 0)
+
+ISO2_COUNTRY_CODE: StaticSchema = (3, n0, _ICC, 0)
+
+NUMBER_CAPABILITY: StaticSchema = (
+    14,
+    n0,
+    _NC,
+    0,
+    (_SMS, _MMS, _VOICE),
+    ((-1, {_sV: _SMS}), (-1, {_sV: _MMS}), (-1, {_sV: _VOICE})),
+)
+
+NUMBER_CAPABILITY_LIST: StaticSchema = (
+    16,
+    n0,
+    _NCL,
+    0,
+    (_m,),
+    ((NUMBER_CAPABILITY, 0),),
+)
+
+ROUTE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RT,
+    0,
+    (_Tr, _Pr, _Pre),
+    ((-1, {_sV: _Tr}), (-1, {_sV: _Pr}), (-1, {_sV: _Pre})),
+)
+
+PHONE_NUMBER_INFORMATION: StaticSchema = (
+    18,
+    n0,
+    _PNI,
+    0,
+    (_CA, _PN, _St, _ICC, _RT, _NCu),
+    (
+        (TIMESTAMP, 0),
+        (PHONE_NUMBER, 0),
+        (STRING, 0),
+        (ISO2_COUNTRY_CODE, 0),
+        (ROUTE_TYPE, 0),
+        (NUMBER_CAPABILITY_LIST, 0),
+    ),
+)
+
+PHONE_NUMBER_INFORMATION_LIST: StaticSchema = (
+    16,
+    n0,
+    _PNIL,
+    0,
+    (_m,),
+    ((PHONE_NUMBER_INFORMATION, 0),),
+)
+
+LIST_ORIGINATION_NUMBERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LONO,
+    {_sSI: _cLONRo, _smi: None},
+    (_NT, _PNh),
+    ((NEXT_TOKEN, 0), (PHONE_NUMBER_INFORMATION_LIST, 0)),
+)
+
+VALIDATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _VE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "ValidationException", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-ADD_PERMISSION = Schema(
-    id=ShapeID("com.amazonaws.sns#AddPermission"), shape_type=ShapeType.OPERATION
-)
-
-AMAZON_RESOURCE_NAME = Schema(
-    id=ShapeID("com.amazonaws.sns#AmazonResourceName"), shape_type=ShapeType.STRING
-)
-
-PHONE_NUMBER = Schema(
-    id=ShapeID("com.amazonaws.sns#PhoneNumber"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#CheckIfPhoneNumberIsOptedOutInput"),
-    members={
-        "phoneNumber": {
-            "target": PHONE_NUMBER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
     },
+    (_M,),
+    ((STRING, 1),),
 )
 
-BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.sns#boolean"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
+LIST_ORIGINATION_NUMBERS: StaticOperationSchema = (
+    23,
+    n0,
+    _LON,
+    0,
+    LIST_ORIGINATION_NUMBERS_INPUT,
+    LIST_ORIGINATION_NUMBERS_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        THROTTLED_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#CheckIfPhoneNumberIsOptedOutOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#CheckIfPhoneNumberIsOptedOutResponse",
-        )
-    ],
-    members={
-        "isOptedOut": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        }
+LIST_PHONE_NUMBERS_OPTED_OUT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LPNOOI,
+    {_s: None},
+    (_nT,),
+    ((STRING, 0),),
+)
+
+PHONE_NUMBER_LIST: StaticSchema = (16, n0, _PNL, 0, (_m,), ((PHONE_NUMBER, 0),))
+
+LIST_PHONE_NUMBERS_OPTED_OUT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LPNOOO,
+    {_sSI: _cLPNOOR, _smi: None},
+    (_pNh, _nT),
+    ((PHONE_NUMBER_LIST, 0), (STRING, 0)),
+)
+
+LIST_PHONE_NUMBERS_OPTED_OUT: StaticOperationSchema = (
+    23,
+    n0,
+    _LPNOO,
+    0,
+    LIST_PHONE_NUMBERS_OPTED_OUT_INPUT,
+    LIST_PHONE_NUMBERS_OPTED_OUT_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        THROTTLED_EXCEPTION,
+    ),
+)
+
+LIST_PLATFORM_APPLICATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LPAI,
+    {_s: None},
+    (_NT,),
+    ((STRING, 0),),
+)
+
+PLATFORM_APPLICATION: StaticSchema = (
+    18,
+    n0,
+    _PA,
+    0,
+    (_PAA, _A),
+    ((STRING, 0), (MAP_STRING_TO_STRING, 0)),
+)
+
+LIST_OF_PLATFORM_APPLICATIONS: StaticSchema = (
+    16,
+    n0,
+    _LOPA,
+    0,
+    (_m,),
+    ((PLATFORM_APPLICATION, 0),),
+)
+
+LIST_PLATFORM_APPLICATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LPAO,
+    {_sSI: _cLPAR, _smi: None},
+    (_PAl, _NT),
+    ((LIST_OF_PLATFORM_APPLICATIONS, 0), (STRING, 0)),
+)
+
+LIST_PLATFORM_APPLICATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LPA,
+    0,
+    LIST_PLATFORM_APPLICATIONS_INPUT,
+    LIST_PLATFORM_APPLICATIONS_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+    ),
+)
+
+MAX_ITEMS: StaticSchema = (7, n0, _MI, 0)
+
+LIST_SMS_SANDBOX_PHONE_NUMBERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LSMSSPNI,
+    {_s: None},
+    (_NT, _MR),
+    ((NEXT_TOKEN, 0), (MAX_ITEMS, 0)),
+)
+
+SMS_SANDBOX_PHONE_NUMBER_VERIFICATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _SMSSPNVS,
+    0,
+    (_Pe, _Ve),
+    ((-1, {_sV: _Pe}), (-1, {_sV: _Ve})),
+)
+
+SMS_SANDBOX_PHONE_NUMBER: StaticSchema = (
+    18,
+    n0,
+    _SMSSPN,
+    0,
+    (_PN, _St),
+    ((PHONE_NUMBER_STRING, 0), (SMS_SANDBOX_PHONE_NUMBER_VERIFICATION_STATUS, 0)),
+)
+
+SMS_SANDBOX_PHONE_NUMBER_LIST: StaticSchema = (
+    16,
+    n0,
+    _SMSSPNL,
+    0,
+    (_m,),
+    ((SMS_SANDBOX_PHONE_NUMBER, 0),),
+)
+
+LIST_SMS_SANDBOX_PHONE_NUMBERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LSMSSPNO,
+    {_sSI: _cLSMSSPNR, _smi: None},
+    (_PNh, _NT),
+    ((SMS_SANDBOX_PHONE_NUMBER_LIST, 1), (STRING, 0)),
+)
+
+LIST_SMS_SANDBOX_PHONE_NUMBERS: StaticOperationSchema = (
+    23,
+    n0,
+    _LSMSSPN,
+    0,
+    LIST_SMS_SANDBOX_PHONE_NUMBERS_INPUT,
+    LIST_SMS_SANDBOX_PHONE_NUMBERS_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLED_EXCEPTION,
+    ),
+)
+
+LIST_SUBSCRIPTIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LSI,
+    {_s: None},
+    (_NT,),
+    ((NEXT_TOKEN, 0),),
+)
+
+ENDPOINT2: StaticSchema = (3, n0, _End, 0)
+
+PROTOCOL: StaticSchema = (3, n0, _p, 0)
+
+SUBSCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _Su,
+    0,
+    (_SA, _O, _Pro, _E, _TA),
+    (
+        (SUBSCRIPTION_ARN, 0),
+        (ACCOUNT, 0),
+        (PROTOCOL, 0),
+        (ENDPOINT2, 0),
+        (TOPIC_ARN, 0),
+    ),
+)
+
+SUBSCRIPTIONS_LIST: StaticSchema = (16, n0, _SL, 0, (_m,), ((SUBSCRIPTION, 0),))
+
+LIST_SUBSCRIPTIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LSO,
+    {_sSI: _cLSR, _smi: None},
+    (_Sub, _NT),
+    ((SUBSCRIPTIONS_LIST, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_SUBSCRIPTIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LSi,
+    0,
+    LIST_SUBSCRIPTIONS_INPUT,
+    LIST_SUBSCRIPTIONS_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+    ),
+)
+
+LIST_SUBSCRIPTIONS_BY_TOPIC_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LSBTI,
+    {_s: None},
+    (_TA, _NT),
+    ((TOPIC_ARN, 1), (NEXT_TOKEN, 0)),
+)
+
+LIST_SUBSCRIPTIONS_BY_TOPIC_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LSBTO,
+    {_sSI: _cLSBTR, _smi: None},
+    (_Sub, _NT),
+    ((SUBSCRIPTIONS_LIST, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_SUBSCRIPTIONS_BY_TOPIC: StaticOperationSchema = (
+    23,
+    n0,
+    _LSBT,
+    0,
+    LIST_SUBSCRIPTIONS_BY_TOPIC_INPUT,
+    LIST_SUBSCRIPTIONS_BY_TOPIC_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+LIST_TAGS_FOR_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRI,
+    {_sSI: _cLTFRR, _s: None},
+    (_RA,),
+    ((AMAZON_RESOURCE_NAME, 1),),
+)
+
+LIST_TAGS_FOR_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRO,
+    {_sSI: _cLTFRRo, _smi: None},
+    (_Tag,),
+    ((TAG_LIST, 0),),
+)
+
+LIST_TAGS_FOR_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _LTFR,
+    0,
+    LIST_TAGS_FOR_RESOURCE_INPUT,
+    LIST_TAGS_FOR_RESOURCE_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        CONCURRENT_ACCESS_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        TAG_POLICY_EXCEPTION,
+    ),
+)
+
+LIST_TOPICS_INPUT: StaticSchema = (18, n0, _LTI, {_s: None}, (_NT,), ((NEXT_TOKEN, 0),))
+
+TOPIC: StaticSchema = (18, n0, _To, 0, (_TA,), ((TOPIC_ARN, 0),))
+
+TOPICS_LIST: StaticSchema = (16, n0, _TLo, 0, (_m,), ((TOPIC, 0),))
+
+LIST_TOPICS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTO,
+    {_sSI: _cLTR, _smi: None},
+    (_Top, _NT),
+    ((TOPICS_LIST, 0), (NEXT_TOKEN, 0)),
+)
+
+LIST_TOPICS: StaticOperationSchema = (
+    23,
+    n0,
+    _LT,
+    0,
+    LIST_TOPICS_INPUT,
+    LIST_TOPICS_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+    ),
+)
+
+OPT_IN_PHONE_NUMBER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _OIPNI,
+    {_s: None},
+    (_pN,),
+    ((PHONE_NUMBER, 1),),
+)
+
+OPT_IN_PHONE_NUMBER_OUTPUT: StaticSchema = (18, n0, _OIPNO, {_sSI: _cOIPNR, _smi: None})
+
+OPT_IN_PHONE_NUMBER: StaticOperationSchema = (
+    23,
+    n0,
+    _OIPN,
+    0,
+    OPT_IN_PHONE_NUMBER_INPUT,
+    OPT_IN_PHONE_NUMBER_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        THROTTLED_EXCEPTION,
+    ),
+)
+
+ENDPOINT_DISABLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EDE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "EndpointDisabled", "httpResponseCode": 400}),
     },
+    (_me,),
+    ((STRING, 0),),
 )
 
-THROTTLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ThrottledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "Throttled", "httpResponseCode": 429}),
+INVALID_PARAMETER_VALUE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IPVE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "ParameterValueInvalid", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-CHECK_IF_PHONE_NUMBER_IS_OPTED_OUT = Schema(
-    id=ShapeID("com.amazonaws.sns#CheckIfPhoneNumberIsOptedOut"),
-    shape_type=ShapeType.OPERATION,
-)
-
-AUTHENTICATE_ON_UNSUBSCRIBE = Schema(
-    id=ShapeID("com.amazonaws.sns#authenticateOnUnsubscribe"),
-    shape_type=ShapeType.STRING,
-)
-
-TOKEN = Schema(id=ShapeID("com.amazonaws.sns#token"), shape_type=ShapeType.STRING)
-
-CONFIRM_SUBSCRIPTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ConfirmSubscriptionInput"),
-    members={
-        "TopicArn": {
-            "target": TOPIC_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Token": {
-            "target": TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AuthenticateOnUnsubscribe": {"target": AUTHENTICATE_ON_UNSUBSCRIBE},
     },
+    (_me,),
+    ((STRING, 0),),
 )
 
-SUBSCRIPTION_ARN = Schema(
-    id=ShapeID("com.amazonaws.sns#subscriptionARN"), shape_type=ShapeType.STRING
+KMS_ACCESS_DENIED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KMSADE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "KMSAccessDenied", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
 )
 
-CONFIRM_SUBSCRIPTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ConfirmSubscriptionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ConfirmSubscriptionResponse",
-        )
-    ],
-    members={"SubscriptionArn": {"target": SUBSCRIPTION_ARN}},
+KMS_DISABLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KMSDE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "KMSDisabled", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
 )
 
-FILTER_POLICY_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#FilterPolicyLimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "FilterPolicyLimitExceeded", "httpResponseCode": 403}
-            ),
+KMS_INVALID_STATE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KMSISE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "KMSInvalidState", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+KMS_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KMSNFE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "KMSNotFound", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+KMS_OPT_IN_REQUIRED: StaticSchema = (
+    18,
+    n0,
+    _KMSOIR,
+    {
+        _smit: _c,
+        _sE: 403,
+        _aQE: MappingProxyType({"code": "KMSOptInRequired", "httpResponseCode": 403}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+KMS_THROTTLING_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KMSTE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "KMSThrottling", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((STRING, 0),),
+)
+
+PLATFORM_APPLICATION_DISABLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _PADE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "PlatformApplicationDisabled", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": STRING}},
+    },
+    (_me,),
+    ((STRING, 0),),
 )
 
-REPLAY_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ReplayLimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ReplayLimitExceeded", "httpResponseCode": 403}
-            ),
+MESSAGE: StaticSchema = (3, n0, _me, 0)
+
+BINARY: StaticSchema = (1, n0, _B, 0)
+
+MESSAGE_ATTRIBUTE_VALUE: StaticSchema = (
+    18,
+    n0,
+    _MAV,
+    0,
+    (_DTa, _SV, _BV),
+    ((STRING, 1), (STRING, 0), (BINARY, 0)),
+)
+
+MESSAGE_ATTRIBUTE_MAP: StaticSchema = (
+    17,
+    n0,
+    _MAM,
+    0,
+    (_k, _v),
+    ((STRING, {_sN: _N}), (MESSAGE_ATTRIBUTE_VALUE, {_sN: _V})),
+)
+
+MESSAGE_STRUCTURE: StaticSchema = (3, n0, _mS, 0)
+
+SUBJECT: StaticSchema = (3, n0, _su, 0)
+
+PUBLISH_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PI,
+    {_s: None},
+    (_TA, _TAa, _PN, _M, _Subj, _MS, _MA, _MDI, _MGI),
+    (
+        (TOPIC_ARN, 0),
+        (STRING, 0),
+        (PHONE_NUMBER, 0),
+        (MESSAGE, 1),
+        (SUBJECT, 0),
+        (MESSAGE_STRUCTURE, 0),
+        (MESSAGE_ATTRIBUTE_MAP, 0),
+        (STRING, 0),
+        (STRING, 0),
+    ),
+)
+
+MESSAGE_ID: StaticSchema = (3, n0, _mI, 0)
+
+PUBLISH_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PO,
+    {_sSI: _cPR, _smi: None},
+    (_MIe, _SN),
+    ((MESSAGE_ID, 0), (STRING, 0)),
+)
+
+PUBLISH: StaticOperationSchema = (
+    23,
+    n0,
+    _Pu,
+    0,
+    PUBLISH_INPUT,
+    PUBLISH_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        ENDPOINT_DISABLED_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        INVALID_SECURITY_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        KMS_OPT_IN_REQUIRED,
+        KMS_THROTTLING_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        PLATFORM_APPLICATION_DISABLED_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+BATCH_ENTRY_IDS_NOT_DISTINCT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _BEINDE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "BatchEntryIdsNotDistinct", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": STRING}},
+    },
+    (_me,),
+    ((STRING, 0),),
 )
 
-SUBSCRIPTION_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SubscriptionLimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "SubscriptionLimitExceeded", "httpResponseCode": 403}
-            ),
+BATCH_REQUEST_TOO_LONG_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _BRTLE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "BatchRequestTooLong", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-CONFIRM_SUBSCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.sns#ConfirmSubscription"), shape_type=ShapeType.OPERATION
-)
-
-MAP_STRING_TO_STRING = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#MapStringToString"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": STRING}},
-)
-
-CREATE_PLATFORM_APPLICATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#CreatePlatformApplicationInput"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Platform": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Attributes": {
-            "target": MAP_STRING_TO_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
     },
+    (_me,),
+    ((STRING, 0),),
 )
 
-CREATE_PLATFORM_APPLICATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#CreatePlatformApplicationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#CreatePlatformApplicationResponse",
-        )
-    ],
-    members={"PlatformApplicationArn": {"target": STRING}},
-)
-
-CREATE_PLATFORM_APPLICATION = Schema(
-    id=ShapeID("com.amazonaws.sns#CreatePlatformApplication"),
-    shape_type=ShapeType.OPERATION,
-)
-
-CREATE_PLATFORM_ENDPOINT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#CreatePlatformEndpointInput"),
-    members={
-        "PlatformApplicationArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Token": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "CustomUserData": {"target": STRING},
-        "Attributes": {"target": MAP_STRING_TO_STRING},
+EMPTY_BATCH_REQUEST_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EBRE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "EmptyBatchRequest", "httpResponseCode": 400}),
     },
+    (_me,),
+    ((STRING, 0),),
 )
 
-CREATE_PLATFORM_ENDPOINT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#CreatePlatformEndpointOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#CreateEndpointResponse",
-        )
-    ],
-    members={"EndpointArn": {"target": STRING}},
-)
-
-CREATE_PLATFORM_ENDPOINT = Schema(
-    id=ShapeID("com.amazonaws.sns#CreatePlatformEndpoint"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LANGUAGE_CODE_STRING = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#LanguageCodeString"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "en_US": {"target": UNIT},
-        "en_GB": {"target": UNIT},
-        "es_419": {"target": UNIT},
-        "es_ES": {"target": UNIT},
-        "de_DE": {"target": UNIT},
-        "fr_CA": {"target": UNIT},
-        "fr_FR": {"target": UNIT},
-        "it_IT": {"target": UNIT},
-        "jp_JP": {"target": UNIT},
-        "pt_BR": {"target": UNIT},
-        "kr_KR": {"target": UNIT},
-        "zh_CN": {"target": UNIT},
-        "zh_TW": {"target": UNIT},
-    },
-)
-
-PHONE_NUMBER_STRING = Schema(
-    id=ShapeID("com.amazonaws.sns#PhoneNumberString"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-CREATE_SMS_SANDBOX_PHONE_NUMBER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#CreateSMSSandboxPhoneNumberInput"),
-    members={
-        "PhoneNumber": {
-            "target": PHONE_NUMBER_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "LanguageCode": {"target": LANGUAGE_CODE_STRING},
-    },
-)
-
-CREATE_SMS_SANDBOX_PHONE_NUMBER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#CreateSMSSandboxPhoneNumberOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#CreateSMSSandboxPhoneNumberResult",
-        )
-    ],
-)
-
-OPTED_OUT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#OptedOutException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "OptedOut", "httpResponseCode": 400}),
+INVALID_BATCH_ENTRY_ID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IBEIE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "InvalidBatchEntryId", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": STRING}},
+    },
+    (_me,),
+    ((STRING, 0),),
 )
 
-USER_ERROR_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#UserErrorException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "UserError", "httpResponseCode": 400}),
+PUBLISH_BATCH_REQUEST_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _PBRE,
+    0,
+    (_I, _M, _Subj, _MS, _MA, _MDI, _MGI),
+    (
+        (STRING, 1),
+        (MESSAGE, 1),
+        (SUBJECT, 0),
+        (MESSAGE_STRUCTURE, 0),
+        (MESSAGE_ATTRIBUTE_MAP, 0),
+        (STRING, 0),
+        (STRING, 0),
+    ),
+)
+
+PUBLISH_BATCH_REQUEST_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _PBREL,
+    0,
+    (_m,),
+    ((PUBLISH_BATCH_REQUEST_ENTRY, 0),),
+)
+
+PUBLISH_BATCH_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PBI,
+    {_s: None},
+    (_TA, _PBREu),
+    ((TOPIC_ARN, 1), (PUBLISH_BATCH_REQUEST_ENTRY_LIST, 1)),
+)
+
+BATCH_RESULT_ERROR_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _BREE,
+    0,
+    (_I, _C, _M, _SF),
+    ((STRING, 1), (STRING, 1), (STRING, 0), (BOOLEAN, {_smithy: False, _sm: None})),
+)
+
+BATCH_RESULT_ERROR_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _BREEL,
+    0,
+    (_m,),
+    ((BATCH_RESULT_ERROR_ENTRY, 0),),
+)
+
+PUBLISH_BATCH_RESULT_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _PBREub,
+    0,
+    (_I, _MIe, _SN),
+    ((STRING, 0), (MESSAGE_ID, 0), (STRING, 0)),
+)
+
+PUBLISH_BATCH_RESULT_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _PBRELu,
+    0,
+    (_m,),
+    ((PUBLISH_BATCH_RESULT_ENTRY, 0),),
+)
+
+PUBLISH_BATCH_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PBO,
+    {_sSI: _cPBR, _smi: None},
+    (_Suc, _F),
+    ((PUBLISH_BATCH_RESULT_ENTRY_LIST, 0), (BATCH_RESULT_ERROR_ENTRY_LIST, 0)),
+)
+
+TOO_MANY_ENTRIES_IN_BATCH_REQUEST_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TMEIBRE,
+    {
+        _smit: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "TooManyEntriesInBatchRequest", "httpResponseCode": 400}
         ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-CREATE_SMS_SANDBOX_PHONE_NUMBER = Schema(
-    id=ShapeID("com.amazonaws.sns#CreateSMSSandboxPhoneNumber"),
-    shape_type=ShapeType.OPERATION,
-)
-
-CONCURRENT_ACCESS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ConcurrentAccessException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ConcurrentAccess", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-ATTRIBUTE_NAME = Schema(
-    id=ShapeID("com.amazonaws.sns#attributeName"), shape_type=ShapeType.STRING
-)
-
-ATTRIBUTE_VALUE = Schema(
-    id=ShapeID("com.amazonaws.sns#attributeValue"), shape_type=ShapeType.STRING
-)
-
-TOPIC_ATTRIBUTES_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#TopicAttributesMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": ATTRIBUTE_NAME}, "value": {"target": ATTRIBUTE_VALUE}},
-)
-
-TOPIC_NAME = Schema(
-    id=ShapeID("com.amazonaws.sns#topicName"), shape_type=ShapeType.STRING
-)
-
-TAG_KEY = Schema(id=ShapeID("com.amazonaws.sns#TagKey"), shape_type=ShapeType.STRING)
-
-TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.sns#TagValue"), shape_type=ShapeType.STRING
-)
-
-TAG = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#Tag"),
-    members={
-        "Key": {
-            "target": TAG_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Value": {
-            "target": TAG_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
     },
-)
-
-TAG_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#TagList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG}},
-)
-
-CREATE_TOPIC_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#CreateTopicInput"),
-    members={
-        "Name": {
-            "target": TOPIC_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Attributes": {"target": TOPIC_ATTRIBUTES_MAP},
-        "Tags": {"target": TAG_LIST},
-        "DataProtectionPolicy": {"target": ATTRIBUTE_VALUE},
-    },
-)
-
-CREATE_TOPIC_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#CreateTopicOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#CreateTopicResponse",
-        )
-    ],
-    members={"TopicArn": {"target": TOPIC_ARN}},
-)
-
-INVALID_SECURITY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#InvalidSecurityException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidSecurity", "httpResponseCode": 403}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-STALE_TAG_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#StaleTagException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "StaleTag", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-TAG_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#TagLimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "TagLimitExceeded", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-TAG_POLICY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#TagPolicyException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "TagPolicy", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-TOPIC_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#TopicLimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "TopicLimitExceeded", "httpResponseCode": 403}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-CREATE_TOPIC = Schema(
-    id=ShapeID("com.amazonaws.sns#CreateTopic"), shape_type=ShapeType.OPERATION
-)
-
-DELETE_ENDPOINT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#DeleteEndpointInput"),
-    members={
-        "EndpointArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_ENDPOINT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#DeleteEndpointOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_ENDPOINT = Schema(
-    id=ShapeID("com.amazonaws.sns#DeleteEndpoint"), shape_type=ShapeType.OPERATION
-)
-
-DELETE_PLATFORM_APPLICATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#DeletePlatformApplicationInput"),
-    members={
-        "PlatformApplicationArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_PLATFORM_APPLICATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#DeletePlatformApplicationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_PLATFORM_APPLICATION = Schema(
-    id=ShapeID("com.amazonaws.sns#DeletePlatformApplication"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DELETE_SMS_SANDBOX_PHONE_NUMBER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#DeleteSMSSandboxPhoneNumberInput"),
-    members={
-        "PhoneNumber": {
-            "target": PHONE_NUMBER_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_SMS_SANDBOX_PHONE_NUMBER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#DeleteSMSSandboxPhoneNumberOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#DeleteSMSSandboxPhoneNumberResult",
-        )
-    ],
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ResourceNotFound", "httpResponseCode": 404}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-DELETE_SMS_SANDBOX_PHONE_NUMBER = Schema(
-    id=ShapeID("com.amazonaws.sns#DeleteSMSSandboxPhoneNumber"),
-    shape_type=ShapeType.OPERATION,
-)
-
-DELETE_TOPIC_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#DeleteTopicInput"),
-    members={
-        "TopicArn": {
-            "target": TOPIC_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_TOPIC_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#DeleteTopicOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-INVALID_STATE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#InvalidStateException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "InvalidState", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-DELETE_TOPIC = Schema(
-    id=ShapeID("com.amazonaws.sns#DeleteTopic"), shape_type=ShapeType.OPERATION
-)
-
-GET_DATA_PROTECTION_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetDataProtectionPolicyInput"),
-    members={
-        "ResourceArn": {
-            "target": TOPIC_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
+    (_me,),
+    ((STRING, 0),),
+)
+
+PUBLISH_BATCH: StaticOperationSchema = (
+    23,
+    n0,
+    _PB,
+    0,
+    PUBLISH_BATCH_INPUT,
+    PUBLISH_BATCH_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        BATCH_ENTRY_IDS_NOT_DISTINCT_EXCEPTION,
+        BATCH_REQUEST_TOO_LONG_EXCEPTION,
+        EMPTY_BATCH_REQUEST_EXCEPTION,
+        ENDPOINT_DISABLED_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_BATCH_ENTRY_ID_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        INVALID_SECURITY_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        KMS_OPT_IN_REQUIRED,
+        KMS_THROTTLING_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        PLATFORM_APPLICATION_DISABLED_EXCEPTION,
+        TOO_MANY_ENTRIES_IN_BATCH_REQUEST_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+PUT_DATA_PROTECTION_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PDPPI,
+    {_s: None},
+    (_RA, _DPP),
+    ((TOPIC_ARN, 1), (ATTRIBUTE_VALUE, 1)),
+)
+
+PUT_DATA_PROTECTION_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PDPPO,
+    {_sSI: _sU, _smi: None},
+)
+
+PUT_DATA_PROTECTION_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _PDPP,
+    0,
+    PUT_DATA_PROTECTION_POLICY_INPUT,
+    PUT_DATA_PROTECTION_POLICY_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_SECURITY_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+REMOVE_PERMISSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RPI,
+    {_s: None},
+    (_TA, _L),
+    ((TOPIC_ARN, 1), (LABEL, 1)),
+)
+
+REMOVE_PERMISSION_OUTPUT: StaticSchema = (18, n0, _RPO, {_sSI: _sU, _smi: None})
+
+REMOVE_PERMISSION: StaticOperationSchema = (
+    23,
+    n0,
+    _RP,
+    0,
+    REMOVE_PERMISSION_INPUT,
+    REMOVE_PERMISSION_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+SET_ENDPOINT_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SEAI,
+    {_s: None},
+    (_EA, _A),
+    ((STRING, 1), (MAP_STRING_TO_STRING, 1)),
+)
 
-GET_DATA_PROTECTION_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetDataProtectionPolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#GetDataProtectionPolicyResponse",
-        )
-    ],
-    members={"DataProtectionPolicy": {"target": ATTRIBUTE_VALUE}},
-)
-
-GET_DATA_PROTECTION_POLICY = Schema(
-    id=ShapeID("com.amazonaws.sns#GetDataProtectionPolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_ENDPOINT_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetEndpointAttributesInput"),
-    members={
-        "EndpointArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-GET_ENDPOINT_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetEndpointAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#GetEndpointAttributesResponse",
-        )
-    ],
-    members={"Attributes": {"target": MAP_STRING_TO_STRING}},
-)
-
-GET_ENDPOINT_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sns#GetEndpointAttributes"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_PLATFORM_APPLICATION_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetPlatformApplicationAttributesInput"),
-    members={
-        "PlatformApplicationArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-GET_PLATFORM_APPLICATION_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetPlatformApplicationAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#GetPlatformApplicationAttributesResponse",
-        )
-    ],
-    members={"Attributes": {"target": MAP_STRING_TO_STRING}},
-)
-
-GET_PLATFORM_APPLICATION_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sns#GetPlatformApplicationAttributes"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_STRING = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListString"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-GET_SMS_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetSMSAttributesInput"),
-    members={"attributes": {"target": LIST_STRING}},
-)
-
-GET_SMS_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetSMSAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#GetSMSAttributesResponse",
-        )
-    ],
-    members={"attributes": {"target": MAP_STRING_TO_STRING}},
-)
-
-GET_SMS_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sns#GetSMSAttributes"), shape_type=ShapeType.OPERATION
-)
-
-GET_SMS_SANDBOX_ACCOUNT_STATUS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetSMSSandboxAccountStatusInput")
-)
-
-GET_SMS_SANDBOX_ACCOUNT_STATUS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetSMSSandboxAccountStatusOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#GetSMSSandboxAccountStatusResult",
-        )
-    ],
-    members={
-        "IsInSandbox": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-GET_SMS_SANDBOX_ACCOUNT_STATUS = Schema(
-    id=ShapeID("com.amazonaws.sns#GetSMSSandboxAccountStatus"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_SUBSCRIPTION_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetSubscriptionAttributesInput"),
-    members={
-        "SubscriptionArn": {
-            "target": SUBSCRIPTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-SUBSCRIPTION_ATTRIBUTES_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SubscriptionAttributesMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": ATTRIBUTE_NAME}, "value": {"target": ATTRIBUTE_VALUE}},
-)
-
-GET_SUBSCRIPTION_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetSubscriptionAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#GetSubscriptionAttributesResponse",
-        )
-    ],
-    members={"Attributes": {"target": SUBSCRIPTION_ATTRIBUTES_MAP}},
-)
-
-GET_SUBSCRIPTION_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sns#GetSubscriptionAttributes"),
-    shape_type=ShapeType.OPERATION,
-)
-
-GET_TOPIC_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetTopicAttributesInput"),
-    members={
-        "TopicArn": {
-            "target": TOPIC_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-GET_TOPIC_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#GetTopicAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#GetTopicAttributesResponse",
-        )
-    ],
-    members={"Attributes": {"target": TOPIC_ATTRIBUTES_MAP}},
-)
-
-GET_TOPIC_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sns#GetTopicAttributes"), shape_type=ShapeType.OPERATION
-)
-
-LIST_ENDPOINTS_BY_PLATFORM_APPLICATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListEndpointsByPlatformApplicationInput"),
-    members={
-        "PlatformApplicationArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextToken": {"target": STRING},
-    },
-)
-
-ENDPOINT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#Endpoint"),
-    members={
-        "EndpointArn": {"target": STRING},
-        "Attributes": {"target": MAP_STRING_TO_STRING},
-    },
-)
-
-LIST_OF_ENDPOINTS = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListOfEndpoints"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ENDPOINT}},
-)
-
-LIST_ENDPOINTS_BY_PLATFORM_APPLICATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListEndpointsByPlatformApplicationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ListEndpointsByPlatformApplicationResponse",
-        )
-    ],
-    members={
-        "Endpoints": {"target": LIST_OF_ENDPOINTS},
-        "NextToken": {"target": STRING},
-    },
-)
-
-LIST_ENDPOINTS_BY_PLATFORM_APPLICATION = Schema(
-    id=ShapeID("com.amazonaws.sns#ListEndpointsByPlatformApplication"),
-    shape_type=ShapeType.OPERATION,
-)
-
-MAX_ITEMS_LIST_ORIGINATION_NUMBERS = Schema(
-    id=ShapeID("com.amazonaws.sns#MaxItemsListOriginationNumbers"),
-    shape_type=ShapeType.INTEGER,
-)
-
-NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.sns#nextToken"), shape_type=ShapeType.STRING
-)
-
-LIST_ORIGINATION_NUMBERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListOriginationNumbersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ListOriginationNumbersRequest",
-        )
-    ],
-    members={
-        "NextToken": {"target": NEXT_TOKEN},
-        "MaxResults": {"target": MAX_ITEMS_LIST_ORIGINATION_NUMBERS},
-    },
-)
-
-TIMESTAMP = Schema(
-    id=ShapeID("com.amazonaws.sns#Timestamp"), shape_type=ShapeType.TIMESTAMP
-)
-
-ISO2_COUNTRY_CODE = Schema(
-    id=ShapeID("com.amazonaws.sns#Iso2CountryCode"), shape_type=ShapeType.STRING
-)
-
-NUMBER_CAPABILITY = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#NumberCapability"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "SMS": {"target": UNIT},
-        "MMS": {"target": UNIT},
-        "VOICE": {"target": UNIT},
-    },
-)
-
-NUMBER_CAPABILITY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#NumberCapabilityList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": NUMBER_CAPABILITY}},
-)
-
-ROUTE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#RouteType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "Transactional": {"target": UNIT},
-        "Promotional": {"target": UNIT},
-        "Premium": {"target": UNIT},
-    },
-)
-
-PHONE_NUMBER_INFORMATION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PhoneNumberInformation"),
-    members={
-        "CreatedAt": {"target": TIMESTAMP},
-        "PhoneNumber": {"target": PHONE_NUMBER},
-        "Status": {"target": STRING},
-        "Iso2CountryCode": {"target": ISO2_COUNTRY_CODE},
-        "RouteType": {"target": ROUTE_TYPE},
-        "NumberCapabilities": {"target": NUMBER_CAPABILITY_LIST},
-    },
-)
-
-PHONE_NUMBER_INFORMATION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PhoneNumberInformationList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PHONE_NUMBER_INFORMATION}},
-)
-
-LIST_ORIGINATION_NUMBERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListOriginationNumbersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ListOriginationNumbersResult",
-        )
-    ],
-    members={
-        "NextToken": {"target": NEXT_TOKEN},
-        "PhoneNumbers": {"target": PHONE_NUMBER_INFORMATION_LIST},
-    },
-)
-
-VALIDATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ValidationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ValidationException", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={
-        "Message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-LIST_ORIGINATION_NUMBERS = Schema(
-    id=ShapeID("com.amazonaws.sns#ListOriginationNumbers"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_PHONE_NUMBERS_OPTED_OUT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListPhoneNumbersOptedOutInput"),
-    members={"nextToken": {"target": STRING}},
-)
-
-PHONE_NUMBER_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PhoneNumberList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PHONE_NUMBER}},
-)
-
-LIST_PHONE_NUMBERS_OPTED_OUT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListPhoneNumbersOptedOutOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ListPhoneNumbersOptedOutResponse",
-        )
-    ],
-    members={
-        "phoneNumbers": {"target": PHONE_NUMBER_LIST},
-        "nextToken": {"target": STRING},
-    },
-)
-
-LIST_PHONE_NUMBERS_OPTED_OUT = Schema(
-    id=ShapeID("com.amazonaws.sns#ListPhoneNumbersOptedOut"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_PLATFORM_APPLICATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListPlatformApplicationsInput"),
-    members={"NextToken": {"target": STRING}},
-)
-
-PLATFORM_APPLICATION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PlatformApplication"),
-    members={
-        "PlatformApplicationArn": {"target": STRING},
-        "Attributes": {"target": MAP_STRING_TO_STRING},
-    },
-)
-
-LIST_OF_PLATFORM_APPLICATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListOfPlatformApplications"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PLATFORM_APPLICATION}},
-)
-
-LIST_PLATFORM_APPLICATIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListPlatformApplicationsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ListPlatformApplicationsResponse",
-        )
-    ],
-    members={
-        "PlatformApplications": {"target": LIST_OF_PLATFORM_APPLICATIONS},
-        "NextToken": {"target": STRING},
-    },
-)
-
-LIST_PLATFORM_APPLICATIONS = Schema(
-    id=ShapeID("com.amazonaws.sns#ListPlatformApplications"),
-    shape_type=ShapeType.OPERATION,
-)
-
-MAX_ITEMS = Schema(
-    id=ShapeID("com.amazonaws.sns#MaxItems"), shape_type=ShapeType.INTEGER
-)
-
-LIST_SMS_SANDBOX_PHONE_NUMBERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListSMSSandboxPhoneNumbersInput"),
-    members={"NextToken": {"target": NEXT_TOKEN}, "MaxResults": {"target": MAX_ITEMS}},
-)
-
-SMS_SANDBOX_PHONE_NUMBER_VERIFICATION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SMSSandboxPhoneNumberVerificationStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"Pending": {"target": UNIT}, "Verified": {"target": UNIT}},
-)
-
-SMS_SANDBOX_PHONE_NUMBER = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SMSSandboxPhoneNumber"),
-    members={
-        "PhoneNumber": {"target": PHONE_NUMBER_STRING},
-        "Status": {"target": SMS_SANDBOX_PHONE_NUMBER_VERIFICATION_STATUS},
-    },
-)
-
-SMS_SANDBOX_PHONE_NUMBER_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SMSSandboxPhoneNumberList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SMS_SANDBOX_PHONE_NUMBER}},
-)
-
-LIST_SMS_SANDBOX_PHONE_NUMBERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListSMSSandboxPhoneNumbersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ListSMSSandboxPhoneNumbersResult",
-        )
-    ],
-    members={
-        "PhoneNumbers": {
-            "target": SMS_SANDBOX_PHONE_NUMBER_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextToken": {"target": STRING},
-    },
-)
-
-LIST_SMS_SANDBOX_PHONE_NUMBERS = Schema(
-    id=ShapeID("com.amazonaws.sns#ListSMSSandboxPhoneNumbers"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_SUBSCRIPTIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListSubscriptionsInput"),
-    members={"NextToken": {"target": NEXT_TOKEN}},
-)
-
-ENDPOINT2 = Schema(
-    id=ShapeID("com.amazonaws.sns#Endpoint2"), shape_type=ShapeType.STRING
-)
-
-PROTOCOL = Schema(id=ShapeID("com.amazonaws.sns#protocol"), shape_type=ShapeType.STRING)
-
-SUBSCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#Subscription"),
-    members={
-        "SubscriptionArn": {"target": SUBSCRIPTION_ARN},
-        "Owner": {"target": ACCOUNT},
-        "Protocol": {"target": PROTOCOL},
-        "Endpoint": {"target": ENDPOINT2},
-        "TopicArn": {"target": TOPIC_ARN},
-    },
-)
-
-SUBSCRIPTIONS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SubscriptionsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SUBSCRIPTION}},
-)
-
-LIST_SUBSCRIPTIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListSubscriptionsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ListSubscriptionsResponse",
-        )
-    ],
-    members={
-        "Subscriptions": {"target": SUBSCRIPTIONS_LIST},
-        "NextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LIST_SUBSCRIPTIONS = Schema(
-    id=ShapeID("com.amazonaws.sns#ListSubscriptions"), shape_type=ShapeType.OPERATION
-)
-
-LIST_SUBSCRIPTIONS_BY_TOPIC_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListSubscriptionsByTopicInput"),
-    members={
-        "TopicArn": {
-            "target": TOPIC_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LIST_SUBSCRIPTIONS_BY_TOPIC_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListSubscriptionsByTopicOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ListSubscriptionsByTopicResponse",
-        )
-    ],
-    members={
-        "Subscriptions": {"target": SUBSCRIPTIONS_LIST},
-        "NextToken": {"target": NEXT_TOKEN},
-    },
-)
-
-LIST_SUBSCRIPTIONS_BY_TOPIC = Schema(
-    id=ShapeID("com.amazonaws.sns#ListSubscriptionsByTopic"),
-    shape_type=ShapeType.OPERATION,
-)
-
-LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListTagsForResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ListTagsForResourceRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": AMAZON_RESOURCE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-LIST_TAGS_FOR_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListTagsForResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ListTagsForResourceResponse",
-        )
-    ],
-    members={"Tags": {"target": TAG_LIST}},
-)
-
-LIST_TAGS_FOR_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.sns#ListTagsForResource"), shape_type=ShapeType.OPERATION
-)
-
-LIST_TOPICS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListTopicsInput"),
-    members={"NextToken": {"target": NEXT_TOKEN}},
-)
-
-TOPIC = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#Topic"), members={"TopicArn": {"target": TOPIC_ARN}}
-)
-
-TOPICS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#TopicsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TOPIC}},
-)
-
-LIST_TOPICS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#ListTopicsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#ListTopicsResponse",
-        )
-    ],
-    members={"Topics": {"target": TOPICS_LIST}, "NextToken": {"target": NEXT_TOKEN}},
-)
-
-LIST_TOPICS = Schema(
-    id=ShapeID("com.amazonaws.sns#ListTopics"), shape_type=ShapeType.OPERATION
-)
-
-OPT_IN_PHONE_NUMBER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#OptInPhoneNumberInput"),
-    members={
-        "phoneNumber": {
-            "target": PHONE_NUMBER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-OPT_IN_PHONE_NUMBER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#OptInPhoneNumberOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#OptInPhoneNumberResponse",
-        )
-    ],
-)
-
-OPT_IN_PHONE_NUMBER = Schema(
-    id=ShapeID("com.amazonaws.sns#OptInPhoneNumber"), shape_type=ShapeType.OPERATION
-)
-
-ENDPOINT_DISABLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#EndpointDisabledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "EndpointDisabled", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-INVALID_PARAMETER_VALUE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#InvalidParameterValueException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "ParameterValueInvalid", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-KMS_ACCESS_DENIED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#KMSAccessDeniedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "KMSAccessDenied", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-KMS_DISABLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#KMSDisabledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "KMSDisabled", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-KMS_INVALID_STATE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#KMSInvalidStateException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "KMSInvalidState", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-KMS_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#KMSNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "KMSNotFound", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-KMS_OPT_IN_REQUIRED = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#KMSOptInRequired"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "KMSOptInRequired", "httpResponseCode": 403}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-KMS_THROTTLING_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#KMSThrottlingException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType({"code": "KMSThrottling", "httpResponseCode": 400}),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-PLATFORM_APPLICATION_DISABLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PlatformApplicationDisabledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "PlatformApplicationDisabled", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-MESSAGE = Schema(id=ShapeID("com.amazonaws.sns#message"), shape_type=ShapeType.STRING)
-
-BINARY = Schema(id=ShapeID("com.amazonaws.sns#Binary"), shape_type=ShapeType.BLOB)
-
-MESSAGE_ATTRIBUTE_VALUE = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#MessageAttributeValue"),
-    members={
-        "DataType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "StringValue": {"target": STRING},
-        "BinaryValue": {"target": BINARY},
-    },
-)
-
-MESSAGE_ATTRIBUTE_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#MessageAttributeMap"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Name")],
-        },
-        "value": {
-            "target": MESSAGE_ATTRIBUTE_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Value")],
-        },
-    },
-)
-
-MESSAGE_STRUCTURE = Schema(
-    id=ShapeID("com.amazonaws.sns#messageStructure"), shape_type=ShapeType.STRING
-)
-
-SUBJECT = Schema(id=ShapeID("com.amazonaws.sns#subject"), shape_type=ShapeType.STRING)
-
-PUBLISH_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PublishInput"),
-    members={
-        "TopicArn": {"target": TOPIC_ARN},
-        "TargetArn": {"target": STRING},
-        "PhoneNumber": {"target": PHONE_NUMBER},
-        "Message": {
-            "target": MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Subject": {"target": SUBJECT},
-        "MessageStructure": {"target": MESSAGE_STRUCTURE},
-        "MessageAttributes": {"target": MESSAGE_ATTRIBUTE_MAP},
-        "MessageDeduplicationId": {"target": STRING},
-        "MessageGroupId": {"target": STRING},
-    },
-)
-
-MESSAGE_ID = Schema(
-    id=ShapeID("com.amazonaws.sns#messageId"), shape_type=ShapeType.STRING
-)
-
-PUBLISH_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PublishOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#PublishResponse",
-        )
-    ],
-    members={"MessageId": {"target": MESSAGE_ID}, "SequenceNumber": {"target": STRING}},
-)
-
-PUBLISH = Schema(
-    id=ShapeID("com.amazonaws.sns#Publish"), shape_type=ShapeType.OPERATION
-)
-
-BATCH_ENTRY_IDS_NOT_DISTINCT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#BatchEntryIdsNotDistinctException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "BatchEntryIdsNotDistinct", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-BATCH_REQUEST_TOO_LONG_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#BatchRequestTooLongException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "BatchRequestTooLong", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-EMPTY_BATCH_REQUEST_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#EmptyBatchRequestException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "EmptyBatchRequest", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-INVALID_BATCH_ENTRY_ID_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#InvalidBatchEntryIdException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "InvalidBatchEntryId", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-PUBLISH_BATCH_REQUEST_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PublishBatchRequestEntry"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Message": {
-            "target": MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Subject": {"target": SUBJECT},
-        "MessageStructure": {"target": MESSAGE_STRUCTURE},
-        "MessageAttributes": {"target": MESSAGE_ATTRIBUTE_MAP},
-        "MessageDeduplicationId": {"target": STRING},
-        "MessageGroupId": {"target": STRING},
-    },
-)
-
-PUBLISH_BATCH_REQUEST_ENTRY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PublishBatchRequestEntryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PUBLISH_BATCH_REQUEST_ENTRY}},
-)
-
-PUBLISH_BATCH_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PublishBatchInput"),
-    members={
-        "TopicArn": {
-            "target": TOPIC_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "PublishBatchRequestEntries": {
-            "target": PUBLISH_BATCH_REQUEST_ENTRY_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-BATCH_RESULT_ERROR_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#BatchResultErrorEntry"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Code": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Message": {"target": STRING},
-        "SenderFault": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=False),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-BATCH_RESULT_ERROR_ENTRY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#BatchResultErrorEntryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BATCH_RESULT_ERROR_ENTRY}},
-)
-
-PUBLISH_BATCH_RESULT_ENTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PublishBatchResultEntry"),
-    members={
-        "Id": {"target": STRING},
-        "MessageId": {"target": MESSAGE_ID},
-        "SequenceNumber": {"target": STRING},
-    },
-)
-
-PUBLISH_BATCH_RESULT_ENTRY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PublishBatchResultEntryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PUBLISH_BATCH_RESULT_ENTRY}},
-)
-
-PUBLISH_BATCH_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PublishBatchOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#PublishBatchResponse",
-        )
-    ],
-    members={
-        "Successful": {"target": PUBLISH_BATCH_RESULT_ENTRY_LIST},
-        "Failed": {"target": BATCH_RESULT_ERROR_ENTRY_LIST},
-    },
-)
-
-TOO_MANY_ENTRIES_IN_BATCH_REQUEST_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#TooManyEntriesInBatchRequestException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-        Trait.new(
-            id=ShapeID("aws.protocols#awsQueryError"),
-            value=MappingProxyType(
-                {"code": "TooManyEntriesInBatchRequest", "httpResponseCode": 400}
-            ),
-        ),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-PUBLISH_BATCH = Schema(
-    id=ShapeID("com.amazonaws.sns#PublishBatch"), shape_type=ShapeType.OPERATION
-)
-
-PUT_DATA_PROTECTION_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PutDataProtectionPolicyInput"),
-    members={
-        "ResourceArn": {
-            "target": TOPIC_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DataProtectionPolicy": {
-            "target": ATTRIBUTE_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PUT_DATA_PROTECTION_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#PutDataProtectionPolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-PUT_DATA_PROTECTION_POLICY = Schema(
-    id=ShapeID("com.amazonaws.sns#PutDataProtectionPolicy"),
-    shape_type=ShapeType.OPERATION,
-)
-
-REMOVE_PERMISSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#RemovePermissionInput"),
-    members={
-        "TopicArn": {
-            "target": TOPIC_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Label": {
-            "target": LABEL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-REMOVE_PERMISSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#RemovePermissionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-REMOVE_PERMISSION = Schema(
-    id=ShapeID("com.amazonaws.sns#RemovePermission"), shape_type=ShapeType.OPERATION
-)
-
-SET_ENDPOINT_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SetEndpointAttributesInput"),
-    members={
-        "EndpointArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Attributes": {
-            "target": MAP_STRING_TO_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-SET_ENDPOINT_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SetEndpointAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-SET_ENDPOINT_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sns#SetEndpointAttributes"),
-    shape_type=ShapeType.OPERATION,
-)
-
-SET_PLATFORM_APPLICATION_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SetPlatformApplicationAttributesInput"),
-    members={
-        "PlatformApplicationArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Attributes": {
-            "target": MAP_STRING_TO_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-SET_PLATFORM_APPLICATION_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SetPlatformApplicationAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-SET_PLATFORM_APPLICATION_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sns#SetPlatformApplicationAttributes"),
-    shape_type=ShapeType.OPERATION,
-)
-
-SET_SMS_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SetSMSAttributesInput"),
-    members={
-        "attributes": {
-            "target": MAP_STRING_TO_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-SET_SMS_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SetSMSAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#SetSMSAttributesResponse",
-        )
-    ],
-)
-
-SET_SMS_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sns#SetSMSAttributes"), shape_type=ShapeType.OPERATION
-)
-
-SET_SUBSCRIPTION_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SetSubscriptionAttributesInput"),
-    members={
-        "SubscriptionArn": {
-            "target": SUBSCRIPTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributeName": {
-            "target": ATTRIBUTE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributeValue": {"target": ATTRIBUTE_VALUE},
-    },
-)
-
-SET_SUBSCRIPTION_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SetSubscriptionAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-SET_SUBSCRIPTION_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sns#SetSubscriptionAttributes"),
-    shape_type=ShapeType.OPERATION,
-)
-
-SET_TOPIC_ATTRIBUTES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SetTopicAttributesInput"),
-    members={
-        "TopicArn": {
-            "target": TOPIC_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributeName": {
-            "target": ATTRIBUTE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AttributeValue": {"target": ATTRIBUTE_VALUE},
-    },
-)
-
-SET_TOPIC_ATTRIBUTES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SetTopicAttributesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-SET_TOPIC_ATTRIBUTES = Schema(
-    id=ShapeID("com.amazonaws.sns#SetTopicAttributes"), shape_type=ShapeType.OPERATION
-)
-
-SUBSCRIBE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SubscribeInput"),
-    members={
-        "TopicArn": {
-            "target": TOPIC_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Protocol": {
-            "target": PROTOCOL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Endpoint": {"target": ENDPOINT2},
-        "Attributes": {"target": SUBSCRIPTION_ATTRIBUTES_MAP},
-        "ReturnSubscriptionArn": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-    },
-)
-
-SUBSCRIBE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#SubscribeOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#SubscribeResponse",
-        )
-    ],
-    members={"SubscriptionArn": {"target": SUBSCRIPTION_ARN}},
-)
-
-SUBSCRIBE = Schema(
-    id=ShapeID("com.amazonaws.sns#Subscribe"), shape_type=ShapeType.OPERATION
-)
-
-TAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#TagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#TagResourceRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": AMAZON_RESOURCE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Tags": {
-            "target": TAG_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#TagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#TagResourceResponse",
-        )
-    ],
-)
-
-TAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.sns#TagResource"), shape_type=ShapeType.OPERATION
-)
-
-UNSUBSCRIBE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#UnsubscribeInput"),
-    members={
-        "SubscriptionArn": {
-            "target": SUBSCRIPTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-UNSUBSCRIBE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#UnsubscribeOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-UNSUBSCRIBE = Schema(
-    id=ShapeID("com.amazonaws.sns#Unsubscribe"), shape_type=ShapeType.OPERATION
-)
-
-TAG_KEY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#TagKeyList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG_KEY}},
-)
-
-UNTAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#UntagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#UntagResourceRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": AMAZON_RESOURCE_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TagKeys": {
-            "target": TAG_KEY_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-UNTAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#UntagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#UntagResourceResponse",
-        )
-    ],
-)
-
-UNTAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.sns#UntagResource"), shape_type=ShapeType.OPERATION
-)
-
-VERIFICATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#VerificationException"),
-    traits=[Trait.new(id=ShapeID("smithy.api#error"), value="client")],
-    members={
-        "Message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Status": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-OTP_CODE = Schema(id=ShapeID("com.amazonaws.sns#OTPCode"), shape_type=ShapeType.STRING)
-
-VERIFY_SMS_SANDBOX_PHONE_NUMBER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#VerifySMSSandboxPhoneNumberInput"),
-    members={
-        "PhoneNumber": {
-            "target": PHONE_NUMBER_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "OneTimePassword": {
-            "target": OTP_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-VERIFY_SMS_SANDBOX_PHONE_NUMBER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.sns#VerifySMSSandboxPhoneNumberOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.sns#VerifySMSSandboxPhoneNumberResult",
-        )
-    ],
-)
-
-VERIFY_SMS_SANDBOX_PHONE_NUMBER = Schema(
-    id=ShapeID("com.amazonaws.sns#VerifySMSSandboxPhoneNumber"),
-    shape_type=ShapeType.OPERATION,
-)
-
-AMAZON_SIMPLE_NOTIFICATION_SERVICE = Schema(
-    id=ShapeID("com.amazonaws.sns#AmazonSimpleNotificationService"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "sns"})
-        ),
-        Trait.new(id=ShapeID("aws.protocols#awsQuery")),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+SET_ENDPOINT_ATTRIBUTES_OUTPUT: StaticSchema = (18, n0, _SEAO, {_sSI: _sU, _smi: None})
+
+SET_ENDPOINT_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _SEA,
+    0,
+    SET_ENDPOINT_ATTRIBUTES_INPUT,
+    SET_ENDPOINT_ATTRIBUTES_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+SET_PLATFORM_APPLICATION_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SPAAI,
+    {_s: None},
+    (_PAA, _A),
+    ((STRING, 1), (MAP_STRING_TO_STRING, 1)),
+)
+
+SET_PLATFORM_APPLICATION_ATTRIBUTES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SPAAO,
+    {_sSI: _sU, _smi: None},
+)
+
+SET_PLATFORM_APPLICATION_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _SPAA,
+    0,
+    SET_PLATFORM_APPLICATION_ATTRIBUTES_INPUT,
+    SET_PLATFORM_APPLICATION_ATTRIBUTES_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+SET_SMS_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SSMSAI,
+    {_s: None},
+    (_at,),
+    ((MAP_STRING_TO_STRING, 1),),
+)
+
+SET_SMS_ATTRIBUTES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SSMSAO,
+    {_sSI: _cSSMSAR, _smi: None},
+)
+
+SET_SMS_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _SSMSA,
+    0,
+    SET_SMS_ATTRIBUTES_INPUT,
+    SET_SMS_ATTRIBUTES_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        THROTTLED_EXCEPTION,
+    ),
+)
+
+SET_SUBSCRIPTION_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SSAI,
+    {_s: None},
+    (_SA, _ANt, _AV),
+    ((SUBSCRIPTION_ARN, 1), (ATTRIBUTE_NAME, 1), (ATTRIBUTE_VALUE, 0)),
+)
+
+SET_SUBSCRIPTION_ATTRIBUTES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SSAO,
+    {_sSI: _sU, _smi: None},
+)
+
+SET_SUBSCRIPTION_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _SSA,
+    0,
+    SET_SUBSCRIPTION_ATTRIBUTES_INPUT,
+    SET_SUBSCRIPTION_ATTRIBUTES_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        FILTER_POLICY_LIMIT_EXCEEDED_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        REPLAY_LIMIT_EXCEEDED_EXCEPTION,
+    ),
+)
+
+SET_TOPIC_ATTRIBUTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _STAI,
+    {_s: None},
+    (_TA, _ANt, _AV),
+    ((TOPIC_ARN, 1), (ATTRIBUTE_NAME, 1), (ATTRIBUTE_VALUE, 0)),
+)
+
+SET_TOPIC_ATTRIBUTES_OUTPUT: StaticSchema = (18, n0, _STAO, {_sSI: _sU, _smi: None})
+
+SET_TOPIC_ATTRIBUTES: StaticOperationSchema = (
+    23,
+    n0,
+    _STA,
+    0,
+    SET_TOPIC_ATTRIBUTES_INPUT,
+    SET_TOPIC_ATTRIBUTES_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_SECURITY_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+SUBSCRIBE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SI,
+    {_s: None},
+    (_TA, _Pro, _E, _A, _RSA),
+    (
+        (TOPIC_ARN, 1),
+        (PROTOCOL, 1),
+        (ENDPOINT2, 0),
+        (SUBSCRIPTION_ATTRIBUTES_MAP, 0),
+        (BOOLEAN, {_smithy: False}),
+    ),
+)
+
+SUBSCRIBE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SO,
+    {_sSI: _cSR, _smi: None},
+    (_SA,),
+    ((SUBSCRIPTION_ARN, 0),),
+)
+
+SUBSCRIBE: StaticOperationSchema = (
+    23,
+    n0,
+    _Subs,
+    0,
+    SUBSCRIBE_INPUT,
+    SUBSCRIBE_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        FILTER_POLICY_LIMIT_EXCEEDED_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_SECURITY_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+        REPLAY_LIMIT_EXCEEDED_EXCEPTION,
+        SUBSCRIPTION_LIMIT_EXCEEDED_EXCEPTION,
+    ),
+)
+
+TAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TRI,
+    {_sSI: _cTRR, _s: None},
+    (_RA, _Tag),
+    ((AMAZON_RESOURCE_NAME, 1), (TAG_LIST, 1)),
+)
+
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _cTRRo, _smi: None})
+
+TAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _TR,
+    0,
+    TAG_RESOURCE_INPUT,
+    TAG_RESOURCE_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        CONCURRENT_ACCESS_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        STALE_TAG_EXCEPTION,
+        TAG_LIMIT_EXCEEDED_EXCEPTION,
+        TAG_POLICY_EXCEPTION,
+    ),
+)
+
+UNSUBSCRIBE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UI,
+    {_s: None},
+    (_SA,),
+    ((SUBSCRIPTION_ARN, 1),),
+)
+
+UNSUBSCRIBE_OUTPUT: StaticSchema = (18, n0, _UO, {_sSI: _sU, _smi: None})
+
+UNSUBSCRIBE: StaticOperationSchema = (
+    23,
+    n0,
+    _U,
+    0,
+    UNSUBSCRIBE_INPUT,
+    UNSUBSCRIBE_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        INVALID_SECURITY_EXCEPTION,
+        NOT_FOUND_EXCEPTION,
+    ),
+)
+
+TAG_KEY_LIST: StaticSchema = (16, n0, _TKL, 0, (_m,), ((TAG_KEY, 0),))
+
+UNTAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URI,
+    {_sSI: _cURR, _s: None},
+    (_RA, _TKa),
+    ((AMAZON_RESOURCE_NAME, 1), (TAG_KEY_LIST, 1)),
+)
+
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _URO, {_sSI: _cURRo, _smi: None})
+
+UNTAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _UR,
+    0,
+    UNTAG_RESOURCE_INPUT,
+    UNTAG_RESOURCE_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        CONCURRENT_ACCESS_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        STALE_TAG_EXCEPTION,
+        TAG_LIMIT_EXCEEDED_EXCEPTION,
+        TAG_POLICY_EXCEPTION,
+    ),
+)
+
+VERIFICATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _VEe,
+    {_smit: _c},
+    (_M, _St),
+    ((STRING, 1), (STRING, 1)),
+)
+
+OTP_CODE: StaticSchema = (3, n0, _OTPC, 0)
+
+VERIFY_SMS_SANDBOX_PHONE_NUMBER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _VSMSSPNI,
+    {_s: None},
+    (_PN, _OTP),
+    ((PHONE_NUMBER_STRING, 1), (OTP_CODE, 1)),
+)
+
+VERIFY_SMS_SANDBOX_PHONE_NUMBER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _VSMSSPNO,
+    {_sSI: _cVSMSSPNR, _smi: None},
+)
+
+VERIFY_SMS_SANDBOX_PHONE_NUMBER: StaticOperationSchema = (
+    23,
+    n0,
+    _VSMSSPN,
+    0,
+    VERIFY_SMS_SANDBOX_PHONE_NUMBER_INPUT,
+    VERIFY_SMS_SANDBOX_PHONE_NUMBER_OUTPUT,
+    (
+        AUTHORIZATION_ERROR_EXCEPTION,
+        INTERNAL_ERROR_EXCEPTION,
+        INVALID_PARAMETER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLED_EXCEPTION,
+        VERIFICATION_EXCEPTION,
+    ),
+)
+
+AMAZON_SIMPLE_NOTIFICATION_SERVICE: StaticSchema = (
+    21,
+    n0,
+    _ASNS,
+    {
+        _aw: MappingProxyType({"name": "sns"}),
+        _aQ: None,
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
+                ),
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsFIPS",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-gov-east-1",
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "Region"}),
-                                    "us-gov-west-1",
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sns-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sns.us-gov-east-1.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sns.us-gov-west-1.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sns-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sns.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://sns.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "Region"}),
+                                "us-gov-east-1",
+                            ),
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 15,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEMAAAABQX14QoF9eELAAAABAAAAAwAAAAJAAAABgAAAAoF9eEJAAAABwX14QYAAAALAAAACAX14QcF9eEIAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType({"ref": "Region"}),
+                                "us-gov-west-1",
+                            ),
+                        }
+                    ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sns-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sns.us-gov-east-1.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sns.us-gov-west-1.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sns-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sns.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://sns.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 15,
+                "nodes": "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEMAAAABQX14QoF9eELAAAABAAAAAwAAAAJAAAABgAAAAoF9eEJAAAABwX14QYAAAALAAAACAX14QcF9eEIAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "SNS",
-                    "arnNamespace": "sns",
-                    "cloudFormationName": "SNS",
-                    "cloudTrailEventSource": "sns.amazonaws.com",
-                    "endpointPrefix": "sns",
-                }
-            ),
+        _aws: MappingProxyType(
+            {
+                "sdkId": "SNS",
+                "arnNamespace": "sns",
+                "cloudFormationName": "SNS",
+                "cloudTrailEventSource": "sns.amazonaws.com",
+                "endpointPrefix": "sns",
+            }
         ),
-        Trait.new(
-            id=ShapeID("smithy.api#xmlNamespace"),
-            value=MappingProxyType({"uri": "http://sns.amazonaws.com/doc/2010-03-31/"}),
-        ),
-    ],
+        _sNm: MappingProxyType({"uri": "http://sns.amazonaws.com/doc/2010-03-31/"}),
+    },
 )

@@ -6,7 +6,7 @@
 import asyncio
 import uuid
 
-from smithy_core.aio.eventstream import DuplexEventStream
+from smithy_core.aio.eventstream import AsyncDuplexEventStream
 from smithy_http.aio.crt import AWSCRTHTTPClient
 
 from aws_sdk_qbusiness.models import (
@@ -29,7 +29,7 @@ from . import REGION, create_qbusiness_client
 
 
 async def _send_chat_events(
-    stream: DuplexEventStream[ChatInputStream, ChatOutputStream, ChatOutput],
+    stream: AsyncDuplexEventStream[ChatInputStream, ChatOutputStream, ChatOutput],
 ) -> None:
     """Send chat input events: configuration, text message, end of input."""
     await stream.input_stream.send(
@@ -50,7 +50,7 @@ async def _send_chat_events(
 
 
 async def _receive_chat_output(
-    stream: DuplexEventStream[ChatInputStream, ChatOutputStream, ChatOutput],
+    stream: AsyncDuplexEventStream[ChatInputStream, ChatOutputStream, ChatOutput],
 ) -> tuple[bool, bool]:
     """Receive and validate chat output from the stream.
 

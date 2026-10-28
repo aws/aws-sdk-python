@@ -36,8 +36,14 @@ dependencies = [
 "Code" = "https://github.com/aws/aws-sdk-python/tree/develop/packages/aws-credentials-imds/"
 "Issue tracker" = "https://github.com/aws/aws-sdk-python/issues"
 
-[project.entry-points."smithy_aws_core.identity.chain_providers"]
-Ec2InstanceMetadata = "aws_credentials_imds.providers:Ec2InstanceMetadataProvider"
+[project.entry-points."smithy_aws_core.aio.identity.chain_providers"]
+Ec2InstanceMetadata = "aws_credentials_imds.aio.providers:Ec2InstanceMetadataProvider"
+
+[dependency-groups]
+test = [
+    "pytest>=9.0.1,<10.0.0",
+    "pytest-asyncio>=1.3.0,<1.4.0"
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -53,3 +59,7 @@ exclude = [
 
 [tool.ruff]
 src = ["src"]
+
+[tool.pytest.ini_options]
+python_classes = ["!Test"]
+asyncio_mode = "auto"

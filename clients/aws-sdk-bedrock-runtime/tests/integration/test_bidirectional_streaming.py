@@ -8,7 +8,7 @@ import base64
 import json
 import uuid
 
-from smithy_core.aio.eventstream import DuplexEventStream
+from smithy_core.aio.eventstream import AsyncDuplexEventStream
 from smithy_http.aio.crt import AWSCRTHTTPClient
 
 from aws_sdk_bedrock_runtime.models import (
@@ -144,7 +144,7 @@ SESSION_END_EVENT = """{
 
 
 async def _send_event(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         InvokeModelWithBidirectionalStreamInput,
         InvokeModelWithBidirectionalStreamOutput,
         InvokeModelWithBidirectionalStreamOperationOutput,
@@ -159,7 +159,7 @@ async def _send_event(
 
 
 async def _send_audio_chunks(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         InvokeModelWithBidirectionalStreamInput,
         InvokeModelWithBidirectionalStreamOutput,
         InvokeModelWithBidirectionalStreamOperationOutput,
@@ -198,7 +198,7 @@ async def _send_audio_chunks(
 
 
 async def _receive_stream_output(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         InvokeModelWithBidirectionalStreamInput,
         InvokeModelWithBidirectionalStreamOutput,
         InvokeModelWithBidirectionalStreamOperationOutput,

@@ -4,9 +4,9 @@
 
 from pathlib import Path
 
-from smithy_aws_core.config import AwsConfigOverrides
-from smithy_aws_core.identity import EnvironmentCredentialsResolver
-from smithy_http.aio.interfaces import HTTPClient
+from smithy_aws_core.aio.config import AwsConfigOverrides
+from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
+from smithy_http.aio.interfaces import AsyncHTTPClient
 
 from aws_sdk_bedrock_runtime.client import AsyncBedrockRuntimeClient
 from aws_sdk_bedrock_runtime.config import AsyncBedrockRuntimeConfig
@@ -18,13 +18,13 @@ AUDIO_FILE = Path(__file__).parent / "assets" / "test.pcm"
 
 
 async def create_bedrock_client(
-    region: str, *, transport: HTTPClient | None = None
+    region: str, *, transport: AsyncHTTPClient | None = None
 ) -> AsyncBedrockRuntimeClient:
     """Helper to create an AsyncBedrockRuntimeClient for a given region."""
     overrides: AwsConfigOverrides = {
         "endpoint_uri": f"https://bedrock-runtime.{region}.amazonaws.com",
         "region": region,
-        "aws_credentials_identity_resolver": EnvironmentCredentialsResolver(),
+        "aws_credentials_identity_resolver": AsyncEnvironmentCredentialsResolver(),
     }
     if transport is not None:
         overrides["transport"] = transport

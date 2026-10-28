@@ -2,9363 +2,9679 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
-
-
-LONG = Schema(
-    id=ShapeID("com.amazonaws.lambda#Long"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-INTEGER = Schema(
-    id=ShapeID("com.amazonaws.lambda#Integer"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-UNRESERVED_CONCURRENT_EXECUTIONS = Schema(
-    id=ShapeID("com.amazonaws.lambda#UnreservedConcurrentExecutions"),
-    shape_type=ShapeType.INTEGER,
-)
-
-ACCOUNT_LIMIT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AccountLimit"),
-    members={
-        "TotalCodeSize": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "CodeSizeUnzipped": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "CodeSizeZipped": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "ConcurrentExecutions": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "UnreservedConcurrentExecutions": {"target": UNRESERVED_CONCURRENT_EXECUTIONS},
-    },
-)
-
-ACCOUNT_USAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AccountUsage"),
-    members={
-        "TotalCodeSize": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "FunctionCount": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-ACTION = Schema(id=ShapeID("com.amazonaws.lambda#Action"), shape_type=ShapeType.STRING)
-
-ADDITIONAL_VERSION = Schema(
-    id=ShapeID("com.amazonaws.lambda#AdditionalVersion"), shape_type=ShapeType.STRING
-)
-
-WEIGHT = Schema(
-    id=ShapeID("com.amazonaws.lambda#Weight"),
-    shape_type=ShapeType.DOUBLE,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-ADDITIONAL_VERSION_WEIGHTS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AdditionalVersionWeights"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": ADDITIONAL_VERSION}, "value": {"target": WEIGHT}},
-)
-
-LAYER_PERMISSION_ALLOWED_ACTION = Schema(
-    id=ShapeID("com.amazonaws.lambda#LayerPermissionAllowedAction"),
-    shape_type=ShapeType.STRING,
-)
-
-LAYER_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#LayerName"), shape_type=ShapeType.STRING
-)
-
-ORGANIZATION_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#OrganizationId"), shape_type=ShapeType.STRING
-)
-
-LAYER_PERMISSION_ALLOWED_PRINCIPAL = Schema(
-    id=ShapeID("com.amazonaws.lambda#LayerPermissionAllowedPrincipal"),
-    shape_type=ShapeType.STRING,
-)
-
-STRING = Schema(id=ShapeID("com.amazonaws.lambda#String"), shape_type=ShapeType.STRING)
-
-STATEMENT_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#StatementId"), shape_type=ShapeType.STRING
-)
-
-LAYER_VERSION_NUMBER = Schema(
-    id=ShapeID("com.amazonaws.lambda#LayerVersionNumber"),
-    shape_type=ShapeType.LONG,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-ADD_LAYER_VERSION_PERMISSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AddLayerVersionPermissionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#AddLayerVersionPermissionRequest",
-        )
-    ],
-    members={
-        "LayerName": {
-            "target": LAYER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "VersionNumber": {
-            "target": LAYER_VERSION_NUMBER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "StatementId": {
-            "target": STATEMENT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Action": {
-            "target": LAYER_PERMISSION_ALLOWED_ACTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Principal": {
-            "target": LAYER_PERMISSION_ALLOWED_PRINCIPAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "OrganizationId": {"target": ORGANIZATION_ID},
-        "RevisionId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="RevisionId")
-            ],
-        },
-    },
-)
-
-ADD_LAYER_VERSION_PERMISSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AddLayerVersionPermissionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#AddLayerVersionPermissionResponse",
-        )
-    ],
-    members={"Statement": {"target": STRING}, "RevisionId": {"target": STRING}},
-)
-
-INVALID_PARAMETER_VALUE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvalidParameterValueException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-POLICY_LENGTH_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PolicyLengthExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-PRECONDITION_FAILED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PreconditionFailedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=412),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-RESOURCE_CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ResourceConflictException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-SERVICE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ServiceException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-THROTTLE_REASON = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ThrottleReason"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ConcurrentInvocationLimitExceeded": {"target": UNIT},
-        "FunctionInvocationRateLimitExceeded": {"target": UNIT},
-        "ReservedFunctionConcurrentInvocationLimitExceeded": {"target": UNIT},
-        "ReservedFunctionInvocationRateLimitExceeded": {"target": UNIT},
-        "CallerRateLimitExceeded": {"target": UNIT},
-        "ConcurrentSnapshotCreateLimitExceeded": {"target": UNIT},
-    },
-)
-
-TOO_MANY_REQUESTS_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TooManyRequestsException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-    ],
-    members={
-        "retryAfterSeconds": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Retry-After")
-            ],
-        },
-        "Type": {"target": STRING},
-        "message": {"target": STRING},
-        "Reason": {"target": THROTTLE_REASON},
-    },
-)
-
-ADD_LAYER_VERSION_PERMISSION = Schema(
-    id=ShapeID("com.amazonaws.lambda#AddLayerVersionPermission"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-EVENT_SOURCE_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.lambda#EventSourceToken"), shape_type=ShapeType.STRING
-)
-
-NAMESPACED_FUNCTION_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#NamespacedFunctionName"),
-    shape_type=ShapeType.STRING,
-)
-
-FUNCTION_URL_AUTH_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionUrlAuthType"),
-    shape_type=ShapeType.ENUM,
-    members={"NONE": {"target": UNIT}, "AWS_IAM": {"target": UNIT}},
-)
-
-INVOKED_VIA_FUNCTION_URL = Schema(
-    id=ShapeID("com.amazonaws.lambda#InvokedViaFunctionUrl"),
-    shape_type=ShapeType.BOOLEAN,
-)
-
-PRINCIPAL = Schema(
-    id=ShapeID("com.amazonaws.lambda#Principal"), shape_type=ShapeType.STRING
-)
-
-PRINCIPAL_ORG_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#PrincipalOrgID"), shape_type=ShapeType.STRING
-)
-
-NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER = Schema(
-    id=ShapeID("com.amazonaws.lambda#NumericLatestPublishedOrAliasQualifier"),
-    shape_type=ShapeType.STRING,
-)
-
-SOURCE_OWNER = Schema(
-    id=ShapeID("com.amazonaws.lambda#SourceOwner"), shape_type=ShapeType.STRING
-)
-
-ARN = Schema(id=ShapeID("com.amazonaws.lambda#Arn"), shape_type=ShapeType.STRING)
-
-ADD_PERMISSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AddPermissionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#AddPermissionRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "StatementId": {
-            "target": STATEMENT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Action": {
-            "target": ACTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Principal": {
-            "target": PRINCIPAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SourceArn": {"target": ARN},
-        "FunctionUrlAuthType": {"target": FUNCTION_URL_AUTH_TYPE},
-        "InvokedViaFunctionUrl": {"target": INVOKED_VIA_FUNCTION_URL},
-        "SourceAccount": {"target": SOURCE_OWNER},
-        "EventSourceToken": {"target": EVENT_SOURCE_TOKEN},
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-        "RevisionId": {"target": STRING},
-        "PrincipalOrgID": {"target": PRINCIPAL_ORG_ID},
-    },
-)
-
-ADD_PERMISSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AddPermissionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#AddPermissionResponse",
-        )
-    ],
-    members={"Statement": {"target": STRING}},
-)
-
-PUBLIC_POLICY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PublicPolicyException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-ADD_PERMISSION = Schema(
-    id=ShapeID("com.amazonaws.lambda#AddPermission"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2015-03-31/functions/{FunctionName}/policy",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-ALIAS = Schema(id=ShapeID("com.amazonaws.lambda#Alias"), shape_type=ShapeType.STRING)
-
-FUNCTION_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#FunctionArn"), shape_type=ShapeType.STRING
-)
-
-DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.lambda#Description"), shape_type=ShapeType.STRING
-)
-
-VERSION = Schema(
-    id=ShapeID("com.amazonaws.lambda#Version"), shape_type=ShapeType.STRING
-)
-
-ALIAS_ROUTING_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AliasRoutingConfiguration"),
-    members={"AdditionalVersionWeights": {"target": ADDITIONAL_VERSION_WEIGHTS}},
-)
-
-ALIAS_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AliasConfiguration"),
-    members={
-        "AliasArn": {"target": FUNCTION_ARN},
-        "Name": {"target": ALIAS},
-        "FunctionVersion": {"target": VERSION},
-        "Description": {"target": DESCRIPTION},
-        "RoutingConfig": {"target": ALIAS_ROUTING_CONFIGURATION},
-        "RevisionId": {"target": STRING},
-    },
-)
-
-ALIAS_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AliasLimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-ALIAS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AliasList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ALIAS_CONFIGURATION}},
-)
-
-ALLOW_CREDENTIALS = Schema(
-    id=ShapeID("com.amazonaws.lambda#AllowCredentials"), shape_type=ShapeType.BOOLEAN
-)
-
-SIGNING_PROFILE_VERSION_ARNS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SigningProfileVersionArns"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ARN}},
-)
-
-ALLOWED_PUBLISHERS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AllowedPublishers"),
-    members={
-        "SigningProfileVersionArns": {
-            "target": SIGNING_PROFILE_VERSION_ARNS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-METHOD = Schema(id=ShapeID("com.amazonaws.lambda#Method"), shape_type=ShapeType.STRING)
-
-ALLOW_METHODS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AllowMethodsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": METHOD}},
-)
-
-ORIGIN = Schema(id=ShapeID("com.amazonaws.lambda#Origin"), shape_type=ShapeType.STRING)
-
-ALLOW_ORIGINS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AllowOriginsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ORIGIN}},
-)
-
-URI = Schema(id=ShapeID("com.amazonaws.lambda#URI"), shape_type=ShapeType.STRING)
-
-KAFKA_SCHEMA_REGISTRY_AUTH_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#KafkaSchemaRegistryAuthType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "BASIC_AUTH": {"target": UNIT},
-        "CLIENT_CERTIFICATE_TLS_AUTH": {"target": UNIT},
-        "SERVER_ROOT_CA_CERTIFICATE": {"target": UNIT},
-    },
-)
-
-KAFKA_SCHEMA_REGISTRY_ACCESS_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#KafkaSchemaRegistryAccessConfig"),
-    members={
-        "Type": {"target": KAFKA_SCHEMA_REGISTRY_AUTH_TYPE},
-        "URI": {"target": ARN},
-    },
-)
-
-KAFKA_SCHEMA_REGISTRY_ACCESS_CONFIG_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#KafkaSchemaRegistryAccessConfigList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": KAFKA_SCHEMA_REGISTRY_ACCESS_CONFIG}},
-)
-
-SCHEMA_REGISTRY_EVENT_RECORD_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SchemaRegistryEventRecordFormat"),
-    shape_type=ShapeType.ENUM,
-    members={"JSON": {"target": UNIT}, "SOURCE": {"target": UNIT}},
-)
-
-SCHEMA_REGISTRY_URI = Schema(
-    id=ShapeID("com.amazonaws.lambda#SchemaRegistryUri"), shape_type=ShapeType.STRING
-)
-
-KAFKA_SCHEMA_VALIDATION_ATTRIBUTE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#KafkaSchemaValidationAttribute"),
-    shape_type=ShapeType.ENUM,
-    members={"KEY": {"target": UNIT}, "VALUE": {"target": UNIT}},
-)
-
-KAFKA_SCHEMA_VALIDATION_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#KafkaSchemaValidationConfig"),
-    members={"Attribute": {"target": KAFKA_SCHEMA_VALIDATION_ATTRIBUTE}},
-)
-
-KAFKA_SCHEMA_VALIDATION_CONFIG_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#KafkaSchemaValidationConfigList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": KAFKA_SCHEMA_VALIDATION_CONFIG}},
-)
-
-KAFKA_SCHEMA_REGISTRY_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#KafkaSchemaRegistryConfig"),
-    members={
-        "SchemaRegistryURI": {"target": SCHEMA_REGISTRY_URI},
-        "EventRecordFormat": {"target": SCHEMA_REGISTRY_EVENT_RECORD_FORMAT},
-        "AccessConfigs": {"target": KAFKA_SCHEMA_REGISTRY_ACCESS_CONFIG_LIST},
-        "SchemaValidationConfigs": {"target": KAFKA_SCHEMA_VALIDATION_CONFIG_LIST},
-    },
-)
-
-AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#AmazonManagedKafkaEventSourceConfig"),
-    members={
-        "ConsumerGroupId": {"target": URI},
-        "SchemaRegistryConfig": {"target": KAFKA_SCHEMA_REGISTRY_CONFIG},
-    },
-)
-
-APPLICATION_LOG_LEVEL = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ApplicationLogLevel"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "Trace": {"target": UNIT},
-        "Debug": {"target": UNIT},
-        "Info": {"target": UNIT},
-        "Warn": {"target": UNIT},
-        "Error": {"target": UNIT},
-        "Fatal": {"target": UNIT},
-    },
-)
-
-ARCHITECTURE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Architecture"),
-    shape_type=ShapeType.ENUM,
-    members={"x86_64": {"target": UNIT}, "arm64": {"target": UNIT}},
-)
-
-ARCHITECTURES_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ArchitecturesList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ARCHITECTURE}},
-)
-
-ATTEMPT_COUNT = Schema(
-    id=ShapeID("com.amazonaws.lambda#AttemptCount"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-CAPACITY_PROVIDER_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderName"), shape_type=ShapeType.STRING
-)
-
-CAPACITY_PROVIDER_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderLimitExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-CAPACITY_PROVIDER_MAX_V_CPU_COUNT = Schema(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderMaxVCpuCount"),
-    shape_type=ShapeType.INTEGER,
-)
-
-CAPACITY_PROVIDER_SCALING_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderScalingMode"),
-    shape_type=ShapeType.ENUM,
-    members={"Auto": {"target": UNIT}, "Manual": {"target": UNIT}},
-)
-
-CAPACITY_PROVIDER_PREDEFINED_METRIC_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderPredefinedMetricType"),
-    shape_type=ShapeType.ENUM,
-    members={"LambdaCapacityProviderAverageCPUUtilization": {"target": UNIT}},
-)
-
-METRIC_TARGET_VALUE = Schema(
-    id=ShapeID("com.amazonaws.lambda#MetricTargetValue"), shape_type=ShapeType.DOUBLE
-)
-
-TARGET_TRACKING_SCALING_POLICY = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TargetTrackingScalingPolicy"),
-    members={
-        "PredefinedMetricType": {
-            "target": CAPACITY_PROVIDER_PREDEFINED_METRIC_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TargetValue": {
-            "target": METRIC_TARGET_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CAPACITY_PROVIDER_SCALING_POLICIES_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderScalingPoliciesList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TARGET_TRACKING_SCALING_POLICY}},
-)
-
-CAPACITY_PROVIDER_SCALING_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderScalingConfig"),
-    members={
-        "MaxVCpuCount": {"target": CAPACITY_PROVIDER_MAX_V_CPU_COUNT},
-        "ScalingMode": {"target": CAPACITY_PROVIDER_SCALING_MODE},
-        "ScalingPolicies": {"target": CAPACITY_PROVIDER_SCALING_POLICIES_LIST},
-    },
-)
-
-INSTANCE_TYPE = Schema(
-    id=ShapeID("com.amazonaws.lambda#InstanceType"), shape_type=ShapeType.STRING
-)
-
-INSTANCE_TYPE_SET = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InstanceTypeSet"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": INSTANCE_TYPE}},
-)
-
-INSTANCE_REQUIREMENTS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InstanceRequirements"),
-    members={
-        "Architectures": {"target": ARCHITECTURES_LIST},
-        "AllowedInstanceTypes": {"target": INSTANCE_TYPE_SET},
-        "ExcludedInstanceTypes": {"target": INSTANCE_TYPE_SET},
-    },
-)
-
-KMS_KEY_ARN_NON_EMPTY = Schema(
-    id=ShapeID("com.amazonaws.lambda#KMSKeyArnNonEmpty"), shape_type=ShapeType.STRING
-)
-
-ROLE_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#RoleArn"), shape_type=ShapeType.STRING
-)
-
-CAPACITY_PROVIDER_PERMISSIONS_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderPermissionsConfig"),
-    members={
-        "CapacityProviderOperatorRoleArn": {
-            "target": ROLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-TAG_KEY = Schema(id=ShapeID("com.amazonaws.lambda#TagKey"), shape_type=ShapeType.STRING)
-
-TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.lambda#TagValue"), shape_type=ShapeType.STRING
-)
-
-TAGS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Tags"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": TAG_KEY}, "value": {"target": TAG_VALUE}},
-)
-
-PROPAGATE_TAGS_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PropagateTagsMode"),
-    shape_type=ShapeType.ENUM,
-    members={"None": {"target": UNIT}, "Explicit": {"target": UNIT}},
-)
-
-PROPAGATE_TAGS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PropagateTags"),
-    members={"Mode": {"target": PROPAGATE_TAGS_MODE}, "ExplicitTags": {"target": TAGS}},
-)
-
-LOG_GROUP = Schema(
-    id=ShapeID("com.amazonaws.lambda#LogGroup"), shape_type=ShapeType.STRING
-)
-
-SYSTEM_LOG_LEVEL = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SystemLogLevel"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "Debug": {"target": UNIT},
-        "Info": {"target": UNIT},
-        "Warn": {"target": UNIT},
-    },
-)
-
-CAPACITY_PROVIDER_LOGGING_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderLoggingConfig"),
-    members={
-        "SystemLogLevel": {"target": SYSTEM_LOG_LEVEL},
-        "LogGroup": {"target": LOG_GROUP},
-    },
-)
-
-CAPACITY_PROVIDER_TELEMETRY_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderTelemetryConfig"),
-    members={"LoggingConfig": {"target": CAPACITY_PROVIDER_LOGGING_CONFIG}},
-)
-
-SECURITY_GROUP_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#SecurityGroupId"), shape_type=ShapeType.STRING
-)
-
-CAPACITY_PROVIDER_SECURITY_GROUP_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderSecurityGroupIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SECURITY_GROUP_ID}},
-)
-
-SUBNET_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#SubnetId"), shape_type=ShapeType.STRING
-)
-
-CAPACITY_PROVIDER_SUBNET_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderSubnetIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SUBNET_ID}},
-)
-
-CAPACITY_PROVIDER_VPC_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderVpcConfig"),
-    members={
-        "SubnetIds": {
-            "target": CAPACITY_PROVIDER_SUBNET_IDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SecurityGroupIds": {
-            "target": CAPACITY_PROVIDER_SECURITY_GROUP_IDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CREATE_CAPACITY_PROVIDER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateCapacityProviderInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#CreateCapacityProviderRequest",
-        )
-    ],
-    members={
-        "CapacityProviderName": {
-            "target": CAPACITY_PROVIDER_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "VpcConfig": {
-            "target": CAPACITY_PROVIDER_VPC_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "PermissionsConfig": {
-            "target": CAPACITY_PROVIDER_PERMISSIONS_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "InstanceRequirements": {"target": INSTANCE_REQUIREMENTS},
-        "CapacityProviderScalingConfig": {"target": CAPACITY_PROVIDER_SCALING_CONFIG},
-        "KmsKeyArn": {"target": KMS_KEY_ARN_NON_EMPTY},
-        "Tags": {"target": TAGS},
-        "PropagateTags": {"target": PROPAGATE_TAGS},
-        "TelemetryConfig": {"target": CAPACITY_PROVIDER_TELEMETRY_CONFIG},
-    },
-)
-
-CAPACITY_PROVIDER_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderArn"), shape_type=ShapeType.STRING
-)
-
-KMS_KEY_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#KMSKeyArn"), shape_type=ShapeType.STRING
-)
-
-TIMESTAMP = Schema(
-    id=ShapeID("com.amazonaws.lambda#Timestamp"), shape_type=ShapeType.STRING
-)
-
-CAPACITY_PROVIDER_STATE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderState"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "Pending": {"target": UNIT},
-        "Active": {"target": UNIT},
-        "Failed": {"target": UNIT},
-        "Deleting": {"target": UNIT},
-    },
-)
-
-CAPACITY_PROVIDER = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProvider"),
-    members={
-        "CapacityProviderArn": {
-            "target": CAPACITY_PROVIDER_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "State": {
-            "target": CAPACITY_PROVIDER_STATE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "VpcConfig": {
-            "target": CAPACITY_PROVIDER_VPC_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "PermissionsConfig": {
-            "target": CAPACITY_PROVIDER_PERMISSIONS_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "InstanceRequirements": {"target": INSTANCE_REQUIREMENTS},
-        "CapacityProviderScalingConfig": {"target": CAPACITY_PROVIDER_SCALING_CONFIG},
-        "KmsKeyArn": {"target": KMS_KEY_ARN},
-        "LastModified": {"target": TIMESTAMP},
-        "PropagateTags": {"target": PROPAGATE_TAGS},
-        "TelemetryConfig": {"target": CAPACITY_PROVIDER_TELEMETRY_CONFIG},
-    },
-)
-
-CREATE_CAPACITY_PROVIDER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateCapacityProviderOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#CreateCapacityProviderResponse",
-        )
-    ],
-    members={
-        "CapacityProvider": {
-            "target": CAPACITY_PROVIDER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CREATE_CAPACITY_PROVIDER = Schema(
-    id=ShapeID("com.amazonaws.lambda#CreateCapacityProvider"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/2025-11-30/capacity-providers", "code": 202}
-            ),
-        )
-    ],
-)
-
-DELETE_CAPACITY_PROVIDER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteCapacityProviderInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteCapacityProviderRequest",
-        )
-    ],
-    members={
-        "CapacityProviderName": {
-            "target": CAPACITY_PROVIDER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_CAPACITY_PROVIDER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteCapacityProviderOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteCapacityProviderResponse",
-        )
-    ],
-    members={
-        "CapacityProvider": {
-            "target": CAPACITY_PROVIDER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-DELETE_CAPACITY_PROVIDER = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteCapacityProvider"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2025-11-30/capacity-providers/{CapacityProviderName}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-GET_CAPACITY_PROVIDER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetCapacityProviderInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetCapacityProviderRequest",
-        )
-    ],
-    members={
-        "CapacityProviderName": {
-            "target": CAPACITY_PROVIDER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_CAPACITY_PROVIDER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetCapacityProviderOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetCapacityProviderResponse",
-        )
-    ],
-    members={
-        "CapacityProvider": {
-            "target": CAPACITY_PROVIDER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-GET_CAPACITY_PROVIDER = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetCapacityProvider"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2025-11-30/capacity-providers/{CapacityProviderName}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-MAX_FIFTY_LIST_ITEMS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaxFiftyListItems"), shape_type=ShapeType.INTEGER
-)
-
-LIST_CAPACITY_PROVIDERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListCapacityProvidersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListCapacityProvidersRequest",
-        )
-    ],
-    members={
-        "State": {
-            "target": CAPACITY_PROVIDER_STATE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="State")],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_FIFTY_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-CAPACITY_PROVIDERS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProvidersList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CAPACITY_PROVIDER}},
-)
-
-LIST_CAPACITY_PROVIDERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListCapacityProvidersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListCapacityProvidersResponse",
-        )
-    ],
-    members={
-        "CapacityProviders": {
-            "target": CAPACITY_PROVIDERS_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextMarker": {"target": STRING},
-    },
-)
-
-LIST_CAPACITY_PROVIDERS = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListCapacityProviders"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/2025-11-30/capacity-providers", "code": 200}
-            ),
-        )
-    ],
-)
-
-LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionVersionsByCapacityProviderInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListFunctionVersionsByCapacityProviderRequest",
-        )
-    ],
-    members={
-        "CapacityProviderName": {
-            "target": CAPACITY_PROVIDER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_FIFTY_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-NAME_SPACED_FUNCTION_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#NameSpacedFunctionArn"),
-    shape_type=ShapeType.STRING,
-)
-
-STATE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#State"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "Pending": {"target": UNIT},
-        "Active": {"target": UNIT},
-        "Inactive": {"target": UNIT},
-        "Failed": {"target": UNIT},
-        "Deactivating": {"target": UNIT},
-        "Deactivated": {"target": UNIT},
-        "ActiveNonInvocable": {"target": UNIT},
-        "Deleting": {"target": UNIT},
-    },
-)
-
-FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_LIST_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionVersionsByCapacityProviderListItem"),
-    members={
-        "FunctionArn": {
-            "target": NAME_SPACED_FUNCTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "State": {
-            "target": STATE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionVersionsByCapacityProviderList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_LIST_ITEM}},
-)
-
-LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionVersionsByCapacityProviderOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListFunctionVersionsByCapacityProviderResponse",
-        )
-    ],
-    members={
-        "CapacityProviderArn": {
-            "target": CAPACITY_PROVIDER_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionVersions": {
-            "target": FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextMarker": {"target": STRING},
-    },
-)
-
-LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionVersionsByCapacityProvider"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2025-11-30/capacity-providers/{CapacityProviderName}/function-versions",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_CAPACITY_PROVIDER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateCapacityProviderInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UpdateCapacityProviderRequest",
-        )
-    ],
-    members={
-        "CapacityProviderName": {
-            "target": CAPACITY_PROVIDER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "CapacityProviderScalingConfig": {"target": CAPACITY_PROVIDER_SCALING_CONFIG},
-        "PropagateTags": {"target": PROPAGATE_TAGS},
-        "TelemetryConfig": {"target": CAPACITY_PROVIDER_TELEMETRY_CONFIG},
-    },
-)
-
-UPDATE_CAPACITY_PROVIDER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateCapacityProviderOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UpdateCapacityProviderResponse",
-        )
-    ],
-    members={
-        "CapacityProvider": {
-            "target": CAPACITY_PROVIDER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-UPDATE_CAPACITY_PROVIDER = Schema(
-    id=ShapeID("com.amazonaws.lambda#UpdateCapacityProvider"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2025-11-30/capacity-providers/{CapacityProviderName}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-CODE_SIGNING_CONFIG_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#CodeSigningConfigId"), shape_type=ShapeType.STRING
-)
-
-CODE_SIGNING_POLICY = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CodeSigningPolicy"),
-    shape_type=ShapeType.ENUM,
-    members={"Warn": {"target": UNIT}, "Enforce": {"target": UNIT}},
-)
-
-CODE_SIGNING_POLICIES = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CodeSigningPolicies"),
-    members={"UntrustedArtifactOnDeployment": {"target": CODE_SIGNING_POLICY}},
-)
-
-CREATE_CODE_SIGNING_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateCodeSigningConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#CreateCodeSigningConfigRequest",
-        )
-    ],
-    members={
-        "Description": {"target": DESCRIPTION},
-        "AllowedPublishers": {
-            "target": ALLOWED_PUBLISHERS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "CodeSigningPolicies": {"target": CODE_SIGNING_POLICIES},
-        "Tags": {"target": TAGS},
-    },
-)
-
-CODE_SIGNING_CONFIG_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#CodeSigningConfigArn"), shape_type=ShapeType.STRING
-)
-
-CODE_SIGNING_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CodeSigningConfig"),
-    members={
-        "CodeSigningConfigId": {
-            "target": CODE_SIGNING_CONFIG_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "CodeSigningConfigArn": {
-            "target": CODE_SIGNING_CONFIG_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Description": {"target": DESCRIPTION},
-        "AllowedPublishers": {
-            "target": ALLOWED_PUBLISHERS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "CodeSigningPolicies": {
-            "target": CODE_SIGNING_POLICIES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "LastModified": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CREATE_CODE_SIGNING_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateCodeSigningConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#CreateCodeSigningConfigResponse",
-        )
-    ],
-    members={
-        "CodeSigningConfig": {
-            "target": CODE_SIGNING_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CREATE_CODE_SIGNING_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#CreateCodeSigningConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2020-04-22/code-signing-configs",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_CODE_SIGNING_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteCodeSigningConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteCodeSigningConfigRequest",
-        )
-    ],
-    members={
-        "CodeSigningConfigArn": {
-            "target": CODE_SIGNING_CONFIG_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_CODE_SIGNING_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteCodeSigningConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteCodeSigningConfigResponse",
-        )
-    ],
-)
-
-DELETE_CODE_SIGNING_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteCodeSigningConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-GET_CODE_SIGNING_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetCodeSigningConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetCodeSigningConfigRequest",
-        )
-    ],
-    members={
-        "CodeSigningConfigArn": {
-            "target": CODE_SIGNING_CONFIG_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_CODE_SIGNING_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetCodeSigningConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetCodeSigningConfigResponse",
-        )
-    ],
-    members={
-        "CodeSigningConfig": {
-            "target": CODE_SIGNING_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-GET_CODE_SIGNING_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetCodeSigningConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-MAX_LIST_ITEMS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaxListItems"), shape_type=ShapeType.INTEGER
-)
-
-LIST_CODE_SIGNING_CONFIGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListCodeSigningConfigsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListCodeSigningConfigsRequest",
-        )
-    ],
-    members={
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-CODE_SIGNING_CONFIG_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CodeSigningConfigList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CODE_SIGNING_CONFIG}},
-)
-
-LIST_CODE_SIGNING_CONFIGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListCodeSigningConfigsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListCodeSigningConfigsResponse",
-        )
-    ],
-    members={
-        "NextMarker": {"target": STRING},
-        "CodeSigningConfigs": {"target": CODE_SIGNING_CONFIG_LIST},
-    },
-)
-
-LIST_CODE_SIGNING_CONFIGS = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListCodeSigningConfigs"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2020-04-22/code-signing-configs",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionsByCodeSigningConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListFunctionsByCodeSigningConfigRequest",
-        )
-    ],
-    members={
-        "CodeSigningConfigArn": {
-            "target": CODE_SIGNING_CONFIG_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-FUNCTION_ARN_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionArnList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FUNCTION_ARN}},
-)
-
-LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionsByCodeSigningConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListFunctionsByCodeSigningConfigResponse",
-        )
-    ],
-    members={
-        "NextMarker": {"target": STRING},
-        "FunctionArns": {"target": FUNCTION_ARN_LIST},
-    },
-)
-
-LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionsByCodeSigningConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}/functions",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_CODE_SIGNING_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateCodeSigningConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UpdateCodeSigningConfigRequest",
-        )
-    ],
-    members={
-        "CodeSigningConfigArn": {
-            "target": CODE_SIGNING_CONFIG_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Description": {"target": DESCRIPTION},
-        "AllowedPublishers": {"target": ALLOWED_PUBLISHERS},
-        "CodeSigningPolicies": {"target": CODE_SIGNING_POLICIES},
-    },
-)
-
-UPDATE_CODE_SIGNING_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateCodeSigningConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UpdateCodeSigningConfigResponse",
-        )
-    ],
-    members={
-        "CodeSigningConfig": {
-            "target": CODE_SIGNING_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-UPDATE_CODE_SIGNING_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#UpdateCodeSigningConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_FUNCTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteFunctionRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-    },
-)
-
-DELETE_FUNCTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteFunctionResponse",
-        )
-    ],
-    members={
-        "StatusCode": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=0),
-                Trait.new(id=ShapeID("smithy.api#httpResponseCode")),
-            ],
-        }
-    },
-)
-
-DELETE_FUNCTION = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunction"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "DELETE", "uri": "/2015-03-31/functions/{FunctionName}"}
-            ),
-        )
-    ],
-)
-
-DELETE_FUNCTION_EVENT_INVOKE_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionEventInvokeConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteFunctionEventInvokeConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-    },
-)
-
-DELETE_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionEventInvokeConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_FUNCTION_EVENT_INVOKE_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionEventInvokeConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-POLICY_RESOURCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#PolicyResourceArn"), shape_type=ShapeType.STRING
-)
-
-REVISION_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#RevisionId"), shape_type=ShapeType.STRING
-)
-
-DELETE_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteResourcePolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteResourcePolicyRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": POLICY_RESOURCE_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "RevisionId": {
-            "target": REVISION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="RevisionId")
-            ],
-        },
-    },
-)
-
-DELETE_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteResourcePolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2026-07-09/resource-policy/{ResourceArn}",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-CHECKPOINT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.lambda#CheckpointToken"), shape_type=ShapeType.STRING
-)
-
-CLIENT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.lambda#ClientToken"), shape_type=ShapeType.STRING
-)
-
-DURABLE_EXECUTION_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#DurableExecutionArn"), shape_type=ShapeType.STRING
-)
-
-OPERATION_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#OperationAction"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "START": {"target": UNIT},
-        "SUCCEED": {"target": UNIT},
-        "FAIL": {"target": UNIT},
-        "RETRY": {"target": UNIT},
-        "CANCEL": {"target": UNIT},
-    },
-)
-
-DURATION_SECONDS = Schema(
-    id=ShapeID("com.amazonaws.lambda#DurationSeconds"), shape_type=ShapeType.INTEGER
-)
-
-CALLBACK_OPTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CallbackOptions"),
-    members={
-        "TimeoutSeconds": {
-            "target": DURATION_SECONDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "HeartbeatTimeoutSeconds": {
-            "target": DURATION_SECONDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-    },
-)
-
-TENANT_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#TenantId"), shape_type=ShapeType.STRING
-)
-
-CHAINED_INVOKE_OPTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ChainedInvokeOptions"),
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TenantId": {"target": TENANT_ID},
-    },
-)
-
-REPLAY_CHILDREN = Schema(
-    id=ShapeID("com.amazonaws.lambda#ReplayChildren"), shape_type=ShapeType.BOOLEAN
-)
-
-CONTEXT_OPTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ContextOptions"),
-    members={"ReplayChildren": {"target": REPLAY_CHILDREN}},
-)
-
-ERROR_DATA = Schema(
-    id=ShapeID("com.amazonaws.lambda#ErrorData"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.lambda#ErrorMessage"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-ERROR_TYPE = Schema(
-    id=ShapeID("com.amazonaws.lambda#ErrorType"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-STACK_TRACE_ENTRY = Schema(
-    id=ShapeID("com.amazonaws.lambda#StackTraceEntry"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-STACK_TRACE_ENTRIES = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#StackTraceEntries"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STACK_TRACE_ENTRY}},
-)
-
-ERROR_OBJECT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ErrorObject"),
-    members={
-        "ErrorMessage": {"target": ERROR_MESSAGE},
-        "ErrorType": {"target": ERROR_TYPE},
-        "ErrorData": {"target": ERROR_DATA},
-        "StackTrace": {"target": STACK_TRACE_ENTRIES},
-    },
-)
-
-OPERATION_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#OperationId"), shape_type=ShapeType.STRING
-)
-
-OPERATION_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#OperationName"), shape_type=ShapeType.STRING
-)
-
-OPERATION_PAYLOAD = Schema(
-    id=ShapeID("com.amazonaws.lambda#OperationPayload"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-STEP_OPTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#StepOptions"),
-    members={"NextAttemptDelaySeconds": {"target": DURATION_SECONDS}},
-)
-
-OPERATION_SUB_TYPE = Schema(
-    id=ShapeID("com.amazonaws.lambda#OperationSubType"), shape_type=ShapeType.STRING
-)
-
-OPERATION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#OperationType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EXECUTION": {"target": UNIT},
-        "CONTEXT": {"target": UNIT},
-        "STEP": {"target": UNIT},
-        "WAIT": {"target": UNIT},
-        "CALLBACK": {"target": UNIT},
-        "CHAINED_INVOKE": {"target": UNIT},
-    },
-)
-
-WAIT_OPTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#WaitOptions"),
-    members={"WaitSeconds": {"target": DURATION_SECONDS}},
-)
-
-OPERATION_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#OperationUpdate"),
-    members={
-        "Id": {
-            "target": OPERATION_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ParentId": {"target": OPERATION_ID},
-        "Name": {"target": OPERATION_NAME},
-        "Type": {
-            "target": OPERATION_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SubType": {"target": OPERATION_SUB_TYPE},
-        "Action": {
-            "target": OPERATION_ACTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Payload": {"target": OPERATION_PAYLOAD},
-        "Error": {"target": ERROR_OBJECT},
-        "ContextOptions": {"target": CONTEXT_OPTIONS},
-        "StepOptions": {"target": STEP_OPTIONS},
-        "WaitOptions": {"target": WAIT_OPTIONS},
-        "CallbackOptions": {"target": CALLBACK_OPTIONS},
-        "ChainedInvokeOptions": {"target": CHAINED_INVOKE_OPTIONS},
-    },
-)
-
-OPERATION_UPDATES = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#OperationUpdates"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": OPERATION_UPDATE}},
-)
-
-CHECKPOINT_DURABLE_EXECUTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CheckpointDurableExecutionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#CheckpointDurableExecutionRequest",
-        )
-    ],
-    members={
-        "DurableExecutionArn": {
-            "target": DURABLE_EXECUTION_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "CheckpointToken": {
-            "target": CHECKPOINT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Updates": {"target": OPERATION_UPDATES},
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-    },
-)
-
-CALLBACK_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#CallbackId"), shape_type=ShapeType.STRING
-)
-
-CALLBACK_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CallbackDetails"),
-    members={
-        "CallbackId": {"target": CALLBACK_ID},
-        "Result": {"target": OPERATION_PAYLOAD},
-        "Error": {"target": ERROR_OBJECT},
-    },
-)
-
-CHAINED_INVOKE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ChainedInvokeDetails"),
-    members={
-        "Result": {"target": OPERATION_PAYLOAD},
-        "Error": {"target": ERROR_OBJECT},
-    },
-)
-
-CONTEXT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ContextDetails"),
-    members={
-        "ReplayChildren": {"target": REPLAY_CHILDREN},
-        "Result": {"target": OPERATION_PAYLOAD},
-        "Error": {"target": ERROR_OBJECT},
-    },
-)
-
-EXECUTION_TIMESTAMP = Schema(
-    id=ShapeID("com.amazonaws.lambda#ExecutionTimestamp"),
-    shape_type=ShapeType.TIMESTAMP,
-)
-
-INPUT_PAYLOAD = Schema(
-    id=ShapeID("com.amazonaws.lambda#InputPayload"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-EXECUTION_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ExecutionDetails"),
-    members={"InputPayload": {"target": INPUT_PAYLOAD}},
-)
-
-OPERATION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#OperationStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "STARTED": {"target": UNIT},
-        "PENDING": {"target": UNIT},
-        "READY": {"target": UNIT},
-        "SUCCEEDED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "CANCELLED": {"target": UNIT},
-        "TIMED_OUT": {"target": UNIT},
-        "STOPPED": {"target": UNIT},
-    },
-)
-
-STEP_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#StepDetails"),
-    members={
-        "Attempt": {
-            "target": ATTEMPT_COUNT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "NextAttemptTimestamp": {"target": EXECUTION_TIMESTAMP},
-        "Result": {"target": OPERATION_PAYLOAD},
-        "Error": {"target": ERROR_OBJECT},
-    },
-)
-
-WAIT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#WaitDetails"),
-    members={"ScheduledEndTimestamp": {"target": EXECUTION_TIMESTAMP}},
-)
-
-OPERATION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Operation"),
-    members={
-        "Id": {
-            "target": OPERATION_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ParentId": {"target": OPERATION_ID},
-        "Name": {"target": OPERATION_NAME},
-        "Type": {
-            "target": OPERATION_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "SubType": {"target": OPERATION_SUB_TYPE},
-        "StartTimestamp": {
-            "target": EXECUTION_TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EndTimestamp": {"target": EXECUTION_TIMESTAMP},
-        "Status": {
-            "target": OPERATION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ExecutionDetails": {"target": EXECUTION_DETAILS},
-        "ContextDetails": {"target": CONTEXT_DETAILS},
-        "StepDetails": {"target": STEP_DETAILS},
-        "WaitDetails": {"target": WAIT_DETAILS},
-        "CallbackDetails": {"target": CALLBACK_DETAILS},
-        "ChainedInvokeDetails": {"target": CHAINED_INVOKE_DETAILS},
-    },
-)
-
-OPERATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Operations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": OPERATION}},
-)
-
-CHECKPOINT_UPDATED_EXECUTION_STATE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CheckpointUpdatedExecutionState"),
-    members={"Operations": {"target": OPERATIONS}, "NextMarker": {"target": STRING}},
-)
-
-CHECKPOINT_DURABLE_EXECUTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CheckpointDurableExecutionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#CheckpointDurableExecutionResponse",
-        )
-    ],
-    members={
-        "CheckpointToken": {"target": CHECKPOINT_TOKEN},
-        "NewExecutionState": {
-            "target": CHECKPOINT_UPDATED_EXECUTION_STATE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-KMS_ACCESS_DENIED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#KMSAccessDeniedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-KMS_DISABLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#KMSDisabledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-KMS_INVALID_STATE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#KMSInvalidStateException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-KMS_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#KMSNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-CHECKPOINT_DURABLE_EXECUTION = Schema(
-    id=ShapeID("com.amazonaws.lambda#CheckpointDurableExecution"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/checkpoint",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-INCLUDE_EXECUTION_DATA = Schema(
-    id=ShapeID("com.amazonaws.lambda#IncludeExecutionData"),
-    shape_type=ShapeType.BOOLEAN,
-)
-
-GET_DURABLE_EXECUTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetDurableExecutionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetDurableExecutionRequest",
-        )
-    ],
-    members={
-        "DurableExecutionArn": {
-            "target": DURABLE_EXECUTION_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "IncludeExecutionData": {
-            "target": INCLUDE_EXECUTION_DATA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=True),
-                Trait.new(
-                    id=ShapeID("smithy.api#httpQuery"), value="IncludeExecutionData"
-                ),
-            ],
-        },
-    },
-)
-
-EXECUTION_TIMEOUT = Schema(
-    id=ShapeID("com.amazonaws.lambda#ExecutionTimeout"), shape_type=ShapeType.INTEGER
-)
-
-RETENTION_PERIOD_IN_DAYS = Schema(
-    id=ShapeID("com.amazonaws.lambda#RetentionPeriodInDays"),
-    shape_type=ShapeType.INTEGER,
-)
-
-DURABLE_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DurableConfig"),
-    members={
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "RetentionPeriodInDays": {"target": RETENTION_PERIOD_IN_DAYS},
-        "ExecutionTimeout": {"target": EXECUTION_TIMEOUT},
-    },
-)
-
-DURABLE_EXECUTION_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#DurableExecutionName"), shape_type=ShapeType.STRING
-)
-
-EXECUTION_DATA_INCLUDED = Schema(
-    id=ShapeID("com.amazonaws.lambda#ExecutionDataIncluded"),
-    shape_type=ShapeType.BOOLEAN,
-)
-
-OUTPUT_PAYLOAD = Schema(
-    id=ShapeID("com.amazonaws.lambda#OutputPayload"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-EXECUTION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ExecutionStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "RUNNING": {"target": UNIT},
-        "SUCCEEDED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "TIMED_OUT": {"target": UNIT},
-        "STOPPED": {"target": UNIT},
-    },
-)
-
-X_AMZN_TRACE_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#XAmznTraceId"), shape_type=ShapeType.STRING
-)
-
-TRACE_HEADER = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TraceHeader"),
-    members={"XAmznTraceId": {"target": X_AMZN_TRACE_ID}},
-)
-
-VERSION_WITH_LATEST_PUBLISHED = Schema(
-    id=ShapeID("com.amazonaws.lambda#VersionWithLatestPublished"),
-    shape_type=ShapeType.STRING,
-)
-
-GET_DURABLE_EXECUTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetDurableExecutionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetDurableExecutionResponse",
-        )
-    ],
-    members={
-        "DurableExecutionArn": {
-            "target": DURABLE_EXECUTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DurableExecutionName": {
-            "target": DURABLE_EXECUTION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionArn": {
-            "target": NAME_SPACED_FUNCTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "InputPayload": {"target": INPUT_PAYLOAD},
-        "Result": {"target": OUTPUT_PAYLOAD},
-        "Error": {"target": ERROR_OBJECT},
-        "StartTimestamp": {
-            "target": EXECUTION_TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Status": {
-            "target": EXECUTION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EndTimestamp": {"target": EXECUTION_TIMESTAMP},
-        "Version": {"target": VERSION_WITH_LATEST_PUBLISHED},
-        "TraceHeader": {"target": TRACE_HEADER},
-        "ExecutionDataIncluded": {"target": EXECUTION_DATA_INCLUDED},
-        "DurableConfig": {"target": DURABLE_CONFIG},
-    },
-)
-
-GET_DURABLE_EXECUTION = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetDurableExecution"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-ITEM_COUNT = Schema(
-    id=ShapeID("com.amazonaws.lambda#ItemCount"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-REVERSE_ORDER = Schema(
-    id=ShapeID("com.amazonaws.lambda#ReverseOrder"), shape_type=ShapeType.BOOLEAN
-)
-
-GET_DURABLE_EXECUTION_HISTORY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetDurableExecutionHistoryInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetDurableExecutionHistoryRequest",
-        )
-    ],
-    members={
-        "DurableExecutionArn": {
-            "target": DURABLE_EXECUTION_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "IncludeExecutionData": {
-            "target": INCLUDE_EXECUTION_DATA,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpQuery"), value="IncludeExecutionData"
-                )
-            ],
-        },
-        "MaxItems": {
-            "target": ITEM_COUNT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=0),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems"),
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "ReverseOrder": {
-            "target": REVERSE_ORDER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="ReverseOrder")
-            ],
-        },
-    },
-)
-
-TRUNCATED = Schema(
-    id=ShapeID("com.amazonaws.lambda#Truncated"), shape_type=ShapeType.BOOLEAN
-)
-
-EVENT_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventError"),
-    members={"Payload": {"target": ERROR_OBJECT}, "Truncated": {"target": TRUNCATED}},
-)
-
-CALLBACK_FAILED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CallbackFailedDetails"),
-    members={
-        "Error": {
-            "target": EVENT_ERROR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CALLBACK_STARTED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CallbackStartedDetails"),
-    members={
-        "CallbackId": {
-            "target": CALLBACK_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "HeartbeatTimeout": {"target": DURATION_SECONDS},
-        "Timeout": {"target": DURATION_SECONDS},
-    },
-)
-
-EVENT_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventResult"),
-    members={
-        "Payload": {"target": OPERATION_PAYLOAD},
-        "Truncated": {"target": TRUNCATED},
-    },
-)
-
-CALLBACK_SUCCEEDED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CallbackSucceededDetails"),
-    members={
-        "Result": {
-            "target": EVENT_RESULT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CALLBACK_TIMED_OUT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CallbackTimedOutDetails"),
-    members={
-        "Error": {
-            "target": EVENT_ERROR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CHAINED_INVOKE_FAILED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ChainedInvokeFailedDetails"),
-    members={
-        "Error": {
-            "target": EVENT_ERROR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-EVENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventInput"),
-    members={"Payload": {"target": INPUT_PAYLOAD}, "Truncated": {"target": TRUNCATED}},
-)
-
-CHAINED_INVOKE_STARTED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ChainedInvokeStartedDetails"),
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "TenantId": {"target": TENANT_ID},
-        "Input": {"target": EVENT_INPUT},
-        "ExecutedVersion": {"target": VERSION_WITH_LATEST_PUBLISHED},
-        "DurableExecutionArn": {"target": DURABLE_EXECUTION_ARN},
-    },
-)
-
-CHAINED_INVOKE_STOPPED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ChainedInvokeStoppedDetails"),
-    members={
-        "Error": {
-            "target": EVENT_ERROR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CHAINED_INVOKE_SUCCEEDED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ChainedInvokeSucceededDetails"),
-    members={
-        "Result": {
-            "target": EVENT_RESULT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CHAINED_INVOKE_TIMED_OUT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ChainedInvokeTimedOutDetails"),
-    members={
-        "Error": {
-            "target": EVENT_ERROR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CONTEXT_FAILED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ContextFailedDetails"),
-    members={
-        "Error": {
-            "target": EVENT_ERROR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CONTEXT_STARTED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ContextStartedDetails")
-)
-
-CONTEXT_SUCCEEDED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ContextSucceededDetails"),
-    members={
-        "Result": {
-            "target": EVENT_RESULT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-EVENT_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#EventId"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=1)],
-)
-
-EVENT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ExecutionStarted": {"target": UNIT},
-        "ExecutionSucceeded": {"target": UNIT},
-        "ExecutionFailed": {"target": UNIT},
-        "ExecutionTimedOut": {"target": UNIT},
-        "ExecutionStopped": {"target": UNIT},
-        "ContextStarted": {"target": UNIT},
-        "ContextSucceeded": {"target": UNIT},
-        "ContextFailed": {"target": UNIT},
-        "WaitStarted": {"target": UNIT},
-        "WaitSucceeded": {"target": UNIT},
-        "WaitCancelled": {"target": UNIT},
-        "StepStarted": {"target": UNIT},
-        "StepSucceeded": {"target": UNIT},
-        "StepFailed": {"target": UNIT},
-        "ChainedInvokeStarted": {"target": UNIT},
-        "ChainedInvokeSucceeded": {"target": UNIT},
-        "ChainedInvokeFailed": {"target": UNIT},
-        "ChainedInvokeTimedOut": {"target": UNIT},
-        "ChainedInvokeStopped": {"target": UNIT},
-        "CallbackStarted": {"target": UNIT},
-        "CallbackSucceeded": {"target": UNIT},
-        "CallbackFailed": {"target": UNIT},
-        "CallbackTimedOut": {"target": UNIT},
-        "InvocationCompleted": {"target": UNIT},
-    },
-)
-
-EXECUTION_FAILED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ExecutionFailedDetails"),
-    members={
-        "Error": {
-            "target": EVENT_ERROR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-EXECUTION_STARTED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ExecutionStartedDetails"),
-    members={
-        "Input": {
-            "target": EVENT_INPUT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ExecutionTimeout": {
-            "target": DURATION_SECONDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-EXECUTION_STOPPED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ExecutionStoppedDetails"),
-    members={
-        "Error": {
-            "target": EVENT_ERROR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-EXECUTION_SUCCEEDED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ExecutionSucceededDetails"),
-    members={
-        "Result": {
-            "target": EVENT_RESULT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-EXECUTION_TIMED_OUT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ExecutionTimedOutDetails"),
-    members={"Error": {"target": EVENT_ERROR}},
-)
-
-INVOCATION_COMPLETED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvocationCompletedDetails"),
-    members={
-        "StartTimestamp": {
-            "target": EXECUTION_TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EndTimestamp": {
-            "target": EXECUTION_TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RequestId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Error": {"target": EVENT_ERROR},
-    },
-)
-
-RETRY_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#RetryDetails"),
-    members={
-        "CurrentAttempt": {
-            "target": ATTEMPT_COUNT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "NextAttemptDelaySeconds": {"target": DURATION_SECONDS},
-    },
-)
-
-STEP_FAILED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#StepFailedDetails"),
-    members={
-        "Error": {
-            "target": EVENT_ERROR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RetryDetails": {
-            "target": RETRY_DETAILS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-STEP_STARTED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#StepStartedDetails")
-)
-
-STEP_SUCCEEDED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#StepSucceededDetails"),
-    members={
-        "Result": {
-            "target": EVENT_RESULT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RetryDetails": {
-            "target": RETRY_DETAILS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-WAIT_CANCELLED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#WaitCancelledDetails"),
-    members={"Error": {"target": EVENT_ERROR}},
-)
-
-WAIT_STARTED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#WaitStartedDetails"),
-    members={
-        "Duration": {
-            "target": DURATION_SECONDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "ScheduledEndTimestamp": {
-            "target": EXECUTION_TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-WAIT_SUCCEEDED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#WaitSucceededDetails"),
-    members={"Duration": {"target": DURATION_SECONDS}},
-)
-
-EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Event"),
-    members={
-        "EventType": {"target": EVENT_TYPE},
-        "SubType": {"target": OPERATION_SUB_TYPE},
-        "EventId": {
-            "target": EVENT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=1)],
-        },
-        "Id": {"target": OPERATION_ID},
-        "Name": {"target": OPERATION_NAME},
-        "EventTimestamp": {"target": EXECUTION_TIMESTAMP},
-        "ParentId": {"target": OPERATION_ID},
-        "ExecutionStartedDetails": {"target": EXECUTION_STARTED_DETAILS},
-        "ExecutionSucceededDetails": {"target": EXECUTION_SUCCEEDED_DETAILS},
-        "ExecutionFailedDetails": {"target": EXECUTION_FAILED_DETAILS},
-        "ExecutionTimedOutDetails": {"target": EXECUTION_TIMED_OUT_DETAILS},
-        "ExecutionStoppedDetails": {"target": EXECUTION_STOPPED_DETAILS},
-        "ContextStartedDetails": {"target": CONTEXT_STARTED_DETAILS},
-        "ContextSucceededDetails": {"target": CONTEXT_SUCCEEDED_DETAILS},
-        "ContextFailedDetails": {"target": CONTEXT_FAILED_DETAILS},
-        "WaitStartedDetails": {"target": WAIT_STARTED_DETAILS},
-        "WaitSucceededDetails": {"target": WAIT_SUCCEEDED_DETAILS},
-        "WaitCancelledDetails": {"target": WAIT_CANCELLED_DETAILS},
-        "StepStartedDetails": {"target": STEP_STARTED_DETAILS},
-        "StepSucceededDetails": {"target": STEP_SUCCEEDED_DETAILS},
-        "StepFailedDetails": {"target": STEP_FAILED_DETAILS},
-        "ChainedInvokeStartedDetails": {"target": CHAINED_INVOKE_STARTED_DETAILS},
-        "ChainedInvokeSucceededDetails": {"target": CHAINED_INVOKE_SUCCEEDED_DETAILS},
-        "ChainedInvokeFailedDetails": {"target": CHAINED_INVOKE_FAILED_DETAILS},
-        "ChainedInvokeTimedOutDetails": {"target": CHAINED_INVOKE_TIMED_OUT_DETAILS},
-        "ChainedInvokeStoppedDetails": {"target": CHAINED_INVOKE_STOPPED_DETAILS},
-        "CallbackStartedDetails": {"target": CALLBACK_STARTED_DETAILS},
-        "CallbackSucceededDetails": {"target": CALLBACK_SUCCEEDED_DETAILS},
-        "CallbackFailedDetails": {"target": CALLBACK_FAILED_DETAILS},
-        "CallbackTimedOutDetails": {"target": CALLBACK_TIMED_OUT_DETAILS},
-        "InvocationCompletedDetails": {"target": INVOCATION_COMPLETED_DETAILS},
-    },
-)
-
-EVENTS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Events"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EVENT}},
-)
-
-GET_DURABLE_EXECUTION_HISTORY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetDurableExecutionHistoryOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetDurableExecutionHistoryResponse",
-        )
-    ],
-    members={
-        "Events": {
-            "target": EVENTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextMarker": {"target": STRING},
-    },
-)
-
-GET_DURABLE_EXECUTION_HISTORY = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetDurableExecutionHistory"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/history",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_DURABLE_EXECUTION_STATE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetDurableExecutionStateInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetDurableExecutionStateRequest",
-        )
-    ],
-    members={
-        "DurableExecutionArn": {
-            "target": DURABLE_EXECUTION_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "CheckpointToken": {
-            "target": CHECKPOINT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="CheckpointToken"),
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": ITEM_COUNT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=0),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems"),
-            ],
-        },
-    },
-)
-
-GET_DURABLE_EXECUTION_STATE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetDurableExecutionStateOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetDurableExecutionStateResponse",
-        )
-    ],
-    members={
-        "Operations": {
-            "target": OPERATIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextMarker": {"target": STRING},
-    },
-)
-
-GET_DURABLE_EXECUTION_STATE = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetDurableExecutionState"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/state",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-STOP_DURABLE_EXECUTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#StopDurableExecutionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#StopDurableExecutionRequest",
-        )
-    ],
-    members={
-        "DurableExecutionArn": {
-            "target": DURABLE_EXECUTION_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Error": {
-            "target": ERROR_OBJECT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-    },
-)
-
-STOP_DURABLE_EXECUTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#StopDurableExecutionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#StopDurableExecutionResponse",
-        )
-    ],
-    members={
-        "StopTimestamp": {
-            "target": EXECUTION_TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-STOP_DURABLE_EXECUTION = Schema(
-    id=ShapeID("com.amazonaws.lambda#StopDurableExecution"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/stop",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-BATCH_SIZE = Schema(
-    id=ShapeID("com.amazonaws.lambda#BatchSize"), shape_type=ShapeType.INTEGER
-)
-
-BISECT_BATCH_ON_FUNCTION_ERROR = Schema(
-    id=ShapeID("com.amazonaws.lambda#BisectBatchOnFunctionError"),
-    shape_type=ShapeType.BOOLEAN,
-)
-
-DESTINATION_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#DestinationArn"), shape_type=ShapeType.STRING
-)
-
-ON_FAILURE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#OnFailure"),
-    members={"Destination": {"target": DESTINATION_ARN}},
-)
-
-ON_SUCCESS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#OnSuccess"),
-    members={"Destination": {"target": DESTINATION_ARN}},
-)
-
-DESTINATION_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DestinationConfig"),
-    members={"OnSuccess": {"target": ON_SUCCESS}, "OnFailure": {"target": ON_FAILURE}},
-)
-
-COLLECTION_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#CollectionName"), shape_type=ShapeType.STRING
-)
-
-DATABASE_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#DatabaseName"), shape_type=ShapeType.STRING
-)
-
-FULL_DOCUMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FullDocument"),
-    shape_type=ShapeType.ENUM,
-    members={"UpdateLookup": {"target": UNIT}, "Default": {"target": UNIT}},
-)
-
-DOCUMENT_DB_EVENT_SOURCE_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DocumentDBEventSourceConfig"),
-    members={
-        "DatabaseName": {"target": DATABASE_NAME},
-        "CollectionName": {"target": COLLECTION_NAME},
-        "FullDocument": {"target": FULL_DOCUMENT},
-    },
-)
-
-ENABLED = Schema(
-    id=ShapeID("com.amazonaws.lambda#Enabled"), shape_type=ShapeType.BOOLEAN
-)
-
-PATTERN = Schema(
-    id=ShapeID("com.amazonaws.lambda#Pattern"), shape_type=ShapeType.STRING
-)
-
-FILTER = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Filter"), members={"Pattern": {"target": PATTERN}}
-)
-
-FILTER_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FilterList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FILTER}},
-)
-
-FILTER_CRITERIA = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FilterCriteria"),
-    members={"Filters": {"target": FILTER_LIST}},
-)
-
-FUNCTION_RESPONSE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionResponseType"),
-    shape_type=ShapeType.ENUM,
-    members={"ReportBatchItemFailures": {"target": UNIT}},
-)
-
-FUNCTION_RESPONSE_TYPE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionResponseTypeList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FUNCTION_RESPONSE_TYPE}},
-)
-
-EVENT_SOURCE_MAPPING_SYSTEM_LOG_LEVEL = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventSourceMappingSystemLogLevel"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "Debug": {"target": UNIT},
-        "Info": {"target": UNIT},
-        "Warn": {"target": UNIT},
-    },
-)
-
-EVENT_SOURCE_MAPPING_LOGGING_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventSourceMappingLoggingConfig"),
-    members={"SystemLogLevel": {"target": EVENT_SOURCE_MAPPING_SYSTEM_LOG_LEVEL}},
-)
-
-MAXIMUM_BATCHING_WINDOW_IN_SECONDS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaximumBatchingWindowInSeconds"),
-    shape_type=ShapeType.INTEGER,
-)
-
-MAXIMUM_RECORD_AGE_IN_SECONDS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaximumRecordAgeInSeconds"),
-    shape_type=ShapeType.INTEGER,
-)
-
-MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaximumRetryAttemptsEventSourceMapping"),
-    shape_type=ShapeType.INTEGER,
-)
-
-EVENT_SOURCE_MAPPING_METRIC = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventSourceMappingMetric"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EventCount": {"target": UNIT},
-        "ErrorCount": {"target": UNIT},
-        "KafkaMetrics": {"target": UNIT},
-    },
-)
-
-EVENT_SOURCE_MAPPING_METRIC_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventSourceMappingMetricList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EVENT_SOURCE_MAPPING_METRIC}},
-)
-
-EVENT_SOURCE_MAPPING_METRICS_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventSourceMappingMetricsConfig"),
-    members={"Metrics": {"target": EVENT_SOURCE_MAPPING_METRIC_LIST}},
-)
-
-PARALLELIZATION_FACTOR = Schema(
-    id=ShapeID("com.amazonaws.lambda#ParallelizationFactor"),
-    shape_type=ShapeType.INTEGER,
-)
-
-MAXIMUM_NUMBER_OF_POLLERS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaximumNumberOfPollers"),
-    shape_type=ShapeType.INTEGER,
-)
-
-MINIMUM_NUMBER_OF_POLLERS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MinimumNumberOfPollers"),
-    shape_type=ShapeType.INTEGER,
-)
-
-PROVISIONED_POLLER_GROUP_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#ProvisionedPollerGroupName"),
-    shape_type=ShapeType.STRING,
-)
-
-PROVISIONED_POLLER_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ProvisionedPollerConfig"),
-    members={
-        "MinimumPollers": {"target": MINIMUM_NUMBER_OF_POLLERS},
-        "MaximumPollers": {"target": MAXIMUM_NUMBER_OF_POLLERS},
-        "PollerGroupName": {"target": PROVISIONED_POLLER_GROUP_NAME},
-    },
-)
-
-QUEUE = Schema(id=ShapeID("com.amazonaws.lambda#Queue"), shape_type=ShapeType.STRING)
-
-QUEUES = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Queues"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": QUEUE}},
-)
-
-MAXIMUM_CONCURRENCY = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaximumConcurrency"), shape_type=ShapeType.INTEGER
-)
-
-SCALING_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ScalingConfig"),
-    members={"MaximumConcurrency": {"target": MAXIMUM_CONCURRENCY}},
-)
-
-END_POINT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EndPointType"),
-    shape_type=ShapeType.ENUM,
-    members={"KAFKA_BOOTSTRAP_SERVERS": {"target": UNIT}},
-)
-
-ENDPOINT = Schema(
-    id=ShapeID("com.amazonaws.lambda#Endpoint"), shape_type=ShapeType.STRING
-)
-
-ENDPOINT_LISTS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EndpointLists"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ENDPOINT}},
-)
-
-ENDPOINTS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Endpoints"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": END_POINT_TYPE}, "value": {"target": ENDPOINT_LISTS}},
-)
-
-SELF_MANAGED_EVENT_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SelfManagedEventSource"),
-    members={"Endpoints": {"target": ENDPOINTS}},
-)
-
-SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SelfManagedKafkaEventSourceConfig"),
-    members={
-        "ConsumerGroupId": {"target": URI},
-        "SchemaRegistryConfig": {"target": KAFKA_SCHEMA_REGISTRY_CONFIG},
-    },
-)
-
-SOURCE_ACCESS_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SourceAccessType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "BASIC_AUTH": {"target": UNIT},
-        "VPC_SUBNET": {"target": UNIT},
-        "VPC_SECURITY_GROUP": {"target": UNIT},
-        "SASL_SCRAM_512_AUTH": {"target": UNIT},
-        "SASL_SCRAM_256_AUTH": {"target": UNIT},
-        "VIRTUAL_HOST": {"target": UNIT},
-        "CLIENT_CERTIFICATE_TLS_AUTH": {"target": UNIT},
-        "SERVER_ROOT_CA_CERTIFICATE": {"target": UNIT},
-    },
-)
-
-SOURCE_ACCESS_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SourceAccessConfiguration"),
-    members={"Type": {"target": SOURCE_ACCESS_TYPE}, "URI": {"target": URI}},
-)
-
-SOURCE_ACCESS_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SourceAccessConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SOURCE_ACCESS_CONFIGURATION}},
-)
-
-EVENT_SOURCE_POSITION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventSourcePosition"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "TRIM_HORIZON": {"target": UNIT},
-        "LATEST": {"target": UNIT},
-        "AT_TIMESTAMP": {"target": UNIT},
-    },
-)
-
-DATE = Schema(id=ShapeID("com.amazonaws.lambda#Date"), shape_type=ShapeType.TIMESTAMP)
-
-TOPIC = Schema(id=ShapeID("com.amazonaws.lambda#Topic"), shape_type=ShapeType.STRING)
-
-TOPICS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Topics"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TOPIC}},
-)
-
-TUMBLING_WINDOW_IN_SECONDS = Schema(
-    id=ShapeID("com.amazonaws.lambda#TumblingWindowInSeconds"),
-    shape_type=ShapeType.INTEGER,
-)
-
-CREATE_EVENT_SOURCE_MAPPING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateEventSourceMappingInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#CreateEventSourceMappingRequest",
-        )
-    ],
-    members={
-        "EventSourceArn": {"target": ARN},
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Enabled": {"target": ENABLED},
-        "BatchSize": {"target": BATCH_SIZE},
-        "FilterCriteria": {"target": FILTER_CRITERIA},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "MetricsConfig": {"target": EVENT_SOURCE_MAPPING_METRICS_CONFIG},
-        "LoggingConfig": {"target": EVENT_SOURCE_MAPPING_LOGGING_CONFIG},
-        "ScalingConfig": {"target": SCALING_CONFIG},
-        "MaximumBatchingWindowInSeconds": {
-            "target": MAXIMUM_BATCHING_WINDOW_IN_SECONDS
-        },
-        "ParallelizationFactor": {"target": PARALLELIZATION_FACTOR},
-        "StartingPosition": {"target": EVENT_SOURCE_POSITION},
-        "StartingPositionTimestamp": {"target": DATE},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-        "MaximumRecordAgeInSeconds": {"target": MAXIMUM_RECORD_AGE_IN_SECONDS},
-        "BisectBatchOnFunctionError": {"target": BISECT_BATCH_ON_FUNCTION_ERROR},
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING},
-        "Tags": {"target": TAGS},
-        "TumblingWindowInSeconds": {"target": TUMBLING_WINDOW_IN_SECONDS},
-        "Topics": {"target": TOPICS},
-        "Queues": {"target": QUEUES},
-        "SourceAccessConfigurations": {"target": SOURCE_ACCESS_CONFIGURATIONS},
-        "SelfManagedEventSource": {"target": SELF_MANAGED_EVENT_SOURCE},
-        "FunctionResponseTypes": {"target": FUNCTION_RESPONSE_TYPE_LIST},
-        "AmazonManagedKafkaEventSourceConfig": {
-            "target": AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "SelfManagedKafkaEventSourceConfig": {
-            "target": SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "DocumentDBEventSourceConfig": {"target": DOCUMENT_DB_EVENT_SOURCE_CONFIG},
-        "ProvisionedPollerConfig": {"target": PROVISIONED_POLLER_CONFIG},
-    },
-)
-
-EVENT_SOURCE_MAPPING_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#EventSourceMappingArn"),
-    shape_type=ShapeType.STRING,
-)
-
-FILTER_CRITERIA_ERROR_CODE = Schema(
-    id=ShapeID("com.amazonaws.lambda#FilterCriteriaErrorCode"),
-    shape_type=ShapeType.STRING,
-)
-
-FILTER_CRITERIA_ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.lambda#FilterCriteriaErrorMessage"),
-    shape_type=ShapeType.STRING,
-)
-
-FILTER_CRITERIA_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FilterCriteriaError"),
-    members={
-        "ErrorCode": {"target": FILTER_CRITERIA_ERROR_CODE},
-        "Message": {"target": FILTER_CRITERIA_ERROR_MESSAGE},
-    },
-)
-
-UUID_STRING = Schema(
-    id=ShapeID("com.amazonaws.lambda#UUIDString"), shape_type=ShapeType.STRING
-)
-
-CREATE_EVENT_SOURCE_MAPPING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateEventSourceMappingOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#EventSourceMappingConfiguration",
-        )
-    ],
-    members={
-        "UUID": {"target": UUID_STRING},
-        "StartingPosition": {"target": EVENT_SOURCE_POSITION},
-        "StartingPositionTimestamp": {"target": DATE},
-        "BatchSize": {"target": BATCH_SIZE},
-        "MaximumBatchingWindowInSeconds": {
-            "target": MAXIMUM_BATCHING_WINDOW_IN_SECONDS
-        },
-        "ParallelizationFactor": {"target": PARALLELIZATION_FACTOR},
-        "EventSourceArn": {"target": ARN},
-        "FilterCriteria": {"target": FILTER_CRITERIA},
-        "FilterCriteriaError": {"target": FILTER_CRITERIA_ERROR},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "MetricsConfig": {"target": EVENT_SOURCE_MAPPING_METRICS_CONFIG},
-        "LoggingConfig": {"target": EVENT_SOURCE_MAPPING_LOGGING_CONFIG},
-        "ScalingConfig": {"target": SCALING_CONFIG},
-        "FunctionArn": {"target": FUNCTION_ARN},
-        "LastModified": {"target": DATE},
-        "LastProcessingResult": {"target": STRING},
-        "State": {"target": STRING},
-        "StateTransitionReason": {"target": STRING},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-        "Topics": {"target": TOPICS},
-        "Queues": {"target": QUEUES},
-        "SourceAccessConfigurations": {"target": SOURCE_ACCESS_CONFIGURATIONS},
-        "SelfManagedEventSource": {"target": SELF_MANAGED_EVENT_SOURCE},
-        "MaximumRecordAgeInSeconds": {"target": MAXIMUM_RECORD_AGE_IN_SECONDS},
-        "BisectBatchOnFunctionError": {"target": BISECT_BATCH_ON_FUNCTION_ERROR},
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING},
-        "TumblingWindowInSeconds": {"target": TUMBLING_WINDOW_IN_SECONDS},
-        "FunctionResponseTypes": {"target": FUNCTION_RESPONSE_TYPE_LIST},
-        "AmazonManagedKafkaEventSourceConfig": {
-            "target": AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "SelfManagedKafkaEventSourceConfig": {
-            "target": SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "DocumentDBEventSourceConfig": {"target": DOCUMENT_DB_EVENT_SOURCE_CONFIG},
-        "EventSourceMappingArn": {"target": EVENT_SOURCE_MAPPING_ARN},
-        "ProvisionedPollerConfig": {"target": PROVISIONED_POLLER_CONFIG},
-    },
-)
-
-CREATE_EVENT_SOURCE_MAPPING = Schema(
-    id=ShapeID("com.amazonaws.lambda#CreateEventSourceMapping"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2015-03-31/event-source-mappings",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_EVENT_SOURCE_MAPPING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteEventSourceMappingInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteEventSourceMappingRequest",
-        )
-    ],
-    members={
-        "UUID": {
-            "target": UUID_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_EVENT_SOURCE_MAPPING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteEventSourceMappingOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#EventSourceMappingConfiguration",
-        )
-    ],
-    members={
-        "UUID": {"target": UUID_STRING},
-        "StartingPosition": {"target": EVENT_SOURCE_POSITION},
-        "StartingPositionTimestamp": {"target": DATE},
-        "BatchSize": {"target": BATCH_SIZE},
-        "MaximumBatchingWindowInSeconds": {
-            "target": MAXIMUM_BATCHING_WINDOW_IN_SECONDS
-        },
-        "ParallelizationFactor": {"target": PARALLELIZATION_FACTOR},
-        "EventSourceArn": {"target": ARN},
-        "FilterCriteria": {"target": FILTER_CRITERIA},
-        "FilterCriteriaError": {"target": FILTER_CRITERIA_ERROR},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "MetricsConfig": {"target": EVENT_SOURCE_MAPPING_METRICS_CONFIG},
-        "LoggingConfig": {"target": EVENT_SOURCE_MAPPING_LOGGING_CONFIG},
-        "ScalingConfig": {"target": SCALING_CONFIG},
-        "FunctionArn": {"target": FUNCTION_ARN},
-        "LastModified": {"target": DATE},
-        "LastProcessingResult": {"target": STRING},
-        "State": {"target": STRING},
-        "StateTransitionReason": {"target": STRING},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-        "Topics": {"target": TOPICS},
-        "Queues": {"target": QUEUES},
-        "SourceAccessConfigurations": {"target": SOURCE_ACCESS_CONFIGURATIONS},
-        "SelfManagedEventSource": {"target": SELF_MANAGED_EVENT_SOURCE},
-        "MaximumRecordAgeInSeconds": {"target": MAXIMUM_RECORD_AGE_IN_SECONDS},
-        "BisectBatchOnFunctionError": {"target": BISECT_BATCH_ON_FUNCTION_ERROR},
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING},
-        "TumblingWindowInSeconds": {"target": TUMBLING_WINDOW_IN_SECONDS},
-        "FunctionResponseTypes": {"target": FUNCTION_RESPONSE_TYPE_LIST},
-        "AmazonManagedKafkaEventSourceConfig": {
-            "target": AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "SelfManagedKafkaEventSourceConfig": {
-            "target": SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "DocumentDBEventSourceConfig": {"target": DOCUMENT_DB_EVENT_SOURCE_CONFIG},
-        "EventSourceMappingArn": {"target": EVENT_SOURCE_MAPPING_ARN},
-        "ProvisionedPollerConfig": {"target": PROVISIONED_POLLER_CONFIG},
-    },
-)
-
-RESOURCE_IN_USE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ResourceInUseException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-DELETE_EVENT_SOURCE_MAPPING = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteEventSourceMapping"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2015-03-31/event-source-mappings/{UUID}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-GET_EVENT_SOURCE_MAPPING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetEventSourceMappingInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetEventSourceMappingRequest",
-        )
-    ],
-    members={
-        "UUID": {
-            "target": UUID_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_EVENT_SOURCE_MAPPING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetEventSourceMappingOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#EventSourceMappingConfiguration",
-        )
-    ],
-    members={
-        "UUID": {"target": UUID_STRING},
-        "StartingPosition": {"target": EVENT_SOURCE_POSITION},
-        "StartingPositionTimestamp": {"target": DATE},
-        "BatchSize": {"target": BATCH_SIZE},
-        "MaximumBatchingWindowInSeconds": {
-            "target": MAXIMUM_BATCHING_WINDOW_IN_SECONDS
-        },
-        "ParallelizationFactor": {"target": PARALLELIZATION_FACTOR},
-        "EventSourceArn": {"target": ARN},
-        "FilterCriteria": {"target": FILTER_CRITERIA},
-        "FilterCriteriaError": {"target": FILTER_CRITERIA_ERROR},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "MetricsConfig": {"target": EVENT_SOURCE_MAPPING_METRICS_CONFIG},
-        "LoggingConfig": {"target": EVENT_SOURCE_MAPPING_LOGGING_CONFIG},
-        "ScalingConfig": {"target": SCALING_CONFIG},
-        "FunctionArn": {"target": FUNCTION_ARN},
-        "LastModified": {"target": DATE},
-        "LastProcessingResult": {"target": STRING},
-        "State": {"target": STRING},
-        "StateTransitionReason": {"target": STRING},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-        "Topics": {"target": TOPICS},
-        "Queues": {"target": QUEUES},
-        "SourceAccessConfigurations": {"target": SOURCE_ACCESS_CONFIGURATIONS},
-        "SelfManagedEventSource": {"target": SELF_MANAGED_EVENT_SOURCE},
-        "MaximumRecordAgeInSeconds": {"target": MAXIMUM_RECORD_AGE_IN_SECONDS},
-        "BisectBatchOnFunctionError": {"target": BISECT_BATCH_ON_FUNCTION_ERROR},
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING},
-        "TumblingWindowInSeconds": {"target": TUMBLING_WINDOW_IN_SECONDS},
-        "FunctionResponseTypes": {"target": FUNCTION_RESPONSE_TYPE_LIST},
-        "AmazonManagedKafkaEventSourceConfig": {
-            "target": AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "SelfManagedKafkaEventSourceConfig": {
-            "target": SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "DocumentDBEventSourceConfig": {"target": DOCUMENT_DB_EVENT_SOURCE_CONFIG},
-        "EventSourceMappingArn": {"target": EVENT_SOURCE_MAPPING_ARN},
-        "ProvisionedPollerConfig": {"target": PROVISIONED_POLLER_CONFIG},
-    },
-)
-
-GET_EVENT_SOURCE_MAPPING = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetEventSourceMapping"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2015-03-31/event-source-mappings/{UUID}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_EVENT_SOURCE_MAPPINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListEventSourceMappingsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListEventSourceMappingsRequest",
-        )
-    ],
-    members={
-        "EventSourceArn": {
-            "target": ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="EventSourceArn")
-            ],
-        },
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="FunctionName")
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-EVENT_SOURCE_MAPPING_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventSourceMappingConfiguration"),
-    members={
-        "UUID": {"target": UUID_STRING},
-        "StartingPosition": {"target": EVENT_SOURCE_POSITION},
-        "StartingPositionTimestamp": {"target": DATE},
-        "BatchSize": {"target": BATCH_SIZE},
-        "MaximumBatchingWindowInSeconds": {
-            "target": MAXIMUM_BATCHING_WINDOW_IN_SECONDS
-        },
-        "ParallelizationFactor": {"target": PARALLELIZATION_FACTOR},
-        "EventSourceArn": {"target": ARN},
-        "FilterCriteria": {"target": FILTER_CRITERIA},
-        "FilterCriteriaError": {"target": FILTER_CRITERIA_ERROR},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "MetricsConfig": {"target": EVENT_SOURCE_MAPPING_METRICS_CONFIG},
-        "LoggingConfig": {"target": EVENT_SOURCE_MAPPING_LOGGING_CONFIG},
-        "ScalingConfig": {"target": SCALING_CONFIG},
-        "FunctionArn": {"target": FUNCTION_ARN},
-        "LastModified": {"target": DATE},
-        "LastProcessingResult": {"target": STRING},
-        "State": {"target": STRING},
-        "StateTransitionReason": {"target": STRING},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-        "Topics": {"target": TOPICS},
-        "Queues": {"target": QUEUES},
-        "SourceAccessConfigurations": {"target": SOURCE_ACCESS_CONFIGURATIONS},
-        "SelfManagedEventSource": {"target": SELF_MANAGED_EVENT_SOURCE},
-        "MaximumRecordAgeInSeconds": {"target": MAXIMUM_RECORD_AGE_IN_SECONDS},
-        "BisectBatchOnFunctionError": {"target": BISECT_BATCH_ON_FUNCTION_ERROR},
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING},
-        "TumblingWindowInSeconds": {"target": TUMBLING_WINDOW_IN_SECONDS},
-        "FunctionResponseTypes": {"target": FUNCTION_RESPONSE_TYPE_LIST},
-        "AmazonManagedKafkaEventSourceConfig": {
-            "target": AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "SelfManagedKafkaEventSourceConfig": {
-            "target": SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "DocumentDBEventSourceConfig": {"target": DOCUMENT_DB_EVENT_SOURCE_CONFIG},
-        "EventSourceMappingArn": {"target": EVENT_SOURCE_MAPPING_ARN},
-        "ProvisionedPollerConfig": {"target": PROVISIONED_POLLER_CONFIG},
-    },
-)
-
-EVENT_SOURCE_MAPPINGS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EventSourceMappingsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EVENT_SOURCE_MAPPING_CONFIGURATION}},
-)
-
-LIST_EVENT_SOURCE_MAPPINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListEventSourceMappingsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListEventSourceMappingsResponse",
-        )
-    ],
-    members={
-        "NextMarker": {"target": STRING},
-        "EventSourceMappings": {"target": EVENT_SOURCE_MAPPINGS_LIST},
-    },
-)
-
-LIST_EVENT_SOURCE_MAPPINGS = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListEventSourceMappings"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2015-03-31/event-source-mappings",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_EVENT_SOURCE_MAPPING_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateEventSourceMappingInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UpdateEventSourceMappingRequest",
-        )
-    ],
-    members={
-        "UUID": {
-            "target": UUID_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FunctionName": {"target": NAMESPACED_FUNCTION_NAME},
-        "Enabled": {"target": ENABLED},
-        "BatchSize": {"target": BATCH_SIZE},
-        "FilterCriteria": {"target": FILTER_CRITERIA},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "MetricsConfig": {"target": EVENT_SOURCE_MAPPING_METRICS_CONFIG},
-        "LoggingConfig": {"target": EVENT_SOURCE_MAPPING_LOGGING_CONFIG},
-        "ScalingConfig": {"target": SCALING_CONFIG},
-        "MaximumBatchingWindowInSeconds": {
-            "target": MAXIMUM_BATCHING_WINDOW_IN_SECONDS
-        },
-        "ParallelizationFactor": {"target": PARALLELIZATION_FACTOR},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-        "MaximumRecordAgeInSeconds": {"target": MAXIMUM_RECORD_AGE_IN_SECONDS},
-        "BisectBatchOnFunctionError": {"target": BISECT_BATCH_ON_FUNCTION_ERROR},
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING},
-        "TumblingWindowInSeconds": {"target": TUMBLING_WINDOW_IN_SECONDS},
-        "SourceAccessConfigurations": {"target": SOURCE_ACCESS_CONFIGURATIONS},
-        "FunctionResponseTypes": {"target": FUNCTION_RESPONSE_TYPE_LIST},
-        "AmazonManagedKafkaEventSourceConfig": {
-            "target": AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "SelfManagedKafkaEventSourceConfig": {
-            "target": SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "DocumentDBEventSourceConfig": {"target": DOCUMENT_DB_EVENT_SOURCE_CONFIG},
-        "ProvisionedPollerConfig": {"target": PROVISIONED_POLLER_CONFIG},
-    },
-)
-
-UPDATE_EVENT_SOURCE_MAPPING_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateEventSourceMappingOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#EventSourceMappingConfiguration",
-        )
-    ],
-    members={
-        "UUID": {"target": UUID_STRING},
-        "StartingPosition": {"target": EVENT_SOURCE_POSITION},
-        "StartingPositionTimestamp": {"target": DATE},
-        "BatchSize": {"target": BATCH_SIZE},
-        "MaximumBatchingWindowInSeconds": {
-            "target": MAXIMUM_BATCHING_WINDOW_IN_SECONDS
-        },
-        "ParallelizationFactor": {"target": PARALLELIZATION_FACTOR},
-        "EventSourceArn": {"target": ARN},
-        "FilterCriteria": {"target": FILTER_CRITERIA},
-        "FilterCriteriaError": {"target": FILTER_CRITERIA_ERROR},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "MetricsConfig": {"target": EVENT_SOURCE_MAPPING_METRICS_CONFIG},
-        "LoggingConfig": {"target": EVENT_SOURCE_MAPPING_LOGGING_CONFIG},
-        "ScalingConfig": {"target": SCALING_CONFIG},
-        "FunctionArn": {"target": FUNCTION_ARN},
-        "LastModified": {"target": DATE},
-        "LastProcessingResult": {"target": STRING},
-        "State": {"target": STRING},
-        "StateTransitionReason": {"target": STRING},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-        "Topics": {"target": TOPICS},
-        "Queues": {"target": QUEUES},
-        "SourceAccessConfigurations": {"target": SOURCE_ACCESS_CONFIGURATIONS},
-        "SelfManagedEventSource": {"target": SELF_MANAGED_EVENT_SOURCE},
-        "MaximumRecordAgeInSeconds": {"target": MAXIMUM_RECORD_AGE_IN_SECONDS},
-        "BisectBatchOnFunctionError": {"target": BISECT_BATCH_ON_FUNCTION_ERROR},
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING},
-        "TumblingWindowInSeconds": {"target": TUMBLING_WINDOW_IN_SECONDS},
-        "FunctionResponseTypes": {"target": FUNCTION_RESPONSE_TYPE_LIST},
-        "AmazonManagedKafkaEventSourceConfig": {
-            "target": AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "SelfManagedKafkaEventSourceConfig": {
-            "target": SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG
-        },
-        "DocumentDBEventSourceConfig": {"target": DOCUMENT_DB_EVENT_SOURCE_CONFIG},
-        "EventSourceMappingArn": {"target": EVENT_SOURCE_MAPPING_ARN},
-        "ProvisionedPollerConfig": {"target": PROVISIONED_POLLER_CONFIG},
-    },
-)
-
-UPDATE_EVENT_SOURCE_MAPPING = Schema(
-    id=ShapeID("com.amazonaws.lambda#UpdateEventSourceMapping"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2015-03-31/event-source-mappings/{UUID}",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-CODE_SIGNING_CONFIG_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CodeSigningConfigNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-CODE_STORAGE_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CodeStorageExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-CODE_VERIFICATION_FAILED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CodeVerificationFailedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-EXECUTION_ENVIRONMENT_MEMORY_GI_B_PER_V_CPU = Schema(
-    id=ShapeID("com.amazonaws.lambda#ExecutionEnvironmentMemoryGiBPerVCpu"),
-    shape_type=ShapeType.DOUBLE,
-)
-
-PER_EXECUTION_ENVIRONMENT_MAX_CONCURRENCY = Schema(
-    id=ShapeID("com.amazonaws.lambda#PerExecutionEnvironmentMaxConcurrency"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LAMBDA_MANAGED_INSTANCES_CAPACITY_PROVIDER_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LambdaManagedInstancesCapacityProviderConfig"),
-    members={
-        "CapacityProviderArn": {
-            "target": CAPACITY_PROVIDER_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "PerExecutionEnvironmentMaxConcurrency": {
-            "target": PER_EXECUTION_ENVIRONMENT_MAX_CONCURRENCY
-        },
-        "ExecutionEnvironmentMemoryGiBPerVCpu": {
-            "target": EXECUTION_ENVIRONMENT_MEMORY_GI_B_PER_V_CPU
-        },
-    },
-)
-
-CAPACITY_PROVIDER_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CapacityProviderConfig"),
-    members={
-        "LambdaManagedInstancesCapacityProviderConfig": {
-            "target": LAMBDA_MANAGED_INSTANCES_CAPACITY_PROVIDER_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-S3_BUCKET = Schema(
-    id=ShapeID("com.amazonaws.lambda#S3Bucket"), shape_type=ShapeType.STRING
-)
-
-S3_KEY = Schema(id=ShapeID("com.amazonaws.lambda#S3Key"), shape_type=ShapeType.STRING)
-
-S3_OBJECT_STORAGE_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#S3ObjectStorageMode"),
-    shape_type=ShapeType.ENUM,
-    members={"Copy": {"target": UNIT}, "Reference": {"target": UNIT}},
-)
-
-S3_OBJECT_VERSION = Schema(
-    id=ShapeID("com.amazonaws.lambda#S3ObjectVersion"), shape_type=ShapeType.STRING
-)
-
-BLOB = Schema(
-    id=ShapeID("com.amazonaws.lambda#Blob"),
-    shape_type=ShapeType.BLOB,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-FUNCTION_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionCode"),
-    members={
-        "ZipFile": {"target": BLOB},
-        "S3Bucket": {"target": S3_BUCKET},
-        "S3Key": {"target": S3_KEY},
-        "S3ObjectVersion": {"target": S3_OBJECT_VERSION},
-        "S3ObjectStorageMode": {"target": S3_OBJECT_STORAGE_MODE},
-        "ImageUri": {"target": STRING},
-        "SourceKMSKeyArn": {"target": KMS_KEY_ARN},
-    },
-)
-
-RESOURCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#ResourceArn"), shape_type=ShapeType.STRING
-)
-
-DEAD_LETTER_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeadLetterConfig"),
-    members={"TargetArn": {"target": RESOURCE_ARN}},
-)
-
-ENVIRONMENT_VARIABLE_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#EnvironmentVariableName"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-ENVIRONMENT_VARIABLE_VALUE = Schema(
-    id=ShapeID("com.amazonaws.lambda#EnvironmentVariableValue"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-ENVIRONMENT_VARIABLES = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EnvironmentVariables"),
-    shape_type=ShapeType.MAP,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-    members={
-        "key": {"target": ENVIRONMENT_VARIABLE_NAME},
-        "value": {"target": ENVIRONMENT_VARIABLE_VALUE},
-    },
-)
-
-ENVIRONMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Environment"),
-    members={"Variables": {"target": ENVIRONMENT_VARIABLES}},
-)
-
-EPHEMERAL_STORAGE_SIZE = Schema(
-    id=ShapeID("com.amazonaws.lambda#EphemeralStorageSize"),
-    shape_type=ShapeType.INTEGER,
-)
-
-EPHEMERAL_STORAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EphemeralStorage"),
-    members={
-        "Size": {
-            "target": EPHEMERAL_STORAGE_SIZE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-FILE_SYSTEM_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#FileSystemArn"), shape_type=ShapeType.STRING
-)
-
-LOCAL_MOUNT_PATH = Schema(
-    id=ShapeID("com.amazonaws.lambda#LocalMountPath"), shape_type=ShapeType.STRING
-)
-
-DIRECT_S3_READ = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DirectS3Read"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ENABLED": {"target": UNIT},
-        "DISABLED": {"target": UNIT},
-        "AUTO": {"target": UNIT},
-    },
-)
-
-S3_FILES_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#S3FilesConfig"),
-    members={"DirectS3Read": {"target": DIRECT_S3_READ}},
-)
-
-FILE_SYSTEM_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FileSystemConfig"),
-    members={
-        "Arn": {
-            "target": FILE_SYSTEM_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "LocalMountPath": {
-            "target": LOCAL_MOUNT_PATH,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "S3FilesConfig": {"target": S3_FILES_CONFIG},
-    },
-)
-
-FILE_SYSTEM_CONFIG_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FileSystemConfigList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FILE_SYSTEM_CONFIG}},
-)
-
-FUNCTION_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#FunctionName"), shape_type=ShapeType.STRING
-)
-
-HANDLER = Schema(
-    id=ShapeID("com.amazonaws.lambda#Handler"), shape_type=ShapeType.STRING
-)
-
-STRING_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#StringList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-WORKING_DIRECTORY = Schema(
-    id=ShapeID("com.amazonaws.lambda#WorkingDirectory"), shape_type=ShapeType.STRING
-)
-
-IMAGE_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ImageConfig"),
-    members={
-        "EntryPoint": {"target": STRING_LIST},
-        "Command": {"target": STRING_LIST},
-        "WorkingDirectory": {"target": WORKING_DIRECTORY},
-    },
-)
-
-LAYER_VERSION_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#LayerVersionArn"), shape_type=ShapeType.STRING
-)
-
-LAYER_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LayerList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LAYER_VERSION_ARN}},
-)
-
-LOG_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LogFormat"),
-    shape_type=ShapeType.ENUM,
-    members={"Json": {"target": UNIT}, "Text": {"target": UNIT}},
-)
-
-LOGGING_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LoggingConfig"),
-    members={
-        "LogFormat": {"target": LOG_FORMAT},
-        "ApplicationLogLevel": {"target": APPLICATION_LOG_LEVEL},
-        "SystemLogLevel": {"target": SYSTEM_LOG_LEVEL},
-        "LogGroup": {"target": LOG_GROUP},
-    },
-)
-
-MEMORY_SIZE = Schema(
-    id=ShapeID("com.amazonaws.lambda#MemorySize"), shape_type=ShapeType.INTEGER
-)
-
-PACKAGE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PackageType"),
-    shape_type=ShapeType.ENUM,
-    members={"Zip": {"target": UNIT}, "Image": {"target": UNIT}},
-)
-
-BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.lambda#Boolean"),
-    shape_type=ShapeType.BOOLEAN,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-)
-
-FUNCTION_VERSION_LATEST_PUBLISHED = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionVersionLatestPublished"),
-    shape_type=ShapeType.ENUM,
-    members={"LATEST_PUBLISHED": {"target": UNIT}},
-)
-
-RUNTIME = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Runtime"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "nodejs": {"target": UNIT},
-        "nodejs43": {"target": UNIT},
-        "nodejs610": {"target": UNIT},
-        "nodejs810": {"target": UNIT},
-        "nodejs10x": {"target": UNIT},
-        "nodejs12x": {"target": UNIT},
-        "nodejs14x": {"target": UNIT},
-        "nodejs16x": {"target": UNIT},
-        "nodejs18x": {"target": UNIT},
-        "nodejs20x": {"target": UNIT},
-        "nodejs22x": {"target": UNIT},
-        "nodejs24x": {"target": UNIT},
-        "java8": {"target": UNIT},
-        "java8al2": {"target": UNIT},
-        "java11": {"target": UNIT},
-        "java17": {"target": UNIT},
-        "java21": {"target": UNIT},
-        "java25": {"target": UNIT},
-        "python27": {"target": UNIT},
-        "python36": {"target": UNIT},
-        "python37": {"target": UNIT},
-        "python38": {"target": UNIT},
-        "python39": {"target": UNIT},
-        "python310": {"target": UNIT},
-        "python311": {"target": UNIT},
-        "python312": {"target": UNIT},
-        "python313": {"target": UNIT},
-        "python314": {"target": UNIT},
-        "dotnetcore10": {"target": UNIT},
-        "dotnetcore20": {"target": UNIT},
-        "dotnetcore21": {"target": UNIT},
-        "dotnetcore31": {"target": UNIT},
-        "dotnet6": {"target": UNIT},
-        "dotnet8": {"target": UNIT},
-        "dotnet10": {"target": UNIT},
-        "nodejs43edge": {"target": UNIT},
-        "go1x": {"target": UNIT},
-        "ruby25": {"target": UNIT},
-        "ruby27": {"target": UNIT},
-        "ruby32": {"target": UNIT},
-        "ruby33": {"target": UNIT},
-        "ruby34": {"target": UNIT},
-        "ruby40": {"target": UNIT},
-        "provided": {"target": UNIT},
-        "providedal2": {"target": UNIT},
-        "providedal2023": {"target": UNIT},
-        "nodejs26x": {"target": UNIT},
-        "python315": {"target": UNIT},
-        "java8al2023": {"target": UNIT},
-        "java11al2023": {"target": UNIT},
-        "java17al2023": {"target": UNIT},
-    },
-)
-
-SNAP_START_APPLY_ON = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SnapStartApplyOn"),
-    shape_type=ShapeType.ENUM,
-    members={"PublishedVersions": {"target": UNIT}, "None": {"target": UNIT}},
-)
-
-SNAP_START = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SnapStart"),
-    members={"ApplyOn": {"target": SNAP_START_APPLY_ON}},
-)
-
-TENANT_ISOLATION_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TenantIsolationMode"),
-    shape_type=ShapeType.ENUM,
-    members={"PER_TENANT": {"target": UNIT}},
-)
-
-TENANCY_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TenancyConfig"),
-    members={
-        "TenantIsolationMode": {
-            "target": TENANT_ISOLATION_MODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-TIMEOUT = Schema(
-    id=ShapeID("com.amazonaws.lambda#Timeout"), shape_type=ShapeType.INTEGER
-)
-
-TRACING_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TracingMode"),
-    shape_type=ShapeType.ENUM,
-    members={"Active": {"target": UNIT}, "PassThrough": {"target": UNIT}},
-)
-
-TRACING_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TracingConfig"),
-    members={"Mode": {"target": TRACING_MODE}},
-)
-
-NULLABLE_BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.lambda#NullableBoolean"), shape_type=ShapeType.BOOLEAN
-)
-
-SECURITY_GROUP_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SecurityGroupIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SECURITY_GROUP_ID}},
-)
-
-SUBNET_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SubnetIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SUBNET_ID}},
-)
-
-VPC_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#VpcConfig"),
-    members={
-        "SubnetIds": {"target": SUBNET_IDS},
-        "SecurityGroupIds": {"target": SECURITY_GROUP_IDS},
-        "Ipv6AllowedForDualStack": {"target": NULLABLE_BOOLEAN},
-    },
-)
-
-CREATE_FUNCTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateFunctionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#CreateFunctionRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Runtime": {"target": RUNTIME},
-        "Role": {
-            "target": ROLE_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Handler": {"target": HANDLER},
-        "Code": {
-            "target": FUNCTION_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Description": {"target": DESCRIPTION},
-        "Timeout": {"target": TIMEOUT},
-        "MemorySize": {"target": MEMORY_SIZE},
-        "Publish": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "PublishTo": {"target": FUNCTION_VERSION_LATEST_PUBLISHED},
-        "VpcConfig": {"target": VPC_CONFIG},
-        "PackageType": {"target": PACKAGE_TYPE},
-        "DeadLetterConfig": {"target": DEAD_LETTER_CONFIG},
-        "Environment": {"target": ENVIRONMENT},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "TracingConfig": {"target": TRACING_CONFIG},
-        "Tags": {"target": TAGS},
-        "Layers": {"target": LAYER_LIST},
-        "FileSystemConfigs": {"target": FILE_SYSTEM_CONFIG_LIST},
-        "CodeSigningConfigArn": {"target": CODE_SIGNING_CONFIG_ARN},
-        "ImageConfig": {"target": IMAGE_CONFIG},
-        "Architectures": {"target": ARCHITECTURES_LIST},
-        "EphemeralStorage": {"target": EPHEMERAL_STORAGE},
-        "SnapStart": {"target": SNAP_START},
-        "LoggingConfig": {"target": LOGGING_CONFIG},
-        "TenancyConfig": {"target": TENANCY_CONFIG},
-        "CapacityProviderConfig": {"target": CAPACITY_PROVIDER_CONFIG},
-        "DurableConfig": {"target": DURABLE_CONFIG},
-    },
-)
-
-SENSITIVE_STRING = Schema(
-    id=ShapeID("com.amazonaws.lambda#SensitiveString"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-ENVIRONMENT_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EnvironmentError"),
-    members={"ErrorCode": {"target": STRING}, "Message": {"target": SENSITIVE_STRING}},
-)
-
-ENVIRONMENT_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EnvironmentResponse"),
-    members={
-        "Variables": {"target": ENVIRONMENT_VARIABLES},
-        "Error": {"target": ENVIRONMENT_ERROR},
-    },
-)
-
-IMAGE_CONFIG_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ImageConfigError"),
-    members={"ErrorCode": {"target": STRING}, "Message": {"target": SENSITIVE_STRING}},
-)
-
-IMAGE_CONFIG_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ImageConfigResponse"),
-    members={
-        "ImageConfig": {"target": IMAGE_CONFIG},
-        "Error": {"target": IMAGE_CONFIG_ERROR},
-    },
-)
-
-LAST_UPDATE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LastUpdateStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "Successful": {"target": UNIT},
-        "Failed": {"target": UNIT},
-        "InProgress": {"target": UNIT},
-    },
-)
-
-LAST_UPDATE_STATUS_REASON = Schema(
-    id=ShapeID("com.amazonaws.lambda#LastUpdateStatusReason"),
-    shape_type=ShapeType.STRING,
-)
-
-LAST_UPDATE_STATUS_REASON_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LastUpdateStatusReasonCode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EniLimitExceeded": {"target": UNIT},
-        "InsufficientRolePermissions": {"target": UNIT},
-        "InvalidConfiguration": {"target": UNIT},
-        "InternalError": {"target": UNIT},
-        "SubnetOutOfIPAddresses": {"target": UNIT},
-        "InvalidSubnet": {"target": UNIT},
-        "InvalidSecurityGroup": {"target": UNIT},
-        "ImageDeleted": {"target": UNIT},
-        "ImageAccessDenied": {"target": UNIT},
-        "InvalidImage": {"target": UNIT},
-        "KMSKeyAccessDenied": {"target": UNIT},
-        "KMSKeyNotFound": {"target": UNIT},
-        "InvalidStateKMSKey": {"target": UNIT},
-        "DisabledKMSKey": {"target": UNIT},
-        "EFSIOError": {"target": UNIT},
-        "EFSMountConnectivityError": {"target": UNIT},
-        "EFSMountFailure": {"target": UNIT},
-        "EFSMountTimeout": {"target": UNIT},
-        "InvalidRuntime": {"target": UNIT},
-        "InvalidZipFileException": {"target": UNIT},
-        "FunctionError": {"target": UNIT},
-        "ServiceQuotaExceededException": {"target": UNIT},
-        "VcpuLimitExceeded": {"target": UNIT},
-        "CapacityProviderScalingLimitExceeded": {"target": UNIT},
-        "InsufficientCapacity": {"target": UNIT},
-        "EC2RequestLimitExceeded": {"target": UNIT},
-        "FunctionErrorInitTimeout": {"target": UNIT},
-        "FunctionErrorRuntimeInitError": {"target": UNIT},
-        "FunctionErrorExtensionInitError": {"target": UNIT},
-        "FunctionErrorInvalidEntryPoint": {"target": UNIT},
-        "FunctionErrorInvalidWorkingDirectory": {"target": UNIT},
-        "FunctionErrorPermissionDenied": {"target": UNIT},
-        "FunctionErrorTooManyExtensions": {"target": UNIT},
-        "FunctionErrorInitResourceExhausted": {"target": UNIT},
-        "DisallowedByVpcEncryptionControl": {"target": UNIT},
-        "DependencyError": {"target": UNIT},
-    },
-)
-
-LAYER = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Layer"),
-    members={
-        "Arn": {"target": LAYER_VERSION_ARN},
-        "CodeSize": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "SigningProfileVersionArn": {"target": ARN},
-        "SigningJobArn": {"target": ARN},
-    },
-)
-
-LAYERS_REFERENCE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LayersReferenceList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LAYER}},
-)
-
-RUNTIME_VERSION_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#RuntimeVersionError"),
-    members={"ErrorCode": {"target": STRING}, "Message": {"target": SENSITIVE_STRING}},
-)
-
-RUNTIME_VERSION_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#RuntimeVersionArn"), shape_type=ShapeType.STRING
-)
-
-RUNTIME_VERSION_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#RuntimeVersionConfig"),
-    members={
-        "RuntimeVersionArn": {"target": RUNTIME_VERSION_ARN},
-        "Error": {"target": RUNTIME_VERSION_ERROR},
-    },
-)
-
-SNAP_START_OPTIMIZATION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SnapStartOptimizationStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"On": {"target": UNIT}, "Off": {"target": UNIT}},
-)
-
-SNAP_START_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SnapStartResponse"),
-    members={
-        "ApplyOn": {"target": SNAP_START_APPLY_ON},
-        "OptimizationStatus": {"target": SNAP_START_OPTIMIZATION_STATUS},
-    },
-)
-
-STATE_REASON = Schema(
-    id=ShapeID("com.amazonaws.lambda#StateReason"), shape_type=ShapeType.STRING
-)
-
-STATE_REASON_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#StateReasonCode"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "Idle": {"target": UNIT},
-        "Creating": {"target": UNIT},
-        "Restoring": {"target": UNIT},
-        "EniLimitExceeded": {"target": UNIT},
-        "InsufficientRolePermissions": {"target": UNIT},
-        "InvalidConfiguration": {"target": UNIT},
-        "InternalError": {"target": UNIT},
-        "SubnetOutOfIPAddresses": {"target": UNIT},
-        "InvalidSubnet": {"target": UNIT},
-        "InvalidSecurityGroup": {"target": UNIT},
-        "ImageDeleted": {"target": UNIT},
-        "ImageAccessDenied": {"target": UNIT},
-        "InvalidImage": {"target": UNIT},
-        "KMSKeyAccessDenied": {"target": UNIT},
-        "KMSKeyNotFound": {"target": UNIT},
-        "InvalidStateKMSKey": {"target": UNIT},
-        "DisabledKMSKey": {"target": UNIT},
-        "EFSIOError": {"target": UNIT},
-        "EFSMountConnectivityError": {"target": UNIT},
-        "EFSMountFailure": {"target": UNIT},
-        "EFSMountTimeout": {"target": UNIT},
-        "InvalidRuntime": {"target": UNIT},
-        "InvalidZipFileException": {"target": UNIT},
-        "FunctionError": {"target": UNIT},
-        "ServiceQuotaExceededException": {"target": UNIT},
-        "VcpuLimitExceeded": {"target": UNIT},
-        "CapacityProviderScalingLimitExceeded": {"target": UNIT},
-        "InsufficientCapacity": {"target": UNIT},
-        "EC2RequestLimitExceeded": {"target": UNIT},
-        "FunctionErrorInitTimeout": {"target": UNIT},
-        "FunctionErrorRuntimeInitError": {"target": UNIT},
-        "FunctionErrorExtensionInitError": {"target": UNIT},
-        "FunctionErrorInvalidEntryPoint": {"target": UNIT},
-        "FunctionErrorInvalidWorkingDirectory": {"target": UNIT},
-        "FunctionErrorPermissionDenied": {"target": UNIT},
-        "FunctionErrorTooManyExtensions": {"target": UNIT},
-        "FunctionErrorInitResourceExhausted": {"target": UNIT},
-        "DisallowedByVpcEncryptionControl": {"target": UNIT},
-        "DrainingDurableExecutions": {"target": UNIT},
-        "DependencyError": {"target": UNIT},
-    },
-)
-
-TRACING_CONFIG_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TracingConfigResponse"),
-    members={"Mode": {"target": TRACING_MODE}},
-)
-
-VPC_ID = Schema(id=ShapeID("com.amazonaws.lambda#VpcId"), shape_type=ShapeType.STRING)
-
-VPC_CONFIG_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#VpcConfigResponse"),
-    members={
-        "SubnetIds": {"target": SUBNET_IDS},
-        "SecurityGroupIds": {"target": SECURITY_GROUP_IDS},
-        "VpcId": {"target": VPC_ID},
-        "Ipv6AllowedForDualStack": {"target": NULLABLE_BOOLEAN},
-    },
-)
-
-CREATE_FUNCTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateFunctionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#FunctionConfiguration",
-        )
-    ],
-    members={
-        "FunctionName": {"target": NAMESPACED_FUNCTION_NAME},
-        "FunctionArn": {"target": NAME_SPACED_FUNCTION_ARN},
-        "Runtime": {"target": RUNTIME},
-        "Role": {"target": ROLE_ARN},
-        "Handler": {"target": HANDLER},
-        "CodeSize": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Description": {"target": DESCRIPTION},
-        "Timeout": {"target": TIMEOUT},
-        "MemorySize": {"target": MEMORY_SIZE},
-        "LastModified": {"target": TIMESTAMP},
-        "CodeSha256": {"target": STRING},
-        "Version": {"target": VERSION},
-        "VpcConfig": {"target": VPC_CONFIG_RESPONSE},
-        "DeadLetterConfig": {"target": DEAD_LETTER_CONFIG},
-        "Environment": {"target": ENVIRONMENT_RESPONSE},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "TracingConfig": {"target": TRACING_CONFIG_RESPONSE},
-        "MasterArn": {"target": FUNCTION_ARN},
-        "RevisionId": {"target": STRING},
-        "Layers": {"target": LAYERS_REFERENCE_LIST},
-        "State": {"target": STATE},
-        "StateReason": {"target": STATE_REASON},
-        "StateReasonCode": {"target": STATE_REASON_CODE},
-        "LastUpdateStatus": {"target": LAST_UPDATE_STATUS},
-        "LastUpdateStatusReason": {"target": LAST_UPDATE_STATUS_REASON},
-        "LastUpdateStatusReasonCode": {"target": LAST_UPDATE_STATUS_REASON_CODE},
-        "FileSystemConfigs": {"target": FILE_SYSTEM_CONFIG_LIST},
-        "SigningProfileVersionArn": {"target": ARN},
-        "SigningJobArn": {"target": ARN},
-        "PackageType": {"target": PACKAGE_TYPE},
-        "ImageConfigResponse": {"target": IMAGE_CONFIG_RESPONSE},
-        "Architectures": {"target": ARCHITECTURES_LIST},
-        "EphemeralStorage": {"target": EPHEMERAL_STORAGE},
-        "SnapStart": {"target": SNAP_START_RESPONSE},
-        "RuntimeVersionConfig": {"target": RUNTIME_VERSION_CONFIG},
-        "LoggingConfig": {"target": LOGGING_CONFIG},
-        "TenancyConfig": {"target": TENANCY_CONFIG},
-        "CapacityProviderConfig": {"target": CAPACITY_PROVIDER_CONFIG},
-        "ConfigSha256": {"target": STRING},
-        "DurableConfig": {"target": DURABLE_CONFIG},
-    },
-)
-
-FUNCTION_VERSIONS_PER_CAPACITY_PROVIDER_LIMIT_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.lambda#FunctionVersionsPerCapacityProviderLimitExceededException"
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
+
+
+n0 = "com.amazonaws.lambda"
+_L = "Long"
+_s = "smithy.api#default"
+_I = "Integer"
+_UCE = "UnreservedConcurrentExecutions"
+_AL = "AccountLimit"
+_TCS = "TotalCodeSize"
+_CSU = "CodeSizeUnzipped"
+_CSZ = "CodeSizeZipped"
+_CE = "ConcurrentExecutions"
+_AU = "AccountUsage"
+_FC = "FunctionCount"
+_A = "Action"
+_AV = "AdditionalVersion"
+_W = "Weight"
+_AVW = "AdditionalVersionWeights"
+_k = "key"
+_v = "value"
+_LPAA = "LayerPermissionAllowedAction"
+_LN = "LayerName"
+_OI = "OrganizationId"
+_LPAP = "LayerPermissionAllowedPrincipal"
+_S = "String"
+_SI = "StatementId"
+_LVN = "LayerVersionNumber"
+_ALVPI = "AddLayerVersionPermissionInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cALVPR = "com.amazonaws.lambda#AddLayerVersionPermissionRequest"
+_sm = "smithy.api#input"
+_smi = "smithy.api#required"
+_sL = "smithy.api#httpLabel"
+_VN = "VersionNumber"
+_P = "Principal"
+_RI = "RevisionId"
+_sQ = "smithy.api#httpQuery"
+_ALVPO = "AddLayerVersionPermissionOutput"
+_cALVPRo = "com.amazonaws.lambda#AddLayerVersionPermissionResponse"
+_smit = "smithy.api#output"
+_St = "Statement"
+_IPVE = "InvalidParameterValueException"
+_smith = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_T = "Type"
+_m = "message"
+_PLEE = "PolicyLengthExceededException"
+_PFE = "PreconditionFailedException"
+_RCE = "ResourceConflictException"
+_RNFE = "ResourceNotFoundException"
+_M = "Message"
+_SE = "ServiceException"
+_se = "server"
+_TR = "ThrottleReason"
+_CILE = "ConcurrentInvocationLimitExceeded"
+_sV = "smithy.api#enumValue"
+_FIRLE = "FunctionInvocationRateLimitExceeded"
+_RFCILE = "ReservedFunctionConcurrentInvocationLimitExceeded"
+_RFIRLE = "ReservedFunctionInvocationRateLimitExceeded"
+_CRLE = "CallerRateLimitExceeded"
+_CSCLE = "ConcurrentSnapshotCreateLimitExceeded"
+_TMRE = "TooManyRequestsException"
+_rAS = "retryAfterSeconds"
+_sH = "smithy.api#httpHeader"
+_RA = "Retry-After"
+_R = "Reason"
+_ALVP = "AddLayerVersionPermission"
+_smithy = "smithy.api#http"
+_EST = "EventSourceToken"
+_NFN = "NamespacedFunctionName"
+_FUAT = "FunctionUrlAuthType"
+_NONE = "NONE"
+_AI = "AWS_IAM"
+_IVFU = "InvokedViaFunctionUrl"
+_POID = "PrincipalOrgID"
+_NLPOAQ = "NumericLatestPublishedOrAliasQualifier"
+_SO = "SourceOwner"
+_Ar = "Arn"
+_API = "AddPermissionInput"
+_cAPR = "com.amazonaws.lambda#AddPermissionRequest"
+_FN = "FunctionName"
+_SA = "SourceArn"
+_SAo = "SourceAccount"
+_Q = "Qualifier"
+_APO = "AddPermissionOutput"
+_cAPRo = "com.amazonaws.lambda#AddPermissionResponse"
+_PPE = "PublicPolicyException"
+_AP = "AddPermission"
+_Al = "Alias"
+_FA = "FunctionArn"
+_D = "Description"
+_V = "Version"
+_ARC = "AliasRoutingConfiguration"
+_AC = "AliasConfiguration"
+_AA = "AliasArn"
+_N = "Name"
+_FV = "FunctionVersion"
+_RC = "RoutingConfig"
+_ALEE = "AliasLimitExceededException"
+_ALl = "AliasList"
+_me = "member"
+_ACl = "AllowCredentials"
+_SPVA = "SigningProfileVersionArns"
+_APl = "AllowedPublishers"
+_Me = "Method"
+_AML = "AllowMethodsList"
+_O = "Origin"
+_AOL = "AllowOriginsList"
+_URI = "URI"
+_KSRAT = "KafkaSchemaRegistryAuthType"
+_BA = "BASIC_AUTH"
+_CCTA = "CLIENT_CERTIFICATE_TLS_AUTH"
+_SRCC = "SERVER_ROOT_CA_CERTIFICATE"
+_KSRAC = "KafkaSchemaRegistryAccessConfig"
+_KSRACL = "KafkaSchemaRegistryAccessConfigList"
+_SRERF = "SchemaRegistryEventRecordFormat"
+_JSON = "JSON"
+_SOURCE = "SOURCE"
+_SRU = "SchemaRegistryUri"
+_KSVA = "KafkaSchemaValidationAttribute"
+_KEY = "KEY"
+_VALUE = "VALUE"
+_KSVC = "KafkaSchemaValidationConfig"
+_At = "Attribute"
+_KSVCL = "KafkaSchemaValidationConfigList"
+_KSRC = "KafkaSchemaRegistryConfig"
+_SRURI = "SchemaRegistryURI"
+_ERF = "EventRecordFormat"
+_ACc = "AccessConfigs"
+_SVC = "SchemaValidationConfigs"
+_AMKESC = "AmazonManagedKafkaEventSourceConfig"
+_CGI = "ConsumerGroupId"
+_SRC = "SchemaRegistryConfig"
+_ALL = "ApplicationLogLevel"
+_Tr = "Trace"
+_TRACE = "TRACE"
+_De = "Debug"
+_DEBUG = "DEBUG"
+_In = "Info"
+_INFO = "INFO"
+_Wa = "Warn"
+_WARN = "WARN"
+_E = "Error"
+_ERROR = "ERROR"
+_F = "Fatal"
+_FATAL = "FATAL"
+_Arc = "Architecture"
+_x = "x86_64"
+_a = "arm64"
+_ALr = "ArchitecturesList"
+_ACt = "AttemptCount"
+_CPN = "CapacityProviderName"
+_CPLEE = "CapacityProviderLimitExceededException"
+_CPMVCC = "CapacityProviderMaxVCpuCount"
+_CPSM = "CapacityProviderScalingMode"
+_Au = "Auto"
+_Ma = "Manual"
+_CPPMT = "CapacityProviderPredefinedMetricType"
+_LCPACPUU = "LambdaCapacityProviderAverageCPUUtilization"
+_MTV = "MetricTargetValue"
+_TTSP = "TargetTrackingScalingPolicy"
+_PMT = "PredefinedMetricType"
+_TV = "TargetValue"
+_CPSPL = "CapacityProviderScalingPoliciesList"
+_CPSC = "CapacityProviderScalingConfig"
+_MVCC = "MaxVCpuCount"
+_SM = "ScalingMode"
+_SP = "ScalingPolicies"
+_IT = "InstanceType"
+_ITS = "InstanceTypeSet"
+_IR = "InstanceRequirements"
+_Arch = "Architectures"
+_AIT = "AllowedInstanceTypes"
+_EIT = "ExcludedInstanceTypes"
+_KMSKANE = "KMSKeyArnNonEmpty"
+_RAo = "RoleArn"
+_CPPC = "CapacityProviderPermissionsConfig"
+_CPORA = "CapacityProviderOperatorRoleArn"
+_TK = "TagKey"
+_TVa = "TagValue"
+_Ta = "Tags"
+_PTM = "PropagateTagsMode"
+_No = "None"
+_Ex = "Explicit"
+_PT = "PropagateTags"
+_Mo = "Mode"
+_ET = "ExplicitTags"
+_LG = "LogGroup"
+_SLL = "SystemLogLevel"
+_CPLC = "CapacityProviderLoggingConfig"
+_CPTC = "CapacityProviderTelemetryConfig"
+_LC = "LoggingConfig"
+_SGI = "SecurityGroupId"
+_CPSGI = "CapacityProviderSecurityGroupIds"
+_SIu = "SubnetId"
+_CPSI = "CapacityProviderSubnetIds"
+_CPVC = "CapacityProviderVpcConfig"
+_SIub = "SubnetIds"
+_SGIe = "SecurityGroupIds"
+_CCPI = "CreateCapacityProviderInput"
+_cCCPR = "com.amazonaws.lambda#CreateCapacityProviderRequest"
+_VC = "VpcConfig"
+_PC = "PermissionsConfig"
+_KKA = "KmsKeyArn"
+_TC = "TelemetryConfig"
+_CPA = "CapacityProviderArn"
+_KMSKA = "KMSKeyArn"
+_Ti = "Timestamp"
+_CPS = "CapacityProviderState"
+_Pe = "Pending"
+_Ac = "Active"
+_Fa = "Failed"
+_Del = "Deleting"
+_CP = "CapacityProvider"
+_Sta = "State"
+_LM = "LastModified"
+_CCPO = "CreateCapacityProviderOutput"
+_cCCPRo = "com.amazonaws.lambda#CreateCapacityProviderResponse"
+_CCP = "CreateCapacityProvider"
+_DCPI = "DeleteCapacityProviderInput"
+_cDCPR = "com.amazonaws.lambda#DeleteCapacityProviderRequest"
+_DCPO = "DeleteCapacityProviderOutput"
+_cDCPRo = "com.amazonaws.lambda#DeleteCapacityProviderResponse"
+_DCP = "DeleteCapacityProvider"
+_GCPI = "GetCapacityProviderInput"
+_cGCPR = "com.amazonaws.lambda#GetCapacityProviderRequest"
+_GCPO = "GetCapacityProviderOutput"
+_cGCPRo = "com.amazonaws.lambda#GetCapacityProviderResponse"
+_GCP = "GetCapacityProvider"
+_MFLI = "MaxFiftyListItems"
+_LCPI = "ListCapacityProvidersInput"
+_cLCPR = "com.amazonaws.lambda#ListCapacityProvidersRequest"
+_Mar = "Marker"
+_MI = "MaxItems"
+_CPL = "CapacityProvidersList"
+_LCPO = "ListCapacityProvidersOutput"
+_cLCPRo = "com.amazonaws.lambda#ListCapacityProvidersResponse"
+_CPa = "CapacityProviders"
+_NM = "NextMarker"
+_LCP = "ListCapacityProviders"
+_LFVBCPI = "ListFunctionVersionsByCapacityProviderInput"
+_cLFVBCPR = "com.amazonaws.lambda#ListFunctionVersionsByCapacityProviderRequest"
+_NSFA = "NameSpacedFunctionArn"
+_Ina = "Inactive"
+_Dea = "Deactivating"
+_Deac = "Deactivated"
+_ANI = "ActiveNonInvocable"
+_FVBCPLI = "FunctionVersionsByCapacityProviderListItem"
+_FVBCPL = "FunctionVersionsByCapacityProviderList"
+_LFVBCPO = "ListFunctionVersionsByCapacityProviderOutput"
+_cLFVBCPRo = "com.amazonaws.lambda#ListFunctionVersionsByCapacityProviderResponse"
+_FVu = "FunctionVersions"
+_LFVBCP = "ListFunctionVersionsByCapacityProvider"
+_UCPI = "UpdateCapacityProviderInput"
+_cUCPR = "com.amazonaws.lambda#UpdateCapacityProviderRequest"
+_UCPO = "UpdateCapacityProviderOutput"
+_cUCPRo = "com.amazonaws.lambda#UpdateCapacityProviderResponse"
+_UCP = "UpdateCapacityProvider"
+_CSCI = "CodeSigningConfigId"
+_CSP = "CodeSigningPolicy"
+_En = "Enforce"
+_CSPo = "CodeSigningPolicies"
+_UAOD = "UntrustedArtifactOnDeployment"
+_CCSCI = "CreateCodeSigningConfigInput"
+_cCCSCR = "com.amazonaws.lambda#CreateCodeSigningConfigRequest"
+_CSCA = "CodeSigningConfigArn"
+_CSC = "CodeSigningConfig"
+_CCSCO = "CreateCodeSigningConfigOutput"
+_cCCSCRo = "com.amazonaws.lambda#CreateCodeSigningConfigResponse"
+_CCSC = "CreateCodeSigningConfig"
+_DCSCI = "DeleteCodeSigningConfigInput"
+_cDCSCR = "com.amazonaws.lambda#DeleteCodeSigningConfigRequest"
+_DCSCO = "DeleteCodeSigningConfigOutput"
+_cDCSCRo = "com.amazonaws.lambda#DeleteCodeSigningConfigResponse"
+_DCSC = "DeleteCodeSigningConfig"
+_GCSCI = "GetCodeSigningConfigInput"
+_cGCSCR = "com.amazonaws.lambda#GetCodeSigningConfigRequest"
+_GCSCO = "GetCodeSigningConfigOutput"
+_cGCSCRo = "com.amazonaws.lambda#GetCodeSigningConfigResponse"
+_GCSC = "GetCodeSigningConfig"
+_MLI = "MaxListItems"
+_LCSCI = "ListCodeSigningConfigsInput"
+_cLCSCR = "com.amazonaws.lambda#ListCodeSigningConfigsRequest"
+_CSCL = "CodeSigningConfigList"
+_LCSCO = "ListCodeSigningConfigsOutput"
+_cLCSCRo = "com.amazonaws.lambda#ListCodeSigningConfigsResponse"
+_CSCo = "CodeSigningConfigs"
+_LCSC = "ListCodeSigningConfigs"
+_LFBCSCI = "ListFunctionsByCodeSigningConfigInput"
+_cLFBCSCR = "com.amazonaws.lambda#ListFunctionsByCodeSigningConfigRequest"
+_FAL = "FunctionArnList"
+_LFBCSCO = "ListFunctionsByCodeSigningConfigOutput"
+_cLFBCSCRo = "com.amazonaws.lambda#ListFunctionsByCodeSigningConfigResponse"
+_FAu = "FunctionArns"
+_LFBCSC = "ListFunctionsByCodeSigningConfig"
+_UCSCI = "UpdateCodeSigningConfigInput"
+_cUCSCR = "com.amazonaws.lambda#UpdateCodeSigningConfigRequest"
+_UCSCO = "UpdateCodeSigningConfigOutput"
+_cUCSCRo = "com.amazonaws.lambda#UpdateCodeSigningConfigResponse"
+_UCSC = "UpdateCodeSigningConfig"
+_DFI = "DeleteFunctionInput"
+_cDFR = "com.amazonaws.lambda#DeleteFunctionRequest"
+_DFO = "DeleteFunctionOutput"
+_cDFRo = "com.amazonaws.lambda#DeleteFunctionResponse"
+_SC = "StatusCode"
+_sRC = "smithy.api#httpResponseCode"
+_DF = "DeleteFunction"
+_DFEICI = "DeleteFunctionEventInvokeConfigInput"
+_cDFEICR = "com.amazonaws.lambda#DeleteFunctionEventInvokeConfigRequest"
+_DFEICO = "DeleteFunctionEventInvokeConfigOutput"
+_sU = "smithy.api#Unit"
+_DFEIC = "DeleteFunctionEventInvokeConfig"
+_PRA = "PolicyResourceArn"
+_DRPI = "DeleteResourcePolicyInput"
+_cDRPR = "com.amazonaws.lambda#DeleteResourcePolicyRequest"
+_RAe = "ResourceArn"
+_DRPO = "DeleteResourcePolicyOutput"
+_DRP = "DeleteResourcePolicy"
+_CT = "CheckpointToken"
+_CTl = "ClientToken"
+_DEA = "DurableExecutionArn"
+_OA = "OperationAction"
+_START = "START"
+_SUCCEED = "SUCCEED"
+_FAIL = "FAIL"
+_RETRY = "RETRY"
+_CANCEL = "CANCEL"
+_DS = "DurationSeconds"
+_CO = "CallbackOptions"
+_TS = "TimeoutSeconds"
+_HTS = "HeartbeatTimeoutSeconds"
+_TI = "TenantId"
+_CIO = "ChainedInvokeOptions"
+_RCe = "ReplayChildren"
+_COo = "ContextOptions"
+_ED = "ErrorData"
+_smithya = "smithy.api#sensitive"
+_EM = "ErrorMessage"
+_ETr = "ErrorType"
+_STE = "StackTraceEntry"
+_STEt = "StackTraceEntries"
+_EO = "ErrorObject"
+_ST = "StackTrace"
+_OIp = "OperationId"
+_ON = "OperationName"
+_OP = "OperationPayload"
+_SOt = "StepOptions"
+_NADS = "NextAttemptDelaySeconds"
+_OST = "OperationSubType"
+_OT = "OperationType"
+_EXECUTION = "EXECUTION"
+_CONTEXT = "CONTEXT"
+_STEP = "STEP"
+_WAIT = "WAIT"
+_CALLBACK = "CALLBACK"
+_CI = "CHAINED_INVOKE"
+_WO = "WaitOptions"
+_WS = "WaitSeconds"
+_OU = "OperationUpdate"
+_Id = "Id"
+_PI = "ParentId"
+_STu = "SubType"
+_Pa = "Payload"
+_OUp = "OperationUpdates"
+_CDEI = "CheckpointDurableExecutionInput"
+_cCDER = "com.amazonaws.lambda#CheckpointDurableExecutionRequest"
+_U = "Updates"
+_sT = "smithy.api#idempotencyToken"
+_CIa = "CallbackId"
+_CD = "CallbackDetails"
+_Re = "Result"
+_CID = "ChainedInvokeDetails"
+_CDo = "ContextDetails"
+_ETx = "ExecutionTimestamp"
+_IP = "InputPayload"
+_EDx = "ExecutionDetails"
+_OS = "OperationStatus"
+_STARTED = "STARTED"
+_PENDING = "PENDING"
+_READY = "READY"
+_SUCCEEDED = "SUCCEEDED"
+_FAILED = "FAILED"
+_CANCELLED = "CANCELLED"
+_TO = "TIMED_OUT"
+_STOPPED = "STOPPED"
+_SD = "StepDetails"
+_Att = "Attempt"
+_NAT = "NextAttemptTimestamp"
+_WD = "WaitDetails"
+_SET = "ScheduledEndTimestamp"
+_Op = "Operation"
+_STt = "StartTimestamp"
+_ETn = "EndTimestamp"
+_Stat = "Status"
+_Ope = "Operations"
+_CUES = "CheckpointUpdatedExecutionState"
+_CDEO = "CheckpointDurableExecutionOutput"
+_cCDERo = "com.amazonaws.lambda#CheckpointDurableExecutionResponse"
+_NES = "NewExecutionState"
+_KMSADE = "KMSAccessDeniedException"
+_KMSDE = "KMSDisabledException"
+_KMSISE = "KMSInvalidStateException"
+_KMSNFE = "KMSNotFoundException"
+_CDE = "CheckpointDurableExecution"
+_IED = "IncludeExecutionData"
+_GDEI = "GetDurableExecutionInput"
+_cGDER = "com.amazonaws.lambda#GetDurableExecutionRequest"
+_ETxe = "ExecutionTimeout"
+_RPID = "RetentionPeriodInDays"
+_DC = "DurableConfig"
+_DEN = "DurableExecutionName"
+_EDI = "ExecutionDataIncluded"
+_OPu = "OutputPayload"
+_ES = "ExecutionStatus"
+_RUNNING = "RUNNING"
+_XATI = "XAmznTraceId"
+_TH = "TraceHeader"
+_VWLP = "VersionWithLatestPublished"
+_GDEO = "GetDurableExecutionOutput"
+_cGDERo = "com.amazonaws.lambda#GetDurableExecutionResponse"
+_GDE = "GetDurableExecution"
+_IC = "ItemCount"
+_RO = "ReverseOrder"
+_GDEHI = "GetDurableExecutionHistoryInput"
+_cGDEHR = "com.amazonaws.lambda#GetDurableExecutionHistoryRequest"
+_Tru = "Truncated"
+_EE = "EventError"
+_CFD = "CallbackFailedDetails"
+_CSD = "CallbackStartedDetails"
+_HT = "HeartbeatTimeout"
+_Tim = "Timeout"
+_ER = "EventResult"
+_CSDa = "CallbackSucceededDetails"
+_CTOD = "CallbackTimedOutDetails"
+_CIFD = "ChainedInvokeFailedDetails"
+_EI = "EventInput"
+_CISD = "ChainedInvokeStartedDetails"
+_Inp = "Input"
+_EV = "ExecutedVersion"
+_CISDh = "ChainedInvokeStoppedDetails"
+_CISDha = "ChainedInvokeSucceededDetails"
+_CITOD = "ChainedInvokeTimedOutDetails"
+_CFDo = "ContextFailedDetails"
+_CSDo = "ContextStartedDetails"
+_CSDon = "ContextSucceededDetails"
+_EIv = "EventId"
+_ETv = "EventType"
+_ESx = "ExecutionStarted"
+_ESxe = "ExecutionSucceeded"
+_EF = "ExecutionFailed"
+_ETO = "ExecutionTimedOut"
+_ESxec = "ExecutionStopped"
+_CS = "ContextStarted"
+_CSo = "ContextSucceeded"
+_CF = "ContextFailed"
+_WSa = "WaitStarted"
+_WSai = "WaitSucceeded"
+_WC = "WaitCancelled"
+_SS = "StepStarted"
+_SSt = "StepSucceeded"
+_SF = "StepFailed"
+_CIS = "ChainedInvokeStarted"
+_CISh = "ChainedInvokeSucceeded"
+_CIF = "ChainedInvokeFailed"
+_CITO = "ChainedInvokeTimedOut"
+_CISha = "ChainedInvokeStopped"
+_CSa = "CallbackStarted"
+_CSal = "CallbackSucceeded"
+_CFa = "CallbackFailed"
+_CTO = "CallbackTimedOut"
+_ICn = "InvocationCompleted"
+_EFD = "ExecutionFailedDetails"
+_ESD = "ExecutionStartedDetails"
+_ESDx = "ExecutionStoppedDetails"
+_ESDxe = "ExecutionSucceededDetails"
+_ETOD = "ExecutionTimedOutDetails"
+_ICD = "InvocationCompletedDetails"
+_RIe = "RequestId"
+_RD = "RetryDetails"
+_CA = "CurrentAttempt"
+_SFD = "StepFailedDetails"
+_SSD = "StepStartedDetails"
+_SSDt = "StepSucceededDetails"
+_WCD = "WaitCancelledDetails"
+_WSD = "WaitStartedDetails"
+_Du = "Duration"
+_WSDa = "WaitSucceededDetails"
+_Ev = "Event"
+_ETve = "EventTimestamp"
+_Eve = "Events"
+_GDEHO = "GetDurableExecutionHistoryOutput"
+_cGDEHRo = "com.amazonaws.lambda#GetDurableExecutionHistoryResponse"
+_GDEH = "GetDurableExecutionHistory"
+_GDESI = "GetDurableExecutionStateInput"
+_cGDESR = "com.amazonaws.lambda#GetDurableExecutionStateRequest"
+_GDESO = "GetDurableExecutionStateOutput"
+_cGDESRo = "com.amazonaws.lambda#GetDurableExecutionStateResponse"
+_GDES = "GetDurableExecutionState"
+_SDEI = "StopDurableExecutionInput"
+_cSDER = "com.amazonaws.lambda#StopDurableExecutionRequest"
+_sP = "smithy.api#httpPayload"
+_SDEO = "StopDurableExecutionOutput"
+_cSDERo = "com.amazonaws.lambda#StopDurableExecutionResponse"
+_STto = "StopTimestamp"
+_SDE = "StopDurableExecution"
+_BS = "BatchSize"
+_BBOFE = "BisectBatchOnFunctionError"
+_DA = "DestinationArn"
+_OF = "OnFailure"
+_Des = "Destination"
+_OSn = "OnSuccess"
+_DCe = "DestinationConfig"
+_CN = "CollectionName"
+_DN = "DatabaseName"
+_FD = "FullDocument"
+_UL = "UpdateLookup"
+_Def = "Default"
+_DDBESC = "DocumentDBEventSourceConfig"
+_Ena = "Enabled"
+_Pat = "Pattern"
+_Fi = "Filter"
+_FL = "FilterList"
+_FCi = "FilterCriteria"
+_Fil = "Filters"
+_FRT = "FunctionResponseType"
+_RBIF = "ReportBatchItemFailures"
+_FRTL = "FunctionResponseTypeList"
+_ESMSLL = "EventSourceMappingSystemLogLevel"
+_ESMLC = "EventSourceMappingLoggingConfig"
+_MBWIS = "MaximumBatchingWindowInSeconds"
+_MRAIS = "MaximumRecordAgeInSeconds"
+_MRAESM = "MaximumRetryAttemptsEventSourceMapping"
+_ESMM = "EventSourceMappingMetric"
+_EC = "EventCount"
+_ECr = "ErrorCount"
+_KM = "KafkaMetrics"
+_ESMML = "EventSourceMappingMetricList"
+_ESMMC = "EventSourceMappingMetricsConfig"
+_Met = "Metrics"
+_PF = "ParallelizationFactor"
+_MNOP = "MaximumNumberOfPollers"
+_MNOPi = "MinimumNumberOfPollers"
+_PPGN = "ProvisionedPollerGroupName"
+_PPC = "ProvisionedPollerConfig"
+_MP = "MinimumPollers"
+_MPa = "MaximumPollers"
+_PGN = "PollerGroupName"
+_Qu = "Queue"
+_Que = "Queues"
+_MC = "MaximumConcurrency"
+_SCc = "ScalingConfig"
+_EPT = "EndPointType"
+_KBS = "KAFKA_BOOTSTRAP_SERVERS"
+_End = "Endpoint"
+_EL = "EndpointLists"
+_Endp = "Endpoints"
+_SMES = "SelfManagedEventSource"
+_SMKESC = "SelfManagedKafkaEventSourceConfig"
+_SAT = "SourceAccessType"
+_VS = "VPC_SUBNET"
+_VSG = "VPC_SECURITY_GROUP"
+_SSA = "SASL_SCRAM_512_AUTH"
+_SSA_ = "SASL_SCRAM_256_AUTH"
+_VH = "VIRTUAL_HOST"
+_SAC = "SourceAccessConfiguration"
+_SACo = "SourceAccessConfigurations"
+_ESP = "EventSourcePosition"
+_TH_ = "TRIM_HORIZON"
+_LATEST = "LATEST"
+_AT = "AT_TIMESTAMP"
+_Da = "Date"
+_To = "Topic"
+_Top = "Topics"
+_TWIS = "TumblingWindowInSeconds"
+_CESMI = "CreateEventSourceMappingInput"
+_cCESMR = "com.amazonaws.lambda#CreateEventSourceMappingRequest"
+_ESA = "EventSourceArn"
+_MCe = "MetricsConfig"
+_SPt = "StartingPosition"
+_SPT = "StartingPositionTimestamp"
+_MRA = "MaximumRetryAttempts"
+_FRTu = "FunctionResponseTypes"
+_ESMA = "EventSourceMappingArn"
+_FCEC = "FilterCriteriaErrorCode"
+_FCEM = "FilterCriteriaErrorMessage"
+_FCE = "FilterCriteriaError"
+_ECrr = "ErrorCode"
+_UUIDS = "UUIDString"
+_CESMO = "CreateEventSourceMappingOutput"
+_cESMC = "com.amazonaws.lambda#EventSourceMappingConfiguration"
+_UUID = "UUID"
+_LPR = "LastProcessingResult"
+_STR = "StateTransitionReason"
+_CESM = "CreateEventSourceMapping"
+_DESMI = "DeleteEventSourceMappingInput"
+_cDESMR = "com.amazonaws.lambda#DeleteEventSourceMappingRequest"
+_DESMO = "DeleteEventSourceMappingOutput"
+_RIUE = "ResourceInUseException"
+_DESM = "DeleteEventSourceMapping"
+_GESMI = "GetEventSourceMappingInput"
+_cGESMR = "com.amazonaws.lambda#GetEventSourceMappingRequest"
+_GESMO = "GetEventSourceMappingOutput"
+_GESM = "GetEventSourceMapping"
+_LESMI = "ListEventSourceMappingsInput"
+_cLESMR = "com.amazonaws.lambda#ListEventSourceMappingsRequest"
+_ESMC = "EventSourceMappingConfiguration"
+_ESML = "EventSourceMappingsList"
+_LESMO = "ListEventSourceMappingsOutput"
+_cLESMRo = "com.amazonaws.lambda#ListEventSourceMappingsResponse"
+_ESM = "EventSourceMappings"
+_LESM = "ListEventSourceMappings"
+_UESMI = "UpdateEventSourceMappingInput"
+_cUESMR = "com.amazonaws.lambda#UpdateEventSourceMappingRequest"
+_UESMO = "UpdateEventSourceMappingOutput"
+_UESM = "UpdateEventSourceMapping"
+_CSCNFE = "CodeSigningConfigNotFoundException"
+_CSEE = "CodeStorageExceededException"
+_CVFE = "CodeVerificationFailedException"
+_EEMGBPVC = "ExecutionEnvironmentMemoryGiBPerVCpu"
+_PEEMC = "PerExecutionEnvironmentMaxConcurrency"
+_LMICPC = "LambdaManagedInstancesCapacityProviderConfig"
+_CPC = "CapacityProviderConfig"
+_SB = "S3Bucket"
+_SK = "S3Key"
+_SOSM = "S3ObjectStorageMode"
+_C = "Copy"
+_COPY = "COPY"
+_Ref = "Reference"
+_REFERENCE = "REFERENCE"
+_SOV = "S3ObjectVersion"
+_B = "Blob"
+_FCu = "FunctionCode"
+_ZF = "ZipFile"
+_IU = "ImageUri"
+_SKMSKA = "SourceKMSKeyArn"
+_DLC = "DeadLetterConfig"
+_TA = "TargetArn"
+_EVN = "EnvironmentVariableName"
+_EVV = "EnvironmentVariableValue"
+_EVn = "EnvironmentVariables"
+_Env = "Environment"
+_Va = "Variables"
+_ESS = "EphemeralStorageSize"
+_ESp = "EphemeralStorage"
+_Si = "Size"
+_FSA = "FileSystemArn"
+_LMP = "LocalMountPath"
+_DSR = "DirectS3Read"
+_ENABLED = "ENABLED"
+_DISABLED = "DISABLED"
+_AUTO = "AUTO"
+_SFC = "S3FilesConfig"
+_FSC = "FileSystemConfig"
+_FSCL = "FileSystemConfigList"
+_H = "Handler"
+_SL = "StringList"
+_WDo = "WorkingDirectory"
+_ICm = "ImageConfig"
+_EP = "EntryPoint"
+_Co = "Command"
+_LVA = "LayerVersionArn"
+_LL = "LayerList"
+_LF = "LogFormat"
+_J = "Json"
+_Te = "Text"
+_MS = "MemorySize"
+_PTa = "PackageType"
+_Z = "Zip"
+_Im = "Image"
+_Bo = "Boolean"
+_FVLP = "FunctionVersionLatestPublished"
+_LP = "LATEST_PUBLISHED"
+_Ru = "Runtime"
+_n = "nodejs"
+_no = "nodejs43"
+_nod = "nodejs4.3"
+_node = "nodejs610"
+_nodej = "nodejs6.10"
+_nodejs = "nodejs810"
+_nodejs_ = "nodejs8.10"
+_nodejsx = "nodejs10x"
+_nodejsx_ = "nodejs10.x"
+_nodejsx__ = "nodejs12x"
+_nodejsx___ = "nodejs12.x"
+_nodejsx____ = "nodejs14x"
+_nodejsx_____ = "nodejs14.x"
+_nodejsx______ = "nodejs16x"
+_nodejsx_______ = "nodejs16.x"
+_nodejsx________ = "nodejs18x"
+_nodejsx_________ = "nodejs18.x"
+_nodejsx__________ = "nodejs20x"
+_nodejsx___________ = "nodejs20.x"
+_nodejsx____________ = "nodejs22x"
+_nodejsx_____________ = "nodejs22.x"
+_nodejsx______________ = "nodejs24x"
+_nodejsx_______________ = "nodejs24.x"
+_j = "java8"
+_ja = "java8al2"
+_jav = "java8.al2"
+_java = "java11"
+_java_ = "java17"
+_java__ = "java21"
+_java___ = "java25"
+_p = "python27"
+_py = "python2.7"
+_pyt = "python36"
+_pyth = "python3.6"
+_pytho = "python37"
+_python = "python3.7"
+_python_ = "python38"
+_python__ = "python3.8"
+_python___ = "python39"
+_python____ = "python3.9"
+_python_____ = "python310"
+_python______ = "python3.10"
+_python_______ = "python311"
+_python________ = "python3.11"
+_python_________ = "python312"
+_python__________ = "python3.12"
+_python___________ = "python313"
+_python____________ = "python3.13"
+_python_____________ = "python314"
+_python______________ = "python3.14"
+_d = "dotnetcore10"
+_do = "dotnetcore1.0"
+_dot = "dotnetcore20"
+_dotn = "dotnetcore2.0"
+_dotne = "dotnetcore21"
+_dotnet = "dotnetcore2.1"
+_dotnetc = "dotnetcore31"
+_dotnetco = "dotnetcore3.1"
+_dotnet_ = "dotnet6"
+_dotnet__ = "dotnet8"
+_dotnet___ = "dotnet10"
+_nodejse = "nodejs43edge"
+_ne = "nodejs4.3-edge"
+_g = "go1x"
+_go = "go1.x"
+_r = "ruby25"
+_ru = "ruby2.5"
+_rub = "ruby27"
+_ruby = "ruby2.7"
+_ruby_ = "ruby32"
+_ruby__ = "ruby3.2"
+_ruby___ = "ruby33"
+_ruby____ = "ruby3.3"
+_ruby_____ = "ruby34"
+_ruby______ = "ruby3.4"
+_ruby_______ = "ruby40"
+_ruby________ = "ruby4.0"
+_pr = "provided"
+_pro = "providedal2"
+_prov = "provided.al2"
+_provi = "providedal2023"
+_provid = "provided.al2023"
+_nodejsx________________ = "nodejs26x"
+_nodejsx_________________ = "nodejs26.x"
+_python_______________ = "python315"
+_python________________ = "python3.15"
+_javaa = "java8al2023"
+_javaal = "java8.al2023"
+_javaal_ = "java11al2023"
+_javaal__ = "java11.al2023"
+_javaal___ = "java17al2023"
+_javaal____ = "java17.al2023"
+_SSAO = "SnapStartApplyOn"
+_PV = "PublishedVersions"
+_SSn = "SnapStart"
+_AO = "ApplyOn"
+_TIM = "TenantIsolationMode"
+_PT_ = "PER_TENANT"
+_TCe = "TenancyConfig"
+_TM = "TracingMode"
+_PTas = "PassThrough"
+_TCr = "TracingConfig"
+_NB = "NullableBoolean"
+_IAFDS = "Ipv6AllowedForDualStack"
+_CFI = "CreateFunctionInput"
+_cCFR = "com.amazonaws.lambda#CreateFunctionRequest"
+_Ro = "Role"
+_Cod = "Code"
+_Pu = "Publish"
+_PTu = "PublishTo"
+_La = "Layers"
+_FSCi = "FileSystemConfigs"
+_SSe = "SensitiveString"
+_EEn = "EnvironmentError"
+_ERn = "EnvironmentResponse"
+_ICE = "ImageConfigError"
+_ICR = "ImageConfigResponse"
+_LUS = "LastUpdateStatus"
+_Su = "Successful"
+_IPn = "InProgress"
+_LUSR = "LastUpdateStatusReason"
+_LUSRC = "LastUpdateStatusReasonCode"
+_ELE = "EniLimitExceeded"
+_IRP = "InsufficientRolePermissions"
+_ICnv = "InvalidConfiguration"
+_IE = "InternalError"
+_SOOIPA = "SubnetOutOfIPAddresses"
+_IS = "InvalidSubnet"
+_ISG = "InvalidSecurityGroup"
+_ID = "ImageDeleted"
+_IAD = "ImageAccessDenied"
+_II = "InvalidImage"
+_KMSKAD = "KMSKeyAccessDenied"
+_KMSKNF = "KMSKeyNotFound"
+_ISKMSK = "InvalidStateKMSKey"
+_DKMSK = "DisabledKMSKey"
+_EFSIOE = "EFSIOError"
+_EFSMCE = "EFSMountConnectivityError"
+_EFSMF = "EFSMountFailure"
+_EFSMT = "EFSMountTimeout"
+_IRn = "InvalidRuntime"
+_IZFE = "InvalidZipFileException"
+_FE = "FunctionError"
+_SQEE = "ServiceQuotaExceededException"
+_VLE = "VcpuLimitExceeded"
+_CPSLE = "CapacityProviderScalingLimitExceeded"
+_ICns = "InsufficientCapacity"
+_ECRLE = "EC2RequestLimitExceeded"
+_FEIT = "FunctionErrorInitTimeout"
+_FEITu = "FunctionError.InitTimeout"
+_FERIE = "FunctionErrorRuntimeInitError"
+_FERIEu = "FunctionError.RuntimeInitError"
+_FEEIE = "FunctionErrorExtensionInitError"
+_FEEIEu = "FunctionError.ExtensionInitError"
+_FEIEP = "FunctionErrorInvalidEntryPoint"
+_FEIEPu = "FunctionError.InvalidEntryPoint"
+_FEIWD = "FunctionErrorInvalidWorkingDirectory"
+_FEIWDu = "FunctionError.InvalidWorkingDirectory"
+_FEPD = "FunctionErrorPermissionDenied"
+_FEPDu = "FunctionError.PermissionDenied"
+_FETME = "FunctionErrorTooManyExtensions"
+_FETMEu = "FunctionError.TooManyExtensions"
+_FEIRE = "FunctionErrorInitResourceExhausted"
+_FEIREu = "FunctionError.InitResourceExhausted"
+_DBVEC = "DisallowedByVpcEncryptionControl"
+_DE = "DependencyError"
+_Lay = "Layer"
+_CSod = "CodeSize"
+_SPVAi = "SigningProfileVersionArn"
+_SJA = "SigningJobArn"
+_LRL = "LayersReferenceList"
+_RVE = "RuntimeVersionError"
+_RVA = "RuntimeVersionArn"
+_RVC = "RuntimeVersionConfig"
+_SSOS = "SnapStartOptimizationStatus"
+_On = "On"
+_Of = "Off"
+_SSR = "SnapStartResponse"
+_OSp = "OptimizationStatus"
+_SR = "StateReason"
+_SRCt = "StateReasonCode"
+_Idl = "Idle"
+_Cr = "Creating"
+_Res = "Restoring"
+_DDE = "DrainingDurableExecutions"
+_TCR = "TracingConfigResponse"
+_VI = "VpcId"
+_VCR = "VpcConfigResponse"
+_CFO = "CreateFunctionOutput"
+_cFC = "com.amazonaws.lambda#FunctionConfiguration"
+_CSode = "CodeSha256"
+_MA = "MasterArn"
+_CSon = "ConfigSha256"
+_FVPCPLEE = "FunctionVersionsPerCapacityProviderLimitExceededException"
+_ICSE = "InvalidCodeSignatureException"
+_CFr = "CreateFunction"
+_He = "Header"
+_HL = "HeadersList"
+_MAa = "MaxAge"
+_Cor = "Cors"
+_AH = "AllowHeaders"
+_AM = "AllowMethods"
+_AOl = "AllowOrigins"
+_EH = "ExposeHeaders"
+_FUFN = "FunctionUrlFunctionName"
+_IM = "InvokeMode"
+_BUFFERED = "BUFFERED"
+_RS = "RESPONSE_STREAM"
+_FUQ = "FunctionUrlQualifier"
+_CFUCI = "CreateFunctionUrlConfigInput"
+_cCFUCR = "com.amazonaws.lambda#CreateFunctionUrlConfigRequest"
+_ATu = "AuthType"
+_FU = "FunctionUrl"
+_CFUCO = "CreateFunctionUrlConfigOutput"
+_cCFUCRo = "com.amazonaws.lambda#CreateFunctionUrlConfigResponse"
+_CTr = "CreationTime"
+_CFUC = "CreateFunctionUrlConfig"
+_DFCSCI = "DeleteFunctionCodeSigningConfigInput"
+_cDFCSCR = "com.amazonaws.lambda#DeleteFunctionCodeSigningConfigRequest"
+_DFCSCO = "DeleteFunctionCodeSigningConfigOutput"
+_DFCSC = "DeleteFunctionCodeSigningConfig"
+_DFCI = "DeleteFunctionConcurrencyInput"
+_cDFCR = "com.amazonaws.lambda#DeleteFunctionConcurrencyRequest"
+_DFCO = "DeleteFunctionConcurrencyOutput"
+_DFC = "DeleteFunctionConcurrency"
+_DFUCI = "DeleteFunctionUrlConfigInput"
+_cDFUCR = "com.amazonaws.lambda#DeleteFunctionUrlConfigRequest"
+_DFUCO = "DeleteFunctionUrlConfigOutput"
+_DFUC = "DeleteFunctionUrlConfig"
+_GFI = "GetFunctionInput"
+_cGFR = "com.amazonaws.lambda#GetFunctionRequest"
+_FCLE = "FunctionCodeLocationError"
+_SSOSO = "SensitiveStringOnServerOnly"
+_RSO = "ResolvedS3Object"
+_FCL = "FunctionCodeLocation"
+_RT = "RepositoryType"
+_Lo = "Location"
+_RIU = "ResolvedImageUri"
+_RCEe = "ReservedConcurrentExecutions"
+_Con = "Concurrency"
+_FCun = "FunctionConfiguration"
+_TEC = "TagsErrorCode"
+_TEM = "TagsErrorMessage"
+_TE = "TagsError"
+_GFO = "GetFunctionOutput"
+_cGFRo = "com.amazonaws.lambda#GetFunctionResponse"
+_Conf = "Configuration"
+_GF = "GetFunction"
+_GFCSCI = "GetFunctionCodeSigningConfigInput"
+_cGFCSCR = "com.amazonaws.lambda#GetFunctionCodeSigningConfigRequest"
+_GFCSCO = "GetFunctionCodeSigningConfigOutput"
+_cGFCSCRo = "com.amazonaws.lambda#GetFunctionCodeSigningConfigResponse"
+_GFCSC = "GetFunctionCodeSigningConfig"
+_GFCI = "GetFunctionConcurrencyInput"
+_cGFCR = "com.amazonaws.lambda#GetFunctionConcurrencyRequest"
+_GFCO = "GetFunctionConcurrencyOutput"
+_cGFCRo = "com.amazonaws.lambda#GetFunctionConcurrencyResponse"
+_GFC = "GetFunctionConcurrency"
+_GFCIe = "GetFunctionConfigurationInput"
+_cGFCRom = "com.amazonaws.lambda#GetFunctionConfigurationRequest"
+_GFCOe = "GetFunctionConfigurationOutput"
+_GFCe = "GetFunctionConfiguration"
+_UFN = "UnqualifiedFunctionName"
+_GFRCI = "GetFunctionRecursionConfigInput"
+_cGFRCR = "com.amazonaws.lambda#GetFunctionRecursionConfigRequest"
+_RL = "RecursiveLoop"
+_All = "Allow"
+_Ter = "Terminate"
+_GFRCO = "GetFunctionRecursionConfigOutput"
+_cGFRCRo = "com.amazonaws.lambda#GetFunctionRecursionConfigResponse"
+_GFRC = "GetFunctionRecursionConfig"
+_PFQ = "PublishedFunctionQualifier"
+_GFSCI = "GetFunctionScalingConfigInput"
+_cGFSCR = "com.amazonaws.lambda#GetFunctionScalingConfigRequest"
+_FSCEE = "FunctionScalingConfigExecutionEnvironments"
+_FSCu = "FunctionScalingConfig"
+_MEE = "MinExecutionEnvironments"
+_MEEa = "MaxExecutionEnvironments"
+_GFSCO = "GetFunctionScalingConfigOutput"
+_cGFSCRo = "com.amazonaws.lambda#GetFunctionScalingConfigResponse"
+_AFSC = "AppliedFunctionScalingConfig"
+_RFSC = "RequestedFunctionScalingConfig"
+_GFSC = "GetFunctionScalingConfig"
+_GFUCI = "GetFunctionUrlConfigInput"
+_cGFUCR = "com.amazonaws.lambda#GetFunctionUrlConfigRequest"
+_GFUCO = "GetFunctionUrlConfigOutput"
+_cGFUCRo = "com.amazonaws.lambda#GetFunctionUrlConfigResponse"
+_LMT = "LastModifiedTime"
+_GFUC = "GetFunctionUrlConfig"
+_GPI = "GetPolicyInput"
+_cGPR = "com.amazonaws.lambda#GetPolicyRequest"
+_GPO = "GetPolicyOutput"
+_cGPRo = "com.amazonaws.lambda#GetPolicyResponse"
+_Po = "Policy"
+_GP = "GetPolicy"
+_GRMCI = "GetRuntimeManagementConfigInput"
+_cGRMCR = "com.amazonaws.lambda#GetRuntimeManagementConfigRequest"
+_URO = "UpdateRuntimeOn"
+_FUu = "FunctionUpdate"
+_GRMCO = "GetRuntimeManagementConfigOutput"
+_cGRMCRo = "com.amazonaws.lambda#GetRuntimeManagementConfigResponse"
+_GRMC = "GetRuntimeManagementConfig"
+_CAUDE = "CodeArtifactUserDeletedException"
+_CAUFE = "CodeArtifactUserFailedException"
+_CAUPE = "CodeArtifactUserPendingException"
+_DEASE = "DurableExecutionAlreadyStartedException"
+_ECADE = "EC2AccessDeniedException"
+_ECTE = "EC2ThrottledException"
+_ECUE = "EC2UnexpectedException"
+_ECEC = "EC2ErrorCode"
+_EFSIOEx = "EFSIOException"
+_EFSMCEo = "EFSMountConnectivityException"
+_EFSMFE = "EFSMountFailureException"
+_EFSMTE = "EFSMountTimeoutException"
+_ENILRE = "ENILimitReachedException"
+_ENINRE = "ENINotReadyException"
+_IRCE = "InvalidRequestContentException"
+_IRE = "InvalidRuntimeException"
+_ISGIDE = "InvalidSecurityGroupIDException"
+_ISIDE = "InvalidSubnetIDException"
+_ITn = "InvocationType"
+_RR = "RequestResponse"
+_DR = "DryRun"
+_LT = "LogType"
+_Tai = "Tail"
+_IIn = "InvokeInput"
+_cIR = "com.amazonaws.lambda#InvocationRequest"
+_XAIT = "X-Amz-Invocation-Type"
+_XALT = "X-Amz-Log-Type"
+_CC = "ClientContext"
+_XACC = "X-Amz-Client-Context"
+_XADEN = "X-Amz-Durable-Execution-Name"
+_XATI_ = "X-Amz-Tenant-Id"
+_IO = "InvokeOutput"
+_cIRo = "com.amazonaws.lambda#InvocationResponse"
+_XAFE = "X-Amz-Function-Error"
+_LR = "LogResult"
+_XALR = "X-Amz-Log-Result"
+_XAEV = "X-Amz-Executed-Version"
+_XADEA = "X-Amz-Durable-Execution-Arn"
+_MNSE = "ModeNotSupportedException"
+_NPVE = "NoPublishedVersionException"
+_RIE = "RecursiveInvocationException"
+_RTLE = "RequestTooLargeException"
+_RNRE = "ResourceNotReadyException"
+_SFMCE = "S3FilesMountConnectivityException"
+_SFMFE = "S3FilesMountFailureException"
+_SFMTE = "S3FilesMountTimeoutException"
+_SRETLE = "SerializedRequestEntityTooLargeException"
+_SSE = "SnapStartException"
+_SSNRE = "SnapStartNotReadyException"
+_SSRFE = "SnapStartRegenerationFailureException"
+_SSTE = "SnapStartTimeoutException"
+_SIPALRE = "SubnetIPAddressLimitReachedException"
+_UMTE = "UnsupportedMediaTypeException"
+_Inv = "Invoke"
+_BSl = "BlobStream"
+_smithyap = "smithy.api#streaming"
+_IAI = "InvokeAsyncInput"
+_cIAR = "com.amazonaws.lambda#InvokeAsyncRequest"
+_IA = "InvokeArgs"
+_HS = "HttpStatus"
+_IAO = "InvokeAsyncOutput"
+_cIARo = "com.amazonaws.lambda#InvokeAsyncResponse"
+_IAn = "InvokeAsync"
+_RSIT = "ResponseStreamingInvocationType"
+_IWRSI = "InvokeWithResponseStreamInput"
+_cIWRSR = "com.amazonaws.lambda#InvokeWithResponseStreamRequest"
+_IWRSCE = "InvokeWithResponseStreamCompleteEvent"
+_EDr = "ErrorDetails"
+_IRSU = "InvokeResponseStreamUpdate"
+_sPm = "smithy.api#eventPayload"
+_IWRSRE = "InvokeWithResponseStreamResponseEvent"
+_PCa = "PayloadChunk"
+_ICnvo = "InvokeComplete"
+_IWRSO = "InvokeWithResponseStreamOutput"
+_cIWRSRo = "com.amazonaws.lambda#InvokeWithResponseStreamResponse"
+_ESv = "EventStream"
+_RSCT = "ResponseStreamContentType"
+_CT_ = "Content-Type"
+_IWRS = "InvokeWithResponseStream"
+_ESL = "ExecutionStatusList"
+_LDEBFI = "ListDurableExecutionsByFunctionInput"
+_cLDEBFR = "com.amazonaws.lambda#ListDurableExecutionsByFunctionRequest"
+_Statu = "Statuses"
+_SAt = "StartedAfter"
+_SBt = "StartedBefore"
+_Exe = "Execution"
+_DEu = "DurableExecutions"
+_LDEBFO = "ListDurableExecutionsByFunctionOutput"
+_cLDEBFRo = "com.amazonaws.lambda#ListDurableExecutionsByFunctionResponse"
+_LDEBF = "ListDurableExecutionsByFunction"
+_ALL_ = "ALL"
+_MR = "MasterRegion"
+_LFI = "ListFunctionsInput"
+_cLFR = "com.amazonaws.lambda#ListFunctionsRequest"
+_FLu = "FunctionList"
+_LFO = "ListFunctionsOutput"
+_cLFRo = "com.amazonaws.lambda#ListFunctionsResponse"
+_Fu = "Functions"
+_LFi = "ListFunctions"
+_LFUCI = "ListFunctionUrlConfigsInput"
+_cLFUCR = "com.amazonaws.lambda#ListFunctionUrlConfigsRequest"
+_FUC = "FunctionUrlConfig"
+_FUCL = "FunctionUrlConfigList"
+_LFUCO = "ListFunctionUrlConfigsOutput"
+_cLFUCRo = "com.amazonaws.lambda#ListFunctionUrlConfigsResponse"
+_FUCu = "FunctionUrlConfigs"
+_LFUC = "ListFunctionUrlConfigs"
+_MPCCLI = "MaxProvisionedConcurrencyConfigListItems"
+_LPCCI = "ListProvisionedConcurrencyConfigsInput"
+_cLPCCR = "com.amazonaws.lambda#ListProvisionedConcurrencyConfigsRequest"
+_NNI = "NonNegativeInteger"
+_PIo = "PositiveInteger"
+_PCSE = "ProvisionedConcurrencyStatusEnum"
+_IP_ = "IN_PROGRESS"
+_PCCLI = "ProvisionedConcurrencyConfigListItem"
+_RPCE = "RequestedProvisionedConcurrentExecutions"
+_APCE = "AvailableProvisionedConcurrentExecutions"
+_APCEl = "AllocatedProvisionedConcurrentExecutions"
+_SRt = "StatusReason"
+_PCCL = "ProvisionedConcurrencyConfigList"
+_LPCCO = "ListProvisionedConcurrencyConfigsOutput"
+_cLPCCRo = "com.amazonaws.lambda#ListProvisionedConcurrencyConfigsResponse"
+_PCC = "ProvisionedConcurrencyConfigs"
+_LPCC = "ListProvisionedConcurrencyConfigs"
+_PFCSCI = "PutFunctionCodeSigningConfigInput"
+_cPFCSCR = "com.amazonaws.lambda#PutFunctionCodeSigningConfigRequest"
+_PFCSCO = "PutFunctionCodeSigningConfigOutput"
+_cPFCSCRo = "com.amazonaws.lambda#PutFunctionCodeSigningConfigResponse"
+_PFCSC = "PutFunctionCodeSigningConfig"
+_PFCI = "PutFunctionConcurrencyInput"
+_cPFCR = "com.amazonaws.lambda#PutFunctionConcurrencyRequest"
+_PFCO = "PutFunctionConcurrencyOutput"
+_cC = "com.amazonaws.lambda#Concurrency"
+_PFC = "PutFunctionConcurrency"
+_PFRCI = "PutFunctionRecursionConfigInput"
+_cPFRCR = "com.amazonaws.lambda#PutFunctionRecursionConfigRequest"
+_PFRCO = "PutFunctionRecursionConfigOutput"
+_cPFRCRo = "com.amazonaws.lambda#PutFunctionRecursionConfigResponse"
+_PFRC = "PutFunctionRecursionConfig"
+_PFSCI = "PutFunctionScalingConfigInput"
+_cPFSCR = "com.amazonaws.lambda#PutFunctionScalingConfigRequest"
+_PFSCO = "PutFunctionScalingConfigOutput"
+_cPFSCRo = "com.amazonaws.lambda#PutFunctionScalingConfigResponse"
+_FS = "FunctionState"
+_PFSC = "PutFunctionScalingConfig"
+_PRMCI = "PutRuntimeManagementConfigInput"
+_cPRMCR = "com.amazonaws.lambda#PutRuntimeManagementConfigRequest"
+_PRMCO = "PutRuntimeManagementConfigOutput"
+_cPRMCRo = "com.amazonaws.lambda#PutRuntimeManagementConfigResponse"
+_PRMC = "PutRuntimeManagementConfig"
+_UFCI = "UpdateFunctionCodeInput"
+_cUFCR = "com.amazonaws.lambda#UpdateFunctionCodeRequest"
+_UFCO = "UpdateFunctionCodeOutput"
+_UFC = "UpdateFunctionCode"
+_UFCIp = "UpdateFunctionConfigurationInput"
+_cUFCRo = "com.amazonaws.lambda#UpdateFunctionConfigurationRequest"
+_UFCOp = "UpdateFunctionConfigurationOutput"
+_UFCp = "UpdateFunctionConfiguration"
+_UFUCI = "UpdateFunctionUrlConfigInput"
+_cUFUCR = "com.amazonaws.lambda#UpdateFunctionUrlConfigRequest"
+_UFUCO = "UpdateFunctionUrlConfigOutput"
+_cUFUCRo = "com.amazonaws.lambda#UpdateFunctionUrlConfigResponse"
+_UFUC = "UpdateFunctionUrlConfig"
+_CAI = "CreateAliasInput"
+_cCAR = "com.amazonaws.lambda#CreateAliasRequest"
+_CAO = "CreateAliasOutput"
+_cAC = "com.amazonaws.lambda#AliasConfiguration"
+_CAr = "CreateAlias"
+_DAI = "DeleteAliasInput"
+_cDAR = "com.amazonaws.lambda#DeleteAliasRequest"
+_DAO = "DeleteAliasOutput"
+_DAe = "DeleteAlias"
+_GAI = "GetAliasInput"
+_cGAR = "com.amazonaws.lambda#GetAliasRequest"
+_GAO = "GetAliasOutput"
+_GA = "GetAlias"
+_LAI = "ListAliasesInput"
+_cLAR = "com.amazonaws.lambda#ListAliasesRequest"
+_LAO = "ListAliasesOutput"
+_cLARo = "com.amazonaws.lambda#ListAliasesResponse"
+_Ali = "Aliases"
+_LA = "ListAliases"
+_UAI = "UpdateAliasInput"
+_cUAR = "com.amazonaws.lambda#UpdateAliasRequest"
+_UAO = "UpdateAliasOutput"
+_UA = "UpdateAlias"
+_LVBFI = "ListVersionsByFunctionInput"
+_cLVBFR = "com.amazonaws.lambda#ListVersionsByFunctionRequest"
+_LVBFO = "ListVersionsByFunctionOutput"
+_cLVBFRo = "com.amazonaws.lambda#ListVersionsByFunctionResponse"
+_Ve = "Versions"
+_LVBF = "ListVersionsByFunction"
+_PVI = "PublishVersionInput"
+_cPVR = "com.amazonaws.lambda#PublishVersionRequest"
+_PVO = "PublishVersionOutput"
+_PVu = "PublishVersion"
+_GASI = "GetAccountSettingsInput"
+_cGASR = "com.amazonaws.lambda#GetAccountSettingsRequest"
+_GASO = "GetAccountSettingsOutput"
+_cGASRo = "com.amazonaws.lambda#GetAccountSettingsResponse"
+_GAS = "GetAccountSettings"
+_GFEICI = "GetFunctionEventInvokeConfigInput"
+_cGFEICR = "com.amazonaws.lambda#GetFunctionEventInvokeConfigRequest"
+_MEAIS = "MaximumEventAgeInSeconds"
+_GFEICO = "GetFunctionEventInvokeConfigOutput"
+_cFEIC = "com.amazonaws.lambda#FunctionEventInvokeConfig"
+_GFEIC = "GetFunctionEventInvokeConfig"
+_GRPI = "GetResourcePolicyInput"
+_cGRPR = "com.amazonaws.lambda#GetResourcePolicyRequest"
+_RP = "ResourcePolicy"
+_GRPO = "GetResourcePolicyOutput"
+_cGRPRo = "com.amazonaws.lambda#GetResourcePolicyResponse"
+_GRP = "GetResourcePolicy"
+_MLLI = "MaxLayerListItems"
+_LLI = "ListLayersInput"
+_cLLR = "com.amazonaws.lambda#ListLayersRequest"
+_CAo = "CompatibleArchitecture"
+_CR = "CompatibleRuntime"
+_CAom = "CompatibleArchitectures"
+_CRo = "CompatibleRuntimes"
+_LI = "LicenseInfo"
+_LVLI = "LayerVersionsListItem"
+_CDr = "CreatedDate"
+_LAa = "LayerArn"
+_LLIa = "LayersListItem"
+_LMV = "LatestMatchingVersion"
+_LLa = "LayersList"
+_LLO = "ListLayersOutput"
+_cLLRo = "com.amazonaws.lambda#ListLayersResponse"
+_LLi = "ListLayers"
+_DLVI = "DeleteLayerVersionInput"
+_cDLVR = "com.amazonaws.lambda#DeleteLayerVersionRequest"
+_DLVO = "DeleteLayerVersionOutput"
+_DLV = "DeleteLayerVersion"
+_GLVI = "GetLayerVersionInput"
+_cGLVR = "com.amazonaws.lambda#GetLayerVersionRequest"
+_LVCO = "LayerVersionContentOutput"
+_GLVO = "GetLayerVersionOutput"
+_cGLVRo = "com.amazonaws.lambda#GetLayerVersionResponse"
+_Cont = "Content"
+_GLV = "GetLayerVersion"
+_GLVBAI = "GetLayerVersionByArnInput"
+_cGLVBAR = "com.amazonaws.lambda#GetLayerVersionByArnRequest"
+_GLVBAO = "GetLayerVersionByArnOutput"
+_GLVBA = "GetLayerVersionByArn"
+_GLVPI = "GetLayerVersionPolicyInput"
+_cGLVPR = "com.amazonaws.lambda#GetLayerVersionPolicyRequest"
+_GLVPO = "GetLayerVersionPolicyOutput"
+_cGLVPRo = "com.amazonaws.lambda#GetLayerVersionPolicyResponse"
+_GLVP = "GetLayerVersionPolicy"
+_LLVI = "ListLayerVersionsInput"
+_cLLVR = "com.amazonaws.lambda#ListLayerVersionsRequest"
+_LVL = "LayerVersionsList"
+_LLVO = "ListLayerVersionsOutput"
+_cLLVRo = "com.amazonaws.lambda#ListLayerVersionsResponse"
+_LV = "LayerVersions"
+_LLV = "ListLayerVersions"
+_LVCI = "LayerVersionContentInput"
+_PLVI = "PublishLayerVersionInput"
+_cPLVR = "com.amazonaws.lambda#PublishLayerVersionRequest"
+_PLVO = "PublishLayerVersionOutput"
+_cPLVRo = "com.amazonaws.lambda#PublishLayerVersionResponse"
+_PLV = "PublishLayerVersion"
+_RLVPI = "RemoveLayerVersionPermissionInput"
+_cRLVPR = "com.amazonaws.lambda#RemoveLayerVersionPermissionRequest"
+_RLVPO = "RemoveLayerVersionPermissionOutput"
+_RLVP = "RemoveLayerVersionPermission"
+_MFEICLI = "MaxFunctionEventInvokeConfigListItems"
+_LFEICI = "ListFunctionEventInvokeConfigsInput"
+_cLFEICR = "com.amazonaws.lambda#ListFunctionEventInvokeConfigsRequest"
+_FEIC = "FunctionEventInvokeConfig"
+_FEICL = "FunctionEventInvokeConfigList"
+_LFEICO = "ListFunctionEventInvokeConfigsOutput"
+_cLFEICRo = "com.amazonaws.lambda#ListFunctionEventInvokeConfigsResponse"
+_FEICu = "FunctionEventInvokeConfigs"
+_LFEIC = "ListFunctionEventInvokeConfigs"
+_TRa = "TaggableResource"
+_LTI = "ListTagsInput"
+_cLTR = "com.amazonaws.lambda#ListTagsRequest"
+_Reso = "Resource"
+_LTO = "ListTagsOutput"
+_cLTRo = "com.amazonaws.lambda#ListTagsResponse"
+_LTi = "ListTags"
+_NSI = "NamespacedStatementId"
+_RPI = "RemovePermissionInput"
+_cRPR = "com.amazonaws.lambda#RemovePermissionRequest"
+_RPO = "RemovePermissionOutput"
+_RPe = "RemovePermission"
+_DPCCI = "DeleteProvisionedConcurrencyConfigInput"
+_cDPCCR = "com.amazonaws.lambda#DeleteProvisionedConcurrencyConfigRequest"
+_DPCCO = "DeleteProvisionedConcurrencyConfigOutput"
+_DPCC = "DeleteProvisionedConcurrencyConfig"
+_GPCCI = "GetProvisionedConcurrencyConfigInput"
+_cGPCCR = "com.amazonaws.lambda#GetProvisionedConcurrencyConfigRequest"
+_GPCCO = "GetProvisionedConcurrencyConfigOutput"
+_cGPCCRo = "com.amazonaws.lambda#GetProvisionedConcurrencyConfigResponse"
+_PCCNFE = "ProvisionedConcurrencyConfigNotFoundException"
+_GPCC = "GetProvisionedConcurrencyConfig"
+_PPCCI = "PutProvisionedConcurrencyConfigInput"
+_cPPCCR = "com.amazonaws.lambda#PutProvisionedConcurrencyConfigRequest"
+_PCE = "ProvisionedConcurrentExecutions"
+_PPCCO = "PutProvisionedConcurrencyConfigOutput"
+_cPPCCRo = "com.amazonaws.lambda#PutProvisionedConcurrencyConfigResponse"
+_PPCC = "PutProvisionedConcurrencyConfig"
+_PFEICI = "PutFunctionEventInvokeConfigInput"
+_cPFEICR = "com.amazonaws.lambda#PutFunctionEventInvokeConfigRequest"
+_PFEICO = "PutFunctionEventInvokeConfigOutput"
+_PFEIC = "PutFunctionEventInvokeConfig"
+_PRPI = "PutResourcePolicyInput"
+_cPRPR = "com.amazonaws.lambda#PutResourcePolicyRequest"
+_PRPO = "PutResourcePolicyOutput"
+_cPRPRo = "com.amazonaws.lambda#PutResourcePolicyResponse"
+_PRP = "PutResourcePolicy"
+_CTE = "CallbackTimeoutException"
+_SDECFI = "SendDurableExecutionCallbackFailureInput"
+_cSDECFR = "com.amazonaws.lambda#SendDurableExecutionCallbackFailureRequest"
+_SDECFO = "SendDurableExecutionCallbackFailureOutput"
+_cSDECFRo = "com.amazonaws.lambda#SendDurableExecutionCallbackFailureResponse"
+_SDECF = "SendDurableExecutionCallbackFailure"
+_SDECHI = "SendDurableExecutionCallbackHeartbeatInput"
+_cSDECHR = "com.amazonaws.lambda#SendDurableExecutionCallbackHeartbeatRequest"
+_SDECHO = "SendDurableExecutionCallbackHeartbeatOutput"
+_cSDECHRo = "com.amazonaws.lambda#SendDurableExecutionCallbackHeartbeatResponse"
+_SDECH = "SendDurableExecutionCallbackHeartbeat"
+_BOP = "BinaryOperationPayload"
+_SDECSI = "SendDurableExecutionCallbackSuccessInput"
+_cSDECSR = "com.amazonaws.lambda#SendDurableExecutionCallbackSuccessRequest"
+_SDECSO = "SendDurableExecutionCallbackSuccessOutput"
+_cSDECSRo = "com.amazonaws.lambda#SendDurableExecutionCallbackSuccessResponse"
+_SDECS = "SendDurableExecutionCallbackSuccess"
+_TRI = "TagResourceInput"
+_cTRR = "com.amazonaws.lambda#TagResourceRequest"
+_TRO = "TagResourceOutput"
+_TRag = "TagResource"
+_TKL = "TagKeyList"
+_sN = "smithy.api#xmlName"
+_K = "Key"
+_URIn = "UntagResourceInput"
+_cURR = "com.amazonaws.lambda#UntagResourceRequest"
+_TKa = "TagKeys"
+_tK = "tagKeys"
+_UROn = "UntagResourceOutput"
+_UR = "UntagResource"
+_UFEICI = "UpdateFunctionEventInvokeConfigInput"
+_cUFEICR = "com.amazonaws.lambda#UpdateFunctionEventInvokeConfigRequest"
+_UFEICO = "UpdateFunctionEventInvokeConfigOutput"
+_UFEIC = "UpdateFunctionEventInvokeConfig"
+_AWSGAS = "AWSGirApiService"
+_aw = "aws.api#service"
+_aws = "aws.auth#sigv4"
+_sB = "smithy.rules#endpointBdd"
+_aJ = "aws.protocols#restJson1"
+
+LONG: StaticSchema = (8, n0, _L, {_s: 0})
+
+INTEGER: StaticSchema = (7, n0, _I, {_s: 0})
+
+UNRESERVED_CONCURRENT_EXECUTIONS: StaticSchema = (7, n0, _UCE, 0)
+
+ACCOUNT_LIMIT: StaticSchema = (
+    18,
+    n0,
+    _AL,
+    0,
+    (_TCS, _CSU, _CSZ, _CE, _UCE),
+    (
+        (LONG, {_s: 0}),
+        (LONG, {_s: 0}),
+        (LONG, {_s: 0}),
+        (INTEGER, {_s: 0}),
+        (UNRESERVED_CONCURRENT_EXECUTIONS, 0),
     ),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
 )
 
-INVALID_CODE_SIGNATURE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvalidCodeSignatureException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-CREATE_FUNCTION = Schema(
-    id=ShapeID("com.amazonaws.lambda#CreateFunction"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/2015-03-31/functions", "code": 201}
-            ),
-        )
-    ],
-)
-
-HEADER = Schema(id=ShapeID("com.amazonaws.lambda#Header"), shape_type=ShapeType.STRING)
-
-HEADERS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#HeadersList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": HEADER}},
-)
-
-MAX_AGE = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaxAge"), shape_type=ShapeType.INTEGER
-)
-
-CORS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Cors"),
-    members={
-        "AllowCredentials": {"target": ALLOW_CREDENTIALS},
-        "AllowHeaders": {"target": HEADERS_LIST},
-        "AllowMethods": {"target": ALLOW_METHODS_LIST},
-        "AllowOrigins": {"target": ALLOW_ORIGINS_LIST},
-        "ExposeHeaders": {"target": HEADERS_LIST},
-        "MaxAge": {"target": MAX_AGE},
-    },
-)
-
-FUNCTION_URL_FUNCTION_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#FunctionUrlFunctionName"),
-    shape_type=ShapeType.STRING,
-)
-
-INVOKE_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvokeMode"),
-    shape_type=ShapeType.ENUM,
-    members={"BUFFERED": {"target": UNIT}, "RESPONSE_STREAM": {"target": UNIT}},
-)
-
-FUNCTION_URL_QUALIFIER = Schema(
-    id=ShapeID("com.amazonaws.lambda#FunctionUrlQualifier"), shape_type=ShapeType.STRING
-)
-
-CREATE_FUNCTION_URL_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateFunctionUrlConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#CreateFunctionUrlConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_URL_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": FUNCTION_URL_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-        "AuthType": {
-            "target": FUNCTION_URL_AUTH_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Cors": {"target": CORS},
-        "InvokeMode": {"target": INVOKE_MODE},
-    },
-)
-
-FUNCTION_URL = Schema(
-    id=ShapeID("com.amazonaws.lambda#FunctionUrl"), shape_type=ShapeType.STRING
-)
-
-CREATE_FUNCTION_URL_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateFunctionUrlConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#CreateFunctionUrlConfigResponse",
-        )
-    ],
-    members={
-        "FunctionUrl": {
-            "target": FUNCTION_URL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionArn": {
-            "target": FUNCTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AuthType": {
-            "target": FUNCTION_URL_AUTH_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Cors": {"target": CORS},
-        "CreationTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "InvokeMode": {"target": INVOKE_MODE},
-    },
-)
-
-CREATE_FUNCTION_URL_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#CreateFunctionUrlConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2021-10-31/functions/{FunctionName}/url",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_FUNCTION_CODE_SIGNING_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionCodeSigningConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteFunctionCodeSigningConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionCodeSigningConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_FUNCTION_CODE_SIGNING_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionCodeSigningConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2020-06-30/functions/{FunctionName}/code-signing-config",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_FUNCTION_CONCURRENCY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionConcurrencyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteFunctionConcurrencyRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_FUNCTION_CONCURRENCY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionConcurrencyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_FUNCTION_CONCURRENCY = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionConcurrency"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2017-10-31/functions/{FunctionName}/concurrency",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_FUNCTION_URL_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionUrlConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteFunctionUrlConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_URL_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": FUNCTION_URL_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-    },
-)
-
-DELETE_FUNCTION_URL_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionUrlConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_FUNCTION_URL_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteFunctionUrlConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2021-10-31/functions/{FunctionName}/url",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-GET_FUNCTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-    },
-)
-
-FUNCTION_CODE_LOCATION_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionCodeLocationError"),
-    members={"ErrorCode": {"target": STRING}, "Message": {"target": SENSITIVE_STRING}},
-)
-
-SENSITIVE_STRING_ON_SERVER_ONLY = Schema(
-    id=ShapeID("com.amazonaws.lambda#SensitiveStringOnServerOnly"),
-    shape_type=ShapeType.STRING,
-)
-
-RESOLVED_S3_OBJECT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ResolvedS3Object"),
-    members={
-        "S3Bucket": {"target": S3_BUCKET},
-        "S3Key": {"target": S3_KEY},
-        "S3ObjectVersion": {"target": S3_OBJECT_VERSION},
-    },
-)
-
-FUNCTION_CODE_LOCATION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionCodeLocation"),
-    members={
-        "RepositoryType": {"target": STRING},
-        "Location": {"target": SENSITIVE_STRING_ON_SERVER_ONLY},
-        "ImageUri": {"target": STRING},
-        "ResolvedImageUri": {"target": STRING},
-        "ResolvedS3Object": {"target": RESOLVED_S3_OBJECT},
-        "SourceKMSKeyArn": {"target": KMS_KEY_ARN},
-        "Error": {"target": FUNCTION_CODE_LOCATION_ERROR},
-    },
-)
-
-RESERVED_CONCURRENT_EXECUTIONS = Schema(
-    id=ShapeID("com.amazonaws.lambda#ReservedConcurrentExecutions"),
-    shape_type=ShapeType.INTEGER,
-)
-
-CONCURRENCY = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Concurrency"),
-    members={
-        "ReservedConcurrentExecutions": {"target": RESERVED_CONCURRENT_EXECUTIONS}
-    },
-)
-
-FUNCTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionConfiguration"),
-    members={
-        "FunctionName": {"target": NAMESPACED_FUNCTION_NAME},
-        "FunctionArn": {"target": NAME_SPACED_FUNCTION_ARN},
-        "Runtime": {"target": RUNTIME},
-        "Role": {"target": ROLE_ARN},
-        "Handler": {"target": HANDLER},
-        "CodeSize": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Description": {"target": DESCRIPTION},
-        "Timeout": {"target": TIMEOUT},
-        "MemorySize": {"target": MEMORY_SIZE},
-        "LastModified": {"target": TIMESTAMP},
-        "CodeSha256": {"target": STRING},
-        "Version": {"target": VERSION},
-        "VpcConfig": {"target": VPC_CONFIG_RESPONSE},
-        "DeadLetterConfig": {"target": DEAD_LETTER_CONFIG},
-        "Environment": {"target": ENVIRONMENT_RESPONSE},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "TracingConfig": {"target": TRACING_CONFIG_RESPONSE},
-        "MasterArn": {"target": FUNCTION_ARN},
-        "RevisionId": {"target": STRING},
-        "Layers": {"target": LAYERS_REFERENCE_LIST},
-        "State": {"target": STATE},
-        "StateReason": {"target": STATE_REASON},
-        "StateReasonCode": {"target": STATE_REASON_CODE},
-        "LastUpdateStatus": {"target": LAST_UPDATE_STATUS},
-        "LastUpdateStatusReason": {"target": LAST_UPDATE_STATUS_REASON},
-        "LastUpdateStatusReasonCode": {"target": LAST_UPDATE_STATUS_REASON_CODE},
-        "FileSystemConfigs": {"target": FILE_SYSTEM_CONFIG_LIST},
-        "SigningProfileVersionArn": {"target": ARN},
-        "SigningJobArn": {"target": ARN},
-        "PackageType": {"target": PACKAGE_TYPE},
-        "ImageConfigResponse": {"target": IMAGE_CONFIG_RESPONSE},
-        "Architectures": {"target": ARCHITECTURES_LIST},
-        "EphemeralStorage": {"target": EPHEMERAL_STORAGE},
-        "SnapStart": {"target": SNAP_START_RESPONSE},
-        "RuntimeVersionConfig": {"target": RUNTIME_VERSION_CONFIG},
-        "LoggingConfig": {"target": LOGGING_CONFIG},
-        "TenancyConfig": {"target": TENANCY_CONFIG},
-        "CapacityProviderConfig": {"target": CAPACITY_PROVIDER_CONFIG},
-        "ConfigSha256": {"target": STRING},
-        "DurableConfig": {"target": DURABLE_CONFIG},
-    },
-)
-
-TAGS_ERROR_CODE = Schema(
-    id=ShapeID("com.amazonaws.lambda#TagsErrorCode"), shape_type=ShapeType.STRING
-)
-
-TAGS_ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.lambda#TagsErrorMessage"), shape_type=ShapeType.STRING
-)
-
-TAGS_ERROR = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TagsError"),
-    members={
-        "ErrorCode": {
-            "target": TAGS_ERROR_CODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Message": {
-            "target": TAGS_ERROR_MESSAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-GET_FUNCTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionResponse",
-        )
-    ],
-    members={
-        "Configuration": {"target": FUNCTION_CONFIGURATION},
-        "Code": {"target": FUNCTION_CODE_LOCATION},
-        "Tags": {"target": TAGS},
-        "TagsError": {"target": TAGS_ERROR},
-        "Concurrency": {"target": CONCURRENCY},
-    },
-)
-
-GET_FUNCTION = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetFunction"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2015-03-31/functions/{FunctionName}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_FUNCTION_CODE_SIGNING_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionCodeSigningConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionCodeSigningConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionCodeSigningConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionCodeSigningConfigResponse",
-        )
-    ],
-    members={
-        "CodeSigningConfigArn": {
-            "target": CODE_SIGNING_CONFIG_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-GET_FUNCTION_CODE_SIGNING_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionCodeSigningConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2020-06-30/functions/{FunctionName}/code-signing-config",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_FUNCTION_CONCURRENCY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionConcurrencyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionConcurrencyRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_FUNCTION_CONCURRENCY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionConcurrencyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionConcurrencyResponse",
-        )
-    ],
-    members={
-        "ReservedConcurrentExecutions": {"target": RESERVED_CONCURRENT_EXECUTIONS}
-    },
-)
-
-GET_FUNCTION_CONCURRENCY = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionConcurrency"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2019-09-30/functions/{FunctionName}/concurrency",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_FUNCTION_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionConfigurationRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-    },
-)
-
-GET_FUNCTION_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#FunctionConfiguration",
-        )
-    ],
-    members={
-        "FunctionName": {"target": NAMESPACED_FUNCTION_NAME},
-        "FunctionArn": {"target": NAME_SPACED_FUNCTION_ARN},
-        "Runtime": {"target": RUNTIME},
-        "Role": {"target": ROLE_ARN},
-        "Handler": {"target": HANDLER},
-        "CodeSize": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Description": {"target": DESCRIPTION},
-        "Timeout": {"target": TIMEOUT},
-        "MemorySize": {"target": MEMORY_SIZE},
-        "LastModified": {"target": TIMESTAMP},
-        "CodeSha256": {"target": STRING},
-        "Version": {"target": VERSION},
-        "VpcConfig": {"target": VPC_CONFIG_RESPONSE},
-        "DeadLetterConfig": {"target": DEAD_LETTER_CONFIG},
-        "Environment": {"target": ENVIRONMENT_RESPONSE},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "TracingConfig": {"target": TRACING_CONFIG_RESPONSE},
-        "MasterArn": {"target": FUNCTION_ARN},
-        "RevisionId": {"target": STRING},
-        "Layers": {"target": LAYERS_REFERENCE_LIST},
-        "State": {"target": STATE},
-        "StateReason": {"target": STATE_REASON},
-        "StateReasonCode": {"target": STATE_REASON_CODE},
-        "LastUpdateStatus": {"target": LAST_UPDATE_STATUS},
-        "LastUpdateStatusReason": {"target": LAST_UPDATE_STATUS_REASON},
-        "LastUpdateStatusReasonCode": {"target": LAST_UPDATE_STATUS_REASON_CODE},
-        "FileSystemConfigs": {"target": FILE_SYSTEM_CONFIG_LIST},
-        "SigningProfileVersionArn": {"target": ARN},
-        "SigningJobArn": {"target": ARN},
-        "PackageType": {"target": PACKAGE_TYPE},
-        "ImageConfigResponse": {"target": IMAGE_CONFIG_RESPONSE},
-        "Architectures": {"target": ARCHITECTURES_LIST},
-        "EphemeralStorage": {"target": EPHEMERAL_STORAGE},
-        "SnapStart": {"target": SNAP_START_RESPONSE},
-        "RuntimeVersionConfig": {"target": RUNTIME_VERSION_CONFIG},
-        "LoggingConfig": {"target": LOGGING_CONFIG},
-        "TenancyConfig": {"target": TENANCY_CONFIG},
-        "CapacityProviderConfig": {"target": CAPACITY_PROVIDER_CONFIG},
-        "ConfigSha256": {"target": STRING},
-        "DurableConfig": {"target": DURABLE_CONFIG},
-    },
-)
-
-GET_FUNCTION_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2015-03-31/functions/{FunctionName}/configuration",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UNQUALIFIED_FUNCTION_NAME = Schema(
-    id=ShapeID("com.amazonaws.lambda#UnqualifiedFunctionName"),
-    shape_type=ShapeType.STRING,
-)
-
-GET_FUNCTION_RECURSION_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionRecursionConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionRecursionConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": UNQUALIFIED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-RECURSIVE_LOOP = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#RecursiveLoop"),
-    shape_type=ShapeType.ENUM,
-    members={"Allow": {"target": UNIT}, "Terminate": {"target": UNIT}},
-)
-
-GET_FUNCTION_RECURSION_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionRecursionConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionRecursionConfigResponse",
-        )
-    ],
-    members={"RecursiveLoop": {"target": RECURSIVE_LOOP}},
-)
-
-GET_FUNCTION_RECURSION_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionRecursionConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2024-08-31/functions/{FunctionName}/recursion-config",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-PUBLISHED_FUNCTION_QUALIFIER = Schema(
-    id=ShapeID("com.amazonaws.lambda#PublishedFunctionQualifier"),
-    shape_type=ShapeType.STRING,
-)
-
-GET_FUNCTION_SCALING_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionScalingConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionScalingConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": UNQUALIFIED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": PUBLISHED_FUNCTION_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier"),
-            ],
-        },
-    },
-)
-
-FUNCTION_SCALING_CONFIG_EXECUTION_ENVIRONMENTS = Schema(
-    id=ShapeID("com.amazonaws.lambda#FunctionScalingConfigExecutionEnvironments"),
-    shape_type=ShapeType.INTEGER,
-)
-
-FUNCTION_SCALING_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionScalingConfig"),
-    members={
-        "MinExecutionEnvironments": {
-            "target": FUNCTION_SCALING_CONFIG_EXECUTION_ENVIRONMENTS
-        },
-        "MaxExecutionEnvironments": {
-            "target": FUNCTION_SCALING_CONFIG_EXECUTION_ENVIRONMENTS
-        },
-    },
-)
-
-GET_FUNCTION_SCALING_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionScalingConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionScalingConfigResponse",
-        )
-    ],
-    members={
-        "FunctionArn": {"target": FUNCTION_ARN},
-        "AppliedFunctionScalingConfig": {"target": FUNCTION_SCALING_CONFIG},
-        "RequestedFunctionScalingConfig": {"target": FUNCTION_SCALING_CONFIG},
-    },
-)
-
-GET_FUNCTION_SCALING_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionScalingConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2025-11-30/functions/{FunctionName}/function-scaling-config",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_FUNCTION_URL_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionUrlConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionUrlConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_URL_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": FUNCTION_URL_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-    },
-)
-
-GET_FUNCTION_URL_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionUrlConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionUrlConfigResponse",
-        )
-    ],
-    members={
-        "FunctionUrl": {
-            "target": FUNCTION_URL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionArn": {
-            "target": FUNCTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AuthType": {
-            "target": FUNCTION_URL_AUTH_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Cors": {"target": CORS},
-        "CreationTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "LastModifiedTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "InvokeMode": {"target": INVOKE_MODE},
-    },
-)
-
-GET_FUNCTION_URL_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionUrlConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2021-10-31/functions/{FunctionName}/url",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetPolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetPolicyRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-    },
-)
-
-GET_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetPolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetPolicyResponse",
-        )
-    ],
-    members={"Policy": {"target": STRING}, "RevisionId": {"target": STRING}},
-)
-
-GET_POLICY = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetPolicy"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2015-03-31/functions/{FunctionName}/policy",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_RUNTIME_MANAGEMENT_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetRuntimeManagementConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetRuntimeManagementConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-    },
-)
-
-UPDATE_RUNTIME_ON = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateRuntimeOn"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "Auto": {"target": UNIT},
-        "Manual": {"target": UNIT},
-        "FunctionUpdate": {"target": UNIT},
-    },
-)
-
-GET_RUNTIME_MANAGEMENT_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetRuntimeManagementConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetRuntimeManagementConfigResponse",
-        )
-    ],
-    members={
-        "UpdateRuntimeOn": {"target": UPDATE_RUNTIME_ON},
-        "FunctionArn": {"target": NAME_SPACED_FUNCTION_ARN},
-        "RuntimeVersionArn": {"target": RUNTIME_VERSION_ARN},
-    },
-)
-
-GET_RUNTIME_MANAGEMENT_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetRuntimeManagementConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2021-07-20/functions/{FunctionName}/runtime-management-config",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-CODE_ARTIFACT_USER_DELETED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CodeArtifactUserDeletedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-CODE_ARTIFACT_USER_FAILED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CodeArtifactUserFailedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-CODE_ARTIFACT_USER_PENDING_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CodeArtifactUserPendingException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-DURABLE_EXECUTION_ALREADY_STARTED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DurableExecutionAlreadyStartedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-EC2_ACCESS_DENIED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EC2AccessDeniedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-EC2_THROTTLED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EC2ThrottledException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-EC2_UNEXPECTED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EC2UnexpectedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={
-        "Type": {"target": STRING},
-        "Message": {"target": STRING},
-        "EC2ErrorCode": {"target": STRING},
-    },
-)
-
-EFSIO_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EFSIOException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=410),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-EFS_MOUNT_CONNECTIVITY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EFSMountConnectivityException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=408),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-EFS_MOUNT_FAILURE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EFSMountFailureException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-EFS_MOUNT_TIMEOUT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#EFSMountTimeoutException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=408),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-ENI_LIMIT_REACHED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ENILimitReachedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-ENI_NOT_READY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ENINotReadyException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-INVALID_REQUEST_CONTENT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvalidRequestContentException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-INVALID_RUNTIME_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvalidRuntimeException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-INVALID_SECURITY_GROUP_ID_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvalidSecurityGroupIDException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-INVALID_SUBNET_ID_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvalidSubnetIDException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-INVALID_ZIP_FILE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvalidZipFileException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-INVOCATION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvocationType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "Event": {"target": UNIT},
-        "RequestResponse": {"target": UNIT},
-        "DryRun": {"target": UNIT},
-    },
-)
-
-LOG_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LogType"),
-    shape_type=ShapeType.ENUM,
-    members={"None": {"target": UNIT}, "Tail": {"target": UNIT}},
-)
-
-INVOKE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvokeInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#InvocationRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "InvocationType": {
-            "target": INVOCATION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Invocation-Type"
-                )
-            ],
-        },
-        "LogType": {
-            "target": LOG_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Log-Type")
-            ],
-        },
-        "ClientContext": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Client-Context"
-                )
-            ],
-        },
-        "DurableExecutionName": {
-            "target": DURABLE_EXECUTION_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="X-Amz-Durable-Execution-Name",
-                )
-            ],
-        },
-        "Payload": {
-            "target": BLOB,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-        "TenantId": {
-            "target": TENANT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Tenant-Id")
-            ],
-        },
-    },
-)
-
-INVOKE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvokeOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#InvocationResponse",
-        )
-    ],
-    members={
-        "StatusCode": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=0),
-                Trait.new(id=ShapeID("smithy.api#httpResponseCode")),
-            ],
-        },
-        "FunctionError": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Function-Error"
-                )
-            ],
-        },
-        "LogResult": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Log-Result")
-            ],
-        },
-        "Payload": {
-            "target": BLOB,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-        "ExecutedVersion": {
-            "target": VERSION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Executed-Version"
-                )
-            ],
-        },
-        "DurableExecutionArn": {
-            "target": DURABLE_EXECUTION_ARN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="X-Amz-Durable-Execution-Arn",
-                )
-            ],
-        },
-    },
-)
-
-MODE_NOT_SUPPORTED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ModeNotSupportedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-NO_PUBLISHED_VERSION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#NoPublishedVersionException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-RECURSIVE_INVOCATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#RecursiveInvocationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-REQUEST_TOO_LARGE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#RequestTooLargeException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=413),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-RESOURCE_NOT_READY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ResourceNotReadyException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-S3_FILES_MOUNT_CONNECTIVITY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#S3FilesMountConnectivityException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=408),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-S3_FILES_MOUNT_FAILURE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#S3FilesMountFailureException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-S3_FILES_MOUNT_TIMEOUT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#S3FilesMountTimeoutException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=408),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-SERIALIZED_REQUEST_ENTITY_TOO_LARGE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SerializedRequestEntityTooLargeException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=413),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-SERVICE_QUOTA_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ServiceQuotaExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=402),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-SNAP_START_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SnapStartException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-SNAP_START_NOT_READY_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SnapStartNotReadyException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-SNAP_START_REGENERATION_FAILURE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SnapStartRegenerationFailureException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-SNAP_START_TIMEOUT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SnapStartTimeoutException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=408),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-SUBNET_IP_ADDRESS_LIMIT_REACHED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SubnetIPAddressLimitReachedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=502),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-UNSUPPORTED_MEDIA_TYPE_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UnsupportedMediaTypeException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=415),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-INVOKE = Schema(
-    id=ShapeID("com.amazonaws.lambda#Invoke"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2015-03-31/functions/{FunctionName}/invocations",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-BLOB_STREAM = Schema(
-    id=ShapeID("com.amazonaws.lambda#BlobStream"),
-    shape_type=ShapeType.BLOB,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-)
-
-INVOKE_ASYNC_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvokeAsyncInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#InvokeAsyncRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "InvokeArgs": {
-            "target": BLOB_STREAM,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpPayload")),
-            ],
-        },
-    },
-)
-
-HTTP_STATUS = Schema(
-    id=ShapeID("com.amazonaws.lambda#HttpStatus"),
-    shape_type=ShapeType.INTEGER,
-    traits=[Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-)
-
-INVOKE_ASYNC_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvokeAsyncOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#InvokeAsyncResponse",
-        )
-    ],
-    members={
-        "Status": {
-            "target": HTTP_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=0),
-                Trait.new(id=ShapeID("smithy.api#httpResponseCode")),
-            ],
-        }
-    },
-)
-
-INVOKE_ASYNC = Schema(
-    id=ShapeID("com.amazonaws.lambda#InvokeAsync"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2014-11-13/functions/{FunctionName}/invoke-async",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-RESPONSE_STREAMING_INVOCATION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ResponseStreamingInvocationType"),
-    shape_type=ShapeType.ENUM,
-    members={"RequestResponse": {"target": UNIT}, "DryRun": {"target": UNIT}},
-)
-
-INVOKE_WITH_RESPONSE_STREAM_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvokeWithResponseStreamInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#InvokeWithResponseStreamRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "LogType": {
-            "target": LOG_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Log-Type")
-            ],
-        },
-        "ClientContext": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Client-Context"
-                )
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-        "Payload": {
-            "target": BLOB,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-        "TenantId": {
-            "target": TENANT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Tenant-Id")
-            ],
-        },
-        "InvocationType": {
-            "target": RESPONSE_STREAMING_INVOCATION_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Invocation-Type"
-                )
-            ],
-        },
-    },
-)
-
-INVOKE_WITH_RESPONSE_STREAM_COMPLETE_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvokeWithResponseStreamCompleteEvent"),
-    members={
-        "ErrorCode": {"target": STRING},
-        "ErrorDetails": {"target": STRING},
-        "LogResult": {"target": STRING},
-    },
-)
-
-INVOKE_RESPONSE_STREAM_UPDATE = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvokeResponseStreamUpdate"),
-    members={
-        "Payload": {
-            "target": BLOB,
-            "traits": [Trait.new(id=ShapeID("smithy.api#eventPayload"))],
-        }
-    },
-)
-
-INVOKE_WITH_RESPONSE_STREAM_RESPONSE_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvokeWithResponseStreamResponseEvent"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "PayloadChunk": {"target": INVOKE_RESPONSE_STREAM_UPDATE},
-        "InvokeComplete": {"target": INVOKE_WITH_RESPONSE_STREAM_COMPLETE_EVENT},
-    },
-)
-
-INVOKE_WITH_RESPONSE_STREAM_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#InvokeWithResponseStreamOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#InvokeWithResponseStreamResponse",
-        )
-    ],
-    members={
-        "StatusCode": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=0),
-                Trait.new(id=ShapeID("smithy.api#httpResponseCode")),
-            ],
-        },
-        "ExecutedVersion": {
-            "target": VERSION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="X-Amz-Executed-Version"
-                )
-            ],
-        },
-        "EventStream": {
-            "target": INVOKE_WITH_RESPONSE_STREAM_RESPONSE_EVENT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-        "ResponseStreamContentType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpHeader"), value="Content-Type")
-            ],
-        },
-    },
-)
-
-INVOKE_WITH_RESPONSE_STREAM = Schema(
-    id=ShapeID("com.amazonaws.lambda#InvokeWithResponseStream"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2021-11-15/functions/{FunctionName}/response-streaming-invocations",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-EXECUTION_STATUS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ExecutionStatusList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EXECUTION_STATUS}},
-)
-
-LIST_DURABLE_EXECUTIONS_BY_FUNCTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListDurableExecutionsByFunctionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListDurableExecutionsByFunctionRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-        "DurableExecutionName": {
-            "target": DURABLE_EXECUTION_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpQuery"), value="DurableExecutionName"
-                )
-            ],
-        },
-        "Statuses": {
-            "target": EXECUTION_STATUS_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Statuses")],
-        },
-        "StartedAfter": {
-            "target": EXECUTION_TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="StartedAfter")
-            ],
-        },
-        "StartedBefore": {
-            "target": EXECUTION_TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="StartedBefore")
-            ],
-        },
-        "ReverseOrder": {
-            "target": REVERSE_ORDER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="ReverseOrder")
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": ITEM_COUNT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=0),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems"),
-            ],
-        },
-    },
-)
-
-EXECUTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#Execution"),
-    members={
-        "DurableExecutionArn": {
-            "target": DURABLE_EXECUTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "DurableExecutionName": {
-            "target": DURABLE_EXECUTION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionArn": {
-            "target": NAME_SPACED_FUNCTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Status": {
-            "target": EXECUTION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "StartTimestamp": {
-            "target": EXECUTION_TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "EndTimestamp": {"target": EXECUTION_TIMESTAMP},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-    },
-)
-
-DURABLE_EXECUTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DurableExecutions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EXECUTION}},
-)
-
-LIST_DURABLE_EXECUTIONS_BY_FUNCTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListDurableExecutionsByFunctionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListDurableExecutionsByFunctionResponse",
-        )
-    ],
-    members={
-        "DurableExecutions": {"target": DURABLE_EXECUTIONS},
-        "NextMarker": {"target": STRING},
-    },
-)
-
-LIST_DURABLE_EXECUTIONS_BY_FUNCTION = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListDurableExecutionsByFunction"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2025-12-01/functions/{FunctionName}/durable-executions",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-FUNCTION_VERSION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionVersion"),
-    shape_type=ShapeType.ENUM,
-    members={"ALL": {"target": UNIT}},
-)
-
-MASTER_REGION = Schema(
-    id=ShapeID("com.amazonaws.lambda#MasterRegion"), shape_type=ShapeType.STRING
-)
-
-LIST_FUNCTIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListFunctionsRequest",
-        )
-    ],
-    members={
-        "MasterRegion": {
-            "target": MASTER_REGION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MasterRegion")
-            ],
-        },
-        "FunctionVersion": {
-            "target": FUNCTION_VERSION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="FunctionVersion")
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-FUNCTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FUNCTION_CONFIGURATION}},
-)
-
-LIST_FUNCTIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListFunctionsResponse",
-        )
-    ],
-    members={"NextMarker": {"target": STRING}, "Functions": {"target": FUNCTION_LIST}},
-)
-
-LIST_FUNCTIONS = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListFunctions"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/2015-03-31/functions", "code": 200}
-            ),
-        )
-    ],
-)
-
-MAX_ITEMS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaxItems"), shape_type=ShapeType.INTEGER
-)
-
-LIST_FUNCTION_URL_CONFIGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionUrlConfigsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListFunctionUrlConfigsRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_URL_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-FUNCTION_URL_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionUrlConfig"),
-    members={
-        "FunctionUrl": {
-            "target": FUNCTION_URL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionArn": {
-            "target": FUNCTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "CreationTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "LastModifiedTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Cors": {"target": CORS},
-        "AuthType": {
-            "target": FUNCTION_URL_AUTH_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "InvokeMode": {"target": INVOKE_MODE},
-    },
-)
-
-FUNCTION_URL_CONFIG_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionUrlConfigList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FUNCTION_URL_CONFIG}},
-)
-
-LIST_FUNCTION_URL_CONFIGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionUrlConfigsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListFunctionUrlConfigsResponse",
-        )
-    ],
-    members={
-        "FunctionUrlConfigs": {
-            "target": FUNCTION_URL_CONFIG_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "NextMarker": {"target": STRING},
-    },
-)
-
-LIST_FUNCTION_URL_CONFIGS = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionUrlConfigs"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2021-10-31/functions/{FunctionName}/urls",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-MAX_PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEMS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaxProvisionedConcurrencyConfigListItems"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_PROVISIONED_CONCURRENCY_CONFIGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListProvisionedConcurrencyConfigsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListProvisionedConcurrencyConfigsRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-NON_NEGATIVE_INTEGER = Schema(
-    id=ShapeID("com.amazonaws.lambda#NonNegativeInteger"), shape_type=ShapeType.INTEGER
-)
-
-POSITIVE_INTEGER = Schema(
-    id=ShapeID("com.amazonaws.lambda#PositiveInteger"), shape_type=ShapeType.INTEGER
-)
-
-PROVISIONED_CONCURRENCY_STATUS_ENUM = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ProvisionedConcurrencyStatusEnum"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "IN_PROGRESS": {"target": UNIT},
-        "READY": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-    },
-)
-
-PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ProvisionedConcurrencyConfigListItem"),
-    members={
-        "FunctionArn": {"target": FUNCTION_ARN},
-        "RequestedProvisionedConcurrentExecutions": {"target": POSITIVE_INTEGER},
-        "AvailableProvisionedConcurrentExecutions": {"target": NON_NEGATIVE_INTEGER},
-        "AllocatedProvisionedConcurrentExecutions": {"target": NON_NEGATIVE_INTEGER},
-        "Status": {"target": PROVISIONED_CONCURRENCY_STATUS_ENUM},
-        "StatusReason": {"target": STRING},
-        "LastModified": {"target": TIMESTAMP},
-    },
-)
-
-PROVISIONED_CONCURRENCY_CONFIG_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ProvisionedConcurrencyConfigList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEM}},
-)
-
-LIST_PROVISIONED_CONCURRENCY_CONFIGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListProvisionedConcurrencyConfigsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListProvisionedConcurrencyConfigsResponse",
-        )
-    ],
-    members={
-        "ProvisionedConcurrencyConfigs": {
-            "target": PROVISIONED_CONCURRENCY_CONFIG_LIST
-        },
-        "NextMarker": {"target": STRING},
-    },
-)
-
-LIST_PROVISIONED_CONCURRENCY_CONFIGS = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListProvisionedConcurrencyConfigs"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency?List=ALL",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_FUNCTION_CODE_SIGNING_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionCodeSigningConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutFunctionCodeSigningConfigRequest",
-        )
-    ],
-    members={
-        "CodeSigningConfigArn": {
-            "target": CODE_SIGNING_CONFIG_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-PUT_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionCodeSigningConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutFunctionCodeSigningConfigResponse",
-        )
-    ],
-    members={
-        "CodeSigningConfigArn": {
-            "target": CODE_SIGNING_CONFIG_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PUT_FUNCTION_CODE_SIGNING_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionCodeSigningConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2020-06-30/functions/{FunctionName}/code-signing-config",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_FUNCTION_CONCURRENCY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionConcurrencyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutFunctionConcurrencyRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "ReservedConcurrentExecutions": {
-            "target": RESERVED_CONCURRENT_EXECUTIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PUT_FUNCTION_CONCURRENCY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionConcurrencyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#Concurrency",
-        )
-    ],
-    members={
-        "ReservedConcurrentExecutions": {"target": RESERVED_CONCURRENT_EXECUTIONS}
-    },
-)
-
-PUT_FUNCTION_CONCURRENCY = Schema(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionConcurrency"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2017-10-31/functions/{FunctionName}/concurrency",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_FUNCTION_RECURSION_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionRecursionConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutFunctionRecursionConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": UNQUALIFIED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "RecursiveLoop": {
-            "target": RECURSIVE_LOOP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PUT_FUNCTION_RECURSION_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionRecursionConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutFunctionRecursionConfigResponse",
-        )
-    ],
-    members={"RecursiveLoop": {"target": RECURSIVE_LOOP}},
-)
-
-PUT_FUNCTION_RECURSION_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionRecursionConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2024-08-31/functions/{FunctionName}/recursion-config",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_FUNCTION_SCALING_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionScalingConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutFunctionScalingConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": UNQUALIFIED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": PUBLISHED_FUNCTION_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier"),
-            ],
-        },
-        "FunctionScalingConfig": {"target": FUNCTION_SCALING_CONFIG},
-    },
-)
-
-PUT_FUNCTION_SCALING_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionScalingConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutFunctionScalingConfigResponse",
-        )
-    ],
-    members={"FunctionState": {"target": STATE}},
-)
-
-PUT_FUNCTION_SCALING_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionScalingConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2025-11-30/functions/{FunctionName}/function-scaling-config",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_RUNTIME_MANAGEMENT_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutRuntimeManagementConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutRuntimeManagementConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-        "UpdateRuntimeOn": {
-            "target": UPDATE_RUNTIME_ON,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RuntimeVersionArn": {"target": RUNTIME_VERSION_ARN},
-    },
-)
-
-PUT_RUNTIME_MANAGEMENT_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutRuntimeManagementConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutRuntimeManagementConfigResponse",
-        )
-    ],
-    members={
-        "UpdateRuntimeOn": {
-            "target": UPDATE_RUNTIME_ON,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionArn": {
-            "target": FUNCTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RuntimeVersionArn": {"target": RUNTIME_VERSION_ARN},
-    },
-)
-
-PUT_RUNTIME_MANAGEMENT_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#PutRuntimeManagementConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2021-07-20/functions/{FunctionName}/runtime-management-config",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_FUNCTION_CODE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionCodeInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UpdateFunctionCodeRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "ZipFile": {"target": BLOB},
-        "S3Bucket": {"target": S3_BUCKET},
-        "S3Key": {"target": S3_KEY},
-        "S3ObjectVersion": {"target": S3_OBJECT_VERSION},
-        "S3ObjectStorageMode": {"target": S3_OBJECT_STORAGE_MODE},
-        "ImageUri": {"target": STRING},
-        "Architectures": {"target": ARCHITECTURES_LIST},
-        "Publish": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "PublishTo": {"target": FUNCTION_VERSION_LATEST_PUBLISHED},
-        "DryRun": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=False)],
-        },
-        "RevisionId": {"target": STRING},
-        "SourceKMSKeyArn": {"target": KMS_KEY_ARN},
-    },
-)
-
-UPDATE_FUNCTION_CODE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionCodeOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#FunctionConfiguration",
-        )
-    ],
-    members={
-        "FunctionName": {"target": NAMESPACED_FUNCTION_NAME},
-        "FunctionArn": {"target": NAME_SPACED_FUNCTION_ARN},
-        "Runtime": {"target": RUNTIME},
-        "Role": {"target": ROLE_ARN},
-        "Handler": {"target": HANDLER},
-        "CodeSize": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Description": {"target": DESCRIPTION},
-        "Timeout": {"target": TIMEOUT},
-        "MemorySize": {"target": MEMORY_SIZE},
-        "LastModified": {"target": TIMESTAMP},
-        "CodeSha256": {"target": STRING},
-        "Version": {"target": VERSION},
-        "VpcConfig": {"target": VPC_CONFIG_RESPONSE},
-        "DeadLetterConfig": {"target": DEAD_LETTER_CONFIG},
-        "Environment": {"target": ENVIRONMENT_RESPONSE},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "TracingConfig": {"target": TRACING_CONFIG_RESPONSE},
-        "MasterArn": {"target": FUNCTION_ARN},
-        "RevisionId": {"target": STRING},
-        "Layers": {"target": LAYERS_REFERENCE_LIST},
-        "State": {"target": STATE},
-        "StateReason": {"target": STATE_REASON},
-        "StateReasonCode": {"target": STATE_REASON_CODE},
-        "LastUpdateStatus": {"target": LAST_UPDATE_STATUS},
-        "LastUpdateStatusReason": {"target": LAST_UPDATE_STATUS_REASON},
-        "LastUpdateStatusReasonCode": {"target": LAST_UPDATE_STATUS_REASON_CODE},
-        "FileSystemConfigs": {"target": FILE_SYSTEM_CONFIG_LIST},
-        "SigningProfileVersionArn": {"target": ARN},
-        "SigningJobArn": {"target": ARN},
-        "PackageType": {"target": PACKAGE_TYPE},
-        "ImageConfigResponse": {"target": IMAGE_CONFIG_RESPONSE},
-        "Architectures": {"target": ARCHITECTURES_LIST},
-        "EphemeralStorage": {"target": EPHEMERAL_STORAGE},
-        "SnapStart": {"target": SNAP_START_RESPONSE},
-        "RuntimeVersionConfig": {"target": RUNTIME_VERSION_CONFIG},
-        "LoggingConfig": {"target": LOGGING_CONFIG},
-        "TenancyConfig": {"target": TENANCY_CONFIG},
-        "CapacityProviderConfig": {"target": CAPACITY_PROVIDER_CONFIG},
-        "ConfigSha256": {"target": STRING},
-        "DurableConfig": {"target": DURABLE_CONFIG},
-    },
-)
-
-UPDATE_FUNCTION_CODE = Schema(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionCode"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2015-03-31/functions/{FunctionName}/code",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_FUNCTION_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UpdateFunctionConfigurationRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Role": {"target": ROLE_ARN},
-        "Handler": {"target": HANDLER},
-        "Description": {"target": DESCRIPTION},
-        "Timeout": {"target": TIMEOUT},
-        "MemorySize": {"target": MEMORY_SIZE},
-        "VpcConfig": {"target": VPC_CONFIG},
-        "Environment": {"target": ENVIRONMENT},
-        "Runtime": {"target": RUNTIME},
-        "DeadLetterConfig": {"target": DEAD_LETTER_CONFIG},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "TracingConfig": {"target": TRACING_CONFIG},
-        "RevisionId": {"target": STRING},
-        "Layers": {"target": LAYER_LIST},
-        "FileSystemConfigs": {"target": FILE_SYSTEM_CONFIG_LIST},
-        "ImageConfig": {"target": IMAGE_CONFIG},
-        "EphemeralStorage": {"target": EPHEMERAL_STORAGE},
-        "SnapStart": {"target": SNAP_START},
-        "LoggingConfig": {"target": LOGGING_CONFIG},
-        "CapacityProviderConfig": {"target": CAPACITY_PROVIDER_CONFIG},
-        "DurableConfig": {"target": DURABLE_CONFIG},
-    },
-)
-
-UPDATE_FUNCTION_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#FunctionConfiguration",
-        )
-    ],
-    members={
-        "FunctionName": {"target": NAMESPACED_FUNCTION_NAME},
-        "FunctionArn": {"target": NAME_SPACED_FUNCTION_ARN},
-        "Runtime": {"target": RUNTIME},
-        "Role": {"target": ROLE_ARN},
-        "Handler": {"target": HANDLER},
-        "CodeSize": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Description": {"target": DESCRIPTION},
-        "Timeout": {"target": TIMEOUT},
-        "MemorySize": {"target": MEMORY_SIZE},
-        "LastModified": {"target": TIMESTAMP},
-        "CodeSha256": {"target": STRING},
-        "Version": {"target": VERSION},
-        "VpcConfig": {"target": VPC_CONFIG_RESPONSE},
-        "DeadLetterConfig": {"target": DEAD_LETTER_CONFIG},
-        "Environment": {"target": ENVIRONMENT_RESPONSE},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "TracingConfig": {"target": TRACING_CONFIG_RESPONSE},
-        "MasterArn": {"target": FUNCTION_ARN},
-        "RevisionId": {"target": STRING},
-        "Layers": {"target": LAYERS_REFERENCE_LIST},
-        "State": {"target": STATE},
-        "StateReason": {"target": STATE_REASON},
-        "StateReasonCode": {"target": STATE_REASON_CODE},
-        "LastUpdateStatus": {"target": LAST_UPDATE_STATUS},
-        "LastUpdateStatusReason": {"target": LAST_UPDATE_STATUS_REASON},
-        "LastUpdateStatusReasonCode": {"target": LAST_UPDATE_STATUS_REASON_CODE},
-        "FileSystemConfigs": {"target": FILE_SYSTEM_CONFIG_LIST},
-        "SigningProfileVersionArn": {"target": ARN},
-        "SigningJobArn": {"target": ARN},
-        "PackageType": {"target": PACKAGE_TYPE},
-        "ImageConfigResponse": {"target": IMAGE_CONFIG_RESPONSE},
-        "Architectures": {"target": ARCHITECTURES_LIST},
-        "EphemeralStorage": {"target": EPHEMERAL_STORAGE},
-        "SnapStart": {"target": SNAP_START_RESPONSE},
-        "RuntimeVersionConfig": {"target": RUNTIME_VERSION_CONFIG},
-        "LoggingConfig": {"target": LOGGING_CONFIG},
-        "TenancyConfig": {"target": TENANCY_CONFIG},
-        "CapacityProviderConfig": {"target": CAPACITY_PROVIDER_CONFIG},
-        "ConfigSha256": {"target": STRING},
-        "DurableConfig": {"target": DURABLE_CONFIG},
-    },
-)
-
-UPDATE_FUNCTION_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2015-03-31/functions/{FunctionName}/configuration",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_FUNCTION_URL_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionUrlConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UpdateFunctionUrlConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_URL_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": FUNCTION_URL_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-        "AuthType": {"target": FUNCTION_URL_AUTH_TYPE},
-        "Cors": {"target": CORS},
-        "InvokeMode": {"target": INVOKE_MODE},
-    },
-)
-
-UPDATE_FUNCTION_URL_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionUrlConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UpdateFunctionUrlConfigResponse",
-        )
-    ],
-    members={
-        "FunctionUrl": {
-            "target": FUNCTION_URL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionArn": {
-            "target": FUNCTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "AuthType": {
-            "target": FUNCTION_URL_AUTH_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Cors": {"target": CORS},
-        "CreationTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "LastModifiedTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "InvokeMode": {"target": INVOKE_MODE},
-    },
-)
-
-UPDATE_FUNCTION_URL_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionUrlConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2021-10-31/functions/{FunctionName}/url",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-CREATE_ALIAS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateAliasInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#CreateAliasRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": ALIAS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "FunctionVersion": {
-            "target": VERSION_WITH_LATEST_PUBLISHED,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "Description": {"target": DESCRIPTION},
-        "RoutingConfig": {"target": ALIAS_ROUTING_CONFIGURATION},
-    },
-)
-
-CREATE_ALIAS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CreateAliasOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#AliasConfiguration",
-        )
-    ],
-    members={
-        "AliasArn": {"target": FUNCTION_ARN},
-        "Name": {"target": ALIAS},
-        "FunctionVersion": {"target": VERSION},
-        "Description": {"target": DESCRIPTION},
-        "RoutingConfig": {"target": ALIAS_ROUTING_CONFIGURATION},
-        "RevisionId": {"target": STRING},
-    },
-)
-
-CREATE_ALIAS = Schema(
-    id=ShapeID("com.amazonaws.lambda#CreateAlias"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2015-03-31/functions/{FunctionName}/aliases",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_ALIAS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteAliasInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteAliasRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": ALIAS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_ALIAS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteAliasOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_ALIAS = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteAlias"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-GET_ALIAS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetAliasInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetAliasRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": ALIAS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_ALIAS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetAliasOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#AliasConfiguration",
-        )
-    ],
-    members={
-        "AliasArn": {"target": FUNCTION_ARN},
-        "Name": {"target": ALIAS},
-        "FunctionVersion": {"target": VERSION},
-        "Description": {"target": DESCRIPTION},
-        "RoutingConfig": {"target": ALIAS_ROUTING_CONFIGURATION},
-        "RevisionId": {"target": STRING},
-    },
-)
-
-GET_ALIAS = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetAlias"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_ALIASES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListAliasesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListAliasesRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FunctionVersion": {
-            "target": VERSION_WITH_LATEST_PUBLISHED,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="FunctionVersion")
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-LIST_ALIASES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListAliasesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListAliasesResponse",
-        )
-    ],
-    members={"NextMarker": {"target": STRING}, "Aliases": {"target": ALIAS_LIST}},
-)
-
-LIST_ALIASES = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListAliases"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2015-03-31/functions/{FunctionName}/aliases",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_ALIAS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateAliasInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UpdateAliasRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": ALIAS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FunctionVersion": {"target": VERSION_WITH_LATEST_PUBLISHED},
-        "Description": {"target": DESCRIPTION},
-        "RoutingConfig": {"target": ALIAS_ROUTING_CONFIGURATION},
-        "RevisionId": {"target": STRING},
-    },
-)
-
-UPDATE_ALIAS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateAliasOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#AliasConfiguration",
-        )
-    ],
-    members={
-        "AliasArn": {"target": FUNCTION_ARN},
-        "Name": {"target": ALIAS},
-        "FunctionVersion": {"target": VERSION},
-        "Description": {"target": DESCRIPTION},
-        "RoutingConfig": {"target": ALIAS_ROUTING_CONFIGURATION},
-        "RevisionId": {"target": STRING},
-    },
-)
-
-UPDATE_ALIAS = Schema(
-    id=ShapeID("com.amazonaws.lambda#UpdateAlias"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_VERSIONS_BY_FUNCTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListVersionsByFunctionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListVersionsByFunctionRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-LIST_VERSIONS_BY_FUNCTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListVersionsByFunctionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListVersionsByFunctionResponse",
-        )
-    ],
-    members={"NextMarker": {"target": STRING}, "Versions": {"target": FUNCTION_LIST}},
-)
-
-LIST_VERSIONS_BY_FUNCTION = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListVersionsByFunction"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2015-03-31/functions/{FunctionName}/versions",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-PUBLISH_VERSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PublishVersionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PublishVersionRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "CodeSha256": {"target": STRING},
-        "Description": {"target": DESCRIPTION},
-        "RevisionId": {"target": STRING},
-        "PublishTo": {"target": FUNCTION_VERSION_LATEST_PUBLISHED},
-    },
-)
-
-PUBLISH_VERSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PublishVersionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#FunctionConfiguration",
-        )
-    ],
-    members={
-        "FunctionName": {"target": NAMESPACED_FUNCTION_NAME},
-        "FunctionArn": {"target": NAME_SPACED_FUNCTION_ARN},
-        "Runtime": {"target": RUNTIME},
-        "Role": {"target": ROLE_ARN},
-        "Handler": {"target": HANDLER},
-        "CodeSize": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Description": {"target": DESCRIPTION},
-        "Timeout": {"target": TIMEOUT},
-        "MemorySize": {"target": MEMORY_SIZE},
-        "LastModified": {"target": TIMESTAMP},
-        "CodeSha256": {"target": STRING},
-        "Version": {"target": VERSION},
-        "VpcConfig": {"target": VPC_CONFIG_RESPONSE},
-        "DeadLetterConfig": {"target": DEAD_LETTER_CONFIG},
-        "Environment": {"target": ENVIRONMENT_RESPONSE},
-        "KMSKeyArn": {"target": KMS_KEY_ARN},
-        "TracingConfig": {"target": TRACING_CONFIG_RESPONSE},
-        "MasterArn": {"target": FUNCTION_ARN},
-        "RevisionId": {"target": STRING},
-        "Layers": {"target": LAYERS_REFERENCE_LIST},
-        "State": {"target": STATE},
-        "StateReason": {"target": STATE_REASON},
-        "StateReasonCode": {"target": STATE_REASON_CODE},
-        "LastUpdateStatus": {"target": LAST_UPDATE_STATUS},
-        "LastUpdateStatusReason": {"target": LAST_UPDATE_STATUS_REASON},
-        "LastUpdateStatusReasonCode": {"target": LAST_UPDATE_STATUS_REASON_CODE},
-        "FileSystemConfigs": {"target": FILE_SYSTEM_CONFIG_LIST},
-        "SigningProfileVersionArn": {"target": ARN},
-        "SigningJobArn": {"target": ARN},
-        "PackageType": {"target": PACKAGE_TYPE},
-        "ImageConfigResponse": {"target": IMAGE_CONFIG_RESPONSE},
-        "Architectures": {"target": ARCHITECTURES_LIST},
-        "EphemeralStorage": {"target": EPHEMERAL_STORAGE},
-        "SnapStart": {"target": SNAP_START_RESPONSE},
-        "RuntimeVersionConfig": {"target": RUNTIME_VERSION_CONFIG},
-        "LoggingConfig": {"target": LOGGING_CONFIG},
-        "TenancyConfig": {"target": TENANCY_CONFIG},
-        "CapacityProviderConfig": {"target": CAPACITY_PROVIDER_CONFIG},
-        "ConfigSha256": {"target": STRING},
-        "DurableConfig": {"target": DURABLE_CONFIG},
-    },
-)
-
-PUBLISH_VERSION = Schema(
-    id=ShapeID("com.amazonaws.lambda#PublishVersion"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2015-03-31/functions/{FunctionName}/versions",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-GET_ACCOUNT_SETTINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetAccountSettingsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetAccountSettingsRequest",
-        )
-    ],
-)
-
-GET_ACCOUNT_SETTINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetAccountSettingsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetAccountSettingsResponse",
-        )
-    ],
-    members={
-        "AccountLimit": {"target": ACCOUNT_LIMIT},
-        "AccountUsage": {"target": ACCOUNT_USAGE},
-    },
-)
-
-GET_ACCOUNT_SETTINGS = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetAccountSettings"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/2016-08-19/account-settings", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_FUNCTION_EVENT_INVOKE_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionEventInvokeConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetFunctionEventInvokeConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-    },
-)
-
-MAXIMUM_EVENT_AGE_IN_SECONDS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaximumEventAgeInSeconds"),
-    shape_type=ShapeType.INTEGER,
-)
-
-MAXIMUM_RETRY_ATTEMPTS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaximumRetryAttempts"),
-    shape_type=ShapeType.INTEGER,
-)
-
-GET_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionEventInvokeConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#FunctionEventInvokeConfig",
-        )
-    ],
-    members={
-        "LastModified": {"target": DATE},
-        "FunctionArn": {"target": FUNCTION_ARN},
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS},
-        "MaximumEventAgeInSeconds": {"target": MAXIMUM_EVENT_AGE_IN_SECONDS},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-    },
-)
-
-GET_FUNCTION_EVENT_INVOKE_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetFunctionEventInvokeConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetResourcePolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetResourcePolicyRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": POLICY_RESOURCE_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.lambda#ResourcePolicy"), shape_type=ShapeType.STRING
-)
-
-GET_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetResourcePolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetResourcePolicyResponse",
-        )
-    ],
-    members={
-        "Policy": {"target": RESOURCE_POLICY},
-        "RevisionId": {"target": REVISION_ID},
-    },
-)
-
-GET_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2026-07-09/resource-policy/{ResourceArn}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-MAX_LAYER_LIST_ITEMS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaxLayerListItems"), shape_type=ShapeType.INTEGER
-)
-
-LIST_LAYERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListLayersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListLayersRequest",
-        )
-    ],
-    members={
-        "CompatibleArchitecture": {
-            "target": ARCHITECTURE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpQuery"), value="CompatibleArchitecture"
-                )
-            ],
-        },
-        "CompatibleRuntime": {
-            "target": RUNTIME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="CompatibleRuntime")
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_LAYER_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-COMPATIBLE_ARCHITECTURES = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CompatibleArchitectures"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ARCHITECTURE}},
-)
-
-COMPATIBLE_RUNTIMES = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CompatibleRuntimes"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RUNTIME}},
-)
-
-LICENSE_INFO = Schema(
-    id=ShapeID("com.amazonaws.lambda#LicenseInfo"), shape_type=ShapeType.STRING
-)
-
-LAYER_VERSIONS_LIST_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LayerVersionsListItem"),
-    members={
-        "LayerVersionArn": {"target": LAYER_VERSION_ARN},
-        "Version": {
-            "target": LAYER_VERSION_NUMBER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "Description": {"target": DESCRIPTION},
-        "CreatedDate": {"target": TIMESTAMP},
-        "CompatibleArchitectures": {"target": COMPATIBLE_ARCHITECTURES},
-        "CompatibleRuntimes": {"target": COMPATIBLE_RUNTIMES},
-        "LicenseInfo": {"target": LICENSE_INFO},
-    },
-)
-
-LAYER_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#LayerArn"), shape_type=ShapeType.STRING
-)
-
-LAYERS_LIST_ITEM = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LayersListItem"),
-    members={
-        "LayerName": {"target": LAYER_NAME},
-        "LayerArn": {"target": LAYER_ARN},
-        "LatestMatchingVersion": {"target": LAYER_VERSIONS_LIST_ITEM},
-    },
-)
-
-LAYERS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LayersList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LAYERS_LIST_ITEM}},
-)
-
-LIST_LAYERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListLayersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListLayersResponse",
-        )
-    ],
-    members={"NextMarker": {"target": STRING}, "Layers": {"target": LAYERS_LIST}},
-)
-
-LIST_LAYERS = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListLayers"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/2018-10-31/layers", "code": 200}
-            ),
-        )
-    ],
-)
-
-DELETE_LAYER_VERSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteLayerVersionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteLayerVersionRequest",
-        )
-    ],
-    members={
-        "LayerName": {
-            "target": LAYER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "VersionNumber": {
-            "target": LAYER_VERSION_NUMBER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_LAYER_VERSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteLayerVersionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_LAYER_VERSION = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteLayerVersion"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-GET_LAYER_VERSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetLayerVersionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetLayerVersionRequest",
-        )
-    ],
-    members={
-        "LayerName": {
-            "target": LAYER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "VersionNumber": {
-            "target": LAYER_VERSION_NUMBER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-LAYER_VERSION_CONTENT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LayerVersionContentOutput"),
-    members={
-        "Location": {"target": SENSITIVE_STRING_ON_SERVER_ONLY},
-        "CodeSha256": {"target": STRING},
-        "CodeSize": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "SigningProfileVersionArn": {"target": ARN},
-        "SigningJobArn": {"target": ARN},
-        "ResolvedS3Object": {"target": RESOLVED_S3_OBJECT},
-    },
-)
-
-GET_LAYER_VERSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetLayerVersionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetLayerVersionResponse",
-        )
-    ],
-    members={
-        "Content": {"target": LAYER_VERSION_CONTENT_OUTPUT},
-        "LayerArn": {"target": LAYER_ARN},
-        "LayerVersionArn": {"target": LAYER_VERSION_ARN},
-        "Description": {"target": DESCRIPTION},
-        "CreatedDate": {"target": TIMESTAMP},
-        "Version": {
-            "target": LAYER_VERSION_NUMBER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "CompatibleArchitectures": {"target": COMPATIBLE_ARCHITECTURES},
-        "CompatibleRuntimes": {"target": COMPATIBLE_RUNTIMES},
-        "LicenseInfo": {"target": LICENSE_INFO},
-    },
-)
-
-GET_LAYER_VERSION = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetLayerVersion"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_LAYER_VERSION_BY_ARN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetLayerVersionByArnInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetLayerVersionByArnRequest",
-        )
-    ],
-    members={
-        "Arn": {
-            "target": LAYER_VERSION_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Arn"),
-            ],
-        }
-    },
-)
-
-GET_LAYER_VERSION_BY_ARN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetLayerVersionByArnOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetLayerVersionResponse",
-        )
-    ],
-    members={
-        "Content": {"target": LAYER_VERSION_CONTENT_OUTPUT},
-        "LayerArn": {"target": LAYER_ARN},
-        "LayerVersionArn": {"target": LAYER_VERSION_ARN},
-        "Description": {"target": DESCRIPTION},
-        "CreatedDate": {"target": TIMESTAMP},
-        "Version": {
-            "target": LAYER_VERSION_NUMBER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "CompatibleArchitectures": {"target": COMPATIBLE_ARCHITECTURES},
-        "CompatibleRuntimes": {"target": COMPATIBLE_RUNTIMES},
-        "LicenseInfo": {"target": LICENSE_INFO},
-    },
-)
-
-GET_LAYER_VERSION_BY_ARN = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetLayerVersionByArn"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2018-10-31/layers?find=LayerVersion",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_LAYER_VERSION_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetLayerVersionPolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetLayerVersionPolicyRequest",
-        )
-    ],
-    members={
-        "LayerName": {
-            "target": LAYER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "VersionNumber": {
-            "target": LAYER_VERSION_NUMBER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_LAYER_VERSION_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetLayerVersionPolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetLayerVersionPolicyResponse",
-        )
-    ],
-    members={"Policy": {"target": STRING}, "RevisionId": {"target": STRING}},
-)
-
-GET_LAYER_VERSION_POLICY = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetLayerVersionPolicy"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_LAYER_VERSIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListLayerVersionsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListLayerVersionsRequest",
-        )
-    ],
-    members={
-        "CompatibleArchitecture": {
-            "target": ARCHITECTURE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpQuery"), value="CompatibleArchitecture"
-                )
-            ],
-        },
-        "CompatibleRuntime": {
-            "target": RUNTIME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="CompatibleRuntime")
-            ],
-        },
-        "LayerName": {
-            "target": LAYER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_LAYER_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-LAYER_VERSIONS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LayerVersionsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LAYER_VERSIONS_LIST_ITEM}},
-)
-
-LIST_LAYER_VERSIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListLayerVersionsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListLayerVersionsResponse",
-        )
-    ],
-    members={
-        "NextMarker": {"target": STRING},
-        "LayerVersions": {"target": LAYER_VERSIONS_LIST},
-    },
-)
-
-LIST_LAYER_VERSIONS = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListLayerVersions"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2018-10-31/layers/{LayerName}/versions",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LAYER_VERSION_CONTENT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#LayerVersionContentInput"),
-    members={
-        "S3Bucket": {"target": S3_BUCKET},
-        "S3Key": {"target": S3_KEY},
-        "S3ObjectVersion": {"target": S3_OBJECT_VERSION},
-        "S3ObjectStorageMode": {"target": S3_OBJECT_STORAGE_MODE},
-        "ZipFile": {"target": BLOB},
-    },
-)
-
-PUBLISH_LAYER_VERSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PublishLayerVersionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PublishLayerVersionRequest",
-        )
-    ],
-    members={
-        "LayerName": {
-            "target": LAYER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Description": {"target": DESCRIPTION},
-        "Content": {
-            "target": LAYER_VERSION_CONTENT_INPUT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "CompatibleArchitectures": {"target": COMPATIBLE_ARCHITECTURES},
-        "CompatibleRuntimes": {"target": COMPATIBLE_RUNTIMES},
-        "LicenseInfo": {"target": LICENSE_INFO},
-    },
-)
-
-PUBLISH_LAYER_VERSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PublishLayerVersionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PublishLayerVersionResponse",
-        )
-    ],
-    members={
-        "Content": {"target": LAYER_VERSION_CONTENT_OUTPUT},
-        "LayerArn": {"target": LAYER_ARN},
-        "LayerVersionArn": {"target": LAYER_VERSION_ARN},
-        "Description": {"target": DESCRIPTION},
-        "CreatedDate": {"target": TIMESTAMP},
-        "Version": {
-            "target": LAYER_VERSION_NUMBER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#default"), value=0)],
-        },
-        "CompatibleArchitectures": {"target": COMPATIBLE_ARCHITECTURES},
-        "CompatibleRuntimes": {"target": COMPATIBLE_RUNTIMES},
-        "LicenseInfo": {"target": LICENSE_INFO},
-    },
-)
-
-PUBLISH_LAYER_VERSION = Schema(
-    id=ShapeID("com.amazonaws.lambda#PublishLayerVersion"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2018-10-31/layers/{LayerName}/versions",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-REMOVE_LAYER_VERSION_PERMISSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#RemoveLayerVersionPermissionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#RemoveLayerVersionPermissionRequest",
-        )
-    ],
-    members={
-        "LayerName": {
-            "target": LAYER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "VersionNumber": {
-            "target": LAYER_VERSION_NUMBER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#default"), value=None),
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "StatementId": {
-            "target": STATEMENT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "RevisionId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="RevisionId")
-            ],
-        },
-    },
-)
-
-REMOVE_LAYER_VERSION_PERMISSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#RemoveLayerVersionPermissionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-REMOVE_LAYER_VERSION_PERMISSION = Schema(
-    id=ShapeID("com.amazonaws.lambda#RemoveLayerVersionPermission"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy/{StatementId}",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-MAX_FUNCTION_EVENT_INVOKE_CONFIG_LIST_ITEMS = Schema(
-    id=ShapeID("com.amazonaws.lambda#MaxFunctionEventInvokeConfigListItems"),
-    shape_type=ShapeType.INTEGER,
-)
-
-LIST_FUNCTION_EVENT_INVOKE_CONFIGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionEventInvokeConfigsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListFunctionEventInvokeConfigsRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Marker": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Marker")],
-        },
-        "MaxItems": {
-            "target": MAX_FUNCTION_EVENT_INVOKE_CONFIG_LIST_ITEMS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="MaxItems")],
-        },
-    },
-)
-
-FUNCTION_EVENT_INVOKE_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionEventInvokeConfig"),
-    members={
-        "LastModified": {"target": DATE},
-        "FunctionArn": {"target": FUNCTION_ARN},
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS},
-        "MaximumEventAgeInSeconds": {"target": MAXIMUM_EVENT_AGE_IN_SECONDS},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-    },
-)
-
-FUNCTION_EVENT_INVOKE_CONFIG_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#FunctionEventInvokeConfigList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FUNCTION_EVENT_INVOKE_CONFIG}},
-)
-
-LIST_FUNCTION_EVENT_INVOKE_CONFIGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionEventInvokeConfigsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListFunctionEventInvokeConfigsResponse",
-        )
-    ],
-    members={
-        "FunctionEventInvokeConfigs": {"target": FUNCTION_EVENT_INVOKE_CONFIG_LIST},
-        "NextMarker": {"target": STRING},
-    },
-)
-
-LIST_FUNCTION_EVENT_INVOKE_CONFIGS = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListFunctionEventInvokeConfigs"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config/list",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-TAGGABLE_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.lambda#TaggableResource"), shape_type=ShapeType.STRING
-)
-
-LIST_TAGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListTagsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListTagsRequest",
-        )
-    ],
-    members={
-        "Resource": {
-            "target": TAGGABLE_RESOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-LIST_TAGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ListTagsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#ListTagsResponse",
-        )
-    ],
-    members={"Tags": {"target": TAGS}},
-)
-
-LIST_TAGS = Schema(
-    id=ShapeID("com.amazonaws.lambda#ListTags"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/2017-03-31/tags/{Resource}", "code": 200}
-            ),
-        )
-    ],
-)
-
-NAMESPACED_STATEMENT_ID = Schema(
-    id=ShapeID("com.amazonaws.lambda#NamespacedStatementId"),
-    shape_type=ShapeType.STRING,
-)
-
-REMOVE_PERMISSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#RemovePermissionInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#RemovePermissionRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "StatementId": {
-            "target": NAMESPACED_STATEMENT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-        "RevisionId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="RevisionId")
-            ],
-        },
-    },
-)
-
-REMOVE_PERMISSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#RemovePermissionOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-REMOVE_PERMISSION = Schema(
-    id=ShapeID("com.amazonaws.lambda#RemovePermission"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2015-03-31/functions/{FunctionName}/policy/{StatementId}",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-QUALIFIER = Schema(
-    id=ShapeID("com.amazonaws.lambda#Qualifier"), shape_type=ShapeType.STRING
-)
-
-DELETE_PROVISIONED_CONCURRENCY_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteProvisionedConcurrencyConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#DeleteProvisionedConcurrencyConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier"),
-            ],
-        },
-    },
-)
-
-DELETE_PROVISIONED_CONCURRENCY_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#DeleteProvisionedConcurrencyConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_PROVISIONED_CONCURRENCY_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#DeleteProvisionedConcurrencyConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
-                    "code": 204,
-                }
-            ),
-        )
-    ],
-)
-
-GET_PROVISIONED_CONCURRENCY_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetProvisionedConcurrencyConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetProvisionedConcurrencyConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier"),
-            ],
-        },
-    },
-)
-
-GET_PROVISIONED_CONCURRENCY_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#GetProvisionedConcurrencyConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#GetProvisionedConcurrencyConfigResponse",
-        )
-    ],
-    members={
-        "RequestedProvisionedConcurrentExecutions": {"target": POSITIVE_INTEGER},
-        "AvailableProvisionedConcurrentExecutions": {"target": NON_NEGATIVE_INTEGER},
-        "AllocatedProvisionedConcurrentExecutions": {"target": NON_NEGATIVE_INTEGER},
-        "Status": {"target": PROVISIONED_CONCURRENCY_STATUS_ENUM},
-        "StatusReason": {"target": STRING},
-        "LastModified": {"target": TIMESTAMP},
-    },
-)
-
-PROVISIONED_CONCURRENCY_CONFIG_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#ProvisionedConcurrencyConfigNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={"Type": {"target": STRING}, "message": {"target": STRING}},
-)
-
-GET_PROVISIONED_CONCURRENCY_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#GetProvisionedConcurrencyConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_PROVISIONED_CONCURRENCY_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutProvisionedConcurrencyConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutProvisionedConcurrencyConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier"),
-            ],
-        },
-        "ProvisionedConcurrentExecutions": {
-            "target": POSITIVE_INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-PUT_PROVISIONED_CONCURRENCY_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutProvisionedConcurrencyConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutProvisionedConcurrencyConfigResponse",
-        )
-    ],
-    members={
-        "RequestedProvisionedConcurrentExecutions": {"target": POSITIVE_INTEGER},
-        "AllocatedProvisionedConcurrentExecutions": {"target": NON_NEGATIVE_INTEGER},
-        "AvailableProvisionedConcurrentExecutions": {"target": NON_NEGATIVE_INTEGER},
-        "Status": {"target": PROVISIONED_CONCURRENCY_STATUS_ENUM},
-        "StatusReason": {"target": STRING},
-        "LastModified": {"target": TIMESTAMP},
-    },
-)
-
-PUT_PROVISIONED_CONCURRENCY_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#PutProvisionedConcurrencyConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_FUNCTION_EVENT_INVOKE_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionEventInvokeConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutFunctionEventInvokeConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS},
-        "MaximumEventAgeInSeconds": {"target": MAXIMUM_EVENT_AGE_IN_SECONDS},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-    },
-)
-
-PUT_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionEventInvokeConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#FunctionEventInvokeConfig",
-        )
-    ],
-    members={
-        "LastModified": {"target": DATE},
-        "FunctionArn": {"target": FUNCTION_ARN},
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS},
-        "MaximumEventAgeInSeconds": {"target": MAXIMUM_EVENT_AGE_IN_SECONDS},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-    },
-)
-
-PUT_FUNCTION_EVENT_INVOKE_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#PutFunctionEventInvokeConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-PUT_RESOURCE_POLICY_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutResourcePolicyInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutResourcePolicyRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": POLICY_RESOURCE_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Policy": {
-            "target": RESOURCE_POLICY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "RevisionId": {"target": REVISION_ID},
-    },
-)
-
-PUT_RESOURCE_POLICY_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#PutResourcePolicyOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#PutResourcePolicyResponse",
-        )
-    ],
-    members={
-        "Policy": {"target": RESOURCE_POLICY},
-        "RevisionId": {"target": REVISION_ID},
-    },
-)
-
-PUT_RESOURCE_POLICY = Schema(
-    id=ShapeID("com.amazonaws.lambda#PutResourcePolicy"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/2026-07-09/resource-policy/{ResourceArn}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-CALLBACK_TIMEOUT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#CallbackTimeoutException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"Type": {"target": STRING}, "Message": {"target": STRING}},
-)
-
-SEND_DURABLE_EXECUTION_CALLBACK_FAILURE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SendDurableExecutionCallbackFailureInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#SendDurableExecutionCallbackFailureRequest",
-        )
-    ],
-    members={
-        "CallbackId": {
-            "target": CALLBACK_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Error": {
-            "target": ERROR_OBJECT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-    },
-)
-
-SEND_DURABLE_EXECUTION_CALLBACK_FAILURE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SendDurableExecutionCallbackFailureOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#SendDurableExecutionCallbackFailureResponse",
-        )
-    ],
-)
-
-SEND_DURABLE_EXECUTION_CALLBACK_FAILURE = Schema(
-    id=ShapeID("com.amazonaws.lambda#SendDurableExecutionCallbackFailure"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2025-12-01/durable-execution-callbacks/{CallbackId}/fail",
-                }
-            ),
-        )
-    ],
-)
-
-SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SendDurableExecutionCallbackHeartbeatInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#SendDurableExecutionCallbackHeartbeatRequest",
-        )
-    ],
-    members={
-        "CallbackId": {
-            "target": CALLBACK_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SendDurableExecutionCallbackHeartbeatOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#SendDurableExecutionCallbackHeartbeatResponse",
-        )
-    ],
-)
-
-SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT = Schema(
-    id=ShapeID("com.amazonaws.lambda#SendDurableExecutionCallbackHeartbeat"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2025-12-01/durable-execution-callbacks/{CallbackId}/heartbeat",
-                }
-            ),
-        )
-    ],
-)
-
-BINARY_OPERATION_PAYLOAD = Schema(
-    id=ShapeID("com.amazonaws.lambda#BinaryOperationPayload"),
-    shape_type=ShapeType.BLOB,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SendDurableExecutionCallbackSuccessInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#SendDurableExecutionCallbackSuccessRequest",
-        )
-    ],
-    members={
-        "CallbackId": {
-            "target": CALLBACK_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Result": {
-            "target": BINARY_OPERATION_PAYLOAD,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-    },
-)
-
-SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#SendDurableExecutionCallbackSuccessOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#SendDurableExecutionCallbackSuccessResponse",
-        )
-    ],
-)
-
-SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS = Schema(
-    id=ShapeID("com.amazonaws.lambda#SendDurableExecutionCallbackSuccess"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2025-12-01/durable-execution-callbacks/{CallbackId}/succeed",
-                }
-            ),
-        )
-    ],
-)
-
-TAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#TagResourceRequest",
-        )
-    ],
-    members={
-        "Resource": {
-            "target": TAGGABLE_RESOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Tags": {
-            "target": TAGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-TAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.lambda#TagResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/2017-03-31/tags/{Resource}", "code": 204}
-            ),
-        )
-    ],
-)
-
-TAG_KEY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#TagKeyList"),
-    shape_type=ShapeType.LIST,
-    members={
-        "member": {
-            "target": TAG_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#xmlName"), value="Key")],
-        }
-    },
-)
-
-UNTAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UntagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UntagResourceRequest",
-        )
-    ],
-    members={
-        "Resource": {
-            "target": TAGGABLE_RESOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "TagKeys": {
-            "target": TAG_KEY_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="tagKeys"),
-            ],
-        },
-    },
-)
-
-UNTAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UntagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-UNTAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.lambda#UntagResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "DELETE", "uri": "/2017-03-31/tags/{Resource}", "code": 204}
-            ),
-        )
-    ],
-)
-
-UPDATE_FUNCTION_EVENT_INVOKE_CONFIG_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionEventInvokeConfigInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#UpdateFunctionEventInvokeConfigRequest",
-        )
-    ],
-    members={
-        "FunctionName": {
-            "target": NAMESPACED_FUNCTION_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Qualifier": {
-            "target": NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="Qualifier")
-            ],
-        },
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS},
-        "MaximumEventAgeInSeconds": {"target": MAXIMUM_EVENT_AGE_IN_SECONDS},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-    },
-)
-
-UPDATE_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionEventInvokeConfigOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.lambda#FunctionEventInvokeConfig",
-        )
-    ],
-    members={
-        "LastModified": {"target": DATE},
-        "FunctionArn": {"target": FUNCTION_ARN},
-        "MaximumRetryAttempts": {"target": MAXIMUM_RETRY_ATTEMPTS},
-        "MaximumEventAgeInSeconds": {"target": MAXIMUM_EVENT_AGE_IN_SECONDS},
-        "DestinationConfig": {"target": DESTINATION_CONFIG},
-    },
-)
-
-UPDATE_FUNCTION_EVENT_INVOKE_CONFIG = Schema(
-    id=ShapeID("com.amazonaws.lambda#UpdateFunctionEventInvokeConfig"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-AWS_GIR_API_SERVICE = Schema(
-    id=ShapeID("com.amazonaws.lambda#AWSGirApiService"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "lambda"})
+ACCOUNT_USAGE: StaticSchema = (
+    18,
+    n0,
+    _AU,
+    0,
+    (_TCS, _FC),
+    ((LONG, {_s: 0}), (LONG, {_s: 0})),
+)
+
+ACTION: StaticSchema = (3, n0, _A, 0)
+
+ADDITIONAL_VERSION: StaticSchema = (3, n0, _AV, 0)
+
+WEIGHT: StaticSchema = (10, n0, _W, {_s: 0})
+
+ADDITIONAL_VERSION_WEIGHTS: StaticSchema = (
+    17,
+    n0,
+    _AVW,
+    0,
+    (_k, _v),
+    ((ADDITIONAL_VERSION, 0), (WEIGHT, 0)),
+)
+
+LAYER_PERMISSION_ALLOWED_ACTION: StaticSchema = (3, n0, _LPAA, 0)
+
+LAYER_NAME: StaticSchema = (3, n0, _LN, 0)
+
+ORGANIZATION_ID: StaticSchema = (3, n0, _OI, 0)
+
+LAYER_PERMISSION_ALLOWED_PRINCIPAL: StaticSchema = (3, n0, _LPAP, 0)
+
+STRING: StaticSchema = (3, n0, _S, 0)
+
+STATEMENT_ID: StaticSchema = (3, n0, _SI, 0)
+
+LAYER_VERSION_NUMBER: StaticSchema = (8, n0, _LVN, {_s: 0})
+
+ADD_LAYER_VERSION_PERMISSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ALVPI,
+    {_sSI: _cALVPR, _sm: None},
+    (_LN, _VN, _SI, _A, _P, _OI, _RI),
+    (
+        (LAYER_NAME, 9),
+        (LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
+        (STATEMENT_ID, 1),
+        (LAYER_PERMISSION_ALLOWED_ACTION, 1),
+        (LAYER_PERMISSION_ALLOWED_PRINCIPAL, 1),
+        (ORGANIZATION_ID, 0),
+        (STRING, {_sQ: _RI}),
+    ),
+)
+
+ADD_LAYER_VERSION_PERMISSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ALVPO,
+    {_sSI: _cALVPRo, _smit: None},
+    (_St, _RI),
+    ((STRING, 0), (STRING, 0)),
+)
+
+INVALID_PARAMETER_VALUE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IPVE,
+    {_smith: _c, _sE: 400},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+POLICY_LENGTH_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _PLEE,
+    {_smith: _c, _sE: 400},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+PRECONDITION_FAILED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _PFE,
+    {_smith: _c, _sE: 412},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+RESOURCE_CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RCE,
+    {_smith: _c, _sE: 409},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_smith: _c, _sE: 404},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+SERVICE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SE,
+    {_smith: _se, _sE: 500},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+THROTTLE_REASON: StaticSchema = (
+    14,
+    n0,
+    _TR,
+    0,
+    (_CILE, _FIRLE, _RFCILE, _RFIRLE, _CRLE, _CSCLE),
+    (
+        (-1, {_sV: _CILE}),
+        (-1, {_sV: _FIRLE}),
+        (-1, {_sV: _RFCILE}),
+        (-1, {_sV: _RFIRLE}),
+        (-1, {_sV: _CRLE}),
+        (-1, {_sV: _CSCLE}),
+    ),
+)
+
+TOO_MANY_REQUESTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TMRE,
+    {_smith: _c, _sE: 429},
+    (_rAS, _T, _m, _R),
+    ((STRING, {_sH: _RA}), (STRING, 0), (STRING, 0), (THROTTLE_REASON, 0)),
+)
+
+ADD_LAYER_VERSION_PERMISSION: StaticOperationSchema = (
+    23,
+    n0,
+    _ALVP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy",
+                "code": 201,
+            }
+        )
+    },
+    ADD_LAYER_VERSION_PERMISSION_INPUT,
+    ADD_LAYER_VERSION_PERMISSION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        POLICY_LENGTH_EXCEEDED_EXCEPTION,
+        PRECONDITION_FAILED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+EVENT_SOURCE_TOKEN: StaticSchema = (3, n0, _EST, 0)
+
+NAMESPACED_FUNCTION_NAME: StaticSchema = (3, n0, _NFN, 0)
+
+FUNCTION_URL_AUTH_TYPE: StaticSchema = (
+    14,
+    n0,
+    _FUAT,
+    0,
+    (_NONE, _AI),
+    ((-1, {_sV: _NONE}), (-1, {_sV: _AI})),
+)
+
+INVOKED_VIA_FUNCTION_URL: StaticSchema = (2, n0, _IVFU, 0)
+
+PRINCIPAL: StaticSchema = (3, n0, _P, 0)
+
+PRINCIPAL_ORG_ID: StaticSchema = (3, n0, _POID, 0)
+
+NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER: StaticSchema = (3, n0, _NLPOAQ, 0)
+
+SOURCE_OWNER: StaticSchema = (3, n0, _SO, 0)
+
+ARN: StaticSchema = (3, n0, _Ar, 0)
+
+ADD_PERMISSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _API,
+    {_sSI: _cAPR, _sm: None},
+    (_FN, _SI, _A, _P, _SA, _FUAT, _IVFU, _SAo, _EST, _Q, _RI, _POID),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (STATEMENT_ID, 1),
+        (ACTION, 1),
+        (PRINCIPAL, 1),
+        (ARN, 0),
+        (FUNCTION_URL_AUTH_TYPE, 0),
+        (INVOKED_VIA_FUNCTION_URL, 0),
+        (SOURCE_OWNER, 0),
+        (EVENT_SOURCE_TOKEN, 0),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+        (STRING, 0),
+        (PRINCIPAL_ORG_ID, 0),
+    ),
+)
+
+ADD_PERMISSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _APO,
+    {_sSI: _cAPRo, _smit: None},
+    (_St,),
+    ((STRING, 0),),
+)
+
+PUBLIC_POLICY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _PPE,
+    {_smith: _c, _sE: 400},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+ADD_PERMISSION: StaticOperationSchema = (
+    23,
+    n0,
+    _AP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2015-03-31/functions/{FunctionName}/policy",
+                "code": 201,
+            }
+        )
+    },
+    ADD_PERMISSION_INPUT,
+    ADD_PERMISSION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        POLICY_LENGTH_EXCEEDED_EXCEPTION,
+        PRECONDITION_FAILED_EXCEPTION,
+        PUBLIC_POLICY_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+ALIAS: StaticSchema = (3, n0, _Al, 0)
+
+FUNCTION_ARN: StaticSchema = (3, n0, _FA, 0)
+
+DESCRIPTION: StaticSchema = (3, n0, _D, 0)
+
+VERSION: StaticSchema = (3, n0, _V, 0)
+
+ALIAS_ROUTING_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _ARC,
+    0,
+    (_AVW,),
+    ((ADDITIONAL_VERSION_WEIGHTS, 0),),
+)
+
+ALIAS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _AC,
+    0,
+    (_AA, _N, _FV, _D, _RC, _RI),
+    (
+        (FUNCTION_ARN, 0),
+        (ALIAS, 0),
+        (VERSION, 0),
+        (DESCRIPTION, 0),
+        (ALIAS_ROUTING_CONFIGURATION, 0),
+        (STRING, 0),
+    ),
+)
+
+ALIAS_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ALEE,
+    {_smith: _c, _sE: 400},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+ALIAS_LIST: StaticSchema = (16, n0, _ALl, 0, (_me,), ((ALIAS_CONFIGURATION, 0),))
+
+ALLOW_CREDENTIALS: StaticSchema = (2, n0, _ACl, 0)
+
+SIGNING_PROFILE_VERSION_ARNS: StaticSchema = (16, n0, _SPVA, 0, (_me,), ((ARN, 0),))
+
+ALLOWED_PUBLISHERS: StaticSchema = (
+    18,
+    n0,
+    _APl,
+    0,
+    (_SPVA,),
+    ((SIGNING_PROFILE_VERSION_ARNS, 1),),
+)
+
+METHOD: StaticSchema = (3, n0, _Me, 0)
+
+ALLOW_METHODS_LIST: StaticSchema = (16, n0, _AML, 0, (_me,), ((METHOD, 0),))
+
+ORIGIN: StaticSchema = (3, n0, _O, 0)
+
+ALLOW_ORIGINS_LIST: StaticSchema = (16, n0, _AOL, 0, (_me,), ((ORIGIN, 0),))
+
+URI: StaticSchema = (3, n0, _URI, 0)
+
+KAFKA_SCHEMA_REGISTRY_AUTH_TYPE: StaticSchema = (
+    14,
+    n0,
+    _KSRAT,
+    0,
+    (_BA, _CCTA, _SRCC),
+    ((-1, {_sV: _BA}), (-1, {_sV: _CCTA}), (-1, {_sV: _SRCC})),
+)
+
+KAFKA_SCHEMA_REGISTRY_ACCESS_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _KSRAC,
+    0,
+    (_T, _URI),
+    ((KAFKA_SCHEMA_REGISTRY_AUTH_TYPE, 0), (ARN, 0)),
+)
+
+KAFKA_SCHEMA_REGISTRY_ACCESS_CONFIG_LIST: StaticSchema = (
+    16,
+    n0,
+    _KSRACL,
+    0,
+    (_me,),
+    ((KAFKA_SCHEMA_REGISTRY_ACCESS_CONFIG, 0),),
+)
+
+SCHEMA_REGISTRY_EVENT_RECORD_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _SRERF,
+    0,
+    (_JSON, _SOURCE),
+    ((-1, {_sV: _JSON}), (-1, {_sV: _SOURCE})),
+)
+
+SCHEMA_REGISTRY_URI: StaticSchema = (3, n0, _SRU, 0)
+
+KAFKA_SCHEMA_VALIDATION_ATTRIBUTE: StaticSchema = (
+    14,
+    n0,
+    _KSVA,
+    0,
+    (_KEY, _VALUE),
+    ((-1, {_sV: _KEY}), (-1, {_sV: _VALUE})),
+)
+
+KAFKA_SCHEMA_VALIDATION_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _KSVC,
+    0,
+    (_At,),
+    ((KAFKA_SCHEMA_VALIDATION_ATTRIBUTE, 0),),
+)
+
+KAFKA_SCHEMA_VALIDATION_CONFIG_LIST: StaticSchema = (
+    16,
+    n0,
+    _KSVCL,
+    0,
+    (_me,),
+    ((KAFKA_SCHEMA_VALIDATION_CONFIG, 0),),
+)
+
+KAFKA_SCHEMA_REGISTRY_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _KSRC,
+    0,
+    (_SRURI, _ERF, _ACc, _SVC),
+    (
+        (SCHEMA_REGISTRY_URI, 0),
+        (SCHEMA_REGISTRY_EVENT_RECORD_FORMAT, 0),
+        (KAFKA_SCHEMA_REGISTRY_ACCESS_CONFIG_LIST, 0),
+        (KAFKA_SCHEMA_VALIDATION_CONFIG_LIST, 0),
+    ),
+)
+
+AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _AMKESC,
+    0,
+    (_CGI, _SRC),
+    ((URI, 0), (KAFKA_SCHEMA_REGISTRY_CONFIG, 0)),
+)
+
+APPLICATION_LOG_LEVEL: StaticSchema = (
+    14,
+    n0,
+    _ALL,
+    0,
+    (_Tr, _De, _In, _Wa, _E, _F),
+    (
+        (-1, {_sV: _TRACE}),
+        (-1, {_sV: _DEBUG}),
+        (-1, {_sV: _INFO}),
+        (-1, {_sV: _WARN}),
+        (-1, {_sV: _ERROR}),
+        (-1, {_sV: _FATAL}),
+    ),
+)
+
+ARCHITECTURE: StaticSchema = (
+    14,
+    n0,
+    _Arc,
+    0,
+    (_x, _a),
+    ((-1, {_sV: _x}), (-1, {_sV: _a})),
+)
+
+ARCHITECTURES_LIST: StaticSchema = (16, n0, _ALr, 0, (_me,), ((ARCHITECTURE, 0),))
+
+ATTEMPT_COUNT: StaticSchema = (7, n0, _ACt, {_s: 0})
+
+CAPACITY_PROVIDER_NAME: StaticSchema = (3, n0, _CPN, 0)
+
+CAPACITY_PROVIDER_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CPLEE,
+    {_smith: _c, _sE: 400},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+CAPACITY_PROVIDER_MAX_V_CPU_COUNT: StaticSchema = (7, n0, _CPMVCC, 0)
+
+CAPACITY_PROVIDER_SCALING_MODE: StaticSchema = (
+    14,
+    n0,
+    _CPSM,
+    0,
+    (_Au, _Ma),
+    ((-1, {_sV: _Au}), (-1, {_sV: _Ma})),
+)
+
+CAPACITY_PROVIDER_PREDEFINED_METRIC_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CPPMT,
+    0,
+    (_LCPACPUU,),
+    ((-1, {_sV: _LCPACPUU}),),
+)
+
+METRIC_TARGET_VALUE: StaticSchema = (10, n0, _MTV, 0)
+
+TARGET_TRACKING_SCALING_POLICY: StaticSchema = (
+    18,
+    n0,
+    _TTSP,
+    0,
+    (_PMT, _TV),
+    ((CAPACITY_PROVIDER_PREDEFINED_METRIC_TYPE, 1), (METRIC_TARGET_VALUE, 1)),
+)
+
+CAPACITY_PROVIDER_SCALING_POLICIES_LIST: StaticSchema = (
+    16,
+    n0,
+    _CPSPL,
+    0,
+    (_me,),
+    ((TARGET_TRACKING_SCALING_POLICY, 0),),
+)
+
+CAPACITY_PROVIDER_SCALING_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _CPSC,
+    0,
+    (_MVCC, _SM, _SP),
+    (
+        (CAPACITY_PROVIDER_MAX_V_CPU_COUNT, 0),
+        (CAPACITY_PROVIDER_SCALING_MODE, 0),
+        (CAPACITY_PROVIDER_SCALING_POLICIES_LIST, 0),
+    ),
+)
+
+INSTANCE_TYPE: StaticSchema = (3, n0, _IT, 0)
+
+INSTANCE_TYPE_SET: StaticSchema = (16, n0, _ITS, 0, (_me,), ((INSTANCE_TYPE, 0),))
+
+INSTANCE_REQUIREMENTS: StaticSchema = (
+    18,
+    n0,
+    _IR,
+    0,
+    (_Arch, _AIT, _EIT),
+    ((ARCHITECTURES_LIST, 0), (INSTANCE_TYPE_SET, 0), (INSTANCE_TYPE_SET, 0)),
+)
+
+KMS_KEY_ARN_NON_EMPTY: StaticSchema = (3, n0, _KMSKANE, 0)
+
+ROLE_ARN: StaticSchema = (3, n0, _RAo, 0)
+
+CAPACITY_PROVIDER_PERMISSIONS_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _CPPC,
+    0,
+    (_CPORA,),
+    ((ROLE_ARN, 1),),
+)
+
+TAG_KEY: StaticSchema = (3, n0, _TK, 0)
+
+TAG_VALUE: StaticSchema = (3, n0, _TVa, 0)
+
+TAGS: StaticSchema = (17, n0, _Ta, 0, (_k, _v), ((TAG_KEY, 0), (TAG_VALUE, 0)))
+
+PROPAGATE_TAGS_MODE: StaticSchema = (
+    14,
+    n0,
+    _PTM,
+    0,
+    (_No, _Ex),
+    ((-1, {_sV: _No}), (-1, {_sV: _Ex})),
+)
+
+PROPAGATE_TAGS: StaticSchema = (
+    18,
+    n0,
+    _PT,
+    0,
+    (_Mo, _ET),
+    ((PROPAGATE_TAGS_MODE, 0), (TAGS, 0)),
+)
+
+LOG_GROUP: StaticSchema = (3, n0, _LG, 0)
+
+SYSTEM_LOG_LEVEL: StaticSchema = (
+    14,
+    n0,
+    _SLL,
+    0,
+    (_De, _In, _Wa),
+    ((-1, {_sV: _DEBUG}), (-1, {_sV: _INFO}), (-1, {_sV: _WARN})),
+)
+
+CAPACITY_PROVIDER_LOGGING_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _CPLC,
+    0,
+    (_SLL, _LG),
+    ((SYSTEM_LOG_LEVEL, 0), (LOG_GROUP, 0)),
+)
+
+CAPACITY_PROVIDER_TELEMETRY_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _CPTC,
+    0,
+    (_LC,),
+    ((CAPACITY_PROVIDER_LOGGING_CONFIG, 0),),
+)
+
+SECURITY_GROUP_ID: StaticSchema = (3, n0, _SGI, 0)
+
+CAPACITY_PROVIDER_SECURITY_GROUP_IDS: StaticSchema = (
+    16,
+    n0,
+    _CPSGI,
+    0,
+    (_me,),
+    ((SECURITY_GROUP_ID, 0),),
+)
+
+SUBNET_ID: StaticSchema = (3, n0, _SIu, 0)
+
+CAPACITY_PROVIDER_SUBNET_IDS: StaticSchema = (
+    16,
+    n0,
+    _CPSI,
+    0,
+    (_me,),
+    ((SUBNET_ID, 0),),
+)
+
+CAPACITY_PROVIDER_VPC_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _CPVC,
+    0,
+    (_SIub, _SGIe),
+    ((CAPACITY_PROVIDER_SUBNET_IDS, 1), (CAPACITY_PROVIDER_SECURITY_GROUP_IDS, 1)),
+)
+
+CREATE_CAPACITY_PROVIDER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CCPI,
+    {_sSI: _cCCPR, _sm: None},
+    (_CPN, _VC, _PC, _IR, _CPSC, _KKA, _Ta, _PT, _TC),
+    (
+        (CAPACITY_PROVIDER_NAME, 1),
+        (CAPACITY_PROVIDER_VPC_CONFIG, 1),
+        (CAPACITY_PROVIDER_PERMISSIONS_CONFIG, 1),
+        (INSTANCE_REQUIREMENTS, 0),
+        (CAPACITY_PROVIDER_SCALING_CONFIG, 0),
+        (KMS_KEY_ARN_NON_EMPTY, 0),
+        (TAGS, 0),
+        (PROPAGATE_TAGS, 0),
+        (CAPACITY_PROVIDER_TELEMETRY_CONFIG, 0),
+    ),
+)
+
+CAPACITY_PROVIDER_ARN: StaticSchema = (3, n0, _CPA, 0)
+
+KMS_KEY_ARN: StaticSchema = (3, n0, _KMSKA, 0)
+
+TIMESTAMP: StaticSchema = (3, n0, _Ti, 0)
+
+CAPACITY_PROVIDER_STATE: StaticSchema = (
+    14,
+    n0,
+    _CPS,
+    0,
+    (_Pe, _Ac, _Fa, _Del),
+    ((-1, {_sV: _Pe}), (-1, {_sV: _Ac}), (-1, {_sV: _Fa}), (-1, {_sV: _Del})),
+)
+
+CAPACITY_PROVIDER: StaticSchema = (
+    18,
+    n0,
+    _CP,
+    0,
+    (_CPA, _Sta, _VC, _PC, _IR, _CPSC, _KKA, _LM, _PT, _TC),
+    (
+        (CAPACITY_PROVIDER_ARN, 1),
+        (CAPACITY_PROVIDER_STATE, 1),
+        (CAPACITY_PROVIDER_VPC_CONFIG, 1),
+        (CAPACITY_PROVIDER_PERMISSIONS_CONFIG, 1),
+        (INSTANCE_REQUIREMENTS, 0),
+        (CAPACITY_PROVIDER_SCALING_CONFIG, 0),
+        (KMS_KEY_ARN, 0),
+        (TIMESTAMP, 0),
+        (PROPAGATE_TAGS, 0),
+        (CAPACITY_PROVIDER_TELEMETRY_CONFIG, 0),
+    ),
+)
+
+CREATE_CAPACITY_PROVIDER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CCPO,
+    {_sSI: _cCCPRo, _smit: None},
+    (_CP,),
+    ((CAPACITY_PROVIDER, 1),),
+)
+
+CREATE_CAPACITY_PROVIDER: StaticOperationSchema = (
+    23,
+    n0,
+    _CCP,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/2025-11-30/capacity-providers", "code": 202}
+        )
+    },
+    CREATE_CAPACITY_PROVIDER_INPUT,
+    CREATE_CAPACITY_PROVIDER_OUTPUT,
+    (
+        CAPACITY_PROVIDER_LIMIT_EXCEEDED_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+DELETE_CAPACITY_PROVIDER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCPI,
+    {_sSI: _cDCPR, _sm: None},
+    (_CPN,),
+    ((CAPACITY_PROVIDER_NAME, 9),),
+)
+
+DELETE_CAPACITY_PROVIDER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCPO,
+    {_sSI: _cDCPRo, _smit: None},
+    (_CP,),
+    ((CAPACITY_PROVIDER, 1),),
+)
+
+DELETE_CAPACITY_PROVIDER: StaticOperationSchema = (
+    23,
+    n0,
+    _DCP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2025-11-30/capacity-providers/{CapacityProviderName}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_CAPACITY_PROVIDER_INPUT,
+    DELETE_CAPACITY_PROVIDER_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_CAPACITY_PROVIDER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCPI,
+    {_sSI: _cGCPR, _sm: None},
+    (_CPN,),
+    ((CAPACITY_PROVIDER_NAME, 9),),
+)
+
+GET_CAPACITY_PROVIDER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCPO,
+    {_sSI: _cGCPRo, _smit: None},
+    (_CP,),
+    ((CAPACITY_PROVIDER, 1),),
+)
+
+GET_CAPACITY_PROVIDER: StaticOperationSchema = (
+    23,
+    n0,
+    _GCP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2025-11-30/capacity-providers/{CapacityProviderName}",
+                "code": 200,
+            }
+        )
+    },
+    GET_CAPACITY_PROVIDER_INPUT,
+    GET_CAPACITY_PROVIDER_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+MAX_FIFTY_LIST_ITEMS: StaticSchema = (7, n0, _MFLI, 0)
+
+LIST_CAPACITY_PROVIDERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LCPI,
+    {_sSI: _cLCPR, _sm: None},
+    (_Sta, _Mar, _MI),
+    (
+        (CAPACITY_PROVIDER_STATE, {_sQ: _Sta}),
+        (STRING, {_sQ: _Mar}),
+        (MAX_FIFTY_LIST_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+CAPACITY_PROVIDERS_LIST: StaticSchema = (
+    16,
+    n0,
+    _CPL,
+    0,
+    (_me,),
+    ((CAPACITY_PROVIDER, 0),),
+)
+
+LIST_CAPACITY_PROVIDERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LCPO,
+    {_sSI: _cLCPRo, _smit: None},
+    (_CPa, _NM),
+    ((CAPACITY_PROVIDERS_LIST, 1), (STRING, 0)),
+)
+
+LIST_CAPACITY_PROVIDERS: StaticOperationSchema = (
+    23,
+    n0,
+    _LCP,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/2025-11-30/capacity-providers", "code": 200}
+        )
+    },
+    LIST_CAPACITY_PROVIDERS_INPUT,
+    LIST_CAPACITY_PROVIDERS_OUTPUT,
+    (INVALID_PARAMETER_VALUE_EXCEPTION, SERVICE_EXCEPTION, TOO_MANY_REQUESTS_EXCEPTION),
+)
+
+LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LFVBCPI,
+    {_sSI: _cLFVBCPR, _sm: None},
+    (_CPN, _Mar, _MI),
+    (
+        (CAPACITY_PROVIDER_NAME, 9),
+        (STRING, {_sQ: _Mar}),
+        (MAX_FIFTY_LIST_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+NAME_SPACED_FUNCTION_ARN: StaticSchema = (3, n0, _NSFA, 0)
+
+STATE: StaticSchema = (
+    14,
+    n0,
+    _Sta,
+    0,
+    (_Pe, _Ac, _Ina, _Fa, _Dea, _Deac, _ANI, _Del),
+    (
+        (-1, {_sV: _Pe}),
+        (-1, {_sV: _Ac}),
+        (-1, {_sV: _Ina}),
+        (-1, {_sV: _Fa}),
+        (-1, {_sV: _Dea}),
+        (-1, {_sV: _Deac}),
+        (-1, {_sV: _ANI}),
+        (-1, {_sV: _Del}),
+    ),
+)
+
+FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_LIST_ITEM: StaticSchema = (
+    18,
+    n0,
+    _FVBCPLI,
+    0,
+    (_FA, _Sta),
+    ((NAME_SPACED_FUNCTION_ARN, 1), (STATE, 1)),
+)
+
+FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_LIST: StaticSchema = (
+    16,
+    n0,
+    _FVBCPL,
+    0,
+    (_me,),
+    ((FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_LIST_ITEM, 0),),
+)
+
+LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LFVBCPO,
+    {_sSI: _cLFVBCPRo, _smit: None},
+    (_CPA, _FVu, _NM),
+    (
+        (CAPACITY_PROVIDER_ARN, 1),
+        (FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_LIST, 1),
+        (STRING, 0),
+    ),
+)
+
+LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER: StaticOperationSchema = (
+    23,
+    n0,
+    _LFVBCP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2025-11-30/capacity-providers/{CapacityProviderName}/function-versions",
+                "code": 200,
+            }
+        )
+    },
+    LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_INPUT,
+    LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+UPDATE_CAPACITY_PROVIDER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UCPI,
+    {_sSI: _cUCPR, _sm: None},
+    (_CPN, _CPSC, _PT, _TC),
+    (
+        (CAPACITY_PROVIDER_NAME, 9),
+        (CAPACITY_PROVIDER_SCALING_CONFIG, 0),
+        (PROPAGATE_TAGS, 0),
+        (CAPACITY_PROVIDER_TELEMETRY_CONFIG, 0),
+    ),
+)
+
+UPDATE_CAPACITY_PROVIDER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UCPO,
+    {_sSI: _cUCPRo, _smit: None},
+    (_CP,),
+    ((CAPACITY_PROVIDER, 1),),
+)
+
+UPDATE_CAPACITY_PROVIDER: StaticOperationSchema = (
+    23,
+    n0,
+    _UCP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2025-11-30/capacity-providers/{CapacityProviderName}",
+                "code": 202,
+            }
+        )
+    },
+    UPDATE_CAPACITY_PROVIDER_INPUT,
+    UPDATE_CAPACITY_PROVIDER_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+CODE_SIGNING_CONFIG_ID: StaticSchema = (3, n0, _CSCI, 0)
+
+CODE_SIGNING_POLICY: StaticSchema = (
+    14,
+    n0,
+    _CSP,
+    0,
+    (_Wa, _En),
+    ((-1, {_sV: _Wa}), (-1, {_sV: _En})),
+)
+
+CODE_SIGNING_POLICIES: StaticSchema = (
+    18,
+    n0,
+    _CSPo,
+    0,
+    (_UAOD,),
+    ((CODE_SIGNING_POLICY, 0),),
+)
+
+CREATE_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CCSCI,
+    {_sSI: _cCCSCR, _sm: None},
+    (_D, _APl, _CSPo, _Ta),
+    ((DESCRIPTION, 0), (ALLOWED_PUBLISHERS, 1), (CODE_SIGNING_POLICIES, 0), (TAGS, 0)),
+)
+
+CODE_SIGNING_CONFIG_ARN: StaticSchema = (3, n0, _CSCA, 0)
+
+CODE_SIGNING_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _CSC,
+    0,
+    (_CSCI, _CSCA, _D, _APl, _CSPo, _LM),
+    (
+        (CODE_SIGNING_CONFIG_ID, 1),
+        (CODE_SIGNING_CONFIG_ARN, 1),
+        (DESCRIPTION, 0),
+        (ALLOWED_PUBLISHERS, 1),
+        (CODE_SIGNING_POLICIES, 1),
+        (TIMESTAMP, 1),
+    ),
+)
+
+CREATE_CODE_SIGNING_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CCSCO,
+    {_sSI: _cCCSCRo, _smit: None},
+    (_CSC,),
+    ((CODE_SIGNING_CONFIG, 1),),
+)
+
+CREATE_CODE_SIGNING_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _CCSC,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/2020-04-22/code-signing-configs", "code": 201}
+        )
+    },
+    CREATE_CODE_SIGNING_CONFIG_INPUT,
+    CREATE_CODE_SIGNING_CONFIG_OUTPUT,
+    (INVALID_PARAMETER_VALUE_EXCEPTION, SERVICE_EXCEPTION),
+)
+
+DELETE_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCSCI,
+    {_sSI: _cDCSCR, _sm: None},
+    (_CSCA,),
+    ((CODE_SIGNING_CONFIG_ARN, 9),),
+)
+
+DELETE_CODE_SIGNING_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCSCO,
+    {_sSI: _cDCSCRo, _smit: None},
+)
+
+DELETE_CODE_SIGNING_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _DCSC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_CODE_SIGNING_CONFIG_INPUT,
+    DELETE_CODE_SIGNING_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+    ),
+)
+
+GET_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCSCI,
+    {_sSI: _cGCSCR, _sm: None},
+    (_CSCA,),
+    ((CODE_SIGNING_CONFIG_ARN, 9),),
+)
+
+GET_CODE_SIGNING_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCSCO,
+    {_sSI: _cGCSCRo, _smit: None},
+    (_CSC,),
+    ((CODE_SIGNING_CONFIG, 1),),
+)
+
+GET_CODE_SIGNING_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _GCSC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}",
+                "code": 200,
+            }
+        )
+    },
+    GET_CODE_SIGNING_CONFIG_INPUT,
+    GET_CODE_SIGNING_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+    ),
+)
+
+MAX_LIST_ITEMS: StaticSchema = (7, n0, _MLI, 0)
+
+LIST_CODE_SIGNING_CONFIGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LCSCI,
+    {_sSI: _cLCSCR, _sm: None},
+    (_Mar, _MI),
+    ((STRING, {_sQ: _Mar}), (MAX_LIST_ITEMS, {_sQ: _MI})),
+)
+
+CODE_SIGNING_CONFIG_LIST: StaticSchema = (
+    16,
+    n0,
+    _CSCL,
+    0,
+    (_me,),
+    ((CODE_SIGNING_CONFIG, 0),),
+)
+
+LIST_CODE_SIGNING_CONFIGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LCSCO,
+    {_sSI: _cLCSCRo, _smit: None},
+    (_NM, _CSCo),
+    ((STRING, 0), (CODE_SIGNING_CONFIG_LIST, 0)),
+)
+
+LIST_CODE_SIGNING_CONFIGS: StaticOperationSchema = (
+    23,
+    n0,
+    _LCSC,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/2020-04-22/code-signing-configs", "code": 200}
+        )
+    },
+    LIST_CODE_SIGNING_CONFIGS_INPUT,
+    LIST_CODE_SIGNING_CONFIGS_OUTPUT,
+    (INVALID_PARAMETER_VALUE_EXCEPTION, SERVICE_EXCEPTION),
+)
+
+LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LFBCSCI,
+    {_sSI: _cLFBCSCR, _sm: None},
+    (_CSCA, _Mar, _MI),
+    ((CODE_SIGNING_CONFIG_ARN, 9), (STRING, {_sQ: _Mar}), (MAX_LIST_ITEMS, {_sQ: _MI})),
+)
+
+FUNCTION_ARN_LIST: StaticSchema = (16, n0, _FAL, 0, (_me,), ((FUNCTION_ARN, 0),))
+
+LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LFBCSCO,
+    {_sSI: _cLFBCSCRo, _smit: None},
+    (_NM, _FAu),
+    ((STRING, 0), (FUNCTION_ARN_LIST, 0)),
+)
+
+LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _LFBCSC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}/functions",
+                "code": 200,
+            }
+        )
+    },
+    LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG_INPUT,
+    LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+    ),
+)
+
+UPDATE_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UCSCI,
+    {_sSI: _cUCSCR, _sm: None},
+    (_CSCA, _D, _APl, _CSPo),
+    (
+        (CODE_SIGNING_CONFIG_ARN, 9),
+        (DESCRIPTION, 0),
+        (ALLOWED_PUBLISHERS, 0),
+        (CODE_SIGNING_POLICIES, 0),
+    ),
+)
+
+UPDATE_CODE_SIGNING_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UCSCO,
+    {_sSI: _cUCSCRo, _smit: None},
+    (_CSC,),
+    ((CODE_SIGNING_CONFIG, 1),),
+)
+
+UPDATE_CODE_SIGNING_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _UCSC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_CODE_SIGNING_CONFIG_INPUT,
+    UPDATE_CODE_SIGNING_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+    ),
+)
+
+DELETE_FUNCTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFI,
+    {_sSI: _cDFR, _sm: None},
+    (_FN, _Q),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+    ),
+)
+
+DELETE_FUNCTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DFO,
+    {_sSI: _cDFRo, _smit: None},
+    (_SC,),
+    ((INTEGER, {_s: 0, _sRC: None}),),
+)
+
+DELETE_FUNCTION: StaticOperationSchema = (
+    23,
+    n0,
+    _DF,
+    {
+        _smithy: MappingProxyType(
+            {"method": "DELETE", "uri": "/2015-03-31/functions/{FunctionName}"}
+        )
+    },
+    DELETE_FUNCTION_INPUT,
+    DELETE_FUNCTION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+DELETE_FUNCTION_EVENT_INVOKE_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFEICI,
+    {_sSI: _cDFEICR, _sm: None},
+    (_FN, _Q),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+    ),
+)
+
+DELETE_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DFEICO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_FUNCTION_EVENT_INVOKE_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _DFEIC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_FUNCTION_EVENT_INVOKE_CONFIG_INPUT,
+    DELETE_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+POLICY_RESOURCE_ARN: StaticSchema = (3, n0, _PRA, 0)
+
+REVISION_ID: StaticSchema = (3, n0, _RI, 0)
+
+DELETE_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPI,
+    {_sSI: _cDRPR, _sm: None},
+    (_RAe, _RI),
+    ((POLICY_RESOURCE_ARN, 9), (REVISION_ID, {_sQ: _RI})),
+)
+
+DELETE_RESOURCE_POLICY_OUTPUT: StaticSchema = (18, n0, _DRPO, {_sSI: _sU, _smit: None})
+
+DELETE_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _DRP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2026-07-09/resource-policy/{ResourceArn}",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_RESOURCE_POLICY_INPUT,
+    DELETE_RESOURCE_POLICY_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        PRECONDITION_FAILED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+CHECKPOINT_TOKEN: StaticSchema = (3, n0, _CT, 0)
+
+CLIENT_TOKEN: StaticSchema = (3, n0, _CTl, 0)
+
+DURABLE_EXECUTION_ARN: StaticSchema = (3, n0, _DEA, 0)
+
+OPERATION_ACTION: StaticSchema = (
+    14,
+    n0,
+    _OA,
+    0,
+    (_START, _SUCCEED, _FAIL, _RETRY, _CANCEL),
+    (
+        (-1, {_sV: _START}),
+        (-1, {_sV: _SUCCEED}),
+        (-1, {_sV: _FAIL}),
+        (-1, {_sV: _RETRY}),
+        (-1, {_sV: _CANCEL}),
+    ),
+)
+
+DURATION_SECONDS: StaticSchema = (7, n0, _DS, 0)
+
+CALLBACK_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _CO,
+    0,
+    (_TS, _HTS),
+    ((DURATION_SECONDS, {_s: 0}), (DURATION_SECONDS, {_s: 0})),
+)
+
+TENANT_ID: StaticSchema = (3, n0, _TI, 0)
+
+CHAINED_INVOKE_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _CIO,
+    0,
+    (_FN, _TI),
+    ((NAMESPACED_FUNCTION_NAME, 1), (TENANT_ID, 0)),
+)
+
+REPLAY_CHILDREN: StaticSchema = (2, n0, _RCe, 0)
+
+CONTEXT_OPTIONS: StaticSchema = (18, n0, _COo, 0, (_RCe,), ((REPLAY_CHILDREN, 0),))
+
+ERROR_DATA: StaticSchema = (3, n0, _ED, 4)
+
+ERROR_MESSAGE: StaticSchema = (3, n0, _EM, 4)
+
+ERROR_TYPE: StaticSchema = (3, n0, _ETr, 4)
+
+STACK_TRACE_ENTRY: StaticSchema = (3, n0, _STE, 4)
+
+STACK_TRACE_ENTRIES: StaticSchema = (
+    16,
+    n0,
+    _STEt,
+    0,
+    (_me,),
+    ((STACK_TRACE_ENTRY, 0),),
+)
+
+ERROR_OBJECT: StaticSchema = (
+    18,
+    n0,
+    _EO,
+    0,
+    (_EM, _ETr, _ED, _ST),
+    ((ERROR_MESSAGE, 0), (ERROR_TYPE, 0), (ERROR_DATA, 0), (STACK_TRACE_ENTRIES, 0)),
+)
+
+OPERATION_ID: StaticSchema = (3, n0, _OIp, 0)
+
+OPERATION_NAME: StaticSchema = (3, n0, _ON, 0)
+
+OPERATION_PAYLOAD: StaticSchema = (3, n0, _OP, 4)
+
+STEP_OPTIONS: StaticSchema = (18, n0, _SOt, 0, (_NADS,), ((DURATION_SECONDS, 0),))
+
+OPERATION_SUB_TYPE: StaticSchema = (3, n0, _OST, 0)
+
+OPERATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _OT,
+    0,
+    (_EXECUTION, _CONTEXT, _STEP, _WAIT, _CALLBACK, _CI),
+    (
+        (-1, {_sV: _EXECUTION}),
+        (-1, {_sV: _CONTEXT}),
+        (-1, {_sV: _STEP}),
+        (-1, {_sV: _WAIT}),
+        (-1, {_sV: _CALLBACK}),
+        (-1, {_sV: _CI}),
+    ),
+)
+
+WAIT_OPTIONS: StaticSchema = (18, n0, _WO, 0, (_WS,), ((DURATION_SECONDS, 0),))
+
+OPERATION_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _OU,
+    0,
+    (_Id, _PI, _N, _T, _STu, _A, _Pa, _E, _COo, _SOt, _WO, _CO, _CIO),
+    (
+        (OPERATION_ID, 1),
+        (OPERATION_ID, 0),
+        (OPERATION_NAME, 0),
+        (OPERATION_TYPE, 1),
+        (OPERATION_SUB_TYPE, 0),
+        (OPERATION_ACTION, 1),
+        (OPERATION_PAYLOAD, 0),
+        (ERROR_OBJECT, 0),
+        (CONTEXT_OPTIONS, 0),
+        (STEP_OPTIONS, 0),
+        (WAIT_OPTIONS, 0),
+        (CALLBACK_OPTIONS, 0),
+        (CHAINED_INVOKE_OPTIONS, 0),
+    ),
+)
+
+OPERATION_UPDATES: StaticSchema = (16, n0, _OUp, 0, (_me,), ((OPERATION_UPDATE, 0),))
+
+CHECKPOINT_DURABLE_EXECUTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDEI,
+    {_sSI: _cCDER, _sm: None},
+    (_DEA, _CT, _U, _CTl),
+    (
+        (DURABLE_EXECUTION_ARN, 9),
+        (CHECKPOINT_TOKEN, 1),
+        (OPERATION_UPDATES, 0),
+        (CLIENT_TOKEN, 2),
+    ),
+)
+
+CALLBACK_ID: StaticSchema = (3, n0, _CIa, 0)
+
+CALLBACK_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CD,
+    0,
+    (_CIa, _Re, _E),
+    ((CALLBACK_ID, 0), (OPERATION_PAYLOAD, 0), (ERROR_OBJECT, 0)),
+)
+
+CHAINED_INVOKE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CID,
+    0,
+    (_Re, _E),
+    ((OPERATION_PAYLOAD, 0), (ERROR_OBJECT, 0)),
+)
+
+CONTEXT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CDo,
+    0,
+    (_RCe, _Re, _E),
+    ((REPLAY_CHILDREN, 0), (OPERATION_PAYLOAD, 0), (ERROR_OBJECT, 0)),
+)
+
+EXECUTION_TIMESTAMP: StaticSchema = (4, n0, _ETx, 0)
+
+INPUT_PAYLOAD: StaticSchema = (3, n0, _IP, 4)
+
+EXECUTION_DETAILS: StaticSchema = (18, n0, _EDx, 0, (_IP,), ((INPUT_PAYLOAD, 0),))
+
+OPERATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _OS,
+    0,
+    (_STARTED, _PENDING, _READY, _SUCCEEDED, _FAILED, _CANCELLED, _TO, _STOPPED),
+    (
+        (-1, {_sV: _STARTED}),
+        (-1, {_sV: _PENDING}),
+        (-1, {_sV: _READY}),
+        (-1, {_sV: _SUCCEEDED}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _CANCELLED}),
+        (-1, {_sV: _TO}),
+        (-1, {_sV: _STOPPED}),
+    ),
+)
+
+STEP_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _SD,
+    0,
+    (_Att, _NAT, _Re, _E),
+    (
+        (ATTEMPT_COUNT, {_s: 0}),
+        (EXECUTION_TIMESTAMP, 0),
+        (OPERATION_PAYLOAD, 0),
+        (ERROR_OBJECT, 0),
+    ),
+)
+
+WAIT_DETAILS: StaticSchema = (18, n0, _WD, 0, (_SET,), ((EXECUTION_TIMESTAMP, 0),))
+
+OPERATION: StaticSchema = (
+    18,
+    n0,
+    _Op,
+    0,
+    (_Id, _PI, _N, _T, _STu, _STt, _ETn, _Stat, _EDx, _CDo, _SD, _WD, _CD, _CID),
+    (
+        (OPERATION_ID, 1),
+        (OPERATION_ID, 0),
+        (OPERATION_NAME, 0),
+        (OPERATION_TYPE, 1),
+        (OPERATION_SUB_TYPE, 0),
+        (EXECUTION_TIMESTAMP, 1),
+        (EXECUTION_TIMESTAMP, 0),
+        (OPERATION_STATUS, 1),
+        (EXECUTION_DETAILS, 0),
+        (CONTEXT_DETAILS, 0),
+        (STEP_DETAILS, 0),
+        (WAIT_DETAILS, 0),
+        (CALLBACK_DETAILS, 0),
+        (CHAINED_INVOKE_DETAILS, 0),
+    ),
+)
+
+OPERATIONS: StaticSchema = (16, n0, _Ope, 0, (_me,), ((OPERATION, 0),))
+
+CHECKPOINT_UPDATED_EXECUTION_STATE: StaticSchema = (
+    18,
+    n0,
+    _CUES,
+    0,
+    (_Ope, _NM),
+    ((OPERATIONS, 0), (STRING, 0)),
+)
+
+CHECKPOINT_DURABLE_EXECUTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDEO,
+    {_sSI: _cCDERo, _smit: None},
+    (_CT, _NES),
+    ((CHECKPOINT_TOKEN, 0), (CHECKPOINT_UPDATED_EXECUTION_STATE, 1)),
+)
+
+KMS_ACCESS_DENIED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KMSADE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+KMS_DISABLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KMSDE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+KMS_INVALID_STATE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KMSISE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+KMS_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _KMSNFE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+CHECKPOINT_DURABLE_EXECUTION: StaticOperationSchema = (
+    23,
+    n0,
+    _CDE,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/checkpoint",
+                "code": 200,
+            }
+        )
+    },
+    CHECKPOINT_DURABLE_EXECUTION_INPUT,
+    CHECKPOINT_DURABLE_EXECUTION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+INCLUDE_EXECUTION_DATA: StaticSchema = (2, n0, _IED, 0)
+
+GET_DURABLE_EXECUTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDEI,
+    {_sSI: _cGDER, _sm: None},
+    (_DEA, _IED),
+    ((DURABLE_EXECUTION_ARN, 9), (INCLUDE_EXECUTION_DATA, {_s: True, _sQ: _IED})),
+)
+
+EXECUTION_TIMEOUT: StaticSchema = (7, n0, _ETxe, 0)
+
+RETENTION_PERIOD_IN_DAYS: StaticSchema = (7, n0, _RPID, 0)
+
+DURABLE_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _DC,
+    0,
+    (_KMSKA, _RPID, _ETxe),
+    ((KMS_KEY_ARN, 0), (RETENTION_PERIOD_IN_DAYS, 0), (EXECUTION_TIMEOUT, 0)),
+)
+
+DURABLE_EXECUTION_NAME: StaticSchema = (3, n0, _DEN, 0)
+
+EXECUTION_DATA_INCLUDED: StaticSchema = (2, n0, _EDI, 0)
+
+OUTPUT_PAYLOAD: StaticSchema = (3, n0, _OPu, 4)
+
+EXECUTION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ES,
+    0,
+    (_RUNNING, _SUCCEEDED, _FAILED, _TO, _STOPPED),
+    (
+        (-1, {_sV: _RUNNING}),
+        (-1, {_sV: _SUCCEEDED}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _TO}),
+        (-1, {_sV: _STOPPED}),
+    ),
+)
+
+X_AMZN_TRACE_ID: StaticSchema = (3, n0, _XATI, 0)
+
+TRACE_HEADER: StaticSchema = (18, n0, _TH, 0, (_XATI,), ((X_AMZN_TRACE_ID, 0),))
+
+VERSION_WITH_LATEST_PUBLISHED: StaticSchema = (3, n0, _VWLP, 0)
+
+GET_DURABLE_EXECUTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDEO,
+    {_sSI: _cGDERo, _smit: None},
+    (_DEA, _DEN, _FA, _IP, _Re, _E, _STt, _Stat, _ETn, _V, _TH, _EDI, _DC),
+    (
+        (DURABLE_EXECUTION_ARN, 1),
+        (DURABLE_EXECUTION_NAME, 1),
+        (NAME_SPACED_FUNCTION_ARN, 1),
+        (INPUT_PAYLOAD, 0),
+        (OUTPUT_PAYLOAD, 0),
+        (ERROR_OBJECT, 0),
+        (EXECUTION_TIMESTAMP, 1),
+        (EXECUTION_STATUS, 1),
+        (EXECUTION_TIMESTAMP, 0),
+        (VERSION_WITH_LATEST_PUBLISHED, 0),
+        (TRACE_HEADER, 0),
+        (EXECUTION_DATA_INCLUDED, 0),
+        (DURABLE_CONFIG, 0),
+    ),
+)
+
+GET_DURABLE_EXECUTION: StaticOperationSchema = (
+    23,
+    n0,
+    _GDE,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}",
+                "code": 200,
+            }
+        )
+    },
+    GET_DURABLE_EXECUTION_INPUT,
+    GET_DURABLE_EXECUTION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+ITEM_COUNT: StaticSchema = (7, n0, _IC, {_s: 0})
+
+REVERSE_ORDER: StaticSchema = (2, n0, _RO, 0)
+
+GET_DURABLE_EXECUTION_HISTORY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDEHI,
+    {_sSI: _cGDEHR, _sm: None},
+    (_DEA, _IED, _MI, _Mar, _RO),
+    (
+        (DURABLE_EXECUTION_ARN, 9),
+        (INCLUDE_EXECUTION_DATA, {_sQ: _IED}),
+        (ITEM_COUNT, {_s: 0, _sQ: _MI}),
+        (STRING, {_sQ: _Mar}),
+        (REVERSE_ORDER, {_sQ: _RO}),
+    ),
+)
+
+TRUNCATED: StaticSchema = (2, n0, _Tru, 0)
+
+EVENT_ERROR: StaticSchema = (
+    18,
+    n0,
+    _EE,
+    0,
+    (_Pa, _Tru),
+    ((ERROR_OBJECT, 0), (TRUNCATED, 0)),
+)
+
+CALLBACK_FAILED_DETAILS: StaticSchema = (18, n0, _CFD, 0, (_E,), ((EVENT_ERROR, 1),))
+
+CALLBACK_STARTED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CSD,
+    0,
+    (_CIa, _HT, _Tim),
+    ((CALLBACK_ID, 1), (DURATION_SECONDS, 0), (DURATION_SECONDS, 0)),
+)
+
+EVENT_RESULT: StaticSchema = (
+    18,
+    n0,
+    _ER,
+    0,
+    (_Pa, _Tru),
+    ((OPERATION_PAYLOAD, 0), (TRUNCATED, 0)),
+)
+
+CALLBACK_SUCCEEDED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CSDa,
+    0,
+    (_Re,),
+    ((EVENT_RESULT, 1),),
+)
+
+CALLBACK_TIMED_OUT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CTOD,
+    0,
+    (_E,),
+    ((EVENT_ERROR, 1),),
+)
+
+CHAINED_INVOKE_FAILED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CIFD,
+    0,
+    (_E,),
+    ((EVENT_ERROR, 1),),
+)
+
+EVENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EI,
+    0,
+    (_Pa, _Tru),
+    ((INPUT_PAYLOAD, 0), (TRUNCATED, 0)),
+)
+
+CHAINED_INVOKE_STARTED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CISD,
+    0,
+    (_FN, _TI, _Inp, _EV, _DEA),
+    (
+        (NAMESPACED_FUNCTION_NAME, 1),
+        (TENANT_ID, 0),
+        (EVENT_INPUT, 0),
+        (VERSION_WITH_LATEST_PUBLISHED, 0),
+        (DURABLE_EXECUTION_ARN, 0),
+    ),
+)
+
+CHAINED_INVOKE_STOPPED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CISDh,
+    0,
+    (_E,),
+    ((EVENT_ERROR, 1),),
+)
+
+CHAINED_INVOKE_SUCCEEDED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CISDha,
+    0,
+    (_Re,),
+    ((EVENT_RESULT, 1),),
+)
+
+CHAINED_INVOKE_TIMED_OUT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CITOD,
+    0,
+    (_E,),
+    ((EVENT_ERROR, 1),),
+)
+
+CONTEXT_FAILED_DETAILS: StaticSchema = (18, n0, _CFDo, 0, (_E,), ((EVENT_ERROR, 1),))
+
+CONTEXT_STARTED_DETAILS: StaticSchema = (18, n0, _CSDo, 0)
+
+CONTEXT_SUCCEEDED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CSDon,
+    0,
+    (_Re,),
+    ((EVENT_RESULT, 1),),
+)
+
+EVENT_ID: StaticSchema = (7, n0, _EIv, {_s: 1})
+
+EVENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ETv,
+    0,
+    (
+        _ESx,
+        _ESxe,
+        _EF,
+        _ETO,
+        _ESxec,
+        _CS,
+        _CSo,
+        _CF,
+        _WSa,
+        _WSai,
+        _WC,
+        _SS,
+        _SSt,
+        _SF,
+        _CIS,
+        _CISh,
+        _CIF,
+        _CITO,
+        _CISha,
+        _CSa,
+        _CSal,
+        _CFa,
+        _CTO,
+        _ICn,
+    ),
+    (
+        (-1, {_sV: _ESx}),
+        (-1, {_sV: _ESxe}),
+        (-1, {_sV: _EF}),
+        (-1, {_sV: _ETO}),
+        (-1, {_sV: _ESxec}),
+        (-1, {_sV: _CS}),
+        (-1, {_sV: _CSo}),
+        (-1, {_sV: _CF}),
+        (-1, {_sV: _WSa}),
+        (-1, {_sV: _WSai}),
+        (-1, {_sV: _WC}),
+        (-1, {_sV: _SS}),
+        (-1, {_sV: _SSt}),
+        (-1, {_sV: _SF}),
+        (-1, {_sV: _CIS}),
+        (-1, {_sV: _CISh}),
+        (-1, {_sV: _CIF}),
+        (-1, {_sV: _CITO}),
+        (-1, {_sV: _CISha}),
+        (-1, {_sV: _CSa}),
+        (-1, {_sV: _CSal}),
+        (-1, {_sV: _CFa}),
+        (-1, {_sV: _CTO}),
+        (-1, {_sV: _ICn}),
+    ),
+)
+
+EXECUTION_FAILED_DETAILS: StaticSchema = (18, n0, _EFD, 0, (_E,), ((EVENT_ERROR, 1),))
+
+EXECUTION_STARTED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ESD,
+    0,
+    (_Inp, _ETxe),
+    ((EVENT_INPUT, 1), (DURATION_SECONDS, 1)),
+)
+
+EXECUTION_STOPPED_DETAILS: StaticSchema = (18, n0, _ESDx, 0, (_E,), ((EVENT_ERROR, 1),))
+
+EXECUTION_SUCCEEDED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ESDxe,
+    0,
+    (_Re,),
+    ((EVENT_RESULT, 1),),
+)
+
+EXECUTION_TIMED_OUT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ETOD,
+    0,
+    (_E,),
+    ((EVENT_ERROR, 0),),
+)
+
+INVOCATION_COMPLETED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ICD,
+    0,
+    (_STt, _ETn, _RIe, _E),
+    ((EXECUTION_TIMESTAMP, 1), (EXECUTION_TIMESTAMP, 1), (STRING, 1), (EVENT_ERROR, 0)),
+)
+
+RETRY_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RD,
+    0,
+    (_CA, _NADS),
+    ((ATTEMPT_COUNT, {_s: 0}), (DURATION_SECONDS, 0)),
+)
+
+STEP_FAILED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _SFD,
+    0,
+    (_E, _RD),
+    ((EVENT_ERROR, 1), (RETRY_DETAILS, 1)),
+)
+
+STEP_STARTED_DETAILS: StaticSchema = (18, n0, _SSD, 0)
+
+STEP_SUCCEEDED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _SSDt,
+    0,
+    (_Re, _RD),
+    ((EVENT_RESULT, 1), (RETRY_DETAILS, 1)),
+)
+
+WAIT_CANCELLED_DETAILS: StaticSchema = (18, n0, _WCD, 0, (_E,), ((EVENT_ERROR, 0),))
+
+WAIT_STARTED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _WSD,
+    0,
+    (_Du, _SET),
+    ((DURATION_SECONDS, 1), (EXECUTION_TIMESTAMP, 1)),
+)
+
+WAIT_SUCCEEDED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _WSDa,
+    0,
+    (_Du,),
+    ((DURATION_SECONDS, 0),),
+)
+
+EVENT: StaticSchema = (
+    18,
+    n0,
+    _Ev,
+    0,
+    (
+        _ETv,
+        _STu,
+        _EIv,
+        _Id,
+        _N,
+        _ETve,
+        _PI,
+        _ESD,
+        _ESDxe,
+        _EFD,
+        _ETOD,
+        _ESDx,
+        _CSDo,
+        _CSDon,
+        _CFDo,
+        _WSD,
+        _WSDa,
+        _WCD,
+        _SSD,
+        _SSDt,
+        _SFD,
+        _CISD,
+        _CISDha,
+        _CIFD,
+        _CITOD,
+        _CISDh,
+        _CSD,
+        _CSDa,
+        _CFD,
+        _CTOD,
+        _ICD,
+    ),
+    (
+        (EVENT_TYPE, 0),
+        (OPERATION_SUB_TYPE, 0),
+        (EVENT_ID, {_s: 1}),
+        (OPERATION_ID, 0),
+        (OPERATION_NAME, 0),
+        (EXECUTION_TIMESTAMP, 0),
+        (OPERATION_ID, 0),
+        (EXECUTION_STARTED_DETAILS, 0),
+        (EXECUTION_SUCCEEDED_DETAILS, 0),
+        (EXECUTION_FAILED_DETAILS, 0),
+        (EXECUTION_TIMED_OUT_DETAILS, 0),
+        (EXECUTION_STOPPED_DETAILS, 0),
+        (CONTEXT_STARTED_DETAILS, 0),
+        (CONTEXT_SUCCEEDED_DETAILS, 0),
+        (CONTEXT_FAILED_DETAILS, 0),
+        (WAIT_STARTED_DETAILS, 0),
+        (WAIT_SUCCEEDED_DETAILS, 0),
+        (WAIT_CANCELLED_DETAILS, 0),
+        (STEP_STARTED_DETAILS, 0),
+        (STEP_SUCCEEDED_DETAILS, 0),
+        (STEP_FAILED_DETAILS, 0),
+        (CHAINED_INVOKE_STARTED_DETAILS, 0),
+        (CHAINED_INVOKE_SUCCEEDED_DETAILS, 0),
+        (CHAINED_INVOKE_FAILED_DETAILS, 0),
+        (CHAINED_INVOKE_TIMED_OUT_DETAILS, 0),
+        (CHAINED_INVOKE_STOPPED_DETAILS, 0),
+        (CALLBACK_STARTED_DETAILS, 0),
+        (CALLBACK_SUCCEEDED_DETAILS, 0),
+        (CALLBACK_FAILED_DETAILS, 0),
+        (CALLBACK_TIMED_OUT_DETAILS, 0),
+        (INVOCATION_COMPLETED_DETAILS, 0),
+    ),
+)
+
+EVENTS: StaticSchema = (16, n0, _Eve, 0, (_me,), ((EVENT, 0),))
+
+GET_DURABLE_EXECUTION_HISTORY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDEHO,
+    {_sSI: _cGDEHRo, _smit: None},
+    (_Eve, _NM),
+    ((EVENTS, 1), (STRING, 0)),
+)
+
+GET_DURABLE_EXECUTION_HISTORY: StaticOperationSchema = (
+    23,
+    n0,
+    _GDEH,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/history",
+                "code": 200,
+            }
+        )
+    },
+    GET_DURABLE_EXECUTION_HISTORY_INPUT,
+    GET_DURABLE_EXECUTION_HISTORY_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_DURABLE_EXECUTION_STATE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDESI,
+    {_sSI: _cGDESR, _sm: None},
+    (_DEA, _CT, _Mar, _MI),
+    (
+        (DURABLE_EXECUTION_ARN, 9),
+        (CHECKPOINT_TOKEN, {_sQ: _CT, _smi: None}),
+        (STRING, {_sQ: _Mar}),
+        (ITEM_COUNT, {_s: 0, _sQ: _MI}),
+    ),
+)
+
+GET_DURABLE_EXECUTION_STATE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDESO,
+    {_sSI: _cGDESRo, _smit: None},
+    (_Ope, _NM),
+    ((OPERATIONS, 1), (STRING, 0)),
+)
+
+GET_DURABLE_EXECUTION_STATE: StaticOperationSchema = (
+    23,
+    n0,
+    _GDES,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/state",
+                "code": 200,
+            }
+        )
+    },
+    GET_DURABLE_EXECUTION_STATE_INPUT,
+    GET_DURABLE_EXECUTION_STATE_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+STOP_DURABLE_EXECUTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SDEI,
+    {_sSI: _cSDER, _sm: None},
+    (_DEA, _E),
+    ((DURABLE_EXECUTION_ARN, 9), (ERROR_OBJECT, 16)),
+)
+
+STOP_DURABLE_EXECUTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SDEO,
+    {_sSI: _cSDERo, _smit: None},
+    (_STto,),
+    ((EXECUTION_TIMESTAMP, 1),),
+)
+
+STOP_DURABLE_EXECUTION: StaticOperationSchema = (
+    23,
+    n0,
+    _SDE,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/stop",
+                "code": 200,
+            }
+        )
+    },
+    STOP_DURABLE_EXECUTION_INPUT,
+    STOP_DURABLE_EXECUTION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+BATCH_SIZE: StaticSchema = (7, n0, _BS, 0)
+
+BISECT_BATCH_ON_FUNCTION_ERROR: StaticSchema = (2, n0, _BBOFE, 0)
+
+DESTINATION_ARN: StaticSchema = (3, n0, _DA, 0)
+
+ON_FAILURE: StaticSchema = (18, n0, _OF, 0, (_Des,), ((DESTINATION_ARN, 0),))
+
+ON_SUCCESS: StaticSchema = (18, n0, _OSn, 0, (_Des,), ((DESTINATION_ARN, 0),))
+
+DESTINATION_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _DCe,
+    0,
+    (_OSn, _OF),
+    ((ON_SUCCESS, 0), (ON_FAILURE, 0)),
+)
+
+COLLECTION_NAME: StaticSchema = (3, n0, _CN, 0)
+
+DATABASE_NAME: StaticSchema = (3, n0, _DN, 0)
+
+FULL_DOCUMENT: StaticSchema = (
+    14,
+    n0,
+    _FD,
+    0,
+    (_UL, _Def),
+    ((-1, {_sV: _UL}), (-1, {_sV: _Def})),
+)
+
+DOCUMENT_DB_EVENT_SOURCE_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _DDBESC,
+    0,
+    (_DN, _CN, _FD),
+    ((DATABASE_NAME, 0), (COLLECTION_NAME, 0), (FULL_DOCUMENT, 0)),
+)
+
+ENABLED: StaticSchema = (2, n0, _Ena, 0)
+
+PATTERN: StaticSchema = (3, n0, _Pat, 0)
+
+FILTER: StaticSchema = (18, n0, _Fi, 0, (_Pat,), ((PATTERN, 0),))
+
+FILTER_LIST: StaticSchema = (16, n0, _FL, 0, (_me,), ((FILTER, 0),))
+
+FILTER_CRITERIA: StaticSchema = (18, n0, _FCi, 0, (_Fil,), ((FILTER_LIST, 0),))
+
+FUNCTION_RESPONSE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _FRT,
+    0,
+    (_RBIF,),
+    ((-1, {_sV: _RBIF}),),
+)
+
+FUNCTION_RESPONSE_TYPE_LIST: StaticSchema = (
+    16,
+    n0,
+    _FRTL,
+    0,
+    (_me,),
+    ((FUNCTION_RESPONSE_TYPE, 0),),
+)
+
+EVENT_SOURCE_MAPPING_SYSTEM_LOG_LEVEL: StaticSchema = (
+    14,
+    n0,
+    _ESMSLL,
+    0,
+    (_De, _In, _Wa),
+    ((-1, {_sV: _DEBUG}), (-1, {_sV: _INFO}), (-1, {_sV: _WARN})),
+)
+
+EVENT_SOURCE_MAPPING_LOGGING_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _ESMLC,
+    0,
+    (_SLL,),
+    ((EVENT_SOURCE_MAPPING_SYSTEM_LOG_LEVEL, 0),),
+)
+
+MAXIMUM_BATCHING_WINDOW_IN_SECONDS: StaticSchema = (7, n0, _MBWIS, 0)
+
+MAXIMUM_RECORD_AGE_IN_SECONDS: StaticSchema = (7, n0, _MRAIS, 0)
+
+MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING: StaticSchema = (7, n0, _MRAESM, 0)
+
+EVENT_SOURCE_MAPPING_METRIC: StaticSchema = (
+    14,
+    n0,
+    _ESMM,
+    0,
+    (_EC, _ECr, _KM),
+    ((-1, {_sV: _EC}), (-1, {_sV: _ECr}), (-1, {_sV: _KM})),
+)
+
+EVENT_SOURCE_MAPPING_METRIC_LIST: StaticSchema = (
+    16,
+    n0,
+    _ESMML,
+    0,
+    (_me,),
+    ((EVENT_SOURCE_MAPPING_METRIC, 0),),
+)
+
+EVENT_SOURCE_MAPPING_METRICS_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _ESMMC,
+    0,
+    (_Met,),
+    ((EVENT_SOURCE_MAPPING_METRIC_LIST, 0),),
+)
+
+PARALLELIZATION_FACTOR: StaticSchema = (7, n0, _PF, 0)
+
+MAXIMUM_NUMBER_OF_POLLERS: StaticSchema = (7, n0, _MNOP, 0)
+
+MINIMUM_NUMBER_OF_POLLERS: StaticSchema = (7, n0, _MNOPi, 0)
+
+PROVISIONED_POLLER_GROUP_NAME: StaticSchema = (3, n0, _PPGN, 0)
+
+PROVISIONED_POLLER_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _PPC,
+    0,
+    (_MP, _MPa, _PGN),
+    (
+        (MINIMUM_NUMBER_OF_POLLERS, 0),
+        (MAXIMUM_NUMBER_OF_POLLERS, 0),
+        (PROVISIONED_POLLER_GROUP_NAME, 0),
+    ),
+)
+
+QUEUE: StaticSchema = (3, n0, _Qu, 0)
+
+QUEUES: StaticSchema = (16, n0, _Que, 0, (_me,), ((QUEUE, 0),))
+
+MAXIMUM_CONCURRENCY: StaticSchema = (7, n0, _MC, 0)
+
+SCALING_CONFIG: StaticSchema = (18, n0, _SCc, 0, (_MC,), ((MAXIMUM_CONCURRENCY, 0),))
+
+END_POINT_TYPE: StaticSchema = (14, n0, _EPT, 0, (_KBS,), ((-1, {_sV: _KBS}),))
+
+ENDPOINT: StaticSchema = (3, n0, _End, 0)
+
+ENDPOINT_LISTS: StaticSchema = (16, n0, _EL, 0, (_me,), ((ENDPOINT, 0),))
+
+ENDPOINTS: StaticSchema = (
+    17,
+    n0,
+    _Endp,
+    0,
+    (_k, _v),
+    ((END_POINT_TYPE, 0), (ENDPOINT_LISTS, 0)),
+)
+
+SELF_MANAGED_EVENT_SOURCE: StaticSchema = (
+    18,
+    n0,
+    _SMES,
+    0,
+    (_Endp,),
+    ((ENDPOINTS, 0),),
+)
+
+SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _SMKESC,
+    0,
+    (_CGI, _SRC),
+    ((URI, 0), (KAFKA_SCHEMA_REGISTRY_CONFIG, 0)),
+)
+
+SOURCE_ACCESS_TYPE: StaticSchema = (
+    14,
+    n0,
+    _SAT,
+    0,
+    (_BA, _VS, _VSG, _SSA, _SSA_, _VH, _CCTA, _SRCC),
+    (
+        (-1, {_sV: _BA}),
+        (-1, {_sV: _VS}),
+        (-1, {_sV: _VSG}),
+        (-1, {_sV: _SSA}),
+        (-1, {_sV: _SSA_}),
+        (-1, {_sV: _VH}),
+        (-1, {_sV: _CCTA}),
+        (-1, {_sV: _SRCC}),
+    ),
+)
+
+SOURCE_ACCESS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SAC,
+    0,
+    (_T, _URI),
+    ((SOURCE_ACCESS_TYPE, 0), (URI, 0)),
+)
+
+SOURCE_ACCESS_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _SACo,
+    0,
+    (_me,),
+    ((SOURCE_ACCESS_CONFIGURATION, 0),),
+)
+
+EVENT_SOURCE_POSITION: StaticSchema = (
+    14,
+    n0,
+    _ESP,
+    0,
+    (_TH_, _LATEST, _AT),
+    ((-1, {_sV: _TH_}), (-1, {_sV: _LATEST}), (-1, {_sV: _AT})),
+)
+
+DATE: StaticSchema = (4, n0, _Da, 0)
+
+TOPIC: StaticSchema = (3, n0, _To, 0)
+
+TOPICS: StaticSchema = (16, n0, _Top, 0, (_me,), ((TOPIC, 0),))
+
+TUMBLING_WINDOW_IN_SECONDS: StaticSchema = (7, n0, _TWIS, 0)
+
+CREATE_EVENT_SOURCE_MAPPING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CESMI,
+    {_sSI: _cCESMR, _sm: None},
+    (
+        _ESA,
+        _FN,
+        _Ena,
+        _BS,
+        _FCi,
+        _KMSKA,
+        _MCe,
+        _LC,
+        _SCc,
+        _MBWIS,
+        _PF,
+        _SPt,
+        _SPT,
+        _DCe,
+        _MRAIS,
+        _BBOFE,
+        _MRA,
+        _Ta,
+        _TWIS,
+        _Top,
+        _Que,
+        _SACo,
+        _SMES,
+        _FRTu,
+        _AMKESC,
+        _SMKESC,
+        _DDBESC,
+        _PPC,
+    ),
+    (
+        (ARN, 0),
+        (NAMESPACED_FUNCTION_NAME, 1),
+        (ENABLED, 0),
+        (BATCH_SIZE, 0),
+        (FILTER_CRITERIA, 0),
+        (KMS_KEY_ARN, 0),
+        (EVENT_SOURCE_MAPPING_METRICS_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_LOGGING_CONFIG, 0),
+        (SCALING_CONFIG, 0),
+        (MAXIMUM_BATCHING_WINDOW_IN_SECONDS, 0),
+        (PARALLELIZATION_FACTOR, 0),
+        (EVENT_SOURCE_POSITION, 0),
+        (DATE, 0),
+        (DESTINATION_CONFIG, 0),
+        (MAXIMUM_RECORD_AGE_IN_SECONDS, 0),
+        (BISECT_BATCH_ON_FUNCTION_ERROR, 0),
+        (MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING, 0),
+        (TAGS, 0),
+        (TUMBLING_WINDOW_IN_SECONDS, 0),
+        (TOPICS, 0),
+        (QUEUES, 0),
+        (SOURCE_ACCESS_CONFIGURATIONS, 0),
+        (SELF_MANAGED_EVENT_SOURCE, 0),
+        (FUNCTION_RESPONSE_TYPE_LIST, 0),
+        (AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (DOCUMENT_DB_EVENT_SOURCE_CONFIG, 0),
+        (PROVISIONED_POLLER_CONFIG, 0),
+    ),
+)
+
+EVENT_SOURCE_MAPPING_ARN: StaticSchema = (3, n0, _ESMA, 0)
+
+FILTER_CRITERIA_ERROR_CODE: StaticSchema = (3, n0, _FCEC, 0)
+
+FILTER_CRITERIA_ERROR_MESSAGE: StaticSchema = (3, n0, _FCEM, 0)
+
+FILTER_CRITERIA_ERROR: StaticSchema = (
+    18,
+    n0,
+    _FCE,
+    0,
+    (_ECrr, _M),
+    ((FILTER_CRITERIA_ERROR_CODE, 0), (FILTER_CRITERIA_ERROR_MESSAGE, 0)),
+)
+
+UUID_STRING: StaticSchema = (3, n0, _UUIDS, 0)
+
+CREATE_EVENT_SOURCE_MAPPING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CESMO,
+    {_sSI: _cESMC, _smit: None},
+    (
+        _UUID,
+        _SPt,
+        _SPT,
+        _BS,
+        _MBWIS,
+        _PF,
+        _ESA,
+        _FCi,
+        _FCE,
+        _KMSKA,
+        _MCe,
+        _LC,
+        _SCc,
+        _FA,
+        _LM,
+        _LPR,
+        _Sta,
+        _STR,
+        _DCe,
+        _Top,
+        _Que,
+        _SACo,
+        _SMES,
+        _MRAIS,
+        _BBOFE,
+        _MRA,
+        _TWIS,
+        _FRTu,
+        _AMKESC,
+        _SMKESC,
+        _DDBESC,
+        _ESMA,
+        _PPC,
+    ),
+    (
+        (UUID_STRING, 0),
+        (EVENT_SOURCE_POSITION, 0),
+        (DATE, 0),
+        (BATCH_SIZE, 0),
+        (MAXIMUM_BATCHING_WINDOW_IN_SECONDS, 0),
+        (PARALLELIZATION_FACTOR, 0),
+        (ARN, 0),
+        (FILTER_CRITERIA, 0),
+        (FILTER_CRITERIA_ERROR, 0),
+        (KMS_KEY_ARN, 0),
+        (EVENT_SOURCE_MAPPING_METRICS_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_LOGGING_CONFIG, 0),
+        (SCALING_CONFIG, 0),
+        (FUNCTION_ARN, 0),
+        (DATE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (DESTINATION_CONFIG, 0),
+        (TOPICS, 0),
+        (QUEUES, 0),
+        (SOURCE_ACCESS_CONFIGURATIONS, 0),
+        (SELF_MANAGED_EVENT_SOURCE, 0),
+        (MAXIMUM_RECORD_AGE_IN_SECONDS, 0),
+        (BISECT_BATCH_ON_FUNCTION_ERROR, 0),
+        (MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING, 0),
+        (TUMBLING_WINDOW_IN_SECONDS, 0),
+        (FUNCTION_RESPONSE_TYPE_LIST, 0),
+        (AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (DOCUMENT_DB_EVENT_SOURCE_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_ARN, 0),
+        (PROVISIONED_POLLER_CONFIG, 0),
+    ),
+)
+
+CREATE_EVENT_SOURCE_MAPPING: StaticOperationSchema = (
+    23,
+    n0,
+    _CESM,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/2015-03-31/event-source-mappings", "code": 202}
+        )
+    },
+    CREATE_EVENT_SOURCE_MAPPING_INPUT,
+    CREATE_EVENT_SOURCE_MAPPING_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+DELETE_EVENT_SOURCE_MAPPING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DESMI,
+    {_sSI: _cDESMR, _sm: None},
+    (_UUID,),
+    ((UUID_STRING, 9),),
+)
+
+DELETE_EVENT_SOURCE_MAPPING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DESMO,
+    {_sSI: _cESMC, _smit: None},
+    (
+        _UUID,
+        _SPt,
+        _SPT,
+        _BS,
+        _MBWIS,
+        _PF,
+        _ESA,
+        _FCi,
+        _FCE,
+        _KMSKA,
+        _MCe,
+        _LC,
+        _SCc,
+        _FA,
+        _LM,
+        _LPR,
+        _Sta,
+        _STR,
+        _DCe,
+        _Top,
+        _Que,
+        _SACo,
+        _SMES,
+        _MRAIS,
+        _BBOFE,
+        _MRA,
+        _TWIS,
+        _FRTu,
+        _AMKESC,
+        _SMKESC,
+        _DDBESC,
+        _ESMA,
+        _PPC,
+    ),
+    (
+        (UUID_STRING, 0),
+        (EVENT_SOURCE_POSITION, 0),
+        (DATE, 0),
+        (BATCH_SIZE, 0),
+        (MAXIMUM_BATCHING_WINDOW_IN_SECONDS, 0),
+        (PARALLELIZATION_FACTOR, 0),
+        (ARN, 0),
+        (FILTER_CRITERIA, 0),
+        (FILTER_CRITERIA_ERROR, 0),
+        (KMS_KEY_ARN, 0),
+        (EVENT_SOURCE_MAPPING_METRICS_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_LOGGING_CONFIG, 0),
+        (SCALING_CONFIG, 0),
+        (FUNCTION_ARN, 0),
+        (DATE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (DESTINATION_CONFIG, 0),
+        (TOPICS, 0),
+        (QUEUES, 0),
+        (SOURCE_ACCESS_CONFIGURATIONS, 0),
+        (SELF_MANAGED_EVENT_SOURCE, 0),
+        (MAXIMUM_RECORD_AGE_IN_SECONDS, 0),
+        (BISECT_BATCH_ON_FUNCTION_ERROR, 0),
+        (MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING, 0),
+        (TUMBLING_WINDOW_IN_SECONDS, 0),
+        (FUNCTION_RESPONSE_TYPE_LIST, 0),
+        (AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (DOCUMENT_DB_EVENT_SOURCE_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_ARN, 0),
+        (PROVISIONED_POLLER_CONFIG, 0),
+    ),
+)
+
+RESOURCE_IN_USE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RIUE,
+    {_smith: _c, _sE: 400},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+DELETE_EVENT_SOURCE_MAPPING: StaticOperationSchema = (
+    23,
+    n0,
+    _DESM,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2015-03-31/event-source-mappings/{UUID}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_EVENT_SOURCE_MAPPING_INPUT,
+    DELETE_EVENT_SOURCE_MAPPING_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_EVENT_SOURCE_MAPPING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GESMI,
+    {_sSI: _cGESMR, _sm: None},
+    (_UUID,),
+    ((UUID_STRING, 9),),
+)
+
+GET_EVENT_SOURCE_MAPPING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GESMO,
+    {_sSI: _cESMC, _smit: None},
+    (
+        _UUID,
+        _SPt,
+        _SPT,
+        _BS,
+        _MBWIS,
+        _PF,
+        _ESA,
+        _FCi,
+        _FCE,
+        _KMSKA,
+        _MCe,
+        _LC,
+        _SCc,
+        _FA,
+        _LM,
+        _LPR,
+        _Sta,
+        _STR,
+        _DCe,
+        _Top,
+        _Que,
+        _SACo,
+        _SMES,
+        _MRAIS,
+        _BBOFE,
+        _MRA,
+        _TWIS,
+        _FRTu,
+        _AMKESC,
+        _SMKESC,
+        _DDBESC,
+        _ESMA,
+        _PPC,
+    ),
+    (
+        (UUID_STRING, 0),
+        (EVENT_SOURCE_POSITION, 0),
+        (DATE, 0),
+        (BATCH_SIZE, 0),
+        (MAXIMUM_BATCHING_WINDOW_IN_SECONDS, 0),
+        (PARALLELIZATION_FACTOR, 0),
+        (ARN, 0),
+        (FILTER_CRITERIA, 0),
+        (FILTER_CRITERIA_ERROR, 0),
+        (KMS_KEY_ARN, 0),
+        (EVENT_SOURCE_MAPPING_METRICS_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_LOGGING_CONFIG, 0),
+        (SCALING_CONFIG, 0),
+        (FUNCTION_ARN, 0),
+        (DATE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (DESTINATION_CONFIG, 0),
+        (TOPICS, 0),
+        (QUEUES, 0),
+        (SOURCE_ACCESS_CONFIGURATIONS, 0),
+        (SELF_MANAGED_EVENT_SOURCE, 0),
+        (MAXIMUM_RECORD_AGE_IN_SECONDS, 0),
+        (BISECT_BATCH_ON_FUNCTION_ERROR, 0),
+        (MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING, 0),
+        (TUMBLING_WINDOW_IN_SECONDS, 0),
+        (FUNCTION_RESPONSE_TYPE_LIST, 0),
+        (AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (DOCUMENT_DB_EVENT_SOURCE_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_ARN, 0),
+        (PROVISIONED_POLLER_CONFIG, 0),
+    ),
+)
+
+GET_EVENT_SOURCE_MAPPING: StaticOperationSchema = (
+    23,
+    n0,
+    _GESM,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2015-03-31/event-source-mappings/{UUID}",
+                "code": 200,
+            }
+        )
+    },
+    GET_EVENT_SOURCE_MAPPING_INPUT,
+    GET_EVENT_SOURCE_MAPPING_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+LIST_EVENT_SOURCE_MAPPINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LESMI,
+    {_sSI: _cLESMR, _sm: None},
+    (_ESA, _FN, _Mar, _MI),
+    (
+        (ARN, {_sQ: _ESA}),
+        (NAMESPACED_FUNCTION_NAME, {_sQ: _FN}),
+        (STRING, {_sQ: _Mar}),
+        (MAX_LIST_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+EVENT_SOURCE_MAPPING_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _ESMC,
+    0,
+    (
+        _UUID,
+        _SPt,
+        _SPT,
+        _BS,
+        _MBWIS,
+        _PF,
+        _ESA,
+        _FCi,
+        _FCE,
+        _KMSKA,
+        _MCe,
+        _LC,
+        _SCc,
+        _FA,
+        _LM,
+        _LPR,
+        _Sta,
+        _STR,
+        _DCe,
+        _Top,
+        _Que,
+        _SACo,
+        _SMES,
+        _MRAIS,
+        _BBOFE,
+        _MRA,
+        _TWIS,
+        _FRTu,
+        _AMKESC,
+        _SMKESC,
+        _DDBESC,
+        _ESMA,
+        _PPC,
+    ),
+    (
+        (UUID_STRING, 0),
+        (EVENT_SOURCE_POSITION, 0),
+        (DATE, 0),
+        (BATCH_SIZE, 0),
+        (MAXIMUM_BATCHING_WINDOW_IN_SECONDS, 0),
+        (PARALLELIZATION_FACTOR, 0),
+        (ARN, 0),
+        (FILTER_CRITERIA, 0),
+        (FILTER_CRITERIA_ERROR, 0),
+        (KMS_KEY_ARN, 0),
+        (EVENT_SOURCE_MAPPING_METRICS_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_LOGGING_CONFIG, 0),
+        (SCALING_CONFIG, 0),
+        (FUNCTION_ARN, 0),
+        (DATE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (DESTINATION_CONFIG, 0),
+        (TOPICS, 0),
+        (QUEUES, 0),
+        (SOURCE_ACCESS_CONFIGURATIONS, 0),
+        (SELF_MANAGED_EVENT_SOURCE, 0),
+        (MAXIMUM_RECORD_AGE_IN_SECONDS, 0),
+        (BISECT_BATCH_ON_FUNCTION_ERROR, 0),
+        (MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING, 0),
+        (TUMBLING_WINDOW_IN_SECONDS, 0),
+        (FUNCTION_RESPONSE_TYPE_LIST, 0),
+        (AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (DOCUMENT_DB_EVENT_SOURCE_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_ARN, 0),
+        (PROVISIONED_POLLER_CONFIG, 0),
+    ),
+)
+
+EVENT_SOURCE_MAPPINGS_LIST: StaticSchema = (
+    16,
+    n0,
+    _ESML,
+    0,
+    (_me,),
+    ((EVENT_SOURCE_MAPPING_CONFIGURATION, 0),),
+)
+
+LIST_EVENT_SOURCE_MAPPINGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LESMO,
+    {_sSI: _cLESMRo, _smit: None},
+    (_NM, _ESM),
+    ((STRING, 0), (EVENT_SOURCE_MAPPINGS_LIST, 0)),
+)
+
+LIST_EVENT_SOURCE_MAPPINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _LESM,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/2015-03-31/event-source-mappings", "code": 200}
+        )
+    },
+    LIST_EVENT_SOURCE_MAPPINGS_INPUT,
+    LIST_EVENT_SOURCE_MAPPINGS_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+UPDATE_EVENT_SOURCE_MAPPING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UESMI,
+    {_sSI: _cUESMR, _sm: None},
+    (
+        _UUID,
+        _FN,
+        _Ena,
+        _BS,
+        _FCi,
+        _KMSKA,
+        _MCe,
+        _LC,
+        _SCc,
+        _MBWIS,
+        _PF,
+        _DCe,
+        _MRAIS,
+        _BBOFE,
+        _MRA,
+        _TWIS,
+        _SACo,
+        _FRTu,
+        _AMKESC,
+        _SMKESC,
+        _DDBESC,
+        _PPC,
+    ),
+    (
+        (UUID_STRING, 9),
+        (NAMESPACED_FUNCTION_NAME, 0),
+        (ENABLED, 0),
+        (BATCH_SIZE, 0),
+        (FILTER_CRITERIA, 0),
+        (KMS_KEY_ARN, 0),
+        (EVENT_SOURCE_MAPPING_METRICS_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_LOGGING_CONFIG, 0),
+        (SCALING_CONFIG, 0),
+        (MAXIMUM_BATCHING_WINDOW_IN_SECONDS, 0),
+        (PARALLELIZATION_FACTOR, 0),
+        (DESTINATION_CONFIG, 0),
+        (MAXIMUM_RECORD_AGE_IN_SECONDS, 0),
+        (BISECT_BATCH_ON_FUNCTION_ERROR, 0),
+        (MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING, 0),
+        (TUMBLING_WINDOW_IN_SECONDS, 0),
+        (SOURCE_ACCESS_CONFIGURATIONS, 0),
+        (FUNCTION_RESPONSE_TYPE_LIST, 0),
+        (AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (DOCUMENT_DB_EVENT_SOURCE_CONFIG, 0),
+        (PROVISIONED_POLLER_CONFIG, 0),
+    ),
+)
+
+UPDATE_EVENT_SOURCE_MAPPING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UESMO,
+    {_sSI: _cESMC, _smit: None},
+    (
+        _UUID,
+        _SPt,
+        _SPT,
+        _BS,
+        _MBWIS,
+        _PF,
+        _ESA,
+        _FCi,
+        _FCE,
+        _KMSKA,
+        _MCe,
+        _LC,
+        _SCc,
+        _FA,
+        _LM,
+        _LPR,
+        _Sta,
+        _STR,
+        _DCe,
+        _Top,
+        _Que,
+        _SACo,
+        _SMES,
+        _MRAIS,
+        _BBOFE,
+        _MRA,
+        _TWIS,
+        _FRTu,
+        _AMKESC,
+        _SMKESC,
+        _DDBESC,
+        _ESMA,
+        _PPC,
+    ),
+    (
+        (UUID_STRING, 0),
+        (EVENT_SOURCE_POSITION, 0),
+        (DATE, 0),
+        (BATCH_SIZE, 0),
+        (MAXIMUM_BATCHING_WINDOW_IN_SECONDS, 0),
+        (PARALLELIZATION_FACTOR, 0),
+        (ARN, 0),
+        (FILTER_CRITERIA, 0),
+        (FILTER_CRITERIA_ERROR, 0),
+        (KMS_KEY_ARN, 0),
+        (EVENT_SOURCE_MAPPING_METRICS_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_LOGGING_CONFIG, 0),
+        (SCALING_CONFIG, 0),
+        (FUNCTION_ARN, 0),
+        (DATE, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (DESTINATION_CONFIG, 0),
+        (TOPICS, 0),
+        (QUEUES, 0),
+        (SOURCE_ACCESS_CONFIGURATIONS, 0),
+        (SELF_MANAGED_EVENT_SOURCE, 0),
+        (MAXIMUM_RECORD_AGE_IN_SECONDS, 0),
+        (BISECT_BATCH_ON_FUNCTION_ERROR, 0),
+        (MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING, 0),
+        (TUMBLING_WINDOW_IN_SECONDS, 0),
+        (FUNCTION_RESPONSE_TYPE_LIST, 0),
+        (AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (DOCUMENT_DB_EVENT_SOURCE_CONFIG, 0),
+        (EVENT_SOURCE_MAPPING_ARN, 0),
+        (PROVISIONED_POLLER_CONFIG, 0),
+    ),
+)
+
+UPDATE_EVENT_SOURCE_MAPPING: StaticOperationSchema = (
+    23,
+    n0,
+    _UESM,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2015-03-31/event-source-mappings/{UUID}",
+                "code": 202,
+            }
+        )
+    },
+    UPDATE_EVENT_SOURCE_MAPPING_INPUT,
+    UPDATE_EVENT_SOURCE_MAPPING_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+CODE_SIGNING_CONFIG_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CSCNFE,
+    {_smith: _c, _sE: 404},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+CODE_STORAGE_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CSEE,
+    {_smith: _c, _sE: 400},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+CODE_VERIFICATION_FAILED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CVFE,
+    {_smith: _c, _sE: 400},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+EXECUTION_ENVIRONMENT_MEMORY_GI_B_PER_V_CPU: StaticSchema = (10, n0, _EEMGBPVC, 0)
+
+PER_EXECUTION_ENVIRONMENT_MAX_CONCURRENCY: StaticSchema = (7, n0, _PEEMC, 0)
+
+LAMBDA_MANAGED_INSTANCES_CAPACITY_PROVIDER_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _LMICPC,
+    0,
+    (_CPA, _PEEMC, _EEMGBPVC),
+    (
+        (CAPACITY_PROVIDER_ARN, 1),
+        (PER_EXECUTION_ENVIRONMENT_MAX_CONCURRENCY, 0),
+        (EXECUTION_ENVIRONMENT_MEMORY_GI_B_PER_V_CPU, 0),
+    ),
+)
+
+CAPACITY_PROVIDER_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _CPC,
+    0,
+    (_LMICPC,),
+    ((LAMBDA_MANAGED_INSTANCES_CAPACITY_PROVIDER_CONFIG, 1),),
+)
+
+S3_BUCKET: StaticSchema = (3, n0, _SB, 0)
+
+S3_KEY: StaticSchema = (3, n0, _SK, 0)
+
+S3_OBJECT_STORAGE_MODE: StaticSchema = (
+    14,
+    n0,
+    _SOSM,
+    0,
+    (_C, _Ref),
+    ((-1, {_sV: _COPY}), (-1, {_sV: _REFERENCE})),
+)
+
+S3_OBJECT_VERSION: StaticSchema = (3, n0, _SOV, 0)
+
+BLOB: StaticSchema = (1, n0, _B, 4)
+
+FUNCTION_CODE: StaticSchema = (
+    18,
+    n0,
+    _FCu,
+    0,
+    (_ZF, _SB, _SK, _SOV, _SOSM, _IU, _SKMSKA),
+    (
+        (BLOB, 0),
+        (S3_BUCKET, 0),
+        (S3_KEY, 0),
+        (S3_OBJECT_VERSION, 0),
+        (S3_OBJECT_STORAGE_MODE, 0),
+        (STRING, 0),
+        (KMS_KEY_ARN, 0),
+    ),
+)
+
+RESOURCE_ARN: StaticSchema = (3, n0, _RAe, 0)
+
+DEAD_LETTER_CONFIG: StaticSchema = (18, n0, _DLC, 0, (_TA,), ((RESOURCE_ARN, 0),))
+
+ENVIRONMENT_VARIABLE_NAME: StaticSchema = (3, n0, _EVN, 4)
+
+ENVIRONMENT_VARIABLE_VALUE: StaticSchema = (3, n0, _EVV, 4)
+
+ENVIRONMENT_VARIABLES: StaticSchema = (
+    17,
+    n0,
+    _EVn,
+    4,
+    (_k, _v),
+    ((ENVIRONMENT_VARIABLE_NAME, 0), (ENVIRONMENT_VARIABLE_VALUE, 0)),
+)
+
+ENVIRONMENT: StaticSchema = (18, n0, _Env, 0, (_Va,), ((ENVIRONMENT_VARIABLES, 0),))
+
+EPHEMERAL_STORAGE_SIZE: StaticSchema = (7, n0, _ESS, 0)
+
+EPHEMERAL_STORAGE: StaticSchema = (
+    18,
+    n0,
+    _ESp,
+    0,
+    (_Si,),
+    ((EPHEMERAL_STORAGE_SIZE, 1),),
+)
+
+FILE_SYSTEM_ARN: StaticSchema = (3, n0, _FSA, 0)
+
+LOCAL_MOUNT_PATH: StaticSchema = (3, n0, _LMP, 0)
+
+DIRECT_S3_READ: StaticSchema = (
+    14,
+    n0,
+    _DSR,
+    0,
+    (_ENABLED, _DISABLED, _AUTO),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED}), (-1, {_sV: _AUTO})),
+)
+
+S3_FILES_CONFIG: StaticSchema = (18, n0, _SFC, 0, (_DSR,), ((DIRECT_S3_READ, 0),))
+
+FILE_SYSTEM_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _FSC,
+    0,
+    (_Ar, _LMP, _SFC),
+    ((FILE_SYSTEM_ARN, 1), (LOCAL_MOUNT_PATH, 1), (S3_FILES_CONFIG, 0)),
+)
+
+FILE_SYSTEM_CONFIG_LIST: StaticSchema = (
+    16,
+    n0,
+    _FSCL,
+    0,
+    (_me,),
+    ((FILE_SYSTEM_CONFIG, 0),),
+)
+
+FUNCTION_NAME: StaticSchema = (3, n0, _FN, 0)
+
+HANDLER: StaticSchema = (3, n0, _H, 0)
+
+STRING_LIST: StaticSchema = (16, n0, _SL, 0, (_me,), ((STRING, 0),))
+
+WORKING_DIRECTORY: StaticSchema = (3, n0, _WDo, 0)
+
+IMAGE_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _ICm,
+    0,
+    (_EP, _Co, _WDo),
+    ((STRING_LIST, 0), (STRING_LIST, 0), (WORKING_DIRECTORY, 0)),
+)
+
+LAYER_VERSION_ARN: StaticSchema = (3, n0, _LVA, 0)
+
+LAYER_LIST: StaticSchema = (16, n0, _LL, 0, (_me,), ((LAYER_VERSION_ARN, 0),))
+
+LOG_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _LF,
+    0,
+    (_J, _Te),
+    ((-1, {_sV: _JSON}), (-1, {_sV: _Te})),
+)
+
+LOGGING_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _LC,
+    0,
+    (_LF, _ALL, _SLL, _LG),
+    (
+        (LOG_FORMAT, 0),
+        (APPLICATION_LOG_LEVEL, 0),
+        (SYSTEM_LOG_LEVEL, 0),
+        (LOG_GROUP, 0),
+    ),
+)
+
+MEMORY_SIZE: StaticSchema = (7, n0, _MS, 0)
+
+PACKAGE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _PTa,
+    0,
+    (_Z, _Im),
+    ((-1, {_sV: _Z}), (-1, {_sV: _Im})),
+)
+
+BOOLEAN: StaticSchema = (2, n0, _Bo, {_s: False})
+
+FUNCTION_VERSION_LATEST_PUBLISHED: StaticSchema = (
+    14,
+    n0,
+    _FVLP,
+    0,
+    (_LP,),
+    ((-1, {_sV: _LP}),),
+)
+
+RUNTIME: StaticSchema = (
+    14,
+    n0,
+    _Ru,
+    0,
+    (
+        _n,
+        _no,
+        _node,
+        _nodejs,
+        _nodejsx,
+        _nodejsx__,
+        _nodejsx____,
+        _nodejsx______,
+        _nodejsx________,
+        _nodejsx__________,
+        _nodejsx____________,
+        _nodejsx______________,
+        _j,
+        _ja,
+        _java,
+        _java_,
+        _java__,
+        _java___,
+        _p,
+        _pyt,
+        _pytho,
+        _python_,
+        _python___,
+        _python_____,
+        _python_______,
+        _python_________,
+        _python___________,
+        _python_____________,
+        _d,
+        _dot,
+        _dotne,
+        _dotnetc,
+        _dotnet_,
+        _dotnet__,
+        _dotnet___,
+        _nodejse,
+        _g,
+        _r,
+        _rub,
+        _ruby_,
+        _ruby___,
+        _ruby_____,
+        _ruby_______,
+        _pr,
+        _pro,
+        _provi,
+        _nodejsx________________,
+        _python_______________,
+        _javaa,
+        _javaal_,
+        _javaal___,
+    ),
+    (
+        (-1, {_sV: _n}),
+        (-1, {_sV: _nod}),
+        (-1, {_sV: _nodej}),
+        (-1, {_sV: _nodejs_}),
+        (-1, {_sV: _nodejsx_}),
+        (-1, {_sV: _nodejsx___}),
+        (-1, {_sV: _nodejsx_____}),
+        (-1, {_sV: _nodejsx_______}),
+        (-1, {_sV: _nodejsx_________}),
+        (-1, {_sV: _nodejsx___________}),
+        (-1, {_sV: _nodejsx_____________}),
+        (-1, {_sV: _nodejsx_______________}),
+        (-1, {_sV: _j}),
+        (-1, {_sV: _jav}),
+        (-1, {_sV: _java}),
+        (-1, {_sV: _java_}),
+        (-1, {_sV: _java__}),
+        (-1, {_sV: _java___}),
+        (-1, {_sV: _py}),
+        (-1, {_sV: _pyth}),
+        (-1, {_sV: _python}),
+        (-1, {_sV: _python__}),
+        (-1, {_sV: _python____}),
+        (-1, {_sV: _python______}),
+        (-1, {_sV: _python________}),
+        (-1, {_sV: _python__________}),
+        (-1, {_sV: _python____________}),
+        (-1, {_sV: _python______________}),
+        (-1, {_sV: _do}),
+        (-1, {_sV: _dotn}),
+        (-1, {_sV: _dotnet}),
+        (-1, {_sV: _dotnetco}),
+        (-1, {_sV: _dotnet_}),
+        (-1, {_sV: _dotnet__}),
+        (-1, {_sV: _dotnet___}),
+        (-1, {_sV: _ne}),
+        (-1, {_sV: _go}),
+        (-1, {_sV: _ru}),
+        (-1, {_sV: _ruby}),
+        (-1, {_sV: _ruby__}),
+        (-1, {_sV: _ruby____}),
+        (-1, {_sV: _ruby______}),
+        (-1, {_sV: _ruby________}),
+        (-1, {_sV: _pr}),
+        (-1, {_sV: _prov}),
+        (-1, {_sV: _provid}),
+        (-1, {_sV: _nodejsx_________________}),
+        (-1, {_sV: _python________________}),
+        (-1, {_sV: _javaal}),
+        (-1, {_sV: _javaal__}),
+        (-1, {_sV: _javaal____}),
+    ),
+)
+
+SNAP_START_APPLY_ON: StaticSchema = (
+    14,
+    n0,
+    _SSAO,
+    0,
+    (_PV, _No),
+    ((-1, {_sV: _PV}), (-1, {_sV: _No})),
+)
+
+SNAP_START: StaticSchema = (18, n0, _SSn, 0, (_AO,), ((SNAP_START_APPLY_ON, 0),))
+
+TENANT_ISOLATION_MODE: StaticSchema = (14, n0, _TIM, 0, (_PT_,), ((-1, {_sV: _PT_}),))
+
+TENANCY_CONFIG: StaticSchema = (18, n0, _TCe, 0, (_TIM,), ((TENANT_ISOLATION_MODE, 1),))
+
+TIMEOUT: StaticSchema = (7, n0, _Tim, 0)
+
+TRACING_MODE: StaticSchema = (
+    14,
+    n0,
+    _TM,
+    0,
+    (_Ac, _PTas),
+    ((-1, {_sV: _Ac}), (-1, {_sV: _PTas})),
+)
+
+TRACING_CONFIG: StaticSchema = (18, n0, _TCr, 0, (_Mo,), ((TRACING_MODE, 0),))
+
+NULLABLE_BOOLEAN: StaticSchema = (2, n0, _NB, 0)
+
+SECURITY_GROUP_IDS: StaticSchema = (16, n0, _SGIe, 0, (_me,), ((SECURITY_GROUP_ID, 0),))
+
+SUBNET_IDS: StaticSchema = (16, n0, _SIub, 0, (_me,), ((SUBNET_ID, 0),))
+
+VPC_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _VC,
+    0,
+    (_SIub, _SGIe, _IAFDS),
+    ((SUBNET_IDS, 0), (SECURITY_GROUP_IDS, 0), (NULLABLE_BOOLEAN, 0)),
+)
+
+CREATE_FUNCTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CFI,
+    {_sSI: _cCFR, _sm: None},
+    (
+        _FN,
+        _Ru,
+        _Ro,
+        _H,
+        _Cod,
+        _D,
+        _Tim,
+        _MS,
+        _Pu,
+        _PTu,
+        _VC,
+        _PTa,
+        _DLC,
+        _Env,
+        _KMSKA,
+        _TCr,
+        _Ta,
+        _La,
+        _FSCi,
+        _CSCA,
+        _ICm,
+        _Arch,
+        _ESp,
+        _SSn,
+        _LC,
+        _TCe,
+        _CPC,
+        _DC,
+    ),
+    (
+        (FUNCTION_NAME, 1),
+        (RUNTIME, 0),
+        (ROLE_ARN, 1),
+        (HANDLER, 0),
+        (FUNCTION_CODE, 1),
+        (DESCRIPTION, 0),
+        (TIMEOUT, 0),
+        (MEMORY_SIZE, 0),
+        (BOOLEAN, {_s: False}),
+        (FUNCTION_VERSION_LATEST_PUBLISHED, 0),
+        (VPC_CONFIG, 0),
+        (PACKAGE_TYPE, 0),
+        (DEAD_LETTER_CONFIG, 0),
+        (ENVIRONMENT, 0),
+        (KMS_KEY_ARN, 0),
+        (TRACING_CONFIG, 0),
+        (TAGS, 0),
+        (LAYER_LIST, 0),
+        (FILE_SYSTEM_CONFIG_LIST, 0),
+        (CODE_SIGNING_CONFIG_ARN, 0),
+        (IMAGE_CONFIG, 0),
+        (ARCHITECTURES_LIST, 0),
+        (EPHEMERAL_STORAGE, 0),
+        (SNAP_START, 0),
+        (LOGGING_CONFIG, 0),
+        (TENANCY_CONFIG, 0),
+        (CAPACITY_PROVIDER_CONFIG, 0),
+        (DURABLE_CONFIG, 0),
+    ),
+)
+
+SENSITIVE_STRING: StaticSchema = (3, n0, _SSe, 4)
+
+ENVIRONMENT_ERROR: StaticSchema = (
+    18,
+    n0,
+    _EEn,
+    0,
+    (_ECrr, _M),
+    ((STRING, 0), (SENSITIVE_STRING, 0)),
+)
+
+ENVIRONMENT_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _ERn,
+    0,
+    (_Va, _E),
+    ((ENVIRONMENT_VARIABLES, 0), (ENVIRONMENT_ERROR, 0)),
+)
+
+IMAGE_CONFIG_ERROR: StaticSchema = (
+    18,
+    n0,
+    _ICE,
+    0,
+    (_ECrr, _M),
+    ((STRING, 0), (SENSITIVE_STRING, 0)),
+)
+
+IMAGE_CONFIG_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _ICR,
+    0,
+    (_ICm, _E),
+    ((IMAGE_CONFIG, 0), (IMAGE_CONFIG_ERROR, 0)),
+)
+
+LAST_UPDATE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _LUS,
+    0,
+    (_Su, _Fa, _IPn),
+    ((-1, {_sV: _Su}), (-1, {_sV: _Fa}), (-1, {_sV: _IPn})),
+)
+
+LAST_UPDATE_STATUS_REASON: StaticSchema = (3, n0, _LUSR, 0)
+
+LAST_UPDATE_STATUS_REASON_CODE: StaticSchema = (
+    14,
+    n0,
+    _LUSRC,
+    0,
+    (
+        _ELE,
+        _IRP,
+        _ICnv,
+        _IE,
+        _SOOIPA,
+        _IS,
+        _ISG,
+        _ID,
+        _IAD,
+        _II,
+        _KMSKAD,
+        _KMSKNF,
+        _ISKMSK,
+        _DKMSK,
+        _EFSIOE,
+        _EFSMCE,
+        _EFSMF,
+        _EFSMT,
+        _IRn,
+        _IZFE,
+        _FE,
+        _SQEE,
+        _VLE,
+        _CPSLE,
+        _ICns,
+        _ECRLE,
+        _FEIT,
+        _FERIE,
+        _FEEIE,
+        _FEIEP,
+        _FEIWD,
+        _FEPD,
+        _FETME,
+        _FEIRE,
+        _DBVEC,
+        _DE,
+    ),
+    (
+        (-1, {_sV: _ELE}),
+        (-1, {_sV: _IRP}),
+        (-1, {_sV: _ICnv}),
+        (-1, {_sV: _IE}),
+        (-1, {_sV: _SOOIPA}),
+        (-1, {_sV: _IS}),
+        (-1, {_sV: _ISG}),
+        (-1, {_sV: _ID}),
+        (-1, {_sV: _IAD}),
+        (-1, {_sV: _II}),
+        (-1, {_sV: _KMSKAD}),
+        (-1, {_sV: _KMSKNF}),
+        (-1, {_sV: _ISKMSK}),
+        (-1, {_sV: _DKMSK}),
+        (-1, {_sV: _EFSIOE}),
+        (-1, {_sV: _EFSMCE}),
+        (-1, {_sV: _EFSMF}),
+        (-1, {_sV: _EFSMT}),
+        (-1, {_sV: _IRn}),
+        (-1, {_sV: _IZFE}),
+        (-1, {_sV: _FE}),
+        (-1, {_sV: _SQEE}),
+        (-1, {_sV: _VLE}),
+        (-1, {_sV: _CPSLE}),
+        (-1, {_sV: _ICns}),
+        (-1, {_sV: _ECRLE}),
+        (-1, {_sV: _FEITu}),
+        (-1, {_sV: _FERIEu}),
+        (-1, {_sV: _FEEIEu}),
+        (-1, {_sV: _FEIEPu}),
+        (-1, {_sV: _FEIWDu}),
+        (-1, {_sV: _FEPDu}),
+        (-1, {_sV: _FETMEu}),
+        (-1, {_sV: _FEIREu}),
+        (-1, {_sV: _DBVEC}),
+        (-1, {_sV: _DE}),
+    ),
+)
+
+LAYER: StaticSchema = (
+    18,
+    n0,
+    _Lay,
+    0,
+    (_Ar, _CSod, _SPVAi, _SJA),
+    ((LAYER_VERSION_ARN, 0), (LONG, {_s: 0}), (ARN, 0), (ARN, 0)),
+)
+
+LAYERS_REFERENCE_LIST: StaticSchema = (16, n0, _LRL, 0, (_me,), ((LAYER, 0),))
+
+RUNTIME_VERSION_ERROR: StaticSchema = (
+    18,
+    n0,
+    _RVE,
+    0,
+    (_ECrr, _M),
+    ((STRING, 0), (SENSITIVE_STRING, 0)),
+)
+
+RUNTIME_VERSION_ARN: StaticSchema = (3, n0, _RVA, 0)
+
+RUNTIME_VERSION_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _RVC,
+    0,
+    (_RVA, _E),
+    ((RUNTIME_VERSION_ARN, 0), (RUNTIME_VERSION_ERROR, 0)),
+)
+
+SNAP_START_OPTIMIZATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _SSOS,
+    0,
+    (_On, _Of),
+    ((-1, {_sV: _On}), (-1, {_sV: _Of})),
+)
+
+SNAP_START_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _SSR,
+    0,
+    (_AO, _OSp),
+    ((SNAP_START_APPLY_ON, 0), (SNAP_START_OPTIMIZATION_STATUS, 0)),
+)
+
+STATE_REASON: StaticSchema = (3, n0, _SR, 0)
+
+STATE_REASON_CODE: StaticSchema = (
+    14,
+    n0,
+    _SRCt,
+    0,
+    (
+        _Idl,
+        _Cr,
+        _Res,
+        _ELE,
+        _IRP,
+        _ICnv,
+        _IE,
+        _SOOIPA,
+        _IS,
+        _ISG,
+        _ID,
+        _IAD,
+        _II,
+        _KMSKAD,
+        _KMSKNF,
+        _ISKMSK,
+        _DKMSK,
+        _EFSIOE,
+        _EFSMCE,
+        _EFSMF,
+        _EFSMT,
+        _IRn,
+        _IZFE,
+        _FE,
+        _SQEE,
+        _VLE,
+        _CPSLE,
+        _ICns,
+        _ECRLE,
+        _FEIT,
+        _FERIE,
+        _FEEIE,
+        _FEIEP,
+        _FEIWD,
+        _FEPD,
+        _FETME,
+        _FEIRE,
+        _DBVEC,
+        _DDE,
+        _DE,
+    ),
+    (
+        (-1, {_sV: _Idl}),
+        (-1, {_sV: _Cr}),
+        (-1, {_sV: _Res}),
+        (-1, {_sV: _ELE}),
+        (-1, {_sV: _IRP}),
+        (-1, {_sV: _ICnv}),
+        (-1, {_sV: _IE}),
+        (-1, {_sV: _SOOIPA}),
+        (-1, {_sV: _IS}),
+        (-1, {_sV: _ISG}),
+        (-1, {_sV: _ID}),
+        (-1, {_sV: _IAD}),
+        (-1, {_sV: _II}),
+        (-1, {_sV: _KMSKAD}),
+        (-1, {_sV: _KMSKNF}),
+        (-1, {_sV: _ISKMSK}),
+        (-1, {_sV: _DKMSK}),
+        (-1, {_sV: _EFSIOE}),
+        (-1, {_sV: _EFSMCE}),
+        (-1, {_sV: _EFSMF}),
+        (-1, {_sV: _EFSMT}),
+        (-1, {_sV: _IRn}),
+        (-1, {_sV: _IZFE}),
+        (-1, {_sV: _FE}),
+        (-1, {_sV: _SQEE}),
+        (-1, {_sV: _VLE}),
+        (-1, {_sV: _CPSLE}),
+        (-1, {_sV: _ICns}),
+        (-1, {_sV: _ECRLE}),
+        (-1, {_sV: _FEITu}),
+        (-1, {_sV: _FERIEu}),
+        (-1, {_sV: _FEEIEu}),
+        (-1, {_sV: _FEIEPu}),
+        (-1, {_sV: _FEIWDu}),
+        (-1, {_sV: _FEPDu}),
+        (-1, {_sV: _FETMEu}),
+        (-1, {_sV: _FEIREu}),
+        (-1, {_sV: _DBVEC}),
+        (-1, {_sV: _DDE}),
+        (-1, {_sV: _DE}),
+    ),
+)
+
+TRACING_CONFIG_RESPONSE: StaticSchema = (18, n0, _TCR, 0, (_Mo,), ((TRACING_MODE, 0),))
+
+VPC_ID: StaticSchema = (3, n0, _VI, 0)
+
+VPC_CONFIG_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _VCR,
+    0,
+    (_SIub, _SGIe, _VI, _IAFDS),
+    ((SUBNET_IDS, 0), (SECURITY_GROUP_IDS, 0), (VPC_ID, 0), (NULLABLE_BOOLEAN, 0)),
+)
+
+CREATE_FUNCTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CFO,
+    {_sSI: _cFC, _smit: None},
+    (
+        _FN,
+        _FA,
+        _Ru,
+        _Ro,
+        _H,
+        _CSod,
+        _D,
+        _Tim,
+        _MS,
+        _LM,
+        _CSode,
+        _V,
+        _VC,
+        _DLC,
+        _Env,
+        _KMSKA,
+        _TCr,
+        _MA,
+        _RI,
+        _La,
+        _Sta,
+        _SR,
+        _SRCt,
+        _LUS,
+        _LUSR,
+        _LUSRC,
+        _FSCi,
+        _SPVAi,
+        _SJA,
+        _PTa,
+        _ICR,
+        _Arch,
+        _ESp,
+        _SSn,
+        _RVC,
+        _LC,
+        _TCe,
+        _CPC,
+        _CSon,
+        _DC,
+    ),
+    (
+        (NAMESPACED_FUNCTION_NAME, 0),
+        (NAME_SPACED_FUNCTION_ARN, 0),
+        (RUNTIME, 0),
+        (ROLE_ARN, 0),
+        (HANDLER, 0),
+        (LONG, {_s: 0}),
+        (DESCRIPTION, 0),
+        (TIMEOUT, 0),
+        (MEMORY_SIZE, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (VERSION, 0),
+        (VPC_CONFIG_RESPONSE, 0),
+        (DEAD_LETTER_CONFIG, 0),
+        (ENVIRONMENT_RESPONSE, 0),
+        (KMS_KEY_ARN, 0),
+        (TRACING_CONFIG_RESPONSE, 0),
+        (FUNCTION_ARN, 0),
+        (STRING, 0),
+        (LAYERS_REFERENCE_LIST, 0),
+        (STATE, 0),
+        (STATE_REASON, 0),
+        (STATE_REASON_CODE, 0),
+        (LAST_UPDATE_STATUS, 0),
+        (LAST_UPDATE_STATUS_REASON, 0),
+        (LAST_UPDATE_STATUS_REASON_CODE, 0),
+        (FILE_SYSTEM_CONFIG_LIST, 0),
+        (ARN, 0),
+        (ARN, 0),
+        (PACKAGE_TYPE, 0),
+        (IMAGE_CONFIG_RESPONSE, 0),
+        (ARCHITECTURES_LIST, 0),
+        (EPHEMERAL_STORAGE, 0),
+        (SNAP_START_RESPONSE, 0),
+        (RUNTIME_VERSION_CONFIG, 0),
+        (LOGGING_CONFIG, 0),
+        (TENANCY_CONFIG, 0),
+        (CAPACITY_PROVIDER_CONFIG, 0),
+        (STRING, 0),
+        (DURABLE_CONFIG, 0),
+    ),
+)
+
+FUNCTION_VERSIONS_PER_CAPACITY_PROVIDER_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _FVPCPLEE,
+    {_smith: _c, _sE: 400},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+INVALID_CODE_SIGNATURE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ICSE,
+    {_smith: _c, _sE: 400},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+CREATE_FUNCTION: StaticOperationSchema = (
+    23,
+    n0,
+    _CFr,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/2015-03-31/functions", "code": 201}
+        )
+    },
+    CREATE_FUNCTION_INPUT,
+    CREATE_FUNCTION_OUTPUT,
+    (
+        CODE_SIGNING_CONFIG_NOT_FOUND_EXCEPTION,
+        CODE_STORAGE_EXCEEDED_EXCEPTION,
+        CODE_VERIFICATION_FAILED_EXCEPTION,
+        FUNCTION_VERSIONS_PER_CAPACITY_PROVIDER_LIMIT_EXCEEDED_EXCEPTION,
+        INVALID_CODE_SIGNATURE_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+HEADER: StaticSchema = (3, n0, _He, 0)
+
+HEADERS_LIST: StaticSchema = (16, n0, _HL, 0, (_me,), ((HEADER, 0),))
+
+MAX_AGE: StaticSchema = (7, n0, _MAa, 0)
+
+CORS: StaticSchema = (
+    18,
+    n0,
+    _Cor,
+    0,
+    (_ACl, _AH, _AM, _AOl, _EH, _MAa),
+    (
+        (ALLOW_CREDENTIALS, 0),
+        (HEADERS_LIST, 0),
+        (ALLOW_METHODS_LIST, 0),
+        (ALLOW_ORIGINS_LIST, 0),
+        (HEADERS_LIST, 0),
+        (MAX_AGE, 0),
+    ),
+)
+
+FUNCTION_URL_FUNCTION_NAME: StaticSchema = (3, n0, _FUFN, 0)
+
+INVOKE_MODE: StaticSchema = (
+    14,
+    n0,
+    _IM,
+    0,
+    (_BUFFERED, _RS),
+    ((-1, {_sV: _BUFFERED}), (-1, {_sV: _RS})),
+)
+
+FUNCTION_URL_QUALIFIER: StaticSchema = (3, n0, _FUQ, 0)
+
+CREATE_FUNCTION_URL_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CFUCI,
+    {_sSI: _cCFUCR, _sm: None},
+    (_FN, _Q, _ATu, _Cor, _IM),
+    (
+        (FUNCTION_URL_FUNCTION_NAME, 9),
+        (FUNCTION_URL_QUALIFIER, {_sQ: _Q}),
+        (FUNCTION_URL_AUTH_TYPE, 1),
+        (CORS, 0),
+        (INVOKE_MODE, 0),
+    ),
+)
+
+FUNCTION_URL: StaticSchema = (3, n0, _FU, 0)
+
+CREATE_FUNCTION_URL_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CFUCO,
+    {_sSI: _cCFUCRo, _smit: None},
+    (_FU, _FA, _ATu, _Cor, _CTr, _IM),
+    (
+        (FUNCTION_URL, 1),
+        (FUNCTION_ARN, 1),
+        (FUNCTION_URL_AUTH_TYPE, 1),
+        (CORS, 0),
+        (TIMESTAMP, 1),
+        (INVOKE_MODE, 0),
+    ),
+)
+
+CREATE_FUNCTION_URL_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _CFUC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2021-10-31/functions/{FunctionName}/url",
+                "code": 201,
+            }
+        )
+    },
+    CREATE_FUNCTION_URL_CONFIG_INPUT,
+    CREATE_FUNCTION_URL_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+DELETE_FUNCTION_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFCSCI,
+    {_sSI: _cDFCSCR, _sm: None},
+    (_FN,),
+    ((NAMESPACED_FUNCTION_NAME, 9),),
+)
+
+DELETE_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DFCSCO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_FUNCTION_CODE_SIGNING_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _DFCSC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2020-06-30/functions/{FunctionName}/code-signing-config",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_FUNCTION_CODE_SIGNING_CONFIG_INPUT,
+    DELETE_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT,
+    (
+        CODE_SIGNING_CONFIG_NOT_FOUND_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+DELETE_FUNCTION_CONCURRENCY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFCI,
+    {_sSI: _cDFCR, _sm: None},
+    (_FN,),
+    ((FUNCTION_NAME, 9),),
+)
+
+DELETE_FUNCTION_CONCURRENCY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DFCO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_FUNCTION_CONCURRENCY: StaticOperationSchema = (
+    23,
+    n0,
+    _DFC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2017-10-31/functions/{FunctionName}/concurrency",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_FUNCTION_CONCURRENCY_INPUT,
+    DELETE_FUNCTION_CONCURRENCY_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+DELETE_FUNCTION_URL_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFUCI,
+    {_sSI: _cDFUCR, _sm: None},
+    (_FN, _Q),
+    ((FUNCTION_URL_FUNCTION_NAME, 9), (FUNCTION_URL_QUALIFIER, {_sQ: _Q})),
+)
+
+DELETE_FUNCTION_URL_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DFUCO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_FUNCTION_URL_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _DFUC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2021-10-31/functions/{FunctionName}/url",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_FUNCTION_URL_CONFIG_INPUT,
+    DELETE_FUNCTION_URL_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_FUNCTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFI,
+    {_sSI: _cGFR, _sm: None},
+    (_FN, _Q),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+    ),
+)
+
+FUNCTION_CODE_LOCATION_ERROR: StaticSchema = (
+    18,
+    n0,
+    _FCLE,
+    0,
+    (_ECrr, _M),
+    ((STRING, 0), (SENSITIVE_STRING, 0)),
+)
+
+SENSITIVE_STRING_ON_SERVER_ONLY: StaticSchema = (3, n0, _SSOSO, 0)
+
+RESOLVED_S3_OBJECT: StaticSchema = (
+    18,
+    n0,
+    _RSO,
+    0,
+    (_SB, _SK, _SOV),
+    ((S3_BUCKET, 0), (S3_KEY, 0), (S3_OBJECT_VERSION, 0)),
+)
+
+FUNCTION_CODE_LOCATION: StaticSchema = (
+    18,
+    n0,
+    _FCL,
+    0,
+    (_RT, _Lo, _IU, _RIU, _RSO, _SKMSKA, _E),
+    (
+        (STRING, 0),
+        (SENSITIVE_STRING_ON_SERVER_ONLY, 0),
+        (STRING, 0),
+        (STRING, 0),
+        (RESOLVED_S3_OBJECT, 0),
+        (KMS_KEY_ARN, 0),
+        (FUNCTION_CODE_LOCATION_ERROR, 0),
+    ),
+)
+
+RESERVED_CONCURRENT_EXECUTIONS: StaticSchema = (7, n0, _RCEe, 0)
+
+CONCURRENCY: StaticSchema = (
+    18,
+    n0,
+    _Con,
+    0,
+    (_RCEe,),
+    ((RESERVED_CONCURRENT_EXECUTIONS, 0),),
+)
+
+FUNCTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _FCun,
+    0,
+    (
+        _FN,
+        _FA,
+        _Ru,
+        _Ro,
+        _H,
+        _CSod,
+        _D,
+        _Tim,
+        _MS,
+        _LM,
+        _CSode,
+        _V,
+        _VC,
+        _DLC,
+        _Env,
+        _KMSKA,
+        _TCr,
+        _MA,
+        _RI,
+        _La,
+        _Sta,
+        _SR,
+        _SRCt,
+        _LUS,
+        _LUSR,
+        _LUSRC,
+        _FSCi,
+        _SPVAi,
+        _SJA,
+        _PTa,
+        _ICR,
+        _Arch,
+        _ESp,
+        _SSn,
+        _RVC,
+        _LC,
+        _TCe,
+        _CPC,
+        _CSon,
+        _DC,
+    ),
+    (
+        (NAMESPACED_FUNCTION_NAME, 0),
+        (NAME_SPACED_FUNCTION_ARN, 0),
+        (RUNTIME, 0),
+        (ROLE_ARN, 0),
+        (HANDLER, 0),
+        (LONG, {_s: 0}),
+        (DESCRIPTION, 0),
+        (TIMEOUT, 0),
+        (MEMORY_SIZE, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (VERSION, 0),
+        (VPC_CONFIG_RESPONSE, 0),
+        (DEAD_LETTER_CONFIG, 0),
+        (ENVIRONMENT_RESPONSE, 0),
+        (KMS_KEY_ARN, 0),
+        (TRACING_CONFIG_RESPONSE, 0),
+        (FUNCTION_ARN, 0),
+        (STRING, 0),
+        (LAYERS_REFERENCE_LIST, 0),
+        (STATE, 0),
+        (STATE_REASON, 0),
+        (STATE_REASON_CODE, 0),
+        (LAST_UPDATE_STATUS, 0),
+        (LAST_UPDATE_STATUS_REASON, 0),
+        (LAST_UPDATE_STATUS_REASON_CODE, 0),
+        (FILE_SYSTEM_CONFIG_LIST, 0),
+        (ARN, 0),
+        (ARN, 0),
+        (PACKAGE_TYPE, 0),
+        (IMAGE_CONFIG_RESPONSE, 0),
+        (ARCHITECTURES_LIST, 0),
+        (EPHEMERAL_STORAGE, 0),
+        (SNAP_START_RESPONSE, 0),
+        (RUNTIME_VERSION_CONFIG, 0),
+        (LOGGING_CONFIG, 0),
+        (TENANCY_CONFIG, 0),
+        (CAPACITY_PROVIDER_CONFIG, 0),
+        (STRING, 0),
+        (DURABLE_CONFIG, 0),
+    ),
+)
+
+TAGS_ERROR_CODE: StaticSchema = (3, n0, _TEC, 0)
+
+TAGS_ERROR_MESSAGE: StaticSchema = (3, n0, _TEM, 0)
+
+TAGS_ERROR: StaticSchema = (
+    18,
+    n0,
+    _TE,
+    0,
+    (_ECrr, _M),
+    ((TAGS_ERROR_CODE, 1), (TAGS_ERROR_MESSAGE, 1)),
+)
+
+GET_FUNCTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFO,
+    {_sSI: _cGFRo, _smit: None},
+    (_Conf, _Cod, _Ta, _TE, _Con),
+    (
+        (FUNCTION_CONFIGURATION, 0),
+        (FUNCTION_CODE_LOCATION, 0),
+        (TAGS, 0),
+        (TAGS_ERROR, 0),
+        (CONCURRENCY, 0),
+    ),
+)
+
+GET_FUNCTION: StaticOperationSchema = (
+    23,
+    n0,
+    _GF,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2015-03-31/functions/{FunctionName}",
+                "code": 200,
+            }
+        )
+    },
+    GET_FUNCTION_INPUT,
+    GET_FUNCTION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_FUNCTION_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFCSCI,
+    {_sSI: _cGFCSCR, _sm: None},
+    (_FN,),
+    ((NAMESPACED_FUNCTION_NAME, 9),),
+)
+
+GET_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFCSCO,
+    {_sSI: _cGFCSCRo, _smit: None},
+    (_CSCA, _FN),
+    ((CODE_SIGNING_CONFIG_ARN, 1), (FUNCTION_NAME, 1)),
+)
+
+GET_FUNCTION_CODE_SIGNING_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _GFCSC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2020-06-30/functions/{FunctionName}/code-signing-config",
+                "code": 200,
+            }
+        )
+    },
+    GET_FUNCTION_CODE_SIGNING_CONFIG_INPUT,
+    GET_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT,
+    (
+        CODE_SIGNING_CONFIG_NOT_FOUND_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_FUNCTION_CONCURRENCY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFCI,
+    {_sSI: _cGFCR, _sm: None},
+    (_FN,),
+    ((FUNCTION_NAME, 9),),
+)
+
+GET_FUNCTION_CONCURRENCY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFCO,
+    {_sSI: _cGFCRo, _smit: None},
+    (_RCEe,),
+    ((RESERVED_CONCURRENT_EXECUTIONS, 0),),
+)
+
+GET_FUNCTION_CONCURRENCY: StaticOperationSchema = (
+    23,
+    n0,
+    _GFC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2019-09-30/functions/{FunctionName}/concurrency",
+                "code": 200,
+            }
+        )
+    },
+    GET_FUNCTION_CONCURRENCY_INPUT,
+    GET_FUNCTION_CONCURRENCY_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_FUNCTION_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFCIe,
+    {_sSI: _cGFCRom, _sm: None},
+    (_FN, _Q),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+    ),
+)
+
+GET_FUNCTION_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFCOe,
+    {_sSI: _cFC, _smit: None},
+    (
+        _FN,
+        _FA,
+        _Ru,
+        _Ro,
+        _H,
+        _CSod,
+        _D,
+        _Tim,
+        _MS,
+        _LM,
+        _CSode,
+        _V,
+        _VC,
+        _DLC,
+        _Env,
+        _KMSKA,
+        _TCr,
+        _MA,
+        _RI,
+        _La,
+        _Sta,
+        _SR,
+        _SRCt,
+        _LUS,
+        _LUSR,
+        _LUSRC,
+        _FSCi,
+        _SPVAi,
+        _SJA,
+        _PTa,
+        _ICR,
+        _Arch,
+        _ESp,
+        _SSn,
+        _RVC,
+        _LC,
+        _TCe,
+        _CPC,
+        _CSon,
+        _DC,
+    ),
+    (
+        (NAMESPACED_FUNCTION_NAME, 0),
+        (NAME_SPACED_FUNCTION_ARN, 0),
+        (RUNTIME, 0),
+        (ROLE_ARN, 0),
+        (HANDLER, 0),
+        (LONG, {_s: 0}),
+        (DESCRIPTION, 0),
+        (TIMEOUT, 0),
+        (MEMORY_SIZE, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (VERSION, 0),
+        (VPC_CONFIG_RESPONSE, 0),
+        (DEAD_LETTER_CONFIG, 0),
+        (ENVIRONMENT_RESPONSE, 0),
+        (KMS_KEY_ARN, 0),
+        (TRACING_CONFIG_RESPONSE, 0),
+        (FUNCTION_ARN, 0),
+        (STRING, 0),
+        (LAYERS_REFERENCE_LIST, 0),
+        (STATE, 0),
+        (STATE_REASON, 0),
+        (STATE_REASON_CODE, 0),
+        (LAST_UPDATE_STATUS, 0),
+        (LAST_UPDATE_STATUS_REASON, 0),
+        (LAST_UPDATE_STATUS_REASON_CODE, 0),
+        (FILE_SYSTEM_CONFIG_LIST, 0),
+        (ARN, 0),
+        (ARN, 0),
+        (PACKAGE_TYPE, 0),
+        (IMAGE_CONFIG_RESPONSE, 0),
+        (ARCHITECTURES_LIST, 0),
+        (EPHEMERAL_STORAGE, 0),
+        (SNAP_START_RESPONSE, 0),
+        (RUNTIME_VERSION_CONFIG, 0),
+        (LOGGING_CONFIG, 0),
+        (TENANCY_CONFIG, 0),
+        (CAPACITY_PROVIDER_CONFIG, 0),
+        (STRING, 0),
+        (DURABLE_CONFIG, 0),
+    ),
+)
+
+GET_FUNCTION_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _GFCe,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2015-03-31/functions/{FunctionName}/configuration",
+                "code": 200,
+            }
+        )
+    },
+    GET_FUNCTION_CONFIGURATION_INPUT,
+    GET_FUNCTION_CONFIGURATION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+UNQUALIFIED_FUNCTION_NAME: StaticSchema = (3, n0, _UFN, 0)
+
+GET_FUNCTION_RECURSION_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFRCI,
+    {_sSI: _cGFRCR, _sm: None},
+    (_FN,),
+    ((UNQUALIFIED_FUNCTION_NAME, 9),),
+)
+
+RECURSIVE_LOOP: StaticSchema = (
+    14,
+    n0,
+    _RL,
+    0,
+    (_All, _Ter),
+    ((-1, {_sV: _All}), (-1, {_sV: _Ter})),
+)
+
+GET_FUNCTION_RECURSION_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFRCO,
+    {_sSI: _cGFRCRo, _smit: None},
+    (_RL,),
+    ((RECURSIVE_LOOP, 0),),
+)
+
+GET_FUNCTION_RECURSION_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _GFRC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2024-08-31/functions/{FunctionName}/recursion-config",
+                "code": 200,
+            }
+        )
+    },
+    GET_FUNCTION_RECURSION_CONFIG_INPUT,
+    GET_FUNCTION_RECURSION_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+PUBLISHED_FUNCTION_QUALIFIER: StaticSchema = (3, n0, _PFQ, 0)
+
+GET_FUNCTION_SCALING_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFSCI,
+    {_sSI: _cGFSCR, _sm: None},
+    (_FN, _Q),
+    (
+        (UNQUALIFIED_FUNCTION_NAME, 9),
+        (PUBLISHED_FUNCTION_QUALIFIER, {_sQ: _Q, _smi: None}),
+    ),
+)
+
+FUNCTION_SCALING_CONFIG_EXECUTION_ENVIRONMENTS: StaticSchema = (7, n0, _FSCEE, 0)
+
+FUNCTION_SCALING_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _FSCu,
+    0,
+    (_MEE, _MEEa),
+    (
+        (FUNCTION_SCALING_CONFIG_EXECUTION_ENVIRONMENTS, 0),
+        (FUNCTION_SCALING_CONFIG_EXECUTION_ENVIRONMENTS, 0),
+    ),
+)
+
+GET_FUNCTION_SCALING_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFSCO,
+    {_sSI: _cGFSCRo, _smit: None},
+    (_FA, _AFSC, _RFSC),
+    ((FUNCTION_ARN, 0), (FUNCTION_SCALING_CONFIG, 0), (FUNCTION_SCALING_CONFIG, 0)),
+)
+
+GET_FUNCTION_SCALING_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _GFSC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2025-11-30/functions/{FunctionName}/function-scaling-config",
+                "code": 200,
+            }
+        )
+    },
+    GET_FUNCTION_SCALING_CONFIG_INPUT,
+    GET_FUNCTION_SCALING_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_FUNCTION_URL_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFUCI,
+    {_sSI: _cGFUCR, _sm: None},
+    (_FN, _Q),
+    ((FUNCTION_URL_FUNCTION_NAME, 9), (FUNCTION_URL_QUALIFIER, {_sQ: _Q})),
+)
+
+GET_FUNCTION_URL_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFUCO,
+    {_sSI: _cGFUCRo, _smit: None},
+    (_FU, _FA, _ATu, _Cor, _CTr, _LMT, _IM),
+    (
+        (FUNCTION_URL, 1),
+        (FUNCTION_ARN, 1),
+        (FUNCTION_URL_AUTH_TYPE, 1),
+        (CORS, 0),
+        (TIMESTAMP, 1),
+        (TIMESTAMP, 1),
+        (INVOKE_MODE, 0),
+    ),
+)
+
+GET_FUNCTION_URL_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _GFUC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2021-10-31/functions/{FunctionName}/url",
+                "code": 200,
+            }
+        )
+    },
+    GET_FUNCTION_URL_CONFIG_INPUT,
+    GET_FUNCTION_URL_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GPI,
+    {_sSI: _cGPR, _sm: None},
+    (_FN, _Q),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+    ),
+)
+
+GET_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GPO,
+    {_sSI: _cGPRo, _smit: None},
+    (_Po, _RI),
+    ((STRING, 0), (STRING, 0)),
+)
+
+GET_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2015-03-31/functions/{FunctionName}/policy",
+                "code": 200,
+            }
+        )
+    },
+    GET_POLICY_INPUT,
+    GET_POLICY_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_RUNTIME_MANAGEMENT_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRMCI,
+    {_sSI: _cGRMCR, _sm: None},
+    (_FN, _Q),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+    ),
+)
+
+UPDATE_RUNTIME_ON: StaticSchema = (
+    14,
+    n0,
+    _URO,
+    0,
+    (_Au, _Ma, _FUu),
+    ((-1, {_sV: _Au}), (-1, {_sV: _Ma}), (-1, {_sV: _FUu})),
+)
+
+GET_RUNTIME_MANAGEMENT_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRMCO,
+    {_sSI: _cGRMCRo, _smit: None},
+    (_URO, _FA, _RVA),
+    ((UPDATE_RUNTIME_ON, 0), (NAME_SPACED_FUNCTION_ARN, 0), (RUNTIME_VERSION_ARN, 0)),
+)
+
+GET_RUNTIME_MANAGEMENT_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _GRMC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2021-07-20/functions/{FunctionName}/runtime-management-config",
+                "code": 200,
+            }
+        )
+    },
+    GET_RUNTIME_MANAGEMENT_CONFIG_INPUT,
+    GET_RUNTIME_MANAGEMENT_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+CODE_ARTIFACT_USER_DELETED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CAUDE,
+    {_smith: _c, _sE: 409},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+CODE_ARTIFACT_USER_FAILED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CAUFE,
+    {_smith: _c, _sE: 409},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+CODE_ARTIFACT_USER_PENDING_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CAUPE,
+    {_smith: _c, _sE: 409},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+DURABLE_EXECUTION_ALREADY_STARTED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _DEASE,
+    {_smith: _c, _sE: 409},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+EC2_ACCESS_DENIED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ECADE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+EC2_THROTTLED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ECTE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+EC2_UNEXPECTED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ECUE,
+    {_smith: _se, _sE: 502},
+    (_T, _M, _ECEC),
+    ((STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+EFSIO_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EFSIOEx,
+    {_smith: _c, _sE: 410},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+EFS_MOUNT_CONNECTIVITY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EFSMCEo,
+    {_smith: _c, _sE: 408},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+EFS_MOUNT_FAILURE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EFSMFE,
+    {_smith: _c, _sE: 403},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+EFS_MOUNT_TIMEOUT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _EFSMTE,
+    {_smith: _c, _sE: 408},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+ENI_LIMIT_REACHED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ENILRE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+ENI_NOT_READY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ENINRE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+INVALID_REQUEST_CONTENT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IRCE,
+    {_smith: _c, _sE: 400},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+INVALID_RUNTIME_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IRE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+INVALID_SECURITY_GROUP_ID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISGIDE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+INVALID_SUBNET_ID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISIDE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+INVALID_ZIP_FILE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IZFE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+INVOCATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ITn,
+    0,
+    (_Ev, _RR, _DR),
+    ((-1, {_sV: _Ev}), (-1, {_sV: _RR}), (-1, {_sV: _DR})),
+)
+
+LOG_TYPE: StaticSchema = (
+    14,
+    n0,
+    _LT,
+    0,
+    (_No, _Tai),
+    ((-1, {_sV: _No}), (-1, {_sV: _Tai})),
+)
+
+INVOKE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IIn,
+    {_sSI: _cIR, _sm: None},
+    (_FN, _ITn, _LT, _CC, _DEN, _Pa, _Q, _TI),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (INVOCATION_TYPE, {_sH: _XAIT}),
+        (LOG_TYPE, {_sH: _XALT}),
+        (STRING, {_sH: _XACC}),
+        (DURABLE_EXECUTION_NAME, {_sH: _XADEN}),
+        (BLOB, 16),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+        (TENANT_ID, {_sH: _XATI_}),
+    ),
+)
+
+INVOKE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IO,
+    {_sSI: _cIRo, _smit: None},
+    (_SC, _FE, _LR, _Pa, _EV, _DEA),
+    (
+        (INTEGER, {_s: 0, _sRC: None}),
+        (STRING, {_sH: _XAFE}),
+        (STRING, {_sH: _XALR}),
+        (BLOB, 16),
+        (VERSION, {_sH: _XAEV}),
+        (DURABLE_EXECUTION_ARN, {_sH: _XADEA}),
+    ),
+)
+
+MODE_NOT_SUPPORTED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MNSE,
+    {_smith: _c, _sE: 400},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+NO_PUBLISHED_VERSION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _NPVE,
+    {_smith: _c, _sE: 400},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+RECURSIVE_INVOCATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RIE,
+    {_smith: _c, _sE: 400},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+REQUEST_TOO_LARGE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RTLE,
+    {_smith: _c, _sE: 413},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+RESOURCE_NOT_READY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNRE,
+    {_smith: _se, _sE: 502},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+S3_FILES_MOUNT_CONNECTIVITY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SFMCE,
+    {_smith: _c, _sE: 408},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+S3_FILES_MOUNT_FAILURE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SFMFE,
+    {_smith: _c, _sE: 403},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+S3_FILES_MOUNT_TIMEOUT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SFMTE,
+    {_smith: _c, _sE: 408},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+SERIALIZED_REQUEST_ENTITY_TOO_LARGE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SRETLE,
+    {_smith: _c, _sE: 413},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SQEE,
+    {_smith: _c, _sE: 402},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+SNAP_START_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SSE,
+    {_smith: _c, _sE: 400},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+SNAP_START_NOT_READY_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SSNRE,
+    {_smith: _c, _sE: 409},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+SNAP_START_REGENERATION_FAILURE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SSRFE,
+    {_smith: _c, _sE: 409},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+SNAP_START_TIMEOUT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SSTE,
+    {_smith: _c, _sE: 408},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+SUBNET_IP_ADDRESS_LIMIT_REACHED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SIPALRE,
+    {_smith: _se, _sE: 502},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+UNSUPPORTED_MEDIA_TYPE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _UMTE,
+    {_smith: _c, _sE: 415},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+INVOKE: StaticOperationSchema = (
+    23,
+    n0,
+    _Inv,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2015-03-31/functions/{FunctionName}/invocations",
+                "code": 200,
+            }
+        )
+    },
+    INVOKE_INPUT,
+    INVOKE_OUTPUT,
+    (
+        CODE_ARTIFACT_USER_DELETED_EXCEPTION,
+        CODE_ARTIFACT_USER_FAILED_EXCEPTION,
+        CODE_ARTIFACT_USER_PENDING_EXCEPTION,
+        DURABLE_EXECUTION_ALREADY_STARTED_EXCEPTION,
+        EC2_ACCESS_DENIED_EXCEPTION,
+        EC2_THROTTLED_EXCEPTION,
+        EC2_UNEXPECTED_EXCEPTION,
+        EFSIO_EXCEPTION,
+        EFS_MOUNT_CONNECTIVITY_EXCEPTION,
+        EFS_MOUNT_FAILURE_EXCEPTION,
+        EFS_MOUNT_TIMEOUT_EXCEPTION,
+        ENI_LIMIT_REACHED_EXCEPTION,
+        ENI_NOT_READY_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        INVALID_REQUEST_CONTENT_EXCEPTION,
+        INVALID_RUNTIME_EXCEPTION,
+        INVALID_SECURITY_GROUP_ID_EXCEPTION,
+        INVALID_SUBNET_ID_EXCEPTION,
+        INVALID_ZIP_FILE_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        MODE_NOT_SUPPORTED_EXCEPTION,
+        NO_PUBLISHED_VERSION_EXCEPTION,
+        RECURSIVE_INVOCATION_EXCEPTION,
+        REQUEST_TOO_LARGE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_READY_EXCEPTION,
+        S3_FILES_MOUNT_CONNECTIVITY_EXCEPTION,
+        S3_FILES_MOUNT_FAILURE_EXCEPTION,
+        S3_FILES_MOUNT_TIMEOUT_EXCEPTION,
+        SERIALIZED_REQUEST_ENTITY_TOO_LARGE_EXCEPTION,
+        SERVICE_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        SNAP_START_EXCEPTION,
+        SNAP_START_NOT_READY_EXCEPTION,
+        SNAP_START_REGENERATION_FAILURE_EXCEPTION,
+        SNAP_START_TIMEOUT_EXCEPTION,
+        SUBNET_IP_ADDRESS_LIMIT_REACHED_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNSUPPORTED_MEDIA_TYPE_EXCEPTION,
+    ),
+)
+
+BLOB_STREAM: StaticSchema = (1, n0, _BSl, {_smithyap: None})
+
+INVOKE_ASYNC_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IAI,
+    {_sSI: _cIAR, _sm: None},
+    (_FN, _IA),
+    ((NAMESPACED_FUNCTION_NAME, 9), (BLOB_STREAM, 17)),
+)
+
+HTTP_STATUS: StaticSchema = (7, n0, _HS, {_s: 0})
+
+INVOKE_ASYNC_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IAO,
+    {_sSI: _cIARo, _smit: None},
+    (_Stat,),
+    ((HTTP_STATUS, {_s: 0, _sRC: None}),),
+)
+
+INVOKE_ASYNC: StaticOperationSchema = (
+    23,
+    n0,
+    _IAn,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2014-11-13/functions/{FunctionName}/invoke-async",
+                "code": 202,
+            }
+        )
+    },
+    INVOKE_ASYNC_INPUT,
+    INVOKE_ASYNC_OUTPUT,
+    (
+        EC2_ACCESS_DENIED_EXCEPTION,
+        EC2_THROTTLED_EXCEPTION,
+        EC2_UNEXPECTED_EXCEPTION,
+        EFSIO_EXCEPTION,
+        EFS_MOUNT_CONNECTIVITY_EXCEPTION,
+        EFS_MOUNT_FAILURE_EXCEPTION,
+        EFS_MOUNT_TIMEOUT_EXCEPTION,
+        ENI_LIMIT_REACHED_EXCEPTION,
+        INVALID_REQUEST_CONTENT_EXCEPTION,
+        INVALID_RUNTIME_EXCEPTION,
+        INVALID_SECURITY_GROUP_ID_EXCEPTION,
+        INVALID_SUBNET_ID_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        MODE_NOT_SUPPORTED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        S3_FILES_MOUNT_CONNECTIVITY_EXCEPTION,
+        S3_FILES_MOUNT_FAILURE_EXCEPTION,
+        S3_FILES_MOUNT_TIMEOUT_EXCEPTION,
+        SERVICE_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        SNAP_START_EXCEPTION,
+        SNAP_START_NOT_READY_EXCEPTION,
+        SNAP_START_REGENERATION_FAILURE_EXCEPTION,
+        SNAP_START_TIMEOUT_EXCEPTION,
+        SUBNET_IP_ADDRESS_LIMIT_REACHED_EXCEPTION,
+    ),
+)
+
+RESPONSE_STREAMING_INVOCATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RSIT,
+    0,
+    (_RR, _DR),
+    ((-1, {_sV: _RR}), (-1, {_sV: _DR})),
+)
+
+INVOKE_WITH_RESPONSE_STREAM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IWRSI,
+    {_sSI: _cIWRSR, _sm: None},
+    (_FN, _LT, _CC, _Q, _Pa, _TI, _ITn),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (LOG_TYPE, {_sH: _XALT}),
+        (STRING, {_sH: _XACC}),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+        (BLOB, 16),
+        (TENANT_ID, {_sH: _XATI_}),
+        (RESPONSE_STREAMING_INVOCATION_TYPE, {_sH: _XAIT}),
+    ),
+)
+
+INVOKE_WITH_RESPONSE_STREAM_COMPLETE_EVENT: StaticSchema = (
+    18,
+    n0,
+    _IWRSCE,
+    0,
+    (_ECrr, _EDr, _LR),
+    ((STRING, 0), (STRING, 0), (STRING, 0)),
+)
+
+INVOKE_RESPONSE_STREAM_UPDATE: StaticSchema = (
+    18,
+    n0,
+    _IRSU,
+    0,
+    (_Pa,),
+    ((BLOB, {_sPm: None}),),
+)
+
+INVOKE_WITH_RESPONSE_STREAM_RESPONSE_EVENT: StaticSchema = (
+    19,
+    n0,
+    _IWRSRE,
+    {_smithyap: None},
+    (_PCa, _ICnvo),
+    (
+        (INVOKE_RESPONSE_STREAM_UPDATE, 0),
+        (INVOKE_WITH_RESPONSE_STREAM_COMPLETE_EVENT, 0),
+    ),
+)
+
+INVOKE_WITH_RESPONSE_STREAM_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IWRSO,
+    {_sSI: _cIWRSRo, _smit: None},
+    (_SC, _EV, _ESv, _RSCT),
+    (
+        (INTEGER, {_s: 0, _sRC: None}),
+        (VERSION, {_sH: _XAEV}),
+        (INVOKE_WITH_RESPONSE_STREAM_RESPONSE_EVENT, 16),
+        (STRING, {_sH: _CT_}),
+    ),
+)
+
+INVOKE_WITH_RESPONSE_STREAM: StaticOperationSchema = (
+    23,
+    n0,
+    _IWRS,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2021-11-15/functions/{FunctionName}/response-streaming-invocations",
+                "code": 200,
+            }
+        )
+    },
+    INVOKE_WITH_RESPONSE_STREAM_INPUT,
+    INVOKE_WITH_RESPONSE_STREAM_OUTPUT,
+    (
+        EC2_ACCESS_DENIED_EXCEPTION,
+        EC2_THROTTLED_EXCEPTION,
+        EC2_UNEXPECTED_EXCEPTION,
+        EFSIO_EXCEPTION,
+        EFS_MOUNT_CONNECTIVITY_EXCEPTION,
+        EFS_MOUNT_FAILURE_EXCEPTION,
+        EFS_MOUNT_TIMEOUT_EXCEPTION,
+        ENI_LIMIT_REACHED_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        INVALID_REQUEST_CONTENT_EXCEPTION,
+        INVALID_RUNTIME_EXCEPTION,
+        INVALID_SECURITY_GROUP_ID_EXCEPTION,
+        INVALID_SUBNET_ID_EXCEPTION,
+        INVALID_ZIP_FILE_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        NO_PUBLISHED_VERSION_EXCEPTION,
+        RECURSIVE_INVOCATION_EXCEPTION,
+        REQUEST_TOO_LARGE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_READY_EXCEPTION,
+        S3_FILES_MOUNT_CONNECTIVITY_EXCEPTION,
+        S3_FILES_MOUNT_FAILURE_EXCEPTION,
+        S3_FILES_MOUNT_TIMEOUT_EXCEPTION,
+        SERIALIZED_REQUEST_ENTITY_TOO_LARGE_EXCEPTION,
+        SERVICE_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        SNAP_START_EXCEPTION,
+        SNAP_START_NOT_READY_EXCEPTION,
+        SNAP_START_REGENERATION_FAILURE_EXCEPTION,
+        SNAP_START_TIMEOUT_EXCEPTION,
+        SUBNET_IP_ADDRESS_LIMIT_REACHED_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+        UNSUPPORTED_MEDIA_TYPE_EXCEPTION,
+    ),
+)
+
+EXECUTION_STATUS_LIST: StaticSchema = (
+    16,
+    n0,
+    _ESL,
+    0,
+    (_me,),
+    ((EXECUTION_STATUS, 0),),
+)
+
+LIST_DURABLE_EXECUTIONS_BY_FUNCTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDEBFI,
+    {_sSI: _cLDEBFR, _sm: None},
+    (_FN, _Q, _DEN, _Statu, _SAt, _SBt, _RO, _Mar, _MI),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+        (DURABLE_EXECUTION_NAME, {_sQ: _DEN}),
+        (EXECUTION_STATUS_LIST, {_sQ: _Statu}),
+        (EXECUTION_TIMESTAMP, {_sQ: _SAt}),
+        (EXECUTION_TIMESTAMP, {_sQ: _SBt}),
+        (REVERSE_ORDER, {_sQ: _RO}),
+        (STRING, {_sQ: _Mar}),
+        (ITEM_COUNT, {_s: 0, _sQ: _MI}),
+    ),
+)
+
+EXECUTION: StaticSchema = (
+    18,
+    n0,
+    _Exe,
+    0,
+    (_DEA, _DEN, _FA, _Stat, _STt, _ETn, _KMSKA),
+    (
+        (DURABLE_EXECUTION_ARN, 1),
+        (DURABLE_EXECUTION_NAME, 1),
+        (NAME_SPACED_FUNCTION_ARN, 1),
+        (EXECUTION_STATUS, 1),
+        (EXECUTION_TIMESTAMP, 1),
+        (EXECUTION_TIMESTAMP, 0),
+        (KMS_KEY_ARN, 0),
+    ),
+)
+
+DURABLE_EXECUTIONS: StaticSchema = (16, n0, _DEu, 0, (_me,), ((EXECUTION, 0),))
+
+LIST_DURABLE_EXECUTIONS_BY_FUNCTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDEBFO,
+    {_sSI: _cLDEBFRo, _smit: None},
+    (_DEu, _NM),
+    ((DURABLE_EXECUTIONS, 0), (STRING, 0)),
+)
+
+LIST_DURABLE_EXECUTIONS_BY_FUNCTION: StaticOperationSchema = (
+    23,
+    n0,
+    _LDEBF,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2025-12-01/functions/{FunctionName}/durable-executions",
+                "code": 200,
+            }
+        )
+    },
+    LIST_DURABLE_EXECUTIONS_BY_FUNCTION_INPUT,
+    LIST_DURABLE_EXECUTIONS_BY_FUNCTION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+FUNCTION_VERSION: StaticSchema = (14, n0, _FV, 0, (_ALL_,), ((-1, {_sV: _ALL_}),))
+
+MASTER_REGION: StaticSchema = (3, n0, _MR, 0)
+
+LIST_FUNCTIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LFI,
+    {_sSI: _cLFR, _sm: None},
+    (_MR, _FV, _Mar, _MI),
+    (
+        (MASTER_REGION, {_sQ: _MR}),
+        (FUNCTION_VERSION, {_sQ: _FV}),
+        (STRING, {_sQ: _Mar}),
+        (MAX_LIST_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+FUNCTION_LIST: StaticSchema = (16, n0, _FLu, 0, (_me,), ((FUNCTION_CONFIGURATION, 0),))
+
+LIST_FUNCTIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LFO,
+    {_sSI: _cLFRo, _smit: None},
+    (_NM, _Fu),
+    ((STRING, 0), (FUNCTION_LIST, 0)),
+)
+
+LIST_FUNCTIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LFi,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/2015-03-31/functions", "code": 200}
+        )
+    },
+    LIST_FUNCTIONS_INPUT,
+    LIST_FUNCTIONS_OUTPUT,
+    (INVALID_PARAMETER_VALUE_EXCEPTION, SERVICE_EXCEPTION, TOO_MANY_REQUESTS_EXCEPTION),
+)
+
+MAX_ITEMS: StaticSchema = (7, n0, _MI, 0)
+
+LIST_FUNCTION_URL_CONFIGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LFUCI,
+    {_sSI: _cLFUCR, _sm: None},
+    (_FN, _Mar, _MI),
+    ((FUNCTION_URL_FUNCTION_NAME, 9), (STRING, {_sQ: _Mar}), (MAX_ITEMS, {_sQ: _MI})),
+)
+
+FUNCTION_URL_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _FUC,
+    0,
+    (_FU, _FA, _CTr, _LMT, _Cor, _ATu, _IM),
+    (
+        (FUNCTION_URL, 1),
+        (FUNCTION_ARN, 1),
+        (TIMESTAMP, 1),
+        (TIMESTAMP, 1),
+        (CORS, 0),
+        (FUNCTION_URL_AUTH_TYPE, 1),
+        (INVOKE_MODE, 0),
+    ),
+)
+
+FUNCTION_URL_CONFIG_LIST: StaticSchema = (
+    16,
+    n0,
+    _FUCL,
+    0,
+    (_me,),
+    ((FUNCTION_URL_CONFIG, 0),),
+)
+
+LIST_FUNCTION_URL_CONFIGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LFUCO,
+    {_sSI: _cLFUCRo, _smit: None},
+    (_FUCu, _NM),
+    ((FUNCTION_URL_CONFIG_LIST, 1), (STRING, 0)),
+)
+
+LIST_FUNCTION_URL_CONFIGS: StaticOperationSchema = (
+    23,
+    n0,
+    _LFUC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2021-10-31/functions/{FunctionName}/urls",
+                "code": 200,
+            }
+        )
+    },
+    LIST_FUNCTION_URL_CONFIGS_INPUT,
+    LIST_FUNCTION_URL_CONFIGS_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+MAX_PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEMS: StaticSchema = (7, n0, _MPCCLI, 0)
+
+LIST_PROVISIONED_CONCURRENCY_CONFIGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LPCCI,
+    {_sSI: _cLPCCR, _sm: None},
+    (_FN, _Mar, _MI),
+    (
+        (FUNCTION_NAME, 9),
+        (STRING, {_sQ: _Mar}),
+        (MAX_PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+NON_NEGATIVE_INTEGER: StaticSchema = (7, n0, _NNI, 0)
+
+POSITIVE_INTEGER: StaticSchema = (7, n0, _PIo, 0)
+
+PROVISIONED_CONCURRENCY_STATUS_ENUM: StaticSchema = (
+    14,
+    n0,
+    _PCSE,
+    0,
+    (_IP_, _READY, _FAILED),
+    ((-1, {_sV: _IP_}), (-1, {_sV: _READY}), (-1, {_sV: _FAILED})),
+)
+
+PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEM: StaticSchema = (
+    18,
+    n0,
+    _PCCLI,
+    0,
+    (_FA, _RPCE, _APCE, _APCEl, _Stat, _SRt, _LM),
+    (
+        (FUNCTION_ARN, 0),
+        (POSITIVE_INTEGER, 0),
+        (NON_NEGATIVE_INTEGER, 0),
+        (NON_NEGATIVE_INTEGER, 0),
+        (PROVISIONED_CONCURRENCY_STATUS_ENUM, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+PROVISIONED_CONCURRENCY_CONFIG_LIST: StaticSchema = (
+    16,
+    n0,
+    _PCCL,
+    0,
+    (_me,),
+    ((PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEM, 0),),
+)
+
+LIST_PROVISIONED_CONCURRENCY_CONFIGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LPCCO,
+    {_sSI: _cLPCCRo, _smit: None},
+    (_PCC, _NM),
+    ((PROVISIONED_CONCURRENCY_CONFIG_LIST, 0), (STRING, 0)),
+)
+
+LIST_PROVISIONED_CONCURRENCY_CONFIGS: StaticOperationSchema = (
+    23,
+    n0,
+    _LPCC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency?List=ALL",
+                "code": 200,
+            }
+        )
+    },
+    LIST_PROVISIONED_CONCURRENCY_CONFIGS_INPUT,
+    LIST_PROVISIONED_CONCURRENCY_CONFIGS_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+PUT_FUNCTION_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PFCSCI,
+    {_sSI: _cPFCSCR, _sm: None},
+    (_CSCA, _FN),
+    ((CODE_SIGNING_CONFIG_ARN, 1), (NAMESPACED_FUNCTION_NAME, 9)),
+)
+
+PUT_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PFCSCO,
+    {_sSI: _cPFCSCRo, _smit: None},
+    (_CSCA, _FN),
+    ((CODE_SIGNING_CONFIG_ARN, 1), (FUNCTION_NAME, 1)),
+)
+
+PUT_FUNCTION_CODE_SIGNING_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _PFCSC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2020-06-30/functions/{FunctionName}/code-signing-config",
+                "code": 200,
+            }
+        )
+    },
+    PUT_FUNCTION_CODE_SIGNING_CONFIG_INPUT,
+    PUT_FUNCTION_CODE_SIGNING_CONFIG_OUTPUT,
+    (
+        CODE_SIGNING_CONFIG_NOT_FOUND_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+PUT_FUNCTION_CONCURRENCY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PFCI,
+    {_sSI: _cPFCR, _sm: None},
+    (_FN, _RCEe),
+    ((FUNCTION_NAME, 9), (RESERVED_CONCURRENT_EXECUTIONS, 1)),
+)
+
+PUT_FUNCTION_CONCURRENCY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PFCO,
+    {_sSI: _cC, _smit: None},
+    (_RCEe,),
+    ((RESERVED_CONCURRENT_EXECUTIONS, 0),),
+)
+
+PUT_FUNCTION_CONCURRENCY: StaticOperationSchema = (
+    23,
+    n0,
+    _PFC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2017-10-31/functions/{FunctionName}/concurrency",
+                "code": 200,
+            }
+        )
+    },
+    PUT_FUNCTION_CONCURRENCY_INPUT,
+    PUT_FUNCTION_CONCURRENCY_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+PUT_FUNCTION_RECURSION_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PFRCI,
+    {_sSI: _cPFRCR, _sm: None},
+    (_FN, _RL),
+    ((UNQUALIFIED_FUNCTION_NAME, 9), (RECURSIVE_LOOP, 1)),
+)
+
+PUT_FUNCTION_RECURSION_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PFRCO,
+    {_sSI: _cPFRCRo, _smit: None},
+    (_RL,),
+    ((RECURSIVE_LOOP, 0),),
+)
+
+PUT_FUNCTION_RECURSION_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _PFRC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2024-08-31/functions/{FunctionName}/recursion-config",
+                "code": 200,
+            }
+        )
+    },
+    PUT_FUNCTION_RECURSION_CONFIG_INPUT,
+    PUT_FUNCTION_RECURSION_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+PUT_FUNCTION_SCALING_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PFSCI,
+    {_sSI: _cPFSCR, _sm: None},
+    (_FN, _Q, _FSCu),
+    (
+        (UNQUALIFIED_FUNCTION_NAME, 9),
+        (PUBLISHED_FUNCTION_QUALIFIER, {_sQ: _Q, _smi: None}),
+        (FUNCTION_SCALING_CONFIG, 0),
+    ),
+)
+
+PUT_FUNCTION_SCALING_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PFSCO,
+    {_sSI: _cPFSCRo, _smit: None},
+    (_FS,),
+    ((STATE, 0),),
+)
+
+PUT_FUNCTION_SCALING_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _PFSC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2025-11-30/functions/{FunctionName}/function-scaling-config",
+                "code": 202,
+            }
+        )
+    },
+    PUT_FUNCTION_SCALING_CONFIG_INPUT,
+    PUT_FUNCTION_SCALING_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+PUT_RUNTIME_MANAGEMENT_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PRMCI,
+    {_sSI: _cPRMCR, _sm: None},
+    (_FN, _Q, _URO, _RVA),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+        (UPDATE_RUNTIME_ON, 1),
+        (RUNTIME_VERSION_ARN, 0),
+    ),
+)
+
+PUT_RUNTIME_MANAGEMENT_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PRMCO,
+    {_sSI: _cPRMCRo, _smit: None},
+    (_URO, _FA, _RVA),
+    ((UPDATE_RUNTIME_ON, 1), (FUNCTION_ARN, 1), (RUNTIME_VERSION_ARN, 0)),
+)
+
+PUT_RUNTIME_MANAGEMENT_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _PRMC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2021-07-20/functions/{FunctionName}/runtime-management-config",
+                "code": 200,
+            }
+        )
+    },
+    PUT_RUNTIME_MANAGEMENT_CONFIG_INPUT,
+    PUT_RUNTIME_MANAGEMENT_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+UPDATE_FUNCTION_CODE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UFCI,
+    {_sSI: _cUFCR, _sm: None},
+    (_FN, _ZF, _SB, _SK, _SOV, _SOSM, _IU, _Arch, _Pu, _PTu, _DR, _RI, _SKMSKA),
+    (
+        (FUNCTION_NAME, 9),
+        (BLOB, 0),
+        (S3_BUCKET, 0),
+        (S3_KEY, 0),
+        (S3_OBJECT_VERSION, 0),
+        (S3_OBJECT_STORAGE_MODE, 0),
+        (STRING, 0),
+        (ARCHITECTURES_LIST, 0),
+        (BOOLEAN, {_s: False}),
+        (FUNCTION_VERSION_LATEST_PUBLISHED, 0),
+        (BOOLEAN, {_s: False}),
+        (STRING, 0),
+        (KMS_KEY_ARN, 0),
+    ),
+)
+
+UPDATE_FUNCTION_CODE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UFCO,
+    {_sSI: _cFC, _smit: None},
+    (
+        _FN,
+        _FA,
+        _Ru,
+        _Ro,
+        _H,
+        _CSod,
+        _D,
+        _Tim,
+        _MS,
+        _LM,
+        _CSode,
+        _V,
+        _VC,
+        _DLC,
+        _Env,
+        _KMSKA,
+        _TCr,
+        _MA,
+        _RI,
+        _La,
+        _Sta,
+        _SR,
+        _SRCt,
+        _LUS,
+        _LUSR,
+        _LUSRC,
+        _FSCi,
+        _SPVAi,
+        _SJA,
+        _PTa,
+        _ICR,
+        _Arch,
+        _ESp,
+        _SSn,
+        _RVC,
+        _LC,
+        _TCe,
+        _CPC,
+        _CSon,
+        _DC,
+    ),
+    (
+        (NAMESPACED_FUNCTION_NAME, 0),
+        (NAME_SPACED_FUNCTION_ARN, 0),
+        (RUNTIME, 0),
+        (ROLE_ARN, 0),
+        (HANDLER, 0),
+        (LONG, {_s: 0}),
+        (DESCRIPTION, 0),
+        (TIMEOUT, 0),
+        (MEMORY_SIZE, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (VERSION, 0),
+        (VPC_CONFIG_RESPONSE, 0),
+        (DEAD_LETTER_CONFIG, 0),
+        (ENVIRONMENT_RESPONSE, 0),
+        (KMS_KEY_ARN, 0),
+        (TRACING_CONFIG_RESPONSE, 0),
+        (FUNCTION_ARN, 0),
+        (STRING, 0),
+        (LAYERS_REFERENCE_LIST, 0),
+        (STATE, 0),
+        (STATE_REASON, 0),
+        (STATE_REASON_CODE, 0),
+        (LAST_UPDATE_STATUS, 0),
+        (LAST_UPDATE_STATUS_REASON, 0),
+        (LAST_UPDATE_STATUS_REASON_CODE, 0),
+        (FILE_SYSTEM_CONFIG_LIST, 0),
+        (ARN, 0),
+        (ARN, 0),
+        (PACKAGE_TYPE, 0),
+        (IMAGE_CONFIG_RESPONSE, 0),
+        (ARCHITECTURES_LIST, 0),
+        (EPHEMERAL_STORAGE, 0),
+        (SNAP_START_RESPONSE, 0),
+        (RUNTIME_VERSION_CONFIG, 0),
+        (LOGGING_CONFIG, 0),
+        (TENANCY_CONFIG, 0),
+        (CAPACITY_PROVIDER_CONFIG, 0),
+        (STRING, 0),
+        (DURABLE_CONFIG, 0),
+    ),
+)
+
+UPDATE_FUNCTION_CODE: StaticOperationSchema = (
+    23,
+    n0,
+    _UFC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2015-03-31/functions/{FunctionName}/code",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_FUNCTION_CODE_INPUT,
+    UPDATE_FUNCTION_CODE_OUTPUT,
+    (
+        CODE_SIGNING_CONFIG_NOT_FOUND_EXCEPTION,
+        CODE_STORAGE_EXCEEDED_EXCEPTION,
+        CODE_VERIFICATION_FAILED_EXCEPTION,
+        INVALID_CODE_SIGNATURE_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        PRECONDITION_FAILED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+UPDATE_FUNCTION_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UFCIp,
+    {_sSI: _cUFCRo, _sm: None},
+    (
+        _FN,
+        _Ro,
+        _H,
+        _D,
+        _Tim,
+        _MS,
+        _VC,
+        _Env,
+        _Ru,
+        _DLC,
+        _KMSKA,
+        _TCr,
+        _RI,
+        _La,
+        _FSCi,
+        _ICm,
+        _ESp,
+        _SSn,
+        _LC,
+        _CPC,
+        _DC,
+    ),
+    (
+        (FUNCTION_NAME, 9),
+        (ROLE_ARN, 0),
+        (HANDLER, 0),
+        (DESCRIPTION, 0),
+        (TIMEOUT, 0),
+        (MEMORY_SIZE, 0),
+        (VPC_CONFIG, 0),
+        (ENVIRONMENT, 0),
+        (RUNTIME, 0),
+        (DEAD_LETTER_CONFIG, 0),
+        (KMS_KEY_ARN, 0),
+        (TRACING_CONFIG, 0),
+        (STRING, 0),
+        (LAYER_LIST, 0),
+        (FILE_SYSTEM_CONFIG_LIST, 0),
+        (IMAGE_CONFIG, 0),
+        (EPHEMERAL_STORAGE, 0),
+        (SNAP_START, 0),
+        (LOGGING_CONFIG, 0),
+        (CAPACITY_PROVIDER_CONFIG, 0),
+        (DURABLE_CONFIG, 0),
+    ),
+)
+
+UPDATE_FUNCTION_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UFCOp,
+    {_sSI: _cFC, _smit: None},
+    (
+        _FN,
+        _FA,
+        _Ru,
+        _Ro,
+        _H,
+        _CSod,
+        _D,
+        _Tim,
+        _MS,
+        _LM,
+        _CSode,
+        _V,
+        _VC,
+        _DLC,
+        _Env,
+        _KMSKA,
+        _TCr,
+        _MA,
+        _RI,
+        _La,
+        _Sta,
+        _SR,
+        _SRCt,
+        _LUS,
+        _LUSR,
+        _LUSRC,
+        _FSCi,
+        _SPVAi,
+        _SJA,
+        _PTa,
+        _ICR,
+        _Arch,
+        _ESp,
+        _SSn,
+        _RVC,
+        _LC,
+        _TCe,
+        _CPC,
+        _CSon,
+        _DC,
+    ),
+    (
+        (NAMESPACED_FUNCTION_NAME, 0),
+        (NAME_SPACED_FUNCTION_ARN, 0),
+        (RUNTIME, 0),
+        (ROLE_ARN, 0),
+        (HANDLER, 0),
+        (LONG, {_s: 0}),
+        (DESCRIPTION, 0),
+        (TIMEOUT, 0),
+        (MEMORY_SIZE, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (VERSION, 0),
+        (VPC_CONFIG_RESPONSE, 0),
+        (DEAD_LETTER_CONFIG, 0),
+        (ENVIRONMENT_RESPONSE, 0),
+        (KMS_KEY_ARN, 0),
+        (TRACING_CONFIG_RESPONSE, 0),
+        (FUNCTION_ARN, 0),
+        (STRING, 0),
+        (LAYERS_REFERENCE_LIST, 0),
+        (STATE, 0),
+        (STATE_REASON, 0),
+        (STATE_REASON_CODE, 0),
+        (LAST_UPDATE_STATUS, 0),
+        (LAST_UPDATE_STATUS_REASON, 0),
+        (LAST_UPDATE_STATUS_REASON_CODE, 0),
+        (FILE_SYSTEM_CONFIG_LIST, 0),
+        (ARN, 0),
+        (ARN, 0),
+        (PACKAGE_TYPE, 0),
+        (IMAGE_CONFIG_RESPONSE, 0),
+        (ARCHITECTURES_LIST, 0),
+        (EPHEMERAL_STORAGE, 0),
+        (SNAP_START_RESPONSE, 0),
+        (RUNTIME_VERSION_CONFIG, 0),
+        (LOGGING_CONFIG, 0),
+        (TENANCY_CONFIG, 0),
+        (CAPACITY_PROVIDER_CONFIG, 0),
+        (STRING, 0),
+        (DURABLE_CONFIG, 0),
+    ),
+)
+
+UPDATE_FUNCTION_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _UFCp,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2015-03-31/functions/{FunctionName}/configuration",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_FUNCTION_CONFIGURATION_INPUT,
+    UPDATE_FUNCTION_CONFIGURATION_OUTPUT,
+    (
+        CODE_SIGNING_CONFIG_NOT_FOUND_EXCEPTION,
+        CODE_VERIFICATION_FAILED_EXCEPTION,
+        INVALID_CODE_SIGNATURE_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        PRECONDITION_FAILED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+UPDATE_FUNCTION_URL_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UFUCI,
+    {_sSI: _cUFUCR, _sm: None},
+    (_FN, _Q, _ATu, _Cor, _IM),
+    (
+        (FUNCTION_URL_FUNCTION_NAME, 9),
+        (FUNCTION_URL_QUALIFIER, {_sQ: _Q}),
+        (FUNCTION_URL_AUTH_TYPE, 0),
+        (CORS, 0),
+        (INVOKE_MODE, 0),
+    ),
+)
+
+UPDATE_FUNCTION_URL_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UFUCO,
+    {_sSI: _cUFUCRo, _smit: None},
+    (_FU, _FA, _ATu, _Cor, _CTr, _LMT, _IM),
+    (
+        (FUNCTION_URL, 1),
+        (FUNCTION_ARN, 1),
+        (FUNCTION_URL_AUTH_TYPE, 1),
+        (CORS, 0),
+        (TIMESTAMP, 1),
+        (TIMESTAMP, 1),
+        (INVOKE_MODE, 0),
+    ),
+)
+
+UPDATE_FUNCTION_URL_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _UFUC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2021-10-31/functions/{FunctionName}/url",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_FUNCTION_URL_CONFIG_INPUT,
+    UPDATE_FUNCTION_URL_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+CREATE_ALIAS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CAI,
+    {_sSI: _cCAR, _sm: None},
+    (_FN, _N, _FV, _D, _RC),
+    (
+        (FUNCTION_NAME, 9),
+        (ALIAS, 1),
+        (VERSION_WITH_LATEST_PUBLISHED, 1),
+        (DESCRIPTION, 0),
+        (ALIAS_ROUTING_CONFIGURATION, 0),
+    ),
+)
+
+CREATE_ALIAS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CAO,
+    {_sSI: _cAC, _smit: None},
+    (_AA, _N, _FV, _D, _RC, _RI),
+    (
+        (FUNCTION_ARN, 0),
+        (ALIAS, 0),
+        (VERSION, 0),
+        (DESCRIPTION, 0),
+        (ALIAS_ROUTING_CONFIGURATION, 0),
+        (STRING, 0),
+    ),
+)
+
+CREATE_ALIAS: StaticOperationSchema = (
+    23,
+    n0,
+    _CAr,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2015-03-31/functions/{FunctionName}/aliases",
+                "code": 201,
+            }
+        )
+    },
+    CREATE_ALIAS_INPUT,
+    CREATE_ALIAS_OUTPUT,
+    (
+        ALIAS_LIMIT_EXCEEDED_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+DELETE_ALIAS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DAI,
+    {_sSI: _cDAR, _sm: None},
+    (_FN, _N),
+    ((FUNCTION_NAME, 9), (ALIAS, 9)),
+)
+
+DELETE_ALIAS_OUTPUT: StaticSchema = (18, n0, _DAO, {_sSI: _sU, _smit: None})
+
+DELETE_ALIAS: StaticOperationSchema = (
+    23,
+    n0,
+    _DAe,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_ALIAS_INPUT,
+    DELETE_ALIAS_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_ALIAS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GAI,
+    {_sSI: _cGAR, _sm: None},
+    (_FN, _N),
+    ((FUNCTION_NAME, 9), (ALIAS, 9)),
+)
+
+GET_ALIAS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GAO,
+    {_sSI: _cAC, _smit: None},
+    (_AA, _N, _FV, _D, _RC, _RI),
+    (
+        (FUNCTION_ARN, 0),
+        (ALIAS, 0),
+        (VERSION, 0),
+        (DESCRIPTION, 0),
+        (ALIAS_ROUTING_CONFIGURATION, 0),
+        (STRING, 0),
+    ),
+)
+
+GET_ALIAS: StaticOperationSchema = (
+    23,
+    n0,
+    _GA,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
+                "code": 200,
+            }
+        )
+    },
+    GET_ALIAS_INPUT,
+    GET_ALIAS_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+LIST_ALIASES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LAI,
+    {_sSI: _cLAR, _sm: None},
+    (_FN, _FV, _Mar, _MI),
+    (
+        (FUNCTION_NAME, 9),
+        (VERSION_WITH_LATEST_PUBLISHED, {_sQ: _FV}),
+        (STRING, {_sQ: _Mar}),
+        (MAX_LIST_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+LIST_ALIASES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LAO,
+    {_sSI: _cLARo, _smit: None},
+    (_NM, _Ali),
+    ((STRING, 0), (ALIAS_LIST, 0)),
+)
+
+LIST_ALIASES: StaticOperationSchema = (
+    23,
+    n0,
+    _LA,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2015-03-31/functions/{FunctionName}/aliases",
+                "code": 200,
+            }
+        )
+    },
+    LIST_ALIASES_INPUT,
+    LIST_ALIASES_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+UPDATE_ALIAS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UAI,
+    {_sSI: _cUAR, _sm: None},
+    (_FN, _N, _FV, _D, _RC, _RI),
+    (
+        (FUNCTION_NAME, 9),
+        (ALIAS, 9),
+        (VERSION_WITH_LATEST_PUBLISHED, 0),
+        (DESCRIPTION, 0),
+        (ALIAS_ROUTING_CONFIGURATION, 0),
+        (STRING, 0),
+    ),
+)
+
+UPDATE_ALIAS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UAO,
+    {_sSI: _cAC, _smit: None},
+    (_AA, _N, _FV, _D, _RC, _RI),
+    (
+        (FUNCTION_ARN, 0),
+        (ALIAS, 0),
+        (VERSION, 0),
+        (DESCRIPTION, 0),
+        (ALIAS_ROUTING_CONFIGURATION, 0),
+        (STRING, 0),
+    ),
+)
+
+UPDATE_ALIAS: StaticOperationSchema = (
+    23,
+    n0,
+    _UA,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_ALIAS_INPUT,
+    UPDATE_ALIAS_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        PRECONDITION_FAILED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+LIST_VERSIONS_BY_FUNCTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LVBFI,
+    {_sSI: _cLVBFR, _sm: None},
+    (_FN, _Mar, _MI),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (STRING, {_sQ: _Mar}),
+        (MAX_LIST_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+LIST_VERSIONS_BY_FUNCTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LVBFO,
+    {_sSI: _cLVBFRo, _smit: None},
+    (_NM, _Ve),
+    ((STRING, 0), (FUNCTION_LIST, 0)),
+)
+
+LIST_VERSIONS_BY_FUNCTION: StaticOperationSchema = (
+    23,
+    n0,
+    _LVBF,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2015-03-31/functions/{FunctionName}/versions",
+                "code": 200,
+            }
+        )
+    },
+    LIST_VERSIONS_BY_FUNCTION_INPUT,
+    LIST_VERSIONS_BY_FUNCTION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+PUBLISH_VERSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PVI,
+    {_sSI: _cPVR, _sm: None},
+    (_FN, _CSode, _D, _RI, _PTu),
+    (
+        (FUNCTION_NAME, 9),
+        (STRING, 0),
+        (DESCRIPTION, 0),
+        (STRING, 0),
+        (FUNCTION_VERSION_LATEST_PUBLISHED, 0),
+    ),
+)
+
+PUBLISH_VERSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PVO,
+    {_sSI: _cFC, _smit: None},
+    (
+        _FN,
+        _FA,
+        _Ru,
+        _Ro,
+        _H,
+        _CSod,
+        _D,
+        _Tim,
+        _MS,
+        _LM,
+        _CSode,
+        _V,
+        _VC,
+        _DLC,
+        _Env,
+        _KMSKA,
+        _TCr,
+        _MA,
+        _RI,
+        _La,
+        _Sta,
+        _SR,
+        _SRCt,
+        _LUS,
+        _LUSR,
+        _LUSRC,
+        _FSCi,
+        _SPVAi,
+        _SJA,
+        _PTa,
+        _ICR,
+        _Arch,
+        _ESp,
+        _SSn,
+        _RVC,
+        _LC,
+        _TCe,
+        _CPC,
+        _CSon,
+        _DC,
+    ),
+    (
+        (NAMESPACED_FUNCTION_NAME, 0),
+        (NAME_SPACED_FUNCTION_ARN, 0),
+        (RUNTIME, 0),
+        (ROLE_ARN, 0),
+        (HANDLER, 0),
+        (LONG, {_s: 0}),
+        (DESCRIPTION, 0),
+        (TIMEOUT, 0),
+        (MEMORY_SIZE, 0),
+        (TIMESTAMP, 0),
+        (STRING, 0),
+        (VERSION, 0),
+        (VPC_CONFIG_RESPONSE, 0),
+        (DEAD_LETTER_CONFIG, 0),
+        (ENVIRONMENT_RESPONSE, 0),
+        (KMS_KEY_ARN, 0),
+        (TRACING_CONFIG_RESPONSE, 0),
+        (FUNCTION_ARN, 0),
+        (STRING, 0),
+        (LAYERS_REFERENCE_LIST, 0),
+        (STATE, 0),
+        (STATE_REASON, 0),
+        (STATE_REASON_CODE, 0),
+        (LAST_UPDATE_STATUS, 0),
+        (LAST_UPDATE_STATUS_REASON, 0),
+        (LAST_UPDATE_STATUS_REASON_CODE, 0),
+        (FILE_SYSTEM_CONFIG_LIST, 0),
+        (ARN, 0),
+        (ARN, 0),
+        (PACKAGE_TYPE, 0),
+        (IMAGE_CONFIG_RESPONSE, 0),
+        (ARCHITECTURES_LIST, 0),
+        (EPHEMERAL_STORAGE, 0),
+        (SNAP_START_RESPONSE, 0),
+        (RUNTIME_VERSION_CONFIG, 0),
+        (LOGGING_CONFIG, 0),
+        (TENANCY_CONFIG, 0),
+        (CAPACITY_PROVIDER_CONFIG, 0),
+        (STRING, 0),
+        (DURABLE_CONFIG, 0),
+    ),
+)
+
+PUBLISH_VERSION: StaticOperationSchema = (
+    23,
+    n0,
+    _PVu,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2015-03-31/functions/{FunctionName}/versions",
+                "code": 201,
+            }
+        )
+    },
+    PUBLISH_VERSION_INPUT,
+    PUBLISH_VERSION_OUTPUT,
+    (
+        CODE_STORAGE_EXCEEDED_EXCEPTION,
+        FUNCTION_VERSIONS_PER_CAPACITY_PROVIDER_LIMIT_EXCEEDED_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        PRECONDITION_FAILED_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_ACCOUNT_SETTINGS_INPUT: StaticSchema = (18, n0, _GASI, {_sSI: _cGASR, _sm: None})
+
+GET_ACCOUNT_SETTINGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GASO,
+    {_sSI: _cGASRo, _smit: None},
+    (_AL, _AU),
+    ((ACCOUNT_LIMIT, 0), (ACCOUNT_USAGE, 0)),
+)
+
+GET_ACCOUNT_SETTINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _GAS,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/2016-08-19/account-settings", "code": 200}
+        )
+    },
+    GET_ACCOUNT_SETTINGS_INPUT,
+    GET_ACCOUNT_SETTINGS_OUTPUT,
+    (SERVICE_EXCEPTION, TOO_MANY_REQUESTS_EXCEPTION),
+)
+
+GET_FUNCTION_EVENT_INVOKE_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFEICI,
+    {_sSI: _cGFEICR, _sm: None},
+    (_FN, _Q),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+    ),
+)
+
+MAXIMUM_EVENT_AGE_IN_SECONDS: StaticSchema = (7, n0, _MEAIS, 0)
+
+MAXIMUM_RETRY_ATTEMPTS: StaticSchema = (7, n0, _MRA, 0)
+
+GET_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFEICO,
+    {_sSI: _cFEIC, _smit: None},
+    (_LM, _FA, _MRA, _MEAIS, _DCe),
+    (
+        (DATE, 0),
+        (FUNCTION_ARN, 0),
+        (MAXIMUM_RETRY_ATTEMPTS, 0),
+        (MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (DESTINATION_CONFIG, 0),
+    ),
+)
+
+GET_FUNCTION_EVENT_INVOKE_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _GFEIC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
+                "code": 200,
+            }
+        )
+    },
+    GET_FUNCTION_EVENT_INVOKE_CONFIG_INPUT,
+    GET_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPI,
+    {_sSI: _cGRPR, _sm: None},
+    (_RAe,),
+    ((POLICY_RESOURCE_ARN, 9),),
+)
+
+RESOURCE_POLICY: StaticSchema = (3, n0, _RP, 0)
+
+GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPO,
+    {_sSI: _cGRPRo, _smit: None},
+    (_Po, _RI),
+    ((RESOURCE_POLICY, 0), (REVISION_ID, 0)),
+)
+
+GET_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GRP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2026-07-09/resource-policy/{ResourceArn}",
+                "code": 200,
+            }
+        )
+    },
+    GET_RESOURCE_POLICY_INPUT,
+    GET_RESOURCE_POLICY_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+MAX_LAYER_LIST_ITEMS: StaticSchema = (7, n0, _MLLI, 0)
+
+LIST_LAYERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LLI,
+    {_sSI: _cLLR, _sm: None},
+    (_CAo, _CR, _Mar, _MI),
+    (
+        (ARCHITECTURE, {_sQ: _CAo}),
+        (RUNTIME, {_sQ: _CR}),
+        (STRING, {_sQ: _Mar}),
+        (MAX_LAYER_LIST_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+COMPATIBLE_ARCHITECTURES: StaticSchema = (
+    16,
+    n0,
+    _CAom,
+    0,
+    (_me,),
+    ((ARCHITECTURE, 0),),
+)
+
+COMPATIBLE_RUNTIMES: StaticSchema = (16, n0, _CRo, 0, (_me,), ((RUNTIME, 0),))
+
+LICENSE_INFO: StaticSchema = (3, n0, _LI, 0)
+
+LAYER_VERSIONS_LIST_ITEM: StaticSchema = (
+    18,
+    n0,
+    _LVLI,
+    0,
+    (_LVA, _V, _D, _CDr, _CAom, _CRo, _LI),
+    (
+        (LAYER_VERSION_ARN, 0),
+        (LAYER_VERSION_NUMBER, {_s: 0}),
+        (DESCRIPTION, 0),
+        (TIMESTAMP, 0),
+        (COMPATIBLE_ARCHITECTURES, 0),
+        (COMPATIBLE_RUNTIMES, 0),
+        (LICENSE_INFO, 0),
+    ),
+)
+
+LAYER_ARN: StaticSchema = (3, n0, _LAa, 0)
+
+LAYERS_LIST_ITEM: StaticSchema = (
+    18,
+    n0,
+    _LLIa,
+    0,
+    (_LN, _LAa, _LMV),
+    ((LAYER_NAME, 0), (LAYER_ARN, 0), (LAYER_VERSIONS_LIST_ITEM, 0)),
+)
+
+LAYERS_LIST: StaticSchema = (16, n0, _LLa, 0, (_me,), ((LAYERS_LIST_ITEM, 0),))
+
+LIST_LAYERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LLO,
+    {_sSI: _cLLRo, _smit: None},
+    (_NM, _La),
+    ((STRING, 0), (LAYERS_LIST, 0)),
+)
+
+LIST_LAYERS: StaticOperationSchema = (
+    23,
+    n0,
+    _LLi,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/2018-10-31/layers", "code": 200}
+        )
+    },
+    LIST_LAYERS_INPUT,
+    LIST_LAYERS_OUTPUT,
+    (INVALID_PARAMETER_VALUE_EXCEPTION, SERVICE_EXCEPTION, TOO_MANY_REQUESTS_EXCEPTION),
+)
+
+DELETE_LAYER_VERSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DLVI,
+    {_sSI: _cDLVR, _sm: None},
+    (_LN, _VN),
+    ((LAYER_NAME, 9), (LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None})),
+)
+
+DELETE_LAYER_VERSION_OUTPUT: StaticSchema = (18, n0, _DLVO, {_sSI: _sU, _smit: None})
+
+DELETE_LAYER_VERSION: StaticOperationSchema = (
+    23,
+    n0,
+    _DLV,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_LAYER_VERSION_INPUT,
+    DELETE_LAYER_VERSION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_LAYER_VERSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GLVI,
+    {_sSI: _cGLVR, _sm: None},
+    (_LN, _VN),
+    ((LAYER_NAME, 9), (LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None})),
+)
+
+LAYER_VERSION_CONTENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LVCO,
+    0,
+    (_Lo, _CSode, _CSod, _SPVAi, _SJA, _RSO),
+    (
+        (SENSITIVE_STRING_ON_SERVER_ONLY, 0),
+        (STRING, 0),
+        (LONG, {_s: 0}),
+        (ARN, 0),
+        (ARN, 0),
+        (RESOLVED_S3_OBJECT, 0),
+    ),
+)
+
+GET_LAYER_VERSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GLVO,
+    {_sSI: _cGLVRo, _smit: None},
+    (_Cont, _LAa, _LVA, _D, _CDr, _V, _CAom, _CRo, _LI),
+    (
+        (LAYER_VERSION_CONTENT_OUTPUT, 0),
+        (LAYER_ARN, 0),
+        (LAYER_VERSION_ARN, 0),
+        (DESCRIPTION, 0),
+        (TIMESTAMP, 0),
+        (LAYER_VERSION_NUMBER, {_s: 0}),
+        (COMPATIBLE_ARCHITECTURES, 0),
+        (COMPATIBLE_RUNTIMES, 0),
+        (LICENSE_INFO, 0),
+    ),
+)
+
+GET_LAYER_VERSION: StaticOperationSchema = (
+    23,
+    n0,
+    _GLV,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}",
+                "code": 200,
+            }
+        )
+    },
+    GET_LAYER_VERSION_INPUT,
+    GET_LAYER_VERSION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_LAYER_VERSION_BY_ARN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GLVBAI,
+    {_sSI: _cGLVBAR, _sm: None},
+    (_Ar,),
+    ((LAYER_VERSION_ARN, {_sQ: _Ar, _smi: None}),),
+)
+
+GET_LAYER_VERSION_BY_ARN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GLVBAO,
+    {_sSI: _cGLVRo, _smit: None},
+    (_Cont, _LAa, _LVA, _D, _CDr, _V, _CAom, _CRo, _LI),
+    (
+        (LAYER_VERSION_CONTENT_OUTPUT, 0),
+        (LAYER_ARN, 0),
+        (LAYER_VERSION_ARN, 0),
+        (DESCRIPTION, 0),
+        (TIMESTAMP, 0),
+        (LAYER_VERSION_NUMBER, {_s: 0}),
+        (COMPATIBLE_ARCHITECTURES, 0),
+        (COMPATIBLE_RUNTIMES, 0),
+        (LICENSE_INFO, 0),
+    ),
+)
+
+GET_LAYER_VERSION_BY_ARN: StaticOperationSchema = (
+    23,
+    n0,
+    _GLVBA,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2018-10-31/layers?find=LayerVersion",
+                "code": 200,
+            }
+        )
+    },
+    GET_LAYER_VERSION_BY_ARN_INPUT,
+    GET_LAYER_VERSION_BY_ARN_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_LAYER_VERSION_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GLVPI,
+    {_sSI: _cGLVPR, _sm: None},
+    (_LN, _VN),
+    ((LAYER_NAME, 9), (LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None})),
+)
+
+GET_LAYER_VERSION_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GLVPO,
+    {_sSI: _cGLVPRo, _smit: None},
+    (_Po, _RI),
+    ((STRING, 0), (STRING, 0)),
+)
+
+GET_LAYER_VERSION_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GLVP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy",
+                "code": 200,
+            }
+        )
+    },
+    GET_LAYER_VERSION_POLICY_INPUT,
+    GET_LAYER_VERSION_POLICY_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+LIST_LAYER_VERSIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LLVI,
+    {_sSI: _cLLVR, _sm: None},
+    (_CAo, _CR, _LN, _Mar, _MI),
+    (
+        (ARCHITECTURE, {_sQ: _CAo}),
+        (RUNTIME, {_sQ: _CR}),
+        (LAYER_NAME, 9),
+        (STRING, {_sQ: _Mar}),
+        (MAX_LAYER_LIST_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+LAYER_VERSIONS_LIST: StaticSchema = (
+    16,
+    n0,
+    _LVL,
+    0,
+    (_me,),
+    ((LAYER_VERSIONS_LIST_ITEM, 0),),
+)
+
+LIST_LAYER_VERSIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LLVO,
+    {_sSI: _cLLVRo, _smit: None},
+    (_NM, _LV),
+    ((STRING, 0), (LAYER_VERSIONS_LIST, 0)),
+)
+
+LIST_LAYER_VERSIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LLV,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2018-10-31/layers/{LayerName}/versions",
+                "code": 200,
+            }
+        )
+    },
+    LIST_LAYER_VERSIONS_INPUT,
+    LIST_LAYER_VERSIONS_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+LAYER_VERSION_CONTENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LVCI,
+    0,
+    (_SB, _SK, _SOV, _SOSM, _ZF),
+    (
+        (S3_BUCKET, 0),
+        (S3_KEY, 0),
+        (S3_OBJECT_VERSION, 0),
+        (S3_OBJECT_STORAGE_MODE, 0),
+        (BLOB, 0),
+    ),
+)
+
+PUBLISH_LAYER_VERSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PLVI,
+    {_sSI: _cPLVR, _sm: None},
+    (_LN, _D, _Cont, _CAom, _CRo, _LI),
+    (
+        (LAYER_NAME, 9),
+        (DESCRIPTION, 0),
+        (LAYER_VERSION_CONTENT_INPUT, 1),
+        (COMPATIBLE_ARCHITECTURES, 0),
+        (COMPATIBLE_RUNTIMES, 0),
+        (LICENSE_INFO, 0),
+    ),
+)
+
+PUBLISH_LAYER_VERSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PLVO,
+    {_sSI: _cPLVRo, _smit: None},
+    (_Cont, _LAa, _LVA, _D, _CDr, _V, _CAom, _CRo, _LI),
+    (
+        (LAYER_VERSION_CONTENT_OUTPUT, 0),
+        (LAYER_ARN, 0),
+        (LAYER_VERSION_ARN, 0),
+        (DESCRIPTION, 0),
+        (TIMESTAMP, 0),
+        (LAYER_VERSION_NUMBER, {_s: 0}),
+        (COMPATIBLE_ARCHITECTURES, 0),
+        (COMPATIBLE_RUNTIMES, 0),
+        (LICENSE_INFO, 0),
+    ),
+)
+
+PUBLISH_LAYER_VERSION: StaticOperationSchema = (
+    23,
+    n0,
+    _PLV,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2018-10-31/layers/{LayerName}/versions",
+                "code": 201,
+            }
+        )
+    },
+    PUBLISH_LAYER_VERSION_INPUT,
+    PUBLISH_LAYER_VERSION_OUTPUT,
+    (
+        CODE_STORAGE_EXCEEDED_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+REMOVE_LAYER_VERSION_PERMISSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RLVPI,
+    {_sSI: _cRLVPR, _sm: None},
+    (_LN, _VN, _SI, _RI),
+    (
+        (LAYER_NAME, 9),
+        (LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
+        (STATEMENT_ID, 9),
+        (STRING, {_sQ: _RI}),
+    ),
+)
+
+REMOVE_LAYER_VERSION_PERMISSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RLVPO,
+    {_sSI: _sU, _smit: None},
+)
+
+REMOVE_LAYER_VERSION_PERMISSION: StaticOperationSchema = (
+    23,
+    n0,
+    _RLVP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy/{StatementId}",
+                "code": 204,
+            }
+        )
+    },
+    REMOVE_LAYER_VERSION_PERMISSION_INPUT,
+    REMOVE_LAYER_VERSION_PERMISSION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        PRECONDITION_FAILED_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+MAX_FUNCTION_EVENT_INVOKE_CONFIG_LIST_ITEMS: StaticSchema = (7, n0, _MFEICLI, 0)
+
+LIST_FUNCTION_EVENT_INVOKE_CONFIGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LFEICI,
+    {_sSI: _cLFEICR, _sm: None},
+    (_FN, _Mar, _MI),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (STRING, {_sQ: _Mar}),
+        (MAX_FUNCTION_EVENT_INVOKE_CONFIG_LIST_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+FUNCTION_EVENT_INVOKE_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _FEIC,
+    0,
+    (_LM, _FA, _MRA, _MEAIS, _DCe),
+    (
+        (DATE, 0),
+        (FUNCTION_ARN, 0),
+        (MAXIMUM_RETRY_ATTEMPTS, 0),
+        (MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (DESTINATION_CONFIG, 0),
+    ),
+)
+
+FUNCTION_EVENT_INVOKE_CONFIG_LIST: StaticSchema = (
+    16,
+    n0,
+    _FEICL,
+    0,
+    (_me,),
+    ((FUNCTION_EVENT_INVOKE_CONFIG, 0),),
+)
+
+LIST_FUNCTION_EVENT_INVOKE_CONFIGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LFEICO,
+    {_sSI: _cLFEICRo, _smit: None},
+    (_FEICu, _NM),
+    ((FUNCTION_EVENT_INVOKE_CONFIG_LIST, 0), (STRING, 0)),
+)
+
+LIST_FUNCTION_EVENT_INVOKE_CONFIGS: StaticOperationSchema = (
+    23,
+    n0,
+    _LFEIC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config/list",
+                "code": 200,
+            }
+        )
+    },
+    LIST_FUNCTION_EVENT_INVOKE_CONFIGS_INPUT,
+    LIST_FUNCTION_EVENT_INVOKE_CONFIGS_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+TAGGABLE_RESOURCE: StaticSchema = (3, n0, _TRa, 0)
+
+LIST_TAGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTI,
+    {_sSI: _cLTR, _sm: None},
+    (_Reso,),
+    ((TAGGABLE_RESOURCE, 9),),
+)
+
+LIST_TAGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTO,
+    {_sSI: _cLTRo, _smit: None},
+    (_Ta,),
+    ((TAGS, 0),),
+)
+
+LIST_TAGS: StaticOperationSchema = (
+    23,
+    n0,
+    _LTi,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/2017-03-31/tags/{Resource}", "code": 200}
+        )
+    },
+    LIST_TAGS_INPUT,
+    LIST_TAGS_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+NAMESPACED_STATEMENT_ID: StaticSchema = (3, n0, _NSI, 0)
+
+REMOVE_PERMISSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RPI,
+    {_sSI: _cRPR, _sm: None},
+    (_FN, _SI, _Q, _RI),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NAMESPACED_STATEMENT_ID, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+        (STRING, {_sQ: _RI}),
+    ),
+)
+
+REMOVE_PERMISSION_OUTPUT: StaticSchema = (18, n0, _RPO, {_sSI: _sU, _smit: None})
+
+REMOVE_PERMISSION: StaticOperationSchema = (
+    23,
+    n0,
+    _RPe,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2015-03-31/functions/{FunctionName}/policy/{StatementId}",
+                "code": 204,
+            }
+        )
+    },
+    REMOVE_PERMISSION_INPUT,
+    REMOVE_PERMISSION_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        PRECONDITION_FAILED_EXCEPTION,
+        PUBLIC_POLICY_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+QUALIFIER: StaticSchema = (3, n0, _Q, 0)
+
+DELETE_PROVISIONED_CONCURRENCY_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DPCCI,
+    {_sSI: _cDPCCR, _sm: None},
+    (_FN, _Q),
+    ((FUNCTION_NAME, 9), (QUALIFIER, {_sQ: _Q, _smi: None})),
+)
+
+DELETE_PROVISIONED_CONCURRENCY_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DPCCO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_PROVISIONED_CONCURRENCY_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _DPCC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
+                "code": 204,
+            }
+        )
+    },
+    DELETE_PROVISIONED_CONCURRENCY_CONFIG_INPUT,
+    DELETE_PROVISIONED_CONCURRENCY_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+GET_PROVISIONED_CONCURRENCY_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GPCCI,
+    {_sSI: _cGPCCR, _sm: None},
+    (_FN, _Q),
+    ((FUNCTION_NAME, 9), (QUALIFIER, {_sQ: _Q, _smi: None})),
+)
+
+GET_PROVISIONED_CONCURRENCY_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GPCCO,
+    {_sSI: _cGPCCRo, _smit: None},
+    (_RPCE, _APCE, _APCEl, _Stat, _SRt, _LM),
+    (
+        (POSITIVE_INTEGER, 0),
+        (NON_NEGATIVE_INTEGER, 0),
+        (NON_NEGATIVE_INTEGER, 0),
+        (PROVISIONED_CONCURRENCY_STATUS_ENUM, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+PROVISIONED_CONCURRENCY_CONFIG_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _PCCNFE,
+    {_smith: _c, _sE: 404},
+    (_T, _m),
+    ((STRING, 0), (STRING, 0)),
+)
+
+GET_PROVISIONED_CONCURRENCY_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _GPCC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
+                "code": 200,
+            }
+        )
+    },
+    GET_PROVISIONED_CONCURRENCY_CONFIG_INPUT,
+    GET_PROVISIONED_CONCURRENCY_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        PROVISIONED_CONCURRENCY_CONFIG_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+PUT_PROVISIONED_CONCURRENCY_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PPCCI,
+    {_sSI: _cPPCCR, _sm: None},
+    (_FN, _Q, _PCE),
+    ((FUNCTION_NAME, 9), (QUALIFIER, {_sQ: _Q, _smi: None}), (POSITIVE_INTEGER, 1)),
+)
+
+PUT_PROVISIONED_CONCURRENCY_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PPCCO,
+    {_sSI: _cPPCCRo, _smit: None},
+    (_RPCE, _APCEl, _APCE, _Stat, _SRt, _LM),
+    (
+        (POSITIVE_INTEGER, 0),
+        (NON_NEGATIVE_INTEGER, 0),
+        (NON_NEGATIVE_INTEGER, 0),
+        (PROVISIONED_CONCURRENCY_STATUS_ENUM, 0),
+        (STRING, 0),
+        (TIMESTAMP, 0),
+    ),
+)
+
+PUT_PROVISIONED_CONCURRENCY_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _PPCC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
+                "code": 202,
+            }
+        )
+    },
+    PUT_PROVISIONED_CONCURRENCY_CONFIG_INPUT,
+    PUT_PROVISIONED_CONCURRENCY_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+PUT_FUNCTION_EVENT_INVOKE_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PFEICI,
+    {_sSI: _cPFEICR, _sm: None},
+    (_FN, _Q, _MRA, _MEAIS, _DCe),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+        (MAXIMUM_RETRY_ATTEMPTS, 0),
+        (MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (DESTINATION_CONFIG, 0),
+    ),
+)
+
+PUT_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PFEICO,
+    {_sSI: _cFEIC, _smit: None},
+    (_LM, _FA, _MRA, _MEAIS, _DCe),
+    (
+        (DATE, 0),
+        (FUNCTION_ARN, 0),
+        (MAXIMUM_RETRY_ATTEMPTS, 0),
+        (MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (DESTINATION_CONFIG, 0),
+    ),
+)
+
+PUT_FUNCTION_EVENT_INVOKE_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _PFEIC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
+                "code": 200,
+            }
+        )
+    },
+    PUT_FUNCTION_EVENT_INVOKE_CONFIG_INPUT,
+    PUT_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+PUT_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PRPI,
+    {_sSI: _cPRPR, _sm: None},
+    (_RAe, _Po, _RI),
+    ((POLICY_RESOURCE_ARN, 9), (RESOURCE_POLICY, 1), (REVISION_ID, 0)),
+)
+
+PUT_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PRPO,
+    {_sSI: _cPRPRo, _smit: None},
+    (_Po, _RI),
+    ((RESOURCE_POLICY, 0), (REVISION_ID, 0)),
+)
+
+PUT_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _PRP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/2026-07-09/resource-policy/{ResourceArn}",
+                "code": 200,
+            }
+        )
+    },
+    PUT_RESOURCE_POLICY_INPUT,
+    PUT_RESOURCE_POLICY_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        POLICY_LENGTH_EXCEEDED_EXCEPTION,
+        PRECONDITION_FAILED_EXCEPTION,
+        PUBLIC_POLICY_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+CALLBACK_TIMEOUT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CTE,
+    {_smith: _c, _sE: 400},
+    (_T, _M),
+    ((STRING, 0), (STRING, 0)),
+)
+
+SEND_DURABLE_EXECUTION_CALLBACK_FAILURE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SDECFI,
+    {_sSI: _cSDECFR, _sm: None},
+    (_CIa, _E),
+    ((CALLBACK_ID, 9), (ERROR_OBJECT, 16)),
+)
+
+SEND_DURABLE_EXECUTION_CALLBACK_FAILURE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SDECFO,
+    {_sSI: _cSDECFRo, _smit: None},
+)
+
+SEND_DURABLE_EXECUTION_CALLBACK_FAILURE: StaticOperationSchema = (
+    23,
+    n0,
+    _SDECF,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2025-12-01/durable-execution-callbacks/{CallbackId}/fail",
+            }
+        )
+    },
+    SEND_DURABLE_EXECUTION_CALLBACK_FAILURE_INPUT,
+    SEND_DURABLE_EXECUTION_CALLBACK_FAILURE_OUTPUT,
+    (
+        CALLBACK_TIMEOUT_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SDECHI,
+    {_sSI: _cSDECHR, _sm: None},
+    (_CIa,),
+    ((CALLBACK_ID, 9),),
+)
+
+SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SDECHO,
+    {_sSI: _cSDECHRo, _smit: None},
+)
+
+SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT: StaticOperationSchema = (
+    23,
+    n0,
+    _SDECH,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2025-12-01/durable-execution-callbacks/{CallbackId}/heartbeat",
+            }
+        )
+    },
+    SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT_INPUT,
+    SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT_OUTPUT,
+    (
+        CALLBACK_TIMEOUT_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+BINARY_OPERATION_PAYLOAD: StaticSchema = (1, n0, _BOP, 4)
+
+SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SDECSI,
+    {_sSI: _cSDECSR, _sm: None},
+    (_CIa, _Re),
+    ((CALLBACK_ID, 9), (BINARY_OPERATION_PAYLOAD, 16)),
+)
+
+SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SDECSO,
+    {_sSI: _cSDECSRo, _smit: None},
+)
+
+SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS: StaticOperationSchema = (
+    23,
+    n0,
+    _SDECS,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2025-12-01/durable-execution-callbacks/{CallbackId}/succeed",
+            }
+        )
+    },
+    SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS_INPUT,
+    SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS_OUTPUT,
+    (
+        CALLBACK_TIMEOUT_EXCEPTION,
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        KMS_ACCESS_DENIED_EXCEPTION,
+        KMS_DISABLED_EXCEPTION,
+        KMS_INVALID_STATE_EXCEPTION,
+        KMS_NOT_FOUND_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+TAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TRI,
+    {_sSI: _cTRR, _sm: None},
+    (_Reso, _Ta),
+    ((TAGGABLE_RESOURCE, 9), (TAGS, 1)),
+)
+
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _sU, _smit: None})
+
+TAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _TRag,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/2017-03-31/tags/{Resource}", "code": 204}
+        )
+    },
+    TAG_RESOURCE_INPUT,
+    TAG_RESOURCE_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+TAG_KEY_LIST: StaticSchema = (16, n0, _TKL, 0, (_me,), ((TAG_KEY, {_sN: _K}),))
+
+UNTAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URIn,
+    {_sSI: _cURR, _sm: None},
+    (_Reso, _TKa),
+    ((TAGGABLE_RESOURCE, 9), (TAG_KEY_LIST, {_sQ: _tK, _smi: None})),
+)
+
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _UROn, {_sSI: _sU, _smit: None})
+
+UNTAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _UR,
+    {
+        _smithy: MappingProxyType(
+            {"method": "DELETE", "uri": "/2017-03-31/tags/{Resource}", "code": 204}
+        )
+    },
+    UNTAG_RESOURCE_INPUT,
+    UNTAG_RESOURCE_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+UPDATE_FUNCTION_EVENT_INVOKE_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UFEICI,
+    {_sSI: _cUFEICR, _sm: None},
+    (_FN, _Q, _MRA, _MEAIS, _DCe),
+    (
+        (NAMESPACED_FUNCTION_NAME, 9),
+        (NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+        (MAXIMUM_RETRY_ATTEMPTS, 0),
+        (MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (DESTINATION_CONFIG, 0),
+    ),
+)
+
+UPDATE_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UFEICO,
+    {_sSI: _cFEIC, _smit: None},
+    (_LM, _FA, _MRA, _MEAIS, _DCe),
+    (
+        (DATE, 0),
+        (FUNCTION_ARN, 0),
+        (MAXIMUM_RETRY_ATTEMPTS, 0),
+        (MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (DESTINATION_CONFIG, 0),
+    ),
+)
+
+UPDATE_FUNCTION_EVENT_INVOKE_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _UFEIC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_FUNCTION_EVENT_INVOKE_CONFIG_INPUT,
+    UPDATE_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT,
+    (
+        INVALID_PARAMETER_VALUE_EXCEPTION,
+        RESOURCE_CONFLICT_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_EXCEPTION,
+        TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+AWS_GIR_API_SERVICE: StaticSchema = (
+    21,
+    n0,
+    _AWSGAS,
+    {
+        _aw: MappingProxyType(
+            {
+                "sdkId": "Lambda",
+                "arnNamespace": "lambda",
+                "cloudFormationName": "Lambda",
+                "cloudTrailEventSource": "lambda.amazonaws.com",
+                "endpointPrefix": "lambda",
+            }
         ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+        _aws: MappingProxyType({"name": "lambda"}),
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
+                ),
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsFIPS",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://lambda-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://lambda-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://lambda.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://lambda.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 13,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://lambda-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://lambda-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://lambda.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://lambda.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 13,
+                "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "Lambda",
-                    "arnNamespace": "lambda",
-                    "cloudFormationName": "Lambda",
-                    "cloudTrailEventSource": "lambda.amazonaws.com",
-                    "endpointPrefix": "lambda",
-                }
-            ),
-        ),
-        Trait.new(id=ShapeID("aws.protocols#restJson1")),
-    ],
+        _aJ: None,
+    },
 )

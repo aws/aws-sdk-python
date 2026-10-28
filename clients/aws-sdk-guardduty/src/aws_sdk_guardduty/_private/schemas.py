@@ -2,16746 +2,11884 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
-
-
-STRING = Schema(
-    id=ShapeID("com.amazonaws.guardduty#String"), shape_type=ShapeType.STRING
-)
-
-DETECTOR_ID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DetectorId"), shape_type=ShapeType.STRING
-)
-
-ACCEPT_ADMINISTRATOR_INVITATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AcceptAdministratorInvitationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#AcceptAdministratorInvitationRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AdministratorId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="administratorId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "InvitationId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitationId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-ACCEPT_ADMINISTRATOR_INVITATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AcceptAdministratorInvitationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#AcceptAdministratorInvitationResponse",
-        )
-    ],
-)
-
-BAD_REQUEST_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#BadRequestException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={
-        "Message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="message")],
-        },
-        "Type": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
-        },
-    },
-)
-
-INTERNAL_SERVER_ERROR_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#InternalServerErrorException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-    ],
-    members={
-        "Message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="message")],
-        },
-        "Type": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
-        },
-    },
-)
-
-ACCEPT_ADMINISTRATOR_INVITATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#AcceptAdministratorInvitation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/administrator",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-ACCEPT_INVITATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AcceptInvitationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#AcceptInvitationRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "MasterId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="masterId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "InvitationId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitationId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-ACCEPT_INVITATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AcceptInvitationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#AcceptInvitationResponse",
-        )
-    ],
-)
-
-ACCEPT_INVITATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#AcceptInvitation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/detector/{DetectorId}/master", "code": 200}
-            ),
-        )
-    ],
-)
-
-BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Boolean"), shape_type=ShapeType.BOOLEAN
-)
-
-ACCESS_CONTROL_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AccessControlList"),
-    members={
-        "AllowsPublicReadAccess": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="allowsPublicReadAccess"
-                )
-            ],
-        },
-        "AllowsPublicWriteAccess": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="allowsPublicWriteAccess"
-                )
-            ],
-        },
-    },
-)
-
-ACCESS_DENIED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AccessDeniedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=403),
-    ],
-    members={
-        "Message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="message")],
-        },
-        "Type": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
-        },
-    },
-)
-
-ACCESS_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AccessKey"),
-    members={
-        "PrincipalId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="principalId")
-            ],
-        },
-        "UserName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="userName")],
-        },
-        "UserType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="userType")],
-        },
-    },
-)
-
-ACCESS_KEY_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AccessKeyDetails"),
-    members={
-        "AccessKeyId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accessKeyId")
-            ],
-        },
-        "PrincipalId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="principalId")
-            ],
-        },
-        "UserName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="userName")],
-        },
-        "UserType": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="userType")],
-        },
-    },
-)
-
-ACCOUNT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Account"),
-    members={
-        "Uid": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="account")],
-        },
-    },
-)
-
-ACCOUNT_ID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#AccountId"), shape_type=ShapeType.STRING
-)
-
-EMAIL = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Email"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-ACCOUNT_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AccountDetail"),
-    members={
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Email": {
-            "target": EMAIL,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="email"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-ACCOUNT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AccountDetails"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACCOUNT_DETAIL}},
-)
-
-INTEGER = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Integer"), shape_type=ShapeType.INTEGER
-)
-
-DATA_SOURCE_FREE_TRIAL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DataSourceFreeTrial"),
-    members={
-        "FreeTrialDaysRemaining": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="freeTrialDaysRemaining"
-                )
-            ],
-        }
-    },
-)
-
-KUBERNETES_DATA_SOURCE_FREE_TRIAL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesDataSourceFreeTrial"),
-    members={
-        "AuditLogs": {
-            "target": DATA_SOURCE_FREE_TRIAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="auditLogs")],
-        }
-    },
-)
-
-MALWARE_PROTECTION_DATA_SOURCE_FREE_TRIAL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionDataSourceFreeTrial"),
-    members={
-        "ScanEc2InstanceWithFindings": {
-            "target": DATA_SOURCE_FREE_TRIAL,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="scanEc2InstanceWithFindings",
-                )
-            ],
-        }
-    },
-)
-
-DATA_SOURCES_FREE_TRIAL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DataSourcesFreeTrial"),
-    members={
-        "CloudTrail": {
-            "target": DATA_SOURCE_FREE_TRIAL,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="cloudTrail")
-            ],
-        },
-        "DnsLogs": {
-            "target": DATA_SOURCE_FREE_TRIAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="dnsLogs")],
-        },
-        "FlowLogs": {
-            "target": DATA_SOURCE_FREE_TRIAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="flowLogs")],
-        },
-        "S3Logs": {
-            "target": DATA_SOURCE_FREE_TRIAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Logs")],
-        },
-        "Kubernetes": {
-            "target": KUBERNETES_DATA_SOURCE_FREE_TRIAL,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="kubernetes")
-            ],
-        },
-        "MalwareProtection": {
-            "target": MALWARE_PROTECTION_DATA_SOURCE_FREE_TRIAL,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="malwareProtection")
-            ],
-        },
-    },
-)
-
-FREE_TRIAL_FEATURE_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FreeTrialFeatureResult"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FLOW_LOGS": {"target": UNIT},
-        "CLOUD_TRAIL": {"target": UNIT},
-        "DNS_LOGS": {"target": UNIT},
-        "S3_DATA_EVENTS": {"target": UNIT},
-        "EKS_AUDIT_LOGS": {"target": UNIT},
-        "EBS_MALWARE_PROTECTION": {"target": UNIT},
-        "RDS_LOGIN_EVENTS": {"target": UNIT},
-        "LAMBDA_NETWORK_LOGS": {"target": UNIT},
-        "EKS_RUNTIME_MONITORING": {"target": UNIT},
-        "EC2_RUNTIME_MONITORING": {"target": UNIT},
-        "FARGATE_RUNTIME_MONITORING": {"target": UNIT},
-        "AI_PROTECTION": {"target": UNIT},
-    },
-)
-
-FREE_TRIAL_FEATURE_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FreeTrialFeatureConfigurationResult"),
-    members={
-        "Name": {
-            "target": FREE_TRIAL_FEATURE_RESULT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "FreeTrialDaysRemaining": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="freeTrialDaysRemaining"
-                )
-            ],
-        },
-    },
-)
-
-FREE_TRIAL_FEATURE_CONFIGURATIONS_RESULTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FreeTrialFeatureConfigurationsResults"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FREE_TRIAL_FEATURE_CONFIGURATION_RESULT}},
-)
-
-ACCOUNT_FREE_TRIAL_INFO = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AccountFreeTrialInfo"),
-    members={
-        "AccountId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "DataSources": {
-            "target": DATA_SOURCES_FREE_TRIAL,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
-            ],
-        },
-        "Features": {
-            "target": FREE_TRIAL_FEATURE_CONFIGURATIONS_RESULTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="features")],
-        },
-    },
-)
-
-ACCOUNT_FREE_TRIAL_INFOS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AccountFreeTrialInfos"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACCOUNT_FREE_TRIAL_INFO}},
-)
-
-ACCOUNT_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AccountIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACCOUNT_ID}},
-)
-
-BLOCK_PUBLIC_ACCESS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#BlockPublicAccess"),
-    members={
-        "IgnorePublicAcls": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ignorePublicAcls")
-            ],
-        },
-        "RestrictPublicBuckets": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="restrictPublicBuckets"
-                )
-            ],
-        },
-        "BlockPublicAcls": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="blockPublicAcls")
-            ],
-        },
-        "BlockPublicPolicy": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="blockPublicPolicy")
-            ],
-        },
-    },
-)
-
-ACCOUNT_LEVEL_PERMISSIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AccountLevelPermissions"),
-    members={
-        "BlockPublicAccess": {
-            "target": BLOCK_PUBLIC_ACCESS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="blockPublicAccess")
-            ],
-        }
-    },
-)
-
-TIMESTAMP = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Timestamp"), shape_type=ShapeType.TIMESTAMP
-)
-
-ACCOUNT_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AccountStatistics"),
-    members={
-        "AccountId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "LastGeneratedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lastGeneratedAt")
-            ],
-        },
-        "TotalFindings": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="totalFindings")
-            ],
-        },
-    },
-)
-
-AFFECTED_RESOURCES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AffectedResources"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": STRING}},
-)
-
-DOMAIN_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DomainDetails"),
-    members={
-        "Domain": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="domain")],
-        }
-    },
-)
-
-REMOTE_ACCOUNT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RemoteAccountDetails"),
-    members={
-        "AccountId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "Affiliated": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="affiliated")
-            ],
-        },
-        "AwsServiceName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="awsServiceName")
-            ],
-        },
-    },
-)
-
-CITY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#City"),
-    members={
-        "CityName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="cityName")],
-        }
-    },
-)
-
-COUNTRY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Country"),
-    members={
-        "CountryCode": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="countryCode")
-            ],
-        },
-        "CountryName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="countryName")
-            ],
-        },
-    },
-)
-
-DOUBLE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Double"), shape_type=ShapeType.DOUBLE
-)
-
-GEO_LOCATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GeoLocation"),
-    members={
-        "Lat": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="lat")],
-        },
-        "Lon": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="lon")],
-        },
-    },
-)
-
-SENSITIVE_STRING = Schema(
-    id=ShapeID("com.amazonaws.guardduty#SensitiveString"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-ORGANIZATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Organization"),
-    members={
-        "Asn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="asn")],
-        },
-        "AsnOrg": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="asnOrg")],
-        },
-        "Isp": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="isp")],
-        },
-        "Org": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="org")],
-        },
-    },
-)
-
-REMOTE_IP_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RemoteIpDetails"),
-    members={
-        "City": {
-            "target": CITY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="city")],
-        },
-        "Country": {
-            "target": COUNTRY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="country")],
-        },
-        "GeoLocation": {
-            "target": GEO_LOCATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="geoLocation")
-            ],
-        },
-        "IpAddressV4": {
-            "target": SENSITIVE_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ipAddressV4")
-            ],
-        },
-        "IpAddressV6": {
-            "target": SENSITIVE_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ipAddressV6")
-            ],
-        },
-        "Organization": {
-            "target": ORGANIZATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="organization")
-            ],
-        },
-    },
-)
-
-AWS_API_CALL_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AwsApiCallAction"),
-    members={
-        "Api": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="api")],
-        },
-        "CallerType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="callerType")
-            ],
-        },
-        "DomainDetails": {
-            "target": DOMAIN_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="domainDetails")
-            ],
-        },
-        "ErrorCode": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="errorCode")],
-        },
-        "UserAgent": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="userAgent")],
-        },
-        "RemoteIpDetails": {
-            "target": REMOTE_IP_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="remoteIpDetails")
-            ],
-        },
-        "ServiceName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="serviceName")
-            ],
-        },
-        "RemoteAccountDetails": {
-            "target": REMOTE_ACCOUNT_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="remoteAccountDetails"
-                )
-            ],
-        },
-        "AffectedResources": {
-            "target": AFFECTED_RESOURCES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="affectedResources")
-            ],
-        },
-    },
-)
-
-DNS_REQUEST_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DnsRequestAction"),
-    members={
-        "Domain": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="domain")],
-        },
-        "Protocol": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="protocol")],
-        },
-        "Blocked": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="blocked")],
-        },
-        "DomainWithSuffix": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="domainWithSuffix")
-            ],
-        },
-        "VpcOwnerAccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="vpcOwnerAccountId")
-            ],
-        },
-    },
-)
-
-SOURCE_IPS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#SourceIps"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-KUBERNETES_API_CALL_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesApiCallAction"),
-    members={
-        "RequestUri": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="requestUri")
-            ],
-        },
-        "Verb": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="verb")],
-        },
-        "Resource": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="resource")],
-        },
-        "Subresource": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="subresource")
-            ],
-        },
-        "Namespace": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="namespace")],
-        },
-        "ResourceName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceName")
-            ],
-        },
-        "SourceIps": {
-            "target": SOURCE_IPS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="sourceIPs")],
-        },
-        "UserAgent": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="userAgent")],
-        },
-        "RemoteIpDetails": {
-            "target": REMOTE_IP_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="remoteIpDetails")
-            ],
-        },
-        "StatusCode": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="statusCode")
-            ],
-        },
-        "Parameters": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="parameters")
-            ],
-        },
-    },
-)
-
-KUBERNETES_PERMISSION_CHECKED_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesPermissionCheckedDetails"),
-    members={
-        "Verb": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="verb")],
-        },
-        "Resource": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="resource")],
-        },
-        "Namespace": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="namespace")],
-        },
-        "Allowed": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="allowed")],
-        },
-    },
-)
-
-KUBERNETES_ROLE_BINDING_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesRoleBindingDetails"),
-    members={
-        "Kind": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="kind")],
-        },
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Uid": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid")],
-        },
-        "RoleRefName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="roleRefName")
-            ],
-        },
-        "RoleRefKind": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="roleRefKind")
-            ],
-        },
-    },
-)
-
-KUBERNETES_ROLE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesRoleDetails"),
-    members={
-        "Kind": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="kind")],
-        },
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Uid": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid")],
-        },
-    },
-)
-
-LOCAL_IP_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#LocalIpDetails"),
-    members={
-        "IpAddressV4": {
-            "target": SENSITIVE_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ipAddressV4")
-            ],
-        },
-        "IpAddressV6": {
-            "target": SENSITIVE_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ipAddressV6")
-            ],
-        },
-    },
-)
-
-LOCAL_PORT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#LocalPortDetails"),
-    members={
-        "Port": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="port")],
-        },
-        "PortName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="portName")],
-        },
-    },
-)
-
-REMOTE_PORT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RemotePortDetails"),
-    members={
-        "Port": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="port")],
-        },
-        "PortName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="portName")],
-        },
-    },
-)
-
-NETWORK_CONNECTION_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#NetworkConnectionAction"),
-    members={
-        "Blocked": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="blocked")],
-        },
-        "ConnectionDirection": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="connectionDirection"
-                )
-            ],
-        },
-        "LocalPortDetails": {
-            "target": LOCAL_PORT_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="localPortDetails")
-            ],
-        },
-        "Protocol": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="protocol")],
-        },
-        "LocalIpDetails": {
-            "target": LOCAL_IP_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="localIpDetails")
-            ],
-        },
-        "LocalNetworkInterface": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="localNetworkInterface"
-                )
-            ],
-        },
-        "RemoteIpDetails": {
-            "target": REMOTE_IP_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="remoteIpDetails")
-            ],
-        },
-        "RemotePortDetails": {
-            "target": REMOTE_PORT_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="remotePortDetails")
-            ],
-        },
-    },
-)
-
-PORT_PROBE_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PortProbeDetail"),
-    members={
-        "LocalPortDetails": {
-            "target": LOCAL_PORT_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="localPortDetails")
-            ],
-        },
-        "LocalIpDetails": {
-            "target": LOCAL_IP_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="localIpDetails")
-            ],
-        },
-        "RemoteIpDetails": {
-            "target": REMOTE_IP_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="remoteIpDetails")
-            ],
-        },
-    },
-)
-
-PORT_PROBE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PortProbeDetails"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PORT_PROBE_DETAIL}},
-)
-
-PORT_PROBE_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PortProbeAction"),
-    members={
-        "Blocked": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="blocked")],
-        },
-        "PortProbeDetails": {
-            "target": PORT_PROBE_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="portProbeDetails")
-            ],
-        },
-    },
-)
-
-LOGIN_ATTRIBUTE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#LoginAttribute"),
-    members={
-        "User": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="user")],
-        },
-        "Application": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="application")
-            ],
-        },
-        "FailedLoginAttempts": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="failedLoginAttempts"
-                )
-            ],
-        },
-        "SuccessfulLoginAttempts": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="successfulLoginAttempts"
-                )
-            ],
-        },
-    },
-)
-
-LOGIN_ATTRIBUTES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#LoginAttributes"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LOGIN_ATTRIBUTE}},
-)
-
-RDS_LOGIN_ATTEMPT_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RdsLoginAttemptAction"),
-    members={
-        "RemoteIpDetails": {
-            "target": REMOTE_IP_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="remoteIpDetails")
-            ],
-        },
-        "LoginAttributes": {"target": LOGIN_ATTRIBUTES},
-    },
-)
-
-ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Action"),
-    members={
-        "ActionType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="actionType")
-            ],
-        },
-        "AwsApiCallAction": {
-            "target": AWS_API_CALL_ACTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="awsApiCallAction")
-            ],
-        },
-        "DnsRequestAction": {
-            "target": DNS_REQUEST_ACTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dnsRequestAction")
-            ],
-        },
-        "NetworkConnectionAction": {
-            "target": NETWORK_CONNECTION_ACTION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="networkConnectionAction"
-                )
-            ],
-        },
-        "PortProbeAction": {
-            "target": PORT_PROBE_ACTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="portProbeAction")
-            ],
-        },
-        "KubernetesApiCallAction": {
-            "target": KUBERNETES_API_CALL_ACTION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="kubernetesApiCallAction"
-                )
-            ],
-        },
-        "KubernetesPermissionCheckedDetails": {
-            "target": KUBERNETES_PERMISSION_CHECKED_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="kubernetesPermissionCheckedDetails",
-                )
-            ],
-        },
-        "KubernetesRoleBindingDetails": {
-            "target": KUBERNETES_ROLE_BINDING_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="kubernetesRoleBindingDetails",
-                )
-            ],
-        },
-        "KubernetesRoleDetails": {
-            "target": KUBERNETES_ROLE_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="kubernetesRoleDetails"
-                )
-            ],
-        },
-        "RdsLoginAttemptAction": {
-            "target": RDS_LOGIN_ATTEMPT_ACTION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="rdsLoginAttemptAction"
-                )
-            ],
-        },
-    },
-)
-
-API_CALL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ApiCall"),
-    members={
-        "Operation": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="operation")],
-        },
-        "Service": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="service")],
-        },
-        "Error": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="error")],
-        },
-        "UserAgent": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="userAgent")],
-        },
-    },
-)
-
-ACTIVITY_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ActivityType"),
-    shape_type=ShapeType.ENUM,
-    members={"API_CALL": {"target": UNIT}},
-)
-
-ACTIVITY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Activity"),
-    members={
-        "Type": {
-            "target": ACTIVITY_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="type"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Api": {
-            "target": API_CALL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="api")],
-        },
-    },
-)
-
-ACTIVITIES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Activities"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACTIVITY}},
-)
-
-PROCESS_NAME = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ProcessName"), shape_type=ShapeType.STRING
-)
-
-PROCESS_PATH = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ProcessPath"), shape_type=ShapeType.STRING
-)
-
-PROCESS_SHA256 = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ProcessSha256"), shape_type=ShapeType.STRING
-)
-
-ACTOR_PROCESS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ActorProcess"),
-    members={
-        "Name": {
-            "target": PROCESS_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Path": {
-            "target": PROCESS_PATH,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="path"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Sha256": {
-            "target": PROCESS_SHA256,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="sha256")],
-        },
-    },
-)
-
-MFA_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MfaStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-SESSION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Session"),
-    members={
-        "Uid": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid")],
-        },
-        "MfaStatus": {
-            "target": MFA_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="mfaStatus")],
-        },
-        "CreatedTime": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdTime")
-            ],
-        },
-        "Issuer": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="issuer")],
-        },
-    },
-)
-
-USER = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#User"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Uid": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Type": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="type"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "CredentialUid": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="credentialUid")
-            ],
-        },
-        "Account": {
-            "target": ACCOUNT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="account")],
-        },
-    },
-)
-
-ACTOR = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Actor"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="id"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "User": {
-            "target": USER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="user")],
-        },
-        "Session": {
-            "target": SESSION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="session")],
-        },
-        "Process": {
-            "target": ACTOR_PROCESS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="process")],
-        },
-    },
-)
-
-ACTOR_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ActorIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-ACTORS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Actors"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACTOR}},
-)
-
-NON_EMPTY_STRING = Schema(
-    id=ShapeID("com.amazonaws.guardduty#NonEmptyString"), shape_type=ShapeType.STRING
-)
-
-ADDITIONAL_INFO = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AdditionalInfo"),
-    members={
-        "VersionId": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="versionId")],
-        },
-        "DeviceName": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="deviceName")
-            ],
-        },
-    },
-)
-
-FINDING_TYPE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FindingType"), shape_type=ShapeType.STRING
-)
-
-ADDITIONAL_SEQUENCE_TYPES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AdditionalSequenceTypes"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FINDING_TYPE}},
-)
-
-ADDON_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AddonDetails"),
-    members={
-        "AddonVersion": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="addonVersion")
-            ],
-        },
-        "AddonStatus": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="addonStatus")
-            ],
-        },
-    },
-)
-
-ADMIN_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AdminStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLE_IN_PROGRESS": {"target": UNIT}},
-)
-
-ADMIN_ACCOUNT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AdminAccount"),
-    members={
-        "AdminAccountId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="adminAccountId")
-            ],
-        },
-        "AdminStatus": {
-            "target": ADMIN_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="adminStatus")
-            ],
-        },
-    },
-)
-
-ADMIN_ACCOUNTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AdminAccounts"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ADMIN_ACCOUNT}},
-)
-
-ADMINISTRATOR = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Administrator"),
-    members={
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "InvitationId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitationId")
-            ],
-        },
-        "RelationshipStatus": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="relationshipStatus")
-            ],
-        },
-        "InvitedAt": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitedAt")],
-        },
-    },
-)
-
-AGENT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AgentDetails"),
-    members={
-        "Version": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="version")],
-        }
-    },
-)
-
-LONG = Schema(id=ShapeID("com.amazonaws.guardduty#Long"), shape_type=ShapeType.LONG)
-
-OBSERVATION_NUMBERS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ObservationNumbers"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LONG}},
-)
-
-OBSERVATION_TEXTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ObservationTexts"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-OBSERVATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Observations"),
-    members={
-        "Text": {
-            "target": OBSERVATION_TEXTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="text")],
-        },
-        "Number": {
-            "target": OBSERVATION_NUMBERS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="number")],
-        },
-    },
-)
-
-PROFILE_SUBTYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ProfileSubtype"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FREQUENT": {"target": UNIT},
-        "INFREQUENT": {"target": UNIT},
-        "UNSEEN": {"target": UNIT},
-        "RARE": {"target": UNIT},
-        "COUNT": {"target": UNIT},
-        "AVERAGE": {"target": UNIT},
-    },
-)
-
-PROFILE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ProfileType"),
-    shape_type=ShapeType.ENUM,
-    members={"FREQUENCY": {"target": UNIT}, "VOLUME": {"target": UNIT}},
-)
-
-ANOMALY_OBJECT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AnomalyObject"),
-    members={
-        "ProfileType": {
-            "target": PROFILE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="profileType")
-            ],
-        },
-        "ProfileSubtype": {
-            "target": PROFILE_SUBTYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="profileSubtype")
-            ],
-        },
-        "Observations": {
-            "target": OBSERVATIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="observations")
-            ],
-        },
-    },
-)
-
-ANOMALY_PROFILE_FEATURE_OBJECTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AnomalyProfileFeatureObjects"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ANOMALY_OBJECT}},
-)
-
-ANOMALY_PROFILE_FEATURES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AnomalyProfileFeatures"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": STRING},
-        "value": {"target": ANOMALY_PROFILE_FEATURE_OBJECTS},
-    },
-)
-
-ANOMALY_PROFILES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AnomalyProfiles"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": ANOMALY_PROFILE_FEATURES}},
-)
-
-ANOMALY_UNUSUAL_BEHAVIOR_FEATURE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AnomalyUnusualBehaviorFeature"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": ANOMALY_OBJECT}},
-)
-
-BEHAVIOR = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Behavior"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": STRING},
-        "value": {"target": ANOMALY_UNUSUAL_BEHAVIOR_FEATURE},
-    },
-)
-
-ANOMALY_UNUSUAL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AnomalyUnusual"),
-    members={
-        "Behavior": {
-            "target": BEHAVIOR,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="behavior")],
-        }
-    },
-)
-
-ANOMALY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Anomaly"),
-    members={
-        "Profiles": {
-            "target": ANOMALY_PROFILES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="profiles")],
-        },
-        "Unusual": {
-            "target": ANOMALY_UNUSUAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="unusual")],
-        },
-    },
-)
-
-FINDING_ID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FindingId"), shape_type=ShapeType.STRING
-)
-
-FINDING_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FindingIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FINDING_ID}},
-)
-
-ARCHIVE_FINDINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ArchiveFindingsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ArchiveFindingsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FindingIds": {
-            "target": FINDING_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-ARCHIVE_FINDINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ArchiveFindingsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ArchiveFindingsResponse",
-        )
-    ],
-)
-
-ARCHIVE_FINDINGS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ArchiveFindings"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/findings/archive",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DETECTION_RULE_ARN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleArn"), shape_type=ShapeType.STRING
-)
-
-ASSOCIATION_ID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#AssociationId"), shape_type=ShapeType.STRING
-)
-
-ASSOCIATION_MODE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AssociationMode"),
-    shape_type=ShapeType.ENUM,
-    members={"LIVE": {"target": UNIT}, "DRY_RUN": {"target": UNIT}},
-)
-
-RULE_ID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#RuleId"), shape_type=ShapeType.STRING
-)
-
-ASSOCIATION_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AssociationDetail"),
-    members={
-        "AssociationId": {
-            "target": ASSOCIATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="associationId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Arn": {
-            "target": DETECTION_RULE_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Mode": {
-            "target": ASSOCIATION_MODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ExpiresAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="expiresAt")],
-        },
-    },
-)
-
-ASSOCIATION_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AssociationSummary"),
-    members={
-        "AssociationId": {
-            "target": ASSOCIATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="associationId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Arn": {
-            "target": DETECTION_RULE_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Mode": {
-            "target": ASSOCIATION_MODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ExpiresAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="expiresAt")],
-        },
-    },
-)
-
-ASSOCIATION_SUMMARY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AssociationSummaryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ASSOCIATION_SUMMARY}},
-)
-
-AUTO_ENABLE_MEMBERS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AutoEnableMembers"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "NEW": {"target": UNIT},
-        "ALL": {"target": UNIT},
-        "NONE": {"target": UNIT},
-    },
-)
-
-AUTONOMOUS_SYSTEM = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AutonomousSystem"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Number": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="number"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-EC2_INSTANCE_UID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Ec2InstanceUid"), shape_type=ShapeType.STRING
-)
-
-EC2_INSTANCE_UIDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Ec2InstanceUids"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": EC2_INSTANCE_UID}},
-)
-
-AUTOSCALING_AUTO_SCALING_GROUP = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#AutoscalingAutoScalingGroup"),
-    members={
-        "Ec2InstanceUids": {
-            "target": EC2_INSTANCE_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2InstanceUids")
-            ],
-        }
-    },
-)
-
-BEDROCK_GUARDRAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#BedrockGuardrail"),
-    members={
-        "Arn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn")],
-        },
-        "Version": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="version")],
-        },
-    },
-)
-
-CONTENT_POLICY_FILTER_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ContentPolicyFilterAction"),
-    shape_type=ShapeType.ENUM,
-    members={"BLOCKED": {"target": UNIT}, "NONE": {"target": UNIT}},
-)
-
-CONFIDENCE_LEVEL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ConfidenceLevel"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "HIGH": {"target": UNIT},
-        "MEDIUM": {"target": UNIT},
-        "LOW": {"target": UNIT},
-        "NONE": {"target": UNIT},
-    },
-)
-
-CONTENT_POLICY_FILTER_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ContentPolicyFilterType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "PROMPT_ATTACK": {"target": UNIT},
-        "JAILBREAK": {"target": UNIT},
-        "HATE": {"target": UNIT},
-        "INSULTS": {"target": UNIT},
-        "SEXUAL": {"target": UNIT},
-        "VIOLENCE": {"target": UNIT},
-        "MISCONDUCT": {"target": UNIT},
-    },
-)
-
-CONTENT_POLICY_FILTER = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ContentPolicyFilter"),
-    members={
-        "Type": {
-            "target": CONTENT_POLICY_FILTER_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
-        },
-        "Confidence": {
-            "target": CONFIDENCE_LEVEL,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="confidence")
-            ],
-        },
-        "Action": {
-            "target": CONTENT_POLICY_FILTER_ACTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="action")],
-        },
-    },
-)
-
-CONTENT_POLICY_FILTERS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ContentPolicyFilters"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CONTENT_POLICY_FILTER}},
-)
-
-GUARDRAIL_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GuardrailAction"),
-    shape_type=ShapeType.ENUM,
-    members={"GUARDRAIL_INTERVENED": {"target": UNIT}, "NONE": {"target": UNIT}},
-)
-
-BEDROCK_GUARDRAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#BedrockGuardrails"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": BEDROCK_GUARDRAIL}},
-)
-
-GUARDRAIL_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GuardrailSource"),
-    shape_type=ShapeType.ENUM,
-    members={"INPUT": {"target": UNIT}, "OUTPUT": {"target": UNIT}},
-)
-
-BEDROCK_GUARDRAIL_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#BedrockGuardrailDetails"),
-    members={
-        "GuardrailArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailArn")
-            ],
-        },
-        "GuardrailVersion": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailVersion")
-            ],
-        },
-        "Guardrails": {
-            "target": BEDROCK_GUARDRAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrails")
-            ],
-        },
-        "GuardrailAction": {
-            "target": GUARDRAIL_ACTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailAction")
-            ],
-        },
-        "GuardrailSource": {
-            "target": GUARDRAIL_SOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailSource")
-            ],
-        },
-        "ContentPolicyFilters": {
-            "target": CONTENT_POLICY_FILTERS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="contentPolicyFilters"
-                )
-            ],
-        },
-    },
-)
-
-BEDROCK_GUARDRAIL_RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#BedrockGuardrailResource"),
-    members={
-        "Version": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="version")],
-        },
-        "GuardrailAction": {
-            "target": GUARDRAIL_ACTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailAction")
-            ],
-        },
-        "GuardrailSource": {
-            "target": GUARDRAIL_SOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardrailSource")
-            ],
-        },
-    },
-)
-
-BUCKET_POLICY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#BucketPolicy"),
-    members={
-        "AllowsPublicReadAccess": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="allowsPublicReadAccess"
-                )
-            ],
-        },
-        "AllowsPublicWriteAccess": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="allowsPublicWriteAccess"
-                )
-            ],
-        },
-    },
-)
-
-BUCKET_LEVEL_PERMISSIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#BucketLevelPermissions"),
-    members={
-        "AccessControlList": {
-            "target": ACCESS_CONTROL_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accessControlList")
-            ],
-        },
-        "BucketPolicy": {
-            "target": BUCKET_POLICY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="bucketPolicy")
-            ],
-        },
-        "BlockPublicAccess": {
-            "target": BLOCK_PUBLIC_ACCESS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="blockPublicAccess")
-            ],
-        },
-    },
-)
-
-CLIENT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ClientToken"), shape_type=ShapeType.STRING
-)
-
-CLOUD_PROVIDER = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CloudProvider"),
-    shape_type=ShapeType.ENUM,
-    members={"AWS": {"target": UNIT}},
-)
-
-CLOUD_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CloudDetails"),
-    members={
-        "Provider": {
-            "target": CLOUD_PROVIDER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="provider"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Region": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="region"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Account": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="account"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-CLOUDFORMATION_STACK = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CloudformationStack"),
-    members={
-        "Ec2InstanceUids": {
-            "target": EC2_INSTANCE_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2InstanceUids")
-            ],
-        }
-    },
-)
-
-DATA_SOURCE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DataSourceStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-CLOUD_TRAIL_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CloudTrailConfigurationResult"),
-    members={
-        "Status": {
-            "target": DATA_SOURCE_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-CLUSTER_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ClusterStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CREATING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "UPDATING": {"target": UNIT},
-        "PENDING": {"target": UNIT},
-    },
-)
-
-EQ = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Eq"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-EQUALS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Equals"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-MATCH = Schema(id=ShapeID("com.amazonaws.guardduty#Match"), shape_type=ShapeType.STRING)
-
-MATCHES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Matches"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MATCH}},
-)
-
-NEQ = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Neq"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-NOT_EQUALS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#NotEquals"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-NOT_MATCH = Schema(
-    id=ShapeID("com.amazonaws.guardduty#NotMatch"), shape_type=ShapeType.STRING
-)
-
-NOT_MATCHES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#NotMatches"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": NOT_MATCH}},
-)
-
-CONDITION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Condition"),
-    members={
-        "Eq": {
-            "target": EQ,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="eq")],
-        },
-        "Neq": {
-            "target": NEQ,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="neq")],
-        },
-        "Gt": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="gt")],
-        },
-        "Gte": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="gte")],
-        },
-        "Lt": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="lt")],
-        },
-        "Lte": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="lte")],
-        },
-        "Equals": {
-            "target": EQUALS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="equals")],
-        },
-        "NotEquals": {
-            "target": NOT_EQUALS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="notEquals")],
-        },
-        "GreaterThan": {
-            "target": LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="greaterThan")
-            ],
-        },
-        "GreaterThanOrEqual": {
-            "target": LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="greaterThanOrEqual")
-            ],
-        },
-        "LessThan": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="lessThan")],
-        },
-        "LessThanOrEqual": {
-            "target": LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lessThanOrEqual")
-            ],
-        },
-        "Matches": {
-            "target": MATCHES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="matches")],
-        },
-        "NotMatches": {
-            "target": NOT_MATCHES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="notMatches")
-            ],
-        },
-    },
-)
-
-CONFIDENCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Confidence"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "UNKNOWN": {"target": UNIT},
-        "LOW": {"target": UNIT},
-        "MEDIUM": {"target": UNIT},
-        "HIGH": {"target": UNIT},
-    },
-)
-
-CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ConflictException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={
-        "Message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="message")],
-        },
-        "Type": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
-        },
-    },
-)
-
-SECURITY_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#SecurityContext"),
-    members={
-        "Privileged": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="privileged")
-            ],
-        },
-        "AllowPrivilegeEscalation": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="allowPrivilegeEscalation"
-                )
-            ],
-        },
-    },
-)
-
-VOLUME_MOUNT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#VolumeMount"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "MountPath": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="mountPath")],
-        },
-    },
-)
-
-VOLUME_MOUNTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#VolumeMounts"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VOLUME_MOUNT}},
-)
-
-CONTAINER = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Container"),
-    members={
-        "ContainerRuntime": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="containerRuntime")
-            ],
-        },
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="id")],
-        },
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Image": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="image")],
-        },
-        "ImagePrefix": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="imagePrefix")
-            ],
-        },
-        "VolumeMounts": {
-            "target": VOLUME_MOUNTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="volumeMounts")
-            ],
-        },
-        "SecurityContext": {
-            "target": SECURITY_CONTEXT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="securityContext")
-            ],
-        },
-    },
-)
-
-CONTAINER_IMAGE_UID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ContainerImageUid"), shape_type=ShapeType.STRING
-)
-
-CONTAINER_FINDING_RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ContainerFindingResource"),
-    members={
-        "Image": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="image"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ImageUid": {
-            "target": CONTAINER_IMAGE_UID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="imageUid")],
-        },
-    },
-)
-
-CONTAINER_INSTANCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ContainerInstanceDetails"),
-    members={
-        "CoveredContainerInstances": {
-            "target": LONG,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="coveredContainerInstances"
-                )
-            ],
-        },
-        "CompatibleContainerInstances": {
-            "target": LONG,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="compatibleContainerInstances",
-                )
-            ],
-        },
-    },
-)
-
-CONTAINERS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Containers"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CONTAINER}},
-)
-
-CONTAINER_UID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ContainerUid"), shape_type=ShapeType.STRING
-)
-
-CONTAINER_UIDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ContainerUids"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": CONTAINER_UID}},
-)
-
-CONTINUOUS_SCAN_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ContinuousScanDetails"),
-    members={
-        "StartTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="startTime")],
-        },
-        "EndTime": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="endTime"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-COVERAGE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"HEALTHY": {"target": UNIT}, "UNHEALTHY": {"target": UNIT}},
-)
-
-COUNT_BY_COVERAGE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CountByCoverageStatus"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": COVERAGE_STATUS}, "value": {"target": LONG}},
-)
-
-RESOURCE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ResourceType"),
-    shape_type=ShapeType.ENUM,
-    members={"EKS": {"target": UNIT}, "ECS": {"target": UNIT}, "EC2": {"target": UNIT}},
-)
-
-COUNT_BY_RESOURCE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CountByResourceType"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": RESOURCE_TYPE}, "value": {"target": LONG}},
-)
-
-COUNT_BY_SEVERITY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CountBySeverity"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": INTEGER}},
-)
-
-MANAGEMENT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ManagementType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "AUTO_MANAGED": {"target": UNIT},
-        "MANUAL": {"target": UNIT},
-        "DISABLED": {"target": UNIT},
-    },
-)
-
-COVERAGE_EC2_INSTANCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageEc2InstanceDetails"),
-    members={
-        "InstanceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="instanceId")
-            ],
-        },
-        "InstanceType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="instanceType")
-            ],
-        },
-        "ClusterArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clusterArn")
-            ],
-        },
-        "AgentDetails": {
-            "target": AGENT_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="agentDetails")
-            ],
-        },
-        "ManagementType": {
-            "target": MANAGEMENT_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="managementType")
-            ],
-        },
-    },
-)
-
-ISSUES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Issues"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-FARGATE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FargateDetails"),
-    members={
-        "Issues": {
-            "target": ISSUES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="issues")],
-        },
-        "ManagementType": {
-            "target": MANAGEMENT_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="managementType")
-            ],
-        },
-    },
-)
-
-COVERAGE_ECS_CLUSTER_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageEcsClusterDetails"),
-    members={
-        "ClusterName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clusterName")
-            ],
-        },
-        "FargateDetails": {
-            "target": FARGATE_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="fargateDetails")
-            ],
-        },
-        "ContainerInstanceDetails": {
-            "target": CONTAINER_INSTANCE_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="containerInstanceDetails"
-                )
-            ],
-        },
-    },
-)
-
-COVERAGE_EKS_CLUSTER_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageEksClusterDetails"),
-    members={
-        "ClusterName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clusterName")
-            ],
-        },
-        "CoveredNodes": {
-            "target": LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="coveredNodes")
-            ],
-        },
-        "CompatibleNodes": {
-            "target": LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="compatibleNodes")
-            ],
-        },
-        "AddonDetails": {
-            "target": ADDON_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="addonDetails")
-            ],
-        },
-        "ManagementType": {
-            "target": MANAGEMENT_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="managementType")
-            ],
-        },
-    },
-)
-
-COVERAGE_FILTER_CONDITION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageFilterCondition"),
-    members={
-        "Equals": {
-            "target": EQUALS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="equals")],
-        },
-        "NotEquals": {
-            "target": NOT_EQUALS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="notEquals")],
-        },
-    },
-)
-
-COVERAGE_FILTER_CRITERION_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageFilterCriterionKey"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ACCOUNT_ID": {"target": UNIT},
-        "RESOURCE_TYPE": {"target": UNIT},
-        "COVERAGE_STATUS": {"target": UNIT},
-        "ADDON_VERSION": {"target": UNIT},
-        "CLUSTER_NAME": {"target": UNIT},
-        "ECS_CLUSTER_NAME": {"target": UNIT},
-        "MANAGEMENT_TYPE": {"target": UNIT},
-        "EKS_CLUSTER_NAME": {"target": UNIT},
-        "AGENT_VERSION": {"target": UNIT},
-        "INSTANCE_ID": {"target": UNIT},
-        "CLUSTER_ARN": {"target": UNIT},
-    },
-)
-
-COVERAGE_FILTER_CRITERION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageFilterCriterion"),
-    members={
-        "CriterionKey": {
-            "target": COVERAGE_FILTER_CRITERION_KEY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="criterionKey")
-            ],
-        },
-        "FilterCondition": {
-            "target": COVERAGE_FILTER_CONDITION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterCondition")
-            ],
-        },
-    },
-)
-
-COVERAGE_FILTER_CRITERION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageFilterCriterionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": COVERAGE_FILTER_CRITERION}},
-)
-
-COVERAGE_FILTER_CRITERIA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageFilterCriteria"),
-    members={
-        "FilterCriterion": {
-            "target": COVERAGE_FILTER_CRITERION_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterCriterion")
-            ],
-        }
-    },
-)
-
-COVERAGE_RESOURCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageResourceDetails"),
-    members={
-        "EksClusterDetails": {
-            "target": COVERAGE_EKS_CLUSTER_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="eksClusterDetails")
-            ],
-        },
-        "EcsClusterDetails": {
-            "target": COVERAGE_ECS_CLUSTER_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ecsClusterDetails")
-            ],
-        },
-        "Ec2InstanceDetails": {
-            "target": COVERAGE_EC2_INSTANCE_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2InstanceDetails")
-            ],
-        },
-        "ResourceType": {
-            "target": RESOURCE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceType")
-            ],
-        },
-    },
-)
-
-COVERAGE_RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageResource"),
-    members={
-        "ResourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceId")
-            ],
-        },
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="detectorId")
-            ],
-        },
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "ResourceDetails": {
-            "target": COVERAGE_RESOURCE_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceDetails")
-            ],
-        },
-        "CoverageStatus": {
-            "target": COVERAGE_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="coverageStatus")
-            ],
-        },
-        "Issue": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="issue")],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-    },
-)
-
-COVERAGE_RESOURCES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageResources"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": COVERAGE_RESOURCE}},
-)
-
-COVERAGE_SORT_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageSortKey"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ACCOUNT_ID": {"target": UNIT},
-        "COVERAGE_STATUS": {"target": UNIT},
-        "ISSUE": {"target": UNIT},
-        "ADDON_VERSION": {"target": UNIT},
-        "UPDATED_AT": {"target": UNIT},
-        "CLUSTER_NAME": {"target": UNIT},
-        "EKS_CLUSTER_NAME": {"target": UNIT},
-        "ECS_CLUSTER_NAME": {"target": UNIT},
-        "INSTANCE_ID": {"target": UNIT},
-    },
-)
-
-ORDER_BY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrderBy"),
-    shape_type=ShapeType.ENUM,
-    members={"ASC": {"target": UNIT}, "DESC": {"target": UNIT}},
-)
-
-COVERAGE_SORT_CRITERIA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageSortCriteria"),
-    members={
-        "AttributeName": {
-            "target": COVERAGE_SORT_KEY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="attributeName")
-            ],
-        },
-        "OrderBy": {
-            "target": ORDER_BY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="orderBy")],
-        },
-    },
-)
-
-COVERAGE_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageStatistics"),
-    members={
-        "CountByResourceType": {
-            "target": COUNT_BY_RESOURCE_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="countByResourceType"
-                )
-            ],
-        },
-        "CountByCoverageStatus": {
-            "target": COUNT_BY_COVERAGE_STATUS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="countByCoverageStatus"
-                )
-            ],
-        },
-    },
-)
-
-COVERAGE_STATISTICS_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageStatisticsType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "COUNT_BY_RESOURCE_TYPE": {"target": UNIT},
-        "COUNT_BY_COVERAGE_STATUS": {"target": UNIT},
-    },
-)
-
-COVERAGE_STATISTICS_TYPE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CoverageStatisticsTypeList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": COVERAGE_STATISTICS_TYPE}},
-)
-
-TAG_KEY = Schema(
-    id=ShapeID("com.amazonaws.guardduty#TagKey"), shape_type=ShapeType.STRING
-)
-
-TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#TagValue"), shape_type=ShapeType.STRING
-)
-
-TAG_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#TagMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": TAG_KEY}, "value": {"target": TAG_VALUE}},
-)
-
-CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationRequest",
-        )
-    ],
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Mode": {
-            "target": ASSOCIATION_MODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationResponse",
-        )
-    ],
-    members={
-        "RuleAssociation": {
-            "target": ASSOCIATION_DETAIL,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleAssociation"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={
-        "Message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="message")],
-        },
-        "Type": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
-        },
-    },
-)
-
-CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateCustomDetectionRuleAssociation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/custom-detection-rule/association",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DETECTION_RULE_ACCOUNT_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleAccountIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACCOUNT_ID}},
-)
-
-CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationInput"
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
+
+
+n0 = "com.amazonaws.guardduty"
+_S = "String"
+_DI = "DetectorId"
+_AAII = "AcceptAdministratorInvitationInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cAAIR = "com.amazonaws.guardduty#AcceptAdministratorInvitationRequest"
+_s = "smithy.api#input"
+_sm = "smithy.api#required"
+_sL = "smithy.api#httpLabel"
+_AI = "AdministratorId"
+_sN = "smithy.api#jsonName"
+_aI = "administratorId"
+_II = "InvitationId"
+_iI = "invitationId"
+_AAIO = "AcceptAdministratorInvitationOutput"
+_cAAIRo = "com.amazonaws.guardduty#AcceptAdministratorInvitationResponse"
+_smi = "smithy.api#output"
+_BRE = "BadRequestException"
+_smit = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_M = "Message"
+_m = "message"
+_T = "Type"
+_t = "type"
+_ISEE = "InternalServerErrorException"
+_se = "server"
+_AAI = "AcceptAdministratorInvitation"
+_smith = "smithy.api#http"
+_AII = "AcceptInvitationInput"
+_cAIR = "com.amazonaws.guardduty#AcceptInvitationRequest"
+_MI = "MasterId"
+_mI = "masterId"
+_AIO = "AcceptInvitationOutput"
+_cAIRo = "com.amazonaws.guardduty#AcceptInvitationResponse"
+_AIc = "AcceptInvitation"
+_B = "Boolean"
+_ACL = "AccessControlList"
+_APRA = "AllowsPublicReadAccess"
+_aPRA = "allowsPublicReadAccess"
+_APWA = "AllowsPublicWriteAccess"
+_aPWA = "allowsPublicWriteAccess"
+_ADE = "AccessDeniedException"
+_AK = "AccessKey"
+_PI = "PrincipalId"
+_pI = "principalId"
+_UN = "UserName"
+_uN = "userName"
+_UT = "UserType"
+_uT = "userType"
+_AKD = "AccessKeyDetails"
+_AKI = "AccessKeyId"
+_aKI = "accessKeyId"
+_A = "Account"
+_U = "Uid"
+_u = "uid"
+_N = "Name"
+_a = "account"
+_AIcc = "AccountId"
+_E = "Email"
+_smithy = "smithy.api#sensitive"
+_AD = "AccountDetail"
+_aIc = "accountId"
+_e = "email"
+_ADc = "AccountDetails"
+_me = "member"
+_I = "Integer"
+_DSFT = "DataSourceFreeTrial"
+_FTDR = "FreeTrialDaysRemaining"
+_fTDR = "freeTrialDaysRemaining"
+_KDSFT = "KubernetesDataSourceFreeTrial"
+_AL = "AuditLogs"
+_aL = "auditLogs"
+_MPDSFT = "MalwareProtectionDataSourceFreeTrial"
+_SEIWF = "ScanEc2InstanceWithFindings"
+_sEIWF = "scanEc2InstanceWithFindings"
+_DSFTa = "DataSourcesFreeTrial"
+_CT = "CloudTrail"
+_cT = "cloudTrail"
+_DL = "DnsLogs"
+_dL = "dnsLogs"
+_FL = "FlowLogs"
+_fL = "flowLogs"
+_SL = "S3Logs"
+_sLo = "s3Logs"
+_K = "Kubernetes"
+_k = "kubernetes"
+_MP = "MalwareProtection"
+_mP = "malwareProtection"
+_FTFR = "FreeTrialFeatureResult"
+_FL_ = "FLOW_LOGS"
+_sV = "smithy.api#enumValue"
+_CT_ = "CLOUD_TRAIL"
+_DL_ = "DNS_LOGS"
+_SDE = "S3_DATA_EVENTS"
+_EAL = "EKS_AUDIT_LOGS"
+_EMP = "EBS_MALWARE_PROTECTION"
+_RLE = "RDS_LOGIN_EVENTS"
+_LNL = "LAMBDA_NETWORK_LOGS"
+_ERM = "EKS_RUNTIME_MONITORING"
+_ERM_ = "EC2_RUNTIME_MONITORING"
+_FRM = "FARGATE_RUNTIME_MONITORING"
+_AP = "AI_PROTECTION"
+_FTFCR = "FreeTrialFeatureConfigurationResult"
+_n = "name"
+_FTFCRr = "FreeTrialFeatureConfigurationsResults"
+_AFTI = "AccountFreeTrialInfo"
+_DS = "DataSources"
+_dS = "dataSources"
+_F = "Features"
+_f = "features"
+_AFTIc = "AccountFreeTrialInfos"
+_AIcco = "AccountIds"
+_BPA = "BlockPublicAccess"
+_IPA = "IgnorePublicAcls"
+_iPA = "ignorePublicAcls"
+_RPB = "RestrictPublicBuckets"
+_rPB = "restrictPublicBuckets"
+_BPAl = "BlockPublicAcls"
+_bPA = "blockPublicAcls"
+_BPP = "BlockPublicPolicy"
+_bPP = "blockPublicPolicy"
+_ALP = "AccountLevelPermissions"
+_bPAl = "blockPublicAccess"
+_Ti = "Timestamp"
+_AS = "AccountStatistics"
+_LGA = "LastGeneratedAt"
+_lGA = "lastGeneratedAt"
+_TF = "TotalFindings"
+_tF = "totalFindings"
+_AR = "AffectedResources"
+_ke = "key"
+_v = "value"
+_DD = "DomainDetails"
+_D = "Domain"
+_d = "domain"
+_RAD = "RemoteAccountDetails"
+_Af = "Affiliated"
+_af = "affiliated"
+_ASN = "AwsServiceName"
+_aSN = "awsServiceName"
+_C = "City"
+_CN = "CityName"
+_cN = "cityName"
+_Co = "Country"
+_CC = "CountryCode"
+_cC = "countryCode"
+_CNo = "CountryName"
+_cNo = "countryName"
+_Do = "Double"
+_GL = "GeoLocation"
+_L = "Lat"
+_l = "lat"
+_Lo = "Lon"
+_lo = "lon"
+_SS = "SensitiveString"
+_O = "Organization"
+_As = "Asn"
+_as = "asn"
+_AO = "AsnOrg"
+_aO = "asnOrg"
+_Is = "Isp"
+_i = "isp"
+_Or = "Org"
+_o = "org"
+_RID = "RemoteIpDetails"
+_ci = "city"
+_co = "country"
+_gL = "geoLocation"
+_IAV = "IpAddressV4"
+_iAV = "ipAddressV4"
+_IAVp = "IpAddressV6"
+_iAVp = "ipAddressV6"
+_or = "organization"
+_AACA = "AwsApiCallAction"
+_Ap = "Api"
+_ap = "api"
+_CTa = "CallerType"
+_cTa = "callerType"
+_dD = "domainDetails"
+_EC = "ErrorCode"
+_eC = "errorCode"
+_UA = "UserAgent"
+_uA = "userAgent"
+_rID = "remoteIpDetails"
+_SN = "ServiceName"
+_sNe = "serviceName"
+_rAD = "remoteAccountDetails"
+_aR = "affectedResources"
+_DRA = "DnsRequestAction"
+_P = "Protocol"
+_p = "protocol"
+_Bl = "Blocked"
+_b = "blocked"
+_DWS = "DomainWithSuffix"
+_dWS = "domainWithSuffix"
+_VOAI = "VpcOwnerAccountId"
+_vOAI = "vpcOwnerAccountId"
+_SI = "SourceIps"
+_KACA = "KubernetesApiCallAction"
+_RU = "RequestUri"
+_rU = "requestUri"
+_V = "Verb"
+_ve = "verb"
+_R = "Resource"
+_r = "resource"
+_Su = "Subresource"
+_su = "subresource"
+_Na = "Namespace"
+_na = "namespace"
+_RN = "ResourceName"
+_rN = "resourceName"
+_sIP = "sourceIPs"
+_SC = "StatusCode"
+_sC = "statusCode"
+_Pa = "Parameters"
+_pa = "parameters"
+_KPCD = "KubernetesPermissionCheckedDetails"
+_Al = "Allowed"
+_al = "allowed"
+_KRBD = "KubernetesRoleBindingDetails"
+_Ki = "Kind"
+_ki = "kind"
+_RRN = "RoleRefName"
+_rRN = "roleRefName"
+_RRK = "RoleRefKind"
+_rRK = "roleRefKind"
+_KRD = "KubernetesRoleDetails"
+_LID = "LocalIpDetails"
+_LPD = "LocalPortDetails"
+_Po = "Port"
+_po = "port"
+_PN = "PortName"
+_pN = "portName"
+_RPD = "RemotePortDetails"
+_NCA = "NetworkConnectionAction"
+_CD = "ConnectionDirection"
+_cD = "connectionDirection"
+_lPD = "localPortDetails"
+_lID = "localIpDetails"
+_LNI = "LocalNetworkInterface"
+_lNI = "localNetworkInterface"
+_rPD = "remotePortDetails"
+_PPD = "PortProbeDetail"
+_PPDo = "PortProbeDetails"
+_PPA = "PortProbeAction"
+_pPD = "portProbeDetails"
+_LA = "LoginAttribute"
+_Us = "User"
+_us = "user"
+_App = "Application"
+_app = "application"
+_FLA = "FailedLoginAttempts"
+_fLA = "failedLoginAttempts"
+_SLA = "SuccessfulLoginAttempts"
+_sLA = "successfulLoginAttempts"
+_LAo = "LoginAttributes"
+_RLAA = "RdsLoginAttemptAction"
+_Ac = "Action"
+_AT = "ActionType"
+_aT = "actionType"
+_aACA = "awsApiCallAction"
+_dRA = "dnsRequestAction"
+_nCA = "networkConnectionAction"
+_pPA = "portProbeAction"
+_kACA = "kubernetesApiCallAction"
+_kPCD = "kubernetesPermissionCheckedDetails"
+_kRBD = "kubernetesRoleBindingDetails"
+_kRD = "kubernetesRoleDetails"
+_rLAA = "rdsLoginAttemptAction"
+_AC = "ApiCall"
+_Op = "Operation"
+_op = "operation"
+_Se = "Service"
+_ser = "service"
+_Er = "Error"
+_er = "error"
+_ATc = "ActivityType"
+_AC_ = "API_CALL"
+_Act = "Activity"
+_Acti = "Activities"
+_PNr = "ProcessName"
+_PP = "ProcessPath"
+_PS = "ProcessSha256"
+_APc = "ActorProcess"
+_Pat = "Path"
+_pat = "path"
+_Sh = "Sha256"
+_sh = "sha256"
+_MS = "MfaStatus"
+_ENABLED = "ENABLED"
+_DISABLED = "DISABLED"
+_Ses = "Session"
+_mS = "mfaStatus"
+_CTr = "CreatedTime"
+_cTr = "createdTime"
+_Iss = "Issuer"
+_is = "issuer"
+_CU = "CredentialUid"
+_cU = "credentialUid"
+_Acto = "Actor"
+_Id = "Id"
+_id = "id"
+_ses = "session"
+_Pr = "Process"
+_pr = "process"
+_AIct = "ActorIds"
+_Actor = "Actors"
+_NES = "NonEmptyString"
+_AId = "AdditionalInfo"
+_VI = "VersionId"
+_vI = "versionId"
+_DN = "DeviceName"
+_dN = "deviceName"
+_FT = "FindingType"
+_AST = "AdditionalSequenceTypes"
+_ADd = "AddonDetails"
+_AV = "AddonVersion"
+_aV = "addonVersion"
+_ASd = "AddonStatus"
+_aS = "addonStatus"
+_ASdm = "AdminStatus"
+_DIP = "DISABLE_IN_PROGRESS"
+_AA = "AdminAccount"
+_AAId = "AdminAccountId"
+_aAI = "adminAccountId"
+_aSd = "adminStatus"
+_AAd = "AdminAccounts"
+_Ad = "Administrator"
+_RS = "RelationshipStatus"
+_rS = "relationshipStatus"
+_IA = "InvitedAt"
+_iA = "invitedAt"
+_ADg = "AgentDetails"
+_Ve = "Version"
+_ver = "version"
+_Lon = "Long"
+_ON = "ObservationNumbers"
+_OT = "ObservationTexts"
+_Ob = "Observations"
+_Te = "Text"
+_te = "text"
+_Nu = "Number"
+_nu = "number"
+_PSr = "ProfileSubtype"
+_FREQUENT = "FREQUENT"
+_INFREQUENT = "INFREQUENT"
+_UNSEEN = "UNSEEN"
+_RARE = "RARE"
+_COUNT = "COUNT"
+_AVERAGE = "AVERAGE"
+_PT = "ProfileType"
+_FREQUENCY = "FREQUENCY"
+_VOLUME = "VOLUME"
+_AOn = "AnomalyObject"
+_pT = "profileType"
+_pS = "profileSubtype"
+_ob = "observations"
+_APFO = "AnomalyProfileFeatureObjects"
+_APF = "AnomalyProfileFeatures"
+_APn = "AnomalyProfiles"
+_AUBF = "AnomalyUnusualBehaviorFeature"
+_Be = "Behavior"
+_AU = "AnomalyUnusual"
+_be = "behavior"
+_An = "Anomaly"
+_Pro = "Profiles"
+_pro = "profiles"
+_Un = "Unusual"
+_un = "unusual"
+_FI = "FindingId"
+_FIi = "FindingIds"
+_AFI = "ArchiveFindingsInput"
+_cAFR = "com.amazonaws.guardduty#ArchiveFindingsRequest"
+_fI = "findingIds"
+_AFO = "ArchiveFindingsOutput"
+_cAFRo = "com.amazonaws.guardduty#ArchiveFindingsResponse"
+_AF = "ArchiveFindings"
+_DRAe = "DetectionRuleArn"
+_AIs = "AssociationId"
+_AM = "AssociationMode"
+_LIVE = "LIVE"
+_DR = "DRY_RUN"
+_RI = "RuleId"
+_ADs = "AssociationDetail"
+_aIs = "associationId"
+_Ar = "Arn"
+_ar = "arn"
+_rI = "ruleId"
+_Mo = "Mode"
+_mo = "mode"
+_CA = "CreatedAt"
+_cA = "createdAt"
+_UAp = "UpdatedAt"
+_uAp = "updatedAt"
+_EA = "ExpiresAt"
+_eA = "expiresAt"
+_ASs = "AssociationSummary"
+_ASL = "AssociationSummaryList"
+_AEM = "AutoEnableMembers"
+_NEW = "NEW"
+_ALL = "ALL"
+_NONE = "NONE"
+_ASu = "AutonomousSystem"
+_EIU = "Ec2InstanceUid"
+_EIUc = "Ec2InstanceUids"
+_AASG = "AutoscalingAutoScalingGroup"
+_eIU = "ec2InstanceUids"
+_BG = "BedrockGuardrail"
+_CPFA = "ContentPolicyFilterAction"
+_BLOCKED = "BLOCKED"
+_CL = "ConfidenceLevel"
+_HIGH = "HIGH"
+_MEDIUM = "MEDIUM"
+_LOW = "LOW"
+_CPFT = "ContentPolicyFilterType"
+_PA = "PROMPT_ATTACK"
+_JAILBREAK = "JAILBREAK"
+_HATE = "HATE"
+_INSULTS = "INSULTS"
+_SEXUAL = "SEXUAL"
+_VIOLENCE = "VIOLENCE"
+_MISCONDUCT = "MISCONDUCT"
+_CPF = "ContentPolicyFilter"
+_Con = "Confidence"
+_con = "confidence"
+_ac = "action"
+_CPFo = "ContentPolicyFilters"
+_GA = "GuardrailAction"
+_GI = "GUARDRAIL_INTERVENED"
+_BGe = "BedrockGuardrails"
+_GS = "GuardrailSource"
+_INPUT = "INPUT"
+_OUTPUT = "OUTPUT"
+_BGD = "BedrockGuardrailDetails"
+_GAu = "GuardrailArn"
+_gA = "guardrailArn"
+_GV = "GuardrailVersion"
+_gV = "guardrailVersion"
+_G = "Guardrails"
+_g = "guardrails"
+_gAu = "guardrailAction"
+_gS = "guardrailSource"
+_cPF = "contentPolicyFilters"
+_BGR = "BedrockGuardrailResource"
+_BP = "BucketPolicy"
+_BLP = "BucketLevelPermissions"
+_aCL = "accessControlList"
+_bP = "bucketPolicy"
+_CTl = "ClientToken"
+_CP = "CloudProvider"
+_AWS = "AWS"
+_CDl = "CloudDetails"
+_Prov = "Provider"
+_prov = "provider"
+_Re = "Region"
+_re = "region"
+_CS = "CloudformationStack"
+_DSS = "DataSourceStatus"
+_CTCR = "CloudTrailConfigurationResult"
+_St = "Status"
+_st = "status"
+_CSl = "ClusterStatus"
+_CREATING = "CREATING"
+_ACTIVE = "ACTIVE"
+_DELETING = "DELETING"
+_FAILED = "FAILED"
+_UPDATING = "UPDATING"
+_PENDING = "PENDING"
+_Eq = "Eq"
+_Equ = "Equals"
+_Ma = "Match"
+_Mat = "Matches"
+_Ne = "Neq"
+_NE = "NotEquals"
+_NM = "NotMatch"
+_NMo = "NotMatches"
+_Cond = "Condition"
+_eq = "eq"
+_ne = "neq"
+_Gt = "Gt"
+_gt = "gt"
+_Gte = "Gte"
+_gte = "gte"
+_Lt = "Lt"
+_lt = "lt"
+_Lte = "Lte"
+_lte = "lte"
+_equ = "equals"
+_nE = "notEquals"
+_GT = "GreaterThan"
+_gT = "greaterThan"
+_GTOE = "GreaterThanOrEqual"
+_gTOE = "greaterThanOrEqual"
+_LT = "LessThan"
+_lT = "lessThan"
+_LTOE = "LessThanOrEqual"
+_lTOE = "lessThanOrEqual"
+_ma = "matches"
+_nM = "notMatches"
+_UNKNOWN = "UNKNOWN"
+_Unk = "Unknown"
+_Low = "Low"
+_Me = "Medium"
+_H = "High"
+_CE = "ConflictException"
+_SCe = "SecurityContext"
+_Pri = "Privileged"
+_pri = "privileged"
+_APE = "AllowPrivilegeEscalation"
+_aPE = "allowPrivilegeEscalation"
+_VM = "VolumeMount"
+_MPo = "MountPath"
+_mPo = "mountPath"
+_VMo = "VolumeMounts"
+_Cont = "Container"
+_CR = "ContainerRuntime"
+_cR = "containerRuntime"
+_Im = "Image"
+_im = "image"
+_IP = "ImagePrefix"
+_iP = "imagePrefix"
+_vM = "volumeMounts"
+_sCe = "securityContext"
+_CIU = "ContainerImageUid"
+_CFR = "ContainerFindingResource"
+_IU = "ImageUid"
+_iU = "imageUid"
+_CID = "ContainerInstanceDetails"
+_CCI = "CoveredContainerInstances"
+_cCI = "coveredContainerInstances"
+_CCIo = "CompatibleContainerInstances"
+_cCIo = "compatibleContainerInstances"
+_Conta = "Containers"
+_CUo = "ContainerUid"
+_CUon = "ContainerUids"
+_CSD = "ContinuousScanDetails"
+_ST = "StartTime"
+_sT = "startTime"
+_ET = "EndTime"
+_eT = "endTime"
+_CSo = "CoverageStatus"
+_HEALTHY = "HEALTHY"
+_UNHEALTHY = "UNHEALTHY"
+_CBCS = "CountByCoverageStatus"
+_RT = "ResourceType"
+_EKS = "EKS"
+_ECS = "ECS"
+_EC_ = "EC2"
+_CBRT = "CountByResourceType"
+_CBS = "CountBySeverity"
+_MT = "ManagementType"
+_AM_ = "AUTO_MANAGED"
+_MANUAL = "MANUAL"
+_CEID = "CoverageEc2InstanceDetails"
+_IIn = "InstanceId"
+_iIn = "instanceId"
+_IT = "InstanceType"
+_iT = "instanceType"
+_CAl = "ClusterArn"
+_cAl = "clusterArn"
+_aD = "agentDetails"
+_mT = "managementType"
+_Issu = "Issues"
+_FD = "FargateDetails"
+_iss = "issues"
+_CECD = "CoverageEcsClusterDetails"
+_CNl = "ClusterName"
+_cNl = "clusterName"
+_fD = "fargateDetails"
+_cID = "containerInstanceDetails"
+_CECDo = "CoverageEksClusterDetails"
+_CNov = "CoveredNodes"
+_cNov = "coveredNodes"
+_CNom = "CompatibleNodes"
+_cNom = "compatibleNodes"
+_aDd = "addonDetails"
+_CFC = "CoverageFilterCondition"
+_CFCK = "CoverageFilterCriterionKey"
+_AI_ = "ACCOUNT_ID"
+_RT_ = "RESOURCE_TYPE"
+_CS_ = "COVERAGE_STATUS"
+_AV_ = "ADDON_VERSION"
+_CN_ = "CLUSTER_NAME"
+_ECN = "ECS_CLUSTER_NAME"
+_MT_ = "MANAGEMENT_TYPE"
+_ECN_ = "EKS_CLUSTER_NAME"
+_AV__ = "AGENT_VERSION"
+_II_ = "INSTANCE_ID"
+_CA_ = "CLUSTER_ARN"
+_CFCo = "CoverageFilterCriterion"
+_CK = "CriterionKey"
+_cK = "criterionKey"
+_FC = "FilterCondition"
+_fC = "filterCondition"
+_CFCL = "CoverageFilterCriterionList"
+_CFCov = "CoverageFilterCriteria"
+_FCi = "FilterCriterion"
+_fCi = "filterCriterion"
+_CRD = "CoverageResourceDetails"
+_ECD = "EksClusterDetails"
+_eCD = "eksClusterDetails"
+_ECDc = "EcsClusterDetails"
+_eCDc = "ecsClusterDetails"
+_EID = "Ec2InstanceDetails"
+_eID = "ec2InstanceDetails"
+_rT = "resourceType"
+_CRo = "CoverageResource"
+_RIe = "ResourceId"
+_rIe = "resourceId"
+_dI = "detectorId"
+_RD = "ResourceDetails"
+_rD = "resourceDetails"
+_cS = "coverageStatus"
+_Issue = "Issue"
+_issu = "issue"
+_CRov = "CoverageResources"
+_CSK = "CoverageSortKey"
+_ISSUE = "ISSUE"
+_UA_ = "UPDATED_AT"
+_OB = "OrderBy"
+_ASC = "ASC"
+_DESC = "DESC"
+_CSC = "CoverageSortCriteria"
+_AN = "AttributeName"
+_aN = "attributeName"
+_oB = "orderBy"
+_CSov = "CoverageStatistics"
+_cBRT = "countByResourceType"
+_cBCS = "countByCoverageStatus"
+_CST = "CoverageStatisticsType"
+_CBRT_ = "COUNT_BY_RESOURCE_TYPE"
+_CBCS_ = "COUNT_BY_COVERAGE_STATUS"
+_CSTL = "CoverageStatisticsTypeList"
+_TK = "TagKey"
+_TV = "TagValue"
+_TM = "TagMap"
+_CCDRAI = "CreateCustomDetectionRuleAssociationInput"
+_cCCDRAR = "com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationRequest"
+_sTm = "smithy.api#idempotencyToken"
+_cTl = "clientToken"
+_Ta = "Tags"
+_ta = "tags"
+_CCDRAO = "CreateCustomDetectionRuleAssociationOutput"
+_cCCDRARo = "com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationResponse"
+_RA = "RuleAssociation"
+_rA = "ruleAssociation"
+_RNFE = "ResourceNotFoundException"
+_CCDRA = "CreateCustomDetectionRuleAssociation"
+_DRAI = "DetectionRuleAccountIds"
+_CCDROCI = "CreateCustomDetectionRuleOrgConfigurationInput"
+_cCCDROCR = "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationRequest"
+_IAI = "IncludeAccountIds"
+_iAI = "includeAccountIds"
+_EAI = "ExcludeAccountIds"
+_eAI = "excludeAccountIds"
+_CCDROCO = "CreateCustomDetectionRuleOrgConfigurationOutput"
+_cCCDROCRo = "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationResponse"
+_CCDROC = "CreateCustomDetectionRuleOrgConfiguration"
+_KALC = "KubernetesAuditLogsConfiguration"
+_En = "Enable"
+_en = "enable"
+_KC = "KubernetesConfiguration"
+_EV = "EbsVolumes"
+_eV = "ebsVolumes"
+_MPC = "MalwareProtectionConfiguration"
+_SLC = "S3LogsConfiguration"
+_DSC = "DataSourceConfigurations"
+_FAC = "FeatureAdditionalConfiguration"
+_EAM = "EKS_ADDON_MANAGEMENT"
+_EFAM = "ECS_FARGATE_AGENT_MANAGEMENT"
+_EAM_ = "EC2_AGENT_MANAGEMENT"
+_FS = "FeatureStatus"
+_DAC = "DetectorAdditionalConfiguration"
+_DACe = "DetectorAdditionalConfigurations"
+_DF = "DetectorFeature"
+_RM = "RUNTIME_MONITORING"
+_AA_ = "AI_ANALYST"
+_DFC = "DetectorFeatureConfiguration"
+_ACd = "AdditionalConfiguration"
+_aC = "additionalConfiguration"
+_DFCe = "DetectorFeatureConfigurations"
+_FPF = "FindingPublishingFrequency"
+_FM = "FIFTEEN_MINUTES"
+_OH = "ONE_HOUR"
+_SH = "SIX_HOURS"
+_CDI = "CreateDetectorInput"
+_cCDR = "com.amazonaws.guardduty#CreateDetectorRequest"
+_fPF = "findingPublishingFrequency"
+_EVR = "EbsVolumesResult"
+_Rea = "Reason"
+_rea = "reason"
+_SEIWFR = "ScanEc2InstanceWithFindingsResult"
+_MPCR = "MalwareProtectionConfigurationResult"
+_SR = "ServiceRole"
+_sR = "serviceRole"
+_UDSR = "UnprocessedDataSourcesResult"
+_CDO = "CreateDetectorOutput"
+_cCDRo = "com.amazonaws.guardduty#CreateDetectorResponse"
+_UDS = "UnprocessedDataSources"
+_uDS = "unprocessedDataSources"
+_CDr = "CreateDetector"
+_FA = "FilterAction"
+_NOOP = "NOOP"
+_ARCHIVE = "ARCHIVE"
+_FDi = "FilterDescription"
+_Cr = "Criterion"
+_FCin = "FindingCriteria"
+_cr = "criterion"
+_FN = "FilterName"
+_FR = "FilterRank"
+_CFI = "CreateFilterInput"
+_cCFR = "com.amazonaws.guardduty#CreateFilterRequest"
+_De = "Description"
+_de = "description"
+_Ra = "Rank"
+_ra = "rank"
+_fCin = "findingCriteria"
+_CFO = "CreateFilterOutput"
+_cCFRo = "com.amazonaws.guardduty#CreateFilterResponse"
+_CF = "CreateFilter"
+_TP = "TriggerPrompt"
+_CII = "CreateInvestigationInput"
+_cCIR = "com.amazonaws.guardduty#CreateInvestigationRequest"
+_tP = "triggerPrompt"
+_IInv = "InvestigationId"
+_CIO = "CreateInvestigationOutput"
+_cCIRo = "com.amazonaws.guardduty#CreateInvestigationResponse"
+_iInv = "investigationId"
+_CI = "CreateInvestigation"
+_ISF = "IpSetFormat"
+_TXT = "TXT"
+_STIX = "STIX"
+_OC = "OTX_CSV"
+_AV___ = "ALIEN_VAULT"
+_PP_ = "PROOF_POINT"
+_FE = "FIRE_EYE"
+_Loc = "Location"
+_CIPSI = "CreateIPSetInput"
+_cCIPSR = "com.amazonaws.guardduty#CreateIPSetRequest"
+_Fo = "Format"
+_fo = "format"
+_loc = "location"
+_Activ = "Activate"
+_act = "activate"
+_EBO = "ExpectedBucketOwner"
+_eBO = "expectedBucketOwner"
+_CIPSO = "CreateIPSetOutput"
+_cCIPSRo = "com.amazonaws.guardduty#CreateIPSetResponse"
+_ISI = "IpSetId"
+_iSI = "ipSetId"
+_CIPS = "CreateIPSet"
+_MPPTAS = "MalwareProtectionPlanTaggingActionStatus"
+_MPPTA = "MalwareProtectionPlanTaggingAction"
+_MPPA = "MalwareProtectionPlanActions"
+_Tag = "Tagging"
+_tag = "tagging"
+_MPPOPL = "MalwareProtectionPlanObjectPrefixesList"
+_CSBR = "CreateS3BucketResource"
+_BN = "BucketName"
+_bN = "bucketName"
+_OP = "ObjectPrefixes"
+_oP = "objectPrefixes"
+_CPR = "CreateProtectedResource"
+_SB = "S3Bucket"
+_sB = "s3Bucket"
+_CMPPI = "CreateMalwareProtectionPlanInput"
+_cCMPPR = "com.amazonaws.guardduty#CreateMalwareProtectionPlanRequest"
+_Ro = "Role"
+_ro = "role"
+_PR = "ProtectedResource"
+_pR = "protectedResource"
+_Actio = "Actions"
+_acti = "actions"
+_CMPPO = "CreateMalwareProtectionPlanOutput"
+_cCMPPRo = "com.amazonaws.guardduty#CreateMalwareProtectionPlanResponse"
+_MPPI = "MalwareProtectionPlanId"
+_mPPI = "malwareProtectionPlanId"
+_CMPP = "CreateMalwareProtectionPlan"
+_CMI = "CreateMembersInput"
+_cCMR = "com.amazonaws.guardduty#CreateMembersRequest"
+_aDc = "accountDetails"
+_UAn = "UnprocessedAccount"
+_Res = "Result"
+_res = "result"
+_UAnp = "UnprocessedAccounts"
+_CMO = "CreateMembersOutput"
+_cCMRo = "com.amazonaws.guardduty#CreateMembersResponse"
+_uAn = "unprocessedAccounts"
+_CM = "CreateMembers"
+_DP = "DestinationProperties"
+_DA = "DestinationArn"
+_dA = "destinationArn"
+_KKA = "KmsKeyArn"
+_kKA = "kmsKeyArn"
+_DT = "DestinationType"
+_S_ = "S3"
+_CPDI = "CreatePublishingDestinationInput"
+_cCPDR = "com.amazonaws.guardduty#CreatePublishingDestinationRequest"
+_dT = "destinationType"
+_dP = "destinationProperties"
+_CPDO = "CreatePublishingDestinationOutput"
+_cCPDRo = "com.amazonaws.guardduty#CreatePublishingDestinationResponse"
+_DIe = "DestinationId"
+_dIe = "destinationId"
+_CPD = "CreatePublishingDestination"
+_FTi = "FindingTypes"
+_CSFI = "CreateSampleFindingsInput"
+_cCSFR = "com.amazonaws.guardduty#CreateSampleFindingsRequest"
+_fT = "findingTypes"
+_CSFO = "CreateSampleFindingsOutput"
+_cCSFRo = "com.amazonaws.guardduty#CreateSampleFindingsResponse"
+_CSF = "CreateSampleFindings"
+_TESF = "ThreatEntitySetFormat"
+_CTESI = "CreateThreatEntitySetInput"
+_cCTESR = "com.amazonaws.guardduty#CreateThreatEntitySetRequest"
+_CTESO = "CreateThreatEntitySetOutput"
+_cCTESRo = "com.amazonaws.guardduty#CreateThreatEntitySetResponse"
+_TESI = "ThreatEntitySetId"
+_tESI = "threatEntitySetId"
+_CTES = "CreateThreatEntitySet"
+_TISF = "ThreatIntelSetFormat"
+_CTISI = "CreateThreatIntelSetInput"
+_cCTISR = "com.amazonaws.guardduty#CreateThreatIntelSetRequest"
+_CTISO = "CreateThreatIntelSetOutput"
+_cCTISRo = "com.amazonaws.guardduty#CreateThreatIntelSetResponse"
+_TISI = "ThreatIntelSetId"
+_tISI = "threatIntelSetId"
+_CTIS = "CreateThreatIntelSet"
+_TESFr = "TrustedEntitySetFormat"
+_CTESIr = "CreateTrustedEntitySetInput"
+_cCTESRom = "com.amazonaws.guardduty#CreateTrustedEntitySetRequest"
+_CTESOr = "CreateTrustedEntitySetOutput"
+_cCTESRoma = "com.amazonaws.guardduty#CreateTrustedEntitySetResponse"
+_TESIr = "TrustedEntitySetId"
+_tESIr = "trustedEntitySetId"
+_CTESr = "CreateTrustedEntitySet"
+_EIA = "EC2_INSTANCE_ARN"
+_SI_ = "SCAN_ID"
+_GFI = "GUARDDUTY_FINDING_ID"
+_SST = "SCAN_START_TIME"
+_SS_ = "SCAN_STATUS"
+_ST_ = "SCAN_TYPE"
+_DSa = "DataSource"
+_SL_ = "S3_LOGS"
+_KAL = "KUBERNETES_AUDIT_LOGS"
+_EMS = "EC2_MALWARE_SCAN"
+_DNSLCR = "DNSLogsConfigurationResult"
+_FLCR = "FlowLogsConfigurationResult"
+_KALCR = "KubernetesAuditLogsConfigurationResult"
+_KCR = "KubernetesConfigurationResult"
+_SLCR = "S3LogsConfigurationResult"
+_DSCR = "DataSourceConfigurationsResult"
+_DNSL = "DNSLogs"
+_DSL = "DataSourceList"
+_DSat = "DateStatistics"
+_Da = "Date"
+_da = "date"
+_Sev = "Severity"
+_sev = "severity"
+_DII = "DeclineInvitationsInput"
+_cDIR = "com.amazonaws.guardduty#DeclineInvitationsRequest"
+_aIcc = "accountIds"
+_DIO = "DeclineInvitationsOutput"
+_cDIRo = "com.amazonaws.guardduty#DeclineInvitationsResponse"
+_DIec = "DeclineInvitations"
+_DSSE = "DefaultServerSideEncryption"
+_ETn = "EncryptionType"
+_eTn = "encryptionType"
+_KMKA = "KmsMasterKeyArn"
+_kMKA = "kmsMasterKeyArn"
+_DCDRAI = "DeleteCustomDetectionRuleAssociationInput"
+_cDCDRAR = "com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationRequest"
+_DCDRAO = "DeleteCustomDetectionRuleAssociationOutput"
+_cDCDRARo = "com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationResponse"
+_DCDRA = "DeleteCustomDetectionRuleAssociation"
+_DCDROCI = "DeleteCustomDetectionRuleOrgConfigurationInput"
+_cDCDROCR = "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationRequest"
+_sQ = "smithy.api#httpQuery"
+_DCDROCO = "DeleteCustomDetectionRuleOrgConfigurationOutput"
+_cDCDROCRo = "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationResponse"
+_DCDROC = "DeleteCustomDetectionRuleOrgConfiguration"
+_DDI = "DeleteDetectorInput"
+_cDDR = "com.amazonaws.guardduty#DeleteDetectorRequest"
+_DDO = "DeleteDetectorOutput"
+_cDDRo = "com.amazonaws.guardduty#DeleteDetectorResponse"
+_DDe = "DeleteDetector"
+_DFI = "DeleteFilterInput"
+_cDFR = "com.amazonaws.guardduty#DeleteFilterRequest"
+_DFO = "DeleteFilterOutput"
+_cDFRo = "com.amazonaws.guardduty#DeleteFilterResponse"
+_DFe = "DeleteFilter"
+_DIIe = "DeleteInvitationsInput"
+_cDIRom = "com.amazonaws.guardduty#DeleteInvitationsRequest"
+_DIOe = "DeleteInvitationsOutput"
+_cDIRoma = "com.amazonaws.guardduty#DeleteInvitationsResponse"
+_DIel = "DeleteInvitations"
+_DIPSI = "DeleteIPSetInput"
+_cDIPSR = "com.amazonaws.guardduty#DeleteIPSetRequest"
+_DIPSO = "DeleteIPSetOutput"
+_cDIPSRo = "com.amazonaws.guardduty#DeleteIPSetResponse"
+_DIPS = "DeleteIPSet"
+_DMPPI = "DeleteMalwareProtectionPlanInput"
+_cDMPPR = "com.amazonaws.guardduty#DeleteMalwareProtectionPlanRequest"
+_DMPPO = "DeleteMalwareProtectionPlanOutput"
+_sU = "smithy.api#Unit"
+_DMPP = "DeleteMalwareProtectionPlan"
+_DMI = "DeleteMembersInput"
+_cDMR = "com.amazonaws.guardduty#DeleteMembersRequest"
+_DMO = "DeleteMembersOutput"
+_cDMRo = "com.amazonaws.guardduty#DeleteMembersResponse"
+_DM = "DeleteMembers"
+_DPDI = "DeletePublishingDestinationInput"
+_cDPDR = "com.amazonaws.guardduty#DeletePublishingDestinationRequest"
+_DPDO = "DeletePublishingDestinationOutput"
+_cDPDRo = "com.amazonaws.guardduty#DeletePublishingDestinationResponse"
+_DPD = "DeletePublishingDestination"
+_DTESI = "DeleteThreatEntitySetInput"
+_cDTESR = "com.amazonaws.guardduty#DeleteThreatEntitySetRequest"
+_DTESO = "DeleteThreatEntitySetOutput"
+_cDTESRo = "com.amazonaws.guardduty#DeleteThreatEntitySetResponse"
+_DTES = "DeleteThreatEntitySet"
+_DTISI = "DeleteThreatIntelSetInput"
+_cDTISR = "com.amazonaws.guardduty#DeleteThreatIntelSetRequest"
+_DTISO = "DeleteThreatIntelSetOutput"
+_cDTISRo = "com.amazonaws.guardduty#DeleteThreatIntelSetResponse"
+_DTIS = "DeleteThreatIntelSet"
+_DTESIe = "DeleteTrustedEntitySetInput"
+_cDTESRom = "com.amazonaws.guardduty#DeleteTrustedEntitySetRequest"
+_DTESOe = "DeleteTrustedEntitySetOutput"
+_cDTESRoma = "com.amazonaws.guardduty#DeleteTrustedEntitySetResponse"
+_DTESe = "DeleteTrustedEntitySet"
+_LV = "LongValue"
+_EVq = "EqualsValue"
+_eVq = "equalsValue"
+_FCL = "FilterCriterionList"
+_FCil = "FilterCriteria"
+_IVWM = "IntegerValueWithMax"
+_SCo = "SortCriteria"
+_DMSI = "DescribeMalwareScansInput"
+_cDMSR = "com.amazonaws.guardduty#DescribeMalwareScansRequest"
+_NT = "NextToken"
+_nT = "nextToken"
+_MR = "MaxResults"
+_mR = "maxResults"
+_fCil = "filterCriteria"
+_sCo = "sortCriteria"
+_VD = "VolumeDetail"
+_VA = "VolumeArn"
+_vA = "volumeArn"
+_VT = "VolumeType"
+_vT = "volumeType"
+_VSIGB = "VolumeSizeInGB"
+_vSIGB = "volumeSizeInGB"
+_SA = "SnapshotArn"
+_sA = "snapshotArn"
+_VDo = "VolumeDetails"
+_PL = "PositiveLong"
+_IAn = "InstanceArn"
+_iAn = "instanceArn"
+_SRc = "ScanResult"
+_CLEAN = "CLEAN"
+_INFECTED = "INFECTED"
+_SRD = "ScanResultDetails"
+_sRc = "scanResult"
+_SSc = "ScanStatus"
+_RUNNING = "RUNNING"
+_COMPLETED = "COMPLETED"
+_SKIPPED = "SKIPPED"
+_STc = "ScanType"
+_GI_ = "GUARDDUTY_INITIATED"
+_OD = "ON_DEMAND"
+_TT = "TriggerType"
+_BACKUP = "BACKUP"
+_GUARDDUTY = "GUARDDUTY"
+_TD = "TriggerDetails"
+_GDFI = "GuardDutyFindingId"
+_gDFI = "guardDutyFindingId"
+_tT = "triggerType"
+_Sc = "Scan"
+_ADI = "AdminDetectorId"
+_aDI = "adminDetectorId"
+_SIc = "ScanId"
+_sI = "scanId"
+_sS = "scanStatus"
+_FRa = "FailureReason"
+_fR = "failureReason"
+_SSTc = "ScanStartTime"
+_sST = "scanStartTime"
+_SET = "ScanEndTime"
+_sET = "scanEndTime"
+_tD = "triggerDetails"
+_sRD = "scanResultDetails"
+_TB = "TotalBytes"
+_tB = "totalBytes"
+_FCile = "FileCount"
+_fCile = "fileCount"
+_AVt = "AttachedVolumes"
+_aVt = "attachedVolumes"
+_sTc = "scanType"
+_Sca = "Scans"
+_DMSO = "DescribeMalwareScansOutput"
+_cDMSRo = "com.amazonaws.guardduty#DescribeMalwareScansResponse"
+_sc = "scans"
+_DMS = "DescribeMalwareScans"
+_DOCI = "DescribeOrganizationConfigurationInput"
+_cDOCR = "com.amazonaws.guardduty#DescribeOrganizationConfigurationRequest"
+_OKALCR = "OrganizationKubernetesAuditLogsConfigurationResult"
+_AE = "AutoEnable"
+_aE = "autoEnable"
+_OKCR = "OrganizationKubernetesConfigurationResult"
+_OEVR = "OrganizationEbsVolumesResult"
+_OSEIWFR = "OrganizationScanEc2InstanceWithFindingsResult"
+_OMPCR = "OrganizationMalwareProtectionConfigurationResult"
+_OSLCR = "OrganizationS3LogsConfigurationResult"
+_ODSCR = "OrganizationDataSourceConfigurationsResult"
+_OFS = "OrgFeatureStatus"
+_OFAC = "OrgFeatureAdditionalConfiguration"
+_OACR = "OrganizationAdditionalConfigurationResult"
+_OACRr = "OrganizationAdditionalConfigurationResults"
+_OF = "OrgFeature"
+_OFCR = "OrganizationFeatureConfigurationResult"
+_OFCRr = "OrganizationFeaturesConfigurationsResults"
+_DOCO = "DescribeOrganizationConfigurationOutput"
+_cDOCRo = "com.amazonaws.guardduty#DescribeOrganizationConfigurationResponse"
+_MALR = "MemberAccountLimitReached"
+_mALR = "memberAccountLimitReached"
+_AEOM = "AutoEnableOrganizationMembers"
+_aEOM = "autoEnableOrganizationMembers"
+_DOC = "DescribeOrganizationConfiguration"
+_DPDIe = "DescribePublishingDestinationInput"
+_cDPDRom = "com.amazonaws.guardduty#DescribePublishingDestinationRequest"
+_PSu = "PublishingStatus"
+_PV = "PENDING_VERIFICATION"
+_PUBLISHING = "PUBLISHING"
+_UTPFDP = "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"
+_STOPPED = "STOPPED"
+_DPDOe = "DescribePublishingDestinationOutput"
+_cDPDRoma = "com.amazonaws.guardduty#DescribePublishingDestinationResponse"
+_PFST = "PublishingFailureStartTimestamp"
+_pFST = "publishingFailureStartTimestamp"
+_DPDe = "DescribePublishingDestination"
+_Des = "Destination"
+_Dest = "Destinations"
+_SD = "SequenceDescription"
+_ND = "NetworkDirection"
+_INBOUND = "INBOUND"
+_OUTBOUND = "OUTBOUND"
+_NC = "NetworkConnection"
+_Di = "Direction"
+_di = "direction"
+_NGL = "NetworkGeoLocation"
+_La = "Latitude"
+_Long = "Longitude"
+_NEe = "NetworkEndpoint"
+_Ip = "Ip"
+_ip = "ip"
+_aSu = "autonomousSystem"
+_Conn = "Connection"
+_conn = "connection"
+_NEet = "NetworkEndpoints"
+_EI = "Ec2Image"
+_ENIU = "Ec2NetworkInterfaceUids"
+_IIP = "IamInstanceProfile"
+_PC = "ProductCode"
+_Cod = "Code"
+_pCI = "productCodeId"
+_PTr = "ProductType"
+_pCT = "productCodeType"
+_PCr = "ProductCodes"
+_EIc = "Ec2Instance"
+_AZ = "AvailabilityZone"
+_aZ = "availabilityZone"
+_ID = "ImageDescription"
+_iD = "imageDescription"
+_IS = "InstanceState"
+_iS = "instanceState"
+_OA = "OutpostArn"
+_oA = "outpostArn"
+_Pl = "Platform"
+_pl = "platform"
+_pC = "productCodes"
+_eNIU = "ec2NetworkInterfaceUids"
+_LTV = "LaunchTemplateVersion"
+_ELT = "Ec2LaunchTemplate"
+_IAp = "Ipv6Addresses"
+_PIAD = "PrivateIpAddressDetails"
+_PDN = "PrivateDnsName"
+_pDN = "privateDnsName"
+_PIA = "PrivateIpAddress"
+_pIA = "privateIpAddress"
+_PIAr = "PrivateIpAddresses"
+_SG = "SecurityGroup"
+_GIr = "GroupId"
+_gI = "groupId"
+_GN = "GroupName"
+_gN = "groupName"
+_SGe = "SecurityGroups"
+_ENI = "Ec2NetworkInterface"
+_iAp = "ipv6Addresses"
+_pIAr = "privateIpAddresses"
+_PIu = "PublicIp"
+_pIu = "publicIp"
+_sG = "securityGroups"
+_SNI = "SubNetId"
+_sNI = "subNetId"
+_VIp = "VpcId"
+_vIp = "vpcId"
+_EVc = "Ec2Vpc"
+_ECSc = "EcsClusterStatus"
+_PROVISIONING = "PROVISIONING"
+_DEPROVISIONING = "DEPROVISIONING"
+_INACTIVE = "INACTIVE"
+_ECc = "EcsCluster"
+_ELTc = "EcsLaunchType"
+_FARGATE = "FARGATE"
+_ETc = "EcsTask"
+_TDA = "TaskDefinitionArn"
+_tDA = "taskDefinitionArn"
+_LTa = "LaunchType"
+_lTa = "launchType"
+_cUo = "containerUids"
+_ECk = "EksCluster"
+_IIPV = "IamInstanceProfileV2"
+_KRT = "KubernetesResourcesTypes"
+_PODS = "PODS"
+_JOBS = "JOBS"
+_CRONJOBS = "CRONJOBS"
+_DEPLOYMENTS = "DEPLOYMENTS"
+_DAEMONSETS = "DAEMONSETS"
+_STATEFULSETS = "STATEFULSETS"
+_REPLICASETS = "REPLICASETS"
+_REPLICATIONCONTROLLERS = "REPLICATIONCONTROLLERS"
+_KW = "KubernetesWorkload"
+_PAS = "PublicAccessStatus"
+_ALLOWED = "ALLOWED"
+_PAIB = "PublicAclIgnoreBehavior"
+_IGNORED = "IGNORED"
+_NI = "NOT_IGNORED"
+_PBRB = "PublicBucketRestrictBehavior"
+_RESTRICTED = "RESTRICTED"
+_NR = "NOT_RESTRICTED"
+_PAC = "PublicAccessConfiguration"
+_PAA = "PublicAclAccess"
+_pAA = "publicAclAccess"
+_PPAu = "PublicPolicyAccess"
+_pPAu = "publicPolicyAccess"
+_pAIB = "publicAclIgnoreBehavior"
+_pBRB = "publicBucketRestrictBehavior"
+_SOU = "S3ObjectUids"
+_OI = "OwnerId"
+_oI = "ownerId"
+_EKA = "EncryptionKeyArn"
+_eKA = "encryptionKeyArn"
+_EP = "EffectivePermission"
+_eP = "effectivePermission"
+_PRA = "PublicReadAccess"
+_pRA = "publicReadAccess"
+_PWA = "PublicWriteAccess"
+_pWA = "publicWriteAccess"
+_APA = "AccountPublicAccess"
+_aPA = "accountPublicAccess"
+_BPAu = "BucketPublicAccess"
+_bPAu = "bucketPublicAccess"
+_sOU = "s3ObjectUids"
+_SO = "S3Object"
+_ETa = "ETag"
+_eTa = "eTag"
+_Ke = "Key"
+_RDe = "ResourceData"
+_eI = "ec2Instance"
+_aK = "accessKey"
+_eNI = "ec2NetworkInterface"
+_sO = "s3Object"
+_eCk = "eksCluster"
+_kW = "kubernetesWorkload"
+_cont = "container"
+_eCc = "ecsCluster"
+_eTc = "ecsTask"
+_iIP = "iamInstanceProfile"
+_aASG = "autoscalingAutoScalingGroup"
+_eLT = "ec2LaunchTemplate"
+_eVc = "ec2Vpc"
+_eIc = "ec2Image"
+_cSl = "cloudformationStack"
+_bG = "bedrockGuardrail"
+_FRT = "FindingResourceType"
+_EI_ = "EC2_INSTANCE"
+_ENI_ = "EC2_NETWORK_INTERFACE"
+_SB_ = "S3_BUCKET"
+_SO_ = "S3_OBJECT"
+_AK_ = "ACCESS_KEY"
+_EC__ = "EKS_CLUSTER"
+_KW_ = "KUBERNETES_WORKLOAD"
+_CONTAINER = "CONTAINER"
+_EC___ = "ECS_CLUSTER"
+_ET_ = "ECS_TASK"
+_AASG_ = "AUTOSCALING_AUTO_SCALING_GROUP"
+_IIP_ = "IAM_INSTANCE_PROFILE"
+_CS__ = "CLOUDFORMATION_STACK"
+_ELT_ = "EC2_LAUNCH_TEMPLATE"
+_EV_ = "EC2_VPC"
+_EI__ = "EC2_IMAGE"
+_BCM = "BEDROCK_CUSTOM_MODEL"
+_BIM = "BEDROCK_IMPORTED_MODEL"
+_BPM = "BEDROCK_PROVISIONED_MODEL"
+_BCMD = "BEDROCK_CUSTOM_MODEL_DEPLOYMENT"
+_BIP = "BEDROCK_INFERENCE_PROFILE"
+_BAIP = "BEDROCK_APPLICATION_INFERENCE_PROFILE"
+_BP_ = "BEDROCK_PROMPT"
+_BPR = "BEDROCK_PROMPT_ROUTER"
+_BG_ = "BEDROCK_GUARDRAIL"
+_SE = "SAGEMAKER_ENDPOINT"
+_Tag_ = "Tag"
+_Va = "Value"
+_RV = "ResourceV2"
+_CPl = "CloudPartition"
+_cP = "cloudPartition"
+_Dat = "Data"
+_dat = "data"
+_Reso = "Resources"
+_ITn = "IndicatorType"
+_SUA = "SUSPICIOUS_USER_AGENT"
+_SN_ = "SUSPICIOUS_NETWORK"
+_MI_ = "MALICIOUS_IP"
+_TI = "TOR_IP"
+_AT_ = "ATTACK_TACTIC"
+_HRA = "HIGH_RISK_API"
+_AT__ = "ATTACK_TECHNIQUE"
+_UAFA = "UNUSUAL_API_FOR_ACCOUNT"
+_UAFA_ = "UNUSUAL_ASN_FOR_ACCOUNT"
+_UAFU = "UNUSUAL_ASN_FOR_USER"
+_SP = "SUSPICIOUS_PROCESS"
+_MD = "MALICIOUS_DOMAIN"
+_MP_ = "MALICIOUS_PROCESS"
+_CI_ = "CRYPTOMINING_IP"
+_CD_ = "CRYPTOMINING_DOMAIN"
+_CP_ = "CRYPTOMINING_PROCESS"
+_MF = "MALICIOUS_FILE"
+_VULNERABILITY = "VULNERABILITY"
+_MP__ = "MALICIOUS_PACKAGE"
+_MISCONFIGURATION = "MISCONFIGURATION"
+_REACHABILITY = "REACHABILITY"
+_SD_ = "SENSITIVE_DATA"
+_ITnd = "IndicatorTitle"
+_IVS = "IndicatorValueString"
+_IV = "IndicatorValues"
+_In = "Indicator"
+_Val = "Values"
+_va = "values"
+_Tit = "Title"
+_ti = "title"
+_Ind = "Indicators"
+_SDi = "SignalDescription"
+_EIn = "EndpointIds"
+_RUe = "ResourceUids"
+_STi = "SignalType"
+_FINDING = "FINDING"
+_Si = "Signal"
+_FSA = "FirstSeenAt"
+_fSA = "firstSeenAt"
+_LSA = "LastSeenAt"
+_lSA = "lastSeenAt"
+_Cou = "Count"
+_cou = "count"
+_rUe = "resourceUids"
+_aIct = "actorIds"
+_eIn = "endpointIds"
+_SIi = "SignalIndicators"
+_sIi = "signalIndicators"
+_activ = "activities"
+_Sig = "Signals"
+_Seq = "Sequence"
+_acto = "actors"
+_reso = "resources"
+_End = "Endpoints"
+_end = "endpoints"
+_si = "signals"
+_SIe = "SequenceIndicators"
+_sIe = "sequenceIndicators"
+_aST = "additionalSequenceTypes"
+_Det = "Detection"
+_an = "anomaly"
+_seq = "sequence"
+_DRCS = "DetectionRuleConfigurationStatus"
+_PROCESSING = "PROCESSING"
+_DRDS = "DetectionRuleDataSource"
+_CME = "CLOUDTRAIL_MANAGEMENT_EVENT"
+_CTME = "CloudTrailManagementEvent"
+_DRD = "DetectionRuleDescription"
+_DRFC = "DetectionRuleFilterCondition"
+_EQUALS = "EQUALS"
+_CONTAINS = "CONTAINS"
+_FFN = "FilterFieldName"
+_NAME = "NAME"
+_DESCRIPTION = "DESCRIPTION"
+_DS_ = "DATA_SOURCE"
+_dSa = "dataSource"
+_SEVERITY = "SEVERITY"
+_TACTIC = "TACTIC"
+_tac = "tactic"
+_TECHNIQUE = "TECHNIQUE"
+_tec = "technique"
+_SERVICE = "SERVICE"
+_DRFV = "DetectionRuleFilterValue"
+_DRFVe = "DetectionRuleFilterValues"
+_DRF = "DetectionRuleFilter"
+_cond = "condition"
+_DRFL = "DetectionRuleFilterList"
+_DRMR = "DetectionRuleMaxResults"
+_DROC = "DetectionRuleOrgConfiguration"
+_SRt = "StatusReason"
+_sRt = "statusReason"
+_DROCS = "DetectionRuleOrgConfigurationSummary"
+_DROCSL = "DetectionRuleOrgConfigurationSummaryList"
+_DRSN = "DetectionRuleServiceName"
+_DRS = "DetectionRuleSeverity"
+_CRITICAL = "CRITICAL"
+_DSe = "DetectionSource"
+_AMAZON = "AMAZON"
+_BITDEFENDER = "BITDEFENDER"
+_MB = "ManagedBy"
+_GP = "GUARDDUTY_POLICY"
+_DACR = "DetectorAdditionalConfigurationResult"
+_mB = "managedBy"
+_DACRe = "DetectorAdditionalConfigurationResults"
+_DFR = "DetectorFeatureResult"
+_DFCR = "DetectorFeatureConfigurationResult"
+_DFCRe = "DetectorFeatureConfigurationsResults"
+_DIet = "DetectorIds"
+_DSet = "DetectorStatus"
+_DOAAI = "DisableOrganizationAdminAccountInput"
+_cDOAAR = "com.amazonaws.guardduty#DisableOrganizationAdminAccountRequest"
+_DOAAO = "DisableOrganizationAdminAccountOutput"
+_cDOAARo = "com.amazonaws.guardduty#DisableOrganizationAdminAccountResponse"
+_DOAA = "DisableOrganizationAdminAccount"
+_DFAAI = "DisassociateFromAdministratorAccountInput"
+_cDFAAR = "com.amazonaws.guardduty#DisassociateFromAdministratorAccountRequest"
+_DFAAO = "DisassociateFromAdministratorAccountOutput"
+_cDFAARo = "com.amazonaws.guardduty#DisassociateFromAdministratorAccountResponse"
+_DFAA = "DisassociateFromAdministratorAccount"
+_DFMAI = "DisassociateFromMasterAccountInput"
+_cDFMAR = "com.amazonaws.guardduty#DisassociateFromMasterAccountRequest"
+_DFMAO = "DisassociateFromMasterAccountOutput"
+_cDFMARo = "com.amazonaws.guardduty#DisassociateFromMasterAccountResponse"
+_DFMA = "DisassociateFromMasterAccount"
+_DMIi = "DisassociateMembersInput"
+_cDMRom = "com.amazonaws.guardduty#DisassociateMembersRequest"
+_DMOi = "DisassociateMembersOutput"
+_cDMRoma = "com.amazonaws.guardduty#DisassociateMembersResponse"
+_DMi = "DisassociateMembers"
+_ES = "EbsSnapshot"
+_ESD = "EbsSnapshotDetails"
+_ESP = "EbsSnapshotPreservation"
+_NR_ = "NO_RETENTION"
+_RWF = "RETENTION_WITH_FINDING"
+_EVD = "EbsVolumeDetails"
+_SVD = "ScannedVolumeDetails"
+_sVD = "scannedVolumeDetails"
+_SVDk = "SkippedVolumeDetails"
+_sVDk = "skippedVolumeDetails"
+_HSTD = "HighestSeverityThreatDetails"
+_TN = "ThreatName"
+_tN = "threatName"
+_SIC = "ScannedItemCount"
+_TG = "TotalGb"
+_tG = "totalGb"
+_Fi = "Files"
+_fi = "files"
+_Vo = "Volumes"
+_vo = "volumes"
+_SFP = "ScanFilePath"
+_FP = "FilePath"
+_fP = "filePath"
+_Ha = "Hash"
+_h = "hash"
+_FNi = "FileName"
+_fN = "fileName"
+_FPi = "FilePaths"
+_STN = "ScanThreatName"
+_IC = "ItemCount"
+_iC = "itemCount"
+_fPi = "filePaths"
+_STNc = "ScanThreatNames"
+_TDBN = "ThreatDetectedByName"
+_UTNC = "UniqueThreatNameCount"
+_uTNC = "uniqueThreatNameCount"
+_Sho = "Shortened"
+_sho = "shortened"
+_TNh = "ThreatNames"
+_tNh = "threatNames"
+_TDIC = "ThreatsDetectedItemCount"
+_SDc = "ScanDetections"
+_sIC = "scannedItemCount"
+_tDIC = "threatsDetectedItemCount"
+_hSTD = "highestSeverityThreatDetails"
+_tDBN = "threatDetectedByName"
+_So = "Sources"
+_EVSD = "EbsVolumeScanDetails"
+_SSA = "ScanStartedAt"
+_sSA = "scanStartedAt"
+_SCA = "ScanCompletedAt"
+_sCA = "scanCompletedAt"
+_TFI = "TriggerFindingId"
+_tFI = "triggerFindingId"
+_so = "sources"
+_sD = "scanDetections"
+_EIDc = "Ec2ImageDetails"
+_IAm = "ImageArn"
+_iAm = "imageArn"
+_HP = "HostPath"
+_Vol = "Volume"
+_hP = "hostPath"
+_ETD = "EcsTaskDetails"
+_DAe = "DefinitionArn"
+_dAe = "definitionArn"
+_TCA = "TaskCreatedAt"
+_SAt = "StartedAt"
+_sAt = "startedAt"
+_SBt = "StartedBy"
+_sBt = "startedBy"
+_conta = "containers"
+_Gr = "Group"
+_gr = "group"
+_ASCc = "ActiveServicesCount"
+_aSC = "activeServicesCount"
+_RCIC = "RegisteredContainerInstancesCount"
+_rCIC = "registeredContainerInstancesCount"
+_RTC = "RunningTasksCount"
+_rTC = "runningTasksCount"
+_TDa = "TaskDetails"
+_tDa = "taskDetails"
+_EOAAI = "EnableOrganizationAdminAccountInput"
+_cEOAAR = "com.amazonaws.guardduty#EnableOrganizationAdminAccountRequest"
+_EOAAO = "EnableOrganizationAdminAccountOutput"
+_cEOAARo = "com.amazonaws.guardduty#EnableOrganizationAdminAccountResponse"
+_EOAA = "EnableOrganizationAdminAccount"
+_TID = "ThreatIntelligenceDetail"
+_TLN = "ThreatListName"
+_tLN = "threatListName"
+_TFS = "ThreatFileSha256"
+_tFS = "threatFileSha256"
+_TIDh = "ThreatIntelligenceDetails"
+_Ev = "Evidence"
+_tID = "threatIntelligenceDetails"
+_Fe = "Feedback"
+_USEFUL = "USEFUL"
+_NU = "NOT_USEFUL"
+_FNil = "FilterNames"
+_FV = "FilterVersion"
+_NIe = "NetworkInterface"
+_NII = "NetworkInterfaceId"
+_nII = "networkInterfaceId"
+_PDNu = "PublicDnsName"
+_pDNu = "publicDnsName"
+_SIu = "SubnetId"
+_sIu = "subnetId"
+_NIet = "NetworkInterfaces"
+_IDn = "InstanceDetails"
+_IIm = "ImageId"
+_iIm = "imageId"
+_LTau = "LaunchTime"
+_lTau = "launchTime"
+_nI = "networkInterfaces"
+_Gro = "Groups"
+_IUm = "ImpersonatedUser"
+_Use = "Username"
+_use = "username"
+_gro = "groups"
+_SNL = "SessionNameList"
+_KUD = "KubernetesUserDetails"
+_SNe = "SessionName"
+_sNes = "sessionName"
+_iUm = "impersonatedUser"
+_KWD = "KubernetesWorkloadDetails"
+_HN = "HostNetwork"
+_hN = "hostNetwork"
+_SAN = "ServiceAccountName"
+_sAN = "serviceAccountName"
+_HIPC = "HostIPC"
+_hIPC = "hostIPC"
+_HPID = "HostPID"
+_hPID = "hostPID"
+_KD = "KubernetesDetails"
+_kUD = "kubernetesUserDetails"
+_kWD = "kubernetesWorkloadDetails"
+_SIub = "SubnetIds"
+_VC = "VpcConfig"
+_sIub = "subnetIds"
+_LD = "LambdaDetails"
+_FAu = "FunctionArn"
+_fA = "functionArn"
+_FNu = "FunctionName"
+_fNu = "functionName"
+_LMA = "LastModifiedAt"
+_lMA = "lastModifiedAt"
+_RIev = "RevisionId"
+_rIev = "revisionId"
+_FVu = "FunctionVersion"
+_fV = "functionVersion"
+_vC = "vpcConfig"
+_MDo = "ModelDetail"
+_MIo = "ModelId"
+_mIo = "modelId"
+_MDod = "ModelDetails"
+_RDID = "RdsDbInstanceDetails"
+_DIIb = "DbInstanceIdentifier"
+_dII = "dbInstanceIdentifier"
+_Eng = "Engine"
+_eng = "engine"
+_EVn = "EngineVersion"
+_eVn = "engineVersion"
+_DCI = "DbClusterIdentifier"
+_dCI = "dbClusterIdentifier"
+_DIA = "DbInstanceArn"
+_dIA = "dbInstanceArn"
+_DRI = "DbiResourceId"
+_dRI = "dbiResourceId"
+_RDUD = "RdsDbUserDetails"
+_Data = "Database"
+_data = "database"
+_Ss = "Ssl"
+_ss = "ssl"
+_AMu = "AuthMethod"
+_aM = "authMethod"
+_RLDD = "RdsLimitlessDbDetails"
+_DSGI = "DbShardGroupIdentifier"
+_dSGI = "dbShardGroupIdentifier"
+_DSGRI = "DbShardGroupResourceId"
+_dSGRI = "dbShardGroupResourceId"
+_DSGA = "DbShardGroupArn"
+_dSGA = "dbShardGroupArn"
+_SCCSD = "ScanConfigurationContinuousScanDetails"
+_RPDe = "RecoveryPointDetails"
+_RPA = "RecoveryPointArn"
+_rPA = "recoveryPointArn"
+_BVN = "BackupVaultName"
+_bVN = "backupVaultName"
+_cSD = "continuousScanDetails"
+_Ow = "Owner"
+_PCe = "PermissionConfiguration"
+_bLP = "bucketLevelPermissions"
+_aLP = "accountLevelPermissions"
+_PAu = "PublicAccess"
+_pCe = "permissionConfiguration"
+_SOD = "S3ObjectDetail"
+_OAb = "ObjectArn"
+_oAb = "objectArn"
+_SODb = "S3ObjectDetails"
+_SBD = "S3BucketDetail"
+_ow = "owner"
+_dSSE = "defaultServerSideEncryption"
+_pA = "publicAccess"
+_sOD = "s3ObjectDetails"
+_SBDu = "S3BucketDetails"
+_aKD = "accessKeyDetails"
+_sBD = "s3BucketDetails"
+_iDn = "instanceDetails"
+_kD = "kubernetesDetails"
+_eVD = "ebsVolumeDetails"
+_CDo = "ContainerDetails"
+_cDo = "containerDetails"
+_lD = "lambdaDetails"
+_rDID = "rdsDbInstanceDetails"
+_rLDD = "rdsLimitlessDbDetails"
+_rDUD = "rdsDbUserDetails"
+_eSD = "ebsSnapshotDetails"
+_eIDc = "ec2ImageDetails"
+_rPDe = "recoveryPointDetails"
+_bGD = "bedrockGuardrailDetails"
+_mD = "modelDetails"
+_SAI = "ServiceAdditionalInfo"
+_SCc = "ScanCategory"
+_FS_ = "FULL_SCAN"
+_IS_ = "INCREMENTAL_SCAN"
+_ISD = "IncrementalScanDetails"
+_BRA = "BaselineResourceArn"
+_bRA = "baselineResourceArn"
+_MPFSC = "MalwareProtectionFindingsScanConfiguration"
+_iSD = "incrementalScanDetails"
+_MPST = "MalwareProtectionScanType"
+_BI = "BACKUP_INITIATED"
+_IDt = "ItemDetails"
+_RAe = "ResourceArn"
+_rAe = "resourceArn"
+_IPt = "ItemPath"
+_iPt = "itemPath"
+_aId = "additionalInfo"
+_IDL = "ItemDetailsList"
+_NIP = "NestedItemPath"
+_nIP = "nestedItemPath"
+_IPte = "ItemPaths"
+_Th = "Threat"
+_Sou = "Source"
+_sou = "source"
+_iPte = "itemPaths"
+_iDt = "itemDetails"
+_Thr = "Threats"
+_MSD = "MalwareScanDetails"
+_th = "threats"
+_sCc = "scanCategory"
+_SCca = "ScanConfiguration"
+_sCca = "scanConfiguration"
+_UTC = "UniqueThreatCount"
+_uTC = "uniqueThreatCount"
+_FLl = "FlagsList"
+_MRL = "MemoryRegionsList"
+_LO = "LineageObject"
+_NP = "NamespacePid"
+_nP = "namespacePid"
+_UI = "UserId"
+_uI = "userId"
+_Pi = "Pid"
+_pi = "pid"
+_Uu = "Uuid"
+_uu = "uuid"
+_EPx = "ExecutablePath"
+_ePx = "executablePath"
+_Eu = "Euid"
+_eu = "euid"
+_PU = "ParentUuid"
+_pU = "parentUuid"
+_Li = "Lineage"
+_PD = "ProcessDetails"
+_ESx = "ExecutableSha256"
+_eS = "executableSha256"
+_Pw = "Pwd"
+_pw = "pwd"
+_li = "lineage"
+_RFPL = "RelatedFilePathsList"
+_RC = "RuntimeContext"
+_MPod = "ModifyingProcess"
+_mPod = "modifyingProcess"
+_MA = "ModifiedAt"
+_mA = "modifiedAt"
+_SPc = "ScriptPath"
+_sP = "scriptPath"
+_LP = "LibraryPath"
+_lP = "libraryPath"
+_LPV = "LdPreloadValue"
+_lPV = "ldPreloadValue"
+_SPo = "SocketPath"
+_sPo = "socketPath"
+_RBP = "RuncBinaryPath"
+_rBP = "runcBinaryPath"
+_RAP = "ReleaseAgentPath"
+_rAP = "releaseAgentPath"
+_MSo = "MountSource"
+_mSo = "mountSource"
+_MTo = "MountTarget"
+_mTo = "mountTarget"
+_FST = "FileSystemType"
+_fST = "fileSystemType"
+_Fl = "Flags"
+_fl = "flags"
+_MN = "ModuleName"
+_mN = "moduleName"
+_MFP = "ModuleFilePath"
+_mFP = "moduleFilePath"
+_MSod = "ModuleSha256"
+_mSod = "moduleSha256"
+_SHFP = "ShellHistoryFilePath"
+_sHFP = "shellHistoryFilePath"
+_TPa = "TargetProcess"
+_tPa = "targetProcess"
+_AFd = "AddressFamily"
+_aF = "addressFamily"
+_IPN = "IanaProtocolNumber"
+_iPN = "ianaProtocolNumber"
+_MRe = "MemoryRegions"
+_mRe = "memoryRegions"
+_TNo = "ToolName"
+_tNo = "toolName"
+_TC = "ToolCategory"
+_tC = "toolCategory"
+_CLE = "CommandLineExample"
+_cLE = "commandLineExample"
+_TFP = "ThreatFilePath"
+_tFP = "threatFilePath"
+_FO = "FileOperation"
+_fO = "fileOperation"
+_RFP = "RelatedFilePaths"
+_rFP = "relatedFilePaths"
+_RDu = "RuntimeDetails"
+_Conte = "Context"
+_conte = "context"
+_ev = "evidence"
+_Arc = "Archived"
+_arc = "archived"
+_EFS = "EventFirstSeen"
+_eFS = "eventFirstSeen"
+_ELS = "EventLastSeen"
+_eLS = "eventLastSeen"
+_RR = "ResourceRole"
+_rR = "resourceRole"
+_UF = "UserFeedback"
+_uF = "userFeedback"
+_FNe = "FeatureName"
+_fNe = "featureName"
+_eVSD = "ebsVolumeScanDetails"
+_rDu = "runtimeDetails"
+_det = "detection"
+_mSD = "malwareScanDetails"
+_Fin = "Finding"
+_Par = "Partition"
+_par = "partition"
+_SV = "SchemaVersion"
+_sVc = "schemaVersion"
+_AASA = "AssociatedAttackSequenceArn"
+_aASA = "associatedAttackSequenceArn"
+_Find = "Findings"
+_GBA = "GroupedByAccount"
+_GBD = "GroupedByDate"
+_FTS = "FindingTypeStatistics"
+_fTi = "findingType"
+_GBFT = "GroupedByFindingType"
+_RSe = "ResourceStatistics"
+_GBR = "GroupedByResource"
+_SSe = "SeverityStatistics"
+_GBS = "GroupedBySeverity"
+_FSi = "FindingStatistics"
+_cBS = "countBySeverity"
+_gBA = "groupedByAccount"
+_gBD = "groupedByDate"
+_gBFT = "groupedByFindingType"
+_gBR = "groupedByResource"
+_gBS = "groupedBySeverity"
+_FSTi = "FindingStatisticType"
+_CBS_ = "COUNT_BY_SEVERITY"
+_FSTin = "FindingStatisticTypes"
+_GAAI = "GetAdministratorAccountInput"
+_cGAAR = "com.amazonaws.guardduty#GetAdministratorAccountRequest"
+_GAAO = "GetAdministratorAccountOutput"
+_cGAARo = "com.amazonaws.guardduty#GetAdministratorAccountResponse"
+_ad = "administrator"
+_GAA = "GetAdministratorAccount"
+_GCSI = "GetCoverageStatisticsInput"
+_cGCSR = "com.amazonaws.guardduty#GetCoverageStatisticsRequest"
+_STt = "StatisticsType"
+_sTt = "statisticsType"
+_GCSO = "GetCoverageStatisticsOutput"
+_cGCSRo = "com.amazonaws.guardduty#GetCoverageStatisticsResponse"
+_cSo = "coverageStatistics"
+_GCS = "GetCoverageStatistics"
+_GCDRI = "GetCustomDetectionRuleInput"
+_cGCDRR = "com.amazonaws.guardduty#GetCustomDetectionRuleRequest"
+_RE = "RuleExpression"
+_RDul = "RuleDefinition"
+_Ex = "Expression"
+_ex = "expression"
+_RL = "RuleLanguage"
+_SQL = "SQL"
+_RNu = "RuleName"
+_RSu = "RuleSchema"
+_MTi = "MitreTactic"
+_MTit = "MitreTechnique"
+_RDule = "RuleDetail"
+_Tac = "Tactic"
+_Tec = "Technique"
+_Def = "Definition"
+_def = "definition"
+_Lan = "Language"
+_la = "language"
+_Sch = "Schema"
+_sch = "schema"
+_GCDRO = "GetCustomDetectionRuleOutput"
+_cGCDRRo = "com.amazonaws.guardduty#GetCustomDetectionRuleResponse"
+_Ru = "Rule"
+_ru = "rule"
+_GCDR = "GetCustomDetectionRule"
+_GCDRAI = "GetCustomDetectionRuleAssociationInput"
+_cGCDRAR = "com.amazonaws.guardduty#GetCustomDetectionRuleAssociationRequest"
+_GCDRAO = "GetCustomDetectionRuleAssociationOutput"
+_cGCDRARo = "com.amazonaws.guardduty#GetCustomDetectionRuleAssociationResponse"
+_GCDRA = "GetCustomDetectionRuleAssociation"
+_GCDROCI = "GetCustomDetectionRuleOrgConfigurationInput"
+_cGCDROCR = "com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationRequest"
+_GCDROCO = "GetCustomDetectionRuleOrgConfigurationOutput"
+_cGCDROCRo = "com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationResponse"
+_Conf = "Configuration"
+_conf = "configuration"
+_GCDROC = "GetCustomDetectionRuleOrgConfiguration"
+_GDI = "GetDetectorInput"
+_cGDR = "com.amazonaws.guardduty#GetDetectorRequest"
+_GDO = "GetDetectorOutput"
+_cGDRo = "com.amazonaws.guardduty#GetDetectorResponse"
+_GD = "GetDetector"
+_GFIe = "GetFilterInput"
+_cGFR = "com.amazonaws.guardduty#GetFilterRequest"
+_GFO = "GetFilterOutput"
+_cGFRo = "com.amazonaws.guardduty#GetFilterResponse"
+_GF = "GetFilter"
+_GFIet = "GetFindingsInput"
+_cGFRom = "com.amazonaws.guardduty#GetFindingsRequest"
+_GFOe = "GetFindingsOutput"
+_cGFRoma = "com.amazonaws.guardduty#GetFindingsResponse"
+_fin = "findings"
+_GFe = "GetFindings"
+_GBT = "GroupByType"
+_ACCOUNT = "ACCOUNT"
+_DATE = "DATE"
+_FT_ = "FINDING_TYPE"
+_RESOURCE = "RESOURCE"
+_MRa = "MaxResults100"
+_GFSI = "GetFindingsStatisticsInput"
+_cGFSR = "com.amazonaws.guardduty#GetFindingsStatisticsRequest"
+_fSTi = "findingStatisticTypes"
+_GB = "GroupBy"
+_gB = "groupBy"
+_GFSO = "GetFindingsStatisticsOutput"
+_cGFSRo = "com.amazonaws.guardduty#GetFindingsStatisticsResponse"
+_fS = "findingStatistics"
+_GFS = "GetFindingsStatistics"
+_GII = "GetInvestigationInput"
+_cGIR = "com.amazonaws.guardduty#GetInvestigationRequest"
+_IED = "InvestigationErrorDetails"
+_Prod = "Product"
+_Fea = "Feature"
+_fe = "feature"
+_IM = "InvestigationMetadata"
+_prod = "product"
+_RDi = "RiskDetails"
+_RLi = "RiskLevel"
+_INFO = "INFO"
+_Inf = "Info"
+_Cri = "Critical"
+_ISn = "InvestigationStatus"
+_TBr = "TriggeredBy"
+_Inv = "Investigation"
+_tBr = "triggeredBy"
+_Met = "Metadata"
+_met = "metadata"
+_Cl = "Cloud"
+_cl = "cloud"
+_rL = "riskLevel"
+_Ri = "Risk"
+_ri = "risk"
+_Sum = "Summary"
+_sum = "summary"
+_GIO = "GetInvestigationOutput"
+_cGIRo = "com.amazonaws.guardduty#GetInvestigationResponse"
+_in = "investigation"
+_GIe = "GetInvestigation"
+_GICI = "GetInvitationsCountInput"
+_cGICR = "com.amazonaws.guardduty#GetInvitationsCountRequest"
+_GICO = "GetInvitationsCountOutput"
+_cGICRo = "com.amazonaws.guardduty#GetInvitationsCountResponse"
+_ICn = "InvitationsCount"
+_iCn = "invitationsCount"
+_GIC = "GetInvitationsCount"
+_GIPSI = "GetIPSetInput"
+_cGIPSR = "com.amazonaws.guardduty#GetIPSetRequest"
+_ISS = "IpSetStatus"
+_ACTIVATING = "ACTIVATING"
+_DEACTIVATING = "DEACTIVATING"
+_ERROR = "ERROR"
+_DP_ = "DELETE_PENDING"
+_DELETED = "DELETED"
+_GIPSO = "GetIPSetOutput"
+_cGIPSRo = "com.amazonaws.guardduty#GetIPSetResponse"
+_GIPS = "GetIPSet"
+_GMPPI = "GetMalwareProtectionPlanInput"
+_cGMPPR = "com.amazonaws.guardduty#GetMalwareProtectionPlanRequest"
+_MPPS = "MalwareProtectionPlanStatus"
+_WARNING = "WARNING"
+_MPPSR = "MalwareProtectionPlanStatusReason"
+_cod = "code"
+_MPPSRL = "MalwareProtectionPlanStatusReasonsList"
+_GMPPO = "GetMalwareProtectionPlanOutput"
+_cGMPPRo = "com.amazonaws.guardduty#GetMalwareProtectionPlanResponse"
+_SRta = "StatusReasons"
+_sRta = "statusReasons"
+_GMPP = "GetMalwareProtectionPlan"
+_GMSI = "GetMalwareScanInput"
+_cGMSR = "com.amazonaws.guardduty#GetMalwareScanRequest"
+_NNI = "NonNegativeInteger"
+_MPRT = "MalwareProtectionResourceType"
+_ERP = "EBS_RECOVERY_POINT"
+_ES_ = "EBS_SNAPSHOT"
+_EV__ = "EBS_VOLUME"
+_EA_ = "EC2_AMI"
+_ERP_ = "EC2_RECOVERY_POINT"
+_SRP = "S3_RECOVERY_POINT"
+_SPITR = "S3_POINT_IN_TIME_RECOVERY"
+_SCRP = "ScanConfigurationRecoveryPoint"
+_RP = "RecoveryPoint"
+_rP = "recoveryPoint"
+_SRDc = "ScannedResourceDetails"
+_EVb = "EbsVolume"
+_eVb = "ebsVolume"
+_eSb = "ebsSnapshot"
+_MPSS = "MalwareProtectionScanStatus"
+_CWI = "COMPLETED_WITH_ISSUES"
+_SSR = "ScanStatusReason"
+_AD_ = "ACCESS_DENIED"
+_RNF = "RESOURCE_NOT_FOUND"
+_SSLE = "SNAPSHOT_SIZE_LIMIT_EXCEEDED"
+_RU_ = "RESOURCE_UNAVAILABLE"
+_IS__ = "INCONSISTENT_SOURCE"
+_IND = "INCREMENTAL_NO_DIFFERENCE"
+_NEVF = "NO_EBS_VOLUMES_FOUND"
+_UPCT = "UNSUPPORTED_PRODUCT_CODE_TYPE"
+_ASLE = "AMI_SNAPSHOT_LIMIT_EXCEEDED"
+_UR = "UNRELATED_RESOURCES"
+_BRNS = "BASE_RESOURCE_NOT_SCANNED"
+_BCAT = "BASE_CREATED_AFTER_TARGET"
+_UFI = "UNSUPPORTED_FOR_INCREMENTAL"
+_UA__ = "UNSUPPORTED_AMI"
+_US = "UNSUPPORTED_SNAPSHOT"
+_UCRP = "UNSUPPORTED_COMPOSITE_RECOVERY_POINT"
+_AFSOF = "ALL_FILES_SKIPPED_OR_FAILED"
+_SRca = "ScannedResource"
+_SRA = "ScannedResourceArn"
+_sRA = "scannedResourceArn"
+_SRT = "ScannedResourceType"
+_sRT = "scannedResourceType"
+_SRS = "ScannedResourceStatus"
+_sRS = "scannedResourceStatus"
+_sSR = "scanStatusReason"
+_SRcan = "ScannedResources"
+_SRSc = "ScanResultStatus"
+_NTF = "NO_THREATS_FOUND"
+_TF_ = "THREATS_FOUND"
+_SRTc = "ScanResultThreat"
+_SRTca = "ScanResultThreats"
+_GMSRD = "GetMalwareScanResultDetails"
+_sRSc = "scanResultStatus"
+_SFC = "SkippedFileCount"
+_sFC = "skippedFileCount"
+_FFC = "FailedFileCount"
+_fFC = "failedFileCount"
+_TFFC = "ThreatFoundFileCount"
+_tFFC = "threatFoundFileCount"
+_TFC = "TotalFileCount"
+_tFC = "totalFileCount"
+_GMSO = "GetMalwareScanOutput"
+_cGMSRo = "com.amazonaws.guardduty#GetMalwareScanResponse"
+_SRC = "ScannedResourcesCount"
+_sRC = "scannedResourcesCount"
+_SRCk = "SkippedResourcesCount"
+_sRCk = "skippedResourcesCount"
+_FRC = "FailedResourcesCount"
+_fRC = "failedResourcesCount"
+_sRca = "scannedResources"
+_GMS = "GetMalwareScan"
+_GMSSI = "GetMalwareScanSettingsInput"
+_cGMSSR = "com.amazonaws.guardduty#GetMalwareScanSettingsRequest"
+_SCK = "ScanCriterionKey"
+_EIT = "EC2_INSTANCE_TAG"
+_SCP = "ScanConditionPair"
+_ME = "MapEquals"
+_SCcan = "ScanCondition"
+_mE = "mapEquals"
+_SCcanr = "ScanCriterion"
+_SRCc = "ScanResourceCriteria"
+_Inc = "Include"
+_inc = "include"
+_Exc = "Exclude"
+_exc = "exclude"
+_GMSSO = "GetMalwareScanSettingsOutput"
+_cGMSSRo = "com.amazonaws.guardduty#GetMalwareScanSettingsResponse"
+_sRCc = "scanResourceCriteria"
+_eSP = "ebsSnapshotPreservation"
+_GMSS = "GetMalwareScanSettings"
+_GMAI = "GetMasterAccountInput"
+_cGMAR = "com.amazonaws.guardduty#GetMasterAccountRequest"
+_Mas = "Master"
+_GMAO = "GetMasterAccountOutput"
+_cGMARo = "com.amazonaws.guardduty#GetMasterAccountResponse"
+_mas = "master"
+_GMA = "GetMasterAccount"
+_GMDI = "GetMemberDetectorsInput"
+_cGMDR = "com.amazonaws.guardduty#GetMemberDetectorsRequest"
+_MACR = "MemberAdditionalConfigurationResult"
+_MACRe = "MemberAdditionalConfigurationResults"
+_MFCR = "MemberFeaturesConfigurationResult"
+_MFCRe = "MemberFeaturesConfigurationsResults"
+_MDSC = "MemberDataSourceConfiguration"
+_MDSCe = "MemberDataSourceConfigurations"
+_GMDO = "GetMemberDetectorsOutput"
+_cGMDRo = "com.amazonaws.guardduty#GetMemberDetectorsResponse"
+_mem = "members"
+_GMD = "GetMemberDetectors"
+_GMI = "GetMembersInput"
+_cGMR = "com.amazonaws.guardduty#GetMembersRequest"
+_Mem = "Member"
+_Memb = "Members"
+_GMO = "GetMembersOutput"
+_cGMRo = "com.amazonaws.guardduty#GetMembersResponse"
+_GM = "GetMembers"
+_GOSI = "GetOrganizationStatisticsInput"
+_OFSAC = "OrganizationFeatureStatisticsAdditionalConfiguration"
+_EAC = "EnabledAccountsCount"
+_eAC = "enabledAccountsCount"
+_OFSACr = "OrganizationFeatureStatisticsAdditionalConfigurations"
+_OFSr = "OrganizationFeatureStatistics"
+_OFSR = "OrganizationFeatureStatisticsResults"
+_OS = "OrganizationStatistics"
+_TAC = "TotalAccountsCount"
+_tAC = "totalAccountsCount"
+_MAC = "MemberAccountsCount"
+_mAC = "memberAccountsCount"
+_AAC = "ActiveAccountsCount"
+_aAC = "activeAccountsCount"
+_CBF = "CountByFeature"
+_cBF = "countByFeature"
+_ODr = "OrganizationDetails"
+_oS = "organizationStatistics"
+_GOSO = "GetOrganizationStatisticsOutput"
+_cGOSR = "com.amazonaws.guardduty#GetOrganizationStatisticsResponse"
+_oD = "organizationDetails"
+_GOS = "GetOrganizationStatistics"
+_GRFTDI = "GetRemainingFreeTrialDaysInput"
+_cGRFTDR = "com.amazonaws.guardduty#GetRemainingFreeTrialDaysRequest"
+_GRFTDO = "GetRemainingFreeTrialDaysOutput"
+_cGRFTDRo = "com.amazonaws.guardduty#GetRemainingFreeTrialDaysResponse"
+_Acc = "Accounts"
+_acc = "accounts"
+_GRFTD = "GetRemainingFreeTrialDays"
+_GTESI = "GetThreatEntitySetInput"
+_cGTESR = "com.amazonaws.guardduty#GetThreatEntitySetRequest"
+_TESS = "ThreatEntitySetStatus"
+_GTESO = "GetThreatEntitySetOutput"
+_cGTESRo = "com.amazonaws.guardduty#GetThreatEntitySetResponse"
+_ED = "ErrorDetails"
+_eD = "errorDetails"
+_GTES = "GetThreatEntitySet"
+_GTISI = "GetThreatIntelSetInput"
+_cGTISR = "com.amazonaws.guardduty#GetThreatIntelSetRequest"
+_TISS = "ThreatIntelSetStatus"
+_GTISO = "GetThreatIntelSetOutput"
+_cGTISRo = "com.amazonaws.guardduty#GetThreatIntelSetResponse"
+_GTIS = "GetThreatIntelSet"
+_GTESIe = "GetTrustedEntitySetInput"
+_cGTESRom = "com.amazonaws.guardduty#GetTrustedEntitySetRequest"
+_TESSr = "TrustedEntitySetStatus"
+_GTESOe = "GetTrustedEntitySetOutput"
+_cGTESRoma = "com.amazonaws.guardduty#GetTrustedEntitySetResponse"
+_GTESe = "GetTrustedEntitySet"
+_UFs = "UsageFeature"
+_RDPP = "RDS_DBI_PROTECTION_PROVISIONED"
+_RDPS = "RDS_DBI_PROTECTION_SERVERLESS"
+_UFL = "UsageFeatureList"
+_RLe = "ResourceList"
+_UC = "UsageCriteria"
+_UST = "UsageStatisticType"
+_SBA = "SUM_BY_ACCOUNT"
+_SBDS = "SUM_BY_DATA_SOURCE"
+_SBR = "SUM_BY_RESOURCE"
+_TR = "TOP_RESOURCES"
+_SBF = "SUM_BY_FEATURES"
+_TABF = "TOP_ACCOUNTS_BY_FEATURE"
+_GUSI = "GetUsageStatisticsInput"
+_cGUSR = "com.amazonaws.guardduty#GetUsageStatisticsRequest"
+_uST = "usageStatisticsType"
+_uC = "usageCriteria"
+_Uni = "Unit"
+_uni = "unit"
+_To = "Total"
+_Am = "Amount"
+_am = "amount"
+_UAR = "UsageAccountResult"
+_to = "total"
+_UARL = "UsageAccountResultList"
+_UDSRs = "UsageDataSourceResult"
+_UDSRL = "UsageDataSourceResultList"
+_UFR = "UsageFeatureResult"
+_UFRL = "UsageFeatureResultList"
+_URR = "UsageResourceResult"
+_URRL = "UsageResourceResultList"
+_UTAR = "UsageTopAccountResult"
+_UTABFL = "UsageTopAccountsByFeatureList"
+_UTARs = "UsageTopAccountsResult"
+_UTARL = "UsageTopAccountsResultList"
+_USs = "UsageStatistics"
+_SBAu = "SumByAccount"
+_sBA = "sumByAccount"
+_TABFo = "TopAccountsByFeature"
+_tABF = "topAccountsByFeature"
+_SBDSu = "SumByDataSource"
+_sBDS = "sumByDataSource"
+_SBRu = "SumByResource"
+_sBR = "sumByResource"
+_TRo = "TopResources"
+_tR = "topResources"
+_SBFu = "SumByFeature"
+_sBF = "sumByFeature"
+_GUSO = "GetUsageStatisticsOutput"
+_cGUSRo = "com.amazonaws.guardduty#GetUsageStatisticsResponse"
+_uS = "usageStatistics"
+_GUS = "GetUsageStatistics"
+_IMI = "InviteMembersInput"
+_cIMR = "com.amazonaws.guardduty#InviteMembersRequest"
+_DEN = "DisableEmailNotification"
+_dEN = "disableEmailNotification"
+_IMO = "InviteMembersOutput"
+_cIMRo = "com.amazonaws.guardduty#InviteMembersResponse"
+_IMn = "InviteMembers"
+_LCI = "ListCoverageInput"
+_cLCR = "com.amazonaws.guardduty#ListCoverageRequest"
+_LCO = "ListCoverageOutput"
+_cLCRo = "com.amazonaws.guardduty#ListCoverageResponse"
+_LC = "ListCoverage"
+_LCDRAI = "ListCustomDetectionRuleAssociationsInput"
+_cLCDRAR = "com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsRequest"
+_LCDRAO = "ListCustomDetectionRuleAssociationsOutput"
+_cLCDRARo = "com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsResponse"
+_RAu = "RuleAssociations"
+_rAu = "ruleAssociations"
+_LCDRA = "ListCustomDetectionRuleAssociations"
+_LCDROCI = "ListCustomDetectionRuleOrgConfigurationsInput"
+_cLCDROCR = "com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsRequest"
+_LCDROCO = "ListCustomDetectionRuleOrgConfigurationsOutput"
+_cLCDROCRo = "com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsResponse"
+_Confi = "Configurations"
+_confi = "configurations"
+_LCDROC = "ListCustomDetectionRuleOrgConfigurations"
+_LCDRI = "ListCustomDetectionRulesInput"
+_cLCDRR = "com.amazonaws.guardduty#ListCustomDetectionRulesRequest"
+_Fil = "Filters"
+_fil = "filters"
+_RSul = "RuleSummary"
+_RSL = "RuleSummaryList"
+_LCDRO = "ListCustomDetectionRulesOutput"
+_cLCDRRo = "com.amazonaws.guardduty#ListCustomDetectionRulesResponse"
+_Rul = "Rules"
+_rul = "rules"
+_LCDR = "ListCustomDetectionRules"
+_LDI = "ListDetectorsInput"
+_cLDR = "com.amazonaws.guardduty#ListDetectorsRequest"
+_LDO = "ListDetectorsOutput"
+_cLDRo = "com.amazonaws.guardduty#ListDetectorsResponse"
+_dIet = "detectorIds"
+_LDi = "ListDetectors"
+_LFI = "ListFiltersInput"
+_cLFR = "com.amazonaws.guardduty#ListFiltersRequest"
+_LFO = "ListFiltersOutput"
+_cLFRo = "com.amazonaws.guardduty#ListFiltersResponse"
+_fNi = "filterNames"
+_LF = "ListFilters"
+_LFIi = "ListFindingsInput"
+_cLFRom = "com.amazonaws.guardduty#ListFindingsRequest"
+_LFOi = "ListFindingsOutput"
+_cLFRoma = "com.amazonaws.guardduty#ListFindingsResponse"
+_LFi = "ListFindings"
+_ISFn = "InvestigationSortField"
+_ST__ = "START_TIME"
+_ET__ = "END_TIME"
+_STATUS = "STATUS"
+_RL_ = "RISK_LEVEL"
+_CONFIDENCE = "CONFIDENCE"
+_ISC = "InvestigationSortCriteria"
+_LII = "ListInvestigationsInput"
+_cLIR = "com.amazonaws.guardduty#ListInvestigationsRequest"
+_ITnv = "InvestigationTitle"
+_ISnv = "InvestigationSummary"
+_ISnve = "InvestigationSummaries"
+_LIO = "ListInvestigationsOutput"
+_cLIRo = "com.amazonaws.guardduty#ListInvestigationsResponse"
+_Inve = "Investigations"
+_inv = "investigations"
+_LI = "ListInvestigations"
+_LIIi = "ListInvitationsInput"
+_cLIRom = "com.amazonaws.guardduty#ListInvitationsRequest"
+_Invi = "Invitation"
+_Invit = "Invitations"
+_LIOi = "ListInvitationsOutput"
+_cLIRoma = "com.amazonaws.guardduty#ListInvitationsResponse"
+_invi = "invitations"
+_LIi = "ListInvitations"
+_LIPSI = "ListIPSetsInput"
+_cLIPSR = "com.amazonaws.guardduty#ListIPSetsRequest"
+_ISIp = "IpSetIds"
+_LIPSO = "ListIPSetsOutput"
+_cLIPSRo = "com.amazonaws.guardduty#ListIPSetsResponse"
+_iSIp = "ipSetIds"
+_LIPS = "ListIPSets"
+_LMPPI = "ListMalwareProtectionPlansInput"
+_cLMPPR = "com.amazonaws.guardduty#ListMalwareProtectionPlansRequest"
+_MPPSa = "MalwareProtectionPlanSummary"
+_MPPSal = "MalwareProtectionPlansSummary"
+_LMPPO = "ListMalwareProtectionPlansOutput"
+_cLMPPRo = "com.amazonaws.guardduty#ListMalwareProtectionPlansResponse"
+_MPP = "MalwareProtectionPlans"
+_mPP = "malwareProtectionPlans"
+_LMPP = "ListMalwareProtectionPlans"
+_LMSCK = "ListMalwareScansCriterionKey"
+_RA_ = "RESOURCE_ARN"
+_LMSFC = "ListMalwareScansFilterCriterion"
+_LMSFCL = "ListMalwareScansFilterCriterionList"
+_LMSFCi = "ListMalwareScansFilterCriteria"
+_LMSI = "ListMalwareScansInput"
+_cLMSR = "com.amazonaws.guardduty#ListMalwareScansRequest"
+_MSa = "MalwareScan"
+_MSal = "MalwareScans"
+_LMSO = "ListMalwareScansOutput"
+_cLMSRo = "com.amazonaws.guardduty#ListMalwareScansResponse"
+_LMS = "ListMalwareScans"
+_LMI = "ListMembersInput"
+_cLMR = "com.amazonaws.guardduty#ListMembersRequest"
+_OAn = "OnlyAssociated"
+_oAn = "onlyAssociated"
+_LMO = "ListMembersOutput"
+_cLMRo = "com.amazonaws.guardduty#ListMembersResponse"
+_LM = "ListMembers"
+_LOAAI = "ListOrganizationAdminAccountsInput"
+_cLOAAR = "com.amazonaws.guardduty#ListOrganizationAdminAccountsRequest"
+_LOAAO = "ListOrganizationAdminAccountsOutput"
+_cLOAARo = "com.amazonaws.guardduty#ListOrganizationAdminAccountsResponse"
+_aA = "adminAccounts"
+_LOAA = "ListOrganizationAdminAccounts"
+_LPDI = "ListPublishingDestinationsInput"
+_cLPDR = "com.amazonaws.guardduty#ListPublishingDestinationsRequest"
+_LPDO = "ListPublishingDestinationsOutput"
+_cLPDRo = "com.amazonaws.guardduty#ListPublishingDestinationsResponse"
+_des = "destinations"
+_LPDi = "ListPublishingDestinations"
+_GDA = "GuardDutyArn"
+_LTFRI = "ListTagsForResourceInput"
+_cLTFRR = "com.amazonaws.guardduty#ListTagsForResourceRequest"
+_LTFRO = "ListTagsForResourceOutput"
+_cLTFRRo = "com.amazonaws.guardduty#ListTagsForResourceResponse"
+_LTFR = "ListTagsForResource"
+_LTESI = "ListThreatEntitySetsInput"
+_cLTESR = "com.amazonaws.guardduty#ListThreatEntitySetsRequest"
+_TESIh = "ThreatEntitySetIds"
+_LTESO = "ListThreatEntitySetsOutput"
+_cLTESRo = "com.amazonaws.guardduty#ListThreatEntitySetsResponse"
+_tESIh = "threatEntitySetIds"
+_LTES = "ListThreatEntitySets"
+_LTISI = "ListThreatIntelSetsInput"
+_cLTISR = "com.amazonaws.guardduty#ListThreatIntelSetsRequest"
+_TISIh = "ThreatIntelSetIds"
+_LTISO = "ListThreatIntelSetsOutput"
+_cLTISRo = "com.amazonaws.guardduty#ListThreatIntelSetsResponse"
+_tISIh = "threatIntelSetIds"
+_LTIS = "ListThreatIntelSets"
+_LTESIi = "ListTrustedEntitySetsInput"
+_cLTESRom = "com.amazonaws.guardduty#ListTrustedEntitySetsRequest"
+_TESIru = "TrustedEntitySetIds"
+_LTESOi = "ListTrustedEntitySetsOutput"
+_cLTESRoma = "com.amazonaws.guardduty#ListTrustedEntitySetsResponse"
+_tESIru = "trustedEntitySetIds"
+_LTESi = "ListTrustedEntitySets"
+_SOFSOMS = "S3ObjectForSendObjectMalwareScan"
+_Bu = "Bucket"
+_bu = "bucket"
+_SOMSI = "SendObjectMalwareScanInput"
+_cSOMSR = "com.amazonaws.guardduty#SendObjectMalwareScanRequest"
+_SOMSO = "SendObjectMalwareScanOutput"
+_cSOMSRo = "com.amazonaws.guardduty#SendObjectMalwareScanResponse"
+_SOMS = "SendObjectMalwareScan"
+_SMSC = "StartMalwareScanConfiguration"
+_SMSI = "StartMalwareScanInput"
+_cSMSR = "com.amazonaws.guardduty#StartMalwareScanRequest"
+_SMSO = "StartMalwareScanOutput"
+_cSMSRo = "com.amazonaws.guardduty#StartMalwareScanResponse"
+_SMS = "StartMalwareScan"
+_SMMI = "StartMonitoringMembersInput"
+_cSMMR = "com.amazonaws.guardduty#StartMonitoringMembersRequest"
+_SMMO = "StartMonitoringMembersOutput"
+_cSMMRo = "com.amazonaws.guardduty#StartMonitoringMembersResponse"
+_SMM = "StartMonitoringMembers"
+_SMMIt = "StopMonitoringMembersInput"
+_cSMMRom = "com.amazonaws.guardduty#StopMonitoringMembersRequest"
+_SMMOt = "StopMonitoringMembersOutput"
+_cSMMRoma = "com.amazonaws.guardduty#StopMonitoringMembersResponse"
+_SMMt = "StopMonitoringMembers"
+_TRI = "TagResourceInput"
+_cTRR = "com.amazonaws.guardduty#TagResourceRequest"
+_TRO = "TagResourceOutput"
+_cTRRo = "com.amazonaws.guardduty#TagResourceResponse"
+_TRa = "TagResource"
+_UFIn = "UnarchiveFindingsInput"
+_cUFR = "com.amazonaws.guardduty#UnarchiveFindingsRequest"
+_UFO = "UnarchiveFindingsOutput"
+_cUFRo = "com.amazonaws.guardduty#UnarchiveFindingsResponse"
+_UFn = "UnarchiveFindings"
+_TKL = "TagKeyList"
+_URI = "UntagResourceInput"
+_cURR = "com.amazonaws.guardduty#UntagResourceRequest"
+_TKa = "TagKeys"
+_tK = "tagKeys"
+_URO = "UntagResourceOutput"
+_cURRo = "com.amazonaws.guardduty#UntagResourceResponse"
+_URn = "UntagResource"
+_UCDRAI = "UpdateCustomDetectionRuleAssociationInput"
+_cUCDRAR = "com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationRequest"
+_UCDRAO = "UpdateCustomDetectionRuleAssociationOutput"
+_cUCDRARo = "com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationResponse"
+_UCDRA = "UpdateCustomDetectionRuleAssociation"
+_UCDROCI = "UpdateCustomDetectionRuleOrgConfigurationInput"
+_cUCDROCR = "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationRequest"
+_UCDROCO = "UpdateCustomDetectionRuleOrgConfigurationOutput"
+_cUCDROCRo = "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationResponse"
+_UCDROC = "UpdateCustomDetectionRuleOrgConfiguration"
+_UDI = "UpdateDetectorInput"
+_cUDR = "com.amazonaws.guardduty#UpdateDetectorRequest"
+_UDO = "UpdateDetectorOutput"
+_cUDRo = "com.amazonaws.guardduty#UpdateDetectorResponse"
+_UD = "UpdateDetector"
+_UFIp = "UpdateFilterInput"
+_cUFRom = "com.amazonaws.guardduty#UpdateFilterRequest"
+_UFOp = "UpdateFilterOutput"
+_cUFRoma = "com.amazonaws.guardduty#UpdateFilterResponse"
+_UFp = "UpdateFilter"
+_UFFI = "UpdateFindingsFeedbackInput"
+_cUFFR = "com.amazonaws.guardduty#UpdateFindingsFeedbackRequest"
+_fee = "feedback"
+_Com = "Comments"
+_com = "comments"
+_UFFO = "UpdateFindingsFeedbackOutput"
+_cUFFRo = "com.amazonaws.guardduty#UpdateFindingsFeedbackResponse"
+_UFF = "UpdateFindingsFeedback"
+_UIPSI = "UpdateIPSetInput"
+_cUIPSR = "com.amazonaws.guardduty#UpdateIPSetRequest"
+_UIPSO = "UpdateIPSetOutput"
+_cUIPSRo = "com.amazonaws.guardduty#UpdateIPSetResponse"
+_UIPS = "UpdateIPSet"
+_USBR = "UpdateS3BucketResource"
+_UPR = "UpdateProtectedResource"
+_UMPPI = "UpdateMalwareProtectionPlanInput"
+_cUMPPR = "com.amazonaws.guardduty#UpdateMalwareProtectionPlanRequest"
+_UMPPO = "UpdateMalwareProtectionPlanOutput"
+_UMPP = "UpdateMalwareProtectionPlan"
+_UMSSI = "UpdateMalwareScanSettingsInput"
+_cUMSSR = "com.amazonaws.guardduty#UpdateMalwareScanSettingsRequest"
+_UMSSO = "UpdateMalwareScanSettingsOutput"
+_cUMSSRo = "com.amazonaws.guardduty#UpdateMalwareScanSettingsResponse"
+_UMSS = "UpdateMalwareScanSettings"
+_MACe = "MemberAdditionalConfiguration"
+_MACem = "MemberAdditionalConfigurations"
+_MFC = "MemberFeaturesConfiguration"
+_MFCe = "MemberFeaturesConfigurations"
+_UMDI = "UpdateMemberDetectorsInput"
+_cUMDR = "com.amazonaws.guardduty#UpdateMemberDetectorsRequest"
+_UMDO = "UpdateMemberDetectorsOutput"
+_cUMDRo = "com.amazonaws.guardduty#UpdateMemberDetectorsResponse"
+_UMD = "UpdateMemberDetectors"
+_OKALC = "OrganizationKubernetesAuditLogsConfiguration"
+_OKC = "OrganizationKubernetesConfiguration"
+_OEV = "OrganizationEbsVolumes"
+_OSEIWF = "OrganizationScanEc2InstanceWithFindings"
+_OMPC = "OrganizationMalwareProtectionConfiguration"
+_OSLC = "OrganizationS3LogsConfiguration"
+_ODSC = "OrganizationDataSourceConfigurations"
+_OAC = "OrganizationAdditionalConfiguration"
+_OACr = "OrganizationAdditionalConfigurations"
+_OFC = "OrganizationFeatureConfiguration"
+_OFCr = "OrganizationFeaturesConfigurations"
+_UOCI = "UpdateOrganizationConfigurationInput"
+_cUOCR = "com.amazonaws.guardduty#UpdateOrganizationConfigurationRequest"
+_UOCO = "UpdateOrganizationConfigurationOutput"
+_cUOCRo = "com.amazonaws.guardduty#UpdateOrganizationConfigurationResponse"
+_UOC = "UpdateOrganizationConfiguration"
+_UPDI = "UpdatePublishingDestinationInput"
+_cUPDR = "com.amazonaws.guardduty#UpdatePublishingDestinationRequest"
+_UPDO = "UpdatePublishingDestinationOutput"
+_cUPDRo = "com.amazonaws.guardduty#UpdatePublishingDestinationResponse"
+_UPD = "UpdatePublishingDestination"
+_UTESI = "UpdateThreatEntitySetInput"
+_cUTESR = "com.amazonaws.guardduty#UpdateThreatEntitySetRequest"
+_UTESO = "UpdateThreatEntitySetOutput"
+_cUTESRo = "com.amazonaws.guardduty#UpdateThreatEntitySetResponse"
+_UTES = "UpdateThreatEntitySet"
+_UTISI = "UpdateThreatIntelSetInput"
+_cUTISR = "com.amazonaws.guardduty#UpdateThreatIntelSetRequest"
+_UTISO = "UpdateThreatIntelSetOutput"
+_cUTISRo = "com.amazonaws.guardduty#UpdateThreatIntelSetResponse"
+_UTIS = "UpdateThreatIntelSet"
+_UTESIp = "UpdateTrustedEntitySetInput"
+_cUTESRom = "com.amazonaws.guardduty#UpdateTrustedEntitySetRequest"
+_UTESOp = "UpdateTrustedEntitySetOutput"
+_cUTESRoma = "com.amazonaws.guardduty#UpdateTrustedEntitySetResponse"
+_UTESp = "UpdateTrustedEntitySet"
+_GDAPIS = "GuardDutyAPIService"
+_aw = "aws.auth#sigv4"
+_sBm = "smithy.rules#endpointBdd"
+_aws = "aws.api#service"
+_aJ = "aws.protocols#restJson1"
+
+STRING: StaticSchema = (3, n0, _S, 0)
+
+DETECTOR_ID: StaticSchema = (3, n0, _DI, 0)
+
+ACCEPT_ADMINISTRATOR_INVITATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _AAII,
+    {_sSI: _cAAIR, _s: None},
+    (_DI, _AI, _II),
+    (
+        (DETECTOR_ID, 9),
+        (STRING, {_sN: _aI, _sm: None}),
+        (STRING, {_sN: _iI, _sm: None}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationRequest",
-        )
-    ],
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Mode": {
-            "target": ASSOCIATION_MODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "IncludeAccountIds": {
-            "target": DETECTION_RULE_ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="includeAccountIds")
-            ],
-        },
-        "ExcludeAccountIds": {
-            "target": DETECTION_RULE_ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="excludeAccountIds")
-            ],
-        },
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-    },
 )
 
-CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationOutput"
+ACCEPT_ADMINISTRATOR_INVITATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _AAIO,
+    {_sSI: _cAAIRo, _smi: None},
+)
+
+BAD_REQUEST_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _BRE,
+    {_smit: _c, _sE: 400},
+    (_M, _T),
+    ((STRING, {_sN: _m}), (STRING, {_sN: _t})),
+)
+
+INTERNAL_SERVER_ERROR_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISEE,
+    {_smit: _se, _sE: 500},
+    (_M, _T),
+    ((STRING, {_sN: _m}), (STRING, {_sN: _t})),
+)
+
+ACCEPT_ADMINISTRATOR_INVITATION: StaticOperationSchema = (
+    23,
+    n0,
+    _AAI,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/administrator",
+                "code": 200,
+            }
+        )
+    },
+    ACCEPT_ADMINISTRATOR_INVITATION_INPUT,
+    ACCEPT_ADMINISTRATOR_INVITATION_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+ACCEPT_INVITATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _AII,
+    {_sSI: _cAIR, _s: None},
+    (_DI, _MI, _II),
+    (
+        (DETECTOR_ID, 9),
+        (STRING, {_sN: _mI, _sm: None}),
+        (STRING, {_sN: _iI, _sm: None}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationResponse",
+)
+
+ACCEPT_INVITATION_OUTPUT: StaticSchema = (18, n0, _AIO, {_sSI: _cAIRo, _smi: None})
+
+ACCEPT_INVITATION: StaticOperationSchema = (
+    23,
+    n0,
+    _AIc,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/detector/{DetectorId}/master", "code": 200}
         )
-    ],
-)
-
-CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/custom-detection-rule/org-configuration",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-KUBERNETES_AUDIT_LOGS_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesAuditLogsConfiguration"),
-    members={
-        "Enable": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="enable"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
     },
-)
-
-KUBERNETES_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesConfiguration"),
-    members={
-        "AuditLogs": {
-            "target": KUBERNETES_AUDIT_LOGS_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="auditLogs"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-SCAN_EC2_INSTANCE_WITH_FINDINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanEc2InstanceWithFindings"),
-    members={
-        "EbsVolumes": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ebsVolumes")
-            ],
-        }
-    },
-)
-
-MALWARE_PROTECTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionConfiguration"),
-    members={
-        "ScanEc2InstanceWithFindings": {
-            "target": SCAN_EC2_INSTANCE_WITH_FINDINGS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="scanEc2InstanceWithFindings",
-                )
-            ],
-        }
-    },
-)
-
-S3_LOGS_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#S3LogsConfiguration"),
-    members={
-        "Enable": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="enable"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-DATA_SOURCE_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DataSourceConfigurations"),
-    members={
-        "S3Logs": {
-            "target": S3_LOGS_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Logs")],
-        },
-        "Kubernetes": {
-            "target": KUBERNETES_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="kubernetes")
-            ],
-        },
-        "MalwareProtection": {
-            "target": MALWARE_PROTECTION_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="malwareProtection")
-            ],
-        },
-    },
-)
-
-FEATURE_ADDITIONAL_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FeatureAdditionalConfiguration"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EKS_ADDON_MANAGEMENT": {"target": UNIT},
-        "ECS_FARGATE_AGENT_MANAGEMENT": {"target": UNIT},
-        "EC2_AGENT_MANAGEMENT": {"target": UNIT},
-    },
-)
-
-FEATURE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FeatureStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-DETECTOR_ADDITIONAL_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorAdditionalConfiguration"),
-    members={
-        "Name": {
-            "target": FEATURE_ADDITIONAL_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Status": {
-            "target": FEATURE_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-    },
-)
-
-DETECTOR_ADDITIONAL_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorAdditionalConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DETECTOR_ADDITIONAL_CONFIGURATION}},
-)
-
-DETECTOR_FEATURE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorFeature"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "S3_DATA_EVENTS": {"target": UNIT},
-        "EKS_AUDIT_LOGS": {"target": UNIT},
-        "EBS_MALWARE_PROTECTION": {"target": UNIT},
-        "RDS_LOGIN_EVENTS": {"target": UNIT},
-        "LAMBDA_NETWORK_LOGS": {"target": UNIT},
-        "EKS_RUNTIME_MONITORING": {"target": UNIT},
-        "RUNTIME_MONITORING": {"target": UNIT},
-        "AI_PROTECTION": {"target": UNIT},
-        "AI_ANALYST": {"target": UNIT},
-    },
-)
-
-DETECTOR_FEATURE_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorFeatureConfiguration"),
-    members={
-        "Name": {
-            "target": DETECTOR_FEATURE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Status": {
-            "target": FEATURE_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "AdditionalConfiguration": {
-            "target": DETECTOR_ADDITIONAL_CONFIGURATIONS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="additionalConfiguration"
-                )
-            ],
-        },
-    },
-)
-
-DETECTOR_FEATURE_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorFeatureConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DETECTOR_FEATURE_CONFIGURATION}},
-)
-
-FINDING_PUBLISHING_FREQUENCY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FindingPublishingFrequency"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FIFTEEN_MINUTES": {"target": UNIT},
-        "ONE_HOUR": {"target": UNIT},
-        "SIX_HOURS": {"target": UNIT},
-    },
-)
-
-CREATE_DETECTOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateDetectorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateDetectorRequest",
-        )
-    ],
-    members={
-        "Enable": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="enable"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-        "FindingPublishingFrequency": {
-            "target": FINDING_PUBLISHING_FREQUENCY,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="findingPublishingFrequency",
-                )
-            ],
-        },
-        "DataSources": {
-            "target": DATA_SOURCE_CONFIGURATIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "Features": {
-            "target": DETECTOR_FEATURE_CONFIGURATIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="features")],
-        },
-    },
-)
-
-EBS_VOLUMES_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EbsVolumesResult"),
-    members={
-        "Status": {
-            "target": DATA_SOURCE_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "Reason": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="reason")],
-        },
-    },
-)
-
-SCAN_EC2_INSTANCE_WITH_FINDINGS_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanEc2InstanceWithFindingsResult"),
-    members={
-        "EbsVolumes": {
-            "target": EBS_VOLUMES_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ebsVolumes")
-            ],
-        }
-    },
-)
-
-MALWARE_PROTECTION_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionConfigurationResult"),
-    members={
-        "ScanEc2InstanceWithFindings": {
-            "target": SCAN_EC2_INSTANCE_WITH_FINDINGS_RESULT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="scanEc2InstanceWithFindings",
-                )
-            ],
-        },
-        "ServiceRole": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="serviceRole")
-            ],
-        },
-    },
-)
-
-UNPROCESSED_DATA_SOURCES_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UnprocessedDataSourcesResult"),
-    members={
-        "MalwareProtection": {
-            "target": MALWARE_PROTECTION_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="malwareProtection")
-            ],
-        }
-    },
-)
-
-CREATE_DETECTOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateDetectorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateDetectorResponse",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="detectorId")
-            ],
-        },
-        "UnprocessedDataSources": {
-            "target": UNPROCESSED_DATA_SOURCES_RESULT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedDataSources"
-                )
-            ],
-        },
-    },
-)
-
-CREATE_DETECTOR = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateDetector"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "POST", "uri": "/detector", "code": 200}),
-        )
-    ],
-)
-
-FILTER_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FilterAction"),
-    shape_type=ShapeType.ENUM,
-    members={"NOOP": {"target": UNIT}, "ARCHIVE": {"target": UNIT}},
-)
-
-FILTER_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FilterDescription"), shape_type=ShapeType.STRING
-)
-
-CRITERION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Criterion"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": STRING}, "value": {"target": CONDITION}},
-)
-
-FINDING_CRITERIA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FindingCriteria"),
-    members={
-        "Criterion": {
-            "target": CRITERION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="criterion")],
-        }
-    },
-)
-
-FILTER_NAME = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FilterName"), shape_type=ShapeType.STRING
-)
-
-FILTER_RANK = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FilterRank"), shape_type=ShapeType.INTEGER
-)
-
-CREATE_FILTER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateFilterInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateFilterRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": FILTER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Description": {
-            "target": FILTER_DESCRIPTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description")
-            ],
-        },
-        "Action": {
-            "target": FILTER_ACTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="action")],
-        },
-        "Rank": {
-            "target": FILTER_RANK,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="rank")],
-        },
-        "FindingCriteria": {
-            "target": FINDING_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingCriteria"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-CREATE_FILTER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateFilterOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateFilterResponse",
-        )
-    ],
-    members={
-        "Name": {
-            "target": FILTER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-CREATE_FILTER = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateFilter"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/detector/{DetectorId}/filter", "code": 200}
-            ),
-        )
-    ],
-)
-
-TRIGGER_PROMPT = Schema(
-    id=ShapeID("com.amazonaws.guardduty#TriggerPrompt"), shape_type=ShapeType.STRING
-)
-
-CREATE_INVESTIGATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateInvestigationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateInvestigationRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "TriggerPrompt": {
-            "target": TRIGGER_PROMPT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggerPrompt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-    },
-)
-
-INVESTIGATION_ID = Schema(
-    id=ShapeID("com.amazonaws.guardduty#InvestigationId"), shape_type=ShapeType.STRING
-)
-
-CREATE_INVESTIGATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateInvestigationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateInvestigationResponse",
-        )
-    ],
-    members={
-        "InvestigationId": {
-            "target": INVESTIGATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="investigationId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-CREATE_INVESTIGATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateInvestigation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/investigation",
-                    "code": 202,
-                }
-            ),
-        )
-    ],
-)
-
-IP_SET_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#IpSetFormat"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "TXT": {"target": UNIT},
-        "STIX": {"target": UNIT},
-        "OTX_CSV": {"target": UNIT},
-        "ALIEN_VAULT": {"target": UNIT},
-        "PROOF_POINT": {"target": UNIT},
-        "FIRE_EYE": {"target": UNIT},
-    },
-)
-
-LOCATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#Location"), shape_type=ShapeType.STRING
-)
-
-NAME = Schema(id=ShapeID("com.amazonaws.guardduty#Name"), shape_type=ShapeType.STRING)
-
-CREATE_IP_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateIPSetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateIPSetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Format": {
-            "target": IP_SET_FORMAT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Activate": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "ExpectedBucketOwner": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
-    },
-)
-
-CREATE_IP_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateIPSetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateIPSetResponse",
-        )
-    ],
-    members={
-        "IpSetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ipSetId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-CREATE_IP_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateIPSet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/detector/{DetectorId}/ipset", "code": 200}
-            ),
-        )
-    ],
-)
-
-MALWARE_PROTECTION_PLAN_TAGGING_ACTION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanTaggingActionStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-MALWARE_PROTECTION_PLAN_TAGGING_ACTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanTaggingAction"),
-    members={
-        "Status": {
-            "target": MALWARE_PROTECTION_PLAN_TAGGING_ACTION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        }
-    },
-)
-
-MALWARE_PROTECTION_PLAN_ACTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanActions"),
-    members={
-        "Tagging": {
-            "target": MALWARE_PROTECTION_PLAN_TAGGING_ACTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tagging")],
-        }
-    },
-)
-
-MALWARE_PROTECTION_PLAN_OBJECT_PREFIXES_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanObjectPrefixesList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-CREATE_S3_BUCKET_RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateS3BucketResource"),
-    members={
-        "BucketName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="bucketName")
-            ],
-        },
-        "ObjectPrefixes": {
-            "target": MALWARE_PROTECTION_PLAN_OBJECT_PREFIXES_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="objectPrefixes")
-            ],
-        },
-    },
-)
-
-CREATE_PROTECTED_RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateProtectedResource"),
-    members={
-        "S3Bucket": {
-            "target": CREATE_S3_BUCKET_RESOURCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Bucket")],
-        }
-    },
-)
-
-CREATE_MALWARE_PROTECTION_PLAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateMalwareProtectionPlanInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateMalwareProtectionPlanRequest",
-        )
-    ],
-    members={
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-        "Role": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="role"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ProtectedResource": {
-            "target": CREATE_PROTECTED_RESOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="protectedResource"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Actions": {
-            "target": MALWARE_PROTECTION_PLAN_ACTIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="actions")],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-CREATE_MALWARE_PROTECTION_PLAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateMalwareProtectionPlanOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateMalwareProtectionPlanResponse",
-        )
-    ],
-    members={
-        "MalwareProtectionPlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="malwareProtectionPlanId"
-                )
-            ],
-        }
-    },
-)
-
-CREATE_MALWARE_PROTECTION_PLAN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateMalwareProtectionPlan"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/malware-protection-plan", "code": 200}
-            ),
-        )
-    ],
-)
-
-CREATE_MEMBERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateMembersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateMembersRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AccountDetails": {
-            "target": ACCOUNT_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountDetails"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-UNPROCESSED_ACCOUNT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UnprocessedAccount"),
-    members={
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Result": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="result"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-UNPROCESSED_ACCOUNTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UnprocessedAccounts"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": UNPROCESSED_ACCOUNT}},
-)
-
-CREATE_MEMBERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateMembersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateMembersResponse",
-        )
-    ],
-    members={
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-CREATE_MEMBERS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateMembers"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/detector/{DetectorId}/member", "code": 200}
-            ),
-        )
-    ],
-)
-
-DESTINATION_PROPERTIES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DestinationProperties"),
-    members={
-        "DestinationArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationArn")
-            ],
-        },
-        "KmsKeyArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="kmsKeyArn")],
-        },
-    },
-)
-
-DESTINATION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DestinationType"),
-    shape_type=ShapeType.ENUM,
-    members={"S3": {"target": UNIT}},
-)
-
-CREATE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreatePublishingDestinationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreatePublishingDestinationRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "DestinationType": {
-            "target": DESTINATION_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationType"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DestinationProperties": {
-            "target": DESTINATION_PROPERTIES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="destinationProperties"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-CREATE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreatePublishingDestinationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreatePublishingDestinationResponse",
-        )
-    ],
-    members={
-        "DestinationId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-CREATE_PUBLISHING_DESTINATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreatePublishingDestination"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/publishingDestination",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-FINDING_TYPES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FindingTypes"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FINDING_TYPE}},
-)
-
-CREATE_SAMPLE_FINDINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateSampleFindingsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateSampleFindingsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FindingTypes": {
-            "target": FINDING_TYPES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingTypes")
-            ],
-        },
-    },
-)
-
-CREATE_SAMPLE_FINDINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateSampleFindingsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateSampleFindingsResponse",
-        )
-    ],
-)
-
-CREATE_SAMPLE_FINDINGS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateSampleFindings"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/findings/create",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-EXPECTED_BUCKET_OWNER = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ExpectedBucketOwner"),
-    shape_type=ShapeType.STRING,
-)
-
-THREAT_ENTITY_SET_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ThreatEntitySetFormat"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "TXT": {"target": UNIT},
-        "STIX": {"target": UNIT},
-        "OTX_CSV": {"target": UNIT},
-        "ALIEN_VAULT": {"target": UNIT},
-        "PROOF_POINT": {"target": UNIT},
-        "FIRE_EYE": {"target": UNIT},
-    },
-)
-
-CREATE_THREAT_ENTITY_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateThreatEntitySetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateThreatEntitySetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Format": {
-            "target": THREAT_ENTITY_SET_FORMAT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ExpectedBucketOwner": {
-            "target": EXPECTED_BUCKET_OWNER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
-        "Activate": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-CREATE_THREAT_ENTITY_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateThreatEntitySetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateThreatEntitySetResponse",
-        )
-    ],
-    members={
-        "ThreatEntitySetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatEntitySetId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-CREATE_THREAT_ENTITY_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateThreatEntitySet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/threatentityset",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-THREAT_INTEL_SET_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ThreatIntelSetFormat"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "TXT": {"target": UNIT},
-        "STIX": {"target": UNIT},
-        "OTX_CSV": {"target": UNIT},
-        "ALIEN_VAULT": {"target": UNIT},
-        "PROOF_POINT": {"target": UNIT},
-        "FIRE_EYE": {"target": UNIT},
-    },
-)
-
-CREATE_THREAT_INTEL_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateThreatIntelSetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateThreatIntelSetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Format": {
-            "target": THREAT_INTEL_SET_FORMAT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Activate": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "ExpectedBucketOwner": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
-    },
-)
-
-CREATE_THREAT_INTEL_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateThreatIntelSetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateThreatIntelSetResponse",
-        )
-    ],
-    members={
-        "ThreatIntelSetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatIntelSetId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-CREATE_THREAT_INTEL_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateThreatIntelSet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/threatintelset",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-TRUSTED_ENTITY_SET_FORMAT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#TrustedEntitySetFormat"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "TXT": {"target": UNIT},
-        "STIX": {"target": UNIT},
-        "OTX_CSV": {"target": UNIT},
-        "ALIEN_VAULT": {"target": UNIT},
-        "PROOF_POINT": {"target": UNIT},
-        "FIRE_EYE": {"target": UNIT},
-    },
-)
-
-CREATE_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateTrustedEntitySetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateTrustedEntitySetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Format": {
-            "target": TRUSTED_ENTITY_SET_FORMAT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ExpectedBucketOwner": {
-            "target": EXPECTED_BUCKET_OWNER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
-        "Activate": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-CREATE_TRUSTED_ENTITY_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CreateTrustedEntitySetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#CreateTrustedEntitySetResponse",
-        )
-    ],
-    members={
-        "TrustedEntitySetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="trustedEntitySetId"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-CREATE_TRUSTED_ENTITY_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#CreateTrustedEntitySet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/trustedentityset",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-CRITERION_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#CriterionKey"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EC2_INSTANCE_ARN": {"target": UNIT},
-        "SCAN_ID": {"target": UNIT},
-        "ACCOUNT_ID": {"target": UNIT},
-        "GUARDDUTY_FINDING_ID": {"target": UNIT},
-        "SCAN_START_TIME": {"target": UNIT},
-        "SCAN_STATUS": {"target": UNIT},
-        "SCAN_TYPE": {"target": UNIT},
-    },
-)
-
-DATA_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DataSource"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FLOW_LOGS": {"target": UNIT},
-        "CLOUD_TRAIL": {"target": UNIT},
-        "DNS_LOGS": {"target": UNIT},
-        "S3_LOGS": {"target": UNIT},
-        "KUBERNETES_AUDIT_LOGS": {"target": UNIT},
-        "EC2_MALWARE_SCAN": {"target": UNIT},
-    },
-)
-
-DNS_LOGS_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DNSLogsConfigurationResult"),
-    members={
-        "Status": {
-            "target": DATA_SOURCE_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-FLOW_LOGS_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FlowLogsConfigurationResult"),
-    members={
-        "Status": {
-            "target": DATA_SOURCE_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesAuditLogsConfigurationResult"),
-    members={
-        "Status": {
-            "target": DATA_SOURCE_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-KUBERNETES_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesConfigurationResult"),
-    members={
-        "AuditLogs": {
-            "target": KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="auditLogs"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-S3_LOGS_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#S3LogsConfigurationResult"),
-    members={
-        "Status": {
-            "target": DATA_SOURCE_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-DATA_SOURCE_CONFIGURATIONS_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DataSourceConfigurationsResult"),
-    members={
-        "CloudTrail": {
-            "target": CLOUD_TRAIL_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="cloudTrail"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DNSLogs": {
-            "target": DNS_LOGS_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dnsLogs"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "FlowLogs": {
-            "target": FLOW_LOGS_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="flowLogs"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "S3Logs": {
-            "target": S3_LOGS_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Logs"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Kubernetes": {
-            "target": KUBERNETES_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="kubernetes")
-            ],
-        },
-        "MalwareProtection": {
-            "target": MALWARE_PROTECTION_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="malwareProtection")
-            ],
-        },
-    },
-)
-
-DATA_SOURCE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DataSourceList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DATA_SOURCE}},
-)
-
-DATE_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DateStatistics"),
-    members={
-        "Date": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="date")],
-        },
-        "LastGeneratedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lastGeneratedAt")
-            ],
-        },
-        "Severity": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="severity")],
-        },
-        "TotalFindings": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="totalFindings")
-            ],
-        },
-    },
-)
-
-DECLINE_INVITATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeclineInvitationsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeclineInvitationsRequest",
-        )
-    ],
-    members={
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-DECLINE_INVITATIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeclineInvitationsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeclineInvitationsResponse",
-        )
-    ],
-    members={
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-DECLINE_INVITATIONS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeclineInvitations"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/invitation/decline", "code": 200}
-            ),
-        )
-    ],
-)
-
-DEFAULT_SERVER_SIDE_ENCRYPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DefaultServerSideEncryption"),
-    members={
-        "EncryptionType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="encryptionType")
-            ],
-        },
-        "KmsMasterKeyArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="kmsMasterKeyArn")
-            ],
-        },
-    },
-)
-
-DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationRequest",
-        )
-    ],
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AssociationId": {
-            "target": ASSOCIATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationResponse",
-        )
-    ],
-)
-
-DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationInput"
+    ACCEPT_INVITATION_INPUT,
+    ACCEPT_INVITATION_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+BOOLEAN: StaticSchema = (2, n0, _B, 0)
+
+ACCESS_CONTROL_LIST: StaticSchema = (
+    18,
+    n0,
+    _ACL,
+    0,
+    (_APRA, _APWA),
+    ((BOOLEAN, {_sN: _aPRA}), (BOOLEAN, {_sN: _aPWA})),
+)
+
+ACCESS_DENIED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ADE,
+    {_smit: _c, _sE: 403},
+    (_M, _T),
+    ((STRING, {_sN: _m}), (STRING, {_sN: _t})),
+)
+
+ACCESS_KEY: StaticSchema = (
+    18,
+    n0,
+    _AK,
+    0,
+    (_PI, _UN, _UT),
+    ((STRING, {_sN: _pI}), (STRING, {_sN: _uN}), (STRING, {_sN: _uT})),
+)
+
+ACCESS_KEY_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _AKD,
+    0,
+    (_AKI, _PI, _UN, _UT),
+    (
+        (STRING, {_sN: _aKI}),
+        (STRING, {_sN: _pI}),
+        (STRING, {_sN: _uN}),
+        (STRING, {_sN: _uT}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationRequest",
-        )
-    ],
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Mode": {
-            "target": ASSOCIATION_MODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="mode"),
-            ],
-        },
-    },
 )
 
-DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationOutput"
+ACCOUNT: StaticSchema = (
+    18,
+    n0,
+    _A,
+    0,
+    (_U, _N),
+    ((STRING, {_sN: _u, _sm: None}), (STRING, {_sN: _a})),
+)
+
+ACCOUNT_ID: StaticSchema = (3, n0, _AIcc, 0)
+
+EMAIL: StaticSchema = (3, n0, _E, 4)
+
+ACCOUNT_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _AD,
+    0,
+    (_AIcc, _E),
+    ((ACCOUNT_ID, {_sN: _aIc, _sm: None}), (EMAIL, {_sN: _e, _sm: None})),
+)
+
+ACCOUNT_DETAILS: StaticSchema = (16, n0, _ADc, 0, (_me,), ((ACCOUNT_DETAIL, 0),))
+
+INTEGER: StaticSchema = (7, n0, _I, 0)
+
+DATA_SOURCE_FREE_TRIAL: StaticSchema = (
+    18,
+    n0,
+    _DSFT,
+    0,
+    (_FTDR,),
+    ((INTEGER, {_sN: _fTDR}),),
+)
+
+KUBERNETES_DATA_SOURCE_FREE_TRIAL: StaticSchema = (
+    18,
+    n0,
+    _KDSFT,
+    0,
+    (_AL,),
+    ((DATA_SOURCE_FREE_TRIAL, {_sN: _aL}),),
+)
+
+MALWARE_PROTECTION_DATA_SOURCE_FREE_TRIAL: StaticSchema = (
+    18,
+    n0,
+    _MPDSFT,
+    0,
+    (_SEIWF,),
+    ((DATA_SOURCE_FREE_TRIAL, {_sN: _sEIWF}),),
+)
+
+DATA_SOURCES_FREE_TRIAL: StaticSchema = (
+    18,
+    n0,
+    _DSFTa,
+    0,
+    (_CT, _DL, _FL, _SL, _K, _MP),
+    (
+        (DATA_SOURCE_FREE_TRIAL, {_sN: _cT}),
+        (DATA_SOURCE_FREE_TRIAL, {_sN: _dL}),
+        (DATA_SOURCE_FREE_TRIAL, {_sN: _fL}),
+        (DATA_SOURCE_FREE_TRIAL, {_sN: _sLo}),
+        (KUBERNETES_DATA_SOURCE_FREE_TRIAL, {_sN: _k}),
+        (MALWARE_PROTECTION_DATA_SOURCE_FREE_TRIAL, {_sN: _mP}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationResponse",
-        )
-    ],
 )
 
-DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/custom-detection-rule/org-configuration/{RuleId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_DETECTOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteDetectorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteDetectorRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_DETECTOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteDetectorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteDetectorResponse",
-        )
-    ],
-)
-
-DELETE_DETECTOR = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeleteDetector"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "DELETE", "uri": "/detector/{DetectorId}", "code": 200}
-            ),
-        )
-    ],
-)
-
-DELETE_FILTER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteFilterInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteFilterRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FilterName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_FILTER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteFilterOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteFilterResponse",
-        )
-    ],
-)
-
-DELETE_FILTER = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeleteFilter"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/detector/{DetectorId}/filter/{FilterName}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_INVITATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteInvitationsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteInvitationsRequest",
-        )
-    ],
-    members={
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-DELETE_INVITATIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteInvitationsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteInvitationsResponse",
-        )
-    ],
-    members={
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-DELETE_INVITATIONS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeleteInvitations"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/invitation/delete", "code": 200}
-            ),
-        )
-    ],
-)
-
-DELETE_IP_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteIPSetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteIPSetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "IpSetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_IP_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteIPSetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteIPSetResponse",
-        )
-    ],
-)
-
-DELETE_IP_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeleteIPSet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/detector/{DetectorId}/ipset/{IpSetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_MALWARE_PROTECTION_PLAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteMalwareProtectionPlanInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteMalwareProtectionPlanRequest",
-        )
-    ],
-    members={
-        "MalwareProtectionPlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_MALWARE_PROTECTION_PLAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteMalwareProtectionPlanOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-DELETE_MALWARE_PROTECTION_PLAN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeleteMalwareProtectionPlan"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/malware-protection-plan/{MalwareProtectionPlanId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_MEMBERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteMembersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteMembersRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-DELETE_MEMBERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteMembersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteMembersResponse",
-        )
-    ],
-    members={
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-DELETE_MEMBERS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeleteMembers"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/member/delete",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeletePublishingDestinationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeletePublishingDestinationRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "DestinationId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeletePublishingDestinationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeletePublishingDestinationResponse",
-        )
-    ],
-)
-
-DELETE_PUBLISHING_DESTINATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeletePublishingDestination"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/detector/{DetectorId}/publishingDestination/{DestinationId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_THREAT_ENTITY_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteThreatEntitySetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteThreatEntitySetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "ThreatEntitySetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_THREAT_ENTITY_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteThreatEntitySetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteThreatEntitySetResponse",
-        )
-    ],
-)
-
-DELETE_THREAT_ENTITY_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeleteThreatEntitySet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_THREAT_INTEL_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteThreatIntelSetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteThreatIntelSetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "ThreatIntelSetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_THREAT_INTEL_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteThreatIntelSetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteThreatIntelSetResponse",
-        )
-    ],
-)
-
-DELETE_THREAT_INTEL_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeleteThreatIntelSet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/detector/{DetectorId}/threatintelset/{ThreatIntelSetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteTrustedEntitySetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteTrustedEntitySetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "TrustedEntitySetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DELETE_TRUSTED_ENTITY_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DeleteTrustedEntitySetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DeleteTrustedEntitySetResponse",
-        )
-    ],
-)
-
-DELETE_TRUSTED_ENTITY_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DeleteTrustedEntitySet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "DELETE",
-                    "uri": "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LONG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#LongValue"), shape_type=ShapeType.LONG
-)
-
-FILTER_CONDITION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FilterCondition"),
-    members={
-        "EqualsValue": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="equalsValue")
-            ],
-        },
-        "GreaterThan": {
-            "target": LONG_VALUE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="greaterThan")
-            ],
-        },
-        "LessThan": {
-            "target": LONG_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="lessThan")],
-        },
-    },
-)
-
-FILTER_CRITERION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FilterCriterion"),
-    members={
-        "CriterionKey": {
-            "target": CRITERION_KEY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="criterionKey")
-            ],
-        },
-        "FilterCondition": {
-            "target": FILTER_CONDITION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterCondition")
-            ],
-        },
-    },
-)
-
-FILTER_CRITERION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FilterCriterionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FILTER_CRITERION}},
-)
-
-FILTER_CRITERIA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FilterCriteria"),
-    members={
-        "FilterCriterion": {
-            "target": FILTER_CRITERION_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterCriterion")
-            ],
-        }
-    },
-)
-
-INTEGER_VALUE_WITH_MAX = Schema(
-    id=ShapeID("com.amazonaws.guardduty#IntegerValueWithMax"),
-    shape_type=ShapeType.INTEGER,
-)
-
-SORT_CRITERIA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#SortCriteria"),
-    members={
-        "AttributeName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="attributeName")
-            ],
-        },
-        "OrderBy": {
-            "target": ORDER_BY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="orderBy")],
-        },
-    },
-)
-
-DESCRIBE_MALWARE_SCANS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DescribeMalwareScansInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DescribeMalwareScansRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-        "MaxResults": {
-            "target": INTEGER_VALUE_WITH_MAX,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="maxResults")
-            ],
-        },
-        "FilterCriteria": {
-            "target": FILTER_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterCriteria")
-            ],
-        },
-        "SortCriteria": {
-            "target": SORT_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sortCriteria")
-            ],
-        },
-    },
-)
-
-VOLUME_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#VolumeDetail"),
-    members={
-        "VolumeArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="volumeArn")],
-        },
-        "VolumeType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="volumeType")
-            ],
-        },
-        "DeviceName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="deviceName")
-            ],
-        },
-        "VolumeSizeInGB": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="volumeSizeInGB")
-            ],
-        },
-        "EncryptionType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="encryptionType")
-            ],
-        },
-        "SnapshotArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="snapshotArn")
-            ],
-        },
-        "KmsKeyArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="kmsKeyArn")],
-        },
-    },
-)
-
-VOLUME_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#VolumeDetails"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VOLUME_DETAIL}},
-)
-
-POSITIVE_LONG = Schema(
-    id=ShapeID("com.amazonaws.guardduty#PositiveLong"), shape_type=ShapeType.LONG
-)
-
-INSTANCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#InstanceArn"), shape_type=ShapeType.STRING
-)
-
-RESOURCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ResourceDetails"),
-    members={
-        "InstanceArn": {
-            "target": INSTANCE_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="instanceArn")
-            ],
-        }
-    },
-)
-
-SCAN_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanResult"),
-    shape_type=ShapeType.ENUM,
-    members={"CLEAN": {"target": UNIT}, "INFECTED": {"target": UNIT}},
-)
-
-SCAN_RESULT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanResultDetails"),
-    members={
-        "ScanResult": {
-            "target": SCAN_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanResult")
-            ],
-        }
-    },
-)
-
-SCAN_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "RUNNING": {"target": UNIT},
-        "COMPLETED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "SKIPPED": {"target": UNIT},
-    },
-)
-
-SCAN_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanType"),
-    shape_type=ShapeType.ENUM,
-    members={"GUARDDUTY_INITIATED": {"target": UNIT}, "ON_DEMAND": {"target": UNIT}},
-)
-
-TRIGGER_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#TriggerType"),
-    shape_type=ShapeType.ENUM,
-    members={"BACKUP": {"target": UNIT}, "GUARDDUTY": {"target": UNIT}},
-)
-
-TRIGGER_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#TriggerDetails"),
-    members={
-        "GuardDutyFindingId": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="guardDutyFindingId")
-            ],
-        },
-        "Description": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description")
-            ],
-        },
-        "TriggerType": {
-            "target": TRIGGER_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggerType")
-            ],
-        },
-    },
-)
-
-SCAN = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Scan"),
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="detectorId")
-            ],
-        },
-        "AdminDetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="adminDetectorId")
-            ],
-        },
-        "ScanId": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanId")],
-        },
-        "ScanStatus": {
-            "target": SCAN_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanStatus")
-            ],
-        },
-        "FailureReason": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="failureReason")
-            ],
-        },
-        "ScanStartTime": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanStartTime")
-            ],
-        },
-        "ScanEndTime": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanEndTime")
-            ],
-        },
-        "TriggerDetails": {
-            "target": TRIGGER_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggerDetails")
-            ],
-        },
-        "ResourceDetails": {
-            "target": RESOURCE_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceDetails")
-            ],
-        },
-        "ScanResultDetails": {
-            "target": SCAN_RESULT_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanResultDetails")
-            ],
-        },
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "TotalBytes": {
-            "target": POSITIVE_LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="totalBytes")
-            ],
-        },
-        "FileCount": {
-            "target": POSITIVE_LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="fileCount")],
-        },
-        "AttachedVolumes": {
-            "target": VOLUME_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="attachedVolumes")
-            ],
-        },
-        "ScanType": {
-            "target": SCAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanType")],
-        },
-    },
-)
-
-SCANS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Scans"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SCAN}},
-)
-
-DESCRIBE_MALWARE_SCANS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DescribeMalwareScansOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DescribeMalwareScansResponse",
-        )
-    ],
-    members={
-        "Scans": {
-            "target": SCANS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scans"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-DESCRIBE_MALWARE_SCANS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DescribeMalwareScans"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/malware-scans",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#MaxResults"), shape_type=ShapeType.INTEGER
-)
-
-DESCRIBE_ORGANIZATION_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DescribeOrganizationConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DescribeOrganizationConfigurationRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.guardduty#OrganizationKubernetesAuditLogsConfigurationResult"
+FREE_TRIAL_FEATURE_RESULT: StaticSchema = (
+    14,
+    n0,
+    _FTFR,
+    0,
+    (_FL_, _CT_, _DL_, _SDE, _EAL, _EMP, _RLE, _LNL, _ERM, _ERM_, _FRM, _AP),
+    (
+        (-1, {_sV: _FL_}),
+        (-1, {_sV: _CT_}),
+        (-1, {_sV: _DL_}),
+        (-1, {_sV: _SDE}),
+        (-1, {_sV: _EAL}),
+        (-1, {_sV: _EMP}),
+        (-1, {_sV: _RLE}),
+        (-1, {_sV: _LNL}),
+        (-1, {_sV: _ERM}),
+        (-1, {_sV: _ERM_}),
+        (-1, {_sV: _FRM}),
+        (-1, {_sV: _AP}),
     ),
-    members={
-        "AutoEnable": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
 )
 
-ORGANIZATION_KUBERNETES_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationKubernetesConfigurationResult"),
-    members={
-        "AuditLogs": {
-            "target": ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="auditLogs"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
+FREE_TRIAL_FEATURE_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _FTFCR,
+    0,
+    (_N, _FTDR),
+    ((FREE_TRIAL_FEATURE_RESULT, {_sN: _n}), (INTEGER, {_sN: _fTDR})),
 )
 
-ORGANIZATION_EBS_VOLUMES_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationEbsVolumesResult"),
-    members={
-        "AutoEnable": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable")
-            ],
-        }
-    },
+FREE_TRIAL_FEATURE_CONFIGURATIONS_RESULTS: StaticSchema = (
+    16,
+    n0,
+    _FTFCRr,
+    0,
+    (_me,),
+    ((FREE_TRIAL_FEATURE_CONFIGURATION_RESULT, 0),),
 )
 
-ORGANIZATION_SCAN_EC2_INSTANCE_WITH_FINDINGS_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationScanEc2InstanceWithFindingsResult"),
-    members={
-        "EbsVolumes": {
-            "target": ORGANIZATION_EBS_VOLUMES_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ebsVolumes")
-            ],
-        }
-    },
-)
-
-ORGANIZATION_MALWARE_PROTECTION_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.guardduty#OrganizationMalwareProtectionConfigurationResult"
+ACCOUNT_FREE_TRIAL_INFO: StaticSchema = (
+    18,
+    n0,
+    _AFTI,
+    0,
+    (_AIcc, _DS, _F),
+    (
+        (STRING, {_sN: _aIc}),
+        (DATA_SOURCES_FREE_TRIAL, {_sN: _dS}),
+        (FREE_TRIAL_FEATURE_CONFIGURATIONS_RESULTS, {_sN: _f}),
     ),
-    members={
-        "ScanEc2InstanceWithFindings": {
-            "target": ORGANIZATION_SCAN_EC2_INSTANCE_WITH_FINDINGS_RESULT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="scanEc2InstanceWithFindings",
-                )
-            ],
-        }
-    },
 )
 
-ORGANIZATION_S3_LOGS_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationS3LogsConfigurationResult"),
-    members={
-        "AutoEnable": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-ORGANIZATION_DATA_SOURCE_CONFIGURATIONS_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationDataSourceConfigurationsResult"),
-    members={
-        "S3Logs": {
-            "target": ORGANIZATION_S3_LOGS_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Logs"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Kubernetes": {
-            "target": ORGANIZATION_KUBERNETES_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="kubernetes")
-            ],
-        },
-        "MalwareProtection": {
-            "target": ORGANIZATION_MALWARE_PROTECTION_CONFIGURATION_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="malwareProtection")
-            ],
-        },
-    },
-)
-
-ORG_FEATURE_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrgFeatureStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "NEW": {"target": UNIT},
-        "NONE": {"target": UNIT},
-        "ALL": {"target": UNIT},
-    },
-)
-
-ORG_FEATURE_ADDITIONAL_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrgFeatureAdditionalConfiguration"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EKS_ADDON_MANAGEMENT": {"target": UNIT},
-        "ECS_FARGATE_AGENT_MANAGEMENT": {"target": UNIT},
-        "EC2_AGENT_MANAGEMENT": {"target": UNIT},
-    },
-)
-
-ORGANIZATION_ADDITIONAL_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationAdditionalConfigurationResult"),
-    members={
-        "Name": {
-            "target": ORG_FEATURE_ADDITIONAL_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "AutoEnable": {
-            "target": ORG_FEATURE_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable")
-            ],
-        },
-    },
-)
-
-ORGANIZATION_ADDITIONAL_CONFIGURATION_RESULTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationAdditionalConfigurationResults"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ORGANIZATION_ADDITIONAL_CONFIGURATION_RESULT}},
-)
-
-ORG_FEATURE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrgFeature"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "S3_DATA_EVENTS": {"target": UNIT},
-        "EKS_AUDIT_LOGS": {"target": UNIT},
-        "EBS_MALWARE_PROTECTION": {"target": UNIT},
-        "RDS_LOGIN_EVENTS": {"target": UNIT},
-        "LAMBDA_NETWORK_LOGS": {"target": UNIT},
-        "EKS_RUNTIME_MONITORING": {"target": UNIT},
-        "RUNTIME_MONITORING": {"target": UNIT},
-        "AI_PROTECTION": {"target": UNIT},
-    },
-)
-
-ORGANIZATION_FEATURE_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationFeatureConfigurationResult"),
-    members={
-        "Name": {
-            "target": ORG_FEATURE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "AutoEnable": {
-            "target": ORG_FEATURE_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable")
-            ],
-        },
-        "AdditionalConfiguration": {
-            "target": ORGANIZATION_ADDITIONAL_CONFIGURATION_RESULTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="additionalConfiguration"
-                )
-            ],
-        },
-    },
-)
-
-ORGANIZATION_FEATURES_CONFIGURATIONS_RESULTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationFeaturesConfigurationsResults"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ORGANIZATION_FEATURE_CONFIGURATION_RESULT}},
-)
-
-DESCRIBE_ORGANIZATION_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DescribeOrganizationConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DescribeOrganizationConfigurationResponse",
-        )
-    ],
-    members={
-        "AutoEnable": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable")
-            ],
-        },
-        "MemberAccountLimitReached": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="memberAccountLimitReached"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DataSources": {
-            "target": ORGANIZATION_DATA_SOURCE_CONFIGURATIONS_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
-            ],
-        },
-        "Features": {
-            "target": ORGANIZATION_FEATURES_CONFIGURATIONS_RESULTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="features")],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-        "AutoEnableOrganizationMembers": {
-            "target": AUTO_ENABLE_MEMBERS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="autoEnableOrganizationMembers",
-                )
-            ],
-        },
-    },
-)
-
-DESCRIBE_ORGANIZATION_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DescribeOrganizationConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/detector/{DetectorId}/admin", "code": 200}
-            ),
-        )
-    ],
-)
-
-DESCRIBE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DescribePublishingDestinationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DescribePublishingDestinationRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "DestinationId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-PUBLISHING_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PublishingStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "PENDING_VERIFICATION": {"target": UNIT},
-        "PUBLISHING": {"target": UNIT},
-        "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY": {"target": UNIT},
-        "STOPPED": {"target": UNIT},
-    },
-)
-
-DESCRIBE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DescribePublishingDestinationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DescribePublishingDestinationResponse",
-        )
-    ],
-    members={
-        "DestinationId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DestinationType": {
-            "target": DESTINATION_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationType"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Status": {
-            "target": PUBLISHING_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "PublishingFailureStartTimestamp": {
-            "target": LONG,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="publishingFailureStartTimestamp",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DestinationProperties": {
-            "target": DESTINATION_PROPERTIES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="destinationProperties"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-DESCRIBE_PUBLISHING_DESTINATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DescribePublishingDestination"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/publishingDestination/{DestinationId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DESTINATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Destination"),
-    members={
-        "DestinationId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DestinationType": {
-            "target": DESTINATION_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinationType"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Status": {
-            "target": PUBLISHING_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-DESTINATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Destinations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DESTINATION}},
-)
-
-SEQUENCE_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#SequenceDescription"),
-    shape_type=ShapeType.STRING,
-)
-
-NETWORK_DIRECTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#NetworkDirection"),
-    shape_type=ShapeType.ENUM,
-    members={"INBOUND": {"target": UNIT}, "OUTBOUND": {"target": UNIT}},
-)
-
-NETWORK_CONNECTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#NetworkConnection"),
-    members={
-        "Direction": {
-            "target": NETWORK_DIRECTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="direction"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-NETWORK_GEO_LOCATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#NetworkGeoLocation"),
-    members={
-        "City": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="city"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Country": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="country"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Latitude": {
-            "target": DOUBLE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lat"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Longitude": {
-            "target": DOUBLE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lon"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-NETWORK_ENDPOINT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#NetworkEndpoint"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="id"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Ip": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="ip")],
-        },
-        "Domain": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="domain")],
-        },
-        "Port": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="port")],
-        },
-        "Location": {
-            "target": NETWORK_GEO_LOCATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="location")],
-        },
-        "AutonomousSystem": {
-            "target": AUTONOMOUS_SYSTEM,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autonomousSystem")
-            ],
-        },
-        "Connection": {
-            "target": NETWORK_CONNECTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="connection")
-            ],
-        },
-    },
-)
-
-NETWORK_ENDPOINTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#NetworkEndpoints"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": NETWORK_ENDPOINT}},
-)
-
-EC2_IMAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Ec2Image"),
-    members={
-        "Ec2InstanceUids": {
-            "target": EC2_INSTANCE_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2InstanceUids")
-            ],
-        }
-    },
-)
-
-EC2_NETWORK_INTERFACE_UIDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Ec2NetworkInterfaceUids"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-IAM_INSTANCE_PROFILE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#IamInstanceProfile"),
-    members={
-        "Arn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn")],
-        },
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="id")],
-        },
-    },
-)
-
-PRODUCT_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ProductCode"),
-    members={
-        "Code": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="productCodeId")
-            ],
-        },
-        "ProductType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="productCodeType")
-            ],
-        },
-    },
-)
-
-PRODUCT_CODES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ProductCodes"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PRODUCT_CODE}},
-)
-
-EC2_INSTANCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Ec2Instance"),
-    members={
-        "AvailabilityZone": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="availabilityZone")
-            ],
-        },
-        "ImageDescription": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="imageDescription")
-            ],
-        },
-        "InstanceState": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="instanceState")
-            ],
-        },
-        "IamInstanceProfile": {"target": IAM_INSTANCE_PROFILE},
-        "InstanceType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="instanceType")
-            ],
-        },
-        "OutpostArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="outpostArn")
-            ],
-        },
-        "Platform": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="platform")],
-        },
-        "ProductCodes": {
-            "target": PRODUCT_CODES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="productCodes")
-            ],
-        },
-        "Ec2NetworkInterfaceUids": {
-            "target": EC2_NETWORK_INTERFACE_UIDS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="ec2NetworkInterfaceUids"
-                )
-            ],
-        },
-    },
-)
-
-LAUNCH_TEMPLATE_VERSION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#LaunchTemplateVersion"),
-    shape_type=ShapeType.STRING,
-)
-
-EC2_LAUNCH_TEMPLATE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Ec2LaunchTemplate"),
-    members={
-        "Ec2InstanceUids": {
-            "target": EC2_INSTANCE_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2InstanceUids")
-            ],
-        },
-        "Version": {
-            "target": LAUNCH_TEMPLATE_VERSION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="version")],
-        },
-    },
-)
-
-IPV6_ADDRESSES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Ipv6Addresses"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-PRIVATE_IP_ADDRESS_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PrivateIpAddressDetails"),
-    members={
-        "PrivateDnsName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="privateDnsName")
-            ],
-        },
-        "PrivateIpAddress": {
-            "target": SENSITIVE_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="privateIpAddress")
-            ],
-        },
-    },
-)
-
-PRIVATE_IP_ADDRESSES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PrivateIpAddresses"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": PRIVATE_IP_ADDRESS_DETAILS}},
-)
-
-SECURITY_GROUP = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#SecurityGroup"),
-    members={
-        "GroupId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="groupId")],
-        },
-        "GroupName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="groupName")],
-        },
-    },
-)
-
-SECURITY_GROUPS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#SecurityGroups"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SECURITY_GROUP}},
-)
-
-EC2_NETWORK_INTERFACE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Ec2NetworkInterface"),
-    members={
-        "Ipv6Addresses": {
-            "target": IPV6_ADDRESSES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ipv6Addresses")
-            ],
-        },
-        "PrivateIpAddresses": {
-            "target": PRIVATE_IP_ADDRESSES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="privateIpAddresses")
-            ],
-        },
-        "PublicIp": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="publicIp")],
-        },
-        "SecurityGroups": {
-            "target": SECURITY_GROUPS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="securityGroups")
-            ],
-        },
-        "SubNetId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="subNetId")],
-        },
-        "VpcId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="vpcId")],
-        },
-    },
-)
-
-EC2_VPC = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Ec2Vpc"),
-    members={
-        "Ec2InstanceUids": {
-            "target": EC2_INSTANCE_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2InstanceUids")
-            ],
-        }
-    },
-)
-
-ECS_CLUSTER_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EcsClusterStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ACTIVE": {"target": UNIT},
-        "PROVISIONING": {"target": UNIT},
-        "DEPROVISIONING": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "INACTIVE": {"target": UNIT},
-    },
-)
-
-ECS_CLUSTER = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EcsCluster"),
-    members={
-        "Status": {
-            "target": ECS_CLUSTER_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "Ec2InstanceUids": {
-            "target": EC2_INSTANCE_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2InstanceUids")
-            ],
-        },
-    },
-)
-
-ECS_LAUNCH_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EcsLaunchType"),
-    shape_type=ShapeType.ENUM,
-    members={"FARGATE": {"target": UNIT}, "EC2": {"target": UNIT}},
-)
-
-ECS_TASK = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EcsTask"),
-    members={
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt")],
-        },
-        "TaskDefinitionArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="taskDefinitionArn")
-            ],
-        },
-        "LaunchType": {
-            "target": ECS_LAUNCH_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="launchType")
-            ],
-        },
-        "ContainerUids": {
-            "target": CONTAINER_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="containerUids")
-            ],
-        },
-    },
-)
-
-EKS_CLUSTER = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EksCluster"),
-    members={
-        "Arn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn")],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt")],
-        },
-        "Status": {
-            "target": CLUSTER_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "VpcId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="vpcId")],
-        },
-        "Ec2InstanceUids": {
-            "target": EC2_INSTANCE_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2InstanceUids")
-            ],
-        },
-    },
-)
-
-IAM_INSTANCE_PROFILE_V2 = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#IamInstanceProfileV2"),
-    members={
-        "Ec2InstanceUids": {
-            "target": EC2_INSTANCE_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2InstanceUids")
-            ],
-        }
-    },
-)
-
-KUBERNETES_RESOURCES_TYPES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesResourcesTypes"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "PODS": {"target": UNIT},
-        "JOBS": {"target": UNIT},
-        "CRONJOBS": {"target": UNIT},
-        "DEPLOYMENTS": {"target": UNIT},
-        "DAEMONSETS": {"target": UNIT},
-        "STATEFULSETS": {"target": UNIT},
-        "REPLICASETS": {"target": UNIT},
-        "REPLICATIONCONTROLLERS": {"target": UNIT},
-    },
-)
-
-KUBERNETES_WORKLOAD = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesWorkload"),
-    members={
-        "ContainerUids": {
-            "target": CONTAINER_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="containerUids")
-            ],
-        },
-        "Namespace": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="namespace")],
-        },
-        "KubernetesResourcesTypes": {
-            "target": KUBERNETES_RESOURCES_TYPES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
-        },
-    },
-)
-
-PUBLIC_ACCESS_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PublicAccessStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"BLOCKED": {"target": UNIT}, "ALLOWED": {"target": UNIT}},
-)
-
-PUBLIC_ACL_IGNORE_BEHAVIOR = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PublicAclIgnoreBehavior"),
-    shape_type=ShapeType.ENUM,
-    members={"IGNORED": {"target": UNIT}, "NOT_IGNORED": {"target": UNIT}},
-)
-
-PUBLIC_BUCKET_RESTRICT_BEHAVIOR = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PublicBucketRestrictBehavior"),
-    shape_type=ShapeType.ENUM,
-    members={"RESTRICTED": {"target": UNIT}, "NOT_RESTRICTED": {"target": UNIT}},
-)
-
-PUBLIC_ACCESS_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PublicAccessConfiguration"),
-    members={
-        "PublicAclAccess": {
-            "target": PUBLIC_ACCESS_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="publicAclAccess")
-            ],
-        },
-        "PublicPolicyAccess": {
-            "target": PUBLIC_ACCESS_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="publicPolicyAccess")
-            ],
-        },
-        "PublicAclIgnoreBehavior": {
-            "target": PUBLIC_ACL_IGNORE_BEHAVIOR,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="publicAclIgnoreBehavior"
-                )
-            ],
-        },
-        "PublicBucketRestrictBehavior": {
-            "target": PUBLIC_BUCKET_RESTRICT_BEHAVIOR,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="publicBucketRestrictBehavior",
-                )
-            ],
-        },
-    },
-)
-
-S3_OBJECT_UIDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#S3ObjectUids"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-S3_BUCKET = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#S3Bucket"),
-    members={
-        "OwnerId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="ownerId")],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt")],
-        },
-        "EncryptionType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="encryptionType")
-            ],
-        },
-        "EncryptionKeyArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="encryptionKeyArn")
-            ],
-        },
-        "EffectivePermission": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="effectivePermission"
-                )
-            ],
-        },
-        "PublicReadAccess": {
-            "target": PUBLIC_ACCESS_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="publicReadAccess")
-            ],
-        },
-        "PublicWriteAccess": {
-            "target": PUBLIC_ACCESS_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="publicWriteAccess")
-            ],
-        },
-        "AccountPublicAccess": {
-            "target": PUBLIC_ACCESS_CONFIGURATION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="accountPublicAccess"
-                )
-            ],
-        },
-        "BucketPublicAccess": {
-            "target": PUBLIC_ACCESS_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="bucketPublicAccess")
-            ],
-        },
-        "S3ObjectUids": {
-            "target": S3_OBJECT_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3ObjectUids")
-            ],
-        },
-    },
-)
-
-S3_OBJECT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#S3Object"),
-    members={
-        "ETag": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="eTag")],
-        },
-        "Key": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="key")],
-        },
-        "VersionId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="versionId")],
-        },
-    },
-)
-
-RESOURCE_DATA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ResourceData"),
-    members={
-        "S3Bucket": {
-            "target": S3_BUCKET,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Bucket")],
-        },
-        "Ec2Instance": {
-            "target": EC2_INSTANCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2Instance")
-            ],
-        },
-        "AccessKey": {
-            "target": ACCESS_KEY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accessKey")],
-        },
-        "Ec2NetworkInterface": {
-            "target": EC2_NETWORK_INTERFACE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="ec2NetworkInterface"
-                )
-            ],
-        },
-        "S3Object": {
-            "target": S3_OBJECT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Object")],
-        },
-        "EksCluster": {
-            "target": EKS_CLUSTER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="eksCluster")
-            ],
-        },
-        "KubernetesWorkload": {
-            "target": KUBERNETES_WORKLOAD,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="kubernetesWorkload")
-            ],
-        },
-        "Container": {
-            "target": CONTAINER_FINDING_RESOURCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="container")],
-        },
-        "EcsCluster": {
-            "target": ECS_CLUSTER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ecsCluster")
-            ],
-        },
-        "EcsTask": {
-            "target": ECS_TASK,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="ecsTask")],
-        },
-        "IamInstanceProfile": {
-            "target": IAM_INSTANCE_PROFILE_V2,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="iamInstanceProfile")
-            ],
-        },
-        "AutoscalingAutoScalingGroup": {
-            "target": AUTOSCALING_AUTO_SCALING_GROUP,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="autoscalingAutoScalingGroup",
-                )
-            ],
-        },
-        "Ec2LaunchTemplate": {
-            "target": EC2_LAUNCH_TEMPLATE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2LaunchTemplate")
-            ],
-        },
-        "Ec2Vpc": {
-            "target": EC2_VPC,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2Vpc")],
-        },
-        "Ec2Image": {
-            "target": EC2_IMAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2Image")],
-        },
-        "CloudformationStack": {
-            "target": CLOUDFORMATION_STACK,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="cloudformationStack"
-                )
-            ],
-        },
-        "BedrockGuardrail": {
-            "target": BEDROCK_GUARDRAIL_RESOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="bedrockGuardrail")
-            ],
-        },
-    },
-)
-
-FINDING_RESOURCE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FindingResourceType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EC2_INSTANCE": {"target": UNIT},
-        "EC2_NETWORK_INTERFACE": {"target": UNIT},
-        "S3_BUCKET": {"target": UNIT},
-        "S3_OBJECT": {"target": UNIT},
-        "ACCESS_KEY": {"target": UNIT},
-        "EKS_CLUSTER": {"target": UNIT},
-        "KUBERNETES_WORKLOAD": {"target": UNIT},
-        "CONTAINER": {"target": UNIT},
-        "ECS_CLUSTER": {"target": UNIT},
-        "ECS_TASK": {"target": UNIT},
-        "AUTOSCALING_AUTO_SCALING_GROUP": {"target": UNIT},
-        "IAM_INSTANCE_PROFILE": {"target": UNIT},
-        "CLOUDFORMATION_STACK": {"target": UNIT},
-        "EC2_LAUNCH_TEMPLATE": {"target": UNIT},
-        "EC2_VPC": {"target": UNIT},
-        "EC2_IMAGE": {"target": UNIT},
-        "BEDROCK_CUSTOM_MODEL": {"target": UNIT},
-        "BEDROCK_IMPORTED_MODEL": {"target": UNIT},
-        "BEDROCK_PROVISIONED_MODEL": {"target": UNIT},
-        "BEDROCK_CUSTOM_MODEL_DEPLOYMENT": {"target": UNIT},
-        "BEDROCK_INFERENCE_PROFILE": {"target": UNIT},
-        "BEDROCK_APPLICATION_INFERENCE_PROFILE": {"target": UNIT},
-        "BEDROCK_PROMPT": {"target": UNIT},
-        "BEDROCK_PROMPT_ROUTER": {"target": UNIT},
-        "BEDROCK_GUARDRAIL": {"target": UNIT},
-        "SAGEMAKER_ENDPOINT": {"target": UNIT},
-    },
-)
-
-TAG = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Tag"),
-    members={
-        "Key": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="key")],
-        },
-        "Value": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="value")],
-        },
-    },
-)
-
-TAGS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Tags"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG}},
-)
-
-RESOURCE_V2 = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ResourceV2"),
-    members={
-        "Uid": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "AccountId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "ResourceType": {
-            "target": FINDING_RESOURCE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceType"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Region": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="region")],
-        },
-        "Service": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="service")],
-        },
-        "CloudPartition": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="cloudPartition")
-            ],
-        },
-        "Tags": {
-            "target": TAGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "Data": {
-            "target": RESOURCE_DATA,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="data")],
-        },
-    },
-)
-
-RESOURCES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Resources"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RESOURCE_V2}},
-)
-
-INDICATOR_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#IndicatorType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "SUSPICIOUS_USER_AGENT": {"target": UNIT},
-        "SUSPICIOUS_NETWORK": {"target": UNIT},
-        "MALICIOUS_IP": {"target": UNIT},
-        "TOR_IP": {"target": UNIT},
-        "ATTACK_TACTIC": {"target": UNIT},
-        "HIGH_RISK_API": {"target": UNIT},
-        "ATTACK_TECHNIQUE": {"target": UNIT},
-        "UNUSUAL_API_FOR_ACCOUNT": {"target": UNIT},
-        "UNUSUAL_ASN_FOR_ACCOUNT": {"target": UNIT},
-        "UNUSUAL_ASN_FOR_USER": {"target": UNIT},
-        "SUSPICIOUS_PROCESS": {"target": UNIT},
-        "MALICIOUS_DOMAIN": {"target": UNIT},
-        "MALICIOUS_PROCESS": {"target": UNIT},
-        "CRYPTOMINING_IP": {"target": UNIT},
-        "CRYPTOMINING_DOMAIN": {"target": UNIT},
-        "CRYPTOMINING_PROCESS": {"target": UNIT},
-        "MALICIOUS_FILE": {"target": UNIT},
-        "VULNERABILITY": {"target": UNIT},
-        "MALICIOUS_PACKAGE": {"target": UNIT},
-        "MISCONFIGURATION": {"target": UNIT},
-        "REACHABILITY": {"target": UNIT},
-        "SENSITIVE_DATA": {"target": UNIT},
-    },
-)
-
-INDICATOR_TITLE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#IndicatorTitle"), shape_type=ShapeType.STRING
-)
-
-INDICATOR_VALUE_STRING = Schema(
-    id=ShapeID("com.amazonaws.guardduty#IndicatorValueString"),
-    shape_type=ShapeType.STRING,
-)
-
-INDICATOR_VALUES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#IndicatorValues"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": INDICATOR_VALUE_STRING}},
-)
-
-INDICATOR = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Indicator"),
-    members={
-        "Key": {
-            "target": INDICATOR_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="key"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Values": {
-            "target": INDICATOR_VALUES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="values")],
-        },
-        "Title": {
-            "target": INDICATOR_TITLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="title")],
-        },
-    },
-)
-
-INDICATORS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Indicators"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": INDICATOR}},
-)
-
-SIGNAL_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#SignalDescription"), shape_type=ShapeType.STRING
-)
-
-ENDPOINT_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EndpointIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-RESOURCE_UIDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ResourceUids"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-SIGNAL_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#SignalType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FINDING": {"target": UNIT},
-        "CLOUD_TRAIL": {"target": UNIT},
-        "S3_DATA_EVENTS": {"target": UNIT},
-        "EKS_AUDIT_LOGS": {"target": UNIT},
-        "FLOW_LOGS": {"target": UNIT},
-        "DNS_LOGS": {"target": UNIT},
-        "RUNTIME_MONITORING": {"target": UNIT},
-    },
-)
-
-SIGNAL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Signal"),
-    members={
-        "Uid": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Type": {
-            "target": SIGNAL_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="type"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Description": {
-            "target": SIGNAL_DESCRIPTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description")
-            ],
-        },
-        "Name": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "FirstSeenAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="firstSeenAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "LastSeenAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lastSeenAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Severity": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="severity")],
-        },
-        "Count": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="count"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ResourceUids": {
-            "target": RESOURCE_UIDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceUids")
-            ],
-        },
-        "ActorIds": {
-            "target": ACTOR_IDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="actorIds")],
-        },
-        "EndpointIds": {
-            "target": ENDPOINT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="endpointIds")
-            ],
-        },
-        "SignalIndicators": {
-            "target": INDICATORS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="signalIndicators")
-            ],
-        },
-        "Activities": {
-            "target": ACTIVITIES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="activities")
-            ],
-        },
-    },
-)
-
-SIGNALS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Signals"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SIGNAL}},
-)
-
-SEQUENCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Sequence"),
-    members={
-        "Uid": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Description": {
-            "target": SEQUENCE_DESCRIPTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Actors": {
-            "target": ACTORS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="actors")],
-        },
-        "Resources": {
-            "target": RESOURCES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="resources")],
-        },
-        "Endpoints": {
-            "target": NETWORK_ENDPOINTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="endpoints")],
-        },
-        "Signals": {
-            "target": SIGNALS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="signals"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "SequenceIndicators": {
-            "target": INDICATORS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sequenceIndicators")
-            ],
-        },
-        "AdditionalSequenceTypes": {
-            "target": ADDITIONAL_SEQUENCE_TYPES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="additionalSequenceTypes"
-                )
-            ],
-        },
-    },
-)
-
-DETECTION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Detection"),
-    members={
-        "Anomaly": {
-            "target": ANOMALY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="anomaly")],
-        },
-        "Sequence": {
-            "target": SEQUENCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="sequence")],
-        },
-    },
-)
-
-DETECTION_RULE_CONFIGURATION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleConfigurationStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ACTIVE": {"target": UNIT},
-        "PROCESSING": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-    },
-)
-
-DETECTION_RULE_DATA_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleDataSource"),
-    shape_type=ShapeType.ENUM,
-    members={"CLOUDTRAIL_MANAGEMENT_EVENT": {"target": UNIT}},
-)
-
-DETECTION_RULE_DESCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleDescription"),
-    shape_type=ShapeType.STRING,
-)
-
-DETECTION_RULE_FILTER_CONDITION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleFilterCondition"),
-    shape_type=ShapeType.ENUM,
-    members={"EQUALS": {"target": UNIT}, "CONTAINS": {"target": UNIT}},
-)
-
-FILTER_FIELD_NAME = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FilterFieldName"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "NAME": {"target": UNIT},
-        "DESCRIPTION": {"target": UNIT},
-        "DATA_SOURCE": {"target": UNIT},
-        "SEVERITY": {"target": UNIT},
-        "TACTIC": {"target": UNIT},
-        "TECHNIQUE": {"target": UNIT},
-        "SERVICE": {"target": UNIT},
-    },
-)
-
-DETECTION_RULE_FILTER_VALUE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleFilterValue"),
-    shape_type=ShapeType.STRING,
-)
-
-DETECTION_RULE_FILTER_VALUES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleFilterValues"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DETECTION_RULE_FILTER_VALUE}},
-)
-
-DETECTION_RULE_FILTER = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleFilter"),
-    members={
-        "Name": {
-            "target": FILTER_FIELD_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Values": {
-            "target": DETECTION_RULE_FILTER_VALUES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="values"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Condition": {
-            "target": DETECTION_RULE_FILTER_CONDITION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="condition")],
-        },
-    },
-)
-
-DETECTION_RULE_FILTER_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleFilterList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DETECTION_RULE_FILTER}},
-)
-
-DETECTION_RULE_MAX_RESULTS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleMaxResults"),
-    shape_type=ShapeType.INTEGER,
-)
-
-DETECTION_RULE_ORG_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleOrgConfiguration"),
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Mode": {
-            "target": ASSOCIATION_MODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Status": {
-            "target": DETECTION_RULE_CONFIGURATION_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "StatusReason": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="statusReason")
-            ],
-        },
-        "IncludeAccountIds": {
-            "target": DETECTION_RULE_ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="includeAccountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ExcludeAccountIds": {
-            "target": DETECTION_RULE_ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="excludeAccountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ExpiresAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="expiresAt")],
-        },
-    },
-)
-
-DETECTION_RULE_ORG_CONFIGURATION_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleOrgConfigurationSummary"),
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Mode": {
-            "target": ASSOCIATION_MODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Status": {
-            "target": DETECTION_RULE_CONFIGURATION_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "StatusReason": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="statusReason")
-            ],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ExpiresAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="expiresAt")],
-        },
-    },
-)
-
-DETECTION_RULE_ORG_CONFIGURATION_SUMMARY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleOrgConfigurationSummaryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DETECTION_RULE_ORG_CONFIGURATION_SUMMARY}},
-)
-
-DETECTION_RULE_SERVICE_NAME = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleServiceName"),
-    shape_type=ShapeType.STRING,
-)
-
-DETECTION_RULE_SEVERITY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionRuleSeverity"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "CRITICAL": {"target": UNIT},
-        "HIGH": {"target": UNIT},
-        "MEDIUM": {"target": UNIT},
-        "LOW": {"target": UNIT},
-    },
-)
-
-DETECTION_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectionSource"),
-    shape_type=ShapeType.ENUM,
-    members={"AMAZON": {"target": UNIT}, "BITDEFENDER": {"target": UNIT}},
-)
-
-MANAGED_BY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ManagedBy"),
-    shape_type=ShapeType.ENUM,
-    members={"GUARDDUTY_POLICY": {"target": UNIT}},
-)
-
-DETECTOR_ADDITIONAL_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorAdditionalConfigurationResult"),
-    members={
-        "Name": {
-            "target": FEATURE_ADDITIONAL_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Status": {
-            "target": FEATURE_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-        "ManagedBy": {
-            "target": MANAGED_BY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="managedBy")],
-        },
-    },
-)
-
-DETECTOR_ADDITIONAL_CONFIGURATION_RESULTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorAdditionalConfigurationResults"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DETECTOR_ADDITIONAL_CONFIGURATION_RESULT}},
-)
-
-DETECTOR_FEATURE_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorFeatureResult"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FLOW_LOGS": {"target": UNIT},
-        "CLOUD_TRAIL": {"target": UNIT},
-        "DNS_LOGS": {"target": UNIT},
-        "S3_DATA_EVENTS": {"target": UNIT},
-        "EKS_AUDIT_LOGS": {"target": UNIT},
-        "EBS_MALWARE_PROTECTION": {"target": UNIT},
-        "RDS_LOGIN_EVENTS": {"target": UNIT},
-        "LAMBDA_NETWORK_LOGS": {"target": UNIT},
-        "EKS_RUNTIME_MONITORING": {"target": UNIT},
-        "RUNTIME_MONITORING": {"target": UNIT},
-        "AI_PROTECTION": {"target": UNIT},
-        "AI_ANALYST": {"target": UNIT},
-    },
-)
-
-DETECTOR_FEATURE_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorFeatureConfigurationResult"),
-    members={
-        "Name": {
-            "target": DETECTOR_FEATURE_RESULT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Status": {
-            "target": FEATURE_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-        "AdditionalConfiguration": {
-            "target": DETECTOR_ADDITIONAL_CONFIGURATION_RESULTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="additionalConfiguration"
-                )
-            ],
-        },
-        "ManagedBy": {
-            "target": MANAGED_BY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="managedBy")],
-        },
-    },
-)
-
-DETECTOR_FEATURE_CONFIGURATIONS_RESULTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorFeatureConfigurationsResults"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DETECTOR_FEATURE_CONFIGURATION_RESULT}},
-)
-
-DETECTOR_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DETECTOR_ID}},
-)
-
-DETECTOR_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DetectorStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"ENABLED": {"target": UNIT}, "DISABLED": {"target": UNIT}},
-)
-
-DISABLE_ORGANIZATION_ADMIN_ACCOUNT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DisableOrganizationAdminAccountInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DisableOrganizationAdminAccountRequest",
-        )
-    ],
-    members={
-        "AdminAccountId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="adminAccountId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-DISABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DisableOrganizationAdminAccountOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DisableOrganizationAdminAccountResponse",
-        )
-    ],
-)
-
-DISABLE_ORGANIZATION_ADMIN_ACCOUNT = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DisableOrganizationAdminAccount"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/admin/disable", "code": 200}
-            ),
-        )
-    ],
-)
-
-DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DisassociateFromAdministratorAccountInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DisassociateFromAdministratorAccountRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DisassociateFromAdministratorAccountOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DisassociateFromAdministratorAccountResponse",
-        )
-    ],
-)
-
-DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DisassociateFromAdministratorAccount"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/administrator/disassociate",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DISASSOCIATE_FROM_MASTER_ACCOUNT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DisassociateFromMasterAccountInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DisassociateFromMasterAccountRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DISASSOCIATE_FROM_MASTER_ACCOUNT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DisassociateFromMasterAccountOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DisassociateFromMasterAccountResponse",
-        )
-    ],
-)
-
-DISASSOCIATE_FROM_MASTER_ACCOUNT = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DisassociateFromMasterAccount"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/master/disassociate",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DISASSOCIATE_MEMBERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DisassociateMembersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DisassociateMembersRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-DISASSOCIATE_MEMBERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#DisassociateMembersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#DisassociateMembersResponse",
-        )
-    ],
-    members={
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-DISASSOCIATE_MEMBERS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#DisassociateMembers"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/member/disassociate",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-EBS_SNAPSHOT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EbsSnapshot"),
-    members={
-        "DeviceName": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="deviceName")
-            ],
-        }
-    },
-)
-
-EBS_SNAPSHOT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EbsSnapshotDetails"),
-    members={
-        "SnapshotArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="snapshotArn")
-            ],
-        }
-    },
-)
-
-EBS_SNAPSHOT_PRESERVATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EbsSnapshotPreservation"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "NO_RETENTION": {"target": UNIT},
-        "RETENTION_WITH_FINDING": {"target": UNIT},
-    },
-)
-
-EBS_VOLUME_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EbsVolumeDetails"),
-    members={
-        "ScannedVolumeDetails": {
-            "target": VOLUME_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="scannedVolumeDetails"
-                )
-            ],
-        },
-        "SkippedVolumeDetails": {
-            "target": VOLUME_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="skippedVolumeDetails"
-                )
-            ],
-        },
-    },
-)
-
-HIGHEST_SEVERITY_THREAT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#HighestSeverityThreatDetails"),
-    members={
-        "Severity": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="severity")],
-        },
-        "ThreatName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatName")
-            ],
-        },
-        "Count": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="count")],
-        },
-    },
-)
-
-SCANNED_ITEM_COUNT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScannedItemCount"),
-    members={
-        "TotalGb": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="totalGb")],
-        },
-        "Files": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="files")],
-        },
-        "Volumes": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="volumes")],
-        },
-    },
-)
-
-SCAN_FILE_PATH = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanFilePath"),
-    members={
-        "FilePath": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="filePath")],
-        },
-        "VolumeArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="volumeArn")],
-        },
-        "Hash": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="hash")],
-        },
-        "FileName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="fileName")],
-        },
-    },
-)
-
-FILE_PATHS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FilePaths"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SCAN_FILE_PATH}},
-)
-
-SCAN_THREAT_NAME = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanThreatName"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Severity": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="severity")],
-        },
-        "ItemCount": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="itemCount")],
-        },
-        "FilePaths": {
-            "target": FILE_PATHS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="filePaths")],
-        },
-    },
-)
-
-SCAN_THREAT_NAMES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanThreatNames"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SCAN_THREAT_NAME}},
-)
-
-THREAT_DETECTED_BY_NAME = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ThreatDetectedByName"),
-    members={
-        "ItemCount": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="itemCount")],
-        },
-        "UniqueThreatNameCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="uniqueThreatNameCount"
-                )
-            ],
-        },
-        "Shortened": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="shortened")],
-        },
-        "ThreatNames": {
-            "target": SCAN_THREAT_NAMES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatNames")
-            ],
-        },
-    },
-)
-
-THREATS_DETECTED_ITEM_COUNT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ThreatsDetectedItemCount"),
-    members={
-        "Files": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="files")],
-        }
-    },
-)
-
-SCAN_DETECTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanDetections"),
-    members={
-        "ScannedItemCount": {
-            "target": SCANNED_ITEM_COUNT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scannedItemCount")
-            ],
-        },
-        "ThreatsDetectedItemCount": {
-            "target": THREATS_DETECTED_ITEM_COUNT,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="threatsDetectedItemCount"
-                )
-            ],
-        },
-        "HighestSeverityThreatDetails": {
-            "target": HIGHEST_SEVERITY_THREAT_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="highestSeverityThreatDetails",
-                )
-            ],
-        },
-        "ThreatDetectedByName": {
-            "target": THREAT_DETECTED_BY_NAME,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="threatDetectedByName"
-                )
-            ],
-        },
-    },
-)
-
-SOURCES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Sources"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-EBS_VOLUME_SCAN_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EbsVolumeScanDetails"),
-    members={
-        "ScanId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanId")],
-        },
-        "ScanStartedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanStartedAt")
-            ],
-        },
-        "ScanCompletedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanCompletedAt")
-            ],
-        },
-        "TriggerFindingId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggerFindingId")
-            ],
-        },
-        "Sources": {
-            "target": SOURCES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="sources")],
-        },
-        "ScanDetections": {
-            "target": SCAN_DETECTIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanDetections")
-            ],
-        },
-        "ScanType": {
-            "target": SCAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanType")],
-        },
-    },
-)
-
-EC2_IMAGE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Ec2ImageDetails"),
-    members={
-        "ImageArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="imageArn")],
-        }
-    },
-)
-
-HOST_PATH = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#HostPath"),
-    members={
-        "Path": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="path")],
-        }
-    },
-)
-
-VOLUME = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Volume"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "HostPath": {
-            "target": HOST_PATH,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="hostPath")],
-        },
-    },
-)
-
-VOLUMES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Volumes"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": VOLUME}},
-)
-
-ECS_TASK_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EcsTaskDetails"),
-    members={
-        "Arn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn")],
-        },
-        "DefinitionArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="definitionArn")
-            ],
-        },
-        "Version": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="version")],
-        },
-        "TaskCreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt")],
-        },
-        "StartedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="startedAt")],
-        },
-        "StartedBy": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="startedBy")],
-        },
-        "Tags": {
-            "target": TAGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "Volumes": {
-            "target": VOLUMES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="volumes")],
-        },
-        "Containers": {
-            "target": CONTAINERS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="containers")
-            ],
-        },
-        "Group": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="group")],
-        },
-        "LaunchType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="launchType")
-            ],
-        },
-    },
-)
-
-ECS_CLUSTER_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EcsClusterDetails"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Arn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn")],
-        },
-        "Status": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "ActiveServicesCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="activeServicesCount"
-                )
-            ],
-        },
-        "RegisteredContainerInstancesCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="registeredContainerInstancesCount",
-                )
-            ],
-        },
-        "RunningTasksCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="runningTasksCount")
-            ],
-        },
-        "Tags": {
-            "target": TAGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "TaskDetails": {
-            "target": ECS_TASK_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="taskDetails")
-            ],
-        },
-    },
-)
-
-EKS_CLUSTER_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EksClusterDetails"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Arn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn")],
-        },
-        "VpcId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="vpcId")],
-        },
-        "Status": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "Tags": {
-            "target": TAGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt")],
-        },
-    },
-)
-
-ENABLE_ORGANIZATION_ADMIN_ACCOUNT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EnableOrganizationAdminAccountInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#EnableOrganizationAdminAccountRequest",
-        )
-    ],
-    members={
-        "AdminAccountId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="adminAccountId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-ENABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#EnableOrganizationAdminAccountOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#EnableOrganizationAdminAccountResponse",
-        )
-    ],
-)
-
-ENABLE_ORGANIZATION_ADMIN_ACCOUNT = Schema(
-    id=ShapeID("com.amazonaws.guardduty#EnableOrganizationAdminAccount"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/admin/enable", "code": 200}
-            ),
-        )
-    ],
-)
-
-THREAT_NAMES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ThreatNames"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-THREAT_INTELLIGENCE_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ThreatIntelligenceDetail"),
-    members={
-        "ThreatListName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatListName")
-            ],
-        },
-        "ThreatNames": {
-            "target": THREAT_NAMES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatNames")
-            ],
-        },
-        "ThreatFileSha256": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatFileSha256")
-            ],
-        },
-    },
-)
-
-THREAT_INTELLIGENCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ThreatIntelligenceDetails"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": THREAT_INTELLIGENCE_DETAIL}},
-)
-
-EVIDENCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Evidence"),
-    members={
-        "ThreatIntelligenceDetails": {
-            "target": THREAT_INTELLIGENCE_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="threatIntelligenceDetails"
-                )
-            ],
-        }
-    },
-)
-
-FEEDBACK = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Feedback"),
-    shape_type=ShapeType.ENUM,
-    members={"USEFUL": {"target": UNIT}, "NOT_USEFUL": {"target": UNIT}},
-)
-
-FILTER_NAMES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FilterNames"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FILTER_NAME}},
-)
-
-FILTER_VERSION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#FilterVersion"), shape_type=ShapeType.LONG
-)
-
-NETWORK_INTERFACE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#NetworkInterface"),
-    members={
-        "Ipv6Addresses": {
-            "target": IPV6_ADDRESSES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ipv6Addresses")
-            ],
-        },
-        "NetworkInterfaceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="networkInterfaceId")
-            ],
-        },
-        "PrivateDnsName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="privateDnsName")
-            ],
-        },
-        "PrivateIpAddress": {
-            "target": SENSITIVE_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="privateIpAddress")
-            ],
-        },
-        "PrivateIpAddresses": {
-            "target": PRIVATE_IP_ADDRESSES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="privateIpAddresses")
-            ],
-        },
-        "PublicDnsName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="publicDnsName")
-            ],
-        },
-        "PublicIp": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="publicIp")],
-        },
-        "SecurityGroups": {
-            "target": SECURITY_GROUPS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="securityGroups")
-            ],
-        },
-        "SubnetId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="subnetId")],
-        },
-        "VpcId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="vpcId")],
-        },
-    },
-)
-
-NETWORK_INTERFACES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#NetworkInterfaces"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": NETWORK_INTERFACE}},
-)
-
-INSTANCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#InstanceDetails"),
-    members={
-        "AvailabilityZone": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="availabilityZone")
-            ],
-        },
-        "IamInstanceProfile": {
-            "target": IAM_INSTANCE_PROFILE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="iamInstanceProfile")
-            ],
-        },
-        "ImageDescription": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="imageDescription")
-            ],
-        },
-        "ImageId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="imageId")],
-        },
-        "InstanceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="instanceId")
-            ],
-        },
-        "InstanceState": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="instanceState")
-            ],
-        },
-        "InstanceType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="instanceType")
-            ],
-        },
-        "OutpostArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="outpostArn")
-            ],
-        },
-        "LaunchTime": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="launchTime")
-            ],
-        },
-        "NetworkInterfaces": {
-            "target": NETWORK_INTERFACES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="networkInterfaces")
-            ],
-        },
-        "Platform": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="platform")],
-        },
-        "ProductCodes": {
-            "target": PRODUCT_CODES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="productCodes")
-            ],
-        },
-        "Tags": {
-            "target": TAGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-GROUPS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Groups"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-IMPERSONATED_USER = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ImpersonatedUser"),
-    members={
-        "Username": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="username")],
-        },
-        "Groups": {
-            "target": GROUPS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="groups")],
-        },
-    },
-)
-
-SESSION_NAME_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#SessionNameList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-KUBERNETES_USER_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesUserDetails"),
-    members={
-        "Username": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="username")],
-        },
-        "Uid": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid")],
-        },
-        "Groups": {
-            "target": GROUPS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="groups")],
-        },
-        "SessionName": {
-            "target": SESSION_NAME_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sessionName")
-            ],
-        },
-        "ImpersonatedUser": {
-            "target": IMPERSONATED_USER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="impersonatedUser")
-            ],
-        },
-    },
-)
-
-KUBERNETES_WORKLOAD_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesWorkloadDetails"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Type": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
-        },
-        "Uid": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="uid")],
-        },
-        "Namespace": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="namespace")],
-        },
-        "HostNetwork": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="hostNetwork")
-            ],
-        },
-        "ServiceAccountName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="serviceAccountName")
-            ],
-        },
-        "Containers": {
-            "target": CONTAINERS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="containers")
-            ],
-        },
-        "Volumes": {
-            "target": VOLUMES,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="volumes")],
-        },
-        "HostIPC": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="hostIPC")],
-        },
-        "HostPID": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="hostPID")],
-        },
-    },
-)
-
-KUBERNETES_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#KubernetesDetails"),
-    members={
-        "KubernetesUserDetails": {
-            "target": KUBERNETES_USER_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="kubernetesUserDetails"
-                )
-            ],
-        },
-        "KubernetesWorkloadDetails": {
-            "target": KUBERNETES_WORKLOAD_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="kubernetesWorkloadDetails"
-                )
-            ],
-        },
-    },
-)
-
-SUBNET_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#SubnetIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-VPC_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#VpcConfig"),
-    members={
-        "SubnetIds": {
-            "target": SUBNET_IDS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="subnetIds")],
-        },
-        "VpcId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="vpcId")],
-        },
-        "SecurityGroups": {
-            "target": SECURITY_GROUPS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="securityGroups")
-            ],
-        },
-    },
-)
-
-LAMBDA_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#LambdaDetails"),
-    members={
-        "FunctionArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="functionArn")
-            ],
-        },
-        "FunctionName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="functionName")
-            ],
-        },
-        "Description": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description")
-            ],
-        },
-        "LastModifiedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lastModifiedAt")
-            ],
-        },
-        "RevisionId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="revisionId")
-            ],
-        },
-        "FunctionVersion": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="functionVersion")
-            ],
-        },
-        "Role": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="role")],
-        },
-        "VpcConfig": {
-            "target": VPC_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="vpcConfig")],
-        },
-        "Tags": {
-            "target": TAGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-MODEL_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ModelDetail"),
-    members={
-        "ModelId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="modelId")],
-        }
-    },
-)
-
-MODEL_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ModelDetails"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MODEL_DETAIL}},
-)
-
-RDS_DB_INSTANCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RdsDbInstanceDetails"),
-    members={
-        "DbInstanceIdentifier": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="dbInstanceIdentifier"
-                )
-            ],
-        },
-        "Engine": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="engine")],
-        },
-        "EngineVersion": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="engineVersion")
-            ],
-        },
-        "DbClusterIdentifier": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="dbClusterIdentifier"
-                )
-            ],
-        },
-        "DbInstanceArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dbInstanceArn")
-            ],
-        },
-        "DbiResourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dbiResourceId")
-            ],
-        },
-        "Tags": {
-            "target": TAGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-RDS_DB_USER_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RdsDbUserDetails"),
-    members={
-        "User": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="user")],
-        },
-        "Application": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="application")
-            ],
-        },
-        "Database": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="database")],
-        },
-        "Ssl": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="ssl")],
-        },
-        "AuthMethod": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="authMethod")
-            ],
-        },
-    },
-)
-
-RDS_LIMITLESS_DB_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RdsLimitlessDbDetails"),
-    members={
-        "DbShardGroupIdentifier": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="dbShardGroupIdentifier"
-                )
-            ],
-        },
-        "DbShardGroupResourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="dbShardGroupResourceId"
-                )
-            ],
-        },
-        "DbShardGroupArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dbShardGroupArn")
-            ],
-        },
-        "Engine": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="engine")],
-        },
-        "EngineVersion": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="engineVersion")
-            ],
-        },
-        "DbClusterIdentifier": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="dbClusterIdentifier"
-                )
-            ],
-        },
-        "Tags": {
-            "target": TAGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-SCAN_CONFIGURATION_CONTINUOUS_SCAN_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanConfigurationContinuousScanDetails"),
-    members={
-        "StartTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="startTime")],
-        },
-        "EndTime": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="endTime"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-RECOVERY_POINT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RecoveryPointDetails"),
-    members={
-        "RecoveryPointArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="recoveryPointArn")
-            ],
-        },
-        "BackupVaultName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="backupVaultName")
-            ],
-        },
-        "ContinuousScanDetails": {
-            "target": SCAN_CONFIGURATION_CONTINUOUS_SCAN_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="continuousScanDetails"
-                )
-            ],
-        },
-    },
-)
-
-OWNER = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Owner"),
-    members={
-        "Id": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="id")],
-        }
-    },
-)
-
-PERMISSION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PermissionConfiguration"),
-    members={
-        "BucketLevelPermissions": {
-            "target": BUCKET_LEVEL_PERMISSIONS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="bucketLevelPermissions"
-                )
-            ],
-        },
-        "AccountLevelPermissions": {
-            "target": ACCOUNT_LEVEL_PERMISSIONS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="accountLevelPermissions"
-                )
-            ],
-        },
-    },
-)
-
-PUBLIC_ACCESS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#PublicAccess"),
-    members={
-        "PermissionConfiguration": {
-            "target": PERMISSION_CONFIGURATION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="permissionConfiguration"
-                )
-            ],
-        },
-        "EffectivePermission": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="effectivePermission"
-                )
-            ],
-        },
-    },
-)
-
-S3_OBJECT_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#S3ObjectDetail"),
-    members={
-        "ObjectArn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="objectArn")],
-        },
-        "Key": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="key")],
-        },
-        "ETag": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="eTag")],
-        },
-        "Hash": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="hash")],
-        },
-        "VersionId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="versionId")],
-        },
-    },
-)
-
-S3_OBJECT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#S3ObjectDetails"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": S3_OBJECT_DETAIL}},
-)
-
-S3_BUCKET_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#S3BucketDetail"),
-    members={
-        "Arn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn")],
-        },
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Type": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt")],
-        },
-        "Owner": {
-            "target": OWNER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="owner")],
-        },
-        "Tags": {
-            "target": TAGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "DefaultServerSideEncryption": {
-            "target": DEFAULT_SERVER_SIDE_ENCRYPTION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="defaultServerSideEncryption",
-                )
-            ],
-        },
-        "PublicAccess": {
-            "target": PUBLIC_ACCESS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="publicAccess")
-            ],
-        },
-        "S3ObjectDetails": {
-            "target": S3_OBJECT_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3ObjectDetails")
-            ],
-        },
-    },
-)
-
-S3_BUCKET_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#S3BucketDetails"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": S3_BUCKET_DETAIL}},
-)
-
-RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Resource"),
-    members={
-        "AccessKeyDetails": {
-            "target": ACCESS_KEY_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accessKeyDetails")
-            ],
-        },
-        "S3BucketDetails": {
-            "target": S3_BUCKET_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3BucketDetails")
-            ],
-        },
-        "InstanceDetails": {
-            "target": INSTANCE_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="instanceDetails")
-            ],
-        },
-        "EksClusterDetails": {
-            "target": EKS_CLUSTER_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="eksClusterDetails")
-            ],
-        },
-        "KubernetesDetails": {
-            "target": KUBERNETES_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="kubernetesDetails")
-            ],
-        },
-        "ResourceType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceType")
-            ],
-        },
-        "EbsVolumeDetails": {
-            "target": EBS_VOLUME_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ebsVolumeDetails")
-            ],
-        },
-        "EcsClusterDetails": {
-            "target": ECS_CLUSTER_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ecsClusterDetails")
-            ],
-        },
-        "ContainerDetails": {
-            "target": CONTAINER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="containerDetails")
-            ],
-        },
-        "LambdaDetails": {
-            "target": LAMBDA_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lambdaDetails")
-            ],
-        },
-        "RdsDbInstanceDetails": {
-            "target": RDS_DB_INSTANCE_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="rdsDbInstanceDetails"
-                )
-            ],
-        },
-        "RdsLimitlessDbDetails": {
-            "target": RDS_LIMITLESS_DB_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="rdsLimitlessDbDetails"
-                )
-            ],
-        },
-        "RdsDbUserDetails": {
-            "target": RDS_DB_USER_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="rdsDbUserDetails")
-            ],
-        },
-        "EbsSnapshotDetails": {
-            "target": EBS_SNAPSHOT_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ebsSnapshotDetails")
-            ],
-        },
-        "Ec2ImageDetails": {
-            "target": EC2_IMAGE_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ec2ImageDetails")
-            ],
-        },
-        "RecoveryPointDetails": {
-            "target": RECOVERY_POINT_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="recoveryPointDetails"
-                )
-            ],
-        },
-        "BedrockGuardrailDetails": {
-            "target": BEDROCK_GUARDRAIL_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="bedrockGuardrailDetails"
-                )
-            ],
-        },
-        "ModelDetails": {
-            "target": MODEL_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="modelDetails")
-            ],
-        },
-    },
-)
-
-SERVICE_ADDITIONAL_INFO = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ServiceAdditionalInfo"),
-    members={
-        "Value": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="value")],
-        },
-        "Type": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="type")],
-        },
-    },
-)
-
-SCAN_CATEGORY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanCategory"),
-    shape_type=ShapeType.ENUM,
-    members={"FULL_SCAN": {"target": UNIT}, "INCREMENTAL_SCAN": {"target": UNIT}},
-)
-
-INCREMENTAL_SCAN_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#IncrementalScanDetails"),
-    members={
-        "BaselineResourceArn": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="baselineResourceArn"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-MALWARE_PROTECTION_FINDINGS_SCAN_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionFindingsScanConfiguration"),
-    members={
-        "TriggerType": {
-            "target": TRIGGER_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggerType")
-            ],
-        },
-        "IncrementalScanDetails": {
-            "target": INCREMENTAL_SCAN_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="incrementalScanDetails"
-                )
-            ],
-        },
-    },
-)
-
-MALWARE_PROTECTION_SCAN_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionScanType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "BACKUP_INITIATED": {"target": UNIT},
-        "ON_DEMAND": {"target": UNIT},
-        "GUARDDUTY_INITIATED": {"target": UNIT},
-    },
-)
-
-ITEM_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ItemDetails"),
-    members={
-        "ResourceArn": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceArn")
-            ],
-        },
-        "ItemPath": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="itemPath")],
-        },
-        "Hash": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="hash")],
-        },
-        "AdditionalInfo": {
-            "target": ADDITIONAL_INFO,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="additionalInfo")
-            ],
-        },
-    },
-)
-
-ITEM_DETAILS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ItemDetailsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ITEM_DETAILS}},
-)
-
-ITEM_PATH = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ItemPath"),
-    members={
-        "NestedItemPath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="nestedItemPath")
-            ],
-        },
-        "Hash": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="hash")],
-        },
-    },
-)
-
-ITEM_PATHS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ItemPaths"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ITEM_PATH}},
-)
-
-THREAT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Threat"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Source": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="source")],
-        },
-        "ItemPaths": {
-            "target": ITEM_PATHS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="itemPaths")],
-        },
-        "Count": {
-            "target": LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="count")],
-        },
-        "Hash": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="hash")],
-        },
-        "ItemDetails": {
-            "target": ITEM_DETAILS_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="itemDetails")
-            ],
-        },
-    },
-)
-
-THREATS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Threats"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": THREAT}},
-)
-
-MALWARE_SCAN_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareScanDetails"),
-    members={
-        "Threats": {
-            "target": THREATS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="threats")],
-        },
-        "ScanId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanId")],
-        },
-        "ScanType": {
-            "target": MALWARE_PROTECTION_SCAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanType")],
-        },
-        "ScanCategory": {
-            "target": SCAN_CATEGORY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanCategory")
-            ],
-        },
-        "ScanConfiguration": {
-            "target": MALWARE_PROTECTION_FINDINGS_SCAN_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanConfiguration")
-            ],
-        },
-        "UniqueThreatCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="uniqueThreatCount")
-            ],
-        },
-    },
-)
-
-FLAGS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FlagsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-MEMORY_REGIONS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MemoryRegionsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-LINEAGE_OBJECT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#LineageObject"),
-    members={
-        "StartTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="startTime")],
-        },
-        "NamespacePid": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="namespacePid")
-            ],
-        },
-        "UserId": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="userId")],
-        },
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Pid": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="pid")],
-        },
-        "Uuid": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="uuid")],
-        },
-        "ExecutablePath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="executablePath")
-            ],
-        },
-        "Euid": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="euid")],
-        },
-        "ParentUuid": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="parentUuid")
-            ],
-        },
-    },
-)
-
-LINEAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Lineage"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LINEAGE_OBJECT}},
-)
-
-PROCESS_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ProcessDetails"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "ExecutablePath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="executablePath")
-            ],
-        },
-        "ExecutableSha256": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="executableSha256")
-            ],
-        },
-        "NamespacePid": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="namespacePid")
-            ],
-        },
-        "Pwd": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="pwd")],
-        },
-        "Pid": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="pid")],
-        },
-        "StartTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="startTime")],
-        },
-        "Uuid": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="uuid")],
-        },
-        "ParentUuid": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="parentUuid")
-            ],
-        },
-        "User": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="user")],
-        },
-        "UserId": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="userId")],
-        },
-        "Euid": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="euid")],
-        },
-        "Lineage": {
-            "target": LINEAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="lineage")],
-        },
-    },
-)
-
-RELATED_FILE_PATHS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RelatedFilePathsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-RUNTIME_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RuntimeContext"),
-    members={
-        "ModifyingProcess": {
-            "target": PROCESS_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="modifyingProcess")
-            ],
-        },
-        "ModifiedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="modifiedAt")
-            ],
-        },
-        "ScriptPath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scriptPath")
-            ],
-        },
-        "LibraryPath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="libraryPath")
-            ],
-        },
-        "LdPreloadValue": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ldPreloadValue")
-            ],
-        },
-        "SocketPath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="socketPath")
-            ],
-        },
-        "RuncBinaryPath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="runcBinaryPath")
-            ],
-        },
-        "ReleaseAgentPath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="releaseAgentPath")
-            ],
-        },
-        "MountSource": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mountSource")
-            ],
-        },
-        "MountTarget": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mountTarget")
-            ],
-        },
-        "FileSystemType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="fileSystemType")
-            ],
-        },
-        "Flags": {
-            "target": FLAGS_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="flags")],
-        },
-        "ModuleName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="moduleName")
-            ],
-        },
-        "ModuleFilePath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="moduleFilePath")
-            ],
-        },
-        "ModuleSha256": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="moduleSha256")
-            ],
-        },
-        "ShellHistoryFilePath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="shellHistoryFilePath"
-                )
-            ],
-        },
-        "TargetProcess": {
-            "target": PROCESS_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="targetProcess")
-            ],
-        },
-        "AddressFamily": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="addressFamily")
-            ],
-        },
-        "IanaProtocolNumber": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ianaProtocolNumber")
-            ],
-        },
-        "MemoryRegions": {
-            "target": MEMORY_REGIONS_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="memoryRegions")
-            ],
-        },
-        "ToolName": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="toolName")],
-        },
-        "ToolCategory": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="toolCategory")
-            ],
-        },
-        "ServiceName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="serviceName")
-            ],
-        },
-        "CommandLineExample": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="commandLineExample")
-            ],
-        },
-        "ThreatFilePath": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatFilePath")
-            ],
-        },
-        "FileOperation": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="fileOperation")
-            ],
-        },
-        "FilePath": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="filePath")],
-        },
-        "RelatedFilePaths": {
-            "target": RELATED_FILE_PATHS_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="relatedFilePaths")
-            ],
-        },
-    },
-)
-
-RUNTIME_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RuntimeDetails"),
-    members={
-        "Process": {
-            "target": PROCESS_DETAILS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="process")],
-        },
-        "Context": {
-            "target": RUNTIME_CONTEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="context")],
-        },
-    },
-)
-
-SERVICE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Service"),
-    members={
-        "Action": {
-            "target": ACTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="action")],
-        },
-        "Evidence": {
-            "target": EVIDENCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="evidence")],
-        },
-        "Archived": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="archived")],
-        },
-        "Count": {
-            "target": INTEGER,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="count")],
-        },
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="detectorId")
-            ],
-        },
-        "EventFirstSeen": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="eventFirstSeen")
-            ],
-        },
-        "EventLastSeen": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="eventLastSeen")
-            ],
-        },
-        "ResourceRole": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceRole")
-            ],
-        },
-        "ServiceName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="serviceName")
-            ],
-        },
-        "UserFeedback": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="userFeedback")
-            ],
-        },
-        "AdditionalInfo": {
-            "target": SERVICE_ADDITIONAL_INFO,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="additionalInfo")
-            ],
-        },
-        "FeatureName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="featureName")
-            ],
-        },
-        "EbsVolumeScanDetails": {
-            "target": EBS_VOLUME_SCAN_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="ebsVolumeScanDetails"
-                )
-            ],
-        },
-        "RuntimeDetails": {
-            "target": RUNTIME_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="runtimeDetails")
-            ],
-        },
-        "Detection": {
-            "target": DETECTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="detection")],
-        },
-        "MalwareScanDetails": {
-            "target": MALWARE_SCAN_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="malwareScanDetails")
-            ],
-        },
-    },
-)
-
-FINDING = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Finding"),
-    members={
-        "AccountId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Arn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Confidence": {
-            "target": DOUBLE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="confidence")
-            ],
-        },
-        "CreatedAt": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Description": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description")
-            ],
-        },
-        "Id": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="id"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Partition": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="partition")],
-        },
-        "Region": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="region"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Resource": {
-            "target": RESOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resource"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "SchemaVersion": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="schemaVersion"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Service": {
-            "target": SERVICE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="service")],
-        },
-        "Severity": {
-            "target": DOUBLE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="severity"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Title": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="title")],
-        },
-        "Type": {
-            "target": FINDING_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="type"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UpdatedAt": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "AssociatedAttackSequenceArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="associatedAttackSequenceArn",
-                )
-            ],
-        },
-    },
-)
-
-FINDINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Findings"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FINDING}},
-)
-
-GROUPED_BY_ACCOUNT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GroupedByAccount"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ACCOUNT_STATISTICS}},
-)
-
-GROUPED_BY_DATE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GroupedByDate"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DATE_STATISTICS}},
-)
-
-FINDING_TYPE_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FindingTypeStatistics"),
-    members={
-        "FindingType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingType")
-            ],
-        },
-        "LastGeneratedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lastGeneratedAt")
-            ],
-        },
-        "TotalFindings": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="totalFindings")
-            ],
-        },
-    },
-)
-
-GROUPED_BY_FINDING_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GroupedByFindingType"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FINDING_TYPE_STATISTICS}},
-)
-
-RESOURCE_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ResourceStatistics"),
-    members={
-        "AccountId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "LastGeneratedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lastGeneratedAt")
-            ],
-        },
-        "ResourceId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceId")
-            ],
-        },
-        "ResourceType": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceType")
-            ],
-        },
-        "TotalFindings": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="totalFindings")
-            ],
-        },
-    },
-)
-
-GROUPED_BY_RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GroupedByResource"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RESOURCE_STATISTICS}},
-)
-
-SEVERITY_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#SeverityStatistics"),
-    members={
-        "LastGeneratedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="lastGeneratedAt")
-            ],
-        },
-        "Severity": {
-            "target": DOUBLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="severity")],
-        },
-        "TotalFindings": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="totalFindings")
-            ],
-        },
-    },
-)
-
-GROUPED_BY_SEVERITY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GroupedBySeverity"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SEVERITY_STATISTICS}},
-)
-
-FINDING_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FindingStatistics"),
-    members={
-        "CountBySeverity": {
-            "target": COUNT_BY_SEVERITY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="countBySeverity")
-            ],
-        },
-        "GroupedByAccount": {
-            "target": GROUPED_BY_ACCOUNT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="groupedByAccount")
-            ],
-        },
-        "GroupedByDate": {
-            "target": GROUPED_BY_DATE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="groupedByDate")
-            ],
-        },
-        "GroupedByFindingType": {
-            "target": GROUPED_BY_FINDING_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="groupedByFindingType"
-                )
-            ],
-        },
-        "GroupedByResource": {
-            "target": GROUPED_BY_RESOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="groupedByResource")
-            ],
-        },
-        "GroupedBySeverity": {
-            "target": GROUPED_BY_SEVERITY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="groupedBySeverity")
-            ],
-        },
-    },
-)
-
-FINDING_STATISTIC_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FindingStatisticType"),
-    shape_type=ShapeType.ENUM,
-    members={"COUNT_BY_SEVERITY": {"target": UNIT}},
-)
-
-FINDING_STATISTIC_TYPES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#FindingStatisticTypes"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": FINDING_STATISTIC_TYPE}},
-)
-
-GET_ADMINISTRATOR_ACCOUNT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetAdministratorAccountInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetAdministratorAccountRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_ADMINISTRATOR_ACCOUNT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetAdministratorAccountOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetAdministratorAccountResponse",
-        )
-    ],
-    members={
-        "Administrator": {
-            "target": ADMINISTRATOR,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="administrator"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-GET_ADMINISTRATOR_ACCOUNT = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetAdministratorAccount"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/administrator",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_COVERAGE_STATISTICS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetCoverageStatisticsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetCoverageStatisticsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FilterCriteria": {
-            "target": COVERAGE_FILTER_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterCriteria")
-            ],
-        },
-        "StatisticsType": {
-            "target": COVERAGE_STATISTICS_TYPE_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="statisticsType"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-GET_COVERAGE_STATISTICS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetCoverageStatisticsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetCoverageStatisticsResponse",
-        )
-    ],
-    members={
-        "CoverageStatistics": {
-            "target": COVERAGE_STATISTICS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="coverageStatistics")
-            ],
-        }
-    },
-)
-
-GET_COVERAGE_STATISTICS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetCoverageStatistics"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/coverage/statistics",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_CUSTOM_DETECTION_RULE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetCustomDetectionRuleRequest",
-        )
-    ],
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-RULE_EXPRESSION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#RuleExpression"), shape_type=ShapeType.STRING
-)
-
-RULE_DEFINITION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RuleDefinition"),
-    members={
-        "Expression": {
-            "target": RULE_EXPRESSION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="expression"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-RULE_LANGUAGE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RuleLanguage"),
-    shape_type=ShapeType.ENUM,
-    members={"SQL": {"target": UNIT}},
-)
-
-RULE_NAME = Schema(
-    id=ShapeID("com.amazonaws.guardduty#RuleName"), shape_type=ShapeType.STRING
-)
-
-RULE_SCHEMA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RuleSchema"),
-    shape_type=ShapeType.ENUM,
-    members={"CLOUD_TRAIL": {"target": UNIT}},
-)
-
-MITRE_TACTIC = Schema(
-    id=ShapeID("com.amazonaws.guardduty#MitreTactic"), shape_type=ShapeType.STRING
-)
-
-MITRE_TECHNIQUE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#MitreTechnique"), shape_type=ShapeType.STRING
-)
-
-RULE_DETAIL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RuleDetail"),
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Arn": {
-            "target": DETECTION_RULE_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Name": {
-            "target": RULE_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Description": {
-            "target": DETECTION_RULE_DESCRIPTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Severity": {
-            "target": DETECTION_RULE_SEVERITY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="severity"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DataSource": {
-            "target": DETECTION_RULE_DATA_SOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSource"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Tactic": {
-            "target": MITRE_TACTIC,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="tactic"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Technique": {
-            "target": MITRE_TECHNIQUE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="technique"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Service": {
-            "target": DETECTION_RULE_SERVICE_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="service"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Definition": {
-            "target": RULE_DEFINITION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="definition"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Language": {
-            "target": RULE_LANGUAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="language")],
-        },
-        "Schema": {
-            "target": RULE_SCHEMA,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="schema")],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-    },
-)
-
-GET_CUSTOM_DETECTION_RULE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetCustomDetectionRuleResponse",
-        )
-    ],
-    members={
-        "Rule": {
-            "target": RULE_DETAIL,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="rule"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-GET_CUSTOM_DETECTION_RULE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRule"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/custom-detection-rule/rule/{RuleId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleAssociationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetCustomDetectionRuleAssociationRequest",
-        )
-    ],
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AssociationId": {
-            "target": ASSOCIATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleAssociationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetCustomDetectionRuleAssociationResponse",
-        )
-    ],
-    members={
-        "RuleAssociation": {
-            "target": ASSOCIATION_DETAIL,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleAssociation"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-GET_CUSTOM_DETECTION_RULE_ASSOCIATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleAssociation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationRequest",
-        )
-    ],
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Mode": {
-            "target": ASSOCIATION_MODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="mode"),
-            ],
-        },
-    },
-)
-
-GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationResponse",
-        )
-    ],
-    members={
-        "Configuration": {
-            "target": DETECTION_RULE_ORG_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="configuration"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/custom-detection-rule/org-configuration/{RuleId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_DETECTOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetDetectorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetDetectorRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_DETECTOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetDetectorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetDetectorResponse",
-        )
-    ],
-    members={
-        "CreatedAt": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt")],
-        },
-        "FindingPublishingFrequency": {
-            "target": FINDING_PUBLISHING_FREQUENCY,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="findingPublishingFrequency",
-                )
-            ],
-        },
-        "ServiceRole": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="serviceRole"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Status": {
-            "target": DETECTOR_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UpdatedAt": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-        "DataSources": {
-            "target": DATA_SOURCE_CONFIGURATIONS_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "Features": {
-            "target": DETECTOR_FEATURE_CONFIGURATIONS_RESULTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="features")],
-        },
-    },
-)
-
-GET_DETECTOR = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetDetector"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/detector/{DetectorId}", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_FILTER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetFilterInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetFilterRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FilterName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-GET_FILTER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetFilterOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetFilterResponse",
-        )
-    ],
-    members={
-        "Name": {
-            "target": FILTER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Description": {
-            "target": FILTER_DESCRIPTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description")
-            ],
-        },
-        "Action": {
-            "target": FILTER_ACTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="action"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Rank": {
-            "target": FILTER_RANK,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="rank")],
-        },
-        "FindingCriteria": {
-            "target": FINDING_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingCriteria"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt")],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-        "Version": {
-            "target": FILTER_VERSION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="version")],
-        },
-    },
-)
-
-GET_FILTER = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetFilter"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/filter/{FilterName}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_FINDINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetFindingsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetFindingsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FindingIds": {
-            "target": FINDING_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "SortCriteria": {
-            "target": SORT_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sortCriteria")
-            ],
-        },
-    },
-)
-
-GET_FINDINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetFindingsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetFindingsResponse",
-        )
-    ],
-    members={
-        "Findings": {
-            "target": FINDINGS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findings"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-GET_FINDINGS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetFindings"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/findings/get",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GROUP_BY_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GroupByType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ACCOUNT": {"target": UNIT},
-        "DATE": {"target": UNIT},
-        "FINDING_TYPE": {"target": UNIT},
-        "RESOURCE": {"target": UNIT},
-        "SEVERITY": {"target": UNIT},
-    },
-)
-
-MAX_RESULTS100 = Schema(
-    id=ShapeID("com.amazonaws.guardduty#MaxResults100"), shape_type=ShapeType.INTEGER
-)
-
-GET_FINDINGS_STATISTICS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetFindingsStatisticsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetFindingsStatisticsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FindingStatisticTypes": {
-            "target": FINDING_STATISTIC_TYPES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="findingStatisticTypes"
-                )
-            ],
-        },
-        "FindingCriteria": {
-            "target": FINDING_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingCriteria")
-            ],
-        },
-        "GroupBy": {
-            "target": GROUP_BY_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="groupBy")],
-        },
-        "OrderBy": {
-            "target": ORDER_BY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="orderBy")],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS100,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="maxResults")
-            ],
-        },
-    },
-)
-
-GET_FINDINGS_STATISTICS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetFindingsStatisticsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetFindingsStatisticsResponse",
-        )
-    ],
-    members={
-        "FindingStatistics": {
-            "target": FINDING_STATISTICS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingStatistics"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-GET_FINDINGS_STATISTICS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetFindingsStatistics"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/findings/statistics",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_INVESTIGATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetInvestigationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetInvestigationRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "InvestigationId": {
-            "target": INVESTIGATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-INVESTIGATION_ERROR_DETAILS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#InvestigationErrorDetails"),
-    shape_type=ShapeType.STRING,
-)
-
-PRODUCT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Product"),
-    members={
-        "Name": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Feature": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="feature")],
-        },
-    },
-)
-
-INVESTIGATION_METADATA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#InvestigationMetadata"),
-    members={
-        "Version": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="version"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Product": {
-            "target": PRODUCT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="product"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-RISK_DETAILS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#RiskDetails"), shape_type=ShapeType.STRING
-)
-
-RISK_LEVEL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RiskLevel"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "INFO": {"target": UNIT},
-        "LOW": {"target": UNIT},
-        "MEDIUM": {"target": UNIT},
-        "HIGH": {"target": UNIT},
-        "CRITICAL": {"target": UNIT},
-    },
-)
-
-INVESTIGATION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#InvestigationStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "RUNNING": {"target": UNIT},
-        "COMPLETED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-    },
-)
-
-TRIGGERED_BY = Schema(
-    id=ShapeID("com.amazonaws.guardduty#TriggeredBy"), shape_type=ShapeType.STRING
-)
-
-INVESTIGATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Investigation"),
-    members={
-        "InvestigationId": {
-            "target": INVESTIGATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="investigationId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Status": {
-            "target": INVESTIGATION_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "TriggerPrompt": {
-            "target": TRIGGER_PROMPT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggerPrompt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "TriggeredBy": {
-            "target": TRIGGERED_BY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggeredBy"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Metadata": {
-            "target": INVESTIGATION_METADATA,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="metadata")],
-        },
-        "Cloud": {
-            "target": CLOUD_DETAILS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="cloud")],
-        },
-        "RiskLevel": {
-            "target": RISK_LEVEL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="riskLevel")],
-        },
-        "Risk": {
-            "target": RISK_DETAILS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="risk")],
-        },
-        "Confidence": {
-            "target": CONFIDENCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="confidence")
-            ],
-        },
-        "Summary": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="summary")],
-        },
-        "StartTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="startTime")],
-        },
-        "EndTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="endTime")],
-        },
-        "Error": {
-            "target": INVESTIGATION_ERROR_DETAILS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="error")],
-        },
-    },
-)
-
-GET_INVESTIGATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetInvestigationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetInvestigationResponse",
-        )
-    ],
-    members={
-        "Investigation": {
-            "target": INVESTIGATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="investigation"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-GET_INVESTIGATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetInvestigation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/investigation/{InvestigationId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_INVITATIONS_COUNT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetInvitationsCountInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetInvitationsCountRequest",
-        )
-    ],
-)
-
-GET_INVITATIONS_COUNT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetInvitationsCountOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetInvitationsCountResponse",
-        )
-    ],
-    members={
-        "InvitationsCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitationsCount")
-            ],
-        }
-    },
-)
-
-GET_INVITATIONS_COUNT = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetInvitationsCount"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/invitation/count", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_IP_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetIPSetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetIPSetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "IpSetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-IP_SET_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#IpSetStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "INACTIVE": {"target": UNIT},
-        "ACTIVATING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "DEACTIVATING": {"target": UNIT},
-        "ERROR": {"target": UNIT},
-        "DELETE_PENDING": {"target": UNIT},
-        "DELETED": {"target": UNIT},
-    },
-)
-
-GET_IP_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetIPSetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetIPSetResponse",
-        )
-    ],
-    members={
-        "Name": {
-            "target": NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Format": {
-            "target": IP_SET_FORMAT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Status": {
-            "target": IP_SET_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "ExpectedBucketOwner": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
-    },
-)
-
-GET_IP_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetIPSet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/ipset/{IpSetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_MALWARE_PROTECTION_PLAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMalwareProtectionPlanInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMalwareProtectionPlanRequest",
-        )
-    ],
-    members={
-        "MalwareProtectionPlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-MALWARE_PROTECTION_PLAN_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ACTIVE": {"target": UNIT},
-        "WARNING": {"target": UNIT},
-        "ERROR": {"target": UNIT},
-    },
-)
-
-MALWARE_PROTECTION_PLAN_STATUS_REASON = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanStatusReason"),
-    members={
-        "Code": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="code")],
-        },
-        "Message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="message")],
-        },
-    },
-)
-
-MALWARE_PROTECTION_PLAN_STATUS_REASONS_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanStatusReasonsList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MALWARE_PROTECTION_PLAN_STATUS_REASON}},
-)
-
-GET_MALWARE_PROTECTION_PLAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMalwareProtectionPlanOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMalwareProtectionPlanResponse",
-        )
-    ],
-    members={
-        "Arn": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn")],
-        },
-        "Role": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="role")],
-        },
-        "ProtectedResource": {
-            "target": CREATE_PROTECTED_RESOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="protectedResource")
-            ],
-        },
-        "Actions": {
-            "target": MALWARE_PROTECTION_PLAN_ACTIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="actions")],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt")],
-        },
-        "Status": {
-            "target": MALWARE_PROTECTION_PLAN_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "StatusReasons": {
-            "target": MALWARE_PROTECTION_PLAN_STATUS_REASONS_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="statusReasons")
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-    },
-)
-
-GET_MALWARE_PROTECTION_PLAN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetMalwareProtectionPlan"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/malware-protection-plan/{MalwareProtectionPlanId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_MALWARE_SCAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMalwareScanInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMalwareScanRequest",
-        )
-    ],
-    members={
-        "ScanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-NON_NEGATIVE_INTEGER = Schema(
-    id=ShapeID("com.amazonaws.guardduty#NonNegativeInteger"),
-    shape_type=ShapeType.INTEGER,
-)
-
-MALWARE_PROTECTION_RESOURCE_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionResourceType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "EBS_RECOVERY_POINT": {"target": UNIT},
-        "EBS_SNAPSHOT": {"target": UNIT},
-        "EBS_VOLUME": {"target": UNIT},
-        "EC2_AMI": {"target": UNIT},
-        "EC2_INSTANCE": {"target": UNIT},
-        "EC2_RECOVERY_POINT": {"target": UNIT},
-        "S3_RECOVERY_POINT": {"target": UNIT},
-        "S3_BUCKET": {"target": UNIT},
-        "S3_POINT_IN_TIME_RECOVERY": {"target": UNIT},
-    },
-)
-
-SCAN_CONFIGURATION_RECOVERY_POINT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanConfigurationRecoveryPoint"),
-    members={
-        "BackupVaultName": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="backupVaultName")
-            ],
-        },
-        "ContinuousScanDetails": {
-            "target": SCAN_CONFIGURATION_CONTINUOUS_SCAN_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="continuousScanDetails"
-                )
-            ],
-        },
-    },
-)
-
-SCAN_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanConfiguration"),
-    members={
-        "Role": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="role")],
-        },
-        "TriggerDetails": {
-            "target": TRIGGER_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggerDetails")
-            ],
-        },
-        "IncrementalScanDetails": {
-            "target": INCREMENTAL_SCAN_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="incrementalScanDetails"
-                )
-            ],
-        },
-        "RecoveryPoint": {
-            "target": SCAN_CONFIGURATION_RECOVERY_POINT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="recoveryPoint")
-            ],
-        },
-    },
-)
-
-SCANNED_RESOURCE_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScannedResourceDetails"),
-    members={
-        "EbsVolume": {
-            "target": VOLUME_DETAIL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="ebsVolume")],
-        },
-        "EbsSnapshot": {
-            "target": EBS_SNAPSHOT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ebsSnapshot")
-            ],
-        },
-    },
-)
-
-MALWARE_PROTECTION_SCAN_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionScanStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "RUNNING": {"target": UNIT},
-        "COMPLETED": {"target": UNIT},
-        "COMPLETED_WITH_ISSUES": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "SKIPPED": {"target": UNIT},
-    },
-)
-
-SCAN_STATUS_REASON = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanStatusReason"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ACCESS_DENIED": {"target": UNIT},
-        "RESOURCE_NOT_FOUND": {"target": UNIT},
-        "SNAPSHOT_SIZE_LIMIT_EXCEEDED": {"target": UNIT},
-        "RESOURCE_UNAVAILABLE": {"target": UNIT},
-        "INCONSISTENT_SOURCE": {"target": UNIT},
-        "INCREMENTAL_NO_DIFFERENCE": {"target": UNIT},
-        "NO_EBS_VOLUMES_FOUND": {"target": UNIT},
-        "UNSUPPORTED_PRODUCT_CODE_TYPE": {"target": UNIT},
-        "AMI_SNAPSHOT_LIMIT_EXCEEDED": {"target": UNIT},
-        "UNRELATED_RESOURCES": {"target": UNIT},
-        "BASE_RESOURCE_NOT_SCANNED": {"target": UNIT},
-        "BASE_CREATED_AFTER_TARGET": {"target": UNIT},
-        "UNSUPPORTED_FOR_INCREMENTAL": {"target": UNIT},
-        "UNSUPPORTED_AMI": {"target": UNIT},
-        "UNSUPPORTED_SNAPSHOT": {"target": UNIT},
-        "UNSUPPORTED_COMPOSITE_RECOVERY_POINT": {"target": UNIT},
-        "ALL_FILES_SKIPPED_OR_FAILED": {"target": UNIT},
-    },
-)
-
-SCANNED_RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScannedResource"),
-    members={
-        "ScannedResourceArn": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scannedResourceArn")
-            ],
-        },
-        "ScannedResourceType": {
-            "target": MALWARE_PROTECTION_RESOURCE_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="scannedResourceType"
-                )
-            ],
-        },
-        "ScannedResourceStatus": {
-            "target": MALWARE_PROTECTION_SCAN_STATUS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="scannedResourceStatus"
-                )
-            ],
-        },
-        "ScanStatusReason": {
-            "target": SCAN_STATUS_REASON,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanStatusReason")
-            ],
-        },
-        "ResourceDetails": {
-            "target": SCANNED_RESOURCE_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceDetails")
-            ],
-        },
-    },
-)
-
-SCANNED_RESOURCES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScannedResources"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SCANNED_RESOURCE}},
-)
-
-SCAN_RESULT_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanResultStatus"),
-    shape_type=ShapeType.ENUM,
-    members={"NO_THREATS_FOUND": {"target": UNIT}, "THREATS_FOUND": {"target": UNIT}},
-)
-
-SCAN_RESULT_THREAT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanResultThreat"),
-    members={
-        "Name": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Source": {
-            "target": DETECTION_SOURCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="source")],
-        },
-        "Count": {
-            "target": POSITIVE_LONG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="count")],
-        },
-        "Hash": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="hash")],
-        },
-        "ItemDetails": {
-            "target": ITEM_DETAILS_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="itemDetails")
-            ],
-        },
-    },
-)
-
-SCAN_RESULT_THREATS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanResultThreats"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SCAN_RESULT_THREAT}},
-)
-
-GET_MALWARE_SCAN_RESULT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMalwareScanResultDetails"),
-    members={
-        "ScanResultStatus": {
-            "target": SCAN_RESULT_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanResultStatus")
-            ],
-        },
-        "SkippedFileCount": {
-            "target": POSITIVE_LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="skippedFileCount")
-            ],
-        },
-        "FailedFileCount": {
-            "target": POSITIVE_LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="failedFileCount")
-            ],
-        },
-        "ThreatFoundFileCount": {
-            "target": POSITIVE_LONG,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="threatFoundFileCount"
-                )
-            ],
-        },
-        "TotalFileCount": {
-            "target": POSITIVE_LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="totalFileCount")
-            ],
-        },
-        "TotalBytes": {
-            "target": POSITIVE_LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="totalBytes")
-            ],
-        },
-        "UniqueThreatCount": {
-            "target": POSITIVE_LONG,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="uniqueThreatCount")
-            ],
-        },
-        "Threats": {
-            "target": SCAN_RESULT_THREATS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="threats")],
-        },
-    },
-)
-
-GET_MALWARE_SCAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMalwareScanOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMalwareScanResponse",
-        )
-    ],
-    members={
-        "ScanId": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanId")],
-        },
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="detectorId")
-            ],
-        },
-        "AdminDetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="adminDetectorId")
-            ],
-        },
-        "ResourceArn": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceArn")
-            ],
-        },
-        "ResourceType": {
-            "target": MALWARE_PROTECTION_RESOURCE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceType")
-            ],
-        },
-        "ScannedResourcesCount": {
-            "target": NON_NEGATIVE_INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="scannedResourcesCount"
-                )
-            ],
-        },
-        "SkippedResourcesCount": {
-            "target": NON_NEGATIVE_INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="skippedResourcesCount"
-                )
-            ],
-        },
-        "FailedResourcesCount": {
-            "target": NON_NEGATIVE_INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="failedResourcesCount"
-                )
-            ],
-        },
-        "ScannedResources": {
-            "target": SCANNED_RESOURCES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scannedResources")
-            ],
-        },
-        "ScanConfiguration": {
-            "target": SCAN_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanConfiguration")
-            ],
-        },
-        "ScanCategory": {
-            "target": SCAN_CATEGORY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanCategory")
-            ],
-        },
-        "ScanStatus": {
-            "target": MALWARE_PROTECTION_SCAN_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanStatus")
-            ],
-        },
-        "ScanStatusReason": {
-            "target": SCAN_STATUS_REASON,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanStatusReason")
-            ],
-        },
-        "ScanType": {
-            "target": MALWARE_PROTECTION_SCAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanType")],
-        },
-        "ScanStartedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanStartedAt")
-            ],
-        },
-        "ScanCompletedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanCompletedAt")
-            ],
-        },
-        "ScanResultDetails": {
-            "target": GET_MALWARE_SCAN_RESULT_DETAILS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanResultDetails")
-            ],
-        },
-    },
-)
-
-GET_MALWARE_SCAN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetMalwareScan"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/malware-scan/{ScanId}", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_MALWARE_SCAN_SETTINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMalwareScanSettingsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMalwareScanSettingsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-SCAN_CRITERION_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanCriterionKey"),
-    shape_type=ShapeType.ENUM,
-    members={"EC2_INSTANCE_TAG": {"target": UNIT}},
-)
-
-SCAN_CONDITION_PAIR = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanConditionPair"),
-    members={
-        "Key": {
-            "target": TAG_KEY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="key"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Value": {
-            "target": TAG_VALUE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="value")],
-        },
-    },
-)
-
-MAP_EQUALS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MapEquals"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SCAN_CONDITION_PAIR}},
-)
-
-SCAN_CONDITION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanCondition"),
-    members={
-        "MapEquals": {
-            "target": MAP_EQUALS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mapEquals"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-SCAN_CRITERION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanCriterion"),
-    shape_type=ShapeType.MAP,
-    members={
-        "key": {"target": SCAN_CRITERION_KEY},
-        "value": {"target": SCAN_CONDITION},
-    },
-)
-
-SCAN_RESOURCE_CRITERIA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ScanResourceCriteria"),
-    members={
-        "Include": {
-            "target": SCAN_CRITERION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="include")],
-        },
-        "Exclude": {
-            "target": SCAN_CRITERION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="exclude")],
-        },
-    },
-)
-
-GET_MALWARE_SCAN_SETTINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMalwareScanSettingsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMalwareScanSettingsResponse",
-        )
-    ],
-    members={
-        "ScanResourceCriteria": {
-            "target": SCAN_RESOURCE_CRITERIA,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="scanResourceCriteria"
-                )
-            ],
-        },
-        "EbsSnapshotPreservation": {
-            "target": EBS_SNAPSHOT_PRESERVATION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="ebsSnapshotPreservation"
-                )
-            ],
-        },
-    },
-)
-
-GET_MALWARE_SCAN_SETTINGS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetMalwareScanSettings"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/malware-scan-settings",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_MASTER_ACCOUNT_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMasterAccountInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMasterAccountRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-MASTER = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Master"),
-    members={
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "InvitationId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitationId")
-            ],
-        },
-        "RelationshipStatus": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="relationshipStatus")
-            ],
-        },
-        "InvitedAt": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitedAt")],
-        },
-    },
-)
-
-GET_MASTER_ACCOUNT_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMasterAccountOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMasterAccountResponse",
-        )
-    ],
-    members={
-        "Master": {
-            "target": MASTER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="master"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-GET_MASTER_ACCOUNT = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetMasterAccount"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/detector/{DetectorId}/master", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_MEMBER_DETECTORS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMemberDetectorsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMemberDetectorsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-MEMBER_ADDITIONAL_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MemberAdditionalConfigurationResult"),
-    members={
-        "Name": {
-            "target": ORG_FEATURE_ADDITIONAL_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Status": {
-            "target": FEATURE_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-        "ManagedBy": {
-            "target": MANAGED_BY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="managedBy")],
-        },
-    },
-)
-
-MEMBER_ADDITIONAL_CONFIGURATION_RESULTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MemberAdditionalConfigurationResults"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEMBER_ADDITIONAL_CONFIGURATION_RESULT}},
-)
-
-MEMBER_FEATURES_CONFIGURATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MemberFeaturesConfigurationResult"),
-    members={
-        "Name": {
-            "target": ORG_FEATURE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Status": {
-            "target": FEATURE_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-        "AdditionalConfiguration": {
-            "target": MEMBER_ADDITIONAL_CONFIGURATION_RESULTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="additionalConfiguration"
-                )
-            ],
-        },
-        "ManagedBy": {
-            "target": MANAGED_BY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="managedBy")],
-        },
-    },
-)
-
-MEMBER_FEATURES_CONFIGURATIONS_RESULTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MemberFeaturesConfigurationsResults"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEMBER_FEATURES_CONFIGURATION_RESULT}},
-)
-
-MEMBER_DATA_SOURCE_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MemberDataSourceConfiguration"),
-    members={
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DataSources": {
-            "target": DATA_SOURCE_CONFIGURATIONS_RESULT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Features": {
-            "target": MEMBER_FEATURES_CONFIGURATIONS_RESULTS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="features")],
-        },
-    },
-)
-
-MEMBER_DATA_SOURCE_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MemberDataSourceConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEMBER_DATA_SOURCE_CONFIGURATION}},
-)
-
-GET_MEMBER_DETECTORS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMemberDetectorsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMemberDetectorsResponse",
-        )
-    ],
-    members={
-        "MemberDataSourceConfigurations": {
-            "target": MEMBER_DATA_SOURCE_CONFIGURATIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="members"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-GET_MEMBER_DETECTORS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetMemberDetectors"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/member/detector/get",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_MEMBERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMembersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMembersRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-MEMBER = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Member"),
-    members={
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="detectorId")
-            ],
-        },
-        "MasterId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="masterId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Email": {
-            "target": EMAIL,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="email"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "RelationshipStatus": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="relationshipStatus"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "InvitedAt": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitedAt")],
-        },
-        "UpdatedAt": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "AdministratorId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="administratorId")
-            ],
-        },
-    },
-)
-
-MEMBERS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Members"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEMBER}},
-)
-
-GET_MEMBERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetMembersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetMembersResponse",
-        )
-    ],
-    members={
-        "Members": {
-            "target": MEMBERS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="members"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-GET_MEMBERS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetMembers"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/member/get",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_ORGANIZATION_STATISTICS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetOrganizationStatisticsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-ORGANIZATION_FEATURE_STATISTICS_ADDITIONAL_CONFIGURATION = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.guardduty#OrganizationFeatureStatisticsAdditionalConfiguration"
+ACCOUNT_FREE_TRIAL_INFOS: StaticSchema = (
+    16,
+    n0,
+    _AFTIc,
+    0,
+    (_me,),
+    ((ACCOUNT_FREE_TRIAL_INFO, 0),),
+)
+
+ACCOUNT_IDS: StaticSchema = (16, n0, _AIcco, 0, (_me,), ((ACCOUNT_ID, 0),))
+
+BLOCK_PUBLIC_ACCESS: StaticSchema = (
+    18,
+    n0,
+    _BPA,
+    0,
+    (_IPA, _RPB, _BPAl, _BPP),
+    (
+        (BOOLEAN, {_sN: _iPA}),
+        (BOOLEAN, {_sN: _rPB}),
+        (BOOLEAN, {_sN: _bPA}),
+        (BOOLEAN, {_sN: _bPP}),
     ),
-    members={
-        "Name": {
-            "target": ORG_FEATURE_ADDITIONAL_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "EnabledAccountsCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="enabledAccountsCount"
-                )
-            ],
-        },
-    },
 )
 
-ORGANIZATION_FEATURE_STATISTICS_ADDITIONAL_CONFIGURATIONS = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.guardduty#OrganizationFeatureStatisticsAdditionalConfigurations"
+ACCOUNT_LEVEL_PERMISSIONS: StaticSchema = (
+    18,
+    n0,
+    _ALP,
+    0,
+    (_BPA,),
+    ((BLOCK_PUBLIC_ACCESS, {_sN: _bPAl}),),
+)
+
+TIMESTAMP: StaticSchema = (4, n0, _Ti, 0)
+
+ACCOUNT_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _AS,
+    0,
+    (_AIcc, _LGA, _TF),
+    ((STRING, {_sN: _aIc}), (TIMESTAMP, {_sN: _lGA}), (INTEGER, {_sN: _tF})),
+)
+
+AFFECTED_RESOURCES: StaticSchema = (
+    17,
+    n0,
+    _AR,
+    0,
+    (_ke, _v),
+    ((STRING, 0), (STRING, 0)),
+)
+
+DOMAIN_DETAILS: StaticSchema = (18, n0, _DD, 0, (_D,), ((STRING, {_sN: _d}),))
+
+REMOTE_ACCOUNT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RAD,
+    0,
+    (_AIcc, _Af, _ASN),
+    ((STRING, {_sN: _aIc}), (BOOLEAN, {_sN: _af}), (STRING, {_sN: _aSN})),
+)
+
+CITY: StaticSchema = (18, n0, _C, 0, (_CN,), ((STRING, {_sN: _cN}),))
+
+COUNTRY: StaticSchema = (
+    18,
+    n0,
+    _Co,
+    0,
+    (_CC, _CNo),
+    ((STRING, {_sN: _cC}), (STRING, {_sN: _cNo})),
+)
+
+DOUBLE: StaticSchema = (10, n0, _Do, 0)
+
+GEO_LOCATION: StaticSchema = (
+    18,
+    n0,
+    _GL,
+    0,
+    (_L, _Lo),
+    ((DOUBLE, {_sN: _l}), (DOUBLE, {_sN: _lo})),
+)
+
+SENSITIVE_STRING: StaticSchema = (3, n0, _SS, 4)
+
+ORGANIZATION: StaticSchema = (
+    18,
+    n0,
+    _O,
+    0,
+    (_As, _AO, _Is, _Or),
+    (
+        (STRING, {_sN: _as}),
+        (STRING, {_sN: _aO}),
+        (STRING, {_sN: _i}),
+        (STRING, {_sN: _o}),
     ),
-    shape_type=ShapeType.LIST,
-    members={
-        "member": {"target": ORGANIZATION_FEATURE_STATISTICS_ADDITIONAL_CONFIGURATION}
-    },
 )
 
-ORGANIZATION_FEATURE_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationFeatureStatistics"),
-    members={
-        "Name": {
-            "target": ORG_FEATURE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "EnabledAccountsCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="enabledAccountsCount"
-                )
-            ],
-        },
-        "AdditionalConfiguration": {
-            "target": ORGANIZATION_FEATURE_STATISTICS_ADDITIONAL_CONFIGURATIONS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="additionalConfiguration"
-                )
-            ],
-        },
-    },
-)
-
-ORGANIZATION_FEATURE_STATISTICS_RESULTS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationFeatureStatisticsResults"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ORGANIZATION_FEATURE_STATISTICS}},
-)
-
-ORGANIZATION_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationStatistics"),
-    members={
-        "TotalAccountsCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="totalAccountsCount")
-            ],
-        },
-        "MemberAccountsCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="memberAccountsCount"
-                )
-            ],
-        },
-        "ActiveAccountsCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="activeAccountsCount"
-                )
-            ],
-        },
-        "EnabledAccountsCount": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="enabledAccountsCount"
-                )
-            ],
-        },
-        "CountByFeature": {
-            "target": ORGANIZATION_FEATURE_STATISTICS_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="countByFeature")
-            ],
-        },
-    },
-)
-
-ORGANIZATION_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationDetails"),
-    members={
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-        "OrganizationStatistics": {
-            "target": ORGANIZATION_STATISTICS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="organizationStatistics"
-                )
-            ],
-        },
-    },
-)
-
-GET_ORGANIZATION_STATISTICS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetOrganizationStatisticsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetOrganizationStatisticsResponse",
-        )
-    ],
-    members={
-        "OrganizationDetails": {
-            "target": ORGANIZATION_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="organizationDetails"
-                )
-            ],
-        }
-    },
-)
-
-GET_ORGANIZATION_STATISTICS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetOrganizationStatistics"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/organization/statistics", "code": 200}
-            ),
-        )
-    ],
-)
-
-GET_REMAINING_FREE_TRIAL_DAYS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetRemainingFreeTrialDaysInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetRemainingFreeTrialDaysRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-GET_REMAINING_FREE_TRIAL_DAYS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetRemainingFreeTrialDaysOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetRemainingFreeTrialDaysResponse",
-        )
-    ],
-    members={
-        "Accounts": {
-            "target": ACCOUNT_FREE_TRIAL_INFOS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accounts")],
-        },
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
-                )
-            ],
-        },
-    },
-)
-
-GET_REMAINING_FREE_TRIAL_DAYS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetRemainingFreeTrialDays"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/freeTrial/daysRemaining",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_THREAT_ENTITY_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetThreatEntitySetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetThreatEntitySetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "ThreatEntitySetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-THREAT_ENTITY_SET_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ThreatEntitySetStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "INACTIVE": {"target": UNIT},
-        "ACTIVATING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "DEACTIVATING": {"target": UNIT},
-        "ERROR": {"target": UNIT},
-        "DELETE_PENDING": {"target": UNIT},
-        "DELETED": {"target": UNIT},
-    },
-)
-
-GET_THREAT_ENTITY_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetThreatEntitySetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetThreatEntitySetResponse",
-        )
-    ],
-    members={
-        "Name": {
-            "target": NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Format": {
-            "target": THREAT_ENTITY_SET_FORMAT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ExpectedBucketOwner": {
-            "target": EXPECTED_BUCKET_OWNER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
-        "Status": {
-            "target": THREAT_ENTITY_SET_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt")],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-        "ErrorDetails": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="errorDetails")
-            ],
-        },
-    },
-)
-
-GET_THREAT_ENTITY_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetThreatEntitySet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_THREAT_INTEL_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetThreatIntelSetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetThreatIntelSetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "ThreatIntelSetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-THREAT_INTEL_SET_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ThreatIntelSetStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "INACTIVE": {"target": UNIT},
-        "ACTIVATING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "DEACTIVATING": {"target": UNIT},
-        "ERROR": {"target": UNIT},
-        "DELETE_PENDING": {"target": UNIT},
-        "DELETED": {"target": UNIT},
-    },
-)
-
-GET_THREAT_INTEL_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetThreatIntelSetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetThreatIntelSetResponse",
-        )
-    ],
-    members={
-        "Name": {
-            "target": NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Format": {
-            "target": THREAT_INTEL_SET_FORMAT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Status": {
-            "target": THREAT_INTEL_SET_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "ExpectedBucketOwner": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
-    },
-)
-
-GET_THREAT_INTEL_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetThreatIntelSet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/threatintelset/{ThreatIntelSetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GET_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetTrustedEntitySetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetTrustedEntitySetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "TrustedEntitySetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-TRUSTED_ENTITY_SET_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#TrustedEntitySetStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "INACTIVE": {"target": UNIT},
-        "ACTIVATING": {"target": UNIT},
-        "ACTIVE": {"target": UNIT},
-        "DEACTIVATING": {"target": UNIT},
-        "ERROR": {"target": UNIT},
-        "DELETE_PENDING": {"target": UNIT},
-        "DELETED": {"target": UNIT},
-    },
-)
-
-GET_TRUSTED_ENTITY_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetTrustedEntitySetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetTrustedEntitySetResponse",
-        )
-    ],
-    members={
-        "Name": {
-            "target": NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Format": {
-            "target": TRUSTED_ENTITY_SET_FORMAT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="format"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="location"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ExpectedBucketOwner": {
-            "target": EXPECTED_BUCKET_OWNER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
-        "Status": {
-            "target": TRUSTED_ENTITY_SET_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="status"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt")],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-        "ErrorDetails": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="errorDetails")
-            ],
-        },
-    },
-)
-
-GET_TRUSTED_ENTITY_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetTrustedEntitySet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-USAGE_FEATURE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageFeature"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "FLOW_LOGS": {"target": UNIT},
-        "CLOUD_TRAIL": {"target": UNIT},
-        "DNS_LOGS": {"target": UNIT},
-        "S3_DATA_EVENTS": {"target": UNIT},
-        "EKS_AUDIT_LOGS": {"target": UNIT},
-        "EBS_MALWARE_PROTECTION": {"target": UNIT},
-        "RDS_LOGIN_EVENTS": {"target": UNIT},
-        "LAMBDA_NETWORK_LOGS": {"target": UNIT},
-        "EKS_RUNTIME_MONITORING": {"target": UNIT},
-        "EC2_RUNTIME_MONITORING": {"target": UNIT},
-        "FARGATE_RUNTIME_MONITORING": {"target": UNIT},
-        "RDS_DBI_PROTECTION_PROVISIONED": {"target": UNIT},
-        "RDS_DBI_PROTECTION_SERVERLESS": {"target": UNIT},
-        "AI_PROTECTION": {"target": UNIT},
-    },
-)
-
-USAGE_FEATURE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageFeatureList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": USAGE_FEATURE}},
-)
-
-RESOURCE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ResourceList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-USAGE_CRITERIA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageCriteria"),
-    members={
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds")
-            ],
-        },
-        "DataSources": {
-            "target": DATA_SOURCE_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
-            ],
-        },
-        "Resources": {
-            "target": RESOURCE_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="resources")],
-        },
-        "Features": {
-            "target": USAGE_FEATURE_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="features")],
-        },
-    },
-)
-
-USAGE_STATISTIC_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageStatisticType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "SUM_BY_ACCOUNT": {"target": UNIT},
-        "SUM_BY_DATA_SOURCE": {"target": UNIT},
-        "SUM_BY_RESOURCE": {"target": UNIT},
-        "TOP_RESOURCES": {"target": UNIT},
-        "SUM_BY_FEATURES": {"target": UNIT},
-        "TOP_ACCOUNTS_BY_FEATURE": {"target": UNIT},
-    },
-)
-
-GET_USAGE_STATISTICS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetUsageStatisticsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetUsageStatisticsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "UsageStatisticType": {
-            "target": USAGE_STATISTIC_TYPE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="usageStatisticsType"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UsageCriteria": {
-            "target": USAGE_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="usageCriteria"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Unit": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="unit")],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-TOTAL = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Total"),
-    members={
-        "Amount": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="amount")],
-        },
-        "Unit": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="unit")],
-        },
-    },
-)
-
-USAGE_ACCOUNT_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageAccountResult"),
-    members={
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "Total": {
-            "target": TOTAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="total")],
-        },
-    },
-)
-
-USAGE_ACCOUNT_RESULT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageAccountResultList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": USAGE_ACCOUNT_RESULT}},
-)
-
-USAGE_DATA_SOURCE_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageDataSourceResult"),
-    members={
-        "DataSource": {
-            "target": DATA_SOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSource")
-            ],
-        },
-        "Total": {
-            "target": TOTAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="total")],
-        },
-    },
-)
-
-USAGE_DATA_SOURCE_RESULT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageDataSourceResultList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": USAGE_DATA_SOURCE_RESULT}},
-)
-
-USAGE_FEATURE_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageFeatureResult"),
-    members={
-        "Feature": {
-            "target": USAGE_FEATURE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="feature")],
-        },
-        "Total": {
-            "target": TOTAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="total")],
-        },
-    },
-)
-
-USAGE_FEATURE_RESULT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageFeatureResultList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": USAGE_FEATURE_RESULT}},
-)
-
-USAGE_RESOURCE_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageResourceResult"),
-    members={
-        "Resource": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="resource")],
-        },
-        "Total": {
-            "target": TOTAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="total")],
-        },
-    },
-)
-
-USAGE_RESOURCE_RESULT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageResourceResultList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": USAGE_RESOURCE_RESULT}},
-)
-
-USAGE_TOP_ACCOUNT_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageTopAccountResult"),
-    members={
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "Total": {
-            "target": TOTAL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="total")],
-        },
-    },
-)
-
-USAGE_TOP_ACCOUNTS_BY_FEATURE_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageTopAccountsByFeatureList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": USAGE_TOP_ACCOUNT_RESULT}},
-)
-
-USAGE_TOP_ACCOUNTS_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageTopAccountsResult"),
-    members={
-        "Feature": {
-            "target": USAGE_FEATURE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="feature")],
-        },
-        "Accounts": {
-            "target": USAGE_TOP_ACCOUNTS_BY_FEATURE_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accounts")],
-        },
-    },
-)
-
-USAGE_TOP_ACCOUNTS_RESULT_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageTopAccountsResultList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": USAGE_TOP_ACCOUNTS_RESULT}},
-)
-
-USAGE_STATISTICS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UsageStatistics"),
-    members={
-        "SumByAccount": {
-            "target": USAGE_ACCOUNT_RESULT_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sumByAccount")
-            ],
-        },
-        "TopAccountsByFeature": {
-            "target": USAGE_TOP_ACCOUNTS_RESULT_LIST,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="topAccountsByFeature"
-                )
-            ],
-        },
-        "SumByDataSource": {
-            "target": USAGE_DATA_SOURCE_RESULT_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sumByDataSource")
-            ],
-        },
-        "SumByResource": {
-            "target": USAGE_RESOURCE_RESULT_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sumByResource")
-            ],
-        },
-        "TopResources": {
-            "target": USAGE_RESOURCE_RESULT_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="topResources")
-            ],
-        },
-        "SumByFeature": {
-            "target": USAGE_FEATURE_RESULT_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sumByFeature")
-            ],
-        },
-    },
-)
-
-GET_USAGE_STATISTICS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#GetUsageStatisticsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#GetUsageStatisticsResponse",
-        )
-    ],
-    members={
-        "UsageStatistics": {
-            "target": USAGE_STATISTICS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="usageStatistics")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-GET_USAGE_STATISTICS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GetUsageStatistics"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/usage/statistics",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-INVITE_MEMBERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#InviteMembersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#InviteMembersRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DisableEmailNotification": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="disableEmailNotification"
-                )
-            ],
-        },
-        "Message": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="message")],
-        },
-    },
-)
-
-INVITE_MEMBERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#InviteMembersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#InviteMembersResponse",
-        )
-    ],
-    members={
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-INVITE_MEMBERS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#InviteMembers"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/member/invite",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_COVERAGE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListCoverageInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListCoverageRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="maxResults")
-            ],
-        },
-        "FilterCriteria": {
-            "target": COVERAGE_FILTER_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterCriteria")
-            ],
-        },
-        "SortCriteria": {
-            "target": COVERAGE_SORT_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sortCriteria")
-            ],
-        },
-    },
-)
-
-LIST_COVERAGE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListCoverageOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListCoverageResponse",
-        )
-    ],
-    members={
-        "Resources": {
-            "target": COVERAGE_RESOURCES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resources"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_COVERAGE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListCoverage"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/coverage",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsRequest",
-        )
-    ],
-    members={
-        "MaxResults": {
-            "target": DETECTION_RULE_MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="ruleId")],
-        },
-        "Mode": {
-            "target": ASSOCIATION_MODE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="mode")],
-        },
-    },
-)
-
-LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsResponse",
-        )
-    ],
-    members={
-        "RuleAssociations": {
-            "target": ASSOCIATION_SUMMARY_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleAssociations"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRuleAssociations"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/custom-detection-rule/association",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsRequest",
-        )
-    ],
-    members={
-        "MaxResults": {
-            "target": DETECTION_RULE_MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "Status": {
-            "target": DETECTION_RULE_CONFIGURATION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="status")],
-        },
-    },
-)
-
-LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsOutput"
+REMOTE_IP_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RID,
+    0,
+    (_C, _Co, _GL, _IAV, _IAVp, _O),
+    (
+        (CITY, {_sN: _ci}),
+        (COUNTRY, {_sN: _co}),
+        (GEO_LOCATION, {_sN: _gL}),
+        (SENSITIVE_STRING, {_sN: _iAV}),
+        (SENSITIVE_STRING, {_sN: _iAVp}),
+        (ORGANIZATION, {_sN: _or}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsResponse",
-        )
-    ],
-    members={
-        "Configurations": {
-            "target": DETECTION_RULE_ORG_CONFIGURATION_SUMMARY_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="configurations"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
 )
 
-LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurations"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/custom-detection-rule/org-configuration",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_CUSTOM_DETECTION_RULES_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRulesInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListCustomDetectionRulesRequest",
-        )
-    ],
-    members={
-        "MaxResults": {
-            "target": DETECTION_RULE_MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-        "Filters": {
-            "target": DETECTION_RULE_FILTER_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="filters")],
-        },
-    },
-)
-
-RULE_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RuleSummary"),
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ruleId"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Arn": {
-            "target": DETECTION_RULE_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="arn"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Name": {
-            "target": RULE_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Description": {
-            "target": DETECTION_RULE_DESCRIPTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Severity": {
-            "target": DETECTION_RULE_SEVERITY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="severity"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DataSource": {
-            "target": DETECTION_RULE_DATA_SOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSource"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Tactic": {
-            "target": MITRE_TACTIC,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="tactic"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Technique": {
-            "target": MITRE_TECHNIQUE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="technique"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Service": {
-            "target": DETECTION_RULE_SERVICE_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="service"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Language": {
-            "target": RULE_LANGUAGE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="language")],
-        },
-        "Schema": {
-            "target": RULE_SCHEMA,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="schema")],
-        },
-        "CreatedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="createdAt"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "UpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="updatedAt")],
-        },
-    },
-)
-
-RULE_SUMMARY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RuleSummaryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": RULE_SUMMARY}},
-)
-
-LIST_CUSTOM_DETECTION_RULES_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRulesOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListCustomDetectionRulesResponse",
-        )
-    ],
-    members={
-        "Rules": {
-            "target": RULE_SUMMARY_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="rules"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_CUSTOM_DETECTION_RULES = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListCustomDetectionRules"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/custom-detection-rule/rule", "code": 200}
-            ),
-        )
-    ],
-)
-
-LIST_DETECTORS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListDetectorsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListDetectorsRequest",
-        )
-    ],
-    members={
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-LIST_DETECTORS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListDetectorsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListDetectorsResponse",
-        )
-    ],
-    members={
-        "DetectorIds": {
-            "target": DETECTOR_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="detectorIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_DETECTORS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListDetectors"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "GET", "uri": "/detector", "code": 200}),
-        )
-    ],
-)
-
-LIST_FILTERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListFiltersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListFiltersRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-LIST_FILTERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListFiltersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListFiltersResponse",
-        )
-    ],
-    members={
-        "FilterNames": {
-            "target": FILTER_NAMES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterNames"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_FILTERS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListFilters"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/detector/{DetectorId}/filter", "code": 200}
-            ),
-        )
-    ],
-)
-
-LIST_FINDINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListFindingsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListFindingsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FindingCriteria": {
-            "target": FINDING_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingCriteria")
-            ],
-        },
-        "SortCriteria": {
-            "target": SORT_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sortCriteria")
-            ],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_FINDINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListFindingsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListFindingsResponse",
-        )
-    ],
-    members={
-        "FindingIds": {
-            "target": FINDING_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_FINDINGS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListFindings"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/findings",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-NEXT_TOKEN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#NextToken"), shape_type=ShapeType.STRING
-)
-
-INVESTIGATION_SORT_FIELD = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#InvestigationSortField"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "START_TIME": {"target": UNIT},
-        "END_TIME": {"target": UNIT},
-        "STATUS": {"target": UNIT},
-        "RISK_LEVEL": {"target": UNIT},
-        "CONFIDENCE": {"target": UNIT},
-    },
-)
-
-INVESTIGATION_SORT_CRITERIA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#InvestigationSortCriteria"),
-    members={
-        "AttributeName": {
-            "target": INVESTIGATION_SORT_FIELD,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="attributeName")
-            ],
-        },
-        "OrderBy": {
-            "target": ORDER_BY,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="orderBy")],
-        },
-    },
-)
-
-LIST_INVESTIGATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListInvestigationsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListInvestigationsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "SortCriteria": {
-            "target": INVESTIGATION_SORT_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sortCriteria")
-            ],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-INVESTIGATION_TITLE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#InvestigationTitle"),
-    shape_type=ShapeType.STRING,
-)
-
-INVESTIGATION_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#InvestigationSummary"),
-    members={
-        "InvestigationId": {
-            "target": INVESTIGATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="investigationId")
-            ],
-        },
-        "Status": {
-            "target": INVESTIGATION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "TriggerPrompt": {
-            "target": TRIGGER_PROMPT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="triggerPrompt")
-            ],
-        },
-        "RiskLevel": {
-            "target": RISK_LEVEL,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="riskLevel")],
-        },
-        "Confidence": {
-            "target": CONFIDENCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="confidence")
-            ],
-        },
-        "Title": {
-            "target": INVESTIGATION_TITLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="title")],
-        },
-        "AccountId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "StartTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="startTime")],
-        },
-        "EndTime": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="endTime")],
-        },
-    },
-)
-
-INVESTIGATION_SUMMARIES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#InvestigationSummaries"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": INVESTIGATION_SUMMARY}},
-)
-
-LIST_INVESTIGATIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListInvestigationsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListInvestigationsResponse",
-        )
-    ],
-    members={
-        "Investigations": {
-            "target": INVESTIGATION_SUMMARIES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="investigations"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": NEXT_TOKEN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_INVESTIGATIONS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListInvestigations"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/investigation/list",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_INVITATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListInvitationsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListInvitationsRequest",
-        )
-    ],
-    members={
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-INVITATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Invitation"),
-    members={
-        "AccountId": {
-            "target": ACCOUNT_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountId")],
-        },
-        "InvitationId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitationId")
-            ],
-        },
-        "RelationshipStatus": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="relationshipStatus")
-            ],
-        },
-        "InvitedAt": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitedAt")],
-        },
-    },
-)
-
-INVITATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#Invitations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": INVITATION}},
-)
-
-LIST_INVITATIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListInvitationsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListInvitationsResponse",
-        )
-    ],
-    members={
-        "Invitations": {
-            "target": INVITATIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="invitations")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_INVITATIONS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListInvitations"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/invitation", "code": 200}
-            ),
-        )
-    ],
-)
-
-LIST_IP_SETS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListIPSetsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListIPSetsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-IP_SET_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#IpSetIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-LIST_IP_SETS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListIPSetsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListIPSetsResponse",
-        )
-    ],
-    members={
-        "IpSetIds": {
-            "target": IP_SET_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ipSetIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_IP_SETS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListIPSets"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/detector/{DetectorId}/ipset", "code": 200}
-            ),
-        )
-    ],
-)
-
-LIST_MALWARE_PROTECTION_PLANS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListMalwareProtectionPlansInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListMalwareProtectionPlansRequest",
-        )
-    ],
-    members={
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        }
-    },
-)
-
-MALWARE_PROTECTION_PLAN_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlanSummary"),
-    members={
-        "MalwareProtectionPlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="malwareProtectionPlanId"
-                )
-            ],
-        }
-    },
-)
-
-MALWARE_PROTECTION_PLANS_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareProtectionPlansSummary"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MALWARE_PROTECTION_PLAN_SUMMARY}},
-)
-
-LIST_MALWARE_PROTECTION_PLANS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListMalwareProtectionPlansOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListMalwareProtectionPlansResponse",
-        )
-    ],
-    members={
-        "MalwareProtectionPlans": {
-            "target": MALWARE_PROTECTION_PLANS_SUMMARY,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="malwareProtectionPlans"
-                )
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_MALWARE_PROTECTION_PLANS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListMalwareProtectionPlans"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/malware-protection-plan", "code": 200}
-            ),
-        )
-    ],
-)
-
-LIST_MALWARE_SCANS_CRITERION_KEY = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListMalwareScansCriterionKey"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "RESOURCE_ARN": {"target": UNIT},
-        "SCAN_ID": {"target": UNIT},
-        "ACCOUNT_ID": {"target": UNIT},
-        "GUARDDUTY_FINDING_ID": {"target": UNIT},
-        "RESOURCE_TYPE": {"target": UNIT},
-        "SCAN_START_TIME": {"target": UNIT},
-        "SCAN_STATUS": {"target": UNIT},
-        "SCAN_TYPE": {"target": UNIT},
-    },
-)
-
-LIST_MALWARE_SCANS_FILTER_CRITERION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListMalwareScansFilterCriterion"),
-    members={
-        "ListMalwareScansCriterionKey": {
-            "target": LIST_MALWARE_SCANS_CRITERION_KEY,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="criterionKey")
-            ],
-        },
-        "FilterCondition": {
-            "target": FILTER_CONDITION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterCondition")
-            ],
-        },
-    },
-)
-
-LIST_MALWARE_SCANS_FILTER_CRITERION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListMalwareScansFilterCriterionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": LIST_MALWARE_SCANS_FILTER_CRITERION}},
-)
-
-LIST_MALWARE_SCANS_FILTER_CRITERIA = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListMalwareScansFilterCriteria"),
-    members={
-        "ListMalwareScansFilterCriterion": {
-            "target": LIST_MALWARE_SCANS_FILTER_CRITERION_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterCriterion")
-            ],
-        }
-    },
-)
-
-LIST_MALWARE_SCANS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListMalwareScansInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListMalwareScansRequest",
-        )
-    ],
-    members={
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "FilterCriteria": {
-            "target": LIST_MALWARE_SCANS_FILTER_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="filterCriteria")
-            ],
-        },
-        "SortCriteria": {
-            "target": SORT_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="sortCriteria")
-            ],
-        },
-    },
-)
-
-MALWARE_SCAN = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareScan"),
-    members={
-        "ResourceArn": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceArn")
-            ],
-        },
-        "ResourceType": {
-            "target": MALWARE_PROTECTION_RESOURCE_TYPE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceType")
-            ],
-        },
-        "ScanId": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanId")],
-        },
-        "ScanStatus": {
-            "target": MALWARE_PROTECTION_SCAN_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanStatus")
-            ],
-        },
-        "ScanResultStatus": {
-            "target": SCAN_RESULT_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanResultStatus")
-            ],
-        },
-        "ScanType": {
-            "target": MALWARE_PROTECTION_SCAN_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanType")],
-        },
-        "ScanStartedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanStartedAt")
-            ],
-        },
-        "ScanCompletedAt": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanCompletedAt")
-            ],
-        },
-    },
-)
-
-MALWARE_SCANS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MalwareScans"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MALWARE_SCAN}},
-)
-
-LIST_MALWARE_SCANS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListMalwareScansOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListMalwareScansResponse",
-        )
-    ],
-    members={
-        "Scans": {
-            "target": MALWARE_SCANS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scans"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_MALWARE_SCANS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListMalwareScans"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/malware-scan", "code": 200}
-            ),
-        )
-    ],
-)
-
-LIST_MEMBERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListMembersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListMembersRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-        "OnlyAssociated": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="onlyAssociated")
-            ],
-        },
-    },
-)
-
-LIST_MEMBERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListMembersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListMembersResponse",
-        )
-    ],
-    members={
-        "Members": {
-            "target": MEMBERS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="members")],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_MEMBERS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListMembers"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/detector/{DetectorId}/member", "code": 200}
-            ),
-        )
-    ],
-)
-
-LIST_ORGANIZATION_ADMIN_ACCOUNTS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListOrganizationAdminAccountsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListOrganizationAdminAccountsRequest",
-        )
-    ],
-    members={
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-LIST_ORGANIZATION_ADMIN_ACCOUNTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListOrganizationAdminAccountsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListOrganizationAdminAccountsResponse",
-        )
-    ],
-    members={
-        "AdminAccounts": {
-            "target": ADMIN_ACCOUNTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="adminAccounts")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_ORGANIZATION_ADMIN_ACCOUNTS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListOrganizationAdminAccounts"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "GET", "uri": "/admin", "code": 200}),
-        )
-    ],
-)
-
-LIST_PUBLISHING_DESTINATIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListPublishingDestinationsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListPublishingDestinationsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-LIST_PUBLISHING_DESTINATIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListPublishingDestinationsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListPublishingDestinationsResponse",
-        )
-    ],
-    members={
-        "Destinations": {
-            "target": DESTINATIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="destinations"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_PUBLISHING_DESTINATIONS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListPublishingDestinations"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/publishingDestination",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GUARD_DUTY_ARN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GuardDutyArn"), shape_type=ShapeType.STRING
-)
-
-LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListTagsForResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListTagsForResourceRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": GUARD_DUTY_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-LIST_TAGS_FOR_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListTagsForResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListTagsForResourceResponse",
-        )
-    ],
-    members={
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags")],
-        }
-    },
-)
-
-LIST_TAGS_FOR_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListTagsForResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/tags/{ResourceArn}", "code": 200}
-            ),
-        )
-    ],
-)
-
-LIST_THREAT_ENTITY_SETS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListThreatEntitySetsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListThreatEntitySetsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-THREAT_ENTITY_SET_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ThreatEntitySetIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-LIST_THREAT_ENTITY_SETS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListThreatEntitySetsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListThreatEntitySetsResponse",
-        )
-    ],
-    members={
-        "ThreatEntitySetIds": {
-            "target": THREAT_ENTITY_SET_IDS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="threatEntitySetIds"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_THREAT_ENTITY_SETS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListThreatEntitySets"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/threatentityset",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_THREAT_INTEL_SETS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListThreatIntelSetsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListThreatIntelSetsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-THREAT_INTEL_SET_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ThreatIntelSetIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-LIST_THREAT_INTEL_SETS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListThreatIntelSetsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListThreatIntelSetsResponse",
-        )
-    ],
-    members={
-        "ThreatIntelSetIds": {
-            "target": THREAT_INTEL_SET_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="threatIntelSetIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_THREAT_INTEL_SETS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListThreatIntelSets"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/threatintelset",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-LIST_TRUSTED_ENTITY_SETS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListTrustedEntitySetsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListTrustedEntitySetsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "MaxResults": {
-            "target": MAX_RESULTS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
-    },
-)
-
-TRUSTED_ENTITY_SET_IDS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#TrustedEntitySetIds"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": STRING}},
-)
-
-LIST_TRUSTED_ENTITY_SETS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#ListTrustedEntitySetsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#ListTrustedEntitySetsResponse",
-        )
-    ],
-    members={
-        "TrustedEntitySetIds": {
-            "target": TRUSTED_ENTITY_SET_IDS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="trustedEntitySetIds"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "NextToken": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="nextToken")],
-        },
-    },
-)
-
-LIST_TRUSTED_ENTITY_SETS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ListTrustedEntitySets"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/detector/{DetectorId}/trustedentityset",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-S3_OBJECT_FOR_SEND_OBJECT_MALWARE_SCAN = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#S3ObjectForSendObjectMalwareScan"),
-    members={
-        "Bucket": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="bucket")],
-        },
-        "Key": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="key")],
-        },
-        "VersionId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="versionId")],
-        },
-    },
-)
-
-SEND_OBJECT_MALWARE_SCAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#SendObjectMalwareScanInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#SendObjectMalwareScanRequest",
-        )
-    ],
-    members={
-        "S3Object": {
-            "target": S3_OBJECT_FOR_SEND_OBJECT_MALWARE_SCAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Object")],
-        }
-    },
-)
-
-SEND_OBJECT_MALWARE_SCAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#SendObjectMalwareScanOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#SendObjectMalwareScanResponse",
-        )
-    ],
-)
-
-SEND_OBJECT_MALWARE_SCAN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#SendObjectMalwareScan"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/object-malware-scan/send", "code": 200}
-            ),
-        )
-    ],
-)
-
-RESOURCE_ARN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#ResourceArn"), shape_type=ShapeType.STRING
-)
-
-RECOVERY_POINT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#RecoveryPoint"),
-    members={
-        "BackupVaultName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="backupVaultName"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ContinuousScanDetails": {
-            "target": CONTINUOUS_SCAN_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="continuousScanDetails"
-                )
-            ],
-        },
-    },
-)
-
-START_MALWARE_SCAN_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#StartMalwareScanConfiguration"),
-    members={
-        "Role": {
-            "target": NON_EMPTY_STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="role"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "IncrementalScanDetails": {
-            "target": INCREMENTAL_SCAN_DETAILS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="incrementalScanDetails"
-                )
-            ],
-        },
-        "RecoveryPoint": {
-            "target": RECOVERY_POINT,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="recoveryPoint")
-            ],
-        },
-    },
-)
-
-START_MALWARE_SCAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#StartMalwareScanInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#StartMalwareScanRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": RESOURCE_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="resourceArn"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "ClientToken": {
-            "target": CLIENT_TOKEN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#idempotencyToken")),
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="clientToken"),
-            ],
-        },
-        "ScanConfiguration": {
-            "target": START_MALWARE_SCAN_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanConfiguration")
-            ],
-        },
-    },
-)
-
-START_MALWARE_SCAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#StartMalwareScanOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#StartMalwareScanResponse",
-        )
-    ],
-    members={
-        "ScanId": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="scanId")],
-        }
-    },
-)
-
-START_MALWARE_SCAN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#StartMalwareScan"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/malware-scan/start", "code": 200}
-            ),
-        )
-    ],
-)
-
-START_MONITORING_MEMBERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#StartMonitoringMembersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#StartMonitoringMembersRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-START_MONITORING_MEMBERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#StartMonitoringMembersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#StartMonitoringMembersResponse",
-        )
-    ],
-    members={
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-START_MONITORING_MEMBERS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#StartMonitoringMembers"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/member/start",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-STOP_MONITORING_MEMBERS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#StopMonitoringMembersInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#StopMonitoringMembersRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-STOP_MONITORING_MEMBERS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#StopMonitoringMembersOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#StopMonitoringMembersResponse",
-        )
-    ],
-    members={
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-STOP_MONITORING_MEMBERS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#StopMonitoringMembers"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/member/stop",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-TAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#TagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#TagResourceRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": GUARD_DUTY_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Tags": {
-            "target": TAG_MAP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="tags"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-TAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#TagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#TagResourceResponse",
-        )
-    ],
-)
-
-TAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#TagResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/tags/{ResourceArn}", "code": 204}
-            ),
-        )
-    ],
-)
-
-UNARCHIVE_FINDINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UnarchiveFindingsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UnarchiveFindingsRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FindingIds": {
-            "target": FINDING_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-UNARCHIVE_FINDINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UnarchiveFindingsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UnarchiveFindingsResponse",
-        )
-    ],
-)
-
-UNARCHIVE_FINDINGS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UnarchiveFindings"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/findings/unarchive",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-TAG_KEY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#TagKeyList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG_KEY}},
-)
-
-UNTAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UntagResourceInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UntagResourceRequest",
-        )
-    ],
-    members={
-        "ResourceArn": {
-            "target": GUARD_DUTY_ARN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "TagKeys": {
-            "target": TAG_KEY_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="tagKeys"),
-            ],
-        },
-    },
-)
-
-UNTAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UntagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UntagResourceResponse",
-        )
-    ],
-)
-
-UNTAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UntagResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "DELETE", "uri": "/tags/{ResourceArn}", "code": 204}
-            ),
-        )
-    ],
-)
-
-UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationRequest",
-        )
-    ],
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AssociationId": {
-            "target": ASSOCIATION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Mode": {
-            "target": ASSOCIATION_MODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-    },
-)
-
-UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationResponse",
-        )
-    ],
-)
-
-UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociation"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationInput"
+AWS_API_CALL_ACTION: StaticSchema = (
+    18,
+    n0,
+    _AACA,
+    0,
+    (_Ap, _CTa, _DD, _EC, _UA, _RID, _SN, _RAD, _AR),
+    (
+        (STRING, {_sN: _ap}),
+        (STRING, {_sN: _cTa}),
+        (DOMAIN_DETAILS, {_sN: _dD}),
+        (STRING, {_sN: _eC}),
+        (STRING, {_sN: _uA}),
+        (REMOTE_IP_DETAILS, {_sN: _rID}),
+        (STRING, {_sN: _sNe}),
+        (REMOTE_ACCOUNT_DETAILS, {_sN: _rAD}),
+        (AFFECTED_RESOURCES, {_sN: _aR}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationRequest",
-        )
-    ],
-    members={
-        "RuleId": {
-            "target": RULE_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Mode": {
-            "target": ASSOCIATION_MODE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="mode"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "IncludeAccountIds": {
-            "target": DETECTION_RULE_ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="includeAccountIds")
-            ],
-        },
-        "ExcludeAccountIds": {
-            "target": DETECTION_RULE_ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="excludeAccountIds")
-            ],
-        },
-    },
 )
 
-UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationOutput"
+DNS_REQUEST_ACTION: StaticSchema = (
+    18,
+    n0,
+    _DRA,
+    0,
+    (_D, _P, _Bl, _DWS, _VOAI),
+    (
+        (STRING, {_sN: _d}),
+        (STRING, {_sN: _p}),
+        (BOOLEAN, {_sN: _b}),
+        (STRING, {_sN: _dWS}),
+        (ACCOUNT_ID, {_sN: _vOAI}),
     ),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationResponse",
-        )
-    ],
 )
 
-UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PUT",
-                    "uri": "/custom-detection-rule/org-configuration/{RuleId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
+SOURCE_IPS: StaticSchema = (16, n0, _SI, 0, (_me,), ((STRING, 0),))
+
+KUBERNETES_API_CALL_ACTION: StaticSchema = (
+    18,
+    n0,
+    _KACA,
+    0,
+    (_RU, _V, _R, _Su, _Na, _RN, _SI, _UA, _RID, _SC, _Pa),
+    (
+        (STRING, {_sN: _rU}),
+        (STRING, {_sN: _ve}),
+        (STRING, {_sN: _r}),
+        (STRING, {_sN: _su}),
+        (STRING, {_sN: _na}),
+        (STRING, {_sN: _rN}),
+        (SOURCE_IPS, {_sN: _sIP}),
+        (STRING, {_sN: _uA}),
+        (REMOTE_IP_DETAILS, {_sN: _rID}),
+        (INTEGER, {_sN: _sC}),
+        (STRING, {_sN: _pa}),
+    ),
 )
 
-UPDATE_DETECTOR_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateDetectorInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateDetectorRequest",
+KUBERNETES_PERMISSION_CHECKED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _KPCD,
+    0,
+    (_V, _R, _Na, _Al),
+    (
+        (STRING, {_sN: _ve}),
+        (STRING, {_sN: _r}),
+        (STRING, {_sN: _na}),
+        (BOOLEAN, {_sN: _al}),
+    ),
+)
+
+KUBERNETES_ROLE_BINDING_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _KRBD,
+    0,
+    (_Ki, _N, _U, _RRN, _RRK),
+    (
+        (STRING, {_sN: _ki}),
+        (STRING, {_sN: _n}),
+        (STRING, {_sN: _u}),
+        (STRING, {_sN: _rRN}),
+        (STRING, {_sN: _rRK}),
+    ),
+)
+
+KUBERNETES_ROLE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _KRD,
+    0,
+    (_Ki, _N, _U),
+    ((STRING, {_sN: _ki}), (STRING, {_sN: _n}), (STRING, {_sN: _u})),
+)
+
+LOCAL_IP_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _LID,
+    0,
+    (_IAV, _IAVp),
+    ((SENSITIVE_STRING, {_sN: _iAV}), (SENSITIVE_STRING, {_sN: _iAVp})),
+)
+
+LOCAL_PORT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _LPD,
+    0,
+    (_Po, _PN),
+    ((INTEGER, {_sN: _po}), (STRING, {_sN: _pN})),
+)
+
+REMOTE_PORT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RPD,
+    0,
+    (_Po, _PN),
+    ((INTEGER, {_sN: _po}), (STRING, {_sN: _pN})),
+)
+
+NETWORK_CONNECTION_ACTION: StaticSchema = (
+    18,
+    n0,
+    _NCA,
+    0,
+    (_Bl, _CD, _LPD, _P, _LID, _LNI, _RID, _RPD),
+    (
+        (BOOLEAN, {_sN: _b}),
+        (STRING, {_sN: _cD}),
+        (LOCAL_PORT_DETAILS, {_sN: _lPD}),
+        (STRING, {_sN: _p}),
+        (LOCAL_IP_DETAILS, {_sN: _lID}),
+        (STRING, {_sN: _lNI}),
+        (REMOTE_IP_DETAILS, {_sN: _rID}),
+        (REMOTE_PORT_DETAILS, {_sN: _rPD}),
+    ),
+)
+
+PORT_PROBE_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _PPD,
+    0,
+    (_LPD, _LID, _RID),
+    (
+        (LOCAL_PORT_DETAILS, {_sN: _lPD}),
+        (LOCAL_IP_DETAILS, {_sN: _lID}),
+        (REMOTE_IP_DETAILS, {_sN: _rID}),
+    ),
+)
+
+PORT_PROBE_DETAILS: StaticSchema = (16, n0, _PPDo, 0, (_me,), ((PORT_PROBE_DETAIL, 0),))
+
+PORT_PROBE_ACTION: StaticSchema = (
+    18,
+    n0,
+    _PPA,
+    0,
+    (_Bl, _PPDo),
+    ((BOOLEAN, {_sN: _b}), (PORT_PROBE_DETAILS, {_sN: _pPD})),
+)
+
+LOGIN_ATTRIBUTE: StaticSchema = (
+    18,
+    n0,
+    _LA,
+    0,
+    (_Us, _App, _FLA, _SLA),
+    (
+        (STRING, {_sN: _us}),
+        (STRING, {_sN: _app}),
+        (INTEGER, {_sN: _fLA}),
+        (INTEGER, {_sN: _sLA}),
+    ),
+)
+
+LOGIN_ATTRIBUTES: StaticSchema = (16, n0, _LAo, 0, (_me,), ((LOGIN_ATTRIBUTE, 0),))
+
+RDS_LOGIN_ATTEMPT_ACTION: StaticSchema = (
+    18,
+    n0,
+    _RLAA,
+    0,
+    (_RID, _LAo),
+    ((REMOTE_IP_DETAILS, {_sN: _rID}), (LOGIN_ATTRIBUTES, 0)),
+)
+
+ACTION: StaticSchema = (
+    18,
+    n0,
+    _Ac,
+    0,
+    (_AT, _AACA, _DRA, _NCA, _PPA, _KACA, _KPCD, _KRBD, _KRD, _RLAA),
+    (
+        (STRING, {_sN: _aT}),
+        (AWS_API_CALL_ACTION, {_sN: _aACA}),
+        (DNS_REQUEST_ACTION, {_sN: _dRA}),
+        (NETWORK_CONNECTION_ACTION, {_sN: _nCA}),
+        (PORT_PROBE_ACTION, {_sN: _pPA}),
+        (KUBERNETES_API_CALL_ACTION, {_sN: _kACA}),
+        (KUBERNETES_PERMISSION_CHECKED_DETAILS, {_sN: _kPCD}),
+        (KUBERNETES_ROLE_BINDING_DETAILS, {_sN: _kRBD}),
+        (KUBERNETES_ROLE_DETAILS, {_sN: _kRD}),
+        (RDS_LOGIN_ATTEMPT_ACTION, {_sN: _rLAA}),
+    ),
+)
+
+API_CALL: StaticSchema = (
+    18,
+    n0,
+    _AC,
+    0,
+    (_Op, _Se, _Er, _UA),
+    (
+        (STRING, {_sN: _op}),
+        (STRING, {_sN: _ser}),
+        (STRING, {_sN: _er}),
+        (STRING, {_sN: _uA}),
+    ),
+)
+
+ACTIVITY_TYPE: StaticSchema = (14, n0, _ATc, 0, (_AC_,), ((-1, {_sV: _AC_}),))
+
+ACTIVITY: StaticSchema = (
+    18,
+    n0,
+    _Act,
+    0,
+    (_T, _Ap),
+    ((ACTIVITY_TYPE, {_sN: _t, _sm: None}), (API_CALL, {_sN: _ap})),
+)
+
+ACTIVITIES: StaticSchema = (16, n0, _Acti, 0, (_me,), ((ACTIVITY, 0),))
+
+PROCESS_NAME: StaticSchema = (3, n0, _PNr, 0)
+
+PROCESS_PATH: StaticSchema = (3, n0, _PP, 0)
+
+PROCESS_SHA256: StaticSchema = (3, n0, _PS, 0)
+
+ACTOR_PROCESS: StaticSchema = (
+    18,
+    n0,
+    _APc,
+    0,
+    (_N, _Pat, _Sh),
+    (
+        (PROCESS_NAME, {_sN: _n, _sm: None}),
+        (PROCESS_PATH, {_sN: _pat, _sm: None}),
+        (PROCESS_SHA256, {_sN: _sh}),
+    ),
+)
+
+MFA_STATUS: StaticSchema = (
+    14,
+    n0,
+    _MS,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+SESSION: StaticSchema = (
+    18,
+    n0,
+    _Ses,
+    0,
+    (_U, _MS, _CTr, _Iss),
+    (
+        (STRING, {_sN: _u}),
+        (MFA_STATUS, {_sN: _mS}),
+        (TIMESTAMP, {_sN: _cTr}),
+        (STRING, {_sN: _is}),
+    ),
+)
+
+USER: StaticSchema = (
+    18,
+    n0,
+    _Us,
+    0,
+    (_N, _U, _T, _CU, _A),
+    (
+        (STRING, {_sN: _n, _sm: None}),
+        (STRING, {_sN: _u, _sm: None}),
+        (STRING, {_sN: _t, _sm: None}),
+        (STRING, {_sN: _cU}),
+        (ACCOUNT, {_sN: _a}),
+    ),
+)
+
+ACTOR: StaticSchema = (
+    18,
+    n0,
+    _Acto,
+    0,
+    (_Id, _Us, _Ses, _Pr),
+    (
+        (STRING, {_sN: _id, _sm: None}),
+        (USER, {_sN: _us}),
+        (SESSION, {_sN: _ses}),
+        (ACTOR_PROCESS, {_sN: _pr}),
+    ),
+)
+
+ACTOR_IDS: StaticSchema = (16, n0, _AIct, 0, (_me,), ((STRING, 0),))
+
+ACTORS: StaticSchema = (16, n0, _Actor, 0, (_me,), ((ACTOR, 0),))
+
+NON_EMPTY_STRING: StaticSchema = (3, n0, _NES, 0)
+
+ADDITIONAL_INFO: StaticSchema = (
+    18,
+    n0,
+    _AId,
+    0,
+    (_VI, _DN),
+    ((NON_EMPTY_STRING, {_sN: _vI}), (NON_EMPTY_STRING, {_sN: _dN})),
+)
+
+FINDING_TYPE: StaticSchema = (3, n0, _FT, 0)
+
+ADDITIONAL_SEQUENCE_TYPES: StaticSchema = (
+    16,
+    n0,
+    _AST,
+    0,
+    (_me,),
+    ((FINDING_TYPE, 0),),
+)
+
+ADDON_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ADd,
+    0,
+    (_AV, _ASd),
+    ((STRING, {_sN: _aV}), (STRING, {_sN: _aS})),
+)
+
+ADMIN_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ASdm,
+    0,
+    (_ENABLED, _DIP),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DIP})),
+)
+
+ADMIN_ACCOUNT: StaticSchema = (
+    18,
+    n0,
+    _AA,
+    0,
+    (_AAId, _ASdm),
+    ((STRING, {_sN: _aAI}), (ADMIN_STATUS, {_sN: _aSd})),
+)
+
+ADMIN_ACCOUNTS: StaticSchema = (16, n0, _AAd, 0, (_me,), ((ADMIN_ACCOUNT, 0),))
+
+ADMINISTRATOR: StaticSchema = (
+    18,
+    n0,
+    _Ad,
+    0,
+    (_AIcc, _II, _RS, _IA),
+    (
+        (ACCOUNT_ID, {_sN: _aIc}),
+        (STRING, {_sN: _iI}),
+        (STRING, {_sN: _rS}),
+        (STRING, {_sN: _iA}),
+    ),
+)
+
+AGENT_DETAILS: StaticSchema = (18, n0, _ADg, 0, (_Ve,), ((STRING, {_sN: _ver}),))
+
+LONG: StaticSchema = (8, n0, _Lon, 0)
+
+OBSERVATION_NUMBERS: StaticSchema = (16, n0, _ON, 0, (_me,), ((LONG, 0),))
+
+OBSERVATION_TEXTS: StaticSchema = (16, n0, _OT, 0, (_me,), ((STRING, 0),))
+
+OBSERVATIONS: StaticSchema = (
+    18,
+    n0,
+    _Ob,
+    0,
+    (_Te, _Nu),
+    ((OBSERVATION_TEXTS, {_sN: _te}), (OBSERVATION_NUMBERS, {_sN: _nu})),
+)
+
+PROFILE_SUBTYPE: StaticSchema = (
+    14,
+    n0,
+    _PSr,
+    0,
+    (_FREQUENT, _INFREQUENT, _UNSEEN, _RARE, _COUNT, _AVERAGE),
+    (
+        (-1, {_sV: _FREQUENT}),
+        (-1, {_sV: _INFREQUENT}),
+        (-1, {_sV: _UNSEEN}),
+        (-1, {_sV: _RARE}),
+        (-1, {_sV: _COUNT}),
+        (-1, {_sV: _AVERAGE}),
+    ),
+)
+
+PROFILE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _PT,
+    0,
+    (_FREQUENCY, _VOLUME),
+    ((-1, {_sV: _FREQUENCY}), (-1, {_sV: _VOLUME})),
+)
+
+ANOMALY_OBJECT: StaticSchema = (
+    18,
+    n0,
+    _AOn,
+    0,
+    (_PT, _PSr, _Ob),
+    (
+        (PROFILE_TYPE, {_sN: _pT}),
+        (PROFILE_SUBTYPE, {_sN: _pS}),
+        (OBSERVATIONS, {_sN: _ob}),
+    ),
+)
+
+ANOMALY_PROFILE_FEATURE_OBJECTS: StaticSchema = (
+    16,
+    n0,
+    _APFO,
+    0,
+    (_me,),
+    ((ANOMALY_OBJECT, 0),),
+)
+
+ANOMALY_PROFILE_FEATURES: StaticSchema = (
+    17,
+    n0,
+    _APF,
+    0,
+    (_ke, _v),
+    ((STRING, 0), (ANOMALY_PROFILE_FEATURE_OBJECTS, 0)),
+)
+
+ANOMALY_PROFILES: StaticSchema = (
+    17,
+    n0,
+    _APn,
+    0,
+    (_ke, _v),
+    ((STRING, 0), (ANOMALY_PROFILE_FEATURES, 0)),
+)
+
+ANOMALY_UNUSUAL_BEHAVIOR_FEATURE: StaticSchema = (
+    17,
+    n0,
+    _AUBF,
+    0,
+    (_ke, _v),
+    ((STRING, 0), (ANOMALY_OBJECT, 0)),
+)
+
+BEHAVIOR: StaticSchema = (
+    17,
+    n0,
+    _Be,
+    0,
+    (_ke, _v),
+    ((STRING, 0), (ANOMALY_UNUSUAL_BEHAVIOR_FEATURE, 0)),
+)
+
+ANOMALY_UNUSUAL: StaticSchema = (18, n0, _AU, 0, (_Be,), ((BEHAVIOR, {_sN: _be}),))
+
+ANOMALY: StaticSchema = (
+    18,
+    n0,
+    _An,
+    0,
+    (_Pro, _Un),
+    ((ANOMALY_PROFILES, {_sN: _pro}), (ANOMALY_UNUSUAL, {_sN: _un})),
+)
+
+FINDING_ID: StaticSchema = (3, n0, _FI, 0)
+
+FINDING_IDS: StaticSchema = (16, n0, _FIi, 0, (_me,), ((FINDING_ID, 0),))
+
+ARCHIVE_FINDINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _AFI,
+    {_sSI: _cAFR, _s: None},
+    (_DI, _FIi),
+    ((DETECTOR_ID, 9), (FINDING_IDS, {_sN: _fI, _sm: None})),
+)
+
+ARCHIVE_FINDINGS_OUTPUT: StaticSchema = (18, n0, _AFO, {_sSI: _cAFRo, _smi: None})
+
+ARCHIVE_FINDINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _AF,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/findings/archive",
+                "code": 200,
+            }
         )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Enable": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="enable")],
-        },
-        "FindingPublishingFrequency": {
-            "target": FINDING_PUBLISHING_FREQUENCY,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="findingPublishingFrequency",
-                )
-            ],
-        },
-        "DataSources": {
-            "target": DATA_SOURCE_CONFIGURATIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
-            ],
-        },
-        "Features": {
-            "target": DETECTOR_FEATURE_CONFIGURATIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="features")],
-        },
     },
+    ARCHIVE_FINDINGS_INPUT,
+    ARCHIVE_FINDINGS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
 )
 
-UPDATE_DETECTOR_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateDetectorOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateDetectorResponse",
-        )
-    ],
+DETECTION_RULE_ARN: StaticSchema = (3, n0, _DRAe, 0)
+
+ASSOCIATION_ID: StaticSchema = (3, n0, _AIs, 0)
+
+ASSOCIATION_MODE: StaticSchema = (
+    14,
+    n0,
+    _AM,
+    0,
+    (_LIVE, _DR),
+    ((-1, {_sV: _LIVE}), (-1, {_sV: _DR})),
 )
 
-UPDATE_DETECTOR = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateDetector"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/detector/{DetectorId}", "code": 200}
-            ),
-        )
-    ],
+RULE_ID: StaticSchema = (3, n0, _RI, 0)
+
+ASSOCIATION_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _ADs,
+    0,
+    (_AIs, _Ar, _RI, _AIcc, _Mo, _CA, _UAp, _EA),
+    (
+        (ASSOCIATION_ID, {_sN: _aIs, _sm: None}),
+        (DETECTION_RULE_ARN, {_sN: _ar, _sm: None}),
+        (RULE_ID, {_sN: _rI, _sm: None}),
+        (ACCOUNT_ID, {_sN: _aIc, _sm: None}),
+        (ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
+        (TIMESTAMP, {_sN: _cA, _sm: None}),
+        (TIMESTAMP, {_sN: _uAp, _sm: None}),
+        (TIMESTAMP, {_sN: _eA}),
+    ),
 )
 
-UPDATE_FILTER_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateFilterInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateFilterRequest",
+ASSOCIATION_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _ASs,
+    0,
+    (_AIs, _Ar, _RI, _Mo, _CA, _UAp, _EA),
+    (
+        (ASSOCIATION_ID, {_sN: _aIs, _sm: None}),
+        (DETECTION_RULE_ARN, {_sN: _ar, _sm: None}),
+        (RULE_ID, {_sN: _rI, _sm: None}),
+        (ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
+        (TIMESTAMP, {_sN: _cA, _sm: None}),
+        (TIMESTAMP, {_sN: _uAp, _sm: None}),
+        (TIMESTAMP, {_sN: _eA}),
+    ),
+)
+
+ASSOCIATION_SUMMARY_LIST: StaticSchema = (
+    16,
+    n0,
+    _ASL,
+    0,
+    (_me,),
+    ((ASSOCIATION_SUMMARY, 0),),
+)
+
+AUTO_ENABLE_MEMBERS: StaticSchema = (
+    14,
+    n0,
+    _AEM,
+    0,
+    (_NEW, _ALL, _NONE),
+    ((-1, {_sV: _NEW}), (-1, {_sV: _ALL}), (-1, {_sV: _NONE})),
+)
+
+AUTONOMOUS_SYSTEM: StaticSchema = (
+    18,
+    n0,
+    _ASu,
+    0,
+    (_N, _Nu),
+    ((STRING, {_sN: _n, _sm: None}), (INTEGER, {_sN: _nu, _sm: None})),
+)
+
+EC2_INSTANCE_UID: StaticSchema = (3, n0, _EIU, 0)
+
+EC2_INSTANCE_UIDS: StaticSchema = (16, n0, _EIUc, 0, (_me,), ((EC2_INSTANCE_UID, 0),))
+
+AUTOSCALING_AUTO_SCALING_GROUP: StaticSchema = (
+    18,
+    n0,
+    _AASG,
+    0,
+    (_EIUc,),
+    ((EC2_INSTANCE_UIDS, {_sN: _eIU}),),
+)
+
+BEDROCK_GUARDRAIL: StaticSchema = (
+    18,
+    n0,
+    _BG,
+    0,
+    (_Ar, _Ve),
+    ((STRING, {_sN: _ar}), (STRING, {_sN: _ver})),
+)
+
+CONTENT_POLICY_FILTER_ACTION: StaticSchema = (
+    14,
+    n0,
+    _CPFA,
+    0,
+    (_BLOCKED, _NONE),
+    ((-1, {_sV: _BLOCKED}), (-1, {_sV: _NONE})),
+)
+
+CONFIDENCE_LEVEL: StaticSchema = (
+    14,
+    n0,
+    _CL,
+    0,
+    (_HIGH, _MEDIUM, _LOW, _NONE),
+    ((-1, {_sV: _HIGH}), (-1, {_sV: _MEDIUM}), (-1, {_sV: _LOW}), (-1, {_sV: _NONE})),
+)
+
+CONTENT_POLICY_FILTER_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CPFT,
+    0,
+    (_PA, _JAILBREAK, _HATE, _INSULTS, _SEXUAL, _VIOLENCE, _MISCONDUCT),
+    (
+        (-1, {_sV: _PA}),
+        (-1, {_sV: _JAILBREAK}),
+        (-1, {_sV: _HATE}),
+        (-1, {_sV: _INSULTS}),
+        (-1, {_sV: _SEXUAL}),
+        (-1, {_sV: _VIOLENCE}),
+        (-1, {_sV: _MISCONDUCT}),
+    ),
+)
+
+CONTENT_POLICY_FILTER: StaticSchema = (
+    18,
+    n0,
+    _CPF,
+    0,
+    (_T, _Con, _Ac),
+    (
+        (CONTENT_POLICY_FILTER_TYPE, {_sN: _t}),
+        (CONFIDENCE_LEVEL, {_sN: _con}),
+        (CONTENT_POLICY_FILTER_ACTION, {_sN: _ac}),
+    ),
+)
+
+CONTENT_POLICY_FILTERS: StaticSchema = (
+    16,
+    n0,
+    _CPFo,
+    0,
+    (_me,),
+    ((CONTENT_POLICY_FILTER, 0),),
+)
+
+GUARDRAIL_ACTION: StaticSchema = (
+    14,
+    n0,
+    _GA,
+    0,
+    (_GI, _NONE),
+    ((-1, {_sV: _GI}), (-1, {_sV: _NONE})),
+)
+
+BEDROCK_GUARDRAILS: StaticSchema = (16, n0, _BGe, 0, (_me,), ((BEDROCK_GUARDRAIL, 0),))
+
+GUARDRAIL_SOURCE: StaticSchema = (
+    14,
+    n0,
+    _GS,
+    0,
+    (_INPUT, _OUTPUT),
+    ((-1, {_sV: _INPUT}), (-1, {_sV: _OUTPUT})),
+)
+
+BEDROCK_GUARDRAIL_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _BGD,
+    0,
+    (_GAu, _GV, _G, _GA, _GS, _CPFo),
+    (
+        (STRING, {_sN: _gA}),
+        (STRING, {_sN: _gV}),
+        (BEDROCK_GUARDRAILS, {_sN: _g}),
+        (GUARDRAIL_ACTION, {_sN: _gAu}),
+        (GUARDRAIL_SOURCE, {_sN: _gS}),
+        (CONTENT_POLICY_FILTERS, {_sN: _cPF}),
+    ),
+)
+
+BEDROCK_GUARDRAIL_RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _BGR,
+    0,
+    (_Ve, _GA, _GS),
+    (
+        (STRING, {_sN: _ver}),
+        (GUARDRAIL_ACTION, {_sN: _gAu}),
+        (GUARDRAIL_SOURCE, {_sN: _gS}),
+    ),
+)
+
+BUCKET_POLICY: StaticSchema = (
+    18,
+    n0,
+    _BP,
+    0,
+    (_APRA, _APWA),
+    ((BOOLEAN, {_sN: _aPRA}), (BOOLEAN, {_sN: _aPWA})),
+)
+
+BUCKET_LEVEL_PERMISSIONS: StaticSchema = (
+    18,
+    n0,
+    _BLP,
+    0,
+    (_ACL, _BP, _BPA),
+    (
+        (ACCESS_CONTROL_LIST, {_sN: _aCL}),
+        (BUCKET_POLICY, {_sN: _bP}),
+        (BLOCK_PUBLIC_ACCESS, {_sN: _bPAl}),
+    ),
+)
+
+CLIENT_TOKEN: StaticSchema = (3, n0, _CTl, 0)
+
+CLOUD_PROVIDER: StaticSchema = (14, n0, _CP, 0, (_AWS,), ((-1, {_sV: _AWS}),))
+
+CLOUD_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CDl,
+    0,
+    (_Prov, _Re, _A),
+    (
+        (CLOUD_PROVIDER, {_sN: _prov, _sm: None}),
+        (STRING, {_sN: _re, _sm: None}),
+        (STRING, {_sN: _a, _sm: None}),
+    ),
+)
+
+CLOUDFORMATION_STACK: StaticSchema = (
+    18,
+    n0,
+    _CS,
+    0,
+    (_EIUc,),
+    ((EC2_INSTANCE_UIDS, {_sN: _eIU}),),
+)
+
+DATA_SOURCE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DSS,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+CLOUD_TRAIL_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _CTCR,
+    0,
+    (_St,),
+    ((DATA_SOURCE_STATUS, {_sN: _st, _sm: None}),),
+)
+
+CLUSTER_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CSl,
+    0,
+    (_CREATING, _ACTIVE, _DELETING, _FAILED, _UPDATING, _PENDING),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _UPDATING}),
+        (-1, {_sV: _PENDING}),
+    ),
+)
+
+EQ: StaticSchema = (16, n0, _Eq, 0, (_me,), ((STRING, 0),))
+
+EQUALS: StaticSchema = (16, n0, _Equ, 0, (_me,), ((STRING, 0),))
+
+MATCH: StaticSchema = (3, n0, _Ma, 0)
+
+MATCHES: StaticSchema = (16, n0, _Mat, 0, (_me,), ((MATCH, 0),))
+
+NEQ: StaticSchema = (16, n0, _Ne, 0, (_me,), ((STRING, 0),))
+
+NOT_EQUALS: StaticSchema = (16, n0, _NE, 0, (_me,), ((STRING, 0),))
+
+NOT_MATCH: StaticSchema = (3, n0, _NM, 0)
+
+NOT_MATCHES: StaticSchema = (16, n0, _NMo, 0, (_me,), ((NOT_MATCH, 0),))
+
+CONDITION: StaticSchema = (
+    18,
+    n0,
+    _Cond,
+    0,
+    (_Eq, _Ne, _Gt, _Gte, _Lt, _Lte, _Equ, _NE, _GT, _GTOE, _LT, _LTOE, _Mat, _NMo),
+    (
+        (EQ, {_sN: _eq}),
+        (NEQ, {_sN: _ne}),
+        (INTEGER, {_sN: _gt}),
+        (INTEGER, {_sN: _gte}),
+        (INTEGER, {_sN: _lt}),
+        (INTEGER, {_sN: _lte}),
+        (EQUALS, {_sN: _equ}),
+        (NOT_EQUALS, {_sN: _nE}),
+        (LONG, {_sN: _gT}),
+        (LONG, {_sN: _gTOE}),
+        (LONG, {_sN: _lT}),
+        (LONG, {_sN: _lTOE}),
+        (MATCHES, {_sN: _ma}),
+        (NOT_MATCHES, {_sN: _nM}),
+    ),
+)
+
+CONFIDENCE: StaticSchema = (
+    14,
+    n0,
+    _Con,
+    0,
+    (_UNKNOWN, _LOW, _MEDIUM, _HIGH),
+    ((-1, {_sV: _Unk}), (-1, {_sV: _Low}), (-1, {_sV: _Me}), (-1, {_sV: _H})),
+)
+
+CONFLICT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _CE,
+    {_smit: _c, _sE: 409},
+    (_M, _T),
+    ((STRING, {_sN: _m}), (STRING, {_sN: _t})),
+)
+
+SECURITY_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _SCe,
+    0,
+    (_Pri, _APE),
+    ((BOOLEAN, {_sN: _pri}), (BOOLEAN, {_sN: _aPE})),
+)
+
+VOLUME_MOUNT: StaticSchema = (
+    18,
+    n0,
+    _VM,
+    0,
+    (_N, _MPo),
+    ((STRING, {_sN: _n}), (STRING, {_sN: _mPo})),
+)
+
+VOLUME_MOUNTS: StaticSchema = (16, n0, _VMo, 0, (_me,), ((VOLUME_MOUNT, 0),))
+
+CONTAINER: StaticSchema = (
+    18,
+    n0,
+    _Cont,
+    0,
+    (_CR, _Id, _N, _Im, _IP, _VMo, _SCe),
+    (
+        (STRING, {_sN: _cR}),
+        (STRING, {_sN: _id}),
+        (STRING, {_sN: _n}),
+        (STRING, {_sN: _im}),
+        (STRING, {_sN: _iP}),
+        (VOLUME_MOUNTS, {_sN: _vM}),
+        (SECURITY_CONTEXT, {_sN: _sCe}),
+    ),
+)
+
+CONTAINER_IMAGE_UID: StaticSchema = (3, n0, _CIU, 0)
+
+CONTAINER_FINDING_RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _CFR,
+    0,
+    (_Im, _IU),
+    ((STRING, {_sN: _im, _sm: None}), (CONTAINER_IMAGE_UID, {_sN: _iU})),
+)
+
+CONTAINER_INSTANCE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CID,
+    0,
+    (_CCI, _CCIo),
+    ((LONG, {_sN: _cCI}), (LONG, {_sN: _cCIo})),
+)
+
+CONTAINERS: StaticSchema = (16, n0, _Conta, 0, (_me,), ((CONTAINER, 0),))
+
+CONTAINER_UID: StaticSchema = (3, n0, _CUo, 0)
+
+CONTAINER_UIDS: StaticSchema = (16, n0, _CUon, 0, (_me,), ((CONTAINER_UID, 0),))
+
+CONTINUOUS_SCAN_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CSD,
+    0,
+    (_ST, _ET),
+    ((TIMESTAMP, {_sN: _sT}), (TIMESTAMP, {_sN: _eT, _sm: None})),
+)
+
+COVERAGE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CSo,
+    0,
+    (_HEALTHY, _UNHEALTHY),
+    ((-1, {_sV: _HEALTHY}), (-1, {_sV: _UNHEALTHY})),
+)
+
+COUNT_BY_COVERAGE_STATUS: StaticSchema = (
+    17,
+    n0,
+    _CBCS,
+    0,
+    (_ke, _v),
+    ((COVERAGE_STATUS, 0), (LONG, 0)),
+)
+
+RESOURCE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RT,
+    0,
+    (_EKS, _ECS, _EC_),
+    ((-1, {_sV: _EKS}), (-1, {_sV: _ECS}), (-1, {_sV: _EC_})),
+)
+
+COUNT_BY_RESOURCE_TYPE: StaticSchema = (
+    17,
+    n0,
+    _CBRT,
+    0,
+    (_ke, _v),
+    ((RESOURCE_TYPE, 0), (LONG, 0)),
+)
+
+COUNT_BY_SEVERITY: StaticSchema = (
+    17,
+    n0,
+    _CBS,
+    0,
+    (_ke, _v),
+    ((STRING, 0), (INTEGER, 0)),
+)
+
+MANAGEMENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MT,
+    0,
+    (_AM_, _MANUAL, _DISABLED),
+    ((-1, {_sV: _AM_}), (-1, {_sV: _MANUAL}), (-1, {_sV: _DISABLED})),
+)
+
+COVERAGE_EC2_INSTANCE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CEID,
+    0,
+    (_IIn, _IT, _CAl, _ADg, _MT),
+    (
+        (STRING, {_sN: _iIn}),
+        (STRING, {_sN: _iT}),
+        (STRING, {_sN: _cAl}),
+        (AGENT_DETAILS, {_sN: _aD}),
+        (MANAGEMENT_TYPE, {_sN: _mT}),
+    ),
+)
+
+ISSUES: StaticSchema = (16, n0, _Issu, 0, (_me,), ((STRING, 0),))
+
+FARGATE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _FD,
+    0,
+    (_Issu, _MT),
+    ((ISSUES, {_sN: _iss}), (MANAGEMENT_TYPE, {_sN: _mT})),
+)
+
+COVERAGE_ECS_CLUSTER_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CECD,
+    0,
+    (_CNl, _FD, _CID),
+    (
+        (STRING, {_sN: _cNl}),
+        (FARGATE_DETAILS, {_sN: _fD}),
+        (CONTAINER_INSTANCE_DETAILS, {_sN: _cID}),
+    ),
+)
+
+COVERAGE_EKS_CLUSTER_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CECDo,
+    0,
+    (_CNl, _CNov, _CNom, _ADd, _MT),
+    (
+        (STRING, {_sN: _cNl}),
+        (LONG, {_sN: _cNov}),
+        (LONG, {_sN: _cNom}),
+        (ADDON_DETAILS, {_sN: _aDd}),
+        (MANAGEMENT_TYPE, {_sN: _mT}),
+    ),
+)
+
+COVERAGE_FILTER_CONDITION: StaticSchema = (
+    18,
+    n0,
+    _CFC,
+    0,
+    (_Equ, _NE),
+    ((EQUALS, {_sN: _equ}), (NOT_EQUALS, {_sN: _nE})),
+)
+
+COVERAGE_FILTER_CRITERION_KEY: StaticSchema = (
+    14,
+    n0,
+    _CFCK,
+    0,
+    (_AI_, _RT_, _CS_, _AV_, _CN_, _ECN, _MT_, _ECN_, _AV__, _II_, _CA_),
+    (
+        (-1, {_sV: _AI_}),
+        (-1, {_sV: _RT_}),
+        (-1, {_sV: _CS_}),
+        (-1, {_sV: _AV_}),
+        (-1, {_sV: _CN_}),
+        (-1, {_sV: _ECN}),
+        (-1, {_sV: _MT_}),
+        (-1, {_sV: _ECN_}),
+        (-1, {_sV: _AV__}),
+        (-1, {_sV: _II_}),
+        (-1, {_sV: _CA_}),
+    ),
+)
+
+COVERAGE_FILTER_CRITERION: StaticSchema = (
+    18,
+    n0,
+    _CFCo,
+    0,
+    (_CK, _FC),
+    (
+        (COVERAGE_FILTER_CRITERION_KEY, {_sN: _cK}),
+        (COVERAGE_FILTER_CONDITION, {_sN: _fC}),
+    ),
+)
+
+COVERAGE_FILTER_CRITERION_LIST: StaticSchema = (
+    16,
+    n0,
+    _CFCL,
+    0,
+    (_me,),
+    ((COVERAGE_FILTER_CRITERION, 0),),
+)
+
+COVERAGE_FILTER_CRITERIA: StaticSchema = (
+    18,
+    n0,
+    _CFCov,
+    0,
+    (_FCi,),
+    ((COVERAGE_FILTER_CRITERION_LIST, {_sN: _fCi}),),
+)
+
+COVERAGE_RESOURCE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CRD,
+    0,
+    (_ECD, _ECDc, _EID, _RT),
+    (
+        (COVERAGE_EKS_CLUSTER_DETAILS, {_sN: _eCD}),
+        (COVERAGE_ECS_CLUSTER_DETAILS, {_sN: _eCDc}),
+        (COVERAGE_EC2_INSTANCE_DETAILS, {_sN: _eID}),
+        (RESOURCE_TYPE, {_sN: _rT}),
+    ),
+)
+
+COVERAGE_RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _CRo,
+    0,
+    (_RIe, _DI, _AIcc, _RD, _CSo, _Issue, _UAp),
+    (
+        (STRING, {_sN: _rIe}),
+        (DETECTOR_ID, {_sN: _dI}),
+        (ACCOUNT_ID, {_sN: _aIc}),
+        (COVERAGE_RESOURCE_DETAILS, {_sN: _rD}),
+        (COVERAGE_STATUS, {_sN: _cS}),
+        (STRING, {_sN: _issu}),
+        (TIMESTAMP, {_sN: _uAp}),
+    ),
+)
+
+COVERAGE_RESOURCES: StaticSchema = (16, n0, _CRov, 0, (_me,), ((COVERAGE_RESOURCE, 0),))
+
+COVERAGE_SORT_KEY: StaticSchema = (
+    14,
+    n0,
+    _CSK,
+    0,
+    (_AI_, _CS_, _ISSUE, _AV_, _UA_, _CN_, _ECN_, _ECN, _II_),
+    (
+        (-1, {_sV: _AI_}),
+        (-1, {_sV: _CS_}),
+        (-1, {_sV: _ISSUE}),
+        (-1, {_sV: _AV_}),
+        (-1, {_sV: _UA_}),
+        (-1, {_sV: _CN_}),
+        (-1, {_sV: _ECN_}),
+        (-1, {_sV: _ECN}),
+        (-1, {_sV: _II_}),
+    ),
+)
+
+ORDER_BY: StaticSchema = (
+    14,
+    n0,
+    _OB,
+    0,
+    (_ASC, _DESC),
+    ((-1, {_sV: _ASC}), (-1, {_sV: _DESC})),
+)
+
+COVERAGE_SORT_CRITERIA: StaticSchema = (
+    18,
+    n0,
+    _CSC,
+    0,
+    (_AN, _OB),
+    ((COVERAGE_SORT_KEY, {_sN: _aN}), (ORDER_BY, {_sN: _oB})),
+)
+
+COVERAGE_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _CSov,
+    0,
+    (_CBRT, _CBCS),
+    ((COUNT_BY_RESOURCE_TYPE, {_sN: _cBRT}), (COUNT_BY_COVERAGE_STATUS, {_sN: _cBCS})),
+)
+
+COVERAGE_STATISTICS_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CST,
+    0,
+    (_CBRT_, _CBCS_),
+    ((-1, {_sV: _CBRT_}), (-1, {_sV: _CBCS_})),
+)
+
+COVERAGE_STATISTICS_TYPE_LIST: StaticSchema = (
+    16,
+    n0,
+    _CSTL,
+    0,
+    (_me,),
+    ((COVERAGE_STATISTICS_TYPE, 0),),
+)
+
+TAG_KEY: StaticSchema = (3, n0, _TK, 0)
+
+TAG_VALUE: StaticSchema = (3, n0, _TV, 0)
+
+TAG_MAP: StaticSchema = (17, n0, _TM, 0, (_ke, _v), ((TAG_KEY, 0), (TAG_VALUE, 0)))
+
+CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CCDRAI,
+    {_sSI: _cCCDRAR, _s: None},
+    (_RI, _Mo, _CTl, _Ta),
+    (
+        (RULE_ID, {_sN: _rI, _sm: None}),
+        (ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+        (TAG_MAP, {_sN: _ta}),
+    ),
+)
+
+CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CCDRAO,
+    {_sSI: _cCCDRARo, _smi: None},
+    (_RA,),
+    ((ASSOCIATION_DETAIL, {_sN: _rA, _sm: None}),),
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_smit: _c, _sE: 404},
+    (_M, _T),
+    ((STRING, {_sN: _m}), (STRING, {_sN: _t})),
+)
+
+CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION: StaticOperationSchema = (
+    23,
+    n0,
+    _CCDRA,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/custom-detection-rule/association", "code": 200}
         )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FilterName": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Description": {
-            "target": FILTER_DESCRIPTION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="description")
-            ],
-        },
-        "Action": {
-            "target": FILTER_ACTION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="action")],
-        },
-        "Rank": {
-            "target": FILTER_RANK,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="rank")],
-        },
-        "FindingCriteria": {
-            "target": FINDING_CRITERIA,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingCriteria")
-            ],
-        },
     },
+    CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    CREATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
 )
 
-UPDATE_FILTER_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateFilterOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateFilterResponse",
+DETECTION_RULE_ACCOUNT_IDS: StaticSchema = (
+    16,
+    n0,
+    _DRAI,
+    0,
+    (_me,),
+    ((ACCOUNT_ID, 0),),
+)
+
+CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CCDROCI,
+    {_sSI: _cCCDROCR, _s: None},
+    (_RI, _Mo, _IAI, _EAI, _CTl),
+    (
+        (RULE_ID, {_sN: _rI, _sm: None}),
+        (ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
+        (DETECTION_RULE_ACCOUNT_IDS, {_sN: _iAI}),
+        (DETECTION_RULE_ACCOUNT_IDS, {_sN: _eAI}),
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+    ),
+)
+
+CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CCDROCO,
+    {_sSI: _cCCDROCRo, _smi: None},
+)
+
+CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _CCDROC,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/custom-detection-rule/org-configuration",
+                "code": 200,
+            }
         )
-    ],
-    members={
-        "Name": {
-            "target": FILTER_NAME,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="name"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
     },
+    CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    CREATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
 )
 
-UPDATE_FILTER = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateFilter"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/filter/{FilterName}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
+KUBERNETES_AUDIT_LOGS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _KALC,
+    0,
+    (_En,),
+    ((BOOLEAN, {_sN: _en, _sm: None}),),
 )
 
-UPDATE_FINDINGS_FEEDBACK_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateFindingsFeedbackInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateFindingsFeedbackRequest",
+KUBERNETES_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _KC,
+    0,
+    (_AL,),
+    ((KUBERNETES_AUDIT_LOGS_CONFIGURATION, {_sN: _aL, _sm: None}),),
+)
+
+SCAN_EC2_INSTANCE_WITH_FINDINGS: StaticSchema = (
+    18,
+    n0,
+    _SEIWF,
+    0,
+    (_EV,),
+    ((BOOLEAN, {_sN: _eV}),),
+)
+
+MALWARE_PROTECTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _MPC,
+    0,
+    (_SEIWF,),
+    ((SCAN_EC2_INSTANCE_WITH_FINDINGS, {_sN: _sEIWF}),),
+)
+
+S3_LOGS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SLC,
+    0,
+    (_En,),
+    ((BOOLEAN, {_sN: _en, _sm: None}),),
+)
+
+DATA_SOURCE_CONFIGURATIONS: StaticSchema = (
+    18,
+    n0,
+    _DSC,
+    0,
+    (_SL, _K, _MP),
+    (
+        (S3_LOGS_CONFIGURATION, {_sN: _sLo}),
+        (KUBERNETES_CONFIGURATION, {_sN: _k}),
+        (MALWARE_PROTECTION_CONFIGURATION, {_sN: _mP}),
+    ),
+)
+
+FEATURE_ADDITIONAL_CONFIGURATION: StaticSchema = (
+    14,
+    n0,
+    _FAC,
+    0,
+    (_EAM, _EFAM, _EAM_),
+    ((-1, {_sV: _EAM}), (-1, {_sV: _EFAM}), (-1, {_sV: _EAM_})),
+)
+
+FEATURE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _FS,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+DETECTOR_ADDITIONAL_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _DAC,
+    0,
+    (_N, _St),
+    ((FEATURE_ADDITIONAL_CONFIGURATION, {_sN: _n}), (FEATURE_STATUS, {_sN: _st})),
+)
+
+DETECTOR_ADDITIONAL_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _DACe,
+    0,
+    (_me,),
+    ((DETECTOR_ADDITIONAL_CONFIGURATION, 0),),
+)
+
+DETECTOR_FEATURE: StaticSchema = (
+    14,
+    n0,
+    _DF,
+    0,
+    (_SDE, _EAL, _EMP, _RLE, _LNL, _ERM, _RM, _AP, _AA_),
+    (
+        (-1, {_sV: _SDE}),
+        (-1, {_sV: _EAL}),
+        (-1, {_sV: _EMP}),
+        (-1, {_sV: _RLE}),
+        (-1, {_sV: _LNL}),
+        (-1, {_sV: _ERM}),
+        (-1, {_sV: _RM}),
+        (-1, {_sV: _AP}),
+        (-1, {_sV: _AA_}),
+    ),
+)
+
+DETECTOR_FEATURE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _DFC,
+    0,
+    (_N, _St, _ACd),
+    (
+        (DETECTOR_FEATURE, {_sN: _n}),
+        (FEATURE_STATUS, {_sN: _st}),
+        (DETECTOR_ADDITIONAL_CONFIGURATIONS, {_sN: _aC}),
+    ),
+)
+
+DETECTOR_FEATURE_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _DFCe,
+    0,
+    (_me,),
+    ((DETECTOR_FEATURE_CONFIGURATION, 0),),
+)
+
+FINDING_PUBLISHING_FREQUENCY: StaticSchema = (
+    14,
+    n0,
+    _FPF,
+    0,
+    (_FM, _OH, _SH),
+    ((-1, {_sV: _FM}), (-1, {_sV: _OH}), (-1, {_sV: _SH})),
+)
+
+CREATE_DETECTOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDI,
+    {_sSI: _cCDR, _s: None},
+    (_En, _CTl, _FPF, _DS, _Ta, _F),
+    (
+        (BOOLEAN, {_sN: _en, _sm: None}),
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+        (FINDING_PUBLISHING_FREQUENCY, {_sN: _fPF}),
+        (DATA_SOURCE_CONFIGURATIONS, {_sN: _dS}),
+        (TAG_MAP, {_sN: _ta}),
+        (DETECTOR_FEATURE_CONFIGURATIONS, {_sN: _f}),
+    ),
+)
+
+EBS_VOLUMES_RESULT: StaticSchema = (
+    18,
+    n0,
+    _EVR,
+    0,
+    (_St, _Rea),
+    ((DATA_SOURCE_STATUS, {_sN: _st}), (STRING, {_sN: _rea})),
+)
+
+SCAN_EC2_INSTANCE_WITH_FINDINGS_RESULT: StaticSchema = (
+    18,
+    n0,
+    _SEIWFR,
+    0,
+    (_EV,),
+    ((EBS_VOLUMES_RESULT, {_sN: _eV}),),
+)
+
+MALWARE_PROTECTION_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _MPCR,
+    0,
+    (_SEIWF, _SR),
+    ((SCAN_EC2_INSTANCE_WITH_FINDINGS_RESULT, {_sN: _sEIWF}), (STRING, {_sN: _sR})),
+)
+
+UNPROCESSED_DATA_SOURCES_RESULT: StaticSchema = (
+    18,
+    n0,
+    _UDSR,
+    0,
+    (_MP,),
+    ((MALWARE_PROTECTION_CONFIGURATION_RESULT, {_sN: _mP}),),
+)
+
+CREATE_DETECTOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDO,
+    {_sSI: _cCDRo, _smi: None},
+    (_DI, _UDS),
+    ((DETECTOR_ID, {_sN: _dI}), (UNPROCESSED_DATA_SOURCES_RESULT, {_sN: _uDS})),
+)
+
+CREATE_DETECTOR: StaticOperationSchema = (
+    23,
+    n0,
+    _CDr,
+    {_smith: MappingProxyType({"method": "POST", "uri": "/detector", "code": 200})},
+    CREATE_DETECTOR_INPUT,
+    CREATE_DETECTOR_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+FILTER_ACTION: StaticSchema = (
+    14,
+    n0,
+    _FA,
+    0,
+    (_NOOP, _ARCHIVE),
+    ((-1, {_sV: _NOOP}), (-1, {_sV: _ARCHIVE})),
+)
+
+FILTER_DESCRIPTION: StaticSchema = (3, n0, _FDi, 0)
+
+CRITERION: StaticSchema = (17, n0, _Cr, 0, (_ke, _v), ((STRING, 0), (CONDITION, 0)))
+
+FINDING_CRITERIA: StaticSchema = (18, n0, _FCin, 0, (_Cr,), ((CRITERION, {_sN: _cr}),))
+
+FILTER_NAME: StaticSchema = (3, n0, _FN, 0)
+
+FILTER_RANK: StaticSchema = (7, n0, _FR, 0)
+
+CREATE_FILTER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CFI,
+    {_sSI: _cCFR, _s: None},
+    (_DI, _N, _De, _Ac, _Ra, _FCin, _CTl, _Ta),
+    (
+        (DETECTOR_ID, 9),
+        (FILTER_NAME, {_sN: _n, _sm: None}),
+        (FILTER_DESCRIPTION, {_sN: _de}),
+        (FILTER_ACTION, {_sN: _ac}),
+        (FILTER_RANK, {_sN: _ra}),
+        (FINDING_CRITERIA, {_sN: _fCin, _sm: None}),
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+        (TAG_MAP, {_sN: _ta}),
+    ),
+)
+
+CREATE_FILTER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CFO,
+    {_sSI: _cCFRo, _smi: None},
+    (_N,),
+    ((FILTER_NAME, {_sN: _n, _sm: None}),),
+)
+
+CREATE_FILTER: StaticOperationSchema = (
+    23,
+    n0,
+    _CF,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/detector/{DetectorId}/filter", "code": 200}
         )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "FindingIds": {
-            "target": FINDING_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="findingIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Feedback": {
-            "target": FEEDBACK,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="feedback"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "Comments": {
-            "target": SENSITIVE_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="comments")],
-        },
     },
+    CREATE_FILTER_INPUT,
+    CREATE_FILTER_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
 )
 
-UPDATE_FINDINGS_FEEDBACK_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateFindingsFeedbackOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateFindingsFeedbackResponse",
-        )
-    ],
+TRIGGER_PROMPT: StaticSchema = (3, n0, _TP, 0)
+
+CREATE_INVESTIGATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CII,
+    {_sSI: _cCIR, _s: None},
+    (_DI, _TP, _CTl),
+    (
+        (DETECTOR_ID, 9),
+        (TRIGGER_PROMPT, {_sN: _tP, _sm: None}),
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+    ),
 )
 
-UPDATE_FINDINGS_FEEDBACK = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateFindingsFeedback"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/findings/feedback",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
+INVESTIGATION_ID: StaticSchema = (3, n0, _IInv, 0)
+
+CREATE_INVESTIGATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CIO,
+    {_sSI: _cCIRo, _smi: None},
+    (_IInv,),
+    ((INVESTIGATION_ID, {_sN: _iInv, _sm: None}),),
 )
 
-UPDATE_IP_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateIPSetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateIPSetRequest",
+CREATE_INVESTIGATION: StaticOperationSchema = (
+    23,
+    n0,
+    _CI,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/investigation",
+                "code": 202,
+            }
         )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "IpSetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="location")],
-        },
-        "Activate": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate")],
-        },
-        "ExpectedBucketOwner": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
     },
+    CREATE_INVESTIGATION_INPUT,
+    CREATE_INVESTIGATION_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
 )
 
-UPDATE_IP_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateIPSetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateIPSetResponse",
+IP_SET_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _ISF,
+    0,
+    (_TXT, _STIX, _OC, _AV___, _PP_, _FE),
+    (
+        (-1, {_sV: _TXT}),
+        (-1, {_sV: _STIX}),
+        (-1, {_sV: _OC}),
+        (-1, {_sV: _AV___}),
+        (-1, {_sV: _PP_}),
+        (-1, {_sV: _FE}),
+    ),
+)
+
+LOCATION: StaticSchema = (3, n0, _Loc, 0)
+
+NAME: StaticSchema = (3, n0, _N, 0)
+
+CREATE_IP_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CIPSI,
+    {_sSI: _cCIPSR, _s: None},
+    (_DI, _N, _Fo, _Loc, _Activ, _CTl, _Ta, _EBO),
+    (
+        (DETECTOR_ID, 9),
+        (NAME, {_sN: _n, _sm: None}),
+        (IP_SET_FORMAT, {_sN: _fo, _sm: None}),
+        (LOCATION, {_sN: _loc, _sm: None}),
+        (BOOLEAN, {_sN: _act, _sm: None}),
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+        (TAG_MAP, {_sN: _ta}),
+        (ACCOUNT_ID, {_sN: _eBO}),
+    ),
+)
+
+CREATE_IP_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CIPSO,
+    {_sSI: _cCIPSRo, _smi: None},
+    (_ISI,),
+    ((STRING, {_sN: _iSI, _sm: None}),),
+)
+
+CREATE_IP_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _CIPS,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/detector/{DetectorId}/ipset", "code": 200}
         )
-    ],
-)
-
-UPDATE_IP_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateIPSet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/ipset/{IpSetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_S3_BUCKET_RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateS3BucketResource"),
-    members={
-        "ObjectPrefixes": {
-            "target": MALWARE_PROTECTION_PLAN_OBJECT_PREFIXES_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="objectPrefixes")
-            ],
-        }
     },
+    CREATE_IP_SET_INPUT,
+    CREATE_IP_SET_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
 )
 
-UPDATE_PROTECTED_RESOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateProtectedResource"),
-    members={
-        "S3Bucket": {
-            "target": UPDATE_S3_BUCKET_RESOURCE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Bucket")],
-        }
+MALWARE_PROTECTION_PLAN_TAGGING_ACTION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _MPPTAS,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+MALWARE_PROTECTION_PLAN_TAGGING_ACTION: StaticSchema = (
+    18,
+    n0,
+    _MPPTA,
+    0,
+    (_St,),
+    ((MALWARE_PROTECTION_PLAN_TAGGING_ACTION_STATUS, {_sN: _st}),),
+)
+
+MALWARE_PROTECTION_PLAN_ACTIONS: StaticSchema = (
+    18,
+    n0,
+    _MPPA,
+    0,
+    (_Tag,),
+    ((MALWARE_PROTECTION_PLAN_TAGGING_ACTION, {_sN: _tag}),),
+)
+
+MALWARE_PROTECTION_PLAN_OBJECT_PREFIXES_LIST: StaticSchema = (
+    16,
+    n0,
+    _MPPOPL,
+    0,
+    (_me,),
+    ((STRING, 0),),
+)
+
+CREATE_S3_BUCKET_RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _CSBR,
+    0,
+    (_BN, _OP),
+    ((STRING, {_sN: _bN}), (MALWARE_PROTECTION_PLAN_OBJECT_PREFIXES_LIST, {_sN: _oP})),
+)
+
+CREATE_PROTECTED_RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _CPR,
+    0,
+    (_SB,),
+    ((CREATE_S3_BUCKET_RESOURCE, {_sN: _sB}),),
+)
+
+CREATE_MALWARE_PROTECTION_PLAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CMPPI,
+    {_sSI: _cCMPPR, _s: None},
+    (_CTl, _Ro, _PR, _Actio, _Ta),
+    (
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+        (STRING, {_sN: _ro, _sm: None}),
+        (CREATE_PROTECTED_RESOURCE, {_sN: _pR, _sm: None}),
+        (MALWARE_PROTECTION_PLAN_ACTIONS, {_sN: _acti}),
+        (TAG_MAP, {_sN: _ta}),
+    ),
+)
+
+CREATE_MALWARE_PROTECTION_PLAN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CMPPO,
+    {_sSI: _cCMPPRo, _smi: None},
+    (_MPPI,),
+    ((STRING, {_sN: _mPPI}),),
+)
+
+CREATE_MALWARE_PROTECTION_PLAN: StaticOperationSchema = (
+    23,
+    n0,
+    _CMPP,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/malware-protection-plan", "code": 200}
+        )
     },
+    CREATE_MALWARE_PROTECTION_PLAN_INPUT,
+    CREATE_MALWARE_PROTECTION_PLAN_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+    ),
 )
 
-UPDATE_MALWARE_PROTECTION_PLAN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateMalwareProtectionPlanInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateMalwareProtectionPlanRequest",
+CREATE_MEMBERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CMI,
+    {_sSI: _cCMR, _s: None},
+    (_DI, _ADc),
+    ((DETECTOR_ID, 9), (ACCOUNT_DETAILS, {_sN: _aDc, _sm: None})),
+)
+
+UNPROCESSED_ACCOUNT: StaticSchema = (
+    18,
+    n0,
+    _UAn,
+    0,
+    (_AIcc, _Res),
+    ((ACCOUNT_ID, {_sN: _aIc, _sm: None}), (STRING, {_sN: _res, _sm: None})),
+)
+
+UNPROCESSED_ACCOUNTS: StaticSchema = (
+    16,
+    n0,
+    _UAnp,
+    0,
+    (_me,),
+    ((UNPROCESSED_ACCOUNT, 0),),
+)
+
+CREATE_MEMBERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CMO,
+    {_sSI: _cCMRo, _smi: None},
+    (_UAnp,),
+    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+)
+
+CREATE_MEMBERS: StaticOperationSchema = (
+    23,
+    n0,
+    _CM,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/detector/{DetectorId}/member", "code": 200}
         )
-    ],
-    members={
-        "MalwareProtectionPlanId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Role": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="role")],
-        },
-        "Actions": {
-            "target": MALWARE_PROTECTION_PLAN_ACTIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="actions")],
-        },
-        "ProtectedResource": {
-            "target": UPDATE_PROTECTED_RESOURCE,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="protectedResource")
-            ],
-        },
     },
+    CREATE_MEMBERS_INPUT,
+    CREATE_MEMBERS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
 )
 
-UPDATE_MALWARE_PROTECTION_PLAN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateMalwareProtectionPlanOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
+DESTINATION_PROPERTIES: StaticSchema = (
+    18,
+    n0,
+    _DP,
+    0,
+    (_DA, _KKA),
+    ((STRING, {_sN: _dA}), (STRING, {_sN: _kKA})),
 )
 
-UPDATE_MALWARE_PROTECTION_PLAN = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateMalwareProtectionPlan"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "PATCH",
-                    "uri": "/malware-protection-plan/{MalwareProtectionPlanId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
+DESTINATION_TYPE: StaticSchema = (14, n0, _DT, 0, (_S_,), ((-1, {_sV: _S_}),))
+
+CREATE_PUBLISHING_DESTINATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CPDI,
+    {_sSI: _cCPDR, _s: None},
+    (_DI, _DT, _DP, _CTl, _Ta),
+    (
+        (DETECTOR_ID, 9),
+        (DESTINATION_TYPE, {_sN: _dT, _sm: None}),
+        (DESTINATION_PROPERTIES, {_sN: _dP, _sm: None}),
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+        (TAG_MAP, {_sN: _ta}),
+    ),
 )
 
-UPDATE_MALWARE_SCAN_SETTINGS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateMalwareScanSettingsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateMalwareScanSettingsRequest",
+CREATE_PUBLISHING_DESTINATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CPDO,
+    {_sSI: _cCPDRo, _smi: None},
+    (_DIe,),
+    ((STRING, {_sN: _dIe, _sm: None}),),
+)
+
+CREATE_PUBLISHING_DESTINATION: StaticOperationSchema = (
+    23,
+    n0,
+    _CPD,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/publishingDestination",
+                "code": 200,
+            }
         )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "ScanResourceCriteria": {
-            "target": SCAN_RESOURCE_CRITERIA,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="scanResourceCriteria"
-                )
-            ],
-        },
-        "EbsSnapshotPreservation": {
-            "target": EBS_SNAPSHOT_PRESERVATION,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="ebsSnapshotPreservation"
-                )
-            ],
-        },
     },
+    CREATE_PUBLISHING_DESTINATION_INPUT,
+    CREATE_PUBLISHING_DESTINATION_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
 )
 
-UPDATE_MALWARE_SCAN_SETTINGS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateMalwareScanSettingsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateMalwareScanSettingsResponse",
+FINDING_TYPES: StaticSchema = (16, n0, _FTi, 0, (_me,), ((FINDING_TYPE, 0),))
+
+CREATE_SAMPLE_FINDINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSFI,
+    {_sSI: _cCSFR, _s: None},
+    (_DI, _FTi),
+    ((DETECTOR_ID, 9), (FINDING_TYPES, {_sN: _fT})),
+)
+
+CREATE_SAMPLE_FINDINGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CSFO,
+    {_sSI: _cCSFRo, _smi: None},
+)
+
+CREATE_SAMPLE_FINDINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _CSF,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/findings/create",
+                "code": 200,
+            }
         )
-    ],
-)
-
-UPDATE_MALWARE_SCAN_SETTINGS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateMalwareScanSettings"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/malware-scan-settings",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-MEMBER_ADDITIONAL_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MemberAdditionalConfiguration"),
-    members={
-        "Name": {
-            "target": ORG_FEATURE_ADDITIONAL_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Status": {
-            "target": FEATURE_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
     },
+    CREATE_SAMPLE_FINDINGS_INPUT,
+    CREATE_SAMPLE_FINDINGS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
 )
 
-MEMBER_ADDITIONAL_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MemberAdditionalConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEMBER_ADDITIONAL_CONFIGURATION}},
+EXPECTED_BUCKET_OWNER: StaticSchema = (3, n0, _EBO, 0)
+
+THREAT_ENTITY_SET_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _TESF,
+    0,
+    (_TXT, _STIX, _OC, _AV___, _PP_, _FE),
+    (
+        (-1, {_sV: _TXT}),
+        (-1, {_sV: _STIX}),
+        (-1, {_sV: _OC}),
+        (-1, {_sV: _AV___}),
+        (-1, {_sV: _PP_}),
+        (-1, {_sV: _FE}),
+    ),
 )
 
-MEMBER_FEATURES_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MemberFeaturesConfiguration"),
-    members={
-        "Name": {
-            "target": ORG_FEATURE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Status": {
-            "target": FEATURE_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="status")],
-        },
-        "AdditionalConfiguration": {
-            "target": MEMBER_ADDITIONAL_CONFIGURATIONS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="additionalConfiguration"
-                )
-            ],
-        },
-    },
+CREATE_THREAT_ENTITY_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CTESI,
+    {_sSI: _cCTESR, _s: None},
+    (_DI, _N, _Fo, _Loc, _EBO, _Activ, _CTl, _Ta),
+    (
+        (DETECTOR_ID, 9),
+        (NAME, {_sN: _n, _sm: None}),
+        (THREAT_ENTITY_SET_FORMAT, {_sN: _fo, _sm: None}),
+        (LOCATION, {_sN: _loc, _sm: None}),
+        (EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
+        (BOOLEAN, {_sN: _act, _sm: None}),
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+        (TAG_MAP, {_sN: _ta}),
+    ),
 )
 
-MEMBER_FEATURES_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#MemberFeaturesConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEMBER_FEATURES_CONFIGURATION}},
+CREATE_THREAT_ENTITY_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CTESO,
+    {_sSI: _cCTESRo, _smi: None},
+    (_TESI,),
+    ((STRING, {_sN: _tESI, _sm: None}),),
 )
 
-UPDATE_MEMBER_DETECTORS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateMemberDetectorsInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateMemberDetectorsRequest",
+CREATE_THREAT_ENTITY_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _CTES,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/threatentityset",
+                "code": 200,
+            }
         )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AccountIds": {
-            "target": ACCOUNT_IDS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="accountIds"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "DataSources": {
-            "target": DATA_SOURCE_CONFIGURATIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
-            ],
-        },
-        "Features": {
-            "target": MEMBER_FEATURES_CONFIGURATIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="features")],
-        },
     },
+    CREATE_THREAT_ENTITY_SET_INPUT,
+    CREATE_THREAT_ENTITY_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
 )
 
-UPDATE_MEMBER_DETECTORS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateMemberDetectorsOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateMemberDetectorsResponse",
+THREAT_INTEL_SET_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _TISF,
+    0,
+    (_TXT, _STIX, _OC, _AV___, _PP_, _FE),
+    (
+        (-1, {_sV: _TXT}),
+        (-1, {_sV: _STIX}),
+        (-1, {_sV: _OC}),
+        (-1, {_sV: _AV___}),
+        (-1, {_sV: _PP_}),
+        (-1, {_sV: _FE}),
+    ),
+)
+
+CREATE_THREAT_INTEL_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CTISI,
+    {_sSI: _cCTISR, _s: None},
+    (_DI, _N, _Fo, _Loc, _Activ, _CTl, _Ta, _EBO),
+    (
+        (DETECTOR_ID, 9),
+        (NAME, {_sN: _n, _sm: None}),
+        (THREAT_INTEL_SET_FORMAT, {_sN: _fo, _sm: None}),
+        (LOCATION, {_sN: _loc, _sm: None}),
+        (BOOLEAN, {_sN: _act, _sm: None}),
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+        (TAG_MAP, {_sN: _ta}),
+        (ACCOUNT_ID, {_sN: _eBO}),
+    ),
+)
+
+CREATE_THREAT_INTEL_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CTISO,
+    {_sSI: _cCTISRo, _smi: None},
+    (_TISI,),
+    ((STRING, {_sN: _tISI, _sm: None}),),
+)
+
+CREATE_THREAT_INTEL_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _CTIS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/threatintelset",
+                "code": 200,
+            }
         )
-    ],
-    members={
-        "UnprocessedAccounts": {
-            "target": UNPROCESSED_ACCOUNTS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="unprocessedAccounts"
+    },
+    CREATE_THREAT_INTEL_SET_INPUT,
+    CREATE_THREAT_INTEL_SET_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+TRUSTED_ENTITY_SET_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _TESFr,
+    0,
+    (_TXT, _STIX, _OC, _AV___, _PP_, _FE),
+    (
+        (-1, {_sV: _TXT}),
+        (-1, {_sV: _STIX}),
+        (-1, {_sV: _OC}),
+        (-1, {_sV: _AV___}),
+        (-1, {_sV: _PP_}),
+        (-1, {_sV: _FE}),
+    ),
+)
+
+CREATE_TRUSTED_ENTITY_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CTESIr,
+    {_sSI: _cCTESRom, _s: None},
+    (_DI, _N, _Fo, _Loc, _EBO, _Activ, _CTl, _Ta),
+    (
+        (DETECTOR_ID, 9),
+        (NAME, {_sN: _n, _sm: None}),
+        (TRUSTED_ENTITY_SET_FORMAT, {_sN: _fo, _sm: None}),
+        (LOCATION, {_sN: _loc, _sm: None}),
+        (EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
+        (BOOLEAN, {_sN: _act, _sm: None}),
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+        (TAG_MAP, {_sN: _ta}),
+    ),
+)
+
+CREATE_TRUSTED_ENTITY_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CTESOr,
+    {_sSI: _cCTESRoma, _smi: None},
+    (_TESIr,),
+    ((STRING, {_sN: _tESIr, _sm: None}),),
+)
+
+CREATE_TRUSTED_ENTITY_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _CTESr,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/trustedentityset",
+                "code": 200,
+            }
+        )
+    },
+    CREATE_TRUSTED_ENTITY_SET_INPUT,
+    CREATE_TRUSTED_ENTITY_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+CRITERION_KEY: StaticSchema = (
+    14,
+    n0,
+    _CK,
+    0,
+    (_EIA, _SI_, _AI_, _GFI, _SST, _SS_, _ST_),
+    (
+        (-1, {_sV: _EIA}),
+        (-1, {_sV: _SI_}),
+        (-1, {_sV: _AI_}),
+        (-1, {_sV: _GFI}),
+        (-1, {_sV: _SST}),
+        (-1, {_sV: _SS_}),
+        (-1, {_sV: _ST_}),
+    ),
+)
+
+DATA_SOURCE: StaticSchema = (
+    14,
+    n0,
+    _DSa,
+    0,
+    (_FL_, _CT_, _DL_, _SL_, _KAL, _EMS),
+    (
+        (-1, {_sV: _FL_}),
+        (-1, {_sV: _CT_}),
+        (-1, {_sV: _DL_}),
+        (-1, {_sV: _SL_}),
+        (-1, {_sV: _KAL}),
+        (-1, {_sV: _EMS}),
+    ),
+)
+
+DNS_LOGS_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _DNSLCR,
+    0,
+    (_St,),
+    ((DATA_SOURCE_STATUS, {_sN: _st, _sm: None}),),
+)
+
+FLOW_LOGS_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _FLCR,
+    0,
+    (_St,),
+    ((DATA_SOURCE_STATUS, {_sN: _st, _sm: None}),),
+)
+
+KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _KALCR,
+    0,
+    (_St,),
+    ((DATA_SOURCE_STATUS, {_sN: _st, _sm: None}),),
+)
+
+KUBERNETES_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _KCR,
+    0,
+    (_AL,),
+    ((KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT, {_sN: _aL, _sm: None}),),
+)
+
+S3_LOGS_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _SLCR,
+    0,
+    (_St,),
+    ((DATA_SOURCE_STATUS, {_sN: _st, _sm: None}),),
+)
+
+DATA_SOURCE_CONFIGURATIONS_RESULT: StaticSchema = (
+    18,
+    n0,
+    _DSCR,
+    0,
+    (_CT, _DNSL, _FL, _SL, _K, _MP),
+    (
+        (CLOUD_TRAIL_CONFIGURATION_RESULT, {_sN: _cT, _sm: None}),
+        (DNS_LOGS_CONFIGURATION_RESULT, {_sN: _dL, _sm: None}),
+        (FLOW_LOGS_CONFIGURATION_RESULT, {_sN: _fL, _sm: None}),
+        (S3_LOGS_CONFIGURATION_RESULT, {_sN: _sLo, _sm: None}),
+        (KUBERNETES_CONFIGURATION_RESULT, {_sN: _k}),
+        (MALWARE_PROTECTION_CONFIGURATION_RESULT, {_sN: _mP}),
+    ),
+)
+
+DATA_SOURCE_LIST: StaticSchema = (16, n0, _DSL, 0, (_me,), ((DATA_SOURCE, 0),))
+
+DATE_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _DSat,
+    0,
+    (_Da, _LGA, _Sev, _TF),
+    (
+        (TIMESTAMP, {_sN: _da}),
+        (TIMESTAMP, {_sN: _lGA}),
+        (DOUBLE, {_sN: _sev}),
+        (INTEGER, {_sN: _tF}),
+    ),
+)
+
+DECLINE_INVITATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DII,
+    {_sSI: _cDIR, _s: None},
+    (_AIcco,),
+    ((ACCOUNT_IDS, {_sN: _aIcc, _sm: None}),),
+)
+
+DECLINE_INVITATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIO,
+    {_sSI: _cDIRo, _smi: None},
+    (_UAnp,),
+    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+)
+
+DECLINE_INVITATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DIec,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/invitation/decline", "code": 200}
+        )
+    },
+    DECLINE_INVITATIONS_INPUT,
+    DECLINE_INVITATIONS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DEFAULT_SERVER_SIDE_ENCRYPTION: StaticSchema = (
+    18,
+    n0,
+    _DSSE,
+    0,
+    (_ETn, _KMKA),
+    ((STRING, {_sN: _eTn}), (STRING, {_sN: _kMKA})),
+)
+
+DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCDRAI,
+    {_sSI: _cDCDRAR, _s: None},
+    (_RI, _AIs),
+    ((RULE_ID, 9), (ASSOCIATION_ID, 9)),
+)
+
+DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCDRAO,
+    {_sSI: _cDCDRARo, _smi: None},
+)
+
+DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DCDRA,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
+                "code": 200,
+            }
+        )
+    },
+    DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    DELETE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCDROCI,
+    {_sSI: _cDCDROCR, _s: None},
+    (_RI, _Mo),
+    ((RULE_ID, 9), (ASSOCIATION_MODE, {_sQ: _mo, _sm: None})),
+)
+
+DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCDROCO,
+    {_sSI: _cDCDROCRo, _smi: None},
+)
+
+DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DCDROC,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/custom-detection-rule/org-configuration/{RuleId}",
+                "code": 200,
+            }
+        )
+    },
+    DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    DELETE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+DELETE_DETECTOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDI,
+    {_sSI: _cDDR, _s: None},
+    (_DI,),
+    ((DETECTOR_ID, 9),),
+)
+
+DELETE_DETECTOR_OUTPUT: StaticSchema = (18, n0, _DDO, {_sSI: _cDDRo, _smi: None})
+
+DELETE_DETECTOR: StaticOperationSchema = (
+    23,
+    n0,
+    _DDe,
+    {
+        _smith: MappingProxyType(
+            {"method": "DELETE", "uri": "/detector/{DetectorId}", "code": 200}
+        )
+    },
+    DELETE_DETECTOR_INPUT,
+    DELETE_DETECTOR_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DELETE_FILTER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFI,
+    {_sSI: _cDFR, _s: None},
+    (_DI, _FN),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+DELETE_FILTER_OUTPUT: StaticSchema = (18, n0, _DFO, {_sSI: _cDFRo, _smi: None})
+
+DELETE_FILTER: StaticOperationSchema = (
+    23,
+    n0,
+    _DFe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/detector/{DetectorId}/filter/{FilterName}",
+                "code": 200,
+            }
+        )
+    },
+    DELETE_FILTER_INPUT,
+    DELETE_FILTER_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DELETE_INVITATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIIe,
+    {_sSI: _cDIRom, _s: None},
+    (_AIcco,),
+    ((ACCOUNT_IDS, {_sN: _aIcc, _sm: None}),),
+)
+
+DELETE_INVITATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIOe,
+    {_sSI: _cDIRoma, _smi: None},
+    (_UAnp,),
+    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+)
+
+DELETE_INVITATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DIel,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/invitation/delete", "code": 200}
+        )
+    },
+    DELETE_INVITATIONS_INPUT,
+    DELETE_INVITATIONS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DELETE_IP_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIPSI,
+    {_sSI: _cDIPSR, _s: None},
+    (_DI, _ISI),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+DELETE_IP_SET_OUTPUT: StaticSchema = (18, n0, _DIPSO, {_sSI: _cDIPSRo, _smi: None})
+
+DELETE_IP_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _DIPS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/detector/{DetectorId}/ipset/{IpSetId}",
+                "code": 200,
+            }
+        )
+    },
+    DELETE_IP_SET_INPUT,
+    DELETE_IP_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DELETE_MALWARE_PROTECTION_PLAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMPPI,
+    {_sSI: _cDMPPR, _s: None},
+    (_MPPI,),
+    ((STRING, 9),),
+)
+
+DELETE_MALWARE_PROTECTION_PLAN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DMPPO,
+    {_sSI: _sU, _smi: None},
+)
+
+DELETE_MALWARE_PROTECTION_PLAN: StaticOperationSchema = (
+    23,
+    n0,
+    _DMPP,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/malware-protection-plan/{MalwareProtectionPlanId}",
+                "code": 200,
+            }
+        )
+    },
+    DELETE_MALWARE_PROTECTION_PLAN_INPUT,
+    DELETE_MALWARE_PROTECTION_PLAN_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+DELETE_MEMBERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMI,
+    {_sSI: _cDMR, _s: None},
+    (_DI, _AIcco),
+    ((DETECTOR_ID, 9), (ACCOUNT_IDS, {_sN: _aIcc, _sm: None})),
+)
+
+DELETE_MEMBERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DMO,
+    {_sSI: _cDMRo, _smi: None},
+    (_UAnp,),
+    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+)
+
+DELETE_MEMBERS: StaticOperationSchema = (
+    23,
+    n0,
+    _DM,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/member/delete",
+                "code": 200,
+            }
+        )
+    },
+    DELETE_MEMBERS_INPUT,
+    DELETE_MEMBERS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DELETE_PUBLISHING_DESTINATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DPDI,
+    {_sSI: _cDPDR, _s: None},
+    (_DI, _DIe),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+DELETE_PUBLISHING_DESTINATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DPDO,
+    {_sSI: _cDPDRo, _smi: None},
+)
+
+DELETE_PUBLISHING_DESTINATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DPD,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/detector/{DetectorId}/publishingDestination/{DestinationId}",
+                "code": 200,
+            }
+        )
+    },
+    DELETE_PUBLISHING_DESTINATION_INPUT,
+    DELETE_PUBLISHING_DESTINATION_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DELETE_THREAT_ENTITY_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTESI,
+    {_sSI: _cDTESR, _s: None},
+    (_DI, _TESI),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+DELETE_THREAT_ENTITY_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTESO,
+    {_sSI: _cDTESRo, _smi: None},
+)
+
+DELETE_THREAT_ENTITY_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _DTES,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}",
+                "code": 200,
+            }
+        )
+    },
+    DELETE_THREAT_ENTITY_SET_INPUT,
+    DELETE_THREAT_ENTITY_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DELETE_THREAT_INTEL_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTISI,
+    {_sSI: _cDTISR, _s: None},
+    (_DI, _TISI),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+DELETE_THREAT_INTEL_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTISO,
+    {_sSI: _cDTISRo, _smi: None},
+)
+
+DELETE_THREAT_INTEL_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _DTIS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/detector/{DetectorId}/threatintelset/{ThreatIntelSetId}",
+                "code": 200,
+            }
+        )
+    },
+    DELETE_THREAT_INTEL_SET_INPUT,
+    DELETE_THREAT_INTEL_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DELETE_TRUSTED_ENTITY_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTESIe,
+    {_sSI: _cDTESRom, _s: None},
+    (_DI, _TESIr),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+DELETE_TRUSTED_ENTITY_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTESOe,
+    {_sSI: _cDTESRoma, _smi: None},
+)
+
+DELETE_TRUSTED_ENTITY_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _DTESe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}",
+                "code": 200,
+            }
+        )
+    },
+    DELETE_TRUSTED_ENTITY_SET_INPUT,
+    DELETE_TRUSTED_ENTITY_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LONG_VALUE: StaticSchema = (8, n0, _LV, 0)
+
+FILTER_CONDITION: StaticSchema = (
+    18,
+    n0,
+    _FC,
+    0,
+    (_EVq, _GT, _LT),
+    (
+        (NON_EMPTY_STRING, {_sN: _eVq}),
+        (LONG_VALUE, {_sN: _gT}),
+        (LONG_VALUE, {_sN: _lT}),
+    ),
+)
+
+FILTER_CRITERION: StaticSchema = (
+    18,
+    n0,
+    _FCi,
+    0,
+    (_CK, _FC),
+    ((CRITERION_KEY, {_sN: _cK}), (FILTER_CONDITION, {_sN: _fC})),
+)
+
+FILTER_CRITERION_LIST: StaticSchema = (
+    16,
+    n0,
+    _FCL,
+    0,
+    (_me,),
+    ((FILTER_CRITERION, 0),),
+)
+
+FILTER_CRITERIA: StaticSchema = (
+    18,
+    n0,
+    _FCil,
+    0,
+    (_FCi,),
+    ((FILTER_CRITERION_LIST, {_sN: _fCi}),),
+)
+
+INTEGER_VALUE_WITH_MAX: StaticSchema = (7, n0, _IVWM, 0)
+
+SORT_CRITERIA: StaticSchema = (
+    18,
+    n0,
+    _SCo,
+    0,
+    (_AN, _OB),
+    ((STRING, {_sN: _aN}), (ORDER_BY, {_sN: _oB})),
+)
+
+DESCRIBE_MALWARE_SCANS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMSI,
+    {_sSI: _cDMSR, _s: None},
+    (_DI, _NT, _MR, _FCil, _SCo),
+    (
+        (DETECTOR_ID, 9),
+        (STRING, {_sN: _nT}),
+        (INTEGER_VALUE_WITH_MAX, {_sN: _mR}),
+        (FILTER_CRITERIA, {_sN: _fCil}),
+        (SORT_CRITERIA, {_sN: _sCo}),
+    ),
+)
+
+VOLUME_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _VD,
+    0,
+    (_VA, _VT, _DN, _VSIGB, _ETn, _SA, _KKA),
+    (
+        (STRING, {_sN: _vA}),
+        (STRING, {_sN: _vT}),
+        (STRING, {_sN: _dN}),
+        (INTEGER, {_sN: _vSIGB}),
+        (STRING, {_sN: _eTn}),
+        (STRING, {_sN: _sA}),
+        (STRING, {_sN: _kKA}),
+    ),
+)
+
+VOLUME_DETAILS: StaticSchema = (16, n0, _VDo, 0, (_me,), ((VOLUME_DETAIL, 0),))
+
+POSITIVE_LONG: StaticSchema = (8, n0, _PL, 0)
+
+INSTANCE_ARN: StaticSchema = (3, n0, _IAn, 0)
+
+RESOURCE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RD,
+    0,
+    (_IAn,),
+    ((INSTANCE_ARN, {_sN: _iAn}),),
+)
+
+SCAN_RESULT: StaticSchema = (
+    14,
+    n0,
+    _SRc,
+    0,
+    (_CLEAN, _INFECTED),
+    ((-1, {_sV: _CLEAN}), (-1, {_sV: _INFECTED})),
+)
+
+SCAN_RESULT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _SRD,
+    0,
+    (_SRc,),
+    ((SCAN_RESULT, {_sN: _sRc}),),
+)
+
+SCAN_STATUS: StaticSchema = (
+    14,
+    n0,
+    _SSc,
+    0,
+    (_RUNNING, _COMPLETED, _FAILED, _SKIPPED),
+    (
+        (-1, {_sV: _RUNNING}),
+        (-1, {_sV: _COMPLETED}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _SKIPPED}),
+    ),
+)
+
+SCAN_TYPE: StaticSchema = (
+    14,
+    n0,
+    _STc,
+    0,
+    (_GI_, _OD),
+    ((-1, {_sV: _GI_}), (-1, {_sV: _OD})),
+)
+
+TRIGGER_TYPE: StaticSchema = (
+    14,
+    n0,
+    _TT,
+    0,
+    (_BACKUP, _GUARDDUTY),
+    ((-1, {_sV: _BACKUP}), (-1, {_sV: _GUARDDUTY})),
+)
+
+TRIGGER_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _TD,
+    0,
+    (_GDFI, _De, _TT),
+    (
+        (NON_EMPTY_STRING, {_sN: _gDFI}),
+        (NON_EMPTY_STRING, {_sN: _de}),
+        (TRIGGER_TYPE, {_sN: _tT}),
+    ),
+)
+
+SCAN: StaticSchema = (
+    18,
+    n0,
+    _Sc,
+    0,
+    (
+        _DI,
+        _ADI,
+        _SIc,
+        _SSc,
+        _FRa,
+        _SSTc,
+        _SET,
+        _TD,
+        _RD,
+        _SRD,
+        _AIcc,
+        _TB,
+        _FCile,
+        _AVt,
+        _STc,
+    ),
+    (
+        (DETECTOR_ID, {_sN: _dI}),
+        (DETECTOR_ID, {_sN: _aDI}),
+        (NON_EMPTY_STRING, {_sN: _sI}),
+        (SCAN_STATUS, {_sN: _sS}),
+        (NON_EMPTY_STRING, {_sN: _fR}),
+        (TIMESTAMP, {_sN: _sST}),
+        (TIMESTAMP, {_sN: _sET}),
+        (TRIGGER_DETAILS, {_sN: _tD}),
+        (RESOURCE_DETAILS, {_sN: _rD}),
+        (SCAN_RESULT_DETAILS, {_sN: _sRD}),
+        (ACCOUNT_ID, {_sN: _aIc}),
+        (POSITIVE_LONG, {_sN: _tB}),
+        (POSITIVE_LONG, {_sN: _fCile}),
+        (VOLUME_DETAILS, {_sN: _aVt}),
+        (SCAN_TYPE, {_sN: _sTc}),
+    ),
+)
+
+SCANS: StaticSchema = (16, n0, _Sca, 0, (_me,), ((SCAN, 0),))
+
+DESCRIBE_MALWARE_SCANS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DMSO,
+    {_sSI: _cDMSRo, _smi: None},
+    (_Sca, _NT),
+    ((SCANS, {_sN: _sc, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+DESCRIBE_MALWARE_SCANS: StaticOperationSchema = (
+    23,
+    n0,
+    _DMS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/malware-scans",
+                "code": 200,
+            }
+        )
+    },
+    DESCRIBE_MALWARE_SCANS_INPUT,
+    DESCRIBE_MALWARE_SCANS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+MAX_RESULTS: StaticSchema = (7, n0, _MR, 0)
+
+DESCRIBE_ORGANIZATION_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DOCI,
+    {_sSI: _cDOCR, _s: None},
+    (_DI, _MR, _NT),
+    ((DETECTOR_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (STRING, {_sQ: _nT})),
+)
+
+ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OKALCR,
+    0,
+    (_AE,),
+    ((BOOLEAN, {_sN: _aE, _sm: None}),),
+)
+
+ORGANIZATION_KUBERNETES_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OKCR,
+    0,
+    (_AL,),
+    ((ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION_RESULT, {_sN: _aL, _sm: None}),),
+)
+
+ORGANIZATION_EBS_VOLUMES_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OEVR,
+    0,
+    (_AE,),
+    ((BOOLEAN, {_sN: _aE}),),
+)
+
+ORGANIZATION_SCAN_EC2_INSTANCE_WITH_FINDINGS_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OSEIWFR,
+    0,
+    (_EV,),
+    ((ORGANIZATION_EBS_VOLUMES_RESULT, {_sN: _eV}),),
+)
+
+ORGANIZATION_MALWARE_PROTECTION_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OMPCR,
+    0,
+    (_SEIWF,),
+    ((ORGANIZATION_SCAN_EC2_INSTANCE_WITH_FINDINGS_RESULT, {_sN: _sEIWF}),),
+)
+
+ORGANIZATION_S3_LOGS_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OSLCR,
+    0,
+    (_AE,),
+    ((BOOLEAN, {_sN: _aE, _sm: None}),),
+)
+
+ORGANIZATION_DATA_SOURCE_CONFIGURATIONS_RESULT: StaticSchema = (
+    18,
+    n0,
+    _ODSCR,
+    0,
+    (_SL, _K, _MP),
+    (
+        (ORGANIZATION_S3_LOGS_CONFIGURATION_RESULT, {_sN: _sLo, _sm: None}),
+        (ORGANIZATION_KUBERNETES_CONFIGURATION_RESULT, {_sN: _k}),
+        (ORGANIZATION_MALWARE_PROTECTION_CONFIGURATION_RESULT, {_sN: _mP}),
+    ),
+)
+
+ORG_FEATURE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _OFS,
+    0,
+    (_NEW, _NONE, _ALL),
+    ((-1, {_sV: _NEW}), (-1, {_sV: _NONE}), (-1, {_sV: _ALL})),
+)
+
+ORG_FEATURE_ADDITIONAL_CONFIGURATION: StaticSchema = (
+    14,
+    n0,
+    _OFAC,
+    0,
+    (_EAM, _EFAM, _EAM_),
+    ((-1, {_sV: _EAM}), (-1, {_sV: _EFAM}), (-1, {_sV: _EAM_})),
+)
+
+ORGANIZATION_ADDITIONAL_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OACR,
+    0,
+    (_N, _AE),
+    (
+        (ORG_FEATURE_ADDITIONAL_CONFIGURATION, {_sN: _n}),
+        (ORG_FEATURE_STATUS, {_sN: _aE}),
+    ),
+)
+
+ORGANIZATION_ADDITIONAL_CONFIGURATION_RESULTS: StaticSchema = (
+    16,
+    n0,
+    _OACRr,
+    0,
+    (_me,),
+    ((ORGANIZATION_ADDITIONAL_CONFIGURATION_RESULT, 0),),
+)
+
+ORG_FEATURE: StaticSchema = (
+    14,
+    n0,
+    _OF,
+    0,
+    (_SDE, _EAL, _EMP, _RLE, _LNL, _ERM, _RM, _AP),
+    (
+        (-1, {_sV: _SDE}),
+        (-1, {_sV: _EAL}),
+        (-1, {_sV: _EMP}),
+        (-1, {_sV: _RLE}),
+        (-1, {_sV: _LNL}),
+        (-1, {_sV: _ERM}),
+        (-1, {_sV: _RM}),
+        (-1, {_sV: _AP}),
+    ),
+)
+
+ORGANIZATION_FEATURE_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _OFCR,
+    0,
+    (_N, _AE, _ACd),
+    (
+        (ORG_FEATURE, {_sN: _n}),
+        (ORG_FEATURE_STATUS, {_sN: _aE}),
+        (ORGANIZATION_ADDITIONAL_CONFIGURATION_RESULTS, {_sN: _aC}),
+    ),
+)
+
+ORGANIZATION_FEATURES_CONFIGURATIONS_RESULTS: StaticSchema = (
+    16,
+    n0,
+    _OFCRr,
+    0,
+    (_me,),
+    ((ORGANIZATION_FEATURE_CONFIGURATION_RESULT, 0),),
+)
+
+DESCRIBE_ORGANIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DOCO,
+    {_sSI: _cDOCRo, _smi: None},
+    (_AE, _MALR, _DS, _F, _NT, _AEOM),
+    (
+        (BOOLEAN, {_sN: _aE}),
+        (BOOLEAN, {_sN: _mALR, _sm: None}),
+        (ORGANIZATION_DATA_SOURCE_CONFIGURATIONS_RESULT, {_sN: _dS}),
+        (ORGANIZATION_FEATURES_CONFIGURATIONS_RESULTS, {_sN: _f}),
+        (STRING, {_sN: _nT}),
+        (AUTO_ENABLE_MEMBERS, {_sN: _aEOM}),
+    ),
+)
+
+DESCRIBE_ORGANIZATION_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DOC,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/detector/{DetectorId}/admin", "code": 200}
+        )
+    },
+    DESCRIBE_ORGANIZATION_CONFIGURATION_INPUT,
+    DESCRIBE_ORGANIZATION_CONFIGURATION_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DESCRIBE_PUBLISHING_DESTINATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DPDIe,
+    {_sSI: _cDPDRom, _s: None},
+    (_DI, _DIe),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+PUBLISHING_STATUS: StaticSchema = (
+    14,
+    n0,
+    _PSu,
+    0,
+    (_PV, _PUBLISHING, _UTPFDP, _STOPPED),
+    (
+        (-1, {_sV: _PV}),
+        (-1, {_sV: _PUBLISHING}),
+        (-1, {_sV: _UTPFDP}),
+        (-1, {_sV: _STOPPED}),
+    ),
+)
+
+DESCRIBE_PUBLISHING_DESTINATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DPDOe,
+    {_sSI: _cDPDRoma, _smi: None},
+    (_DIe, _DT, _St, _PFST, _DP, _Ta),
+    (
+        (STRING, {_sN: _dIe, _sm: None}),
+        (DESTINATION_TYPE, {_sN: _dT, _sm: None}),
+        (PUBLISHING_STATUS, {_sN: _st, _sm: None}),
+        (LONG, {_sN: _pFST, _sm: None}),
+        (DESTINATION_PROPERTIES, {_sN: _dP, _sm: None}),
+        (TAG_MAP, {_sN: _ta}),
+    ),
+)
+
+DESCRIBE_PUBLISHING_DESTINATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DPDe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/publishingDestination/{DestinationId}",
+                "code": 200,
+            }
+        )
+    },
+    DESCRIBE_PUBLISHING_DESTINATION_INPUT,
+    DESCRIBE_PUBLISHING_DESTINATION_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DESTINATION: StaticSchema = (
+    18,
+    n0,
+    _Des,
+    0,
+    (_DIe, _DT, _St),
+    (
+        (STRING, {_sN: _dIe, _sm: None}),
+        (DESTINATION_TYPE, {_sN: _dT, _sm: None}),
+        (PUBLISHING_STATUS, {_sN: _st, _sm: None}),
+    ),
+)
+
+DESTINATIONS: StaticSchema = (16, n0, _Dest, 0, (_me,), ((DESTINATION, 0),))
+
+SEQUENCE_DESCRIPTION: StaticSchema = (3, n0, _SD, 0)
+
+NETWORK_DIRECTION: StaticSchema = (
+    14,
+    n0,
+    _ND,
+    0,
+    (_INBOUND, _OUTBOUND),
+    ((-1, {_sV: _INBOUND}), (-1, {_sV: _OUTBOUND})),
+)
+
+NETWORK_CONNECTION: StaticSchema = (
+    18,
+    n0,
+    _NC,
+    0,
+    (_Di,),
+    ((NETWORK_DIRECTION, {_sN: _di, _sm: None}),),
+)
+
+NETWORK_GEO_LOCATION: StaticSchema = (
+    18,
+    n0,
+    _NGL,
+    0,
+    (_C, _Co, _La, _Long),
+    (
+        (STRING, {_sN: _ci, _sm: None}),
+        (STRING, {_sN: _co, _sm: None}),
+        (DOUBLE, {_sN: _l, _sm: None}),
+        (DOUBLE, {_sN: _lo, _sm: None}),
+    ),
+)
+
+NETWORK_ENDPOINT: StaticSchema = (
+    18,
+    n0,
+    _NEe,
+    0,
+    (_Id, _Ip, _D, _Po, _Loc, _ASu, _Conn),
+    (
+        (STRING, {_sN: _id, _sm: None}),
+        (STRING, {_sN: _ip}),
+        (STRING, {_sN: _d}),
+        (INTEGER, {_sN: _po}),
+        (NETWORK_GEO_LOCATION, {_sN: _loc}),
+        (AUTONOMOUS_SYSTEM, {_sN: _aSu}),
+        (NETWORK_CONNECTION, {_sN: _conn}),
+    ),
+)
+
+NETWORK_ENDPOINTS: StaticSchema = (16, n0, _NEet, 0, (_me,), ((NETWORK_ENDPOINT, 0),))
+
+EC2_IMAGE: StaticSchema = (
+    18,
+    n0,
+    _EI,
+    0,
+    (_EIUc,),
+    ((EC2_INSTANCE_UIDS, {_sN: _eIU}),),
+)
+
+EC2_NETWORK_INTERFACE_UIDS: StaticSchema = (16, n0, _ENIU, 0, (_me,), ((STRING, 0),))
+
+IAM_INSTANCE_PROFILE: StaticSchema = (
+    18,
+    n0,
+    _IIP,
+    0,
+    (_Ar, _Id),
+    ((STRING, {_sN: _ar}), (STRING, {_sN: _id})),
+)
+
+PRODUCT_CODE: StaticSchema = (
+    18,
+    n0,
+    _PC,
+    0,
+    (_Cod, _PTr),
+    ((STRING, {_sN: _pCI}), (STRING, {_sN: _pCT})),
+)
+
+PRODUCT_CODES: StaticSchema = (16, n0, _PCr, 0, (_me,), ((PRODUCT_CODE, 0),))
+
+EC2_INSTANCE: StaticSchema = (
+    18,
+    n0,
+    _EIc,
+    0,
+    (_AZ, _ID, _IS, _IIP, _IT, _OA, _Pl, _PCr, _ENIU),
+    (
+        (STRING, {_sN: _aZ}),
+        (STRING, {_sN: _iD}),
+        (STRING, {_sN: _iS}),
+        (IAM_INSTANCE_PROFILE, 0),
+        (STRING, {_sN: _iT}),
+        (STRING, {_sN: _oA}),
+        (STRING, {_sN: _pl}),
+        (PRODUCT_CODES, {_sN: _pC}),
+        (EC2_NETWORK_INTERFACE_UIDS, {_sN: _eNIU}),
+    ),
+)
+
+LAUNCH_TEMPLATE_VERSION: StaticSchema = (3, n0, _LTV, 0)
+
+EC2_LAUNCH_TEMPLATE: StaticSchema = (
+    18,
+    n0,
+    _ELT,
+    0,
+    (_EIUc, _Ve),
+    ((EC2_INSTANCE_UIDS, {_sN: _eIU}), (LAUNCH_TEMPLATE_VERSION, {_sN: _ver})),
+)
+
+IPV6_ADDRESSES: StaticSchema = (16, n0, _IAp, 0, (_me,), ((STRING, 0),))
+
+PRIVATE_IP_ADDRESS_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _PIAD,
+    0,
+    (_PDN, _PIA),
+    ((STRING, {_sN: _pDN}), (SENSITIVE_STRING, {_sN: _pIA})),
+)
+
+PRIVATE_IP_ADDRESSES: StaticSchema = (
+    16,
+    n0,
+    _PIAr,
+    0,
+    (_me,),
+    ((PRIVATE_IP_ADDRESS_DETAILS, 0),),
+)
+
+SECURITY_GROUP: StaticSchema = (
+    18,
+    n0,
+    _SG,
+    0,
+    (_GIr, _GN),
+    ((STRING, {_sN: _gI}), (STRING, {_sN: _gN})),
+)
+
+SECURITY_GROUPS: StaticSchema = (16, n0, _SGe, 0, (_me,), ((SECURITY_GROUP, 0),))
+
+EC2_NETWORK_INTERFACE: StaticSchema = (
+    18,
+    n0,
+    _ENI,
+    0,
+    (_IAp, _PIAr, _PIu, _SGe, _SNI, _VIp),
+    (
+        (IPV6_ADDRESSES, {_sN: _iAp}),
+        (PRIVATE_IP_ADDRESSES, {_sN: _pIAr}),
+        (STRING, {_sN: _pIu}),
+        (SECURITY_GROUPS, {_sN: _sG}),
+        (STRING, {_sN: _sNI}),
+        (STRING, {_sN: _vIp}),
+    ),
+)
+
+EC2_VPC: StaticSchema = (18, n0, _EVc, 0, (_EIUc,), ((EC2_INSTANCE_UIDS, {_sN: _eIU}),))
+
+ECS_CLUSTER_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ECSc,
+    0,
+    (_ACTIVE, _PROVISIONING, _DEPROVISIONING, _FAILED, _INACTIVE),
+    (
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _PROVISIONING}),
+        (-1, {_sV: _DEPROVISIONING}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _INACTIVE}),
+    ),
+)
+
+ECS_CLUSTER: StaticSchema = (
+    18,
+    n0,
+    _ECc,
+    0,
+    (_St, _EIUc),
+    ((ECS_CLUSTER_STATUS, {_sN: _st}), (EC2_INSTANCE_UIDS, {_sN: _eIU})),
+)
+
+ECS_LAUNCH_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ELTc,
+    0,
+    (_FARGATE, _EC_),
+    ((-1, {_sV: _FARGATE}), (-1, {_sV: _EC_})),
+)
+
+ECS_TASK: StaticSchema = (
+    18,
+    n0,
+    _ETc,
+    0,
+    (_CA, _TDA, _LTa, _CUon),
+    (
+        (TIMESTAMP, {_sN: _cA}),
+        (STRING, {_sN: _tDA}),
+        (ECS_LAUNCH_TYPE, {_sN: _lTa}),
+        (CONTAINER_UIDS, {_sN: _cUo}),
+    ),
+)
+
+EKS_CLUSTER: StaticSchema = (
+    18,
+    n0,
+    _ECk,
+    0,
+    (_Ar, _CA, _St, _VIp, _EIUc),
+    (
+        (STRING, {_sN: _ar}),
+        (TIMESTAMP, {_sN: _cA}),
+        (CLUSTER_STATUS, {_sN: _st}),
+        (STRING, {_sN: _vIp}),
+        (EC2_INSTANCE_UIDS, {_sN: _eIU}),
+    ),
+)
+
+IAM_INSTANCE_PROFILE_V2: StaticSchema = (
+    18,
+    n0,
+    _IIPV,
+    0,
+    (_EIUc,),
+    ((EC2_INSTANCE_UIDS, {_sN: _eIU}),),
+)
+
+KUBERNETES_RESOURCES_TYPES: StaticSchema = (
+    14,
+    n0,
+    _KRT,
+    0,
+    (
+        _PODS,
+        _JOBS,
+        _CRONJOBS,
+        _DEPLOYMENTS,
+        _DAEMONSETS,
+        _STATEFULSETS,
+        _REPLICASETS,
+        _REPLICATIONCONTROLLERS,
+    ),
+    (
+        (-1, {_sV: _PODS}),
+        (-1, {_sV: _JOBS}),
+        (-1, {_sV: _CRONJOBS}),
+        (-1, {_sV: _DEPLOYMENTS}),
+        (-1, {_sV: _DAEMONSETS}),
+        (-1, {_sV: _STATEFULSETS}),
+        (-1, {_sV: _REPLICASETS}),
+        (-1, {_sV: _REPLICATIONCONTROLLERS}),
+    ),
+)
+
+KUBERNETES_WORKLOAD: StaticSchema = (
+    18,
+    n0,
+    _KW,
+    0,
+    (_CUon, _Na, _KRT),
+    (
+        (CONTAINER_UIDS, {_sN: _cUo}),
+        (STRING, {_sN: _na}),
+        (KUBERNETES_RESOURCES_TYPES, {_sN: _t}),
+    ),
+)
+
+PUBLIC_ACCESS_STATUS: StaticSchema = (
+    14,
+    n0,
+    _PAS,
+    0,
+    (_BLOCKED, _ALLOWED),
+    ((-1, {_sV: _BLOCKED}), (-1, {_sV: _ALLOWED})),
+)
+
+PUBLIC_ACL_IGNORE_BEHAVIOR: StaticSchema = (
+    14,
+    n0,
+    _PAIB,
+    0,
+    (_IGNORED, _NI),
+    ((-1, {_sV: _IGNORED}), (-1, {_sV: _NI})),
+)
+
+PUBLIC_BUCKET_RESTRICT_BEHAVIOR: StaticSchema = (
+    14,
+    n0,
+    _PBRB,
+    0,
+    (_RESTRICTED, _NR),
+    ((-1, {_sV: _RESTRICTED}), (-1, {_sV: _NR})),
+)
+
+PUBLIC_ACCESS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _PAC,
+    0,
+    (_PAA, _PPAu, _PAIB, _PBRB),
+    (
+        (PUBLIC_ACCESS_STATUS, {_sN: _pAA}),
+        (PUBLIC_ACCESS_STATUS, {_sN: _pPAu}),
+        (PUBLIC_ACL_IGNORE_BEHAVIOR, {_sN: _pAIB}),
+        (PUBLIC_BUCKET_RESTRICT_BEHAVIOR, {_sN: _pBRB}),
+    ),
+)
+
+S3_OBJECT_UIDS: StaticSchema = (16, n0, _SOU, 0, (_me,), ((STRING, 0),))
+
+S3_BUCKET: StaticSchema = (
+    18,
+    n0,
+    _SB,
+    0,
+    (_OI, _CA, _ETn, _EKA, _EP, _PRA, _PWA, _APA, _BPAu, _SOU),
+    (
+        (STRING, {_sN: _oI}),
+        (TIMESTAMP, {_sN: _cA}),
+        (STRING, {_sN: _eTn}),
+        (STRING, {_sN: _eKA}),
+        (STRING, {_sN: _eP}),
+        (PUBLIC_ACCESS_STATUS, {_sN: _pRA}),
+        (PUBLIC_ACCESS_STATUS, {_sN: _pWA}),
+        (PUBLIC_ACCESS_CONFIGURATION, {_sN: _aPA}),
+        (PUBLIC_ACCESS_CONFIGURATION, {_sN: _bPAu}),
+        (S3_OBJECT_UIDS, {_sN: _sOU}),
+    ),
+)
+
+S3_OBJECT: StaticSchema = (
+    18,
+    n0,
+    _SO,
+    0,
+    (_ETa, _Ke, _VI),
+    ((STRING, {_sN: _eTa}), (STRING, {_sN: _ke}), (STRING, {_sN: _vI})),
+)
+
+RESOURCE_DATA: StaticSchema = (
+    18,
+    n0,
+    _RDe,
+    0,
+    (
+        _SB,
+        _EIc,
+        _AK,
+        _ENI,
+        _SO,
+        _ECk,
+        _KW,
+        _Cont,
+        _ECc,
+        _ETc,
+        _IIP,
+        _AASG,
+        _ELT,
+        _EVc,
+        _EI,
+        _CS,
+        _BG,
+    ),
+    (
+        (S3_BUCKET, {_sN: _sB}),
+        (EC2_INSTANCE, {_sN: _eI}),
+        (ACCESS_KEY, {_sN: _aK}),
+        (EC2_NETWORK_INTERFACE, {_sN: _eNI}),
+        (S3_OBJECT, {_sN: _sO}),
+        (EKS_CLUSTER, {_sN: _eCk}),
+        (KUBERNETES_WORKLOAD, {_sN: _kW}),
+        (CONTAINER_FINDING_RESOURCE, {_sN: _cont}),
+        (ECS_CLUSTER, {_sN: _eCc}),
+        (ECS_TASK, {_sN: _eTc}),
+        (IAM_INSTANCE_PROFILE_V2, {_sN: _iIP}),
+        (AUTOSCALING_AUTO_SCALING_GROUP, {_sN: _aASG}),
+        (EC2_LAUNCH_TEMPLATE, {_sN: _eLT}),
+        (EC2_VPC, {_sN: _eVc}),
+        (EC2_IMAGE, {_sN: _eIc}),
+        (CLOUDFORMATION_STACK, {_sN: _cSl}),
+        (BEDROCK_GUARDRAIL_RESOURCE, {_sN: _bG}),
+    ),
+)
+
+FINDING_RESOURCE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _FRT,
+    0,
+    (
+        _EI_,
+        _ENI_,
+        _SB_,
+        _SO_,
+        _AK_,
+        _EC__,
+        _KW_,
+        _CONTAINER,
+        _EC___,
+        _ET_,
+        _AASG_,
+        _IIP_,
+        _CS__,
+        _ELT_,
+        _EV_,
+        _EI__,
+        _BCM,
+        _BIM,
+        _BPM,
+        _BCMD,
+        _BIP,
+        _BAIP,
+        _BP_,
+        _BPR,
+        _BG_,
+        _SE,
+    ),
+    (
+        (-1, {_sV: _EI_}),
+        (-1, {_sV: _ENI_}),
+        (-1, {_sV: _SB_}),
+        (-1, {_sV: _SO_}),
+        (-1, {_sV: _AK_}),
+        (-1, {_sV: _EC__}),
+        (-1, {_sV: _KW_}),
+        (-1, {_sV: _CONTAINER}),
+        (-1, {_sV: _EC___}),
+        (-1, {_sV: _ET_}),
+        (-1, {_sV: _AASG_}),
+        (-1, {_sV: _IIP_}),
+        (-1, {_sV: _CS__}),
+        (-1, {_sV: _ELT_}),
+        (-1, {_sV: _EV_}),
+        (-1, {_sV: _EI__}),
+        (-1, {_sV: _BCM}),
+        (-1, {_sV: _BIM}),
+        (-1, {_sV: _BPM}),
+        (-1, {_sV: _BCMD}),
+        (-1, {_sV: _BIP}),
+        (-1, {_sV: _BAIP}),
+        (-1, {_sV: _BP_}),
+        (-1, {_sV: _BPR}),
+        (-1, {_sV: _BG_}),
+        (-1, {_sV: _SE}),
+    ),
+)
+
+TAG: StaticSchema = (
+    18,
+    n0,
+    _Tag_,
+    0,
+    (_Ke, _Va),
+    ((STRING, {_sN: _ke}), (STRING, {_sN: _v})),
+)
+
+TAGS: StaticSchema = (16, n0, _Ta, 0, (_me,), ((TAG, 0),))
+
+RESOURCE_V2: StaticSchema = (
+    18,
+    n0,
+    _RV,
+    0,
+    (_U, _N, _AIcc, _RT, _Re, _Se, _CPl, _Ta, _Dat),
+    (
+        (STRING, {_sN: _u, _sm: None}),
+        (STRING, {_sN: _n}),
+        (STRING, {_sN: _aIc}),
+        (FINDING_RESOURCE_TYPE, {_sN: _rT, _sm: None}),
+        (STRING, {_sN: _re}),
+        (STRING, {_sN: _ser}),
+        (STRING, {_sN: _cP}),
+        (TAGS, {_sN: _ta}),
+        (RESOURCE_DATA, {_sN: _dat}),
+    ),
+)
+
+RESOURCES: StaticSchema = (16, n0, _Reso, 0, (_me,), ((RESOURCE_V2, 0),))
+
+INDICATOR_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ITn,
+    0,
+    (
+        _SUA,
+        _SN_,
+        _MI_,
+        _TI,
+        _AT_,
+        _HRA,
+        _AT__,
+        _UAFA,
+        _UAFA_,
+        _UAFU,
+        _SP,
+        _MD,
+        _MP_,
+        _CI_,
+        _CD_,
+        _CP_,
+        _MF,
+        _VULNERABILITY,
+        _MP__,
+        _MISCONFIGURATION,
+        _REACHABILITY,
+        _SD_,
+    ),
+    (
+        (-1, {_sV: _SUA}),
+        (-1, {_sV: _SN_}),
+        (-1, {_sV: _MI_}),
+        (-1, {_sV: _TI}),
+        (-1, {_sV: _AT_}),
+        (-1, {_sV: _HRA}),
+        (-1, {_sV: _AT__}),
+        (-1, {_sV: _UAFA}),
+        (-1, {_sV: _UAFA_}),
+        (-1, {_sV: _UAFU}),
+        (-1, {_sV: _SP}),
+        (-1, {_sV: _MD}),
+        (-1, {_sV: _MP_}),
+        (-1, {_sV: _CI_}),
+        (-1, {_sV: _CD_}),
+        (-1, {_sV: _CP_}),
+        (-1, {_sV: _MF}),
+        (-1, {_sV: _VULNERABILITY}),
+        (-1, {_sV: _MP__}),
+        (-1, {_sV: _MISCONFIGURATION}),
+        (-1, {_sV: _REACHABILITY}),
+        (-1, {_sV: _SD_}),
+    ),
+)
+
+INDICATOR_TITLE: StaticSchema = (3, n0, _ITnd, 0)
+
+INDICATOR_VALUE_STRING: StaticSchema = (3, n0, _IVS, 0)
+
+INDICATOR_VALUES: StaticSchema = (
+    16,
+    n0,
+    _IV,
+    0,
+    (_me,),
+    ((INDICATOR_VALUE_STRING, 0),),
+)
+
+INDICATOR: StaticSchema = (
+    18,
+    n0,
+    _In,
+    0,
+    (_Ke, _Val, _Tit),
+    (
+        (INDICATOR_TYPE, {_sN: _ke, _sm: None}),
+        (INDICATOR_VALUES, {_sN: _va}),
+        (INDICATOR_TITLE, {_sN: _ti}),
+    ),
+)
+
+INDICATORS: StaticSchema = (16, n0, _Ind, 0, (_me,), ((INDICATOR, 0),))
+
+SIGNAL_DESCRIPTION: StaticSchema = (3, n0, _SDi, 0)
+
+ENDPOINT_IDS: StaticSchema = (16, n0, _EIn, 0, (_me,), ((STRING, 0),))
+
+RESOURCE_UIDS: StaticSchema = (16, n0, _RUe, 0, (_me,), ((STRING, 0),))
+
+SIGNAL_TYPE: StaticSchema = (
+    14,
+    n0,
+    _STi,
+    0,
+    (_FINDING, _CT_, _SDE, _EAL, _FL_, _DL_, _RM),
+    (
+        (-1, {_sV: _FINDING}),
+        (-1, {_sV: _CT_}),
+        (-1, {_sV: _SDE}),
+        (-1, {_sV: _EAL}),
+        (-1, {_sV: _FL_}),
+        (-1, {_sV: _DL_}),
+        (-1, {_sV: _RM}),
+    ),
+)
+
+SIGNAL: StaticSchema = (
+    18,
+    n0,
+    _Si,
+    0,
+    (
+        _U,
+        _T,
+        _De,
+        _N,
+        _CA,
+        _UAp,
+        _FSA,
+        _LSA,
+        _Sev,
+        _Cou,
+        _RUe,
+        _AIct,
+        _EIn,
+        _SIi,
+        _Acti,
+    ),
+    (
+        (STRING, {_sN: _u, _sm: None}),
+        (SIGNAL_TYPE, {_sN: _t, _sm: None}),
+        (SIGNAL_DESCRIPTION, {_sN: _de}),
+        (STRING, {_sN: _n, _sm: None}),
+        (TIMESTAMP, {_sN: _cA, _sm: None}),
+        (TIMESTAMP, {_sN: _uAp, _sm: None}),
+        (TIMESTAMP, {_sN: _fSA, _sm: None}),
+        (TIMESTAMP, {_sN: _lSA, _sm: None}),
+        (DOUBLE, {_sN: _sev}),
+        (INTEGER, {_sN: _cou, _sm: None}),
+        (RESOURCE_UIDS, {_sN: _rUe}),
+        (ACTOR_IDS, {_sN: _aIct}),
+        (ENDPOINT_IDS, {_sN: _eIn}),
+        (INDICATORS, {_sN: _sIi}),
+        (ACTIVITIES, {_sN: _activ}),
+    ),
+)
+
+SIGNALS: StaticSchema = (16, n0, _Sig, 0, (_me,), ((SIGNAL, 0),))
+
+SEQUENCE: StaticSchema = (
+    18,
+    n0,
+    _Seq,
+    0,
+    (_U, _De, _Actor, _Reso, _End, _Sig, _SIe, _AST),
+    (
+        (STRING, {_sN: _u, _sm: None}),
+        (SEQUENCE_DESCRIPTION, {_sN: _de, _sm: None}),
+        (ACTORS, {_sN: _acto}),
+        (RESOURCES, {_sN: _reso}),
+        (NETWORK_ENDPOINTS, {_sN: _end}),
+        (SIGNALS, {_sN: _si, _sm: None}),
+        (INDICATORS, {_sN: _sIe}),
+        (ADDITIONAL_SEQUENCE_TYPES, {_sN: _aST}),
+    ),
+)
+
+DETECTION: StaticSchema = (
+    18,
+    n0,
+    _Det,
+    0,
+    (_An, _Seq),
+    ((ANOMALY, {_sN: _an}), (SEQUENCE, {_sN: _seq})),
+)
+
+DETECTION_RULE_CONFIGURATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DRCS,
+    0,
+    (_ACTIVE, _PROCESSING, _FAILED),
+    ((-1, {_sV: _ACTIVE}), (-1, {_sV: _PROCESSING}), (-1, {_sV: _FAILED})),
+)
+
+DETECTION_RULE_DATA_SOURCE: StaticSchema = (
+    14,
+    n0,
+    _DRDS,
+    0,
+    (_CME,),
+    ((-1, {_sV: _CTME}),),
+)
+
+DETECTION_RULE_DESCRIPTION: StaticSchema = (3, n0, _DRD, 0)
+
+DETECTION_RULE_FILTER_CONDITION: StaticSchema = (
+    14,
+    n0,
+    _DRFC,
+    0,
+    (_EQUALS, _CONTAINS),
+    ((-1, {_sV: _EQUALS}), (-1, {_sV: _CONTAINS})),
+)
+
+FILTER_FIELD_NAME: StaticSchema = (
+    14,
+    n0,
+    _FFN,
+    0,
+    (_NAME, _DESCRIPTION, _DS_, _SEVERITY, _TACTIC, _TECHNIQUE, _SERVICE),
+    (
+        (-1, {_sV: _n}),
+        (-1, {_sV: _de}),
+        (-1, {_sV: _dSa}),
+        (-1, {_sV: _sev}),
+        (-1, {_sV: _tac}),
+        (-1, {_sV: _tec}),
+        (-1, {_sV: _ser}),
+    ),
+)
+
+DETECTION_RULE_FILTER_VALUE: StaticSchema = (3, n0, _DRFV, 0)
+
+DETECTION_RULE_FILTER_VALUES: StaticSchema = (
+    16,
+    n0,
+    _DRFVe,
+    0,
+    (_me,),
+    ((DETECTION_RULE_FILTER_VALUE, 0),),
+)
+
+DETECTION_RULE_FILTER: StaticSchema = (
+    18,
+    n0,
+    _DRF,
+    0,
+    (_N, _Val, _Cond),
+    (
+        (FILTER_FIELD_NAME, {_sN: _n, _sm: None}),
+        (DETECTION_RULE_FILTER_VALUES, {_sN: _va, _sm: None}),
+        (DETECTION_RULE_FILTER_CONDITION, {_sN: _cond}),
+    ),
+)
+
+DETECTION_RULE_FILTER_LIST: StaticSchema = (
+    16,
+    n0,
+    _DRFL,
+    0,
+    (_me,),
+    ((DETECTION_RULE_FILTER, 0),),
+)
+
+DETECTION_RULE_MAX_RESULTS: StaticSchema = (7, n0, _DRMR, 0)
+
+DETECTION_RULE_ORG_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _DROC,
+    0,
+    (_RI, _Mo, _St, _SRt, _IAI, _EAI, _CA, _UAp, _EA),
+    (
+        (RULE_ID, {_sN: _rI, _sm: None}),
+        (ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
+        (DETECTION_RULE_CONFIGURATION_STATUS, {_sN: _st, _sm: None}),
+        (STRING, {_sN: _sRt}),
+        (DETECTION_RULE_ACCOUNT_IDS, {_sN: _iAI, _sm: None}),
+        (DETECTION_RULE_ACCOUNT_IDS, {_sN: _eAI, _sm: None}),
+        (TIMESTAMP, {_sN: _cA, _sm: None}),
+        (TIMESTAMP, {_sN: _uAp, _sm: None}),
+        (TIMESTAMP, {_sN: _eA}),
+    ),
+)
+
+DETECTION_RULE_ORG_CONFIGURATION_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _DROCS,
+    0,
+    (_RI, _Mo, _St, _SRt, _CA, _UAp, _EA),
+    (
+        (RULE_ID, {_sN: _rI, _sm: None}),
+        (ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
+        (DETECTION_RULE_CONFIGURATION_STATUS, {_sN: _st, _sm: None}),
+        (STRING, {_sN: _sRt}),
+        (TIMESTAMP, {_sN: _cA, _sm: None}),
+        (TIMESTAMP, {_sN: _uAp, _sm: None}),
+        (TIMESTAMP, {_sN: _eA}),
+    ),
+)
+
+DETECTION_RULE_ORG_CONFIGURATION_SUMMARY_LIST: StaticSchema = (
+    16,
+    n0,
+    _DROCSL,
+    0,
+    (_me,),
+    ((DETECTION_RULE_ORG_CONFIGURATION_SUMMARY, 0),),
+)
+
+DETECTION_RULE_SERVICE_NAME: StaticSchema = (3, n0, _DRSN, 0)
+
+DETECTION_RULE_SEVERITY: StaticSchema = (
+    14,
+    n0,
+    _DRS,
+    0,
+    (_CRITICAL, _HIGH, _MEDIUM, _LOW),
+    (
+        (-1, {_sV: _CRITICAL}),
+        (-1, {_sV: _HIGH}),
+        (-1, {_sV: _MEDIUM}),
+        (-1, {_sV: _LOW}),
+    ),
+)
+
+DETECTION_SOURCE: StaticSchema = (
+    14,
+    n0,
+    _DSe,
+    0,
+    (_AMAZON, _BITDEFENDER),
+    ((-1, {_sV: _AMAZON}), (-1, {_sV: _BITDEFENDER})),
+)
+
+MANAGED_BY: StaticSchema = (14, n0, _MB, 0, (_GP,), ((-1, {_sV: _GP}),))
+
+DETECTOR_ADDITIONAL_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _DACR,
+    0,
+    (_N, _St, _UAp, _MB),
+    (
+        (FEATURE_ADDITIONAL_CONFIGURATION, {_sN: _n}),
+        (FEATURE_STATUS, {_sN: _st}),
+        (TIMESTAMP, {_sN: _uAp}),
+        (MANAGED_BY, {_sN: _mB}),
+    ),
+)
+
+DETECTOR_ADDITIONAL_CONFIGURATION_RESULTS: StaticSchema = (
+    16,
+    n0,
+    _DACRe,
+    0,
+    (_me,),
+    ((DETECTOR_ADDITIONAL_CONFIGURATION_RESULT, 0),),
+)
+
+DETECTOR_FEATURE_RESULT: StaticSchema = (
+    14,
+    n0,
+    _DFR,
+    0,
+    (_FL_, _CT_, _DL_, _SDE, _EAL, _EMP, _RLE, _LNL, _ERM, _RM, _AP, _AA_),
+    (
+        (-1, {_sV: _FL_}),
+        (-1, {_sV: _CT_}),
+        (-1, {_sV: _DL_}),
+        (-1, {_sV: _SDE}),
+        (-1, {_sV: _EAL}),
+        (-1, {_sV: _EMP}),
+        (-1, {_sV: _RLE}),
+        (-1, {_sV: _LNL}),
+        (-1, {_sV: _ERM}),
+        (-1, {_sV: _RM}),
+        (-1, {_sV: _AP}),
+        (-1, {_sV: _AA_}),
+    ),
+)
+
+DETECTOR_FEATURE_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _DFCR,
+    0,
+    (_N, _St, _UAp, _ACd, _MB),
+    (
+        (DETECTOR_FEATURE_RESULT, {_sN: _n}),
+        (FEATURE_STATUS, {_sN: _st}),
+        (TIMESTAMP, {_sN: _uAp}),
+        (DETECTOR_ADDITIONAL_CONFIGURATION_RESULTS, {_sN: _aC}),
+        (MANAGED_BY, {_sN: _mB}),
+    ),
+)
+
+DETECTOR_FEATURE_CONFIGURATIONS_RESULTS: StaticSchema = (
+    16,
+    n0,
+    _DFCRe,
+    0,
+    (_me,),
+    ((DETECTOR_FEATURE_CONFIGURATION_RESULT, 0),),
+)
+
+DETECTOR_IDS: StaticSchema = (16, n0, _DIet, 0, (_me,), ((DETECTOR_ID, 0),))
+
+DETECTOR_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DSet,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+DISABLE_ORGANIZATION_ADMIN_ACCOUNT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DOAAI,
+    {_sSI: _cDOAAR, _s: None},
+    (_AAId,),
+    ((STRING, {_sN: _aAI, _sm: None}),),
+)
+
+DISABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DOAAO,
+    {_sSI: _cDOAARo, _smi: None},
+)
+
+DISABLE_ORGANIZATION_ADMIN_ACCOUNT: StaticOperationSchema = (
+    23,
+    n0,
+    _DOAA,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/admin/disable", "code": 200}
+        )
+    },
+    DISABLE_ORGANIZATION_ADMIN_ACCOUNT_INPUT,
+    DISABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFAAI,
+    {_sSI: _cDFAAR, _s: None},
+    (_DI,),
+    ((DETECTOR_ID, 9),),
+)
+
+DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DFAAO,
+    {_sSI: _cDFAARo, _smi: None},
+)
+
+DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT: StaticOperationSchema = (
+    23,
+    n0,
+    _DFAA,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/administrator/disassociate",
+                "code": 200,
+            }
+        )
+    },
+    DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT_INPUT,
+    DISASSOCIATE_FROM_ADMINISTRATOR_ACCOUNT_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DISASSOCIATE_FROM_MASTER_ACCOUNT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFMAI,
+    {_sSI: _cDFMAR, _s: None},
+    (_DI,),
+    ((DETECTOR_ID, 9),),
+)
+
+DISASSOCIATE_FROM_MASTER_ACCOUNT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DFMAO,
+    {_sSI: _cDFMARo, _smi: None},
+)
+
+DISASSOCIATE_FROM_MASTER_ACCOUNT: StaticOperationSchema = (
+    23,
+    n0,
+    _DFMA,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/master/disassociate",
+                "code": 200,
+            }
+        )
+    },
+    DISASSOCIATE_FROM_MASTER_ACCOUNT_INPUT,
+    DISASSOCIATE_FROM_MASTER_ACCOUNT_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+DISASSOCIATE_MEMBERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMIi,
+    {_sSI: _cDMRom, _s: None},
+    (_DI, _AIcco),
+    ((DETECTOR_ID, 9), (ACCOUNT_IDS, {_sN: _aIcc, _sm: None})),
+)
+
+DISASSOCIATE_MEMBERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DMOi,
+    {_sSI: _cDMRoma, _smi: None},
+    (_UAnp,),
+    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+)
+
+DISASSOCIATE_MEMBERS: StaticOperationSchema = (
+    23,
+    n0,
+    _DMi,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/member/disassociate",
+                "code": 200,
+            }
+        )
+    },
+    DISASSOCIATE_MEMBERS_INPUT,
+    DISASSOCIATE_MEMBERS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+EBS_SNAPSHOT: StaticSchema = (18, n0, _ES, 0, (_DN,), ((NON_EMPTY_STRING, {_sN: _dN}),))
+
+EBS_SNAPSHOT_DETAILS: StaticSchema = (18, n0, _ESD, 0, (_SA,), ((STRING, {_sN: _sA}),))
+
+EBS_SNAPSHOT_PRESERVATION: StaticSchema = (
+    14,
+    n0,
+    _ESP,
+    0,
+    (_NR_, _RWF),
+    ((-1, {_sV: _NR_}), (-1, {_sV: _RWF})),
+)
+
+EBS_VOLUME_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _EVD,
+    0,
+    (_SVD, _SVDk),
+    ((VOLUME_DETAILS, {_sN: _sVD}), (VOLUME_DETAILS, {_sN: _sVDk})),
+)
+
+HIGHEST_SEVERITY_THREAT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _HSTD,
+    0,
+    (_Sev, _TN, _Cou),
+    ((STRING, {_sN: _sev}), (STRING, {_sN: _tN}), (INTEGER, {_sN: _cou})),
+)
+
+SCANNED_ITEM_COUNT: StaticSchema = (
+    18,
+    n0,
+    _SIC,
+    0,
+    (_TG, _Fi, _Vo),
+    ((INTEGER, {_sN: _tG}), (INTEGER, {_sN: _fi}), (INTEGER, {_sN: _vo})),
+)
+
+SCAN_FILE_PATH: StaticSchema = (
+    18,
+    n0,
+    _SFP,
+    0,
+    (_FP, _VA, _Ha, _FNi),
+    (
+        (STRING, {_sN: _fP}),
+        (STRING, {_sN: _vA}),
+        (STRING, {_sN: _h}),
+        (STRING, {_sN: _fN}),
+    ),
+)
+
+FILE_PATHS: StaticSchema = (16, n0, _FPi, 0, (_me,), ((SCAN_FILE_PATH, 0),))
+
+SCAN_THREAT_NAME: StaticSchema = (
+    18,
+    n0,
+    _STN,
+    0,
+    (_N, _Sev, _IC, _FPi),
+    (
+        (STRING, {_sN: _n}),
+        (STRING, {_sN: _sev}),
+        (INTEGER, {_sN: _iC}),
+        (FILE_PATHS, {_sN: _fPi}),
+    ),
+)
+
+SCAN_THREAT_NAMES: StaticSchema = (16, n0, _STNc, 0, (_me,), ((SCAN_THREAT_NAME, 0),))
+
+THREAT_DETECTED_BY_NAME: StaticSchema = (
+    18,
+    n0,
+    _TDBN,
+    0,
+    (_IC, _UTNC, _Sho, _TNh),
+    (
+        (INTEGER, {_sN: _iC}),
+        (INTEGER, {_sN: _uTNC}),
+        (BOOLEAN, {_sN: _sho}),
+        (SCAN_THREAT_NAMES, {_sN: _tNh}),
+    ),
+)
+
+THREATS_DETECTED_ITEM_COUNT: StaticSchema = (
+    18,
+    n0,
+    _TDIC,
+    0,
+    (_Fi,),
+    ((INTEGER, {_sN: _fi}),),
+)
+
+SCAN_DETECTIONS: StaticSchema = (
+    18,
+    n0,
+    _SDc,
+    0,
+    (_SIC, _TDIC, _HSTD, _TDBN),
+    (
+        (SCANNED_ITEM_COUNT, {_sN: _sIC}),
+        (THREATS_DETECTED_ITEM_COUNT, {_sN: _tDIC}),
+        (HIGHEST_SEVERITY_THREAT_DETAILS, {_sN: _hSTD}),
+        (THREAT_DETECTED_BY_NAME, {_sN: _tDBN}),
+    ),
+)
+
+SOURCES: StaticSchema = (16, n0, _So, 0, (_me,), ((STRING, 0),))
+
+EBS_VOLUME_SCAN_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _EVSD,
+    0,
+    (_SIc, _SSA, _SCA, _TFI, _So, _SDc, _STc),
+    (
+        (STRING, {_sN: _sI}),
+        (TIMESTAMP, {_sN: _sSA}),
+        (TIMESTAMP, {_sN: _sCA}),
+        (STRING, {_sN: _tFI}),
+        (SOURCES, {_sN: _so}),
+        (SCAN_DETECTIONS, {_sN: _sD}),
+        (SCAN_TYPE, {_sN: _sTc}),
+    ),
+)
+
+EC2_IMAGE_DETAILS: StaticSchema = (18, n0, _EIDc, 0, (_IAm,), ((STRING, {_sN: _iAm}),))
+
+HOST_PATH: StaticSchema = (18, n0, _HP, 0, (_Pat,), ((STRING, {_sN: _pat}),))
+
+VOLUME: StaticSchema = (
+    18,
+    n0,
+    _Vol,
+    0,
+    (_N, _HP),
+    ((STRING, {_sN: _n}), (HOST_PATH, {_sN: _hP})),
+)
+
+VOLUMES: StaticSchema = (16, n0, _Vo, 0, (_me,), ((VOLUME, 0),))
+
+ECS_TASK_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ETD,
+    0,
+    (_Ar, _DAe, _Ve, _TCA, _SAt, _SBt, _Ta, _Vo, _Conta, _Gr, _LTa),
+    (
+        (STRING, {_sN: _ar}),
+        (STRING, {_sN: _dAe}),
+        (STRING, {_sN: _ver}),
+        (TIMESTAMP, {_sN: _cA}),
+        (TIMESTAMP, {_sN: _sAt}),
+        (STRING, {_sN: _sBt}),
+        (TAGS, {_sN: _ta}),
+        (VOLUMES, {_sN: _vo}),
+        (CONTAINERS, {_sN: _conta}),
+        (STRING, {_sN: _gr}),
+        (STRING, {_sN: _lTa}),
+    ),
+)
+
+ECS_CLUSTER_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ECDc,
+    0,
+    (_N, _Ar, _St, _ASCc, _RCIC, _RTC, _Ta, _TDa),
+    (
+        (STRING, {_sN: _n}),
+        (STRING, {_sN: _ar}),
+        (STRING, {_sN: _st}),
+        (INTEGER, {_sN: _aSC}),
+        (INTEGER, {_sN: _rCIC}),
+        (INTEGER, {_sN: _rTC}),
+        (TAGS, {_sN: _ta}),
+        (ECS_TASK_DETAILS, {_sN: _tDa}),
+    ),
+)
+
+EKS_CLUSTER_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ECD,
+    0,
+    (_N, _Ar, _VIp, _St, _Ta, _CA),
+    (
+        (STRING, {_sN: _n}),
+        (STRING, {_sN: _ar}),
+        (STRING, {_sN: _vIp}),
+        (STRING, {_sN: _st}),
+        (TAGS, {_sN: _ta}),
+        (TIMESTAMP, {_sN: _cA}),
+    ),
+)
+
+ENABLE_ORGANIZATION_ADMIN_ACCOUNT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EOAAI,
+    {_sSI: _cEOAAR, _s: None},
+    (_AAId,),
+    ((STRING, {_sN: _aAI, _sm: None}),),
+)
+
+ENABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _EOAAO,
+    {_sSI: _cEOAARo, _smi: None},
+)
+
+ENABLE_ORGANIZATION_ADMIN_ACCOUNT: StaticOperationSchema = (
+    23,
+    n0,
+    _EOAA,
+    {_smith: MappingProxyType({"method": "POST", "uri": "/admin/enable", "code": 200})},
+    ENABLE_ORGANIZATION_ADMIN_ACCOUNT_INPUT,
+    ENABLE_ORGANIZATION_ADMIN_ACCOUNT_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+THREAT_NAMES: StaticSchema = (16, n0, _TNh, 0, (_me,), ((STRING, 0),))
+
+THREAT_INTELLIGENCE_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _TID,
+    0,
+    (_TLN, _TNh, _TFS),
+    ((STRING, {_sN: _tLN}), (THREAT_NAMES, {_sN: _tNh}), (STRING, {_sN: _tFS})),
+)
+
+THREAT_INTELLIGENCE_DETAILS: StaticSchema = (
+    16,
+    n0,
+    _TIDh,
+    0,
+    (_me,),
+    ((THREAT_INTELLIGENCE_DETAIL, 0),),
+)
+
+EVIDENCE: StaticSchema = (
+    18,
+    n0,
+    _Ev,
+    0,
+    (_TIDh,),
+    ((THREAT_INTELLIGENCE_DETAILS, {_sN: _tID}),),
+)
+
+FEEDBACK: StaticSchema = (
+    14,
+    n0,
+    _Fe,
+    0,
+    (_USEFUL, _NU),
+    ((-1, {_sV: _USEFUL}), (-1, {_sV: _NU})),
+)
+
+FILTER_NAMES: StaticSchema = (16, n0, _FNil, 0, (_me,), ((FILTER_NAME, 0),))
+
+FILTER_VERSION: StaticSchema = (8, n0, _FV, 0)
+
+NETWORK_INTERFACE: StaticSchema = (
+    18,
+    n0,
+    _NIe,
+    0,
+    (_IAp, _NII, _PDN, _PIA, _PIAr, _PDNu, _PIu, _SGe, _SIu, _VIp),
+    (
+        (IPV6_ADDRESSES, {_sN: _iAp}),
+        (STRING, {_sN: _nII}),
+        (STRING, {_sN: _pDN}),
+        (SENSITIVE_STRING, {_sN: _pIA}),
+        (PRIVATE_IP_ADDRESSES, {_sN: _pIAr}),
+        (STRING, {_sN: _pDNu}),
+        (STRING, {_sN: _pIu}),
+        (SECURITY_GROUPS, {_sN: _sG}),
+        (STRING, {_sN: _sIu}),
+        (STRING, {_sN: _vIp}),
+    ),
+)
+
+NETWORK_INTERFACES: StaticSchema = (16, n0, _NIet, 0, (_me,), ((NETWORK_INTERFACE, 0),))
+
+INSTANCE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _IDn,
+    0,
+    (_AZ, _IIP, _ID, _IIm, _IIn, _IS, _IT, _OA, _LTau, _NIet, _Pl, _PCr, _Ta),
+    (
+        (STRING, {_sN: _aZ}),
+        (IAM_INSTANCE_PROFILE, {_sN: _iIP}),
+        (STRING, {_sN: _iD}),
+        (STRING, {_sN: _iIm}),
+        (STRING, {_sN: _iIn}),
+        (STRING, {_sN: _iS}),
+        (STRING, {_sN: _iT}),
+        (STRING, {_sN: _oA}),
+        (STRING, {_sN: _lTau}),
+        (NETWORK_INTERFACES, {_sN: _nI}),
+        (STRING, {_sN: _pl}),
+        (PRODUCT_CODES, {_sN: _pC}),
+        (TAGS, {_sN: _ta}),
+    ),
+)
+
+GROUPS: StaticSchema = (16, n0, _Gro, 0, (_me,), ((STRING, 0),))
+
+IMPERSONATED_USER: StaticSchema = (
+    18,
+    n0,
+    _IUm,
+    0,
+    (_Use, _Gro),
+    ((STRING, {_sN: _use}), (GROUPS, {_sN: _gro})),
+)
+
+SESSION_NAME_LIST: StaticSchema = (16, n0, _SNL, 0, (_me,), ((STRING, 0),))
+
+KUBERNETES_USER_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _KUD,
+    0,
+    (_Use, _U, _Gro, _SNe, _IUm),
+    (
+        (STRING, {_sN: _use}),
+        (STRING, {_sN: _u}),
+        (GROUPS, {_sN: _gro}),
+        (SESSION_NAME_LIST, {_sN: _sNes}),
+        (IMPERSONATED_USER, {_sN: _iUm}),
+    ),
+)
+
+KUBERNETES_WORKLOAD_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _KWD,
+    0,
+    (_N, _T, _U, _Na, _HN, _SAN, _Conta, _Vo, _HIPC, _HPID),
+    (
+        (STRING, {_sN: _n}),
+        (STRING, {_sN: _t}),
+        (STRING, {_sN: _u}),
+        (STRING, {_sN: _na}),
+        (BOOLEAN, {_sN: _hN}),
+        (STRING, {_sN: _sAN}),
+        (CONTAINERS, {_sN: _conta}),
+        (VOLUMES, {_sN: _vo}),
+        (BOOLEAN, {_sN: _hIPC}),
+        (BOOLEAN, {_sN: _hPID}),
+    ),
+)
+
+KUBERNETES_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _KD,
+    0,
+    (_KUD, _KWD),
+    (
+        (KUBERNETES_USER_DETAILS, {_sN: _kUD}),
+        (KUBERNETES_WORKLOAD_DETAILS, {_sN: _kWD}),
+    ),
+)
+
+SUBNET_IDS: StaticSchema = (16, n0, _SIub, 0, (_me,), ((STRING, 0),))
+
+VPC_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _VC,
+    0,
+    (_SIub, _VIp, _SGe),
+    ((SUBNET_IDS, {_sN: _sIub}), (STRING, {_sN: _vIp}), (SECURITY_GROUPS, {_sN: _sG})),
+)
+
+LAMBDA_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _LD,
+    0,
+    (_FAu, _FNu, _De, _LMA, _RIev, _FVu, _Ro, _VC, _Ta),
+    (
+        (STRING, {_sN: _fA}),
+        (STRING, {_sN: _fNu}),
+        (STRING, {_sN: _de}),
+        (TIMESTAMP, {_sN: _lMA}),
+        (STRING, {_sN: _rIev}),
+        (STRING, {_sN: _fV}),
+        (STRING, {_sN: _ro}),
+        (VPC_CONFIG, {_sN: _vC}),
+        (TAGS, {_sN: _ta}),
+    ),
+)
+
+MODEL_DETAIL: StaticSchema = (18, n0, _MDo, 0, (_MIo,), ((STRING, {_sN: _mIo}),))
+
+MODEL_DETAILS: StaticSchema = (16, n0, _MDod, 0, (_me,), ((MODEL_DETAIL, 0),))
+
+RDS_DB_INSTANCE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RDID,
+    0,
+    (_DIIb, _Eng, _EVn, _DCI, _DIA, _DRI, _Ta),
+    (
+        (STRING, {_sN: _dII}),
+        (STRING, {_sN: _eng}),
+        (STRING, {_sN: _eVn}),
+        (STRING, {_sN: _dCI}),
+        (STRING, {_sN: _dIA}),
+        (STRING, {_sN: _dRI}),
+        (TAGS, {_sN: _ta}),
+    ),
+)
+
+RDS_DB_USER_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RDUD,
+    0,
+    (_Us, _App, _Data, _Ss, _AMu),
+    (
+        (STRING, {_sN: _us}),
+        (STRING, {_sN: _app}),
+        (STRING, {_sN: _data}),
+        (STRING, {_sN: _ss}),
+        (STRING, {_sN: _aM}),
+    ),
+)
+
+RDS_LIMITLESS_DB_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RLDD,
+    0,
+    (_DSGI, _DSGRI, _DSGA, _Eng, _EVn, _DCI, _Ta),
+    (
+        (STRING, {_sN: _dSGI}),
+        (STRING, {_sN: _dSGRI}),
+        (STRING, {_sN: _dSGA}),
+        (STRING, {_sN: _eng}),
+        (STRING, {_sN: _eVn}),
+        (STRING, {_sN: _dCI}),
+        (TAGS, {_sN: _ta}),
+    ),
+)
+
+SCAN_CONFIGURATION_CONTINUOUS_SCAN_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _SCCSD,
+    0,
+    (_ST, _ET),
+    ((TIMESTAMP, {_sN: _sT}), (TIMESTAMP, {_sN: _eT, _sm: None})),
+)
+
+RECOVERY_POINT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RPDe,
+    0,
+    (_RPA, _BVN, _CSD),
+    (
+        (STRING, {_sN: _rPA}),
+        (STRING, {_sN: _bVN}),
+        (SCAN_CONFIGURATION_CONTINUOUS_SCAN_DETAILS, {_sN: _cSD}),
+    ),
+)
+
+OWNER: StaticSchema = (18, n0, _Ow, 0, (_Id,), ((STRING, {_sN: _id}),))
+
+PERMISSION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _PCe,
+    0,
+    (_BLP, _ALP),
+    ((BUCKET_LEVEL_PERMISSIONS, {_sN: _bLP}), (ACCOUNT_LEVEL_PERMISSIONS, {_sN: _aLP})),
+)
+
+PUBLIC_ACCESS: StaticSchema = (
+    18,
+    n0,
+    _PAu,
+    0,
+    (_PCe, _EP),
+    ((PERMISSION_CONFIGURATION, {_sN: _pCe}), (STRING, {_sN: _eP})),
+)
+
+S3_OBJECT_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _SOD,
+    0,
+    (_OAb, _Ke, _ETa, _Ha, _VI),
+    (
+        (STRING, {_sN: _oAb}),
+        (STRING, {_sN: _ke}),
+        (STRING, {_sN: _eTa}),
+        (STRING, {_sN: _h}),
+        (STRING, {_sN: _vI}),
+    ),
+)
+
+S3_OBJECT_DETAILS: StaticSchema = (16, n0, _SODb, 0, (_me,), ((S3_OBJECT_DETAIL, 0),))
+
+S3_BUCKET_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _SBD,
+    0,
+    (_Ar, _N, _T, _CA, _Ow, _Ta, _DSSE, _PAu, _SODb),
+    (
+        (STRING, {_sN: _ar}),
+        (STRING, {_sN: _n}),
+        (STRING, {_sN: _t}),
+        (TIMESTAMP, {_sN: _cA}),
+        (OWNER, {_sN: _ow}),
+        (TAGS, {_sN: _ta}),
+        (DEFAULT_SERVER_SIDE_ENCRYPTION, {_sN: _dSSE}),
+        (PUBLIC_ACCESS, {_sN: _pA}),
+        (S3_OBJECT_DETAILS, {_sN: _sOD}),
+    ),
+)
+
+S3_BUCKET_DETAILS: StaticSchema = (16, n0, _SBDu, 0, (_me,), ((S3_BUCKET_DETAIL, 0),))
+
+RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _R,
+    0,
+    (
+        _AKD,
+        _SBDu,
+        _IDn,
+        _ECD,
+        _KD,
+        _RT,
+        _EVD,
+        _ECDc,
+        _CDo,
+        _LD,
+        _RDID,
+        _RLDD,
+        _RDUD,
+        _ESD,
+        _EIDc,
+        _RPDe,
+        _BGD,
+        _MDod,
+    ),
+    (
+        (ACCESS_KEY_DETAILS, {_sN: _aKD}),
+        (S3_BUCKET_DETAILS, {_sN: _sBD}),
+        (INSTANCE_DETAILS, {_sN: _iDn}),
+        (EKS_CLUSTER_DETAILS, {_sN: _eCD}),
+        (KUBERNETES_DETAILS, {_sN: _kD}),
+        (STRING, {_sN: _rT}),
+        (EBS_VOLUME_DETAILS, {_sN: _eVD}),
+        (ECS_CLUSTER_DETAILS, {_sN: _eCDc}),
+        (CONTAINER, {_sN: _cDo}),
+        (LAMBDA_DETAILS, {_sN: _lD}),
+        (RDS_DB_INSTANCE_DETAILS, {_sN: _rDID}),
+        (RDS_LIMITLESS_DB_DETAILS, {_sN: _rLDD}),
+        (RDS_DB_USER_DETAILS, {_sN: _rDUD}),
+        (EBS_SNAPSHOT_DETAILS, {_sN: _eSD}),
+        (EC2_IMAGE_DETAILS, {_sN: _eIDc}),
+        (RECOVERY_POINT_DETAILS, {_sN: _rPDe}),
+        (BEDROCK_GUARDRAIL_DETAILS, {_sN: _bGD}),
+        (MODEL_DETAILS, {_sN: _mD}),
+    ),
+)
+
+SERVICE_ADDITIONAL_INFO: StaticSchema = (
+    18,
+    n0,
+    _SAI,
+    0,
+    (_Va, _T),
+    ((STRING, {_sN: _v}), (STRING, {_sN: _t})),
+)
+
+SCAN_CATEGORY: StaticSchema = (
+    14,
+    n0,
+    _SCc,
+    0,
+    (_FS_, _IS_),
+    ((-1, {_sV: _FS_}), (-1, {_sV: _IS_})),
+)
+
+INCREMENTAL_SCAN_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ISD,
+    0,
+    (_BRA,),
+    ((NON_EMPTY_STRING, {_sN: _bRA, _sm: None}),),
+)
+
+MALWARE_PROTECTION_FINDINGS_SCAN_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _MPFSC,
+    0,
+    (_TT, _ISD),
+    ((TRIGGER_TYPE, {_sN: _tT}), (INCREMENTAL_SCAN_DETAILS, {_sN: _iSD})),
+)
+
+MALWARE_PROTECTION_SCAN_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MPST,
+    0,
+    (_BI, _OD, _GI_),
+    ((-1, {_sV: _BI}), (-1, {_sV: _OD}), (-1, {_sV: _GI_})),
+)
+
+ITEM_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _IDt,
+    0,
+    (_RAe, _IPt, _Ha, _AId),
+    (
+        (NON_EMPTY_STRING, {_sN: _rAe}),
+        (NON_EMPTY_STRING, {_sN: _iPt}),
+        (STRING, {_sN: _h}),
+        (ADDITIONAL_INFO, {_sN: _aId}),
+    ),
+)
+
+ITEM_DETAILS_LIST: StaticSchema = (16, n0, _IDL, 0, (_me,), ((ITEM_DETAILS, 0),))
+
+ITEM_PATH: StaticSchema = (
+    18,
+    n0,
+    _IPt,
+    0,
+    (_NIP, _Ha),
+    ((STRING, {_sN: _nIP}), (STRING, {_sN: _h})),
+)
+
+ITEM_PATHS: StaticSchema = (16, n0, _IPte, 0, (_me,), ((ITEM_PATH, 0),))
+
+THREAT: StaticSchema = (
+    18,
+    n0,
+    _Th,
+    0,
+    (_N, _Sou, _IPte, _Cou, _Ha, _IDt),
+    (
+        (STRING, {_sN: _n}),
+        (STRING, {_sN: _sou}),
+        (ITEM_PATHS, {_sN: _iPte}),
+        (LONG, {_sN: _cou}),
+        (STRING, {_sN: _h}),
+        (ITEM_DETAILS_LIST, {_sN: _iDt}),
+    ),
+)
+
+THREATS: StaticSchema = (16, n0, _Thr, 0, (_me,), ((THREAT, 0),))
+
+MALWARE_SCAN_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _MSD,
+    0,
+    (_Thr, _SIc, _STc, _SCc, _SCca, _UTC),
+    (
+        (THREATS, {_sN: _th}),
+        (STRING, {_sN: _sI}),
+        (MALWARE_PROTECTION_SCAN_TYPE, {_sN: _sTc}),
+        (SCAN_CATEGORY, {_sN: _sCc}),
+        (MALWARE_PROTECTION_FINDINGS_SCAN_CONFIGURATION, {_sN: _sCca}),
+        (INTEGER, {_sN: _uTC}),
+    ),
+)
+
+FLAGS_LIST: StaticSchema = (16, n0, _FLl, 0, (_me,), ((STRING, 0),))
+
+MEMORY_REGIONS_LIST: StaticSchema = (16, n0, _MRL, 0, (_me,), ((STRING, 0),))
+
+LINEAGE_OBJECT: StaticSchema = (
+    18,
+    n0,
+    _LO,
+    0,
+    (_ST, _NP, _UI, _N, _Pi, _Uu, _EPx, _Eu, _PU),
+    (
+        (TIMESTAMP, {_sN: _sT}),
+        (INTEGER, {_sN: _nP}),
+        (INTEGER, {_sN: _uI}),
+        (STRING, {_sN: _n}),
+        (INTEGER, {_sN: _pi}),
+        (STRING, {_sN: _uu}),
+        (STRING, {_sN: _ePx}),
+        (INTEGER, {_sN: _eu}),
+        (STRING, {_sN: _pU}),
+    ),
+)
+
+LINEAGE: StaticSchema = (16, n0, _Li, 0, (_me,), ((LINEAGE_OBJECT, 0),))
+
+PROCESS_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _PD,
+    0,
+    (_N, _EPx, _ESx, _NP, _Pw, _Pi, _ST, _Uu, _PU, _Us, _UI, _Eu, _Li),
+    (
+        (STRING, {_sN: _n}),
+        (STRING, {_sN: _ePx}),
+        (STRING, {_sN: _eS}),
+        (INTEGER, {_sN: _nP}),
+        (STRING, {_sN: _pw}),
+        (INTEGER, {_sN: _pi}),
+        (TIMESTAMP, {_sN: _sT}),
+        (STRING, {_sN: _uu}),
+        (STRING, {_sN: _pU}),
+        (STRING, {_sN: _us}),
+        (INTEGER, {_sN: _uI}),
+        (INTEGER, {_sN: _eu}),
+        (LINEAGE, {_sN: _li}),
+    ),
+)
+
+RELATED_FILE_PATHS_LIST: StaticSchema = (16, n0, _RFPL, 0, (_me,), ((STRING, 0),))
+
+RUNTIME_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _RC,
+    0,
+    (
+        _MPod,
+        _MA,
+        _SPc,
+        _LP,
+        _LPV,
+        _SPo,
+        _RBP,
+        _RAP,
+        _MSo,
+        _MTo,
+        _FST,
+        _Fl,
+        _MN,
+        _MFP,
+        _MSod,
+        _SHFP,
+        _TPa,
+        _AFd,
+        _IPN,
+        _MRe,
+        _TNo,
+        _TC,
+        _SN,
+        _CLE,
+        _TFP,
+        _FO,
+        _FP,
+        _RFP,
+    ),
+    (
+        (PROCESS_DETAILS, {_sN: _mPod}),
+        (TIMESTAMP, {_sN: _mA}),
+        (STRING, {_sN: _sP}),
+        (STRING, {_sN: _lP}),
+        (STRING, {_sN: _lPV}),
+        (STRING, {_sN: _sPo}),
+        (STRING, {_sN: _rBP}),
+        (STRING, {_sN: _rAP}),
+        (STRING, {_sN: _mSo}),
+        (STRING, {_sN: _mTo}),
+        (STRING, {_sN: _fST}),
+        (FLAGS_LIST, {_sN: _fl}),
+        (STRING, {_sN: _mN}),
+        (STRING, {_sN: _mFP}),
+        (STRING, {_sN: _mSod}),
+        (STRING, {_sN: _sHFP}),
+        (PROCESS_DETAILS, {_sN: _tPa}),
+        (STRING, {_sN: _aF}),
+        (INTEGER, {_sN: _iPN}),
+        (MEMORY_REGIONS_LIST, {_sN: _mRe}),
+        (STRING, {_sN: _tNo}),
+        (STRING, {_sN: _tC}),
+        (STRING, {_sN: _sNe}),
+        (STRING, {_sN: _cLE}),
+        (STRING, {_sN: _tFP}),
+        (STRING, {_sN: _fO}),
+        (STRING, {_sN: _fP}),
+        (RELATED_FILE_PATHS_LIST, {_sN: _rFP}),
+    ),
+)
+
+RUNTIME_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _RDu,
+    0,
+    (_Pr, _Conte),
+    ((PROCESS_DETAILS, {_sN: _pr}), (RUNTIME_CONTEXT, {_sN: _conte})),
+)
+
+SERVICE: StaticSchema = (
+    18,
+    n0,
+    _Se,
+    0,
+    (
+        _Ac,
+        _Ev,
+        _Arc,
+        _Cou,
+        _DI,
+        _EFS,
+        _ELS,
+        _RR,
+        _SN,
+        _UF,
+        _AId,
+        _FNe,
+        _EVSD,
+        _RDu,
+        _Det,
+        _MSD,
+    ),
+    (
+        (ACTION, {_sN: _ac}),
+        (EVIDENCE, {_sN: _ev}),
+        (BOOLEAN, {_sN: _arc}),
+        (INTEGER, {_sN: _cou}),
+        (DETECTOR_ID, {_sN: _dI}),
+        (STRING, {_sN: _eFS}),
+        (STRING, {_sN: _eLS}),
+        (STRING, {_sN: _rR}),
+        (STRING, {_sN: _sNe}),
+        (STRING, {_sN: _uF}),
+        (SERVICE_ADDITIONAL_INFO, {_sN: _aId}),
+        (STRING, {_sN: _fNe}),
+        (EBS_VOLUME_SCAN_DETAILS, {_sN: _eVSD}),
+        (RUNTIME_DETAILS, {_sN: _rDu}),
+        (DETECTION, {_sN: _det}),
+        (MALWARE_SCAN_DETAILS, {_sN: _mSD}),
+    ),
+)
+
+FINDING: StaticSchema = (
+    18,
+    n0,
+    _Fin,
+    0,
+    (
+        _AIcc,
+        _Ar,
+        _Con,
+        _CA,
+        _De,
+        _Id,
+        _Par,
+        _Re,
+        _R,
+        _SV,
+        _Se,
+        _Sev,
+        _Tit,
+        _T,
+        _UAp,
+        _AASA,
+    ),
+    (
+        (STRING, {_sN: _aIc, _sm: None}),
+        (STRING, {_sN: _ar, _sm: None}),
+        (DOUBLE, {_sN: _con}),
+        (STRING, {_sN: _cA, _sm: None}),
+        (STRING, {_sN: _de}),
+        (STRING, {_sN: _id, _sm: None}),
+        (STRING, {_sN: _par}),
+        (STRING, {_sN: _re, _sm: None}),
+        (RESOURCE, {_sN: _r, _sm: None}),
+        (STRING, {_sN: _sVc, _sm: None}),
+        (SERVICE, {_sN: _ser}),
+        (DOUBLE, {_sN: _sev, _sm: None}),
+        (STRING, {_sN: _ti}),
+        (FINDING_TYPE, {_sN: _t, _sm: None}),
+        (STRING, {_sN: _uAp, _sm: None}),
+        (STRING, {_sN: _aASA}),
+    ),
+)
+
+FINDINGS: StaticSchema = (16, n0, _Find, 0, (_me,), ((FINDING, 0),))
+
+GROUPED_BY_ACCOUNT: StaticSchema = (16, n0, _GBA, 0, (_me,), ((ACCOUNT_STATISTICS, 0),))
+
+GROUPED_BY_DATE: StaticSchema = (16, n0, _GBD, 0, (_me,), ((DATE_STATISTICS, 0),))
+
+FINDING_TYPE_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _FTS,
+    0,
+    (_FT, _LGA, _TF),
+    ((STRING, {_sN: _fTi}), (TIMESTAMP, {_sN: _lGA}), (INTEGER, {_sN: _tF})),
+)
+
+GROUPED_BY_FINDING_TYPE: StaticSchema = (
+    16,
+    n0,
+    _GBFT,
+    0,
+    (_me,),
+    ((FINDING_TYPE_STATISTICS, 0),),
+)
+
+RESOURCE_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _RSe,
+    0,
+    (_AIcc, _LGA, _RIe, _RT, _TF),
+    (
+        (STRING, {_sN: _aIc}),
+        (TIMESTAMP, {_sN: _lGA}),
+        (STRING, {_sN: _rIe}),
+        (STRING, {_sN: _rT}),
+        (INTEGER, {_sN: _tF}),
+    ),
+)
+
+GROUPED_BY_RESOURCE: StaticSchema = (
+    16,
+    n0,
+    _GBR,
+    0,
+    (_me,),
+    ((RESOURCE_STATISTICS, 0),),
+)
+
+SEVERITY_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _SSe,
+    0,
+    (_LGA, _Sev, _TF),
+    ((TIMESTAMP, {_sN: _lGA}), (DOUBLE, {_sN: _sev}), (INTEGER, {_sN: _tF})),
+)
+
+GROUPED_BY_SEVERITY: StaticSchema = (
+    16,
+    n0,
+    _GBS,
+    0,
+    (_me,),
+    ((SEVERITY_STATISTICS, 0),),
+)
+
+FINDING_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _FSi,
+    0,
+    (_CBS, _GBA, _GBD, _GBFT, _GBR, _GBS),
+    (
+        (COUNT_BY_SEVERITY, {_sN: _cBS}),
+        (GROUPED_BY_ACCOUNT, {_sN: _gBA}),
+        (GROUPED_BY_DATE, {_sN: _gBD}),
+        (GROUPED_BY_FINDING_TYPE, {_sN: _gBFT}),
+        (GROUPED_BY_RESOURCE, {_sN: _gBR}),
+        (GROUPED_BY_SEVERITY, {_sN: _gBS}),
+    ),
+)
+
+FINDING_STATISTIC_TYPE: StaticSchema = (
+    14,
+    n0,
+    _FSTi,
+    0,
+    (_CBS_,),
+    ((-1, {_sV: _CBS_}),),
+)
+
+FINDING_STATISTIC_TYPES: StaticSchema = (
+    16,
+    n0,
+    _FSTin,
+    0,
+    (_me,),
+    ((FINDING_STATISTIC_TYPE, 0),),
+)
+
+GET_ADMINISTRATOR_ACCOUNT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GAAI,
+    {_sSI: _cGAAR, _s: None},
+    (_DI,),
+    ((DETECTOR_ID, 9),),
+)
+
+GET_ADMINISTRATOR_ACCOUNT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GAAO,
+    {_sSI: _cGAARo, _smi: None},
+    (_Ad,),
+    ((ADMINISTRATOR, {_sN: _ad, _sm: None}),),
+)
+
+GET_ADMINISTRATOR_ACCOUNT: StaticOperationSchema = (
+    23,
+    n0,
+    _GAA,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/administrator",
+                "code": 200,
+            }
+        )
+    },
+    GET_ADMINISTRATOR_ACCOUNT_INPUT,
+    GET_ADMINISTRATOR_ACCOUNT_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_COVERAGE_STATISTICS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCSI,
+    {_sSI: _cGCSR, _s: None},
+    (_DI, _FCil, _STt),
+    (
+        (DETECTOR_ID, 9),
+        (COVERAGE_FILTER_CRITERIA, {_sN: _fCil}),
+        (COVERAGE_STATISTICS_TYPE_LIST, {_sN: _sTt, _sm: None}),
+    ),
+)
+
+GET_COVERAGE_STATISTICS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCSO,
+    {_sSI: _cGCSRo, _smi: None},
+    (_CSov,),
+    ((COVERAGE_STATISTICS, {_sN: _cSo}),),
+)
+
+GET_COVERAGE_STATISTICS: StaticOperationSchema = (
+    23,
+    n0,
+    _GCS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/coverage/statistics",
+                "code": 200,
+            }
+        )
+    },
+    GET_COVERAGE_STATISTICS_INPUT,
+    GET_COVERAGE_STATISTICS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_CUSTOM_DETECTION_RULE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCDRI,
+    {_sSI: _cGCDRR, _s: None},
+    (_RI,),
+    ((RULE_ID, 9),),
+)
+
+RULE_EXPRESSION: StaticSchema = (3, n0, _RE, 0)
+
+RULE_DEFINITION: StaticSchema = (
+    18,
+    n0,
+    _RDul,
+    0,
+    (_Ex,),
+    ((RULE_EXPRESSION, {_sN: _ex, _sm: None}),),
+)
+
+RULE_LANGUAGE: StaticSchema = (14, n0, _RL, 0, (_SQL,), ((-1, {_sV: _SQL}),))
+
+RULE_NAME: StaticSchema = (3, n0, _RNu, 0)
+
+RULE_SCHEMA: StaticSchema = (14, n0, _RSu, 0, (_CT_,), ((-1, {_sV: _CT}),))
+
+MITRE_TACTIC: StaticSchema = (3, n0, _MTi, 0)
+
+MITRE_TECHNIQUE: StaticSchema = (3, n0, _MTit, 0)
+
+RULE_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _RDule,
+    0,
+    (_RI, _Ar, _N, _De, _Sev, _DSa, _Tac, _Tec, _Se, _Def, _Lan, _Sch, _CA, _UAp),
+    (
+        (RULE_ID, {_sN: _rI, _sm: None}),
+        (DETECTION_RULE_ARN, {_sN: _ar, _sm: None}),
+        (RULE_NAME, {_sN: _n, _sm: None}),
+        (DETECTION_RULE_DESCRIPTION, {_sN: _de, _sm: None}),
+        (DETECTION_RULE_SEVERITY, {_sN: _sev, _sm: None}),
+        (DETECTION_RULE_DATA_SOURCE, {_sN: _dSa, _sm: None}),
+        (MITRE_TACTIC, {_sN: _tac, _sm: None}),
+        (MITRE_TECHNIQUE, {_sN: _tec, _sm: None}),
+        (DETECTION_RULE_SERVICE_NAME, {_sN: _ser, _sm: None}),
+        (RULE_DEFINITION, {_sN: _def, _sm: None}),
+        (RULE_LANGUAGE, {_sN: _la}),
+        (RULE_SCHEMA, {_sN: _sch}),
+        (TIMESTAMP, {_sN: _cA, _sm: None}),
+        (TIMESTAMP, {_sN: _uAp}),
+    ),
+)
+
+GET_CUSTOM_DETECTION_RULE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCDRO,
+    {_sSI: _cGCDRRo, _smi: None},
+    (_Ru,),
+    ((RULE_DETAIL, {_sN: _ru, _sm: None}),),
+)
+
+GET_CUSTOM_DETECTION_RULE: StaticOperationSchema = (
+    23,
+    n0,
+    _GCDR,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/custom-detection-rule/rule/{RuleId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_CUSTOM_DETECTION_RULE_INPUT,
+    GET_CUSTOM_DETECTION_RULE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCDRAI,
+    {_sSI: _cGCDRAR, _s: None},
+    (_RI, _AIs),
+    ((RULE_ID, 9), (ASSOCIATION_ID, 9)),
+)
+
+GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCDRAO,
+    {_sSI: _cGCDRARo, _smi: None},
+    (_RA, _Ta),
+    ((ASSOCIATION_DETAIL, {_sN: _rA, _sm: None}), (TAG_MAP, {_sN: _ta})),
+)
+
+GET_CUSTOM_DETECTION_RULE_ASSOCIATION: StaticOperationSchema = (
+    23,
+    n0,
+    _GCDRA,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    GET_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCDROCI,
+    {_sSI: _cGCDROCR, _s: None},
+    (_RI, _Mo),
+    ((RULE_ID, 9), (ASSOCIATION_MODE, {_sQ: _mo, _sm: None})),
+)
+
+GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCDROCO,
+    {_sSI: _cGCDROCRo, _smi: None},
+    (_Conf,),
+    ((DETECTION_RULE_ORG_CONFIGURATION, {_sN: _conf, _sm: None}),),
+)
+
+GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _GCDROC,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/custom-detection-rule/org-configuration/{RuleId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    GET_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+GET_DETECTOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDI,
+    {_sSI: _cGDR, _s: None},
+    (_DI,),
+    ((DETECTOR_ID, 9),),
+)
+
+GET_DETECTOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDO,
+    {_sSI: _cGDRo, _smi: None},
+    (_CA, _FPF, _SR, _St, _UAp, _DS, _Ta, _F),
+    (
+        (STRING, {_sN: _cA}),
+        (FINDING_PUBLISHING_FREQUENCY, {_sN: _fPF}),
+        (STRING, {_sN: _sR, _sm: None}),
+        (DETECTOR_STATUS, {_sN: _st, _sm: None}),
+        (STRING, {_sN: _uAp}),
+        (DATA_SOURCE_CONFIGURATIONS_RESULT, {_sN: _dS}),
+        (TAG_MAP, {_sN: _ta}),
+        (DETECTOR_FEATURE_CONFIGURATIONS_RESULTS, {_sN: _f}),
+    ),
+)
+
+GET_DETECTOR: StaticOperationSchema = (
+    23,
+    n0,
+    _GD,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/detector/{DetectorId}", "code": 200}
+        )
+    },
+    GET_DETECTOR_INPUT,
+    GET_DETECTOR_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_FILTER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFIe,
+    {_sSI: _cGFR, _s: None},
+    (_DI, _FN),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+GET_FILTER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFO,
+    {_sSI: _cGFRo, _smi: None},
+    (_N, _De, _Ac, _Ra, _FCin, _Ta, _CA, _UAp, _Ve),
+    (
+        (FILTER_NAME, {_sN: _n, _sm: None}),
+        (FILTER_DESCRIPTION, {_sN: _de}),
+        (FILTER_ACTION, {_sN: _ac, _sm: None}),
+        (FILTER_RANK, {_sN: _ra}),
+        (FINDING_CRITERIA, {_sN: _fCin, _sm: None}),
+        (TAG_MAP, {_sN: _ta}),
+        (TIMESTAMP, {_sN: _cA}),
+        (TIMESTAMP, {_sN: _uAp}),
+        (FILTER_VERSION, {_sN: _ver}),
+    ),
+)
+
+GET_FILTER: StaticOperationSchema = (
+    23,
+    n0,
+    _GF,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/filter/{FilterName}",
+                "code": 200,
+            }
+        )
+    },
+    GET_FILTER_INPUT,
+    GET_FILTER_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_FINDINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFIet,
+    {_sSI: _cGFRom, _s: None},
+    (_DI, _FIi, _SCo),
+    (
+        (DETECTOR_ID, 9),
+        (FINDING_IDS, {_sN: _fI, _sm: None}),
+        (SORT_CRITERIA, {_sN: _sCo}),
+    ),
+)
+
+GET_FINDINGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFOe,
+    {_sSI: _cGFRoma, _smi: None},
+    (_Find,),
+    ((FINDINGS, {_sN: _fin, _sm: None}),),
+)
+
+GET_FINDINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _GFe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/findings/get",
+                "code": 200,
+            }
+        )
+    },
+    GET_FINDINGS_INPUT,
+    GET_FINDINGS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GROUP_BY_TYPE: StaticSchema = (
+    14,
+    n0,
+    _GBT,
+    0,
+    (_ACCOUNT, _DATE, _FT_, _RESOURCE, _SEVERITY),
+    (
+        (-1, {_sV: _ACCOUNT}),
+        (-1, {_sV: _DATE}),
+        (-1, {_sV: _FT_}),
+        (-1, {_sV: _RESOURCE}),
+        (-1, {_sV: _SEVERITY}),
+    ),
+)
+
+MAX_RESULTS100: StaticSchema = (7, n0, _MRa, 0)
+
+GET_FINDINGS_STATISTICS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFSI,
+    {_sSI: _cGFSR, _s: None},
+    (_DI, _FSTin, _FCin, _GB, _OB, _MR),
+    (
+        (DETECTOR_ID, 9),
+        (FINDING_STATISTIC_TYPES, {_sN: _fSTi}),
+        (FINDING_CRITERIA, {_sN: _fCin}),
+        (GROUP_BY_TYPE, {_sN: _gB}),
+        (ORDER_BY, {_sN: _oB}),
+        (MAX_RESULTS100, {_sN: _mR}),
+    ),
+)
+
+GET_FINDINGS_STATISTICS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFSO,
+    {_sSI: _cGFSRo, _smi: None},
+    (_FSi, _NT),
+    ((FINDING_STATISTICS, {_sN: _fS, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+GET_FINDINGS_STATISTICS: StaticOperationSchema = (
+    23,
+    n0,
+    _GFS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/findings/statistics",
+                "code": 200,
+            }
+        )
+    },
+    GET_FINDINGS_STATISTICS_INPUT,
+    GET_FINDINGS_STATISTICS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_INVESTIGATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GII,
+    {_sSI: _cGIR, _s: None},
+    (_DI, _IInv),
+    ((DETECTOR_ID, 9), (INVESTIGATION_ID, 9)),
+)
+
+INVESTIGATION_ERROR_DETAILS: StaticSchema = (3, n0, _IED, 0)
+
+PRODUCT: StaticSchema = (
+    18,
+    n0,
+    _Prod,
+    0,
+    (_N, _Fea),
+    ((STRING, {_sN: _n, _sm: None}), (STRING, {_sN: _fe})),
+)
+
+INVESTIGATION_METADATA: StaticSchema = (
+    18,
+    n0,
+    _IM,
+    0,
+    (_Ve, _Prod),
+    ((STRING, {_sN: _ver, _sm: None}), (PRODUCT, {_sN: _prod, _sm: None})),
+)
+
+RISK_DETAILS: StaticSchema = (3, n0, _RDi, 0)
+
+RISK_LEVEL: StaticSchema = (
+    14,
+    n0,
+    _RLi,
+    0,
+    (_INFO, _LOW, _MEDIUM, _HIGH, _CRITICAL),
+    (
+        (-1, {_sV: _Inf}),
+        (-1, {_sV: _Low}),
+        (-1, {_sV: _Me}),
+        (-1, {_sV: _H}),
+        (-1, {_sV: _Cri}),
+    ),
+)
+
+INVESTIGATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ISn,
+    0,
+    (_RUNNING, _COMPLETED, _FAILED),
+    ((-1, {_sV: _RUNNING}), (-1, {_sV: _COMPLETED}), (-1, {_sV: _FAILED})),
+)
+
+TRIGGERED_BY: StaticSchema = (3, n0, _TBr, 0)
+
+INVESTIGATION: StaticSchema = (
+    18,
+    n0,
+    _Inv,
+    0,
+    (_IInv, _St, _TP, _TBr, _Met, _Cl, _RLi, _Ri, _Con, _Sum, _ST, _ET, _Er),
+    (
+        (INVESTIGATION_ID, {_sN: _iInv, _sm: None}),
+        (INVESTIGATION_STATUS, {_sN: _st, _sm: None}),
+        (TRIGGER_PROMPT, {_sN: _tP, _sm: None}),
+        (TRIGGERED_BY, {_sN: _tBr, _sm: None}),
+        (INVESTIGATION_METADATA, {_sN: _met}),
+        (CLOUD_DETAILS, {_sN: _cl}),
+        (RISK_LEVEL, {_sN: _rL}),
+        (RISK_DETAILS, {_sN: _ri}),
+        (CONFIDENCE, {_sN: _con}),
+        (STRING, {_sN: _sum}),
+        (TIMESTAMP, {_sN: _sT}),
+        (TIMESTAMP, {_sN: _eT}),
+        (INVESTIGATION_ERROR_DETAILS, {_sN: _er}),
+    ),
+)
+
+GET_INVESTIGATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIO,
+    {_sSI: _cGIRo, _smi: None},
+    (_Inv,),
+    ((INVESTIGATION, {_sN: _in, _sm: None}),),
+)
+
+GET_INVESTIGATION: StaticOperationSchema = (
+    23,
+    n0,
+    _GIe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/investigation/{InvestigationId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_INVESTIGATION_INPUT,
+    GET_INVESTIGATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+GET_INVITATIONS_COUNT_INPUT: StaticSchema = (18, n0, _GICI, {_sSI: _cGICR, _s: None})
+
+GET_INVITATIONS_COUNT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GICO,
+    {_sSI: _cGICRo, _smi: None},
+    (_ICn,),
+    ((INTEGER, {_sN: _iCn}),),
+)
+
+GET_INVITATIONS_COUNT: StaticOperationSchema = (
+    23,
+    n0,
+    _GIC,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/invitation/count", "code": 200}
+        )
+    },
+    GET_INVITATIONS_COUNT_INPUT,
+    GET_INVITATIONS_COUNT_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_IP_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GIPSI,
+    {_sSI: _cGIPSR, _s: None},
+    (_DI, _ISI),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+IP_SET_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ISS,
+    0,
+    (_INACTIVE, _ACTIVATING, _ACTIVE, _DEACTIVATING, _ERROR, _DP_, _DELETED),
+    (
+        (-1, {_sV: _INACTIVE}),
+        (-1, {_sV: _ACTIVATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _DEACTIVATING}),
+        (-1, {_sV: _ERROR}),
+        (-1, {_sV: _DP_}),
+        (-1, {_sV: _DELETED}),
+    ),
+)
+
+GET_IP_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIPSO,
+    {_sSI: _cGIPSRo, _smi: None},
+    (_N, _Fo, _Loc, _St, _Ta, _EBO),
+    (
+        (NAME, {_sN: _n, _sm: None}),
+        (IP_SET_FORMAT, {_sN: _fo, _sm: None}),
+        (LOCATION, {_sN: _loc, _sm: None}),
+        (IP_SET_STATUS, {_sN: _st, _sm: None}),
+        (TAG_MAP, {_sN: _ta}),
+        (ACCOUNT_ID, {_sN: _eBO}),
+    ),
+)
+
+GET_IP_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _GIPS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/ipset/{IpSetId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_IP_SET_INPUT,
+    GET_IP_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_MALWARE_PROTECTION_PLAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMPPI,
+    {_sSI: _cGMPPR, _s: None},
+    (_MPPI,),
+    ((STRING, 9),),
+)
+
+MALWARE_PROTECTION_PLAN_STATUS: StaticSchema = (
+    14,
+    n0,
+    _MPPS,
+    0,
+    (_ACTIVE, _WARNING, _ERROR),
+    ((-1, {_sV: _ACTIVE}), (-1, {_sV: _WARNING}), (-1, {_sV: _ERROR})),
+)
+
+MALWARE_PROTECTION_PLAN_STATUS_REASON: StaticSchema = (
+    18,
+    n0,
+    _MPPSR,
+    0,
+    (_Cod, _M),
+    ((STRING, {_sN: _cod}), (STRING, {_sN: _m})),
+)
+
+MALWARE_PROTECTION_PLAN_STATUS_REASONS_LIST: StaticSchema = (
+    16,
+    n0,
+    _MPPSRL,
+    0,
+    (_me,),
+    ((MALWARE_PROTECTION_PLAN_STATUS_REASON, 0),),
+)
+
+GET_MALWARE_PROTECTION_PLAN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMPPO,
+    {_sSI: _cGMPPRo, _smi: None},
+    (_Ar, _Ro, _PR, _Actio, _CA, _St, _SRta, _Ta),
+    (
+        (STRING, {_sN: _ar}),
+        (STRING, {_sN: _ro}),
+        (CREATE_PROTECTED_RESOURCE, {_sN: _pR}),
+        (MALWARE_PROTECTION_PLAN_ACTIONS, {_sN: _acti}),
+        (TIMESTAMP, {_sN: _cA}),
+        (MALWARE_PROTECTION_PLAN_STATUS, {_sN: _st}),
+        (MALWARE_PROTECTION_PLAN_STATUS_REASONS_LIST, {_sN: _sRta}),
+        (TAG_MAP, {_sN: _ta}),
+    ),
+)
+
+GET_MALWARE_PROTECTION_PLAN: StaticOperationSchema = (
+    23,
+    n0,
+    _GMPP,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/malware-protection-plan/{MalwareProtectionPlanId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_MALWARE_PROTECTION_PLAN_INPUT,
+    GET_MALWARE_PROTECTION_PLAN_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+GET_MALWARE_SCAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMSI,
+    {_sSI: _cGMSR, _s: None},
+    (_SIc,),
+    ((STRING, 9),),
+)
+
+NON_NEGATIVE_INTEGER: StaticSchema = (7, n0, _NNI, 0)
+
+MALWARE_PROTECTION_RESOURCE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MPRT,
+    0,
+    (_ERP, _ES_, _EV__, _EA_, _EI_, _ERP_, _SRP, _SB_, _SPITR),
+    (
+        (-1, {_sV: _ERP}),
+        (-1, {_sV: _ES_}),
+        (-1, {_sV: _EV__}),
+        (-1, {_sV: _EA_}),
+        (-1, {_sV: _EI_}),
+        (-1, {_sV: _ERP_}),
+        (-1, {_sV: _SRP}),
+        (-1, {_sV: _SB_}),
+        (-1, {_sV: _SPITR}),
+    ),
+)
+
+SCAN_CONFIGURATION_RECOVERY_POINT: StaticSchema = (
+    18,
+    n0,
+    _SCRP,
+    0,
+    (_BVN, _CSD),
+    (
+        (NON_EMPTY_STRING, {_sN: _bVN}),
+        (SCAN_CONFIGURATION_CONTINUOUS_SCAN_DETAILS, {_sN: _cSD}),
+    ),
+)
+
+SCAN_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SCca,
+    0,
+    (_Ro, _TD, _ISD, _RP),
+    (
+        (NON_EMPTY_STRING, {_sN: _ro}),
+        (TRIGGER_DETAILS, {_sN: _tD}),
+        (INCREMENTAL_SCAN_DETAILS, {_sN: _iSD}),
+        (SCAN_CONFIGURATION_RECOVERY_POINT, {_sN: _rP}),
+    ),
+)
+
+SCANNED_RESOURCE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _SRDc,
+    0,
+    (_EVb, _ES),
+    ((VOLUME_DETAIL, {_sN: _eVb}), (EBS_SNAPSHOT, {_sN: _eSb})),
+)
+
+MALWARE_PROTECTION_SCAN_STATUS: StaticSchema = (
+    14,
+    n0,
+    _MPSS,
+    0,
+    (_RUNNING, _COMPLETED, _CWI, _FAILED, _SKIPPED),
+    (
+        (-1, {_sV: _RUNNING}),
+        (-1, {_sV: _COMPLETED}),
+        (-1, {_sV: _CWI}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _SKIPPED}),
+    ),
+)
+
+SCAN_STATUS_REASON: StaticSchema = (
+    14,
+    n0,
+    _SSR,
+    0,
+    (
+        _AD_,
+        _RNF,
+        _SSLE,
+        _RU_,
+        _IS__,
+        _IND,
+        _NEVF,
+        _UPCT,
+        _ASLE,
+        _UR,
+        _BRNS,
+        _BCAT,
+        _UFI,
+        _UA__,
+        _US,
+        _UCRP,
+        _AFSOF,
+    ),
+    (
+        (-1, {_sV: _AD_}),
+        (-1, {_sV: _RNF}),
+        (-1, {_sV: _SSLE}),
+        (-1, {_sV: _RU_}),
+        (-1, {_sV: _IS__}),
+        (-1, {_sV: _IND}),
+        (-1, {_sV: _NEVF}),
+        (-1, {_sV: _UPCT}),
+        (-1, {_sV: _ASLE}),
+        (-1, {_sV: _UR}),
+        (-1, {_sV: _BRNS}),
+        (-1, {_sV: _BCAT}),
+        (-1, {_sV: _UFI}),
+        (-1, {_sV: _UA__}),
+        (-1, {_sV: _US}),
+        (-1, {_sV: _UCRP}),
+        (-1, {_sV: _AFSOF}),
+    ),
+)
+
+SCANNED_RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _SRca,
+    0,
+    (_SRA, _SRT, _SRS, _SSR, _RD),
+    (
+        (NON_EMPTY_STRING, {_sN: _sRA}),
+        (MALWARE_PROTECTION_RESOURCE_TYPE, {_sN: _sRT}),
+        (MALWARE_PROTECTION_SCAN_STATUS, {_sN: _sRS}),
+        (SCAN_STATUS_REASON, {_sN: _sSR}),
+        (SCANNED_RESOURCE_DETAILS, {_sN: _rD}),
+    ),
+)
+
+SCANNED_RESOURCES: StaticSchema = (16, n0, _SRcan, 0, (_me,), ((SCANNED_RESOURCE, 0),))
+
+SCAN_RESULT_STATUS: StaticSchema = (
+    14,
+    n0,
+    _SRSc,
+    0,
+    (_NTF, _TF_),
+    ((-1, {_sV: _NTF}), (-1, {_sV: _TF_})),
+)
+
+SCAN_RESULT_THREAT: StaticSchema = (
+    18,
+    n0,
+    _SRTc,
+    0,
+    (_N, _Sou, _Cou, _Ha, _IDt),
+    (
+        (NON_EMPTY_STRING, {_sN: _n}),
+        (DETECTION_SOURCE, {_sN: _sou}),
+        (POSITIVE_LONG, {_sN: _cou}),
+        (NON_EMPTY_STRING, {_sN: _h}),
+        (ITEM_DETAILS_LIST, {_sN: _iDt}),
+    ),
+)
+
+SCAN_RESULT_THREATS: StaticSchema = (
+    16,
+    n0,
+    _SRTca,
+    0,
+    (_me,),
+    ((SCAN_RESULT_THREAT, 0),),
+)
+
+GET_MALWARE_SCAN_RESULT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _GMSRD,
+    0,
+    (_SRSc, _SFC, _FFC, _TFFC, _TFC, _TB, _UTC, _Thr),
+    (
+        (SCAN_RESULT_STATUS, {_sN: _sRSc}),
+        (POSITIVE_LONG, {_sN: _sFC}),
+        (POSITIVE_LONG, {_sN: _fFC}),
+        (POSITIVE_LONG, {_sN: _tFFC}),
+        (POSITIVE_LONG, {_sN: _tFC}),
+        (POSITIVE_LONG, {_sN: _tB}),
+        (POSITIVE_LONG, {_sN: _uTC}),
+        (SCAN_RESULT_THREATS, {_sN: _th}),
+    ),
+)
+
+GET_MALWARE_SCAN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMSO,
+    {_sSI: _cGMSRo, _smi: None},
+    (
+        _SIc,
+        _DI,
+        _ADI,
+        _RAe,
+        _RT,
+        _SRC,
+        _SRCk,
+        _FRC,
+        _SRcan,
+        _SCca,
+        _SCc,
+        _SSc,
+        _SSR,
+        _STc,
+        _SSA,
+        _SCA,
+        _SRD,
+    ),
+    (
+        (NON_EMPTY_STRING, {_sN: _sI}),
+        (DETECTOR_ID, {_sN: _dI}),
+        (DETECTOR_ID, {_sN: _aDI}),
+        (NON_EMPTY_STRING, {_sN: _rAe}),
+        (MALWARE_PROTECTION_RESOURCE_TYPE, {_sN: _rT}),
+        (NON_NEGATIVE_INTEGER, {_sN: _sRC}),
+        (NON_NEGATIVE_INTEGER, {_sN: _sRCk}),
+        (NON_NEGATIVE_INTEGER, {_sN: _fRC}),
+        (SCANNED_RESOURCES, {_sN: _sRca}),
+        (SCAN_CONFIGURATION, {_sN: _sCca}),
+        (SCAN_CATEGORY, {_sN: _sCc}),
+        (MALWARE_PROTECTION_SCAN_STATUS, {_sN: _sS}),
+        (SCAN_STATUS_REASON, {_sN: _sSR}),
+        (MALWARE_PROTECTION_SCAN_TYPE, {_sN: _sTc}),
+        (TIMESTAMP, {_sN: _sSA}),
+        (TIMESTAMP, {_sN: _sCA}),
+        (GET_MALWARE_SCAN_RESULT_DETAILS, {_sN: _sRD}),
+    ),
+)
+
+GET_MALWARE_SCAN: StaticOperationSchema = (
+    23,
+    n0,
+    _GMS,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/malware-scan/{ScanId}", "code": 200}
+        )
+    },
+    GET_MALWARE_SCAN_INPUT,
+    GET_MALWARE_SCAN_OUTPUT,
+    (
+        BAD_REQUEST_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+GET_MALWARE_SCAN_SETTINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMSSI,
+    {_sSI: _cGMSSR, _s: None},
+    (_DI,),
+    ((DETECTOR_ID, 9),),
+)
+
+SCAN_CRITERION_KEY: StaticSchema = (14, n0, _SCK, 0, (_EIT,), ((-1, {_sV: _EIT}),))
+
+SCAN_CONDITION_PAIR: StaticSchema = (
+    18,
+    n0,
+    _SCP,
+    0,
+    (_Ke, _Va),
+    ((TAG_KEY, {_sN: _ke, _sm: None}), (TAG_VALUE, {_sN: _v})),
+)
+
+MAP_EQUALS: StaticSchema = (16, n0, _ME, 0, (_me,), ((SCAN_CONDITION_PAIR, 0),))
+
+SCAN_CONDITION: StaticSchema = (
+    18,
+    n0,
+    _SCcan,
+    0,
+    (_ME,),
+    ((MAP_EQUALS, {_sN: _mE, _sm: None}),),
+)
+
+SCAN_CRITERION: StaticSchema = (
+    17,
+    n0,
+    _SCcanr,
+    0,
+    (_ke, _v),
+    ((SCAN_CRITERION_KEY, 0), (SCAN_CONDITION, 0)),
+)
+
+SCAN_RESOURCE_CRITERIA: StaticSchema = (
+    18,
+    n0,
+    _SRCc,
+    0,
+    (_Inc, _Exc),
+    ((SCAN_CRITERION, {_sN: _inc}), (SCAN_CRITERION, {_sN: _exc})),
+)
+
+GET_MALWARE_SCAN_SETTINGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMSSO,
+    {_sSI: _cGMSSRo, _smi: None},
+    (_SRCc, _ESP),
+    ((SCAN_RESOURCE_CRITERIA, {_sN: _sRCc}), (EBS_SNAPSHOT_PRESERVATION, {_sN: _eSP})),
+)
+
+GET_MALWARE_SCAN_SETTINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _GMSS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/malware-scan-settings",
+                "code": 200,
+            }
+        )
+    },
+    GET_MALWARE_SCAN_SETTINGS_INPUT,
+    GET_MALWARE_SCAN_SETTINGS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_MASTER_ACCOUNT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMAI,
+    {_sSI: _cGMAR, _s: None},
+    (_DI,),
+    ((DETECTOR_ID, 9),),
+)
+
+MASTER: StaticSchema = (
+    18,
+    n0,
+    _Mas,
+    0,
+    (_AIcc, _II, _RS, _IA),
+    (
+        (ACCOUNT_ID, {_sN: _aIc}),
+        (STRING, {_sN: _iI}),
+        (STRING, {_sN: _rS}),
+        (STRING, {_sN: _iA}),
+    ),
+)
+
+GET_MASTER_ACCOUNT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMAO,
+    {_sSI: _cGMARo, _smi: None},
+    (_Mas,),
+    ((MASTER, {_sN: _mas, _sm: None}),),
+)
+
+GET_MASTER_ACCOUNT: StaticOperationSchema = (
+    23,
+    n0,
+    _GMA,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/detector/{DetectorId}/master", "code": 200}
+        )
+    },
+    GET_MASTER_ACCOUNT_INPUT,
+    GET_MASTER_ACCOUNT_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_MEMBER_DETECTORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMDI,
+    {_sSI: _cGMDR, _s: None},
+    (_DI, _AIcco),
+    ((DETECTOR_ID, 9), (ACCOUNT_IDS, {_sN: _aIcc, _sm: None})),
+)
+
+MEMBER_ADDITIONAL_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _MACR,
+    0,
+    (_N, _St, _UAp, _MB),
+    (
+        (ORG_FEATURE_ADDITIONAL_CONFIGURATION, {_sN: _n}),
+        (FEATURE_STATUS, {_sN: _st}),
+        (TIMESTAMP, {_sN: _uAp}),
+        (MANAGED_BY, {_sN: _mB}),
+    ),
+)
+
+MEMBER_ADDITIONAL_CONFIGURATION_RESULTS: StaticSchema = (
+    16,
+    n0,
+    _MACRe,
+    0,
+    (_me,),
+    ((MEMBER_ADDITIONAL_CONFIGURATION_RESULT, 0),),
+)
+
+MEMBER_FEATURES_CONFIGURATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _MFCR,
+    0,
+    (_N, _St, _UAp, _ACd, _MB),
+    (
+        (ORG_FEATURE, {_sN: _n}),
+        (FEATURE_STATUS, {_sN: _st}),
+        (TIMESTAMP, {_sN: _uAp}),
+        (MEMBER_ADDITIONAL_CONFIGURATION_RESULTS, {_sN: _aC}),
+        (MANAGED_BY, {_sN: _mB}),
+    ),
+)
+
+MEMBER_FEATURES_CONFIGURATIONS_RESULTS: StaticSchema = (
+    16,
+    n0,
+    _MFCRe,
+    0,
+    (_me,),
+    ((MEMBER_FEATURES_CONFIGURATION_RESULT, 0),),
+)
+
+MEMBER_DATA_SOURCE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _MDSC,
+    0,
+    (_AIcc, _DS, _F),
+    (
+        (ACCOUNT_ID, {_sN: _aIc, _sm: None}),
+        (DATA_SOURCE_CONFIGURATIONS_RESULT, {_sN: _dS, _sm: None}),
+        (MEMBER_FEATURES_CONFIGURATIONS_RESULTS, {_sN: _f}),
+    ),
+)
+
+MEMBER_DATA_SOURCE_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _MDSCe,
+    0,
+    (_me,),
+    ((MEMBER_DATA_SOURCE_CONFIGURATION, 0),),
+)
+
+GET_MEMBER_DETECTORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMDO,
+    {_sSI: _cGMDRo, _smi: None},
+    (_MDSCe, _UAnp),
+    (
+        (MEMBER_DATA_SOURCE_CONFIGURATIONS, {_sN: _mem, _sm: None}),
+        (UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),
+    ),
+)
+
+GET_MEMBER_DETECTORS: StaticOperationSchema = (
+    23,
+    n0,
+    _GMD,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/member/detector/get",
+                "code": 200,
+            }
+        )
+    },
+    GET_MEMBER_DETECTORS_INPUT,
+    GET_MEMBER_DETECTORS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_MEMBERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMI,
+    {_sSI: _cGMR, _s: None},
+    (_DI, _AIcco),
+    ((DETECTOR_ID, 9), (ACCOUNT_IDS, {_sN: _aIcc, _sm: None})),
+)
+
+MEMBER: StaticSchema = (
+    18,
+    n0,
+    _Mem,
+    0,
+    (_AIcc, _DI, _MI, _E, _RS, _IA, _UAp, _AI),
+    (
+        (ACCOUNT_ID, {_sN: _aIc, _sm: None}),
+        (DETECTOR_ID, {_sN: _dI}),
+        (STRING, {_sN: _mI, _sm: None}),
+        (EMAIL, {_sN: _e, _sm: None}),
+        (STRING, {_sN: _rS, _sm: None}),
+        (STRING, {_sN: _iA}),
+        (STRING, {_sN: _uAp, _sm: None}),
+        (STRING, {_sN: _aI}),
+    ),
+)
+
+MEMBERS: StaticSchema = (16, n0, _Memb, 0, (_me,), ((MEMBER, 0),))
+
+GET_MEMBERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMO,
+    {_sSI: _cGMRo, _smi: None},
+    (_Memb, _UAnp),
+    ((MEMBERS, {_sN: _mem, _sm: None}), (UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None})),
+)
+
+GET_MEMBERS: StaticOperationSchema = (
+    23,
+    n0,
+    _GM,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/detector/{DetectorId}/member/get", "code": 200}
+        )
+    },
+    GET_MEMBERS_INPUT,
+    GET_MEMBERS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_ORGANIZATION_STATISTICS_INPUT: StaticSchema = (18, n0, _GOSI, {_sSI: _sU, _s: None})
+
+ORGANIZATION_FEATURE_STATISTICS_ADDITIONAL_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OFSAC,
+    0,
+    (_N, _EAC),
+    ((ORG_FEATURE_ADDITIONAL_CONFIGURATION, {_sN: _n}), (INTEGER, {_sN: _eAC})),
+)
+
+ORGANIZATION_FEATURE_STATISTICS_ADDITIONAL_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _OFSACr,
+    0,
+    (_me,),
+    ((ORGANIZATION_FEATURE_STATISTICS_ADDITIONAL_CONFIGURATION, 0),),
+)
+
+ORGANIZATION_FEATURE_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _OFSr,
+    0,
+    (_N, _EAC, _ACd),
+    (
+        (ORG_FEATURE, {_sN: _n}),
+        (INTEGER, {_sN: _eAC}),
+        (ORGANIZATION_FEATURE_STATISTICS_ADDITIONAL_CONFIGURATIONS, {_sN: _aC}),
+    ),
+)
+
+ORGANIZATION_FEATURE_STATISTICS_RESULTS: StaticSchema = (
+    16,
+    n0,
+    _OFSR,
+    0,
+    (_me,),
+    ((ORGANIZATION_FEATURE_STATISTICS, 0),),
+)
+
+ORGANIZATION_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _OS,
+    0,
+    (_TAC, _MAC, _AAC, _EAC, _CBF),
+    (
+        (INTEGER, {_sN: _tAC}),
+        (INTEGER, {_sN: _mAC}),
+        (INTEGER, {_sN: _aAC}),
+        (INTEGER, {_sN: _eAC}),
+        (ORGANIZATION_FEATURE_STATISTICS_RESULTS, {_sN: _cBF}),
+    ),
+)
+
+ORGANIZATION_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ODr,
+    0,
+    (_UAp, _OS),
+    ((TIMESTAMP, {_sN: _uAp}), (ORGANIZATION_STATISTICS, {_sN: _oS})),
+)
+
+GET_ORGANIZATION_STATISTICS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GOSO,
+    {_sSI: _cGOSR, _smi: None},
+    (_ODr,),
+    ((ORGANIZATION_DETAILS, {_sN: _oD}),),
+)
+
+GET_ORGANIZATION_STATISTICS: StaticOperationSchema = (
+    23,
+    n0,
+    _GOS,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/organization/statistics", "code": 200}
+        )
+    },
+    GET_ORGANIZATION_STATISTICS_INPUT,
+    GET_ORGANIZATION_STATISTICS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_REMAINING_FREE_TRIAL_DAYS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRFTDI,
+    {_sSI: _cGRFTDR, _s: None},
+    (_DI, _AIcco),
+    ((DETECTOR_ID, 9), (ACCOUNT_IDS, {_sN: _aIcc, _sm: None})),
+)
+
+GET_REMAINING_FREE_TRIAL_DAYS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRFTDO,
+    {_sSI: _cGRFTDRo, _smi: None},
+    (_Acc, _UAnp),
+    ((ACCOUNT_FREE_TRIAL_INFOS, {_sN: _acc}), (UNPROCESSED_ACCOUNTS, {_sN: _uAn})),
+)
+
+GET_REMAINING_FREE_TRIAL_DAYS: StaticOperationSchema = (
+    23,
+    n0,
+    _GRFTD,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/freeTrial/daysRemaining",
+                "code": 200,
+            }
+        )
+    },
+    GET_REMAINING_FREE_TRIAL_DAYS_INPUT,
+    GET_REMAINING_FREE_TRIAL_DAYS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_THREAT_ENTITY_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GTESI,
+    {_sSI: _cGTESR, _s: None},
+    (_DI, _TESI),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+THREAT_ENTITY_SET_STATUS: StaticSchema = (
+    14,
+    n0,
+    _TESS,
+    0,
+    (_INACTIVE, _ACTIVATING, _ACTIVE, _DEACTIVATING, _ERROR, _DP_, _DELETED),
+    (
+        (-1, {_sV: _INACTIVE}),
+        (-1, {_sV: _ACTIVATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _DEACTIVATING}),
+        (-1, {_sV: _ERROR}),
+        (-1, {_sV: _DP_}),
+        (-1, {_sV: _DELETED}),
+    ),
+)
+
+GET_THREAT_ENTITY_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GTESO,
+    {_sSI: _cGTESRo, _smi: None},
+    (_N, _Fo, _Loc, _EBO, _St, _Ta, _CA, _UAp, _ED),
+    (
+        (NAME, {_sN: _n, _sm: None}),
+        (THREAT_ENTITY_SET_FORMAT, {_sN: _fo, _sm: None}),
+        (LOCATION, {_sN: _loc, _sm: None}),
+        (EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
+        (THREAT_ENTITY_SET_STATUS, {_sN: _st, _sm: None}),
+        (TAG_MAP, {_sN: _ta}),
+        (TIMESTAMP, {_sN: _cA}),
+        (TIMESTAMP, {_sN: _uAp}),
+        (STRING, {_sN: _eD}),
+    ),
+)
+
+GET_THREAT_ENTITY_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _GTES,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_THREAT_ENTITY_SET_INPUT,
+    GET_THREAT_ENTITY_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_THREAT_INTEL_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GTISI,
+    {_sSI: _cGTISR, _s: None},
+    (_DI, _TISI),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+THREAT_INTEL_SET_STATUS: StaticSchema = (
+    14,
+    n0,
+    _TISS,
+    0,
+    (_INACTIVE, _ACTIVATING, _ACTIVE, _DEACTIVATING, _ERROR, _DP_, _DELETED),
+    (
+        (-1, {_sV: _INACTIVE}),
+        (-1, {_sV: _ACTIVATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _DEACTIVATING}),
+        (-1, {_sV: _ERROR}),
+        (-1, {_sV: _DP_}),
+        (-1, {_sV: _DELETED}),
+    ),
+)
+
+GET_THREAT_INTEL_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GTISO,
+    {_sSI: _cGTISRo, _smi: None},
+    (_N, _Fo, _Loc, _St, _Ta, _EBO),
+    (
+        (NAME, {_sN: _n, _sm: None}),
+        (THREAT_INTEL_SET_FORMAT, {_sN: _fo, _sm: None}),
+        (LOCATION, {_sN: _loc, _sm: None}),
+        (THREAT_INTEL_SET_STATUS, {_sN: _st, _sm: None}),
+        (TAG_MAP, {_sN: _ta}),
+        (ACCOUNT_ID, {_sN: _eBO}),
+    ),
+)
+
+GET_THREAT_INTEL_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _GTIS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/threatintelset/{ThreatIntelSetId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_THREAT_INTEL_SET_INPUT,
+    GET_THREAT_INTEL_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GET_TRUSTED_ENTITY_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GTESIe,
+    {_sSI: _cGTESRom, _s: None},
+    (_DI, _TESIr),
+    ((DETECTOR_ID, 9), (STRING, 9)),
+)
+
+TRUSTED_ENTITY_SET_STATUS: StaticSchema = (
+    14,
+    n0,
+    _TESSr,
+    0,
+    (_INACTIVE, _ACTIVATING, _ACTIVE, _DEACTIVATING, _ERROR, _DP_, _DELETED),
+    (
+        (-1, {_sV: _INACTIVE}),
+        (-1, {_sV: _ACTIVATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _DEACTIVATING}),
+        (-1, {_sV: _ERROR}),
+        (-1, {_sV: _DP_}),
+        (-1, {_sV: _DELETED}),
+    ),
+)
+
+GET_TRUSTED_ENTITY_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GTESOe,
+    {_sSI: _cGTESRoma, _smi: None},
+    (_N, _Fo, _Loc, _EBO, _St, _Ta, _CA, _UAp, _ED),
+    (
+        (NAME, {_sN: _n, _sm: None}),
+        (TRUSTED_ENTITY_SET_FORMAT, {_sN: _fo, _sm: None}),
+        (LOCATION, {_sN: _loc, _sm: None}),
+        (EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
+        (TRUSTED_ENTITY_SET_STATUS, {_sN: _st, _sm: None}),
+        (TAG_MAP, {_sN: _ta}),
+        (TIMESTAMP, {_sN: _cA}),
+        (TIMESTAMP, {_sN: _uAp}),
+        (STRING, {_sN: _eD}),
+    ),
+)
+
+GET_TRUSTED_ENTITY_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _GTESe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_TRUSTED_ENTITY_SET_INPUT,
+    GET_TRUSTED_ENTITY_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+USAGE_FEATURE: StaticSchema = (
+    14,
+    n0,
+    _UFs,
+    0,
+    (
+        _FL_,
+        _CT_,
+        _DL_,
+        _SDE,
+        _EAL,
+        _EMP,
+        _RLE,
+        _LNL,
+        _ERM,
+        _ERM_,
+        _FRM,
+        _RDPP,
+        _RDPS,
+        _AP,
+    ),
+    (
+        (-1, {_sV: _FL_}),
+        (-1, {_sV: _CT_}),
+        (-1, {_sV: _DL_}),
+        (-1, {_sV: _SDE}),
+        (-1, {_sV: _EAL}),
+        (-1, {_sV: _EMP}),
+        (-1, {_sV: _RLE}),
+        (-1, {_sV: _LNL}),
+        (-1, {_sV: _ERM}),
+        (-1, {_sV: _ERM_}),
+        (-1, {_sV: _FRM}),
+        (-1, {_sV: _RDPP}),
+        (-1, {_sV: _RDPS}),
+        (-1, {_sV: _AP}),
+    ),
+)
+
+USAGE_FEATURE_LIST: StaticSchema = (16, n0, _UFL, 0, (_me,), ((USAGE_FEATURE, 0),))
+
+RESOURCE_LIST: StaticSchema = (16, n0, _RLe, 0, (_me,), ((STRING, 0),))
+
+USAGE_CRITERIA: StaticSchema = (
+    18,
+    n0,
+    _UC,
+    0,
+    (_AIcco, _DS, _Reso, _F),
+    (
+        (ACCOUNT_IDS, {_sN: _aIcc}),
+        (DATA_SOURCE_LIST, {_sN: _dS}),
+        (RESOURCE_LIST, {_sN: _reso}),
+        (USAGE_FEATURE_LIST, {_sN: _f}),
+    ),
+)
+
+USAGE_STATISTIC_TYPE: StaticSchema = (
+    14,
+    n0,
+    _UST,
+    0,
+    (_SBA, _SBDS, _SBR, _TR, _SBF, _TABF),
+    (
+        (-1, {_sV: _SBA}),
+        (-1, {_sV: _SBDS}),
+        (-1, {_sV: _SBR}),
+        (-1, {_sV: _TR}),
+        (-1, {_sV: _SBF}),
+        (-1, {_sV: _TABF}),
+    ),
+)
+
+GET_USAGE_STATISTICS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GUSI,
+    {_sSI: _cGUSR, _s: None},
+    (_DI, _UST, _UC, _Uni, _MR, _NT),
+    (
+        (DETECTOR_ID, 9),
+        (USAGE_STATISTIC_TYPE, {_sN: _uST, _sm: None}),
+        (USAGE_CRITERIA, {_sN: _uC, _sm: None}),
+        (STRING, {_sN: _uni}),
+        (MAX_RESULTS, {_sN: _mR}),
+        (STRING, {_sN: _nT}),
+    ),
+)
+
+TOTAL: StaticSchema = (
+    18,
+    n0,
+    _To,
+    0,
+    (_Am, _Uni),
+    ((STRING, {_sN: _am}), (STRING, {_sN: _uni})),
+)
+
+USAGE_ACCOUNT_RESULT: StaticSchema = (
+    18,
+    n0,
+    _UAR,
+    0,
+    (_AIcc, _To),
+    ((ACCOUNT_ID, {_sN: _aIc}), (TOTAL, {_sN: _to})),
+)
+
+USAGE_ACCOUNT_RESULT_LIST: StaticSchema = (
+    16,
+    n0,
+    _UARL,
+    0,
+    (_me,),
+    ((USAGE_ACCOUNT_RESULT, 0),),
+)
+
+USAGE_DATA_SOURCE_RESULT: StaticSchema = (
+    18,
+    n0,
+    _UDSRs,
+    0,
+    (_DSa, _To),
+    ((DATA_SOURCE, {_sN: _dSa}), (TOTAL, {_sN: _to})),
+)
+
+USAGE_DATA_SOURCE_RESULT_LIST: StaticSchema = (
+    16,
+    n0,
+    _UDSRL,
+    0,
+    (_me,),
+    ((USAGE_DATA_SOURCE_RESULT, 0),),
+)
+
+USAGE_FEATURE_RESULT: StaticSchema = (
+    18,
+    n0,
+    _UFR,
+    0,
+    (_Fea, _To),
+    ((USAGE_FEATURE, {_sN: _fe}), (TOTAL, {_sN: _to})),
+)
+
+USAGE_FEATURE_RESULT_LIST: StaticSchema = (
+    16,
+    n0,
+    _UFRL,
+    0,
+    (_me,),
+    ((USAGE_FEATURE_RESULT, 0),),
+)
+
+USAGE_RESOURCE_RESULT: StaticSchema = (
+    18,
+    n0,
+    _URR,
+    0,
+    (_R, _To),
+    ((STRING, {_sN: _r}), (TOTAL, {_sN: _to})),
+)
+
+USAGE_RESOURCE_RESULT_LIST: StaticSchema = (
+    16,
+    n0,
+    _URRL,
+    0,
+    (_me,),
+    ((USAGE_RESOURCE_RESULT, 0),),
+)
+
+USAGE_TOP_ACCOUNT_RESULT: StaticSchema = (
+    18,
+    n0,
+    _UTAR,
+    0,
+    (_AIcc, _To),
+    ((ACCOUNT_ID, {_sN: _aIc}), (TOTAL, {_sN: _to})),
+)
+
+USAGE_TOP_ACCOUNTS_BY_FEATURE_LIST: StaticSchema = (
+    16,
+    n0,
+    _UTABFL,
+    0,
+    (_me,),
+    ((USAGE_TOP_ACCOUNT_RESULT, 0),),
+)
+
+USAGE_TOP_ACCOUNTS_RESULT: StaticSchema = (
+    18,
+    n0,
+    _UTARs,
+    0,
+    (_Fea, _Acc),
+    ((USAGE_FEATURE, {_sN: _fe}), (USAGE_TOP_ACCOUNTS_BY_FEATURE_LIST, {_sN: _acc})),
+)
+
+USAGE_TOP_ACCOUNTS_RESULT_LIST: StaticSchema = (
+    16,
+    n0,
+    _UTARL,
+    0,
+    (_me,),
+    ((USAGE_TOP_ACCOUNTS_RESULT, 0),),
+)
+
+USAGE_STATISTICS: StaticSchema = (
+    18,
+    n0,
+    _USs,
+    0,
+    (_SBAu, _TABFo, _SBDSu, _SBRu, _TRo, _SBFu),
+    (
+        (USAGE_ACCOUNT_RESULT_LIST, {_sN: _sBA}),
+        (USAGE_TOP_ACCOUNTS_RESULT_LIST, {_sN: _tABF}),
+        (USAGE_DATA_SOURCE_RESULT_LIST, {_sN: _sBDS}),
+        (USAGE_RESOURCE_RESULT_LIST, {_sN: _sBR}),
+        (USAGE_RESOURCE_RESULT_LIST, {_sN: _tR}),
+        (USAGE_FEATURE_RESULT_LIST, {_sN: _sBF}),
+    ),
+)
+
+GET_USAGE_STATISTICS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GUSO,
+    {_sSI: _cGUSRo, _smi: None},
+    (_USs, _NT),
+    ((USAGE_STATISTICS, {_sN: _uS}), (STRING, {_sN: _nT})),
+)
+
+GET_USAGE_STATISTICS: StaticOperationSchema = (
+    23,
+    n0,
+    _GUS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/usage/statistics",
+                "code": 200,
+            }
+        )
+    },
+    GET_USAGE_STATISTICS_INPUT,
+    GET_USAGE_STATISTICS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+INVITE_MEMBERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IMI,
+    {_sSI: _cIMR, _s: None},
+    (_DI, _AIcco, _DEN, _M),
+    (
+        (DETECTOR_ID, 9),
+        (ACCOUNT_IDS, {_sN: _aIcc, _sm: None}),
+        (BOOLEAN, {_sN: _dEN}),
+        (STRING, {_sN: _m}),
+    ),
+)
+
+INVITE_MEMBERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IMO,
+    {_sSI: _cIMRo, _smi: None},
+    (_UAnp,),
+    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+)
+
+INVITE_MEMBERS: StaticOperationSchema = (
+    23,
+    n0,
+    _IMn,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/member/invite",
+                "code": 200,
+            }
+        )
+    },
+    INVITE_MEMBERS_INPUT,
+    INVITE_MEMBERS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_COVERAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LCI,
+    {_sSI: _cLCR, _s: None},
+    (_DI, _NT, _MR, _FCil, _SCo),
+    (
+        (DETECTOR_ID, 9),
+        (STRING, {_sN: _nT}),
+        (MAX_RESULTS, {_sN: _mR}),
+        (COVERAGE_FILTER_CRITERIA, {_sN: _fCil}),
+        (COVERAGE_SORT_CRITERIA, {_sN: _sCo}),
+    ),
+)
+
+LIST_COVERAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LCO,
+    {_sSI: _cLCRo, _smi: None},
+    (_Reso, _NT),
+    ((COVERAGE_RESOURCES, {_sN: _reso, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_COVERAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _LC,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/detector/{DetectorId}/coverage", "code": 200}
+        )
+    },
+    LIST_COVERAGE_INPUT,
+    LIST_COVERAGE_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LCDRAI,
+    {_sSI: _cLCDRAR, _s: None},
+    (_MR, _NT, _RI, _Mo),
+    (
+        (DETECTION_RULE_MAX_RESULTS, {_sQ: _mR}),
+        (STRING, {_sQ: _nT}),
+        (RULE_ID, {_sQ: _rI}),
+        (ASSOCIATION_MODE, {_sQ: _mo}),
+    ),
+)
+
+LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LCDRAO,
+    {_sSI: _cLCDRARo, _smi: None},
+    (_RAu, _NT),
+    ((ASSOCIATION_SUMMARY_LIST, {_sN: _rAu, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LCDRA,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/custom-detection-rule/association", "code": 200}
+        )
+    },
+    LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_INPUT,
+    LIST_CUSTOM_DETECTION_RULE_ASSOCIATIONS_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LCDROCI,
+    {_sSI: _cLCDROCR, _s: None},
+    (_MR, _NT, _St),
+    (
+        (DETECTION_RULE_MAX_RESULTS, {_sQ: _mR}),
+        (STRING, {_sQ: _nT}),
+        (DETECTION_RULE_CONFIGURATION_STATUS, {_sQ: _st}),
+    ),
+)
+
+LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LCDROCO,
+    {_sSI: _cLCDROCRo, _smi: None},
+    (_Confi, _NT),
+    (
+        (DETECTION_RULE_ORG_CONFIGURATION_SUMMARY_LIST, {_sN: _confi, _sm: None}),
+        (STRING, {_sN: _nT}),
+    ),
+)
+
+LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LCDROC,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/custom-detection-rule/org-configuration",
+                "code": 200,
+            }
+        )
+    },
+    LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_INPUT,
+    LIST_CUSTOM_DETECTION_RULE_ORG_CONFIGURATIONS_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_CUSTOM_DETECTION_RULES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LCDRI,
+    {_sSI: _cLCDRR, _s: None},
+    (_MR, _NT, _Fil),
+    (
+        (DETECTION_RULE_MAX_RESULTS, {_sN: _mR}),
+        (STRING, {_sN: _nT}),
+        (DETECTION_RULE_FILTER_LIST, {_sN: _fil}),
+    ),
+)
+
+RULE_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _RSul,
+    0,
+    (_RI, _Ar, _N, _De, _Sev, _DSa, _Tac, _Tec, _Se, _Lan, _Sch, _CA, _UAp),
+    (
+        (RULE_ID, {_sN: _rI, _sm: None}),
+        (DETECTION_RULE_ARN, {_sN: _ar, _sm: None}),
+        (RULE_NAME, {_sN: _n, _sm: None}),
+        (DETECTION_RULE_DESCRIPTION, {_sN: _de, _sm: None}),
+        (DETECTION_RULE_SEVERITY, {_sN: _sev, _sm: None}),
+        (DETECTION_RULE_DATA_SOURCE, {_sN: _dSa, _sm: None}),
+        (MITRE_TACTIC, {_sN: _tac, _sm: None}),
+        (MITRE_TECHNIQUE, {_sN: _tec, _sm: None}),
+        (DETECTION_RULE_SERVICE_NAME, {_sN: _ser, _sm: None}),
+        (RULE_LANGUAGE, {_sN: _la}),
+        (RULE_SCHEMA, {_sN: _sch}),
+        (TIMESTAMP, {_sN: _cA, _sm: None}),
+        (TIMESTAMP, {_sN: _uAp}),
+    ),
+)
+
+RULE_SUMMARY_LIST: StaticSchema = (16, n0, _RSL, 0, (_me,), ((RULE_SUMMARY, 0),))
+
+LIST_CUSTOM_DETECTION_RULES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LCDRO,
+    {_sSI: _cLCDRRo, _smi: None},
+    (_Rul, _NT),
+    ((RULE_SUMMARY_LIST, {_sN: _rul, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_CUSTOM_DETECTION_RULES: StaticOperationSchema = (
+    23,
+    n0,
+    _LCDR,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/custom-detection-rule/rule", "code": 200}
+        )
+    },
+    LIST_CUSTOM_DETECTION_RULES_INPUT,
+    LIST_CUSTOM_DETECTION_RULES_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_DETECTORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDI,
+    {_sSI: _cLDR, _s: None},
+    (_MR, _NT),
+    ((MAX_RESULTS, {_sQ: _mR}), (STRING, {_sQ: _nT})),
+)
+
+LIST_DETECTORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDO,
+    {_sSI: _cLDRo, _smi: None},
+    (_DIet, _NT),
+    ((DETECTOR_IDS, {_sN: _dIet, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_DETECTORS: StaticOperationSchema = (
+    23,
+    n0,
+    _LDi,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/detector", "code": 200})},
+    LIST_DETECTORS_INPUT,
+    LIST_DETECTORS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_FILTERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LFI,
+    {_sSI: _cLFR, _s: None},
+    (_DI, _MR, _NT),
+    ((DETECTOR_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (STRING, {_sQ: _nT})),
+)
+
+LIST_FILTERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LFO,
+    {_sSI: _cLFRo, _smi: None},
+    (_FNil, _NT),
+    ((FILTER_NAMES, {_sN: _fNi, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_FILTERS: StaticOperationSchema = (
+    23,
+    n0,
+    _LF,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/detector/{DetectorId}/filter", "code": 200}
+        )
+    },
+    LIST_FILTERS_INPUT,
+    LIST_FILTERS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_FINDINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LFIi,
+    {_sSI: _cLFRom, _s: None},
+    (_DI, _FCin, _SCo, _MR, _NT),
+    (
+        (DETECTOR_ID, 9),
+        (FINDING_CRITERIA, {_sN: _fCin}),
+        (SORT_CRITERIA, {_sN: _sCo}),
+        (MAX_RESULTS, {_sN: _mR}),
+        (STRING, {_sN: _nT}),
+    ),
+)
+
+LIST_FINDINGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LFOi,
+    {_sSI: _cLFRoma, _smi: None},
+    (_FIi, _NT),
+    ((FINDING_IDS, {_sN: _fI, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_FINDINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _LFi,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/detector/{DetectorId}/findings", "code": 200}
+        )
+    },
+    LIST_FINDINGS_INPUT,
+    LIST_FINDINGS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+NEXT_TOKEN: StaticSchema = (3, n0, _NT, 0)
+
+INVESTIGATION_SORT_FIELD: StaticSchema = (
+    14,
+    n0,
+    _ISFn,
+    0,
+    (_ST__, _ET__, _STATUS, _RL_, _CONFIDENCE),
+    (
+        (-1, {_sV: _ST__}),
+        (-1, {_sV: _ET__}),
+        (-1, {_sV: _STATUS}),
+        (-1, {_sV: _RL_}),
+        (-1, {_sV: _CONFIDENCE}),
+    ),
+)
+
+INVESTIGATION_SORT_CRITERIA: StaticSchema = (
+    18,
+    n0,
+    _ISC,
+    0,
+    (_AN, _OB),
+    ((INVESTIGATION_SORT_FIELD, {_sN: _aN}), (ORDER_BY, {_sN: _oB})),
+)
+
+LIST_INVESTIGATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LII,
+    {_sSI: _cLIR, _s: None},
+    (_DI, _SCo, _MR, _NT),
+    (
+        (DETECTOR_ID, 9),
+        (INVESTIGATION_SORT_CRITERIA, {_sN: _sCo}),
+        (MAX_RESULTS, {_sN: _mR}),
+        (NEXT_TOKEN, {_sN: _nT}),
+    ),
+)
+
+INVESTIGATION_TITLE: StaticSchema = (3, n0, _ITnv, 0)
+
+INVESTIGATION_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _ISnv,
+    0,
+    (_IInv, _St, _TP, _RLi, _Con, _Tit, _AIcc, _ST, _ET),
+    (
+        (INVESTIGATION_ID, {_sN: _iInv}),
+        (INVESTIGATION_STATUS, {_sN: _st}),
+        (TRIGGER_PROMPT, {_sN: _tP}),
+        (RISK_LEVEL, {_sN: _rL}),
+        (CONFIDENCE, {_sN: _con}),
+        (INVESTIGATION_TITLE, {_sN: _ti}),
+        (STRING, {_sN: _aIc}),
+        (TIMESTAMP, {_sN: _sT}),
+        (TIMESTAMP, {_sN: _eT}),
+    ),
+)
+
+INVESTIGATION_SUMMARIES: StaticSchema = (
+    16,
+    n0,
+    _ISnve,
+    0,
+    (_me,),
+    ((INVESTIGATION_SUMMARY, 0),),
+)
+
+LIST_INVESTIGATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LIO,
+    {_sSI: _cLIRo, _smi: None},
+    (_Inve, _NT),
+    ((INVESTIGATION_SUMMARIES, {_sN: _inv, _sm: None}), (NEXT_TOKEN, {_sN: _nT})),
+)
+
+LIST_INVESTIGATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LI,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/investigation/list",
+                "code": 200,
+            }
+        )
+    },
+    LIST_INVESTIGATIONS_INPUT,
+    LIST_INVESTIGATIONS_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_INVITATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LIIi,
+    {_sSI: _cLIRom, _s: None},
+    (_MR, _NT),
+    ((MAX_RESULTS, {_sQ: _mR}), (STRING, {_sQ: _nT})),
+)
+
+INVITATION: StaticSchema = (
+    18,
+    n0,
+    _Invi,
+    0,
+    (_AIcc, _II, _RS, _IA),
+    (
+        (ACCOUNT_ID, {_sN: _aIc}),
+        (STRING, {_sN: _iI}),
+        (STRING, {_sN: _rS}),
+        (STRING, {_sN: _iA}),
+    ),
+)
+
+INVITATIONS: StaticSchema = (16, n0, _Invit, 0, (_me,), ((INVITATION, 0),))
+
+LIST_INVITATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LIOi,
+    {_sSI: _cLIRoma, _smi: None},
+    (_Invit, _NT),
+    ((INVITATIONS, {_sN: _invi}), (STRING, {_sN: _nT})),
+)
+
+LIST_INVITATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LIi,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/invitation", "code": 200})},
+    LIST_INVITATIONS_INPUT,
+    LIST_INVITATIONS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_IP_SETS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LIPSI,
+    {_sSI: _cLIPSR, _s: None},
+    (_DI, _MR, _NT),
+    ((DETECTOR_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (STRING, {_sQ: _nT})),
+)
+
+IP_SET_IDS: StaticSchema = (16, n0, _ISIp, 0, (_me,), ((STRING, 0),))
+
+LIST_IP_SETS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LIPSO,
+    {_sSI: _cLIPSRo, _smi: None},
+    (_ISIp, _NT),
+    ((IP_SET_IDS, {_sN: _iSIp, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_IP_SETS: StaticOperationSchema = (
+    23,
+    n0,
+    _LIPS,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/detector/{DetectorId}/ipset", "code": 200}
+        )
+    },
+    LIST_IP_SETS_INPUT,
+    LIST_IP_SETS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_MALWARE_PROTECTION_PLANS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LMPPI,
+    {_sSI: _cLMPPR, _s: None},
+    (_NT,),
+    ((STRING, {_sQ: _nT}),),
+)
+
+MALWARE_PROTECTION_PLAN_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _MPPSa,
+    0,
+    (_MPPI,),
+    ((STRING, {_sN: _mPPI}),),
+)
+
+MALWARE_PROTECTION_PLANS_SUMMARY: StaticSchema = (
+    16,
+    n0,
+    _MPPSal,
+    0,
+    (_me,),
+    ((MALWARE_PROTECTION_PLAN_SUMMARY, 0),),
+)
+
+LIST_MALWARE_PROTECTION_PLANS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LMPPO,
+    {_sSI: _cLMPPRo, _smi: None},
+    (_MPP, _NT),
+    ((MALWARE_PROTECTION_PLANS_SUMMARY, {_sN: _mPP}), (STRING, {_sN: _nT})),
+)
+
+LIST_MALWARE_PROTECTION_PLANS: StaticOperationSchema = (
+    23,
+    n0,
+    _LMPP,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/malware-protection-plan", "code": 200}
+        )
+    },
+    LIST_MALWARE_PROTECTION_PLANS_INPUT,
+    LIST_MALWARE_PROTECTION_PLANS_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_MALWARE_SCANS_CRITERION_KEY: StaticSchema = (
+    14,
+    n0,
+    _LMSCK,
+    0,
+    (_RA_, _SI_, _AI_, _GFI, _RT_, _SST, _SS_, _ST_),
+    (
+        (-1, {_sV: _RA_}),
+        (-1, {_sV: _SI_}),
+        (-1, {_sV: _AI_}),
+        (-1, {_sV: _GFI}),
+        (-1, {_sV: _RT_}),
+        (-1, {_sV: _SST}),
+        (-1, {_sV: _SS_}),
+        (-1, {_sV: _ST_}),
+    ),
+)
+
+LIST_MALWARE_SCANS_FILTER_CRITERION: StaticSchema = (
+    18,
+    n0,
+    _LMSFC,
+    0,
+    (_LMSCK, _FC),
+    ((LIST_MALWARE_SCANS_CRITERION_KEY, {_sN: _cK}), (FILTER_CONDITION, {_sN: _fC})),
+)
+
+LIST_MALWARE_SCANS_FILTER_CRITERION_LIST: StaticSchema = (
+    16,
+    n0,
+    _LMSFCL,
+    0,
+    (_me,),
+    ((LIST_MALWARE_SCANS_FILTER_CRITERION, 0),),
+)
+
+LIST_MALWARE_SCANS_FILTER_CRITERIA: StaticSchema = (
+    18,
+    n0,
+    _LMSFCi,
+    0,
+    (_LMSFC,),
+    ((LIST_MALWARE_SCANS_FILTER_CRITERION_LIST, {_sN: _fCi}),),
+)
+
+LIST_MALWARE_SCANS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LMSI,
+    {_sSI: _cLMSR, _s: None},
+    (_MR, _NT, _FCil, _SCo),
+    (
+        (MAX_RESULTS, {_sQ: _mR}),
+        (STRING, {_sQ: _nT}),
+        (LIST_MALWARE_SCANS_FILTER_CRITERIA, {_sN: _fCil}),
+        (SORT_CRITERIA, {_sN: _sCo}),
+    ),
+)
+
+MALWARE_SCAN: StaticSchema = (
+    18,
+    n0,
+    _MSa,
+    0,
+    (_RAe, _RT, _SIc, _SSc, _SRSc, _STc, _SSA, _SCA),
+    (
+        (NON_EMPTY_STRING, {_sN: _rAe}),
+        (MALWARE_PROTECTION_RESOURCE_TYPE, {_sN: _rT}),
+        (NON_EMPTY_STRING, {_sN: _sI}),
+        (MALWARE_PROTECTION_SCAN_STATUS, {_sN: _sS}),
+        (SCAN_RESULT_STATUS, {_sN: _sRSc}),
+        (MALWARE_PROTECTION_SCAN_TYPE, {_sN: _sTc}),
+        (TIMESTAMP, {_sN: _sSA}),
+        (TIMESTAMP, {_sN: _sCA}),
+    ),
+)
+
+MALWARE_SCANS: StaticSchema = (16, n0, _MSal, 0, (_me,), ((MALWARE_SCAN, 0),))
+
+LIST_MALWARE_SCANS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LMSO,
+    {_sSI: _cLMSRo, _smi: None},
+    (_Sca, _NT),
+    ((MALWARE_SCANS, {_sN: _sc, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_MALWARE_SCANS: StaticOperationSchema = (
+    23,
+    n0,
+    _LMS,
+    {_smith: MappingProxyType({"method": "POST", "uri": "/malware-scan", "code": 200})},
+    LIST_MALWARE_SCANS_INPUT,
+    LIST_MALWARE_SCANS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_MEMBERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LMI,
+    {_sSI: _cLMR, _s: None},
+    (_DI, _MR, _NT, _OAn),
+    (
+        (DETECTOR_ID, 9),
+        (MAX_RESULTS, {_sQ: _mR}),
+        (STRING, {_sQ: _nT}),
+        (STRING, {_sQ: _oAn}),
+    ),
+)
+
+LIST_MEMBERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LMO,
+    {_sSI: _cLMRo, _smi: None},
+    (_Memb, _NT),
+    ((MEMBERS, {_sN: _mem}), (STRING, {_sN: _nT})),
+)
+
+LIST_MEMBERS: StaticOperationSchema = (
+    23,
+    n0,
+    _LM,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/detector/{DetectorId}/member", "code": 200}
+        )
+    },
+    LIST_MEMBERS_INPUT,
+    LIST_MEMBERS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_ORGANIZATION_ADMIN_ACCOUNTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LOAAI,
+    {_sSI: _cLOAAR, _s: None},
+    (_MR, _NT),
+    ((MAX_RESULTS, {_sQ: _mR}), (STRING, {_sQ: _nT})),
+)
+
+LIST_ORGANIZATION_ADMIN_ACCOUNTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LOAAO,
+    {_sSI: _cLOAARo, _smi: None},
+    (_AAd, _NT),
+    ((ADMIN_ACCOUNTS, {_sN: _aA}), (STRING, {_sN: _nT})),
+)
+
+LIST_ORGANIZATION_ADMIN_ACCOUNTS: StaticOperationSchema = (
+    23,
+    n0,
+    _LOAA,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/admin", "code": 200})},
+    LIST_ORGANIZATION_ADMIN_ACCOUNTS_INPUT,
+    LIST_ORGANIZATION_ADMIN_ACCOUNTS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_PUBLISHING_DESTINATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LPDI,
+    {_sSI: _cLPDR, _s: None},
+    (_DI, _MR, _NT),
+    ((DETECTOR_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (STRING, {_sQ: _nT})),
+)
+
+LIST_PUBLISHING_DESTINATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LPDO,
+    {_sSI: _cLPDRo, _smi: None},
+    (_Dest, _NT),
+    ((DESTINATIONS, {_sN: _des, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_PUBLISHING_DESTINATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LPDi,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/publishingDestination",
+                "code": 200,
+            }
+        )
+    },
+    LIST_PUBLISHING_DESTINATIONS_INPUT,
+    LIST_PUBLISHING_DESTINATIONS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GUARD_DUTY_ARN: StaticSchema = (3, n0, _GDA, 0)
+
+LIST_TAGS_FOR_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRI,
+    {_sSI: _cLTFRR, _s: None},
+    (_RAe,),
+    ((GUARD_DUTY_ARN, 9),),
+)
+
+LIST_TAGS_FOR_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRO,
+    {_sSI: _cLTFRRo, _smi: None},
+    (_Ta,),
+    ((TAG_MAP, {_sN: _ta}),),
+)
+
+LIST_TAGS_FOR_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _LTFR,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/tags/{ResourceArn}", "code": 200}
+        )
+    },
+    LIST_TAGS_FOR_RESOURCE_INPUT,
+    LIST_TAGS_FOR_RESOURCE_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_THREAT_ENTITY_SETS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTESI,
+    {_sSI: _cLTESR, _s: None},
+    (_DI, _MR, _NT),
+    ((DETECTOR_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (STRING, {_sQ: _nT})),
+)
+
+THREAT_ENTITY_SET_IDS: StaticSchema = (16, n0, _TESIh, 0, (_me,), ((STRING, 0),))
+
+LIST_THREAT_ENTITY_SETS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTESO,
+    {_sSI: _cLTESRo, _smi: None},
+    (_TESIh, _NT),
+    ((THREAT_ENTITY_SET_IDS, {_sN: _tESIh, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_THREAT_ENTITY_SETS: StaticOperationSchema = (
+    23,
+    n0,
+    _LTES,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/threatentityset",
+                "code": 200,
+            }
+        )
+    },
+    LIST_THREAT_ENTITY_SETS_INPUT,
+    LIST_THREAT_ENTITY_SETS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_THREAT_INTEL_SETS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTISI,
+    {_sSI: _cLTISR, _s: None},
+    (_DI, _MR, _NT),
+    ((DETECTOR_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (STRING, {_sQ: _nT})),
+)
+
+THREAT_INTEL_SET_IDS: StaticSchema = (16, n0, _TISIh, 0, (_me,), ((STRING, 0),))
+
+LIST_THREAT_INTEL_SETS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTISO,
+    {_sSI: _cLTISRo, _smi: None},
+    (_TISIh, _NT),
+    ((THREAT_INTEL_SET_IDS, {_sN: _tISIh, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_THREAT_INTEL_SETS: StaticOperationSchema = (
+    23,
+    n0,
+    _LTIS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/threatintelset",
+                "code": 200,
+            }
+        )
+    },
+    LIST_THREAT_INTEL_SETS_INPUT,
+    LIST_THREAT_INTEL_SETS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+LIST_TRUSTED_ENTITY_SETS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTESIi,
+    {_sSI: _cLTESRom, _s: None},
+    (_DI, _MR, _NT),
+    ((DETECTOR_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (STRING, {_sQ: _nT})),
+)
+
+TRUSTED_ENTITY_SET_IDS: StaticSchema = (16, n0, _TESIru, 0, (_me,), ((STRING, 0),))
+
+LIST_TRUSTED_ENTITY_SETS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTESOi,
+    {_sSI: _cLTESRoma, _smi: None},
+    (_TESIru, _NT),
+    ((TRUSTED_ENTITY_SET_IDS, {_sN: _tESIru, _sm: None}), (STRING, {_sN: _nT})),
+)
+
+LIST_TRUSTED_ENTITY_SETS: StaticOperationSchema = (
+    23,
+    n0,
+    _LTESi,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/detector/{DetectorId}/trustedentityset",
+                "code": 200,
+            }
+        )
+    },
+    LIST_TRUSTED_ENTITY_SETS_INPUT,
+    LIST_TRUSTED_ENTITY_SETS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+S3_OBJECT_FOR_SEND_OBJECT_MALWARE_SCAN: StaticSchema = (
+    18,
+    n0,
+    _SOFSOMS,
+    0,
+    (_Bu, _Ke, _VI),
+    ((STRING, {_sN: _bu}), (STRING, {_sN: _ke}), (STRING, {_sN: _vI})),
+)
+
+SEND_OBJECT_MALWARE_SCAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SOMSI,
+    {_sSI: _cSOMSR, _s: None},
+    (_SO,),
+    ((S3_OBJECT_FOR_SEND_OBJECT_MALWARE_SCAN, {_sN: _sO}),),
+)
+
+SEND_OBJECT_MALWARE_SCAN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SOMSO,
+    {_sSI: _cSOMSRo, _smi: None},
+)
+
+SEND_OBJECT_MALWARE_SCAN: StaticOperationSchema = (
+    23,
+    n0,
+    _SOMS,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/object-malware-scan/send", "code": 200}
+        )
+    },
+    SEND_OBJECT_MALWARE_SCAN_INPUT,
+    SEND_OBJECT_MALWARE_SCAN_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+RESOURCE_ARN: StaticSchema = (3, n0, _RAe, 0)
+
+RECOVERY_POINT: StaticSchema = (
+    18,
+    n0,
+    _RP,
+    0,
+    (_BVN, _CSD),
+    ((STRING, {_sN: _bVN, _sm: None}), (CONTINUOUS_SCAN_DETAILS, {_sN: _cSD})),
+)
+
+START_MALWARE_SCAN_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SMSC,
+    0,
+    (_Ro, _ISD, _RP),
+    (
+        (NON_EMPTY_STRING, {_sN: _ro, _sm: None}),
+        (INCREMENTAL_SCAN_DETAILS, {_sN: _iSD}),
+        (RECOVERY_POINT, {_sN: _rP}),
+    ),
+)
+
+START_MALWARE_SCAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SMSI,
+    {_sSI: _cSMSR, _s: None},
+    (_RAe, _CTl, _SCca),
+    (
+        (RESOURCE_ARN, {_sN: _rAe, _sm: None}),
+        (CLIENT_TOKEN, {_sN: _cTl, _sTm: None}),
+        (START_MALWARE_SCAN_CONFIGURATION, {_sN: _sCca}),
+    ),
+)
+
+START_MALWARE_SCAN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SMSO,
+    {_sSI: _cSMSRo, _smi: None},
+    (_SIc,),
+    ((NON_EMPTY_STRING, {_sN: _sI}),),
+)
+
+START_MALWARE_SCAN: StaticOperationSchema = (
+    23,
+    n0,
+    _SMS,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/malware-scan/start", "code": 200}
+        )
+    },
+    START_MALWARE_SCAN_INPUT,
+    START_MALWARE_SCAN_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, CONFLICT_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+START_MONITORING_MEMBERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SMMI,
+    {_sSI: _cSMMR, _s: None},
+    (_DI, _AIcco),
+    ((DETECTOR_ID, 9), (ACCOUNT_IDS, {_sN: _aIcc, _sm: None})),
+)
+
+START_MONITORING_MEMBERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SMMO,
+    {_sSI: _cSMMRo, _smi: None},
+    (_UAnp,),
+    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+)
+
+START_MONITORING_MEMBERS: StaticOperationSchema = (
+    23,
+    n0,
+    _SMM,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/member/start",
+                "code": 200,
+            }
+        )
+    },
+    START_MONITORING_MEMBERS_INPUT,
+    START_MONITORING_MEMBERS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+STOP_MONITORING_MEMBERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SMMIt,
+    {_sSI: _cSMMRom, _s: None},
+    (_DI, _AIcco),
+    ((DETECTOR_ID, 9), (ACCOUNT_IDS, {_sN: _aIcc, _sm: None})),
+)
+
+STOP_MONITORING_MEMBERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SMMOt,
+    {_sSI: _cSMMRoma, _smi: None},
+    (_UAnp,),
+    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+)
+
+STOP_MONITORING_MEMBERS: StaticOperationSchema = (
+    23,
+    n0,
+    _SMMt,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/detector/{DetectorId}/member/stop", "code": 200}
+        )
+    },
+    STOP_MONITORING_MEMBERS_INPUT,
+    STOP_MONITORING_MEMBERS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+TAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TRI,
+    {_sSI: _cTRR, _s: None},
+    (_RAe, _Ta),
+    ((GUARD_DUTY_ARN, 9), (TAG_MAP, {_sN: _ta, _sm: None})),
+)
+
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _cTRRo, _smi: None})
+
+TAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _TRa,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/tags/{ResourceArn}", "code": 204}
+        )
+    },
+    TAG_RESOURCE_INPUT,
+    TAG_RESOURCE_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+UNARCHIVE_FINDINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UFIn,
+    {_sSI: _cUFR, _s: None},
+    (_DI, _FIi),
+    ((DETECTOR_ID, 9), (FINDING_IDS, {_sN: _fI, _sm: None})),
+)
+
+UNARCHIVE_FINDINGS_OUTPUT: StaticSchema = (18, n0, _UFO, {_sSI: _cUFRo, _smi: None})
+
+UNARCHIVE_FINDINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _UFn,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/findings/unarchive",
+                "code": 200,
+            }
+        )
+    },
+    UNARCHIVE_FINDINGS_INPUT,
+    UNARCHIVE_FINDINGS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+TAG_KEY_LIST: StaticSchema = (16, n0, _TKL, 0, (_me,), ((TAG_KEY, 0),))
+
+UNTAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URI,
+    {_sSI: _cURR, _s: None},
+    (_RAe, _TKa),
+    ((GUARD_DUTY_ARN, 9), (TAG_KEY_LIST, {_sQ: _tK, _sm: None})),
+)
+
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _URO, {_sSI: _cURRo, _smi: None})
+
+UNTAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _URn,
+    {
+        _smith: MappingProxyType(
+            {"method": "DELETE", "uri": "/tags/{ResourceArn}", "code": 204}
+        )
+    },
+    UNTAG_RESOURCE_INPUT,
+    UNTAG_RESOURCE_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UCDRAI,
+    {_sSI: _cUCDRAR, _s: None},
+    (_RI, _AIs, _Mo),
+    ((RULE_ID, 9), (ASSOCIATION_ID, 9), (ASSOCIATION_MODE, {_sN: _mo, _sm: None})),
+)
+
+UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UCDRAO,
+    {_sSI: _cUCDRARo, _smi: None},
+)
+
+UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION: StaticOperationSchema = (
+    23,
+    n0,
+    _UCDRA,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_INPUT,
+    UPDATE_CUSTOM_DETECTION_RULE_ASSOCIATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UCDROCI,
+    {_sSI: _cUCDROCR, _s: None},
+    (_RI, _Mo, _IAI, _EAI),
+    (
+        (RULE_ID, 9),
+        (ASSOCIATION_MODE, {_sN: _mo, _sm: None}),
+        (DETECTION_RULE_ACCOUNT_IDS, {_sN: _iAI}),
+        (DETECTION_RULE_ACCOUNT_IDS, {_sN: _eAI}),
+    ),
+)
+
+UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UCDROCO,
+    {_sSI: _cUCDROCRo, _smi: None},
+)
+
+UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _UCDROC,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/custom-detection-rule/org-configuration/{RuleId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_INPUT,
+    UPDATE_CUSTOM_DETECTION_RULE_ORG_CONFIGURATION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+UPDATE_DETECTOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UDI,
+    {_sSI: _cUDR, _s: None},
+    (_DI, _En, _FPF, _DS, _F),
+    (
+        (DETECTOR_ID, 9),
+        (BOOLEAN, {_sN: _en}),
+        (FINDING_PUBLISHING_FREQUENCY, {_sN: _fPF}),
+        (DATA_SOURCE_CONFIGURATIONS, {_sN: _dS}),
+        (DETECTOR_FEATURE_CONFIGURATIONS, {_sN: _f}),
+    ),
+)
+
+UPDATE_DETECTOR_OUTPUT: StaticSchema = (18, n0, _UDO, {_sSI: _cUDRo, _smi: None})
+
+UPDATE_DETECTOR: StaticOperationSchema = (
+    23,
+    n0,
+    _UD,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/detector/{DetectorId}", "code": 200}
+        )
+    },
+    UPDATE_DETECTOR_INPUT,
+    UPDATE_DETECTOR_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+UPDATE_FILTER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UFIp,
+    {_sSI: _cUFRom, _s: None},
+    (_DI, _FN, _De, _Ac, _Ra, _FCin),
+    (
+        (DETECTOR_ID, 9),
+        (STRING, 9),
+        (FILTER_DESCRIPTION, {_sN: _de}),
+        (FILTER_ACTION, {_sN: _ac}),
+        (FILTER_RANK, {_sN: _ra}),
+        (FINDING_CRITERIA, {_sN: _fCin}),
+    ),
+)
+
+UPDATE_FILTER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UFOp,
+    {_sSI: _cUFRoma, _smi: None},
+    (_N,),
+    ((FILTER_NAME, {_sN: _n, _sm: None}),),
+)
+
+UPDATE_FILTER: StaticOperationSchema = (
+    23,
+    n0,
+    _UFp,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/filter/{FilterName}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_FILTER_INPUT,
+    UPDATE_FILTER_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+UPDATE_FINDINGS_FEEDBACK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UFFI,
+    {_sSI: _cUFFR, _s: None},
+    (_DI, _FIi, _Fe, _Com),
+    (
+        (DETECTOR_ID, 9),
+        (FINDING_IDS, {_sN: _fI, _sm: None}),
+        (FEEDBACK, {_sN: _fee, _sm: None}),
+        (SENSITIVE_STRING, {_sN: _com}),
+    ),
+)
+
+UPDATE_FINDINGS_FEEDBACK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UFFO,
+    {_sSI: _cUFFRo, _smi: None},
+)
+
+UPDATE_FINDINGS_FEEDBACK: StaticOperationSchema = (
+    23,
+    n0,
+    _UFF,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/findings/feedback",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_FINDINGS_FEEDBACK_INPUT,
+    UPDATE_FINDINGS_FEEDBACK_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+UPDATE_IP_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UIPSI,
+    {_sSI: _cUIPSR, _s: None},
+    (_DI, _ISI, _N, _Loc, _Activ, _EBO),
+    (
+        (DETECTOR_ID, 9),
+        (STRING, 9),
+        (NAME, {_sN: _n}),
+        (LOCATION, {_sN: _loc}),
+        (BOOLEAN, {_sN: _act}),
+        (ACCOUNT_ID, {_sN: _eBO}),
+    ),
+)
+
+UPDATE_IP_SET_OUTPUT: StaticSchema = (18, n0, _UIPSO, {_sSI: _cUIPSRo, _smi: None})
+
+UPDATE_IP_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _UIPS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/ipset/{IpSetId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_IP_SET_INPUT,
+    UPDATE_IP_SET_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+UPDATE_S3_BUCKET_RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _USBR,
+    0,
+    (_OP,),
+    ((MALWARE_PROTECTION_PLAN_OBJECT_PREFIXES_LIST, {_sN: _oP}),),
+)
+
+UPDATE_PROTECTED_RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _UPR,
+    0,
+    (_SB,),
+    ((UPDATE_S3_BUCKET_RESOURCE, {_sN: _sB}),),
+)
+
+UPDATE_MALWARE_PROTECTION_PLAN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UMPPI,
+    {_sSI: _cUMPPR, _s: None},
+    (_MPPI, _Ro, _Actio, _PR),
+    (
+        (STRING, 9),
+        (STRING, {_sN: _ro}),
+        (MALWARE_PROTECTION_PLAN_ACTIONS, {_sN: _acti}),
+        (UPDATE_PROTECTED_RESOURCE, {_sN: _pR}),
+    ),
+)
+
+UPDATE_MALWARE_PROTECTION_PLAN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UMPPO,
+    {_sSI: _sU, _smi: None},
+)
+
+UPDATE_MALWARE_PROTECTION_PLAN: StaticOperationSchema = (
+    23,
+    n0,
+    _UMPP,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "PATCH",
+                "uri": "/malware-protection-plan/{MalwareProtectionPlanId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_MALWARE_PROTECTION_PLAN_INPUT,
+    UPDATE_MALWARE_PROTECTION_PLAN_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        BAD_REQUEST_EXCEPTION,
+        INTERNAL_SERVER_ERROR_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+UPDATE_MALWARE_SCAN_SETTINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UMSSI,
+    {_sSI: _cUMSSR, _s: None},
+    (_DI, _SRCc, _ESP),
+    (
+        (DETECTOR_ID, 9),
+        (SCAN_RESOURCE_CRITERIA, {_sN: _sRCc}),
+        (EBS_SNAPSHOT_PRESERVATION, {_sN: _eSP}),
+    ),
+)
+
+UPDATE_MALWARE_SCAN_SETTINGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UMSSO,
+    {_sSI: _cUMSSRo, _smi: None},
+)
+
+UPDATE_MALWARE_SCAN_SETTINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _UMSS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/malware-scan-settings",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_MALWARE_SCAN_SETTINGS_INPUT,
+    UPDATE_MALWARE_SCAN_SETTINGS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+MEMBER_ADDITIONAL_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _MACe,
+    0,
+    (_N, _St),
+    ((ORG_FEATURE_ADDITIONAL_CONFIGURATION, {_sN: _n}), (FEATURE_STATUS, {_sN: _st})),
+)
+
+MEMBER_ADDITIONAL_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _MACem,
+    0,
+    (_me,),
+    ((MEMBER_ADDITIONAL_CONFIGURATION, 0),),
+)
+
+MEMBER_FEATURES_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _MFC,
+    0,
+    (_N, _St, _ACd),
+    (
+        (ORG_FEATURE, {_sN: _n}),
+        (FEATURE_STATUS, {_sN: _st}),
+        (MEMBER_ADDITIONAL_CONFIGURATIONS, {_sN: _aC}),
+    ),
+)
+
+MEMBER_FEATURES_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _MFCe,
+    0,
+    (_me,),
+    ((MEMBER_FEATURES_CONFIGURATION, 0),),
+)
+
+UPDATE_MEMBER_DETECTORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UMDI,
+    {_sSI: _cUMDR, _s: None},
+    (_DI, _AIcco, _DS, _F),
+    (
+        (DETECTOR_ID, 9),
+        (ACCOUNT_IDS, {_sN: _aIcc, _sm: None}),
+        (DATA_SOURCE_CONFIGURATIONS, {_sN: _dS}),
+        (MEMBER_FEATURES_CONFIGURATIONS, {_sN: _f}),
+    ),
+)
+
+UPDATE_MEMBER_DETECTORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UMDO,
+    {_sSI: _cUMDRo, _smi: None},
+    (_UAnp,),
+    ((UNPROCESSED_ACCOUNTS, {_sN: _uAn, _sm: None}),),
+)
+
+UPDATE_MEMBER_DETECTORS: StaticOperationSchema = (
+    23,
+    n0,
+    _UMD,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/member/detector/update",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_MEMBER_DETECTORS_INPUT,
+    UPDATE_MEMBER_DETECTORS_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OKALC,
+    0,
+    (_AE,),
+    ((BOOLEAN, {_sN: _aE, _sm: None}),),
+)
+
+ORGANIZATION_KUBERNETES_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OKC,
+    0,
+    (_AL,),
+    ((ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION, {_sN: _aL, _sm: None}),),
+)
+
+ORGANIZATION_EBS_VOLUMES: StaticSchema = (
+    18,
+    n0,
+    _OEV,
+    0,
+    (_AE,),
+    ((BOOLEAN, {_sN: _aE}),),
+)
+
+ORGANIZATION_SCAN_EC2_INSTANCE_WITH_FINDINGS: StaticSchema = (
+    18,
+    n0,
+    _OSEIWF,
+    0,
+    (_EV,),
+    ((ORGANIZATION_EBS_VOLUMES, {_sN: _eV}),),
+)
+
+ORGANIZATION_MALWARE_PROTECTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OMPC,
+    0,
+    (_SEIWF,),
+    ((ORGANIZATION_SCAN_EC2_INSTANCE_WITH_FINDINGS, {_sN: _sEIWF}),),
+)
+
+ORGANIZATION_S3_LOGS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OSLC,
+    0,
+    (_AE,),
+    ((BOOLEAN, {_sN: _aE, _sm: None}),),
+)
+
+ORGANIZATION_DATA_SOURCE_CONFIGURATIONS: StaticSchema = (
+    18,
+    n0,
+    _ODSC,
+    0,
+    (_SL, _K, _MP),
+    (
+        (ORGANIZATION_S3_LOGS_CONFIGURATION, {_sN: _sLo}),
+        (ORGANIZATION_KUBERNETES_CONFIGURATION, {_sN: _k}),
+        (ORGANIZATION_MALWARE_PROTECTION_CONFIGURATION, {_sN: _mP}),
+    ),
+)
+
+ORGANIZATION_ADDITIONAL_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OAC,
+    0,
+    (_N, _AE),
+    (
+        (ORG_FEATURE_ADDITIONAL_CONFIGURATION, {_sN: _n}),
+        (ORG_FEATURE_STATUS, {_sN: _aE}),
+    ),
+)
+
+ORGANIZATION_ADDITIONAL_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _OACr,
+    0,
+    (_me,),
+    ((ORGANIZATION_ADDITIONAL_CONFIGURATION, 0),),
+)
+
+ORGANIZATION_FEATURE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OFC,
+    0,
+    (_N, _AE, _ACd),
+    (
+        (ORG_FEATURE, {_sN: _n}),
+        (ORG_FEATURE_STATUS, {_sN: _aE}),
+        (ORGANIZATION_ADDITIONAL_CONFIGURATIONS, {_sN: _aC}),
+    ),
+)
+
+ORGANIZATION_FEATURES_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _OFCr,
+    0,
+    (_me,),
+    ((ORGANIZATION_FEATURE_CONFIGURATION, 0),),
+)
+
+UPDATE_ORGANIZATION_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UOCI,
+    {_sSI: _cUOCR, _s: None},
+    (_DI, _AE, _DS, _F, _AEOM),
+    (
+        (DETECTOR_ID, 9),
+        (BOOLEAN, {_sN: _aE}),
+        (ORGANIZATION_DATA_SOURCE_CONFIGURATIONS, {_sN: _dS}),
+        (ORGANIZATION_FEATURES_CONFIGURATIONS, {_sN: _f}),
+        (AUTO_ENABLE_MEMBERS, {_sN: _aEOM}),
+    ),
+)
+
+UPDATE_ORGANIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UOCO,
+    {_sSI: _cUOCRo, _smi: None},
+)
+
+UPDATE_ORGANIZATION_CONFIGURATION: StaticOperationSchema = (
+    23,
+    n0,
+    _UOC,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/detector/{DetectorId}/admin", "code": 200}
+        )
+    },
+    UPDATE_ORGANIZATION_CONFIGURATION_INPUT,
+    UPDATE_ORGANIZATION_CONFIGURATION_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+UPDATE_PUBLISHING_DESTINATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UPDI,
+    {_sSI: _cUPDR, _s: None},
+    (_DI, _DIe, _DP),
+    ((DETECTOR_ID, 9), (STRING, 9), (DESTINATION_PROPERTIES, {_sN: _dP})),
+)
+
+UPDATE_PUBLISHING_DESTINATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UPDO,
+    {_sSI: _cUPDRo, _smi: None},
+)
+
+UPDATE_PUBLISHING_DESTINATION: StaticOperationSchema = (
+    23,
+    n0,
+    _UPD,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/publishingDestination/{DestinationId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_PUBLISHING_DESTINATION_INPUT,
+    UPDATE_PUBLISHING_DESTINATION_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+UPDATE_THREAT_ENTITY_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UTESI,
+    {_sSI: _cUTESR, _s: None},
+    (_DI, _TESI, _N, _Loc, _EBO, _Activ),
+    (
+        (DETECTOR_ID, 9),
+        (STRING, 9),
+        (NAME, {_sN: _n}),
+        (LOCATION, {_sN: _loc}),
+        (EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
+        (BOOLEAN, {_sN: _act}),
+    ),
+)
+
+UPDATE_THREAT_ENTITY_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UTESO,
+    {_sSI: _cUTESRo, _smi: None},
+)
+
+UPDATE_THREAT_ENTITY_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _UTES,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_THREAT_ENTITY_SET_INPUT,
+    UPDATE_THREAT_ENTITY_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+UPDATE_THREAT_INTEL_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UTISI,
+    {_sSI: _cUTISR, _s: None},
+    (_DI, _TISI, _N, _Loc, _Activ, _EBO),
+    (
+        (DETECTOR_ID, 9),
+        (STRING, 9),
+        (NAME, {_sN: _n}),
+        (LOCATION, {_sN: _loc}),
+        (BOOLEAN, {_sN: _act}),
+        (ACCOUNT_ID, {_sN: _eBO}),
+    ),
+)
+
+UPDATE_THREAT_INTEL_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UTISO,
+    {_sSI: _cUTISRo, _smi: None},
+)
+
+UPDATE_THREAT_INTEL_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _UTIS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/threatintelset/{ThreatIntelSetId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_THREAT_INTEL_SET_INPUT,
+    UPDATE_THREAT_INTEL_SET_OUTPUT,
+    (ACCESS_DENIED_EXCEPTION, BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+UPDATE_TRUSTED_ENTITY_SET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UTESIp,
+    {_sSI: _cUTESRom, _s: None},
+    (_DI, _TESIr, _N, _Loc, _EBO, _Activ),
+    (
+        (DETECTOR_ID, 9),
+        (STRING, 9),
+        (NAME, {_sN: _n}),
+        (LOCATION, {_sN: _loc}),
+        (EXPECTED_BUCKET_OWNER, {_sN: _eBO}),
+        (BOOLEAN, {_sN: _act}),
+    ),
+)
+
+UPDATE_TRUSTED_ENTITY_SET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UTESOp,
+    {_sSI: _cUTESRoma, _smi: None},
+)
+
+UPDATE_TRUSTED_ENTITY_SET: StaticOperationSchema = (
+    23,
+    n0,
+    _UTESp,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}",
+                "code": 200,
+            }
+        )
+    },
+    UPDATE_TRUSTED_ENTITY_SET_INPUT,
+    UPDATE_TRUSTED_ENTITY_SET_OUTPUT,
+    (BAD_REQUEST_EXCEPTION, INTERNAL_SERVER_ERROR_EXCEPTION),
+)
+
+GUARD_DUTY_API_SERVICE: StaticSchema = (
+    21,
+    n0,
+    _GDAPIS,
+    {
+        _aw: MappingProxyType({"name": "guardduty"}),
+        _sBm: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                        "UseDualStack": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseDualStack",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                    }
                 ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-UPDATE_MEMBER_DETECTORS = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateMemberDetectors"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/member/detector/update",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationKubernetesAuditLogsConfiguration"),
-    members={
-        "AutoEnable": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-ORGANIZATION_KUBERNETES_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationKubernetesConfiguration"),
-    members={
-        "AuditLogs": {
-            "target": ORGANIZATION_KUBERNETES_AUDIT_LOGS_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="auditLogs"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-ORGANIZATION_EBS_VOLUMES = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationEbsVolumes"),
-    members={
-        "AutoEnable": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable")
-            ],
-        }
-    },
-)
-
-ORGANIZATION_SCAN_EC2_INSTANCE_WITH_FINDINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationScanEc2InstanceWithFindings"),
-    members={
-        "EbsVolumes": {
-            "target": ORGANIZATION_EBS_VOLUMES,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="ebsVolumes")
-            ],
-        }
-    },
-)
-
-ORGANIZATION_MALWARE_PROTECTION_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationMalwareProtectionConfiguration"),
-    members={
-        "ScanEc2InstanceWithFindings": {
-            "target": ORGANIZATION_SCAN_EC2_INSTANCE_WITH_FINDINGS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="scanEc2InstanceWithFindings",
-                )
-            ],
-        }
-    },
-)
-
-ORGANIZATION_S3_LOGS_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationS3LogsConfiguration"),
-    members={
-        "AutoEnable": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable"),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-ORGANIZATION_DATA_SOURCE_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationDataSourceConfigurations"),
-    members={
-        "S3Logs": {
-            "target": ORGANIZATION_S3_LOGS_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="s3Logs")],
-        },
-        "Kubernetes": {
-            "target": ORGANIZATION_KUBERNETES_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="kubernetes")
-            ],
-        },
-        "MalwareProtection": {
-            "target": ORGANIZATION_MALWARE_PROTECTION_CONFIGURATION,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="malwareProtection")
-            ],
-        },
-    },
-)
-
-ORGANIZATION_ADDITIONAL_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationAdditionalConfiguration"),
-    members={
-        "Name": {
-            "target": ORG_FEATURE_ADDITIONAL_CONFIGURATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "AutoEnable": {
-            "target": ORG_FEATURE_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable")
-            ],
-        },
-    },
-)
-
-ORGANIZATION_ADDITIONAL_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationAdditionalConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ORGANIZATION_ADDITIONAL_CONFIGURATION}},
-)
-
-ORGANIZATION_FEATURE_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationFeatureConfiguration"),
-    members={
-        "Name": {
-            "target": ORG_FEATURE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "AutoEnable": {
-            "target": ORG_FEATURE_STATUS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable")
-            ],
-        },
-        "AdditionalConfiguration": {
-            "target": ORGANIZATION_ADDITIONAL_CONFIGURATIONS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="additionalConfiguration"
-                )
-            ],
-        },
-    },
-)
-
-ORGANIZATION_FEATURES_CONFIGURATIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#OrganizationFeaturesConfigurations"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": ORGANIZATION_FEATURE_CONFIGURATION}},
-)
-
-UPDATE_ORGANIZATION_CONFIGURATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateOrganizationConfigurationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateOrganizationConfigurationRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "AutoEnable": {
-            "target": BOOLEAN,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="autoEnable")
-            ],
-        },
-        "DataSources": {
-            "target": ORGANIZATION_DATA_SOURCE_CONFIGURATIONS,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#jsonName"), value="dataSources")
-            ],
-        },
-        "Features": {
-            "target": ORGANIZATION_FEATURES_CONFIGURATIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="features")],
-        },
-        "AutoEnableOrganizationMembers": {
-            "target": AUTO_ENABLE_MEMBERS,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"),
-                    value="autoEnableOrganizationMembers",
-                )
-            ],
-        },
-    },
-)
-
-UPDATE_ORGANIZATION_CONFIGURATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateOrganizationConfigurationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateOrganizationConfigurationResponse",
-        )
-    ],
-)
-
-UPDATE_ORGANIZATION_CONFIGURATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateOrganizationConfiguration"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "POST", "uri": "/detector/{DetectorId}/admin", "code": 200}
-            ),
-        )
-    ],
-)
-
-UPDATE_PUBLISHING_DESTINATION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdatePublishingDestinationInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdatePublishingDestinationRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "DestinationId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "DestinationProperties": {
-            "target": DESTINATION_PROPERTIES,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="destinationProperties"
-                )
-            ],
-        },
-    },
-)
-
-UPDATE_PUBLISHING_DESTINATION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdatePublishingDestinationOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdatePublishingDestinationResponse",
-        )
-    ],
-)
-
-UPDATE_PUBLISHING_DESTINATION = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdatePublishingDestination"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/publishingDestination/{DestinationId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_THREAT_ENTITY_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateThreatEntitySetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateThreatEntitySetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "ThreatEntitySetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="location")],
-        },
-        "ExpectedBucketOwner": {
-            "target": EXPECTED_BUCKET_OWNER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
-        "Activate": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate")],
-        },
-    },
-)
-
-UPDATE_THREAT_ENTITY_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateThreatEntitySetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateThreatEntitySetResponse",
-        )
-    ],
-)
-
-UPDATE_THREAT_ENTITY_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateThreatEntitySet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/threatentityset/{ThreatEntitySetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_THREAT_INTEL_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateThreatIntelSetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateThreatIntelSetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "ThreatIntelSetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="location")],
-        },
-        "Activate": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate")],
-        },
-        "ExpectedBucketOwner": {
-            "target": ACCOUNT_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
-    },
-)
-
-UPDATE_THREAT_INTEL_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateThreatIntelSetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateThreatIntelSetResponse",
-        )
-    ],
-)
-
-UPDATE_THREAT_INTEL_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateThreatIntelSet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/threatintelset/{ThreatIntelSetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-UPDATE_TRUSTED_ENTITY_SET_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateTrustedEntitySetInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateTrustedEntitySetRequest",
-        )
-    ],
-    members={
-        "DetectorId": {
-            "target": DETECTOR_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "TrustedEntitySetId": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "Name": {
-            "target": NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="name")],
-        },
-        "Location": {
-            "target": LOCATION,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="location")],
-        },
-        "ExpectedBucketOwner": {
-            "target": EXPECTED_BUCKET_OWNER,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#jsonName"), value="expectedBucketOwner"
-                )
-            ],
-        },
-        "Activate": {
-            "target": BOOLEAN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#jsonName"), value="activate")],
-        },
-    },
-)
-
-UPDATE_TRUSTED_ENTITY_SET_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.guardduty#UpdateTrustedEntitySetOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.guardduty#UpdateTrustedEntitySetResponse",
-        )
-    ],
-)
-
-UPDATE_TRUSTED_ENTITY_SET = Schema(
-    id=ShapeID("com.amazonaws.guardduty#UpdateTrustedEntitySet"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/detector/{DetectorId}/trustedentityset/{TrustedEntitySetId}",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-GUARD_DUTY_API_SERVICE = Schema(
-    id=ShapeID("com.amazonaws.guardduty#GuardDutyAPIService"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"), value=MappingProxyType({"name": "guardduty"})
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
-                            "UseDualStack": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseDualStack",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
+                        }
+                    ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseDualStack"}), True),
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "supportsDualStack",
+                                        ),
+                                    }
+                                ),
+                                True,
                             ),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType({"ref": "UseDualStack"}),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsDualStack",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (
+                                MappingProxyType(
+                                    {
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
                                             ),
-                                        }
-                                    ),
-                                    True,
+                                            "supportsFIPS",
+                                        ),
+                                    }
                                 ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "supportsFIPS",
-                                            ),
-                                        }
-                                    ),
-                                    True,
-                                ),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "stringEquals",
-                                "argv": (
-                                    MappingProxyType(
-                                        {
-                                            "fn": "getAttr",
-                                            "argv": (
-                                                MappingProxyType(
-                                                    {"ref": "PartitionResult"}
-                                                ),
-                                                "name",
-                                            ),
-                                        }
-                                    ),
-                                    "aws-us-gov",
-                                ),
-                            }
-                        ),
+                                True,
+                            ),
+                        }
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
+                    MappingProxyType(
+                        {
+                            "fn": "stringEquals",
+                            "argv": (
+                                MappingProxyType(
                                     {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
+                                        "fn": "getAttr",
+                                        "argv": (
+                                            MappingProxyType(
+                                                {"ref": "PartitionResult"}
+                                            ),
+                                            "name",
+                                        ),
                                     }
                                 ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://guardduty-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://guardduty.{Region}.amazonaws.com",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://guardduty-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "FIPS is enabled but this partition does not support FIPS",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://guardduty.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "DualStack is enabled but this partition does not support DualStack",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://guardduty.{Region}.{PartitionResult#dnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                                "aws-us-gov",
+                            ),
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 14,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED",
-                }
-            ),
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://guardduty-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://guardduty.{Region}.amazonaws.com",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://guardduty-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://guardduty.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://guardduty.{Region}.{PartitionResult#dnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 14,
+                "nodes": "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED",
+            }
         ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "GuardDuty",
-                    "arnNamespace": "guardduty",
-                    "cloudFormationName": "GuardDuty",
-                    "cloudTrailEventSource": "guardduty.amazonaws.com",
-                    "endpointPrefix": "guardduty",
-                }
-            ),
+        _aws: MappingProxyType(
+            {
+                "sdkId": "GuardDuty",
+                "arnNamespace": "guardduty",
+                "cloudFormationName": "GuardDuty",
+                "cloudTrailEventSource": "guardduty.amazonaws.com",
+                "endpointPrefix": "guardduty",
+            }
         ),
-        Trait.new(id=ShapeID("aws.protocols#restJson1")),
-    ],
+        _aJ: None,
+    },
 )

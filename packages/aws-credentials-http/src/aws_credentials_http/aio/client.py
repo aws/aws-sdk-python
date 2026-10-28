@@ -8,7 +8,7 @@ from smithy_core import URI
 from smithy_core.exceptions import SmithyIdentityError
 from smithy_http import Field, Fields
 from smithy_http.aio import HTTPRequest
-from smithy_http.aio.interfaces import HTTPClient, HTTPResponse
+from smithy_http.aio.interfaces import AsyncHTTPClient, HTTPResponse
 from smithy_http.interfaces import HTTPRequestConfiguration
 
 _CONTAINER_METADATA_IP = "169.254.170.2"
@@ -28,7 +28,7 @@ class HttpCredentialsClient:
 
     def __init__(
         self,
-        http_client: HTTPClient,
+        http_client: AsyncHTTPClient,
         *,
         timeout: int = _DEFAULT_TIMEOUT,
         retries: int = _DEFAULT_RETRIES,

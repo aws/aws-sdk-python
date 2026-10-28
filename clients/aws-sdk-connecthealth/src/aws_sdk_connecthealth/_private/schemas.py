@@ -2,1965 +2,1757 @@
 
 from types import MappingProxyType
 
-from smithy_core.prelude import INTEGER, STRING, TIMESTAMP, UNIT
-from smithy_core.schemas import Schema
-from smithy_core.shapes import ShapeID, ShapeType
-from smithy_core.traits import Trait
-
-
-ACCESS_DENIED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#AccessDeniedException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=401),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-DOMAIN_ID = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#DomainId"), shape_type=ShapeType.STRING
-)
-
-SUBSCRIPTION_ID = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#SubscriptionId"),
-    shape_type=ShapeType.STRING,
-)
-
-ACTIVATE_SUBSCRIPTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ActivateSubscriptionInput"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "subscriptionId": {
-            "target": SUBSCRIPTION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-SUBSCRIPTION_ARN = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#SubscriptionArn"),
-    shape_type=ShapeType.STRING,
-)
-
-SUBSCRIPTION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#SubscriptionStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ACTIVE": {"target": UNIT},
-        "INACTIVE": {"target": UNIT},
-        "DELETED": {"target": UNIT},
-    },
-)
-
-SUBSCRIPTION_DESCRIPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#SubscriptionDescription"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "subscriptionId": {
-            "target": SUBSCRIPTION_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "arn": {
-            "target": SUBSCRIPTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "status": {
-            "target": SUBSCRIPTION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "createdAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "lastUpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "activatedAt": {"target": TIMESTAMP},
-        "deactivatedAt": {"target": TIMESTAMP},
-    },
-)
-
-ACTIVATE_SUBSCRIPTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ActivateSubscriptionOutput"),
-    members={"subscription": {"target": SUBSCRIPTION_DESCRIPTION}},
-)
-
-INTERNAL_SERVER_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#InternalServerException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="server"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=500),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ResourceNotFoundException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=404),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-VALIDATION_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ValidationException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=400),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-ACTIVATE_SUBSCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#ActivateSubscription"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/domains/{domainId}/subscriptions/{subscriptionId}/activate",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-ERROR_MESSAGE = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#ErrorMessage"), shape_type=ShapeType.STRING
-)
-
-URI = Schema(id=ShapeID("com.amazonaws.connecthealth#Uri"), shape_type=ShapeType.STRING)
-
-POST_STREAM_ARTIFACT_GENERATION_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#PostStreamArtifactGenerationStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "IN_PROGRESS": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "COMPLETED": {"target": UNIT},
-    },
-)
-
-ARTIFACT_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ArtifactDetails"),
-    members={
-        "outputLocation": {"target": URI},
-        "status": {"target": POST_STREAM_ARTIFACT_GENERATION_STATUS},
-        "failureReason": {"target": ERROR_MESSAGE},
-    },
-)
-
-AUDIO_CHUNK = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#AudioChunk"), shape_type=ShapeType.BLOB
-)
-
-AUDIO_OFFSET = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#AudioOffset"), shape_type=ShapeType.DOUBLE
-)
-
-CLINICAL_NOTE_GENERATION_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ClinicalNoteGenerationResult"),
-    members={
-        "noteResult": {"target": ARTIFACT_DETAILS},
-        "transcriptResult": {"target": ARTIFACT_DETAILS},
-        "afterVisitSummaryResult": {"target": ARTIFACT_DETAILS},
-    },
-)
-
-SENSITIVE_SECTION_HEADER_STRING = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#SensitiveSectionHeaderString"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-SENSITIVE_MARKDOWN_STRING = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#SensitiveMarkdownString"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-TEMPLATE_SECTION_INSTRUCTION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#TemplateSectionInstruction"),
-    members={
-        "sectionHeader": {
-            "target": SENSITIVE_SECTION_HEADER_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "sectionInstruction": {
-            "target": SENSITIVE_MARKDOWN_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TEMPLATE_INSTRUCTIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#TemplateInstructions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TEMPLATE_SECTION_INSTRUCTION}},
-)
-
-CUSTOM_TEMPLATE_BASE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#CustomTemplateBase"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "HISTORY_AND_PHYSICAL": {"target": UNIT},
-        "GIRPP": {"target": UNIT},
-        "DAP": {"target": UNIT},
-        "SIRP": {"target": UNIT},
-        "BIRP": {"target": UNIT},
-        "BEHAVIORAL_SOAP": {"target": UNIT},
-    },
-)
-
-CUSTOM_TEMPLATE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#CustomTemplate"),
-    members={
-        "templateType": {
-            "target": CUSTOM_TEMPLATE_BASE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "templateInstructions": {
-            "target": TEMPLATE_INSTRUCTIONS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-MANAGED_NOTE_TEMPLATE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ManagedNoteTemplate"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "HISTORY_AND_PHYSICAL": {"target": UNIT},
-        "GIRPP": {"target": UNIT},
-        "DAP": {"target": UNIT},
-        "SIRP": {"target": UNIT},
-        "BIRP": {"target": UNIT},
-        "BEHAVIORAL_SOAP": {"target": UNIT},
-        "PHYSICAL_SOAP": {"target": UNIT},
-    },
-)
-
-MANAGED_TEMPLATE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ManagedTemplate"),
-    members={
-        "templateType": {
-            "target": MANAGED_NOTE_TEMPLATE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-NOTE_TEMPLATE_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#NoteTemplateSettings"),
-    shape_type=ShapeType.UNION,
-    members={
-        "managedTemplate": {"target": MANAGED_TEMPLATE},
-        "customTemplate": {"target": CUSTOM_TEMPLATE},
-    },
-)
-
-CLINICAL_NOTE_GENERATION_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ClinicalNoteGenerationSettings"),
-    members={
-        "noteTemplateSettings": {
-            "target": NOTE_TEMPLATE_SETTINGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-CUSTOM_TEMPLATE_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#CustomTemplateResponse"),
-    members={"templateType": {"target": CUSTOM_TEMPLATE_BASE}},
-)
-
-MANAGED_TEMPLATE_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ManagedTemplateResponse"),
-    members={"templateType": {"target": MANAGED_NOTE_TEMPLATE}},
-)
-
-NOTE_TEMPLATE_SETTINGS_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#NoteTemplateSettingsResponse"),
-    shape_type=ShapeType.UNION,
-    members={
-        "managedTemplate": {"target": MANAGED_TEMPLATE_RESPONSE},
-        "customTemplate": {"target": CUSTOM_TEMPLATE_RESPONSE},
-    },
-)
-
-CLINICAL_NOTE_GENERATION_SETTINGS_RESPONSE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ClinicalNoteGenerationSettingsResponse"),
-    members={"noteTemplateSettings": {"target": NOTE_TEMPLATE_SETTINGS_RESPONSE}},
-)
-
-CONFLICT_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ConflictException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=409),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-KMS_KEY_ARN = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#KmsKeyArn"), shape_type=ShapeType.STRING
-)
-
-DOMAIN_NAME = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#DomainName"), shape_type=ShapeType.STRING
-)
-
-TAG_KEY = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#TagKey"), shape_type=ShapeType.STRING
-)
-
-TAG_VALUE = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#TagValue"), shape_type=ShapeType.STRING
-)
-
-TAG_MAP = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#TagMap"),
-    shape_type=ShapeType.MAP,
-    members={"key": {"target": TAG_KEY}, "value": {"target": TAG_VALUE}},
-)
-
-CREATE_WEB_APP_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#CreateWebAppConfiguration"),
-    members={
-        "ehrRole": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "idcInstanceId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "idcRegion": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-CREATE_DOMAIN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#CreateDomainInput"),
-    members={
-        "name": {
-            "target": DOMAIN_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "kmsKeyArn": {"target": KMS_KEY_ARN},
-        "webAppSetupConfiguration": {"target": CREATE_WEB_APP_CONFIGURATION},
-        "tags": {"target": TAG_MAP},
-    },
-)
-
-DOMAIN_ARN = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#DomainArn"), shape_type=ShapeType.STRING
-)
-
-ENCRYPTION_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#EncryptionType"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "AWS_OWNED_KEY": {"target": UNIT},
-        "CUSTOMER_MANAGED_KEY": {"target": UNIT},
-    },
-)
-
-ENCRYPTION_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#EncryptionContext"),
-    members={
-        "encryptionType": {
-            "target": ENCRYPTION_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "kmsKeyArn": {"target": KMS_KEY_ARN},
-    },
-)
-
-DOMAIN_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#DomainStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "ACTIVE": {"target": UNIT},
-        "DELETING": {"target": UNIT},
-        "DELETED": {"target": UNIT},
-    },
-)
-
-WEB_APP_CONFIGURATION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#WebAppConfiguration"),
-    members={
-        "ehrRole": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "idcApplicationId": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "idcRegion": {
-            "target": STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-WEB_APP_URL = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#WebAppUrl"), shape_type=ShapeType.STRING
-)
-
-CREATE_DOMAIN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#CreateDomainOutput"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "arn": {
-            "target": DOMAIN_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "name": {
-            "target": DOMAIN_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "kmsKeyArn": {"target": KMS_KEY_ARN},
-        "encryptionContext": {"target": ENCRYPTION_CONTEXT},
-        "status": {
-            "target": DOMAIN_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "webAppUrl": {"target": WEB_APP_URL},
-        "webAppConfiguration": {"target": WEB_APP_CONFIGURATION},
-        "createdAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-SERVICE_QUOTA_EXCEEDED_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ServiceQuotaExceededException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=402),
-    ],
-    members={"message": {"target": STRING}},
-)
-
-CREATE_DOMAIN = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#CreateDomain"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "POST", "uri": "/domain", "code": 201}),
-        )
-    ],
-)
-
-CREATE_SUBSCRIPTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#CreateSubscriptionInput"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-CREATE_SUBSCRIPTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#CreateSubscriptionOutput"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "subscriptionId": {
-            "target": SUBSCRIPTION_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "arn": {
-            "target": SUBSCRIPTION_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "status": {
-            "target": SUBSCRIPTION_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "createdAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "lastUpdatedAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "activatedAt": {"target": TIMESTAMP},
-        "deactivatedAt": {"target": TIMESTAMP},
-    },
-)
-
-CREATE_SUBSCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#CreateSubscription"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/domains/{domainId}/subscriptions",
-                    "code": 201,
-                }
-            ),
-        )
-    ],
-)
-
-DEACTIVATE_SUBSCRIPTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#DeactivateSubscriptionInput"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "subscriptionId": {
-            "target": SUBSCRIPTION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-DEACTIVATE_SUBSCRIPTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#DeactivateSubscriptionOutput"),
-    members={"subscription": {"target": SUBSCRIPTION_DESCRIPTION}},
-)
-
-DEACTIVATE_SUBSCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#DeactivateSubscription"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "POST",
-                    "uri": "/domains/{domainId}/subscriptions/{subscriptionId}/deactivate",
-                    "code": 200,
-                }
-            ),
-        )
-    ],
-)
-
-DELETE_DOMAIN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#DeleteDomainInput"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-DELETE_DOMAIN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#DeleteDomainOutput"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "arn": {
-            "target": DOMAIN_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "status": {
-            "target": DOMAIN_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-DELETE_DOMAIN = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#DeleteDomain"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "DELETE", "uri": "/domain/{domainId}"}),
-        )
-    ],
-)
-
-GET_DOMAIN_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#GetDomainInput"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-GET_DOMAIN_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#GetDomainOutput"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "arn": {
-            "target": DOMAIN_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "name": {
-            "target": DOMAIN_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "kmsKeyArn": {"target": KMS_KEY_ARN},
-        "encryptionContext": {"target": ENCRYPTION_CONTEXT},
-        "status": {
-            "target": DOMAIN_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "webAppUrl": {"target": WEB_APP_URL},
-        "webAppConfiguration": {"target": WEB_APP_CONFIGURATION},
-        "createdAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "tags": {"target": TAG_MAP},
-    },
-)
-
-GET_DOMAIN = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#GetDomain"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "GET", "uri": "/domain/{domainId}"}),
-        )
-    ],
-)
-
-SCRIBE_SESSION_ID = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#ScribeSessionId"),
-    shape_type=ShapeType.STRING,
-)
-
-GET_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#GetMedicalScribeListeningSessionInput"),
-    members={
-        "sessionId": {
-            "target": SCRIBE_SESSION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "subscriptionId": {
-            "target": SUBSCRIPTION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-    },
-)
-
-MEDICAL_SCRIBE_CHANNEL_ID = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeChannelId"),
-    shape_type=ShapeType.INTEGER,
-)
-
-MEDICAL_SCRIBE_PARTICIPANT_ROLE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeParticipantRole"),
-    shape_type=ShapeType.ENUM,
-    members={"PATIENT": {"target": UNIT}, "CLINICIAN": {"target": UNIT}},
-)
-
-MEDICAL_SCRIBE_CHANNEL_DEFINITION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeChannelDefinition"),
-    members={
-        "channelId": {
-            "target": MEDICAL_SCRIBE_CHANNEL_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "participantRole": {
-            "target": MEDICAL_SCRIBE_PARTICIPANT_ROLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-MEDICAL_SCRIBE_CHANNEL_DEFINITIONS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeChannelDefinitions"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": MEDICAL_SCRIBE_CHANNEL_DEFINITION}},
-)
-
-NON_NULL_BOOLEAN = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#NonNullBoolean"),
-    shape_type=ShapeType.BOOLEAN,
-)
-
-MEDICAL_SCRIBE_LANGUAGE_CODE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeLanguageCode"),
-    shape_type=ShapeType.ENUM,
-    members={"EN_US": {"target": UNIT}, "MULTI": {"target": UNIT}},
-)
-
-MEDICAL_SCRIBE_MEDIA_ENCODING = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeMediaEncoding"),
-    shape_type=ShapeType.ENUM,
-    members={"PCM": {"target": UNIT}, "FLAC": {"target": UNIT}},
-)
-
-MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeMediaSampleRateHertz"),
-    shape_type=ShapeType.INTEGER,
-)
-
-MEDICAL_SCRIBE_POST_STREAM_ACTIONS_RESULT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribePostStreamActionsResult"),
-    members={
-        "clinicalNoteGenerationResult": {"target": CLINICAL_NOTE_GENERATION_RESULT}
-    },
-)
-
-S3_URI = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#S3Uri"), shape_type=ShapeType.STRING
-)
-
-MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS_RESPONSE = Schema.collection(
-    id=ShapeID(
-        "com.amazonaws.connecthealth#MedicalScribePostStreamActionSettingsResponse"
+from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
+
+
+n0 = "com.amazonaws.connecthealth"
+_ADE = "AccessDeniedException"
+_s = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
+_m = "message"
+_DI = "DomainId"
+_SI = "SubscriptionId"
+_ASI = "ActivateSubscriptionInput"
+_sm = "smithy.api#input"
+_dI = "domainId"
+_smi = "smithy.api#required"
+_sL = "smithy.api#httpLabel"
+_sI = "subscriptionId"
+_SA = "SubscriptionArn"
+_SS = "SubscriptionStatus"
+_ACTIVE = "ACTIVE"
+_sV = "smithy.api#enumValue"
+_INACTIVE = "INACTIVE"
+_DELETED = "DELETED"
+_SD = "SubscriptionDescription"
+_a = "arn"
+_st = "status"
+_cA = "createdAt"
+_lUA = "lastUpdatedAt"
+_aA = "activatedAt"
+_dA = "deactivatedAt"
+_ASO = "ActivateSubscriptionOutput"
+_smit = "smithy.api#output"
+_su = "subscription"
+_ISE = "InternalServerException"
+_se = "server"
+_RNFE = "ResourceNotFoundException"
+_VE = "ValidationException"
+_AS = "ActivateSubscription"
+_smith = "smithy.api#http"
+_EM = "ErrorMessage"
+_U = "Uri"
+_PSAGS = "PostStreamArtifactGenerationStatus"
+_IP = "IN_PROGRESS"
+_FAILED = "FAILED"
+_COMPLETED = "COMPLETED"
+_AD = "ArtifactDetails"
+_oL = "outputLocation"
+_fR = "failureReason"
+_AC = "AudioChunk"
+_AO = "AudioOffset"
+_CNGR = "ClinicalNoteGenerationResult"
+_nR = "noteResult"
+_tR = "transcriptResult"
+_aVSR = "afterVisitSummaryResult"
+_SSHS = "SensitiveSectionHeaderString"
+_smithy = "smithy.api#sensitive"
+_SMS = "SensitiveMarkdownString"
+_TSI = "TemplateSectionInstruction"
+_sH = "sectionHeader"
+_sIe = "sectionInstruction"
+_TI = "TemplateInstructions"
+_me = "member"
+_CTB = "CustomTemplateBase"
+_HAP = "HISTORY_AND_PHYSICAL"
+_GIRPP = "GIRPP"
+_DAP = "DAP"
+_SIRP = "SIRP"
+_BIRP = "BIRP"
+_BS = "BEHAVIORAL_SOAP"
+_CT = "CustomTemplate"
+_tT = "templateType"
+_tI = "templateInstructions"
+_MNT = "ManagedNoteTemplate"
+_PS = "PHYSICAL_SOAP"
+_MT = "ManagedTemplate"
+_NTS = "NoteTemplateSettings"
+_mT = "managedTemplate"
+_cT = "customTemplate"
+_CNGS = "ClinicalNoteGenerationSettings"
+_nTS = "noteTemplateSettings"
+_CTR = "CustomTemplateResponse"
+_MTR = "ManagedTemplateResponse"
+_NTSR = "NoteTemplateSettingsResponse"
+_CNGSR = "ClinicalNoteGenerationSettingsResponse"
+_CE = "ConflictException"
+_KKA = "KmsKeyArn"
+_DN = "DomainName"
+_TK = "TagKey"
+_TV = "TagValue"
+_TM = "TagMap"
+_k = "key"
+_v = "value"
+_CWAC = "CreateWebAppConfiguration"
+_eR = "ehrRole"
+_iII = "idcInstanceId"
+_iR = "idcRegion"
+_CDI = "CreateDomainInput"
+_n = "name"
+_kKA = "kmsKeyArn"
+_wASC = "webAppSetupConfiguration"
+_t = "tags"
+_DA = "DomainArn"
+_ET = "EncryptionType"
+_AOK = "AWS_OWNED_KEY"
+_CMK = "CUSTOMER_MANAGED_KEY"
+_EC = "EncryptionContext"
+_eT = "encryptionType"
+_DS = "DomainStatus"
+_DELETING = "DELETING"
+_WAC = "WebAppConfiguration"
+_iAI = "idcApplicationId"
+_WAU = "WebAppUrl"
+_CDO = "CreateDomainOutput"
+_eC = "encryptionContext"
+_wAU = "webAppUrl"
+_wAC = "webAppConfiguration"
+_SQEE = "ServiceQuotaExceededException"
+_CD = "CreateDomain"
+_CSI = "CreateSubscriptionInput"
+_CSO = "CreateSubscriptionOutput"
+_CS = "CreateSubscription"
+_DSI = "DeactivateSubscriptionInput"
+_DSO = "DeactivateSubscriptionOutput"
+_DSe = "DeactivateSubscription"
+_DDI = "DeleteDomainInput"
+_DDO = "DeleteDomainOutput"
+_DD = "DeleteDomain"
+_GDI = "GetDomainInput"
+_GDO = "GetDomainOutput"
+_GD = "GetDomain"
+_SSI = "ScribeSessionId"
+_GMSLSI = "GetMedicalScribeListeningSessionInput"
+_sIes = "sessionId"
+_MSCI = "MedicalScribeChannelId"
+_MSPR = "MedicalScribeParticipantRole"
+_PATIENT = "PATIENT"
+_CLINICIAN = "CLINICIAN"
+_MSCD = "MedicalScribeChannelDefinition"
+_cI = "channelId"
+_pR = "participantRole"
+_MSCDe = "MedicalScribeChannelDefinitions"
+_NNB = "NonNullBoolean"
+_MSLC = "MedicalScribeLanguageCode"
+_EU = "EN_US"
+_eU = "en-US"
+_MULTI = "MULTI"
+_mu = "multi"
+_MSME = "MedicalScribeMediaEncoding"
+_PCM = "PCM"
+_p = "pcm"
+_FLAC = "FLAC"
+_f = "flac"
+_MSMSRH = "MedicalScribeMediaSampleRateHertz"
+_MSPSAR = "MedicalScribePostStreamActionsResult"
+_cNGR = "clinicalNoteGenerationResult"
+_SU = "S3Uri"
+_MSPSASR = "MedicalScribePostStreamActionSettingsResponse"
+_oSU = "outputS3Uri"
+_cNGS = "clinicalNoteGenerationSettings"
+_MSSS = "MedicalScribeStreamStatus"
+_PAUSED = "PAUSED"
+_MSLSD = "MedicalScribeListeningSessionDetails"
+_lC = "languageCode"
+_mSRH = "mediaSampleRateHertz"
+_mE = "mediaEncoding"
+_cD = "channelDefinitions"
+_pSAS = "postStreamActionSettings"
+_pSAR = "postStreamActionResult"
+_eCP = "encounterContextProvided"
+_sS = "streamStatus"
+_sCT = "streamCreationTime"
+_sET = "streamEndTime"
+_GMSLSO = "GetMedicalScribeListeningSessionOutput"
+_mSLSD = "medicalScribeListeningSessionDetails"
+_TE = "ThrottlingException"
+_GMSLS = "GetMedicalScribeListeningSession"
+_smithya = "smithy.api#endpoint"
+_JI = "JobId"
+_GPIJI = "GetPatientInsightsJobInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cGPIJR = "com.amazonaws.connecthealth#GetPatientInsightsJobRequest"
+_jI = "jobId"
+_SNES = "SensitiveNonEmptyString"
+_PIEC = "PatientInsightsEncounterContext"
+_eRn = "encounterReason"
+_NES = "NonEmptyString"
+_FHIRS = "FHIRServer"
+_fE = "fhirEndpoint"
+_oT = "oauthToken"
+_SSo = "S3Source"
+_u = "uri"
+_SSou = "S3Sources"
+_IDC = "InputDataConfig"
+_fS = "fhirServer"
+_sSo = "s3Sources"
+_IT = "InsightsType"
+_PV = "PRE_VISIT"
+_IC = "InsightsContext"
+_iT = "insightsType"
+_IO = "InsightsOutput"
+_JA = "JobArn"
+_JS = "JobStatus"
+_SUBMITTED = "SUBMITTED"
+_SUCCEEDED = "SUCCEEDED"
+_ODC = "OutputDataConfig"
+_sOP = "s3OutputPath"
+_SIDS = "SensitiveIsoDateString"
+_P = "Pronouns"
+_HH = "HE_HIM"
+_SH = "SHE_HER"
+_TT = "THEY_THEM"
+_PIPC = "PatientInsightsPatientContext"
+_pI = "patientId"
+_dOB = "dateOfBirth"
+_pr = "pronouns"
+_PR = "ProviderRole"
+_S = "Specialty"
+_PC = "PRIMARY_CARE"
+_UC = "UserContext"
+_r = "role"
+_uI = "userId"
+_sp = "specialty"
+_GPIJO = "GetPatientInsightsJobOutput"
+_cGPIJRo = "com.amazonaws.connecthealth#GetPatientInsightsJobResponse"
+_jA = "jobArn"
+_jS = "jobStatus"
+_cTr = "creationTime"
+_sF = "smithy.api#timestampFormat"
+_dt = "date-time"
+_uT = "updatedTime"
+_iO = "insightsOutput"
+_sD = "statusDetails"
+_pC = "patientContext"
+_iC = "insightsContext"
+_eCn = "encounterContext"
+_uC = "userContext"
+_iDC = "inputDataConfig"
+_oDC = "outputDataConfig"
+_GPIJ = "GetPatientInsightsJob"
+_GSI = "GetSubscriptionInput"
+_GSO = "GetSubscriptionOutput"
+_GS = "GetSubscription"
+_LDI = "ListDomainsInput"
+_sQ = "smithy.api#httpQuery"
+_mR = "maxResults"
+_nT = "nextToken"
+_DSo = "DomainSummary"
+_DSL = "DomainSummaryList"
+_LDO = "ListDomainsOutput"
+_d = "domains"
+_LD = "ListDomains"
+_LSI = "ListSubscriptionsInput"
+_SL = "SubscriptionList"
+_LSO = "ListSubscriptionsOutput"
+_sub = "subscriptions"
+_LS = "ListSubscriptions"
+_LTFRI = "ListTagsForResourceInput"
+_rA = "resourceArn"
+_LTFRO = "ListTagsForResourceOutput"
+_LTFR = "ListTagsForResource"
+_MSAE = "MedicalScribeAudioEvent"
+_aC = "audioChunk"
+_MSBAE = "MedicalScribeBinaryAudioEvent"
+_sP = "smithy.api#eventPayload"
+_ECn = "EncounterContext"
+_uCn = "unstructuredContext"
+_MSPSAS = "MedicalScribePostStreamActionSettings"
+_MSCE = "MedicalScribeConfigurationEvent"
+_MSSCET = "MedicalScribeSessionControlEventType"
+_EOS = "END_OF_SESSION"
+_MSSCE = "MedicalScribeSessionControlEvent"
+_ty = "type"
+_MSIS = "MedicalScribeInputStream"
+_smithyap = "smithy.api#streaming"
+_aE = "audioEvent"
+_bAE = "binaryAudioEvent"
+_sCE = "sessionControlEvent"
+_cE = "configurationEvent"
+_SMSLSI = "StartMedicalScribeListeningSessionInput"
+_sHm = "smithy.api#httpHeader"
+_xamsi = "x-amzn-medscribe-session-id"
+_xamdi = "x-amzn-medscribe-domain-id"
+_xamsi_ = "x-amzn-medscribe-subscription-id"
+_xamlc = "x-amzn-medscribe-language-code"
+_xamsr = "x-amzn-medscribe-sample-rate"
+_xamme = "x-amzn-medscribe-media-encoding"
+_iS = "inputStream"
+_sPm = "smithy.api#httpPayload"
+_RI = "RequestId"
+_MSTS = "MedicalScribeTranscriptSegment"
+_sIeg = "segmentId"
+_aBO = "audioBeginOffset"
+_aEO = "audioEndOffset"
+_iP = "isPartial"
+_co = "content"
+_MSTE = "MedicalScribeTranscriptEvent"
+_tS = "transcriptSegment"
+_MSOS = "MedicalScribeOutputStream"
+_tE = "transcriptEvent"
+_iFE = "internalFailureException"
+_vE = "validationException"
+_SMSLSO = "StartMedicalScribeListeningSessionOutput"
+_rI = "requestId"
+_xari = "x-amzn-request-id"
+_rS = "responseStream"
+_SMSLS = "StartMedicalScribeListeningSession"
+_SPIJI = "StartPatientInsightsJobInput"
+_cSPIJR = "com.amazonaws.connecthealth#StartPatientInsightsJobRequest"
+_cTl = "clientToken"
+_sT = "smithy.api#idempotencyToken"
+_SPIJO = "StartPatientInsightsJobOutput"
+_cSPIJRo = "com.amazonaws.connecthealth#StartPatientInsightsJobResponse"
+_SPIJ = "StartPatientInsightsJob"
+_TRI = "TagResourceInput"
+_TRO = "TagResourceOutput"
+_sU = "smithy.api#Unit"
+_TR = "TagResource"
+_TKL = "TagKeyList"
+_URI = "UntagResourceInput"
+_tK = "tagKeys"
+_URO = "UntagResourceOutput"
+_UR = "UntagResource"
+_CH = "ConnectHealth"
+_aw = "aws.auth#sigv4"
+_sB = "smithy.rules#endpointBdd"
+_aws = "aws.api#service"
+_aJ = "aws.protocols#restJson1"
+_smithyapi = "smithy.api#cors"
+
+ACCESS_DENIED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ADE,
+    {_s: _c, _sE: 401},
+    (_m,),
+    ((3, 0),),
+)
+
+DOMAIN_ID: StaticSchema = (3, n0, _DI, 0)
+
+SUBSCRIPTION_ID: StaticSchema = (3, n0, _SI, 0)
+
+ACTIVATE_SUBSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ASI,
+    {_sm: None},
+    (_dI, _sI),
+    ((DOMAIN_ID, 9), (SUBSCRIPTION_ID, 9)),
+)
+
+SUBSCRIPTION_ARN: StaticSchema = (3, n0, _SA, 0)
+
+SUBSCRIPTION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _SS,
+    0,
+    (_ACTIVE, _INACTIVE, _DELETED),
+    ((-1, {_sV: _ACTIVE}), (-1, {_sV: _INACTIVE}), (-1, {_sV: _DELETED})),
+)
+
+SUBSCRIPTION_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _SD,
+    0,
+    (_dI, _sI, _a, _st, _cA, _lUA, _aA, _dA),
+    (
+        (DOMAIN_ID, 1),
+        (SUBSCRIPTION_ID, 1),
+        (SUBSCRIPTION_ARN, 1),
+        (SUBSCRIPTION_STATUS, 1),
+        (4, 1),
+        (4, 1),
+        (4, 0),
+        (4, 0),
     ),
-    members={
-        "outputS3Uri": {
-            "target": S3_URI,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "clinicalNoteGenerationSettings": {
-            "target": CLINICAL_NOTE_GENERATION_SETTINGS_RESPONSE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
+)
+
+ACTIVATE_SUBSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ASO,
+    {_smit: None},
+    (_su,),
+    ((SUBSCRIPTION_DESCRIPTION, 0),),
+)
+
+INTERNAL_SERVER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_s: _se, _sE: 500},
+    (_m,),
+    ((3, 0),),
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_s: _c, _sE: 404},
+    (_m,),
+    ((3, 0),),
+)
+
+VALIDATION_EXCEPTION: StaticSchema = (18, n0, _VE, {_s: _c, _sE: 400}, (_m,), ((3, 0),))
+
+ACTIVATE_SUBSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _AS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/domains/{domainId}/subscriptions/{subscriptionId}/activate",
+                "code": 200,
+            }
+        )
     },
+    ACTIVATE_SUBSCRIPTION_INPUT,
+    ACTIVATE_SUBSCRIPTION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-MEDICAL_SCRIBE_STREAM_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeStreamStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "IN_PROGRESS": {"target": UNIT},
-        "PAUSED": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "COMPLETED": {"target": UNIT},
+ERROR_MESSAGE: StaticSchema = (3, n0, _EM, 0)
+
+URI: StaticSchema = (3, n0, _U, 0)
+
+POST_STREAM_ARTIFACT_GENERATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _PSAGS,
+    0,
+    (_IP, _FAILED, _COMPLETED),
+    ((-1, {_sV: _IP}), (-1, {_sV: _FAILED}), (-1, {_sV: _COMPLETED})),
+)
+
+ARTIFACT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _AD,
+    0,
+    (_oL, _st, _fR),
+    ((URI, 0), (POST_STREAM_ARTIFACT_GENERATION_STATUS, 0), (ERROR_MESSAGE, 0)),
+)
+
+AUDIO_CHUNK: StaticSchema = (1, n0, _AC, 0)
+
+AUDIO_OFFSET: StaticSchema = (10, n0, _AO, 0)
+
+CLINICAL_NOTE_GENERATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _CNGR,
+    0,
+    (_nR, _tR, _aVSR),
+    ((ARTIFACT_DETAILS, 0), (ARTIFACT_DETAILS, 0), (ARTIFACT_DETAILS, 0)),
+)
+
+SENSITIVE_SECTION_HEADER_STRING: StaticSchema = (3, n0, _SSHS, 4)
+
+SENSITIVE_MARKDOWN_STRING: StaticSchema = (3, n0, _SMS, 4)
+
+TEMPLATE_SECTION_INSTRUCTION: StaticSchema = (
+    18,
+    n0,
+    _TSI,
+    0,
+    (_sH, _sIe),
+    ((SENSITIVE_SECTION_HEADER_STRING, 1), (SENSITIVE_MARKDOWN_STRING, 1)),
+)
+
+TEMPLATE_INSTRUCTIONS: StaticSchema = (
+    16,
+    n0,
+    _TI,
+    0,
+    (_me,),
+    ((TEMPLATE_SECTION_INSTRUCTION, 0),),
+)
+
+CUSTOM_TEMPLATE_BASE: StaticSchema = (
+    14,
+    n0,
+    _CTB,
+    0,
+    (_HAP, _GIRPP, _DAP, _SIRP, _BIRP, _BS),
+    (
+        (-1, {_sV: _HAP}),
+        (-1, {_sV: _GIRPP}),
+        (-1, {_sV: _DAP}),
+        (-1, {_sV: _SIRP}),
+        (-1, {_sV: _BIRP}),
+        (-1, {_sV: _BS}),
+    ),
+)
+
+CUSTOM_TEMPLATE: StaticSchema = (
+    18,
+    n0,
+    _CT,
+    0,
+    (_tT, _tI),
+    ((CUSTOM_TEMPLATE_BASE, 1), (TEMPLATE_INSTRUCTIONS, 1)),
+)
+
+MANAGED_NOTE_TEMPLATE: StaticSchema = (
+    14,
+    n0,
+    _MNT,
+    0,
+    (_HAP, _GIRPP, _DAP, _SIRP, _BIRP, _BS, _PS),
+    (
+        (-1, {_sV: _HAP}),
+        (-1, {_sV: _GIRPP}),
+        (-1, {_sV: _DAP}),
+        (-1, {_sV: _SIRP}),
+        (-1, {_sV: _BIRP}),
+        (-1, {_sV: _BS}),
+        (-1, {_sV: _PS}),
+    ),
+)
+
+MANAGED_TEMPLATE: StaticSchema = (18, n0, _MT, 0, (_tT,), ((MANAGED_NOTE_TEMPLATE, 1),))
+
+NOTE_TEMPLATE_SETTINGS: StaticSchema = (
+    19,
+    n0,
+    _NTS,
+    0,
+    (_mT, _cT),
+    ((MANAGED_TEMPLATE, 0), (CUSTOM_TEMPLATE, 0)),
+)
+
+CLINICAL_NOTE_GENERATION_SETTINGS: StaticSchema = (
+    18,
+    n0,
+    _CNGS,
+    0,
+    (_nTS,),
+    ((NOTE_TEMPLATE_SETTINGS, 1),),
+)
+
+CUSTOM_TEMPLATE_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _CTR,
+    0,
+    (_tT,),
+    ((CUSTOM_TEMPLATE_BASE, 0),),
+)
+
+MANAGED_TEMPLATE_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _MTR,
+    0,
+    (_tT,),
+    ((MANAGED_NOTE_TEMPLATE, 0),),
+)
+
+NOTE_TEMPLATE_SETTINGS_RESPONSE: StaticSchema = (
+    19,
+    n0,
+    _NTSR,
+    0,
+    (_mT, _cT),
+    ((MANAGED_TEMPLATE_RESPONSE, 0), (CUSTOM_TEMPLATE_RESPONSE, 0)),
+)
+
+CLINICAL_NOTE_GENERATION_SETTINGS_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _CNGSR,
+    0,
+    (_nTS,),
+    ((NOTE_TEMPLATE_SETTINGS_RESPONSE, 0),),
+)
+
+CONFLICT_EXCEPTION: StaticSchema = (18, n0, _CE, {_s: _c, _sE: 409}, (_m,), ((3, 0),))
+
+KMS_KEY_ARN: StaticSchema = (3, n0, _KKA, 0)
+
+DOMAIN_NAME: StaticSchema = (3, n0, _DN, 0)
+
+TAG_KEY: StaticSchema = (3, n0, _TK, 0)
+
+TAG_VALUE: StaticSchema = (3, n0, _TV, 0)
+
+TAG_MAP: StaticSchema = (17, n0, _TM, 0, (_k, _v), ((TAG_KEY, 0), (TAG_VALUE, 0)))
+
+CREATE_WEB_APP_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _CWAC,
+    0,
+    (_eR, _iII, _iR),
+    ((3, 1), (3, 1), (3, 1)),
+)
+
+CREATE_DOMAIN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDI,
+    {_sm: None},
+    (_n, _kKA, _wASC, _t),
+    (
+        (DOMAIN_NAME, 1),
+        (KMS_KEY_ARN, 0),
+        (CREATE_WEB_APP_CONFIGURATION, 0),
+        (TAG_MAP, 0),
+    ),
+)
+
+DOMAIN_ARN: StaticSchema = (3, n0, _DA, 0)
+
+ENCRYPTION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ET,
+    0,
+    (_AOK, _CMK),
+    ((-1, {_sV: _AOK}), (-1, {_sV: _CMK})),
+)
+
+ENCRYPTION_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _EC,
+    0,
+    (_eT, _kKA),
+    ((ENCRYPTION_TYPE, 1), (KMS_KEY_ARN, 0)),
+)
+
+DOMAIN_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DS,
+    0,
+    (_ACTIVE, _DELETING, _DELETED),
+    ((-1, {_sV: _ACTIVE}), (-1, {_sV: _DELETING}), (-1, {_sV: _DELETED})),
+)
+
+WEB_APP_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _WAC,
+    0,
+    (_eR, _iAI, _iR),
+    ((3, 1), (3, 1), (3, 1)),
+)
+
+WEB_APP_URL: StaticSchema = (3, n0, _WAU, 0)
+
+CREATE_DOMAIN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDO,
+    {_smit: None},
+    (_dI, _a, _n, _kKA, _eC, _st, _wAU, _wAC, _cA),
+    (
+        (DOMAIN_ID, 1),
+        (DOMAIN_ARN, 1),
+        (DOMAIN_NAME, 1),
+        (KMS_KEY_ARN, 0),
+        (ENCRYPTION_CONTEXT, 0),
+        (DOMAIN_STATUS, 1),
+        (WEB_APP_URL, 0),
+        (WEB_APP_CONFIGURATION, 0),
+        (4, 1),
+    ),
+)
+
+SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SQEE,
+    {_s: _c, _sE: 402},
+    (_m,),
+    ((3, 0),),
+)
+
+CREATE_DOMAIN: StaticOperationSchema = (
+    23,
+    n0,
+    _CD,
+    {_smith: MappingProxyType({"method": "POST", "uri": "/domain", "code": 201})},
+    CREATE_DOMAIN_INPUT,
+    CREATE_DOMAIN_OUTPUT,
+    (SERVICE_QUOTA_EXCEEDED_EXCEPTION,),
+)
+
+CREATE_SUBSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSI,
+    {_sm: None},
+    (_dI,),
+    ((DOMAIN_ID, 9),),
+)
+
+CREATE_SUBSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CSO,
+    {_smit: None},
+    (_dI, _sI, _a, _st, _cA, _lUA, _aA, _dA),
+    (
+        (DOMAIN_ID, 1),
+        (SUBSCRIPTION_ID, 1),
+        (SUBSCRIPTION_ARN, 1),
+        (SUBSCRIPTION_STATUS, 1),
+        (4, 1),
+        (4, 1),
+        (4, 0),
+        (4, 0),
+    ),
+)
+
+CREATE_SUBSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _CS,
+    {
+        _smith: MappingProxyType(
+            {"method": "POST", "uri": "/domains/{domainId}/subscriptions", "code": 201}
+        )
     },
+    CREATE_SUBSCRIPTION_INPUT,
+    CREATE_SUBSCRIPTION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-MEDICAL_SCRIBE_LISTENING_SESSION_DETAILS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeListeningSessionDetails"),
-    members={
-        "sessionId": {"target": SCRIBE_SESSION_ID},
-        "domainId": {"target": DOMAIN_ID},
-        "subscriptionId": {"target": SUBSCRIPTION_ID},
-        "languageCode": {"target": MEDICAL_SCRIBE_LANGUAGE_CODE},
-        "mediaSampleRateHertz": {"target": MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ},
-        "mediaEncoding": {"target": MEDICAL_SCRIBE_MEDIA_ENCODING},
-        "channelDefinitions": {"target": MEDICAL_SCRIBE_CHANNEL_DEFINITIONS},
-        "postStreamActionSettings": {
-            "target": MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS_RESPONSE
-        },
-        "postStreamActionResult": {"target": MEDICAL_SCRIBE_POST_STREAM_ACTIONS_RESULT},
-        "encounterContextProvided": {"target": NON_NULL_BOOLEAN},
-        "streamStatus": {"target": MEDICAL_SCRIBE_STREAM_STATUS},
-        "streamCreationTime": {"target": TIMESTAMP},
-        "streamEndTime": {"target": TIMESTAMP},
+DEACTIVATE_SUBSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSI,
+    {_sm: None},
+    (_dI, _sI),
+    ((DOMAIN_ID, 9), (SUBSCRIPTION_ID, 9)),
+)
+
+DEACTIVATE_SUBSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSO,
+    {_smit: None},
+    (_su,),
+    ((SUBSCRIPTION_DESCRIPTION, 0),),
+)
+
+DEACTIVATE_SUBSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _DSe,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/domains/{domainId}/subscriptions/{subscriptionId}/deactivate",
+                "code": 200,
+            }
+        )
     },
+    DEACTIVATE_SUBSCRIPTION_INPUT,
+    DEACTIVATE_SUBSCRIPTION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-GET_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#GetMedicalScribeListeningSessionOutput"),
-    members={
-        "medicalScribeListeningSessionDetails": {
-            "target": MEDICAL_SCRIBE_LISTENING_SESSION_DETAILS
-        }
-    },
+DELETE_DOMAIN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDI,
+    {_sm: None},
+    (_dI,),
+    ((DOMAIN_ID, 9),),
 )
 
-THROTTLING_EXCEPTION = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ThrottlingException"),
-    traits=[
-        Trait.new(id=ShapeID("smithy.api#error"), value="client"),
-        Trait.new(id=ShapeID("smithy.api#httpError"), value=429),
-    ],
-    members={"message": {"target": STRING}},
+DELETE_DOMAIN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DDO,
+    {_smit: None},
+    (_dI, _a, _st),
+    ((DOMAIN_ID, 1), (DOMAIN_ARN, 1), (DOMAIN_STATUS, 1)),
 )
 
-GET_MEDICAL_SCRIBE_LISTENING_SESSION = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#GetMedicalScribeListeningSession"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#endpoint"),
-            value=MappingProxyType({"hostPrefix": "streaming."}),
+DELETE_DOMAIN: StaticOperationSchema = (
+    23,
+    n0,
+    _DD,
+    {_smith: MappingProxyType({"method": "DELETE", "uri": "/domain/{domainId}"})},
+    DELETE_DOMAIN_INPUT,
+    DELETE_DOMAIN_OUTPUT,
+    (RESOURCE_NOT_FOUND_EXCEPTION,),
+)
+
+GET_DOMAIN_INPUT: StaticSchema = (18, n0, _GDI, {_sm: None}, (_dI,), ((DOMAIN_ID, 9),))
+
+GET_DOMAIN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDO,
+    {_smit: None},
+    (_dI, _a, _n, _kKA, _eC, _st, _wAU, _wAC, _cA, _t),
+    (
+        (DOMAIN_ID, 1),
+        (DOMAIN_ARN, 1),
+        (DOMAIN_NAME, 1),
+        (KMS_KEY_ARN, 0),
+        (ENCRYPTION_CONTEXT, 0),
+        (DOMAIN_STATUS, 1),
+        (WEB_APP_URL, 0),
+        (WEB_APP_CONFIGURATION, 0),
+        (4, 1),
+        (TAG_MAP, 0),
+    ),
+)
+
+GET_DOMAIN: StaticOperationSchema = (
+    23,
+    n0,
+    _GD,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/domain/{domainId}"})},
+    GET_DOMAIN_INPUT,
+    GET_DOMAIN_OUTPUT,
+    (RESOURCE_NOT_FOUND_EXCEPTION,),
+)
+
+SCRIBE_SESSION_ID: StaticSchema = (3, n0, _SSI, 0)
+
+GET_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMSLSI,
+    {_sm: None},
+    (_sIes, _dI, _sI),
+    ((SCRIBE_SESSION_ID, 9), (DOMAIN_ID, 9), (SUBSCRIPTION_ID, 9)),
+)
+
+MEDICAL_SCRIBE_CHANNEL_ID: StaticSchema = (7, n0, _MSCI, 0)
+
+MEDICAL_SCRIBE_PARTICIPANT_ROLE: StaticSchema = (
+    14,
+    n0,
+    _MSPR,
+    0,
+    (_PATIENT, _CLINICIAN),
+    ((-1, {_sV: _PATIENT}), (-1, {_sV: _CLINICIAN})),
+)
+
+MEDICAL_SCRIBE_CHANNEL_DEFINITION: StaticSchema = (
+    18,
+    n0,
+    _MSCD,
+    0,
+    (_cI, _pR),
+    ((MEDICAL_SCRIBE_CHANNEL_ID, 1), (MEDICAL_SCRIBE_PARTICIPANT_ROLE, 1)),
+)
+
+MEDICAL_SCRIBE_CHANNEL_DEFINITIONS: StaticSchema = (
+    16,
+    n0,
+    _MSCDe,
+    0,
+    (_me,),
+    ((MEDICAL_SCRIBE_CHANNEL_DEFINITION, 0),),
+)
+
+NON_NULL_BOOLEAN: StaticSchema = (2, n0, _NNB, 0)
+
+MEDICAL_SCRIBE_LANGUAGE_CODE: StaticSchema = (
+    14,
+    n0,
+    _MSLC,
+    0,
+    (_EU, _MULTI),
+    ((-1, {_sV: _eU}), (-1, {_sV: _mu})),
+)
+
+MEDICAL_SCRIBE_MEDIA_ENCODING: StaticSchema = (
+    14,
+    n0,
+    _MSME,
+    0,
+    (_PCM, _FLAC),
+    ((-1, {_sV: _p}), (-1, {_sV: _f})),
+)
+
+MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ: StaticSchema = (7, n0, _MSMSRH, 0)
+
+MEDICAL_SCRIBE_POST_STREAM_ACTIONS_RESULT: StaticSchema = (
+    18,
+    n0,
+    _MSPSAR,
+    0,
+    (_cNGR,),
+    ((CLINICAL_NOTE_GENERATION_RESULT, 0),),
+)
+
+S3_URI: StaticSchema = (3, n0, _SU, 0)
+
+MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _MSPSASR,
+    0,
+    (_oSU, _cNGS),
+    ((S3_URI, 1), (CLINICAL_NOTE_GENERATION_SETTINGS_RESPONSE, 1)),
+)
+
+MEDICAL_SCRIBE_STREAM_STATUS: StaticSchema = (
+    14,
+    n0,
+    _MSSS,
+    0,
+    (_IP, _PAUSED, _FAILED, _COMPLETED),
+    (
+        (-1, {_sV: _IP}),
+        (-1, {_sV: _PAUSED}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _COMPLETED}),
+    ),
+)
+
+MEDICAL_SCRIBE_LISTENING_SESSION_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _MSLSD,
+    0,
+    (_sIes, _dI, _sI, _lC, _mSRH, _mE, _cD, _pSAS, _pSAR, _eCP, _sS, _sCT, _sET),
+    (
+        (SCRIBE_SESSION_ID, 0),
+        (DOMAIN_ID, 0),
+        (SUBSCRIPTION_ID, 0),
+        (MEDICAL_SCRIBE_LANGUAGE_CODE, 0),
+        (MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ, 0),
+        (MEDICAL_SCRIBE_MEDIA_ENCODING, 0),
+        (MEDICAL_SCRIBE_CHANNEL_DEFINITIONS, 0),
+        (MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS_RESPONSE, 0),
+        (MEDICAL_SCRIBE_POST_STREAM_ACTIONS_RESULT, 0),
+        (NON_NULL_BOOLEAN, 0),
+        (MEDICAL_SCRIBE_STREAM_STATUS, 0),
+        (4, 0),
+        (4, 0),
+    ),
+)
+
+GET_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMSLSO,
+    {_smit: None},
+    (_mSLSD,),
+    ((MEDICAL_SCRIBE_LISTENING_SESSION_DETAILS, 0),),
+)
+
+THROTTLING_EXCEPTION: StaticSchema = (18, n0, _TE, {_s: _c, _sE: 429}, (_m,), ((3, 0),))
+
+GET_MEDICAL_SCRIBE_LISTENING_SESSION: StaticOperationSchema = (
+    23,
+    n0,
+    _GMSLS,
+    {
+        _smithya: MappingProxyType({"hostPrefix": "streaming."}),
+        _smith: MappingProxyType(
+            {
+                "uri": "/medical-scribe-stream/domain/{domainId}/subscription/{subscriptionId}/session/{sessionId}",
+                "method": "GET",
+            }
         ),
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "uri": "/medical-scribe-stream/domain/{domainId}/subscription/{subscriptionId}/session/{sessionId}",
-                    "method": "GET",
-                }
-            ),
+    },
+    GET_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT,
+    GET_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+    ),
+)
+
+JOB_ID: StaticSchema = (3, n0, _JI, 0)
+
+GET_PATIENT_INSIGHTS_JOB_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GPIJI,
+    {_sSI: _cGPIJR, _sm: None},
+    (_dI, _jI),
+    ((DOMAIN_ID, 9), (JOB_ID, 9)),
+)
+
+SENSITIVE_NON_EMPTY_STRING: StaticSchema = (3, n0, _SNES, 4)
+
+PATIENT_INSIGHTS_ENCOUNTER_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _PIEC,
+    0,
+    (_eRn,),
+    ((SENSITIVE_NON_EMPTY_STRING, 1),),
+)
+
+NON_EMPTY_STRING: StaticSchema = (3, n0, _NES, 0)
+
+FHIR_SERVER: StaticSchema = (
+    18,
+    n0,
+    _FHIRS,
+    0,
+    (_fE, _oT),
+    ((NON_EMPTY_STRING, 1), (SENSITIVE_NON_EMPTY_STRING, 0)),
+)
+
+S3_SOURCE: StaticSchema = (18, n0, _SSo, 0, (_u,), ((S3_URI, 1),))
+
+S3_SOURCES: StaticSchema = (16, n0, _SSou, 0, (_me,), ((S3_SOURCE, 0),))
+
+INPUT_DATA_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _IDC,
+    0,
+    (_fS, _sSo),
+    ((FHIR_SERVER, 0), (S3_SOURCES, 0)),
+)
+
+INSIGHTS_TYPE: StaticSchema = (14, n0, _IT, 0, (_PV,), ((-1, {_sV: _PV}),))
+
+INSIGHTS_CONTEXT: StaticSchema = (18, n0, _IC, 0, (_iT,), ((INSIGHTS_TYPE, 1),))
+
+INSIGHTS_OUTPUT: StaticSchema = (18, n0, _IO, 0, (_u,), ((S3_URI, 1),))
+
+JOB_ARN: StaticSchema = (3, n0, _JA, 0)
+
+JOB_STATUS: StaticSchema = (
+    14,
+    n0,
+    _JS,
+    0,
+    (_SUBMITTED, _IP, _FAILED, _SUCCEEDED),
+    (
+        (-1, {_sV: _SUBMITTED}),
+        (-1, {_sV: _IP}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _SUCCEEDED}),
+    ),
+)
+
+OUTPUT_DATA_CONFIG: StaticSchema = (18, n0, _ODC, 0, (_sOP,), ((S3_URI, 1),))
+
+SENSITIVE_ISO_DATE_STRING: StaticSchema = (3, n0, _SIDS, 4)
+
+PRONOUNS: StaticSchema = (
+    14,
+    n0,
+    _P,
+    4,
+    (_HH, _SH, _TT),
+    ((-1, {_sV: _HH}), (-1, {_sV: _SH}), (-1, {_sV: _TT})),
+)
+
+PATIENT_INSIGHTS_PATIENT_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _PIPC,
+    0,
+    (_pI, _dOB, _pr),
+    ((SENSITIVE_NON_EMPTY_STRING, 1), (SENSITIVE_ISO_DATE_STRING, 0), (PRONOUNS, 0)),
+)
+
+PROVIDER_ROLE: StaticSchema = (
+    14,
+    n0,
+    _PR,
+    0,
+    (_CLINICIAN,),
+    ((-1, {_sV: _CLINICIAN}),),
+)
+
+SPECIALTY: StaticSchema = (14, n0, _S, 0, (_PC,), ((-1, {_sV: _PC}),))
+
+USER_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _UC,
+    0,
+    (_r, _uI, _sp),
+    ((PROVIDER_ROLE, 1), (SENSITIVE_NON_EMPTY_STRING, 1), (SPECIALTY, 0)),
+)
+
+GET_PATIENT_INSIGHTS_JOB_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GPIJO,
+    {_sSI: _cGPIJRo, _smit: None},
+    (_jI, _jA, _jS, _cTr, _uT, _iO, _sD, _pC, _iC, _eCn, _uC, _iDC, _oDC),
+    (
+        (JOB_ID, 1),
+        (JOB_ARN, 1),
+        (JOB_STATUS, 1),
+        (4, {_sF: _dt}),
+        (4, {_sF: _dt}),
+        (INSIGHTS_OUTPUT, 0),
+        (NON_EMPTY_STRING, 0),
+        (PATIENT_INSIGHTS_PATIENT_CONTEXT, 1),
+        (INSIGHTS_CONTEXT, 1),
+        (PATIENT_INSIGHTS_ENCOUNTER_CONTEXT, 1),
+        (USER_CONTEXT, 1),
+        (INPUT_DATA_CONFIG, 1),
+        (OUTPUT_DATA_CONFIG, 1),
+    ),
+)
+
+GET_PATIENT_INSIGHTS_JOB: StaticOperationSchema = (
+    23,
+    n0,
+    _GPIJ,
+    {
+        _smithya: MappingProxyType({"hostPrefix": "runtime."}),
+        _smith: MappingProxyType(
+            {
+                "code": 200,
+                "method": "GET",
+                "uri": "/domain/{domainId}/patient-insights-job/{jobId}",
+            }
         ),
-    ],
+    },
+    GET_PATIENT_INSIGHTS_JOB_INPUT,
+    GET_PATIENT_INSIGHTS_JOB_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-JOB_ID = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#JobId"), shape_type=ShapeType.STRING
+GET_SUBSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSI,
+    {_sm: None},
+    (_dI, _sI),
+    ((DOMAIN_ID, 9), (SUBSCRIPTION_ID, 9)),
 )
 
-GET_PATIENT_INSIGHTS_JOB_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#GetPatientInsightsJobInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.connecthealth#GetPatientInsightsJobRequest",
+GET_SUBSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSO,
+    {_smit: None},
+    (_su,),
+    ((SUBSCRIPTION_DESCRIPTION, 0),),
+)
+
+GET_SUBSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _GS,
+    {
+        _smith: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/domains/{domainId}/subscriptions/{subscriptionId}",
+            }
         )
-    ],
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "jobId": {
-            "target": JOB_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
     },
+    GET_SUBSCRIPTION_INPUT,
+    GET_SUBSCRIPTION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-SENSITIVE_NON_EMPTY_STRING = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#SensitiveNonEmptyString"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
+LIST_DOMAINS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDI,
+    {_sm: None},
+    (_st, _mR, _nT),
+    ((DOMAIN_STATUS, {_sQ: _st}), (7, {_sQ: _mR}), (3, {_sQ: _nT})),
 )
 
-PATIENT_INSIGHTS_ENCOUNTER_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#PatientInsightsEncounterContext"),
-    members={
-        "encounterReason": {
-            "target": SENSITIVE_NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
+DOMAIN_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _DSo,
+    0,
+    (_dI, _a, _n, _st, _cA),
+    ((DOMAIN_ID, 1), (DOMAIN_ARN, 1), (DOMAIN_NAME, 1), (DOMAIN_STATUS, 1), (4, 1)),
 )
 
-NON_EMPTY_STRING = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#NonEmptyString"),
-    shape_type=ShapeType.STRING,
+DOMAIN_SUMMARY_LIST: StaticSchema = (16, n0, _DSL, 0, (_me,), ((DOMAIN_SUMMARY, 0),))
+
+LIST_DOMAINS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDO,
+    {_smit: None},
+    (_d, _nT),
+    ((DOMAIN_SUMMARY_LIST, 1), (3, 0)),
 )
 
-FHIR_SERVER = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#FHIRServer"),
-    members={
-        "fhirEndpoint": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "oauthToken": {"target": SENSITIVE_NON_EMPTY_STRING},
-    },
+LIST_DOMAINS: StaticOperationSchema = (
+    23,
+    n0,
+    _LD,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/domain"})},
+    LIST_DOMAINS_INPUT,
+    LIST_DOMAINS_OUTPUT,
+    (),
 )
 
-S3_SOURCE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#S3Source"),
-    members={
-        "uri": {
-            "target": S3_URI,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
+LIST_SUBSCRIPTIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LSI,
+    {_sm: None},
+    (_dI, _mR, _nT),
+    ((DOMAIN_ID, 9), (7, {_sQ: _mR}), (3, {_sQ: _nT})),
 )
 
-S3_SOURCES = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#S3Sources"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": S3_SOURCE}},
+SUBSCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _SL,
+    0,
+    (_me,),
+    ((SUBSCRIPTION_DESCRIPTION, 0),),
 )
 
-INPUT_DATA_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#InputDataConfig"),
-    members={
-        "fhirServer": {"target": FHIR_SERVER},
-        "s3Sources": {"target": S3_SOURCES},
-    },
+LIST_SUBSCRIPTIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LSO,
+    {_smit: None},
+    (_sub, _nT),
+    ((SUBSCRIPTION_LIST, 1), (3, 0)),
 )
 
-INSIGHTS_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#InsightsType"),
-    shape_type=ShapeType.ENUM,
-    members={"PRE_VISIT": {"target": UNIT}},
-)
-
-INSIGHTS_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#InsightsContext"),
-    members={
-        "insightsType": {
-            "target": INSIGHTS_TYPE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-INSIGHTS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#InsightsOutput"),
-    members={
-        "uri": {
-            "target": S3_URI,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-JOB_ARN = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#JobArn"), shape_type=ShapeType.STRING
-)
-
-JOB_STATUS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#JobStatus"),
-    shape_type=ShapeType.ENUM,
-    members={
-        "SUBMITTED": {"target": UNIT},
-        "IN_PROGRESS": {"target": UNIT},
-        "FAILED": {"target": UNIT},
-        "SUCCEEDED": {"target": UNIT},
-    },
-)
-
-OUTPUT_DATA_CONFIG = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#OutputDataConfig"),
-    members={
-        "s3OutputPath": {
-            "target": S3_URI,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-SENSITIVE_ISO_DATE_STRING = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#SensitiveIsoDateString"),
-    shape_type=ShapeType.STRING,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-)
-
-PRONOUNS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#Pronouns"),
-    shape_type=ShapeType.ENUM,
-    traits=[Trait.new(id=ShapeID("smithy.api#sensitive"))],
-    members={
-        "HE_HIM": {"target": UNIT},
-        "SHE_HER": {"target": UNIT},
-        "THEY_THEM": {"target": UNIT},
-    },
-)
-
-PATIENT_INSIGHTS_PATIENT_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#PatientInsightsPatientContext"),
-    members={
-        "patientId": {
-            "target": SENSITIVE_NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "dateOfBirth": {"target": SENSITIVE_ISO_DATE_STRING},
-        "pronouns": {"target": PRONOUNS},
-    },
-)
-
-PROVIDER_ROLE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ProviderRole"),
-    shape_type=ShapeType.ENUM,
-    members={"CLINICIAN": {"target": UNIT}},
-)
-
-SPECIALTY = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#Specialty"),
-    shape_type=ShapeType.ENUM,
-    members={"PRIMARY_CARE": {"target": UNIT}},
-)
-
-USER_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#UserContext"),
-    members={
-        "role": {
-            "target": PROVIDER_ROLE,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "userId": {
-            "target": SENSITIVE_NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "specialty": {"target": SPECIALTY},
-    },
-)
-
-GET_PATIENT_INSIGHTS_JOB_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#GetPatientInsightsJobOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.connecthealth#GetPatientInsightsJobResponse",
+LIST_SUBSCRIPTIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LS,
+    {
+        _smith: MappingProxyType(
+            {"method": "GET", "uri": "/domains/{domainId}/subscriptions"}
         )
-    ],
-    members={
-        "jobId": {
-            "target": JOB_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "jobArn": {
-            "target": JOB_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "jobStatus": {
-            "target": JOB_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "creationTime": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#timestampFormat"), value="date-time")
-            ],
-        },
-        "updatedTime": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#timestampFormat"), value="date-time")
-            ],
-        },
-        "insightsOutput": {"target": INSIGHTS_OUTPUT},
-        "statusDetails": {"target": NON_EMPTY_STRING},
-        "patientContext": {
-            "target": PATIENT_INSIGHTS_PATIENT_CONTEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "insightsContext": {
-            "target": INSIGHTS_CONTEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "encounterContext": {
-            "target": PATIENT_INSIGHTS_ENCOUNTER_CONTEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "userContext": {
-            "target": USER_CONTEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "inputDataConfig": {
-            "target": INPUT_DATA_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "outputDataConfig": {
-            "target": OUTPUT_DATA_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
     },
+    LIST_SUBSCRIPTIONS_INPUT,
+    LIST_SUBSCRIPTIONS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-GET_PATIENT_INSIGHTS_JOB = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#GetPatientInsightsJob"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#endpoint"),
-            value=MappingProxyType({"hostPrefix": "runtime."}),
+LIST_TAGS_FOR_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRI,
+    {_sm: None},
+    (_rA,),
+    ((3, 9),),
+)
+
+LIST_TAGS_FOR_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LTFRO,
+    {_smit: None},
+    (_t,),
+    ((TAG_MAP, 0),),
+)
+
+LIST_TAGS_FOR_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _LTFR,
+    {
+        _smith: MappingProxyType(
+            {"uri": "/tags/{resourceArn}", "method": "GET", "code": 200}
+        )
+    },
+    LIST_TAGS_FOR_RESOURCE_INPUT,
+    LIST_TAGS_FOR_RESOURCE_OUTPUT,
+    (),
+)
+
+MEDICAL_SCRIBE_AUDIO_EVENT: StaticSchema = (
+    18,
+    n0,
+    _MSAE,
+    0,
+    (_aC,),
+    ((AUDIO_CHUNK, 1),),
+)
+
+MEDICAL_SCRIBE_BINARY_AUDIO_EVENT: StaticSchema = (
+    18,
+    n0,
+    _MSBAE,
+    0,
+    (_aC,),
+    ((AUDIO_CHUNK, {_sP: None, _smi: None}),),
+)
+
+ENCOUNTER_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _ECn,
+    0,
+    (_uCn,),
+    ((SENSITIVE_MARKDOWN_STRING, 0),),
+)
+
+MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS: StaticSchema = (
+    18,
+    n0,
+    _MSPSAS,
+    0,
+    (_oSU, _cNGS),
+    ((S3_URI, 1), (CLINICAL_NOTE_GENERATION_SETTINGS, 1)),
+)
+
+MEDICAL_SCRIBE_CONFIGURATION_EVENT: StaticSchema = (
+    18,
+    n0,
+    _MSCE,
+    0,
+    (_pSAS, _cD, _eCn),
+    (
+        (MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS, 1),
+        (MEDICAL_SCRIBE_CHANNEL_DEFINITIONS, 0),
+        (ENCOUNTER_CONTEXT, 0),
+    ),
+)
+
+MEDICAL_SCRIBE_SESSION_CONTROL_EVENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MSSCET,
+    0,
+    (_EOS,),
+    ((-1, {_sV: _EOS}),),
+)
+
+MEDICAL_SCRIBE_SESSION_CONTROL_EVENT: StaticSchema = (
+    18,
+    n0,
+    _MSSCE,
+    0,
+    (_ty,),
+    ((MEDICAL_SCRIBE_SESSION_CONTROL_EVENT_TYPE, 0),),
+)
+
+MEDICAL_SCRIBE_INPUT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _MSIS,
+    {_smithyap: None},
+    (_aE, _bAE, _sCE, _cE),
+    (
+        (MEDICAL_SCRIBE_AUDIO_EVENT, 0),
+        (MEDICAL_SCRIBE_BINARY_AUDIO_EVENT, 0),
+        (MEDICAL_SCRIBE_SESSION_CONTROL_EVENT, 0),
+        (MEDICAL_SCRIBE_CONFIGURATION_EVENT, 0),
+    ),
+)
+
+START_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SMSLSI,
+    {_sm: None},
+    (_sIes, _dI, _sI, _lC, _mSRH, _mE, _iS),
+    (
+        (SCRIBE_SESSION_ID, {_sHm: _xamsi, _smi: None}),
+        (DOMAIN_ID, {_sHm: _xamdi, _smi: None}),
+        (SUBSCRIPTION_ID, {_sHm: _xamsi_, _smi: None}),
+        (MEDICAL_SCRIBE_LANGUAGE_CODE, {_sHm: _xamlc, _smi: None}),
+        (MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ, {_sHm: _xamsr, _smi: None}),
+        (MEDICAL_SCRIBE_MEDIA_ENCODING, {_sHm: _xamme, _smi: None}),
+        (MEDICAL_SCRIBE_INPUT_STREAM, 16),
+    ),
+)
+
+REQUEST_ID: StaticSchema = (3, n0, _RI, 0)
+
+MEDICAL_SCRIBE_TRANSCRIPT_SEGMENT: StaticSchema = (
+    18,
+    n0,
+    _MSTS,
+    0,
+    (_sIeg, _aBO, _aEO, _iP, _cI, _co),
+    (
+        (3, 0),
+        (AUDIO_OFFSET, 0),
+        (AUDIO_OFFSET, 0),
+        (NON_NULL_BOOLEAN, 0),
+        (3, 0),
+        (3, 0),
+    ),
+)
+
+MEDICAL_SCRIBE_TRANSCRIPT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _MSTE,
+    0,
+    (_tS,),
+    ((MEDICAL_SCRIBE_TRANSCRIPT_SEGMENT, 0),),
+)
+
+MEDICAL_SCRIBE_OUTPUT_STREAM: StaticSchema = (
+    19,
+    n0,
+    _MSOS,
+    {_smithyap: None},
+    (_tE, _iFE, _vE),
+    (
+        (MEDICAL_SCRIBE_TRANSCRIPT_EVENT, 0),
+        (INTERNAL_SERVER_EXCEPTION, 0),
+        (VALIDATION_EXCEPTION, 0),
+    ),
+)
+
+START_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SMSLSO,
+    {_smit: None},
+    (_sIes, _dI, _sI, _rI, _lC, _mSRH, _mE, _rS),
+    (
+        (SCRIBE_SESSION_ID, {_sHm: _xamsi}),
+        (DOMAIN_ID, {_sHm: _xamdi}),
+        (SUBSCRIPTION_ID, {_sHm: _xamsi_}),
+        (REQUEST_ID, {_sHm: _xari}),
+        (MEDICAL_SCRIBE_LANGUAGE_CODE, {_sHm: _xamlc}),
+        (MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ, {_sHm: _xamsr}),
+        (MEDICAL_SCRIBE_MEDIA_ENCODING, {_sHm: _xamme}),
+        (MEDICAL_SCRIBE_OUTPUT_STREAM, 16),
+    ),
+)
+
+START_MEDICAL_SCRIBE_LISTENING_SESSION: StaticOperationSchema = (
+    23,
+    n0,
+    _SMSLS,
+    {
+        _smithya: MappingProxyType({"hostPrefix": "streaming."}),
+        _smith: MappingProxyType({"uri": "/medical-scribe-stream/", "method": "POST"}),
+    },
+    START_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT,
+    START_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+START_PATIENT_INSIGHTS_JOB_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SPIJI,
+    {_sSI: _cSPIJR, _sm: None},
+    (_dI, _pC, _iC, _eCn, _uC, _iDC, _oDC, _cTl),
+    (
+        (DOMAIN_ID, 9),
+        (PATIENT_INSIGHTS_PATIENT_CONTEXT, 1),
+        (INSIGHTS_CONTEXT, 1),
+        (PATIENT_INSIGHTS_ENCOUNTER_CONTEXT, 1),
+        (USER_CONTEXT, 1),
+        (INPUT_DATA_CONFIG, 1),
+        (OUTPUT_DATA_CONFIG, 1),
+        (NON_EMPTY_STRING, 2),
+    ),
+)
+
+START_PATIENT_INSIGHTS_JOB_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SPIJO,
+    {_sSI: _cSPIJRo, _smit: None},
+    (_jA, _jI, _cTr),
+    ((JOB_ARN, 1), (JOB_ID, 1), (4, {_sF: _dt})),
+)
+
+START_PATIENT_INSIGHTS_JOB: StaticOperationSchema = (
+    23,
+    n0,
+    _SPIJ,
+    {
+        _smithya: MappingProxyType({"hostPrefix": "runtime."}),
+        _smith: MappingProxyType(
+            {
+                "code": 200,
+                "method": "POST",
+                "uri": "/domain/{domainId}/patient-insights-job",
+            }
         ),
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "code": 200,
-                    "method": "GET",
-                    "uri": "/domain/{domainId}/patient-insights-job/{jobId}",
-                }
-            ),
-        ),
-    ],
-)
-
-GET_SUBSCRIPTION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#GetSubscriptionInput"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "subscriptionId": {
-            "target": SUBSCRIPTION_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
     },
+    START_PATIENT_INSIGHTS_JOB_INPUT,
+    START_PATIENT_INSIGHTS_JOB_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-GET_SUBSCRIPTION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#GetSubscriptionOutput"),
-    members={"subscription": {"target": SUBSCRIPTION_DESCRIPTION}},
+TAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TRI,
+    {_sm: None},
+    (_rA, _t),
+    ((3, 9), (TAG_MAP, 1)),
 )
 
-GET_SUBSCRIPTION = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#GetSubscription"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "method": "GET",
-                    "uri": "/domains/{domainId}/subscriptions/{subscriptionId}",
-                }
-            ),
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _sU, _smit: None})
+
+TAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _TR,
+    {
+        _smith: MappingProxyType(
+            {"uri": "/tags/{resourceArn}", "method": "POST", "code": 204}
         )
-    ],
-)
-
-LIST_DOMAINS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ListDomainsInput"),
-    members={
-        "status": {
-            "target": DOMAIN_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpQuery"), value="status")],
-        },
-        "maxResults": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "nextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
     },
+    TAG_RESOURCE_INPUT,
+    TAG_RESOURCE_OUTPUT,
+    (),
 )
 
-DOMAIN_SUMMARY = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#DomainSummary"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "arn": {
-            "target": DOMAIN_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "name": {
-            "target": DOMAIN_NAME,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "status": {
-            "target": DOMAIN_STATUS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "createdAt": {
-            "target": TIMESTAMP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
+TAG_KEY_LIST: StaticSchema = (16, n0, _TKL, 0, (_me,), ((TAG_KEY, 0),))
+
+UNTAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URI,
+    {_sm: None},
+    (_rA, _tK),
+    ((3, 9), (TAG_KEY_LIST, {_sQ: _tK, _smi: None})),
 )
 
-DOMAIN_SUMMARY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#DomainSummaryList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": DOMAIN_SUMMARY}},
-)
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _URO, {_sSI: _sU, _smit: None})
 
-LIST_DOMAINS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ListDomainsOutput"),
-    members={
-        "domains": {
-            "target": DOMAIN_SUMMARY_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "nextToken": {"target": STRING},
-    },
-)
-
-LIST_DOMAINS = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#ListDomains"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType({"method": "GET", "uri": "/domain"}),
+UNTAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _UR,
+    {
+        _smith: MappingProxyType(
+            {"uri": "/tags/{resourceArn}", "method": "DELETE", "code": 204}
         )
-    ],
-)
-
-LIST_SUBSCRIPTIONS_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ListSubscriptionsInput"),
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "maxResults": {
-            "target": INTEGER,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="maxResults")
-            ],
-        },
-        "nextToken": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="nextToken")
-            ],
-        },
     },
+    UNTAG_RESOURCE_INPUT,
+    UNTAG_RESOURCE_OUTPUT,
+    (),
 )
 
-SUBSCRIPTION_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#SubscriptionList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": SUBSCRIPTION_DESCRIPTION}},
-)
-
-LIST_SUBSCRIPTIONS_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ListSubscriptionsOutput"),
-    members={
-        "subscriptions": {
-            "target": SUBSCRIPTION_LIST,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "nextToken": {"target": STRING},
-    },
-)
-
-LIST_SUBSCRIPTIONS = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#ListSubscriptions"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"method": "GET", "uri": "/domains/{domainId}/subscriptions"}
-            ),
-        )
-    ],
-)
-
-LIST_TAGS_FOR_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ListTagsForResourceInput"),
-    members={
-        "resourceArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        }
-    },
-)
-
-LIST_TAGS_FOR_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#ListTagsForResourceOutput"),
-    members={"tags": {"target": TAG_MAP}},
-)
-
-LIST_TAGS_FOR_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#ListTagsForResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/tags/{resourceArn}", "method": "GET", "code": 200}
-            ),
-        )
-    ],
-)
-
-MEDICAL_SCRIBE_AUDIO_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeAudioEvent"),
-    members={
-        "audioChunk": {
-            "target": AUDIO_CHUNK,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        }
-    },
-)
-
-MEDICAL_SCRIBE_BINARY_AUDIO_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeBinaryAudioEvent"),
-    members={
-        "audioChunk": {
-            "target": AUDIO_CHUNK,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#eventPayload")),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        }
-    },
-)
-
-ENCOUNTER_CONTEXT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#EncounterContext"),
-    members={"unstructuredContext": {"target": SENSITIVE_MARKDOWN_STRING}},
-)
-
-MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribePostStreamActionSettings"),
-    members={
-        "outputS3Uri": {
-            "target": S3_URI,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "clinicalNoteGenerationSettings": {
-            "target": CLINICAL_NOTE_GENERATION_SETTINGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-MEDICAL_SCRIBE_CONFIGURATION_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeConfigurationEvent"),
-    members={
-        "postStreamActionSettings": {
-            "target": MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "channelDefinitions": {"target": MEDICAL_SCRIBE_CHANNEL_DEFINITIONS},
-        "encounterContext": {"target": ENCOUNTER_CONTEXT},
-    },
-)
-
-MEDICAL_SCRIBE_SESSION_CONTROL_EVENT_TYPE = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeSessionControlEventType"),
-    shape_type=ShapeType.ENUM,
-    members={"END_OF_SESSION": {"target": UNIT}},
-)
-
-MEDICAL_SCRIBE_SESSION_CONTROL_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeSessionControlEvent"),
-    members={"type": {"target": MEDICAL_SCRIBE_SESSION_CONTROL_EVENT_TYPE}},
-)
-
-MEDICAL_SCRIBE_INPUT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeInputStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "audioEvent": {"target": MEDICAL_SCRIBE_AUDIO_EVENT},
-        "binaryAudioEvent": {"target": MEDICAL_SCRIBE_BINARY_AUDIO_EVENT},
-        "sessionControlEvent": {"target": MEDICAL_SCRIBE_SESSION_CONTROL_EVENT},
-        "configurationEvent": {"target": MEDICAL_SCRIBE_CONFIGURATION_EVENT},
-    },
-)
-
-START_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#StartMedicalScribeListeningSessionInput"),
-    members={
-        "sessionId": {
-            "target": SCRIBE_SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-session-id",
+CONNECT_HEALTH: StaticSchema = (
+    21,
+    n0,
+    _CH,
+    {
+        _aw: MappingProxyType({"name": "health-agent"}),
+        _sB: MappingProxyType(
+            {
+                "version": "1.1",
+                "parameters": MappingProxyType(
+                    {
+                        "UseFIPS": MappingProxyType(
+                            {
+                                "builtIn": "AWS::UseFIPS",
+                                "required": True,
+                                "default": False,
+                                "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                                "type": "boolean",
+                            }
+                        ),
+                        "Endpoint": MappingProxyType(
+                            {
+                                "builtIn": "SDK::Endpoint",
+                                "required": False,
+                                "documentation": "Override the endpoint used to send this request",
+                                "type": "string",
+                            }
+                        ),
+                        "Region": MappingProxyType(
+                            {
+                                "builtIn": "AWS::Region",
+                                "required": False,
+                                "documentation": "The AWS region used to dispatch the request.",
+                                "type": "string",
+                            }
+                        ),
+                    }
                 ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-domain-id",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "subscriptionId": {
-            "target": SUBSCRIPTION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-subscription-id",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "languageCode": {
-            "target": MEDICAL_SCRIBE_LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-language-code",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "mediaSampleRateHertz": {
-            "target": MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-sample-rate",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "mediaEncoding": {
-            "target": MEDICAL_SCRIBE_MEDIA_ENCODING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-media-encoding",
-                ),
-                Trait.new(id=ShapeID("smithy.api#required")),
-            ],
-        },
-        "inputStream": {
-            "target": MEDICAL_SCRIBE_INPUT_STREAM,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-    },
-)
-
-REQUEST_ID = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#RequestId"), shape_type=ShapeType.STRING
-)
-
-MEDICAL_SCRIBE_TRANSCRIPT_SEGMENT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeTranscriptSegment"),
-    members={
-        "segmentId": {"target": STRING},
-        "audioBeginOffset": {"target": AUDIO_OFFSET},
-        "audioEndOffset": {"target": AUDIO_OFFSET},
-        "isPartial": {"target": NON_NULL_BOOLEAN},
-        "channelId": {"target": STRING},
-        "content": {"target": STRING},
-    },
-)
-
-MEDICAL_SCRIBE_TRANSCRIPT_EVENT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeTranscriptEvent"),
-    members={"transcriptSegment": {"target": MEDICAL_SCRIBE_TRANSCRIPT_SEGMENT}},
-)
-
-MEDICAL_SCRIBE_OUTPUT_STREAM = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#MedicalScribeOutputStream"),
-    shape_type=ShapeType.UNION,
-    traits=[Trait.new(id=ShapeID("smithy.api#streaming"))],
-    members={
-        "transcriptEvent": {"target": MEDICAL_SCRIBE_TRANSCRIPT_EVENT},
-        "internalFailureException": {"target": INTERNAL_SERVER_EXCEPTION},
-        "validationException": {"target": VALIDATION_EXCEPTION},
-    },
-)
-
-START_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#StartMedicalScribeListeningSessionOutput"),
-    members={
-        "sessionId": {
-            "target": SCRIBE_SESSION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-session-id",
-                )
-            ],
-        },
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-domain-id",
-                )
-            ],
-        },
-        "subscriptionId": {
-            "target": SUBSCRIPTION_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-subscription-id",
-                )
-            ],
-        },
-        "requestId": {
-            "target": REQUEST_ID,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"), value="x-amzn-request-id"
-                )
-            ],
-        },
-        "languageCode": {
-            "target": MEDICAL_SCRIBE_LANGUAGE_CODE,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-language-code",
-                )
-            ],
-        },
-        "mediaSampleRateHertz": {
-            "target": MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-sample-rate",
-                )
-            ],
-        },
-        "mediaEncoding": {
-            "target": MEDICAL_SCRIBE_MEDIA_ENCODING,
-            "traits": [
-                Trait.new(
-                    id=ShapeID("smithy.api#httpHeader"),
-                    value="x-amzn-medscribe-media-encoding",
-                )
-            ],
-        },
-        "responseStream": {
-            "target": MEDICAL_SCRIBE_OUTPUT_STREAM,
-            "traits": [Trait.new(id=ShapeID("smithy.api#httpPayload"))],
-        },
-    },
-)
-
-START_MEDICAL_SCRIBE_LISTENING_SESSION = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#StartMedicalScribeListeningSession"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#endpoint"),
-            value=MappingProxyType({"hostPrefix": "streaming."}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/medical-scribe-stream/", "method": "POST"}
-            ),
-        ),
-    ],
-)
-
-START_PATIENT_INSIGHTS_JOB_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#StartPatientInsightsJobInput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.connecthealth#StartPatientInsightsJobRequest",
-        )
-    ],
-    members={
-        "domainId": {
-            "target": DOMAIN_ID,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "patientContext": {
-            "target": PATIENT_INSIGHTS_PATIENT_CONTEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "insightsContext": {
-            "target": INSIGHTS_CONTEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "encounterContext": {
-            "target": PATIENT_INSIGHTS_ENCOUNTER_CONTEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "userContext": {
-            "target": USER_CONTEXT,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "inputDataConfig": {
-            "target": INPUT_DATA_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "outputDataConfig": {
-            "target": OUTPUT_DATA_CONFIG,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "clientToken": {
-            "target": NON_EMPTY_STRING,
-            "traits": [Trait.new(id=ShapeID("smithy.api#idempotencyToken"))],
-        },
-    },
-)
-
-START_PATIENT_INSIGHTS_JOB_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#StartPatientInsightsJobOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"),
-            value="com.amazonaws.connecthealth#StartPatientInsightsJobResponse",
-        )
-    ],
-    members={
-        "jobArn": {
-            "target": JOB_ARN,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "jobId": {
-            "target": JOB_ID,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-        "creationTime": {
-            "target": TIMESTAMP,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#timestampFormat"), value="date-time")
-            ],
-        },
-    },
-)
-
-START_PATIENT_INSIGHTS_JOB = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#StartPatientInsightsJob"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#endpoint"),
-            value=MappingProxyType({"hostPrefix": "runtime."}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {
-                    "code": 200,
-                    "method": "POST",
-                    "uri": "/domain/{domainId}/patient-insights-job",
-                }
-            ),
-        ),
-    ],
-)
-
-TAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#TagResourceInput"),
-    members={
-        "resourceArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "tags": {
-            "target": TAG_MAP,
-            "traits": [Trait.new(id=ShapeID("smithy.api#required"))],
-        },
-    },
-)
-
-TAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#TagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-TAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#TagResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/tags/{resourceArn}", "method": "POST", "code": 204}
-            ),
-        )
-    ],
-)
-
-TAG_KEY_LIST = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#TagKeyList"),
-    shape_type=ShapeType.LIST,
-    members={"member": {"target": TAG_KEY}},
-)
-
-UNTAG_RESOURCE_INPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#UntagResourceInput"),
-    members={
-        "resourceArn": {
-            "target": STRING,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpLabel")),
-            ],
-        },
-        "tagKeys": {
-            "target": TAG_KEY_LIST,
-            "traits": [
-                Trait.new(id=ShapeID("smithy.api#required")),
-                Trait.new(id=ShapeID("smithy.api#httpQuery"), value="tagKeys"),
-            ],
-        },
-    },
-)
-
-UNTAG_RESOURCE_OUTPUT = Schema.collection(
-    id=ShapeID("com.amazonaws.connecthealth#UntagResourceOutput"),
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.synthetic#originalShapeId"), value="smithy.api#Unit"
-        )
-    ],
-)
-
-UNTAG_RESOURCE = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#UntagResource"),
-    shape_type=ShapeType.OPERATION,
-    traits=[
-        Trait.new(
-            id=ShapeID("smithy.api#http"),
-            value=MappingProxyType(
-                {"uri": "/tags/{resourceArn}", "method": "DELETE", "code": 204}
-            ),
-        )
-    ],
-)
-
-CONNECT_HEALTH = Schema(
-    id=ShapeID("com.amazonaws.connecthealth#ConnectHealth"),
-    shape_type=ShapeType.SERVICE,
-    traits=[
-        Trait.new(
-            id=ShapeID("aws.auth#sigv4"),
-            value=MappingProxyType({"name": "health-agent"}),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.rules#endpointBdd"),
-            value=MappingProxyType(
-                {
-                    "version": "1.1",
-                    "parameters": MappingProxyType(
+                "conditions": (
+                    MappingProxyType(
                         {
-                            "UseFIPS": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::UseFIPS",
-                                    "required": True,
-                                    "default": False,
-                                    "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                                    "type": "boolean",
-                                }
-                            ),
-                            "Endpoint": MappingProxyType(
-                                {
-                                    "builtIn": "SDK::Endpoint",
-                                    "required": False,
-                                    "documentation": "Override the endpoint used to send this request",
-                                    "type": "string",
-                                }
-                            ),
-                            "Region": MappingProxyType(
-                                {
-                                    "builtIn": "AWS::Region",
-                                    "required": False,
-                                    "documentation": "The AWS region used to dispatch the request.",
-                                    "type": "string",
-                                }
-                            ),
+                            "fn": "isSet",
+                            "argv": (MappingProxyType({"ref": "Endpoint"}),),
                         }
                     ),
-                    "conditions": (
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Endpoint"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "isSet",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "aws.partition",
-                                "argv": (MappingProxyType({"ref": "Region"}),),
-                                "assign": "PartitionResult",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "fn": "booleanEquals",
-                                "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
-                            }
-                        ),
+                    MappingProxyType(
+                        {"fn": "isSet", "argv": (MappingProxyType({"ref": "Region"}),)}
                     ),
-                    "results": (
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                                "type": "error",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": MappingProxyType({"ref": "Endpoint"}),
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://health-agent-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "endpoint": MappingProxyType(
-                                    {
-                                        "url": "https://health-agent.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                        "properties": MappingProxyType({}),
-                                        "headers": MappingProxyType({}),
-                                    }
-                                ),
-                                "type": "endpoint",
-                            }
-                        ),
-                        MappingProxyType(
-                            {
-                                "conditions": (),
-                                "error": "Invalid Configuration: Missing Region",
-                                "type": "error",
-                            }
-                        ),
+                    MappingProxyType(
+                        {
+                            "fn": "aws.partition",
+                            "argv": (MappingProxyType({"ref": "Region"}),),
+                            "assign": "PartitionResult",
+                        }
                     ),
-                    "root": 2,
-                    "nodeCount": 6,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC",
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("aws.api#service"),
-            value=MappingProxyType(
-                {
-                    "sdkId": "ConnectHealth",
-                    "arnNamespace": "health-agent",
-                    "endpointPrefix": "health-agent",
-                    "cloudTrailEventSource": "health-agent.amazonaws.com",
-                }
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("aws.protocols#restJson1"),
-            value=MappingProxyType(
-                {"http": ("h2", "http/1.1"), "eventStreamHttp": ("h2",)}
-            ),
-        ),
-        Trait.new(
-            id=ShapeID("smithy.api#cors"),
-            value=MappingProxyType(
-                {
-                    "origin": "*",
-                    "additionalAllowedHeaders": (
-                        "*",
-                        "content-type",
-                        "content-length",
-                        "authorization",
-                        "x-amz-date",
-                        "x-amz-security-token",
-                        "x-amz-content-sha256",
-                        "x-amz-user-agent",
-                        "x-api-key",
+                    MappingProxyType(
+                        {
+                            "fn": "booleanEquals",
+                            "argv": (MappingProxyType({"ref": "UseFIPS"}), True),
+                        }
                     ),
-                    "additionalExposedHeaders": (
-                        "x-amzn-errortype",
-                        "x-amzn-requestid",
-                        "x-amzn-trace-id",
-                        "Access-Control-Allow-Origin",
+                ),
+                "results": (
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error",
+                        }
                     ),
-                    "maxAge": 86400,
-                }
-            ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": MappingProxyType({"ref": "Endpoint"}),
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://health-agent-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "endpoint": MappingProxyType(
+                                {
+                                    "url": "https://health-agent.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                    "properties": MappingProxyType[str, object]({}),
+                                    "headers": MappingProxyType[str, object]({}),
+                                }
+                            ),
+                            "type": "endpoint",
+                        }
+                    ),
+                    MappingProxyType(
+                        {
+                            "conditions": (),
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error",
+                        }
+                    ),
+                ),
+                "root": 2,
+                "nodeCount": 6,
+                "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC",
+            }
         ),
-    ],
+        _aws: MappingProxyType(
+            {
+                "sdkId": "ConnectHealth",
+                "arnNamespace": "health-agent",
+                "endpointPrefix": "health-agent",
+                "cloudTrailEventSource": "health-agent.amazonaws.com",
+            }
+        ),
+        _aJ: MappingProxyType({"http": ("h2", "http/1.1"), "eventStreamHttp": ("h2",)}),
+        _smithyapi: MappingProxyType(
+            {
+                "origin": "*",
+                "additionalAllowedHeaders": (
+                    "*",
+                    "content-type",
+                    "content-length",
+                    "authorization",
+                    "x-amz-date",
+                    "x-amz-security-token",
+                    "x-amz-content-sha256",
+                    "x-amz-user-agent",
+                    "x-api-key",
+                ),
+                "additionalExposedHeaders": (
+                    "x-amzn-errortype",
+                    "x-amzn-requestid",
+                    "x-amzn-trace-id",
+                    "Access-Control-Allow-Origin",
+                ),
+                "maxAge": 86400,
+            }
+        ),
+    },
 )
