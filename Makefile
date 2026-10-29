@@ -4,7 +4,10 @@ PYTHON_VERSION := 3.12
 # Colocated smithy-python checkout that provides the codegen jars.
 SMITHY_PYTHON ?= ../smithy-python
 
-.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen publish-codegen aio-check
+# Clients per gradle build in `make clients`; lower it if the build runs out of heap.
+BATCH_SIZE ?= 25
+
+.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen clients publish-codegen aio-check
 
 # Publishes the smithy-python codegen jars to the local Maven cache so `gen`
 # can resolve them. Run once, and again whenever the generator changes.
@@ -14,7 +17,13 @@ publish-codegen:
 # Regenerate one client from its service model: `make gen dynamodb`.
 # Accepts dynamodb, aws_sdk_dynamodb, aws-sdk-dynamodb, or a hyphenated model name.
 gen:
-	SMITHY_PYTHON=$(SMITHY_PYTHON) uv run python codegen/gen_client.py $(filter-out gen,$(MAKECMDGOALS))
+	SMITHY_PYTHON=$(abspath $(SMITHY_PYTHON)) uv run python codegen/gen_client.py $(filter-out gen,$(MAKECMDGOALS))
+
+# Regenerate every client from codegen/aws-models with codegen built from the
+# smithy-python commit in codegen/smithy-python.toml. Each client is cleared first,
+# keeping only the paths in gen_client.py's KEEP, then scripts/client-overlays is applied.
+clients:
+	SMITHY_PYTHON=$(abspath $(SMITHY_PYTHON)) uv run python codegen/gen_client.py --all --pinned --batch-size $(BATCH_SIZE)
 
 # Swallow the client-name argument so make does not treat it as a target.
 # Scoped to `gen` so it does not mask typos in unrelated commands.
