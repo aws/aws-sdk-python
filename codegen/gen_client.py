@@ -184,9 +184,7 @@ def service_id(model: Path) -> str:
 
 def _projection(model: Path) -> dict[str, object]:
     slug = model.stem
-    # Per-projection imports make each client's input independent of its batch.
     return {
-        "imports": [str(model)],
         "plugins": {
             "python-client-codegen": {
                 "service": service_id(model),
@@ -219,8 +217,11 @@ def _read_version(pyproject: Path) -> str:
 
 
 def _build(models: list[Path], gradle_args: list[str]) -> None:
+    # Generated shape order depends on the loaded model set, so every build loads all
+    # models, as the release build does; batch size then cannot affect output.
     build_config = {
         "version": "1.0",
+        "imports": [str(MODELS)],
         "projections": {m.stem: _projection(m) for m in models},
     }
     build_file = CODEGEN_DIR / "smithy-build.json"
@@ -252,6 +253,7 @@ def _install_client(slug: str, docs_deps: list[str]) -> None:
     )
     if not projection.is_dir():
         sys.exit(f"codegen produced no output at {projection}")
+    _format(projection, projection / "pyproject.toml")
     generated = _relative_files(projection)
     _check_keep_untouched(name, generated)
     overlays = _overlay_files(name, generated)
@@ -266,7 +268,6 @@ def _install_client(slug: str, docs_deps: list[str]) -> None:
         _uv_add(dest, "docs", docs_deps)
     if name in CLIENTS_REQUIRING_BOTO3:
         _uv_add(dest, "test", ["boto3"])
-    _format(dest / "src" / _module(slug), dest / "pyproject.toml")
     print(f"wrote {dest}")
 
 
@@ -356,7 +357,7 @@ def _uv_add(client: Path, group: str, deps: list[str]) -> None:
     )
 
 
-def _format(src_dir: Path, config: Path) -> None:
+def _format(root: Path, config: Path) -> None:
     # The generator only formats when ruff is on gradle's PATH, which it usually is not.
     smithy_python = _smithy_python()
     if not (smithy_python / "pyproject.toml").exists():
@@ -364,8 +365,8 @@ def _format(src_dir: Path, config: Path) -> None:
         return
     cfg = ["--config", str(config)]
     for cmd in (
-        ["uv", "run", "ruff", "check", str(src_dir), "--fix", *cfg],
-        ["uv", "run", "ruff", "format", str(src_dir), *cfg],
+        ["uv", "run", "ruff", "check", str(root), "--fix", *cfg],
+        ["uv", "run", "ruff", "format", str(root), *cfg],
     ):
         subprocess.run(cmd, cwd=smithy_python, check=True)
 
