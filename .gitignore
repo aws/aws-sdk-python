@@ -1,6 +1,9 @@
 # macOS system files
 .DS_Store
 
+# IDE
+.idea/
+
 # Docs build artifacts
 site/
 docs/clients/

@@ -2,3 +2,4 @@
 build/
 smithy-build.json
 __pycache__/
+.smithy-python/
