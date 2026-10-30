@@ -13,6 +13,9 @@ from aws_sdk_connecthealth.config import AsyncConnectHealthConfig, Plugin
 REGION = "us-east-1"
 AUDIO_FILE = Path(__file__).parent / "assets" / "test.wav"
 
+# (domain_id, subscription_id, output_s3_uri)
+type ConnectHealthResources = tuple[str, str, str]
+
 
 async def create_connecthealth_client(
     region: str, *, transport: HTTPClient | None = None

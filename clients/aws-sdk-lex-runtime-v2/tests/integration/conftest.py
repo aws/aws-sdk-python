@@ -10,10 +10,17 @@ test session. All integration tests receive the bot_id via the
 
 import json
 import uuid
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import boto3
 import pytest
+
+# The stubs are a pyright-only test dependency; the annotations using them are
+# on local variables, which are never evaluated at runtime.
+if TYPE_CHECKING:
+    from types_boto3_iam import IAMClient
+    from types_boto3_lexv2_models import LexModelsV2Client
+    from types_boto3_sts import STSClient
 
 from . import LOCALE_ID, REGION
 
@@ -144,9 +151,9 @@ def lex_bot():
     role_name = f"integ-test-lex-runtime-v2-role-{unique_suffix}"
     bot_name = f"integ-test-lex-runtime-v2-bot-{unique_suffix}"
 
-    iam_client = boto3.client("iam")
-    lex_client = boto3.client("lexv2-models", region_name=REGION)
-    sts_client = boto3.client("sts")
+    iam_client: IAMClient = boto3.client("iam")
+    lex_client: LexModelsV2Client = boto3.client("lexv2-models", region_name=REGION)
+    sts_client: STSClient = boto3.client("sts")
 
     bot_id = None
     try:

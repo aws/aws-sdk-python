@@ -42,6 +42,7 @@ test = [
     "boto3",
     "pytest>=9.0.1,<10.0.0",
     "pytest-asyncio>=1.3.0,<1.4.0",
+    "types-boto3-lite[iam,lexv2-models,sts]",
 ]
 
 [build-system]
