@@ -1,0 +1,4 @@
+{
+  "type": "feature",
+  "description": "Document and validate standard request-compression thresholds and disable controls inherited from the shared runtime. Current Bedrock operations remain uncompressed because their service model does not advertise support."
+}
