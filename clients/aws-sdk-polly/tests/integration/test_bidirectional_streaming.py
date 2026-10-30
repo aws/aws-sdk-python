@@ -19,7 +19,6 @@ from aws_sdk_polly.models import (
     StartSpeechSynthesisStreamEventStreamServiceQuotaExceededException,
     StartSpeechSynthesisStreamEventStreamStreamClosedEvent,
     StartSpeechSynthesisStreamEventStreamThrottlingException,
-    StartSpeechSynthesisStreamEventStreamUnknown,
     StartSpeechSynthesisStreamEventStreamValidationException,
     StartSpeechSynthesisStreamInput,
     StartSpeechSynthesisStreamOutput,
@@ -85,12 +84,8 @@ async def _receive_audio(
             break
         elif isinstance(event, ERROR_EVENT_TYPES):
             raise event.value
-        elif isinstance(event, StartSpeechSynthesisStreamEventStreamUnknown):
-            raise RuntimeError(f"Received unknown event in stream: {event.tag}")
         else:
-            raise RuntimeError(
-                f"Received unexpected event type in stream: {type(event).__name__}"
-            )
+            raise RuntimeError(f"Received unknown event in stream: {event.tag}")
 
     return audio_bytes, request_characters
 

@@ -10,10 +10,16 @@ fixture provides ``(domain_id, subscription_id, output_s3_uri)``.
 
 import asyncio
 import uuid
-from typing import Any
+from collections.abc import AsyncIterator
+from typing import TYPE_CHECKING, Any
 
 import boto3
 import pytest
+
+# The stubs are a pyright-only test dependency; the annotations using them are
+# on local variables, which are never evaluated at runtime.
+if TYPE_CHECKING:
+    from types_boto3_s3 import S3Client
 
 from aws_sdk_connecthealth.client import AsyncConnectHealthClient
 from aws_sdk_connecthealth.models import (
@@ -25,7 +31,7 @@ from aws_sdk_connecthealth.models import (
     SubscriptionStatus,
 )
 
-from . import REGION, create_connecthealth_client
+from . import REGION, ConnectHealthResources, create_connecthealth_client
 
 # Tags applied to all resources so orphaned resources from interrupted
 # test runs can be discovered and cleaned up.
@@ -118,7 +124,7 @@ def _create_s3_bucket(s3_client: Any, bucket_name: str) -> None:
     s3_client.create_bucket(
         Bucket=bucket_name,
         CreateBucketConfiguration={
-            "Tags": [{"Key": k, "Value": v} for k, v in _TAGS.items()],
+            "Tags": [{"Key": k, "Value": v} for k, v in _TAGS.items()]
         },
     )
 
@@ -146,13 +152,13 @@ def _delete_s3_bucket(s3_client: Any, bucket_name: str) -> None:
 
 
 @pytest.fixture(scope="session")
-async def connecthealth_resources():
+async def connecthealth_resources() -> AsyncIterator[ConnectHealthResources]:
     """Create ConnectHealth resources for the test session and delete them after."""
     unique_suffix = uuid.uuid4().hex[:16]
     domain_name = f"integ-test-connecthealth-domain-{unique_suffix}"
     bucket_name = f"integ-test-connecthealth-bucket-{unique_suffix}"
 
-    s3_client = boto3.client("s3", region_name=REGION)
+    s3_client: S3Client = boto3.client("s3", region_name=REGION)
     async with await create_connecthealth_client(REGION) as client:
         domain_id: str | None = None
         subscription_id: str | None = None

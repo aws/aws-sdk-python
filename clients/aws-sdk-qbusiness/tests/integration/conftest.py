@@ -10,9 +10,11 @@ ID.
 
 import asyncio
 import uuid
+from collections.abc import AsyncIterator
 
 import pytest
 
+from aws_sdk_qbusiness.client import AsyncQBusinessClient
 from aws_sdk_qbusiness.models import (
     ApplicationStatus,
     CreateApplicationInput,
@@ -46,7 +48,9 @@ _THROTTLE_RETRY_DELAY_SECONDS = 5
 _THROTTLE_RETRY_TIMEOUT_SECONDS = 300
 
 
-async def _wait_for_application_active(client, application_id: str) -> None:
+async def _wait_for_application_active(
+    client: AsyncQBusinessClient, application_id: str
+) -> None:
     """Wait for an Application to reach ACTIVE status.
 
     Args:
@@ -68,7 +72,9 @@ async def _wait_for_application_active(client, application_id: str) -> None:
     raise TimeoutError(f"Application {application_id} did not become ACTIVE in time")
 
 
-async def _wait_for_index_active(client, application_id: str, index_id: str) -> None:
+async def _wait_for_index_active(
+    client: AsyncQBusinessClient, application_id: str, index_id: str
+) -> None:
     """Wait for an Index to reach ACTIVE status.
 
     Args:
@@ -92,7 +98,7 @@ async def _wait_for_index_active(client, application_id: str, index_id: str) -> 
 
 
 async def _wait_for_retriever_active(
-    client, application_id: str, retriever_id: str
+    client: AsyncQBusinessClient, application_id: str, retriever_id: str
 ) -> None:
     """Wait for a Retriever to reach ACTIVE status.
 
@@ -119,7 +125,7 @@ async def _wait_for_retriever_active(
 
 
 async def _create_qbusiness_app(
-    client, app_name: str, index_name: str, retriever_name: str
+    client: AsyncQBusinessClient, app_name: str, index_name: str, retriever_name: str
 ) -> str:
     """Create a Q Business application with index and retriever.
 
@@ -185,7 +191,9 @@ async def _create_qbusiness_app(
     return application_id
 
 
-async def _delete_qbusiness_app(client, application_id: str | None) -> None:
+async def _delete_qbusiness_app(
+    client: AsyncQBusinessClient, application_id: str | None
+) -> None:
     """Delete a Q Business application. Cascades to its index and retriever.
 
     Args:
@@ -200,7 +208,7 @@ async def _delete_qbusiness_app(client, application_id: str | None) -> None:
 
 
 @pytest.fixture(scope="session")
-async def qbusiness_app():
+async def qbusiness_app() -> AsyncIterator[str]:
     """Create a Q Business application for the test session and delete it after."""
     unique_suffix = uuid.uuid4().hex[:16]
     app_name = f"integ-test-qbusiness-app-{unique_suffix}"

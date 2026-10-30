@@ -45,11 +45,12 @@ KEEP = (
     "zensical.toml",
 )
 
-# The integration tests of these clients set up resources with boto3.
+# The integration tests of these clients set up resources with boto3; values are
+# the services they call, which select the matching types-boto3-lite stubs.
 CLIENTS_REQUIRING_BOTO3 = {
-    "aws-sdk-connecthealth",
-    "aws-sdk-lex-runtime-v2",
-    "aws-sdk-transcribe-streaming",
+    "aws-sdk-connecthealth": ["s3"],
+    "aws-sdk-lex-runtime-v2": ["iam", "lexv2-models", "sts"],
+    "aws-sdk-transcribe-streaming": ["iam", "s3", "sts"],
 }
 CLIENT_DOC_DEPS = {"zensical", "mkdocstrings[python]"}
 
@@ -267,7 +268,8 @@ def _install_client(slug: str, docs_deps: list[str]) -> None:
     if docs_deps:
         _uv_add(dest, "docs", docs_deps)
     if name in CLIENTS_REQUIRING_BOTO3:
-        _uv_add(dest, "test", ["boto3"])
+        services = ",".join(CLIENTS_REQUIRING_BOTO3[name])
+        _uv_add(dest, "test", ["boto3", f"types-boto3-lite[{services}]"])
     print(f"wrote {dest}")
 
 

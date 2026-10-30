@@ -39,7 +39,13 @@ from aws_sdk_connecthealth.models import (
     StartMedicalScribeListeningSessionOutput,
 )
 
-from . import AUDIO_FILE, REGION, create_connecthealth_client, streaming_endpoint_plugin
+from . import (
+    AUDIO_FILE,
+    REGION,
+    ConnectHealthResources,
+    create_connecthealth_client,
+    streaming_endpoint_plugin,
+)
 
 SAMPLE_RATE = 16000
 BYTES_PER_SAMPLE = 2
@@ -155,7 +161,9 @@ async def _receive_events(
     return got_transcript
 
 
-async def test_start_medical_scribe_listening_session(connecthealth_resources) -> None:
+async def test_start_medical_scribe_listening_session(
+    connecthealth_resources: ConnectHealthResources,
+) -> None:
     """Test bidirectional streaming with audio input and transcript output."""
     domain_id, subscription_id, output_s3_uri = connecthealth_resources
 

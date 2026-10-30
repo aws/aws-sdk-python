@@ -17,10 +17,10 @@ from aws_sdk_connecthealth.models import (
     SubscriptionStatus,
 )
 
-from . import REGION, create_connecthealth_client
+from . import REGION, ConnectHealthResources, create_connecthealth_client
 
 
-async def test_list_domains(connecthealth_resources) -> None:
+async def test_list_domains(connecthealth_resources: ConnectHealthResources) -> None:
     """Test non-streaming ListDomains operation."""
     _ = connecthealth_resources
     async with await create_connecthealth_client(REGION) as client:
@@ -31,7 +31,7 @@ async def test_list_domains(connecthealth_resources) -> None:
         assert len(response.domains) >= 1
 
 
-async def test_get_domain(connecthealth_resources) -> None:
+async def test_get_domain(connecthealth_resources: ConnectHealthResources) -> None:
     """Test non-streaming GetDomain operation."""
     domain_id, _, _ = connecthealth_resources
     async with await create_connecthealth_client(REGION) as client:
@@ -51,7 +51,9 @@ async def test_get_domain(connecthealth_resources) -> None:
         assert response.tags == {"Purpose": "IntegTest"}
 
 
-async def test_list_subscriptions(connecthealth_resources) -> None:
+async def test_list_subscriptions(
+    connecthealth_resources: ConnectHealthResources,
+) -> None:
     """Test non-streaming ListSubscriptions operation."""
     domain_id, subscription_id, _ = connecthealth_resources
     async with await create_connecthealth_client(REGION) as client:
@@ -68,7 +70,9 @@ async def test_list_subscriptions(connecthealth_resources) -> None:
         assert sub.domain_id == domain_id
 
 
-async def test_get_subscription(connecthealth_resources) -> None:
+async def test_get_subscription(
+    connecthealth_resources: ConnectHealthResources,
+) -> None:
     """Test non-streaming GetSubscription operation."""
     domain_id, subscription_id, _ = connecthealth_resources
     async with await create_connecthealth_client(REGION) as client:

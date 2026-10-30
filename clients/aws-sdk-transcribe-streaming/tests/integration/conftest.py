@@ -10,10 +10,17 @@ fixture provides the role ARN and bucket name.
 
 import json
 import uuid
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import boto3
 import pytest
+
+# The stubs are a pyright-only test dependency; the annotations using them are
+# on local variables, which are never evaluated at runtime.
+if TYPE_CHECKING:
+    from types_boto3_iam import IAMClient
+    from types_boto3_s3 import S3Client
+    from types_boto3_sts import STSClient
 
 REGION = "us-east-1"
 
@@ -140,9 +147,9 @@ def healthscribe_resources():
     role_name = f"integ-test-transcribe-streaming-role-{unique_suffix}"
     bucket_name = f"integ-test-transcribe-streaming-bucket-{unique_suffix}"
 
-    iam_client = boto3.client("iam")
-    s3_client = boto3.client("s3", region_name=REGION)
-    sts_client = boto3.client("sts")
+    iam_client: IAMClient = boto3.client("iam")
+    s3_client: S3Client = boto3.client("s3", region_name=REGION)
+    sts_client: STSClient = boto3.client("sts")
 
     try:
         role_arn = _create_healthscribe_resources(
