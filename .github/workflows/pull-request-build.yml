@@ -1,7 +1,7 @@
 name: Build aws-sdk-python
 on:
   pull_request:
-    types: [opened, synchronize, ready_for_review]
+    types: [opened, synchronize]
     branches: [develop]
 
 concurrency:
@@ -16,8 +16,8 @@ env:
 
 jobs:
   aws-sdk-pr-build:
-    # Skip draft PRs and PRs from forked repos (they don't have access)
-    if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
+    # Skip PRs from forked repos (they don't have access)
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     permissions:
       id-token: write
