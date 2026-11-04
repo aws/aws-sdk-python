@@ -123,22 +123,18 @@ def _pinned_commits() -> tuple[str, str]:
 
 
 def _sync_entry(previous: str, commit: str) -> str:
+    changes = f"{SMITHY_PYTHON_COMMITS}/{previous}..{commit}"
+    reminder = f"write the changelog text for this codegen sync of {changes}"
     if not SYNC_CHANGELOG.exists():
         SYNC_CHANGELOG.touch()
-        sys.exit(
-            f"created empty {SYNC_CHANGELOG}; "
-            "write the changelog text for this codegen sync"
-        )
+        sys.exit(f"created empty {SYNC_CHANGELOG}; {reminder}")
     age = time.time() - SYNC_CHANGELOG.stat().st_mtime
     if age > SYNC_CHANGELOG_MAX_AGE_SECONDS:
-        sys.exit(
-            f"{SYNC_CHANGELOG} is {age / 3600:.1f} hours old; "
-            "write the changelog text for this codegen sync"
-        )
+        sys.exit(f"{SYNC_CHANGELOG} is {age / 3600:.1f} hours old; {reminder}")
     text = SYNC_CHANGELOG.read_text().strip()
     if not text:
-        sys.exit(f"{SYNC_CHANGELOG} is empty")
-    return f"Codegen sync for {SMITHY_PYTHON_COMMITS}/{previous}..{commit} {text}"
+        sys.exit(f"{SYNC_CHANGELOG} is empty; {reminder}")
+    return f"Codegen sync for {changes} {text}"
 
 
 @contextmanager
