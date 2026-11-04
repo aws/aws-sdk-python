@@ -57,6 +57,8 @@ test-integration:
 # Regenerate every client from codegen/aws-models with codegen built from the
 # smithy-python commit in codegen/smithy-python.toml. Each client is cleared first,
 # keeping only the paths in gen_client.py's KEEP, then scripts/client-overlays is applied.
+# Requires CODEGEN_SYNC_CHANGELOG.md in the repo root, written within 8 hours; each
+# changed client gets a changelog fragment from it, prefixed with the commit range.
 clients:
 	SMITHY_PYTHON=$(abspath $(SMITHY_PYTHON)) uv run python codegen/gen_client.py --all --pinned --batch-size $(BATCH_SIZE)
 

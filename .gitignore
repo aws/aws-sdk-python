@@ -26,3 +26,6 @@ dist/
 
 # scratch workspace
 /workspace
+
+# Codegen sync changelog text, read by `make clients`
+/CODEGEN_SYNC_CHANGELOG.md
