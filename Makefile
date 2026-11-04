@@ -7,7 +7,7 @@ SMITHY_PYTHON ?= ../smithy-python
 # Clients per gradle build in `make clients`; lower it if the build runs out of heap.
 BATCH_SIZE ?= 25
 
-.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen clients publish-codegen aio-check static-analysis test-unit test-functional test-integration
+.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen clients fragments publish-codegen aio-check static-analysis test-unit test-functional test-integration
 
 # Each client and package runs in its own .venv. Dependencies outside this repo,
 # including smithy-python, resolve from PyPI at the versions each one declares.
@@ -57,10 +57,13 @@ test-integration:
 # Regenerate every client from codegen/aws-models with codegen built from the
 # smithy-python commit in codegen/smithy-python.toml. Each client is cleared first,
 # keeping only the paths in gen_client.py's KEEP, then scripts/client-overlays is applied.
-# Requires CODEGEN_SYNC_CHANGELOG.md in the repo root, written within 8 hours; each
-# changed client gets a changelog fragment from it, prefixed with the commit range.
 clients:
 	SMITHY_PYTHON=$(abspath $(SMITHY_PYTHON)) uv run python codegen/gen_client.py --all --pinned --batch-size $(BATCH_SIZE)
+
+# Only for a smithy-python pointer move: writes a changelog fragment from
+# CODEGEN_SYNC_CHANGELOG.md for every generated client.
+fragments:
+	uv run --no-project --python $(PYTHON_VERSION) python codegen/gen_fragments.py
 
 ########################## Granular targets below ##########################
 

@@ -5,8 +5,6 @@ Usage: python codegen/gen_client.py (--all | <name>...) [--pinned] [--batch-size
   <name> accepts dynamodb, aws_sdk_dynamodb, aws-sdk-dynamodb, or bedrock-runtime forms.
   --pinned builds codegen from the smithy-python commit in codegen/smithy-python.toml;
   without it, the codegen last published to the local Maven cache is used.
-  --pinned requires a CODEGEN_SYNC_CHANGELOG.md in the repo root written within the
-  last 8 hours; each client whose output changed gets a changelog fragment from it.
 """
 
 import argparse
@@ -16,7 +14,6 @@ import re
 import shutil
 import subprocess
 import sys
-import time
 import tomllib
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -32,10 +29,6 @@ META_PACKAGE = "aws-sdk-python"
 DEFAULT_BATCH_SIZE = 25
 POINTER = CODEGEN_DIR / "smithy-python.toml"
 PINNED_DIR = CODEGEN_DIR / ".smithy-python"
-SYNC_CHANGELOG = REPO / "CODEGEN_SYNC_CHANGELOG.md"
-SMITHY_PYTHON_COMMITS = "https://github.com/smithy-lang/smithy-python/commits"
-# An older file is assumed to be left over from a previous `make clients`.
-SYNC_CHANGELOG_MAX_AGE_SECONDS = 8 * 60 * 60
 
 # Paths codegen never emits; they survive the pre-generation delete. A path codegen
 # does emit but that must differ from codegen output belongs in client-overlays.
@@ -83,58 +76,27 @@ def main() -> None:
         sys.exit("no clients selected")
 
     if args.pinned:
-        previous, commit = _pinned_commits()
-        sync_entry = _sync_entry(previous, commit)
-        with _pinned_codegen(commit) as gradle_args:
-            _generate(models, args.batch_size, gradle_args, sync_entry)
+        with _pinned_codegen(_pinned_commit()) as gradle_args:
+            _generate(models, args.batch_size, gradle_args)
     else:
-        _generate(models, args.batch_size, [], None)
+        _generate(models, args.batch_size, [])
 
 
-def _generate(
-    models: list[Path],
-    batch_size: int,
-    gradle_args: list[str],
-    sync_entry: str | None,
-) -> None:
+def _generate(models: list[Path], batch_size: int, gradle_args: list[str]) -> None:
     docs_deps = _docs_deps()
     for start in range(0, len(models), batch_size):
         batch = models[start : start + batch_size]
         _build(batch, gradle_args)
         for model in batch:
-            _install_client(model.stem, docs_deps, sync_entry)
+            _install_client(model.stem, docs_deps)
 
 
-def _pinned_commits() -> tuple[str, str]:
+def _pinned_commit() -> str:
     with POINTER.open("rb") as f:
-        pointer = tomllib.load(f)
-    commits = []
-    for key in ("previous_commit", "commit"):
-        value = pointer.get(key)
-        if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{40}", value):
-            sys.exit(
-                f"{POINTER}: {key} must be a full 40-character hash, got {value!r}"
-            )
-        commits.append(value)
-    previous, commit = commits
-    if previous == commit:
-        sys.exit(f"{POINTER}: previous_commit and commit must differ")
-    return previous, commit
-
-
-def _sync_entry(previous: str, commit: str) -> str:
-    changes = f"{SMITHY_PYTHON_COMMITS}/{previous}..{commit}"
-    reminder = f"write the changelog text for this codegen sync of {changes}"
-    if not SYNC_CHANGELOG.exists():
-        SYNC_CHANGELOG.touch()
-        sys.exit(f"created empty {SYNC_CHANGELOG}; {reminder}")
-    age = time.time() - SYNC_CHANGELOG.stat().st_mtime
-    if age > SYNC_CHANGELOG_MAX_AGE_SECONDS:
-        sys.exit(f"{SYNC_CHANGELOG} is {age / 3600:.1f} hours old; {reminder}")
-    text = SYNC_CHANGELOG.read_text().strip()
-    if not text:
-        sys.exit(f"{SYNC_CHANGELOG} is empty; {reminder}")
-    return f"Codegen sync for {changes} {text}"
+        commit = tomllib.load(f)["commit"]
+    if not re.fullmatch(r"[0-9a-f]{40}", commit):
+        sys.exit(f"{POINTER}: commit must be a full 40-character hash, got {commit!r}")
+    return commit
 
 
 @contextmanager
@@ -280,7 +242,7 @@ def _build(models: list[Path], gradle_args: list[str]) -> None:
     )
 
 
-def _install_client(slug: str, docs_deps: list[str], sync_entry: str | None) -> None:
+def _install_client(slug: str, docs_deps: list[str]) -> None:
     name = f"aws-sdk-{slug}"
     projection = (
         CODEGEN_DIR
@@ -309,30 +271,6 @@ def _install_client(slug: str, docs_deps: list[str], sync_entry: str | None) -> 
         services = ",".join(CLIENTS_REQUIRING_BOTO3[name])
         _uv_add(dest, "test", ["boto3", f"types-boto3-lite[{services}]"])
     print(f"wrote {dest}")
-    if sync_entry is not None and _changed(dest):
-        _write_sync_fragment(dest, name, sync_entry)
-
-
-def _changed(dest: Path) -> bool:
-    out = subprocess.run(
-        ["git", "status", "--porcelain", "--", ".", ":(exclude).changes"],
-        cwd=dest,
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout
-    return bool(out.strip())
-
-
-def _write_sync_fragment(dest: Path, name: str, description: str) -> None:
-    # A fixed name lets a rerun of `make clients` overwrite rather than duplicate.
-    fragment = (
-        dest / ".changes" / "next-release" / f"{name}-enhancement-codegen-sync.json"
-    )
-    fragment.parent.mkdir(parents=True, exist_ok=True)
-    entry = {"type": "enhancement", "description": description}
-    fragment.write_text(json.dumps(entry, indent=2) + "\n")
-    print(f"wrote {fragment}")
 
 
 def _relative_files(root: Path) -> set[str]:
