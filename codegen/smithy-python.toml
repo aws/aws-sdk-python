@@ -3,4 +3,4 @@
 commit = "b8eceadb0573bd0c757def9a2b26fe7bf938b239"
 # The commit this pointer moved from; with `commit` it bounds the range linked
 # in codegen sync changelog entries.
-previous_commit = "6c2dfa2c689c2352985ffb05eef1bfc5e3a697e7"
+previous_commit = "505312562bf78d45265145ae3ae9f874c00464d1"
