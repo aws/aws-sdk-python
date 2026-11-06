@@ -3,10 +3,10 @@
 from smithy_aws_core.interceptors.user_agent import UserAgentInterceptor
 
 from . import __version__
-from .config import AsyncLexRuntimeV2Config
+from .config import LexRuntimeV2Config
 
 
-def aws_user_agent_plugin(config: AsyncLexRuntimeV2Config):
+def aws_user_agent_plugin(config: LexRuntimeV2Config):
     config.interceptors.append(
         UserAgentInterceptor(
             ua_suffix=config.user_agent_extra,

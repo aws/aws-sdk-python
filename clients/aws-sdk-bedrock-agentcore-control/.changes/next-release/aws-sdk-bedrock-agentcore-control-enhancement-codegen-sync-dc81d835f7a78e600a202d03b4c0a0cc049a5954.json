@@ -1,0 +1,4 @@
+{
+  "type": "enhancement",
+  "description": "Codegen sync for [smithy-python b8ecead..dc81d83](https://github.com/smithy-lang/smithy-python/commits/b8eceadb0573bd0c757def9a2b26fe7bf938b239..dc81d835f7a78e600a202d03b4c0a0cc049a5954): Add synchronous client APIs."
+}
