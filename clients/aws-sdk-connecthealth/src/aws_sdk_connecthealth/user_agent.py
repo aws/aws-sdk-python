@@ -3,10 +3,10 @@
 from smithy_aws_core.interceptors.user_agent import UserAgentInterceptor
 
 from . import __version__
-from .config import AsyncConnectHealthConfig
+from .config import ConnectHealthConfig
 
 
-def aws_user_agent_plugin(config: AsyncConnectHealthConfig):
+def aws_user_agent_plugin(config: ConnectHealthConfig):
     config.interceptors.append(
         UserAgentInterceptor(
             ua_suffix=config.user_agent_extra,

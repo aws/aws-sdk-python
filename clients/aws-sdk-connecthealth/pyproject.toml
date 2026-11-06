@@ -19,13 +19,14 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14"
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15"
 ]
 
 dependencies = [
     "smithy_aws_core[eventstream, json]~=0.12.0",
     "smithy_core~=0.9.0",
-    "smithy_http[aiohttp]~=0.6.0"
+    "smithy_http[aiohttp, urllib3]~=0.6.0"
 ]
 
 [project.optional-dependencies]
@@ -42,6 +43,7 @@ test = [
     "boto3",
     "pytest>=9.0.1,<10.0.0",
     "pytest-asyncio>=1.3.0,<1.4.0",
+    "smithy_test~=0.1.0",
     "types-boto3-lite[s3]",
 ]
 
@@ -57,6 +59,9 @@ reportUnusedVariable = false
 reportUnnecessaryComparison = false
 reportUnusedClass = false
 enableExperimentalFeatures = true
+# models.py is the dynamic runtime; models.pyi carries the typed
+# surface for consumers, so don't type-check the implementation body.
+exclude = ["**/models.py"]
 
 [tool.ruff]
 target-version = "py312"
