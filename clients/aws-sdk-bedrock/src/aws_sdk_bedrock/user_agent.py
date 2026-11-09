@@ -3,10 +3,10 @@
 from smithy_aws_core.interceptors.user_agent import UserAgentInterceptor
 
 from . import __version__
-from .config import AsyncBedrockConfig
+from .config import BedrockConfig
 
 
-def aws_user_agent_plugin(config: AsyncBedrockConfig):
+def aws_user_agent_plugin(config: BedrockConfig):
     config.interceptors.append(
         UserAgentInterceptor(
             ua_suffix=config.user_agent_extra,

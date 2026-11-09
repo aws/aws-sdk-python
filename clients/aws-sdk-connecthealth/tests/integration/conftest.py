@@ -21,7 +21,7 @@ import pytest
 if TYPE_CHECKING:
     from types_boto3_s3 import S3Client
 
-from aws_sdk_connecthealth.client import AsyncConnectHealthClient
+from aws_sdk_connecthealth.aio.client import AsyncConnectHealthClient
 from aws_sdk_connecthealth.models import (
     CreateDomainInput,
     CreateSubscriptionInput,

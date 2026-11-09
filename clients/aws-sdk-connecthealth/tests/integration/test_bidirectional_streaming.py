@@ -7,9 +7,6 @@ import asyncio
 import time
 import uuid
 
-from smithy_core.aio.eventstream import DuplexEventStream
-from smithy_http.aio.crt import AWSCRTHTTPClient
-
 from aws_sdk_connecthealth.models import (
     ClinicalNoteGenerationSettings,
     ClinicalNoteGenerationSettingsResponse,
@@ -38,6 +35,8 @@ from aws_sdk_connecthealth.models import (
     StartMedicalScribeListeningSessionInput,
     StartMedicalScribeListeningSessionOutput,
 )
+from smithy_core.aio.eventstream import AsyncDuplexEventStream
+from smithy_http.aio.crt import AWSCRTHTTPClient
 
 from . import (
     AUDIO_FILE,
@@ -54,7 +53,7 @@ CHUNK_SIZE = 1024 * 8
 
 
 async def _send_events(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         MedicalScribeInputStream,
         MedicalScribeOutputStream,
         StartMedicalScribeListeningSessionOutput,
@@ -111,7 +110,7 @@ async def _send_events(
 
 
 async def _receive_events(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         MedicalScribeInputStream,
         MedicalScribeOutputStream,
         StartMedicalScribeListeningSessionOutput,

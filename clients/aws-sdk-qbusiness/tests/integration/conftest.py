@@ -13,8 +13,7 @@ import uuid
 from collections.abc import AsyncIterator
 
 import pytest
-
-from aws_sdk_qbusiness.client import AsyncQBusinessClient
+from aws_sdk_qbusiness.aio.client import AsyncQBusinessClient
 from aws_sdk_qbusiness.models import (
     ApplicationStatus,
     CreateApplicationInput,
