@@ -10,27 +10,26 @@ from collections.abc import Callable
 from importlib import metadata
 from typing import TYPE_CHECKING, cast
 
-from smithy_aws_core.config import AwsConfigOverrides
+from smithy_aws_core.aio.config import AsyncAwsConfigOverrides
 from smithy_aws_core.config.merged_config import MergedConfig
-from smithy_aws_core.identity import (
-    AWSCredentialsIdentity,
-    AWSCredentialsResolver,
-    AWSIdentityProperties,
-    StaticCredentialsResolver,
+from smithy_aws_core.aio.identity import (
+    AsyncAWSCredentialsResolver,
+    AsyncStaticCredentialsResolver,
 )
-from smithy_aws_core.identity.chain import (
-    ChainIdentityProvider,
-    ChainSetup,
-    StandardProvider,
+from smithy_aws_core.aio.identity.chain.provider import (
+    AsyncChainIdentityProvider,
+    AsyncChainSetup,
 )
-from smithy_core.aio.interfaces.identity import IdentityResolver
+from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
+from smithy_aws_core.identity.chain import StandardProvider
+from smithy_core.aio.interfaces.identity import AsyncIdentityResolver
 from smithy_core.exceptions import SmithyError, SmithyIdentityError
-from smithy_http.aio.interfaces import HTTPClient
+from smithy_http.aio.interfaces import AsyncHTTPClient
 
 if TYPE_CHECKING:
-    from aws_sdk_sts.client import AsyncSTSClient
+    from aws_sdk_sts.aio.client import AsyncSTSClient
 
-_CHAIN_PROVIDER_ENTRY_POINT_GROUP = "smithy_aws_core.identity.chain_providers"
+_CHAIN_PROVIDER_ENTRY_POINT_GROUP = "smithy_aws_core.aio.identity.chain_providers"
 _DEFAULT_STS_REGION = "us-east-1"
 
 _ACCESS_KEY_ID = "aws_access_key_id"
@@ -82,20 +81,20 @@ def _resolve_sts_region(
 
 
 class AssumeRoleCredentialsResolver(
-    IdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
+    AsyncIdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
 ):
     """Resolves credentials with an STS AssumeRole call."""
 
     def __init__(
         self,
         *,
-        source_resolver: AWSCredentialsResolver,
+        source_resolver: AsyncAWSCredentialsResolver,
         role_arn: str,
         role_session_name: str | None = None,
         external_id: str | None = None,
         duration_seconds: int | None = None,
         region: str | None = None,
-        http_client: HTTPClient | None = None,
+        http_client: AsyncHTTPClient | None = None,
     ) -> None:
         self._source_resolver = source_resolver
         self._role_arn = role_arn
@@ -126,12 +125,12 @@ class AssumeRoleCredentialsResolver(
             return self._credentials
 
     async def _assume_role(self) -> AWSCredentialsIdentity:
-        from aws_sdk_sts.client import AsyncSTSClient
-        from aws_sdk_sts.config import AsyncSTSConfig
+        from aws_sdk_sts.aio.client import AsyncSTSClient
+        from aws_sdk_sts.aio.config import AsyncSTSConfig
         from aws_sdk_sts.models import AssumeRoleInput
 
         if self._client is None:
-            overrides: AwsConfigOverrides = {
+            overrides: AsyncAwsConfigOverrides = {
                 "aws_credentials_identity_resolver": self._source_resolver,
                 "region": self._region,
             }
@@ -171,7 +170,7 @@ class AssumeRoleCredentialsResolver(
 
 
 class ProfileAssumeRoleCredentialsResolver(
-    IdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
+    AsyncIdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
 ):
     """Resolves credentials from a profile-based AssumeRole configuration."""
 
@@ -181,7 +180,7 @@ class ProfileAssumeRoleCredentialsResolver(
         profile_name: str,
         config_file: MergedConfig,
         region_override: str | None = None,
-        http_client: HTTPClient | None = None,
+        http_client: AsyncHTTPClient | None = None,
     ) -> None:
         if config_file.get_profile(profile_name) is None:
             raise AssumeRoleConfigurationError(
@@ -259,7 +258,7 @@ class ProfileAssumeRoleCredentialsResolver(
         self,
         source_profile_name: str,
         visited: tuple[str, ...],
-    ) -> AWSCredentialsResolver:
+    ) -> AsyncAWSCredentialsResolver:
         config_file = self._config_file
         is_direct_self_reference = (
             len(visited) > 0 and source_profile_name == visited[-1]
@@ -300,7 +299,7 @@ class ProfileAssumeRoleCredentialsResolver(
     def _create_static_resolver(
         self,
         profile_name: str,
-    ) -> AWSCredentialsResolver:
+    ) -> AsyncAWSCredentialsResolver:
         config_file = self._config_file
         access_key_id = config_file.get(profile_name, _ACCESS_KEY_ID)
         secret_access_key = config_file.get(profile_name, _SECRET_ACCESS_KEY)
@@ -309,7 +308,7 @@ class ProfileAssumeRoleCredentialsResolver(
                 f"Profile '{profile_name}' contains partial credentials."
             )
 
-        return StaticCredentialsResolver(
+        return AsyncStaticCredentialsResolver(
             AWSCredentialsIdentity(
                 access_key_id=access_key_id,
                 secret_access_key=secret_access_key,
@@ -322,7 +321,7 @@ class ProfileAssumeRoleCredentialsResolver(
         self,
         credential_source: str,
         region: str,
-    ) -> AWSCredentialsResolver:
+    ) -> AsyncAWSCredentialsResolver:
         slot = _CREDENTIAL_SOURCE_SLOTS.get(credential_source)
         if slot is None:
             raise AssumeRoleConfigurationError(
@@ -335,7 +334,7 @@ class ProfileAssumeRoleCredentialsResolver(
                 f"No provider is installed for credential source '{credential_source}'. Install '{slot.module_suggestion}'."
             )
 
-        setup = ChainSetup(
+        setup = AsyncChainSetup(
             region_override=region,
             http_client=self._http_client,
         )
@@ -345,19 +344,19 @@ class ProfileAssumeRoleCredentialsResolver(
             raise AssumeRoleConfigurationError(
                 f"'{credential_source}' credential source is not configured."
             )
-        return cast(AWSCredentialsResolver, setup.resolvers[0])
+        return cast(AsyncAWSCredentialsResolver, setup.resolvers[0])
 
     def _find_provider(
         self,
         slot: StandardProvider,
-    ) -> ChainIdentityProvider | None:
+    ) -> AsyncChainIdentityProvider | None:
         for entry_point in metadata.entry_points(
             group=_CHAIN_PROVIDER_ENTRY_POINT_GROUP
         ):
             if entry_point.name != slot.canonical_name:
                 continue
             provider_factory = cast(
-                Callable[[], ChainIdentityProvider],
+                Callable[[], AsyncChainIdentityProvider],
                 entry_point.load(),
             )
             return provider_factory()

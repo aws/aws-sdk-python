@@ -9,8 +9,9 @@ from aws_credentials_sts.providers import ProfileAssumeRoleProvider
 from aws_credentials_sts.resolvers import ProfileAssumeRoleCredentialsResolver
 from smithy_aws_core.config.file_parser import Section, StandardizedOutput
 from smithy_aws_core.config.merged_config import MergedConfig
+from smithy_aws_core.aio.identity.chain.provider import AsyncChainSetup
 from smithy_aws_core.identity import AWSCredentialsIdentity
-from smithy_aws_core.identity.chain import ChainSetup, Standard, StandardProvider
+from smithy_aws_core.identity.chain import Standard, StandardProvider
 from smithy_core.interfaces.identity import Identity
 
 ROLE_ARN = "arn:aws:iam::123456789012:role/MyRole"
@@ -35,15 +36,15 @@ def merged_config() -> Callable[..., MergedConfig]:
 
 
 @pytest.fixture
-def setup_provider() -> Callable[..., Awaitable[ChainSetup]]:
+def setup_provider() -> Callable[..., Awaitable[AsyncChainSetup]]:
     async def _setup(
         provider: Any,
         *,
         identity_type: type[Identity] = AWSCredentialsIdentity,
         config_file: MergedConfig | None = None,
         profile_name: str,
-    ) -> ChainSetup:
-        setup = ChainSetup(config_file=config_file, profile_name=profile_name)
+    ) -> AsyncChainSetup:
+        setup = AsyncChainSetup(config_file=config_file, profile_name=profile_name)
         setup.set_current_provider(provider)
         await provider.setup(identity_type, setup)
         return setup
@@ -59,7 +60,7 @@ def test_provider_metadata() -> None:
 
 
 async def test_ignores_non_aws_identity_type(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+    setup_provider: Callable[..., Awaitable[AsyncChainSetup]],
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config({"default": {"role_arn": ROLE_ARN}})
@@ -75,7 +76,7 @@ async def test_ignores_non_aws_identity_type(
 
 
 async def test_no_profile_name_skips(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+    setup_provider: Callable[..., Awaitable[AsyncChainSetup]],
 ) -> None:
     setup = await setup_provider(ProfileAssumeRoleProvider(), profile_name=None)
 
@@ -84,7 +85,7 @@ async def test_no_profile_name_skips(
 
 
 async def test_profile_without_role_arn_skips(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+    setup_provider: Callable[..., Awaitable[AsyncChainSetup]],
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config({"default": {"region": "us-east-1"}})
@@ -97,7 +98,7 @@ async def test_profile_without_role_arn_skips(
 
 
 async def test_registers_terminal_resolver_for_role_arn(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+    setup_provider: Callable[..., Awaitable[AsyncChainSetup]],
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(

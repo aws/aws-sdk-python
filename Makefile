@@ -7,7 +7,7 @@ SMITHY_PYTHON ?= ../smithy-python
 # Clients per gradle build in `make clients`; lower it if the build runs out of heap.
 BATCH_SIZE ?= 25
 
-.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen clients fragments publish-codegen aio-check static-analysis test-unit test-functional test-integration
+.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen clients fragments publish-codegen aio-check meta-package-check static-analysis test-unit test-functional test-integration
 
 # Each client and package runs in its own .venv. Dependencies outside this repo,
 # including smithy-python, resolve from PyPI at the versions each one declares.
@@ -20,6 +20,7 @@ UV_RUN = uv run --python $(PYTHON_VERSION) --project
 INTEGRATION_SKIP := clients/aws-sdk-qbusiness
 
 static-analysis:
+	$(MAKE) meta-package-check
 	@set -e; for p in $(PROJECTS); do \
 		dirs=$$(ls -d $$p/src $$p/tests 2>/dev/null || true); \
 		group=$$(grep -q '^test = \[' $$p/pyproject.toml && echo --group test || true); \
@@ -86,6 +87,11 @@ endif
 # Enforces aio naming and separation in package and client sources.
 aio-check:
 	uv run --no-project --python $(PYTHON_VERSION) python scripts/aio-naming/aio_naming.py
+
+# Catches a client missing from aws-sdk-python's extras or in-repo sources, which
+# would otherwise resolve from PyPI and fail on any unpublished version bump.
+meta-package-check:
+	uv run --no-project --python $(PYTHON_VERSION) python scripts/meta-package/meta_package.py
 
 venv:
 	uv venv --python $(PYTHON_VERSION)

@@ -1,8 +1,9 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
+from smithy_aws_core.aio.identity.chain.provider import AsyncChainSetup
 from smithy_aws_core.identity import AWSCredentialsIdentity
-from smithy_aws_core.identity.chain import ChainSetup, Standard, StandardProvider
+from smithy_aws_core.identity.chain import Standard, StandardProvider
 from smithy_core.interfaces.identity import Identity
 
 from .resolvers import ProfileAssumeRoleCredentialsResolver
@@ -23,7 +24,9 @@ class ProfileAssumeRoleProvider:
         """Return the provider's standard chain position."""
         return Standard(slot=StandardProvider.PROFILE_ASSUME_ROLE)
 
-    async def setup(self, identity_type: type[Identity], setup: ChainSetup) -> None:
+    async def setup(
+        self, identity_type: type[Identity], setup: AsyncChainSetup
+    ) -> None:
         """Add a terminal resolver when the active profile declares a role ARN."""
         if identity_type is not AWSCredentialsIdentity:
             return
