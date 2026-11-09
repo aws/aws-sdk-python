@@ -76,6 +76,33 @@ all = [
     "aws_sdk_python[transcribe_streaming]",
 ]
 
+[tool.uv.sources]
+aws-sdk-api-gateway = { path = "../aws-sdk-api-gateway", editable = true }
+aws-sdk-bedrock = { path = "../aws-sdk-bedrock", editable = true }
+aws-sdk-bedrock-agent = { path = "../aws-sdk-bedrock-agent", editable = true }
+aws-sdk-bedrock-agent-runtime = { path = "../aws-sdk-bedrock-agent-runtime", editable = true }
+aws-sdk-bedrock-agentcore = { path = "../aws-sdk-bedrock-agentcore", editable = true }
+aws-sdk-bedrock-agentcore-control = { path = "../aws-sdk-bedrock-agentcore-control", editable = true }
+aws-sdk-bedrock-data-automation = { path = "../aws-sdk-bedrock-data-automation", editable = true }
+aws-sdk-bedrock-data-automation-runtime = { path = "../aws-sdk-bedrock-data-automation-runtime", editable = true }
+aws-sdk-bedrock-runtime = { path = "../aws-sdk-bedrock-runtime", editable = true }
+aws-sdk-cloudtrail = { path = "../aws-sdk-cloudtrail", editable = true }
+aws-sdk-cognito-identity = { path = "../aws-sdk-cognito-identity", editable = true }
+aws-sdk-connecthealth = { path = "../aws-sdk-connecthealth", editable = true }
+aws-sdk-dynamodb = { path = "../aws-sdk-dynamodb", editable = true }
+aws-sdk-guardduty = { path = "../aws-sdk-guardduty", editable = true }
+aws-sdk-lambda = { path = "../aws-sdk-lambda", editable = true }
+aws-sdk-lex-runtime-v2 = { path = "../aws-sdk-lex-runtime-v2", editable = true }
+aws-sdk-polly = { path = "../aws-sdk-polly", editable = true }
+aws-sdk-qbusiness = { path = "../aws-sdk-qbusiness", editable = true }
+aws-sdk-sagemaker-runtime-http2 = { path = "../aws-sdk-sagemaker-runtime-http2", editable = true }
+aws-sdk-secrets-manager = { path = "../aws-sdk-secrets-manager", editable = true }
+aws-sdk-signin = { path = "../aws-sdk-signin", editable = true }
+aws-sdk-sns = { path = "../aws-sdk-sns", editable = true }
+aws-sdk-sqs = { path = "../aws-sdk-sqs", editable = true }
+aws-sdk-sts = { path = "../aws-sdk-sts", editable = true }
+aws-sdk-transcribe-streaming = { path = "../aws-sdk-transcribe-streaming", editable = true }
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

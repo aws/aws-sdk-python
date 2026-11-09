@@ -6,9 +6,6 @@
 import asyncio
 import time
 
-from smithy_core.aio.eventstream import DuplexEventStream
-from smithy_http.aio.crt import AWSCRTHTTPClient
-
 from aws_sdk_transcribe_streaming.models import (
     AudioEvent,
     AudioStream,
@@ -20,6 +17,8 @@ from aws_sdk_transcribe_streaming.models import (
     TranscriptResultStream,
     TranscriptResultStreamTranscriptEvent,
 )
+from smithy_core.aio.eventstream import AsyncDuplexEventStream
+from smithy_http.aio.crt import AWSCRTHTTPClient
 
 from . import AUDIO_FILE, create_transcribe_client
 
@@ -30,7 +29,7 @@ CHUNK_SIZE = 1024 * 8
 
 
 async def _send_audio_chunks(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         AudioStream, TranscriptResultStream, StartStreamTranscriptionOutput
     ],
 ) -> None:
@@ -53,7 +52,7 @@ async def _send_audio_chunks(
 
 
 async def _receive_transcription_output(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         AudioStream, TranscriptResultStream, StartStreamTranscriptionOutput
     ],
 ) -> tuple[bool, list[str]]:

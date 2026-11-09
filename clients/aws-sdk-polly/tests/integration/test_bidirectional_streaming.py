@@ -5,9 +5,6 @@
 
 import asyncio
 
-from smithy_core.aio.eventstream import DuplexEventStream
-from smithy_http.aio.crt import AWSCRTHTTPClient
-
 from aws_sdk_polly.models import (
     CloseStreamEvent,
     StartSpeechSynthesisStreamActionStream,
@@ -24,6 +21,8 @@ from aws_sdk_polly.models import (
     StartSpeechSynthesisStreamOutput,
     TextEvent,
 )
+from smithy_core.aio.eventstream import AsyncDuplexEventStream
+from smithy_http.aio.crt import AWSCRTHTTPClient
 
 from . import (
     ENGINE,
@@ -44,7 +43,7 @@ ERROR_EVENT_TYPES = (
 
 
 async def _send_text(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         StartSpeechSynthesisStreamActionStream,
         StartSpeechSynthesisStreamEventStream,
         StartSpeechSynthesisStreamOutput,
@@ -61,7 +60,7 @@ async def _send_text(
 
 
 async def _receive_audio(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         StartSpeechSynthesisStreamActionStream,
         StartSpeechSynthesisStreamEventStream,
         StartSpeechSynthesisStreamOutput,

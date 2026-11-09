@@ -6,9 +6,6 @@
 import asyncio
 import uuid
 
-from smithy_core.aio.eventstream import DuplexEventStream
-from smithy_http.aio.crt import AWSCRTHTTPClient
-
 from aws_sdk_lex_runtime_v2.models import (
     ConfigurationEvent,
     DisconnectionEvent,
@@ -25,12 +22,14 @@ from aws_sdk_lex_runtime_v2.models import (
     StartConversationResponseEventStreamTranscriptEvent,
     TextInputEvent,
 )
+from smithy_core.aio.eventstream import AsyncDuplexEventStream
+from smithy_http.aio.crt import AWSCRTHTTPClient
 
 from . import BOT_ALIAS_ID, LOCALE_ID, REGION, create_lex_client
 
 
 async def _send_events(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         StartConversationRequestEventStream,
         StartConversationResponseEventStream,
         StartConversationOutput,
@@ -63,7 +62,7 @@ async def _send_events(
 
 
 async def _receive_events(
-    stream: DuplexEventStream[
+    stream: AsyncDuplexEventStream[
         StartConversationRequestEventStream,
         StartConversationResponseEventStream,
         StartConversationOutput,

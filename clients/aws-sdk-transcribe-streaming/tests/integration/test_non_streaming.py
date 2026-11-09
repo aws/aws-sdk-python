@@ -7,9 +7,6 @@ import asyncio
 import time
 import uuid
 
-from smithy_core.exceptions import CallError
-from smithy_http.aio.crt import AWSCRTHTTPClient
-
 from aws_sdk_transcribe_streaming.models import (
     BadRequestException,
     ClinicalNoteGenerationSettings,
@@ -28,6 +25,8 @@ from aws_sdk_transcribe_streaming.models import (
     MedicalScribeSessionControlEventType,
     StartMedicalScribeStreamInput,
 )
+from smithy_core.exceptions import CallError
+from smithy_http.aio.crt import AWSCRTHTTPClient
 
 from . import AUDIO_FILE, create_transcribe_client
 
