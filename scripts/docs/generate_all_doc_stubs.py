@@ -25,6 +25,7 @@ logging.basicConfig(
 logger = logging.getLogger("generate_all_doc_stubs")
 
 DEFAULT_CPU_COUNT = 1
+STUB_SCRIPT = Path(__file__).parent / "generate_doc_stubs.py"
 
 
 @dataclass
@@ -39,7 +40,7 @@ class ClientInfo:
 
 def discover_clients(clients_dir: Path, models_dir: Path) -> list[ClientInfo]:
     """
-    Discover all clients that have a generate_doc_stubs.py script.
+    Discover all generated clients, identified by a matching Smithy model.
 
     Args:
         clients_dir: Path to the clients directory.
@@ -53,13 +54,13 @@ def discover_clients(clients_dir: Path, models_dir: Path) -> list[ClientInfo]:
 
     clients = []
     for client_dir in sorted(clients_dir.iterdir()):
-        script_path = client_dir / "scripts" / "docs" / "generate_doc_stubs.py"
-        if not script_path.exists():
-            continue
-
         package_name = client_dir.name
         path_name = package_name.replace("aws-sdk-", "")
-        service_name = get_sdk_id(models_dir / f"{path_name}.json")
+        model_path = models_dir / f"{path_name}.json"
+        if not model_path.exists():
+            continue
+
+        service_name = get_sdk_id(model_path)
         clients.append(ClientInfo(client_dir, service_name, package_name, path_name))
 
     return clients
@@ -67,7 +68,7 @@ def discover_clients(clients_dir: Path, models_dir: Path) -> list[ClientInfo]:
 
 def generate_all_doc_stubs(clients: list[ClientInfo], docs_dir: Path) -> bool:
     """
-    Generate doc stubs for all clients by running each client's generate_doc_stubs.py.
+    Generate doc stubs for all clients by running generate_doc_stubs.py on each.
 
     Args:
         clients: List of ClientInfo objects.
@@ -124,12 +125,10 @@ def _generate_doc_stub(
     Returns:
         Tuple of (service_name, success).
     """
-    script_path = client_dir / "scripts" / "docs" / "generate_doc_stubs.py"
-
     result = subprocess.run(
         [
             sys.executable,
-            str(script_path),
+            str(STUB_SCRIPT),
             "--client-dir",
             str(client_dir / "src" / client_dir.name.replace("-", "_")),
             "--output-dir",

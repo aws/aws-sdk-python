@@ -28,16 +28,16 @@ classifiers = [
 ]
 dependencies = [
   "aws-sdk-sts~=0.12.0",
-  "smithy-aws-core~=0.12.0",
-  "smithy-core~=0.9.0",
-  "smithy-http~=0.6.0",
+  "smithy-aws-core~=0.13.0",
+  "smithy-core~=0.10.0",
+  "smithy-http~=0.7.0",
 ]
 
 [project.urls]
 "Code" = "https://github.com/aws/aws-sdk-python/tree/develop/packages/aws-credentials-sts/"
 "Issue tracker" = "https://github.com/aws/aws-sdk-python/issues"
 
-[project.entry-points."smithy_aws_core.identity.chain_providers"]
+[project.entry-points."smithy_aws_core.aio.identity.chain_providers"]
 ProfileAssumeRole = "aws_credentials_sts.providers:ProfileAssumeRoleProvider"
 
 [dependency-groups]

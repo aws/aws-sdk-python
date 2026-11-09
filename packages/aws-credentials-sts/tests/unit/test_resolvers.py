@@ -21,16 +21,13 @@ from aws_sdk_sts.models import (
 )
 from smithy_aws_core.config.file_parser import Section, StandardizedOutput
 from smithy_aws_core.config.merged_config import MergedConfig
-from smithy_aws_core.identity import (
-    AWSCredentialsIdentity,
-    StaticCredentialsResolver,
+from smithy_aws_core.aio.identity import AsyncStaticCredentialsResolver
+from smithy_aws_core.aio.identity.chain.provider import (
+    AsyncChainSetup,
+    AsyncNamedResolver,
 )
-from smithy_aws_core.identity.chain import (
-    ChainSetup,
-    Standard,
-    StandardProvider,
-)
-from smithy_aws_core.identity.chain.provider import NamedResolver
+from smithy_aws_core.identity import AWSCredentialsIdentity
+from smithy_aws_core.identity.chain import Standard, StandardProvider
 from smithy_core.exceptions import SmithyIdentityError
 
 ROLE_ARN = "arn:aws:iam::123456789012:role/MyRole"
@@ -44,7 +41,7 @@ SESSION_TOKEN = "test-session-token"
 class _FakeProvider:
     """A chain provider that adds a single static resolver during setup."""
 
-    def __init__(self, resolver: StaticCredentialsResolver) -> None:
+    def __init__(self, resolver: AsyncStaticCredentialsResolver) -> None:
         self._resolver = resolver
 
     @property
@@ -55,7 +52,7 @@ class _FakeProvider:
     def ordering(self) -> Standard:
         return Standard(slot=StandardProvider.ENVIRONMENT)
 
-    async def setup(self, identity_type: object, setup: ChainSetup) -> None:
+    async def setup(self, identity_type: object, setup: AsyncChainSetup) -> None:
         setup.add_resolver(self._resolver)
 
 
@@ -333,7 +330,7 @@ async def test_source_profile_with_static_credentials(
 
     assert isinstance(delegate, AssumeRoleCredentialsResolver)
     assert delegate._role_arn == ROLE_ARN
-    assert isinstance(delegate._source_resolver, StaticCredentialsResolver)
+    assert isinstance(delegate._source_resolver, AsyncStaticCredentialsResolver)
     identity = await delegate._source_resolver.get_identity(properties={})
     assert identity.access_key_id == "akid"
     assert identity.secret_access_key == "secret"
@@ -418,7 +415,7 @@ async def test_first_profile_credentials_ignored_in_favor_of_source(
         profile_name="role", visited=("role",)
     )
 
-    assert isinstance(delegate._source_resolver, StaticCredentialsResolver)
+    assert isinstance(delegate._source_resolver, AsyncStaticCredentialsResolver)
     identity = await delegate._source_resolver.get_identity(properties={})
     assert identity.access_key_id == "akid"
     assert identity.secret_access_key == "secret"
@@ -454,7 +451,7 @@ async def test_nested_source_profile_role_chain(
     inner = delegate._source_resolver
     assert isinstance(inner, AssumeRoleCredentialsResolver)
     assert inner._role_arn == SOURCE_ROLE_ARN
-    assert isinstance(inner._source_resolver, StaticCredentialsResolver)
+    assert isinstance(inner._source_resolver, AsyncStaticCredentialsResolver)
 
 
 async def test_chain_terminates_at_static_credentials(
@@ -484,7 +481,7 @@ async def test_chain_terminates_at_static_credentials(
     )
 
     assert delegate._role_arn == ROLE_ARN
-    assert isinstance(delegate._source_resolver, StaticCredentialsResolver)
+    assert isinstance(delegate._source_resolver, AsyncStaticCredentialsResolver)
     identity = await delegate._source_resolver.get_identity(properties={})
     assert identity.access_key_id == "akid"
     assert identity.secret_access_key == "secret"
@@ -613,7 +610,7 @@ async def test_self_referencing_profile_with_static_credentials(
         profile_name="role", visited=("role",)
     )
 
-    assert isinstance(delegate._source_resolver, StaticCredentialsResolver)
+    assert isinstance(delegate._source_resolver, AsyncStaticCredentialsResolver)
 
 
 async def test_missing_role_arn_raises(
@@ -729,7 +726,7 @@ async def test_credential_source_builds_resolver_from_provider(
     resolver = ProfileAssumeRoleCredentialsResolver(
         profile_name="role", config_file=config_file
     )
-    static = StaticCredentialsResolver(
+    static = AsyncStaticCredentialsResolver(
         AWSCredentialsIdentity(access_key_id="akid", secret_access_key="secret")
     )
     resolver._find_provider = lambda slot: _FakeProvider(static)  # type: ignore[assignment]
@@ -739,7 +736,7 @@ async def test_credential_source_builds_resolver_from_provider(
     )
 
     assert isinstance(delegate, AssumeRoleCredentialsResolver)
-    assert isinstance(delegate._source_resolver, NamedResolver)
+    assert isinstance(delegate._source_resolver, AsyncNamedResolver)
     assert delegate._source_resolver.resolver is static
 
 
@@ -767,7 +764,7 @@ async def test_credential_source_provider_registers_nothing_raises(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     class _EmptyProvider:
-        async def setup(self, identity_type: object, setup: ChainSetup) -> None:
+        async def setup(self, identity_type: object, setup: AsyncChainSetup) -> None:
             return None
 
     config_file = merged_config(

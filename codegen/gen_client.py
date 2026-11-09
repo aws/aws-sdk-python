@@ -37,12 +37,8 @@ KEEP = (
     "CHANGELOG.md",
     "LICENSE",
     "NOTICE",
-    "Makefile",
-    "docs",
     "examples",
-    "scripts",
     "tests/integration",
-    "zensical.toml",
 )
 
 # The integration tests of these clients set up resources with boto3; values are
@@ -52,7 +48,6 @@ CLIENTS_REQUIRING_BOTO3 = {
     "aws-sdk-lex-runtime-v2": ["iam", "lexv2-models", "sts"],
     "aws-sdk-transcribe-streaming": ["iam", "s3", "sts"],
 }
-CLIENT_DOC_DEPS = {"zensical", "mkdocstrings[python]"}
 
 
 def main() -> None:
@@ -83,12 +78,11 @@ def main() -> None:
 
 
 def _generate(models: list[Path], batch_size: int, gradle_args: list[str]) -> None:
-    docs_deps = _docs_deps()
     for start in range(0, len(models), batch_size):
         batch = models[start : start + batch_size]
         _build(batch, gradle_args)
         for model in batch:
-            _install_client(model.stem, docs_deps)
+            _install_client(model.stem)
 
 
 def _pinned_commit() -> str:
@@ -242,7 +236,7 @@ def _build(models: list[Path], gradle_args: list[str]) -> None:
     )
 
 
-def _install_client(slug: str, docs_deps: list[str]) -> None:
+def _install_client(slug: str) -> None:
     name = f"aws-sdk-{slug}"
     projection = (
         CODEGEN_DIR
@@ -265,8 +259,6 @@ def _install_client(slug: str, docs_deps: list[str]) -> None:
     for rel in overlays:
         shutil.copyfile(OVERLAYS / name / rel, dest / rel)
 
-    if docs_deps:
-        _uv_add(dest, "docs", docs_deps)
     if name in CLIENTS_REQUIRING_BOTO3:
         services = ",".join(CLIENTS_REQUIRING_BOTO3[name])
         _uv_add(dest, "test", ["boto3", f"types-boto3-lite[{services}]"])
@@ -342,15 +334,6 @@ def _ignored(dest: Path) -> set[str]:
         text=True,
     ).stdout
     return {p.rstrip("/") for p in out.split("\0") if p}
-
-
-def _docs_deps() -> list[str]:
-    deps = []
-    for line in (REPO / "requirements-docs.in").read_text().splitlines():
-        line = line.split("#")[0].strip()
-        if line and re.split(r"[<>=!~]", line)[0] in CLIENT_DOC_DEPS:
-            deps.append(line)
-    return deps
 
 
 def _uv_add(client: Path, group: str, deps: list[str]) -> None:
