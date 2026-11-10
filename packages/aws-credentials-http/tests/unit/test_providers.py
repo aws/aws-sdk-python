@@ -1,7 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 # pyright: reportPrivateUsage=false
-from collections.abc import Awaitable, Callable
+from collections.abc import Callable
 from typing import Any
 
 import pytest
@@ -32,15 +32,15 @@ def clear_environment(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 @pytest.fixture
-def setup_provider() -> Callable[..., Awaitable[ChainSetup]]:
-    async def _setup(
+def setup_provider() -> Callable[..., ChainSetup]:
+    def _setup(
         provider: Any,
         *,
         identity_type: type[Identity] = AWSCredentialsIdentity,
     ) -> ChainSetup:
         setup = ChainSetup()
         setup.set_current_provider(provider)
-        await provider.setup(identity_type, setup)
+        provider.setup(identity_type, setup)
         return setup
 
     return _setup
@@ -53,13 +53,13 @@ def test_provider_metadata() -> None:
     assert provider.ordering == Standard(slot=StandardProvider.ECS_CONTAINER)
 
 
-async def test_ignores_non_aws_identity_type(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_ignores_non_aws_identity_type(
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv(_RELATIVE_URI, "/credentials")
 
-    setup = await setup_provider(EcsContainerProvider(), identity_type=OtherIdentity)
+    setup = setup_provider(EcsContainerProvider(), identity_type=OtherIdentity)
 
     assert setup.resolvers == ()
     assert not setup.terminal
@@ -74,10 +74,10 @@ async def test_ignores_non_aws_identity_type(
         ("", ""),
     ],
 )
-async def test_requires_configured_endpoint(
+def test_requires_configured_endpoint(
     relative_uri: str | None,
     full_uri: str | None,
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     if relative_uri is not None:
@@ -85,7 +85,7 @@ async def test_requires_configured_endpoint(
     if full_uri is not None:
         monkeypatch.setenv(_FULL_URI, full_uri)
 
-    setup = await setup_provider(EcsContainerProvider())
+    setup = setup_provider(EcsContainerProvider())
 
     assert setup.resolvers == ()
     assert not setup.terminal
@@ -98,15 +98,15 @@ async def test_requires_configured_endpoint(
         (_FULL_URI, "http://169.254.170.23/credentials"),
     ],
 )
-async def test_registers_terminal_resolver_for_env_vars(
+def test_registers_terminal_resolver_for_env_vars(
     name: str,
     value: str,
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv(name, value)
 
-    setup = await setup_provider(EcsContainerProvider())
+    setup = setup_provider(EcsContainerProvider())
 
     assert setup.terminal
     assert len(setup.resolvers) == 1

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # pyright: reportPrivateUsage=false
-from collections.abc import Awaitable, Callable, Mapping
+from collections.abc import Callable, Mapping
 from typing import Any
 
 import pytest
@@ -55,8 +55,8 @@ def merged_config() -> Callable[..., MergedConfig]:
 
 
 @pytest.fixture
-def setup_provider() -> Callable[..., Awaitable[ChainSetup]]:
-    async def _setup(
+def setup_provider() -> Callable[..., ChainSetup]:
+    def _setup(
         provider: Any,
         *,
         identity_type: type[Identity] = AWSCredentialsIdentity,
@@ -65,7 +65,7 @@ def setup_provider() -> Callable[..., Awaitable[ChainSetup]]:
     ) -> ChainSetup:
         setup = ChainSetup(config_file=config_file, profile_name=profile_name)
         setup.set_current_provider(provider)
-        await provider.setup(identity_type, setup)
+        provider.setup(identity_type, setup)
         return setup
 
     return _setup
@@ -85,21 +85,19 @@ def test_provider_metadata() -> None:
     assert provider.ordering == Standard(slot=StandardProvider.EC2_INSTANCE_METADATA)
 
 
-async def test_ignores_non_aws_identity_type(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_ignores_non_aws_identity_type(
+    setup_provider: Callable[..., ChainSetup],
 ) -> None:
-    setup = await setup_provider(
-        Ec2InstanceMetadataProvider(), identity_type=OtherIdentity
-    )
+    setup = setup_provider(Ec2InstanceMetadataProvider(), identity_type=OtherIdentity)
 
     assert setup.resolvers == ()
     assert not setup.terminal
 
 
-async def test_registers_non_terminal_resolver(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_registers_non_terminal_resolver(
+    setup_provider: Callable[..., ChainSetup],
 ) -> None:
-    setup = await setup_provider(Ec2InstanceMetadataProvider())
+    setup = setup_provider(Ec2InstanceMetadataProvider())
 
     assert not setup.terminal
     assert len(setup.resolvers) == 1
@@ -110,93 +108,93 @@ async def test_registers_non_terminal_resolver(
 
 
 @pytest.mark.parametrize("value", ["true", "True", "TRUE"])
-async def test_disabled_env_skips_registration(
+def test_disabled_env_skips_registration(
     value: str,
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv(_DISABLED_ENV, value)
 
-    setup = await setup_provider(Ec2InstanceMetadataProvider())
+    setup = setup_provider(Ec2InstanceMetadataProvider())
 
     assert setup.resolvers == ()
     assert not setup.terminal
 
 
-async def test_disabled_profile_skips_registration(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_disabled_profile_skips_registration(
+    setup_provider: Callable[..., ChainSetup],
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config = merged_config({"default": {"disable_ec2_metadata": "true"}})
 
-    setup = await setup_provider(
+    setup = setup_provider(
         Ec2InstanceMetadataProvider(), config_file=config, profile_name="default"
     )
 
     assert setup.resolvers == ()
 
 
-async def test_disabled_false_still_registers(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_disabled_false_still_registers(
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv(_DISABLED_ENV, "false")
 
-    setup = await setup_provider(Ec2InstanceMetadataProvider())
+    setup = setup_provider(Ec2InstanceMetadataProvider())
 
     assert len(setup.resolvers) == 1
 
 
-async def test_endpoint_mode_from_env(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_endpoint_mode_from_env(
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv(_ENDPOINT_MODE_ENV, "IPv6")
 
-    setup = await setup_provider(Ec2InstanceMetadataProvider())
+    setup = setup_provider(Ec2InstanceMetadataProvider())
 
     config = _only_resolver(setup)._config
     assert config.endpoint_mode == "IPv6"
     assert config.endpoint_uri.host == config._HOST_MAPPING["IPv6"]
 
 
-async def test_endpoint_mode_is_case_insensitive(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_endpoint_mode_is_case_insensitive(
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv(_ENDPOINT_MODE_ENV, "ipv6")
 
-    setup = await setup_provider(Ec2InstanceMetadataProvider())
+    setup = setup_provider(Ec2InstanceMetadataProvider())
 
     assert _only_resolver(setup)._config.endpoint_mode == "IPv6"
 
 
-async def test_endpoint_mode_env_overrides_profile(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_endpoint_mode_env_overrides_profile(
+    setup_provider: Callable[..., ChainSetup],
     merged_config: Callable[..., MergedConfig],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv(_ENDPOINT_MODE_ENV, "IPv6")
     config = merged_config({"default": {"ec2_metadata_service_endpoint_mode": "IPv4"}})
 
-    setup = await setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
+    setup = setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
 
     assert _only_resolver(setup)._config.endpoint_mode == "IPv6"
 
 
-async def test_endpoint_mode_from_profile(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_endpoint_mode_from_profile(
+    setup_provider: Callable[..., ChainSetup],
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config = merged_config({"default": {"ec2_metadata_service_endpoint_mode": "IPv6"}})
 
-    setup = await setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
+    setup = setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
 
     assert _only_resolver(setup)._config.endpoint_mode == "IPv6"
 
 
-async def test_invalid_endpoint_mode_raises(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_invalid_endpoint_mode_raises(
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv(_ENDPOINT_MODE_ENV, "IPv5")
@@ -204,16 +202,16 @@ async def test_invalid_endpoint_mode_raises(
     with pytest.raises(
         IMDSConfigurationError, match="Invalid IMDS endpoint mode 'IPv5'"
     ):
-        await setup_provider(Ec2InstanceMetadataProvider())
+        setup_provider(Ec2InstanceMetadataProvider())
 
 
-async def test_endpoint_from_env(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_endpoint_from_env(
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv(_ENDPOINT_ENV, "http://169.254.169.200:8080")
 
-    setup = await setup_provider(Ec2InstanceMetadataProvider())
+    setup = setup_provider(Ec2InstanceMetadataProvider())
 
     endpoint = _only_resolver(setup)._config.endpoint_uri
     assert endpoint.scheme == "http"
@@ -221,8 +219,8 @@ async def test_endpoint_from_env(
     assert endpoint.port == 8080
 
 
-async def test_endpoint_env_overrides_profile(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_endpoint_env_overrides_profile(
+    setup_provider: Callable[..., ChainSetup],
     merged_config: Callable[..., MergedConfig],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -231,59 +229,59 @@ async def test_endpoint_env_overrides_profile(
         {"default": {"ec2_metadata_service_endpoint": "http://169.254.169.111"}}
     )
 
-    setup = await setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
+    setup = setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
 
     assert _only_resolver(setup)._config.endpoint_uri.host == "169.254.169.200"
 
 
-async def test_endpoint_from_profile(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_endpoint_from_profile(
+    setup_provider: Callable[..., ChainSetup],
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config = merged_config(
         {"default": {"ec2_metadata_service_endpoint": "http://169.254.169.111"}}
     )
 
-    setup = await setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
+    setup = setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
 
     assert _only_resolver(setup)._config.endpoint_uri.host == "169.254.169.111"
 
 
-async def test_invalid_endpoint_raises(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_invalid_endpoint_raises(
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     # Missing scheme is not a valid endpoint URI.
     monkeypatch.setenv(_ENDPOINT_ENV, "169.254.169.254")
 
     with pytest.raises(IMDSConfigurationError, match="Invalid IMDS endpoint URI"):
-        await setup_provider(Ec2InstanceMetadataProvider())
+        setup_provider(Ec2InstanceMetadataProvider())
 
 
-async def test_profile_name_from_env(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_profile_name_from_env(
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv(_PROFILE_NAME_ENV, "my-profile")
 
-    setup = await setup_provider(Ec2InstanceMetadataProvider())
+    setup = setup_provider(Ec2InstanceMetadataProvider())
 
     assert _only_resolver(setup)._config.ec2_instance_profile_name == "my-profile"
 
 
-async def test_profile_name_from_profile(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_profile_name_from_profile(
+    setup_provider: Callable[..., ChainSetup],
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config = merged_config({"default": {"ec2_instance_profile_name": "my-profile"}})
 
-    setup = await setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
+    setup = setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
 
     assert _only_resolver(setup)._config.ec2_instance_profile_name == "my-profile"
 
 
-async def test_blank_profile_name_raises(
-    setup_provider: Callable[..., Awaitable[ChainSetup]],
+def test_blank_profile_name_raises(
+    setup_provider: Callable[..., ChainSetup],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv(_PROFILE_NAME_ENV, "   ")
@@ -292,4 +290,4 @@ async def test_blank_profile_name_raises(
         IMDSConfigurationError,
         match="The configured EC2 instance profile name must not be blank",
     ):
-        await setup_provider(Ec2InstanceMetadataProvider())
+        setup_provider(Ec2InstanceMetadataProvider())

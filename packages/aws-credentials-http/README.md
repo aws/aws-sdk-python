@@ -37,11 +37,11 @@ The resolver can also be used on its own to fetch credentials directly:
 ```python
 import asyncio
 
-from aws_credentials_http import ContainerCredentialsResolver
+from aws_credentials_http.aio import AsyncContainerCredentialsResolver
 
 
 async def main() -> None:
-    resolver = ContainerCredentialsResolver()
+    resolver = AsyncContainerCredentialsResolver()
     identity = await resolver.get_identity(properties={})
 
 

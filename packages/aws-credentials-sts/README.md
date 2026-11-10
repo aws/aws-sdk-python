@@ -48,12 +48,12 @@ from aws_credentials_sts import ProfileAssumeRoleCredentialsResolver
 from smithy_aws_core.config import load_config
 
 
-async def build_client() -> ServiceClient:
+def build_client() -> ServiceClient:
     return ServiceClient(
         config=ServiceClientConfig(
             aws_credentials_identity_resolver=ProfileAssumeRoleCredentialsResolver(
                 profile_name="my-profile",
-                config_file=await load_config(),
+                config_file=load_config(),
             ),
         )
     )
@@ -66,13 +66,13 @@ Either resolver can also be used on its own to fetch credentials directly:
 ```python
 import asyncio
 
-from aws_credentials_sts import AssumeRoleCredentialsResolver
-from smithy_aws_core.identity import EnvironmentCredentialsResolver
+from aws_credentials_sts.aio import AsyncAssumeRoleCredentialsResolver
+from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
 
 
 async def main() -> None:
-    resolver = AssumeRoleCredentialsResolver(
-        source_resolver=EnvironmentCredentialsResolver(),
+    resolver = AsyncAssumeRoleCredentialsResolver(
+        source_resolver=AsyncEnvironmentCredentialsResolver(),
         role_arn="arn:aws:iam::123456789012:role/example-role",
     )
     identity = await resolver.get_identity(properties={})

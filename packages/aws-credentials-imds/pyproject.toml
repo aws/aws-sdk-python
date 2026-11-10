@@ -27,9 +27,9 @@ classifiers = [
   "Topic :: Software Development :: Libraries",
 ]
 dependencies = [
-  "smithy-aws-core~=0.12.0",
-  "smithy-core~=0.9.0",
-  "smithy-http[aiohttp]~=0.6.0",
+  "smithy-aws-core~=0.13.0",
+  "smithy-core~=0.10.0",
+  "smithy-http[aiohttp,urllib3]~=0.7.0",
 ]
 
 [project.urls]
@@ -38,6 +38,9 @@ dependencies = [
 
 [project.entry-points."smithy_aws_core.identity.chain_providers"]
 Ec2InstanceMetadata = "aws_credentials_imds.providers:Ec2InstanceMetadataProvider"
+
+[project.entry-points."smithy_aws_core.aio.identity.chain_providers"]
+Ec2InstanceMetadata = "aws_credentials_imds.aio.providers:AsyncEc2InstanceMetadataProvider"
 
 [dependency-groups]
 test = [

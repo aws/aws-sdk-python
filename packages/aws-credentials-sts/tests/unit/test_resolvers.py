@@ -4,15 +4,13 @@
 # pyright: reportPrivateUsage=false
 from collections.abc import Callable, Mapping
 from datetime import UTC, datetime, timedelta
-from unittest.mock import AsyncMock
+from unittest.mock import Mock
 
 import pytest
+from aws_credentials_sts import AssumeRoleConfigurationError
 from aws_credentials_sts.resolvers import (
-    AssumeRoleConfigurationError,
     AssumeRoleCredentialsResolver,
     ProfileAssumeRoleCredentialsResolver,
-    _account_id_from_arn,
-    _resolve_sts_region,
 )
 from aws_sdk_sts.models import (
     AssumedRoleUser,
@@ -21,13 +19,9 @@ from aws_sdk_sts.models import (
 )
 from smithy_aws_core.config.file_parser import Section, StandardizedOutput
 from smithy_aws_core.config.merged_config import MergedConfig
-from smithy_aws_core.aio.identity import AsyncStaticCredentialsResolver
-from smithy_aws_core.aio.identity.chain.provider import (
-    AsyncChainSetup,
-    AsyncNamedResolver,
-)
-from smithy_aws_core.identity import AWSCredentialsIdentity
+from smithy_aws_core.identity import AWSCredentialsIdentity, StaticCredentialsResolver
 from smithy_aws_core.identity.chain import Standard, StandardProvider
+from smithy_aws_core.identity.chain.provider import ChainSetup, NamedResolver
 from smithy_core.exceptions import SmithyIdentityError
 
 ROLE_ARN = "arn:aws:iam::123456789012:role/MyRole"
@@ -41,7 +35,7 @@ SESSION_TOKEN = "test-session-token"
 class _FakeProvider:
     """A chain provider that adds a single static resolver during setup."""
 
-    def __init__(self, resolver: AsyncStaticCredentialsResolver) -> None:
+    def __init__(self, resolver: StaticCredentialsResolver) -> None:
         self._resolver = resolver
 
     @property
@@ -52,7 +46,7 @@ class _FakeProvider:
     def ordering(self) -> Standard:
         return Standard(slot=StandardProvider.ENVIRONMENT)
 
-    async def setup(self, identity_type: object, setup: AsyncChainSetup) -> None:
+    def setup(self, identity_type: object, setup: ChainSetup) -> None:
         setup.add_resolver(self._resolver)
 
 
@@ -93,60 +87,12 @@ def _valid_output(
 
 def _mock_sts_client(
     resolver: AssumeRoleCredentialsResolver, *responses: AssumeRoleOutput
-) -> AsyncMock:
+) -> Mock:
     """Attach a mock STS client returning one response per AssumeRole call."""
-    client = AsyncMock()
+    client = Mock()
     client.assume_role.side_effect = list(responses)
     resolver._client = client
     return client
-
-
-@pytest.mark.parametrize(
-    ("env_aws_region", "env_aws_default_region", "profile_region", "expected"),
-    [
-        (None, None, None, "us-east-1"),
-        ("us-west-2", None, "eu-west-1", "us-west-2"),
-        (None, "ap-south-1", None, "ap-south-1"),
-        (None, None, "eu-west-1", "eu-west-1"),
-    ],
-)
-def test_resolve_sts_region(
-    env_aws_region: str | None,
-    env_aws_default_region: str | None,
-    profile_region: str | None,
-    expected: str,
-    monkeypatch: pytest.MonkeyPatch,
-    merged_config: Callable[..., MergedConfig],
-) -> None:
-    for name, value in (
-        ("AWS_REGION", env_aws_region),
-        ("AWS_DEFAULT_REGION", env_aws_default_region),
-    ):
-        if value is None:
-            monkeypatch.delenv(name, raising=False)
-        else:
-            monkeypatch.setenv(name, value)
-
-    config_file = merged_config(
-        {"default": {"region": profile_region}} if profile_region else {}
-    )
-
-    region = _resolve_sts_region(config_file=config_file, profile_name="default")
-
-    assert region == expected
-
-
-@pytest.mark.parametrize(
-    "arn,expected",
-    [
-        (ASSUMED_ROLE_ARN, "123456789012"),
-        ("arn:aws:sts:::assumed-role/MyRole/session", None),  # empty account field
-        ("not-an-arn", None),  # too few segments
-        (None, None),
-    ],
-)
-def test_account_id_from_arn(arn: str | None, expected: str | None) -> None:
-    assert _account_id_from_arn(arn) == expected
 
 
 # ---------------------------------------------------------------------------
@@ -154,14 +100,12 @@ def test_account_id_from_arn(arn: str | None, expected: str | None) -> None:
 # ---------------------------------------------------------------------------
 
 
-async def test_resolves_identity_from_assume_role() -> None:
+def test_resolves_identity_from_assume_role() -> None:
     expiration = _future_expiry()
-    resolver = AssumeRoleCredentialsResolver(
-        source_resolver=AsyncMock(), role_arn=ROLE_ARN
-    )
+    resolver = AssumeRoleCredentialsResolver(source_resolver=Mock(), role_arn=ROLE_ARN)
     _mock_sts_client(resolver, _valid_output(expiration=expiration))
 
-    identity = await resolver.get_identity(properties={})
+    identity = resolver.get_identity(properties={})
 
     assert identity.access_key_id == ACCESS_KEY_ID
     assert identity.secret_access_key == SECRET_ACCESS_KEY
@@ -170,46 +114,40 @@ async def test_resolves_identity_from_assume_role() -> None:
     assert identity.account_id == "123456789012"
 
 
-async def test_missing_credentials_raises() -> None:
-    resolver = AssumeRoleCredentialsResolver(
-        source_resolver=AsyncMock(), role_arn=ROLE_ARN
-    )
+def test_missing_credentials_raises() -> None:
+    resolver = AssumeRoleCredentialsResolver(source_resolver=Mock(), role_arn=ROLE_ARN)
     _mock_sts_client(resolver, AssumeRoleOutput(credentials=None))
 
     with pytest.raises(SmithyIdentityError, match="did not contain credentials"):
-        await resolver.get_identity(properties={})
+        resolver.get_identity(properties={})
 
 
-async def test_valid_credentials_reused() -> None:
-    resolver = AssumeRoleCredentialsResolver(
-        source_resolver=AsyncMock(), role_arn=ROLE_ARN
-    )
+def test_valid_credentials_reused() -> None:
+    resolver = AssumeRoleCredentialsResolver(source_resolver=Mock(), role_arn=ROLE_ARN)
     sts_client = _mock_sts_client(
         resolver,
         _valid_output(access_key_id="test-access-key-1"),
         _valid_output(access_key_id="test-access-key-2"),
     )
 
-    identity_one = await resolver.get_identity(properties={})
-    identity_two = await resolver.get_identity(properties={})
+    identity_one = resolver.get_identity(properties={})
+    identity_two = resolver.get_identity(properties={})
 
     # The cached identity is returned without a second STS call.
     assert identity_one is identity_two
     assert sts_client.assume_role.call_count == 1
 
 
-async def test_expired_credentials_refreshed() -> None:
-    resolver = AssumeRoleCredentialsResolver(
-        source_resolver=AsyncMock(), role_arn=ROLE_ARN
-    )
+def test_expired_credentials_refreshed() -> None:
+    resolver = AssumeRoleCredentialsResolver(source_resolver=Mock(), role_arn=ROLE_ARN)
     sts_client = _mock_sts_client(
         resolver,
         _valid_output(access_key_id="test-access-key-1", expiration=_past_expiry()),
         _valid_output(access_key_id="test-access-key-2"),
     )
 
-    identity_one = await resolver.get_identity(properties={})
-    identity_two = await resolver.get_identity(properties={})
+    identity_one = resolver.get_identity(properties={})
+    identity_two = resolver.get_identity(properties={})
 
     # The cached identity is refreshed with a second STS call.
     assert identity_one is not identity_two
@@ -218,73 +156,69 @@ async def test_expired_credentials_refreshed() -> None:
     assert sts_client.assume_role.call_count == 2
 
 
-async def test_assume_role_request_uses_role_arn() -> None:
+def test_assume_role_request_uses_role_arn() -> None:
     resolver = AssumeRoleCredentialsResolver(
-        source_resolver=AsyncMock(),
+        source_resolver=Mock(),
         role_arn=ROLE_ARN,
         role_session_name="test-session-name",
     )
     sts_client = _mock_sts_client(resolver, _valid_output())
 
-    await resolver.get_identity(properties={})
+    resolver.get_identity(properties={})
 
     request = sts_client.assume_role.call_args.args[0]
     assert request.role_arn == ROLE_ARN
     assert request.role_session_name == "test-session-name"
 
 
-async def test_assume_role_request_forwards_external_id() -> None:
+def test_assume_role_request_forwards_external_id() -> None:
     resolver = AssumeRoleCredentialsResolver(
-        source_resolver=AsyncMock(),
+        source_resolver=Mock(),
         role_arn=ROLE_ARN,
         external_id="my-external-id",
     )
     sts_client = _mock_sts_client(resolver, _valid_output())
 
-    await resolver.get_identity(properties={})
+    resolver.get_identity(properties={})
 
     request = sts_client.assume_role.call_args.args[0]
     assert request.external_id == "my-external-id"
 
 
-async def test_assume_role_request_forwards_duration_seconds() -> None:
+def test_assume_role_request_forwards_duration_seconds() -> None:
     resolver = AssumeRoleCredentialsResolver(
-        source_resolver=AsyncMock(),
+        source_resolver=Mock(),
         role_arn=ROLE_ARN,
         duration_seconds=3600,
     )
     sts_client = _mock_sts_client(resolver, _valid_output())
 
-    await resolver.get_identity(properties={})
+    resolver.get_identity(properties={})
 
     request = sts_client.assume_role.call_args.args[0]
     assert request.duration_seconds == 3600
 
 
-async def test_role_session_name_generated_when_unset() -> None:
-    resolver = AssumeRoleCredentialsResolver(
-        source_resolver=AsyncMock(), role_arn=ROLE_ARN
-    )
+def test_role_session_name_generated_when_unset() -> None:
+    resolver = AssumeRoleCredentialsResolver(source_resolver=Mock(), role_arn=ROLE_ARN)
     sts_client = _mock_sts_client(resolver, _valid_output())
 
-    await resolver.get_identity(properties={})
+    resolver.get_identity(properties={})
 
     request = sts_client.assume_role.call_args.args[0]
     assert request.role_session_name.startswith("aws-sdk-python-")
 
 
-async def test_role_session_name_stable_across_refreshes() -> None:
-    resolver = AssumeRoleCredentialsResolver(
-        source_resolver=AsyncMock(), role_arn=ROLE_ARN
-    )
+def test_role_session_name_stable_across_refreshes() -> None:
+    resolver = AssumeRoleCredentialsResolver(source_resolver=Mock(), role_arn=ROLE_ARN)
     sts_client = _mock_sts_client(
         resolver,
         _valid_output(expiration=_past_expiry()),
         _valid_output(),
     )
 
-    await resolver.get_identity(properties={})
-    await resolver.get_identity(properties={})
+    resolver.get_identity(properties={})
+    resolver.get_identity(properties={})
 
     first, second = sts_client.assume_role.call_args_list
     assert first.args[0].role_session_name == second.args[0].role_session_name
@@ -308,7 +242,7 @@ def test_missing_profile_raises(
         )
 
 
-async def test_source_profile_with_static_credentials(
+def test_source_profile_with_static_credentials(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -324,19 +258,17 @@ async def test_source_profile_with_static_credentials(
         profile_name="role", config_file=config_file
     )
 
-    delegate = await resolver._create_assume_role_resolver(
-        profile_name="role", visited=("role",)
-    )
+    delegate = resolver._create_delegate()
 
     assert isinstance(delegate, AssumeRoleCredentialsResolver)
     assert delegate._role_arn == ROLE_ARN
-    assert isinstance(delegate._source_resolver, AsyncStaticCredentialsResolver)
-    identity = await delegate._source_resolver.get_identity(properties={})
+    assert isinstance(delegate._source_resolver, StaticCredentialsResolver)
+    identity = delegate._source_resolver.get_identity(properties={})
     assert identity.access_key_id == "akid"
     assert identity.secret_access_key == "secret"
 
 
-async def test_profile_duration_seconds_forwarded_to_delegate(
+def test_profile_duration_seconds_forwarded_to_delegate(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -356,14 +288,12 @@ async def test_profile_duration_seconds_forwarded_to_delegate(
         profile_name="role", config_file=config_file
     )
 
-    delegate = await resolver._create_assume_role_resolver(
-        profile_name="role", visited=("role",)
-    )
+    delegate = resolver._create_delegate()
 
     assert delegate._duration_seconds == 43200
 
 
-async def test_profile_invalid_duration_seconds_ignored(
+def test_profile_invalid_duration_seconds_ignored(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -383,14 +313,12 @@ async def test_profile_invalid_duration_seconds_ignored(
         profile_name="role", config_file=config_file
     )
 
-    delegate = await resolver._create_assume_role_resolver(
-        profile_name="role", visited=("role",)
-    )
+    delegate = resolver._create_delegate()
 
     assert delegate._duration_seconds is None
 
 
-async def test_first_profile_credentials_ignored_in_favor_of_source(
+def test_first_profile_credentials_ignored_in_favor_of_source(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -411,17 +339,15 @@ async def test_first_profile_credentials_ignored_in_favor_of_source(
         profile_name="role", config_file=config_file
     )
 
-    delegate = await resolver._create_assume_role_resolver(
-        profile_name="role", visited=("role",)
-    )
+    delegate = resolver._create_delegate()
 
-    assert isinstance(delegate._source_resolver, AsyncStaticCredentialsResolver)
-    identity = await delegate._source_resolver.get_identity(properties={})
+    assert isinstance(delegate._source_resolver, StaticCredentialsResolver)
+    identity = delegate._source_resolver.get_identity(properties={})
     assert identity.access_key_id == "akid"
     assert identity.secret_access_key == "secret"
 
 
-async def test_nested_source_profile_role_chain(
+def test_nested_source_profile_role_chain(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -441,9 +367,7 @@ async def test_nested_source_profile_role_chain(
         profile_name="role", config_file=config_file
     )
 
-    delegate = await resolver._create_assume_role_resolver(
-        profile_name="role", visited=("role",)
-    )
+    delegate = resolver._create_delegate()
 
     # The outer role assumes via an inner AssumeRole resolver that itself
     # sources from the static base profile.
@@ -451,10 +375,10 @@ async def test_nested_source_profile_role_chain(
     inner = delegate._source_resolver
     assert isinstance(inner, AssumeRoleCredentialsResolver)
     assert inner._role_arn == SOURCE_ROLE_ARN
-    assert isinstance(inner._source_resolver, AsyncStaticCredentialsResolver)
+    assert isinstance(inner._source_resolver, StaticCredentialsResolver)
 
 
-async def test_chain_terminates_at_static_credentials(
+def test_chain_terminates_at_static_credentials(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -476,18 +400,16 @@ async def test_chain_terminates_at_static_credentials(
         profile_name="role", config_file=config_file
     )
 
-    delegate = await resolver._create_assume_role_resolver(
-        profile_name="role", visited=("role",)
-    )
+    delegate = resolver._create_delegate()
 
     assert delegate._role_arn == ROLE_ARN
-    assert isinstance(delegate._source_resolver, AsyncStaticCredentialsResolver)
-    identity = await delegate._source_resolver.get_identity(properties={})
+    assert isinstance(delegate._source_resolver, StaticCredentialsResolver)
+    identity = delegate._source_resolver.get_identity(properties={})
     assert identity.access_key_id == "akid"
     assert identity.secret_access_key == "secret"
 
 
-async def test_missing_source_profile_raises(
+def test_missing_source_profile_raises(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -500,12 +422,10 @@ async def test_missing_source_profile_raises(
     with pytest.raises(
         AssumeRoleConfigurationError, match="Source profile 'ghost' does not exist"
     ):
-        await resolver._create_assume_role_resolver(
-            profile_name="role", visited=("role",)
-        )
+        resolver._create_delegate()
 
 
-async def test_source_profile_without_credentials_or_role_raises(
+def test_source_profile_without_credentials_or_role_raises(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -519,15 +439,12 @@ async def test_source_profile_without_credentials_or_role_raises(
     )
 
     with pytest.raises(
-        AssumeRoleConfigurationError,
         match="Source profile 'base' has no supported credential source",
     ):
-        await resolver._create_assume_role_resolver(
-            profile_name="role", visited=("role",)
-        )
+        resolver._create_delegate()
 
 
-async def test_circular_source_profile_raises(
+def test_circular_source_profile_raises(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -541,10 +458,10 @@ async def test_circular_source_profile_raises(
     )
 
     with pytest.raises(AssumeRoleConfigurationError, match="Circular"):
-        await resolver._create_assume_role_resolver(profile_name="a", visited=("a",))
+        resolver._create_delegate()
 
 
-async def test_circular_source_profile_with_static_credentials_raises(
+def test_circular_source_profile_with_static_credentials_raises(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -563,13 +480,12 @@ async def test_circular_source_profile_with_static_credentials_raises(
     )
 
     with pytest.raises(
-        AssumeRoleConfigurationError,
         match="Circular source_profile reference: a -> b -> a",
     ):
-        await resolver._create_assume_role_resolver(profile_name="a", visited=("a",))
+        resolver._create_delegate()
 
 
-async def test_self_referencing_profile_requires_static_credentials(
+def test_self_referencing_profile_requires_static_credentials(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     # A profile whose source_profile points at itself but has no static keys.
@@ -581,15 +497,12 @@ async def test_self_referencing_profile_requires_static_credentials(
     )
 
     with pytest.raises(
-        AssumeRoleConfigurationError,
         match="Self-referencing profile 'role' must contain complete static credentials",
     ):
-        await resolver._create_assume_role_resolver(
-            profile_name="role", visited=("role",)
-        )
+        resolver._create_delegate()
 
 
-async def test_self_referencing_profile_with_static_credentials(
+def test_self_referencing_profile_with_static_credentials(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -606,14 +519,12 @@ async def test_self_referencing_profile_with_static_credentials(
         profile_name="role", config_file=config_file
     )
 
-    delegate = await resolver._create_assume_role_resolver(
-        profile_name="role", visited=("role",)
-    )
+    delegate = resolver._create_delegate()
 
-    assert isinstance(delegate._source_resolver, AsyncStaticCredentialsResolver)
+    assert isinstance(delegate._source_resolver, StaticCredentialsResolver)
 
 
-async def test_missing_role_arn_raises(
+def test_missing_role_arn_raises(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config({"role": {"source_profile": "base"}})
@@ -624,12 +535,10 @@ async def test_missing_role_arn_raises(
     with pytest.raises(
         AssumeRoleConfigurationError, match="Profile 'role' does not define role_arn"
     ):
-        await resolver._create_assume_role_resolver(
-            profile_name="role", visited=("role",)
-        )
+        resolver._create_delegate()
 
 
-async def test_both_source_and_credential_source_raises(
+def test_both_source_and_credential_source_raises(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -646,15 +555,12 @@ async def test_both_source_and_credential_source_raises(
     )
 
     with pytest.raises(
-        AssumeRoleConfigurationError,
         match="Profile 'role' cannot define both 'source_profile' and 'credential_source'",
     ):
-        await resolver._create_assume_role_resolver(
-            profile_name="role", visited=("role",)
-        )
+        resolver._create_delegate()
 
 
-async def test_neither_source_nor_credential_source_raises(
+def test_neither_source_nor_credential_source_raises(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config({"role": {"role_arn": ROLE_ARN}})
@@ -663,15 +569,12 @@ async def test_neither_source_nor_credential_source_raises(
     )
 
     with pytest.raises(
-        AssumeRoleConfigurationError,
         match="Profile 'role' must define either 'source_profile' or 'credential_source'",
     ):
-        await resolver._create_assume_role_resolver(
-            profile_name="role", visited=("role",)
-        )
+        resolver._create_delegate()
 
 
-async def test_partial_static_credentials_raise(
+def test_partial_static_credentials_raise(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -685,15 +588,12 @@ async def test_partial_static_credentials_raise(
     )
 
     with pytest.raises(
-        AssumeRoleConfigurationError,
         match="Profile 'base' contains partial credentials",
     ):
-        await resolver._create_assume_role_resolver(
-            profile_name="role", visited=("role",)
-        )
+        resolver._create_delegate()
 
 
-async def test_unsupported_credential_source_raises(
+def test_unsupported_credential_source_raises(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -704,19 +604,16 @@ async def test_unsupported_credential_source_raises(
     )
 
     with pytest.raises(
-        AssumeRoleConfigurationError,
         match="Unsupported 'credential_source': 'ProfileSso'",
     ):
-        await resolver._create_assume_role_resolver(
-            profile_name="role", visited=("role",)
-        )
+        resolver._create_delegate()
 
 
 @pytest.mark.parametrize(
     "credential_source",
     ["Environment", "EcsContainer", "Ec2InstanceMetadata"],
 )
-async def test_credential_source_builds_resolver_from_provider(
+def test_credential_source_builds_resolver_from_provider(
     merged_config: Callable[..., MergedConfig],
     credential_source: str,
 ) -> None:
@@ -726,21 +623,19 @@ async def test_credential_source_builds_resolver_from_provider(
     resolver = ProfileAssumeRoleCredentialsResolver(
         profile_name="role", config_file=config_file
     )
-    static = AsyncStaticCredentialsResolver(
+    static = StaticCredentialsResolver(
         AWSCredentialsIdentity(access_key_id="akid", secret_access_key="secret")
     )
     resolver._find_provider = lambda slot: _FakeProvider(static)  # type: ignore[assignment]
 
-    delegate = await resolver._create_assume_role_resolver(
-        profile_name="role", visited=("role",)
-    )
+    delegate = resolver._create_delegate()
 
     assert isinstance(delegate, AssumeRoleCredentialsResolver)
-    assert isinstance(delegate._source_resolver, AsyncNamedResolver)
+    assert isinstance(delegate._source_resolver, NamedResolver)
     assert delegate._source_resolver.resolver is static
 
 
-async def test_credential_source_no_installed_provider_raises(
+def test_credential_source_no_installed_provider_raises(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -752,19 +647,16 @@ async def test_credential_source_no_installed_provider_raises(
     resolver._find_provider = lambda slot: None  # type: ignore[assignment]
 
     with pytest.raises(
-        AssumeRoleConfigurationError,
         match="No provider is installed for credential source 'Ec2InstanceMetadata'",
     ):
-        await resolver._create_assume_role_resolver(
-            profile_name="role", visited=("role",)
-        )
+        resolver._create_delegate()
 
 
-async def test_credential_source_provider_registers_nothing_raises(
+def test_credential_source_provider_registers_nothing_raises(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     class _EmptyProvider:
-        async def setup(self, identity_type: object, setup: AsyncChainSetup) -> None:
+        def setup(self, identity_type: object, setup: ChainSetup) -> None:
             return None
 
     config_file = merged_config(
@@ -776,15 +668,12 @@ async def test_credential_source_provider_registers_nothing_raises(
     resolver._find_provider = lambda slot: _EmptyProvider()  # type: ignore[assignment]
 
     with pytest.raises(
-        AssumeRoleConfigurationError,
         match="'Environment' credential source is not configured",
     ):
-        await resolver._create_assume_role_resolver(
-            profile_name="role", visited=("role",)
-        )
+        resolver._create_delegate()
 
 
-async def test_get_identity_creates_and_reuses_delegate(
+def test_get_identity_creates_and_reuses_delegate(
     merged_config: Callable[..., MergedConfig],
 ) -> None:
     config_file = merged_config(
@@ -800,17 +689,17 @@ async def test_get_identity_creates_and_reuses_delegate(
         profile_name="role", config_file=config_file
     )
     expected = AWSCredentialsIdentity(access_key_id="a", secret_access_key="s")
-    delegate = AsyncMock()
+    delegate = Mock()
     delegate.get_identity.return_value = expected
 
-    resolver._create_assume_role_resolver = AsyncMock()
-    resolver._create_assume_role_resolver.return_value = delegate
+    resolver._create_delegate = Mock()
+    resolver._create_delegate.return_value = delegate
 
-    first = await resolver.get_identity(properties={})
-    second = await resolver.get_identity(properties={})
+    first = resolver.get_identity(properties={})
+    second = resolver.get_identity(properties={})
 
     assert first is expected
     assert second is expected
     # The delegate is built once and reused across calls.
     assert resolver._delegate is delegate
-    assert delegate.get_identity.await_count == 2
+    assert delegate.get_identity.call_count == 2

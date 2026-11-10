@@ -104,7 +104,7 @@ to verify your setup:
 ```python
 import asyncio
 
-from aws_sdk_sts.client import AsyncSTSClient
+from aws_sdk_sts.aio.client import AsyncSTSClient
 from aws_sdk_sts.models import GetCallerIdentityInput
 
 
@@ -130,8 +130,8 @@ python -m pip install "aws-sdk-bedrock-runtime[awscrt]"
 ```
 
 ```python
-from aws_sdk_bedrock_runtime.client import AsyncBedrockRuntimeClient
-from aws_sdk_bedrock_runtime.config import AsyncBedrockRuntimeConfig
+from aws_sdk_bedrock_runtime.aio.client import AsyncBedrockRuntimeClient
+from aws_sdk_bedrock_runtime.aio.config import AsyncBedrockRuntimeConfig
 from smithy_http.aio.crt import AWSCRTHTTPClient
 
 
