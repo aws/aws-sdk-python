@@ -7,7 +7,11 @@ SMITHY_PYTHON ?= ../smithy-python
 # Clients per gradle build in `make clients`; lower it if the build runs out of heap.
 BATCH_SIZE ?= 25
 
-.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen clients fragments publish-codegen aio-check meta-package-check static-analysis test-unit test-functional test-integration
+.PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen clients fragments publish-codegen aio-check meta-package-check static-analysis test-unit test-functional test-integration \
+	check-imports check-conventions check-api check-dependencies check-packaging check-import-stability verify-venv \
+	canonical-imports dunder-all source-order dynamic-imports banned-imports docstrings declared-deps import-cycles \
+	dep-specifiers package-metadata version-consistency export-names exception-hierarchy secret-repr import-hygiene \
+	import-deprecations import-side-effects import-cost wheel-contents type-completeness optional-deps lowest-bounds
 
 # Each client and package runs in its own .venv. Dependencies outside this repo,
 # including smithy-python, resolve from PyPI at the versions each one declares.
@@ -31,6 +35,12 @@ static-analysis:
 	done
 	# TODO: enable once aws-credentials-sts passes the aio naming rules.
 	# $(MAKE) aio-check
+	$(MAKE) check-imports
+	$(MAKE) check-conventions
+	$(MAKE) check-api
+	$(MAKE) check-dependencies
+	$(MAKE) check-packaging
+	$(MAKE) check-import-stability
 
 test-unit:
 	@set -e; for p in $(PROJECTS); do \
@@ -92,6 +102,121 @@ aio-check:
 # would otherwise resolve from PyPI and fail on any unpublished version bump.
 meta-package-check:
 	uv run --no-project --python $(PYTHON_VERSION) python scripts/meta-package/meta_package.py
+
+check-imports: ## Keeps the import graph explicit, acyclic, and free of test-only modules.
+	$(MAKE) canonical-imports
+#	$(MAKE) import-cycles # TODO: enable once it passes
+#	$(MAKE) dynamic-imports # TODO: enable once it passes
+	$(MAKE) banned-imports
+
+check-conventions: ## Holds shipped code to our ordering, docstring, error, and secret-handling conventions.
+#	$(MAKE) source-order # TODO: enable once it passes
+#	$(MAKE) docstrings # TODO: enable once it passes
+	$(MAKE) exception-hierarchy
+#	$(MAKE) secret-repr # TODO: enable once it passes
+
+check-api: ## Keeps the public API surface typed and exported under its own names.
+	$(MAKE) export-names
+	$(MAKE) dunder-all
+#	$(MAKE) type-completeness # TODO: enable once it passes
+
+check-dependencies: ## Keeps declared dependencies honest for customers who install only some packages.
+#	$(MAKE) declared-deps # TODO: enable once it passes
+	$(MAKE) dep-specifiers
+	$(MAKE) optional-deps
+	$(MAKE) lowest-bounds
+
+check-packaging: ## Keeps what we publish to PyPI consistent across packages.
+#	$(MAKE) package-metadata # TODO: enable once it passes
+#	$(MAKE) version-consistency # TODO: enable once it passes
+#	$(MAKE) wheel-contents # TODO: enable once it passes
+
+check-import-stability: ## Keeps importing our packages cheap and free of side effects.
+	$(MAKE) import-hygiene
+	$(MAKE) import-deprecations
+	$(MAKE) import-side-effects
+	$(MAKE) import-cost
+
+# The verifications import, build and inspect every client and package together,
+# so they share one venv holding all of them editable, plus the pinned tools.
+VERIFY_VENV := .venv-verify
+VERIFY_STAMP := $(VERIFY_VENV)/.installed
+VERIFY = $(VERIFY_VENV)/bin/python scripts/verifications
+
+$(VERIFY_STAMP): $(addsuffix /pyproject.toml,$(PROJECTS))
+	uv venv --allow-existing --quiet --python $(PYTHON_VERSION) $(VERIFY_VENV)
+	uv pip install --quiet --python $(VERIFY_VENV)/bin/python --all-extras \
+		packaging==25.0 ruff==$(RUFF_VERSION) pyright==$(PYRIGHT_VERSION) \
+		$(foreach p,$(PROJECTS),-e $(p) -r $(p)/pyproject.toml)
+	touch $@
+
+verify-venv: $(VERIFY_STAMP) ## Installs every client and package into the shared verification venv.
+
+canonical-imports: $(VERIFY_STAMP) ## Prevents re-export imports, which hide where symbols live and invite cycles.
+	$(VERIFY)/canonical_imports.py
+
+dunder-all: $(VERIFY_STAMP) ## Keeps __all__ in sync with the public surface that type checkers and docs read.
+	$(VERIFY)/dunder_all.py
+
+source-order: $(VERIFY_STAMP) ## Keeps the public API at the top of every file and class.
+	$(VERIFY)/source_order.py
+
+dynamic-imports: $(VERIFY_STAMP) ## Keeps every import visible to static tools.
+	$(VERIFY)/dynamic_imports.py
+
+banned-imports: $(VERIFY_STAMP) ## Keeps test-only modules out of shipped code.
+	$(VERIFY)/banned_imports.py
+
+docstrings: $(VERIFY_STAMP) ## Keeps the public API documented in editors and the API reference.
+	$(VERIFY)/docstrings.py
+
+declared-deps: $(VERIFY_STAMP) ## Catches imports that only work because something else installed the dependency.
+	$(VERIFY)/declared_deps.py
+
+import-cycles: $(VERIFY_STAMP) ## Catches cycles that make import success depend on import order.
+	$(VERIFY)/import_cycles.py
+
+dep-specifiers: $(VERIFY_STAMP) ## Keeps packages co-installable and in-repo version bounds current.
+	$(VERIFY)/dep_specifiers.py
+
+package-metadata: $(VERIFY_STAMP) ## Catches pyproject.toml drift between packages.
+	$(VERIFY)/package_metadata.py
+
+version-consistency: $(VERIFY_STAMP) ## Keeps __version__ truthful for user agents and bug reports.
+	$(VERIFY)/version_consistency.py
+
+export-names: $(VERIFY_STAMP) ## Catches objects exported under a name other than their own.
+	$(VERIFY)/export_names.py
+
+exception-hierarchy: $(VERIFY_STAMP) ## Lets customers catch every SDK error with one except clause.
+	$(VERIFY)/exception_hierarchy.py
+
+secret-repr: $(VERIFY_STAMP) ## Keeps credentials out of logs and tracebacks.
+	$(VERIFY)/secret_repr.py
+
+import-hygiene: $(VERIFY_STAMP) ## Catches modules that only import after a sibling has warmed sys.modules.
+	$(VERIFY)/import_hygiene.py
+
+import-deprecations: $(VERIFY_STAMP) ## Catches removals that Python or a dependency has already scheduled.
+	$(VERIFY)/import_deprecations.py
+
+import-side-effects: $(VERIFY_STAMP) ## Keeps imports from overriding the host application's global state.
+	$(VERIFY)/import_side_effects.py
+
+import-cost: $(VERIFY_STAMP) ## Catches growth in how many of our modules an import loads.
+	$(VERIFY)/import_cost.py
+
+wheel-contents: $(VERIFY_STAMP) ## Catches wheels that miss source or py.typed, or that ship tests.
+	$(VERIFY)/wheel_contents.py
+
+type-completeness: $(VERIFY_STAMP) ## Verifies the py.typed promise as a customer's type checker sees it.
+	$(VERIFY)/type_completeness.py
+
+optional-deps: $(VERIFY_STAMP) ## Checks that a minimal install without extras works or fails clearly.
+	$(VERIFY)/optional_deps.py
+
+lowest-bounds: $(VERIFY_STAMP) ## Proves the declared lower bounds actually work.
+	$(VERIFY)/lowest_bounds.py
 
 venv:
 	uv venv --python $(PYTHON_VERSION)
