@@ -11,6 +11,7 @@ docs/clients/
 
 # Virtual environments
 .venv
+.venv-verify
 venv
 
 # Caches
