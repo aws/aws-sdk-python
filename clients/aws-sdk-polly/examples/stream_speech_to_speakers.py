@@ -39,12 +39,8 @@ import threading
 from collections import deque
 
 import miniaudio
-from smithy_aws_core.identity import EnvironmentCredentialsResolver
-from smithy_core.aio.interfaces.eventstream import EventPublisher, EventReceiver
-from smithy_http.aio.crt import AWSCRTHTTPClient
-
-from aws_sdk_polly.client import AsyncPollyClient
-from aws_sdk_polly.config import AsyncPollyConfig
+from aws_sdk_polly.aio.client import AsyncPollyClient
+from aws_sdk_polly.aio.config import AsyncPollyConfig
 from aws_sdk_polly.models import (
     CloseStreamEvent,
     StartSpeechSynthesisStreamActionStream,
@@ -56,6 +52,12 @@ from aws_sdk_polly.models import (
     StartSpeechSynthesisStreamInput,
     TextEvent,
 )
+from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
+from smithy_core.aio.interfaces.eventstream import (
+    AsyncEventPublisher,
+    AsyncEventReceiver,
+)
+from smithy_http.aio.crt import AWSCRTHTTPClient
 
 DEFAULT_REGION = "us-east-1"
 DEFAULT_VOICE = "Matthew"
@@ -105,7 +107,7 @@ def get_text_chunks(text_arg: str | None) -> list[str]:
 
 
 async def send_text(
-    input_stream: EventPublisher[StartSpeechSynthesisStreamActionStream],
+    input_stream: AsyncEventPublisher[StartSpeechSynthesisStreamActionStream],
     text_chunks: list[str],
 ):
     for chunk in text_chunks:
@@ -213,7 +215,7 @@ async def wait_until_player_stops_or_errors(
 
 
 async def play_audio(
-    output_stream: EventReceiver[StartSpeechSynthesisStreamEventStream],
+    output_stream: AsyncEventReceiver[StartSpeechSynthesisStreamEventStream],
 ):
     source = Mp3StreamSource()
     stop_player = threading.Event()
@@ -246,7 +248,7 @@ async def main():
         config=await AsyncPollyConfig.resolve(
             endpoint_uri=f"https://polly.{args.region}.amazonaws.com",
             region=args.region,
-            aws_credentials_identity_resolver=EnvironmentCredentialsResolver(),
+            aws_credentials_identity_resolver=AsyncEnvironmentCredentialsResolver(),
             transport=AWSCRTHTTPClient(),
         )
     ) as client:

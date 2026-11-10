@@ -37,8 +37,11 @@ dependencies = [
 "Code" = "https://github.com/aws/aws-sdk-python/tree/develop/packages/aws-credentials-sts/"
 "Issue tracker" = "https://github.com/aws/aws-sdk-python/issues"
 
-[project.entry-points."smithy_aws_core.aio.identity.chain_providers"]
+[project.entry-points."smithy_aws_core.identity.chain_providers"]
 ProfileAssumeRole = "aws_credentials_sts.providers:ProfileAssumeRoleProvider"
+
+[project.entry-points."smithy_aws_core.aio.identity.chain_providers"]
+ProfileAssumeRole = "aws_credentials_sts.aio.providers:AsyncProfileAssumeRoleProvider"
 
 [dependency-groups]
 test = [

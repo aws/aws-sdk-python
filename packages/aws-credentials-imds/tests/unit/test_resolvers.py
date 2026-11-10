@@ -4,7 +4,7 @@
 # pyright: reportPrivateUsage=false
 import json
 from datetime import UTC, datetime, timedelta
-from unittest.mock import AsyncMock
+from unittest.mock import Mock
 
 import pytest
 from aws_credentials_imds.client import IMDSConfig
@@ -22,45 +22,45 @@ _CREDS = {
 }
 
 
-async def test_resolver_success() -> None:
-    http_client = AsyncMock()
+def test_resolver_success() -> None:
+    http_client = Mock()
     config = IMDSConfig()
-    imds_client = AsyncMock()
+    imds_client = Mock()
     resolver = IMDSCredentialsResolver(http_client, config)
     resolver._imds_client = imds_client
 
     imds_client.get.side_effect = ["test-profile", json.dumps(_CREDS)]
 
-    credentials = await resolver.get_identity(properties={})
+    credentials = resolver.get_identity(properties={})
     assert credentials.access_key_id == "test-access-key"
     assert credentials.secret_access_key == "test-secret-key"
     assert credentials.session_token == "test-session-token"
     assert credentials.account_id == "test-account"
     assert credentials.expiration == datetime(2025, 3, 13, 7, 28, 47, tzinfo=UTC)
-    imds_client.get.assert_awaited()
+    imds_client.get.assert_called()
 
 
-async def test_resolver_uses_configured_profile_name() -> None:
-    http_client = AsyncMock()
+def test_resolver_uses_configured_profile_name() -> None:
+    http_client = Mock()
     config = IMDSConfig(ec2_instance_profile_name="configured-profile")
-    imds_client = AsyncMock()
+    imds_client = Mock()
     resolver = IMDSCredentialsResolver(http_client, config)
     resolver._imds_client = imds_client
 
     imds_client.get.return_value = json.dumps(_CREDS)
 
-    await resolver.get_identity(properties={})
+    resolver.get_identity(properties={})
 
     # No profile lookup call when profile name is configured
-    imds_client.get.assert_awaited_once_with(
+    imds_client.get.assert_called_once_with(
         path="/latest/meta-data/iam/security-credentials/configured-profile"
     )
 
 
-async def test_resolver_caches_credentials() -> None:
-    http_client = AsyncMock()
+def test_resolver_caches_credentials() -> None:
+    http_client = Mock()
     config = IMDSConfig()
-    imds_client = AsyncMock()
+    imds_client = Mock()
     resolver = IMDSCredentialsResolver(http_client, config)
     resolver._imds_client = imds_client
 
@@ -70,18 +70,18 @@ async def test_resolver_caches_credentials() -> None:
         json.dumps({**_CREDS, "Expiration": future}),
     ]
 
-    first = await resolver.get_identity(properties={})
-    second = await resolver.get_identity(properties={})
+    first = resolver.get_identity(properties={})
+    second = resolver.get_identity(properties={})
 
     assert first is second
     # Initial call for profile name, second call for credentials
-    assert imds_client.get.await_count == 2
+    assert imds_client.get.call_count == 2
 
 
-async def test_resolver_refreshes_expired_credentials() -> None:
-    http_client = AsyncMock()
+def test_resolver_refreshes_expired_credentials() -> None:
+    http_client = Mock()
     config = IMDSConfig()
-    imds_client = AsyncMock()
+    imds_client = Mock()
     resolver = IMDSCredentialsResolver(http_client, config)
     resolver._imds_client = imds_client
 
@@ -94,20 +94,20 @@ async def test_resolver_refreshes_expired_credentials() -> None:
         json.dumps({**_CREDS, "AccessKeyId": "fresh-key", "Expiration": future}),
     ]
 
-    first = await resolver.get_identity(properties={})
-    second = await resolver.get_identity(properties={})
+    first = resolver.get_identity(properties={})
+    second = resolver.get_identity(properties={})
 
     assert first is not second
     assert first.access_key_id == "expired-key"
     assert second.access_key_id == "fresh-key"
     # Both the profile lookup and credential fetch run again on refresh
-    assert imds_client.get.await_count == 4
+    assert imds_client.get.call_count == 4
 
 
-async def test_resolver_requires_access_key_and_secret() -> None:
-    http_client = AsyncMock()
+def test_resolver_requires_access_key_and_secret() -> None:
+    http_client = Mock()
     config = IMDSConfig()
-    imds_client = AsyncMock()
+    imds_client = Mock()
     resolver = IMDSCredentialsResolver(http_client, config)
     resolver._imds_client = imds_client
 
@@ -119,4 +119,4 @@ async def test_resolver_requires_access_key_and_secret() -> None:
     with pytest.raises(
         SmithyIdentityError, match="AccessKeyId and SecretAccessKey are required"
     ):
-        await resolver.get_identity(properties={})
+        resolver.get_identity(properties={})
