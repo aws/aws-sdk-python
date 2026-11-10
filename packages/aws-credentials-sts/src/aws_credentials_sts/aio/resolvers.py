@@ -89,18 +89,25 @@ class AsyncAssumeRoleCredentialsResolver(
         from aws_sdk_sts.aio.client import AsyncSTSClient
         from aws_sdk_sts.aio.config import AsyncSTSConfig
 
-        if self._client is None:
-            overrides: AsyncAwsConfigOverrides = {
-                "aws_credentials_identity_resolver": self._source_resolver,
-                "region": self._region,
-            }
-            if self._http_client is not None:
-                overrides["transport"] = self._http_client
+        overrides: AsyncAwsConfigOverrides = {
+            "aws_credentials_identity_resolver": self._source_resolver,
+            "region": self._region,
+        }
+        if self._client is None and self._http_client is not None:
+            # CAUTION: never closed, since closing it would close the caller's transport.
+            overrides["transport"] = self._http_client
             self._client = AsyncSTSClient(
                 config=await AsyncSTSConfig.resolve(**overrides)
             )
+        if self._client is not None:
+            return await self._call(self._client)
+        async with AsyncSTSClient(
+            config=await AsyncSTSConfig.resolve(**overrides)
+        ) as client:
+            return await self._call(client)
 
-        response = await self._client.assume_role(
+    async def _call(self, client: AsyncSTSClient) -> AWSCredentialsIdentity:
+        response = await client.assume_role(
             assume_role_input(
                 role_arn=self._role_arn,
                 role_session_name=self._role_session_name,

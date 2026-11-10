@@ -39,9 +39,13 @@ class AsyncContainerCredentialsResolver(
         timeout: int = DEFAULT_TIMEOUT,
         retries: int = DEFAULT_RETRIES,
     ):
-        self._http_client = http_client or AIOHTTPClient()
-        self._client = AsyncHttpCredentialsClient(
-            self._http_client, timeout=timeout, retries=retries
+        self._timeout = timeout
+        self._retries = retries
+        # A caller-provided client is the caller's to close.
+        self._client = (
+            AsyncHttpCredentialsClient(http_client, timeout=timeout, retries=retries)
+            if http_client is not None
+            else None
         )
         self._credentials: AWSCredentialsIdentity | None = None
 
@@ -51,12 +55,25 @@ class AsyncContainerCredentialsResolver(
         """Return cached credentials if valid, otherwise fetch from container endpoint."""
         if self._credentials is not None and is_fresh(self._credentials):
             return self._credentials
-        self._credentials = await run_program_async(
+        if self._client is not None:
+            self._credentials = await self._resolve(self._client)
+        else:
+            async with AIOHTTPClient() as http_client:
+                self._credentials = await self._resolve(
+                    AsyncHttpCredentialsClient(
+                        http_client, timeout=self._timeout, retries=self._retries
+                    )
+                )
+        return self._credentials
+
+    async def _resolve(
+        self, client: AsyncHttpCredentialsClient
+    ) -> AWSCredentialsIdentity:
+        return await run_program_async(
             resolve_credentials(
-                fetch=self._client.get_credentials,
+                fetch=client.get_credentials,
                 read_token=lambda filename: asyncio.to_thread(
                     read_token_file, filename
                 ),
             )
         )
-        return self._credentials

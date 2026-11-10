@@ -4,7 +4,7 @@
 # pyright: reportPrivateUsage=false
 import json
 from datetime import UTC, datetime, timedelta
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 import pytest
 from aws_credentials_imds.client import IMDSConfig
@@ -120,3 +120,17 @@ def test_resolver_requires_access_key_and_secret() -> None:
         SmithyIdentityError, match="AccessKeyId and SecretAccessKey are required"
     ):
         resolver.get_identity(properties={})
+
+
+def test_resolver_closes_default_http_client() -> None:
+    http_client = Mock()
+    http_client.send.side_effect = [
+        Mock(status=200, body=body)
+        for body in (b"token", b"test-profile", json.dumps(_CREDS).encode())
+    ]
+    with patch("aws_credentials_imds.resolvers.Urllib3HTTPClient") as default_client:
+        default_client.return_value.__enter__.return_value = http_client
+        credentials = IMDSCredentialsResolver().get_identity(properties={})
+
+    assert credentials.access_key_id == "test-access-key"
+    default_client.return_value.__exit__.assert_called_once()

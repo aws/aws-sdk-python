@@ -94,16 +94,21 @@ class AssumeRoleCredentialsResolver(
         from aws_sdk_sts.client import STSClient
         from aws_sdk_sts.config import STSConfig
 
-        if self._client is None:
-            overrides: AwsConfigOverrides = {
-                "aws_credentials_identity_resolver": self._source_resolver,
-                "region": self._region,
-            }
-            if self._http_client is not None:
-                overrides["transport"] = self._http_client
+        overrides: AwsConfigOverrides = {
+            "aws_credentials_identity_resolver": self._source_resolver,
+            "region": self._region,
+        }
+        if self._client is None and self._http_client is not None:
+            # CAUTION: never closed, since closing it would close the caller's transport.
+            overrides["transport"] = self._http_client
             self._client = STSClient(config=STSConfig.resolve(**overrides))
+        if self._client is not None:
+            return self._call(self._client)
+        with STSClient(config=STSConfig.resolve(**overrides)) as client:
+            return self._call(client)
 
-        response = self._client.assume_role(
+    def _call(self, client: STSClient) -> AWSCredentialsIdentity:
+        response = client.assume_role(
             assume_role_input(
                 role_arn=self._role_arn,
                 role_session_name=self._role_session_name,
