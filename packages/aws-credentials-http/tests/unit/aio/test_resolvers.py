@@ -321,3 +321,20 @@ async def test_resolver_missing_env() -> None:
         resolver = AsyncContainerCredentialsResolver(http_client)
         with pytest.raises(SmithyIdentityError):
             await resolver.get_identity(properties={})
+
+
+async def test_resolver_closes_default_http_client() -> None:
+    http_client = mock_http_client_response(
+        200, json.dumps(DEFAULT_RESPONSE_DATA).encode()
+    )
+    with (
+        patch.dict(
+            os.environ, {AsyncContainerCredentialsResolver.ENV_VAR: "/test"}, clear=True
+        ),
+        patch("aws_credentials_http.aio.resolvers.AIOHTTPClient") as default_client,
+    ):
+        default_client.return_value.__aenter__.return_value = http_client
+        identity = await AsyncContainerCredentialsResolver().get_identity(properties={})
+
+    _assert_expected_identity(identity)
+    default_client.return_value.__aexit__.assert_awaited_once()

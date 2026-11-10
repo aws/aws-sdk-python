@@ -309,3 +309,20 @@ def test_resolver_missing_env() -> None:
         resolver = ContainerCredentialsResolver(http_client)
         with pytest.raises(SmithyIdentityError):
             resolver.get_identity(properties={})
+
+
+def test_resolver_closes_default_http_client() -> None:
+    http_client = mock_http_client_response(
+        200, json.dumps(DEFAULT_RESPONSE_DATA).encode()
+    )
+    with (
+        patch.dict(
+            os.environ, {ContainerCredentialsResolver.ENV_VAR: "/test"}, clear=True
+        ),
+        patch("aws_credentials_http.resolvers.Urllib3HTTPClient") as default_client,
+    ):
+        default_client.return_value.__enter__.return_value = http_client
+        identity = ContainerCredentialsResolver().get_identity(properties={})
+
+    _assert_expected_identity(identity)
+    default_client.return_value.__exit__.assert_called_once()

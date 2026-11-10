@@ -4,7 +4,7 @@
 # pyright: reportPrivateUsage=false
 import json
 from datetime import UTC, datetime, timedelta
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 from aws_credentials_imds.aio.resolvers import AsyncIMDSCredentialsResolver
@@ -120,3 +120,17 @@ async def test_resolver_requires_access_key_and_secret() -> None:
         SmithyIdentityError, match="AccessKeyId and SecretAccessKey are required"
     ):
         await resolver.get_identity(properties={})
+
+
+async def test_resolver_closes_default_http_client() -> None:
+    http_client = AsyncMock()
+    http_client.send.side_effect = [
+        Mock(status=200, body=body)
+        for body in (b"token", b"test-profile", json.dumps(_CREDS).encode())
+    ]
+    with patch("aws_credentials_imds.aio.resolvers.AIOHTTPClient") as default_client:
+        default_client.return_value.__aenter__.return_value = http_client
+        credentials = await AsyncIMDSCredentialsResolver().get_identity(properties={})
+
+    assert credentials.access_key_id == "test-access-key"
+    default_client.return_value.__aexit__.assert_awaited_once()

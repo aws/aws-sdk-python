@@ -20,11 +20,13 @@ class AsyncIMDSCredentialsResolver(
         http_client: AsyncHTTPClient | None = None,
         config: IMDSConfig | None = None,
     ):
-        self._http_client = http_client or AIOHTTPClient()
-        self._imds_client = AsyncIMDSClient(
-            http_client=self._http_client, config=config
-        )
         self._config = config or IMDSConfig()
+        # A caller-provided client is the caller's to close.
+        self._imds_client = (
+            AsyncIMDSClient(http_client=http_client, config=self._config)
+            if http_client is not None
+            else None
+        )
         self._credentials: AWSCredentialsIdentity | None = None
 
     async def get_identity(
@@ -33,10 +35,19 @@ class AsyncIMDSCredentialsResolver(
         """Return cached credentials if valid, otherwise fetch from IMDS."""
         if self._credentials is not None and is_fresh(self._credentials):
             return self._credentials
-        self._credentials = await run_program_async(
+        if self._imds_client is not None:
+            self._credentials = await self._resolve(self._imds_client)
+        else:
+            async with AIOHTTPClient() as http_client:
+                self._credentials = await self._resolve(
+                    AsyncIMDSClient(http_client=http_client, config=self._config)
+                )
+        return self._credentials
+
+    async def _resolve(self, imds_client: AsyncIMDSClient) -> AWSCredentialsIdentity:
+        return await run_program_async(
             resolve_credentials(
-                get=lambda path: self._imds_client.get(path=path),
+                get=lambda path: imds_client.get(path=path),
                 instance_profile_name=self._config.ec2_instance_profile_name,
             )
         )
-        return self._credentials

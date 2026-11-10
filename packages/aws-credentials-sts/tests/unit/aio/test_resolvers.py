@@ -4,7 +4,7 @@
 # pyright: reportPrivateUsage=false
 from collections.abc import Callable, Mapping
 from datetime import UTC, datetime, timedelta
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, patch
 
 import pytest
 from aws_credentials_sts import AssumeRoleConfigurationError
@@ -719,3 +719,36 @@ async def test_get_identity_creates_and_reuses_delegate(
     # The delegate is built once and reused across calls.
     assert resolver._delegate is delegate
     assert delegate.get_identity.await_count == 2
+
+
+async def test_default_sts_client_closed_after_call() -> None:
+    resolver = AsyncAssumeRoleCredentialsResolver(
+        source_resolver=AsyncMock(), role_arn=ROLE_ARN
+    )
+    with (
+        patch("aws_sdk_sts.aio.config.AsyncSTSConfig.resolve", new_callable=AsyncMock),
+        patch("aws_sdk_sts.aio.client.AsyncSTSClient") as client_cls,
+    ):
+        client = client_cls.return_value.__aenter__.return_value
+        client.assume_role = AsyncMock(return_value=_valid_output())
+        identity = await resolver.get_identity(properties={})
+
+    assert identity.access_key_id == ACCESS_KEY_ID
+    client_cls.return_value.__aexit__.assert_awaited_once()
+    assert resolver._client is None
+
+
+async def test_sts_client_with_caller_transport_kept_open() -> None:
+    resolver = AsyncAssumeRoleCredentialsResolver(
+        source_resolver=AsyncMock(), role_arn=ROLE_ARN, http_client=AsyncMock()
+    )
+    with (
+        patch("aws_sdk_sts.aio.config.AsyncSTSConfig.resolve", new_callable=AsyncMock),
+        patch("aws_sdk_sts.aio.client.AsyncSTSClient") as client_cls,
+    ):
+        client_cls.return_value.assume_role = AsyncMock(return_value=_valid_output())
+        await resolver.get_identity(properties={})
+
+    assert resolver._client is client_cls.return_value
+    client_cls.return_value.__aexit__.assert_not_called()
+    client_cls.return_value.close.assert_not_called()

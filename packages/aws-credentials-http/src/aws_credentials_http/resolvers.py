@@ -37,9 +37,13 @@ class ContainerCredentialsResolver(
         timeout: int = DEFAULT_TIMEOUT,
         retries: int = DEFAULT_RETRIES,
     ):
-        self._http_client = http_client or Urllib3HTTPClient()
-        self._client = HttpCredentialsClient(
-            self._http_client, timeout=timeout, retries=retries
+        self._timeout = timeout
+        self._retries = retries
+        # A caller-provided client is the caller's to close.
+        self._client = (
+            HttpCredentialsClient(http_client, timeout=timeout, retries=retries)
+            if http_client is not None
+            else None
         )
         self._credentials: AWSCredentialsIdentity | None = None
 
@@ -49,9 +53,20 @@ class ContainerCredentialsResolver(
         """Return cached credentials if valid, otherwise fetch from container endpoint."""
         if self._credentials is not None and is_fresh(self._credentials):
             return self._credentials
-        self._credentials = run_program(
+        if self._client is not None:
+            self._credentials = self._resolve(self._client)
+        else:
+            with Urllib3HTTPClient() as http_client:
+                self._credentials = self._resolve(
+                    HttpCredentialsClient(
+                        http_client, timeout=self._timeout, retries=self._retries
+                    )
+                )
+        return self._credentials
+
+    def _resolve(self, client: HttpCredentialsClient) -> AWSCredentialsIdentity:
+        return run_program(
             resolve_credentials(
-                fetch=self._client.get_credentials, read_token=read_token_file
+                fetch=client.get_credentials, read_token=read_token_file
             )
         )
-        return self._credentials
