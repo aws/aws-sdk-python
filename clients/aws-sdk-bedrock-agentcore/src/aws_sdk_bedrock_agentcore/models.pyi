@@ -339,6 +339,15 @@ class BatchCreateMemoryRecordsInput(_SerdeShape):
     A unique, case-sensitive identifier to ensure idempotent processing of
     the batch request.
     """
+    record_expiry_specification: RecordExpirySpecification | None = ...
+    """
+    The record expiry (long-term memory time-to-live) applied to every
+    record created by this request. Set `recordExpiryDurationDays` to the
+    number of days after which the records expire. Only the expiry provided
+    here is applied; the records' strategy association has no effect on
+    their expiry. If you do not provide this value, the records do not
+    expire. The `REMOVE` action does not apply when creating records.
+    """
 
 @dataclass(kw_only=True)
 class BatchCreateMemoryRecordsOutput(_SerdeShape):
@@ -457,6 +466,29 @@ class BatchUpdateMemoryRecordsInput(_SerdeShape):
     """
     A list of memory record update inputs to be processed in the batch
     operation.
+    """
+    record_expiry_specification: RecordExpirySpecification | None = ...
+    """
+    The record expiry (long-term memory time-to-live) applied to every
+    record updated by this request. Set `recordExpiryDurationDays` to
+    configure or overwrite the number of days after which the records
+    expire, or set `action` to `REMOVE` to clear a previously configured
+    expiry so that the records no longer expire.
+
+    When you do not provide this value, the service determines each
+    record's expiry from its current state:
+
+    - If the record already has an expiry configured, the service resets and
+      reapplies the expiry based on the last applied
+      `recordExpiryDurationDays`.
+
+    - If the record does not have an expiry configured, no expiry is applied
+      and the record remains non-expiring. This is the outcome regardless of
+      whether the record's strategy configures an expiry.
+
+    Providing an explicit `recordExpiryDurationDays` always takes
+    precedence: it overwrites an existing expiry, or sets one on a record
+    that previously had none.
     """
 
 @dataclass(kw_only=True)
@@ -2010,6 +2042,22 @@ class DescriptorType(UnknownEnumMixin, StrEnum):
     AGENT_SKILLS = "AGENT_SKILLS"
 
 @dataclass(kw_only=True)
+class DomainFilter(_SerdeShape):
+    """
+    The domains to include in or exclude from the results. A root domain
+    also matches its subdomains. For example, `example.com` also matches
+    `docs.example.com`.
+    """
+
+    include: list[str] | None = ...
+    """
+    The domains to return results from. Results from other domains are not
+    returned.
+    """
+    exclude: list[str] | None = ...
+    """The domains to never return results from."""
+
+@dataclass(kw_only=True)
 class DuplicateIdException(ServiceError, _SerdeShape):
     """
     An exception thrown when attempting to create a resource with an
@@ -2299,6 +2347,13 @@ class EvaluationResultContent(_SerdeShape):
     \"Helpfulness\", \"Correctness\"); for custom evaluators, this is the
     user-defined name.
     """
+    evaluation_dimension_name: str | None = ...
+    """
+    The name of the dimension that this result scores. This field is set
+    only on results produced by an evaluator that uses a multi-dimensional
+    rating scale, where each dimension is scored independently. For
+    evaluators with a single rating scale, this field is absent.
+    """
     explanation: str | None = ...
     """
     The detailed explanation provided by the evaluator describing the
@@ -2432,6 +2487,13 @@ class EvaluatorSummary(_SerdeShape):
 
     evaluator_id: str | None = ...
     """The unique identifier of the evaluator."""
+    evaluation_dimension_name: str | None = ...
+    """
+    The name of the dimension that this summary covers. This field is set
+    only for evaluators that use a multi-dimensional rating scale, where
+    each dimension is summarized separately. For single-scale evaluators,
+    this field is not set.
+    """
     statistics: EvaluatorStatistics | None = ...
     """The aggregated statistics for this evaluator."""
     total_evaluated: int | None = ...
@@ -2753,6 +2815,16 @@ FilterValue = Union[
 class _FilterValueDeserializer:
     def deserialize(self, deserializer: ShapeDeserializer) -> FilterValue: ...
 
+class FindingTargetType(UnknownEnumMixin, StrEnum):
+    """
+    The type of location in a session that a finding points to: a span ID, a
+    trace ID, or a span name.
+    """
+
+    SPAN_ID = "SPAN_ID"
+    TRACE_ID = "TRACE_ID"
+    SPAN_NAME = "SPAN_NAME"
+
 @dataclass(kw_only=True)
 class GatewayFilter(_SerdeShape):
     """
@@ -2906,6 +2978,14 @@ class GetBatchEvaluationOutput(_SerdeShape):
     """
     The aggregated evaluation results, including session completion counts
     and evaluator score summaries.
+    """
+    insight_results: list[InsightResult] | None = ...
+    """
+    The insights generated when the batch evaluation includes the
+    `Builtin.FailureAnalysis` evaluator. Each insight groups related
+    failures found across the evaluated sessions. An empty list means that
+    no failures were found. If the analysis fails, this field is omitted and
+    `errorDetails` describes the error.
     """
     failure_analysis_result: FailureAnalysisResultContent | None = ...
     """
@@ -3776,7 +3856,13 @@ class HarnessGatewayOutboundAuthNone(_SerdeShape):
 
 @dataclass
 class HarnessGatewayOutboundAuthOauth(_SerdeShape):
-    """OAuth 2.0 authentication via AgentCore Identity."""
+    """
+    OAuth 2.0 authentication via AgentCore Identity.
+
+    The `AUTHORIZATION_CODE` grant type is not supported for outbound
+    authentication from a harness to an AgentCore Gateway, even when
+    `defaultReturnUrl` is specified.
+    """
 
     value: OAuthCredentialProvider
 
@@ -4116,6 +4202,49 @@ class HarnessRemoteMcpConfig(_SerdeShape):
     """URL of the MCP endpoint."""
     headers: dict[str, str] | None = ...
     """Custom headers to include when connecting to the remote MCP server."""
+    outbound_auth: HarnessRemoteMcpOutboundAuth | None = ...
+    """
+    How the harness authenticates to this MCP server. Defaults to no
+    authentication.
+    """
+
+@dataclass
+class HarnessRemoteMcpOutboundAuthAwsIam(_SerdeShape):
+    """
+    Sign requests to the remote MCP server with Signature Version 4 (SigV4)
+    using the harness execution role. If you don't specify a Region, the
+    harness Region is used.
+    """
+
+    value: IamCredentialProvider
+
+@dataclass
+class HarnessRemoteMcpOutboundAuthNone(_SerdeShape):
+    """No authentication."""
+
+    value: Unit
+
+@dataclass
+class HarnessRemoteMcpOutboundAuthUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+HarnessRemoteMcpOutboundAuth = Union[
+    HarnessRemoteMcpOutboundAuthAwsIam
+    | HarnessRemoteMcpOutboundAuthNone
+    | HarnessRemoteMcpOutboundAuthUnknown
+]
+"""Authentication method for calling a remote MCP server."""
+
+class _HarnessRemoteMcpOutboundAuthDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> HarnessRemoteMcpOutboundAuth: ...
 
 @dataclass
 class HarnessSkillPath(_SerdeShape):
@@ -4137,7 +4266,7 @@ class HarnessSkillGit(_SerdeShape):
 
 @dataclass
 class HarnessSkillAwsSkills(_SerdeShape):
-    """AWS Skills baked into the Harness's underlying Runtime."""
+    """Amazon Web Services Skills baked into the Harness's underlying Runtime."""
 
     value: HarnessSkillAwsSkillsSource
 
@@ -4165,7 +4294,7 @@ class _HarnessSkillDeserializer:
 
 @dataclass(kw_only=True)
 class HarnessSkillAwsSkillsSource(_SerdeShape):
-    """Passed to show that AWS Skills should be included."""
+    """Passed to show that Amazon Web Services Skills should be included."""
 
     paths: list[str] | None = ...
     """
@@ -4489,6 +4618,26 @@ class HarnessToolUseType(UnknownEnumMixin, StrEnum):
     MCP_TOOL_USE = "mcp_tool_use"
 
 @dataclass(kw_only=True)
+class IamCredentialProvider(_SerdeShape):
+    """
+    An IAM credential provider for authenticating requests. This structure
+    contains the configuration for authenticating with a target endpoint
+    using IAM credentials and SigV4 signing.
+    """
+
+    service: str
+    """
+    The name of the Amazon Web Services service used for SigV4 signing. This
+    value identifies the service to authenticate with when sending requests
+    to the target endpoint.
+    """
+    region: str | None = ...
+    """
+    The Amazon Web Services Region used for SigV4 signing. If not specified,
+    defaults to the Region of the resource that makes the request.
+    """
+
+@dataclass(kw_only=True)
 class IngestDataInput(_SerdeShape):
     """Dataclass for IngestDataInput structure."""
 
@@ -4626,6 +4775,56 @@ class Insight(_SerdeShape):
     insight_id: str
     """The unique identifier of the insight to run."""
 
+@dataclass(kw_only=True)
+class InsightResult(_SerdeShape):
+    """
+    An insight that groups related failures found across the sessions in a
+    batch evaluation.
+    """
+
+    type: str
+    """The type of insight. `FAILURE` indicates a group of related failures."""
+    name: str
+    """
+    A generated label for the insight. The name is not an identifier and can
+    differ between batch evaluations.
+    """
+    description: str
+    """A description of the failure pattern that the insight represents."""
+    created_at: datetime
+    """The timestamp when the insight was generated."""
+    affected_session_count: int | None = ...
+    """The number of distinct sessions affected by the insight."""
+    sample_sessions: list[SampleSession] | None = ...
+    """
+    A sample of up to 10 sessions affected by the insight. Returned only
+    when the insight has no root causes. Otherwise, sample sessions are
+    returned for each root cause.
+    """
+    root_causes: list[InsightRootCause] | None = ...
+    """The root causes identified for the insight."""
+
+@dataclass(kw_only=True)
+class InsightRootCause(_SerdeShape):
+    """A root cause that contributes to an insight."""
+
+    name: str
+    """A generated label for the root cause."""
+    explanation: str
+    """
+    An explanation of how the root cause leads to the failures in the
+    insight.
+    """
+    affected_session_count: int | None = ...
+    """
+    The number of distinct sessions affected by the root cause. A session
+    can be affected by more than one root cause of the same insight.
+    """
+    suggested_fix: str | None = ...
+    """A suggested change to the agent that addresses the root cause."""
+    sample_sessions: list[SampleSession] | None = ...
+    """A sample of up to 10 sessions affected by the root cause."""
+
 class InsightsFailureCategory(UnknownEnumMixin, StrEnum):
     """
     Failure category taxonomy for agent session insights. Values must stay
@@ -4700,6 +4899,11 @@ class InsightsFailureSignal(_SerdeShape):
     """The evidence supporting the failure detection."""
     confidence: float
     """The confidence score of the failure detection."""
+
+class InsightType(UnknownEnumMixin, StrEnum):
+    """The type of insight."""
+
+    FAILURE = "FAILURE"
 
 class InstrumentBalanceToken(UnknownEnumMixin, StrEnum):
     """
@@ -5042,6 +5246,14 @@ class InvokeAgentRuntimeOutput(_SerdeShape):
 
     runtime_session_id: str | None = ...
     """The identifier of the runtime session."""
+    session_endpoint_url: str | None = ...
+    """
+    The HTTPS endpoint that addresses this runtime session directly. This
+    value is returned only when the agent runtime is configured with allowed
+    ports and direct runtime access is available for the session. If this
+    value is not present, use `InvokeAgentRuntime` to communicate with the
+    session.
+    """
     mcp_session_id: str | None = ...
     """The identifier of the MCP session."""
     mcp_protocol_version: str | None = ...
@@ -5359,6 +5571,36 @@ class _InvokeHarnessStreamOutputDeserializer:
     def deserialize(
         self, deserializer: ShapeDeserializer
     ) -> InvokeHarnessStreamOutput: ...
+
+@dataclass(kw_only=True)
+class InvokeWebSearchInput(_SerdeShape):
+    """Request for the `InvokeWebSearch` operation."""
+
+    web_search_id: str | None = ...
+    """
+    The identifier of the web search tool to invoke. The Amazon Web
+    Services-managed web search tool is `web-search.v1`.
+    """
+    search_query: str | None = ...
+    """The text to search for."""
+    max_results: int | None = ...
+    """The maximum number of results to return. Defaults to 25."""
+    filters: WebSearchFilters | None = ...
+    """The filters to apply to the search results."""
+
+@dataclass(kw_only=True)
+class InvokeWebSearchOutput(_SerdeShape):
+    """Response for the `InvokeWebSearch` operation."""
+
+    results: list[WebSearchResult]
+    """The search results, in ranked order."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
 @dataclass(kw_only=True)
 class KeyPressArguments(_SerdeShape):
@@ -5892,9 +6134,9 @@ class ListMemoryRecordsInput(_SerdeShape):
     """
     namespace: str | None = ...
     """
-    The namespace prefix to filter memory records by. Returns all memory
-    records in namespaces that start with the provided prefix. Either
-    `namespace` or `namespacePath` is required.
+    The exact namespace to filter memory records by. Returns all memory
+    records that matches the provided namespace. Either `namespace` or
+    `namespacePath` is required.
     """
     namespace_path: str | None = ...
     """
@@ -6198,8 +6440,24 @@ class MemoryRecord(_SerdeShape):
     """
     created_at: datetime
     """The timestamp when the memory record was created."""
+    timestamp: datetime | None = ...
+    """
+    The timestamp based on which the memory record was ingested. This
+    reflects the time of the source content that the record was derived
+    from, which can differ from `createdAt`, the time the record itself was
+    written.
+    """
     metadata: dict[str, MemoryRecordMetadataValue] | None = ...
     """A map of metadata key-value pairs associated with a memory record."""
+    expires_at: datetime | None = ...
+    """
+    The timestamp at which the memory record expires and becomes eligible
+    for deletion. This value is set when a record expiry (long-term memory
+    time-to-live) applies to the record, either from the strategy the record
+    belongs to or from a record expiry provided on the batch request that
+    created or updated it. If the record has no expiry configured, this
+    value is not present and the record does not expire.
+    """
 
 @dataclass(kw_only=True)
 class MemoryRecordCreateInput(_SerdeShape):
@@ -6395,6 +6653,13 @@ class MemoryRecordSummary(_SerdeShape):
     The relevance score of the memory record when returned as part of a
     search result. Higher values indicate greater relevance to the search
     query.
+    """
+    timestamp: datetime | None = ...
+    """
+    The timestamp based on which the memory record was ingested. This
+    reflects the time of the source content that the record was derived
+    from, which can differ from `createdAt`, the time the record itself was
+    written.
     """
     metadata: dict[str, MemoryRecordMetadataValue] | None = ...
     """A map of metadata key-value pairs associated with a memory record."""
@@ -7200,6 +7465,24 @@ Currently supports HTTP Basic Authentication (username and password).
 class _ProxyCredentialsDeserializer:
     def deserialize(self, deserializer: ShapeDeserializer) -> ProxyCredentials: ...
 
+@dataclass(kw_only=True)
+class PublishedDateFilter(_SerdeShape):
+    """
+    A publication time range for the results. Both bounds are optional, and
+    both are inclusive. If `publishedAfter` is later than `publishedBefore`,
+    the request fails with a `ValidationException`.
+    """
+
+    published_after: datetime | None = ...
+    """The earliest publication time of the results, inclusive."""
+    published_before: datetime | None = ...
+    """
+    The latest publication time of the results, inclusive. A date without a
+    time, such as one passed to the AWS CLI, means midnight UTC. To include
+    a whole day, use the last second of that day, for example
+    `2026-01-31T23:59:59Z`.
+    """
+
 @dataclass
 class RecommendationConfigSystemPromptRecommendationConfig(_SerdeShape):
     """The configuration for a system prompt recommendation."""
@@ -7325,6 +7608,62 @@ class RecommendationType(UnknownEnumMixin, StrEnum):
 
     SYSTEM_PROMPT_RECOMMENDATION = "SYSTEM_PROMPT_RECOMMENDATION"
     TOOL_DESCRIPTION_RECOMMENDATION = "TOOL_DESCRIPTION_RECOMMENDATION"
+
+class RecordExpiryAction(UnknownEnumMixin, StrEnum):
+    """
+    The action to apply to an existing record expiry (long-term memory
+    time-to-live) configuration. `REMOVE` removes a previously configured
+    expiry so that the records no longer expire.
+    """
+
+    REMOVE = "REMOVE"
+
+@dataclass
+class RecordExpirySpecificationRecordExpiryDurationDays(_SerdeShape):
+    """
+    The duration, in days, after which the records in this request expire.
+    The minimum is 31 days.
+    """
+
+    value: int
+
+@dataclass
+class RecordExpirySpecificationAction(_SerdeShape):
+    """
+    The action to apply to the existing record expiry configuration. Set to
+    `REMOVE` to remove a previously configured expiry so that the records no
+    longer expire. This value does not apply when creating records.
+    """
+
+    value: str
+
+@dataclass
+class RecordExpirySpecificationUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+RecordExpirySpecification = Union[
+    RecordExpirySpecificationRecordExpiryDurationDays
+    | RecordExpirySpecificationAction
+    | RecordExpirySpecificationUnknown
+]
+"""
+Specifies the record expiry (long-term memory time-to-live) applied to
+the records in a batch request. Provide exactly one of
+`recordExpiryDurationDays` or `action`. Set `recordExpiryDurationDays`
+to configure or update the expiry, or set `action` to `REMOVE` to remove
+a previously configured expiry.
+"""
+
+class _RecordExpirySpecificationDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> RecordExpirySpecification: ...
 
 class RegistryRecordStatus(UnknownEnumMixin, StrEnum):
     """The status of a registry record in its lifecycle."""
@@ -7469,9 +7808,9 @@ class RetrieveMemoryRecordsInput(_SerdeShape):
     """
     namespace: str | None = ...
     """
-    The namespace prefix to filter memory records by. Searches for memory
-    records in namespaces that start with the provided prefix. Either
-    `namespace` or `namespacePath` is required.
+    The exact namespace to filter memory records by. Searches for memory
+    records that matches the provided namespace value. Either `namespace` or
+    `namespacePath` is required.
     """
     namespace_path: str | None = ...
     """
@@ -7637,6 +7976,26 @@ class S3Location(_SerdeShape):
     """
     The name of the Amazon S3 version ID where the resource is stored
     (Optional).
+    """
+
+@dataclass(kw_only=True)
+class SampleSession(_SerdeShape):
+    """
+    A session affected by an insight or root cause. Use the session ID to
+    find the per-session evaluation results in CloudWatch Logs.
+    """
+
+    session_id: str
+    """The unique identifier of the session."""
+    last_seen_at: datetime | None = ...
+    """
+    The latest timestamp observed for the session in the batch evaluation
+    input.
+    """
+    findings: list[SessionFinding] | None = ...
+    """
+    The failures found in the session that belong to the insight or root
+    cause, up to 10.
     """
 
 @dataclass(kw_only=True)
@@ -7840,6 +8199,24 @@ class ServiceQuotaExceededException(ServiceError, _SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class ServiceUnavailableException(ServiceError, _SerdeShape):
+    """
+    The service can't handle the request right now. Retry the request. If
+    the response includes `retryAfterSeconds`, wait that many seconds before
+    you retry.
+    """
+
+    retry_after_seconds: int | None = ...
+    """The number of seconds to wait before you retry the request."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class SessionFilter(_SerdeShape):
     """Contains filter criteria for listing sessions."""
 
@@ -7866,6 +8243,24 @@ class SessionFilterConfig(_SerdeShape):
     The end time of the time range. Only sessions with activity before this
     timestamp are included.
     """
+
+@dataclass(kw_only=True)
+class SessionFinding(_SerdeShape):
+    """A failure found in a session."""
+
+    target_id: str | None = ...
+    """
+    The identifier or name of the location in the session where the failure
+    was found, interpreted according to `targetType`.
+    """
+    target_type: str | None = ...
+    """The type of location that `targetId` refers to."""
+    description: str
+    """A description of the failure."""
+    category: str | None = ...
+    """The category of the failure."""
+    confidence: float | None = ...
+    """The confidence that the finding is a failure, from 0 to 1."""
 
 @dataclass(kw_only=True)
 class SessionLimits(_SerdeShape):
@@ -9283,6 +9678,31 @@ class ViewPort(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class WebSearchFilters(_SerdeShape):
+    """The filters to apply to a web search."""
+
+    domain_filter: DomainFilter | None = ...
+    """The domains to include in or exclude from the results."""
+    published_date_filter: PublishedDateFilter | None = ...
+    """The publication time range of the results."""
+
+@dataclass(kw_only=True)
+class WebSearchResult(_SerdeShape):
+    """A web search result."""
+
+    title: str | None = ...
+    """The title of the page."""
+    url: str | None = ...
+    """The URL of the page."""
+    text: str
+    """A text extract from the page."""
+    published_at: datetime | None = ...
+    """
+    The time the page was published. This field is absent when the
+    publication time is not known.
+    """
+
+@dataclass(kw_only=True)
 class Unit(_SerdeShape):
     """Dataclass for Unit structure."""
 
@@ -9368,6 +9788,7 @@ INVOKE_CODE_INTERPRETER: APIOperation[
     InvokeCodeInterpreterInput, InvokeCodeInterpreterOutput
 ]
 INVOKE_HARNESS: APIOperation[InvokeHarnessInput, InvokeHarnessOutput]
+INVOKE_WEB_SEARCH: APIOperation[InvokeWebSearchInput, InvokeWebSearchOutput]
 LIST_AB_TESTS: APIOperation[ListABTestsInput, ListABTestsOutput]
 LIST_ACTORS: APIOperation[ListActorsInput, ListActorsOutput]
 LIST_BATCH_EVALUATIONS: APIOperation[

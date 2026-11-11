@@ -7,6 +7,7 @@ from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 n0 = "com.amazonaws.polly"
 _A = "Alphabet"
+_ARN = "AmazonResourceName"
 _AC = "AudioChunk"
 _AE = "AudioEvent"
 _sP = "smithy.api#eventPayload"
@@ -247,6 +248,16 @@ _Fl = "Florian"
 _Le = "Lennart"
 _Lor = "Lorenzo"
 _Ti = "Tiffany"
+_Arj = "Arjun"
+_Carl = "Carlos"
+_Caro = "Carolina"
+_Cu = "Curtis"
+_Hy = "Hyunduk"
+_Ken = "Kenneth"
+_Kia = "Kiara"
+_Leo = "Leo"
+_Nat = "Nate"
+_Tin = "Tina"
 _LNa = "LanguageName"
 _VN = "VoiceName"
 _EL = "EngineList"
@@ -260,6 +271,7 @@ _Voi = "Voices"
 _INTE = "InvalidNextTokenException"
 _DV = "DescribeVoices"
 _ENSE = "EngineNotSupportedException"
+_EMx = "ExceptionMessage"
 _Fo = "Force"
 _FSC = "FlushStreamConfiguration"
 _GLI = "GetLexiconInput"
@@ -333,6 +345,7 @@ _ISKE = "InvalidS3KeyException"
 _ISRE = "InvalidSampleRateException"
 _ISTAE = "InvalidSnsTopicArnException"
 _ISE = "InvalidSsmlException"
+_ITPE = "InvalidTagParameterException"
 _LNSE = "LanguageNotSupportedException"
 _LD = "LexiconDescription"
 _At = "Attributes"
@@ -348,46 +361,28 @@ _Sta = "Status"
 _STy = "SynthesisTasks"
 _LSSTO = "ListSpeechSynthesisTasksOutput"
 _LSST = "ListSpeechSynthesisTasks"
-_MNSFFE = "MarksNotSupportedForFormatException"
-_MLLEE = "MaxLexemeLengthExceededException"
-_MLNEE = "MaxLexiconsNumberExceededException"
-_OSBN = "OutputS3BucketName"
-_OSKP = "OutputS3KeyPrefix"
-_PLI = "PutLexiconInput"
-_PLO = "PutLexiconOutput"
-_UPAE = "UnsupportedPlsAlphabetException"
-_UPLE = "UnsupportedPlsLanguageException"
-_PL = "PutLexicon"
-_QC = "QuotaCode"
-_ISIET = "INPUT_STREAM_INBOUND_EVENT_TIMEOUT"
-_isiet = "input-stream-inbound-event-timeout"
-_IST = "INPUT_STREAM_TIMEOUT"
-_ist = "input-stream-timeout"
-_SC = "ServiceCode"
-_POLLY = "POLLY"
-_po = "polly"
-_SQEE = "ServiceQuotaExceededException"
-_qC = "quotaCode"
-_sC = "serviceCode"
-_Te = "Text"
-_TE = "TextEvent"
-_SSSSAS = "StartSpeechSynthesisStreamActionStream"
-_SSSSI = "StartSpeechSynthesisStreamInput"
-_sH = "smithy.api#httpHeader"
-_xaE = "x-amzn-Engine"
-_xaL = "x-amzn-LanguageCode"
-_xaL_ = "x-amzn-LexiconNames"
-_xaO = "x-amzn-OutputFormat"
-_xaS = "x-amzn-SampleRate"
-_xaV = "x-amzn-VoiceId"
-_ASc = "ActionStream"
-_sPm = "smithy.api#httpPayload"
-_SCE = "StreamClosedEvent"
+_LTFRI = "ListTagsForResourceInput"
+_RA = "ResourceArn"
+_ar = "arn"
+_TK = "TagKey"
+_TV = "TagValue"
+_TM = "TagMap"
+_k = "key"
+_va = "value"
+_LTFRO = "ListTagsForResourceOutput"
+_Tag = "Tags"
+_RI = "ResourceId"
+_RT = "ResourceType"
+_LEXICON = "LEXICON"
+_l = "lexicon"
+_RNFE = "ResourceNotFoundException"
+_rI = "resourceId"
+_rT = "resourceType"
 _TR = "ThrottlingReason"
 _r = "reason"
 _re = "resource"
 _TRL = "ThrottlingReasonList"
-_TEh = "ThrottlingException"
+_TE = "ThrottlingException"
 _aQE = "aws.protocols#awsQueryError"
 _tR = "throttlingReasons"
 _VEFM = "ValidationExceptionFieldMessage"
@@ -406,6 +401,43 @@ _IIE = "INVALID_INBOUND_EVENT"
 _iIE = "invalidInboundEvent"
 _VE = "ValidationException"
 _fi = "fields"
+_LTFR = "ListTagsForResource"
+_MNSFFE = "MarksNotSupportedForFormatException"
+_MLLEE = "MaxLexemeLengthExceededException"
+_MLNEE = "MaxLexiconsNumberExceededException"
+_OSBN = "OutputS3BucketName"
+_OSKP = "OutputS3KeyPrefix"
+_PLI = "PutLexiconInput"
+_PLO = "PutLexiconOutput"
+_TMTE = "TooManyTagsException"
+_UPAE = "UnsupportedPlsAlphabetException"
+_UPLE = "UnsupportedPlsLanguageException"
+_PL = "PutLexicon"
+_QC = "QuotaCode"
+_ISIET = "INPUT_STREAM_INBOUND_EVENT_TIMEOUT"
+_isiet = "input-stream-inbound-event-timeout"
+_IST = "INPUT_STREAM_TIMEOUT"
+_ist = "input-stream-timeout"
+_SC = "ServiceCode"
+_POLLY = "POLLY"
+_po = "polly"
+_SQEE = "ServiceQuotaExceededException"
+_qC = "quotaCode"
+_sC = "serviceCode"
+_Te = "Text"
+_TEe = "TextEvent"
+_SSSSAS = "StartSpeechSynthesisStreamActionStream"
+_SSSSI = "StartSpeechSynthesisStreamInput"
+_sH = "smithy.api#httpHeader"
+_xaE = "x-amzn-Engine"
+_xaL = "x-amzn-LanguageCode"
+_xaL_ = "x-amzn-LexiconNames"
+_xaO = "x-amzn-OutputFormat"
+_xaS = "x-amzn-SampleRate"
+_xaV = "x-amzn-VoiceId"
+_ASc = "ActionStream"
+_sPm = "smithy.api#httpPayload"
+_SCE = "StreamClosedEvent"
 _SSSSES = "StartSpeechSynthesisStreamEventStream"
 _SSSSO = "StartSpeechSynthesisStreamOutput"
 _ES = "EventStream"
@@ -421,6 +453,14 @@ _v_ = ""
 _CT_ = "Content-Type"
 _xaR = "x-amzn-RequestCharacters"
 _SS = "SynthesizeSpeech"
+_TRI = "TagResourceInput"
+_TRO = "TagResourceOutput"
+_TRa = "TagResource"
+_TKL = "TagKeyList"
+_URI = "UntagResourceInput"
+_TKa = "TagKeys"
+_URO = "UntagResourceOutput"
+_UR = "UntagResource"
 _Pv = "Parrot_v1"
 _aw = "aws.auth#sigv4"
 _aws = "aws.api#service"
@@ -428,6 +468,8 @@ _sN = "smithy.api#xmlNamespace"
 _aJ = "aws.protocols#restJson1"
 
 ALPHABET: StaticSchema = (3, n0, _A, 0)
+
+AMAZON_RESOURCE_NAME: StaticSchema = (3, n0, _ARN, 0)
 
 AUDIO_CHUNK: StaticSchema = (1, n0, _AC, 0)
 
@@ -732,6 +774,16 @@ VOICE_ID: StaticSchema = (
         _Le,
         _Lor,
         _Ti,
+        _Arj,
+        _Carl,
+        _Caro,
+        _Cu,
+        _Hy,
+        _Ken,
+        _Kia,
+        _Leo,
+        _Nat,
+        _Tin,
     ),
     (
         (-1, {_sV: _Ad}),
@@ -840,6 +892,16 @@ VOICE_ID: StaticSchema = (
         (-1, {_sV: _Le}),
         (-1, {_sV: _Lor}),
         (-1, {_sV: _Ti}),
+        (-1, {_sV: _Arj}),
+        (-1, {_sV: _Carl}),
+        (-1, {_sV: _Caro}),
+        (-1, {_sV: _Cu}),
+        (-1, {_sV: _Hy}),
+        (-1, {_sV: _Ken}),
+        (-1, {_sV: _Kia}),
+        (-1, {_sV: _Leo}),
+        (-1, {_sV: _Nat}),
+        (-1, {_sV: _Tin}),
     ),
 )
 
@@ -904,6 +966,8 @@ ENGINE_NOT_SUPPORTED_EXCEPTION: StaticSchema = (
     (_m,),
     ((ERROR_MESSAGE, 0),),
 )
+
+EXCEPTION_MESSAGE: StaticSchema = (3, n0, _EMx, 0)
 
 FORCE: StaticSchema = (2, n0, _Fo, {_smithya: False})
 
@@ -1183,6 +1247,15 @@ INVALID_SSML_EXCEPTION: StaticSchema = (
     ((ERROR_MESSAGE, 0),),
 )
 
+INVALID_TAG_PARAMETER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ITPE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
 LANGUAGE_NOT_SUPPORTED_EXCEPTION: StaticSchema = (
     18,
     n0,
@@ -1283,152 +1356,41 @@ LIST_SPEECH_SYNTHESIS_TASKS: StaticOperationSchema = (
     (INVALID_NEXT_TOKEN_EXCEPTION, SERVICE_FAILURE_EXCEPTION),
 )
 
-MARKS_NOT_SUPPORTED_FOR_FORMAT_EXCEPTION: StaticSchema = (
+LIST_TAGS_FOR_RESOURCE_INPUT: StaticSchema = (
     18,
     n0,
-    _MNSFFE,
-    {_smith: _c, _sE: 400},
-    (_m,),
-    ((ERROR_MESSAGE, 0),),
-)
-
-MAX_LEXEME_LENGTH_EXCEEDED_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _MLLEE,
-    {_smith: _c, _sE: 400},
-    (_m,),
-    ((ERROR_MESSAGE, 0),),
-)
-
-MAX_LEXICONS_NUMBER_EXCEEDED_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _MLNEE,
-    {_smith: _c, _sE: 400},
-    (_m,),
-    ((ERROR_MESSAGE, 0),),
-)
-
-OUTPUT_S3_BUCKET_NAME: StaticSchema = (3, n0, _OSBN, 0)
-
-OUTPUT_S3_KEY_PREFIX: StaticSchema = (3, n0, _OSKP, 0)
-
-PUT_LEXICON_INPUT: StaticSchema = (
-    18,
-    n0,
-    _PLI,
+    _LTFRI,
     {_sm: None},
-    (_N, _Con),
-    ((LEXICON_NAME, 9), (LEXICON_CONTENT, 1)),
+    (_RA,),
+    ((AMAZON_RESOURCE_NAME, {_sQ: _ar, _smi: None}),),
 )
 
-PUT_LEXICON_OUTPUT: StaticSchema = (18, n0, _PLO, {_smit: None})
+TAG_KEY: StaticSchema = (3, n0, _TK, 0)
 
-UNSUPPORTED_PLS_ALPHABET_EXCEPTION: StaticSchema = (
+TAG_VALUE: StaticSchema = (3, n0, _TV, 0)
+
+TAG_MAP: StaticSchema = (17, n0, _TM, 0, (_k, _va), ((TAG_KEY, 0), (TAG_VALUE, 0)))
+
+LIST_TAGS_FOR_RESOURCE_OUTPUT: StaticSchema = (
     18,
     n0,
-    _UPAE,
-    {_smith: _c, _sE: 400},
-    (_m,),
-    ((ERROR_MESSAGE, 0),),
+    _LTFRO,
+    {_smit: None},
+    (_Tag,),
+    ((TAG_MAP, 0),),
 )
 
-UNSUPPORTED_PLS_LANGUAGE_EXCEPTION: StaticSchema = (
+RESOURCE_ID: StaticSchema = (3, n0, _RI, 0)
+
+RESOURCE_TYPE: StaticSchema = (14, n0, _RT, 0, (_LEXICON,), ((-1, {_sV: _l}),))
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
     18,
     n0,
-    _UPLE,
-    {_smith: _c, _sE: 400},
-    (_m,),
-    ((ERROR_MESSAGE, 0),),
-)
-
-PUT_LEXICON: StaticOperationSchema = (
-    23,
-    n0,
-    _PL,
-    {
-        _smithy: MappingProxyType(
-            {"method": "PUT", "uri": "/v1/lexicons/{Name}", "code": 200}
-        )
-    },
-    PUT_LEXICON_INPUT,
-    PUT_LEXICON_OUTPUT,
-    (
-        INVALID_LEXICON_EXCEPTION,
-        LEXICON_SIZE_EXCEEDED_EXCEPTION,
-        MAX_LEXEME_LENGTH_EXCEEDED_EXCEPTION,
-        MAX_LEXICONS_NUMBER_EXCEEDED_EXCEPTION,
-        SERVICE_FAILURE_EXCEPTION,
-        UNSUPPORTED_PLS_ALPHABET_EXCEPTION,
-        UNSUPPORTED_PLS_LANGUAGE_EXCEPTION,
-    ),
-)
-
-QUOTA_CODE: StaticSchema = (
-    14,
-    n0,
-    _QC,
-    0,
-    (_ISIET, _IST),
-    ((-1, {_sV: _isiet}), (-1, {_sV: _ist})),
-)
-
-SERVICE_CODE: StaticSchema = (14, n0, _SC, 0, (_POLLY,), ((-1, {_sV: _po}),))
-
-SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _SQEE,
-    {_smith: _c, _sE: 402},
-    (_m, _qC, _sC),
-    ((ERROR_MESSAGE, 1), (QUOTA_CODE, 1), (SERVICE_CODE, 1)),
-)
-
-TEXT: StaticSchema = (3, n0, _Te, 0)
-
-TEXT_EVENT: StaticSchema = (
-    18,
-    n0,
-    _TE,
-    0,
-    (_Te, _TT, _FSC),
-    ((TEXT, 1), (TEXT_TYPE, 0), (FLUSH_STREAM_CONFIGURATION, 0)),
-)
-
-START_SPEECH_SYNTHESIS_STREAM_ACTION_STREAM: StaticSchema = (
-    19,
-    n0,
-    _SSSSAS,
-    {_s: None},
-    (_TE, _CSE),
-    ((TEXT_EVENT, 0), (CLOSE_STREAM_EVENT, 0)),
-)
-
-START_SPEECH_SYNTHESIS_STREAM_INPUT: StaticSchema = (
-    18,
-    n0,
-    _SSSSI,
-    {_sm: None},
-    (_E, _LC, _LNe, _OF, _SR, _VI, _ASc),
-    (
-        (ENGINE, {_sH: _xaE, _smi: None}),
-        (LANGUAGE_CODE, {_sH: _xaL}),
-        (LEXICON_NAME_LIST, {_sH: _xaL_}),
-        (OUTPUT_FORMAT, {_sH: _xaO, _smi: None}),
-        (SAMPLE_RATE, {_sH: _xaS}),
-        (VOICE_ID, {_sH: _xaV, _smi: None}),
-        (START_SPEECH_SYNTHESIS_STREAM_ACTION_STREAM, 16),
-    ),
-)
-
-STREAM_CLOSED_EVENT: StaticSchema = (
-    18,
-    n0,
-    _SCE,
-    0,
-    (_RC,),
-    ((REQUEST_CHARACTERS, {_smithya: 0}),),
+    _RNFE,
+    {_smith: _c, _sE: 404},
+    (_m, _rI, _rT),
+    ((ERROR_MESSAGE, 1), (RESOURCE_ID, 1), (RESOURCE_TYPE, 1)),
 )
 
 THROTTLING_REASON: StaticSchema = (
@@ -1455,7 +1417,7 @@ THROTTLING_REASON_LIST: StaticSchema = (
 THROTTLING_EXCEPTION: StaticSchema = (
     18,
     n0,
-    _TEh,
+    _TE,
     {
         _smith: _c,
         _sE: 400,
@@ -1509,12 +1471,192 @@ VALIDATION_EXCEPTION: StaticSchema = (
     ),
 )
 
+LIST_TAGS_FOR_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _LTFR,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/v1/listTagsForResource", "code": 200}
+        )
+    },
+    LIST_TAGS_FOR_RESOURCE_INPUT,
+    LIST_TAGS_FOR_RESOURCE_OUTPUT,
+    (
+        INVALID_TAG_PARAMETER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_FAILURE_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+MARKS_NOT_SUPPORTED_FOR_FORMAT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MNSFFE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+MAX_LEXEME_LENGTH_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MLLEE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+MAX_LEXICONS_NUMBER_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _MLNEE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+OUTPUT_S3_BUCKET_NAME: StaticSchema = (3, n0, _OSBN, 0)
+
+OUTPUT_S3_KEY_PREFIX: StaticSchema = (3, n0, _OSKP, 0)
+
+PUT_LEXICON_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PLI,
+    {_sm: None},
+    (_N, _Con, _Tag),
+    ((LEXICON_NAME, 9), (LEXICON_CONTENT, 1), (TAG_MAP, 0)),
+)
+
+PUT_LEXICON_OUTPUT: StaticSchema = (18, n0, _PLO, {_smit: None})
+
+TOO_MANY_TAGS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _TMTE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((EXCEPTION_MESSAGE, 0),),
+)
+
+UNSUPPORTED_PLS_ALPHABET_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _UPAE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+UNSUPPORTED_PLS_LANGUAGE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _UPLE,
+    {_smith: _c, _sE: 400},
+    (_m,),
+    ((ERROR_MESSAGE, 0),),
+)
+
+PUT_LEXICON: StaticOperationSchema = (
+    23,
+    n0,
+    _PL,
+    {
+        _smithy: MappingProxyType(
+            {"method": "PUT", "uri": "/v1/lexicons/{Name}", "code": 200}
+        )
+    },
+    PUT_LEXICON_INPUT,
+    PUT_LEXICON_OUTPUT,
+    (
+        INVALID_LEXICON_EXCEPTION,
+        INVALID_TAG_PARAMETER_EXCEPTION,
+        LEXICON_SIZE_EXCEEDED_EXCEPTION,
+        MAX_LEXEME_LENGTH_EXCEEDED_EXCEPTION,
+        MAX_LEXICONS_NUMBER_EXCEEDED_EXCEPTION,
+        SERVICE_FAILURE_EXCEPTION,
+        TOO_MANY_TAGS_EXCEPTION,
+        UNSUPPORTED_PLS_ALPHABET_EXCEPTION,
+        UNSUPPORTED_PLS_LANGUAGE_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+QUOTA_CODE: StaticSchema = (
+    14,
+    n0,
+    _QC,
+    0,
+    (_ISIET, _IST),
+    ((-1, {_sV: _isiet}), (-1, {_sV: _ist})),
+)
+
+SERVICE_CODE: StaticSchema = (14, n0, _SC, 0, (_POLLY,), ((-1, {_sV: _po}),))
+
+SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SQEE,
+    {_smith: _c, _sE: 402},
+    (_m, _qC, _sC),
+    ((ERROR_MESSAGE, 1), (QUOTA_CODE, 1), (SERVICE_CODE, 1)),
+)
+
+TEXT: StaticSchema = (3, n0, _Te, 0)
+
+TEXT_EVENT: StaticSchema = (
+    18,
+    n0,
+    _TEe,
+    0,
+    (_Te, _TT, _FSC),
+    ((TEXT, 1), (TEXT_TYPE, 0), (FLUSH_STREAM_CONFIGURATION, 0)),
+)
+
+START_SPEECH_SYNTHESIS_STREAM_ACTION_STREAM: StaticSchema = (
+    19,
+    n0,
+    _SSSSAS,
+    {_s: None},
+    (_TEe, _CSE),
+    ((TEXT_EVENT, 0), (CLOSE_STREAM_EVENT, 0)),
+)
+
+START_SPEECH_SYNTHESIS_STREAM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SSSSI,
+    {_sm: None},
+    (_E, _LC, _LNe, _OF, _SR, _VI, _ASc),
+    (
+        (ENGINE, {_sH: _xaE, _smi: None}),
+        (LANGUAGE_CODE, {_sH: _xaL}),
+        (LEXICON_NAME_LIST, {_sH: _xaL_}),
+        (OUTPUT_FORMAT, {_sH: _xaO, _smi: None}),
+        (SAMPLE_RATE, {_sH: _xaS}),
+        (VOICE_ID, {_sH: _xaV, _smi: None}),
+        (START_SPEECH_SYNTHESIS_STREAM_ACTION_STREAM, 16),
+    ),
+)
+
+STREAM_CLOSED_EVENT: StaticSchema = (
+    18,
+    n0,
+    _SCE,
+    0,
+    (_RC,),
+    ((REQUEST_CHARACTERS, {_smithya: 0}),),
+)
+
 START_SPEECH_SYNTHESIS_STREAM_EVENT_STREAM: StaticSchema = (
     19,
     n0,
     _SSSSES,
     {_s: None},
-    (_AE, _SCE, _VE, _SQEE, _SFE, _TEh),
+    (_AE, _SCE, _VE, _SQEE, _SFE, _TE),
     (
         (AUDIO_EVENT, 0),
         (STREAM_CLOSED_EVENT, 0),
@@ -1678,6 +1820,71 @@ SYNTHESIZE_SPEECH: StaticOperationSchema = (
         SERVICE_FAILURE_EXCEPTION,
         SSML_MARKS_NOT_SUPPORTED_FOR_TEXT_TYPE_EXCEPTION,
         TEXT_LENGTH_EXCEEDED_EXCEPTION,
+    ),
+)
+
+TAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _TRI,
+    {_sm: None},
+    (_RA, _Tag),
+    ((AMAZON_RESOURCE_NAME, 1), (TAG_MAP, 1)),
+)
+
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_smit: None})
+
+TAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _TRa,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/v1/tagResource", "code": 200}
+        )
+    },
+    TAG_RESOURCE_INPUT,
+    TAG_RESOURCE_OUTPUT,
+    (
+        INVALID_TAG_PARAMETER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_FAILURE_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        TOO_MANY_TAGS_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+TAG_KEY_LIST: StaticSchema = (16, n0, _TKL, 0, (_me,), ((TAG_KEY, 0),))
+
+UNTAG_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URI,
+    {_sm: None},
+    (_RA, _TKa),
+    ((AMAZON_RESOURCE_NAME, 1), (TAG_KEY_LIST, 1)),
+)
+
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _URO, {_smit: None})
+
+UNTAG_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _UR,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/v1/untagResource", "code": 200}
+        )
+    },
+    UNTAG_RESOURCE_INPUT,
+    UNTAG_RESOURCE_OUTPUT,
+    (
+        INVALID_TAG_PARAMETER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_FAILURE_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
     ),
 )
 

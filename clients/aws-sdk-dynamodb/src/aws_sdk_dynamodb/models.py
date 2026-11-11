@@ -63,6 +63,17 @@ _registry = ModelRegistry(
         "BatchWriteItemOutput": "BATCH_WRITE_ITEM_OUTPUT",
         "BillingMode": "BILLING_MODE",
         "BillingModeSummary": "BILLING_MODE_SUMMARY",
+        "BulkOperationBytes": "BULK_OPERATION_BYTES",
+        "BulkOperationDescription": "BULK_OPERATION_DESCRIPTION",
+        "BulkOperationInputFormat": "BULK_OPERATION_INPUT_FORMAT",
+        "BulkOperationPerformanceTier": "BULK_OPERATION_PERFORMANCE_TIER",
+        "BulkOperationStatus": "BULK_OPERATION_STATUS",
+        "BulkOperationSummary": "BULK_OPERATION_SUMMARY",
+        "BulkOperationTableDetail": "BULK_OPERATION_TABLE_DETAIL",
+        "BulkOperationUsage": "BULK_OPERATION_USAGE",
+        "BulkOperationVectorBytes": "BULK_OPERATION_VECTOR_BYTES",
+        "CancelBulkOperationInput": "CANCEL_BULK_OPERATION_INPUT",
+        "CancelBulkOperationOutput": "CANCEL_BULK_OPERATION_OUTPUT",
         "CancellationReason": "CANCELLATION_REASON",
         "Capacity": "CAPACITY",
         "ComparisonOperator": "COMPARISON_OPERATOR",
@@ -107,6 +118,8 @@ _registry = ModelRegistry(
         "DeleteVectorIndexAction": "DELETE_VECTOR_INDEX_ACTION",
         "DescribeBackupInput": "DESCRIBE_BACKUP_INPUT",
         "DescribeBackupOutput": "DESCRIBE_BACKUP_OUTPUT",
+        "DescribeBulkOperationInput": "DESCRIBE_BULK_OPERATION_INPUT",
+        "DescribeBulkOperationOutput": "DESCRIBE_BULK_OPERATION_OUTPUT",
         "DescribeContinuousBackupsInput": "DESCRIBE_CONTINUOUS_BACKUPS_INPUT",
         "DescribeContinuousBackupsOutput": "DESCRIBE_CONTINUOUS_BACKUPS_OUTPUT",
         "DescribeContributorInsightsInput": "DESCRIBE_CONTRIBUTOR_INSIGHTS_INPUT",
@@ -134,6 +147,8 @@ _registry = ModelRegistry(
         "DestinationStatus": "DESTINATION_STATUS",
         "DisableKinesisStreamingDestinationInput": "DISABLE_KINESIS_STREAMING_DESTINATION_INPUT",
         "DisableKinesisStreamingDestinationOutput": "DISABLE_KINESIS_STREAMING_DESTINATION_OUTPUT",
+        "DisassociateReplicationGroupMemberAction": "DISASSOCIATE_REPLICATION_GROUP_MEMBER_ACTION",
+        "DisassociationMode": "DISASSOCIATION_MODE",
         "DuplicateItemException": "DUPLICATE_ITEM_EXCEPTION",
         "EnableKinesisStreamingConfiguration": "ENABLE_KINESIS_STREAMING_CONFIGURATION",
         "EnableKinesisStreamingDestinationInput": "ENABLE_KINESIS_STREAMING_DESTINATION_INPUT",
@@ -190,6 +205,7 @@ _registry = ModelRegistry(
         "InputCompressionType": "INPUT_COMPRESSION_TYPE",
         "InputFormat": "INPUT_FORMAT",
         "InputFormatOptions": "INPUT_FORMAT_OPTIONS",
+        "InputS3Configuration": "INPUT_S3_CONFIGURATION",
         "InternalServerError": "INTERNAL_SERVER_ERROR",
         "InvalidEndpointException": "INVALID_ENDPOINT_EXCEPTION",
         "InvalidExportTimeException": "INVALID_EXPORT_TIME_EXCEPTION",
@@ -204,6 +220,8 @@ _registry = ModelRegistry(
         "LimitExceededException": "LIMIT_EXCEEDED_EXCEPTION",
         "ListBackupsInput": "LIST_BACKUPS_INPUT",
         "ListBackupsOutput": "LIST_BACKUPS_OUTPUT",
+        "ListBulkOperationsInput": "LIST_BULK_OPERATIONS_INPUT",
+        "ListBulkOperationsOutput": "LIST_BULK_OPERATIONS_OUTPUT",
         "ListContributorInsightsInput": "LIST_CONTRIBUTOR_INSIGHTS_INPUT",
         "ListContributorInsightsOutput": "LIST_CONTRIBUTOR_INSIGHTS_OUTPUT",
         "ListExportsInput": "LIST_EXPORTS_INPUT",
@@ -222,6 +240,8 @@ _registry = ModelRegistry(
         "MultiRegionConsistency": "MULTI_REGION_CONSISTENCY",
         "OnDemandThroughput": "ON_DEMAND_THROUGHPUT",
         "OnDemandThroughputOverride": "ON_DEMAND_THROUGHPUT_OVERRIDE",
+        "OutputS3Configuration": "OUTPUT_S3_CONFIGURATION",
+        "OutputTypeEnum": "OUTPUT_TYPE_ENUM",
         "ParameterizedStatement": "PARAMETERIZED_STATEMENT",
         "PointInTimeRecoveryDescription": "POINT_IN_TIME_RECOVERY_DESCRIPTION",
         "PointInTimeRecoverySpecification": "POINT_IN_TIME_RECOVERY_SPECIFICATION",
@@ -289,6 +309,8 @@ _registry = ModelRegistry(
         "SSESpecification": "SSE_SPECIFICATION",
         "SSEStatus": "SSE_STATUS",
         "SSEType": "SSE_TYPE",
+        "StartBulkPutItemsInput": "START_BULK_PUT_ITEMS_INPUT",
+        "StartBulkPutItemsOutput": "START_BULK_PUT_ITEMS_OUTPUT",
         "StreamSpecification": "STREAM_SPECIFICATION",
         "StreamViewType": "STREAM_VIEW_TYPE",
         "TableAlreadyExistsException": "TABLE_ALREADY_EXISTS_EXCEPTION",
@@ -387,6 +409,17 @@ _registry = ModelRegistry(
             "BatchWriteItemOutput",
             "BillingMode",
             "BillingModeSummary",
+            "BulkOperationBytes",
+            "BulkOperationDescription",
+            "BulkOperationInputFormat",
+            "BulkOperationPerformanceTier",
+            "BulkOperationStatus",
+            "BulkOperationSummary",
+            "BulkOperationTableDetail",
+            "BulkOperationUsage",
+            "BulkOperationVectorBytes",
+            "CancelBulkOperationInput",
+            "CancelBulkOperationOutput",
             "CancellationReason",
             "Capacity",
             "ComparisonOperator",
@@ -431,6 +464,8 @@ _registry = ModelRegistry(
             "DeleteVectorIndexAction",
             "DescribeBackupInput",
             "DescribeBackupOutput",
+            "DescribeBulkOperationInput",
+            "DescribeBulkOperationOutput",
             "DescribeContinuousBackupsInput",
             "DescribeContinuousBackupsOutput",
             "DescribeContributorInsightsInput",
@@ -458,6 +493,8 @@ _registry = ModelRegistry(
             "DestinationStatus",
             "DisableKinesisStreamingDestinationInput",
             "DisableKinesisStreamingDestinationOutput",
+            "DisassociateReplicationGroupMemberAction",
+            "DisassociationMode",
             "DuplicateItemException",
             "EnableKinesisStreamingConfiguration",
             "EnableKinesisStreamingDestinationInput",
@@ -514,6 +551,7 @@ _registry = ModelRegistry(
             "InputCompressionType",
             "InputFormat",
             "InputFormatOptions",
+            "InputS3Configuration",
             "InternalServerError",
             "InvalidEndpointException",
             "InvalidExportTimeException",
@@ -528,6 +566,8 @@ _registry = ModelRegistry(
             "LimitExceededException",
             "ListBackupsInput",
             "ListBackupsOutput",
+            "ListBulkOperationsInput",
+            "ListBulkOperationsOutput",
             "ListContributorInsightsInput",
             "ListContributorInsightsOutput",
             "ListExportsInput",
@@ -546,6 +586,8 @@ _registry = ModelRegistry(
             "MultiRegionConsistency",
             "OnDemandThroughput",
             "OnDemandThroughputOverride",
+            "OutputS3Configuration",
+            "OutputTypeEnum",
             "ParameterizedStatement",
             "PointInTimeRecoveryDescription",
             "PointInTimeRecoverySpecification",
@@ -613,6 +655,8 @@ _registry = ModelRegistry(
             "Select",
             "SourceTableDetails",
             "SourceTableFeatureDetails",
+            "StartBulkPutItemsInput",
+            "StartBulkPutItemsOutput",
             "StreamSpecification",
             "StreamViewType",
             "TableAlreadyExistsException",
@@ -686,6 +730,7 @@ _operation_names = (
     "BATCH_EXECUTE_STATEMENT",
     "BATCH_GET_ITEM",
     "BATCH_WRITE_ITEM",
+    "CANCEL_BULK_OPERATION",
     "CREATE_BACKUP",
     "CREATE_GLOBAL_TABLE",
     "CREATE_TABLE",
@@ -694,6 +739,7 @@ _operation_names = (
     "DELETE_RESOURCE_POLICY",
     "DELETE_TABLE",
     "DESCRIBE_BACKUP",
+    "DESCRIBE_BULK_OPERATION",
     "DESCRIBE_CONTINUOUS_BACKUPS",
     "DESCRIBE_CONTRIBUTOR_INSIGHTS",
     "DESCRIBE_ENDPOINTS",
@@ -715,6 +761,7 @@ _operation_names = (
     "GET_RESOURCE_POLICY",
     "IMPORT_TABLE",
     "LIST_BACKUPS",
+    "LIST_BULK_OPERATIONS",
     "LIST_CONTRIBUTOR_INSIGHTS",
     "LIST_EXPORTS",
     "LIST_GLOBAL_TABLES",
@@ -728,6 +775,7 @@ _operation_names = (
     "RESTORE_TABLE_TO_POINT_IN_TIME",
     "SCAN",
     "SEARCH_VECTORS",
+    "START_BULK_PUT_ITEMS",
     "TAG_RESOURCE",
     "TRANSACT_GET_ITEMS",
     "TRANSACT_WRITE_ITEMS",
@@ -765,6 +813,15 @@ def __getattr__(name: str):
 def __dir__():
     return sorted({*globals(), *_operation_names})
 
+
+_operation_data["CANCEL_BULK_OPERATION"] = (
+    "CANCEL_BULK_OPERATION",
+    (
+        "com.amazonaws.dynamodb#InvalidEndpointException",
+        "com.amazonaws.dynamodb#ResourceNotFoundException",
+    ),
+    ("aws.auth#sigv4",),
+)
 
 _operation_data["CREATE_BACKUP"] = (
     "CREATE_BACKUP",
@@ -846,6 +903,15 @@ _operation_data["DESCRIBE_BACKUP"] = (
         "com.amazonaws.dynamodb#BackupNotFoundException",
         "com.amazonaws.dynamodb#InternalServerError",
         "com.amazonaws.dynamodb#InvalidEndpointException",
+    ),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["DESCRIBE_BULK_OPERATION"] = (
+    "DESCRIBE_BULK_OPERATION",
+    (
+        "com.amazonaws.dynamodb#InvalidEndpointException",
+        "com.amazonaws.dynamodb#ResourceNotFoundException",
     ),
     ("aws.auth#sigv4",),
 )
@@ -999,6 +1065,12 @@ _operation_data["LIST_BACKUPS"] = (
     ("aws.auth#sigv4",),
 )
 
+_operation_data["LIST_BULK_OPERATIONS"] = (
+    "LIST_BULK_OPERATIONS",
+    ("com.amazonaws.dynamodb#InvalidEndpointException",),
+    ("aws.auth#sigv4",),
+)
+
 _operation_data["LIST_CONTRIBUTOR_INSIGHTS"] = (
     "LIST_CONTRIBUTOR_INSIGHTS",
     (
@@ -1089,6 +1161,18 @@ _operation_data["RESTORE_TABLE_TO_POINT_IN_TIME"] = (
         "com.amazonaws.dynamodb#TableAlreadyExistsException",
         "com.amazonaws.dynamodb#TableInUseException",
         "com.amazonaws.dynamodb#TableNotFoundException",
+    ),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["START_BULK_PUT_ITEMS"] = (
+    "START_BULK_PUT_ITEMS",
+    (
+        "com.amazonaws.dynamodb#IdempotentParameterMismatchException",
+        "com.amazonaws.dynamodb#InvalidEndpointException",
+        "com.amazonaws.dynamodb#LimitExceededException",
+        "com.amazonaws.dynamodb#ResourceInUseException",
+        "com.amazonaws.dynamodb#ResourceNotFoundException",
     ),
     ("aws.auth#sigv4",),
 )

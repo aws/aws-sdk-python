@@ -318,6 +318,8 @@ if TYPE_CHECKING:
         ListWorkloadIdentitiesOutput,
         PutResourcePolicyInput,
         PutResourcePolicyOutput,
+        ResetTokenVaultKeyMaterialInput,
+        ResetTokenVaultKeyMaterialOutput,
         RotatePaymentConnectorCredentialsInput,
         RotatePaymentConnectorCredentialsOutput,
         SetTokenVaultCMKInput,
@@ -669,6 +671,9 @@ if TYPE_CHECKING:
             ListWorkloadIdentitiesInput, ListWorkloadIdentitiesOutput, Any, Any
         ],
         Interceptor[PutResourcePolicyInput, PutResourcePolicyOutput, Any, Any],
+        Interceptor[
+            ResetTokenVaultKeyMaterialInput, ResetTokenVaultKeyMaterialOutput, Any, Any
+        ],
         Interceptor[
             RotatePaymentConnectorCredentialsInput,
             RotatePaymentConnectorCredentialsOutput,

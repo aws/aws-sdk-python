@@ -80,6 +80,7 @@ from aws_sdk_bedrock_agentcore.models import (
     DeleteRecommendationInput,
     DeleteRecommendationOutput,
     Descriptors,
+    DomainFilter,
     EfsConfiguration,
     EmbeddedCryptoWallet,
     EvaluateInput,
@@ -174,12 +175,15 @@ from aws_sdk_bedrock_agentcore.models import (
     HarnessToolUseBlock,
     HarnessToolUseBlockDelta,
     HarnessToolUseBlockStart,
+    IamCredentialProvider,
     IngestDataInput,
     IngestDataOutput,
     InlineGroundTruth,
     InlineMemoryContent,
     InputContentBlock,
     Insight,
+    InsightResult,
+    InsightRootCause,
     InsightsFailureSignal,
     InvokeAgentRuntimeCommandInput,
     InvokeAgentRuntimeCommandOutput,
@@ -192,6 +196,8 @@ from aws_sdk_bedrock_agentcore.models import (
     InvokeCodeInterpreterOutput,
     InvokeHarnessInput,
     InvokeHarnessOutput,
+    InvokeWebSearchInput,
+    InvokeWebSearchOutput,
     KeyPressArguments,
     KeyPressResult,
     KeyShortcutArguments,
@@ -259,6 +265,7 @@ from aws_sdk_bedrock_agentcore.models import (
     ProcessPaymentOutput,
     ProxyBypass,
     ProxyConfiguration,
+    PublishedDateFilter,
     RecommendationEvaluationConfig,
     RecommendationEvaluatorReference,
     RecommendationResultConfigurationBundle,
@@ -271,6 +278,7 @@ from aws_sdk_bedrock_agentcore.models import (
     RootCauseCluster,
     S3FilesConfiguration,
     S3Location,
+    SampleSession,
     SaveBrowserSessionProfileInput,
     SaveBrowserSessionProfileOutput,
     ScreenshotArguments,
@@ -282,6 +290,7 @@ from aws_sdk_bedrock_agentcore.models import (
     ServerDefinition,
     SessionFilter,
     SessionFilterConfig,
+    SessionFinding,
     SessionLimits,
     SessionMetadataShape,
     SessionSummary,
@@ -337,6 +346,8 @@ from aws_sdk_bedrock_agentcore.models import (
     VariantConfiguration,
     VariantResult,
     ViewPort,
+    WebSearchFilters,
+    WebSearchResult,
 )
 
 
@@ -442,6 +453,7 @@ DeletePaymentSessionOutput(status=_)
 DeleteRecommendationInput()
 DeleteRecommendationOutput(recommendation_id=_, status=_)
 Descriptors()
+DomainFilter()
 EfsConfiguration(access_point_arn=_, mount_path=_, file_system_arn=_)
 EmbeddedCryptoWallet(network=_, linked_accounts=_)
 EvaluateInput()
@@ -570,12 +582,15 @@ HarnessToolResultMetadataBlockDelta(metadata=_)
 HarnessToolUseBlock(name=_, tool_use_id=_, input=_)
 HarnessToolUseBlockDelta(input=_)
 HarnessToolUseBlockStart(tool_use_id=_, name=_)
+IamCredentialProvider(service=_)
 IngestDataInput()
 IngestDataOutput(session_id=_)
 InlineGroundTruth()
 InlineMemoryContent(payload=_)
 InputContentBlock(path=_)
 Insight(insight_id=_)
+InsightResult(type=_, name=_, description=_, created_at=_)
+InsightRootCause(name=_, explanation=_)
 InsightsFailureSignal(category=_, evidence=_, confidence=_)
 InvokeAgentRuntimeCommandInput()
 InvokeAgentRuntimeCommandOutput(content_type=_)
@@ -588,6 +603,8 @@ InvokeCodeInterpreterInput()
 InvokeCodeInterpreterOutput()
 InvokeHarnessInput()
 InvokeHarnessOutput()
+InvokeWebSearchInput()
+InvokeWebSearchOutput(results=_)
 KeyPressArguments(key=_)
 KeyPressResult(status=_)
 KeyShortcutArguments(keys=_)
@@ -702,6 +719,7 @@ ProcessPaymentOutput(
 )
 ProxyBypass()
 ProxyConfiguration(proxies=_)
+PublishedDateFilter()
 RecommendationEvaluationConfig(evaluators=_)
 RecommendationEvaluatorReference(evaluator_arn=_)
 RecommendationResultConfigurationBundle(bundle_arn=_, version_id=_)
@@ -740,6 +758,7 @@ RootCauseCluster(
 )
 S3FilesConfiguration(access_point_arn=_, mount_path=_, file_system_arn=_)
 S3Location(bucket=_, prefix=_)
+SampleSession(session_id=_)
 SaveBrowserSessionProfileInput()
 SaveBrowserSessionProfileOutput(
     profile_identifier=_, browser_identifier=_, session_id=_, last_updated_at=_
@@ -753,6 +772,7 @@ SecretsManagerLocation(secret_arn=_)
 ServerDefinition()
 SessionFilter()
 SessionFilterConfig()
+SessionFinding(description=_)
 SessionLimits(max_spend_amount=_)
 SessionMetadataShape(session_id=_)
 SessionSummary(session_id=_, actor_id=_, created_at=_)
@@ -830,4 +850,6 @@ Variant(name=_, weight=_, variant_configuration=_)
 VariantConfiguration()
 VariantResult(variant_name=_, sample_size=_, mean=_, is_significant=_)
 ViewPort(width=_, height=_)
+WebSearchFilters()
+WebSearchResult(text=_)
 Unit()

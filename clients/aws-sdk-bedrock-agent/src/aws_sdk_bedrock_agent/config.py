@@ -68,6 +68,10 @@ if TYPE_CHECKING:
         CreatePromptOutput,
         CreatePromptVersionInput,
         CreatePromptVersionOutput,
+        CreateRetrievalInstructionInput,
+        CreateRetrievalInstructionOutput,
+        CreateRetrievalInstructionVersionInput,
+        CreateRetrievalInstructionVersionOutput,
         CreateVpcConfigurationInput,
         CreateVpcConfigurationOutput,
         DeleteAgentActionGroupInput,
@@ -94,6 +98,8 @@ if TYPE_CHECKING:
         DeletePromptOutput,
         DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
+        DeleteRetrievalInstructionInput,
+        DeleteRetrievalInstructionOutput,
         DeleteVpcConfigurationInput,
         DeleteVpcConfigurationOutput,
         DisassociateAgentCollaboratorInput,
@@ -130,6 +136,8 @@ if TYPE_CHECKING:
         GetPromptOutput,
         GetResourcePolicyInput,
         GetResourcePolicyOutput,
+        GetRetrievalInstructionInput,
+        GetRetrievalInstructionOutput,
         GetVpcConfigurationInput,
         GetVpcConfigurationOutput,
         IngestKnowledgeBaseDocumentsInput,
@@ -162,6 +170,10 @@ if TYPE_CHECKING:
         ListKnowledgeBasesOutput,
         ListPromptsInput,
         ListPromptsOutput,
+        ListRetrievalInstructionVersionsInput,
+        ListRetrievalInstructionVersionsOutput,
+        ListRetrievalInstructionsInput,
+        ListRetrievalInstructionsOutput,
         ListTagsForResourceInput,
         ListTagsForResourceOutput,
         ListVpcConfigurationsInput,
@@ -200,6 +212,8 @@ if TYPE_CHECKING:
         UpdateKnowledgeBaseOutput,
         UpdatePromptInput,
         UpdatePromptOutput,
+        UpdateRetrievalInstructionInput,
+        UpdateRetrievalInstructionOutput,
         ValidateFlowDefinitionInput,
         ValidateFlowDefinitionOutput,
     )
@@ -227,6 +241,15 @@ if TYPE_CHECKING:
         Interceptor[CreatePromptInput, CreatePromptOutput, Any, Any],
         Interceptor[CreatePromptVersionInput, CreatePromptVersionOutput, Any, Any],
         Interceptor[
+            CreateRetrievalInstructionInput, CreateRetrievalInstructionOutput, Any, Any
+        ],
+        Interceptor[
+            CreateRetrievalInstructionVersionInput,
+            CreateRetrievalInstructionVersionOutput,
+            Any,
+            Any,
+        ],
+        Interceptor[
             CreateVpcConfigurationInput, CreateVpcConfigurationOutput, Any, Any
         ],
         Interceptor[DeleteAgentInput, DeleteAgentOutput, Any, Any],
@@ -248,6 +271,9 @@ if TYPE_CHECKING:
         ],
         Interceptor[DeletePromptInput, DeletePromptOutput, Any, Any],
         Interceptor[DeleteResourcePolicyInput, DeleteResourcePolicyOutput, Any, Any],
+        Interceptor[
+            DeleteRetrievalInstructionInput, DeleteRetrievalInstructionOutput, Any, Any
+        ],
         Interceptor[
             DeleteVpcConfigurationInput, DeleteVpcConfigurationOutput, Any, Any
         ],
@@ -280,6 +306,9 @@ if TYPE_CHECKING:
         ],
         Interceptor[GetPromptInput, GetPromptOutput, Any, Any],
         Interceptor[GetResourcePolicyInput, GetResourcePolicyOutput, Any, Any],
+        Interceptor[
+            GetRetrievalInstructionInput, GetRetrievalInstructionOutput, Any, Any
+        ],
         Interceptor[GetVpcConfigurationInput, GetVpcConfigurationOutput, Any, Any],
         Interceptor[
             IngestKnowledgeBaseDocumentsInput,
@@ -307,6 +336,15 @@ if TYPE_CHECKING:
         ],
         Interceptor[ListKnowledgeBasesInput, ListKnowledgeBasesOutput, Any, Any],
         Interceptor[ListPromptsInput, ListPromptsOutput, Any, Any],
+        Interceptor[
+            ListRetrievalInstructionsInput, ListRetrievalInstructionsOutput, Any, Any
+        ],
+        Interceptor[
+            ListRetrievalInstructionVersionsInput,
+            ListRetrievalInstructionVersionsOutput,
+            Any,
+            Any,
+        ],
         Interceptor[ListTagsForResourceInput, ListTagsForResourceOutput, Any, Any],
         Interceptor[ListVpcConfigurationsInput, ListVpcConfigurationsOutput, Any, Any],
         Interceptor[PrepareAgentInput, PrepareAgentOutput, Any, Any],
@@ -332,6 +370,9 @@ if TYPE_CHECKING:
         Interceptor[UpdateFlowAliasInput, UpdateFlowAliasOutput, Any, Any],
         Interceptor[UpdateKnowledgeBaseInput, UpdateKnowledgeBaseOutput, Any, Any],
         Interceptor[UpdatePromptInput, UpdatePromptOutput, Any, Any],
+        Interceptor[
+            UpdateRetrievalInstructionInput, UpdateRetrievalInstructionOutput, Any, Any
+        ],
         Interceptor[
             ValidateFlowDefinitionInput, ValidateFlowDefinitionOutput, Any, Any
         ],

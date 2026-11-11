@@ -366,7333 +366,3370 @@ RULES_CASES = [
     param({}, {"error": "Invalid Configuration: Missing Region"}, id="Missing region"),
     param(
         {
-            "UseFIPS": True,
-            "UseDualStack": True,
             "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
             "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
             "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
             "Endpoint": "https://example.com",
         },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com}",
     ),
     param(
         {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
             "UseFIPS": False,
             "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
             "Endpoint": "https://example.com",
         },
         {
             "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
         },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
-            "UseFIPS": False,
-            "UseDualStack": False,
             "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
             "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
             "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
             "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
+            "UseDualStack": False,
             "Endpoint": "https://example.com",
         },
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com}",
     ),
     param(
         {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
+            "AccountId": "111111111111",
             "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
             "Endpoint": "https://example.com",
         },
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "Endpoint": "https://example.com",
+        },
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
             "UseFIPS": False,
             "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
             "Endpoint": "https://example.com",
         },
         {
             "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
         },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
+            "AccountId": "111111111111",
             "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
+            "AccountIdEndpointMode": "disabled",
             "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
+            "UseDualStack": False,
             "Endpoint": "https://example.com",
         },
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com}",
     ),
     param(
         {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
+            "AccountId": "111111111111",
             "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
             "Endpoint": "https://example.com",
         },
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "Endpoint": "https://example.com",
+        },
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
             "UseFIPS": False,
             "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
             "Endpoint": "https://example.com",
         },
         {
             "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
         },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
             "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
             "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
             "Endpoint": "https://example.com",
         },
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com}",
     ),
     param(
         {
-            "UseFIPS": True,
-            "UseDualStack": False,
             "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
             "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
             "Endpoint": "https://example.com",
         },
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {"error": "Credentials-sourced account ID parameter is invalid"},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {"error": "Credentials-sourced account ID parameter is invalid"},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-        },
-        {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
-            }
-        },
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn"
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
-            }
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn"
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
-            }
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn"
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.api.aws.ic.gov"}},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.api.aws.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.api.aws.ic.gov"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.api.aws.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.api.aws.ic.gov"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.api.aws.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-gov-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-west-2:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-gov-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb-fips.us-gov-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "ResourceArnList": [
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
-            ],
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-        },
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
             "Endpoint": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn",
             "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
         },
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1}",
+        id="{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1, AccountIdEndpointMode=preferred}",
     ),
     param(
         {
             "Endpoint": "https://dynamodb.us-gov-east-1.api.aws",
             "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
         },
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1}",
-    ),
-    param(
-        {"Endpoint": "https://dynamodb.us-east-1.api.aws", "Region": "us-east-1"},
-        {
-            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-        },
-        id="{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1}",
-    ),
-    param(
-        {
-            "Endpoint": "https://111111111111.ddb.us-east-1.api.aws",
-            "Region": "us-east-1",
-        },
-        {"endpoint": {"url": "https://111111111111.ddb.us-east-1.api.aws"}},
-        id="{Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1}",
-    ),
-    param(
-        {
-            "Endpoint": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws",
-            "Region": "us-east-1",
-        },
-        {
-            "endpoint": {
-                "url": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"
-            }
-        },
-        id="{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1}",
-    ),
-    param(
-        {"Endpoint": "https://dynamodb.eu-west-1.api.aws", "Region": "eu-west-1"},
-        {
-            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-        },
-        id="{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1}",
-    ),
-    param(
-        {"Endpoint": "https://dynamodb.us-west-2.api.aws", "Region": "us-west-2"},
-        {
-            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-        },
-        id="{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}",
-    ),
-    param(
-        {"Endpoint": "https://dynamodb.us-east-1.api.aws/", "Region": "us-east-1"},
-        {
-            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-        },
-        id="{Endpoint=https://dynamodb.us-east-1.api.aws/, Region=us-east-1}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "Endpoint": "https://example.com",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "disabled",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "required",
-            "Region": "local",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.search-ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.search-ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"error": "Credentials-sourced account ID parameter is invalid"},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.search-ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.search-ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.search-ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://111111111111.search-ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"error": "Credentials-sourced account ID parameter is invalid"},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.search-ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://222222222222.search-ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "required",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "required",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "disabled",
-            "Region": "us-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://search-dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
-            }
-        },
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://search-dynamodb-fips.cn-north-1.amazonaws.com.cn"
-            }
-        },
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://search-dynamodb.cn-north-1.api.amazonwebservices.com.cn"
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://search-dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
-            }
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://search-dynamodb-fips.cn-north-1.amazonaws.com.cn"
-            }
-        },
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://search-dynamodb.cn-north-1.api.amazonwebservices.com.cn"
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://search-dynamodb-fips.us-iso-east-1.api.aws.ic.gov"
-            }
-        },
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.api.aws.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "endpoint": {
-                "url": "https://search-dynamodb-fips.us-iso-east-1.api.aws.ic.gov"
-            }
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.api.aws.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-iso-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-gov-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "111111111111",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountId": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-gov-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": True,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": True,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "ResourceArn": "",
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "UseFIPS": False,
-            "UseDualStack": False,
-            "AccountIdEndpointMode": "preferred",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "Endpoint": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn",
-            "Region": "cn-north-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-        },
-        id="{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "Endpoint": "https://dynamodb.us-gov-east-1.api.aws",
-            "Region": "us-gov-east-1",
-            "IsSearchOperation": True,
-        },
-        {
-            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
-        },
-        id="{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1, IsSearchOperation=true}",
+        id="{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1, AccountIdEndpointMode=preferred}",
     ),
     param(
         {
             "Endpoint": "https://dynamodb.us-east-1.api.aws",
             "Region": "us-east-1",
-            "IsSearchOperation": True,
+            "AccountIdEndpointMode": "preferred",
         },
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1, IsSearchOperation=true}",
+        id="{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1, AccountIdEndpointMode=preferred}",
     ),
     param(
         {
             "Endpoint": "https://111111111111.ddb.us-east-1.api.aws",
             "Region": "us-east-1",
-            "IsSearchOperation": True,
+            "AccountIdEndpointMode": "preferred",
         },
         {"endpoint": {"url": "https://111111111111.ddb.us-east-1.api.aws"}},
-        id="{Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1, IsSearchOperation=true}",
+        id="{Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1, AccountIdEndpointMode=preferred}",
     ),
     param(
         {
             "Endpoint": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws",
             "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+        },
+        {
+            "endpoint": {
+                "url": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"
+            }
+        },
+        id="{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1, AccountIdEndpointMode=preferred}",
+    ),
+    param(
+        {
+            "Endpoint": "https://dynamodb.eu-west-1.api.aws",
+            "Region": "eu-west-1",
+            "AccountIdEndpointMode": "preferred",
+        },
+        {
+            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+        },
+        id="{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1, AccountIdEndpointMode=preferred}",
+    ),
+    param(
+        {
+            "Endpoint": "https://dynamodb.us-west-2.api.aws",
+            "Region": "us-west-2",
+            "AccountIdEndpointMode": "preferred",
+        },
+        {
+            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+        },
+        id="{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2, AccountIdEndpointMode=preferred}",
+    ),
+    param(
+        {
+            "Endpoint": "https://dynamodb.us-east-1.api.aws/",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+        },
+        {
+            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+        },
+        id="{Endpoint=https://dynamodb.us-east-1.api.aws/, Region=us-east-1, AccountIdEndpointMode=preferred}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "http://localhost:8000",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "name": "sigv4",
+                            "signingName": "dynamodb",
+                            "signingRegion": "us-east-1",
+                        }
+                    ]
+                },
+            }
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "http://localhost:8000",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "name": "sigv4",
+                            "signingName": "dynamodb",
+                            "signingRegion": "us-east-1",
+                        }
+                    ]
+                },
+            }
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "http://localhost:8000",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "name": "sigv4",
+                            "signingName": "dynamodb",
+                            "signingRegion": "us-east-1",
+                        }
+                    ]
+                },
+            }
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {"UseFIPS": False, "UseDualStack": False},
+        {"error": "Invalid Configuration: Missing Region"},
+        id="{UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:not_an_account:table/table_name",
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:not_an_account:table/table_name}",
+    ),
+    param(
+        {
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"error": "Credentials-sourced account ID parameter is invalid"},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:af-south-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:af-south-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:af-south-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:af-south-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"error": "Credentials-sourced account ID parameter is invalid"},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArnList=[], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "ResourceArnList": [
+                "arn:aws:dynamodb:af-south-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:af-south-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "ResourceArnList": ["arn:aws:s3:us-east-1:333333333333:stream/testStream"],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "Region": "us-new-1",
+            "AccountIdEndpointMode": "preferred",
+            "AccountId": "111111111111",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-new-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{Region=us-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.cn-north-1.api.amazonwebservices.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.cn-north-1.api.amazonwebservices.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.cn-north-1.api.amazonwebservices.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.cn-north-1.amazonaws.com.cn"}},
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.cn-north-1.amazonaws.com.cn"}},
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.cn-north-1.amazonaws.com.cn"}},
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.cn-north-1.amazonaws.com.cn"}},
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.cn-north-1.amazonaws.com.cn"}},
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.cn-north-1.amazonaws.com.cn"}},
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.cn-north-1.api.amazonwebservices.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.cn-north-1.api.amazonwebservices.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.cn-north-1.api.amazonwebservices.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name"
+            ],
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "Region": "cn-new-1",
+            "AccountIdEndpointMode": "preferred",
+            "AccountId": "111111111111",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.cn-new-1.amazonaws.com.cn"}},
+        id="{Region=cn-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-gov-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-gov-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-gov-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-gov-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-gov-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-gov-east-1.api.aws"}},
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.api.aws"}},
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-gov-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-gov-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-gov-east-1.api.aws"}},
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-gov-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-gov-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-gov-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "Region": "us-gov-new-1",
+            "AccountIdEndpointMode": "preferred",
+            "AccountId": "111111111111",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-gov-new-1.amazonaws.com"}},
+        id="{Region=us-gov-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.api.aws.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.api.aws.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.api.aws.ic.gov"}},
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.api.aws.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.api.aws.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.api.aws.ic.gov"}},
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.api.aws.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.api.aws.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.api.aws.ic.gov"}},
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.api.aws.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.api.aws.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {"endpoint": {"url": "https://dynamodb-fips.us-iso-east-1.api.aws.ic.gov"}},
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "ResourceArnList": [
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name"
+            ],
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "Region": "us-iso-new-1",
+            "AccountIdEndpointMode": "preferred",
+            "AccountId": "111111111111",
+            "UseFIPS": False,
+            "UseDualStack": False,
+        },
+        {"endpoint": {"url": "https://dynamodb.us-iso-new-1.c2s.ic.gov"}},
+        id="{Region=us-iso-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "Endpoint": "https://example.com",
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Endpoint": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+        },
+        id="{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Endpoint": "https://dynamodb.us-gov-east-1.api.aws",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+        },
+        id="{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Endpoint": "https://dynamodb.us-east-1.api.aws",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
+        },
+        id="{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Endpoint": "https://111111111111.ddb.us-east-1.api.aws",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://111111111111.ddb.us-east-1.api.aws"}},
+        id="{Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Endpoint": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
             "IsSearchOperation": True,
         },
         {
@@ -7700,40 +3737,1893 @@ RULES_CASES = [
                 "url": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"
             }
         },
-        id="{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1, IsSearchOperation=true}",
+        id="{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
     ),
     param(
         {
             "Endpoint": "https://dynamodb.eu-west-1.api.aws",
             "Region": "eu-west-1",
+            "AccountIdEndpointMode": "preferred",
             "IsSearchOperation": True,
         },
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1, IsSearchOperation=true}",
+        id="{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
     ),
     param(
         {
             "Endpoint": "https://dynamodb.us-west-2.api.aws",
             "Region": "us-west-2",
+            "AccountIdEndpointMode": "preferred",
             "IsSearchOperation": True,
         },
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2, IsSearchOperation=true}",
+        id="{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
     ),
     param(
         {
             "Endpoint": "https://dynamodb.us-east-1.api.aws/",
             "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
             "IsSearchOperation": True,
         },
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.us-east-1.api.aws/, Region=us-east-1, IsSearchOperation=true}",
+        id="{Endpoint=https://dynamodb.us-east-1.api.aws/, Region=us-east-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "http://localhost:8000",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "name": "sigv4",
+                            "signingName": "dynamodb",
+                            "signingRegion": "us-east-1",
+                        }
+                    ]
+                },
+            }
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "http://localhost:8000",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "name": "sigv4",
+                            "signingName": "dynamodb",
+                            "signingRegion": "us-east-1",
+                        }
+                    ]
+                },
+            }
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "http://localhost:8000",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "name": "sigv4",
+                            "signingName": "dynamodb",
+                            "signingRegion": "us-east-1",
+                        }
+                    ]
+                },
+            }
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: Dualstack and local endpoint are not supported"
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "local",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"error": "Invalid Configuration: FIPS and local endpoint are not supported"},
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {"UseFIPS": False, "UseDualStack": False, "IsSearchOperation": True},
+        {"error": "Invalid Configuration: Missing Region"},
+        id="{UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:not_an_account:table/table_name",
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:not_an_account:table/table_name, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"error": "Credentials-sourced account ID parameter is invalid"},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"error": "Credentials-sourced account ID parameter is invalid"},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            "Region": "us-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Region": "us-new-1",
+            "AccountIdEndpointMode": "preferred",
+            "AccountId": "111111111111",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-new-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{Region=us-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.cn-north-1.api.amazonwebservices.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.cn-north-1.api.amazonwebservices.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.cn-north-1.amazonaws.com.cn"
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.cn-north-1.amazonaws.com.cn"
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.cn-north-1.amazonaws.com.cn"
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.cn-north-1.amazonaws.com.cn"
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.cn-north-1.api.amazonwebservices.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.cn-north-1.api.amazonwebservices.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            "Region": "cn-north-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Region": "cn-new-1",
+            "AccountIdEndpointMode": "preferred",
+            "AccountId": "111111111111",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.cn-new-1.amazonaws.com.cn"}},
+        id="{Region=cn-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-gov-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-gov-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-gov-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-gov-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-gov-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-gov-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-gov-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-gov-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            "Region": "us-gov-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Region": "us-gov-new-1",
+            "AccountIdEndpointMode": "preferred",
+            "AccountId": "111111111111",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-new-1.amazonaws.com"}},
+        id="{Region=us-gov-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.api.aws.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.api.aws.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.us-iso-east-1.api.aws.ic.gov"
+            }
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "preferred",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.us-iso-east-1.api.aws.ic.gov"
+            }
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.api.aws.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.api.aws.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.us-iso-east-1.api.aws.ic.gov"
+            }
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "disabled",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "endpoint": {
+                "url": "https://search-dynamodb-fips.us-iso-east-1.api.aws.ic.gov"
+            }
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": False,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "AccountId": "111111111111",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "ResourceArn": "arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            "Region": "us-iso-east-1",
+            "AccountIdEndpointMode": "required",
+            "UseFIPS": True,
+            "UseDualStack": True,
+            "IsSearchOperation": True,
+        },
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "Region": "us-iso-new-1",
+            "AccountIdEndpointMode": "preferred",
+            "AccountId": "111111111111",
+            "UseFIPS": False,
+            "UseDualStack": False,
+            "IsSearchOperation": True,
+        },
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-new-1.c2s.ic.gov"}},
+        id="{Region=us-iso-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
     ),
 ]
 
@@ -7750,27 +5640,7 @@ CLIENT_CASES = [
         {
             "endpoint_uri": "https://example.com",
             "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
+            "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
@@ -7783,8 +5653,8 @@ CLIENT_CASES = [
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com}",
     ),
     param(
         {
@@ -7806,13 +5676,13 @@ CLIENT_CASES = [
         {
             "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
         },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
             "endpoint_uri": "https://example.com",
             "region": "us-east-1",
-            "use_fips_endpoint": False,
+            "use_fips_endpoint": True,
             "use_dualstack_endpoint": False,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
@@ -7825,224 +5695,8 @@ CLIENT_CASES = [
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com}",
     ),
     param(
         {
@@ -8057,18 +5711,18 @@ CLIENT_CASES = [
                     account_id="111111111111",
                 )
             ),
-            "account_id_endpoint_mode": "disabled",
+            "account_id_endpoint_mode": "preferred",
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
             "endpoint_uri": "https://example.com",
             "region": "us-east-1",
-            "use_fips_endpoint": True,
+            "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
@@ -8081,8 +5735,8 @@ CLIENT_CASES = [
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com}",
     ),
     param(
         {
@@ -8104,13 +5758,13 @@ CLIENT_CASES = [
         {
             "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
         },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
             "endpoint_uri": "https://example.com",
             "region": "us-east-1",
-            "use_fips_endpoint": False,
+            "use_fips_endpoint": True,
             "use_dualstack_endpoint": False,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
@@ -8123,224 +5777,8 @@ CLIENT_CASES = [
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com}",
     ),
     param(
         {
@@ -8355,18 +5793,18 @@ CLIENT_CASES = [
                     account_id="111111111111",
                 )
             ),
-            "account_id_endpoint_mode": "required",
+            "account_id_endpoint_mode": "disabled",
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
             "endpoint_uri": "https://example.com",
             "region": "us-east-1",
-            "use_fips_endpoint": True,
+            "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
@@ -8379,8 +5817,8 @@ CLIENT_CASES = [
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com}",
     ),
     param(
         {
@@ -8402,243 +5840,47 @@ CLIENT_CASES = [
         {
             "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
         },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
             "endpoint_uri": "https://example.com",
             "region": "us-east-1",
             "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
             "account_id_endpoint_mode": "required",
         },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com}",
     ),
     param(
         {
             "endpoint_uri": "https://example.com",
             "region": "us-east-1",
             "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
+            "use_dualstack_endpoint": True,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
             "account_id_endpoint_mode": "required",
         },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
         {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com}",
     ),
     param(
         {
@@ -8670,189 +5912,7 @@ CLIENT_CASES = [
                 },
             }
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}",
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
@@ -8884,189 +5944,7 @@ CLIENT_CASES = [
                 },
             }
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}",
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
@@ -9098,251 +5976,7 @@ CLIENT_CASES = [
                 },
             }
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {
-            "endpoint": {
-                "url": "https://111111111111.ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}",
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
@@ -9366,7 +6000,96 @@ CLIENT_CASES = [
                 "properties": {"metricValues": ["O"]},
             }
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {"error": "Credentials-sourced account ID parameter is invalid"},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:af-south-1:222222222222:table/table_name"
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:s3:us-east-1:222222222222:stream/testStream"
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
@@ -9396,54 +6119,45 @@ CLIENT_CASES = [
                 "properties": {"metricValues": ["O"]},
             }
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
+        id="{AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
             "region": "us-east-1",
             "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:s3:af-south-1:222222222222:stream/testStream"
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": True,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
                     access_key_id="test-access-key-id",
                     secret_access_key="test-secret-access-key",
-                    account_id="",
+                    account_id="111111111111",
                 )
             ),
             "account_id_endpoint_mode": "preferred",
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
-        {"error": "Credentials-sourced account ID parameter is invalid"},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
         {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "preferred",
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
         },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
     ),
     param(
         {
@@ -9462,90 +6176,7 @@ CLIENT_CASES = [
                 "properties": {"metricValues": ["O"]},
             }
         },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {
-            "endpoint": {
-                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
     ),
     param(
         {
@@ -9568,12 +6199,45 @@ CLIENT_CASES = [
                 "properties": {"metricValues": ["O"]},
             }
         },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true}",
     ),
     param(
         {
             "region": "us-east-1",
-            "use_fips_endpoint": False,
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
+        ),
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
             "use_dualstack_endpoint": False,
             "account_id_endpoint_mode": "preferred",
         },
@@ -9585,13 +6249,8 @@ CLIENT_CASES = [
                 )
             }
         ),
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}",
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false}",
     ),
     param(
         {
@@ -9605,19 +6264,49 @@ CLIENT_CASES = [
                     account_id="111111111111",
                 )
             ),
-            "account_id_endpoint_mode": "required",
+            "account_id_endpoint_mode": "preferred",
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}",
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
     ),
     param(
         {
             "region": "us-east-1",
             "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
+        ),
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
@@ -9626,14 +6315,130 @@ CLIENT_CASES = [
                     account_id="111111111111",
                 )
             ),
-            "account_id_endpoint_mode": "required",
+            "account_id_endpoint_mode": "disabled",
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
         {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
         },
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}",
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:af-south-1:222222222222:table/table_name"
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:s3:us-east-1:222222222222:stream/testStream"
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:s3:af-south-1:222222222222:stream/testStream"
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
@@ -9647,17 +6452,146 @@ CLIENT_CASES = [
                     account_id="111111111111",
                 )
             ),
-            "account_id_endpoint_mode": "required",
+            "account_id_endpoint_mode": "disabled",
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
         {
-            "endpoint": {
-                "url": "https://111111111111.ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "disabled",
         },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}",
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
+        ),
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
+        ),
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true}",
     ),
     param(
         {
@@ -9681,7 +6615,100 @@ CLIENT_CASES = [
                 "properties": {"metricValues": ["O"]},
             }
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {"error": "Credentials-sourced account ID parameter is invalid"},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:af-south-1:222222222222:table/table_name"
+        ),
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:s3:us-east-1:222222222222:stream/testStream"
+        ),
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
@@ -9711,58 +6738,47 @@ CLIENT_CASES = [
                 "properties": {"metricValues": ["O"]},
             }
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
+        id="{AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
             "region": "us-east-1",
             "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:s3:af-south-1:222222222222:stream/testStream"
+        ),
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": True,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
                     access_key_id="test-access-key-id",
                     secret_access_key="test-secret-access-key",
-                    account_id="",
+                    account_id="111111111111",
                 )
             ),
             "account_id_endpoint_mode": "required",
         },
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
-        {"error": "Credentials-sourced account ID parameter is invalid"},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
         {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "required",
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
         },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
     ),
     param(
         {
@@ -9781,98 +6797,7 @@ CLIENT_CASES = [
                 "properties": {"metricValues": ["O"]},
             }
         },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {
-            "endpoint": {
-                "url": "https://222222222222.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
-        },
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
     ),
     param(
         {
@@ -9895,35 +6820,12 @@ CLIENT_CASES = [
                 "properties": {"metricValues": ["O"]},
             }
         },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true}",
     ),
     param(
         {
             "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "endpoint": {
-                "url": "https://333333333333.ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
+            "use_fips_endpoint": True,
             "use_dualstack_endpoint": False,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
@@ -9937,2705 +6839,50 @@ CLIENT_CASES = [
         AsyncDynamoDBClient.list_tables,
         ListTablesInput(),
         {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
     ),
     param(
         {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
             "use_dualstack_endpoint": False,
             "account_id_endpoint_mode": "required",
         },
         AsyncDynamoDBClient.describe_table,
         DescribeTableInput(
             table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=us-east-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=cn-north-1}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.list_tables,
-        ListTablesInput(),
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.describe_table,
-        DescribeTableInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream"
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.batch_get_item,
-        BatchGetItemInput(
-            request_items={
-                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
-                    keys=[{"pk": AttributeValueS(value="value")}]
-                )
-            }
-        ),
-        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-gov-east-1}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "endpoint_uri": "https://example.com",
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://example.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "local",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "http://localhost:8000",
-                "properties": {
-                    "authSchemes": [
-                        {
-                            "name": "sigv4",
-                            "signingName": "dynamodb",
-                            "signingRegion": "us-east-1",
-                        }
-                    ]
-                },
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "https://111111111111.search-ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "https://111111111111.search-ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Credentials-sourced account ID parameter is invalid"},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "https://222222222222.search-ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "https://222222222222.search-ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
         ),
         {
             "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
         },
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
     ),
     param(
         {
             "region": "us-east-1",
             "use_fips_endpoint": True,
             "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
             "account_id_endpoint_mode": "required",
         },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
         ),
         {
             "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
         },
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false}",
     ),
     param(
         {
             "region": "us-east-1",
-            "use_fips_endpoint": False,
+            "use_fips_endpoint": True,
             "use_dualstack_endpoint": True,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
@@ -12646,85 +6893,12 @@ CLIENT_CASES = [
             ),
             "account_id_endpoint_mode": "required",
         },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
         {
-            "endpoint": {
-                "url": "https://111111111111.search-ddb.us-east-1.api.aws",
-                "properties": {"metricValues": ["O"]},
-            }
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
         },
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "endpoint": {
-                "url": "https://111111111111.search-ddb.us-east-1.amazonaws.com",
-                "properties": {"metricValues": ["O"]},
-            }
-        },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "required",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"error": "Credentials-sourced account ID parameter is invalid"},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
     ),
     param(
         {
@@ -12733,165 +6907,151 @@ CLIENT_CASES = [
             "use_dualstack_endpoint": True,
             "account_id_endpoint_mode": "required",
         },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name"
         ),
         {
             "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
         },
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
     ),
     param(
         {
             "region": "us-east-1",
             "use_fips_endpoint": True,
-            "use_dualstack_endpoint": False,
+            "use_dualstack_endpoint": True,
             "account_id_endpoint_mode": "required",
         },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws:dynamodb:us-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
         ),
         {
             "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
         },
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
+        id="{ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true}",
     ),
     param(
         {
-            "region": "us-east-1",
+            "region": "cn-north-1",
             "use_fips_endpoint": False,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "required",
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
         },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
         {
             "endpoint": {
-                "url": "https://222222222222.search-ddb.us-east-1.api.aws",
+                "url": "https://111111111111.ddb.cn-north-1.amazonaws.com.cn",
                 "properties": {"metricValues": ["O"]},
             }
         },
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
-            "region": "us-east-1",
+            "region": "cn-north-1",
             "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
+            "account_id_endpoint_mode": "preferred",
         },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name"
         ),
         {
             "endpoint": {
-                "url": "https://222222222222.search-ddb.us-east-1.amazonaws.com",
+                "url": "https://222222222222.ddb.cn-north-1.amazonaws.com.cn",
                 "properties": {"metricValues": ["O"]},
             }
         },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
-            "region": "us-east-1",
+            "region": "cn-north-1",
             "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
+            "account_id_endpoint_mode": "preferred",
         },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
         ),
         {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+            "endpoint": {
+                "url": "https://333333333333.ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
         },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
-            "region": "us-east-1",
+            "region": "cn-north-1",
             "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
         },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
-            "region": "us-east-1",
+            "region": "cn-north-1",
             "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
+            "account_id_endpoint_mode": "disabled",
         },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name"
         ),
+        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
         {
-            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+            "region": "cn-north-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}",
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {"endpoint": {"url": "https://dynamodb.cn-north-1.amazonaws.com.cn"}},
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
@@ -12907,36 +7067,444 @@ CLIENT_CASES = [
             ),
             "account_id_endpoint_mode": "required",
         },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
         {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
+            "endpoint": {
+                "url": "https://111111111111.ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
     ),
     param(
         {
             "region": "cn-north-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name"
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "cn-north-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws-cn:dynamodb:cn-north-1:333333333333:table/table_name], Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
             "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
                     access_key_id="test-access-key-id",
                     secret_access_key="test-secret-access-key",
-                    account_id="",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name"
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name"
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
                 )
             ),
             "account_id_endpoint_mode": "required",
         },
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {
+            "endpoint": {
+                "url": "https://111111111111.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name"
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {
+            "endpoint": {
+                "url": "https://333333333333.ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArnList=[arn:aws-us-gov:dynamodb:us-gov-east-1:333333333333:table/table_name], Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name"
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name"
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {"endpoint": {"url": "https://dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.list_tables,
+        ListTablesInput(),
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.describe_table,
+        DescribeTableInput(
+            table_name="arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name"
+        ),
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.batch_get_item,
+        BatchGetItemInput(
+            request_items={
+                "arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name": KeysAndAttributes(
+                    keys=[{"pk": AttributeValueS(value="value")}]
+                )
+            }
+        ),
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{ResourceArnList=[arn:aws-iso:dynamodb:us-iso-east-1:333333333333:table/table_name], Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false}",
+    ),
+    param(
+        {
+            "endpoint_uri": "https://example.com",
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "endpoint_uri": "https://example.com",
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": True,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
             table_name="test-table",
@@ -12949,20 +7517,28 @@ CLIENT_CASES = [
             top_k=10,
         ),
         {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
+            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
     ),
     param(
         {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
+            "endpoint_uri": "https://example.com",
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
             "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            table_name="test-table",
             index_name="test-index",
             search_vector=[
                 AttributeValueN(value="1.0"),
@@ -12971,21 +7547,27 @@ CLIENT_CASES = [
             ],
             top_k=10,
         ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
     ),
     param(
         {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
+            "endpoint_uri": "https://example.com",
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
+            table_name="test-table",
             index_name="test-index",
             search_vector=[
                 AttributeValueN(value="1.0"),
@@ -12994,21 +7576,27 @@ CLIENT_CASES = [
             ],
             top_k=10,
         ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
     ),
     param(
         {
-            "region": "cn-north-1",
+            "endpoint_uri": "https://example.com",
+            "region": "us-east-1",
             "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
+            table_name="test-table",
             index_name="test-index",
             search_vector=[
                 AttributeValueN(value="1.0"),
@@ -13017,17 +7605,23 @@ CLIENT_CASES = [
             ],
             top_k=10,
         ),
-        {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
-        },
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
     ),
     param(
         {
-            "region": "cn-north-1",
+            "endpoint_uri": "https://example.com",
+            "region": "us-east-1",
             "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "required",
+            "use_dualstack_endpoint": True,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
@@ -13041,12 +7635,42 @@ CLIENT_CASES = [
             top_k=10,
         ),
         {
-            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
+            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
         },
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
     ),
     param(
         {
+            "endpoint_uri": "https://example.com",
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "endpoint_uri": "https://example.com",
             "region": "us-east-1",
             "use_fips_endpoint": True,
             "use_dualstack_endpoint": True,
@@ -13070,13 +7694,14 @@ CLIENT_CASES = [
             ],
             top_k=10,
         ),
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
     ),
     param(
         {
+            "endpoint_uri": "https://example.com",
             "region": "us-east-1",
-            "use_fips_endpoint": True,
+            "use_fips_endpoint": False,
             "use_dualstack_endpoint": False,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
@@ -13085,7 +7710,7 @@ CLIENT_CASES = [
                     account_id="111111111111",
                 )
             ),
-            "account_id_endpoint_mode": "disabled",
+            "account_id_endpoint_mode": "required",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
@@ -13098,11 +7723,12 @@ CLIENT_CASES = [
             ],
             top_k=10,
         ),
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
+        {"endpoint": {"url": "https://example.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
     ),
     param(
         {
+            "endpoint_uri": "https://example.com",
             "region": "us-east-1",
             "use_fips_endpoint": False,
             "use_dualstack_endpoint": True,
@@ -13113,7 +7739,7 @@ CLIENT_CASES = [
                     account_id="111111111111",
                 )
             ),
-            "account_id_endpoint_mode": "disabled",
+            "account_id_endpoint_mode": "required",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
@@ -13126,96 +7752,29 @@ CLIENT_CASES = [
             ],
             top_k=10,
         ),
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
         {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
+            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
         },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
     ),
     param(
         {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": True,
-            "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
-        id="{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
+            "endpoint_uri": "https://example.com",
             "region": "us-east-1",
             "use_fips_endpoint": True,
             "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            table_name="test-table",
             index_name="test-index",
             search_vector=[
                 AttributeValueN(value="1.0"),
@@ -13224,119 +7783,15 @@ CLIENT_CASES = [
             ],
             top_k=10,
         ),
-        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, Endpoint=https://example.com, IsSearchOperation=true}",
     ),
     param(
         {
+            "endpoint_uri": "https://example.com",
             "region": "us-east-1",
-            "use_fips_endpoint": False,
+            "use_fips_endpoint": True,
             "use_dualstack_endpoint": True,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.api.aws"}},
-        id="{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "disabled",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
             "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
                 AWSCredentialsIdentity(
                     access_key_id="test-access-key-id",
@@ -13344,7 +7799,7 @@ CLIENT_CASES = [
                     account_id="111111111111",
                 )
             ),
-            "account_id_endpoint_mode": "preferred",
+            "account_id_endpoint_mode": "required",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
@@ -13357,405 +7812,14 @@ CLIENT_CASES = [
             ],
             top_k=10,
         ),
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "cn-north-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-iso-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="111111111111",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
-                AWSCredentialsIdentity(
-                    access_key_id="test-access-key-id",
-                    secret_access_key="test-secret-access-key",
-                    account_id="",
-                )
-            ),
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:dynamodb:us-west-2:222222222222:table/table_name",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="arn:aws:s3:us-west-2:222222222222:stream/testStream",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
-    ),
-    param(
-        {
-            "region": "us-gov-east-1",
-            "use_fips_endpoint": False,
-            "use_dualstack_endpoint": False,
-            "account_id_endpoint_mode": "preferred",
-        },
-        AsyncDynamoDBClient.search_vectors,
-        SearchVectorsInput(
-            table_name="test-table",
-            index_name="test-index",
-            search_vector=[
-                AttributeValueN(value="1.0"),
-                AttributeValueN(value="2.0"),
-                AttributeValueN(value="3.0"),
-            ],
-            top_k=10,
-        ),
-        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
-        id="{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}",
+        {"error": "Invalid Configuration: FIPS and custom endpoint are not supported"},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, Endpoint=https://example.com, IsSearchOperation=true}",
     ),
     param(
         {
             "endpoint_uri": "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn",
             "region": "cn-north-1",
+            "account_id_endpoint_mode": "preferred",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
@@ -13771,12 +7835,13 @@ CLIENT_CASES = [
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1, IsSearchOperation=true}",
+        id="{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
     ),
     param(
         {
             "endpoint_uri": "https://dynamodb.us-gov-east-1.api.aws",
             "region": "us-gov-east-1",
+            "account_id_endpoint_mode": "preferred",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
@@ -13792,10 +7857,14 @@ CLIENT_CASES = [
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1, IsSearchOperation=true}",
+        id="{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
     ),
     param(
-        {"endpoint_uri": "https://dynamodb.us-east-1.api.aws", "region": "us-east-1"},
+        {
+            "endpoint_uri": "https://dynamodb.us-east-1.api.aws",
+            "region": "us-east-1",
+            "account_id_endpoint_mode": "preferred",
+        },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
             table_name="test-table",
@@ -13810,12 +7879,13 @@ CLIENT_CASES = [
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1, IsSearchOperation=true}",
+        id="{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
     ),
     param(
         {
             "endpoint_uri": "https://111111111111.ddb.us-east-1.api.aws",
             "region": "us-east-1",
+            "account_id_endpoint_mode": "preferred",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
@@ -13829,12 +7899,13 @@ CLIENT_CASES = [
             top_k=10,
         ),
         {"endpoint": {"url": "https://111111111111.ddb.us-east-1.api.aws"}},
-        id="{Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1, IsSearchOperation=true}",
+        id="{Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
     ),
     param(
         {
             "endpoint_uri": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws",
             "region": "us-east-1",
+            "account_id_endpoint_mode": "preferred",
         },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
@@ -13852,10 +7923,14 @@ CLIENT_CASES = [
                 "url": "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"
             }
         },
-        id="{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1, IsSearchOperation=true}",
+        id="{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
     ),
     param(
-        {"endpoint_uri": "https://dynamodb.eu-west-1.api.aws", "region": "eu-west-1"},
+        {
+            "endpoint_uri": "https://dynamodb.eu-west-1.api.aws",
+            "region": "eu-west-1",
+            "account_id_endpoint_mode": "preferred",
+        },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
             table_name="test-table",
@@ -13870,10 +7945,14 @@ CLIENT_CASES = [
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1, IsSearchOperation=true}",
+        id="{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
     ),
     param(
-        {"endpoint_uri": "https://dynamodb.us-west-2.api.aws", "region": "us-west-2"},
+        {
+            "endpoint_uri": "https://dynamodb.us-west-2.api.aws",
+            "region": "us-west-2",
+            "account_id_endpoint_mode": "preferred",
+        },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
             table_name="test-table",
@@ -13888,10 +7967,14 @@ CLIENT_CASES = [
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2, IsSearchOperation=true}",
+        id="{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
     ),
     param(
-        {"endpoint_uri": "https://dynamodb.us-east-1.api.aws/", "region": "us-east-1"},
+        {
+            "endpoint_uri": "https://dynamodb.us-east-1.api.aws/",
+            "region": "us-east-1",
+            "account_id_endpoint_mode": "preferred",
+        },
         AsyncDynamoDBClient.search_vectors,
         SearchVectorsInput(
             table_name="test-table",
@@ -13906,7 +7989,1733 @@ CLIENT_CASES = [
         {
             "error": "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"
         },
-        id="{Endpoint=https://dynamodb.us-east-1.api.aws/, Region=us-east-1, IsSearchOperation=true}",
+        id="{Endpoint=https://dynamodb.us-east-1.api.aws/, Region=us-east-1, AccountIdEndpointMode=preferred, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "local",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "http://localhost:8000",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "name": "sigv4",
+                            "signingName": "dynamodb",
+                            "signingRegion": "us-east-1",
+                        }
+                    ]
+                },
+            }
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "local",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "http://localhost:8000",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "name": "sigv4",
+                            "signingName": "dynamodb",
+                            "signingRegion": "us-east-1",
+                        }
+                    ]
+                },
+            }
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "local",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "http://localhost:8000",
+                "properties": {
+                    "authSchemes": [
+                        {
+                            "name": "sigv4",
+                            "signingName": "dynamodb",
+                            "signingRegion": "us-east-1",
+                        }
+                    ]
+                },
+            }
+        },
+        id="{AccountId=111111111111, Region=local, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:not_an_account:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:not_an_account:table/table_name, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"error": "Credentials-sourced account ID parameter is invalid"},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": True,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=preferred, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": True,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb-fips.us-east-1.api.aws"}},
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=disabled, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"error": "Credentials-sourced account ID parameter is invalid"},
+        id="{AccountId=, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:af-south-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:dynamodb:af-south-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:s3:us-east-1:222222222222:stream/testStream",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:s3:us-east-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:s3:af-south-1:222222222222:stream/testStream",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+        },
+        id="{ResourceArn=arn:aws:s3:af-south-1:222222222222:stream/testStream, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": True,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-east-1.api.aws",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{AccountId=111111111111, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-east-1",
+            "use_fips_endpoint": True,
+            "use_dualstack_endpoint": True,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws:dynamodb:us-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"
+        },
+        id="{ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, Region=us-east-1, AccountIdEndpointMode=required, UseFIPS=true, UseDualStack=true, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-new-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-new-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{Region=us-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "cn-north-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "cn-north-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "cn-north-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "cn-north-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}},
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "cn-north-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "cn-north-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.cn-north-1.amazonaws.com.cn",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-cn:dynamodb:cn-north-1:222222222222:table/table_name, Region=cn-north-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "cn-new-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.cn-new-1.amazonaws.com.cn"}},
+        id="{Region=cn-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-east-1.amazonaws.com"}},
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://111111111111.search-ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{AccountId=111111111111, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-gov-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "endpoint": {
+                "url": "https://222222222222.search-ddb.us-gov-east-1.amazonaws.com",
+                "properties": {"metricValues": ["O"]},
+            }
+        },
+        id="{ResourceArn=arn:aws-us-gov:dynamodb:us-gov-east-1:222222222222:table/table_name, Region=us-gov-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-gov-new-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-gov-new-1.amazonaws.com"}},
+        id="{Region=us-gov-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=preferred, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "disabled",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}},
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=disabled, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{AccountId=111111111111, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-iso-east-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "account_id_endpoint_mode": "required",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {
+            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"
+        },
+        id="{ResourceArn=arn:aws-iso:dynamodb:us-iso-east-1:222222222222:table/table_name, Region=us-iso-east-1, AccountIdEndpointMode=required, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
+    ),
+    param(
+        {
+            "region": "us-iso-new-1",
+            "use_fips_endpoint": False,
+            "use_dualstack_endpoint": False,
+            "aws_credentials_identity_resolver": AsyncStaticCredentialsResolver(
+                AWSCredentialsIdentity(
+                    access_key_id="test-access-key-id",
+                    secret_access_key="test-secret-access-key",
+                    account_id="111111111111",
+                )
+            ),
+            "account_id_endpoint_mode": "preferred",
+        },
+        AsyncDynamoDBClient.search_vectors,
+        SearchVectorsInput(
+            table_name="test-table",
+            index_name="test-index",
+            search_vector=[
+                AttributeValueN(value="1.0"),
+                AttributeValueN(value="2.0"),
+                AttributeValueN(value="3.0"),
+            ],
+            top_k=10,
+        ),
+        {"endpoint": {"url": "https://search-dynamodb.us-iso-new-1.c2s.ic.gov"}},
+        id="{Region=us-iso-new-1, AccountIdEndpointMode=preferred, AccountId=111111111111, UseFIPS=false, UseDualStack=false, IsSearchOperation=true}",
     ),
 ]
 

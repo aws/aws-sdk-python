@@ -21,6 +21,8 @@ from aws_sdk_polly.models import (
     ListLexiconsOutput,
     ListSpeechSynthesisTasksInput,
     ListSpeechSynthesisTasksOutput,
+    ListTagsForResourceInput,
+    ListTagsForResourceOutput,
     PutLexiconInput,
     PutLexiconOutput,
     StartSpeechSynthesisStreamInput,
@@ -31,8 +33,12 @@ from aws_sdk_polly.models import (
     SynthesisTask,
     SynthesizeSpeechInput,
     SynthesizeSpeechOutput,
+    TagResourceInput,
+    TagResourceOutput,
     TextEvent,
     ThrottlingReason,
+    UntagResourceInput,
+    UntagResourceOutput,
     ValidationExceptionField,
     Voice,
 )
@@ -61,6 +67,8 @@ ListLexiconsInput()
 ListLexiconsOutput()
 ListSpeechSynthesisTasksInput()
 ListSpeechSynthesisTasksOutput()
+ListTagsForResourceInput()
+ListTagsForResourceOutput()
 PutLexiconInput()
 PutLexiconOutput()
 StartSpeechSynthesisStreamInput()
@@ -71,7 +79,11 @@ StreamClosedEvent()
 SynthesisTask()
 SynthesizeSpeechInput()
 SynthesizeSpeechOutput()
+TagResourceInput()
+TagResourceOutput()
 TextEvent(text=_)
 ThrottlingReason()
+UntagResourceInput()
+UntagResourceOutput()
 ValidationExceptionField(name=_, message=_)
 Voice()

@@ -300,6 +300,40 @@ class AgentSkillsDescriptor(_SerdeShape):
     skill_definition: SkillDefinition | None = ...
     """The structured skill definition with schema version and content."""
 
+@dataclass
+class AllowedPortPort(_SerdeShape):
+    """A single port that is reachable through the runtime's session URL."""
+
+    value: int
+
+@dataclass
+class AllowedPortPortRange(_SerdeShape):
+    """
+    An inclusive range of ports that are reachable through the runtime's
+    session URL.
+    """
+
+    value: PortRange
+
+@dataclass
+class AllowedPortUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+AllowedPort = Union[AllowedPortPort | AllowedPortPortRange | AllowedPortUnknown]
+"""
+A port or port range that is reachable through the runtime's session
+URL. Specify exactly one of `port` or `portRange`.
+"""
+
+class _AllowedPortDeserializer:
+    def deserialize(self, deserializer: ShapeDeserializer) -> AllowedPort: ...
+
 @dataclass(kw_only=True)
 class AllowedWorkloadConfiguration(_SerdeShape):
     """
@@ -814,6 +848,20 @@ class BrowserSummary(_SerdeShape):
     """The timestamp when the browser was last updated."""
 
 @dataclass(kw_only=True)
+class BuildLifecycleHooks(_SerdeShape):
+    """
+    The lifecycle hooks that run when you create or update the AgentCore
+    Runtime, before any sessions are created.
+    """
+
+    warmup: LifecycleHook | None = ...
+    """
+    The hook that warms up your agent before any sessions are created. Use
+    this hook to load the resources that your sessions need, such as models,
+    libraries, or caches. Your hook must complete within 120 seconds.
+    """
+
+@dataclass(kw_only=True)
 class CapacityProviderConfiguration(_SerdeShape):
     """
     Configuration for customer-managed compute capacity for the AgentCore
@@ -1026,12 +1074,12 @@ CertificateConfiguration = Union[
     | CertificateConfigurationUnknown
 ]
 """
-A reference to a private certificate authority (CA) certificate that the
-gateway uses to verify TLS connections to the target endpoint. Use this
-when the target presents a certificate issued by a private CA that is
-not trusted by default. Specify exactly one certificate source. The
-configuration is a reference only and never contains the certificate
-content.
+A reference to a private certificate authority (CA) certificate that
+AgentCore uses to verify TLS connections to an endpoint, such as a
+gateway target or an identity provider, that presents a certificate
+issued by a private CA that is not trusted by default. Specify exactly
+one certificate source. The configuration is a reference only and never
+contains the certificate content.
 """
 
 class _CertificateConfigurationDeserializer:
@@ -1062,6 +1110,23 @@ CertificateLocation = Union[
 
 class _CertificateLocationDeserializer:
     def deserialize(self, deserializer: ShapeDeserializer) -> CertificateLocation: ...
+
+@dataclass(kw_only=True)
+class CircuitBreakerConfiguration(_SerdeShape):
+    """
+    Specifies whether the circuit breaker monitors failures for the targets
+    in a fallback chain.
+    """
+
+    mode: str = ...
+    """
+    Specifies whether you want the circuit breaker turned on. To turn it
+    off, set this value to `DISABLED`. The default is `ENABLED`.
+    """
+
+class CircuitBreakerMode(UnknownEnumMixin, StrEnum):
+    ENABLED = "ENABLED"
+    DISABLED = "DISABLED"
 
 class ClaimMatchOperatorType(UnknownEnumMixin, StrEnum):
     EQUALS = "EQUALS"
@@ -1500,6 +1565,12 @@ class ConditionMatchPaths(_SerdeShape):
     value: MatchPaths
 
 @dataclass
+class ConditionMatchModels(_SerdeShape):
+    """A condition that matches on the model requested in an inference request."""
+
+    value: MatchModels
+
+@dataclass
 class ConditionUnknown(_SerdeShape):
     """
     Represents an unknown variant. If you receive this value, you will need
@@ -1509,10 +1580,15 @@ class ConditionUnknown(_SerdeShape):
 
     tag: str
 
-Condition = Union[ConditionMatchPrincipals | ConditionMatchPaths | ConditionUnknown]
+Condition = Union[
+    ConditionMatchPrincipals
+    | ConditionMatchPaths
+    | ConditionMatchModels
+    | ConditionUnknown
+]
 """
 A condition that determines when a gateway rule applies. Conditions can
-match on principals or request paths.
+match on principals, request paths, or the requested model.
 """
 
 class _ConditionDeserializer:
@@ -1936,11 +2012,18 @@ class CreateAgentRuntimeInput(_SerdeShape):
     """
     protocol_configuration: ProtocolConfiguration | None = ...
     """
-    The protocol configuration for an agent runtime. This structure defines
-    how the agent runtime communicates with clients.
+    The protocol configuration for the AgentCore Runtime, including the
+    protocol, port, and path on which the agent server is available.
     """
     lifecycle_configuration: LifecycleConfiguration | None = ...
     """The life cycle configuration for the AgentCore Runtime."""
+    hooks_configuration: RuntimeHooksConfiguration | None = ...
+    """
+    The lifecycle hooks configuration for the AgentCore Runtime. Use
+    lifecycle hooks to run actions in the agent's container at fixed points
+    in the runtime's lifecycle, such as warming up the agent before
+    sessions are created.
+    """
     environment_variables: dict[str, str] | None = ...
     """Environment variables to set in the AgentCore Runtime environment."""
     filesystem_configurations: list[FilesystemConfiguration] | None = ...
@@ -1964,6 +2047,19 @@ class CreateAgentRuntimeInput(_SerdeShape):
     """
     platform_version: str | None = ...
     """The version of the runtime platform to use for the AgentCore Runtime."""
+    allowed_ports: list[AllowedPort] | None = ...
+    """
+    The additional ports on the AgentCore Runtime that are reachable through
+    the runtime's session URL. Specify one to five non-overlapping entries,
+    each containing either a single port or an inclusive port range. Ports
+    must be between `8000` and `12000`, excluding the reserved port `8443`.
+    """
+    resource_configurations: list[ResourceConfiguration] | None = ...
+    """
+    The resource configurations for the AgentCore Runtime, such as the
+    minimum amount of memory to allocate to the runtime. You can specify at
+    most one resource configuration.
+    """
 
 @dataclass(kw_only=True)
 class CreateAgentRuntimeOutput(_SerdeShape):
@@ -2700,6 +2796,12 @@ class CreateGatewayInput(_SerdeShape):
     """
     tags: dict[str, str] | None = ...
     """A map of key-value pairs to associate with the gateway as metadata tags."""
+    domain_override: DomainOverride | None = ...
+    """
+    The public domain names that the gateway advertises in its OAuth
+    discovery URLs instead of the inbound Host header. Specify this when
+    clients reach the gateway through your own proxy or custom domain.
+    """
 
 @dataclass(kw_only=True)
 class CreateGatewayOutput(_SerdeShape):
@@ -2770,6 +2872,11 @@ class CreateGatewayOutput(_SerdeShape):
     """
     waf_configuration: WafConfiguration | None = ...
     """The Amazon Web Services WAF configuration for the gateway."""
+    domain_override: DomainOverride | None = ...
+    """
+    The public domain names that the gateway advertises in its OAuth
+    discovery URLs instead of the inbound Host header.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -3197,8 +3304,8 @@ class CreateMemoryInput(_SerdeShape):
     """
     event_expiry_duration: int | None = ...
     """
-    The duration after which memory events expire. Specified as an ISO 8601
-    duration.
+    The number of days after which memory events expire, between 7 and 3650
+    days.
     """
     memory_strategies: list[MemoryStrategyInput] | None = ...
     """
@@ -3792,10 +3899,10 @@ class CreatePolicyInput(_SerdeShape):
     client_token: str | None = ...
     """
     A unique, case-sensitive identifier to ensure the idempotency of the
-    request. The AWS SDK automatically generates this token, so you don't
-    need to provide it in most cases. If you retry a request with the same
-    client token, the service returns the same response without creating a
-    duplicate policy.
+    request. The Amazon Web Services SDK automatically generates this token,
+    so you don't need to provide it in most cases. If you retry a request
+    with the same client token, the service returns the same response
+    without creating a duplicate policy.
     """
 
 @dataclass(kw_only=True)
@@ -4558,6 +4665,16 @@ class CustomJWTAuthorizerConfiguration(_SerdeShape):
     The private endpoint overrides for the custom JWT authorizer
     configuration.
     """
+    certificate_configurations: list[CertificateConfiguration] | None = ...
+    """
+    The private certificate authority (CA) configurations for the identity
+    provider. Use this to have AgentCore Identity trust a private CA when
+    establishing TLS connections to identity provider endpoints. You can
+    specify only one certificate authority configuration in this list.
+    Provide the certificate by reference to an Amazon S3 object or an Amazon
+    Web Services Secrets Manager secret. You can use this only together with
+    `privateEndpoint`.
+    """
     allowed_workload_configuration: AllowedWorkloadConfiguration | None = ...
     """
     The configuration that restricts which workloads in the request's
@@ -4586,6 +4703,14 @@ class CustomMemoryStrategyInput(_SerdeShape):
     """The configuration for the custom memory strategy."""
     memory_record_schema: MemoryRecordSchema | None = ...
     """Schema for metadata fields on records generated by this strategy."""
+    record_expiry_specification: RecordExpirySpecification | None = ...
+    """
+    The record expiry (long-term memory time-to-live) configuration for
+    memory records generated by this strategy. Set
+    `recordExpiryDurationDays` to the number of days after which records
+    expire. If not specified, records generated by this strategy do not
+    expire.
+    """
 
 @dataclass(kw_only=True)
 class CustomOauth2ProviderConfigInput(_SerdeShape):
@@ -4637,6 +4762,16 @@ class CustomOauth2ProviderConfigInput(_SerdeShape):
     The private endpoint overrides for the custom OAuth2 provider
     configuration.
     """
+    certificate_configurations: list[CertificateConfiguration] | None = ...
+    """
+    The private certificate authority (CA) configurations for the identity
+    provider. Use this to have AgentCore Identity trust a private CA when
+    establishing TLS connections to identity provider endpoints. You can
+    specify only one certificate authority configuration in this list.
+    Provide the certificate by reference to an Amazon S3 object or an Amazon
+    Web Services Secrets Manager secret. You can use this only together with
+    `privateEndpoint`.
+    """
 
 @dataclass(kw_only=True)
 class CustomOauth2ProviderConfigOutput(_SerdeShape):
@@ -4662,6 +4797,16 @@ class CustomOauth2ProviderConfigOutput(_SerdeShape):
     """
     The private endpoint overrides for the custom OAuth2 provider
     configuration.
+    """
+    certificate_configurations: list[CertificateConfiguration] | None = ...
+    """
+    The private certificate authority (CA) configurations for the identity
+    provider. Use this to have AgentCore Identity trust a private CA when
+    establishing TLS connections to identity provider endpoints. You can
+    specify only one certificate authority configuration in this list.
+    Provide the certificate by reference to an Amazon S3 object or an Amazon
+    Web Services Secrets Manager secret. You can use this only together with
+    `privateEndpoint`.
     """
     private_key_jwt_config: PrivateKeyJwtConfig | None = ...
     """
@@ -5444,7 +5589,7 @@ class DeleteMemoryInput(_SerdeShape):
     """
     A client token is used for keeping track of idempotent requests. It can
     contain a session id which can be around 250 chars, combined with a
-    unique AWS identifier.
+    unique Amazon Web Services identifier.
     """
     memory_id: str | None = ...
     """The unique identifier of the memory to delete."""
@@ -5898,6 +6043,71 @@ class DescriptorType(UnknownEnumMixin, StrEnum):
     CUSTOM = "CUSTOM"
     AGENT_SKILLS = "AGENT_SKILLS"
 
+@dataclass
+class DimensionRatingScaleNumerical(_SerdeShape):
+    """
+    The numerical rating scale with defined score values and descriptions
+    for quantitative evaluation of the dimension.
+    """
+
+    value: list[NumericalScaleDefinition]
+
+@dataclass
+class DimensionRatingScaleCategorical(_SerdeShape):
+    """
+    The categorical rating scale with named categories and definitions for
+    qualitative evaluation of the dimension.
+    """
+
+    value: list[CategoricalScaleDefinition]
+
+@dataclass
+class DimensionRatingScaleUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+DimensionRatingScale = Union[
+    DimensionRatingScaleNumerical
+    | DimensionRatingScaleCategorical
+    | DimensionRatingScaleUnknown
+]
+"""
+The rating scale for one dimension of an LLM-as-a-judge evaluator,
+supporting either a numerical or a categorical scale.
+"""
+
+class _DimensionRatingScaleDeserializer:
+    def deserialize(self, deserializer: ShapeDeserializer) -> DimensionRatingScale: ...
+
+@dataclass(kw_only=True)
+class DomainOverride(_SerdeShape):
+    """
+    The public domain names for a gateway that clients reach through your
+    own proxy or custom domain. When you configure a domain override, the
+    gateway advertises these domains instead of the inbound Host header in
+    the URLs that it returns for OAuth discovery, such as the protected
+    resource metadata and the `WWW-Authenticate` challenge.
+    """
+
+    default_domain: str
+    """
+    The default public domain name for the gateway. The gateway advertises
+    this domain when a request doesn't select a specific domain.
+    """
+    alternate_domains: list[str] | None = ...
+    """
+    Additional public domain names for the gateway, up to 10. Don't repeat
+    the default domain or list a domain more than once. A request can select
+    one of these domains, or the default domain, with the
+    `x-amzn-bedrock-agentcore-gateway-domain` header. The gateway rejects a
+    request that selects a domain that isn't configured.
+    """
+
 class DraftStatus(UnknownEnumMixin, StrEnum):
     """Publish synchronization state of the DRAFT working copy."""
 
@@ -6200,6 +6410,14 @@ class EpisodicMemoryStrategyInput(_SerdeShape):
     """
     memory_record_schema: MemoryRecordSchema | None = ...
     """Schema for metadata fields on records generated by this strategy."""
+    record_expiry_specification: RecordExpirySpecification | None = ...
+    """
+    The record expiry (long-term memory time-to-live) configuration for
+    memory records generated by this strategy. Set
+    `recordExpiryDurationDays` to the number of days after which records
+    expire. If not specified, records generated by this strategy do not
+    expire.
+    """
 
 @dataclass(kw_only=True)
 class EpisodicOverrideConfigurationInput(_SerdeShape):
@@ -6361,6 +6579,31 @@ class EpisodicReflectionOverride(_SerdeShape):
     """
     Schema for metadata fields on records generated by this reflection
     override.
+    """
+
+@dataclass(kw_only=True)
+class EvaluationDimension(_SerdeShape):
+    """
+    A single dimension of an LLM-as-a-judge evaluator, defining what the
+    evaluator model should judge for that dimension and how it should be
+    scored.
+    """
+
+    dimension_name: str
+    """
+    The name of the dimension. This name is unique within the evaluator and
+    identifies the dimension's results.
+    """
+    dimension_instruction: str
+    """
+    The instruction to the evaluator model for this dimension, describing
+    what the model should judge when scoring the dimension.
+    """
+    dimension_rating_scale: DimensionRatingScale
+    """
+    The rating scale for this dimension, which can be numerical or
+    categorical. A dimension's rating scale cannot itself be
+    multi-dimensional.
     """
 
 @dataclass
@@ -6606,6 +6849,148 @@ class ExtractionType(UnknownEnumMixin, StrEnum):
 
     LLM_INFERRED = "LLM_INFERRED"
     STRICTLY_CONSISTENT = "STRICTLY_CONSISTENT"
+
+@dataclass(kw_only=True)
+class Fallback(_SerdeShape):
+    """
+    The fallback configuration for a route to an inference target. Defines
+    an ordered list of fallback targets to try when a request to the
+    route's target fails, and the conditions that trigger a fallback. A
+    fallback can occur only before the gateway sends the first byte of the
+    response to the caller. After a streaming response starts, the gateway
+    doesn't fall back.
+    """
+
+    trigger_on: FallbackTriggers | None = ...
+    """
+    The status codes and errors from the route's target that cause the
+    gateway to send the request to the first fallback target. If you omit
+    `triggerOn`, the gateway falls back on `5XX` status codes and on the
+    `CONNECTION_ERROR`, `FIRST_BYTE_TIMEOUT`, and `UNROUTABLE` errors. If
+    you specify `triggerOn`, only the status codes and errors that you list
+    trigger a fallback.
+    """
+    first_byte_timeout_milliseconds: int | None = ...
+    """
+    The maximum time, in milliseconds, from sending the request to the
+    route's target until the first byte of the response body arrives. If
+    the time expires, the gateway abandons the request and treats it as a
+    `FIRST_BYTE_TIMEOUT` error. If you don't specify a value, no timeout is
+    enforced.
+    """
+    circuit_breaker: CircuitBreakerConfiguration | None = ...
+    """
+    Specifies whether the gateway temporarily stops sending your requests to
+    a failing target. The circuit breaker tracks each combination of target
+    and model separately. With the circuit breaker enabled, the gateway
+    skips one or more targets and models that fail repeatedly, and your
+    requests go to the next target in the chain. The gateway always tries
+    the last remaining target in the chain. The gateway enables the circuit
+    breaker by default.
+    """
+    target_fallback: list[FallbackTarget]
+    """
+    The ordered list of fallback targets. The gateway tries each target in
+    order until a response doesn't match that target's triggers, and
+    returns that response to the caller. If every target fails, the gateway
+    returns the last response. You can specify up to two fallback targets.
+    Each combination of target and model, including the route's target, can
+    appear only once.
+    """
+
+class FallbackError(UnknownEnumMixin, StrEnum):
+    CONNECTION_ERROR = "CONNECTION_ERROR"
+    """
+    The gateway could not establish a connection to the destination
+    (connection refused/reset, or connection timeout) --- the attempt never
+    reached the provider. Feeds the circuit breaker.
+    """
+    FIRST_BYTE_TIMEOUT = "FIRST_BYTE_TIMEOUT"
+    """
+    The destination accepted the connection but did not return the first
+    response byte within firstByteTimeoutMilliseconds; the attempt is
+    abandoned before any byte reaches the client. Feeds the circuit breaker.
+    """
+    UNROUTABLE = "UNROUTABLE"
+    """
+    Gateway-side: the target could not be routed to (target missing, or it
+    does not support the request's API path). Deterministic --- advances
+    the chain but does NOT feed the breaker.
+    """
+
+@dataclass(kw_only=True)
+class FallbackTarget(_SerdeShape):
+    """
+    Specifies a target to send the request to when the previous target in
+    the fallback chain fails. Includes the target name, the model to send,
+    and the conditions that trigger a fallback from this target to the next
+    one.
+    """
+
+    target_name: str
+    """
+    The name of the gateway target to fall back to. The target must be an
+    inference target.
+    """
+    model: str | None = ...
+    """
+    The model ID to send to this fallback target. If you don't specify a
+    model, the gateway sends the model from the original request.
+    """
+    trigger_on: FallbackTriggers | None = ...
+    """
+    The status codes and errors from this target that cause the gateway to
+    send the request to the next fallback target. This setting isn't
+    inherited from the route. If you omit it, the gateway uses the default
+    triggers: `5XX` status codes and the `CONNECTION_ERROR`,
+    `FIRST_BYTE_TIMEOUT`, and `UNROUTABLE` errors.
+    """
+    first_byte_timeout_milliseconds: int | None = ...
+    """
+    The maximum time, in milliseconds, from sending the request to this
+    target until the first byte of the response body arrives. This setting
+    isn't inherited from the route. If you don't specify a value, no
+    timeout is enforced.
+    """
+
+@dataclass(kw_only=True)
+class FallbackTriggers(_SerdeShape):
+    """
+    The conditions that trigger a fallback to the next target. A fallback
+    occurs if the response matches any of the specified status codes or
+    errors.
+    """
+
+    status_codes: list[str] | None = ...
+    """
+    The HTTP status codes returned by the target that trigger a fallback.
+    You can specify the following:
+
+    - An exact status code -- A three-digit code, such as `429`.
+
+    - A class of status codes -- The first digit followed by `XX`, such as
+      `5XX`, which matches every code from 500 to 599.
+
+    Only 4XX and 5XX codes are supported. Throttling by the gateway itself
+    doesn't trigger a fallback.
+    """
+    errors: list[str] | None = ...
+    """
+    The errors that trigger a fallback. You can specify the following:
+
+    - `CONNECTION_ERROR` -- The gateway couldn't connect to the target
+      because the connection was refused, reset, or timed out. The request
+      didn't reach the target.
+
+    - `FIRST_BYTE_TIMEOUT` -- The target accepted the connection but didn't
+      return the first byte of the response within
+      `firstByteTimeoutMilliseconds`. The gateway abandons the request
+      before any of the response reaches you.
+
+    - `UNROUTABLE` -- The gateway couldn't route the request to the target,
+      for example because the target doesn't exist or doesn't support the
+      request path. These errors don't count toward the circuit breaker.
+    """
 
 @dataclass
 class FilesystemConfigurationSessionStorage(_SerdeShape):
@@ -7160,6 +7545,8 @@ class GetAgentRuntimeOutput(_SerdeShape):
     """The current status of the AgentCore Runtime."""
     lifecycle_configuration: LifecycleConfiguration
     """The life cycle configuration for the AgentCore Runtime."""
+    hooks_configuration: RuntimeHooksConfiguration | None = ...
+    """The lifecycle hooks configuration for the AgentCore Runtime."""
     failure_reason: str | None = ...
     """The reason for failure if the AgentCore Runtime is in a failed state."""
     description: str | None = ...
@@ -7170,8 +7557,8 @@ class GetAgentRuntimeOutput(_SerdeShape):
     """The artifact of the AgentCore Runtime."""
     protocol_configuration: ProtocolConfiguration | None = ...
     """
-    The protocol configuration for an agent runtime. This structure defines
-    how the agent runtime communicates with clients.
+    The protocol configuration for the AgentCore Runtime, including the
+    protocol, port, and path on which the agent server is available.
     """
     environment_variables: dict[str, str] | None = ...
     """Environment variables set in the AgentCore Runtime environment."""
@@ -7193,6 +7580,13 @@ class GetAgentRuntimeOutput(_SerdeShape):
     """The capacity provider configuration for the AgentCore Runtime."""
     platform_version: str | None = ...
     """The version of the runtime platform used by the AgentCore Runtime."""
+    allowed_ports: list[AllowedPort] | None = ...
+    """
+    The additional ports on the AgentCore Runtime that are reachable through
+    the runtime's session URL.
+    """
+    resource_configurations: list[ResourceConfiguration] | None = ...
+    """The resource configurations for the AgentCore Runtime."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -7838,6 +8232,11 @@ class GetGatewayOutput(_SerdeShape):
     """
     waf_configuration: WafConfiguration | None = ...
     """The Amazon Web Services WAF configuration for the gateway."""
+    domain_override: DomainOverride | None = ...
+    """
+    The public domain names that the gateway advertises in its OAuth
+    discovery URLs instead of the inbound Host header.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -9177,10 +9576,10 @@ class HarnessAgentCoreRuntimeEnvironment(_SerdeShape):
     """The ID of the underlying AgentCore Runtime."""
     lifecycle_configuration: LifecycleConfiguration
     """
-    LifecycleConfiguration lets you manage the lifecycle of runtime sessions
-    and resources in AgentCore Runtime. This configuration helps optimize
-    resource utilization by automatically cleaning up idle sessions and
-    preventing long-running instances from consuming resources indefinitely.
+    The lifecycle configuration for the harness's runtime environment. For
+    a harness, `idleRuntimeSessionTimeout` and `maxLifetime` each accept a
+    value between 60 and 28800 seconds (8 hours), and
+    `idleRuntimeSessionTimeout` must be less than or equal to `maxLifetime`.
     """
     network_configuration: NetworkConfiguration
     """SecurityConfig for the Agent."""
@@ -9193,10 +9592,11 @@ class HarnessAgentCoreRuntimeEnvironmentRequest(_SerdeShape):
 
     lifecycle_configuration: LifecycleConfiguration | None = ...
     """
-    LifecycleConfiguration lets you manage the lifecycle of runtime sessions
-    and resources in AgentCore Runtime. This configuration helps optimize
-    resource utilization by automatically cleaning up idle sessions and
-    preventing long-running instances from consuming resources indefinitely.
+    The lifecycle configuration for the harness's runtime environment. For
+    a harness, `idleRuntimeSessionTimeout` and `maxLifetime` each accept a
+    value between 60 and 28800 seconds (8 hours), and
+    `idleRuntimeSessionTimeout` must be less than or equal to `maxLifetime`.
+    Values above 28800 seconds are rejected with a `ValidationException`.
     """
     network_configuration: NetworkConfiguration | None = ...
     """SecurityConfig for the Agent."""
@@ -9398,7 +9798,13 @@ class HarnessGatewayOutboundAuthNone(_SerdeShape):
 
 @dataclass
 class HarnessGatewayOutboundAuthOauth(_SerdeShape):
-    """Use OAuth credentials for outbound authentication to the gateway."""
+    """
+    Use OAuth credentials for outbound authentication to the gateway.
+
+    The `AUTHORIZATION_CODE` grant type is not supported for outbound
+    authentication from a harness to an AgentCore Gateway, even when
+    `defaultReturnUrl` is specified.
+    """
 
     value: OAuthCredentialProvider
 
@@ -9519,7 +9925,7 @@ class HarnessHookFailureMode(UnknownEnumMixin, StrEnum):
 
 @dataclass(kw_only=True)
 class HarnessHookLambdaTarget(_SerdeShape):
-    """The configuration for an AWS Lambda hook target."""
+    """The configuration for an Amazon Web Services Lambda hook target."""
 
     arn: str
     """The ARN of the Lambda function to invoke."""
@@ -9544,8 +9950,8 @@ class HarnessHookSnsTarget(_SerdeShape):
 @dataclass
 class HarnessHookTargetLambda(_SerdeShape):
     """
-    A Lambda hook target that invokes an AWS Lambda function synchronously
-    and waits for its response.
+    A Lambda hook target that invokes an Amazon Web Services Lambda function
+    synchronously and waits for its response.
     """
 
     value: HarnessHookLambdaTarget
@@ -9647,8 +10053,8 @@ class HarnessManagedMemoryConfiguration(_SerdeShape):
     """Event retention in days. Defaults to 30."""
     encryption_key_arn: str | None = ...
     """
-    Customer-managed KMS key. Defaults to AWS-owned key. Not updatable after
-    creation.
+    Customer-managed KMS key. Defaults to Amazon Web Services-owned key. Not
+    updatable after creation.
     """
 
 class HarnessManagedMemoryStrategyType(UnknownEnumMixin, StrEnum):
@@ -9796,6 +10202,49 @@ class HarnessRemoteMcpConfig(_SerdeShape):
     """URL of the MCP endpoint."""
     headers: dict[str, str] | None = ...
     """Custom headers to include when connecting to the remote MCP server."""
+    outbound_auth: HarnessRemoteMcpOutboundAuth | None = ...
+    """
+    How the harness authenticates to this MCP server. Defaults to no
+    authentication.
+    """
+
+@dataclass
+class HarnessRemoteMcpOutboundAuthAwsIam(_SerdeShape):
+    """
+    Sign requests to the remote MCP server with Signature Version 4 (SigV4)
+    using the harness execution role. If you don't specify a Region, the
+    harness Region is used.
+    """
+
+    value: IamCredentialProvider
+
+@dataclass
+class HarnessRemoteMcpOutboundAuthNone(_SerdeShape):
+    """No authentication."""
+
+    value: Unit
+
+@dataclass
+class HarnessRemoteMcpOutboundAuthUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+HarnessRemoteMcpOutboundAuth = Union[
+    HarnessRemoteMcpOutboundAuthAwsIam
+    | HarnessRemoteMcpOutboundAuthNone
+    | HarnessRemoteMcpOutboundAuthUnknown
+]
+"""Authentication method for calling a remote MCP server."""
+
+class _HarnessRemoteMcpOutboundAuthDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> HarnessRemoteMcpOutboundAuth: ...
 
 @dataclass
 class HarnessSkillPath(_SerdeShape):
@@ -9817,7 +10266,7 @@ class HarnessSkillGit(_SerdeShape):
 
 @dataclass
 class HarnessSkillAwsSkills(_SerdeShape):
-    """AWS Skills baked into the harness's underlying Runtime."""
+    """Amazon Web Services Skills baked into the harness's underlying Runtime."""
 
     value: HarnessSkillAwsSkillsSource
 
@@ -9845,7 +10294,7 @@ class _HarnessSkillDeserializer:
 
 @dataclass(kw_only=True)
 class HarnessSkillAwsSkillsSource(_SerdeShape):
-    """Passed to show that AWS Skills should be included."""
+    """Passed to show that Amazon Web Services Skills should be included."""
 
     paths: list[str] | None = ...
     """
@@ -10150,6 +10599,28 @@ class HttpConnectorTargetConfiguration(_SerdeShape):
     The resource parameters for this connector (for example, `memoryId`).
     The service validates these parameters against the request path at
     runtime.
+    """
+
+@dataclass(kw_only=True)
+class HttpPostLifecycleHookAction(_SerdeShape):
+    """
+    A lifecycle hook action that sends an HTTP `POST` request to the
+    agent's container. The path and port can't conflict with a path that
+    your agent already serves for AgentCore Runtime, such as the protocol's
+    invocation path or the health check path.
+    """
+
+    path: str
+    """
+    The path in the agent's container that AgentCore Runtime sends the
+    `POST` request to.
+    """
+    port: int | None = ...
+    """
+    The port in the agent's container that AgentCore Runtime sends the
+    `POST` request to. If you don't specify a port, the default is the
+    runtime's server port: the port in the protocol configuration if one is
+    set, otherwise the protocol's default port.
     """
 
 @dataclass
@@ -10805,6 +11276,49 @@ class LifecycleConfiguration(_SerdeShape):
     will be automatically terminated and replaced. Default: 28800 seconds (8
     hours).
     """
+
+@dataclass(kw_only=True)
+class LifecycleHook(_SerdeShape):
+    """
+    A lifecycle hook, which defines the action that AgentCore Runtime runs
+    at a point in the runtime's lifecycle.
+    """
+
+    action: LifecycleHookAction
+    """
+    The action that AgentCore Runtime runs for the hook. Specify exactly one
+    action.
+    """
+
+@dataclass
+class LifecycleHookActionHttpPost(_SerdeShape):
+    """
+    Sends an HTTP `POST` request to your agent's container on the specified
+    port and path to run the hook. The hook succeeds if your container
+    returns a `2xx` response. The hook fails if your container returns any
+    other response or doesn't respond before the hook times out.
+    """
+
+    value: HttpPostLifecycleHookAction
+
+@dataclass
+class LifecycleHookActionUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+LifecycleHookAction = Union[LifecycleHookActionHttpPost | LifecycleHookActionUnknown]
+"""
+The action that a lifecycle hook runs. Specify exactly one member.
+Currently, `httpPost` is the only supported action.
+"""
+
+class _LifecycleHookActionDeserializer:
+    def deserialize(self, deserializer: ShapeDeserializer) -> LifecycleHookAction: ...
 
 @dataclass(kw_only=True)
 class LimitEntry(_SerdeShape):
@@ -12422,6 +12936,45 @@ class ManagedVpcResource(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class MatchModelEntry(_SerdeShape):
+    """
+    A model ID or pattern to match against the requested model, and the
+    operator to use for the comparison.
+    """
+
+    value: str
+    """
+    The model ID or pattern to match. With the `StringLike` operator, you
+    can use `*` and `?` as wildcards, for example `anthropic.claude-*`.
+    """
+    operator: str = ...
+    """
+    The operator to use when comparing the requested model to the value:
+
+    - `StringEquals` -- Requires an exact match.
+
+    - `StringLike` -- Supports wildcard patterns using `*` and `?`. This is
+      the default.
+    """
+
+@dataclass(kw_only=True)
+class MatchModels(_SerdeShape):
+    """
+    A condition that matches inference requests based on the requested
+    model.
+    """
+
+    any_of: list[MatchModelEntry]
+    """
+    A list of model entries. The condition is met if the requested model
+    matches any of the entries.
+    """
+
+class MatchOperator(UnknownEnumMixin, StrEnum):
+    STRING_EQUALS = "StringEquals"
+    STRING_LIKE = "StringLike"
+
+@dataclass(kw_only=True)
 class MatchPaths(_SerdeShape):
     """A condition that matches requests based on the request path."""
 
@@ -12522,11 +13075,13 @@ class MCPGatewayConfiguration(_SerdeShape):
     """
     disable_mcp_list_tools_pagination: bool | None = ...
     """
-    Specifies whether pagination is disabled for the Model Context Protocol
-    (MCP) `tools/list` operation. When set to `true`, the gateway returns
-    the complete list of tools in a single response without a pagination
-    cursor. When set to `false` or omitted, the gateway returns tools in
-    paginated responses.
+    Specifies whether the gateway disables pagination for the Model Context
+    Protocol (MCP) `tools/list` operation. When set to `true`, the gateway
+    returns the complete list of tools in a single response without a
+    pagination cursor. When set to `false` or omitted, the gateway returns
+    tools in paginated responses. For information about changing this value
+    on an existing gateway, see
+    [UpdateGateway](https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_UpdateGateway.html).
     """
 
 @dataclass(kw_only=True)
@@ -12784,6 +13339,13 @@ class MemoryStrategy(_SerdeShape):
     """The current status of the memory strategy."""
     memory_record_schema: MemoryRecordSchema | None = ...
     """Schema for metadata fields on records generated by this strategy."""
+    record_expiry_duration_days: int | None = ...
+    """
+    The effective record expiry (long-term memory time-to-live), in days,
+    for memory records generated by this strategy. New records expire this
+    many days after they are created. If not set, records generated by this
+    strategy do not expire.
+    """
 
 @dataclass
 class MemoryStrategyInputSemanticMemoryStrategy(_SerdeShape):
@@ -13092,6 +13654,15 @@ class ModifyMemoryStrategyInput(_SerdeShape):
     """The updated configuration for the memory strategy."""
     memory_record_schema: MemoryRecordSchema | None = ...
     """Updated metadata schema for records generated by this strategy."""
+    record_expiry_specification: RecordExpirySpecification | None = ...
+    """
+    Updates or removes the record expiry (long-term memory time-to-live) for
+    this strategy. Set `recordExpiryDurationDays` to configure or update the
+    number of days after which records expire, or set `action` to `REMOVE`
+    to remove a previously configured time-to-live so that newer records no
+    longer expire. The change applies only to records created after the
+    update.
+    """
 
 @dataclass
 class ModifyReflectionConfigurationEpisodicReflectionConfiguration(_SerdeShape):
@@ -13535,6 +14106,23 @@ class OAuthGrantType(UnknownEnumMixin, StrEnum):
     TOKEN_EXCHANGE = "TOKEN_EXCHANGE"
 
 @dataclass(kw_only=True)
+class OnBehalfOfAuthenticationConfig(_SerdeShape):
+    """
+    Specifies the client authentication method to use for the on-behalf-of
+    token exchange.
+    """
+
+    client_authentication_method: str
+    """
+    The client authentication method to use during the on-behalf-of token
+    exchange. The `NO_CLIENT` option omits the `clientId` and `clientSecret`
+    during the on-behalf-of token exchange with the identity provider.
+    """
+
+class OnBehalfOfClientAuthenticationMethod(UnknownEnumMixin, StrEnum):
+    NO_CLIENT = "NO_CLIENT"
+
+@dataclass(kw_only=True)
 class OnBehalfOfTokenExchangeConfigType(_SerdeShape):
     """Configuration for on-behalf-of token exchange."""
 
@@ -13542,6 +14130,14 @@ class OnBehalfOfTokenExchangeConfigType(_SerdeShape):
     """The grant type for the on-behalf-of token exchange."""
     token_exchange_grant_type_config: TokenExchangeGrantTypeConfigType | None = ...
     """Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693)."""
+    on_behalf_of_authentication_config: OnBehalfOfAuthenticationConfig | None = ...
+    """
+    Specify the client authentication configuration to use for the
+    on-behalf-of token exchange. With this configuration, you override the
+    provider level client authentication method for the on-behalf-of
+    exchange with the identity provider. If you don't specify this
+    configuration, we use the provider level client authentication method.
+    """
 
 class OnBehalfOfTokenExchangeGrantTypeType(UnknownEnumMixin, StrEnum):
     TOKEN_EXCHANGE = "TOKEN_EXCHANGE"
@@ -14406,6 +15002,18 @@ class PolicyValidationMode(UnknownEnumMixin, StrEnum):
     FAIL_ON_ANY_FINDINGS = "FAIL_ON_ANY_FINDINGS"
     IGNORE_ALL_FINDINGS = "IGNORE_ALL_FINDINGS"
 
+@dataclass(kw_only=True)
+class PortRange(_SerdeShape):
+    """
+    An inclusive range of ports. The value of `from` must be less than or
+    equal to the value of `to`.
+    """
+
+    from_: int
+    """The first port in the inclusive range."""
+    to: int
+    """The last port in the inclusive range."""
+
 class PrincipalMatchOperator(UnknownEnumMixin, StrEnum):
     STRING_EQUALS = "StringEquals"
     STRING_LIKE = "StringLike"
@@ -14524,6 +15132,19 @@ class ProtocolConfiguration(_SerdeShape):
     The server protocol for the agent runtime. This field specifies which
     protocol the agent runtime uses to communicate with clients.
     """
+    port: int | None = ...
+    """
+    The port on which the agent server listens. The port must be between
+    `8000` and `12000`, excluding the reserved port `8443`. When this field
+    is omitted, the default is `8080` for `HTTP` and `AGUI`, `8000` for
+    `MCP`, and `9000` for `A2A`.
+    """
+    path: str | None = ...
+    """
+    The path on which the agent server accepts requests. The path must begin
+    with `/`. When this field is omitted, the default is `/invocations` for
+    `HTTP` and `AGUI`, `/mcp` for `MCP`, and `/` for `A2A`.
+    """
 
 class Provider(UnknownEnumMixin, StrEnum):
     AWS = "AWS"
@@ -14618,6 +15239,16 @@ class RatingScaleCategorical(_SerdeShape):
     value: list[CategoricalScaleDefinition]
 
 @dataclass
+class RatingScaleMultiDimensional(_SerdeShape):
+    """
+    A list of dimensions that lets an LLM-as-a-judge evaluator score several
+    dimensions of the same target in a single evaluation. Each dimension has
+    its own instruction and rating scale, and produces its own result.
+    """
+
+    value: list[EvaluationDimension]
+
+@dataclass
 class RatingScaleUnknown(_SerdeShape):
     """
     Represents an unknown variant. If you receive this value, you will need
@@ -14627,7 +15258,12 @@ class RatingScaleUnknown(_SerdeShape):
 
     tag: str
 
-RatingScale = Union[RatingScaleNumerical | RatingScaleCategorical | RatingScaleUnknown]
+RatingScale = Union[
+    RatingScaleNumerical
+    | RatingScaleCategorical
+    | RatingScaleMultiDimensional
+    | RatingScaleUnknown
+]
 """
 The rating scale that defines how evaluators should score agent
 performance, supporting both numerical and categorical scales.
@@ -14648,6 +15284,64 @@ class ReasoningConfiguration(_SerdeShape):
     The level of reasoning effort the model applies when generating a
     response. For supported values, see the model provider's documentation.
     """
+
+class RecordExpiryAction(UnknownEnumMixin, StrEnum):
+    """
+    The action to apply to a strategy's record expiry (long-term memory
+    time-to-live) configuration. `REMOVE` removes a previously configured
+    time-to-live; newer records no longer have a time-to-live set and do not
+    expire.
+    """
+
+    REMOVE = "REMOVE"
+
+@dataclass
+class RecordExpirySpecificationRecordExpiryDurationDays(_SerdeShape):
+    """
+    The duration, in days, after which memory records generated by this
+    strategy expire. The minimum is 31 days.
+    """
+
+    value: int
+
+@dataclass
+class RecordExpirySpecificationAction(_SerdeShape):
+    """
+    The action to apply to the existing record expiry (long-term memory
+    time-to-live) configuration. Set to `REMOVE` to remove a previously
+    configured time-to-live so that newer records no longer expire. This
+    value is not applicable on create paths.
+    """
+
+    value: str
+
+@dataclass
+class RecordExpirySpecificationUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+RecordExpirySpecification = Union[
+    RecordExpirySpecificationRecordExpiryDurationDays
+    | RecordExpirySpecificationAction
+    | RecordExpirySpecificationUnknown
+]
+"""
+Specifies the record expiry (long-term memory time-to-live) for a memory
+strategy. Provide exactly one of `recordExpiryDurationDays` or `action`.
+Set `recordExpiryDurationDays` to configure or update the time-to-live,
+or set `action` to `REMOVE` to remove a previously configured
+time-to-live.
+"""
+
+class _RecordExpirySpecificationDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> RecordExpirySpecification: ...
 
 @dataclass(kw_only=True)
 class RecordingConfig(_SerdeShape):
@@ -14941,6 +15635,37 @@ class _RequestHeaderConfigurationDeserializer:
         self, deserializer: ShapeDeserializer
     ) -> RequestHeaderConfiguration: ...
 
+@dataclass(kw_only=True)
+class ResetTokenVaultKeyMaterialInput(_SerdeShape):
+    """Dataclass for ResetTokenVaultKeyMaterialInput structure."""
+
+    token_vault_id: str | None = ...
+    """
+    The unique identifier of the token vault to reset. To reset your
+    account's default token vault, specify `default`.
+    """
+
+@dataclass(kw_only=True)
+class ResetTokenVaultKeyMaterialOutput(_SerdeShape):
+    """Dataclass for ResetTokenVaultKeyMaterialOutput structure."""
+
+    token_vault_id: str
+    """The ID of the token vault."""
+    kms_configuration: KmsConfiguration
+    """
+    The KMS configuration for the token vault after the reset. The token
+    vault uses an Amazon Web Services managed key.
+    """
+    last_modified_date: datetime
+    """The timestamp when the token vault was last modified."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
 @dataclass
 class ResourceArn(_SerdeShape):
     """
@@ -14970,6 +15695,16 @@ supported as resources for policy enforcement.
 
 class _ResourceDeserializer:
     def deserialize(self, deserializer: ShapeDeserializer) -> Resource: ...
+
+@dataclass(kw_only=True)
+class ResourceConfiguration(_SerdeShape):
+    """The resource configuration for an AgentCore Runtime."""
+
+    minimum_memory_in_mi_b: int
+    """
+    The minimum amount of memory, in mebibytes, to allocate to the AgentCore
+    Runtime.
+    """
 
 @dataclass(kw_only=True)
 class ResourceLimitExceededException(ServiceError, _SerdeShape):
@@ -15213,6 +15948,19 @@ class Rule(_SerdeShape):
     """
     The session configuration that defines timeout settings for detecting
     when agent sessions are complete and ready for evaluation.
+    """
+
+@dataclass(kw_only=True)
+class RuntimeHooksConfiguration(_SerdeShape):
+    """
+    The lifecycle hooks that AgentCore Runtime runs at fixed points in the
+    runtime's lifecycle.
+    """
+
+    build: BuildLifecycleHooks | None = ...
+    """
+    The hooks that run when you create or update the AgentCore Runtime,
+    before any sessions are created.
     """
 
 @dataclass(kw_only=True)
@@ -15593,6 +16341,14 @@ class SemanticMemoryStrategyInput(_SerdeShape):
     """The namespaceTemplates associated with the semantic memory strategy."""
     memory_record_schema: MemoryRecordSchema | None = ...
     """Schema for metadata on memory records generated by a strategy."""
+    record_expiry_specification: RecordExpirySpecification | None = ...
+    """
+    The record expiry (long-term memory time-to-live) configuration for
+    memory records generated by this strategy. Set
+    `recordExpiryDurationDays` to the number of days after which records
+    expire. If not specified, records generated by this strategy do not
+    expire.
+    """
 
 @dataclass(kw_only=True)
 class SemanticOverrideConfigurationInput(_SerdeShape):
@@ -15835,10 +16591,10 @@ class StartPolicyGenerationInput(_SerdeShape):
     client_token: str | None = ...
     """
     A unique, case-sensitive identifier to ensure the idempotency of the
-    request. The AWS SDK automatically generates this token, so you don't
-    need to provide it in most cases. If you retry a request with the same
-    client token, the service returns the same response without starting a
-    duplicate generation.
+    request. The Amazon Web Services SDK automatically generates this token,
+    so you don't need to provide it in most cases. If you retry a request
+    with the same client token, the service returns the same response
+    without starting a duplicate generation.
     """
 
 @dataclass(kw_only=True)
@@ -15909,6 +16665,17 @@ class StaticRoute(_SerdeShape):
 
     target_name: str
     """The name of the target to route requests to."""
+    model: str | None = ...
+    """
+    The model ID to send to the target. Supported only for inference
+    targets. If you don't specify a model, the gateway sends the model from
+    the original request.
+    """
+    fallback: Fallback | None = ...
+    """
+    The fallback configuration for this route. Supported only for inference
+    targets.
+    """
 
 class Status(UnknownEnumMixin, StrEnum):
     CREATING = "CREATING"
@@ -16187,6 +16954,14 @@ class SummaryMemoryStrategyInput(_SerdeShape):
     """The namespaceTemplates associated with the summary memory strategy."""
     memory_record_schema: MemoryRecordSchema | None = ...
     """Schema for metadata fields on records generated by this strategy."""
+    record_expiry_specification: RecordExpirySpecification | None = ...
+    """
+    The record expiry (long-term memory time-to-live) configuration for
+    memory records generated by this strategy. Set
+    `recordExpiryDurationDays` to the number of days after which records
+    expire. If not specified, records generated by this strategy do not
+    expire.
+    """
 
 @dataclass(kw_only=True)
 class SummaryOverrideConfigurationInput(_SerdeShape):
@@ -16388,12 +17163,23 @@ class TargetSummary(_SerdeShape):
 class TargetTrafficSplitEntry(_SerdeShape):
     """An entry in a target traffic split configuration."""
 
+    target_name: str
+    """The name of the target to route traffic to."""
+    model: str | None = ...
+    """
+    The model ID to send to the target for this variant. Supported only for
+    inference targets. If you don't specify a model, the gateway sends the
+    model from the original request.
+    """
+    fallback: Fallback | None = ...
+    """
+    The fallback configuration for this variant. Supported only for
+    inference targets.
+    """
     name: str
     """The name of this traffic split variant."""
     weight: int
     """The percentage of traffic to route to this variant."""
-    target_name: str
-    """The name of the target to route traffic to."""
     description: str | None = ...
     """The description of this traffic split variant."""
     metadata: dict[str, str] | None = ...
@@ -16816,11 +17602,13 @@ class UpdateAgentRuntimeInput(_SerdeShape):
     """
     protocol_configuration: ProtocolConfiguration | None = ...
     """
-    The protocol configuration for an agent runtime. This structure defines
-    how the agent runtime communicates with clients.
+    The updated protocol configuration for the AgentCore Runtime, including
+    the protocol, port, and path on which the agent server is available.
     """
     lifecycle_configuration: LifecycleConfiguration | None = ...
     """The updated life cycle configuration for the AgentCore Runtime."""
+    hooks_configuration: RuntimeHooksConfiguration | None = ...
+    """The updated lifecycle hooks configuration for the AgentCore Runtime."""
     metadata_configuration: RuntimeMetadataConfiguration | None = ...
     """
     The updated configuration for microVM Metadata Service (MMDS) settings
@@ -16842,6 +17630,19 @@ class UpdateAgentRuntimeInput(_SerdeShape):
     """
     The updated version of the runtime platform to use for the AgentCore
     Runtime.
+    """
+    allowed_ports: list[AllowedPort] | None = ...
+    """
+    The updated additional ports on the AgentCore Runtime that are reachable
+    through the runtime's session URL. Specify one to five non-overlapping
+    entries, each containing either a single port or an inclusive port
+    range. Ports must be between `8000` and `12000`, excluding the reserved
+    port `8443`.
+    """
+    resource_configurations: list[ResourceConfiguration] | None = ...
+    """
+    The updated resource configurations for the AgentCore Runtime. You can
+    specify at most one resource configuration.
     """
     client_token: str | None = ...
     """
@@ -17541,6 +18342,12 @@ class UpdateGatewayInput(_SerdeShape):
     """
     waf_configuration: WafConfiguration | None = ...
     """The updated Amazon Web Services WAF configuration for the gateway."""
+    domain_override: DomainOverride | None = ...
+    """
+    The updated public domain names that the gateway advertises in its OAuth
+    discovery URLs instead of the inbound Host header. Specify this when
+    clients reach the gateway through your own proxy or custom domain.
+    """
 
 @dataclass(kw_only=True)
 class UpdateGatewayOutput(_SerdeShape):
@@ -17608,6 +18415,11 @@ class UpdateGatewayOutput(_SerdeShape):
     """
     waf_configuration: WafConfiguration | None = ...
     """The Amazon Web Services WAF configuration for the gateway."""
+    domain_override: DomainOverride | None = ...
+    """
+    The public domain names that the gateway advertises in its OAuth
+    discovery URLs instead of the inbound Host header.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -17982,7 +18794,7 @@ class UpdateMemoryInput(_SerdeShape):
     """
     A client token is used for keeping track of idempotent requests. It can
     contain a session id which can be around 250 chars, combined with a
-    unique AWS identifier.
+    unique Amazon Web Services identifier.
     """
     memory_id: str | None = ...
     """The unique identifier of the memory to update."""
@@ -17990,8 +18802,8 @@ class UpdateMemoryInput(_SerdeShape):
     """The updated description of the AgentCore Memory resource."""
     event_expiry_duration: int | None = ...
     """
-    The number of days after which memory events will expire, between 7 and
-    365 days.
+    The number of days after which memory events expire, between 7 and 3650
+    days.
     """
     memory_execution_role_arn: str | None = ...
     """
@@ -18780,6 +19592,14 @@ class UserPreferenceMemoryStrategyInput(_SerdeShape):
     """
     memory_record_schema: MemoryRecordSchema | None = ...
     """Schema for metadata fields on records generated by this strategy."""
+    record_expiry_specification: RecordExpirySpecification | None = ...
+    """
+    The record expiry (long-term memory time-to-live) configuration for
+    memory records generated by this strategy. Set
+    `recordExpiryDurationDays` to the number of days after which records
+    expire. If not specified, records generated by this strategy do not
+    expire.
+    """
 
 @dataclass(kw_only=True)
 class UserPreferenceOverrideConfigurationInput(_SerdeShape):
@@ -19360,6 +20180,9 @@ LIST_WORKLOAD_IDENTITIES: APIOperation[
     ListWorkloadIdentitiesInput, ListWorkloadIdentitiesOutput
 ]
 PUT_RESOURCE_POLICY: APIOperation[PutResourcePolicyInput, PutResourcePolicyOutput]
+RESET_TOKEN_VAULT_KEY_MATERIAL: APIOperation[
+    ResetTokenVaultKeyMaterialInput, ResetTokenVaultKeyMaterialOutput
+]
 ROTATE_PAYMENT_CONNECTOR_CREDENTIALS: APIOperation[
     RotatePaymentConnectorCredentialsInput, RotatePaymentConnectorCredentialsOutput
 ]

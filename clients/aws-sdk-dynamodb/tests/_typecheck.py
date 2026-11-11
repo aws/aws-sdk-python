@@ -25,6 +25,14 @@ from aws_sdk_dynamodb.models import (
     BatchWriteItemInput,
     BatchWriteItemOutput,
     BillingModeSummary,
+    BulkOperationBytes,
+    BulkOperationDescription,
+    BulkOperationSummary,
+    BulkOperationTableDetail,
+    BulkOperationUsage,
+    BulkOperationVectorBytes,
+    CancelBulkOperationInput,
+    CancelBulkOperationOutput,
     CancellationReason,
     Capacity,
     Condition,
@@ -61,6 +69,8 @@ from aws_sdk_dynamodb.models import (
     DeleteVectorIndexAction,
     DescribeBackupInput,
     DescribeBackupOutput,
+    DescribeBulkOperationInput,
+    DescribeBulkOperationOutput,
     DescribeContinuousBackupsInput,
     DescribeContinuousBackupsOutput,
     DescribeContributorInsightsInput,
@@ -87,6 +97,7 @@ from aws_sdk_dynamodb.models import (
     DescribeTimeToLiveOutput,
     DisableKinesisStreamingDestinationInput,
     DisableKinesisStreamingDestinationOutput,
+    DisassociateReplicationGroupMemberAction,
     EnableKinesisStreamingConfiguration,
     EnableKinesisStreamingDestinationInput,
     EnableKinesisStreamingDestinationOutput,
@@ -124,6 +135,7 @@ from aws_sdk_dynamodb.models import (
     ImportTableOutput,
     IncrementalExportSpecification,
     InputFormatOptions,
+    InputS3Configuration,
     ItemCollectionMetrics,
     ItemResponse,
     KeySchemaElement,
@@ -131,6 +143,8 @@ from aws_sdk_dynamodb.models import (
     KinesisDataStreamDestination,
     ListBackupsInput,
     ListBackupsOutput,
+    ListBulkOperationsInput,
+    ListBulkOperationsOutput,
     ListContributorInsightsInput,
     ListContributorInsightsOutput,
     ListExportsInput,
@@ -148,6 +162,7 @@ from aws_sdk_dynamodb.models import (
     LocalSecondaryIndexInfo,
     OnDemandThroughput,
     OnDemandThroughputOverride,
+    OutputS3Configuration,
     ParameterizedStatement,
     PointInTimeRecoveryDescription,
     PointInTimeRecoverySpecification,
@@ -193,6 +208,8 @@ from aws_sdk_dynamodb.models import (
     SearchVectorsOutput,
     SourceTableDetails,
     SourceTableFeatureDetails,
+    StartBulkPutItemsInput,
+    StartBulkPutItemsOutput,
     StreamSpecification,
     TableAutoScalingDescription,
     TableClassSummary,
@@ -279,6 +296,14 @@ BatchStatementResponse()
 BatchWriteItemInput()
 BatchWriteItemOutput()
 BillingModeSummary()
+BulkOperationBytes()
+BulkOperationDescription()
+BulkOperationSummary(bulk_operation_arn=_, bulk_operation_status=_, start_time=_)
+BulkOperationTableDetail()
+BulkOperationUsage()
+BulkOperationVectorBytes()
+CancelBulkOperationInput()
+CancelBulkOperationOutput(bulk_operation_arn=_, bulk_operation_status=_)
 CancellationReason()
 Capacity()
 Condition(comparison_operator=_)
@@ -317,6 +342,8 @@ DeleteTableOutput()
 DeleteVectorIndexAction(index_name=_)
 DescribeBackupInput()
 DescribeBackupOutput()
+DescribeBulkOperationInput()
+DescribeBulkOperationOutput(bulk_operation_description=_)
 DescribeContinuousBackupsInput()
 DescribeContinuousBackupsOutput()
 DescribeContributorInsightsInput()
@@ -343,6 +370,7 @@ DescribeTimeToLiveInput()
 DescribeTimeToLiveOutput()
 DisableKinesisStreamingDestinationInput()
 DisableKinesisStreamingDestinationOutput()
+DisassociateReplicationGroupMemberAction(region_name=_, disassociation_mode=_)
 EnableKinesisStreamingConfiguration()
 EnableKinesisStreamingDestinationInput()
 EnableKinesisStreamingDestinationOutput()
@@ -380,6 +408,7 @@ ImportTableInput()
 ImportTableOutput(import_table_description=_)
 IncrementalExportSpecification()
 InputFormatOptions()
+InputS3Configuration(s3_bucket=_, input_format=_)
 ItemCollectionMetrics()
 ItemResponse()
 KeysAndAttributes(keys=_)
@@ -387,6 +416,8 @@ KeySchemaElement(attribute_name=_, key_type=_)
 KinesisDataStreamDestination()
 ListBackupsInput()
 ListBackupsOutput()
+ListBulkOperationsInput()
+ListBulkOperationsOutput()
 ListContributorInsightsInput()
 ListContributorInsightsOutput()
 ListExportsInput()
@@ -404,6 +435,7 @@ LocalSecondaryIndexDescription()
 LocalSecondaryIndexInfo()
 OnDemandThroughput()
 OnDemandThroughputOverride()
+OutputS3Configuration(output_type=_)
 ParameterizedStatement(statement=_)
 PointInTimeRecoveryDescription()
 PointInTimeRecoverySpecification(point_in_time_recovery_enabled=_)
@@ -455,6 +487,8 @@ SourceTableDetails(
 SourceTableFeatureDetails()
 SSEDescription()
 SSESpecification()
+StartBulkPutItemsInput()
+StartBulkPutItemsOutput(bulk_operation_description=_)
 StreamSpecification(stream_enabled=_)
 TableAutoScalingDescription()
 TableClassSummary()

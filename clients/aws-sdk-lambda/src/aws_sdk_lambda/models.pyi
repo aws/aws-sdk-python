@@ -624,6 +624,17 @@ class ChainedInvokeOptions(_SerdeShape):
     """The name or ARN of the Lambda function to invoke."""
     tenant_id: str | None = ...
     """The tenant identifier for the chained invocation."""
+    x_amzn_trace_id: str | None = ...
+    """
+    The X-Ray trace header to use when starting the chained invocation. This
+    parameter is optional. If you omit this value, the child invocation
+    inherits the parent durable execution's trace header.
+
+    Specify this value on the `START` update for the chained invocation
+    operation. For more information about the header format, see [Tracing
+    header](https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader)
+    in the *X-Ray Developer Guide*.
+    """
 
 @dataclass(kw_only=True)
 class ChainedInvokeStartedDetails(_SerdeShape):
@@ -1263,6 +1274,9 @@ class CreateEventSourceMappingInput(_SerdeShape):
     Related setting: For Kinesis, DynamoDB, and Amazon SQS event sources,
     when you set `BatchSize` to a value greater than 10, you must set
     `MaximumBatchingWindowInSeconds` to at least 1.
+
+    Not supported for Kafka event source mappings when `ConsumptionMode` is
+    `Queue`.
     """
     parallelization_factor: int | None = ...
     """
@@ -1275,11 +1289,17 @@ class CreateEventSourceMappingInput(_SerdeShape):
     Amazon Kinesis and Amazon DynamoDB Stream event sources. `AT_TIMESTAMP`
     is supported only for Amazon Kinesis streams, Amazon DocumentDB, Amazon
     MSK, and self-managed Apache Kafka.
+
+    Not supported for Kafka event source mappings when `ConsumptionMode` is
+    `Queue`.
     """
     starting_position_timestamp: datetime | None = ...
     """
     With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to
     start reading. `StartingPositionTimestamp` cannot be in the future.
+
+    Not supported for Kafka event source mappings when `ConsumptionMode` is
+    `Queue`.
     """
     destination_config: DestinationConfig | None = ...
     """
@@ -1304,6 +1324,11 @@ class CreateEventSourceMappingInput(_SerdeShape):
     Discard records after the specified number of retries. The default value
     is infinite (-1). When set to infinite (-1), failed records are retried
     until the record expires.
+
+    For Kafka `Stream` consumption mode, the default is `-1` (infinite
+    retries; capped at 10 when an on-failure destination is configured). For
+    Kafka `Queue` consumption mode, the default is `0`, and if no on-failure
+    destination is configured the Kafka broker performs retries.
     """
     tags: dict[str, str] | None = ...
     """A list of tags to apply to the event source mapping."""
@@ -4171,21 +4196,22 @@ class GetDurableExecutionOutput(_SerdeShape):
     """
     input_payload: str | None = ...
     """
-    The JSON input payload that was provided when the durable execution was
-    started. For asynchronous invocations, this is limited to 256 KB. For
-    synchronous invocations, this can be up to 6 MB.
+    The JSON input payload that you provided when you started the durable
+    execution. Asynchronous invocations support up to 1 MB, and synchronous
+    invocations support up to 6 MB.
     """
     result: str | None = ...
     """
     The JSON result returned by the durable execution if it completed
     successfully. This field is only present when the execution status is
-    `SUCCEEDED`. The result is limited to 256 KB.
+    `SUCCEEDED`. Asynchronous invocations support up to 1 MB, and
+    synchronous invocations support up to 6 MB.
     """
     error: ErrorObject | None = ...
     """
     Error information if the durable execution failed. This field is only
     present when the execution status is `FAILED`, `TIMED_OUT`, or
-    `STOPPED`. The combined size of all error fields is limited to 256 KB.
+    `STOPPED`. The combined size of all error fields is limited to 1 MB.
     """
     start_timestamp: datetime
     """
@@ -5883,6 +5909,10 @@ class _InvokeWithResponseStreamResponseEventDeserializer:
         self, deserializer: ShapeDeserializer
     ) -> InvokeWithResponseStreamResponseEvent: ...
 
+class KafkaEventSourceMappingConsumptionMode(UnknownEnumMixin, StrEnum):
+    STREAM = "Stream"
+    QUEUE = "Queue"
+
 @dataclass(kw_only=True)
 class KafkaSchemaRegistryAccessConfig(_SerdeShape):
     """
@@ -5900,7 +5930,27 @@ class KafkaSchemaRegistryAccessConfig(_SerdeShape):
     """
 
     type: str | None = ...
-    """The type of authentication Lambda uses to access your schema registry."""
+    """
+    The type of authentication Lambda uses to access your schema registry.
+
+    - `BASIC_AUTH` -- The Secrets Manager ARN of your secret key used for
+      basic authentication with your Confluent schema registry.
+
+    - `CLIENT_CERTIFICATE_TLS_AUTH` -- The Secrets Manager ARN of your
+      secret key containing the certificate chain (X.509 PEM), private key
+      (PKCS#8 PEM), and private key password (optional) used for mutual TLS
+      authentication with your Confluent schema registry.
+
+    - `SERVER_ROOT_CA_CERTIFICATE` -- The Secrets Manager ARN of your secret
+      key containing the root CA certificate (X.509 PEM) used for TLS
+      encryption with your Confluent schema registry.
+
+    - `OAUTHBEARER_AUTH` -- The Secrets Manager ARN of your secret key
+      containing the OAuth 2.0 credentials that Lambda uses to acquire an
+      access token for your Confluent schema registry. For the contents of
+      the secret, see [Configuring the OAuth
+      secret](https://docs.aws.amazon.com/lambda/latest/dg/kafka-cluster-auth.html#smaa-auth-oauth-secret).
+    """
     uri: str | None = ...
     """
     The URI of the secret (Secrets Manager secret ARN) to authenticate with
@@ -5911,6 +5961,7 @@ class KafkaSchemaRegistryAuthType(UnknownEnumMixin, StrEnum):
     BASIC_AUTH = "BASIC_AUTH"
     CLIENT_CERTIFICATE_TLS_AUTH = "CLIENT_CERTIFICATE_TLS_AUTH"
     SERVER_ROOT_CA_CERTIFICATE = "SERVER_ROOT_CA_CERTIFICATE"
+    OAUTHBEARER_AUTH = "OAUTHBEARER_AUTH"
 
 @dataclass(kw_only=True)
 class KafkaSchemaRegistryConfig(_SerdeShape):
@@ -6331,8 +6382,9 @@ class ListDurableExecutionsByFunctionInput(_SerdeShape):
     """
     qualifier: str | None = ...
     """
-    The function version or alias. If not specified, lists executions for
-    the $LATEST version.
+    The function version to filter executions by. If you don't specify a
+    qualifier, this operation returns executions across all versions of the
+    Lambda function.
     """
     durable_execution_name: str | None = ...
     """
@@ -7095,12 +7147,14 @@ class OperationUpdate(_SerdeShape):
     """
     The payload for successful operations. The maximum payload size is 6 MB
     for synchronous `EXECUTION` operations (RequestResponse invocationType),
-    1 MB for asynchronous `EXECUTION` (Event invocationType) and
-    `CHAINED_INVOKE` operations, and 256 KB for `CONTEXT`, `STEP`, `WAIT`,
-    and `CALLBACK` operations.
+    and 1 MB for asynchronous `EXECUTION` (Event invocationType),
+    `CHAINED_INVOKE`, `CONTEXT`, `STEP`, `WAIT`, and `CALLBACK` operations.
     """
     error: ErrorObject | None = ...
-    """The error information for failed operations."""
+    """
+    The error information for failed operations. The combined size of all
+    error fields is limited to 1 MB.
+    """
     context_options: ContextOptions | None = ...
     """Options for context operations."""
     step_options: StepOptions | None = ...
@@ -8511,6 +8565,29 @@ class SelfManagedKafkaEventSourceConfig(_SerdeShape):
     """
     schema_registry_config: KafkaSchemaRegistryConfig | None = ...
     """Specific configuration settings for a Kafka schema registry."""
+    consumption_mode: str | None = ...
+    """
+    The mode that Lambda uses to consume records from your self-managed
+    Apache Kafka topic. The default is `Stream`.
+
+    - `Stream` -- Lambda consumes records using a Kafka consumer group and
+      preserves the order of records within each partition. This is the
+      default when you omit `ConsumptionMode`.
+
+    - `Queue` -- Lambda consumes records using a Kafka share group. Multiple
+      consumers can process records from the same partitions concurrently.
+      Queue mode does not preserve per-partition order. Queue mode requires
+      an Apache Kafka cluster running version 4.2 or later with share groups
+      enabled.
+
+    You cannot change `ConsumptionMode` after you create the event source
+    mapping. To use a different consumption mode, create a new event source
+    mapping.
+
+    When `ConsumptionMode` is `Queue`, the `StartingPosition`,
+    `StartingPositionTimestamp`, and `MaximumBatchingWindowInSeconds`
+    parameters are not supported.
+    """
 
 @dataclass(kw_only=True)
 class SendDurableExecutionCallbackFailureInput(_SerdeShape):
@@ -8519,7 +8596,10 @@ class SendDurableExecutionCallbackFailureInput(_SerdeShape):
     callback_id: str | None = ...
     """The unique identifier for the callback operation."""
     error: ErrorObject | None = ...
-    """Error details describing why the callback operation failed."""
+    """
+    Error details describing why the callback operation failed. The combined
+    size of all error fields is limited to 1 MB.
+    """
 
 @dataclass(kw_only=True)
 class SendDurableExecutionCallbackFailureOutput(_SerdeShape):
@@ -8561,7 +8641,7 @@ class SendDurableExecutionCallbackSuccessInput(_SerdeShape):
     result: bytes | None = ...
     """
     The result data from the successful callback operation. Maximum size is
-    256 KB.
+    1 MB.
     """
 
 @dataclass(kw_only=True)
@@ -8791,6 +8871,44 @@ class SourceAccessConfiguration(_SerdeShape):
       Secrets Manager ARN of your secret key containing the root CA
       certificate (X.509 PEM) used for TLS encryption of your Apache Kafka
       brokers.
+
+    - `OAUTHBEARER_AUTH` -- (Self-managed Apache Kafka) The Secrets Manager
+      ARN of your secret key containing the OAuth 2.0 credentials that
+      Lambda uses for SASL/OAUTHBEARER authentication with your Apache Kafka
+      brokers. For the contents of the secret, see [Configuring the OAuth
+      secret](https://docs.aws.amazon.com/lambda/latest/dg/kafka-cluster-auth.html#smaa-auth-oauth-secret).
+
+    - `OAUTHBEARER_SCOPE` -- (Self-managed Apache Kafka) The OAuth 2.0 scope
+      that Lambda requests when it acquires an access token. The `URI` field
+      holds the scope value, not a secret ARN. This type requires
+      `OAUTHBEARER_AUTH`.
+
+    - `OAUTHBEARER_AUDIENCE` -- (Self-managed Apache Kafka) The OAuth 2.0
+      audience that Lambda requests when it acquires an access token. The
+      `URI` field holds the audience value, not a secret ARN. This type
+      requires either `OAUTHBEARER_AUTH` or `IAM_OAUTHBEARER_AUTH`.
+
+    - `OAUTHBEARER_LOGICAL_CLUSTER` -- (Self-managed Apache Kafka) The
+      logical cluster identifier that Lambda sends to a Confluent Cloud
+      broker. The `URI` field holds the identifier, not a secret ARN. This
+      type requires `OAUTHBEARER_AUTH`.
+
+    - `OAUTHBEARER_IDENTITY_POOL` -- (Self-managed Apache Kafka) The
+      identity pool identifier that Lambda sends to a Confluent Cloud
+      broker. The `URI` field holds the identifier, not a secret ARN. This
+      type requires `OAUTHBEARER_AUTH`.
+
+    - `IAM_AUTH` -- (Self-managed Apache Kafka) Authenticate with Identity
+      and Access Management (IAM). Your function's execution role signs
+      each connection, so there is no secret to provide. Omit the `URI`
+      field for this type.
+
+    - `IAM_OAUTHBEARER_AUTH` -- (Self-managed Apache Kafka) Authenticate
+      with an Amazon Web Services web identity token over SASL/OAUTHBEARER.
+      Lambda requests the token for your function's execution role, so
+      there is no secret to provide. Omit the `URI` field for this type.
+      This type requires `OAUTHBEARER_AUDIENCE` and does not support the
+      other `OAUTHBEARER` types.
     """
     uri: str | None = ...
     """
@@ -8807,6 +8925,13 @@ class SourceAccessType(UnknownEnumMixin, StrEnum):
     VIRTUAL_HOST = "VIRTUAL_HOST"
     CLIENT_CERTIFICATE_TLS_AUTH = "CLIENT_CERTIFICATE_TLS_AUTH"
     SERVER_ROOT_CA_CERTIFICATE = "SERVER_ROOT_CA_CERTIFICATE"
+    OAUTHBEARER_AUTH = "OAUTHBEARER_AUTH"
+    OAUTHBEARER_SCOPE = "OAUTHBEARER_SCOPE"
+    OAUTHBEARER_AUDIENCE = "OAUTHBEARER_AUDIENCE"
+    OAUTHBEARER_LOGICAL_CLUSTER = "OAUTHBEARER_LOGICAL_CLUSTER"
+    OAUTHBEARER_IDENTITY_POOL = "OAUTHBEARER_IDENTITY_POOL"
+    IAM_AUTH = "IAM_AUTH"
+    IAM_OAUTHBEARER_AUTH = "IAM_OAUTHBEARER_AUTH"
 
 class State(UnknownEnumMixin, StrEnum):
     PENDING = "Pending"
@@ -8913,7 +9038,10 @@ class StopDurableExecutionInput(_SerdeShape):
     durable_execution_arn: str | None = ...
     """The Amazon Resource Name (ARN) of the durable execution."""
     error: ErrorObject | None = ...
-    """Optional error details explaining why the execution is being stopped."""
+    """
+    Optional error details explaining why the execution is being stopped.
+    The combined size of all error fields is limited to 1 MB.
+    """
 
 @dataclass(kw_only=True)
 class StopDurableExecutionOutput(_SerdeShape):
@@ -9346,6 +9474,9 @@ class UpdateEventSourceMappingInput(_SerdeShape):
     Related setting: For Kinesis, DynamoDB, and Amazon SQS event sources,
     when you set `BatchSize` to a value greater than 10, you must set
     `MaximumBatchingWindowInSeconds` to at least 1.
+
+    Not supported for Kafka event source mappings when `ConsumptionMode` is
+    `Queue`.
     """
     parallelization_factor: int | None = ...
     """
@@ -9375,6 +9506,11 @@ class UpdateEventSourceMappingInput(_SerdeShape):
     Discard records after the specified number of retries. The default value
     is infinite (-1). When set to infinite (-1), failed records are retried
     until the record expires.
+
+    For Kafka `Stream` consumption mode, the default is `-1` (infinite
+    retries; capped at 10 when an on-failure destination is configured). For
+    Kafka `Queue` consumption mode, the default is `0`, and if no on-failure
+    destination is configured the Kafka broker performs retries.
     """
     tumbling_window_in_seconds: int | None = ...
     """

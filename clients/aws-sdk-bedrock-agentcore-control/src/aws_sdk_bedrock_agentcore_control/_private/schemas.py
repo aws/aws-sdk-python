@@ -43,10 +43,37 @@ _tS = "trafficSplit"
 _CBA = "ConfigurationBundleAction"
 _sO = "staticOverride"
 _wO = "weightedOverride"
+_CBM = "CircuitBreakerMode"
+_ENABLED = "ENABLED"
+_sVm = "smithy.api#enumValue"
+_DISABLED = "DISABLED"
+_CBC = "CircuitBreakerConfiguration"
+_mo = "mode"
+_smi = "smithy.api#default"
+_CMI = "ConcreteModelId"
 _TN = "TargetName"
-_smi = "smithy.api#sensitive"
-_SR = "StaticRoute"
+_smit = "smithy.api#sensitive"
+_FE = "FallbackError"
+_CE = "CONNECTION_ERROR"
+_FBT = "FIRST_BYTE_TIMEOUT"
+_UNROUTABLE = "UNROUTABLE"
+_FEa = "FallbackErrors"
+_ESCP = "ErrorStatusCodePattern"
+_ESCPr = "ErrorStatusCodePatterns"
+_FT = "FallbackTriggers"
+_sC = "statusCodes"
+_e = "errors"
+_FTa = "FallbackTarget"
 _tN = "targetName"
+_mod = "model"
+_tO = "triggerOn"
+_fBTM = "firstByteTimeoutMilliseconds"
+_TF = "TargetFallbacks"
+_F = "Fallback"
+_cBi = "circuitBreaker"
+_tF = "targetFallback"
+_SR = "StaticRoute"
+_f = "fallback"
 _TTSE = "TargetTrafficSplitEntry"
 _TTSEa = "TargetTrafficSplitEntries"
 _WR = "WeightedRoute"
@@ -58,7 +85,6 @@ _rTT = "routeToTarget"
 _Ac = "Actions"
 _ATCT = "ActorTokenContentType"
 _NONE = "NONE"
-_sVm = "smithy.api#enumValue"
 _MM = "M2M"
 _AIITJ = "AWS_IAM_ID_TOKEN_JWT"
 _CT = "ClientToken"
@@ -66,7 +92,7 @@ _DI = "DatasetId"
 _SJ = "SensitiveJson"
 _DEL = "DatasetExampleList"
 _IES = "InlineExamplesSource"
-_e = "examples"
+_ex = "examples"
 _SU = "S3Uri"
 _SS = "S3Source"
 _sU = "s3Uri"
@@ -76,7 +102,7 @@ _sS = "s3Source"
 _ADEI = "AddDatasetExamplesInput"
 _sSI = "smithy.synthetic#originalShapeId"
 _cADER = "com.amazonaws.bedrockagentcorecontrol#AddDatasetExamplesRequest"
-_smit = "smithy.api#input"
+_smith = "smithy.api#input"
 _dI = "datasetId"
 _sL = "smithy.api#httpLabel"
 _cT = "clientToken"
@@ -95,13 +121,13 @@ _UF = "UPDATE_FAILED"
 _DF = "DELETE_FAILED"
 _ADEO = "AddDatasetExamplesOutput"
 _cADERo = "com.amazonaws.bedrockagentcorecontrol#AddDatasetExamplesResponse"
-_smith = "smithy.api#output"
+_smithy = "smithy.api#output"
 _dA = "datasetArn"
 _st = "status"
 _aCd = "addedCount"
 _uA = "updatedAt"
 _eI = "exampleIds"
-_CE = "ConflictException"
+_CEo = "ConflictException"
 _ISE = "InternalServerException"
 _se = "server"
 _RNFE = "ResourceNotFoundException"
@@ -124,7 +150,7 @@ _VE = "ValidationException"
 _r = "reason"
 _fL = "fieldList"
 _ADEd = "AddDatasetExamples"
-_smithy = "smithy.api#http"
+_smithya = "smithy.api#http"
 _ACN = "AdditionalClaimName"
 _ACV = "AdditionalClaimValue"
 _AC = "AdditionalClaims"
@@ -216,6 +242,14 @@ _ARAg = "AgentRuntimeArtifact"
 _cC = "containerConfiguration"
 _cCo = "codeConfiguration"
 _ARN = "AgentRuntimeName"
+_Po = "Port"
+_PR = "PortRange"
+_fr = "from"
+_to = "to"
+_AP = "AllowedPort"
+_po = "port"
+_pR = "portRange"
+_APl = "AllowedPorts"
 _AA = "AllowedAudience"
 _AAL = "AllowedAudienceList"
 _ACl = "AllowedClient"
@@ -230,6 +264,17 @@ _WINLT = "WorkloadIdentityNameListType"
 _AWC = "AllowedWorkloadConfiguration"
 _hE = "hostingEnvironments"
 _wI = "workloadIdentities"
+_CBOAI = "CertificateBucketOwnerAccountId"
+_CSU = "CertificateS3Uri"
+_SCC = "S3CertificateConfiguration"
+_u = "uri"
+_bOAI = "bucketOwnerAccountId"
+_CSA = "CertificateSecretArn"
+_SMCC = "SecretsManagerCertificateConfiguration"
+_sA = "secretArn"
+_CCe = "CertificateConfiguration"
+_sM = "secretsManager"
+_CCL = "CertificateConfigurationList"
 _CMOT = "ClaimMatchOperatorType"
 _EQUALS = "EQUALS"
 _CONTAINS = "CONTAINS"
@@ -286,6 +331,7 @@ _aS = "allowedScopes"
 _aSM = "advertisedScopeMapping"
 _cCu = "customClaims"
 _pEO = "privateEndpointOverrides"
+_cCe = "certificateConfigurations"
 _aWC = "allowedWorkloadConfiguration"
 _ACu = "AuthorizerConfiguration"
 _cJWTA = "customJWTAuthorizer"
@@ -313,6 +359,18 @@ _sFAP = "s3FilesAccessPoint"
 _eAP = "efsAccessPoint"
 _cPV = "capacityProviderVolume"
 _FCi = "FilesystemConfigurations"
+_LHP = "LifecycleHookPath"
+_SP = "ServerPort"
+_HPLHA = "HttpPostLifecycleHookAction"
+_pa = "path"
+_LHA = "LifecycleHookAction"
+_hP = "httpPost"
+_LH = "LifecycleHook"
+_ac = "action"
+_BLH = "BuildLifecycleHooks"
+_wa = "warmup"
+_RHC = "RuntimeHooksConfiguration"
+_bu = "build"
 _LC = "LifecycleConfiguration"
 _iRST = "idleRuntimeSessionTimeout"
 _mL = "maxLifetime"
@@ -330,7 +388,8 @@ _NC = "NetworkConfiguration"
 _nM = "networkMode"
 _nMC = "networkModeConfig"
 _PV = "PlatformVersion"
-_SP = "ServerProtocol"
+_SPe = "ServerPath"
+_SPer = "ServerProtocol"
 _MCP = "MCP"
 _HTTP = "HTTP"
 _AA_ = "A2A"
@@ -339,8 +398,11 @@ _PC = "ProtocolConfiguration"
 _sP = "serverProtocol"
 _HN = "HeaderName"
 _RHA = "RequestHeaderAllowlist"
-_RHC = "RequestHeaderConfiguration"
+_RHCe = "RequestHeaderConfiguration"
 _rHA = "requestHeaderAllowlist"
+_RCes = "ResourceConfiguration"
+_mMIMB = "minimumMemoryInMiB"
+_RCeso = "ResourceConfigurations"
 _RA = "RoleArn"
 _CARI = "CreateAgentRuntimeInput"
 _cCARR = "com.amazonaws.bedrockagentcorecontrol#CreateAgentRuntimeRequest"
@@ -352,10 +414,13 @@ _aCu = "authorizerConfiguration"
 _rHC = "requestHeaderConfiguration"
 _pC = "protocolConfiguration"
 _lC = "lifecycleConfiguration"
+_hC = "hooksConfiguration"
 _eV = "environmentVariables"
 _fC = "filesystemConfigurations"
 _cPC = "capacityProviderConfiguration"
 _pV = "platformVersion"
+_aP = "allowedPorts"
+_rC = "resourceConfigurations"
 _ARS = "AgentRuntimeStatus"
 _WIA = "WorkloadIdentityArn"
 _WID = "WorkloadIdentityDetails"
@@ -401,7 +466,7 @@ _ARVSL = "AgentRuntimeVersionSummaryList"
 _SD = "SkillDefinition"
 _SMD = "SkillMdDefinition"
 _ASD = "AgentSkillsDescriptor"
-_sM = "skillMd"
+_sMk = "skillMd"
 _sD = "skillDefinition"
 _AAT = "AllowedAudienceType"
 _HQPN = "HttpQueryParameterName"
@@ -427,13 +492,11 @@ _CPN = "CredentialProviderName"
 _CAKCPI = "CreateApiKeyCredentialProviderInput"
 _cCAKCPR = "com.amazonaws.bedrockagentcorecontrol#CreateApiKeyCredentialProviderRequest"
 _aK = "apiKey"
-_smithya = "smithy.api#default"
 _v_ = ""
 _aKSC = "apiKeySecretConfig"
 _aKSS = "apiKeySecretSource"
 _SAe = "SecretArn"
 _Se = "Secret"
-_sA = "secretArn"
 _CAKCPO = "CreateApiKeyCredentialProviderOutput"
 _cCAKCPRo = (
     "com.amazonaws.bedrockagentcorecontrol#CreateApiKeyCredentialProviderResponse"
@@ -518,7 +581,6 @@ _en = "enabled"
 _TSA = "ToolSecretArn"
 _SML = "SecretsManagerLocation"
 _CL = "CertificateLocation"
-_sMe = "secretsManager"
 _Ce = "Certificate"
 _l = "location"
 _Cer = "Certificates"
@@ -653,7 +715,7 @@ _LP = "LaunchParameters"
 _oS = "operatingSystem"
 _iR = "instanceRequirements"
 _eVp = "ephemeralVolumes"
-_mo = "monitoring"
+_mon = "monitoring"
 _lS = "licenseSpecifications"
 _cRS = "capacityReservationSpecification"
 _sKN = "sshKeyName"
@@ -702,7 +764,7 @@ _QE = "QUOTA_EXCEEDED"
 _THROTTLED = "THROTTLED"
 _ISE_ = "INTERNAL_SERVER_EXCEPTION"
 _GCPO = "GetCapacityProviderOutput"
-_sC = "statusCode"
+_sCt = "statusCode"
 _sRt = "statusReason"
 _GCP = "GetCapacityProvider"
 _LARVBCPI = "ListAgentRuntimeVersionsByCapacityProviderInput"
@@ -801,14 +863,14 @@ _CBSo = "ConfigurationBundleSummary"
 _CBSL = "ConfigurationBundleSummaryList"
 _LCBO = "ListConfigurationBundlesOutput"
 _cLCBRo = "com.amazonaws.bedrockagentcorecontrol#ListConfigurationBundlesResponse"
-_bu = "bundles"
+_bun = "bundles"
 _LCB = "ListConfigurationBundles"
 _VF = "VersionFilter"
 _cBN = "createdByName"
 _lPB = "latestPerBranch"
 _LCBVI = "ListConfigurationBundleVersionsInput"
 _cLCBVR = "com.amazonaws.bedrockagentcorecontrol#ListConfigurationBundleVersionsRequest"
-_f = "filter"
+_fi = "filter"
 _CBVS = "ConfigurationBundleVersionSummary"
 _CBVSL = "ConfigurationBundleVersionSummaryList"
 _LCBVO = "ListConfigurationBundleVersionsOutput"
@@ -993,11 +1055,20 @@ _CSD = "CategoricalScaleDefinition"
 _de = "definition"
 _la = "label"
 _CSDa = "CategoricalScaleDefinitions"
+_EDI = "EvaluationDimensionInstruction"
+_EDN = "EvaluationDimensionName"
 _NSD = "NumericalScaleDefinition"
 _NSDu = "NumericalScaleDefinitions"
-_RS = "RatingScale"
+_DRS = "DimensionRatingScale"
 _nu = "numerical"
 _ca = "categorical"
+_EDv = "EvaluationDimension"
+_dNi = "dimensionName"
+_dIi = "dimensionInstruction"
+_dRS = "dimensionRatingScale"
+_EDva = "EvaluationDimensions"
+_RS = "RatingScale"
+_mD = "multiDimensional"
 _LAAJEC = "LlmAsAJudgeEvaluatorConfig"
 _in = "instructions"
 _rS = "ratingScale"
@@ -1088,7 +1159,7 @@ _Di = "Dimensions"
 _LEi = "LimitEntry"
 _di = "dimensions"
 _req = "requests"
-_to = "tokens"
+_tok = "tokens"
 _conn = "connections"
 _LEim = "LimitEntries"
 _GRLI = "GatewayRateLimitId"
@@ -1139,15 +1210,22 @@ _CJ = "CUSTOM_JWT"
 _AI = "AWS_IAM"
 _AO = "AUTHENTICATE_ONLY"
 _GDa = "GatewayDescription"
+_PDN = "PublicDomainName"
+_PDNL = "PublicDomainNameList"
+_DO = "DomainOverride"
+_dD = "defaultDomain"
+_sN = "smithy.api#jsonName"
+_def = "default"
+_aD = "alternateDomains"
 _ELx = "ExceptionLevel"
 _DEBUG = "DEBUG"
 _IPE = "InterceptorPayloadExclusion"
 _RB = "RESPONSE_BODY"
 _IPES = "InterceptorPayloadExclusionSelector"
-_fi = "field"
+_fie = "field"
 _IPESL = "InterceptorPayloadExclusionSelectorList"
 _IPF = "InterceptorPayloadFilter"
-_ex = "exclude"
+_exc = "exclude"
 _IIC = "InterceptorInputConfiguration"
 _pRH = "passRequestHeaders"
 _pF = "payloadFilter"
@@ -1170,7 +1248,6 @@ _GPEM = "GatewayPolicyEngineMode"
 _LO = "LOG_ONLY"
 _ENFORCE = "ENFORCE"
 _GPEC = "GatewayPolicyEngineConfiguration"
-_mod = "mode"
 _MIc = "McpInstructions"
 _STe = "SearchType"
 _SEMANTIC = "SEMANTIC"
@@ -1185,7 +1262,7 @@ _MCPGC = "MCPGatewayConfiguration"
 _sVu = "supportedVersions"
 _sTe = "searchType"
 _sCe = "sessionConfiguration"
-_sCt = "streamingConfiguration"
+_sCtr = "streamingConfiguration"
 _dMLTP = "disableMcpListToolsPagination"
 _GPC = "GatewayProtocolConfiguration"
 _mc = "mcp"
@@ -1197,6 +1274,7 @@ _aT = "authorizerType"
 _iCnt = "interceptorConfigurations"
 _pEC = "policyEngineConfiguration"
 _eL = "exceptionLevel"
+_dO = "domainOverride"
 _LTC = "LambdaTransformConfiguration"
 _CTC = "CustomTransformConfiguration"
 _GA = "GatewayArn"
@@ -1247,16 +1325,21 @@ _cUGR = "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRequest"
 _UGO = "UpdateGatewayOutput"
 _cUGRo = "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayResponse"
 _UG = "UpdateGateway"
+_MOa = "MatchOperator"
+_SE = "StringEquals"
+_SLt = "StringLike"
+_MPo = "ModelPattern"
+_MME = "MatchModelEntry"
+_op = "operator"
+_MMEa = "MatchModelEntries"
+_MMa = "MatchModels"
+_aO = "anyOf"
 _MPP = "MatchPathPattern"
 _MPPa = "MatchPathPatterns"
 _MPa = "MatchPaths"
-_aO = "anyOf"
 _IPAa = "IamPrincipalArn"
 _PMO = "PrincipalMatchOperator"
-_SE = "StringEquals"
-_SLt = "StringLike"
 _IP = "IamPrincipal"
-_op = "operator"
 _MPE = "MatchPrincipalEntry"
 _iPa = "iamPrincipal"
 _MPEa = "MatchPrincipalEntries"
@@ -1264,6 +1347,7 @@ _MPat = "MatchPrincipals"
 _Co = "Condition"
 _mPa = "matchPrincipals"
 _mPat = "matchPaths"
+_mM = "matchModels"
 _Con = "Conditions"
 _GRD = "GatewayRuleDescription"
 _GRP = "GatewayRulePriority"
@@ -1271,7 +1355,7 @@ _CGRI = "CreateGatewayRuleInput"
 _cCGRR = "com.amazonaws.bedrockagentcorecontrol#CreateGatewayRuleRequest"
 _pri = "priority"
 _cond = "conditions"
-_ac = "actions"
+_act = "actions"
 _GRI = "GatewayRuleId"
 _GRS = "GatewayRuleStatus"
 _SMB = "SystemManagedBlock"
@@ -1306,15 +1390,6 @@ _cUGRR = "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRuleRequest"
 _UGRO = "UpdateGatewayRuleOutput"
 _cUGRRo = "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRuleResponse"
 _UGR = "UpdateGatewayRule"
-_CBOAI = "CertificateBucketOwnerAccountId"
-_CSU = "CertificateS3Uri"
-_SCC = "S3CertificateConfiguration"
-_u = "uri"
-_bOAI = "bucketOwnerAccountId"
-_CSA = "CertificateSecretArn"
-_SMCC = "SecretsManagerCertificateConfiguration"
-_CCe = "CertificateConfiguration"
-_CCL = "CertificateConfigurationList"
 _AKCL = "ApiKeyCredentialLocation"
 _HEADER = "HEADER"
 _QP = "QUERY_PARAMETER"
@@ -1382,7 +1457,7 @@ _CIo = "ConnectorId"
 _HCS = "HttpConnectorSource"
 _cI = "connectorId"
 _HCTC = "HttpConnectorTargetConfiguration"
-_pa = "parameters"
+_par = "parameters"
 _PEa = "PassthroughEndpoint"
 _PPT = "PassthroughProtocolType"
 _INFERENCE = "INFERENCE"
@@ -1416,18 +1491,15 @@ _sep = "separator"
 _v___ = "."
 _MMo = "ModelMapping"
 _pP = "providerPrefix"
-_MPo = "ModelPattern"
 _ME = "ModelEntry"
-_mode = "model"
 _MEo = "ModelEntries"
 _IOP = "InferenceOperationPath"
 _IOC = "InferenceOperationConfiguration"
-_pat = "path"
 _pPr = "providerPath"
-_model = "models"
+_mode = "models"
 _IOCn = "InferenceOperationConfigurations"
 _IPTC = "InferenceProviderTargetConfiguration"
-_mM = "modelMapping"
+_mMo = "modelMapping"
 _ope = "operations"
 _ITC = "InferenceTargetConfiguration"
 _RAM = "RestApiMethod"
@@ -1447,8 +1519,8 @@ _AGTO = "ApiGatewayToolOverride"
 _meth = "method"
 _AGTOp = "ApiGatewayToolOverrides"
 _AGTC = "ApiGatewayToolConfiguration"
-_tO = "toolOverrides"
-_tF = "toolFilters"
+_tOo = "toolOverrides"
+_tFo = "toolFilters"
 _AGTCp = "ApiGatewayTargetConfiguration"
 _rAI = "restApiId"
 _stag = "stage"
@@ -1532,7 +1604,7 @@ _PROVIDER = "PROVIDER"
 _HC = "HTTP_CONNECTOR"
 _TSa = "TargetSummary"
 _lSAa = "lastSynchronizedAt"
-_aD = "authorizationData"
+_aDu = "authorizationData"
 _tT = "targetType"
 _TSar = "TargetSummaries"
 _LGTO = "ListGatewayTargetsOutput"
@@ -1547,7 +1619,7 @@ _cGRPR = "com.amazonaws.bedrockagentcorecontrol#GetResourcePolicyRequest"
 _RPB = "ResourcePolicyBody"
 _GRPO = "GetResourcePolicyOutput"
 _cGRPRo = "com.amazonaws.bedrockagentcorecontrol#GetResourcePolicyResponse"
-_po = "policy"
+_pol = "policy"
 _GRPe = "GetResourcePolicy"
 _TVIT = "TokenVaultIdType"
 _GTVI = "GetTokenVaultInput"
@@ -1642,7 +1714,7 @@ _HACMRCa = "HarnessAgentCoreMemoryRetrievalConfigs"
 _HACMC = "HarnessAgentCoreMemoryConfiguration"
 _aIc = "actorId"
 _mCe = "messagesCount"
-_rC = "retrievalConfig"
+_rCe = "retrievalConfig"
 _HDMC = "HarnessDisabledMemoryConfiguration"
 _HMMST = "HarnessManagedMemoryStrategyType"
 _SUMMARIZATION = "SUMMARIZATION"
@@ -1669,7 +1741,7 @@ _T = "Temperature"
 _TPo = "TopP"
 _HBMC = "HarnessBedrockModelConfig"
 _aF = "apiFormat"
-_aP = "additionalParams"
+_aPd = "additionalParams"
 _AKA = "ApiKeyArn"
 _TKo = "TopK"
 _HGMC = "HarnessGeminiModelConfig"
@@ -1688,7 +1760,7 @@ _lLMC = "liteLlmModelConfig"
 _HASP = "HarnessAwsSkillPath"
 _HASPa = "HarnessAwsSkillPaths"
 _HSASS = "HarnessSkillAwsSkillsSource"
-_path = "paths"
+_pat = "paths"
 _HSGA = "HarnessSkillGitAuth"
 _cAr = "credentialArn"
 _us = "username"
@@ -1722,6 +1794,7 @@ _iS = "inputSchema"
 _HHK = "HttpHeaderKey"
 _HHV = "HttpHeaderValue"
 _HHM = "HttpHeadersMap"
+_HRMOA = "HarnessRemoteMcpOutboundAuth"
 _HRMU = "HarnessRemoteMcpUrl"
 _HRMC = "HarnessRemoteMcpConfig"
 _h = "headers"
@@ -1798,7 +1871,7 @@ _HSarne = "HarnessSummaries"
 _LHO = "ListHarnessesOutput"
 _cLHRo = "com.amazonaws.bedrockagentcorecontrol#ListHarnessesResponse"
 _har = "harnesses"
-_LH = "ListHarnesses"
+_LHi = "ListHarnesses"
 _LHVI = "ListHarnessVersionsInput"
 _cLHVR = "com.amazonaws.bedrockagentcorecontrol#ListHarnessVersionsRequest"
 _HVS = "HarnessVersionSummary"
@@ -1901,10 +1974,16 @@ _uPO = "userPreferenceOverride"
 _eO = "episodicOverride"
 _sMC = "selfManagedConfiguration"
 _Nam = "Name"
+_REA = "RecordExpiryAction"
+_REMOVE = "REMOVE"
+_REDD = "RecordExpiryDurationDays"
+_RES = "RecordExpirySpecification"
+_rEDD = "recordExpiryDurationDays"
 _CMSI = "CustomMemoryStrategyInput"
+_rES = "recordExpirySpecification"
 _ERCI = "EpisodicReflectionConfigurationInput"
 _EMSI = "EpisodicMemoryStrategyInput"
-_rCe = "reflectionConfiguration"
+_rCef = "reflectionConfiguration"
 _SMSI = "SemanticMemoryStrategyInput"
 _SMSIu = "SummaryMemoryStrategyInput"
 _UPMSI = "UserPreferenceMemoryStrategyInput"
@@ -1937,7 +2016,7 @@ _ki = "kinesis"
 _SDRL = "StreamDeliveryResourcesList"
 _SDRt = "StreamDeliveryResources"
 _reso = "resources"
-_CMI = "CreateMemoryInput"
+_CMIr = "CreateMemoryInput"
 _mERA = "memoryExecutionRoleArn"
 _mSe = "memoryStrategies"
 _iK = "indexedKeys"
@@ -2057,7 +2136,7 @@ _RO = "RedditOauth2"
 _ZO = "ZoomOauth2"
 _TO = "TwitchOauth2"
 _SOp = "SpotifyOauth2"
-_DO = "DropboxOauth2"
+_DOr = "DropboxOauth2"
 _NO = "NotionOauth2"
 _HO = "HubspotOauth2"
 _CAO = "CyberArkOauth2"
@@ -2094,6 +2173,10 @@ _OD = "Oauth2Discovery"
 _aSMu = "authorizationServerMetadata"
 _OBOTEGTT = "OnBehalfOfTokenExchangeGrantTypeType"
 _JAG = "JWT_AUTHORIZATION_GRANT"
+_OBOCAM = "OnBehalfOfClientAuthenticationMethod"
+_NC_ = "NO_CLIENT"
+_OBOAC = "OnBehalfOfAuthenticationConfig"
+_cAM = "clientAuthenticationMethod"
 _STco = "ScopeType"
 _SLT = "ScopesListType"
 _TEGTCT = "TokenExchangeGrantTypeConfigType"
@@ -2101,6 +2184,7 @@ _aTCc = "actorTokenContent"
 _aTS = "actorTokenScopes"
 _OBOTECT = "OnBehalfOfTokenExchangeConfigType"
 _tEGTC = "tokenExchangeGrantTypeConfig"
+_oBOAC = "onBehalfOfAuthenticationConfig"
 _KKST = "KmsKeySourceType"
 _PKS = "PrivateKeySource"
 _kKS = "kmsKeySource"
@@ -2116,7 +2200,6 @@ _aPC = "additionalPayloadClaims"
 _COPCI = "CustomOauth2ProviderConfigInput"
 _oD = "oauthDiscovery"
 _oBOTEC = "onBehalfOfTokenExchangeConfig"
-_cAM = "clientAuthenticationMethod"
 _pKJC = "privateKeyJwtConfig"
 _GOPCI = "GithubOauth2ProviderConfigInput"
 _GOPCIo = "GoogleOauth2ProviderConfigInput"
@@ -2194,7 +2277,7 @@ _WEEKLY = "WEEKLY"
 _MONTHLY = "MONTHLY"
 _CFL = "ClusteringFrequencyList"
 _CCl = "ClusteringConfig"
-_fr = "frequencies"
+_fre = "frequencies"
 _LGNP = "LogGroupNamePrefix"
 _LGNPL = "LogGroupNamePrefixList"
 _LGN = "LogGroupName"
@@ -2204,7 +2287,7 @@ _SNL = "ServiceNamesList"
 _CWLIC = "CloudWatchLogsInputConfig"
 _lGN = "logGroupNames"
 _lGNP = "logGroupNamePrefixes"
-_sN = "serviceNames"
+_sNe = "serviceNames"
 _DSC = "DataSourceConfig"
 _cWL = "cloudWatchLogs"
 _ECD = "EvaluationConfigDescription"
@@ -2239,13 +2322,13 @@ _GTOEr = "GreaterThanOrEqual"
 _LTOE = "LESS_THAN_OR_EQUAL"
 _LTOEe = "LessThanOrEqual"
 _Cont = "Contains"
-_NC_ = "NOT_CONTAINS"
+_NC__ = "NOT_CONTAINS"
 _NCo = "NotContains"
 _FV = "FilterValue"
 _sVtr = "stringValue"
 _dVo = "doubleValue"
 _bVo = "booleanValue"
-_F = "Filter"
+_Fi = "Filter"
 _FL = "FilterList"
 _SPa = "SamplingPercentage"
 _SCa = "SamplingConfig"
@@ -2267,8 +2350,6 @@ _oC = "outputConfig"
 _eERA = "evaluationExecutionRoleArn"
 _eOC = "enableOnCreate"
 _OEES = "OnlineEvaluationExecutionStatus"
-_ENABLED = "ENABLED"
-_DISABLED = "DISABLED"
 _OECA = "OnlineEvaluationConfigArn"
 _OECI = "OnlineEvaluationConfigId"
 _OECS = "OnlineEvaluationConfigStatus"
@@ -2565,7 +2646,7 @@ _pGAI = "policyGenerationAssetId"
 _PDo = "PolicyDefinition"
 _ced = "cedar"
 _pG = "policyGeneration"
-_FT = "FindingType"
+_FTi = "FindingType"
 _VALID = "VALID"
 _INVALID = "INVALID"
 _NT_ = "NOT_TRANSLATABLE"
@@ -2573,8 +2654,8 @@ _AA__ = "ALLOW_ALL"
 _AN = "ALLOW_NONE"
 _DA_ = "DENY_ALL"
 _DN_ = "DENY_NONE"
-_Fi = "Finding"
-_Fin = "Findings"
+_Fin = "Finding"
+_Find = "Findings"
 _NLa = "NaturalLanguage"
 _PGAo = "PolicyGenerationAsset"
 _rTF = "rawTextFragment"
@@ -2640,11 +2721,11 @@ _GPS = "GetPolicySummary"
 _LPI = "ListPoliciesInput"
 _cLPR = "com.amazonaws.bedrockagentcorecontrol#ListPoliciesRequest"
 _tRS = "targetResourceScope"
-_Po = "Policy"
-_Pol = "Policies"
+_Pol = "Policy"
+_Poli = "Policies"
 _LPO = "ListPoliciesOutput"
 _cLPRo = "com.amazonaws.bedrockagentcorecontrol#ListPoliciesResponse"
-_pol = "policies"
+_poli = "policies"
 _LPi = "ListPolicies"
 _LPSI = "ListPolicySummariesInput"
 _cLPSR = "com.amazonaws.bedrockagentcorecontrol#ListPolicySummariesRequest"
@@ -2809,6 +2890,11 @@ _cURR = "com.amazonaws.bedrockagentcorecontrol#UpdateRegistryRequest"
 _URO = "UpdateRegistryOutput"
 _cURRo = "com.amazonaws.bedrockagentcorecontrol#UpdateRegistryResponse"
 _UR = "UpdateRegistry"
+_RTVKMI = "ResetTokenVaultKeyMaterialInput"
+_cRTVKMR = "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterialRequest"
+_RTVKMO = "ResetTokenVaultKeyMaterialOutput"
+_cRTVKMRo = "com.amazonaws.bedrockagentcorecontrol#ResetTokenVaultKeyMaterialResponse"
+_RTVKM = "ResetTokenVaultKeyMaterial"
 _CME = "ConcurrentModificationException"
 _STVCMKI = "SetTokenVaultCMKInput"
 _cSTVCMKR = "com.amazonaws.bedrockagentcorecontrol#SetTokenVaultCMKRequest"
@@ -2879,7 +2965,6 @@ _inf = "inference"
 _CGTI = "CreateGatewayTargetInput"
 _cCGTR = "com.amazonaws.bedrockagentcorecontrol#CreateGatewayTargetRequest"
 _tCa = "targetConfiguration"
-_cCe = "certificateConfigurations"
 _CGTO = "CreateGatewayTargetOutput"
 _cCGTRo = "com.amazonaws.bedrockagentcorecontrol#CreateGatewayTargetResponse"
 _pEMR = "privateEndpointManagedResources"
@@ -3005,17 +3090,108 @@ CONFIGURATION_BUNDLE_ACTION: StaticSchema = (
     ((STATIC_OVERRIDE, 0), (WEIGHTED_OVERRIDE, 0)),
 )
 
+CIRCUIT_BREAKER_MODE: StaticSchema = (
+    14,
+    n0,
+    _CBM,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sVm: _ENABLED}), (-1, {_sVm: _DISABLED})),
+)
+
+CIRCUIT_BREAKER_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _CBC,
+    0,
+    (_mo,),
+    ((CIRCUIT_BREAKER_MODE, {_smi: _ENABLED}),),
+)
+
+CONCRETE_MODEL_ID: StaticSchema = (3, n0, _CMI, 0)
+
 TARGET_NAME: StaticSchema = (3, n0, _TN, 4)
 
-STATIC_ROUTE: StaticSchema = (18, n0, _SR, 0, (_tN,), ((TARGET_NAME, 1),))
+FALLBACK_ERROR: StaticSchema = (
+    14,
+    n0,
+    _FE,
+    0,
+    (_CE, _FBT, _UNROUTABLE),
+    ((-1, {_sVm: _CE}), (-1, {_sVm: _FBT}), (-1, {_sVm: _UNROUTABLE})),
+)
+
+FALLBACK_ERRORS: StaticSchema = (16, n0, _FEa, 0, (_mem,), ((FALLBACK_ERROR, 0),))
+
+ERROR_STATUS_CODE_PATTERN: StaticSchema = (3, n0, _ESCP, 0)
+
+ERROR_STATUS_CODE_PATTERNS: StaticSchema = (
+    16,
+    n0,
+    _ESCPr,
+    0,
+    (_mem,),
+    ((ERROR_STATUS_CODE_PATTERN, 0),),
+)
+
+FALLBACK_TRIGGERS: StaticSchema = (
+    18,
+    n0,
+    _FT,
+    0,
+    (_sC, _e),
+    ((ERROR_STATUS_CODE_PATTERNS, 0), (FALLBACK_ERRORS, 0)),
+)
+
+FALLBACK_TARGET: StaticSchema = (
+    18,
+    n0,
+    _FTa,
+    0,
+    (_tN, _mod, _tO, _fBTM),
+    ((TARGET_NAME, 1), (CONCRETE_MODEL_ID, 0), (FALLBACK_TRIGGERS, 0), (7, 0)),
+)
+
+TARGET_FALLBACKS: StaticSchema = (16, n0, _TF, 0, (_mem,), ((FALLBACK_TARGET, 0),))
+
+FALLBACK: StaticSchema = (
+    18,
+    n0,
+    _F,
+    0,
+    (_tO, _fBTM, _cBi, _tF),
+    (
+        (FALLBACK_TRIGGERS, 0),
+        (7, 0),
+        (CIRCUIT_BREAKER_CONFIGURATION, 0),
+        (TARGET_FALLBACKS, 1),
+    ),
+)
+
+STATIC_ROUTE: StaticSchema = (
+    18,
+    n0,
+    _SR,
+    0,
+    (_tN, _mod, _f),
+    ((TARGET_NAME, 1), (CONCRETE_MODEL_ID, 0), (FALLBACK, 0)),
+)
 
 TARGET_TRAFFIC_SPLIT_ENTRY: StaticSchema = (
     18,
     n0,
     _TTSE,
     0,
-    (_n, _w, _tN, _d, _me),
-    ((3, 1), (7, 1), (TARGET_NAME, 1), (3, 0), (TRAFFIC_SPLIT_METADATA_MAP, 0)),
+    (_tN, _mod, _f, _n, _w, _d, _me),
+    (
+        (TARGET_NAME, 1),
+        (CONCRETE_MODEL_ID, 0),
+        (FALLBACK, 0),
+        (3, 1),
+        (7, 1),
+        (3, 0),
+        (TRAFFIC_SPLIT_METADATA_MAP, 0),
+    ),
 )
 
 TARGET_TRAFFIC_SPLIT_ENTRIES: StaticSchema = (
@@ -3078,7 +3254,7 @@ INLINE_EXAMPLES_SOURCE: StaticSchema = (
     n0,
     _IES,
     0,
-    (_e,),
+    (_ex,),
     ((DATASET_EXAMPLE_LIST, 1),),
 )
 
@@ -3099,7 +3275,7 @@ ADD_DATASET_EXAMPLES_INPUT: StaticSchema = (
     18,
     n0,
     _ADEI,
-    {_sSI: _cADER, _smit: None},
+    {_sSI: _cADER, _smith: None},
     (_dI, _cT, _so),
     ((DATASET_ID, 9), (CLIENT_TOKEN, 2), (DATA_SOURCE_TYPE, 1)),
 )
@@ -3131,7 +3307,7 @@ ADD_DATASET_EXAMPLES_OUTPUT: StaticSchema = (
     18,
     n0,
     _ADEO,
-    {_sSI: _cADERo, _smith: None},
+    {_sSI: _cADERo, _smithy: None},
     (_dA, _dI, _st, _aCd, _uA, _eI),
     (
         (DATASET_ARN, 1),
@@ -3146,7 +3322,7 @@ ADD_DATASET_EXAMPLES_OUTPUT: StaticSchema = (
 CONFLICT_EXCEPTION: StaticSchema = (
     18,
     n0,
-    _CE,
+    _CEo,
     {_s: _c, _sE: 409},
     (_m,),
     ((NON_BLANK_STRING, 0),),
@@ -3228,7 +3404,7 @@ ADD_DATASET_EXAMPLES: StaticOperationSchema = (
     n0,
     _ADEd,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "POST", "uri": "/datasets/{datasetId}/examples/add", "code": 202}
         )
     },
@@ -3289,7 +3465,7 @@ CREATE_AGENT_RUNTIME_ENDPOINT_INPUT: StaticSchema = (
     18,
     n0,
     _CAREI,
-    {_sSI: _cCARER, _smit: None},
+    {_sSI: _cCARER, _smith: None},
     (_aRI, _n, _aRV, _d, _cT, _t),
     (
         (AGENT_RUNTIME_ID, 9),
@@ -3328,7 +3504,7 @@ CREATE_AGENT_RUNTIME_ENDPOINT_OUTPUT: StaticSchema = (
     18,
     n0,
     _CAREO,
-    {_sSI: _cCARERo, _smith: None},
+    {_sSI: _cCARERo, _smithy: None},
     (_tV, _aREA, _aRA, _aRI, _eN, _st, _cA),
     (
         (AGENT_RUNTIME_VERSION, 1),
@@ -3346,7 +3522,7 @@ CREATE_AGENT_RUNTIME_ENDPOINT: StaticOperationSchema = (
     n0,
     _CARE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "PUT",
@@ -3371,7 +3547,7 @@ DELETE_AGENT_RUNTIME_ENDPOINT_INPUT: StaticSchema = (
     18,
     n0,
     _DAREI,
-    {_sSI: _cDARER, _smit: None},
+    {_sSI: _cDARER, _smith: None},
     (_aRI, _eN, _cT),
     ((AGENT_RUNTIME_ID, 9), (ENDPOINT_NAME, 9), (CLIENT_TOKEN, {_sQ: _cT, _sT: None})),
 )
@@ -3380,7 +3556,7 @@ DELETE_AGENT_RUNTIME_ENDPOINT_OUTPUT: StaticSchema = (
     18,
     n0,
     _DAREO,
-    {_sSI: _cDARERo, _smith: None},
+    {_sSI: _cDARERo, _smithy: None},
     (_st, _aRI, _eN),
     ((AGENT_RUNTIME_ENDPOINT_STATUS, 1), (AGENT_RUNTIME_ID, 0), (ENDPOINT_NAME, 0)),
 )
@@ -3390,7 +3566,7 @@ DELETE_AGENT_RUNTIME_ENDPOINT: StaticOperationSchema = (
     n0,
     _DARE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "DELETE",
@@ -3413,7 +3589,7 @@ GET_AGENT_RUNTIME_ENDPOINT_INPUT: StaticSchema = (
     18,
     n0,
     _GAREI,
-    {_sSI: _cGARER, _smit: None},
+    {_sSI: _cGARER, _smith: None},
     (_aRI, _eN),
     ((AGENT_RUNTIME_ID, 9), (ENDPOINT_NAME, 9)),
 )
@@ -3424,7 +3600,7 @@ GET_AGENT_RUNTIME_ENDPOINT_OUTPUT: StaticSchema = (
     18,
     n0,
     _GAREO,
-    {_sSI: _cGARERo, _smith: None},
+    {_sSI: _cGARERo, _smithy: None},
     (_lV, _tV, _aREA, _aRA, _d, _st, _cA, _lUA, _fR, _n, _i),
     (
         (AGENT_RUNTIME_VERSION, 0),
@@ -3446,7 +3622,7 @@ GET_AGENT_RUNTIME_ENDPOINT: StaticOperationSchema = (
     n0,
     _GARE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "GET",
@@ -3473,7 +3649,7 @@ LIST_AGENT_RUNTIME_ENDPOINTS_INPUT: StaticSchema = (
     18,
     n0,
     _LAREI,
-    {_sSI: _cLARER, _smit: None},
+    {_sSI: _cLARER, _smith: None},
     (_aRI, _mR, _nT),
     ((AGENT_RUNTIME_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT})),
 )
@@ -3511,7 +3687,7 @@ LIST_AGENT_RUNTIME_ENDPOINTS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LAREO,
-    {_sSI: _cLARERo, _smith: None},
+    {_sSI: _cLARERo, _smithy: None},
     (_rE, _nT),
     ((AGENT_RUNTIME_ENDPOINTS, 1), (NEXT_TOKEN, 0)),
 )
@@ -3521,7 +3697,7 @@ LIST_AGENT_RUNTIME_ENDPOINTS: StaticOperationSchema = (
     n0,
     _LARE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "POST",
@@ -3543,7 +3719,7 @@ UPDATE_AGENT_RUNTIME_ENDPOINT_INPUT: StaticSchema = (
     18,
     n0,
     _UAREI,
-    {_sSI: _cUARER, _smit: None},
+    {_sSI: _cUARER, _smith: None},
     (_aRI, _eN, _aRV, _d, _cT),
     (
         (AGENT_RUNTIME_ID, 9),
@@ -3558,7 +3734,7 @@ UPDATE_AGENT_RUNTIME_ENDPOINT_OUTPUT: StaticSchema = (
     18,
     n0,
     _UAREO,
-    {_sSI: _cUARERo, _smith: None},
+    {_sSI: _cUARERo, _smithy: None},
     (_lV, _tV, _aREA, _aRA, _st, _cA, _lUA),
     (
         (AGENT_RUNTIME_VERSION, 0),
@@ -3576,7 +3752,7 @@ UPDATE_AGENT_RUNTIME_ENDPOINT: StaticOperationSchema = (
     n0,
     _UARE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "PUT",
@@ -3652,6 +3828,14 @@ AGENT_RUNTIME_ARTIFACT: StaticSchema = (
 
 AGENT_RUNTIME_NAME: StaticSchema = (3, n0, _ARN, 0)
 
+PORT: StaticSchema = (7, n0, _Po, 0)
+
+PORT_RANGE: StaticSchema = (18, n0, _PR, 0, (_fr, _to), ((PORT, 1), (PORT, 1)))
+
+ALLOWED_PORT: StaticSchema = (19, n0, _AP, 0, (_po, _pR), ((PORT, 0), (PORT_RANGE, 0)))
+
+ALLOWED_PORTS: StaticSchema = (16, n0, _APl, 0, (_mem,), ((ALLOWED_PORT, 0),))
+
 ALLOWED_AUDIENCE: StaticSchema = (3, n0, _AA, 0)
 
 ALLOWED_AUDIENCE_LIST: StaticSchema = (
@@ -3714,6 +3898,48 @@ ALLOWED_WORKLOAD_CONFIGURATION: StaticSchema = (
     0,
     (_hE, _wI),
     ((HOSTING_ENVIRONMENT_LIST_TYPE, 0), (WORKLOAD_IDENTITY_NAME_LIST_TYPE, 0)),
+)
+
+CERTIFICATE_BUCKET_OWNER_ACCOUNT_ID: StaticSchema = (3, n0, _CBOAI, 0)
+
+CERTIFICATE_S3_URI: StaticSchema = (3, n0, _CSU, 0)
+
+S3_CERTIFICATE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SCC,
+    0,
+    (_u, _bOAI),
+    ((CERTIFICATE_S3_URI, 1), (CERTIFICATE_BUCKET_OWNER_ACCOUNT_ID, 0)),
+)
+
+CERTIFICATE_SECRET_ARN: StaticSchema = (3, n0, _CSA, 0)
+
+SECRETS_MANAGER_CERTIFICATE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SMCC,
+    0,
+    (_sA,),
+    ((CERTIFICATE_SECRET_ARN, 1),),
+)
+
+CERTIFICATE_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _CCe,
+    0,
+    (_s_, _sM),
+    ((S3_CERTIFICATE_CONFIGURATION, 0), (SECRETS_MANAGER_CERTIFICATE_CONFIGURATION, 0)),
+)
+
+CERTIFICATE_CONFIGURATION_LIST: StaticSchema = (
+    16,
+    n0,
+    _CCL,
+    0,
+    (_mem,),
+    ((CERTIFICATE_CONFIGURATION, 0),),
 )
 
 CLAIM_MATCH_OPERATOR_TYPE: StaticSchema = (
@@ -3878,7 +4104,7 @@ CUSTOM_JWT_AUTHORIZER_CONFIGURATION: StaticSchema = (
     n0,
     _CJWTAC,
     0,
-    (_dU, _aA, _aCl, _aS, _aSM, _cCu, _pE, _pEO, _aWC),
+    (_dU, _aA, _aCl, _aS, _aSM, _cCu, _pE, _pEO, _cCe, _aWC),
     (
         (DISCOVERY_URL, 1),
         (ALLOWED_AUDIENCE_LIST, 0),
@@ -3888,6 +4114,7 @@ CUSTOM_JWT_AUTHORIZER_CONFIGURATION: StaticSchema = (
         (CUSTOM_CLAIM_VALIDATIONS_TYPE, 0),
         (PRIVATE_ENDPOINT, 0),
         (PRIVATE_ENDPOINT_OVERRIDES, 0),
+        (CERTIFICATE_CONFIGURATION_LIST, 0),
         (ALLOWED_WORKLOAD_CONFIGURATION, 0),
     ),
 )
@@ -3994,6 +4221,41 @@ FILESYSTEM_CONFIGURATIONS: StaticSchema = (
     ((FILESYSTEM_CONFIGURATION, 0),),
 )
 
+LIFECYCLE_HOOK_PATH: StaticSchema = (3, n0, _LHP, 0)
+
+SERVER_PORT: StaticSchema = (7, n0, _SP, 0)
+
+HTTP_POST_LIFECYCLE_HOOK_ACTION: StaticSchema = (
+    18,
+    n0,
+    _HPLHA,
+    0,
+    (_pa, _po),
+    ((LIFECYCLE_HOOK_PATH, 1), (SERVER_PORT, 0)),
+)
+
+LIFECYCLE_HOOK_ACTION: StaticSchema = (
+    19,
+    n0,
+    _LHA,
+    0,
+    (_hP,),
+    ((HTTP_POST_LIFECYCLE_HOOK_ACTION, 0),),
+)
+
+LIFECYCLE_HOOK: StaticSchema = (18, n0, _LH, 0, (_ac,), ((LIFECYCLE_HOOK_ACTION, 1),))
+
+BUILD_LIFECYCLE_HOOKS: StaticSchema = (18, n0, _BLH, 0, (_wa,), ((LIFECYCLE_HOOK, 0),))
+
+RUNTIME_HOOKS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _RHC,
+    0,
+    (_bu,),
+    ((BUILD_LIFECYCLE_HOOKS, 0),),
+)
+
 LIFECYCLE_CONFIGURATION: StaticSchema = (18, n0, _LC, 0, (_iRST, _mL), ((7, 0), (7, 0)))
 
 NETWORK_MODE: StaticSchema = (
@@ -4031,16 +4293,25 @@ NETWORK_CONFIGURATION: StaticSchema = (
 
 PLATFORM_VERSION: StaticSchema = (3, n0, _PV, 0)
 
+SERVER_PATH: StaticSchema = (3, n0, _SPe, 0)
+
 SERVER_PROTOCOL: StaticSchema = (
     14,
     n0,
-    _SP,
+    _SPer,
     0,
     (_MCP, _HTTP, _AA_, _AGUI),
     ((-1, {_sVm: _MCP}), (-1, {_sVm: _HTTP}), (-1, {_sVm: _AA_}), (-1, {_sVm: _AGUI})),
 )
 
-PROTOCOL_CONFIGURATION: StaticSchema = (18, n0, _PC, 0, (_sP,), ((SERVER_PROTOCOL, 1),))
+PROTOCOL_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _PC,
+    0,
+    (_sP, _po, _pa),
+    ((SERVER_PROTOCOL, 1), (SERVER_PORT, 0), (SERVER_PATH, 0)),
+)
 
 HEADER_NAME: StaticSchema = (3, n0, _HN, 0)
 
@@ -4049,10 +4320,21 @@ REQUEST_HEADER_ALLOWLIST: StaticSchema = (16, n0, _RHA, 0, (_mem,), ((HEADER_NAM
 REQUEST_HEADER_CONFIGURATION: StaticSchema = (
     19,
     n0,
-    _RHC,
+    _RHCe,
     0,
     (_rHA,),
     ((REQUEST_HEADER_ALLOWLIST, 0),),
+)
+
+RESOURCE_CONFIGURATION: StaticSchema = (18, n0, _RCes, 0, (_mMIMB,), ((7, 1),))
+
+RESOURCE_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _RCeso,
+    0,
+    (_mem,),
+    ((RESOURCE_CONFIGURATION, 0),),
 )
 
 ROLE_ARN: StaticSchema = (3, n0, _RA, 0)
@@ -4061,8 +4343,27 @@ CREATE_AGENT_RUNTIME_INPUT: StaticSchema = (
     18,
     n0,
     _CARI,
-    {_sSI: _cCARR, _smit: None},
-    (_aRN, _aRAg, _rA, _nC, _cT, _d, _aCu, _rHC, _pC, _lC, _eV, _fC, _cPC, _t, _pV),
+    {_sSI: _cCARR, _smith: None},
+    (
+        _aRN,
+        _aRAg,
+        _rA,
+        _nC,
+        _cT,
+        _d,
+        _aCu,
+        _rHC,
+        _pC,
+        _lC,
+        _hC,
+        _eV,
+        _fC,
+        _cPC,
+        _t,
+        _pV,
+        _aP,
+        _rC,
+    ),
     (
         (AGENT_RUNTIME_NAME, 1),
         (AGENT_RUNTIME_ARTIFACT, 1),
@@ -4074,11 +4375,14 @@ CREATE_AGENT_RUNTIME_INPUT: StaticSchema = (
         (REQUEST_HEADER_CONFIGURATION, 0),
         (PROTOCOL_CONFIGURATION, 0),
         (LIFECYCLE_CONFIGURATION, 0),
+        (RUNTIME_HOOKS_CONFIGURATION, 0),
         (ENVIRONMENT_VARIABLES_MAP, 0),
         (FILESYSTEM_CONFIGURATIONS, 0),
         (CAPACITY_PROVIDER_CONFIGURATION, 0),
         (TAGS_MAP, 0),
         (PLATFORM_VERSION, 0),
+        (ALLOWED_PORTS, 0),
+        (RESOURCE_CONFIGURATIONS, 0),
     ),
 )
 
@@ -4114,7 +4418,7 @@ CREATE_AGENT_RUNTIME_OUTPUT: StaticSchema = (
     18,
     n0,
     _CARO,
-    {_sSI: _cCARRo, _smith: None},
+    {_sSI: _cCARRo, _smithy: None},
     (_aRA, _wID, _aRI, _aRV, _cA, _st),
     (
         (AGENT_RUNTIME_ARN, 1),
@@ -4130,7 +4434,7 @@ CREATE_AGENT_RUNTIME: StaticOperationSchema = (
     23,
     n0,
     _CAR,
-    {_smithy: MappingProxyType({"code": 202, "method": "PUT", "uri": "/runtimes/"})},
+    {_smithya: MappingProxyType({"code": 202, "method": "PUT", "uri": "/runtimes/"})},
     CREATE_AGENT_RUNTIME_INPUT,
     CREATE_AGENT_RUNTIME_OUTPUT,
     (
@@ -4147,7 +4451,7 @@ DELETE_AGENT_RUNTIME_INPUT: StaticSchema = (
     18,
     n0,
     _DARI,
-    {_sSI: _cDARR, _smit: None},
+    {_sSI: _cDARR, _smith: None},
     (_aRI, _aRV, _cT),
     (
         (AGENT_RUNTIME_ID, 9),
@@ -4160,7 +4464,7 @@ DELETE_AGENT_RUNTIME_OUTPUT: StaticSchema = (
     18,
     n0,
     _DARO,
-    {_sSI: _cDARRo, _smith: None},
+    {_sSI: _cDARRo, _smithy: None},
     (_st, _aRI, _aRV),
     ((AGENT_RUNTIME_STATUS, 1), (AGENT_RUNTIME_ID, 0), (AGENT_RUNTIME_VERSION, 0)),
 )
@@ -4170,7 +4474,7 @@ DELETE_AGENT_RUNTIME: StaticOperationSchema = (
     n0,
     _DAR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "DELETE", "uri": "/runtimes/{agentRuntimeId}/"}
         )
     },
@@ -4189,7 +4493,7 @@ GET_AGENT_RUNTIME_INPUT: StaticSchema = (
     18,
     n0,
     _GARI,
-    {_sSI: _cGARR, _smit: None},
+    {_sSI: _cGARR, _smith: None},
     (_aRI, _aRV),
     ((AGENT_RUNTIME_ID, 9), (AGENT_RUNTIME_VERSION, {_sQ: _ve})),
 )
@@ -4200,7 +4504,7 @@ GET_AGENT_RUNTIME_OUTPUT: StaticSchema = (
     18,
     n0,
     _GARO,
-    {_sSI: _cGARRo, _smith: None},
+    {_sSI: _cGARRo, _smithy: None},
     (
         _aRA,
         _aRN,
@@ -4212,6 +4516,7 @@ GET_AGENT_RUNTIME_OUTPUT: StaticSchema = (
         _nC,
         _st,
         _lC,
+        _hC,
         _fR,
         _d,
         _wID,
@@ -4224,6 +4529,8 @@ GET_AGENT_RUNTIME_OUTPUT: StaticSchema = (
         _fC,
         _cPC,
         _pV,
+        _aP,
+        _rC,
     ),
     (
         (AGENT_RUNTIME_ARN, 1),
@@ -4236,6 +4543,7 @@ GET_AGENT_RUNTIME_OUTPUT: StaticSchema = (
         (NETWORK_CONFIGURATION, 0),
         (AGENT_RUNTIME_STATUS, 1),
         (LIFECYCLE_CONFIGURATION, 1),
+        (RUNTIME_HOOKS_CONFIGURATION, 0),
         (3, 0),
         (DESCRIPTION, 0),
         (WORKLOAD_IDENTITY_DETAILS, 0),
@@ -4248,6 +4556,8 @@ GET_AGENT_RUNTIME_OUTPUT: StaticSchema = (
         (FILESYSTEM_CONFIGURATIONS, 0),
         (CAPACITY_PROVIDER_CONFIGURATION, 0),
         (PLATFORM_VERSION, 0),
+        (ALLOWED_PORTS, 0),
+        (RESOURCE_CONFIGURATIONS, 0),
     ),
 )
 
@@ -4256,7 +4566,7 @@ GET_AGENT_RUNTIME: StaticOperationSchema = (
     n0,
     _GAR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "GET", "uri": "/runtimes/{agentRuntimeId}/"}
         )
     },
@@ -4275,7 +4585,7 @@ LIST_AGENT_RUNTIMES_INPUT: StaticSchema = (
     18,
     n0,
     _LARI,
-    {_sSI: _cLARR, _smit: None},
+    {_sSI: _cLARR, _smith: None},
     (_mR, _nT),
     ((MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT})),
 )
@@ -4303,7 +4613,7 @@ LIST_AGENT_RUNTIMES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LARO,
-    {_sSI: _cLARRo, _smith: None},
+    {_sSI: _cLARRo, _smithy: None},
     (_aR, _nT),
     ((AGENT_RUNTIMES, 1), (NEXT_TOKEN, 0)),
 )
@@ -4312,7 +4622,7 @@ LIST_AGENT_RUNTIMES: StaticOperationSchema = (
     23,
     n0,
     _LAR,
-    {_smithy: MappingProxyType({"code": 200, "method": "POST", "uri": "/runtimes/"})},
+    {_smithya: MappingProxyType({"code": 200, "method": "POST", "uri": "/runtimes/"})},
     LIST_AGENT_RUNTIMES_INPUT,
     LIST_AGENT_RUNTIMES_OUTPUT,
     (
@@ -4327,7 +4637,7 @@ LIST_AGENT_RUNTIME_VERSIONS_INPUT: StaticSchema = (
     18,
     n0,
     _LARVI,
-    {_sSI: _cLARVR, _smit: None},
+    {_sSI: _cLARVR, _smith: None},
     (_aRI, _mR, _nT),
     ((AGENT_RUNTIME_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT})),
 )
@@ -4336,7 +4646,7 @@ LIST_AGENT_RUNTIME_VERSIONS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LARVO,
-    {_sSI: _cLARVRo, _smith: None},
+    {_sSI: _cLARVRo, _smithy: None},
     (_aR, _nT),
     ((AGENT_RUNTIMES, 1), (NEXT_TOKEN, 0)),
 )
@@ -4346,7 +4656,7 @@ LIST_AGENT_RUNTIME_VERSIONS: StaticOperationSchema = (
     n0,
     _LARV,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "POST",
@@ -4369,8 +4679,27 @@ UPDATE_AGENT_RUNTIME_INPUT: StaticSchema = (
     18,
     n0,
     _UARI,
-    {_sSI: _cUARR, _smit: None},
-    (_aRI, _aRAg, _rA, _nC, _d, _aCu, _rHC, _pC, _lC, _mC, _eV, _fC, _cPC, _pV, _cT),
+    {_sSI: _cUARR, _smith: None},
+    (
+        _aRI,
+        _aRAg,
+        _rA,
+        _nC,
+        _d,
+        _aCu,
+        _rHC,
+        _pC,
+        _lC,
+        _hC,
+        _mC,
+        _eV,
+        _fC,
+        _cPC,
+        _pV,
+        _aP,
+        _rC,
+        _cT,
+    ),
     (
         (AGENT_RUNTIME_ID, 9),
         (AGENT_RUNTIME_ARTIFACT, 1),
@@ -4381,11 +4710,14 @@ UPDATE_AGENT_RUNTIME_INPUT: StaticSchema = (
         (REQUEST_HEADER_CONFIGURATION, 0),
         (PROTOCOL_CONFIGURATION, 0),
         (LIFECYCLE_CONFIGURATION, 0),
+        (RUNTIME_HOOKS_CONFIGURATION, 0),
         (RUNTIME_METADATA_CONFIGURATION, 0),
         (ENVIRONMENT_VARIABLES_MAP, 0),
         (FILESYSTEM_CONFIGURATIONS, 0),
         (CAPACITY_PROVIDER_CONFIGURATION, 0),
         (PLATFORM_VERSION, 0),
+        (ALLOWED_PORTS, 0),
+        (RESOURCE_CONFIGURATIONS, 0),
         (CLIENT_TOKEN, 2),
     ),
 )
@@ -4394,7 +4726,7 @@ UPDATE_AGENT_RUNTIME_OUTPUT: StaticSchema = (
     18,
     n0,
     _UARO,
-    {_sSI: _cUARRo, _smith: None},
+    {_sSI: _cUARRo, _smithy: None},
     (_aRA, _aRI, _wID, _aRV, _cA, _lUA, _st),
     (
         (AGENT_RUNTIME_ARN, 1),
@@ -4412,7 +4744,7 @@ UPDATE_AGENT_RUNTIME: StaticOperationSchema = (
     n0,
     _UAR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "PUT", "uri": "/runtimes/{agentRuntimeId}/"}
         )
     },
@@ -4463,7 +4795,7 @@ AGENT_SKILLS_DESCRIPTOR: StaticSchema = (
     n0,
     _ASD,
     0,
-    (_sM, _sD),
+    (_sMk, _sD),
     ((SKILL_MD_DEFINITION, 0), (SKILL_DEFINITION, 0)),
 )
 
@@ -4554,11 +4886,11 @@ CREATE_API_KEY_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _CAKCPI,
-    {_sSI: _cCAKCPR, _smit: None},
+    {_sSI: _cCAKCPR, _smith: None},
     (_n, _aK, _aKSC, _aKSS, _t),
     (
         (CREDENTIAL_PROVIDER_NAME, 1),
-        (DEFAULT_API_KEY_TYPE, {_smithya: _v_}),
+        (DEFAULT_API_KEY_TYPE, {_smi: _v_}),
         (SECRET_REFERENCE, 0),
         (SECRET_SOURCE_TYPE, 0),
         (TAGS_MAP, 0),
@@ -4573,7 +4905,7 @@ CREATE_API_KEY_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _CAKCPO,
-    {_sSI: _cCAKCPRo, _smith: None},
+    {_sSI: _cCAKCPRo, _smithy: None},
     (_aKSA, _aKSJK, _aKSS, _n, _cPAr),
     (
         (SECRET, 1),
@@ -4611,7 +4943,7 @@ CREATE_API_KEY_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _CAKCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 201,
                 "uri": "/identities/CreateApiKeyCredentialProvider",
@@ -4640,7 +4972,7 @@ DELETE_API_KEY_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _DAKCPI,
-    {_sSI: _cDAKCPR, _smit: None},
+    {_sSI: _cDAKCPR, _smith: None},
     (_n,),
     ((CREDENTIAL_PROVIDER_NAME, 1),),
 )
@@ -4649,7 +4981,7 @@ DELETE_API_KEY_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _DAKCPO,
-    {_sSI: _cDAKCPRo, _smith: None},
+    {_sSI: _cDAKCPRo, _smithy: None},
 )
 
 DELETE_API_KEY_CREDENTIAL_PROVIDER: StaticOperationSchema = (
@@ -4657,7 +4989,7 @@ DELETE_API_KEY_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _DAKCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 204,
                 "uri": "/identities/DeleteApiKeyCredentialProvider",
@@ -4681,7 +5013,7 @@ GET_API_KEY_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _GAKCPI,
-    {_sSI: _cGAKCPR, _smit: None},
+    {_sSI: _cGAKCPR, _smith: None},
     (_n,),
     ((CREDENTIAL_PROVIDER_NAME, 1),),
 )
@@ -4690,7 +5022,7 @@ GET_API_KEY_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _GAKCPO,
-    {_sSI: _cGAKCPRo, _smith: None},
+    {_sSI: _cGAKCPRo, _smithy: None},
     (_aKSA, _aKSJK, _aKSS, _n, _cPAr, _cTr, _lUT),
     (
         (SECRET, 1),
@@ -4708,7 +5040,7 @@ GET_API_KEY_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _GAKCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/GetApiKeyCredentialProvider", "method": "POST"}
         )
     },
@@ -4729,9 +5061,9 @@ LIST_API_KEY_CREDENTIAL_PROVIDERS_INPUT: StaticSchema = (
     18,
     n0,
     _LAKCPI,
-    {_sSI: _cLAKCPR, _smit: None},
+    {_sSI: _cLAKCPR, _smith: None},
     (_nT, _mR),
-    ((3, 0), (MAX_RESULTS, {_smithya: 10})),
+    ((3, 0), (MAX_RESULTS, {_smi: 10})),
 )
 
 API_KEY_CREDENTIAL_PROVIDER_ITEM: StaticSchema = (
@@ -4761,7 +5093,7 @@ LIST_API_KEY_CREDENTIAL_PROVIDERS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LAKCPO,
-    {_sSI: _cLAKCPRo, _smith: None},
+    {_sSI: _cLAKCPRo, _smithy: None},
     (_cP, _nT),
     ((API_KEY_CREDENTIAL_PROVIDERS, 1), (3, 0)),
 )
@@ -4771,7 +5103,7 @@ LIST_API_KEY_CREDENTIAL_PROVIDERS: StaticOperationSchema = (
     n0,
     _LAKCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/ListApiKeyCredentialProviders", "method": "POST"}
         )
     },
@@ -4791,11 +5123,11 @@ UPDATE_API_KEY_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _UAKCPI,
-    {_sSI: _cUAKCPR, _smit: None},
+    {_sSI: _cUAKCPR, _smith: None},
     (_n, _aK, _aKSC, _aKSS),
     (
         (CREDENTIAL_PROVIDER_NAME, 1),
-        (DEFAULT_API_KEY_TYPE, {_smithya: _v_}),
+        (DEFAULT_API_KEY_TYPE, {_smi: _v_}),
         (SECRET_REFERENCE, 0),
         (SECRET_SOURCE_TYPE, 0),
     ),
@@ -4805,7 +5137,7 @@ UPDATE_API_KEY_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _UAKCPO,
-    {_sSI: _cUAKCPRo, _smith: None},
+    {_sSI: _cUAKCPRo, _smithy: None},
     (_aKSA, _aKSJK, _aKSS, _n, _cPAr, _cTr, _lUT),
     (
         (SECRET, 1),
@@ -4823,7 +5155,7 @@ UPDATE_API_KEY_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _UAKCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/UpdateApiKeyCredentialProvider", "method": "POST"}
         )
     },
@@ -4851,7 +5183,7 @@ CREATE_BROWSER_PROFILE_INPUT: StaticSchema = (
     18,
     n0,
     _CBPI,
-    {_sSI: _cCBPR, _smit: None},
+    {_sSI: _cCBPR, _smith: None},
     (_n, _d, _cT, _t),
     ((BROWSER_PROFILE_NAME, 1), (DESCRIPTION, 0), (CLIENT_TOKEN, 2), (TAGS_MAP, 0)),
 )
@@ -4876,7 +5208,7 @@ CREATE_BROWSER_PROFILE_OUTPUT: StaticSchema = (
     18,
     n0,
     _CBPO,
-    {_sSI: _cCBPRo, _smith: None},
+    {_sSI: _cCBPRo, _smithy: None},
     (_pI, _pA, _cA, _st),
     (
         (BROWSER_PROFILE_ID, 1),
@@ -4891,7 +5223,7 @@ CREATE_BROWSER_PROFILE: StaticOperationSchema = (
     n0,
     _CBP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "PUT", "uri": "/browser-profiles"}
         )
     },
@@ -4911,7 +5243,7 @@ DELETE_BROWSER_PROFILE_INPUT: StaticSchema = (
     18,
     n0,
     _DBPI,
-    {_sSI: _cDBPR, _smit: None},
+    {_sSI: _cDBPR, _smith: None},
     (_pI, _cT),
     ((BROWSER_PROFILE_ID, 9), (CLIENT_TOKEN, {_sQ: _cT, _sT: None})),
 )
@@ -4920,7 +5252,7 @@ DELETE_BROWSER_PROFILE_OUTPUT: StaticSchema = (
     18,
     n0,
     _DBPO,
-    {_sSI: _cDBPRo, _smith: None},
+    {_sSI: _cDBPRo, _smithy: None},
     (_pI, _pA, _st, _lUA, _lSA),
     (
         (BROWSER_PROFILE_ID, 1),
@@ -4936,7 +5268,7 @@ DELETE_BROWSER_PROFILE: StaticOperationSchema = (
     n0,
     _DBP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "DELETE", "uri": "/browser-profiles/{profileId}"}
         )
     },
@@ -4956,7 +5288,7 @@ GET_BROWSER_PROFILE_INPUT: StaticSchema = (
     18,
     n0,
     _GBPI,
-    {_sSI: _cGBPR, _smit: None},
+    {_sSI: _cGBPR, _smith: None},
     (_pI,),
     ((BROWSER_PROFILE_ID, 9),),
 )
@@ -4969,7 +5301,7 @@ GET_BROWSER_PROFILE_OUTPUT: StaticSchema = (
     18,
     n0,
     _GBPO,
-    {_sSI: _cGBPRo, _smith: None},
+    {_sSI: _cGBPRo, _smithy: None},
     (_pI, _pA, _n, _d, _st, _cA, _lUA, _lSA, _lSBSI, _lSBI),
     (
         (BROWSER_PROFILE_ID, 1),
@@ -4990,7 +5322,7 @@ GET_BROWSER_PROFILE: StaticOperationSchema = (
     n0,
     _GBP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "GET", "uri": "/browser-profiles/{profileId}"}
         )
     },
@@ -5009,7 +5341,7 @@ LIST_BROWSER_PROFILES_INPUT: StaticSchema = (
     18,
     n0,
     _LBPI,
-    {_sSI: _cLBPR, _smit: None},
+    {_sSI: _cLBPR, _smith: None},
     (_mR, _nT, _n),
     ((MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT}), (BROWSER_PROFILE_NAME, 0)),
 )
@@ -5047,7 +5379,7 @@ LIST_BROWSER_PROFILES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LBPO,
-    {_sSI: _cLBPRo, _smith: None},
+    {_sSI: _cLBPRo, _smithy: None},
     (_pS, _nT),
     ((BROWSER_PROFILE_SUMMARIES, 1), (NEXT_TOKEN, 0)),
 )
@@ -5057,7 +5389,7 @@ LIST_BROWSER_PROFILES: StaticOperationSchema = (
     n0,
     _LBP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "POST", "uri": "/browser-profiles"}
         )
     },
@@ -5077,7 +5409,7 @@ BROWSER_SIGNING_CONFIG_INPUT: StaticSchema = (
     _BSCI,
     0,
     (_en,),
-    ((2, {_smithya: False, _sm: None}),),
+    ((2, {_smi: False, _sm: None}),),
 )
 
 TOOL_SECRET_ARN: StaticSchema = (3, n0, _TSA, 0)
@@ -5096,7 +5428,7 @@ CERTIFICATE_LOCATION: StaticSchema = (
     n0,
     _CL,
     0,
-    (_sMe,),
+    (_sM,),
     ((SECRETS_MANAGER_LOCATION, 0),),
 )
 
@@ -5190,7 +5522,7 @@ BROWSER_NETWORK_CONFIGURATION: StaticSchema = (
     _BNC,
     0,
     (_nM, _vC),
-    ((BROWSER_NETWORK_MODE, {_smithya: _PUBLIC, _sm: None}), (VPC_CONFIG, 0)),
+    ((BROWSER_NETWORK_MODE, {_smi: _PUBLIC, _sm: None}), (VPC_CONFIG, 0)),
 )
 
 RECORDING_CONFIG: StaticSchema = (
@@ -5199,14 +5531,14 @@ RECORDING_CONFIG: StaticSchema = (
     _RCec,
     0,
     (_en, _sLo),
-    ((2, {_smithya: False}), (S3_LOCATION, 0)),
+    ((2, {_smi: False}), (S3_LOCATION, 0)),
 )
 
 CREATE_BROWSER_INPUT: StaticSchema = (
     18,
     n0,
     _CBI,
-    {_sSI: _cCBR, _smit: None},
+    {_sSI: _cCBR, _smith: None},
     (_n, _d, _eRA, _nC, _re, _bS, _ePn, _ce, _fC, _cT, _t),
     (
         (SANDBOX_NAME, 1),
@@ -5245,7 +5577,7 @@ CREATE_BROWSER_OUTPUT: StaticSchema = (
     18,
     n0,
     _CBO,
-    {_sSI: _cCBRo, _smith: None},
+    {_sSI: _cCBRo, _smithy: None},
     (_bI, _bAr, _cA, _st),
     ((BROWSER_ID, 1), (BROWSER_ARN, 1), (DATE_TIMESTAMP, 1), (BROWSER_STATUS, 1)),
 )
@@ -5254,7 +5586,7 @@ CREATE_BROWSER: StaticOperationSchema = (
     23,
     n0,
     _CB,
-    {_smithy: MappingProxyType({"code": 202, "method": "PUT", "uri": "/browsers"})},
+    {_smithya: MappingProxyType({"code": 202, "method": "PUT", "uri": "/browsers"})},
     CREATE_BROWSER_INPUT,
     CREATE_BROWSER_OUTPUT,
     (
@@ -5271,7 +5603,7 @@ DELETE_BROWSER_INPUT: StaticSchema = (
     18,
     n0,
     _DBI,
-    {_sSI: _cDBR, _smit: None},
+    {_sSI: _cDBR, _smith: None},
     (_bI, _cT),
     ((BROWSER_ID, 9), (CLIENT_TOKEN, {_sQ: _cT, _sT: None})),
 )
@@ -5280,7 +5612,7 @@ DELETE_BROWSER_OUTPUT: StaticSchema = (
     18,
     n0,
     _DBO,
-    {_sSI: _cDBRo, _smith: None},
+    {_sSI: _cDBRo, _smithy: None},
     (_bI, _st, _lUA),
     ((BROWSER_ID, 1), (BROWSER_STATUS, 1), (DATE_TIMESTAMP, 1)),
 )
@@ -5290,7 +5622,7 @@ DELETE_BROWSER: StaticOperationSchema = (
     n0,
     _DB,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "DELETE", "uri": "/browsers/{browserId}"}
         )
     },
@@ -5311,7 +5643,7 @@ GET_BROWSER_INPUT: StaticSchema = (
     18,
     n0,
     _GBI,
-    {_sSI: _cGBR, _smit: None},
+    {_sSI: _cGBR, _smith: None},
     (_bI,),
     ((BROWSER_ID, 9),),
 )
@@ -5322,14 +5654,14 @@ BROWSER_SIGNING_CONFIG_OUTPUT: StaticSchema = (
     _BSCO,
     0,
     (_en,),
-    ((2, {_smithya: False, _sm: None}),),
+    ((2, {_smi: False, _sm: None}),),
 )
 
 GET_BROWSER_OUTPUT: StaticSchema = (
     18,
     n0,
     _GBO,
-    {_sSI: _cGBRo, _smith: None},
+    {_sSI: _cGBRo, _smithy: None},
     (_bI, _bAr, _n, _d, _eRA, _nC, _re, _bS, _ePn, _ce, _fC, _st, _fR, _cA, _lUA),
     (
         (BROWSER_ID, 1),
@@ -5355,7 +5687,7 @@ GET_BROWSER: StaticOperationSchema = (
     n0,
     _GB,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "GET", "uri": "/browsers/{browserId}"}
         )
     },
@@ -5383,7 +5715,7 @@ LIST_BROWSERS_INPUT: StaticSchema = (
     18,
     n0,
     _LBI,
-    {_sSI: _cLBR, _smit: None},
+    {_sSI: _cLBR, _smith: None},
     (_mR, _nT, _ty),
     ((MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT}), (RESOURCE_TYPE, {_sQ: _ty})),
 )
@@ -5411,7 +5743,7 @@ LIST_BROWSERS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LBO,
-    {_sSI: _cLBRo, _smith: None},
+    {_sSI: _cLBRo, _smithy: None},
     (_bSr, _nT),
     ((BROWSER_SUMMARIES, 1), (NEXT_TOKEN, 0)),
 )
@@ -5420,7 +5752,7 @@ LIST_BROWSERS: StaticOperationSchema = (
     23,
     n0,
     _LB,
-    {_smithy: MappingProxyType({"code": 200, "method": "POST", "uri": "/browsers"})},
+    {_smithya: MappingProxyType({"code": 200, "method": "POST", "uri": "/browsers"})},
     LIST_BROWSERS_INPUT,
     LIST_BROWSERS_OUTPUT,
     (
@@ -5504,7 +5836,7 @@ EPHEMERAL_EBS_VOLUME_CONFIGURATION: StaticSchema = (
     0,
     (_vT, _iop, _th, _enc, _kKI, _sIn, _vS, _vIR, _eCI),
     (
-        (EBS_VOLUME_TYPE, {_smithya: _gp}),
+        (EBS_VOLUME_TYPE, {_smi: _gp}),
         (VOLUME_IOPS, 0),
         (VOLUME_THROUGHPUT, 0),
         (2, 0),
@@ -5600,7 +5932,7 @@ LAUNCH_PARAMETERS: StaticSchema = (
     n0,
     _LP,
     0,
-    (_oS, _iR, _eVp, _mo, _lS, _cRS, _sKN, _iPA, _pT),
+    (_oS, _iR, _eVp, _mon, _lS, _cRS, _sKN, _iPA, _pT),
     (
         (OPERATING_SYSTEM, 1),
         (INSTANCE_REQUIREMENTS, 1),
@@ -5639,7 +5971,7 @@ ROOT_VOLUME_CONFIGURATION: StaticSchema = (
     0,
     (_vT, _iop, _th, _enc, _kKI, _fSGB),
     (
-        (EBS_VOLUME_TYPE, {_smithya: _gp}),
+        (EBS_VOLUME_TYPE, {_smi: _gp}),
         (VOLUME_IOPS, 0),
         (VOLUME_THROUGHPUT, 0),
         (2, 0),
@@ -5659,7 +5991,7 @@ EBS_VOLUME_CONFIGURATION: StaticSchema = (
     (
         (VOLUME_NAME, 1),
         (VOLUME_SIZE_GI_B, 1),
-        (EBS_VOLUME_TYPE, {_smithya: _gp}),
+        (EBS_VOLUME_TYPE, {_smi: _gp}),
         (VOLUME_IOPS, 0),
         (VOLUME_THROUGHPUT, 0),
         (2, 0),
@@ -5738,7 +6070,7 @@ CREATE_CAPACITY_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _CCPI,
-    {_smit: None},
+    {_smith: None},
     (_n, _d, _pCe, _cT, _t, _cCom),
     (
         (CAPACITY_PROVIDER_NAME, 1),
@@ -5771,7 +6103,7 @@ CREATE_CAPACITY_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _CCPO,
-    {_smith: None},
+    {_smithy: None},
     (_cPI, _cPA, _n, _st),
     (
         (CAPACITY_PROVIDER_ID, 1),
@@ -5795,7 +6127,7 @@ CREATE_CAPACITY_PROVIDER: StaticOperationSchema = (
     n0,
     _CCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "PUT", "uri": "/capacity-providers", "code": 202}
         )
     },
@@ -5817,7 +6149,7 @@ DELETE_CAPACITY_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _DCPI,
-    {_smit: None},
+    {_smith: None},
     (_cPI, _cT),
     ((CAPACITY_PROVIDER_ID, 9), (CLIENT_TOKEN, {_sQ: _cT, _sT: None})),
 )
@@ -5826,7 +6158,7 @@ DELETE_CAPACITY_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _DCPO,
-    {_smith: None},
+    {_smithy: None},
     (_cPI, _st),
     ((CAPACITY_PROVIDER_ID, 1), (CAPACITY_PROVIDER_STATUS, 1)),
 )
@@ -5836,7 +6168,7 @@ DELETE_CAPACITY_PROVIDER: StaticOperationSchema = (
     n0,
     _DCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/capacity-providers/{capacityProviderId}",
@@ -5861,7 +6193,7 @@ GET_CAPACITY_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _GCPI,
-    {_smit: None},
+    {_smith: None},
     (_cPI,),
     ((CAPACITY_PROVIDER_ID, 9),),
 )
@@ -5884,8 +6216,8 @@ GET_CAPACITY_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _GCPO,
-    {_smith: None},
-    (_cPI, _cPA, _n, _st, _d, _sC, _sRt, _pCe, _cCom, _cA, _lUA),
+    {_smithy: None},
+    (_cPI, _cPA, _n, _st, _d, _sCt, _sRt, _pCe, _cCom, _cA, _lUA),
     (
         (CAPACITY_PROVIDER_ID, 1),
         (CAPACITY_PROVIDER_ARN, 1),
@@ -5906,7 +6238,7 @@ GET_CAPACITY_PROVIDER: StaticOperationSchema = (
     n0,
     _GCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/capacity-providers/{capacityProviderId}",
@@ -5929,7 +6261,7 @@ LIST_AGENT_RUNTIME_VERSIONS_BY_CAPACITY_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _LARVBCPI,
-    {_smit: None},
+    {_smith: None},
     (_cPI, _mR, _nT),
     ((CAPACITY_PROVIDER_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT})),
 )
@@ -5938,7 +6270,7 @@ LIST_AGENT_RUNTIME_VERSIONS_BY_CAPACITY_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _LARVBCPO,
-    {_smith: None},
+    {_smithy: None},
     (_aR, _nT),
     ((AGENT_RUNTIME_VERSION_SUMMARY_LIST, 1), (3, 0)),
 )
@@ -5948,7 +6280,7 @@ LIST_AGENT_RUNTIME_VERSIONS_BY_CAPACITY_PROVIDER: StaticOperationSchema = (
     n0,
     _LARVBCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "POST",
                 "uri": "/capacity-providers/{capacityProviderId}/runtime-versions",
@@ -5970,7 +6302,7 @@ LIST_CAPACITY_PROVIDERS_INPUT: StaticSchema = (
     18,
     n0,
     _LCPI,
-    {_smit: None},
+    {_smith: None},
     (_mR, _nT),
     ((MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT})),
 )
@@ -6003,7 +6335,7 @@ LIST_CAPACITY_PROVIDERS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LCPO,
-    {_smith: None},
+    {_smithy: None},
     (_cPa, _nT),
     ((CAPACITY_PROVIDER_LIST, 1), (NEXT_TOKEN, 0)),
 )
@@ -6013,7 +6345,7 @@ LIST_CAPACITY_PROVIDERS: StaticOperationSchema = (
     n0,
     _LCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "POST", "uri": "/capacity-providers", "code": 200}
         )
     },
@@ -6033,7 +6365,7 @@ UPDATE_CAPACITY_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _UCPI,
-    {_smit: None},
+    {_smith: None},
     (_cPI, _d, _cT),
     ((CAPACITY_PROVIDER_ID, 9), (UPDATED_DESCRIPTION, 0), (CLIENT_TOKEN, 2)),
 )
@@ -6042,7 +6374,7 @@ UPDATE_CAPACITY_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _UCPO,
-    {_smith: None},
+    {_smithy: None},
     (_cPI, _cPA, _n, _st, _cA, _lUA),
     (
         (CAPACITY_PROVIDER_ID, 1),
@@ -6059,7 +6391,7 @@ UPDATE_CAPACITY_PROVIDER: StaticOperationSchema = (
     n0,
     _UCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "PUT",
                 "uri": "/capacity-providers/{capacityProviderId}",
@@ -6097,14 +6429,14 @@ CODE_INTERPRETER_NETWORK_CONFIGURATION: StaticSchema = (
     _CINC,
     0,
     (_nM, _vC),
-    ((CODE_INTERPRETER_NETWORK_MODE, {_smithya: _SANDBOX, _sm: None}), (VPC_CONFIG, 0)),
+    ((CODE_INTERPRETER_NETWORK_MODE, {_smi: _SANDBOX, _sm: None}), (VPC_CONFIG, 0)),
 )
 
 CREATE_CODE_INTERPRETER_INPUT: StaticSchema = (
     18,
     n0,
     _CCII,
-    {_sSI: _cCCIR, _smit: None},
+    {_sSI: _cCCIR, _smith: None},
     (_n, _d, _eRA, _nC, _ce, _fC, _cT, _t),
     (
         (SANDBOX_NAME, 1),
@@ -6140,7 +6472,7 @@ CREATE_CODE_INTERPRETER_OUTPUT: StaticSchema = (
     18,
     n0,
     _CCIO,
-    {_sSI: _cCCIRo, _smith: None},
+    {_sSI: _cCCIRo, _smithy: None},
     (_cII, _cIA, _cA, _st),
     (
         (CODE_INTERPRETER_ID, 1),
@@ -6155,7 +6487,7 @@ CREATE_CODE_INTERPRETER: StaticOperationSchema = (
     n0,
     _CCI,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "PUT", "uri": "/code-interpreters"}
         )
     },
@@ -6175,7 +6507,7 @@ DELETE_CODE_INTERPRETER_INPUT: StaticSchema = (
     18,
     n0,
     _DCII,
-    {_sSI: _cDCIR, _smit: None},
+    {_sSI: _cDCIR, _smith: None},
     (_cII, _cT),
     ((CODE_INTERPRETER_ID, 9), (CLIENT_TOKEN, {_sQ: _cT, _sT: None})),
 )
@@ -6184,7 +6516,7 @@ DELETE_CODE_INTERPRETER_OUTPUT: StaticSchema = (
     18,
     n0,
     _DCIO,
-    {_sSI: _cDCIRo, _smith: None},
+    {_sSI: _cDCIRo, _smithy: None},
     (_cII, _st, _lUA),
     ((CODE_INTERPRETER_ID, 1), (CODE_INTERPRETER_STATUS, 1), (DATE_TIMESTAMP, 1)),
 )
@@ -6194,7 +6526,7 @@ DELETE_CODE_INTERPRETER: StaticOperationSchema = (
     n0,
     _DCI,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "DELETE",
@@ -6219,7 +6551,7 @@ GET_CODE_INTERPRETER_INPUT: StaticSchema = (
     18,
     n0,
     _GCII,
-    {_sSI: _cGCIR, _smit: None},
+    {_sSI: _cGCIR, _smith: None},
     (_cII,),
     ((CODE_INTERPRETER_ID, 9),),
 )
@@ -6228,7 +6560,7 @@ GET_CODE_INTERPRETER_OUTPUT: StaticSchema = (
     18,
     n0,
     _GCIO,
-    {_sSI: _cGCIRo, _smith: None},
+    {_sSI: _cGCIRo, _smithy: None},
     (_cII, _cIA, _n, _d, _eRA, _nC, _st, _ce, _fC, _fR, _cA, _lUA),
     (
         (CODE_INTERPRETER_ID, 1),
@@ -6251,7 +6583,7 @@ GET_CODE_INTERPRETER: StaticOperationSchema = (
     n0,
     _GCI,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "GET",
@@ -6274,7 +6606,7 @@ LIST_CODE_INTERPRETERS_INPUT: StaticSchema = (
     18,
     n0,
     _LCII,
-    {_sSI: _cLCIR, _smit: None},
+    {_sSI: _cLCIR, _smith: None},
     (_mR, _nT, _ty),
     ((MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT}), (RESOURCE_TYPE, {_sQ: _ty})),
 )
@@ -6309,7 +6641,7 @@ LIST_CODE_INTERPRETERS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LCIO,
-    {_sSI: _cLCIRo, _smith: None},
+    {_sSI: _cLCIRo, _smithy: None},
     (_cIS, _nT),
     ((CODE_INTERPRETER_SUMMARIES, 1), (NEXT_TOKEN, 0)),
 )
@@ -6319,7 +6651,7 @@ LIST_CODE_INTERPRETERS: StaticOperationSchema = (
     n0,
     _LCI,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "POST", "uri": "/code-interpreters"}
         )
     },
@@ -6362,7 +6694,7 @@ CREATE_CONFIGURATION_BUNDLE_INPUT: StaticSchema = (
     18,
     n0,
     _CCBI,
-    {_sSI: _cCCBR, _smit: None},
+    {_sSI: _cCCBR, _smith: None},
     (_cT, _bN, _d, _com, _bNr, _cM, _cBr, _kKA, _t),
     (
         (CLIENT_TOKEN, 2),
@@ -6385,7 +6717,7 @@ CREATE_CONFIGURATION_BUNDLE_OUTPUT: StaticSchema = (
     18,
     n0,
     _CCBO,
-    {_sSI: _cCCBRo, _smith: None},
+    {_sSI: _cCCBRo, _smithy: None},
     (_bA, _bIu, _vI, _cA),
     (
         (CONFIGURATION_BUNDLE_ARN, 1),
@@ -6400,7 +6732,7 @@ CREATE_CONFIGURATION_BUNDLE: StaticOperationSchema = (
     n0,
     _CCB,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "POST", "uri": "/configuration-bundles/create", "code": 201}
         )
     },
@@ -6420,7 +6752,7 @@ DELETE_CONFIGURATION_BUNDLE_INPUT: StaticSchema = (
     18,
     n0,
     _DCBI,
-    {_sSI: _cDCBR, _smit: None},
+    {_sSI: _cDCBR, _smith: None},
     (_bIu,),
     ((CONFIGURATION_BUNDLE_ID, 9),),
 )
@@ -6446,7 +6778,7 @@ DELETE_CONFIGURATION_BUNDLE_OUTPUT: StaticSchema = (
     18,
     n0,
     _DCBO,
-    {_sSI: _cDCBRo, _smith: None},
+    {_sSI: _cDCBRo, _smithy: None},
     (_bA, _bIu, _st),
     (
         (CONFIGURATION_BUNDLE_ARN, 1),
@@ -6460,7 +6792,7 @@ DELETE_CONFIGURATION_BUNDLE: StaticOperationSchema = (
     n0,
     _DCB,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/configuration-bundles/{bundleId}",
@@ -6484,7 +6816,7 @@ GET_CONFIGURATION_BUNDLE_INPUT: StaticSchema = (
     18,
     n0,
     _GCBI,
-    {_sSI: _cGCBR, _smit: None},
+    {_sSI: _cGCBR, _smith: None},
     (_bIu, _bNr),
     ((CONFIGURATION_BUNDLE_ID, 9), (BRANCH_NAME, {_sQ: _bNr})),
 )
@@ -6516,7 +6848,7 @@ GET_CONFIGURATION_BUNDLE_OUTPUT: StaticSchema = (
     18,
     n0,
     _GCBO,
-    {_sSI: _cGCBRo, _smith: None},
+    {_sSI: _cGCBRo, _smithy: None},
     (_bA, _bIu, _bN, _d, _vI, _com, _lM, _cA, _uA, _kKA),
     (
         (CONFIGURATION_BUNDLE_ARN, 1),
@@ -6537,7 +6869,7 @@ GET_CONFIGURATION_BUNDLE: StaticOperationSchema = (
     n0,
     _GCB,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "GET", "uri": "/configuration-bundles/{bundleId}"}
         )
     },
@@ -6556,7 +6888,7 @@ GET_CONFIGURATION_BUNDLE_VERSION_INPUT: StaticSchema = (
     18,
     n0,
     _GCBVI,
-    {_sSI: _cGCBVR, _smit: None},
+    {_sSI: _cGCBVR, _smith: None},
     (_bIu, _vI),
     ((CONFIGURATION_BUNDLE_ID, 9), (CONFIGURATION_BUNDLE_VERSION, 9)),
 )
@@ -6565,7 +6897,7 @@ GET_CONFIGURATION_BUNDLE_VERSION_OUTPUT: StaticSchema = (
     18,
     n0,
     _GCBVO,
-    {_sSI: _cGCBVRo, _smith: None},
+    {_sSI: _cGCBVRo, _smithy: None},
     (_bA, _bIu, _bN, _d, _vI, _com, _lM, _cA, _vCA, _kKA),
     (
         (CONFIGURATION_BUNDLE_ARN, 1),
@@ -6586,7 +6918,7 @@ GET_CONFIGURATION_BUNDLE_VERSION: StaticOperationSchema = (
     n0,
     _GCBV,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/configuration-bundles/{bundleId}/versions/{versionId}",
@@ -6608,7 +6940,7 @@ LIST_CONFIGURATION_BUNDLES_INPUT: StaticSchema = (
     18,
     n0,
     _LCBI,
-    {_sSI: _cLCBR, _smit: None},
+    {_sSI: _cLCBR, _smith: None},
     (_nT, _mR),
     ((3, {_sQ: _nT}), (7, {_sQ: _mR})),
 )
@@ -6641,8 +6973,8 @@ LIST_CONFIGURATION_BUNDLES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LCBO,
-    {_sSI: _cLCBRo, _smith: None},
-    (_bu, _nT),
+    {_sSI: _cLCBRo, _smithy: None},
+    (_bun, _nT),
     ((CONFIGURATION_BUNDLE_SUMMARY_LIST, 1), (3, 0)),
 )
 
@@ -6650,7 +6982,7 @@ LIST_CONFIGURATION_BUNDLES: StaticOperationSchema = (
     23,
     n0,
     _LCB,
-    {_smithy: MappingProxyType({"method": "POST", "uri": "/configuration-bundles"})},
+    {_smithya: MappingProxyType({"method": "POST", "uri": "/configuration-bundles"})},
     LIST_CONFIGURATION_BUNDLES_INPUT,
     LIST_CONFIGURATION_BUNDLES_OUTPUT,
     (
@@ -6674,8 +7006,8 @@ LIST_CONFIGURATION_BUNDLE_VERSIONS_INPUT: StaticSchema = (
     18,
     n0,
     _LCBVI,
-    {_sSI: _cLCBVR, _smit: None},
-    (_bIu, _nT, _mR, _f),
+    {_sSI: _cLCBVR, _smith: None},
+    (_bIu, _nT, _mR, _fi),
     (
         (CONFIGURATION_BUNDLE_ID, 9),
         (3, {_sQ: _nT}),
@@ -6712,7 +7044,7 @@ LIST_CONFIGURATION_BUNDLE_VERSIONS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LCBVO,
-    {_sSI: _cLCBVRo, _smith: None},
+    {_sSI: _cLCBVRo, _smithy: None},
     (_ver, _nT),
     ((CONFIGURATION_BUNDLE_VERSION_SUMMARY_LIST, 1), (3, 0)),
 )
@@ -6722,7 +7054,7 @@ LIST_CONFIGURATION_BUNDLE_VERSIONS: StaticOperationSchema = (
     n0,
     _LCBV,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "POST", "uri": "/configuration-bundles/{bundleId}/versions"}
         )
     },
@@ -6741,7 +7073,7 @@ UPDATE_CONFIGURATION_BUNDLE_INPUT: StaticSchema = (
     18,
     n0,
     _UCBI,
-    {_sSI: _cUCBR, _smit: None},
+    {_sSI: _cUCBR, _smith: None},
     (_cT, _bIu, _bN, _d, _com, _pVI, _bNr, _cM, _cBr, _kKA),
     (
         (CLIENT_TOKEN, 2),
@@ -6761,7 +7093,7 @@ UPDATE_CONFIGURATION_BUNDLE_OUTPUT: StaticSchema = (
     18,
     n0,
     _UCBO,
-    {_sSI: _cUCBRo, _smith: None},
+    {_sSI: _cUCBRo, _smithy: None},
     (_bA, _bIu, _vI, _uA),
     (
         (CONFIGURATION_BUNDLE_ARN, 1),
@@ -6776,7 +7108,7 @@ UPDATE_CONFIGURATION_BUNDLE: StaticOperationSchema = (
     n0,
     _UCB,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "PUT", "uri": "/configuration-bundles/{bundleId}"}
         )
     },
@@ -6866,7 +7198,7 @@ CREATE_CONSENT_PORTAL_INPUT: StaticSchema = (
     18,
     n0,
     _CCPIr,
-    {_sSI: _cCCPR, _smit: None},
+    {_sSI: _cCCPR, _smith: None},
     (_eRA, _iCd, _n, _sou, _d, _t),
     (
         (EXECUTION_ROLE_ARN_TYPE, 1),
@@ -6888,7 +7220,7 @@ CREATE_CONSENT_PORTAL_OUTPUT: StaticSchema = (
     18,
     n0,
     _CCPOr,
-    {_sSI: _cCCPRo, _smith: None},
+    {_sSI: _cCCPRo, _smithy: None},
     (_sou, _cPAo, _cPIo, _cA, _d, _eRA, _iCd, _n, _pU, _st, _sRt, _uA),
     (
         (CONSENT_PORTAL_SOURCES, 1),
@@ -6911,7 +7243,7 @@ CREATE_CONSENT_PORTAL: StaticOperationSchema = (
     n0,
     _CCPr,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "uri": "/identities/CreateConsentPortal", "method": "POST"}
         )
     },
@@ -6933,7 +7265,7 @@ DELETE_CONSENT_PORTAL_INPUT: StaticSchema = (
     18,
     n0,
     _DCPIe,
-    {_sSI: _cDCPR, _smit: None},
+    {_sSI: _cDCPR, _smith: None},
     (_cPIon,),
     ((CONSENT_PORTAL_IDENTIFIER, 1),),
 )
@@ -6942,7 +7274,7 @@ DELETE_CONSENT_PORTAL_OUTPUT: StaticSchema = (
     18,
     n0,
     _DCPOe,
-    {_sSI: _cDCPRo, _smith: None},
+    {_sSI: _cDCPRo, _smithy: None},
 )
 
 DELETE_CONSENT_PORTAL: StaticOperationSchema = (
@@ -6950,7 +7282,7 @@ DELETE_CONSENT_PORTAL: StaticOperationSchema = (
     n0,
     _DCPe,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 204, "uri": "/identities/DeleteConsentPortal", "method": "POST"}
         )
     },
@@ -6971,7 +7303,7 @@ GET_CONSENT_PORTAL_INPUT: StaticSchema = (
     18,
     n0,
     _GCPIe,
-    {_sSI: _cGCPR, _smit: None},
+    {_sSI: _cGCPR, _smith: None},
     (_cPIon,),
     ((CONSENT_PORTAL_IDENTIFIER, 1),),
 )
@@ -6980,7 +7312,7 @@ GET_CONSENT_PORTAL_OUTPUT: StaticSchema = (
     18,
     n0,
     _GCPOe,
-    {_sSI: _cGCPRo, _smith: None},
+    {_sSI: _cGCPRo, _smithy: None},
     (_sou, _cPAo, _cPIo, _cA, _d, _eRA, _iCd, _n, _pU, _st, _sRt, _uA),
     (
         (CONSENT_PORTAL_SOURCES, 1),
@@ -7003,7 +7335,7 @@ GET_CONSENT_PORTAL: StaticOperationSchema = (
     n0,
     _GCPe,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/GetConsentPortal", "method": "POST"}
         )
     },
@@ -7023,7 +7355,7 @@ LIST_CONSENT_PORTALS_INPUT: StaticSchema = (
     18,
     n0,
     _LCPIi,
-    {_sSI: _cLCPR, _smit: None},
+    {_sSI: _cLCPR, _smith: None},
     (_mR, _nT),
     ((7, 0), (3, 0)),
 )
@@ -7060,7 +7392,7 @@ LIST_CONSENT_PORTALS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LCPOi,
-    {_sSI: _cLCPRo, _smith: None},
+    {_sSI: _cLCPRo, _smithy: None},
     (_cPo, _nT),
     ((CONSENT_PORTAL_SUMMARIES, 1), (3, 0)),
 )
@@ -7070,7 +7402,7 @@ LIST_CONSENT_PORTALS: StaticOperationSchema = (
     n0,
     _LCPi,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/ListConsentPortals", "method": "POST"}
         )
     },
@@ -7089,7 +7421,7 @@ UPDATE_CONSENT_PORTAL_INPUT: StaticSchema = (
     18,
     n0,
     _UCPIp,
-    {_sSI: _cUCPR, _smit: None},
+    {_sSI: _cUCPR, _smith: None},
     (_cPIon, _eRA, _iCd, _d),
     (
         (CONSENT_PORTAL_IDENTIFIER, 1),
@@ -7103,7 +7435,7 @@ UPDATE_CONSENT_PORTAL_OUTPUT: StaticSchema = (
     18,
     n0,
     _UCPOp,
-    {_sSI: _cUCPRo, _smith: None},
+    {_sSI: _cUCPRo, _smithy: None},
     (_sou, _cPAo, _cPIo, _cA, _d, _eRA, _iCd, _n, _pU, _st, _sRt, _uA),
     (
         (CONSENT_PORTAL_SOURCES, 1),
@@ -7126,7 +7458,7 @@ UPDATE_CONSENT_PORTAL: StaticOperationSchema = (
     n0,
     _UCPp,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "uri": "/identities/UpdateConsentPortal", "method": "POST"}
         )
     },
@@ -7158,7 +7490,7 @@ CREATE_DATASET_INPUT: StaticSchema = (
     18,
     n0,
     _CDI,
-    {_sSI: _cCDR, _smit: None},
+    {_sSI: _cCDR, _smith: None},
     (_cT, _dNa, _d, _so, _sTc, _kKA, _t),
     (
         (CLIENT_TOKEN, 2),
@@ -7175,7 +7507,7 @@ CREATE_DATASET_OUTPUT: StaticSchema = (
     18,
     n0,
     _CDO,
-    {_sSI: _cCDRo, _smith: None},
+    {_sSI: _cCDRo, _smithy: None},
     (_dA, _dI, _st, _cA),
     ((DATASET_ARN, 1), (DATASET_ID, 1), (DATASET_STATUS, 1), (4, 1)),
 )
@@ -7184,7 +7516,7 @@ CREATE_DATASET: StaticOperationSchema = (
     23,
     n0,
     _CD,
-    {_smithy: MappingProxyType({"method": "POST", "uri": "/datasets", "code": 202})},
+    {_smithya: MappingProxyType({"method": "POST", "uri": "/datasets", "code": 202})},
     CREATE_DATASET_INPUT,
     CREATE_DATASET_OUTPUT,
     (
@@ -7201,7 +7533,7 @@ CREATE_DATASET_VERSION_INPUT: StaticSchema = (
     18,
     n0,
     _CDVI,
-    {_sSI: _cCDVR, _smit: None},
+    {_sSI: _cCDVR, _smith: None},
     (_dI, _cT),
     ((DATASET_ID, 9), (CLIENT_TOKEN, 2)),
 )
@@ -7212,7 +7544,7 @@ CREATE_DATASET_VERSION_OUTPUT: StaticSchema = (
     18,
     n0,
     _CDVO,
-    {_sSI: _cCDVRo, _smith: None},
+    {_sSI: _cCDVRo, _smithy: None},
     (_dA, _dI, _st, _dV, _cA),
     (
         (DATASET_ARN, 1),
@@ -7228,7 +7560,7 @@ CREATE_DATASET_VERSION: StaticOperationSchema = (
     n0,
     _CDV,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "POST", "uri": "/datasets/{datasetId}/versions", "code": 202}
         )
     },
@@ -7249,7 +7581,7 @@ DELETE_DATASET_INPUT: StaticSchema = (
     18,
     n0,
     _DDI,
-    {_sSI: _cDDR, _smit: None},
+    {_sSI: _cDDR, _smith: None},
     (_dI, _dV),
     ((DATASET_ID, 9), (DATASET_VERSION, {_sQ: _dV})),
 )
@@ -7258,7 +7590,7 @@ DELETE_DATASET_OUTPUT: StaticSchema = (
     18,
     n0,
     _DDO,
-    {_sSI: _cDDRo, _smith: None},
+    {_sSI: _cDDRo, _smithy: None},
     (_dA, _dI, _st, _dV, _uA),
     (
         (DATASET_ARN, 1),
@@ -7274,7 +7606,7 @@ DELETE_DATASET: StaticOperationSchema = (
     n0,
     _DD,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "DELETE", "uri": "/datasets/{datasetId}", "code": 202}
         )
     },
@@ -7294,7 +7626,7 @@ DELETE_DATASET_EXAMPLES_INPUT: StaticSchema = (
     18,
     n0,
     _DDEI,
-    {_sSI: _cDDER, _smit: None},
+    {_sSI: _cDDER, _smith: None},
     (_dI, _cT, _eI),
     ((DATASET_ID, 9), (CLIENT_TOKEN, 2), (EXAMPLE_ID_LIST, 1)),
 )
@@ -7303,7 +7635,7 @@ DELETE_DATASET_EXAMPLES_OUTPUT: StaticSchema = (
     18,
     n0,
     _DDEO,
-    {_sSI: _cDDERo, _smith: None},
+    {_sSI: _cDDERo, _smithy: None},
     (_dA, _dI, _st, _dC, _uA),
     ((DATASET_ARN, 1), (DATASET_ID, 1), (DATASET_STATUS, 1), (8, 1), (4, 1)),
 )
@@ -7313,7 +7645,7 @@ DELETE_DATASET_EXAMPLES: StaticOperationSchema = (
     n0,
     _DDE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "POST",
                 "uri": "/datasets/{datasetId}/examples/delete",
@@ -7337,7 +7669,7 @@ GET_DATASET_INPUT: StaticSchema = (
     18,
     n0,
     _GDI,
-    {_sSI: _cGDR, _smit: None},
+    {_sSI: _cGDR, _smith: None},
     (_dI, _dV),
     ((DATASET_ID, 9), (DATASET_VERSION, {_sQ: _dV})),
 )
@@ -7357,7 +7689,7 @@ GET_DATASET_OUTPUT: StaticSchema = (
     18,
     n0,
     _GDO,
-    {_sSI: _cGDRo, _smith: None},
+    {_sSI: _cGDRo, _smithy: None},
     (
         _dA,
         _dI,
@@ -7400,7 +7732,7 @@ GET_DATASET: StaticOperationSchema = (
     23,
     n0,
     _GD,
-    {_smithy: MappingProxyType({"method": "GET", "uri": "/datasets/{datasetId}"})},
+    {_smithya: MappingProxyType({"method": "GET", "uri": "/datasets/{datasetId}"})},
     GET_DATASET_INPUT,
     GET_DATASET_OUTPUT,
     (
@@ -7417,7 +7749,7 @@ LIST_DATASET_EXAMPLES_INPUT: StaticSchema = (
     18,
     n0,
     _LDEI,
-    {_sSI: _cLDER, _smit: None},
+    {_sSI: _cLDER, _smith: None},
     (_dI, _dV, _mR, _nT),
     ((DATASET_ID, 9), (DATASET_VERSION, {_sQ: _dV}), (7, {_sQ: _mR}), (3, {_sQ: _nT})),
 )
@@ -7426,8 +7758,8 @@ LIST_DATASET_EXAMPLES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LDEO,
-    {_sSI: _cLDERo, _smith: None},
-    (_dA, _dI, _dV, _e, _nT),
+    {_sSI: _cLDERo, _smithy: None},
+    (_dA, _dI, _dV, _ex, _nT),
     (
         (DATASET_ARN, 1),
         (DATASET_ID, 1),
@@ -7442,7 +7774,7 @@ LIST_DATASET_EXAMPLES: StaticOperationSchema = (
     n0,
     _LDE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "GET", "uri": "/datasets/{datasetId}/examples"}
         )
     },
@@ -7462,7 +7794,7 @@ LIST_DATASETS_INPUT: StaticSchema = (
     18,
     n0,
     _LDI,
-    {_sSI: _cLDR, _smit: None},
+    {_sSI: _cLDR, _smith: None},
     (_nT, _mR),
     ((3, {_sQ: _nT}), (7, {_sQ: _mR})),
 )
@@ -7493,7 +7825,7 @@ LIST_DATASETS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LDO,
-    {_sSI: _cLDRo, _smith: None},
+    {_sSI: _cLDRo, _smithy: None},
     (_da, _nT),
     ((DATASET_SUMMARY_LIST, 1), (3, 0)),
 )
@@ -7502,7 +7834,7 @@ LIST_DATASETS: StaticOperationSchema = (
     23,
     n0,
     _LD,
-    {_smithy: MappingProxyType({"method": "GET", "uri": "/datasets"})},
+    {_smithya: MappingProxyType({"method": "GET", "uri": "/datasets"})},
     LIST_DATASETS_INPUT,
     LIST_DATASETS_OUTPUT,
     (
@@ -7517,7 +7849,7 @@ LIST_DATASET_VERSIONS_INPUT: StaticSchema = (
     18,
     n0,
     _LDVI,
-    {_sSI: _cLDVR, _smit: None},
+    {_sSI: _cLDVR, _smith: None},
     (_dI, _nT, _mR),
     ((DATASET_ID, 9), (3, {_sQ: _nT}), (7, {_sQ: _mR})),
 )
@@ -7544,7 +7876,7 @@ LIST_DATASET_VERSIONS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LDVO,
-    {_sSI: _cLDVRo, _smith: None},
+    {_sSI: _cLDVRo, _smithy: None},
     (_ver, _nT),
     ((DATASET_VERSION_SUMMARY_LIST, 1), (3, 0)),
 )
@@ -7554,7 +7886,7 @@ LIST_DATASET_VERSIONS: StaticOperationSchema = (
     n0,
     _LDV,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "GET", "uri": "/datasets/{datasetId}/versions"}
         )
     },
@@ -7573,7 +7905,7 @@ UPDATE_DATASET_INPUT: StaticSchema = (
     18,
     n0,
     _UDI,
-    {_sSI: _cUDR, _smit: None},
+    {_sSI: _cUDR, _smith: None},
     (_dI, _cT, _d),
     ((DATASET_ID, 9), (CLIENT_TOKEN, 2), (3, 0)),
 )
@@ -7582,7 +7914,7 @@ UPDATE_DATASET_OUTPUT: StaticSchema = (
     18,
     n0,
     _UDO,
-    {_sSI: _cUDRo, _smith: None},
+    {_sSI: _cUDRo, _smithy: None},
     (_dA, _dI, _uA),
     ((DATASET_ARN, 1), (DATASET_ID, 1), (4, 1)),
 )
@@ -7592,7 +7924,7 @@ UPDATE_DATASET: StaticOperationSchema = (
     n0,
     _UDp,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "PUT", "uri": "/datasets/{datasetId}", "code": 200}
         )
     },
@@ -7612,8 +7944,8 @@ UPDATE_DATASET_EXAMPLES_INPUT: StaticSchema = (
     18,
     n0,
     _UDEI,
-    {_sSI: _cUDER, _smit: None},
-    (_dI, _cT, _e),
+    {_sSI: _cUDER, _smith: None},
+    (_dI, _cT, _ex),
     ((DATASET_ID, 9), (CLIENT_TOKEN, 2), (DATASET_EXAMPLE_LIST, 1)),
 )
 
@@ -7621,7 +7953,7 @@ UPDATE_DATASET_EXAMPLES_OUTPUT: StaticSchema = (
     18,
     n0,
     _UDEO,
-    {_sSI: _cUDERo, _smith: None},
+    {_sSI: _cUDERo, _smithy: None},
     (_dA, _dI, _st, _uC, _uA),
     ((DATASET_ARN, 1), (DATASET_ID, 1), (DATASET_STATUS, 1), (8, 1), (4, 1)),
 )
@@ -7631,7 +7963,7 @@ UPDATE_DATASET_EXAMPLES: StaticOperationSchema = (
     n0,
     _UDE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "POST",
                 "uri": "/datasets/{datasetId}/examples/update",
@@ -7656,7 +7988,7 @@ DELETE_RESOURCE_POLICY_INPUT: StaticSchema = (
     18,
     n0,
     _DRPI,
-    {_sSI: _cDRPR, _smit: None},
+    {_sSI: _cDRPR, _smith: None},
     (_rAe,),
     ((BEDROCK_AGENTCORE_RESOURCE_ARN, 9),),
 )
@@ -7665,7 +7997,7 @@ DELETE_RESOURCE_POLICY_OUTPUT: StaticSchema = (
     18,
     n0,
     _DRPO,
-    {_sSI: _cDRPRo, _smith: None},
+    {_sSI: _cDRPRo, _smithy: None},
 )
 
 DELETE_RESOURCE_POLICY: StaticOperationSchema = (
@@ -7673,7 +8005,7 @@ DELETE_RESOURCE_POLICY: StaticOperationSchema = (
     n0,
     _DRP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 204, "method": "DELETE", "uri": "/resourcepolicy/{resourceArn}"}
         )
     },
@@ -7792,6 +8124,10 @@ CATEGORICAL_SCALE_DEFINITIONS: StaticSchema = (
     ((CATEGORICAL_SCALE_DEFINITION, 0),),
 )
 
+EVALUATION_DIMENSION_INSTRUCTION: StaticSchema = (3, n0, _EDI, 4)
+
+EVALUATION_DIMENSION_NAME: StaticSchema = (3, n0, _EDN, 0)
+
 NUMERICAL_SCALE_DEFINITION: StaticSchema = (
     18,
     n0,
@@ -7810,13 +8146,48 @@ NUMERICAL_SCALE_DEFINITIONS: StaticSchema = (
     ((NUMERICAL_SCALE_DEFINITION, 0),),
 )
 
+DIMENSION_RATING_SCALE: StaticSchema = (
+    19,
+    n0,
+    _DRS,
+    4,
+    (_nu, _ca),
+    ((NUMERICAL_SCALE_DEFINITIONS, 0), (CATEGORICAL_SCALE_DEFINITIONS, 0)),
+)
+
+EVALUATION_DIMENSION: StaticSchema = (
+    18,
+    n0,
+    _EDv,
+    0,
+    (_dNi, _dIi, _dRS),
+    (
+        (EVALUATION_DIMENSION_NAME, 1),
+        (EVALUATION_DIMENSION_INSTRUCTION, 1),
+        (DIMENSION_RATING_SCALE, 1),
+    ),
+)
+
+EVALUATION_DIMENSIONS: StaticSchema = (
+    16,
+    n0,
+    _EDva,
+    0,
+    (_mem,),
+    ((EVALUATION_DIMENSION, 0),),
+)
+
 RATING_SCALE: StaticSchema = (
     19,
     n0,
     _RS,
     4,
-    (_nu, _ca),
-    ((NUMERICAL_SCALE_DEFINITIONS, 0), (CATEGORICAL_SCALE_DEFINITIONS, 0)),
+    (_nu, _ca, _mD),
+    (
+        (NUMERICAL_SCALE_DEFINITIONS, 0),
+        (CATEGORICAL_SCALE_DEFINITIONS, 0),
+        (EVALUATION_DIMENSIONS, 0),
+    ),
 )
 
 LLM_AS_A_JUDGE_EVALUATOR_CONFIG: StaticSchema = (
@@ -7856,7 +8227,7 @@ CREATE_EVALUATOR_INPUT: StaticSchema = (
     18,
     n0,
     _CEI,
-    {_sSI: _cCER, _smit: None},
+    {_sSI: _cCER, _smith: None},
     (_cT, _eNv, _d, _eCv, _le, _kKA, _t),
     (
         (CLIENT_TOKEN, 2),
@@ -7891,7 +8262,7 @@ CREATE_EVALUATOR_OUTPUT: StaticSchema = (
     18,
     n0,
     _CEO,
-    {_sSI: _cCERo, _smith: None},
+    {_sSI: _cCERo, _smithy: None},
     (_eA, _eIv, _cA, _st),
     ((CUSTOM_EVALUATOR_ARN, 1), (EVALUATOR_ID, 1), (4, 1), (EVALUATOR_STATUS, 1)),
 )
@@ -7901,7 +8272,7 @@ CREATE_EVALUATOR: StaticOperationSchema = (
     n0,
     _CEr,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "POST", "uri": "/evaluators/create", "code": 202}
         )
     },
@@ -7921,7 +8292,7 @@ DELETE_EVALUATOR_INPUT: StaticSchema = (
     18,
     n0,
     _DEI,
-    {_sSI: _cDER, _smit: None},
+    {_sSI: _cDER, _smith: None},
     (_eIv,),
     ((EVALUATOR_ID, 9),),
 )
@@ -7932,7 +8303,7 @@ DELETE_EVALUATOR_OUTPUT: StaticSchema = (
     18,
     n0,
     _DEO,
-    {_sSI: _cDERo, _smith: None},
+    {_sSI: _cDERo, _smithy: None},
     (_eA, _eIv, _st),
     ((EVALUATOR_ARN, 1), (EVALUATOR_ID, 1), (EVALUATOR_STATUS, 1)),
 )
@@ -7942,7 +8313,7 @@ DELETE_EVALUATOR: StaticOperationSchema = (
     n0,
     _DE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "DELETE", "uri": "/evaluators/{evaluatorId}", "code": 202}
         )
     },
@@ -7971,7 +8342,7 @@ GET_EVALUATOR_INPUT: StaticSchema = (
     18,
     n0,
     _GEI,
-    {_sSI: _cGER, _smit: None},
+    {_sSI: _cGER, _smith: None},
     (_eIv, _iD),
     ((EVALUATOR_ID, 9), (INCLUDED_DATA, {_sQ: _iD})),
 )
@@ -8006,7 +8377,7 @@ GET_EVALUATOR_OUTPUT: StaticSchema = (
     18,
     n0,
     _GEO,
-    {_sSI: _cGERo, _smith: None},
+    {_sSI: _cGERo, _smithy: None},
     (_eA, _eIv, _eNv, _d, _eCv, _eT, _pr, _le, _st, _cA, _uA, _lFM, _kKA),
     (
         (EVALUATOR_ARN, 1),
@@ -8029,7 +8400,7 @@ GET_EVALUATOR: StaticOperationSchema = (
     23,
     n0,
     _GE,
-    {_smithy: MappingProxyType({"method": "GET", "uri": "/evaluators/{evaluatorId}"})},
+    {_smithya: MappingProxyType({"method": "GET", "uri": "/evaluators/{evaluatorId}"})},
     GET_EVALUATOR_INPUT,
     GET_EVALUATOR_OUTPUT,
     (
@@ -8045,7 +8416,7 @@ LIST_EVALUATORS_INPUT: StaticSchema = (
     18,
     n0,
     _LEI,
-    {_sSI: _cLER, _smit: None},
+    {_sSI: _cLER, _smith: None},
     (_nT, _mR),
     ((3, {_sQ: _nT}), (7, {_sQ: _mR})),
 )
@@ -8085,7 +8456,7 @@ LIST_EVALUATORS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LEO,
-    {_sSI: _cLERo, _smith: None},
+    {_sSI: _cLERo, _smithy: None},
     (_ev, _nT),
     ((EVALUATOR_SUMMARY_LIST, 1), (3, 0)),
 )
@@ -8094,7 +8465,7 @@ LIST_EVALUATORS: StaticOperationSchema = (
     23,
     n0,
     _LE,
-    {_smithy: MappingProxyType({"method": "POST", "uri": "/evaluators"})},
+    {_smithya: MappingProxyType({"method": "POST", "uri": "/evaluators"})},
     LIST_EVALUATORS_INPUT,
     LIST_EVALUATORS_OUTPUT,
     (
@@ -8109,7 +8480,7 @@ UPDATE_EVALUATOR_INPUT: StaticSchema = (
     18,
     n0,
     _UEI,
-    {_sSI: _cUER, _smit: None},
+    {_sSI: _cUER, _smith: None},
     (_cT, _eIv, _d, _eCv, _le, _kKA),
     (
         (CLIENT_TOKEN, 2),
@@ -8125,7 +8496,7 @@ UPDATE_EVALUATOR_OUTPUT: StaticSchema = (
     18,
     n0,
     _UEO,
-    {_sSI: _cUERo, _smith: None},
+    {_sSI: _cUERo, _smithy: None},
     (_eA, _eIv, _uA, _st),
     ((EVALUATOR_ARN, 1), (EVALUATOR_ID, 1), (4, 1), (EVALUATOR_STATUS, 1)),
 )
@@ -8135,7 +8506,7 @@ UPDATE_EVALUATOR: StaticOperationSchema = (
     n0,
     _UEp,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "PUT", "uri": "/evaluators/{evaluatorId}", "code": 202}
         )
     },
@@ -8189,7 +8560,7 @@ LIMIT_ENTRY: StaticSchema = (
     n0,
     _LEi,
     0,
-    (_di, _req, _to, _conn),
+    (_di, _req, _tok, _conn),
     ((DIMENSIONS, 1), (RATE_CONFIGS, 0), (RATE_CONFIGS, 0), (RATE_CONFIGS, 0)),
 )
 
@@ -8224,7 +8595,7 @@ BATCH_PUT_GATEWAY_RATE_LIMITS_INPUT: StaticSchema = (
     18,
     n0,
     _BPGRLI,
-    {_sSI: _cBPGRLR, _smit: None},
+    {_sSI: _cBPGRLR, _smith: None},
     (_gI, _cT, _rL),
     ((GATEWAY_IDENTIFIER, 9), (CLIENT_TOKEN, 2), (BATCH_PUT_LIMIT_ENTRIES, 1)),
 )
@@ -8274,7 +8645,7 @@ BATCH_PUT_GATEWAY_RATE_LIMITS_OUTPUT: StaticSchema = (
     18,
     n0,
     _BPGRLO,
-    {_sSI: _cBPGRLRo, _smith: None},
+    {_sSI: _cBPGRLRo, _smithy: None},
     (_rL,),
     ((GATEWAY_RATE_LIMITS, 1),),
 )
@@ -8284,7 +8655,7 @@ BATCH_PUT_GATEWAY_RATE_LIMITS: StaticOperationSchema = (
     n0,
     _BPGRL,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "PUT",
@@ -8309,7 +8680,7 @@ CREATE_GATEWAY_RATE_LIMIT_INPUT: StaticSchema = (
     18,
     n0,
     _CGRLI,
-    {_sSI: _cCGRLR, _smit: None},
+    {_sSI: _cCGRLR, _smith: None},
     (_gI, _cT, _rLI, _d, _dK, _ent),
     (
         (GATEWAY_IDENTIFIER, 9),
@@ -8325,7 +8696,7 @@ CREATE_GATEWAY_RATE_LIMIT_OUTPUT: StaticSchema = (
     18,
     n0,
     _CGRLO,
-    {_sSI: _cCGRLRo, _smith: None},
+    {_sSI: _cCGRLRo, _smithy: None},
     (_rLI, _gI, _d, _dK, _ent, _st, _cA, _uA),
     (
         (GATEWAY_RATE_LIMIT_ID, 1),
@@ -8344,7 +8715,7 @@ CREATE_GATEWAY_RATE_LIMIT: StaticOperationSchema = (
     n0,
     _CGRL,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 201,
                 "method": "POST",
@@ -8369,7 +8740,7 @@ DELETE_GATEWAY_RATE_LIMIT_INPUT: StaticSchema = (
     18,
     n0,
     _DGRLI,
-    {_sSI: _cDGRLR, _smit: None},
+    {_sSI: _cDGRLR, _smith: None},
     (_gI, _rLI),
     ((GATEWAY_IDENTIFIER, 9), (GATEWAY_RATE_LIMIT_ID, 9)),
 )
@@ -8378,7 +8749,7 @@ DELETE_GATEWAY_RATE_LIMIT_OUTPUT: StaticSchema = (
     18,
     n0,
     _DGRLO,
-    {_sSI: _cDGRLRo, _smith: None},
+    {_sSI: _cDGRLRo, _smithy: None},
     (_rLI, _st),
     ((GATEWAY_RATE_LIMIT_ID, 1), (GATEWAY_RATE_LIMIT_STATUS, 1)),
 )
@@ -8388,7 +8759,7 @@ DELETE_GATEWAY_RATE_LIMIT: StaticOperationSchema = (
     n0,
     _DGRL,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "DELETE",
@@ -8412,7 +8783,7 @@ GET_GATEWAY_RATE_LIMIT_INPUT: StaticSchema = (
     18,
     n0,
     _GGRLI,
-    {_sSI: _cGGRLR, _smit: None},
+    {_sSI: _cGGRLR, _smith: None},
     (_gI, _rLI),
     ((GATEWAY_IDENTIFIER, 9), (GATEWAY_RATE_LIMIT_ID, 9)),
 )
@@ -8421,7 +8792,7 @@ GET_GATEWAY_RATE_LIMIT_OUTPUT: StaticSchema = (
     18,
     n0,
     _GGRLO,
-    {_sSI: _cGGRLRo, _smith: None},
+    {_sSI: _cGGRLRo, _smithy: None},
     (_rLI, _gI, _d, _dK, _ent, _st, _cA, _uA),
     (
         (GATEWAY_RATE_LIMIT_ID, 1),
@@ -8440,7 +8811,7 @@ GET_GATEWAY_RATE_LIMIT: StaticOperationSchema = (
     n0,
     _GGRL,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "GET",
@@ -8467,7 +8838,7 @@ LIST_GATEWAY_RATE_LIMITS_INPUT: StaticSchema = (
     18,
     n0,
     _LGRLI,
-    {_sSI: _cLGRLR, _smit: None},
+    {_sSI: _cLGRLR, _smith: None},
     (_gI, _mR, _nT),
     (
         (GATEWAY_IDENTIFIER, 9),
@@ -8480,7 +8851,7 @@ LIST_GATEWAY_RATE_LIMITS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LGRLO,
-    {_sSI: _cLGRLRo, _smith: None},
+    {_sSI: _cLGRLRo, _smithy: None},
     (_rL, _nT),
     ((GATEWAY_RATE_LIMITS, 1), (GATEWAY_RATE_LIMIT_NEXT_TOKEN, 0)),
 )
@@ -8490,7 +8861,7 @@ LIST_GATEWAY_RATE_LIMITS: StaticOperationSchema = (
     n0,
     _LGRL,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "GET",
@@ -8513,7 +8884,7 @@ UPDATE_GATEWAY_RATE_LIMIT_INPUT: StaticSchema = (
     18,
     n0,
     _UGRLI,
-    {_sSI: _cUGRLR, _smit: None},
+    {_sSI: _cUGRLR, _smith: None},
     (_gI, _rLI, _d, _ent),
     (
         (GATEWAY_IDENTIFIER, 9),
@@ -8527,7 +8898,7 @@ UPDATE_GATEWAY_RATE_LIMIT_OUTPUT: StaticSchema = (
     18,
     n0,
     _UGRLO,
-    {_sSI: _cUGRLRo, _smith: None},
+    {_sSI: _cUGRLRo, _smithy: None},
     (_rLI, _gI, _d, _dK, _ent, _st, _cA, _uA),
     (
         (GATEWAY_RATE_LIMIT_ID, 1),
@@ -8546,7 +8917,7 @@ UPDATE_GATEWAY_RATE_LIMIT: StaticOperationSchema = (
     n0,
     _UGRL,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "PATCH",
@@ -8577,6 +8948,26 @@ AUTHORIZER_TYPE: StaticSchema = (
 
 GATEWAY_DESCRIPTION: StaticSchema = (3, n0, _GDa, 4)
 
+PUBLIC_DOMAIN_NAME: StaticSchema = (3, n0, _PDN, 0)
+
+PUBLIC_DOMAIN_NAME_LIST: StaticSchema = (
+    16,
+    n0,
+    _PDNL,
+    0,
+    (_mem,),
+    ((PUBLIC_DOMAIN_NAME, 0),),
+)
+
+DOMAIN_OVERRIDE: StaticSchema = (
+    18,
+    n0,
+    _DO,
+    0,
+    (_dD, _aD),
+    ((PUBLIC_DOMAIN_NAME, {_sN: _def, _sm: None}), (PUBLIC_DOMAIN_NAME_LIST, 0)),
+)
+
 EXCEPTION_LEVEL: StaticSchema = (14, n0, _ELx, 0, (_DEBUG,), ((-1, {_sVm: _DEBUG}),))
 
 INTERCEPTOR_PAYLOAD_EXCLUSION: StaticSchema = (
@@ -8593,7 +8984,7 @@ INTERCEPTOR_PAYLOAD_EXCLUSION_SELECTOR: StaticSchema = (
     n0,
     _IPES,
     0,
-    (_fi,),
+    (_fie,),
     ((INTERCEPTOR_PAYLOAD_EXCLUSION, 0),),
 )
 
@@ -8611,7 +9002,7 @@ INTERCEPTOR_PAYLOAD_FILTER: StaticSchema = (
     n0,
     _IPF,
     0,
-    (_ex,),
+    (_exc,),
     ((INTERCEPTOR_PAYLOAD_EXCLUSION_SELECTOR_LIST, 1),),
 )
 
@@ -8702,7 +9093,7 @@ GATEWAY_POLICY_ENGINE_CONFIGURATION: StaticSchema = (
     n0,
     _GPEC,
     0,
-    (_a, _mod),
+    (_a, _mo),
     ((GATEWAY_POLICY_ENGINE_ARN, 1), (GATEWAY_POLICY_ENGINE_MODE, 1)),
 )
 
@@ -8714,7 +9105,7 @@ SESSION_CONFIGURATION: StaticSchema = (18, n0, _SCe, 0, (_sTIS,), ((7, 0),))
 
 STREAMING_CONFIGURATION: StaticSchema = (18, n0, _SCt, 0, (_eRS,), ((2, 0),))
 
-MCP_VERSION: StaticSchema = (3, n0, _MV, {_smithya: _v__})
+MCP_VERSION: StaticSchema = (3, n0, _MV, {_smi: _v__})
 
 MCP_SUPPORTED_VERSIONS: StaticSchema = (16, n0, _MSV, 0, (_mem,), ((MCP_VERSION, 0),))
 
@@ -8723,7 +9114,7 @@ MCP_GATEWAY_CONFIGURATION: StaticSchema = (
     n0,
     _MCPGC,
     0,
-    (_sVu, _in, _sTe, _sCe, _sCt, _dMLTP),
+    (_sVu, _in, _sTe, _sCe, _sCtr, _dMLTP),
     (
         (MCP_SUPPORTED_VERSIONS, 0),
         (MCP_INSTRUCTIONS, 0),
@@ -8749,14 +9140,14 @@ CREATE_GATEWAY_INPUT: StaticSchema = (
     18,
     n0,
     _CGI,
-    {_sSI: _cCGR, _smit: None},
-    (_n, _d, _cT, _rA, _pTr, _pC, _aT, _aCu, _kKA, _iCnt, _pEC, _eL, _t),
+    {_sSI: _cCGR, _smith: None},
+    (_n, _d, _cT, _rA, _pTr, _pC, _aT, _aCu, _kKA, _iCnt, _pEC, _eL, _t, _dO),
     (
         (GATEWAY_NAME, 1),
         (GATEWAY_DESCRIPTION, 0),
         (CLIENT_TOKEN, 2),
         (ROLE_ARN, 1),
-        (GATEWAY_PROTOCOL_TYPE, {_smithya: _MCP}),
+        (GATEWAY_PROTOCOL_TYPE, {_smi: _MCP}),
         (GATEWAY_PROTOCOL_CONFIGURATION, 0),
         (AUTHORIZER_TYPE, 1),
         (AUTHORIZER_CONFIGURATION, 0),
@@ -8765,6 +9156,7 @@ CREATE_GATEWAY_INPUT: StaticSchema = (
         (GATEWAY_POLICY_ENGINE_CONFIGURATION, 0),
         (EXCEPTION_LEVEL, 0),
         (TAGS_MAP, 0),
+        (DOMAIN_OVERRIDE, 0),
     ),
 )
 
@@ -8829,7 +9221,7 @@ CREATE_GATEWAY_OUTPUT: StaticSchema = (
     18,
     n0,
     _CGO,
-    {_sSI: _cCGRo, _smith: None},
+    {_sSI: _cCGRo, _smithy: None},
     (
         _gA,
         _gIa,
@@ -8853,6 +9245,7 @@ CREATE_GATEWAY_OUTPUT: StaticSchema = (
         _eL,
         _wAA,
         _wC,
+        _dO,
     ),
     (
         (GATEWAY_ARN, 1),
@@ -8865,7 +9258,7 @@ CREATE_GATEWAY_OUTPUT: StaticSchema = (
         (GATEWAY_NAME, 1),
         (GATEWAY_DESCRIPTION, 0),
         (ROLE_ARN, 0),
-        (GATEWAY_PROTOCOL_TYPE, {_smithya: _MCP}),
+        (GATEWAY_PROTOCOL_TYPE, {_smi: _MCP}),
         (GATEWAY_PROTOCOL_CONFIGURATION, 0),
         (AUTHORIZER_TYPE, 1),
         (AUTHORIZER_CONFIGURATION, 0),
@@ -8877,6 +9270,7 @@ CREATE_GATEWAY_OUTPUT: StaticSchema = (
         (EXCEPTION_LEVEL, 0),
         (WEB_ACL_ARN, 0),
         (WAF_CONFIGURATION, 0),
+        (DOMAIN_OVERRIDE, 0),
     ),
 )
 
@@ -8884,7 +9278,7 @@ CREATE_GATEWAY: StaticOperationSchema = (
     23,
     n0,
     _CG,
-    {_smithy: MappingProxyType({"code": 202, "method": "POST", "uri": "/gateways/"})},
+    {_smithya: MappingProxyType({"code": 202, "method": "POST", "uri": "/gateways/"})},
     CREATE_GATEWAY_INPUT,
     CREATE_GATEWAY_OUTPUT,
     (
@@ -8901,7 +9295,7 @@ DELETE_GATEWAY_INPUT: StaticSchema = (
     18,
     n0,
     _DGI,
-    {_sSI: _cDGR, _smit: None},
+    {_sSI: _cDGR, _smith: None},
     (_gI,),
     ((GATEWAY_IDENTIFIER, 9),),
 )
@@ -8910,7 +9304,7 @@ DELETE_GATEWAY_OUTPUT: StaticSchema = (
     18,
     n0,
     _DGO,
-    {_sSI: _cDGRo, _smith: None},
+    {_sSI: _cDGRo, _smithy: None},
     (_gIa, _st, _sRta),
     ((GATEWAY_ID, 1), (GATEWAY_STATUS, 1), (STATUS_REASONS, 0)),
 )
@@ -8920,7 +9314,7 @@ DELETE_GATEWAY: StaticOperationSchema = (
     n0,
     _DG,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "DELETE", "uri": "/gateways/{gatewayIdentifier}/"}
         )
     },
@@ -8940,7 +9334,7 @@ GET_GATEWAY_INPUT: StaticSchema = (
     18,
     n0,
     _GGI,
-    {_sSI: _cGGR, _smit: None},
+    {_sSI: _cGGR, _smith: None},
     (_gI,),
     ((GATEWAY_IDENTIFIER, 9),),
 )
@@ -8949,7 +9343,7 @@ GET_GATEWAY_OUTPUT: StaticSchema = (
     18,
     n0,
     _GGO,
-    {_sSI: _cGGRo, _smith: None},
+    {_sSI: _cGGRo, _smithy: None},
     (
         _gA,
         _gIa,
@@ -8973,6 +9367,7 @@ GET_GATEWAY_OUTPUT: StaticSchema = (
         _eL,
         _wAA,
         _wC,
+        _dO,
     ),
     (
         (GATEWAY_ARN, 1),
@@ -8985,7 +9380,7 @@ GET_GATEWAY_OUTPUT: StaticSchema = (
         (GATEWAY_NAME, 1),
         (GATEWAY_DESCRIPTION, 0),
         (ROLE_ARN, 0),
-        (GATEWAY_PROTOCOL_TYPE, {_smithya: _MCP}),
+        (GATEWAY_PROTOCOL_TYPE, {_smi: _MCP}),
         (GATEWAY_PROTOCOL_CONFIGURATION, 0),
         (AUTHORIZER_TYPE, 1),
         (AUTHORIZER_CONFIGURATION, 0),
@@ -8997,6 +9392,7 @@ GET_GATEWAY_OUTPUT: StaticSchema = (
         (EXCEPTION_LEVEL, 0),
         (WEB_ACL_ARN, 0),
         (WAF_CONFIGURATION, 0),
+        (DOMAIN_OVERRIDE, 0),
     ),
 )
 
@@ -9005,7 +9401,7 @@ GET_GATEWAY: StaticOperationSchema = (
     n0,
     _GG,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "GET", "uri": "/gateways/{gatewayIdentifier}/"}
         )
     },
@@ -9028,7 +9424,7 @@ LIST_GATEWAYS_INPUT: StaticSchema = (
     18,
     n0,
     _LGI,
-    {_sSI: _cLGR, _smit: None},
+    {_sSI: _cLGR, _smith: None},
     (_mR, _nT),
     ((GATEWAY_MAX_RESULTS, {_sQ: _mR}), (GATEWAY_NEXT_TOKEN, {_sQ: _nT})),
 )
@@ -9047,7 +9443,7 @@ GATEWAY_SUMMARY: StaticSchema = (
         (DATE_TIMESTAMP, 1),
         (DATE_TIMESTAMP, 1),
         (AUTHORIZER_TYPE, 1),
-        (GATEWAY_PROTOCOL_TYPE, {_smithya: _MCP}),
+        (GATEWAY_PROTOCOL_TYPE, {_smi: _MCP}),
     ),
 )
 
@@ -9057,7 +9453,7 @@ LIST_GATEWAYS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LGO,
-    {_sSI: _cLGRo, _smith: None},
+    {_sSI: _cLGRo, _smithy: None},
     (_it, _nT),
     ((GATEWAY_SUMMARIES, 1), (GATEWAY_NEXT_TOKEN, 0)),
 )
@@ -9066,7 +9462,7 @@ LIST_GATEWAYS: StaticOperationSchema = (
     23,
     n0,
     _LG,
-    {_smithy: MappingProxyType({"code": 200, "method": "GET", "uri": "/gateways/"})},
+    {_smithya: MappingProxyType({"code": 200, "method": "GET", "uri": "/gateways/"})},
     LIST_GATEWAYS_INPUT,
     LIST_GATEWAYS_OUTPUT,
     (
@@ -9081,14 +9477,14 @@ UPDATE_GATEWAY_INPUT: StaticSchema = (
     18,
     n0,
     _UGI,
-    {_sSI: _cUGR, _smit: None},
-    (_gI, _n, _d, _rA, _pTr, _pC, _aT, _aCu, _kKA, _cTC, _iCnt, _pEC, _eL, _wC),
+    {_sSI: _cUGR, _smith: None},
+    (_gI, _n, _d, _rA, _pTr, _pC, _aT, _aCu, _kKA, _cTC, _iCnt, _pEC, _eL, _wC, _dO),
     (
         (GATEWAY_IDENTIFIER, 9),
         (GATEWAY_NAME, 1),
         (GATEWAY_DESCRIPTION, 0),
         (ROLE_ARN, 1),
-        (GATEWAY_PROTOCOL_TYPE, {_smithya: _MCP}),
+        (GATEWAY_PROTOCOL_TYPE, {_smi: _MCP}),
         (GATEWAY_PROTOCOL_CONFIGURATION, 0),
         (AUTHORIZER_TYPE, 1),
         (AUTHORIZER_CONFIGURATION, 0),
@@ -9098,6 +9494,7 @@ UPDATE_GATEWAY_INPUT: StaticSchema = (
         (GATEWAY_POLICY_ENGINE_CONFIGURATION, 0),
         (EXCEPTION_LEVEL, 0),
         (WAF_CONFIGURATION, 0),
+        (DOMAIN_OVERRIDE, 0),
     ),
 )
 
@@ -9105,7 +9502,7 @@ UPDATE_GATEWAY_OUTPUT: StaticSchema = (
     18,
     n0,
     _UGO,
-    {_sSI: _cUGRo, _smith: None},
+    {_sSI: _cUGRo, _smithy: None},
     (
         _gA,
         _gIa,
@@ -9129,6 +9526,7 @@ UPDATE_GATEWAY_OUTPUT: StaticSchema = (
         _eL,
         _wAA,
         _wC,
+        _dO,
     ),
     (
         (GATEWAY_ARN, 1),
@@ -9141,7 +9539,7 @@ UPDATE_GATEWAY_OUTPUT: StaticSchema = (
         (GATEWAY_NAME, 1),
         (GATEWAY_DESCRIPTION, 0),
         (ROLE_ARN, 0),
-        (GATEWAY_PROTOCOL_TYPE, {_smithya: _MCP}),
+        (GATEWAY_PROTOCOL_TYPE, {_smi: _MCP}),
         (GATEWAY_PROTOCOL_CONFIGURATION, 0),
         (AUTHORIZER_TYPE, 1),
         (AUTHORIZER_CONFIGURATION, 0),
@@ -9153,6 +9551,7 @@ UPDATE_GATEWAY_OUTPUT: StaticSchema = (
         (EXCEPTION_LEVEL, 0),
         (WEB_ACL_ARN, 0),
         (WAF_CONFIGURATION, 0),
+        (DOMAIN_OVERRIDE, 0),
     ),
 )
 
@@ -9161,7 +9560,7 @@ UPDATE_GATEWAY: StaticOperationSchema = (
     n0,
     _UG,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "PUT", "uri": "/gateways/{gatewayIdentifier}/"}
         )
     },
@@ -9177,6 +9576,37 @@ UPDATE_GATEWAY: StaticOperationSchema = (
         VALIDATION_EXCEPTION,
     ),
 )
+
+MATCH_OPERATOR: StaticSchema = (
+    14,
+    n0,
+    _MOa,
+    0,
+    (_SE, _SLt),
+    ((-1, {_sVm: _SE}), (-1, {_sVm: _SLt})),
+)
+
+MODEL_PATTERN: StaticSchema = (3, n0, _MPo, 0)
+
+MATCH_MODEL_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _MME,
+    0,
+    (_v, _op),
+    ((MODEL_PATTERN, 1), (MATCH_OPERATOR, {_smi: _SLt})),
+)
+
+MATCH_MODEL_ENTRIES: StaticSchema = (
+    16,
+    n0,
+    _MMEa,
+    0,
+    (_mem,),
+    ((MATCH_MODEL_ENTRY, 0),),
+)
+
+MATCH_MODELS: StaticSchema = (18, n0, _MMa, 0, (_aO,), ((MATCH_MODEL_ENTRIES, 1),))
 
 MATCH_PATH_PATTERN: StaticSchema = (3, n0, _MPP, 0)
 
@@ -9236,8 +9666,8 @@ CONDITION: StaticSchema = (
     n0,
     _Co,
     0,
-    (_mPa, _mPat),
-    ((MATCH_PRINCIPALS, 0), (MATCH_PATHS, 0)),
+    (_mPa, _mPat, _mM),
+    ((MATCH_PRINCIPALS, 0), (MATCH_PATHS, 0), (MATCH_MODELS, 0)),
 )
 
 CONDITIONS: StaticSchema = (16, n0, _Con, 0, (_mem,), ((CONDITION, 0),))
@@ -9250,8 +9680,8 @@ CREATE_GATEWAY_RULE_INPUT: StaticSchema = (
     18,
     n0,
     _CGRI,
-    {_sSI: _cCGRR, _smit: None},
-    (_gI, _cT, _pri, _cond, _ac, _d),
+    {_sSI: _cCGRR, _smith: None},
+    (_gI, _cT, _pri, _cond, _act, _d),
     (
         (GATEWAY_IDENTIFIER, 9),
         (CLIENT_TOKEN, 2),
@@ -9284,8 +9714,8 @@ CREATE_GATEWAY_RULE_OUTPUT: StaticSchema = (
     18,
     n0,
     _CGRO,
-    {_sSI: _cCGRRo, _smith: None},
-    (_rI, _gA, _pri, _cond, _ac, _d, _cA, _st, _sy),
+    {_sSI: _cCGRRo, _smithy: None},
+    (_rI, _gA, _pri, _cond, _act, _d, _cA, _st, _sy),
     (
         (GATEWAY_RULE_ID, 1),
         (GATEWAY_ARN, 1),
@@ -9304,7 +9734,7 @@ CREATE_GATEWAY_RULE: StaticOperationSchema = (
     n0,
     _CGR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "POST",
@@ -9329,7 +9759,7 @@ DELETE_GATEWAY_RULE_INPUT: StaticSchema = (
     18,
     n0,
     _DGRI,
-    {_sSI: _cDGRR, _smit: None},
+    {_sSI: _cDGRR, _smith: None},
     (_gI, _rI),
     ((GATEWAY_IDENTIFIER, 9), (GATEWAY_RULE_ID, 9)),
 )
@@ -9338,7 +9768,7 @@ DELETE_GATEWAY_RULE_OUTPUT: StaticSchema = (
     18,
     n0,
     _DGRO,
-    {_sSI: _cDGRRo, _smith: None},
+    {_sSI: _cDGRRo, _smithy: None},
     (_rI, _st),
     ((GATEWAY_RULE_ID, 1), (GATEWAY_RULE_STATUS, 1)),
 )
@@ -9348,7 +9778,7 @@ DELETE_GATEWAY_RULE: StaticOperationSchema = (
     n0,
     _DGR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "DELETE",
@@ -9372,7 +9802,7 @@ GET_GATEWAY_RULE_INPUT: StaticSchema = (
     18,
     n0,
     _GGRI,
-    {_sSI: _cGGRR, _smit: None},
+    {_sSI: _cGGRR, _smith: None},
     (_gI, _rI),
     ((GATEWAY_IDENTIFIER, 9), (GATEWAY_RULE_ID, 9)),
 )
@@ -9381,8 +9811,8 @@ GET_GATEWAY_RULE_OUTPUT: StaticSchema = (
     18,
     n0,
     _GGRO,
-    {_sSI: _cGGRRo, _smith: None},
-    (_rI, _gA, _pri, _cond, _ac, _d, _cA, _st, _sy, _uA),
+    {_sSI: _cGGRRo, _smithy: None},
+    (_rI, _gA, _pri, _cond, _act, _d, _cA, _st, _sy, _uA),
     (
         (GATEWAY_RULE_ID, 1),
         (GATEWAY_ARN, 1),
@@ -9402,7 +9832,7 @@ GET_GATEWAY_RULE: StaticOperationSchema = (
     n0,
     _GGR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "GET",
@@ -9429,7 +9859,7 @@ LIST_GATEWAY_RULES_INPUT: StaticSchema = (
     18,
     n0,
     _LGRI,
-    {_sSI: _cLGRR, _smit: None},
+    {_sSI: _cLGRR, _smith: None},
     (_gI, _mR, _nT),
     (
         (GATEWAY_IDENTIFIER, 9),
@@ -9443,7 +9873,7 @@ GATEWAY_RULE_DETAIL: StaticSchema = (
     n0,
     _GRDa,
     0,
-    (_rI, _gA, _pri, _cond, _ac, _d, _cA, _st, _sy, _uA),
+    (_rI, _gA, _pri, _cond, _act, _d, _cA, _st, _sy, _uA),
     (
         (GATEWAY_RULE_ID, 1),
         (GATEWAY_ARN, 1),
@@ -9464,7 +9894,7 @@ LIST_GATEWAY_RULES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LGRO,
-    {_sSI: _cLGRRo, _smith: None},
+    {_sSI: _cLGRRo, _smithy: None},
     (_gR, _nT),
     ((GATEWAY_RULES, 1), (GATEWAY_RULE_NEXT_TOKEN, 0)),
 )
@@ -9474,7 +9904,7 @@ LIST_GATEWAY_RULES: StaticOperationSchema = (
     n0,
     _LGR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "GET", "uri": "/gateways/{gatewayIdentifier}/rules"}
         )
     },
@@ -9493,8 +9923,8 @@ UPDATE_GATEWAY_RULE_INPUT: StaticSchema = (
     18,
     n0,
     _UGRI,
-    {_sSI: _cUGRR, _smit: None},
-    (_gI, _rI, _pri, _cond, _ac, _d),
+    {_sSI: _cUGRR, _smith: None},
+    (_gI, _rI, _pri, _cond, _act, _d),
     (
         (GATEWAY_IDENTIFIER, 9),
         (GATEWAY_RULE_ID, 9),
@@ -9509,8 +9939,8 @@ UPDATE_GATEWAY_RULE_OUTPUT: StaticSchema = (
     18,
     n0,
     _UGRO,
-    {_sSI: _cUGRRo, _smith: None},
-    (_rI, _gA, _pri, _cond, _ac, _d, _cA, _st, _sy, _uA),
+    {_sSI: _cUGRRo, _smithy: None},
+    (_rI, _gA, _pri, _cond, _act, _d, _cA, _st, _sy, _uA),
     (
         (GATEWAY_RULE_ID, 1),
         (GATEWAY_ARN, 1),
@@ -9530,7 +9960,7 @@ UPDATE_GATEWAY_RULE: StaticOperationSchema = (
     n0,
     _UGR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "PATCH",
@@ -9548,48 +9978,6 @@ UPDATE_GATEWAY_RULE: StaticOperationSchema = (
         THROTTLING_EXCEPTION,
         VALIDATION_EXCEPTION,
     ),
-)
-
-CERTIFICATE_BUCKET_OWNER_ACCOUNT_ID: StaticSchema = (3, n0, _CBOAI, 0)
-
-CERTIFICATE_S3_URI: StaticSchema = (3, n0, _CSU, 0)
-
-S3_CERTIFICATE_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _SCC,
-    0,
-    (_u, _bOAI),
-    ((CERTIFICATE_S3_URI, 1), (CERTIFICATE_BUCKET_OWNER_ACCOUNT_ID, 0)),
-)
-
-CERTIFICATE_SECRET_ARN: StaticSchema = (3, n0, _CSA, 0)
-
-SECRETS_MANAGER_CERTIFICATE_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _SMCC,
-    0,
-    (_sA,),
-    ((CERTIFICATE_SECRET_ARN, 1),),
-)
-
-CERTIFICATE_CONFIGURATION: StaticSchema = (
-    19,
-    n0,
-    _CCe,
-    0,
-    (_s_, _sMe),
-    ((S3_CERTIFICATE_CONFIGURATION, 0), (SECRETS_MANAGER_CERTIFICATE_CONFIGURATION, 0)),
-)
-
-CERTIFICATE_CONFIGURATION_LIST: StaticSchema = (
-    16,
-    n0,
-    _CCL,
-    0,
-    (_mem,),
-    ((CERTIFICATE_CONFIGURATION, 0),),
 )
 
 API_KEY_CREDENTIAL_LOCATION: StaticSchema = (
@@ -9670,7 +10058,7 @@ O_AUTH_CREDENTIAL_PROVIDER: StaticSchema = (
         (O_AUTH_CREDENTIAL_PROVIDER_ARN, 1),
         (O_AUTH_SCOPES, 1),
         (O_AUTH_CUSTOM_PARAMETERS, 0),
-        (O_AUTH_GRANT_TYPE, {_smithya: _CC_}),
+        (O_AUTH_GRANT_TYPE, {_smi: _CC_}),
         (O_AUTH_DEFAULT_RETURN_URL, 0),
     ),
 )
@@ -9804,7 +10192,7 @@ HTTP_CONNECTOR_TARGET_CONFIGURATION: StaticSchema = (
     n0,
     _HCTC,
     0,
-    (_so, _pa),
+    (_so, _par),
     ((HTTP_CONNECTOR_SOURCE, 1), (HTTP_CONNECTOR_PARAMETERS, 0)),
 )
 
@@ -9923,14 +10311,12 @@ PROVIDER_PREFIX: StaticSchema = (
     _PP,
     0,
     (_str, _sep),
-    ((2, {_smithya: False}), (3, {_smithya: _v___})),
+    ((2, {_smi: False}), (3, {_smi: _v___})),
 )
 
 MODEL_MAPPING: StaticSchema = (18, n0, _MMo, 0, (_pP,), ((PROVIDER_PREFIX, 0),))
 
-MODEL_PATTERN: StaticSchema = (3, n0, _MPo, 0)
-
-MODEL_ENTRY: StaticSchema = (18, n0, _ME, 0, (_mode,), ((MODEL_PATTERN, 1),))
+MODEL_ENTRY: StaticSchema = (18, n0, _ME, 0, (_mod,), ((MODEL_PATTERN, 1),))
 
 MODEL_ENTRIES: StaticSchema = (16, n0, _MEo, 0, (_mem,), ((MODEL_ENTRY, 0),))
 
@@ -9941,7 +10327,7 @@ INFERENCE_OPERATION_CONFIGURATION: StaticSchema = (
     n0,
     _IOC,
     0,
-    (_pat, _pPr, _model),
+    (_pa, _pPr, _mode),
     ((INFERENCE_OPERATION_PATH, 1), (INFERENCE_OPERATION_PATH, 0), (MODEL_ENTRIES, 0)),
 )
 
@@ -9959,7 +10345,7 @@ INFERENCE_PROVIDER_TARGET_CONFIGURATION: StaticSchema = (
     n0,
     _IPTC,
     0,
-    (_end, _mM, _ope),
+    (_end, _mMo, _ope),
     (
         (PASSTHROUGH_ENDPOINT, 1),
         (MODEL_MAPPING, 0),
@@ -10021,7 +10407,7 @@ API_GATEWAY_TOOL_OVERRIDE: StaticSchema = (
     n0,
     _AGTO,
     0,
-    (_n, _d, _pat, _meth),
+    (_n, _d, _pa, _meth),
     ((3, 1), (3, 0), (3, 1), (REST_API_METHOD, 1)),
 )
 
@@ -10039,7 +10425,7 @@ API_GATEWAY_TOOL_CONFIGURATION: StaticSchema = (
     n0,
     _AGTC,
     0,
-    (_tO, _tF),
+    (_tOo, _tFo),
     ((API_GATEWAY_TOOL_OVERRIDES, 0), (API_GATEWAY_TOOL_FILTERS, 1)),
 )
 
@@ -10057,7 +10443,7 @@ CONNECTOR_PARAMETER_OVERRIDE: StaticSchema = (
     n0,
     _CPO,
     0,
-    (_pat, _d, _vi),
+    (_pa, _d, _vi),
     ((3, 1), (3, 0), (2, 0)),
 )
 
@@ -10252,7 +10638,7 @@ DELETE_GATEWAY_TARGET_INPUT: StaticSchema = (
     18,
     n0,
     _DGTI,
-    {_sSI: _cDGTR, _smit: None},
+    {_sSI: _cDGTR, _smith: None},
     (_gI, _tI),
     ((GATEWAY_IDENTIFIER, 9), (TARGET_ID, 9)),
 )
@@ -10261,7 +10647,7 @@ DELETE_GATEWAY_TARGET_OUTPUT: StaticSchema = (
     18,
     n0,
     _DGTO,
-    {_sSI: _cDGTRo, _smith: None},
+    {_sSI: _cDGTRo, _smithy: None},
     (_gA, _tI, _st, _sRta),
     ((GATEWAY_ARN, 1), (TARGET_ID, 1), (TARGET_STATUS, 1), (STATUS_REASONS, 0)),
 )
@@ -10271,7 +10657,7 @@ DELETE_GATEWAY_TARGET: StaticOperationSchema = (
     n0,
     _DGT,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "DELETE",
@@ -10295,7 +10681,7 @@ GET_GATEWAY_TARGET_INPUT: StaticSchema = (
     18,
     n0,
     _GGTI,
-    {_sSI: _cGGTR, _smit: None},
+    {_sSI: _cGGTR, _smith: None},
     (_gI, _tI),
     ((GATEWAY_IDENTIFIER, 9), (TARGET_ID, 9)),
 )
@@ -10308,7 +10694,7 @@ LIST_GATEWAY_TARGETS_INPUT: StaticSchema = (
     18,
     n0,
     _LGTI,
-    {_sSI: _cLGTR, _smit: None},
+    {_sSI: _cLGTR, _smith: None},
     (_gI, _mR, _nT),
     (
         (GATEWAY_IDENTIFIER, 9),
@@ -10342,7 +10728,7 @@ TARGET_SUMMARY: StaticSchema = (
     n0,
     _TSa,
     0,
-    (_tI, _n, _st, _d, _cA, _uA, _rP, _lSAa, _aD, _tT, _lMi),
+    (_tI, _n, _st, _d, _cA, _uA, _rP, _lSAa, _aDu, _tT, _lMi),
     (
         (TARGET_ID, 1),
         (TARGET_NAME, 1),
@@ -10364,7 +10750,7 @@ LIST_GATEWAY_TARGETS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LGTO,
-    {_sSI: _cLGTRo, _smith: None},
+    {_sSI: _cLGTRo, _smithy: None},
     (_it, _nT),
     ((TARGET_SUMMARIES, 1), (TARGET_NEXT_TOKEN, 0)),
 )
@@ -10374,7 +10760,7 @@ LIST_GATEWAY_TARGETS: StaticOperationSchema = (
     n0,
     _LGT,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "GET",
@@ -10399,7 +10785,7 @@ SYNCHRONIZE_GATEWAY_TARGETS_INPUT: StaticSchema = (
     18,
     n0,
     _SGTI,
-    {_sSI: _cSGTR, _smit: None},
+    {_sSI: _cSGTR, _smith: None},
     (_gI, _tIL),
     ((GATEWAY_IDENTIFIER, 9), (TARGET_ID_LIST, 1)),
 )
@@ -10408,7 +10794,7 @@ GET_RESOURCE_POLICY_INPUT: StaticSchema = (
     18,
     n0,
     _GRPI,
-    {_sSI: _cGRPR, _smit: None},
+    {_sSI: _cGRPR, _smith: None},
     (_rAe,),
     ((BEDROCK_AGENTCORE_RESOURCE_ARN, 9),),
 )
@@ -10419,8 +10805,8 @@ GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
     18,
     n0,
     _GRPO,
-    {_sSI: _cGRPRo, _smith: None},
-    (_po,),
+    {_sSI: _cGRPRo, _smithy: None},
+    (_pol,),
     ((RESOURCE_POLICY_BODY, 0),),
 )
 
@@ -10429,7 +10815,7 @@ GET_RESOURCE_POLICY: StaticOperationSchema = (
     n0,
     _GRPe,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "GET", "uri": "/resourcepolicy/{resourceArn}"}
         )
     },
@@ -10450,7 +10836,7 @@ GET_TOKEN_VAULT_INPUT: StaticSchema = (
     18,
     n0,
     _GTVI,
-    {_sSI: _cGTVR, _smit: None},
+    {_sSI: _cGTVR, _smith: None},
     (_tVI,),
     ((TOKEN_VAULT_ID_TYPE, 0),),
 )
@@ -10477,7 +10863,7 @@ GET_TOKEN_VAULT_OUTPUT: StaticSchema = (
     18,
     n0,
     _GTVO,
-    {_sSI: _cGTVRo, _smith: None},
+    {_sSI: _cGTVRo, _smithy: None},
     (_tVI, _kC, _lMD),
     ((TOKEN_VAULT_ID_TYPE, 1), (KMS_CONFIGURATION, 1), (4, 1)),
 )
@@ -10487,7 +10873,7 @@ GET_TOKEN_VAULT: StaticOperationSchema = (
     n0,
     _GTV,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/get-token-vault", "method": "POST"}
         )
     },
@@ -10515,7 +10901,7 @@ CREATE_HARNESS_ENDPOINT_INPUT: StaticSchema = (
     18,
     n0,
     _CHEI,
-    {_sSI: _cCHER, _smit: None},
+    {_sSI: _cCHER, _smith: None},
     (_hI, _eN, _tV, _d, _cT, _t),
     (
         (HARNESS_ID, 9),
@@ -10573,7 +10959,7 @@ CREATE_HARNESS_ENDPOINT_OUTPUT: StaticSchema = (
     18,
     n0,
     _CHEO,
-    {_sSI: _cCHERo, _smith: None},
+    {_sSI: _cCHERo, _smithy: None},
     (_end,),
     ((HARNESS_ENDPOINT, 1),),
 )
@@ -10583,7 +10969,7 @@ CREATE_HARNESS_ENDPOINT: StaticOperationSchema = (
     n0,
     _CHE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 201, "method": "POST", "uri": "/harnesses/{harnessId}/endpoints"}
         )
     },
@@ -10604,7 +10990,7 @@ DELETE_HARNESS_ENDPOINT_INPUT: StaticSchema = (
     18,
     n0,
     _DHEI,
-    {_sSI: _cDHER, _smit: None},
+    {_sSI: _cDHER, _smith: None},
     (_hI, _eN, _cT),
     (
         (HARNESS_ID, 9),
@@ -10617,7 +11003,7 @@ DELETE_HARNESS_ENDPOINT_OUTPUT: StaticSchema = (
     18,
     n0,
     _DHEO,
-    {_sSI: _cDHERo, _smith: None},
+    {_sSI: _cDHERo, _smithy: None},
     (_end,),
     ((HARNESS_ENDPOINT, 1),),
 )
@@ -10627,7 +11013,7 @@ DELETE_HARNESS_ENDPOINT: StaticOperationSchema = (
     n0,
     _DHE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "DELETE",
@@ -10651,7 +11037,7 @@ GET_HARNESS_ENDPOINT_INPUT: StaticSchema = (
     18,
     n0,
     _GHEI,
-    {_sSI: _cGHER, _smit: None},
+    {_sSI: _cGHER, _smith: None},
     (_hI, _eN),
     ((HARNESS_ID, 9), (HARNESS_ENDPOINT_NAME, 9)),
 )
@@ -10660,7 +11046,7 @@ GET_HARNESS_ENDPOINT_OUTPUT: StaticSchema = (
     18,
     n0,
     _GHEO,
-    {_sSI: _cGHERo, _smith: None},
+    {_sSI: _cGHERo, _smithy: None},
     (_end,),
     ((HARNESS_ENDPOINT, 1),),
 )
@@ -10670,7 +11056,7 @@ GET_HARNESS_ENDPOINT: StaticOperationSchema = (
     n0,
     _GHE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "GET",
@@ -10693,7 +11079,7 @@ LIST_HARNESS_ENDPOINTS_INPUT: StaticSchema = (
     18,
     n0,
     _LHEI,
-    {_sSI: _cLHER, _smit: None},
+    {_sSI: _cLHER, _smith: None},
     (_hI, _mR, _nT),
     ((HARNESS_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT})),
 )
@@ -10704,7 +11090,7 @@ LIST_HARNESS_ENDPOINTS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LHEO,
-    {_sSI: _cLHERo, _smith: None},
+    {_sSI: _cLHERo, _smithy: None},
     (_endp, _nT),
     ((HARNESS_ENDPOINTS, 1), (NEXT_TOKEN, 0)),
 )
@@ -10714,7 +11100,7 @@ LIST_HARNESS_ENDPOINTS: StaticOperationSchema = (
     n0,
     _LHE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "GET", "uri": "/harnesses/{harnessId}/endpoints"}
         )
     },
@@ -10733,7 +11119,7 @@ UPDATE_HARNESS_ENDPOINT_INPUT: StaticSchema = (
     18,
     n0,
     _UHEI,
-    {_sSI: _cUHER, _smit: None},
+    {_sSI: _cUHER, _smith: None},
     (_hI, _eN, _tV, _d, _cT),
     (
         (HARNESS_ID, 9),
@@ -10748,7 +11134,7 @@ UPDATE_HARNESS_ENDPOINT_OUTPUT: StaticSchema = (
     18,
     n0,
     _UHEO,
-    {_sSI: _cUHERo, _smith: None},
+    {_sSI: _cUHERo, _smithy: None},
     (_end,),
     ((HARNESS_ENDPOINT, 1),),
 )
@@ -10758,7 +11144,7 @@ UPDATE_HARNESS_ENDPOINT: StaticOperationSchema = (
     n0,
     _UHE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "PATCH",
@@ -10853,8 +11239,8 @@ HARNESS_HOOK_LAMBDA_TARGET: StaticSchema = (
     (_a, _tSi, _fM),
     (
         (HARNESS_LAMBDA_FUNCTION_ARN, 1),
-        (7, {_smithya: 60}),
-        (HARNESS_HOOK_FAILURE_MODE, {_smithya: _den}),
+        (7, {_smi: 60}),
+        (HARNESS_HOOK_FAILURE_MODE, {_smi: _den}),
     ),
 )
 
@@ -10959,7 +11345,7 @@ HARNESS_AGENT_CORE_MEMORY_CONFIGURATION: StaticSchema = (
     n0,
     _HACMC,
     0,
-    (_a, _aIc, _mCe, _rC),
+    (_a, _aIc, _mCe, _rCe),
     ((MEMORY_ARN, 1), (3, 0), (7, 0), (HARNESS_AGENT_CORE_MEMORY_RETRIEVAL_CONFIGS, 0)),
 )
 
@@ -11035,7 +11421,7 @@ HARNESS_BEDROCK_MODEL_CONFIG: StaticSchema = (
     n0,
     _HBMC,
     0,
-    (_mI, _mT, _te, _tP, _aF, _aP),
+    (_mI, _mT, _te, _tP, _aF, _aPd),
     (
         (MODEL_ID, 1),
         (MAX_TOKENS, 0),
@@ -11055,7 +11441,7 @@ HARNESS_GEMINI_MODEL_CONFIG: StaticSchema = (
     n0,
     _HGMC,
     0,
-    (_mI, _aKA, _mT, _te, _tP, _tK, _aP),
+    (_mI, _aKA, _mT, _te, _tP, _tK, _aPd),
     (
         (MODEL_ID, 1),
         (API_KEY_ARN, 1),
@@ -11074,7 +11460,7 @@ HARNESS_LITE_LLM_MODEL_CONFIG: StaticSchema = (
     n0,
     _HLLMC,
     0,
-    (_mI, _aKA, _aB, _mT, _te, _tP, _aP),
+    (_mI, _aKA, _aB, _mT, _te, _tP, _aPd),
     (
         (MODEL_ID, 1),
         (API_KEY_ARN, 0),
@@ -11102,7 +11488,7 @@ HARNESS_OPEN_AI_MODEL_CONFIG: StaticSchema = (
     n0,
     _HOAMC,
     0,
-    (_mI, _aKA, _aB, _mT, _te, _tP, _aF, _aP),
+    (_mI, _aKA, _aB, _mT, _te, _tP, _aF, _aPd),
     (
         (MODEL_ID, 1),
         (API_KEY_ARN, 1),
@@ -11145,7 +11531,7 @@ HARNESS_SKILL_AWS_SKILLS_SOURCE: StaticSchema = (
     n0,
     _HSASS,
     0,
-    (_path,),
+    (_pat,),
     ((HARNESS_AWS_SKILL_PATHS, 0),),
 )
 
@@ -11165,7 +11551,7 @@ HARNESS_SKILL_GIT_SOURCE: StaticSchema = (
     n0,
     _HSGS,
     0,
-    (_ur, _pat, _aut),
+    (_ur, _pa, _aut),
     ((HARNESS_SKILL_GIT_URL, 1), (3, 0), (HARNESS_SKILL_GIT_AUTH, 0)),
 )
 
@@ -11187,7 +11573,7 @@ HARNESS_SKILL: StaticSchema = (
     n0,
     _HS,
     0,
-    (_pat, _s_, _gi, _aSw),
+    (_pa, _s_, _gi, _aSw),
     (
         (HARNESS_SKILL_PATH, 0),
         (HARNESS_SKILL_S3_SOURCE, 0),
@@ -11282,6 +11668,15 @@ HTTP_HEADERS_MAP: StaticSchema = (
     ((HTTP_HEADER_KEY, 0), (HTTP_HEADER_VALUE, 0)),
 )
 
+HARNESS_REMOTE_MCP_OUTBOUND_AUTH: StaticSchema = (
+    19,
+    n0,
+    _HRMOA,
+    0,
+    (_aIw, _no),
+    ((IAM_CREDENTIAL_PROVIDER, 0), (-1, 0)),
+)
+
 HARNESS_REMOTE_MCP_URL: StaticSchema = (3, n0, _HRMU, 4)
 
 HARNESS_REMOTE_MCP_CONFIG: StaticSchema = (
@@ -11289,8 +11684,12 @@ HARNESS_REMOTE_MCP_CONFIG: StaticSchema = (
     n0,
     _HRMC,
     0,
-    (_ur, _h),
-    ((HARNESS_REMOTE_MCP_URL, 1), (HTTP_HEADERS_MAP, 0)),
+    (_ur, _h, _oA),
+    (
+        (HARNESS_REMOTE_MCP_URL, 1),
+        (HTTP_HEADERS_MAP, 0),
+        (HARNESS_REMOTE_MCP_OUTBOUND_AUTH, 0),
+    ),
 )
 
 HARNESS_TOOL_CONFIGURATION: StaticSchema = (
@@ -11388,7 +11787,7 @@ CREATE_HARNESS_INPUT: StaticSchema = (
     18,
     n0,
     _CHI,
-    {_sSI: _cCHR, _smit: None},
+    {_sSI: _cCHR, _smith: None},
     (
         _hN,
         _cT,
@@ -11397,7 +11796,7 @@ CREATE_HARNESS_INPUT: StaticSchema = (
         _eAn,
         _eV,
         _aCu,
-        _mode,
+        _mod,
         _sPy,
         _too,
         _sk,
@@ -11491,7 +11890,7 @@ HARNESS: StaticSchema = (
         _eRA,
         _cA,
         _uA,
-        _mode,
+        _mod,
         _sPy,
         _too,
         _sk,
@@ -11540,7 +11939,7 @@ CREATE_HARNESS_OUTPUT: StaticSchema = (
     18,
     n0,
     _CHO,
-    {_sSI: _cCHRo, _smith: None},
+    {_sSI: _cCHRo, _smithy: None},
     (_ha,),
     ((HARNESS, 1),),
 )
@@ -11549,7 +11948,7 @@ CREATE_HARNESS: StaticOperationSchema = (
     23,
     n0,
     _CH,
-    {_smithy: MappingProxyType({"code": 201, "method": "POST", "uri": "/harnesses"})},
+    {_smithya: MappingProxyType({"code": 201, "method": "POST", "uri": "/harnesses"})},
     CREATE_HARNESS_INPUT,
     CREATE_HARNESS_OUTPUT,
     (
@@ -11566,7 +11965,7 @@ DELETE_HARNESS_INPUT: StaticSchema = (
     18,
     n0,
     _DHI,
-    {_sSI: _cDHR, _smit: None},
+    {_sSI: _cDHR, _smith: None},
     (_hI, _cT, _dMM),
     ((HARNESS_ID, 9), (CLIENT_TOKEN, {_sQ: _cT, _sT: None}), (2, {_sQ: _dMM})),
 )
@@ -11575,7 +11974,7 @@ DELETE_HARNESS_OUTPUT: StaticSchema = (
     18,
     n0,
     _DHO,
-    {_sSI: _cDHRo, _smith: None},
+    {_sSI: _cDHRo, _smithy: None},
     (_ha,),
     ((HARNESS, 0),),
 )
@@ -11585,7 +11984,7 @@ DELETE_HARNESS: StaticOperationSchema = (
     n0,
     _DH,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "DELETE", "uri": "/harnesses/{harnessId}"}
         )
     },
@@ -11605,7 +12004,7 @@ GET_HARNESS_INPUT: StaticSchema = (
     18,
     n0,
     _GHI,
-    {_sSI: _cGHR, _smit: None},
+    {_sSI: _cGHR, _smith: None},
     (_hI, _hV),
     ((HARNESS_ID, 9), (HARNESS_VERSION, {_sQ: _hV})),
 )
@@ -11614,7 +12013,7 @@ GET_HARNESS_OUTPUT: StaticSchema = (
     18,
     n0,
     _GHO,
-    {_sSI: _cGHRo, _smith: None},
+    {_sSI: _cGHRo, _smithy: None},
     (_ha,),
     ((HARNESS, 1),),
 )
@@ -11624,7 +12023,7 @@ GET_HARNESS: StaticOperationSchema = (
     n0,
     _GH,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "GET", "uri": "/harnesses/{harnessId}"}
         )
     },
@@ -11643,7 +12042,7 @@ LIST_HARNESSES_INPUT: StaticSchema = (
     18,
     n0,
     _LHI,
-    {_sSI: _cLHR, _smit: None},
+    {_sSI: _cLHR, _smith: None},
     (_mR, _nT),
     ((MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT})),
 )
@@ -11671,7 +12070,7 @@ LIST_HARNESSES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LHO,
-    {_sSI: _cLHRo, _smith: None},
+    {_sSI: _cLHRo, _smithy: None},
     (_har, _nT),
     ((HARNESS_SUMMARIES, 1), (NEXT_TOKEN, 0)),
 )
@@ -11679,8 +12078,8 @@ LIST_HARNESSES_OUTPUT: StaticSchema = (
 LIST_HARNESSES: StaticOperationSchema = (
     23,
     n0,
-    _LH,
-    {_smithy: MappingProxyType({"code": 200, "method": "GET", "uri": "/harnesses"})},
+    _LHi,
+    {_smithya: MappingProxyType({"code": 200, "method": "GET", "uri": "/harnesses"})},
     LIST_HARNESSES_INPUT,
     LIST_HARNESSES_OUTPUT,
     (
@@ -11695,7 +12094,7 @@ LIST_HARNESS_VERSIONS_INPUT: StaticSchema = (
     18,
     n0,
     _LHVI,
-    {_sSI: _cLHVR, _smit: None},
+    {_sSI: _cLHVR, _smith: None},
     (_hI, _mR, _nT),
     ((HARNESS_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT})),
 )
@@ -11731,7 +12130,7 @@ LIST_HARNESS_VERSIONS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LHVO,
-    {_sSI: _cLHVRo, _smith: None},
+    {_sSI: _cLHVRo, _smithy: None},
     (_hVa, _nT),
     ((HARNESS_VERSION_SUMMARIES, 1), (NEXT_TOKEN, 0)),
 )
@@ -11741,7 +12140,7 @@ LIST_HARNESS_VERSIONS: StaticOperationSchema = (
     n0,
     _LHV,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "GET", "uri": "/harnesses/{harnessId}/versions"}
         )
     },
@@ -11787,7 +12186,7 @@ UPDATE_HARNESS_INPUT: StaticSchema = (
     18,
     n0,
     _UHI,
-    {_sSI: _cUHR, _smit: None},
+    {_sSI: _cUHR, _smith: None},
     (
         _hI,
         _cT,
@@ -11796,7 +12195,7 @@ UPDATE_HARNESS_INPUT: StaticSchema = (
         _eAn,
         _eV,
         _aCu,
-        _mode,
+        _mod,
         _sPy,
         _too,
         _sk,
@@ -11834,7 +12233,7 @@ UPDATE_HARNESS_OUTPUT: StaticSchema = (
     18,
     n0,
     _UHO,
-    {_sSI: _cUHRo, _smith: None},
+    {_sSI: _cUHRo, _smithy: None},
     (_ha,),
     ((HARNESS, 1),),
 )
@@ -11844,7 +12243,7 @@ UPDATE_HARNESS: StaticOperationSchema = (
     n0,
     _UH,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "PATCH", "uri": "/harnesses/{harnessId}"}
         )
     },
@@ -11867,7 +12266,7 @@ LIST_TAGS_FOR_RESOURCE_INPUT: StaticSchema = (
     18,
     n0,
     _LTFRI,
-    {_sSI: _cLTFRR, _smit: None},
+    {_sSI: _cLTFRR, _smith: None},
     (_rAe,),
     ((TAGGABLE_RESOURCES_ARN, 9),),
 )
@@ -11876,7 +12275,7 @@ LIST_TAGS_FOR_RESOURCE_OUTPUT: StaticSchema = (
     18,
     n0,
     _LTFRO,
-    {_sSI: _cLTFRRo, _smith: None},
+    {_sSI: _cLTFRRo, _smithy: None},
     (_t,),
     ((TAGS_MAP, 0),),
 )
@@ -11886,7 +12285,7 @@ LIST_TAGS_FOR_RESOURCE: StaticOperationSchema = (
     n0,
     _LTFR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "GET", "uri": "/tags/{resourceArn}"}
         )
     },
@@ -12084,17 +12483,10 @@ MESSAGE_BASED_TRIGGER_INPUT: StaticSchema = (
     _MBTI,
     0,
     (_mCes,),
-    ((7, {_smithya: 6}),),
+    ((7, {_smi: 6}),),
 )
 
-TIME_BASED_TRIGGER_INPUT: StaticSchema = (
-    18,
-    n0,
-    _TBTI,
-    0,
-    (_iST,),
-    ((7, {_smithya: 20}),),
-)
+TIME_BASED_TRIGGER_INPUT: StaticSchema = (18, n0, _TBTI, 0, (_iST,), ((7, {_smi: 20}),))
 
 TOKEN_BASED_TRIGGER_INPUT: StaticSchema = (
     18,
@@ -12102,7 +12494,7 @@ TOKEN_BASED_TRIGGER_INPUT: StaticSchema = (
     _TBTIo,
     0,
     (_tC,),
-    ((7, {_smithya: 5000}),),
+    ((7, {_smi: 5000}),),
 )
 
 TRIGGER_CONDITION_INPUT: StaticSchema = (
@@ -12136,7 +12528,7 @@ SELF_MANAGED_CONFIGURATION_INPUT: StaticSchema = (
     (
         (TRIGGER_CONDITION_INPUT_LIST, 0),
         (INVOCATION_CONFIGURATION_INPUT, 1),
-        (7, {_smithya: 4}),
+        (7, {_smi: 4}),
     ),
 )
 
@@ -12235,12 +12627,32 @@ CUSTOM_CONFIGURATION_INPUT: StaticSchema = (
 
 NAME: StaticSchema = (3, n0, _Nam, 0)
 
+RECORD_EXPIRY_ACTION: StaticSchema = (
+    14,
+    n0,
+    _REA,
+    0,
+    (_REMOVE,),
+    ((-1, {_sVm: _REMOVE}),),
+)
+
+RECORD_EXPIRY_DURATION_DAYS: StaticSchema = (7, n0, _REDD, 0)
+
+RECORD_EXPIRY_SPECIFICATION: StaticSchema = (
+    19,
+    n0,
+    _RES,
+    0,
+    (_rEDD, _ac),
+    ((RECORD_EXPIRY_DURATION_DAYS, 0), (RECORD_EXPIRY_ACTION, 0)),
+)
+
 CUSTOM_MEMORY_STRATEGY_INPUT: StaticSchema = (
     18,
     n0,
     _CMSI,
     0,
-    (_n, _d, _na, _nTa, _con, _mRS),
+    (_n, _d, _na, _nTa, _con, _mRS, _rES),
     (
         (NAME, 1),
         (DESCRIPTION, 0),
@@ -12248,6 +12660,7 @@ CUSTOM_MEMORY_STRATEGY_INPUT: StaticSchema = (
         (NAMESPACES_LIST, 0),
         (CUSTOM_CONFIGURATION_INPUT, 0),
         (MEMORY_RECORD_SCHEMA, 0),
+        (RECORD_EXPIRY_SPECIFICATION, 0),
     ),
 )
 
@@ -12265,7 +12678,7 @@ EPISODIC_MEMORY_STRATEGY_INPUT: StaticSchema = (
     n0,
     _EMSI,
     0,
-    (_n, _d, _na, _nTa, _rCe, _mRS),
+    (_n, _d, _na, _nTa, _rCef, _mRS, _rES),
     (
         (NAME, 1),
         (DESCRIPTION, 0),
@@ -12273,6 +12686,7 @@ EPISODIC_MEMORY_STRATEGY_INPUT: StaticSchema = (
         (NAMESPACES_LIST, 0),
         (EPISODIC_REFLECTION_CONFIGURATION_INPUT, 0),
         (MEMORY_RECORD_SCHEMA, 0),
+        (RECORD_EXPIRY_SPECIFICATION, 0),
     ),
 )
 
@@ -12281,13 +12695,14 @@ SEMANTIC_MEMORY_STRATEGY_INPUT: StaticSchema = (
     n0,
     _SMSI,
     0,
-    (_n, _d, _na, _nTa, _mRS),
+    (_n, _d, _na, _nTa, _mRS, _rES),
     (
         (NAME, 1),
         (DESCRIPTION, 0),
         (NAMESPACES_LIST, 0),
         (NAMESPACES_LIST, 0),
         (MEMORY_RECORD_SCHEMA, 0),
+        (RECORD_EXPIRY_SPECIFICATION, 0),
     ),
 )
 
@@ -12296,13 +12711,14 @@ SUMMARY_MEMORY_STRATEGY_INPUT: StaticSchema = (
     n0,
     _SMSIu,
     0,
-    (_n, _d, _na, _nTa, _mRS),
+    (_n, _d, _na, _nTa, _mRS, _rES),
     (
         (NAME, 1),
         (DESCRIPTION, 0),
         (NAMESPACES_LIST, 0),
         (NAMESPACES_LIST, 0),
         (MEMORY_RECORD_SCHEMA, 0),
+        (RECORD_EXPIRY_SPECIFICATION, 0),
     ),
 )
 
@@ -12311,13 +12727,14 @@ USER_PREFERENCE_MEMORY_STRATEGY_INPUT: StaticSchema = (
     n0,
     _UPMSI,
     0,
-    (_n, _d, _na, _nTa, _mRS),
+    (_n, _d, _na, _nTa, _mRS, _rES),
     (
         (NAME, 1),
         (DESCRIPTION, 0),
         (NAMESPACES_LIST, 0),
         (NAMESPACES_LIST, 0),
         (MEMORY_RECORD_SCHEMA, 0),
+        (RECORD_EXPIRY_SPECIFICATION, 0),
     ),
 )
 
@@ -12404,7 +12821,7 @@ CONTENT_CONFIGURATION: StaticSchema = (
     _CCont,
     0,
     (_ty, _le),
-    ((CONTENT_TYPE, 1), (CONTENT_LEVEL, {_smithya: _MO})),
+    ((CONTENT_TYPE, 1), (CONTENT_LEVEL, {_smi: _MO})),
 )
 
 CONTENT_CONFIGURATION_LIST: StaticSchema = (
@@ -12455,8 +12872,8 @@ STREAM_DELIVERY_RESOURCES: StaticSchema = (
 CREATE_MEMORY_INPUT: StaticSchema = (
     18,
     n0,
-    _CMI,
-    {_smit: None},
+    _CMIr,
+    {_smith: None},
     (_cT, _n, _d, _eKA, _mERA, _eED, _mSe, _iK, _nK, _sDR, _t),
     (
         (NON_EMPTY_STRING, 2),
@@ -12748,7 +13165,7 @@ MEMORY_STRATEGY: StaticSchema = (
     n0,
     _MSem,
     0,
-    (_sIt, _n, _d, _con, _ty, _na, _nTa, _cA, _uA, _st, _mRS),
+    (_sIt, _n, _d, _con, _ty, _na, _nTa, _cA, _uA, _st, _mRS, _rEDD),
     (
         (MEMORY_STRATEGY_ID, 1),
         (NAME, 1),
@@ -12761,6 +13178,7 @@ MEMORY_STRATEGY: StaticSchema = (
         (4, 0),
         (MEMORY_STRATEGY_STATUS, 0),
         (MEMORY_RECORD_SCHEMA, 0),
+        (RECORD_EXPIRY_DURATION_DAYS, 0),
     ),
 )
 
@@ -12820,7 +13238,7 @@ CREATE_MEMORY_OUTPUT: StaticSchema = (
     18,
     n0,
     _CMO,
-    {_smith: None},
+    {_smithy: None},
     (_memo,),
     ((MEMORY, 0),),
 )
@@ -12834,7 +13252,7 @@ CREATE_MEMORY: StaticOperationSchema = (
     n0,
     _CM,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "POST", "uri": "/memories/create"}
         )
     },
@@ -12855,7 +13273,7 @@ DELETE_MEMORY_INPUT: StaticSchema = (
     18,
     n0,
     _DMI,
-    {_smit: None},
+    {_smith: None},
     (_cT, _mIe),
     ((NON_EMPTY_STRING, {_sQ: _cT, _sT: None}), (MEMORY_ID, 9)),
 )
@@ -12864,7 +13282,7 @@ DELETE_MEMORY_OUTPUT: StaticSchema = (
     18,
     n0,
     _DMO,
-    {_smith: None},
+    {_smithy: None},
     (_mIe, _st),
     ((MEMORY_ID, 1), (MEMORY_STATUS, 0)),
 )
@@ -12874,7 +13292,7 @@ DELETE_MEMORY: StaticOperationSchema = (
     n0,
     _DM,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "DELETE", "uri": "/memories/{memoryId}/delete"}
         )
     },
@@ -12903,16 +13321,16 @@ GET_MEMORY_INPUT: StaticSchema = (
     18,
     n0,
     _GMI,
-    {_smit: None},
+    {_smith: None},
     (_mIe, _vie),
-    ((MEMORY_ID, 9), (MEMORY_VIEW, {_smithya: _fu, _sQ: _vie})),
+    ((MEMORY_ID, 9), (MEMORY_VIEW, {_smi: _fu, _sQ: _vie})),
 )
 
 GET_MEMORY_OUTPUT: StaticSchema = (
     18,
     n0,
     _GMO,
-    {_smith: None},
+    {_smithy: None},
     (_memo,),
     ((MEMORY, 1),),
 )
@@ -12922,7 +13340,7 @@ GET_MEMORY: StaticOperationSchema = (
     n0,
     _GM,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "GET", "uri": "/memories/{memoryId}/details"}
         )
     },
@@ -12941,9 +13359,9 @@ LIST_MEMORIES_INPUT: StaticSchema = (
     18,
     n0,
     _LMI,
-    {_smit: None},
+    {_smith: None},
     (_mR, _nT),
-    ((7, {_smithya: 100}), (3, 0)),
+    ((7, {_smi: 100}), (3, 0)),
 )
 
 MEMORY_SUMMARY: StaticSchema = (
@@ -12961,7 +13379,7 @@ LIST_MEMORIES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LMO,
-    {_smith: None},
+    {_smithy: None},
     (_memor, _nT),
     ((MEMORY_SUMMARY_LIST, 1), (3, 0)),
 )
@@ -12970,7 +13388,7 @@ LIST_MEMORIES: StaticOperationSchema = (
     23,
     n0,
     _LMi,
-    {_smithy: MappingProxyType({"method": "POST", "uri": "/memories/"})},
+    {_smithya: MappingProxyType({"method": "POST", "uri": "/memories/"})},
     LIST_MEMORIES_INPUT,
     LIST_MEMORIES_OUTPUT,
     (
@@ -13100,7 +13518,7 @@ MODIFY_MEMORY_STRATEGY_INPUT: StaticSchema = (
     n0,
     _MMSI,
     0,
-    (_mSI, _d, _na, _nTa, _con, _mRS),
+    (_mSI, _d, _na, _nTa, _con, _mRS, _rES),
     (
         (3, 1),
         (DESCRIPTION, 0),
@@ -13108,6 +13526,7 @@ MODIFY_MEMORY_STRATEGY_INPUT: StaticSchema = (
         (NAMESPACES_LIST, 0),
         (MODIFY_STRATEGY_CONFIGURATION, 0),
         (MEMORY_RECORD_SCHEMA, 0),
+        (RECORD_EXPIRY_SPECIFICATION, 0),
     ),
 )
 
@@ -13137,7 +13556,7 @@ UPDATE_MEMORY_INPUT: StaticSchema = (
     18,
     n0,
     _UMI,
-    {_smit: None},
+    {_smith: None},
     (_cT, _mIe, _d, _eED, _mERA, _mSe, _aIK, _nK, _sDR),
     (
         (NON_EMPTY_STRING, 2),
@@ -13156,7 +13575,7 @@ UPDATE_MEMORY_OUTPUT: StaticSchema = (
     18,
     n0,
     _UMO,
-    {_smith: None},
+    {_smithy: None},
     (_memo,),
     ((MEMORY, 0),),
 )
@@ -13166,7 +13585,7 @@ UPDATE_MEMORY: StaticOperationSchema = (
     n0,
     _UM,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "PUT", "uri": "/memories/{memoryId}/update"}
         )
     },
@@ -13207,7 +13626,7 @@ CREDENTIAL_PROVIDER_VENDOR_TYPE: StaticSchema = (
         _ZO,
         _TO,
         _SOp,
-        _DO,
+        _DOr,
         _NO,
         _HO,
         _CAO,
@@ -13234,7 +13653,7 @@ CREDENTIAL_PROVIDER_VENDOR_TYPE: StaticSchema = (
         (-1, {_sVm: _ZO}),
         (-1, {_sVm: _TO}),
         (-1, {_sVm: _SOp}),
-        (-1, {_sVm: _DO}),
+        (-1, {_sVm: _DOr}),
         (-1, {_sVm: _NO}),
         (-1, {_sVm: _HO}),
         (-1, {_sVm: _CAO}),
@@ -13256,7 +13675,7 @@ ATLASSIAN_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
     (_cIl, _cS, _cSC, _cSS),
     (
         (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
         (SECRET_REFERENCE, 0),
         (SECRET_SOURCE_TYPE, 0),
     ),
@@ -13329,6 +13748,24 @@ ON_BEHALF_OF_TOKEN_EXCHANGE_GRANT_TYPE_TYPE: StaticSchema = (
     ((-1, {_sVm: _TE_}), (-1, {_sVm: _JAG})),
 )
 
+ON_BEHALF_OF_CLIENT_AUTHENTICATION_METHOD: StaticSchema = (
+    14,
+    n0,
+    _OBOCAM,
+    0,
+    (_NC_,),
+    ((-1, {_sVm: _NC_}),),
+)
+
+ON_BEHALF_OF_AUTHENTICATION_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _OBOAC,
+    0,
+    (_cAM,),
+    ((ON_BEHALF_OF_CLIENT_AUTHENTICATION_METHOD, 1),),
+)
+
 SCOPE_TYPE: StaticSchema = (3, n0, _STco, 0)
 
 SCOPES_LIST_TYPE: StaticSchema = (16, n0, _SLT, 0, (_mem,), ((SCOPE_TYPE, 0),))
@@ -13347,10 +13784,11 @@ ON_BEHALF_OF_TOKEN_EXCHANGE_CONFIG_TYPE: StaticSchema = (
     n0,
     _OBOTECT,
     0,
-    (_gT, _tEGTC),
+    (_gT, _tEGTC, _oBOAC),
     (
         (ON_BEHALF_OF_TOKEN_EXCHANGE_GRANT_TYPE_TYPE, 1),
         (TOKEN_EXCHANGE_GRANT_TYPE_CONFIG_TYPE, 0),
+        (ON_BEHALF_OF_AUTHENTICATION_CONFIG, 0),
     ),
 )
 
@@ -13393,11 +13831,11 @@ CUSTOM_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
     n0,
     _COPCI,
     0,
-    (_oD, _cIl, _cS, _cSC, _cSS, _oBOTEC, _cAM, _pKJC, _pE, _pEO),
+    (_oD, _cIl, _cS, _cSC, _cSS, _oBOTEC, _cAM, _pKJC, _pE, _pEO, _cCe),
     (
         (OAUTH2_DISCOVERY, 1),
-        (DEFAULT_CLIENT_ID_TYPE, {_smithya: _v_}),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_CLIENT_ID_TYPE, {_smi: _v_}),
+        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
         (SECRET_REFERENCE, 0),
         (SECRET_SOURCE_TYPE, 0),
         (ON_BEHALF_OF_TOKEN_EXCHANGE_CONFIG_TYPE, 0),
@@ -13405,6 +13843,7 @@ CUSTOM_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
         (PRIVATE_KEY_JWT_CONFIG, 0),
         (PRIVATE_ENDPOINT, 0),
         (PRIVATE_ENDPOINT_OVERRIDES, 0),
+        (CERTIFICATE_CONFIGURATION_LIST, 0),
     ),
 )
 
@@ -13416,7 +13855,7 @@ GITHUB_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
     (_cIl, _cS, _cSC, _cSS),
     (
         (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
         (SECRET_REFERENCE, 0),
         (SECRET_SOURCE_TYPE, 0),
     ),
@@ -13430,7 +13869,7 @@ GOOGLE_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
     (_cIl, _cS, _cSC, _cSS),
     (
         (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
         (SECRET_REFERENCE, 0),
         (SECRET_SOURCE_TYPE, 0),
     ),
@@ -13444,7 +13883,7 @@ INCLUDED_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
     (_cIl, _cS, _cSC, _cSS, _is, _aE, _tE),
     (
         (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
         (SECRET_REFERENCE, 0),
         (SECRET_SOURCE_TYPE, 0),
         (ISSUER_URL_TYPE, 0),
@@ -13461,7 +13900,7 @@ LINKEDIN_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
     (_cIl, _cS, _cSC, _cSS),
     (
         (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
         (SECRET_REFERENCE, 0),
         (SECRET_SOURCE_TYPE, 0),
     ),
@@ -13477,7 +13916,7 @@ MICROSOFT_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
     (_cIl, _cS, _cSC, _cSS, _tIe),
     (
         (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
         (SECRET_REFERENCE, 0),
         (SECRET_SOURCE_TYPE, 0),
         (TENANT_ID_TYPE, 0),
@@ -13492,7 +13931,7 @@ SALESFORCE_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
     (_cIl, _cS, _cSC, _cSS),
     (
         (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
         (SECRET_REFERENCE, 0),
         (SECRET_SOURCE_TYPE, 0),
     ),
@@ -13506,7 +13945,7 @@ SLACK_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
     (_cIl, _cS, _cSC, _cSS),
     (
         (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
         (SECRET_REFERENCE, 0),
         (SECRET_SOURCE_TYPE, 0),
     ),
@@ -13535,7 +13974,7 @@ CREATE_OAUTH2_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _COCPI,
-    {_sSI: _cCOCPR, _smit: None},
+    {_sSI: _cCOCPR, _smith: None},
     (_n, _cPVr, _oPCI, _t),
     (
         (CREDENTIAL_PROVIDER_NAME, 1),
@@ -13561,7 +14000,7 @@ CUSTOM_OAUTH2_PROVIDER_CONFIG_OUTPUT: StaticSchema = (
     n0,
     _COPCO,
     0,
-    (_oD, _cIl, _oBOTEC, _cAM, _pE, _pEO, _pKJC),
+    (_oD, _cIl, _oBOTEC, _cAM, _pE, _pEO, _cCe, _pKJC),
     (
         (OAUTH2_DISCOVERY, 1),
         (CLIENT_ID_TYPE, 0),
@@ -13569,6 +14008,7 @@ CUSTOM_OAUTH2_PROVIDER_CONFIG_OUTPUT: StaticSchema = (
         (CLIENT_AUTHENTICATION_METHOD_TYPE, 0),
         (PRIVATE_ENDPOINT, 0),
         (PRIVATE_ENDPOINT_OVERRIDES, 0),
+        (CERTIFICATE_CONFIGURATION_LIST, 0),
         (PRIVATE_KEY_JWT_CONFIG, 0),
     ),
 )
@@ -13676,7 +14116,7 @@ CREATE_OAUTH2_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _COCPO,
-    {_sSI: _cCOCPRo, _smith: None},
+    {_sSI: _cCOCPRo, _smithy: None},
     (_cSA, _cSJK, _cSS, _n, _cPAr, _cUa, _oPCO, _st),
     (
         (SECRET, 1),
@@ -13695,7 +14135,7 @@ CREATE_OAUTH2_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _COCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 201,
                 "uri": "/identities/CreateOauth2CredentialProvider",
@@ -13724,7 +14164,7 @@ DELETE_OAUTH2_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _DOCPI,
-    {_sSI: _cDOCPR, _smit: None},
+    {_sSI: _cDOCPR, _smith: None},
     (_n,),
     ((CREDENTIAL_PROVIDER_NAME, 1),),
 )
@@ -13733,7 +14173,7 @@ DELETE_OAUTH2_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _DOCPO,
-    {_sSI: _cDOCPRo, _smith: None},
+    {_sSI: _cDOCPRo, _smithy: None},
 )
 
 DELETE_OAUTH2_CREDENTIAL_PROVIDER: StaticOperationSchema = (
@@ -13741,7 +14181,7 @@ DELETE_OAUTH2_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _DOCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 204,
                 "uri": "/identities/DeleteOauth2CredentialProvider",
@@ -13766,7 +14206,7 @@ GET_OAUTH2_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _GOCPI,
-    {_sSI: _cGOCPR, _smit: None},
+    {_sSI: _cGOCPR, _smith: None},
     (_n,),
     ((CREDENTIAL_PROVIDER_NAME, 1),),
 )
@@ -13775,7 +14215,7 @@ GET_OAUTH2_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _GOCPO,
-    {_sSI: _cGOCPRo, _smith: None},
+    {_sSI: _cGOCPRo, _smithy: None},
     (_cSA, _cSJK, _cSS, _n, _cPAr, _cPVr, _cUa, _oPCO, _cTr, _lUT, _st, _fR),
     (
         (SECRET, 1),
@@ -13798,7 +14238,7 @@ GET_OAUTH2_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _GOCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/GetOauth2CredentialProvider", "method": "POST"}
         )
     },
@@ -13819,9 +14259,9 @@ LIST_OAUTH2_CREDENTIAL_PROVIDERS_INPUT: StaticSchema = (
     18,
     n0,
     _LOCPI,
-    {_sSI: _cLOCPR, _smit: None},
+    {_sSI: _cLOCPR, _smith: None},
     (_nT, _mR),
-    ((3, 0), (7, {_smithya: 10})),
+    ((3, 0), (7, {_smi: 10})),
 )
 
 OAUTH2_CREDENTIAL_PROVIDER_ITEM: StaticSchema = (
@@ -13852,7 +14292,7 @@ LIST_OAUTH2_CREDENTIAL_PROVIDERS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LOCPO,
-    {_sSI: _cLOCPRo, _smith: None},
+    {_sSI: _cLOCPRo, _smithy: None},
     (_cP, _nT),
     ((OAUTH2_CREDENTIAL_PROVIDERS, 1), (3, 0)),
 )
@@ -13862,7 +14302,7 @@ LIST_OAUTH2_CREDENTIAL_PROVIDERS: StaticOperationSchema = (
     n0,
     _LOCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/ListOauth2CredentialProviders", "method": "POST"}
         )
     },
@@ -13882,7 +14322,7 @@ UPDATE_OAUTH2_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _UOCPI,
-    {_sSI: _cUOCPR, _smit: None},
+    {_sSI: _cUOCPR, _smith: None},
     (_n, _cPVr, _oPCI),
     (
         (CREDENTIAL_PROVIDER_NAME, 1),
@@ -13895,7 +14335,7 @@ UPDATE_OAUTH2_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _UOCPO,
-    {_sSI: _cUOCPRo, _smith: None},
+    {_sSI: _cUOCPRo, _smithy: None},
     (_cSA, _cSJK, _cSS, _n, _cPVr, _cPAr, _cUa, _oPCO, _cTr, _lUT, _st),
     (
         (SECRET, 1),
@@ -13917,7 +14357,7 @@ UPDATE_OAUTH2_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _UOCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/UpdateOauth2CredentialProvider", "method": "POST"}
         )
     },
@@ -13960,7 +14400,7 @@ CLUSTERING_CONFIG: StaticSchema = (
     n0,
     _CCl,
     0,
-    (_fr,),
+    (_fre,),
     ((CLUSTERING_FREQUENCY_LIST, 1),),
 )
 
@@ -13988,9 +14428,9 @@ CLOUD_WATCH_LOGS_INPUT_CONFIG: StaticSchema = (
     n0,
     _CWLIC,
     0,
-    (_lGN, _lGNP, _sN),
+    (_lGN, _lGNP, _sNe),
     (
-        (LOG_GROUP_NAMES_LIST, {_smithya: ()}),
+        (LOG_GROUP_NAMES_LIST, {_smi: ()}),
         (LOG_GROUP_NAME_PREFIX_LIST, 0),
         (SERVICE_NAMES_LIST, 1),
     ),
@@ -14039,9 +14479,9 @@ CLOUD_WATCH_OUTPUT_CONFIG: StaticSchema = (
     0,
     (_lGNo, _mN, _rDe),
     (
-        (OPTIONAL_LOG_GROUP_NAME, {_smithya: _v_}),
+        (OPTIONAL_LOG_GROUP_NAME, {_smi: _v_}),
         (METRICS_NAMESPACE, 0),
-        (RESULT_DESTINATION, {_smithya: _DLG}),
+        (RESULT_DESTINATION, {_smi: _DLG}),
     ),
 )
 
@@ -14059,7 +14499,7 @@ FILTER_OPERATOR: StaticSchema = (
     n0,
     _FOi,
     0,
-    (_EQUALS, _NE, _GT, _LT, _GTOE, _LTOE, _CONTAINS, _NC_),
+    (_EQUALS, _NE, _GT, _LT, _GTOE, _LTOE, _CONTAINS, _NC__),
     (
         (-1, {_sVm: _E}),
         (-1, {_sVm: _NEo}),
@@ -14084,7 +14524,7 @@ FILTER_VALUE: StaticSchema = (
 FILTER: StaticSchema = (
     18,
     n0,
-    _F,
+    _Fi,
     0,
     (_k, _op, _v),
     ((3, 1), (FILTER_OPERATOR, 1), (FILTER_VALUE, 1)),
@@ -14111,7 +14551,7 @@ CREATE_ONLINE_EVALUATION_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _COECI,
-    {_sSI: _cCOECR, _smit: None},
+    {_sSI: _cCOECR, _smith: None},
     (_cT, _oECN, _d, _rul, _dSC, _ev, _ins, _cCl, _oC, _eERA, _eOC, _t),
     (
         (CLIENT_TOKEN, 2),
@@ -14163,7 +14603,7 @@ CREATE_ONLINE_EVALUATION_CONFIG_OUTPUT: StaticSchema = (
     18,
     n0,
     _COECO,
-    {_sSI: _cCOECRo, _smith: None},
+    {_sSI: _cCOECRo, _smithy: None},
     (_oECA, _oECI, _cA, _oC, _st, _eS, _fR),
     (
         (ONLINE_EVALUATION_CONFIG_ARN, 1),
@@ -14181,7 +14621,7 @@ CREATE_ONLINE_EVALUATION_CONFIG: StaticOperationSchema = (
     n0,
     _COEC,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "POST", "uri": "/online-evaluation-configs/create", "code": 202}
         )
     },
@@ -14201,7 +14641,7 @@ DELETE_ONLINE_EVALUATION_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _DOECI,
-    {_sSI: _cDOECR, _smit: None},
+    {_sSI: _cDOECR, _smith: None},
     (_oECI,),
     ((ONLINE_EVALUATION_CONFIG_ID, 9),),
 )
@@ -14210,7 +14650,7 @@ DELETE_ONLINE_EVALUATION_CONFIG_OUTPUT: StaticSchema = (
     18,
     n0,
     _DOECO,
-    {_sSI: _cDOECRo, _smith: None},
+    {_sSI: _cDOECRo, _smithy: None},
     (_oECA, _oECI, _st),
     (
         (ONLINE_EVALUATION_CONFIG_ARN, 1),
@@ -14224,7 +14664,7 @@ DELETE_ONLINE_EVALUATION_CONFIG: StaticOperationSchema = (
     n0,
     _DOEC,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/online-evaluation-configs/{onlineEvaluationConfigId}",
@@ -14248,7 +14688,7 @@ GET_ONLINE_EVALUATION_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _GOECI,
-    {_sSI: _cGOECR, _smit: None},
+    {_sSI: _cGOECR, _smith: None},
     (_oECI,),
     ((ONLINE_EVALUATION_CONFIG_ID, 9),),
 )
@@ -14257,7 +14697,7 @@ GET_ONLINE_EVALUATION_CONFIG_OUTPUT: StaticSchema = (
     18,
     n0,
     _GOECO,
-    {_sSI: _cGOECRo, _smith: None},
+    {_sSI: _cGOECRo, _smithy: None},
     (
         _oECA,
         _oECI,
@@ -14283,7 +14723,7 @@ GET_ONLINE_EVALUATION_CONFIG_OUTPUT: StaticSchema = (
         (EVALUATION_CONFIG_DESCRIPTION, 0),
         (RULE, 1),
         (DATA_SOURCE_CONFIG, 1),
-        (EVALUATOR_LIST, {_smithya: ()}),
+        (EVALUATOR_LIST, {_smi: ()}),
         (INSIGHT_LIST, 0),
         (CLUSTERING_CONFIG, 0),
         (OUTPUT_CONFIG, 0),
@@ -14301,7 +14741,7 @@ GET_ONLINE_EVALUATION_CONFIG: StaticOperationSchema = (
     n0,
     _GOEC,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/online-evaluation-configs/{onlineEvaluationConfigId}",
@@ -14323,7 +14763,7 @@ LIST_ONLINE_EVALUATION_CONFIGS_INPUT: StaticSchema = (
     18,
     n0,
     _LOECI,
-    {_sSI: _cLOECR, _smit: None},
+    {_sSI: _cLOECR, _smith: None},
     (_nT, _mR),
     ((3, {_sQ: _nT}), (7, {_sQ: _mR})),
 )
@@ -14362,7 +14802,7 @@ LIST_ONLINE_EVALUATION_CONFIGS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LOECO,
-    {_sSI: _cLOECRo, _smith: None},
+    {_sSI: _cLOECRo, _smithy: None},
     (_oEC, _nT),
     ((ONLINE_EVALUATION_CONFIG_SUMMARY_LIST, 1), (3, 0)),
 )
@@ -14372,7 +14812,7 @@ LIST_ONLINE_EVALUATION_CONFIGS: StaticOperationSchema = (
     n0,
     _LOEC,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "POST", "uri": "/online-evaluation-configs"}
         )
     },
@@ -14390,7 +14830,7 @@ UPDATE_ONLINE_EVALUATION_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _UOECI,
-    {_sSI: _cUOECR, _smit: None},
+    {_sSI: _cUOECR, _smith: None},
     (_cT, _oECI, _d, _rul, _dSC, _ev, _ins, _cCl, _oC, _eERA, _eS),
     (
         (CLIENT_TOKEN, 2),
@@ -14411,7 +14851,7 @@ UPDATE_ONLINE_EVALUATION_CONFIG_OUTPUT: StaticSchema = (
     18,
     n0,
     _UOECO,
-    {_sSI: _cUOECRo, _smith: None},
+    {_sSI: _cUOECRo, _smithy: None},
     (_oECA, _oECI, _uA, _st, _eS, _fR),
     (
         (ONLINE_EVALUATION_CONFIG_ARN, 1),
@@ -14428,7 +14868,7 @@ UPDATE_ONLINE_EVALUATION_CONFIG: StaticOperationSchema = (
     n0,
     _UOEC,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "PUT",
                 "uri": "/online-evaluation-configs/{onlineEvaluationConfigId}",
@@ -14472,10 +14912,10 @@ COINBASE_CDP_CONFIGURATION_INPUT: StaticSchema = (
     (_aKI, _aKS, _aKSS, _aKSC, _wS, _wSS, _wSC),
     (
         (COINBASE_CDP_API_KEY_ID_TYPE, 1),
-        (DEFAULT_COINBASE_CDP_API_KEY_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_COINBASE_CDP_API_KEY_SECRET_TYPE, {_smi: _v_}),
         (SECRET_SOURCE_TYPE, 0),
         (SECRET_REFERENCE, 0),
-        (DEFAULT_COINBASE_CDP_WALLET_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_COINBASE_CDP_WALLET_SECRET_TYPE, {_smi: _v_}),
         (SECRET_SOURCE_TYPE, 0),
         (SECRET_REFERENCE, 0),
     ),
@@ -14497,10 +14937,10 @@ STRIPE_PRIVY_CONFIGURATION_INPUT: StaticSchema = (
     (_aIp, _aSp, _aSS, _aSC, _aPK, _aPKS, _aPKC, _aIu),
     (
         (STRIPE_PRIVY_APP_ID_TYPE, 1),
-        (DEFAULT_STRIPE_PRIVY_APP_SECRET_TYPE, {_smithya: _v_}),
+        (DEFAULT_STRIPE_PRIVY_APP_SECRET_TYPE, {_smi: _v_}),
         (SECRET_SOURCE_TYPE, 0),
         (SECRET_REFERENCE, 0),
-        (DEFAULT_STRIPE_PRIVY_AUTHORIZATION_PRIVATE_KEY_TYPE, {_smithya: _v_}),
+        (DEFAULT_STRIPE_PRIVY_AUTHORIZATION_PRIVATE_KEY_TYPE, {_smi: _v_}),
         (SECRET_SOURCE_TYPE, 0),
         (SECRET_REFERENCE, 0),
         (STRIPE_PRIVY_AUTHORIZATION_ID_TYPE, 1),
@@ -14520,7 +14960,7 @@ CREATE_PAYMENT_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _CPCPI,
-    {_sSI: _cCPCPR, _smit: None},
+    {_sSI: _cCPCPR, _smith: None},
     (_n, _cPVr, _pCI, _t),
     (
         (CREDENTIAL_PROVIDER_NAME, 1),
@@ -14580,7 +15020,7 @@ CREATE_PAYMENT_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _CPCPO,
-    {_sSI: _cCPCPRo, _smith: None},
+    {_sSI: _cCPCPRo, _smithy: None},
     (_n, _cPVr, _cPAr, _pCO),
     (
         (CREDENTIAL_PROVIDER_NAME, 1),
@@ -14595,7 +15035,7 @@ CREATE_PAYMENT_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _CPCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 201,
                 "uri": "/identities/CreatePaymentCredentialProvider",
@@ -14624,7 +15064,7 @@ DELETE_PAYMENT_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _DPCPI,
-    {_sSI: _cDPCPR, _smit: None},
+    {_sSI: _cDPCPR, _smith: None},
     (_n,),
     ((CREDENTIAL_PROVIDER_NAME, 1),),
 )
@@ -14633,7 +15073,7 @@ DELETE_PAYMENT_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _DPCPO,
-    {_sSI: _cDPCPRo, _smith: None},
+    {_sSI: _cDPCPRo, _smithy: None},
 )
 
 DELETE_PAYMENT_CREDENTIAL_PROVIDER: StaticOperationSchema = (
@@ -14641,7 +15081,7 @@ DELETE_PAYMENT_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _DPCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 204,
                 "uri": "/identities/DeletePaymentCredentialProvider",
@@ -14665,7 +15105,7 @@ GET_PAYMENT_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _GPCPI,
-    {_sSI: _cGPCPR, _smit: None},
+    {_sSI: _cGPCPR, _smith: None},
     (_n,),
     ((CREDENTIAL_PROVIDER_NAME, 1),),
 )
@@ -14674,7 +15114,7 @@ GET_PAYMENT_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _GPCPO,
-    {_sSI: _cGPCPRo, _smith: None},
+    {_sSI: _cGPCPRo, _smithy: None},
     (_n, _cPAr, _cPVr, _pCO, _cTr, _lUT, _t),
     (
         (CREDENTIAL_PROVIDER_NAME, 1),
@@ -14692,7 +15132,7 @@ GET_PAYMENT_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _GPCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/GetPaymentCredentialProvider", "method": "POST"}
         )
     },
@@ -14713,9 +15153,9 @@ LIST_PAYMENT_CREDENTIAL_PROVIDERS_INPUT: StaticSchema = (
     18,
     n0,
     _LPCPI,
-    {_sSI: _cLPCPR, _smit: None},
+    {_sSI: _cLPCPR, _smith: None},
     (_nT, _mR),
-    ((3, 0), (7, {_smithya: 10})),
+    ((3, 0), (7, {_smi: 10})),
 )
 
 PAYMENT_CREDENTIAL_PROVIDER_ITEM: StaticSchema = (
@@ -14746,7 +15186,7 @@ LIST_PAYMENT_CREDENTIAL_PROVIDERS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LPCPO,
-    {_sSI: _cLPCPRo, _smith: None},
+    {_sSI: _cLPCPRo, _smithy: None},
     (_cP, _nT),
     ((PAYMENT_CREDENTIAL_PROVIDERS, 1), (3, 0)),
 )
@@ -14756,7 +15196,7 @@ LIST_PAYMENT_CREDENTIAL_PROVIDERS: StaticOperationSchema = (
     n0,
     _LPCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/ListPaymentCredentialProviders", "method": "POST"}
         )
     },
@@ -14776,7 +15216,7 @@ UPDATE_PAYMENT_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _UPCPI,
-    {_sSI: _cUPCPR, _smit: None},
+    {_sSI: _cUPCPR, _smith: None},
     (_n, _cPVr, _pCI),
     (
         (CREDENTIAL_PROVIDER_NAME, 1),
@@ -14789,7 +15229,7 @@ UPDATE_PAYMENT_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
     18,
     n0,
     _UPCPO,
-    {_sSI: _cUPCPRo, _smith: None},
+    {_sSI: _cUPCPRo, _smithy: None},
     (_n, _cPVr, _cPAr, _pCO, _cTr, _lUT),
     (
         (CREDENTIAL_PROVIDER_NAME, 1),
@@ -14806,7 +15246,7 @@ UPDATE_PAYMENT_CREDENTIAL_PROVIDER: StaticOperationSchema = (
     n0,
     _UPCP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/UpdatePaymentCredentialProvider", "method": "POST"}
         )
     },
@@ -14843,7 +15283,7 @@ CREATE_PAYMENT_MANAGER_INPUT: StaticSchema = (
     18,
     n0,
     _CPMI,
-    {_sSI: _cCPMR, _smit: None},
+    {_sSI: _cCPMR, _smith: None},
     (_n, _d, _aT, _aCu, _rA, _cT, _t, _kKA),
     (
         (PAYMENT_MANAGER_NAME, 1),
@@ -14882,7 +15322,7 @@ CREATE_PAYMENT_MANAGER_OUTPUT: StaticSchema = (
     18,
     n0,
     _CPMO,
-    {_sSI: _cCPMRo, _smith: None},
+    {_sSI: _cCPMRo, _smithy: None},
     (_pMA, _pMI, _n, _aT, _aCu, _rA, _wID, _cA, _st, _t, _kKA),
     (
         (PAYMENT_MANAGER_ARN, 1),
@@ -14904,7 +15344,7 @@ CREATE_PAYMENT_MANAGER: StaticOperationSchema = (
     n0,
     _CPM,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "POST", "uri": "/payments/managers"}
         )
     },
@@ -14924,7 +15364,7 @@ DELETE_PAYMENT_MANAGER_INPUT: StaticSchema = (
     18,
     n0,
     _DPMI,
-    {_sSI: _cDPMR, _smit: None},
+    {_sSI: _cDPMR, _smith: None},
     (_pMI, _cT),
     ((PAYMENT_MANAGER_ID, 9), (CLIENT_TOKEN, {_sQ: _cT, _sT: None})),
 )
@@ -14933,7 +15373,7 @@ DELETE_PAYMENT_MANAGER_OUTPUT: StaticSchema = (
     18,
     n0,
     _DPMO,
-    {_sSI: _cDPMRo, _smith: None},
+    {_sSI: _cDPMRo, _smithy: None},
     (_st, _pMI),
     ((PAYMENT_MANAGER_STATUS, 1), (PAYMENT_MANAGER_ID, 0)),
 )
@@ -14943,7 +15383,7 @@ DELETE_PAYMENT_MANAGER: StaticOperationSchema = (
     n0,
     _DPM,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "DELETE",
@@ -14966,7 +15406,7 @@ GET_PAYMENT_MANAGER_INPUT: StaticSchema = (
     18,
     n0,
     _GPMI,
-    {_sSI: _cGPMR, _smit: None},
+    {_sSI: _cGPMR, _smith: None},
     (_pMI,),
     ((PAYMENT_MANAGER_ID, 9),),
 )
@@ -14975,7 +15415,7 @@ GET_PAYMENT_MANAGER_OUTPUT: StaticSchema = (
     18,
     n0,
     _GPMO,
-    {_sSI: _cGPMRo, _smith: None},
+    {_sSI: _cGPMRo, _smithy: None},
     (_pMA, _pMI, _n, _d, _aT, _aCu, _rA, _wID, _cA, _lUA, _st, _t, _kKA),
     (
         (PAYMENT_MANAGER_ARN, 1),
@@ -14999,7 +15439,7 @@ GET_PAYMENT_MANAGER: StaticOperationSchema = (
     n0,
     _GPM,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "GET",
@@ -15022,7 +15462,7 @@ LIST_PAYMENT_MANAGERS_INPUT: StaticSchema = (
     18,
     n0,
     _LPMI,
-    {_sSI: _cLPMR, _smit: None},
+    {_sSI: _cLPMR, _smith: None},
     (_mR, _nT),
     ((MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT})),
 )
@@ -15060,7 +15500,7 @@ LIST_PAYMENT_MANAGERS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LPMO,
-    {_sSI: _cLPMRo, _smith: None},
+    {_sSI: _cLPMRo, _smithy: None},
     (_pM, _nT),
     ((PAYMENT_MANAGER_SUMMARIES, 1), (NEXT_TOKEN, 0)),
 )
@@ -15070,7 +15510,7 @@ LIST_PAYMENT_MANAGERS: StaticOperationSchema = (
     n0,
     _LPM,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "POST", "uri": "/payments/managers-list"}
         )
     },
@@ -15140,7 +15580,7 @@ CREATE_PAYMENT_CONNECTOR_INPUT: StaticSchema = (
     18,
     n0,
     _CPCI,
-    {_sSI: _cCPCR, _smit: None},
+    {_sSI: _cCPCR, _smith: None},
     (_pMI, _n, _d, _ty, _cPCr, _pMr, _cT),
     (
         (PAYMENT_MANAGER_ID, 9),
@@ -15196,7 +15636,7 @@ CREATE_PAYMENT_CONNECTOR_OUTPUT: StaticSchema = (
     18,
     n0,
     _CPCO,
-    {_sSI: _cCPCRo, _smith: None},
+    {_sSI: _cCPCRo, _smithy: None},
     (_pCIa, _pMI, _n, _ty, _cPCr, _cA, _st, _aU),
     (
         (PAYMENT_CONNECTOR_ID, 1),
@@ -15224,7 +15664,7 @@ CREATE_PAYMENT_CONNECTOR: StaticOperationSchema = (
     n0,
     _CPCrea,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "POST",
@@ -15250,7 +15690,7 @@ DELETE_PAYMENT_CONNECTOR_INPUT: StaticSchema = (
     18,
     n0,
     _DPCI,
-    {_sSI: _cDPCR, _smit: None},
+    {_sSI: _cDPCR, _smith: None},
     (_pMI, _pCIa, _cT),
     (
         (PAYMENT_MANAGER_ID, 9),
@@ -15263,7 +15703,7 @@ DELETE_PAYMENT_CONNECTOR_OUTPUT: StaticSchema = (
     18,
     n0,
     _DPCO,
-    {_sSI: _cDPCRo, _smith: None},
+    {_sSI: _cDPCRo, _smithy: None},
     (_st, _pCIa),
     ((PAYMENT_CONNECTOR_STATUS, 1), (PAYMENT_CONNECTOR_ID, 0)),
 )
@@ -15273,7 +15713,7 @@ DELETE_PAYMENT_CONNECTOR: StaticOperationSchema = (
     n0,
     _DPC,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "DELETE",
@@ -15296,7 +15736,7 @@ GET_PAYMENT_CONNECTOR_INPUT: StaticSchema = (
     18,
     n0,
     _GPCI,
-    {_sSI: _cGPCR, _smit: None},
+    {_sSI: _cGPCR, _smith: None},
     (_pMI, _pCIa),
     ((PAYMENT_MANAGER_ID, 9), (PAYMENT_CONNECTOR_ID, 9)),
 )
@@ -15305,7 +15745,7 @@ GET_PAYMENT_CONNECTOR_OUTPUT: StaticSchema = (
     18,
     n0,
     _GPCO,
-    {_sSI: _cGPCRo, _smith: None},
+    {_sSI: _cGPCRo, _smithy: None},
     (_pCIa, _n, _d, _ty, _pMr, _cPCr, _cA, _lUA, _st, _aU, _cUA),
     (
         (PAYMENT_CONNECTOR_ID, 1),
@@ -15327,7 +15767,7 @@ GET_PAYMENT_CONNECTOR: StaticOperationSchema = (
     n0,
     _GPCe,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "GET",
@@ -15350,7 +15790,7 @@ LIST_PAYMENT_CONNECTORS_INPUT: StaticSchema = (
     18,
     n0,
     _LPCI,
-    {_sSI: _cLPCR, _smit: None},
+    {_sSI: _cLPCR, _smith: None},
     (_pMI, _mR, _nT),
     ((PAYMENT_MANAGER_ID, 9), (MAX_RESULTS, {_sQ: _mR}), (NEXT_TOKEN, {_sQ: _nT})),
 )
@@ -15384,7 +15824,7 @@ LIST_PAYMENT_CONNECTORS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LPCO,
-    {_sSI: _cLPCRo, _smith: None},
+    {_sSI: _cLPCRo, _smithy: None},
     (_pCa, _nT),
     ((PAYMENT_CONNECTOR_SUMMARIES, 1), (NEXT_TOKEN, 0)),
 )
@@ -15394,7 +15834,7 @@ LIST_PAYMENT_CONNECTORS: StaticOperationSchema = (
     n0,
     _LPC,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "POST",
@@ -15452,7 +15892,7 @@ ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT: StaticSchema = (
     18,
     n0,
     _RPCCI,
-    {_sSI: _cRPCCR, _smit: None},
+    {_sSI: _cRPCCR, _smith: None},
     (_pMI, _pCIa, _cTR, _cT),
     (
         (PAYMENT_MANAGER_ID, 9),
@@ -15466,7 +15906,7 @@ ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_OUTPUT: StaticSchema = (
     18,
     n0,
     _RPCCO,
-    {_sSI: _cRPCCRo, _smith: None},
+    {_sSI: _cRPCCRo, _smithy: None},
     (_pCIa, _pMI, _lUA, _st),
     (
         (PAYMENT_CONNECTOR_ID, 1),
@@ -15481,7 +15921,7 @@ ROTATE_PAYMENT_CONNECTOR_CREDENTIALS: StaticOperationSchema = (
     n0,
     _RPCC,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "POST",
@@ -15505,7 +15945,7 @@ UPDATE_PAYMENT_CONNECTOR_INPUT: StaticSchema = (
     18,
     n0,
     _UPCI,
-    {_sSI: _cUPCR, _smit: None},
+    {_sSI: _cUPCR, _smith: None},
     (_pMI, _pCIa, _d, _ty, _cPCr, _cT),
     (
         (PAYMENT_MANAGER_ID, 9),
@@ -15521,7 +15961,7 @@ UPDATE_PAYMENT_CONNECTOR_OUTPUT: StaticSchema = (
     18,
     n0,
     _UPCOp,
-    {_sSI: _cUPCRo, _smith: None},
+    {_sSI: _cUPCRo, _smithy: None},
     (_pCIa, _pMI, _n, _ty, _cPCr, _lUA, _st, _aU),
     (
         (PAYMENT_CONNECTOR_ID, 1),
@@ -15540,7 +15980,7 @@ UPDATE_PAYMENT_CONNECTOR: StaticOperationSchema = (
     n0,
     _UPC,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "PATCH",
@@ -15566,7 +16006,7 @@ UPDATE_PAYMENT_MANAGER_INPUT: StaticSchema = (
     18,
     n0,
     _UPMI,
-    {_sSI: _cUPMR, _smit: None},
+    {_sSI: _cUPMR, _smith: None},
     (_pMI, _d, _aT, _aCu, _rA, _cT, _kKA),
     (
         (PAYMENT_MANAGER_ID, 9),
@@ -15583,7 +16023,7 @@ UPDATE_PAYMENT_MANAGER_OUTPUT: StaticSchema = (
     18,
     n0,
     _UPMO,
-    {_sSI: _cUPMRo, _smith: None},
+    {_sSI: _cUPMRo, _smithy: None},
     (_pMA, _pMI, _n, _aT, _rA, _wID, _lUA, _st, _kKA),
     (
         (PAYMENT_MANAGER_ARN, 1),
@@ -15603,7 +16043,7 @@ UPDATE_PAYMENT_MANAGER: StaticOperationSchema = (
     n0,
     _UPM,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "PATCH",
@@ -15630,7 +16070,7 @@ CREATE_POLICY_ENGINE_INPUT: StaticSchema = (
     18,
     n0,
     _CPEI,
-    {_sSI: _cCPER, _smit: None},
+    {_sSI: _cCPER, _smith: None},
     (_n, _d, _cT, _eKA, _t),
     (
         (POLICY_ENGINE_NAME, 1),
@@ -15670,7 +16110,7 @@ CREATE_POLICY_ENGINE_OUTPUT: StaticSchema = (
     18,
     n0,
     _CPEO,
-    {_sSI: _cCPERo, _smith: None},
+    {_sSI: _cCPERo, _smithy: None},
     (_pEI, _n, _cA, _uA, _pEA, _st, _eKA, _d, _sRta),
     (
         (RESOURCE_ID, 1),
@@ -15690,7 +16130,7 @@ CREATE_POLICY_ENGINE: StaticOperationSchema = (
     n0,
     _CPE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "POST", "uri": "/policy-engines", "code": 202}
         )
     },
@@ -15710,7 +16150,7 @@ DELETE_POLICY_ENGINE_INPUT: StaticSchema = (
     18,
     n0,
     _DPEI,
-    {_sSI: _cDPER, _smit: None},
+    {_sSI: _cDPER, _smith: None},
     (_pEI,),
     ((RESOURCE_ID, 9),),
 )
@@ -15719,7 +16159,7 @@ DELETE_POLICY_ENGINE_OUTPUT: StaticSchema = (
     18,
     n0,
     _DPEO,
-    {_sSI: _cDPERo, _smith: None},
+    {_sSI: _cDPERo, _smithy: None},
     (_pEI, _n, _cA, _uA, _pEA, _st, _eKA, _d, _sRta),
     (
         (RESOURCE_ID, 1),
@@ -15739,7 +16179,7 @@ DELETE_POLICY_ENGINE: StaticOperationSchema = (
     n0,
     _DPE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "DELETE", "uri": "/policy-engines/{policyEngineId}", "code": 202}
         )
     },
@@ -15759,7 +16199,7 @@ GET_POLICY_ENGINE_INPUT: StaticSchema = (
     18,
     n0,
     _GPEI,
-    {_sSI: _cGPER, _smit: None},
+    {_sSI: _cGPER, _smith: None},
     (_pEI,),
     ((RESOURCE_ID, 9),),
 )
@@ -15768,7 +16208,7 @@ GET_POLICY_ENGINE_OUTPUT: StaticSchema = (
     18,
     n0,
     _GPEO,
-    {_sSI: _cGPERo, _smith: None},
+    {_sSI: _cGPERo, _smithy: None},
     (_pEI, _n, _cA, _uA, _pEA, _st, _eKA, _d, _sRta),
     (
         (RESOURCE_ID, 1),
@@ -15788,7 +16228,7 @@ GET_POLICY_ENGINE: StaticOperationSchema = (
     n0,
     _GPE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "GET", "uri": "/policy-engines/{policyEngineId}", "code": 200}
         )
     },
@@ -15807,7 +16247,7 @@ GET_POLICY_ENGINE_SUMMARY_INPUT: StaticSchema = (
     18,
     n0,
     _GPESI,
-    {_sSI: _cGPESR, _smit: None},
+    {_sSI: _cGPESR, _smith: None},
     (_pEI,),
     ((RESOURCE_ID, 9),),
 )
@@ -15816,7 +16256,7 @@ GET_POLICY_ENGINE_SUMMARY_OUTPUT: StaticSchema = (
     18,
     n0,
     _GPESO,
-    {_sSI: _cGPESRo, _smith: None},
+    {_sSI: _cGPESRo, _smithy: None},
     (_pEI, _n, _cA, _uA, _pEA, _st, _eKA),
     (
         (RESOURCE_ID, 1),
@@ -15834,7 +16274,7 @@ GET_POLICY_ENGINE_SUMMARY: StaticOperationSchema = (
     n0,
     _GPES,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/policy-engine-summaries/{policyEngineId}",
@@ -15857,7 +16297,7 @@ LIST_POLICY_ENGINES_INPUT: StaticSchema = (
     18,
     n0,
     _LPEI,
-    {_sSI: _cLPER, _smit: None},
+    {_sSI: _cLPER, _smith: None},
     (_nT, _mR),
     ((NEXT_TOKEN, {_sQ: _nT}), (MAX_RESULTS, {_sQ: _mR})),
 )
@@ -15887,7 +16327,7 @@ LIST_POLICY_ENGINES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LPEO,
-    {_sSI: _cLPERo, _smith: None},
+    {_sSI: _cLPERo, _smithy: None},
     (_pEo, _nT),
     ((POLICY_ENGINES, 1), (NEXT_TOKEN, 0)),
 )
@@ -15897,7 +16337,7 @@ LIST_POLICY_ENGINES: StaticOperationSchema = (
     n0,
     _LPE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "GET", "uri": "/policy-engines", "code": 200}
         )
     },
@@ -15915,7 +16355,7 @@ LIST_POLICY_ENGINE_SUMMARIES_INPUT: StaticSchema = (
     18,
     n0,
     _LPESI,
-    {_sSI: _cLPESR, _smit: None},
+    {_sSI: _cLPESR, _smith: None},
     (_nT, _mR),
     ((NEXT_TOKEN, {_sQ: _nT}), (MAX_RESULTS, {_sQ: _mR})),
 )
@@ -15950,7 +16390,7 @@ LIST_POLICY_ENGINE_SUMMARIES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LPESO,
-    {_sSI: _cLPESRo, _smith: None},
+    {_sSI: _cLPESRo, _smithy: None},
     (_pEo, _nT),
     ((POLICY_ENGINE_SUMMARY_LIST, 1), (NEXT_TOKEN, 0)),
 )
@@ -15960,7 +16400,7 @@ LIST_POLICY_ENGINE_SUMMARIES: StaticOperationSchema = (
     n0,
     _LPES,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "GET", "uri": "/policy-engine-summaries", "code": 200}
         )
     },
@@ -15978,7 +16418,7 @@ UPDATE_POLICY_ENGINE_INPUT: StaticSchema = (
     18,
     n0,
     _UPEI,
-    {_sSI: _cUPER, _smit: None},
+    {_sSI: _cUPER, _smith: None},
     (_pEI, _d),
     ((RESOURCE_ID, 9), (UPDATED_DESCRIPTION, 0)),
 )
@@ -15987,7 +16427,7 @@ UPDATE_POLICY_ENGINE_OUTPUT: StaticSchema = (
     18,
     n0,
     _UPEOp,
-    {_sSI: _cUPERo, _smith: None},
+    {_sSI: _cUPERo, _smithy: None},
     (_pEI, _n, _cA, _uA, _pEA, _st, _eKA, _d, _sRta),
     (
         (RESOURCE_ID, 1),
@@ -16007,7 +16447,7 @@ UPDATE_POLICY_ENGINE: StaticOperationSchema = (
     n0,
     _UPE,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "PATCH", "uri": "/policy-engines/{policyEngineId}", "code": 202}
         )
     },
@@ -16027,7 +16467,7 @@ GET_POLICY_GENERATION_INPUT: StaticSchema = (
     18,
     n0,
     _GPGI,
-    {_sSI: _cGPGR, _smit: None},
+    {_sSI: _cGPGR, _smith: None},
     (_pGI, _pEI),
     ((RESOURCE_ID, 9), (RESOURCE_ID, 9)),
 )
@@ -16056,7 +16496,7 @@ GET_POLICY_GENERATION_OUTPUT: StaticSchema = (
     18,
     n0,
     _GPGO,
-    {_sSI: _cGPGRo, _smith: None},
+    {_sSI: _cGPGRo, _smithy: None},
     (_pEI, _pGI, _n, _pGA, _resou, _cA, _uA, _st, _fin, _sRta),
     (
         (RESOURCE_ID, 1),
@@ -16077,7 +16517,7 @@ GET_POLICY_GENERATION: StaticOperationSchema = (
     n0,
     _GPG,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/policy-engines/{policyEngineId}/policy-generations/{policyGenerationId}",
@@ -16099,7 +16539,7 @@ GET_POLICY_GENERATION_SUMMARY_INPUT: StaticSchema = (
     18,
     n0,
     _GPGSI,
-    {_sSI: _cGPGSR, _smit: None},
+    {_sSI: _cGPGSR, _smith: None},
     (_pGI, _pEI),
     ((RESOURCE_ID, 9), (RESOURCE_ID, 9)),
 )
@@ -16108,7 +16548,7 @@ GET_POLICY_GENERATION_SUMMARY_OUTPUT: StaticSchema = (
     18,
     n0,
     _GPGSO,
-    {_sSI: _cGPGSRo, _smith: None},
+    {_sSI: _cGPGSRo, _smithy: None},
     (_pEI, _pGI, _n, _pGA, _resou, _cA, _uA, _st, _fin),
     (
         (RESOURCE_ID, 1),
@@ -16128,7 +16568,7 @@ GET_POLICY_GENERATION_SUMMARY: StaticOperationSchema = (
     n0,
     _GPGS,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/policy-engines/{policyEngineId}/policy-generation-summaries/{policyGenerationId}",
@@ -16151,7 +16591,7 @@ LIST_POLICY_GENERATION_ASSETS_INPUT: StaticSchema = (
     18,
     n0,
     _LPGAI,
-    {_sSI: _cLPGAR, _smit: None},
+    {_sSI: _cLPGAR, _smith: None},
     (_pGI, _pEI, _nT, _mR),
     (
         (RESOURCE_ID, 9),
@@ -16181,14 +16621,14 @@ POLICY_DEFINITION: StaticSchema = (
     n0,
     _PDo,
     0,
-    (_ced, _pG, _po),
+    (_ced, _pG, _pol),
     ((CEDAR_POLICY, 0), (POLICY_GENERATION_DETAILS, 0), (POLICY_STATEMENT, 0)),
 )
 
 FINDING_TYPE: StaticSchema = (
     14,
     n0,
-    _FT,
+    _FTi,
     0,
     (_VALID, _INVALID, _NT_, _AA__, _AN, _DA_, _DN_),
     (
@@ -16202,9 +16642,9 @@ FINDING_TYPE: StaticSchema = (
     ),
 )
 
-FINDING: StaticSchema = (18, n0, _Fi, 0, (_ty, _d), ((FINDING_TYPE, 0), (STRING, 0)))
+FINDING: StaticSchema = (18, n0, _Fin, 0, (_ty, _d), ((FINDING_TYPE, 0), (STRING, 0)))
 
-FINDINGS: StaticSchema = (16, n0, _Fin, 0, (_mem,), ((FINDING, 0),))
+FINDINGS: StaticSchema = (16, n0, _Find, 0, (_mem,), ((FINDING, 0),))
 
 NATURAL_LANGUAGE: StaticSchema = (3, n0, _NLa, 0)
 
@@ -16230,7 +16670,7 @@ LIST_POLICY_GENERATION_ASSETS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LPGAO,
-    {_sSI: _cLPGARo, _smith: None},
+    {_sSI: _cLPGARo, _smithy: None},
     (_pGAo, _nT),
     ((POLICY_GENERATION_ASSETS, 0), (NEXT_TOKEN, 0)),
 )
@@ -16240,7 +16680,7 @@ LIST_POLICY_GENERATION_ASSETS: StaticOperationSchema = (
     n0,
     _LPGA,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/policy-engines/{policyEngineId}/policy-generations/{policyGenerationId}/assets",
@@ -16262,7 +16702,7 @@ LIST_POLICY_GENERATIONS_INPUT: StaticSchema = (
     18,
     n0,
     _LPGI,
-    {_sSI: _cLPGR, _smit: None},
+    {_sSI: _cLPGR, _smith: None},
     (_nT, _mR, _pEI),
     ((NEXT_TOKEN, {_sQ: _nT}), (MAX_RESULTS, {_sQ: _mR}), (RESOURCE_ID, 9)),
 )
@@ -16293,7 +16733,7 @@ LIST_POLICY_GENERATIONS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LPGO,
-    {_sSI: _cLPGRo, _smith: None},
+    {_sSI: _cLPGRo, _smithy: None},
     (_pGo, _nT),
     ((POLICY_GENERATIONS, 1), (NEXT_TOKEN, 0)),
 )
@@ -16303,7 +16743,7 @@ LIST_POLICY_GENERATIONS: StaticOperationSchema = (
     n0,
     _LPG,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/policy-engines/{policyEngineId}/policy-generations",
@@ -16325,7 +16765,7 @@ LIST_POLICY_GENERATION_SUMMARIES_INPUT: StaticSchema = (
     18,
     n0,
     _LPGSI,
-    {_sSI: _cLPGSR, _smit: None},
+    {_sSI: _cLPGSR, _smith: None},
     (_nT, _mR, _pEI),
     ((NEXT_TOKEN, {_sQ: _nT}), (MAX_RESULTS, {_sQ: _mR}), (RESOURCE_ID, 9)),
 )
@@ -16362,7 +16802,7 @@ LIST_POLICY_GENERATION_SUMMARIES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LPGSO,
-    {_sSI: _cLPGSRo, _smith: None},
+    {_sSI: _cLPGSRo, _smithy: None},
     (_pGo, _nT),
     ((POLICY_GENERATION_SUMMARY_LIST, 1), (NEXT_TOKEN, 0)),
 )
@@ -16372,7 +16812,7 @@ LIST_POLICY_GENERATION_SUMMARIES: StaticOperationSchema = (
     n0,
     _LPGS,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/policy-engines/{policyEngineId}/policy-generation-summaries",
@@ -16397,7 +16837,7 @@ START_POLICY_GENERATION_INPUT: StaticSchema = (
     18,
     n0,
     _SPGI,
-    {_sSI: _cSPGR, _smit: None},
+    {_sSI: _cSPGR, _smith: None},
     (_pEI, _resou, _cont, _n, _cT),
     (
         (RESOURCE_ID, 9),
@@ -16412,7 +16852,7 @@ START_POLICY_GENERATION_OUTPUT: StaticSchema = (
     18,
     n0,
     _SPGO,
-    {_sSI: _cSPGRo, _smith: None},
+    {_sSI: _cSPGRo, _smithy: None},
     (_pEI, _pGI, _n, _pGA, _resou, _cA, _uA, _st, _fin, _sRta),
     (
         (RESOURCE_ID, 1),
@@ -16433,7 +16873,7 @@ START_POLICY_GENERATION: StaticOperationSchema = (
     n0,
     _SPG,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "POST",
                 "uri": "/policy-engines/{policyEngineId}/policy-generations",
@@ -16458,7 +16898,7 @@ ENFORCEMENT_MODE: StaticSchema = (
     14,
     n0,
     _EM,
-    {_smithya: _ACTIVE},
+    {_smi: _ACTIVE},
     (_ACTIVE, _LO),
     ((-1, {_sVm: _ACTIVE}), (-1, {_sVm: _LO})),
 )
@@ -16469,7 +16909,7 @@ POLICY_VALIDATION_MODE: StaticSchema = (
     14,
     n0,
     _PVM,
-    {_smithya: _FOAF},
+    {_smi: _FOAF},
     (_FOAF, _IAF),
     ((-1, {_sVm: _FOAF}), (-1, {_sVm: _IAF})),
 )
@@ -16478,14 +16918,14 @@ CREATE_POLICY_INPUT: StaticSchema = (
     18,
     n0,
     _CPIr,
-    {_sSI: _cCPR, _smit: None},
+    {_sSI: _cCPR, _smith: None},
     (_n, _de, _d, _vM, _eM, _pEI, _cT),
     (
         (POLICY_NAME, 1),
         (POLICY_DEFINITION, 1),
         (DESCRIPTION, 0),
-        (POLICY_VALIDATION_MODE, {_smithya: _FOAF}),
-        (ENFORCEMENT_MODE, {_smithya: _ACTIVE}),
+        (POLICY_VALIDATION_MODE, {_smi: _FOAF}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (RESOURCE_ID, 9),
         (CLIENT_TOKEN, 2),
     ),
@@ -16514,7 +16954,7 @@ CREATE_POLICY_OUTPUT: StaticSchema = (
     18,
     n0,
     _CPOr,
-    {_sSI: _cCPRo, _smith: None},
+    {_sSI: _cCPRo, _smithy: None},
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM, _de, _d, _sRta),
     (
         (RESOURCE_ID, 1),
@@ -16524,7 +16964,7 @@ CREATE_POLICY_OUTPUT: StaticSchema = (
         (DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (ENFORCEMENT_MODE, {_smithya: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (POLICY_DEFINITION, 1),
         (DESCRIPTION, 0),
         (POLICY_STATUS_REASONS, 1),
@@ -16536,7 +16976,7 @@ CREATE_POLICY: StaticOperationSchema = (
     n0,
     _CPre,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "POST",
                 "uri": "/policy-engines/{policyEngineId}/policies",
@@ -16561,7 +17001,7 @@ DELETE_POLICY_INPUT: StaticSchema = (
     18,
     n0,
     _DPI,
-    {_sSI: _cDPR, _smit: None},
+    {_sSI: _cDPR, _smith: None},
     (_pEI, _pIo),
     ((RESOURCE_ID, 9), (RESOURCE_ID, 9)),
 )
@@ -16570,7 +17010,7 @@ DELETE_POLICY_OUTPUT: StaticSchema = (
     18,
     n0,
     _DPO,
-    {_sSI: _cDPRo, _smith: None},
+    {_sSI: _cDPRo, _smithy: None},
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM, _de, _d, _sRta),
     (
         (RESOURCE_ID, 1),
@@ -16580,7 +17020,7 @@ DELETE_POLICY_OUTPUT: StaticSchema = (
         (DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (ENFORCEMENT_MODE, {_smithya: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (POLICY_DEFINITION, 1),
         (DESCRIPTION, 0),
         (POLICY_STATUS_REASONS, 1),
@@ -16592,7 +17032,7 @@ DELETE_POLICY: StaticOperationSchema = (
     n0,
     _DP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/policy-engines/{policyEngineId}/policies/{policyId}",
@@ -16616,7 +17056,7 @@ GET_POLICY_INPUT: StaticSchema = (
     18,
     n0,
     _GPI,
-    {_sSI: _cGPR, _smit: None},
+    {_sSI: _cGPR, _smith: None},
     (_pEI, _pIo),
     ((RESOURCE_ID, 9), (RESOURCE_ID, 9)),
 )
@@ -16625,7 +17065,7 @@ GET_POLICY_OUTPUT: StaticSchema = (
     18,
     n0,
     _GPO,
-    {_sSI: _cGPRo, _smith: None},
+    {_sSI: _cGPRo, _smithy: None},
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM, _de, _d, _sRta),
     (
         (RESOURCE_ID, 1),
@@ -16635,7 +17075,7 @@ GET_POLICY_OUTPUT: StaticSchema = (
         (DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (ENFORCEMENT_MODE, {_smithya: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (POLICY_DEFINITION, 1),
         (DESCRIPTION, 0),
         (POLICY_STATUS_REASONS, 1),
@@ -16647,7 +17087,7 @@ GET_POLICY: StaticOperationSchema = (
     n0,
     _GPe,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/policy-engines/{policyEngineId}/policies/{policyId}",
@@ -16670,7 +17110,7 @@ GET_POLICY_SUMMARY_INPUT: StaticSchema = (
     18,
     n0,
     _GPSI,
-    {_sSI: _cGPSR, _smit: None},
+    {_sSI: _cGPSR, _smith: None},
     (_pEI, _pIo),
     ((RESOURCE_ID, 9), (RESOURCE_ID, 9)),
 )
@@ -16679,7 +17119,7 @@ GET_POLICY_SUMMARY_OUTPUT: StaticSchema = (
     18,
     n0,
     _GPSO,
-    {_sSI: _cGPSRo, _smith: None},
+    {_sSI: _cGPSRo, _smithy: None},
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM),
     (
         (RESOURCE_ID, 1),
@@ -16689,7 +17129,7 @@ GET_POLICY_SUMMARY_OUTPUT: StaticSchema = (
         (DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (ENFORCEMENT_MODE, {_smithya: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
     ),
 )
 
@@ -16698,7 +17138,7 @@ GET_POLICY_SUMMARY: StaticOperationSchema = (
     n0,
     _GPS,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/policy-engines/{policyEngineId}/policy-summaries/{policyId}",
@@ -16721,7 +17161,7 @@ LIST_POLICIES_INPUT: StaticSchema = (
     18,
     n0,
     _LPI,
-    {_sSI: _cLPR, _smit: None},
+    {_sSI: _cLPR, _smith: None},
     (_nT, _mR, _pEI, _tRS),
     (
         (NEXT_TOKEN, {_sQ: _nT}),
@@ -16734,7 +17174,7 @@ LIST_POLICIES_INPUT: StaticSchema = (
 POLICY: StaticSchema = (
     18,
     n0,
-    _Po,
+    _Pol,
     0,
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM, _de, _d, _sRta),
     (
@@ -16745,21 +17185,21 @@ POLICY: StaticSchema = (
         (DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (ENFORCEMENT_MODE, {_smithya: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (POLICY_DEFINITION, 1),
         (DESCRIPTION, 0),
         (POLICY_STATUS_REASONS, 1),
     ),
 )
 
-POLICIES: StaticSchema = (16, n0, _Pol, 0, (_mem,), ((POLICY, 0),))
+POLICIES: StaticSchema = (16, n0, _Poli, 0, (_mem,), ((POLICY, 0),))
 
 LIST_POLICIES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LPO,
-    {_sSI: _cLPRo, _smith: None},
-    (_pol, _nT),
+    {_sSI: _cLPRo, _smithy: None},
+    (_poli, _nT),
     ((POLICIES, 1), (NEXT_TOKEN, 0)),
 )
 
@@ -16768,7 +17208,7 @@ LIST_POLICIES: StaticOperationSchema = (
     n0,
     _LPi,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/policy-engines/{policyEngineId}/policies",
@@ -16791,7 +17231,7 @@ LIST_POLICY_SUMMARIES_INPUT: StaticSchema = (
     18,
     n0,
     _LPSI,
-    {_sSI: _cLPSR, _smit: None},
+    {_sSI: _cLPSR, _smith: None},
     (_nT, _mR, _pEI, _tRS),
     (
         (NEXT_TOKEN, {_sQ: _nT}),
@@ -16815,7 +17255,7 @@ POLICY_SUMMARY: StaticSchema = (
         (DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (ENFORCEMENT_MODE, {_smithya: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
     ),
 )
 
@@ -16825,8 +17265,8 @@ LIST_POLICY_SUMMARIES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LPSO,
-    {_sSI: _cLPSRo, _smith: None},
-    (_pol, _nT),
+    {_sSI: _cLPSRo, _smithy: None},
+    (_poli, _nT),
     ((POLICY_SUMMARY_LIST, 1), (NEXT_TOKEN, 0)),
 )
 
@@ -16835,7 +17275,7 @@ LIST_POLICY_SUMMARIES: StaticOperationSchema = (
     n0,
     _LPS,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/policy-engines/{policyEngineId}/policy-summaries",
@@ -16858,15 +17298,15 @@ UPDATE_POLICY_INPUT: StaticSchema = (
     18,
     n0,
     _UPI,
-    {_sSI: _cUPR, _smit: None},
+    {_sSI: _cUPR, _smith: None},
     (_pEI, _pIo, _d, _de, _vM, _eM),
     (
         (RESOURCE_ID, 9),
         (RESOURCE_ID, 9),
         (UPDATED_DESCRIPTION, 0),
         (POLICY_DEFINITION, 0),
-        (POLICY_VALIDATION_MODE, {_smithya: _FOAF}),
-        (ENFORCEMENT_MODE, {_smithya: None}),
+        (POLICY_VALIDATION_MODE, {_smi: _FOAF}),
+        (ENFORCEMENT_MODE, {_smi: None}),
     ),
 )
 
@@ -16874,7 +17314,7 @@ UPDATE_POLICY_OUTPUT: StaticSchema = (
     18,
     n0,
     _UPOp,
-    {_sSI: _cUPRo, _smith: None},
+    {_sSI: _cUPRo, _smithy: None},
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM, _de, _d, _sRta),
     (
         (RESOURCE_ID, 1),
@@ -16884,7 +17324,7 @@ UPDATE_POLICY_OUTPUT: StaticSchema = (
         (DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (ENFORCEMENT_MODE, {_smithya: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (POLICY_DEFINITION, 1),
         (DESCRIPTION, 0),
         (POLICY_STATUS_REASONS, 1),
@@ -16896,7 +17336,7 @@ UPDATE_POLICY: StaticOperationSchema = (
     n0,
     _UPp,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "PATCH",
                 "uri": "/policy-engines/{policyEngineId}/policies/{policyId}",
@@ -16921,8 +17361,8 @@ PUT_RESOURCE_POLICY_INPUT: StaticSchema = (
     18,
     n0,
     _PRPI,
-    {_sSI: _cPRPR, _smit: None},
-    (_rAe, _po),
+    {_sSI: _cPRPR, _smith: None},
+    (_rAe, _pol),
     ((BEDROCK_AGENTCORE_RESOURCE_ARN, 9), (RESOURCE_POLICY_BODY, 1)),
 )
 
@@ -16930,8 +17370,8 @@ PUT_RESOURCE_POLICY_OUTPUT: StaticSchema = (
     18,
     n0,
     _PRPO,
-    {_sSI: _cPRPRo, _smith: None},
-    (_po,),
+    {_sSI: _cPRPRo, _smithy: None},
+    (_pol,),
     ((RESOURCE_POLICY_BODY, 1),),
 )
 
@@ -16940,7 +17380,7 @@ PUT_RESOURCE_POLICY: StaticOperationSchema = (
     n0,
     _PRP,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 201, "method": "PUT", "uri": "/resourcepolicy/{resourceArn}"}
         )
     },
@@ -17125,7 +17565,7 @@ CREATE_REGISTRY_RECORD_INPUT: StaticSchema = (
     18,
     n0,
     _CRRI,
-    {_sSI: _cCRRR, _smit: None},
+    {_sSI: _cCRRR, _smith: None},
     (_rIe, _n, _d, _dT, _des, _rVe, _sTy, _sCy, _cT),
     (
         (REGISTRY_IDENTIFIER, 9),
@@ -17165,7 +17605,7 @@ CREATE_REGISTRY_RECORD_OUTPUT: StaticSchema = (
     18,
     n0,
     _CRRO,
-    {_sSI: _cCRRRo, _smith: None},
+    {_sSI: _cCRRRo, _smithy: None},
     (_rAec, _st),
     ((REGISTRY_RECORD_ARN, 1), (REGISTRY_RECORD_STATUS, 1)),
 )
@@ -17175,7 +17615,7 @@ CREATE_REGISTRY_RECORD: StaticOperationSchema = (
     n0,
     _CRR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "POST", "uri": "/registries/{registryId}/records", "code": 202}
         )
     },
@@ -17198,7 +17638,7 @@ DELETE_REGISTRY_RECORD_INPUT: StaticSchema = (
     18,
     n0,
     _DRRI,
-    {_sSI: _cDRRR, _smit: None},
+    {_sSI: _cDRRR, _smith: None},
     (_rIe, _rIec),
     ((REGISTRY_IDENTIFIER, 9), (RECORD_IDENTIFIER, 9)),
 )
@@ -17207,7 +17647,7 @@ DELETE_REGISTRY_RECORD_OUTPUT: StaticSchema = (
     18,
     n0,
     _DRRO,
-    {_sSI: _cDRRRo, _smith: None},
+    {_sSI: _cDRRRo, _smithy: None},
 )
 
 DELETE_REGISTRY_RECORD: StaticOperationSchema = (
@@ -17215,7 +17655,7 @@ DELETE_REGISTRY_RECORD: StaticOperationSchema = (
     n0,
     _DRR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/registries/{registryId}/records/{recordId}",
@@ -17239,7 +17679,7 @@ GET_REGISTRY_RECORD_INPUT: StaticSchema = (
     18,
     n0,
     _GRRI,
-    {_sSI: _cGRRR, _smit: None},
+    {_sSI: _cGRRR, _smith: None},
     (_rIe, _rIec),
     ((REGISTRY_IDENTIFIER, 9), (RECORD_IDENTIFIER, 9)),
 )
@@ -17252,7 +17692,7 @@ GET_REGISTRY_RECORD_OUTPUT: StaticSchema = (
     18,
     n0,
     _GRRO,
-    {_sSI: _cGRRRo, _smith: None},
+    {_sSI: _cGRRRo, _smithy: None},
     (_rAeg, _rAec, _rIec, _n, _d, _dT, _des, _rVe, _st, _cA, _uA, _sRt, _sTy, _sCy),
     (
         (REGISTRY_ARN, 1),
@@ -17277,7 +17717,7 @@ GET_REGISTRY_RECORD: StaticOperationSchema = (
     n0,
     _GRR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/registries/{registryId}/records/{recordId}",
@@ -17301,7 +17741,7 @@ LIST_REGISTRY_RECORDS_INPUT: StaticSchema = (
     18,
     n0,
     _LRRI,
-    {_sSI: _cLRRR, _smit: None},
+    {_sSI: _cLRRR, _smith: None},
     (_rIe, _mR, _nT, _n, _st, _dT),
     (
         (REGISTRY_IDENTIFIER, 9),
@@ -17346,7 +17786,7 @@ LIST_REGISTRY_RECORDS_OUTPUT: StaticSchema = (
     18,
     n0,
     _LRRO,
-    {_sSI: _cLRRRo, _smith: None},
+    {_sSI: _cLRRRo, _smithy: None},
     (_rR, _nT),
     ((REGISTRY_RECORD_SUMMARY_LIST, 1), (NEXT_TOKEN, 0)),
 )
@@ -17356,7 +17796,7 @@ LIST_REGISTRY_RECORDS: StaticOperationSchema = (
     n0,
     _LRR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"method": "GET", "uri": "/registries/{registryId}/records", "code": 200}
         )
     },
@@ -17376,7 +17816,7 @@ SUBMIT_REGISTRY_RECORD_FOR_APPROVAL_INPUT: StaticSchema = (
     18,
     n0,
     _SRRFAI,
-    {_sSI: _cSRRFAR, _smit: None},
+    {_sSI: _cSRRFAR, _smith: None},
     (_rIe, _rIec),
     ((REGISTRY_IDENTIFIER, 9), (RECORD_IDENTIFIER, 9)),
 )
@@ -17385,7 +17825,7 @@ SUBMIT_REGISTRY_RECORD_FOR_APPROVAL_OUTPUT: StaticSchema = (
     18,
     n0,
     _SRRFAO,
-    {_sSI: _cSRRFARo, _smith: None},
+    {_sSI: _cSRRFARo, _smithy: None},
     (_rAeg, _rAec, _rIec, _st, _uA),
     (
         (REGISTRY_ARN, 1),
@@ -17401,7 +17841,7 @@ SUBMIT_REGISTRY_RECORD_FOR_APPROVAL: StaticOperationSchema = (
     n0,
     _SRRFA,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "POST",
                 "uri": "/registries/{registryId}/records/{recordId}/submit-for-approval",
@@ -17446,7 +17886,7 @@ UPDATED_AGENT_SKILLS_DESCRIPTOR_FIELDS: StaticSchema = (
     n0,
     _UASDF,
     0,
-    (_sM, _sD),
+    (_sMk, _sD),
     ((UPDATED_SKILL_MD_DEFINITION, 0), (UPDATED_SKILL_DEFINITION, 0)),
 )
 
@@ -17549,7 +17989,7 @@ UPDATE_REGISTRY_RECORD_INPUT: StaticSchema = (
     18,
     n0,
     _URRI,
-    {_sSI: _cURRR, _smit: None},
+    {_sSI: _cURRR, _smith: None},
     (_rIe, _rIec, _n, _d, _dT, _des, _rVe, _sTy, _sCy, _tSr),
     (
         (REGISTRY_IDENTIFIER, 9),
@@ -17569,7 +18009,7 @@ UPDATE_REGISTRY_RECORD_OUTPUT: StaticSchema = (
     18,
     n0,
     _URRO,
-    {_sSI: _cURRRo, _smith: None},
+    {_sSI: _cURRRo, _smithy: None},
     (_rAeg, _rAec, _rIec, _n, _d, _dT, _des, _rVe, _st, _cA, _uA, _sRt, _sTy, _sCy),
     (
         (REGISTRY_ARN, 1),
@@ -17594,7 +18034,7 @@ UPDATE_REGISTRY_RECORD: StaticOperationSchema = (
     n0,
     _URR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "PATCH",
                 "uri": "/registries/{registryId}/records/{recordId}",
@@ -17618,7 +18058,7 @@ UPDATE_REGISTRY_RECORD_STATUS_INPUT: StaticSchema = (
     18,
     n0,
     _URRSI,
-    {_sSI: _cURRSR, _smit: None},
+    {_sSI: _cURRSR, _smith: None},
     (_rIe, _rIec, _st, _sRt),
     (
         (REGISTRY_IDENTIFIER, 9),
@@ -17632,7 +18072,7 @@ UPDATE_REGISTRY_RECORD_STATUS_OUTPUT: StaticSchema = (
     18,
     n0,
     _URRSO,
-    {_sSI: _cURRSRo, _smith: None},
+    {_sSI: _cURRSRo, _smithy: None},
     (_rAeg, _rAec, _rIec, _st, _sRt, _uA),
     (
         (REGISTRY_ARN, 1),
@@ -17649,7 +18089,7 @@ UPDATE_REGISTRY_RECORD_STATUS: StaticOperationSchema = (
     n0,
     _URRS,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "method": "PATCH",
                 "uri": "/registries/{registryId}/records/{recordId}/status",
@@ -17669,14 +18109,7 @@ UPDATE_REGISTRY_RECORD_STATUS: StaticOperationSchema = (
     ),
 )
 
-APPROVAL_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _ACp,
-    0,
-    (_aAu,),
-    ((2, {_smithya: False}),),
-)
+APPROVAL_CONFIGURATION: StaticSchema = (18, n0, _ACp, 0, (_aAu,), ((2, {_smi: False}),))
 
 REGISTRY_AUTHORIZER_TYPE: StaticSchema = (
     14,
@@ -17693,7 +18126,7 @@ CREATE_REGISTRY_INPUT: StaticSchema = (
     18,
     n0,
     _CRIr,
-    {_sSI: _cCRR, _smit: None},
+    {_sSI: _cCRR, _smith: None},
     (_n, _d, _aT, _aCu, _cT, _aCp),
     (
         (REGISTRY_NAME, 1),
@@ -17709,7 +18142,7 @@ CREATE_REGISTRY_OUTPUT: StaticSchema = (
     18,
     n0,
     _CROr,
-    {_sSI: _cCRRo, _smith: None},
+    {_sSI: _cCRRo, _smithy: None},
     (_rAeg,),
     ((REGISTRY_ARN, 1),),
 )
@@ -17718,7 +18151,7 @@ CREATE_REGISTRY: StaticOperationSchema = (
     23,
     n0,
     _CR,
-    {_smithy: MappingProxyType({"code": 202, "method": "POST", "uri": "/registries"})},
+    {_smithya: MappingProxyType({"code": 202, "method": "POST", "uri": "/registries"})},
     CREATE_REGISTRY_INPUT,
     CREATE_REGISTRY_OUTPUT,
     (
@@ -17735,7 +18168,7 @@ DELETE_REGISTRY_INPUT: StaticSchema = (
     18,
     n0,
     _DRI,
-    {_sSI: _cDRR, _smit: None},
+    {_sSI: _cDRR, _smith: None},
     (_rIe,),
     ((REGISTRY_IDENTIFIER, 9),),
 )
@@ -17761,7 +18194,7 @@ DELETE_REGISTRY_OUTPUT: StaticSchema = (
     18,
     n0,
     _DRO,
-    {_sSI: _cDRRo, _smith: None},
+    {_sSI: _cDRRo, _smithy: None},
     (_st,),
     ((REGISTRY_STATUS, 1),),
 )
@@ -17771,7 +18204,7 @@ DELETE_REGISTRY: StaticOperationSchema = (
     n0,
     _DR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "DELETE", "uri": "/registries/{registryId}"}
         )
     },
@@ -17791,7 +18224,7 @@ GET_REGISTRY_INPUT: StaticSchema = (
     18,
     n0,
     _GRIe,
-    {_sSI: _cGRR, _smit: None},
+    {_sSI: _cGRR, _smith: None},
     (_rIe,),
     ((REGISTRY_IDENTIFIER, 9),),
 )
@@ -17802,7 +18235,7 @@ GET_REGISTRY_OUTPUT: StaticSchema = (
     18,
     n0,
     _GRO,
-    {_sSI: _cGRRo, _smith: None},
+    {_sSI: _cGRRo, _smithy: None},
     (_n, _d, _rIe, _rAeg, _aT, _aCu, _aCp, _st, _sRt, _cA, _uA),
     (
         (REGISTRY_NAME, 1),
@@ -17824,7 +18257,7 @@ GET_REGISTRY: StaticOperationSchema = (
     n0,
     _GRe,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 200, "method": "GET", "uri": "/registries/{registryId}"}
         )
     },
@@ -17843,7 +18276,7 @@ LIST_REGISTRIES_INPUT: StaticSchema = (
     18,
     n0,
     _LRI,
-    {_sSI: _cLRR, _smit: None},
+    {_sSI: _cLRR, _smith: None},
     (_mR, _nT, _st, _aT),
     (
         (MAX_RESULTS, {_sQ: _mR}),
@@ -17885,7 +18318,7 @@ LIST_REGISTRIES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LRO,
-    {_sSI: _cLRRo, _smith: None},
+    {_sSI: _cLRRo, _smithy: None},
     (_regi, _nT),
     ((REGISTRY_SUMMARY_LIST, 1), (NEXT_TOKEN, 0)),
 )
@@ -17894,7 +18327,7 @@ LIST_REGISTRIES: StaticOperationSchema = (
     23,
     n0,
     _LR,
-    {_smithy: MappingProxyType({"code": 200, "method": "GET", "uri": "/registries"})},
+    {_smithya: MappingProxyType({"code": 200, "method": "GET", "uri": "/registries"})},
     LIST_REGISTRIES_INPUT,
     LIST_REGISTRIES_OUTPUT,
     (
@@ -17918,7 +18351,7 @@ UPDATE_REGISTRY_INPUT: StaticSchema = (
     18,
     n0,
     _URI,
-    {_sSI: _cURR, _smit: None},
+    {_sSI: _cURR, _smith: None},
     (_rIe, _n, _d, _aCu, _aCp),
     (
         (REGISTRY_IDENTIFIER, 9),
@@ -17933,7 +18366,7 @@ UPDATE_REGISTRY_OUTPUT: StaticSchema = (
     18,
     n0,
     _URO,
-    {_sSI: _cURRo, _smith: None},
+    {_sSI: _cURRo, _smithy: None},
     (_n, _d, _rIe, _rAeg, _aT, _aCu, _aCp, _st, _sRt, _cA, _uA),
     (
         (REGISTRY_NAME, 1),
@@ -17955,7 +18388,7 @@ UPDATE_REGISTRY: StaticOperationSchema = (
     n0,
     _UR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 202, "method": "PATCH", "uri": "/registries/{registryId}"}
         )
     },
@@ -17968,6 +18401,46 @@ UPDATE_REGISTRY: StaticOperationSchema = (
         RESOURCE_NOT_FOUND_EXCEPTION,
         SERVICE_QUOTA_EXCEEDED_EXCEPTION,
         THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+RESET_TOKEN_VAULT_KEY_MATERIAL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RTVKMI,
+    {_sSI: _cRTVKMR, _smith: None},
+    (_tVI,),
+    ((TOKEN_VAULT_ID_TYPE, 1),),
+)
+
+RESET_TOKEN_VAULT_KEY_MATERIAL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RTVKMO,
+    {_sSI: _cRTVKMRo, _smithy: None},
+    (_tVI, _kC, _lMD),
+    ((TOKEN_VAULT_ID_TYPE, 1), (KMS_CONFIGURATION, 1), (4, 1)),
+)
+
+RESET_TOKEN_VAULT_KEY_MATERIAL: StaticOperationSchema = (
+    23,
+    n0,
+    _RTVKM,
+    {
+        _smithya: MappingProxyType(
+            {"uri": "/identities/reset-token-vault-key-material", "method": "POST"}
+        )
+    },
+    RESET_TOKEN_VAULT_KEY_MATERIAL_INPUT,
+    RESET_TOKEN_VAULT_KEY_MATERIAL_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        UNAUTHORIZED_EXCEPTION,
         VALIDATION_EXCEPTION,
     ),
 )
@@ -17985,7 +18458,7 @@ SET_TOKEN_VAULT_CMK_INPUT: StaticSchema = (
     18,
     n0,
     _STVCMKI,
-    {_sSI: _cSTVCMKR, _smit: None},
+    {_sSI: _cSTVCMKR, _smith: None},
     (_tVI, _kC),
     ((TOKEN_VAULT_ID_TYPE, 0), (KMS_CONFIGURATION, 1)),
 )
@@ -17994,7 +18467,7 @@ SET_TOKEN_VAULT_CMK_OUTPUT: StaticSchema = (
     18,
     n0,
     _STVCMKO,
-    {_sSI: _cSTVCMKRo, _smith: None},
+    {_sSI: _cSTVCMKRo, _smithy: None},
     (_tVI, _kC, _lMD),
     ((TOKEN_VAULT_ID_TYPE, 1), (KMS_CONFIGURATION, 1), (4, 1)),
 )
@@ -18004,7 +18477,7 @@ SET_TOKEN_VAULT_CMK: StaticOperationSchema = (
     n0,
     _STVCMK,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/set-token-vault-cmk", "method": "POST"}
         )
     },
@@ -18013,6 +18486,7 @@ SET_TOKEN_VAULT_CMK: StaticOperationSchema = (
     (
         ACCESS_DENIED_EXCEPTION,
         CONCURRENT_MODIFICATION_EXCEPTION,
+        CONFLICT_EXCEPTION,
         INTERNAL_SERVER_EXCEPTION,
         RESOURCE_NOT_FOUND_EXCEPTION,
         THROTTLING_EXCEPTION,
@@ -18025,19 +18499,19 @@ TAG_RESOURCE_INPUT: StaticSchema = (
     18,
     n0,
     _TRI,
-    {_sSI: _cTRR, _smit: None},
+    {_sSI: _cTRR, _smith: None},
     (_rAe, _t),
     ((TAGGABLE_RESOURCES_ARN, 9), (TAGS_MAP, 1)),
 )
 
-TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _cTRRo, _smith: None})
+TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _cTRRo, _smithy: None})
 
 TAG_RESOURCE: StaticOperationSchema = (
     23,
     n0,
     _TR,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 204, "method": "POST", "uri": "/tags/{resourceArn}"}
         )
     },
@@ -18059,19 +18533,19 @@ UNTAG_RESOURCE_INPUT: StaticSchema = (
     18,
     n0,
     _URIn,
-    {_sSI: _cURRom, _smit: None},
+    {_sSI: _cURRom, _smith: None},
     (_rAe, _tKa),
     ((TAGGABLE_RESOURCES_ARN, 9), (TAG_KEY_LIST, {_sQ: _tKa, _sm: None})),
 )
 
-UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _UROn, {_sSI: _cURRoma, _smith: None})
+UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _UROn, {_sSI: _cURRoma, _smithy: None})
 
 UNTAG_RESOURCE: StaticOperationSchema = (
     23,
     n0,
     _URn,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 204, "method": "DELETE", "uri": "/tags/{resourceArn}"}
         )
     },
@@ -18101,7 +18575,7 @@ CREATE_WORKLOAD_IDENTITY_INPUT: StaticSchema = (
     18,
     n0,
     _CWII,
-    {_sSI: _cCWIR, _smit: None},
+    {_sSI: _cCWIR, _smith: None},
     (_n, _aRORU, _t),
     (
         (WORKLOAD_IDENTITY_NAME_TYPE, 1),
@@ -18116,7 +18590,7 @@ CREATE_WORKLOAD_IDENTITY_OUTPUT: StaticSchema = (
     18,
     n0,
     _CWIO,
-    {_sSI: _cCWIRo, _smith: None},
+    {_sSI: _cCWIRo, _smithy: None},
     (_n, _wIA, _aRORU),
     (
         (WORKLOAD_IDENTITY_NAME_TYPE, 1),
@@ -18130,7 +18604,7 @@ CREATE_WORKLOAD_IDENTITY: StaticOperationSchema = (
     n0,
     _CWI,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 201, "uri": "/identities/CreateWorkloadIdentity", "method": "POST"}
         )
     },
@@ -18138,6 +18612,7 @@ CREATE_WORKLOAD_IDENTITY: StaticOperationSchema = (
     CREATE_WORKLOAD_IDENTITY_OUTPUT,
     (
         ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
         INTERNAL_SERVER_EXCEPTION,
         RESOURCE_NOT_FOUND_EXCEPTION,
         THROTTLING_EXCEPTION,
@@ -18150,7 +18625,7 @@ DELETE_WORKLOAD_IDENTITY_INPUT: StaticSchema = (
     18,
     n0,
     _DWII,
-    {_sSI: _cDWIR, _smit: None},
+    {_sSI: _cDWIR, _smith: None},
     (_n,),
     ((WORKLOAD_IDENTITY_NAME_TYPE, 1),),
 )
@@ -18159,7 +18634,7 @@ DELETE_WORKLOAD_IDENTITY_OUTPUT: StaticSchema = (
     18,
     n0,
     _DWIO,
-    {_sSI: _cDWIRo, _smith: None},
+    {_sSI: _cDWIRo, _smithy: None},
 )
 
 DELETE_WORKLOAD_IDENTITY: StaticOperationSchema = (
@@ -18167,7 +18642,7 @@ DELETE_WORKLOAD_IDENTITY: StaticOperationSchema = (
     n0,
     _DWI,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"code": 204, "uri": "/identities/DeleteWorkloadIdentity", "method": "POST"}
         )
     },
@@ -18187,7 +18662,7 @@ GET_WORKLOAD_IDENTITY_INPUT: StaticSchema = (
     18,
     n0,
     _GWII,
-    {_sSI: _cGWIR, _smit: None},
+    {_sSI: _cGWIR, _smith: None},
     (_n,),
     ((WORKLOAD_IDENTITY_NAME_TYPE, 1),),
 )
@@ -18196,7 +18671,7 @@ GET_WORKLOAD_IDENTITY_OUTPUT: StaticSchema = (
     18,
     n0,
     _GWIO,
-    {_sSI: _cGWIRo, _smith: None},
+    {_sSI: _cGWIRo, _smithy: None},
     (_n, _wIA, _aRORU, _cTr, _lUT),
     (
         (WORKLOAD_IDENTITY_NAME_TYPE, 1),
@@ -18212,7 +18687,7 @@ GET_WORKLOAD_IDENTITY: StaticOperationSchema = (
     n0,
     _GWI,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/GetWorkloadIdentity", "method": "POST"}
         )
     },
@@ -18232,9 +18707,9 @@ LIST_WORKLOAD_IDENTITIES_INPUT: StaticSchema = (
     18,
     n0,
     _LWII,
-    {_sSI: _cLWIR, _smit: None},
+    {_sSI: _cLWIR, _smith: None},
     (_nT, _mR),
-    ((3, 0), (7, {_smithya: 10})),
+    ((3, 0), (7, {_smi: 10})),
 )
 
 WORKLOAD_IDENTITY_TYPE: StaticSchema = (
@@ -18259,7 +18734,7 @@ LIST_WORKLOAD_IDENTITIES_OUTPUT: StaticSchema = (
     18,
     n0,
     _LWIO,
-    {_sSI: _cLWIRo, _smith: None},
+    {_sSI: _cLWIRo, _smithy: None},
     (_wI, _nT),
     ((WORKLOAD_IDENTITY_LIST, 1), (3, 0)),
 )
@@ -18269,7 +18744,7 @@ LIST_WORKLOAD_IDENTITIES: StaticOperationSchema = (
     n0,
     _LWI,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/ListWorkloadIdentities", "method": "POST"}
         )
     },
@@ -18289,7 +18764,7 @@ UPDATE_WORKLOAD_IDENTITY_INPUT: StaticSchema = (
     18,
     n0,
     _UWII,
-    {_sSI: _cUWIR, _smit: None},
+    {_sSI: _cUWIR, _smith: None},
     (_n, _aRORU),
     ((WORKLOAD_IDENTITY_NAME_TYPE, 1), (RESOURCE_OAUTH2_RETURN_URL_LIST_TYPE, 0)),
 )
@@ -18298,7 +18773,7 @@ UPDATE_WORKLOAD_IDENTITY_OUTPUT: StaticSchema = (
     18,
     n0,
     _UWIO,
-    {_sSI: _cUWIRo, _smith: None},
+    {_sSI: _cUWIRo, _smithy: None},
     (_n, _wIA, _aRORU, _cTr, _lUT),
     (
         (WORKLOAD_IDENTITY_NAME_TYPE, 1),
@@ -18314,7 +18789,7 @@ UPDATE_WORKLOAD_IDENTITY: StaticOperationSchema = (
     n0,
     _UWI,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {"uri": "/identities/UpdateWorkloadIdentity", "method": "POST"}
         )
     },
@@ -18322,6 +18797,7 @@ UPDATE_WORKLOAD_IDENTITY: StaticOperationSchema = (
     UPDATE_WORKLOAD_IDENTITY_OUTPUT,
     (
         ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
         INTERNAL_SERVER_EXCEPTION,
         RESOURCE_NOT_FOUND_EXCEPTION,
         THROTTLING_EXCEPTION,
@@ -18416,7 +18892,7 @@ CREATE_GATEWAY_TARGET_INPUT: StaticSchema = (
     18,
     n0,
     _CGTI,
-    {_sSI: _cCGTR, _smit: None},
+    {_sSI: _cCGTR, _smith: None},
     (_gI, _n, _d, _cT, _tCa, _cPCr, _mC, _pE, _cCe),
     (
         (GATEWAY_IDENTIFIER, 9),
@@ -18435,7 +18911,7 @@ CREATE_GATEWAY_TARGET_OUTPUT: StaticSchema = (
     18,
     n0,
     _CGTO,
-    {_sSI: _cCGTRo, _smith: None},
+    {_sSI: _cCGTRo, _smithy: None},
     (
         _gA,
         _tI,
@@ -18451,7 +18927,7 @@ CREATE_GATEWAY_TARGET_OUTPUT: StaticSchema = (
         _mC,
         _pE,
         _pEMR,
-        _aD,
+        _aDu,
         _pTr,
         _cCe,
     ),
@@ -18496,7 +18972,7 @@ GATEWAY_TARGET: StaticSchema = (
         _mC,
         _pE,
         _pEMR,
-        _aD,
+        _aDu,
         _pTr,
         _cCe,
     ),
@@ -18525,7 +19001,7 @@ GET_GATEWAY_TARGET_OUTPUT: StaticSchema = (
     18,
     n0,
     _GGTO,
-    {_sSI: _cGGTRo, _smith: None},
+    {_sSI: _cGGTRo, _smithy: None},
     (
         _gA,
         _tI,
@@ -18541,7 +19017,7 @@ GET_GATEWAY_TARGET_OUTPUT: StaticSchema = (
         _mC,
         _pE,
         _pEMR,
-        _aD,
+        _aDu,
         _pTr,
         _cCe,
     ),
@@ -18570,7 +19046,7 @@ UPDATE_GATEWAY_TARGET_INPUT: StaticSchema = (
     18,
     n0,
     _UGTI,
-    {_sSI: _cUGTR, _smit: None},
+    {_sSI: _cUGTR, _smith: None},
     (_gI, _tI, _n, _d, _tCa, _cPCr, _mC, _pE, _cCe),
     (
         (GATEWAY_IDENTIFIER, 9),
@@ -18589,7 +19065,7 @@ UPDATE_GATEWAY_TARGET_OUTPUT: StaticSchema = (
     18,
     n0,
     _UGTO,
-    {_sSI: _cUGTRo, _smith: None},
+    {_sSI: _cUGTRo, _smithy: None},
     (
         _gA,
         _tI,
@@ -18605,7 +19081,7 @@ UPDATE_GATEWAY_TARGET_OUTPUT: StaticSchema = (
         _mC,
         _pE,
         _pEMR,
-        _aD,
+        _aDu,
         _pTr,
         _cCe,
     ),
@@ -18635,7 +19111,7 @@ GET_GATEWAY_TARGET: StaticOperationSchema = (
     n0,
     _GGT,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 200,
                 "method": "GET",
@@ -18660,7 +19136,7 @@ SYNCHRONIZE_GATEWAY_TARGETS_OUTPUT: StaticSchema = (
     18,
     n0,
     _SGTO,
-    {_sSI: _cSGTRo, _smith: None},
+    {_sSI: _cSGTRo, _smithy: None},
     (_tar,),
     ((GATEWAY_TARGET_LIST, 0),),
 )
@@ -18670,7 +19146,7 @@ SYNCHRONIZE_GATEWAY_TARGETS: StaticOperationSchema = (
     n0,
     _SGT,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "PUT",
@@ -18696,7 +19172,7 @@ CREATE_GATEWAY_TARGET: StaticOperationSchema = (
     n0,
     _CGT,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "POST",
@@ -18722,7 +19198,7 @@ UPDATE_GATEWAY_TARGET: StaticOperationSchema = (
     n0,
     _UGT,
     {
-        _smithy: MappingProxyType(
+        _smithya: MappingProxyType(
             {
                 "code": 202,
                 "method": "PUT",

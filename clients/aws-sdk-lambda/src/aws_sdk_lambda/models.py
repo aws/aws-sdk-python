@@ -243,6 +243,7 @@ _registry = ModelRegistry(
         "InvokeWithResponseStreamResponseEventPayloadChunk": "INVOKE_WITH_RESPONSE_STREAM_RESPONSE_EVENT",
         "InvokeWithResponseStreamResponseEventInvokeComplete": "INVOKE_WITH_RESPONSE_STREAM_RESPONSE_EVENT",
         "InvokeWithResponseStreamResponseEventUnknown": "INVOKE_WITH_RESPONSE_STREAM_RESPONSE_EVENT",
+        "KafkaEventSourceMappingConsumptionMode": "KAFKA_EVENT_SOURCE_MAPPING_CONSUMPTION_MODE",
         "KafkaSchemaRegistryAccessConfig": "KAFKA_SCHEMA_REGISTRY_ACCESS_CONFIG",
         "KafkaSchemaRegistryAuthType": "KAFKA_SCHEMA_REGISTRY_AUTH_TYPE",
         "KafkaSchemaRegistryConfig": "KAFKA_SCHEMA_REGISTRY_CONFIG",
@@ -654,6 +655,7 @@ _registry = ModelRegistry(
             "KMSDisabledException",
             "KMSInvalidStateException",
             "KMSNotFoundException",
+            "KafkaEventSourceMappingConsumptionMode",
             "KafkaSchemaRegistryAccessConfig",
             "KafkaSchemaRegistryAuthType",
             "KafkaSchemaRegistryConfig",
@@ -1535,6 +1537,9 @@ _operation_data["INVOKE_ASYNC"] = (
 _operation_data["INVOKE_WITH_RESPONSE_STREAM"] = (
     "INVOKE_WITH_RESPONSE_STREAM",
     (
+        "com.amazonaws.lambda#CodeArtifactUserDeletedException",
+        "com.amazonaws.lambda#CodeArtifactUserFailedException",
+        "com.amazonaws.lambda#CodeArtifactUserPendingException",
         "com.amazonaws.lambda#EC2AccessDeniedException",
         "com.amazonaws.lambda#EC2ThrottledException",
         "com.amazonaws.lambda#EC2UnexpectedException",

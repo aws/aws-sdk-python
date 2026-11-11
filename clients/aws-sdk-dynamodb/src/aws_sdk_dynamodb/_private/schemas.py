@@ -226,9 +226,76 @@ _RWCE = "ReplicatedWriteConflictException"
 _BSBi = "BilledSizeBytes"
 _BMS = "BillingModeSummary"
 _LUTPPRDT = "LastUpdateToPayPerRequestDateTime"
+_BOA = "BulkOperationArn"
+_NNLO = "NonNegativeLongObject"
+_BOB = "BulkOperationBytes"
+_BPB = "BulkPutBytes"
+_BOS = "BulkOperationStatus"
+_IP = "IN_PROGRESS"
+_COMPLETED = "COMPLETED"
+_CWE = "COMPLETED_WITH_ERRORS"
+_CANCELLING = "CANCELLING"
+_CANCELLED = "CANCELLED"
+_FAILED = "FAILED"
+_SIBBM = "SecondaryIndexesBulkBytesMap"
+_BOVB = "BulkOperationVectorBytes"
+_BPVB = "BulkPutVectorBytes"
+_VIBVBM = "VectorIndexesBulkVectorBytesMap"
+_BOU = "BulkOperationUsage"
+_BOUM = "BulkOperationUsageMultiple"
+_CT = "ClientToken"
+_BOET = "BulkOperationEndTime"
+_BOIC = "BulkOperationItemCount"
+_smi = "smithy.api#default"
+_FC = "FailureCode"
+_FM = "FailureMessage"
+_ICT = "InputCompressionType"
+_GZIP = "GZIP"
+_ZSTD = "ZSTD"
+_BOIF = "BulkOperationInputFormat"
+_DJ = "DYNAMODB_JSON"
+_ION = "ION"
+_SB = "S3Bucket"
+_SBO = "S3BucketOwner"
+_SPr = "S3Prefix"
+_ISC = "InputS3Configuration"
+_SKP = "S3KeyPrefix"
+_IFn = "InputFormat"
+_BOMWRU = "BulkOperationMaxWriteRequestUnits"
+_OTE = "OutputTypeEnum"
+_ERROR = "ERROR"
+_CCF_ = "CONDITION_CHECK_FAILURE"
+_OTL = "OutputTypeList"
+_SSA = "S3SseAlgorithm"
+_SSKKI = "S3SseKmsKeyId"
+_OSC = "OutputS3Configuration"
+_OT = "OutputType"
+_BOPT = "BulkOperationPerformanceTier"
+_STANDARD = "STANDARD"
+_ACCELERATED = "ACCELERATED"
+_PIB = "ProcessedInputBytes"
+_BOST = "BulkOperationStartTime"
+_BOTD = "BulkOperationTableDetail"
+_BOTDu = "BulkOperationTableDetails"
+_TIB = "TotalInputBytes"
+_BOD = "BulkOperationDescription"
+_TD = "TableDetails"
+_ST = "StartTime"
+_ET = "EndTime"
+_PIC = "ProcessedItemCount"
+_FIC = "FailedItemCount"
+_PTe = "PerformanceTier"
+_BONT = "BulkOperationNextToken"
+_BOSu = "BulkOperationSummary"
+_BOSL = "BulkOperationsSummaryList"
+_CBOI = "CancelBulkOperationInput"
+_smit = "smithy.api#input"
+_sP = "smithy.rules#contextParam"
+_CBOO = "CancelBulkOperationOutput"
+_smith = "smithy.api#output"
+_CBO = "CancelBulkOperation"
 _Co = "Code"
 _CRT = "ClientRequestToken"
-_CT = "ClientToken"
 _CWLGA = "CloudWatchLogGroupArn"
 _CO = "ComparisonOperator"
 _EQ = "EQ"
@@ -250,7 +317,6 @@ _OR = "OR"
 _CE = "ConditionExpression"
 _EAVV = "ExpressionAttributeValueVariable"
 _CRSRA = "ConfirmRemoveSelfResourceAccess"
-_smi = "smithy.api#default"
 _CBS = "ContinuousBackupsStatus"
 _PITRS = "PointInTimeRecoveryStatus"
 _RPID = "RecoveryPeriodInDays"
@@ -268,14 +334,10 @@ _TK = "THROTTLED_KEYS"
 _CIR = "ContributorInsightsRule"
 _CIRL = "ContributorInsightsRuleList"
 _CIS = "ContributorInsightsStatus"
-_FAILED = "FAILED"
 _CISo = "ContributorInsightsSummary"
 _CISon = "ContributorInsightsSummaries"
 _CBI = "CreateBackupInput"
-_smit = "smithy.api#input"
-_sP = "smithy.rules#contextParam"
-_CBO = "CreateBackupOutput"
-_smith = "smithy.api#output"
+_CBOr = "CreateBackupOutput"
 _LEE = "LimitExceededException"
 _TIUE = "TableInUseException"
 _TNFE = "TableNotFoundException"
@@ -313,7 +375,6 @@ _RNA = "REPLICATION_NOT_AUTHORIZED"
 _RSD = "ReplicaStatusDescription"
 _RSPP = "ReplicaStatusPercentProgress"
 _TCa = "TableClass"
-_STANDARD = "STANDARD"
 _SIA = "STANDARD_INFREQUENT_ACCESS"
 _TCS = "TableClassSummary"
 _LUDT = "LastUpdateDateTime"
@@ -356,7 +417,7 @@ _VIL = "VectorIndexList"
 _CTI = "CreateTableInput"
 _Tag = "Tags"
 _GTSA = "GlobalTableSourceArn"
-_NNLO = "NonNegativeLongObject"
+_DPEi = "DisassociationProtectionEnabled"
 _PTD = "ProvisionedThroughputDescription"
 _LIDT = "LastIncreaseDateTime"
 _LDDT = "LastDecreaseDateTime"
@@ -381,7 +442,7 @@ _STA = "SourceTableArn"
 _RDT = "RestoreDateTime"
 _VID = "VectorIndexDescription"
 _VIDL = "VectorIndexDescriptionList"
-_TD = "TableDescription"
+_TDa = "TableDescription"
 _LSL = "LatestStreamLabel"
 _LSA = "LatestStreamArn"
 _GTV = "GlobalTableVersion"
@@ -425,6 +486,9 @@ _DVIA = "DeleteVectorIndexAction"
 _DBIe = "DescribeBackupInput"
 _DBOe = "DescribeBackupOutput"
 _DBe = "DescribeBackup"
+_DBOI = "DescribeBulkOperationInput"
+_DBOO = "DescribeBulkOperationOutput"
+_DBOes = "DescribeBulkOperation"
 _DCBI = "DescribeContinuousBackupsInput"
 _DCBO = "DescribeContinuousBackupsOutput"
 _DCB = "DescribeContinuousBackups"
@@ -449,28 +513,17 @@ _EA = "ExportArn"
 _DEIe = "DescribeExportInput"
 _EET = "ExportEndTime"
 _EF = "ExportFormat"
-_DJ = "DYNAMODB_JSON"
-_ION = "ION"
 _EMx = "ExportManifest"
 _ES = "ExportStatus"
-_IP = "IN_PROGRESS"
-_COMPLETED = "COMPLETED"
-_ET = "ExportTime"
-_ETx = "ExportType"
+_ETx = "ExportTime"
+_ETxp = "ExportType"
 _FE_ = "FULL_EXPORT"
 _IE = "INCREMENTAL_EXPORT"
-_FC = "FailureCode"
-_FM = "FailureMessage"
 _KE = "KeyExpression"
 _EFT = "ExportFromTime"
 _ETT = "ExportToTime"
 _EVT = "ExportViewType"
 _IES = "IncrementalExportSpecification"
-_SB = "S3Bucket"
-_SBO = "S3BucketOwner"
-_SPr = "S3Prefix"
-_SSA = "S3SseAlgorithm"
-_SSKKI = "S3SseKmsKeyId"
 _EST = "ExportStartTime"
 _ENFE = "ExportNotFoundException"
 _DGTI = "DescribeGlobalTableInput"
@@ -501,23 +554,13 @@ _IET = "ImportEndTime"
 _EC = "ErrorCount"
 _IIC = "ImportedItemCount"
 _ISm = "ImportStatus"
-_CANCELLING = "CANCELLING"
-_CANCELLED = "CANCELLED"
-_ICT = "InputCompressionType"
-_GZIP = "GZIP"
-_ZSTD = "ZSTD"
-_IFn = "InputFormat"
 _CSV = "CSV"
 _IFO = "InputFormatOptions"
 _Cs = "Csv"
-_PIC = "ProcessedItemCount"
 _SBS = "S3BucketSource"
-_SKP = "S3KeyPrefix"
 _IST = "ImportStartTime"
 _TCP = "TableCreationParameters"
 _ITD = "ImportTableDescription"
-_ST = "StartTime"
-_ETn = "EndTime"
 _PSB = "ProcessedSizeBytes"
 _DIO = "DescribeImportOutput"
 _INFE = "ImportNotFoundException"
@@ -557,6 +600,9 @@ _cKSDI = "com.amazonaws.dynamodb#KinesisStreamingDestinationInput"
 _DKSDOi = "DisableKinesisStreamingDestinationOutput"
 _cKSDO = "com.amazonaws.dynamodb#KinesisStreamingDestinationOutput"
 _DKSDi = "DisableKinesisStreamingDestination"
+_DM = "DisassociationMode"
+_WFR = "WAIT_FOR_REPLICATION"
+_DRGMAi = "DisassociateReplicationGroupMemberAction"
 _DIE = "DuplicateItemException"
 _EKSDI = "EnableKinesisStreamingDestinationInput"
 _EKSDO = "EnableKinesisStreamingDestinationOutput"
@@ -586,11 +632,15 @@ _ESBA = "ExclusiveStartBackupArn"
 _LBO = "ListBackupsOutput"
 _LEBA = "LastEvaluatedBackupArn"
 _LB = "ListBackups"
+_LBOML = "ListBulkOperationsMaxLimit"
+_LBOI = "ListBulkOperationsInput"
+_MR = "MaxResults"
+_NT = "NextToken"
+_LBOO = "ListBulkOperationsOutput"
+_LBOi = "ListBulkOperations"
 _LCIL = "ListContributorInsightsLimit"
 _NTS = "NextTokenString"
 _LCII = "ListContributorInsightsInput"
-_NT = "NextToken"
-_MR = "MaxResults"
 _LCIO = "ListContributorInsightsOutput"
 _LCI = "ListContributorInsights"
 _LEML = "ListExportsMaxLimit"
@@ -658,6 +708,9 @@ _SSc = "ScanSegment"
 _STS = "ScanTotalSegments"
 _TKI = "TopKInteger"
 _SN = "ScoreNumber"
+_SBPII = "StartBulkPutItemsInput"
+_SBPIO = "StartBulkPutItemsOutput"
+_SBPI = "StartBulkPutItems"
 _TRI = "TagResourceInput"
 _TRO = "TagResourceOutput"
 _sU = "smithy.api#Unit"
@@ -715,6 +768,7 @@ _GTWGU = "GlobalTableWitnessGroupUpdate"
 _GTWGUL = "GlobalTableWitnessGroupUpdateList"
 _URGMA = "UpdateReplicationGroupMemberAction"
 _RGU = "ReplicationGroupUpdate"
+_Dis = "Disassociate"
 _RGUL = "ReplicationGroupUpdateList"
 _VIU = "VectorIndexUpdate"
 _VIUL = "VectorIndexUpdateList"
@@ -1761,11 +1815,310 @@ BILLING_MODE_SUMMARY: StaticSchema = (
     ((BILLING_MODE, 0), (DATE, 0)),
 )
 
+BULK_OPERATION_ARN: StaticSchema = (3, n0, _BOA, 0)
+
+NON_NEGATIVE_LONG_OBJECT: StaticSchema = (8, n0, _NNLO, 0)
+
+BULK_OPERATION_BYTES: StaticSchema = (
+    18,
+    n0,
+    _BOB,
+    0,
+    (_BPB,),
+    ((NON_NEGATIVE_LONG_OBJECT, 0),),
+)
+
+BULK_OPERATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _BOS,
+    0,
+    (_IP, _COMPLETED, _CWE, _CANCELLING, _CANCELLED, _FAILED),
+    (
+        (-1, {_sV: _IP}),
+        (-1, {_sV: _COMPLETED}),
+        (-1, {_sV: _CWE}),
+        (-1, {_sV: _CANCELLING}),
+        (-1, {_sV: _CANCELLED}),
+        (-1, {_sV: _FAILED}),
+    ),
+)
+
+SECONDARY_INDEXES_BULK_BYTES_MAP: StaticSchema = (
+    17,
+    n0,
+    _SIBBM,
+    0,
+    (_k, _v),
+    ((INDEX_NAME, 0), (BULK_OPERATION_BYTES, 0)),
+)
+
+BULK_OPERATION_VECTOR_BYTES: StaticSchema = (
+    18,
+    n0,
+    _BOVB,
+    0,
+    (_BPVB,),
+    ((NON_NEGATIVE_LONG_OBJECT, 0),),
+)
+
+VECTOR_INDEXES_BULK_VECTOR_BYTES_MAP: StaticSchema = (
+    17,
+    n0,
+    _VIBVBM,
+    0,
+    (_k, _v),
+    ((INDEX_NAME, 0), (BULK_OPERATION_VECTOR_BYTES, 0)),
+)
+
+BULK_OPERATION_USAGE: StaticSchema = (
+    18,
+    n0,
+    _BOU,
+    0,
+    (_TN, _BPB, _T, _LSI, _GSI, _VI),
+    (
+        (TABLE_ARN, 0),
+        (NON_NEGATIVE_LONG_OBJECT, 0),
+        (BULK_OPERATION_BYTES, 0),
+        (SECONDARY_INDEXES_BULK_BYTES_MAP, 0),
+        (SECONDARY_INDEXES_BULK_BYTES_MAP, 0),
+        (VECTOR_INDEXES_BULK_VECTOR_BYTES_MAP, 0),
+    ),
+)
+
+BULK_OPERATION_USAGE_MULTIPLE: StaticSchema = (
+    16,
+    n0,
+    _BOUM,
+    0,
+    (_m,),
+    ((BULK_OPERATION_USAGE, 0),),
+)
+
+CLIENT_TOKEN: StaticSchema = (3, n0, _CT, 0)
+
+BULK_OPERATION_END_TIME: StaticSchema = (4, n0, _BOET, 0)
+
+BULK_OPERATION_ITEM_COUNT: StaticSchema = (8, n0, _BOIC, {_smi: 0})
+
+FAILURE_CODE: StaticSchema = (3, n0, _FC, 0)
+
+FAILURE_MESSAGE: StaticSchema = (3, n0, _FM, 0)
+
+INPUT_COMPRESSION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ICT,
+    0,
+    (_GZIP, _ZSTD, _NONE),
+    ((-1, {_sV: _GZIP}), (-1, {_sV: _ZSTD}), (-1, {_sV: _NONE})),
+)
+
+BULK_OPERATION_INPUT_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _BOIF,
+    0,
+    (_DJ, _ION),
+    ((-1, {_sV: _DJ}), (-1, {_sV: _ION})),
+)
+
+S3_BUCKET: StaticSchema = (3, n0, _SB, 0)
+
+S3_BUCKET_OWNER: StaticSchema = (3, n0, _SBO, 0)
+
+S3_PREFIX: StaticSchema = (3, n0, _SPr, 0)
+
+INPUT_S3_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _ISC,
+    0,
+    (_SBO, _SB, _SKP, _IFn, _ICT),
+    (
+        (S3_BUCKET_OWNER, 0),
+        (S3_BUCKET, 1),
+        (S3_PREFIX, 0),
+        (BULK_OPERATION_INPUT_FORMAT, 1),
+        (INPUT_COMPRESSION_TYPE, 0),
+    ),
+)
+
+BULK_OPERATION_MAX_WRITE_REQUEST_UNITS: StaticSchema = (8, n0, _BOMWRU, 0)
+
+OUTPUT_TYPE_ENUM: StaticSchema = (
+    14,
+    n0,
+    _OTE,
+    0,
+    (_ERROR, _CCF_),
+    ((-1, {_sV: _ERROR}), (-1, {_sV: _CCF_})),
+)
+
+OUTPUT_TYPE_LIST: StaticSchema = (16, n0, _OTL, 0, (_m,), ((OUTPUT_TYPE_ENUM, 0),))
+
+S3_SSE_ALGORITHM: StaticSchema = (
+    14,
+    n0,
+    _SSA,
+    0,
+    (_AES, _KMS),
+    ((-1, {_sV: _AES}), (-1, {_sV: _KMS})),
+)
+
+S3_SSE_KMS_KEY_ID: StaticSchema = (3, n0, _SSKKI, 0)
+
+OUTPUT_S3_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OSC,
+    0,
+    (_SBO, _SB, _SKP, _SSA, _SSKKI, _OT),
+    (
+        (S3_BUCKET_OWNER, 0),
+        (S3_BUCKET, 0),
+        (S3_PREFIX, 0),
+        (S3_SSE_ALGORITHM, 0),
+        (S3_SSE_KMS_KEY_ID, 0),
+        (OUTPUT_TYPE_LIST, 1),
+    ),
+)
+
+BULK_OPERATION_PERFORMANCE_TIER: StaticSchema = (
+    14,
+    n0,
+    _BOPT,
+    0,
+    (_STANDARD, _ACCELERATED),
+    ((-1, {_sV: _STANDARD}), (-1, {_sV: _ACCELERATED})),
+)
+
+PROCESSED_INPUT_BYTES: StaticSchema = (8, n0, _PIB, 0)
+
+BULK_OPERATION_START_TIME: StaticSchema = (4, n0, _BOST, 0)
+
+BULK_OPERATION_TABLE_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _BOTD,
+    0,
+    (_TN, _TI),
+    ((TABLE_ARN, 0), (TABLE_ID, 0)),
+)
+
+BULK_OPERATION_TABLE_DETAILS: StaticSchema = (
+    16,
+    n0,
+    _BOTDu,
+    0,
+    (_m,),
+    ((BULK_OPERATION_TABLE_DETAIL, 0),),
+)
+
+TOTAL_INPUT_BYTES: StaticSchema = (8, n0, _TIB, 0)
+
+BULK_OPERATION_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _BOD,
+    0,
+    (
+        _BOA,
+        _BOS,
+        _TD,
+        _CT,
+        _ISC,
+        _OSC,
+        _ST,
+        _ET,
+        _PIC,
+        _PIB,
+        _TIB,
+        _BOU,
+        _FIC,
+        _FC,
+        _FM,
+        _MWRU,
+        _PTe,
+    ),
+    (
+        (BULK_OPERATION_ARN, 0),
+        (BULK_OPERATION_STATUS, 0),
+        (BULK_OPERATION_TABLE_DETAILS, 0),
+        (CLIENT_TOKEN, 0),
+        (INPUT_S3_CONFIGURATION, 0),
+        (OUTPUT_S3_CONFIGURATION, 0),
+        (BULK_OPERATION_START_TIME, 0),
+        (BULK_OPERATION_END_TIME, 0),
+        (BULK_OPERATION_ITEM_COUNT, {_smi: 0}),
+        (PROCESSED_INPUT_BYTES, 0),
+        (TOTAL_INPUT_BYTES, 0),
+        (BULK_OPERATION_USAGE_MULTIPLE, 0),
+        (BULK_OPERATION_ITEM_COUNT, {_smi: 0}),
+        (FAILURE_CODE, 0),
+        (FAILURE_MESSAGE, 0),
+        (BULK_OPERATION_MAX_WRITE_REQUEST_UNITS, 0),
+        (BULK_OPERATION_PERFORMANCE_TIER, 0),
+    ),
+)
+
+BULK_OPERATION_NEXT_TOKEN: StaticSchema = (3, n0, _BONT, 0)
+
+BULK_OPERATION_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _BOSu,
+    0,
+    (_BOA, _BOS, _ST, _ET),
+    (
+        (BULK_OPERATION_ARN, 1),
+        (BULK_OPERATION_STATUS, 1),
+        (BULK_OPERATION_START_TIME, 1),
+        (BULK_OPERATION_END_TIME, 0),
+    ),
+)
+
+BULK_OPERATIONS_SUMMARY_LIST: StaticSchema = (
+    16,
+    n0,
+    _BOSL,
+    0,
+    (_m,),
+    ((BULK_OPERATION_SUMMARY, 0),),
+)
+
+CANCEL_BULK_OPERATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CBOI,
+    {_smit: None},
+    (_BOA,),
+    ((BULK_OPERATION_ARN, {_sP: MappingProxyType({"name": "ResourceArn"}), _s: None}),),
+)
+
+CANCEL_BULK_OPERATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CBOO,
+    {_smith: None},
+    (_BOA, _BOS),
+    ((BULK_OPERATION_ARN, 1), (BULK_OPERATION_STATUS, 1)),
+)
+
+CANCEL_BULK_OPERATION: StaticOperationSchema = (
+    23,
+    n0,
+    _CBO,
+    0,
+    CANCEL_BULK_OPERATION_INPUT,
+    CANCEL_BULK_OPERATION_OUTPUT,
+    (INVALID_ENDPOINT_EXCEPTION, RESOURCE_NOT_FOUND_EXCEPTION),
+)
+
 CODE: StaticSchema = (3, n0, _Co, 0)
 
 CLIENT_REQUEST_TOKEN: StaticSchema = (3, n0, _CRT, 0)
-
-CLIENT_TOKEN: StaticSchema = (3, n0, _CT, 0)
 
 CLOUD_WATCH_LOG_GROUP_ARN: StaticSchema = (3, n0, _CWLGA, 0)
 
@@ -1941,7 +2294,7 @@ CREATE_BACKUP_INPUT: StaticSchema = (
 CREATE_BACKUP_OUTPUT: StaticSchema = (
     18,
     n0,
-    _CBO,
+    _CBOr,
     {_smith: None},
     (_BD,),
     ((BACKUP_DETAILS, 0),),
@@ -2474,7 +2827,7 @@ CREATE_TABLE_INPUT: StaticSchema = (
     ),
 )
 
-NON_NEGATIVE_LONG_OBJECT: StaticSchema = (8, n0, _NNLO, 0)
+DISASSOCIATION_PROTECTION_ENABLED: StaticSchema = (2, n0, _DPEi, 0)
 
 PROVISIONED_THROUGHPUT_DESCRIPTION: StaticSchema = (
     18,
@@ -2628,7 +2981,7 @@ VECTOR_INDEX_DESCRIPTION_LIST: StaticSchema = (
 TABLE_DESCRIPTION: StaticSchema = (
     18,
     n0,
-    _TD,
+    _TDa,
     0,
     (
         _ADt,
@@ -2656,6 +3009,7 @@ TABLE_DESCRIPTION: StaticSchema = (
         _AS,
         _TCS,
         _DPE,
+        _DPEi,
         _ODT,
         _WT,
         _MRC,
@@ -2687,6 +3041,7 @@ TABLE_DESCRIPTION: StaticSchema = (
         (ARCHIVAL_SUMMARY, 0),
         (TABLE_CLASS_SUMMARY, 0),
         (DELETION_PROTECTION_ENABLED, 0),
+        (DISASSOCIATION_PROTECTION_ENABLED, 0),
         (ON_DEMAND_THROUGHPUT, 0),
         (TABLE_WARM_THROUGHPUT_DESCRIPTION, 0),
         (MULTI_REGION_CONSISTENCY, 0),
@@ -2699,7 +3054,7 @@ CREATE_TABLE_OUTPUT: StaticSchema = (
     n0,
     _CTO,
     {_smith: None},
-    (_TD,),
+    (_TDa,),
     ((TABLE_DESCRIPTION, 0),),
 )
 
@@ -2913,7 +3268,7 @@ DELETE_TABLE_OUTPUT: StaticSchema = (
     n0,
     _DTO,
     {_smith: None},
-    (_TD,),
+    (_TDa,),
     ((TABLE_DESCRIPTION, 0),),
 )
 
@@ -2968,6 +3323,34 @@ DESCRIBE_BACKUP: StaticOperationSchema = (
     DESCRIBE_BACKUP_INPUT,
     DESCRIBE_BACKUP_OUTPUT,
     (BACKUP_NOT_FOUND_EXCEPTION, INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION),
+)
+
+DESCRIBE_BULK_OPERATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DBOI,
+    {_smit: None},
+    (_BOA,),
+    ((BULK_OPERATION_ARN, {_sP: MappingProxyType({"name": "ResourceArn"}), _s: None}),),
+)
+
+DESCRIBE_BULK_OPERATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DBOO,
+    {_smith: None},
+    (_BOD,),
+    ((BULK_OPERATION_DESCRIPTION, 1),),
+)
+
+DESCRIBE_BULK_OPERATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DBOes,
+    0,
+    DESCRIBE_BULK_OPERATION_INPUT,
+    DESCRIBE_BULK_OPERATION_OUTPUT,
+    (INVALID_ENDPOINT_EXCEPTION, RESOURCE_NOT_FOUND_EXCEPTION),
 )
 
 DESCRIBE_CONTINUOUS_BACKUPS_INPUT: StaticSchema = (
@@ -3119,20 +3502,16 @@ EXPORT_STATUS: StaticSchema = (
     ((-1, {_sV: _IP}), (-1, {_sV: _COMPLETED}), (-1, {_sV: _FAILED})),
 )
 
-EXPORT_TIME: StaticSchema = (4, n0, _ET, 0)
+EXPORT_TIME: StaticSchema = (4, n0, _ETx, 0)
 
 EXPORT_TYPE: StaticSchema = (
     14,
     n0,
-    _ETx,
+    _ETxp,
     0,
     (_FE_, _IE),
     ((-1, {_sV: _FE_}), (-1, {_sV: _IE})),
 )
-
-FAILURE_CODE: StaticSchema = (3, n0, _FC, 0)
-
-FAILURE_MESSAGE: StaticSchema = (3, n0, _FM, 0)
 
 KEY_EXPRESSION: StaticSchema = (3, n0, _KE, 0)
 
@@ -3157,23 +3536,6 @@ INCREMENTAL_EXPORT_SPECIFICATION: StaticSchema = (
     (_EFT, _ETT, _EVT),
     ((EXPORT_FROM_TIME, 0), (EXPORT_TO_TIME, 0), (EXPORT_VIEW_TYPE, 0)),
 )
-
-S3_BUCKET: StaticSchema = (3, n0, _SB, 0)
-
-S3_BUCKET_OWNER: StaticSchema = (3, n0, _SBO, 0)
-
-S3_PREFIX: StaticSchema = (3, n0, _SPr, 0)
-
-S3_SSE_ALGORITHM: StaticSchema = (
-    14,
-    n0,
-    _SSA,
-    0,
-    (_AES, _KMS),
-    ((-1, {_sV: _AES}), (-1, {_sV: _KMS})),
-)
-
-S3_SSE_KMS_KEY_ID: StaticSchema = (3, n0, _SSKKI, 0)
 
 EXPORT_START_TIME: StaticSchema = (4, n0, _EST, 0)
 
@@ -3344,15 +3706,6 @@ IMPORT_STATUS: StaticSchema = (
     ),
 )
 
-INPUT_COMPRESSION_TYPE: StaticSchema = (
-    14,
-    n0,
-    _ICT,
-    0,
-    (_GZIP, _ZSTD, _NONE),
-    ((-1, {_sV: _GZIP}), (-1, {_sV: _ZSTD}), (-1, {_sV: _NONE})),
-)
-
 INPUT_FORMAT: StaticSchema = (
     14,
     n0,
@@ -3415,7 +3768,7 @@ IMPORT_TABLE_DESCRIPTION: StaticSchema = (
         _ICT,
         _TCP,
         _ST,
-        _ETn,
+        _ET,
         _PSB,
         _PIC,
         _IIC,
@@ -3758,6 +4111,17 @@ DISABLE_KINESIS_STREAMING_DESTINATION: StaticOperationSchema = (
     ),
 )
 
+DISASSOCIATION_MODE: StaticSchema = (14, n0, _DM, 0, (_WFR,), ((-1, {_sV: _WFR}),))
+
+DISASSOCIATE_REPLICATION_GROUP_MEMBER_ACTION: StaticSchema = (
+    18,
+    n0,
+    _DRGMAi,
+    0,
+    (_RN, _DM),
+    ((REGION_NAME, 1), (DISASSOCIATION_MODE, 1)),
+)
+
 DUPLICATE_ITEM_EXCEPTION: StaticSchema = (
     18,
     n0,
@@ -3988,6 +4352,36 @@ LIST_BACKUPS: StaticOperationSchema = (
     (INTERNAL_SERVER_ERROR, INVALID_ENDPOINT_EXCEPTION),
 )
 
+LIST_BULK_OPERATIONS_MAX_LIMIT: StaticSchema = (7, n0, _LBOML, 0)
+
+LIST_BULK_OPERATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LBOI,
+    {_smit: None},
+    (_MR, _NT),
+    ((LIST_BULK_OPERATIONS_MAX_LIMIT, 0), (BULK_OPERATION_NEXT_TOKEN, 0)),
+)
+
+LIST_BULK_OPERATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LBOO,
+    {_smith: None},
+    (_BOSL, _NT),
+    ((BULK_OPERATIONS_SUMMARY_LIST, 0), (BULK_OPERATION_NEXT_TOKEN, 0)),
+)
+
+LIST_BULK_OPERATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LBOi,
+    0,
+    LIST_BULK_OPERATIONS_INPUT,
+    LIST_BULK_OPERATIONS_OUTPUT,
+    (INVALID_ENDPOINT_EXCEPTION,),
+)
+
 LIST_CONTRIBUTOR_INSIGHTS_LIMIT: StaticSchema = (7, n0, _LCIL, {_smi: 0})
 
 NEXT_TOKEN_STRING: StaticSchema = (3, n0, _NTS, 0)
@@ -4046,7 +4440,7 @@ EXPORT_SUMMARY: StaticSchema = (
     n0,
     _ESx,
     0,
-    (_EA, _ES, _ETx),
+    (_EA, _ES, _ETxp),
     ((EXPORT_ARN, 0), (EXPORT_STATUS, 0), (EXPORT_TYPE, 0)),
 )
 
@@ -4132,7 +4526,7 @@ IMPORT_SUMMARY: StaticSchema = (
     n0,
     _ISmp,
     0,
-    (_IAm, _ISm, _TA, _SBS, _CWLGA, _IFn, _ST, _ETn),
+    (_IAm, _ISm, _TA, _SBS, _CWLGA, _IFn, _ST, _ET),
     (
         (IMPORT_ARN, 0),
         (IMPORT_STATUS, 0),
@@ -4310,7 +4704,7 @@ RESTORE_TABLE_FROM_BACKUP_OUTPUT: StaticSchema = (
     n0,
     _RTFBO,
     {_smith: None},
-    (_TD,),
+    (_TDa,),
     ((TABLE_DESCRIPTION, 0),),
 )
 
@@ -4377,7 +4771,7 @@ RESTORE_TABLE_TO_POINT_IN_TIME_OUTPUT: StaticSchema = (
     n0,
     _RTTPITO,
     {_smith: None},
-    (_TD,),
+    (_TDa,),
     ((TABLE_DESCRIPTION, 0),),
 )
 
@@ -4407,6 +4801,47 @@ SCAN_TOTAL_SEGMENTS: StaticSchema = (7, n0, _STS, 0)
 TOP_K_INTEGER: StaticSchema = (7, n0, _TKI, 0)
 
 SCORE_NUMBER: StaticSchema = (10, n0, _SN, {_smi: 0})
+
+START_BULK_PUT_ITEMS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SBPII,
+    {_smit: None},
+    (_CT, _ISC, _OSC, _TN, _MWRU, _PTe),
+    (
+        (CLIENT_TOKEN, 2),
+        (INPUT_S3_CONFIGURATION, 1),
+        (OUTPUT_S3_CONFIGURATION, 1),
+        (TABLE_ARN, {_sP: MappingProxyType({"name": "ResourceArn"}), _s: None}),
+        (BULK_OPERATION_MAX_WRITE_REQUEST_UNITS, 0),
+        (BULK_OPERATION_PERFORMANCE_TIER, 0),
+    ),
+)
+
+START_BULK_PUT_ITEMS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SBPIO,
+    {_smith: None},
+    (_BOD,),
+    ((BULK_OPERATION_DESCRIPTION, 1),),
+)
+
+START_BULK_PUT_ITEMS: StaticOperationSchema = (
+    23,
+    n0,
+    _SBPI,
+    0,
+    START_BULK_PUT_ITEMS_INPUT,
+    START_BULK_PUT_ITEMS_OUTPUT,
+    (
+        IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION,
+        INVALID_ENDPOINT_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
 
 TAG_RESOURCE_INPUT: StaticSchema = (
     18,
@@ -4870,11 +5305,12 @@ REPLICATION_GROUP_UPDATE: StaticSchema = (
     n0,
     _RGU,
     0,
-    (_Cr, _U, _Del),
+    (_Cr, _U, _Del, _Dis),
     (
         (CREATE_REPLICATION_GROUP_MEMBER_ACTION, 0),
         (UPDATE_REPLICATION_GROUP_MEMBER_ACTION, 0),
         (DELETE_REPLICATION_GROUP_MEMBER_ACTION, 0),
+        (DISASSOCIATE_REPLICATION_GROUP_MEMBER_ACTION, 0),
     ),
 )
 
@@ -4926,6 +5362,7 @@ UPDATE_TABLE_INPUT: StaticSchema = (
         _ODT,
         _WT,
         _GTSRM,
+        _DPEi,
         _VIUe,
     ),
     (
@@ -4944,6 +5381,7 @@ UPDATE_TABLE_INPUT: StaticSchema = (
         (ON_DEMAND_THROUGHPUT, 0),
         (WARM_THROUGHPUT, 0),
         (GLOBAL_TABLE_SETTINGS_REPLICATION_MODE, 0),
+        (DISASSOCIATION_PROTECTION_ENABLED, 0),
         (VECTOR_INDEX_UPDATE_LIST, 0),
     ),
 )
@@ -4953,7 +5391,7 @@ UPDATE_TABLE_OUTPUT: StaticSchema = (
     n0,
     _UTO,
     {_smith: None},
-    (_TD,),
+    (_TDa,),
     ((TABLE_DESCRIPTION, 0),),
 )
 
@@ -5421,11 +5859,11 @@ EXPORT_DESCRIPTION: StaticSchema = (
         _EA,
         _ES,
         _ST,
-        _ETn,
+        _ET,
         _EMx,
         _TA,
         _TI,
-        _ET,
+        _ETx,
         _CT,
         _SB,
         _SBO,
@@ -5437,7 +5875,7 @@ EXPORT_DESCRIPTION: StaticSchema = (
         _EF,
         _BSBi,
         _IC,
-        _ETx,
+        _ETxp,
         _IES,
         _FS,
     ),
@@ -5472,7 +5910,7 @@ EXPORT_TABLE_TO_POINT_IN_TIME_INPUT: StaticSchema = (
     n0,
     _ETTPITI,
     {_smit: None},
-    (_TA, _ET, _CT, _SB, _SBO, _SPr, _SSA, _SSKKI, _EF, _ETx, _IES, _FS),
+    (_TA, _ETx, _CT, _SB, _SBO, _SPr, _SSA, _SSKKI, _EF, _ETxp, _IES, _FS),
     (
         (TABLE_ARN, {_sP: MappingProxyType({"name": "ResourceArn"}), _s: None}),
         (EXPORT_TIME, 0),

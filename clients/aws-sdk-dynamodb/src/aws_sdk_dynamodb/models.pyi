@@ -1054,6 +1054,238 @@ class BillingModeSummary(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class BulkOperationBytes(_SerdeShape):
+    """Contains the bulk put bytes used during a bulk operation."""
+
+    bulk_put_bytes: int | None = ...
+    """The number of bulk put bytes."""
+
+@dataclass(kw_only=True)
+class BulkOperationDescription(_SerdeShape):
+    """Contains detailed information about a bulk operation."""
+
+    bulk_operation_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the bulk operation."""
+    bulk_operation_status: str | None = ...
+    """
+    The current status of the bulk operation can be one of the following
+    values:
+
+    IN_PROGRESS
+
+    : DynamoDB is processing the input.
+
+    COMPLETED
+
+    : The bulk operation finished without parsing or validation errors.
+      Condition-check failures do not cause the operation to complete with
+      errors.
+
+    COMPLETED_WITH_ERRORS
+
+    : The bulk operation finished, but DynamoDB couldn't process at least
+      one input item because of a parsing or validation error. When you
+      enable `ERROR` output, DynamoDB writes the details to the configured
+      Amazon S3 output location.
+
+    CANCELLING
+
+    : DynamoDB accepted a cancellation request and is stopping the
+      operation.
+
+    CANCELLED
+
+    : DynamoDB stopped the operation after a cancellation request.
+
+    FAILED
+
+    : The bulk operation failed. DynamoDB might write some items before the
+      operation reaches this status. See
+      [FailureCode](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BulkOperationDescription.html#DDB-Type-BulkOperationDescription-FailureCode)
+      and
+      [FailureMessage](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BulkOperationDescription.html#DDB-Type-BulkOperationDescription-FailureMessage)
+      for details.
+    """
+    table_details: list[BulkOperationTableDetail] | None = ...
+    """
+    A list containing identifying information for the table targeted by the
+    bulk operation.
+    """
+    client_token: str | None = ...
+    """The idempotency token associated with the start request."""
+    input_s3_configuration: InputS3Configuration | None = ...
+    """The Amazon S3 input configuration associated with the bulk operation."""
+    output_s3_configuration: OutputS3Configuration | None = ...
+    """The Amazon S3 output configuration associated with the bulk operation."""
+    start_time: datetime | None = ...
+    """The time when DynamoDB accepted the start request."""
+    end_time: datetime | None = ...
+    """
+    The time when the operation reached a terminal status. DynamoDB omits
+    this value while the operation remains in progress.
+    """
+    processed_item_count: int = ...
+    """
+    The number of input items that DynamoDB has processed. This count
+    includes successful writes, parsing or validation failures, and
+    condition-check failures.
+    """
+    processed_input_bytes: int | None = ...
+    """
+    The number of bytes that DynamoDB has read from the Amazon S3 input
+    objects.
+    """
+    total_input_bytes: int | None = ...
+    """
+    The total size, in bytes, of the Amazon S3 input objects. DynamoDB omits
+    this value until the initial input-size calculation completes.
+    """
+    bulk_operation_usage: list[BulkOperationUsage] | None = ...
+    """Usage information for the table and its indexes."""
+    failed_item_count: int = ...
+    """
+    The number of processed input items that failed because of parsing or
+    validation errors. This count is included in `ProcessedItemCount`.
+    Condition-check failures do not increase this count.
+    """
+    failure_code: str | None = ...
+    """
+    A code that identifies why the bulk operation failed or was cancelled.
+    DynamoDB returns this value only when `BulkOperationStatus` is `FAILED`
+    or `CANCELLED`.
+    """
+    failure_message: str | None = ...
+    """
+    A message that describes why the bulk operation failed or was cancelled.
+    DynamoDB returns this value only when `BulkOperationStatus` is `FAILED`
+    or `CANCELLED`.
+    """
+    max_write_request_units: int | None = ...
+    """The maximum write request unit rate configured for the bulk operation."""
+    performance_tier: str | None = ...
+    """
+    The performance tier selected for the bulk operation. Valid values are
+    `STANDARD` and `ACCELERATED`. If the start request omitted this value,
+    DynamoDB uses `STANDARD`.
+    """
+
+class BulkOperationInputFormat(UnknownEnumMixin, StrEnum):
+    DYNAMODB_JSON = "DYNAMODB_JSON"
+    ION = "ION"
+
+class BulkOperationPerformanceTier(UnknownEnumMixin, StrEnum):
+    STANDARD = "STANDARD"
+    ACCELERATED = "ACCELERATED"
+
+class BulkOperationStatus(UnknownEnumMixin, StrEnum):
+    IN_PROGRESS = "IN_PROGRESS"
+    COMPLETED = "COMPLETED"
+    COMPLETED_WITH_ERRORS = "COMPLETED_WITH_ERRORS"
+    CANCELLING = "CANCELLING"
+    CANCELLED = "CANCELLED"
+    FAILED = "FAILED"
+
+@dataclass(kw_only=True)
+class BulkOperationSummary(_SerdeShape):
+    """Contains summary information about a bulk operation."""
+
+    bulk_operation_arn: str
+    """The Amazon Resource Name (ARN) of the bulk operation."""
+    bulk_operation_status: str
+    """The current status of the bulk operation."""
+    start_time: datetime
+    """The time when DynamoDB accepted the start request."""
+    end_time: datetime | None = ...
+    """
+    The time when the operation reached a terminal status. DynamoDB omits
+    this value while the operation remains in progress.
+    """
+
+@dataclass(kw_only=True)
+class BulkOperationTableDetail(_SerdeShape):
+    """
+    Contains identifying information for a table associated with a bulk
+    operation.
+    """
+
+    table_name: str | None = ...
+    """The name or ARN of the table associated with the bulk operation."""
+    table_id: str | None = ...
+    """The unique identifier of the table associated with the bulk operation."""
+
+@dataclass(kw_only=True)
+class BulkOperationUsage(_SerdeShape):
+    """
+    Contains the bytes used during a bulk operation, including a breakdown
+    for the table and its indexes.
+    """
+
+    table_name: str | None = ...
+    """The name or ARN of the table associated with the reported usage."""
+    bulk_put_bytes: int | None = ...
+    """
+    The total number of bulk put bytes used by the operation. This value
+    excludes bulk put vector bytes.
+    """
+    table: BulkOperationBytes | None = ...
+    """The number of bulk put bytes for the table, excluding its indexes."""
+    local_secondary_indexes: dict[str, BulkOperationBytes] | None = ...
+    """
+    The bulk put bytes used on each local secondary index affected by the
+    operation, keyed by index name.
+    """
+    global_secondary_indexes: dict[str, BulkOperationBytes] | None = ...
+    """
+    The bulk put bytes used on each global secondary index affected by the
+    operation, keyed by index name.
+    """
+    vector_indexes: dict[str, BulkOperationVectorBytes] | None = ...
+    """
+    The bulk put vector bytes used on each vector index affected by the
+    operation, keyed by index name.
+    """
+
+@dataclass(kw_only=True)
+class BulkOperationVectorBytes(_SerdeShape):
+    """
+    Contains the bulk put vector bytes used by a vector index during a bulk
+    operation.
+    """
+
+    bulk_put_vector_bytes: int | None = ...
+    """The number of bulk put vector bytes used on the vector index."""
+
+@dataclass(kw_only=True)
+class CancelBulkOperationInput(_SerdeShape):
+    """Dataclass for CancelBulkOperationInput structure."""
+
+    bulk_operation_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the bulk operation to cancel."""
+
+@dataclass(kw_only=True)
+class CancelBulkOperationOutput(_SerdeShape):
+    """Dataclass for CancelBulkOperationOutput structure."""
+
+    bulk_operation_arn: str
+    """
+    The Amazon Resource Name (ARN) of the bulk operation for which DynamoDB
+    accepted the cancellation request.
+    """
+    bulk_operation_status: str
+    """
+    The status returned after DynamoDB accepts the cancellation request.
+    This value is `CANCELLING`. Use `DescribeBulkOperation` to determine
+    when the operation reaches `CANCELLED`.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class CancellationReason(_SerdeShape):
     """
     An ordered list of errors for each item in the request which caused the
@@ -2387,6 +2619,27 @@ class DescribeBackupOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class DescribeBulkOperationInput(_SerdeShape):
+    """Dataclass for DescribeBulkOperationInput structure."""
+
+    bulk_operation_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the bulk operation to describe."""
+
+@dataclass(kw_only=True)
+class DescribeBulkOperationOutput(_SerdeShape):
+    """Dataclass for DescribeBulkOperationOutput structure."""
+
+    bulk_operation_description: BulkOperationDescription
+    """Contains detailed information about the bulk operation."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class DescribeContinuousBackupsInput(_SerdeShape):
     """Dataclass for DescribeContinuousBackupsInput structure."""
 
@@ -2773,6 +3026,46 @@ class DisableKinesisStreamingDestinationOutput(_SerdeShape):
     to investigate a call. Members of the metadata are individually
     optional.
     """
+
+@dataclass(kw_only=True)
+class DisassociateReplicationGroupMemberAction(_SerdeShape):
+    """
+    The parameters for disassociating the local replica from a global table
+    using Version 2019.11.21 with multi-Region eventual consistency (MREC).
+
+    After disassociation completes, the replica remains a standalone
+    regional table that keeps its data, indexes, and table settings.
+
+    For request requirements, see
+    [UpdateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html).
+    For prerequisites, the protection update, and completion checks, see
+    [Disassociating a global table
+    replica](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables-disassociate.html)
+    in the *Amazon DynamoDB Developer Guide*.
+    """
+
+    region_name: str
+    """
+    The Region of the replica to disassociate. Set this value to the Region
+    where you send the `UpdateTable` request. You must use credentials for
+    the account that owns the replica.
+    """
+    disassociation_mode: str
+    """
+    The mode for handling pending replication before disassociation
+    completes. You must specify `WAIT_FOR_REPLICATION`. For more
+    information, see [Disassociating a global table
+    replica](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables-disassociate.html)
+    in the *Amazon DynamoDB Developer Guide*.
+    """
+
+class DisassociationMode(UnknownEnumMixin, StrEnum):
+    """
+    Specifies how pending replication is handled before a replica is
+    disassociated. `WAIT_FOR_REPLICATION` is the only supported value.
+    """
+
+    WAIT_FOR_REPLICATION = "WAIT_FOR_REPLICATION"
 
 @dataclass(kw_only=True)
 class DuplicateItemException(ServiceError, _SerdeShape):
@@ -4422,6 +4715,41 @@ class InputFormatOptions(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class InputS3Configuration(_SerdeShape):
+    """
+    Contains the Amazon S3 location and format settings for bulk operation
+    input. The `S3Bucket` and `InputFormat` fields are required.
+    """
+
+    s3_bucket_owner: str | None = ...
+    """
+    The Amazon Web Services account ID of the input bucket owner. If you
+    omit this value, DynamoDB uses the Amazon Web Services account ID of the
+    requester.
+
+    Note:
+        `S3BucketOwner` is required when the bucket is owned by another Amazon
+        Web Services account.
+    """
+    s3_bucket: str
+    """The name of the Amazon S3 bucket that contains the input objects."""
+    s3_key_prefix: str | None = ...
+    """
+    An optional key prefix that limits the input to matching objects in the
+    Amazon S3 bucket.
+    """
+    input_format: str
+    """
+    The format of the input objects. `DYNAMODB_JSON` uses JSON Lines, with
+    one JSON record per line. `ION` uses a sequence of Ion structs.
+    """
+    input_compression_type: str | None = ...
+    """
+    The compression type of the input objects. Valid values are `GZIP`,
+    `ZSTD`, and `NONE`. If you don't specify a value, DynamoDB uses `NONE`.
+    """
+
+@dataclass(kw_only=True)
 class InternalServerError(ServiceError, _SerdeShape):
     """An error occurred on the server side."""
 
@@ -4770,6 +5098,45 @@ class ListBackupsOutput(_SerdeShape):
     that there is more data to be returned. All results are guaranteed to
     have been returned if and only if no value for `LastEvaluatedBackupArn`
     is returned.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListBulkOperationsInput(_SerdeShape):
+    """Dataclass for ListBulkOperationsInput structure."""
+
+    max_results: int | None = ...
+    """
+    The maximum number of bulk operation summaries to return in one page. If
+    you don't specify a value, DynamoDB uses 10.
+    """
+    next_token: str | None = ...
+    """
+    An optional string that, if supplied, must be copied from the output of
+    a previous call to `ListBulkOperations`. When provided in this manner,
+    the API fetches the next page of results.
+    """
+
+@dataclass(kw_only=True)
+class ListBulkOperationsOutput(_SerdeShape):
+    """Dataclass for ListBulkOperationsOutput structure."""
+
+    bulk_operations_summary_list: list[BulkOperationSummary] | None = ...
+    """
+    A list of bulk operation summaries for the current Amazon Web Services
+    account and Amazon Web Services Region.
+    """
+    next_token: str | None = ...
+    """
+    If this value is returned, there are additional results to be displayed.
+    To retrieve them, call `ListBulkOperations` again, with `NextToken` set
+    to this value.
     """
     response_metadata: ResponseMetadata = ...
     """
@@ -5160,6 +5527,62 @@ class OnDemandThroughputOverride(_SerdeShape):
 
     max_read_request_units: int | None = ...
     """Maximum number of read request units for the specified replica table."""
+
+@dataclass(kw_only=True)
+class OutputS3Configuration(_SerdeShape):
+    """
+    Contains the Amazon S3 location, encryption settings, and output types
+    for a bulk operation. The `S3Bucket` and `OutputType` fields are
+    required.
+    """
+
+    s3_bucket_owner: str | None = ...
+    """
+    The Amazon Web Services account ID of the output bucket owner. If you
+    omit this value, DynamoDB uses the Amazon Web Services account ID of the
+    requester.
+
+    Note:
+        `S3BucketOwner` is required when the bucket is owned by another Amazon
+        Web Services account.
+    """
+    s3_bucket: str | None = ...
+    """The name of the Amazon S3 bucket where DynamoDB writes output records."""
+    s3_key_prefix: str | None = ...
+    """An optional key prefix under which DynamoDB writes the output records."""
+    s3_sse_algorithm: str | None = ...
+    """
+    The server-side encryption algorithm for the output objects. Valid
+    values are `AES256` and `KMS`. If you don't specify a value, Amazon S3
+    applies the destination bucket's default encryption settings.
+    """
+    s3_sse_kms_key_id: str | None = ...
+    """
+    The identifier of the KMS key that encrypts the output objects. Specify
+    this value when `S3SseAlgorithm` is `KMS`. Don't specify it when the
+    algorithm is `AES256`.
+    """
+    output_type: list[str]
+    """
+    The following values describe the types of output that DynamoDB writes
+    for individual input items. Include one or both values.
+
+    ERROR
+
+    : Reports input records or input objects that DynamoDB couldn't
+      process. This includes malformed input and item validation failures,
+      such as a missing or incorrectly typed primary key attribute or an
+      item that exceeds a DynamoDB limit.
+
+    CONDITION_CHECK_FAILURE
+
+    : Reports the attempted item and, when present, the existing item for a
+      write whose condition expression evaluates to false.
+    """
+
+class OutputTypeEnum(UnknownEnumMixin, StrEnum):
+    ERROR = "ERROR"
+    CONDITION_CHECK_FAILURE = "CONDITION_CHECK_FAILURE"
 
 @dataclass(kw_only=True)
 class ParameterizedStatement(_SerdeShape):
@@ -6678,6 +7101,13 @@ class ReplicationGroupUpdate(_SerdeShape):
       `DeleteTableReplica` action in the destination Region, deleting the
       replica and all if its items in the destination Region.
 
+    - The local replica to be disassociated from a global table and retained
+      as a standalone regional table.
+
+    Each `ReplicationGroupUpdate` contains exactly one action. A
+    `Disassociate` action must be the only replica update in the request;
+    including other updates causes the request to fail.
+
     Note:
         When you manually remove a table or global table replica, you do not
         automatically remove any associated scalable targets, scaling policies,
@@ -6690,6 +7120,11 @@ class ReplicationGroupUpdate(_SerdeShape):
     """The parameters required for updating a replica for the table."""
     delete: DeleteReplicationGroupMemberAction | None = ...
     """The parameters required for deleting a replica for the table."""
+    disassociate: DisassociateReplicationGroupMemberAction | None = ...
+    """
+    The parameters for disassociating the local replica from the global
+    table and retaining it as a standalone regional table.
+    """
 
 @dataclass(kw_only=True)
 class ReplicaUpdate(_SerdeShape):
@@ -7431,10 +7866,9 @@ class SearchVectorsInput(_SerdeShape):
     expression can reference attributes defined in the vector index search
     schema, including `HASH` and `INLINE_FILTER` key elements.
 
-    Only the equality operator (`=`) is supported for `HASH` attributes.
-    Comparison and range operators are supported for `INLINE_FILTER`
-    attributes. Only top-level attributes from the search schema can be
-    referenced.
+    The `HASH` and `INLINE_FILTER` attributes support only the equality
+    operator (`=`). You can reference only top-level attributes from the
+    search schema.
     """
     top_k: int | None = ...
     """The number of most similar results to return."""
@@ -7618,6 +8052,61 @@ class SSEStatus(UnknownEnumMixin, StrEnum):
 class SSEType(UnknownEnumMixin, StrEnum):
     AES256 = "AES256"
     KMS = "KMS"
+
+@dataclass(kw_only=True)
+class StartBulkPutItemsInput(_SerdeShape):
+    """Dataclass for StartBulkPutItemsInput structure."""
+
+    client_token: str | None = ...
+    """
+    A unique, case-sensitive identifier that ensures the bulk operation
+    starts no more than one time. During the 8 hours after the initial
+    request, repeated requests that use the same token and parameters return
+    the same bulk operation. If a request reuses the token with different
+    parameters, DynamoDB returns an `IdempotentParameterMismatchException`.
+    If you omit the token, an Amazon Web Services SDK automatically
+    generates one.
+    """
+    input_s3_configuration: InputS3Configuration | None = ...
+    """
+    The Amazon S3 location, data format, and compression settings for the
+    input objects.
+    """
+    output_s3_configuration: OutputS3Configuration | None = ...
+    """
+    The Amazon S3 location, encryption settings, and output types for the
+    bulk operation.
+    """
+    table_name: str | None = ...
+    """The name or ARN of the existing DynamoDB table that receives the items."""
+    max_write_request_units: int | None = ...
+    """
+    The maximum rate, in write request units per second, at which the bulk
+    operation attempts to write. The value must be at least 1,024. With this
+    setting, you limit only the bulk operation; the table's provisioned or
+    on-demand capacity settings don't change. The actual write rate can be
+    lower.
+    """
+    performance_tier: str | None = ...
+    """
+    The performance tier for the bulk operation. Valid values are `STANDARD`
+    and `ACCELERATED`. If you don't specify a value, the operation uses
+    `STANDARD`.
+    """
+
+@dataclass(kw_only=True)
+class StartBulkPutItemsOutput(_SerdeShape):
+    """Dataclass for StartBulkPutItemsOutput structure."""
+
+    bulk_operation_description: BulkOperationDescription
+    """Contains detailed information about a bulk operation."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
 @dataclass(kw_only=True)
 class StreamSpecification(_SerdeShape):
@@ -8008,7 +8497,12 @@ class TableDescription(_SerdeShape):
     in use, if the table is replicated across Amazon Web Services Regions.
     """
     replicas: list[ReplicaDescription] | None = ...
-    """Represents replicas of the table."""
+    """
+    Represents replicas of the table.
+
+    After a successful disassociation, this list is absent or empty. To
+    confirm disassociation, also verify that `TableStatus` is `ACTIVE`.
+    """
     global_table_witnesses: list[GlobalTableWitnessDescription] | None = ...
     """
     The witness Region and its current status in the MRSC global table. Only
@@ -8044,6 +8538,12 @@ class TableDescription(_SerdeShape):
     """
     Indicates whether deletion protection is enabled (true) or disabled
     (false) on the table.
+    """
+    disassociation_protection_enabled: bool | None = ...
+    """
+    Specifies whether disassociation protection is enabled (`true`) or
+    disabled (`false`) for the local global table replica. Protection is
+    enabled by default.
     """
     on_demand_throughput: OnDemandThroughput | None = ...
     """
@@ -9474,8 +9974,8 @@ class UpdateTableInput(_SerdeShape):
     """The new server-side encryption settings for the specified table."""
     replica_updates: list[ReplicationGroupUpdate] | None = ...
     """
-    A list of replica update actions (create, delete, or update) for the
-    table.
+    A list of replica update actions (create, delete, update, or
+    disassociate) for the table.
     """
     table_class: str | None = ...
     """
@@ -9552,6 +10052,19 @@ class UpdateTableInput(_SerdeShape):
     - `DISABLED`: Remove settings replication on a regional table. Settings
       replication needs to be defined to ENABLED again in order to create a
       Multi-Account Global Table using this table.
+    """
+    disassociation_protection_enabled: bool | None = ...
+    """
+    Specifies whether disassociation protection is enabled (`true`) or
+    disabled (`false`) for the local replica of a multi-Region eventual
+    consistency (MREC) global table using Version 2019.11.21.
+
+    Disassociation protection is enabled by default. If you omit this
+    parameter, the existing setting is unchanged. This setting is
+    independent of `DeletionProtectionEnabled`.
+
+    You can't combine this change with any other change in the same
+    `UpdateTable` request.
     """
     vector_index_updates: list[VectorIndexUpdate] | None = ...
     """
@@ -9851,6 +10364,7 @@ BATCH_EXECUTE_STATEMENT: APIOperation[
 ]
 BATCH_GET_ITEM: APIOperation[BatchGetItemInput, BatchGetItemOutput]
 BATCH_WRITE_ITEM: APIOperation[BatchWriteItemInput, BatchWriteItemOutput]
+CANCEL_BULK_OPERATION: APIOperation[CancelBulkOperationInput, CancelBulkOperationOutput]
 CREATE_BACKUP: APIOperation[CreateBackupInput, CreateBackupOutput]
 CREATE_GLOBAL_TABLE: APIOperation[CreateGlobalTableInput, CreateGlobalTableOutput]
 CREATE_TABLE: APIOperation[CreateTableInput, CreateTableOutput]
@@ -9861,6 +10375,9 @@ DELETE_RESOURCE_POLICY: APIOperation[
 ]
 DELETE_TABLE: APIOperation[DeleteTableInput, DeleteTableOutput]
 DESCRIBE_BACKUP: APIOperation[DescribeBackupInput, DescribeBackupOutput]
+DESCRIBE_BULK_OPERATION: APIOperation[
+    DescribeBulkOperationInput, DescribeBulkOperationOutput
+]
 DESCRIBE_CONTINUOUS_BACKUPS: APIOperation[
     DescribeContinuousBackupsInput, DescribeContinuousBackupsOutput
 ]
@@ -9898,6 +10415,7 @@ GET_ITEM: APIOperation[GetItemInput, GetItemOutput]
 GET_RESOURCE_POLICY: APIOperation[GetResourcePolicyInput, GetResourcePolicyOutput]
 IMPORT_TABLE: APIOperation[ImportTableInput, ImportTableOutput]
 LIST_BACKUPS: APIOperation[ListBackupsInput, ListBackupsOutput]
+LIST_BULK_OPERATIONS: APIOperation[ListBulkOperationsInput, ListBulkOperationsOutput]
 LIST_CONTRIBUTOR_INSIGHTS: APIOperation[
     ListContributorInsightsInput, ListContributorInsightsOutput
 ]
@@ -9917,6 +10435,7 @@ RESTORE_TABLE_TO_POINT_IN_TIME: APIOperation[
 ]
 SCAN: APIOperation[ScanInput, ScanOutput]
 SEARCH_VECTORS: APIOperation[SearchVectorsInput, SearchVectorsOutput]
+START_BULK_PUT_ITEMS: APIOperation[StartBulkPutItemsInput, StartBulkPutItemsOutput]
 TAG_RESOURCE: APIOperation[TagResourceInput, TagResourceOutput]
 TRANSACT_GET_ITEMS: APIOperation[TransactGetItemsInput, TransactGetItemsOutput]
 TRANSACT_WRITE_ITEMS: APIOperation[TransactWriteItemsInput, TransactWriteItemsOutput]

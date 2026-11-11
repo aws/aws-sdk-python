@@ -23,12 +23,16 @@ _registry = ModelRegistry(
         "AccessDeniedException": "ACCESS_DENIED_EXCEPTION",
         "AccessToken": "ACCESS_TOKEN",
         "ConflictException": "CONFLICT_EXCEPTION",
+        "CreateBearerTokenInput": "CREATE_BEARER_TOKEN_INPUT",
+        "CreateBearerTokenOutput": "CREATE_BEARER_TOKEN_OUTPUT",
         "CreateOAuth2TokenInput": "CREATE_O_AUTH2_TOKEN_INPUT",
         "CreateOAuth2TokenOutput": "CREATE_O_AUTH2_TOKEN_OUTPUT",
         "CreateOAuth2TokenRequestBody": "CREATE_O_AUTH2_TOKEN_REQUEST_BODY",
         "CreateOAuth2TokenResponseBody": "CREATE_O_AUTH2_TOKEN_RESPONSE_BODY",
         "CreateOAuth2TokenWithIAMInput": "CREATE_O_AUTH2_TOKEN_WITH_IAM_INPUT",
         "CreateOAuth2TokenWithIAMOutput": "CREATE_O_AUTH2_TOKEN_WITH_IAM_OUTPUT",
+        "CreateOAuth2TokenWithTokenExchangeInput": "CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE_INPUT",
+        "CreateOAuth2TokenWithTokenExchangeOutput": "CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE_OUTPUT",
         "DeleteConsoleAuthorizationConfigurationInput": "DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT",
         "DeleteConsoleAuthorizationConfigurationOutput": "DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT",
         "DeleteResourcePermissionStatementInput": "DELETE_RESOURCE_PERMISSION_STATEMENT_INPUT",
@@ -40,6 +44,8 @@ _registry = ModelRegistry(
         "InternalServerException": "INTERNAL_SERVER_EXCEPTION",
         "IntrospectOAuth2TokenWithIAMInput": "INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_INPUT",
         "IntrospectOAuth2TokenWithIAMOutput": "INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_OUTPUT",
+        "InvalidGrantException": "INVALID_GRANT_EXCEPTION",
+        "InvalidScopeException": "INVALID_SCOPE_EXCEPTION",
         "ListResourcePermissionStatementsInput": "LIST_RESOURCE_PERMISSION_STATEMENTS_INPUT",
         "ListResourcePermissionStatementsOutput": "LIST_RESOURCE_PERMISSION_STATEMENTS_OUTPUT",
         "OAuth2ErrorCode": "O_AUTH2_ERROR_CODE",
@@ -53,6 +59,7 @@ _registry = ModelRegistry(
         "RevokeOAuth2TokenWithIAMInput": "REVOKE_O_AUTH2_TOKEN_WITH_IAM_INPUT",
         "RevokeOAuth2TokenWithIAMOutput": "REVOKE_O_AUTH2_TOKEN_WITH_IAM_OUTPUT",
         "ServiceQuotaExceededException": "SERVICE_QUOTA_EXCEEDED_EXCEPTION",
+        "ServiceUnavailableException": "SERVICE_UNAVAILABLE_EXCEPTION",
         "SigninResourceBasedPolicy": "SIGNIN_RESOURCE_BASED_POLICY",
         "TooManyRequestsError": "TOO_MANY_REQUESTS_ERROR",
         "ValidationException": "VALIDATION_EXCEPTION",
@@ -62,12 +69,16 @@ _registry = ModelRegistry(
             "AccessDeniedException",
             "AccessToken",
             "ConflictException",
+            "CreateBearerTokenInput",
+            "CreateBearerTokenOutput",
             "CreateOAuth2TokenInput",
             "CreateOAuth2TokenOutput",
             "CreateOAuth2TokenRequestBody",
             "CreateOAuth2TokenResponseBody",
             "CreateOAuth2TokenWithIAMInput",
             "CreateOAuth2TokenWithIAMOutput",
+            "CreateOAuth2TokenWithTokenExchangeInput",
+            "CreateOAuth2TokenWithTokenExchangeOutput",
             "DeleteConsoleAuthorizationConfigurationInput",
             "DeleteConsoleAuthorizationConfigurationOutput",
             "DeleteResourcePermissionStatementInput",
@@ -79,6 +90,8 @@ _registry = ModelRegistry(
             "InternalServerException",
             "IntrospectOAuth2TokenWithIAMInput",
             "IntrospectOAuth2TokenWithIAMOutput",
+            "InvalidGrantException",
+            "InvalidScopeException",
             "ListResourcePermissionStatementsInput",
             "ListResourcePermissionStatementsOutput",
             "OAuth2ErrorCode",
@@ -92,6 +105,7 @@ _registry = ModelRegistry(
             "RevokeOAuth2TokenWithIAMInput",
             "RevokeOAuth2TokenWithIAMOutput",
             "ServiceQuotaExceededException",
+            "ServiceUnavailableException",
             "SigninResourceBasedPolicy",
             "TooManyRequestsError",
             "ValidationException",
@@ -102,8 +116,10 @@ _registry = ModelRegistry(
 
 _operation_data = {}
 _operation_names = (
+    "CREATE_BEARER_TOKEN",
     "CREATE_O_AUTH2_TOKEN",
     "CREATE_O_AUTH2_TOKEN_WITH_IAM",
+    "CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE",
     "DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION",
     "DELETE_RESOURCE_PERMISSION_STATEMENT",
     "GET_CONSOLE_AUTHORIZATION_CONFIGURATION",
@@ -138,6 +154,17 @@ def __dir__():
     return sorted({*globals(), *_operation_names})
 
 
+_operation_data["CREATE_BEARER_TOKEN"] = (
+    "CREATE_BEARER_TOKEN",
+    (
+        "com.amazonaws.signin#AccessDeniedException",
+        "com.amazonaws.signin#InternalServerException",
+        "com.amazonaws.signin#TooManyRequestsError",
+        "com.amazonaws.signin#ValidationException",
+    ),
+    ("aws.auth#sigv4",),
+)
+
 _operation_data["CREATE_O_AUTH2_TOKEN"] = (
     "CREATE_O_AUTH2_TOKEN",
     (
@@ -158,6 +185,19 @@ _operation_data["CREATE_O_AUTH2_TOKEN_WITH_IAM"] = (
         "com.amazonaws.signin#ValidationException",
     ),
     ("aws.auth#sigv4",),
+)
+
+_operation_data["CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE"] = (
+    "CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE",
+    (
+        "com.amazonaws.signin#InternalServerException",
+        "com.amazonaws.signin#InvalidGrantException",
+        "com.amazonaws.signin#InvalidScopeException",
+        "com.amazonaws.signin#ServiceUnavailableException",
+        "com.amazonaws.signin#TooManyRequestsError",
+        "com.amazonaws.signin#ValidationException",
+    ),
+    ("smithy.api#noAuth",),
 )
 
 _operation_data["DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION"] = (

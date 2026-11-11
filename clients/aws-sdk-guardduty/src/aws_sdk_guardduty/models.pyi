@@ -3924,6 +3924,30 @@ class DestinationProperties(_SerdeShape):
     """
     kms_key_arn: str | None = ...
     """The ARN of the KMS key to use for encryption."""
+    expected_bucket_owner: str | None = ...
+    """
+    The 12-digit Amazon Web Services account ID of the account that owns the
+    Amazon S3 bucket specified in the `DestinationArn` parameter.
+
+    When you provide this value, GuardDuty verifies that the specified
+    account owns the bucket before it exports findings. If the account ID
+    doesn't match the actual owner of the bucket, GuardDuty doesn't export
+    findings to that bucket. This helps prevent GuardDuty from exporting
+    your findings to a bucket that a different Amazon Web Services account
+    owns (for example, if the original bucket was deleted and its name was
+    later claimed by another account). If you don't specify this value,
+    GuardDuty doesn't perform this verification. GuardDuty strongly
+    recommends that you provide the expected bucket owner when possible.
+
+    When you update a publishing destination, omitting this field leaves the
+    currently stored value unchanged. This field appears in the response
+    only if it was provided when the publishing destination was created or
+    updated.
+
+    For more information, see [Verifying the Amazon S3 bucket
+    owner](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_exportfindings.html#guardduty-exportfindings-expected-bucket-owner)
+    in the *Amazon GuardDuty User Guide*.
+    """
 
 class DestinationType(UnknownEnumMixin, StrEnum):
     S3 = "S3"
@@ -3947,6 +3971,46 @@ class DetectionRuleConfigurationStatus(UnknownEnumMixin, StrEnum):
 
 class DetectionRuleDataSource(UnknownEnumMixin, StrEnum):
     CLOUDTRAIL_MANAGEMENT_EVENT = "CloudTrailManagementEvent"
+    RUNTIME_MONITORING = "RuntimeMonitoring"
+
+@dataclass(kw_only=True)
+class DetectionRuleEc2Requirements(_SerdeShape):
+    """
+    The requirements for running a Runtime Monitoring custom detection rule
+    on Amazon EC2.
+    """
+
+    min_agent_version: str | None = ...
+    """
+    The minimum GuardDuty agent version required to run the rule on Amazon
+    EC2.
+    """
+
+@dataclass(kw_only=True)
+class DetectionRuleEcsFargateRequirements(_SerdeShape):
+    """
+    The requirements for running a Runtime Monitoring custom detection rule
+    on Amazon ECS with the Fargate launch type.
+    """
+
+    min_agent_version: str | None = ...
+    """
+    The minimum GuardDuty agent version required to run the rule on Amazon
+    ECS with the Fargate launch type.
+    """
+
+@dataclass(kw_only=True)
+class DetectionRuleEksRequirements(_SerdeShape):
+    """
+    The requirements for running a Runtime Monitoring custom detection rule
+    on Amazon EKS.
+    """
+
+    min_agent_version: str | None = ...
+    """
+    The minimum GuardDuty agent version required to run the rule on Amazon
+    EKS.
+    """
 
 @dataclass(kw_only=True)
 class DetectionRuleFilter(_SerdeShape):
@@ -4028,6 +4092,41 @@ class DetectionRuleOrgConfigurationSummary(_SerdeShape):
     """The timestamp when the organization configuration was last updated."""
     expires_at: datetime | None = ...
     """The timestamp when the organization configuration expires."""
+
+@dataclass(kw_only=True)
+class DetectionRuleRuntimeMonitoringDetails(_SerdeShape):
+    """
+    Contains Runtime Monitoring-specific details for a custom detection
+    rule.
+    """
+
+    platforms: DetectionRuleRuntimePlatforms | None = ...
+    """
+    The platforms on which the rule can run. The presence of a platform
+    member indicates that the rule is supported on that platform; the
+    absence of a member indicates that the rule cannot run on that platform
+    at any agent version.
+    """
+
+@dataclass(kw_only=True)
+class DetectionRuleRuntimePlatforms(_SerdeShape):
+    """
+    The platforms on which a Runtime Monitoring custom detection rule can
+    run. A member's presence is the support statement: when present, the
+    rule runs on that platform and `minAgentVersion` is the minimum
+    GuardDuty agent version required there. When absent, the rule cannot run
+    on that platform at any agent version.
+    """
+
+    eks: DetectionRuleEksRequirements | None = ...
+    """The requirements for running the rule on Amazon EKS."""
+    ec2: DetectionRuleEc2Requirements | None = ...
+    """The requirements for running the rule on Amazon EC2."""
+    ecs_fargate: DetectionRuleEcsFargateRequirements | None = ...
+    """
+    The requirements for running the rule on Amazon ECS with the Fargate
+    launch type.
+    """
 
 class DetectionRuleSeverity(UnknownEnumMixin, StrEnum):
     CRITICAL = "CRITICAL"
@@ -4658,6 +4757,12 @@ class FeatureAdditionalConfiguration(UnknownEnumMixin, StrEnum):
     EKS_ADDON_MANAGEMENT = "EKS_ADDON_MANAGEMENT"
     ECS_FARGATE_AGENT_MANAGEMENT = "ECS_FARGATE_AGENT_MANAGEMENT"
     EC2_AGENT_MANAGEMENT = "EC2_AGENT_MANAGEMENT"
+    RDS_DATA_RISK = "RDS_DATA_RISK"
+    """
+    RDS Data Activity Monitoring, which monitors data activity on supported
+    Amazon RDS database engines to detect potentially unauthorized access to
+    your data.
+    """
 
 class FeatureStatus(UnknownEnumMixin, StrEnum):
     ENABLED = "ENABLED"
@@ -4782,6 +4887,8 @@ class Finding(_SerdeShape):
     """The time and date when the finding was last updated."""
     associated_attack_sequence_arn: str | None = ...
     """Amazon Resource Name (ARN) associated with the attack sequence finding."""
+    custom_detection_rule_name: str | None = ...
+    """The name of the custom detection rule that generated this finding."""
 
 @dataclass(kw_only=True)
 class FindingCriteria(_SerdeShape):
@@ -8455,6 +8562,12 @@ class OrgFeatureAdditionalConfiguration(UnknownEnumMixin, StrEnum):
     EKS_ADDON_MANAGEMENT = "EKS_ADDON_MANAGEMENT"
     ECS_FARGATE_AGENT_MANAGEMENT = "ECS_FARGATE_AGENT_MANAGEMENT"
     EC2_AGENT_MANAGEMENT = "EC2_AGENT_MANAGEMENT"
+    RDS_DATA_RISK = "RDS_DATA_RISK"
+    """
+    RDS Data Activity Monitoring, which monitors data activity on supported
+    Amazon RDS database engines to detect potentially unauthorized access to
+    your data.
+    """
 
 class OrgFeatureStatus(UnknownEnumMixin, StrEnum):
     NEW = "NEW"
@@ -9137,6 +9250,12 @@ class RuleDetail(_SerdeShape):
     """The language used for the detection logic expression."""
     schema: str | None = ...
     """The schema version used by the rule definition."""
+    runtime_monitoring_details: DetectionRuleRuntimeMonitoringDetails | None = ...
+    """
+    Runtime Monitoring-specific details for the rule, including the
+    platforms on which the rule can run and the minimum GuardDuty agent
+    version required on each.
+    """
     created_at: datetime | None = ...
     """The timestamp when the rule was created."""
     updated_at: datetime | None = ...
@@ -12413,6 +12532,32 @@ class UsageFeature(UnknownEnumMixin, StrEnum):
     FARGATE_RUNTIME_MONITORING = "FARGATE_RUNTIME_MONITORING"
     RDS_DBI_PROTECTION_PROVISIONED = "RDS_DBI_PROTECTION_PROVISIONED"
     RDS_DBI_PROTECTION_SERVERLESS = "RDS_DBI_PROTECTION_SERVERLESS"
+    RDS_DBI_PROTECTION_LIMITLESS = "RDS_DBI_PROTECTION_LIMITLESS"
+    """
+    Usage attributed to RDS Protection database infrastructure monitoring
+    for Amazon Aurora DSQL Limitless databases.
+    """
+    RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED = (
+        "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED"
+    )
+    """
+    Usage attributed to RDS Data Activity Monitoring for provisioned Amazon
+    RDS databases.
+    """
+    RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS = (
+        "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS"
+    )
+    """
+    Usage attributed to RDS Data Activity Monitoring for Amazon Aurora
+    Serverless databases.
+    """
+    RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS = (
+        "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS"
+    )
+    """
+    Usage attributed to RDS Data Activity Monitoring for Amazon Aurora DSQL
+    Limitless databases.
+    """
     AI_PROTECTION = "AI_PROTECTION"
 
 @dataclass(kw_only=True)

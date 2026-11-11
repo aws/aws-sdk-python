@@ -109,6 +109,8 @@ if TYPE_CHECKING:
         InvokeAgentRuntimeOutput,
         InvokeBrowserInput,
         InvokeBrowserOutput,
+        InvokeWebSearchInput,
+        InvokeWebSearchOutput,
         ListABTestsInput,
         ListABTestsOutput,
         ListActorsInput,
@@ -1178,6 +1180,33 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
             InvokeHarnessStreamOutput,
             _InvokeHarnessStreamOutputDeserializer().deserialize,
         )
+
+    async def invoke_web_search(
+        self, input: InvokeWebSearchInput, plugins: list[Plugin] | None = None
+    ) -> InvokeWebSearchOutput:
+        """
+        Searches the web and returns a ranked list of results. Each result
+        includes a text extract from the page.
+
+        You can filter the results by domain and by publication date.
+
+        To use this operation, you must have the
+        `bedrock-agentcore:InvokeWebSearch` permission on the resource
+        `arn:$${Partition}:bedrock-agentcore:$${Region}:aws:tool/web-search.v1`.
+
+        Args:
+            input:
+                An instance of `InvokeWebSearchInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `InvokeWebSearchOutput`.
+        """
+        return await self._invoke(input, _models.INVOKE_WEB_SEARCH, [], plugins)
 
     async def list_ab_tests(
         self, input: ListABTestsInput, plugins: list[Plugin] | None = None

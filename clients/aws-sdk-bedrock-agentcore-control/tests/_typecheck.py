@@ -31,6 +31,7 @@ from aws_sdk_bedrock_agentcore_control.models import (
     BrowserSigningConfigInput,
     BrowserSigningConfigOutput,
     BrowserSummary,
+    BuildLifecycleHooks,
     CapacityProviderConfiguration,
     CapacityProviderSummary,
     CapacityProviderVolumeConfiguration,
@@ -39,6 +40,7 @@ from aws_sdk_bedrock_agentcore_control.models import (
     CategoricalScaleDefinition,
     CedarPolicy,
     Certificate,
+    CircuitBreakerConfiguration,
     CloudWatchLogsInputConfig,
     CloudWatchOutputConfig,
     ClusteringConfig,
@@ -192,6 +194,7 @@ from aws_sdk_bedrock_agentcore_control.models import (
     DeleteWorkloadIdentityOutput,
     DerivedEvaluatorConfig,
     Descriptors,
+    DomainOverride,
     EbsVolumeConfiguration,
     Ec2Configuration,
     EfsAccessPointConfiguration,
@@ -208,7 +211,11 @@ from aws_sdk_bedrock_agentcore_control.models import (
     EpisodicReflectionConfiguration,
     EpisodicReflectionConfigurationInput,
     EpisodicReflectionOverride,
+    EvaluationDimension,
     EvaluatorSummary,
+    Fallback,
+    FallbackTarget,
+    FallbackTriggers,
     Filter,
     Finding,
     FromUrlSynchronizationConfiguration,
@@ -331,6 +338,7 @@ from aws_sdk_bedrock_agentcore_control.models import (
     HttpApiSchemaConfiguration,
     HttpConnectorSource,
     HttpConnectorTargetConfiguration,
+    HttpPostLifecycleHookAction,
     IamCredentialProvider,
     IamPrincipal,
     IncludedOauth2ProviderConfigInput,
@@ -358,6 +366,7 @@ from aws_sdk_bedrock_agentcore_control.models import (
     LaunchParameters,
     LicenseSpecification,
     LifecycleConfiguration,
+    LifecycleHook,
     LimitEntry,
     LinkedinOauth2ProviderConfigInput,
     LinkedinOauth2ProviderConfigOutput,
@@ -446,6 +455,8 @@ from aws_sdk_bedrock_agentcore_control.models import (
     MCPGatewayConfiguration,
     ManagedResourceDetails,
     ManagedVpcResource,
+    MatchModelEntry,
+    MatchModels,
     MatchPaths,
     MatchPrincipals,
     McpDescriptor,
@@ -477,6 +488,7 @@ from aws_sdk_bedrock_agentcore_control.models import (
     OAuthCredentialProvider,
     Oauth2AuthorizationServerMetadata,
     Oauth2CredentialProviderItem,
+    OnBehalfOfAuthenticationConfig,
     OnBehalfOfTokenExchangeConfigType,
     OnlineEvaluationConfigSummary,
     OpenResponsesEvaluatorModelConfig,
@@ -496,6 +508,7 @@ from aws_sdk_bedrock_agentcore_control.models import (
     PolicyGenerationSummary,
     PolicyStatement,
     PolicySummary,
+    PortRange,
     PrivateEndpointOverride,
     PrivateKeyJwtConfig,
     ProtocolConfiguration,
@@ -510,10 +523,14 @@ from aws_sdk_bedrock_agentcore_control.models import (
     RegistryRecordOAuthCredentialProvider,
     RegistryRecordSummary,
     RegistrySummary,
+    ResetTokenVaultKeyMaterialInput,
+    ResetTokenVaultKeyMaterialOutput,
+    ResourceConfiguration,
     RootVolumeConfiguration,
     RotatePaymentConnectorCredentialsInput,
     RotatePaymentConnectorCredentialsOutput,
     Rule,
+    RuntimeHooksConfiguration,
     RuntimeMetadataConfiguration,
     RuntimeTargetConfiguration,
     S3CertificateConfiguration,
@@ -733,6 +750,7 @@ BrowserProfileSummary(
 BrowserSigningConfigInput()
 BrowserSigningConfigOutput()
 BrowserSummary(browser_id=_, browser_arn=_, status=_, created_at=_)
+BuildLifecycleHooks()
 CapacityProviderConfiguration()
 CapacityProviderSummary(
     capacity_provider_id=_, capacity_provider_arn=_, name=_, status=_, last_updated_at=_
@@ -743,6 +761,7 @@ CapacityReservationTarget()
 CategoricalScaleDefinition(definition=_, label=_)
 CedarPolicy(statement=_)
 Certificate(location=_)
+CircuitBreakerConfiguration()
 CloudWatchLogsInputConfig(service_names=_)
 CloudWatchOutputConfig()
 ClusteringConfig(frequencies=_)
@@ -1049,6 +1068,7 @@ DeleteWorkloadIdentityInput()
 DeleteWorkloadIdentityOutput()
 DerivedEvaluatorConfig(base_evaluator_id=_, model_config=_)
 Descriptors()
+DomainOverride(default_domain=_)
 EbsVolumeConfiguration(name=_, size_gi_b=_)
 Ec2Configuration(launch_template_source=_, vpc_configuration=_)
 EfsAccessPointConfiguration(access_point_arn=_, mount_path=_)
@@ -1065,6 +1085,7 @@ EpisodicOverrideReflectionConfigurationInput(append_to_prompt=_, model_id=_)
 EpisodicReflectionConfiguration()
 EpisodicReflectionConfigurationInput()
 EpisodicReflectionOverride(append_to_prompt=_, model_id=_)
+EvaluationDimension(dimension_name=_, dimension_instruction=_, dimension_rating_scale=_)
 EvaluatorSummary(
     evaluator_arn=_,
     evaluator_id=_,
@@ -1074,6 +1095,9 @@ EvaluatorSummary(
     created_at=_,
     updated_at=_,
 )
+Fallback(target_fallback=_)
+FallbackTarget(target_name=_)
+FallbackTriggers()
 Filter(key=_, operator=_, value=_)
 Finding()
 FromUrlSynchronizationConfiguration(url=_)
@@ -1487,6 +1511,7 @@ HostingEnvironment(arn=_)
 HttpApiSchemaConfiguration(source=_)
 HttpConnectorSource(connector_id=_)
 HttpConnectorTargetConfiguration(source=_)
+HttpPostLifecycleHookAction(path=_)
 IamCredentialProvider(service=_)
 IamPrincipal(arn=_)
 IncludedOauth2ProviderConfigInput(client_id=_)
@@ -1514,6 +1539,7 @@ LambdaTransformConfiguration()
 LaunchParameters(operating_system=_, instance_requirements=_)
 LicenseSpecification(license_configuration_arn=_)
 LifecycleConfiguration()
+LifecycleHook(action=_)
 LimitEntry(dimensions=_)
 LinkedinOauth2ProviderConfigInput(client_id=_)
 LinkedinOauth2ProviderConfigOutput(oauth_discovery=_)
@@ -1601,6 +1627,8 @@ LlmAsAJudgeEvaluatorConfig(instructions=_, rating_scale=_, model_config=_)
 LlmExtractionConfig(definition=_)
 ManagedResourceDetails()
 ManagedVpcResource(vpc_identifier=_, subnet_ids=_, endpoint_ip_address_type=_)
+MatchModelEntry(value=_)
+MatchModels(any_of=_)
 MatchPaths(any_of=_)
 MatchPrincipals(any_of=_)
 McpDescriptor()
@@ -1641,6 +1669,7 @@ Oauth2CredentialProviderItem(
     last_updated_time=_,
 )
 OAuthCredentialProvider(provider_arn=_, scopes=_)
+OnBehalfOfAuthenticationConfig(client_authentication_method=_)
 OnBehalfOfTokenExchangeConfigType(grant_type=_)
 OnlineEvaluationConfigSummary(
     online_evaluation_config_arn=_,
@@ -1736,6 +1765,7 @@ PolicySummary(
     policy_arn=_,
     status=_,
 )
+PortRange(from_=_, to=_)
 PrivateEndpointOverride(domain=_, private_endpoint=_)
 PrivateKeyJwtConfig()
 ProtocolConfiguration(server_protocol=_)
@@ -1764,12 +1794,18 @@ RegistryRecordSummary(
 RegistrySummary(
     name=_, registry_id=_, registry_arn=_, status=_, created_at=_, updated_at=_
 )
+ResetTokenVaultKeyMaterialInput()
+ResetTokenVaultKeyMaterialOutput(
+    token_vault_id=_, kms_configuration=_, last_modified_date=_
+)
+ResourceConfiguration(minimum_memory_in_mi_b=_)
 RootVolumeConfiguration()
 RotatePaymentConnectorCredentialsInput()
 RotatePaymentConnectorCredentialsOutput(
     payment_connector_id=_, payment_manager_id=_, last_updated_at=_, status=_
 )
 Rule(sampling_config=_)
+RuntimeHooksConfiguration()
 RuntimeMetadataConfiguration(require_mmdsv2=_)
 RuntimeTargetConfiguration(arn=_)
 S3CertificateConfiguration(uri=_)
@@ -1845,7 +1881,7 @@ SystemManagedBlock(managed_by=_)
 TagResourceInput()
 TagResourceOutput()
 TargetSummary(target_id=_, name=_, status=_, created_at=_, updated_at=_)
-TargetTrafficSplitEntry(name=_, weight=_, target_name=_)
+TargetTrafficSplitEntry(target_name=_, name=_, weight=_)
 TimeBasedTrigger()
 TimeBasedTriggerInput()
 TokenBasedTrigger()

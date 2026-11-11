@@ -2010,6 +2010,114 @@ class CreatePromptVersionOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class CreateRetrievalInstructionInput(_SerdeShape):
+    """Dataclass for CreateRetrievalInstructionInput structure."""
+
+    client_token: str | None = ...
+    """
+    A caller-supplied token that makes a retried create return the existing
+    resource rather than a second one. The window is 8 hours.
+    """
+    name: str | None = ...
+    """Specifies the name of the retrieval instruction."""
+    instruction: RetrievalInstructionContent | None = ...
+    """
+    The instruction content, as a set of named fields. Get does not return
+    this field until the create review passes.
+    """
+    description: str | None = ...
+    """Specifies a description of the retrieval instruction."""
+    customer_encryption_key_arn: str | None = ...
+    """
+    The Amazon Resource Name (ARN) of a customer managed AWS Key Management
+    Service (AWS KMS) key used to encrypt the instruction content at rest.
+    If you omit it, the service uses an AWS owned key. You fix the key at
+    create and cannot change it later.
+    """
+    tags: dict[str, str] | None = ...
+    """Tags for the retrieval instruction."""
+
+@dataclass(kw_only=True)
+class CreateRetrievalInstructionOutput(_SerdeShape):
+    """Dataclass for CreateRetrievalInstructionOutput structure."""
+
+    retrieval_instruction_id: str
+    """The identifier of the newly created retrieval instruction."""
+    retrieval_instruction_arn: str
+    """The ARN of the newly created retrieval instruction."""
+    name: str
+    """The name of the retrieval instruction."""
+    status: str
+    """
+    Always INACTIVE on this response. The content review has not run when
+    this call returns, so the resource is not yet usable.
+    """
+    last_transition_status: str
+    """
+    Always CREATING on this response. Poll GetRetrievalInstruction until
+    this member is neither CREATING nor UPDATING, then read the outcome from
+    it.
+    """
+    created_at: datetime
+    """When you created the retrieval instruction."""
+    updated_at: datetime
+    """When the retrieval instruction was last updated."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class CreateRetrievalInstructionVersionInput(_SerdeShape):
+    """Dataclass for CreateRetrievalInstructionVersionInput structure."""
+
+    retrieval_instruction_id: str | None = ...
+    """The identifier of the retrieval instruction to version."""
+    description: str | None = ...
+    """
+    A description of this version. Independent of the retrieval
+    instruction's own description.
+    """
+    client_token: str | None = ...
+    """
+    A caller-supplied token that makes a retried call return the version
+    created by the first call rather than a second version. The window is 8
+    hours.
+    """
+
+@dataclass(kw_only=True)
+class CreateRetrievalInstructionVersionOutput(_SerdeShape):
+    """Dataclass for CreateRetrievalInstructionVersionOutput structure."""
+
+    retrieval_instruction_id: str
+    """The identifier of the retrieval instruction."""
+    retrieval_instruction_arn: str
+    """
+    The ARN of the retrieval instruction. Versions do not have their own
+    ARN.
+    """
+    version: str
+    """
+    The number of the version created. Versions are numbered from 1 and
+    allocated monotonically; a number is never reused, even after the
+    version is deleted.
+    """
+    created_at: datetime
+    """When this version was created."""
+    description: str | None = ...
+    """The description of this version, when one was supplied."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class CreateVpcConfigurationInput(_SerdeShape):
     """Dataclass for CreateVpcConfigurationInput structure."""
 
@@ -2804,6 +2912,42 @@ class DeleteResourcePolicyOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class DeleteRetrievalInstructionInput(_SerdeShape):
+    """Dataclass for DeleteRetrievalInstructionInput structure."""
+
+    retrieval_instruction_id: str | None = ...
+    """The identifier of the retrieval instruction to delete."""
+    retrieval_instruction_version: str | None = ...
+    """
+    The version to delete. Omit this field to delete the retrieval
+    instruction itself, which you can do only when it has no versions; while
+    any version exists the service rejects the request with
+    ConflictException. You cannot delete DRAFT on its own; deleting the
+    retrieval instruction removes it.
+    """
+
+@dataclass(kw_only=True)
+class DeleteRetrievalInstructionOutput(_SerdeShape):
+    """Dataclass for DeleteRetrievalInstructionOutput structure."""
+
+    retrieval_instruction_id: str
+    """The identifier of the deleted retrieval instruction."""
+    retrieval_instruction_arn: str
+    """The ARN of the retrieval instruction."""
+    version: str | None = ...
+    """
+    The version that you deleted. Absent when you deleted the whole
+    retrieval instruction.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class DeleteVpcConfigurationInput(_SerdeShape):
     """Dataclass for DeleteVpcConfigurationInput structure."""
 
@@ -3055,6 +3199,18 @@ class FieldForReranking(_SerdeShape):
 
     field_name: str
     """The name of the metadata field to include or exclude during reranking."""
+
+class FieldType(UnknownEnumMixin, StrEnum):
+    """
+    The data type of a custom metadata field. Valid values:
+
+    - `STRING` -- The field holds a single string value.
+
+    - `STRING_LIST` -- The field holds a list of string values.
+    """
+
+    STRING = "STRING"
+    STRING_LIST = "STRING_LIST"
 
 @dataclass(kw_only=True)
 class FixedSizeChunkingConfiguration(_SerdeShape):
@@ -4552,6 +4708,98 @@ class GetResourcePolicyOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class GetRetrievalInstructionInput(_SerdeShape):
+    """Dataclass for GetRetrievalInstructionInput structure."""
+
+    retrieval_instruction_id: str | None = ...
+    """The identifier of the retrieval instruction to get."""
+    retrieval_instruction_version: str | None = ...
+    """
+    The version to return: a version number, or DRAFT for the retrieval
+    instruction's current reviewed content. When omitted, DRAFT is used.
+    This default is permanent: omitting retrievalInstructionVersion will
+    never resolve to a numbered version.
+    """
+
+@dataclass(kw_only=True)
+class GetRetrievalInstructionOutput(_SerdeShape):
+    """Dataclass for GetRetrievalInstructionOutput structure."""
+
+    retrieval_instruction_id: str
+    """The identifier of the retrieval instruction."""
+    retrieval_instruction_arn: str
+    """The ARN of the retrieval instruction."""
+    name: str
+    """The name of the retrieval instruction."""
+    status: str
+    """
+    Specifies whether you can use the instruction. You can resolve only an
+    ACTIVE instruction at retrieval time. Monotone: INACTIVE to ACTIVE once,
+    never back. Numbered versions are always ACTIVE.
+    """
+    last_transition_status: str
+    """
+    The outcome or in-progress state of the most recent create or update.
+    CREATING or UPDATING means the operation is still running. Independent
+    of status. Always has a value from the create 202 onward. On a numbered
+    version this is always CREATE_SUCCESSFUL: a version is created once,
+    from reviewed content, and is immutable.
+    """
+    instruction: RetrievalInstructionContent | None = ...
+    """
+    The reviewed content this instruction serves --- what
+    AgenticRetrieveStream resolves while status is ACTIVE. Absent until the
+    first create review passes. Always present on a numbered version.
+    """
+    created_at: datetime
+    """
+    When the retrieval instruction was created. On a numbered version, when
+    that version was created.
+    """
+    updated_at: datetime
+    """
+    When the retrieval instruction was last updated. Equal to createdAt on a
+    numbered version, which is immutable.
+    """
+    description: str | None = ...
+    """
+    A description of the retrieval instruction. On a numbered version, the
+    description of that version.
+    """
+    customer_encryption_key_arn: str | None = ...
+    """
+    The ARN of the customer managed KMS key protecting this content, when
+    one was supplied at create.
+    """
+    last_transition_status_reasons: list[RetrievalInstructionFailureReason] | None = ...
+    """
+    Why the most recent create or update was rejected. One entry for each
+    rejected field, or a single entry when the review itself failed. Each
+    entry has a machine-readable code and a message, and names the field
+    when it applies to one. The service includes this field only when
+    lastTransitionStatus is CREATE_FAILED or UPDATE_FAILED. Never present on
+    a numbered version.
+    """
+    version: str | None = ...
+    """The version this response describes: a version number, or DRAFT."""
+    latest_version: str | None = ...
+    """
+    The largest version number that currently exists for this retrieval
+    instruction, that is, the newest version you can retrieve. Present only
+    on a DRAFT read, and only when at least one version exists. Because
+    version numbers are never reused, deleting versions can leave gaps: this
+    is the newest existing version, not a count and not the highest number
+    ever created.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class GetVpcConfigurationInput(_SerdeShape):
     """Dataclass for GetVpcConfigurationInput structure."""
 
@@ -5044,6 +5292,17 @@ class KnowledgeBase(_SerdeShape):
     """The time the knowledge base was last updated."""
     failure_reasons: list[str] | None = ...
     """A list of reasons that the API operation on the knowledge base failed."""
+    metadata_configurations: list[MetadataConfiguration] | None = ...
+    """
+    The custom metadata field configurations of the knowledge base. Each
+    configuration specifies whether its field is searchable (`ENABLED` or
+    `DISABLED`).
+
+    If the update fails, the knowledge base status becomes
+    `UPDATE_UNSUCCESSFUL`, the field configurations revert to their previous
+    values, and `failureReasons` describes the cause. You can retry the
+    update from `UPDATE_UNSUCCESSFUL`.
+    """
 
 @dataclass(kw_only=True)
 class KnowledgeBaseConfiguration(_SerdeShape):
@@ -5914,6 +6173,75 @@ class ListPromptsOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class ListRetrievalInstructionsInput(_SerdeShape):
+    """Dataclass for ListRetrievalInstructionsInput structure."""
+
+    status: str | None = ...
+    """Return only instructions with this availability status."""
+    max_results: int | None = ...
+    """
+    The maximum number of results to return in a single page. The effective
+    upper bound is enforced service-side.
+    """
+    next_token: str | None = ...
+    """The pagination token from a previous ListRetrievalInstructions response."""
+
+@dataclass(kw_only=True)
+class ListRetrievalInstructionsOutput(_SerdeShape):
+    """Dataclass for ListRetrievalInstructionsOutput structure."""
+
+    retrieval_instruction_summaries: list[RetrievalInstructionSummary]
+    """The retrieval instruction summaries in this page."""
+    next_token: str | None = ...
+    """
+    The pagination token to pass to the next ListRetrievalInstructions call,
+    absent on the last page.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListRetrievalInstructionVersionsInput(_SerdeShape):
+    """Dataclass for ListRetrievalInstructionVersionsInput structure."""
+
+    retrieval_instruction_id: str | None = ...
+    """The identifier of the retrieval instruction whose versions to list."""
+    max_results: int | None = ...
+    """
+    Specifies the maximum number of versions to return in a single page. The
+    service enforces the effective upper bound.
+    """
+    next_token: str | None = ...
+    """
+    The pagination token from a previous ListRetrievalInstructionVersions
+    response.
+    """
+
+@dataclass(kw_only=True)
+class ListRetrievalInstructionVersionsOutput(_SerdeShape):
+    """Dataclass for ListRetrievalInstructionVersionsOutput structure."""
+
+    retrieval_instruction_version_summaries: list[RetrievalInstructionVersionSummary]
+    """The version summaries in this page, newest first."""
+    next_token: str | None = ...
+    """
+    The pagination token to pass to the next
+    ListRetrievalInstructionVersions call, absent on the last page.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class ListTagsForResourceInput(_SerdeShape):
     """Dataclass for ListTagsForResourceInput structure."""
 
@@ -6199,6 +6527,30 @@ class MetadataAttributeValue(_SerdeShape):
     """The value of the string metadata attribute."""
     string_list_value: list[str] | None = ...
     """An array of strings that define the value of the metadata attribute."""
+
+@dataclass(kw_only=True)
+class MetadataConfiguration(_SerdeShape):
+    """
+    Contains the configuration of a single custom metadata field in a
+    knowledge base, including its name, data type, and whether the field is
+    searchable.
+    """
+
+    name: str
+    """The name of the custom metadata field."""
+    type: str
+    """
+    The data type of the custom metadata field. Valid values are `STRING`
+    and `STRING_LIST`.
+    """
+    searchability: str
+    """
+    Specifies whether the custom metadata field is searchable. Valid values:
+
+    - `ENABLED` -- The field is searchable.
+
+    - `DISABLED` -- The field is not searchable.
+    """
 
 @dataclass(kw_only=True)
 class MetadataConfigurationForReranking(_SerdeShape):
@@ -7756,6 +8108,159 @@ class _RetrievalFlowNodeServiceConfigurationDeserializer:
     ) -> RetrievalFlowNodeServiceConfiguration: ...
 
 @dataclass(kw_only=True)
+class RetrievalInstructionContent(_SerdeShape):
+    """
+    The instruction content, as a set of named fields. Every field is
+    optional; at least one must be present. Service-side validation enforces
+    per-field and aggregate size limits.
+    """
+
+    retrieval_guidance: str | None = ...
+    """
+    How to interpret and decompose the question, and what to prioritise when
+    searching.
+    """
+    persona: str | None = ...
+    """Who the assistant is: identity, tone and language."""
+    answer_format: str | None = ...
+    """How the answer is structured, including how sources are cited."""
+    answer_policy: str | None = ...
+    """
+    Whether and how to answer: how strongly an answer must be supported, and
+    what to do with questions outside scope.
+    """
+
+@dataclass(kw_only=True)
+class RetrievalInstructionFailureReason(_SerdeShape):
+    """
+    One reason the most recent create or update did not succeed. code drives
+    programmatic branching (fix the text, fix the configuration, or retry);
+    message carries the specific cause.
+    """
+
+    field_name: str | None = ...
+    """
+    The instruction field this entry is about. Present on review rejections
+    of a specific field; absent when the failure applies to the whole
+    review, because a client-side execution failure or a service fault has
+    no single field.
+    """
+    code: str
+    """
+    Stable, machine-readable classification by fault attribution. Valid
+    values:
+
+    - CONTENT_REJECTED -- The review rejected the named field's content;
+      revise the text and resubmit.
+
+    - CLIENT_ERROR -- The review could not run for a customer-side reason,
+      for example the customer managed AWS KMS key could not be used; fix
+      the configuration and resubmit.
+
+    - INTERNAL_ERROR -- The review could not complete due to a service
+      fault; retry the create or update.
+
+    New values may be added over time; your client should tolerate values it
+    does not recognize and treat them as a failure.
+    """
+    message: str
+    """
+    Human-readable explanation of the specific cause. Never contains the
+    customer's own text.
+    """
+
+class RetrievalInstructionFailureReasonCode(UnknownEnumMixin, StrEnum):
+    """
+    A machine-readable failure classification. See
+    RetrievalInstructionFailureReason.code for the value semantics.
+    """
+
+    CONTENT_REJECTED = "CONTENT_REJECTED"
+    CLIENT_ERROR = "CLIENT_ERROR"
+    INTERNAL_ERROR = "INTERNAL_ERROR"
+
+class RetrievalInstructionFieldName(UnknownEnumMixin, StrEnum):
+    """
+    Identifies one field of RetrievalInstructionContent:
+
+    - RETRIEVAL_GUIDANCE -- retrievalGuidance
+
+    - PERSONA -- persona
+
+    - ANSWER_FORMAT -- answerFormat
+
+    - ANSWER_POLICY -- answerPolicy
+    """
+
+    RETRIEVAL_GUIDANCE = "RETRIEVAL_GUIDANCE"
+    PERSONA = "PERSONA"
+    ANSWER_FORMAT = "ANSWER_FORMAT"
+    ANSWER_POLICY = "ANSWER_POLICY"
+
+class RetrievalInstructionLastTransitionStatus(UnknownEnumMixin, StrEnum):
+    """
+    The outcome or in-progress state of the most recent create or update of
+    a retrieval instruction. Delete is synchronous and has no representation
+    here. Independent of RetrievalInstructionStatus.
+    """
+
+    CREATING = "CREATING"
+    UPDATING = "UPDATING"
+    CREATE_SUCCESSFUL = "CREATE_SUCCESSFUL"
+    CREATE_FAILED = "CREATE_FAILED"
+    UPDATE_SUCCESSFUL = "UPDATE_SUCCESSFUL"
+    UPDATE_FAILED = "UPDATE_FAILED"
+
+class RetrievalInstructionStatus(UnknownEnumMixin, StrEnum):
+    """
+    Specifies whether you can use a retrieval instruction. You can resolve
+    only an ACTIVE retrieval instruction at retrieval time. Monotone:
+    INACTIVE to ACTIVE once, never back.
+    """
+
+    ACTIVE = "ACTIVE"
+    INACTIVE = "INACTIVE"
+
+@dataclass(kw_only=True)
+class RetrievalInstructionSummary(_SerdeShape):
+    """A summary of a retrieval instruction, without the content."""
+
+    retrieval_instruction_id: str
+    """The identifier of the retrieval instruction."""
+    retrieval_instruction_arn: str
+    """The ARN of the retrieval instruction."""
+    name: str
+    """The name of the retrieval instruction."""
+    status: str
+    """
+    Whether the instruction can be used. Only ACTIVE is resolvable at
+    retrieval time.
+    """
+    last_transition_status: str
+    """
+    The outcome or in-progress state of the most recent create or update of
+    the retrieval instruction.
+    """
+    created_at: datetime
+    """When you created the retrieval instruction."""
+    updated_at: datetime
+    """When the retrieval instruction was last updated."""
+    description: str | None = ...
+    """A description of the retrieval instruction."""
+
+@dataclass(kw_only=True)
+class RetrievalInstructionVersionSummary(_SerdeShape):
+    """
+    A summary of one numbered version of a retrieval instruction, without
+    the content.
+    """
+
+    version: str
+    """The version number."""
+    created_at: datetime
+    """When this version was created."""
+
+@dataclass(kw_only=True)
 class S3Content(_SerdeShape):
     """
     Contains information about the content to ingest into a knowledge base
@@ -7874,6 +8379,15 @@ class SalesforceSourceConfiguration(_SerdeShape):
     depending on your authentication type, see [Salesforce connection
     configuration](https://docs.aws.amazon.com/bedrock/latest/userguide/salesforce-data-source-connector.html#configuration-salesforce-connector).
     """
+
+class SearchableStatus(UnknownEnumMixin, StrEnum):
+    """
+    Specifies whether a custom metadata field is searchable. The knowledge
+    base matches query text against the values of searchable fields.
+    """
+
+    ENABLED = "ENABLED"
+    DISABLED = "DISABLED"
 
 @dataclass(kw_only=True)
 class SeedUrl(_SerdeShape):
@@ -9229,6 +9743,16 @@ class UpdateKnowledgeBaseInput(_SerdeShape):
     base. You must use the same configuration as when the knowledge base was
     created.
     """
+    metadata_configurations: list[MetadataConfiguration] | None = ...
+    """
+    Specifies up to 30 custom metadata field configurations for a managed
+    knowledge base.
+
+    The list that you specify replaces the existing configurations. The
+    update removes any configuration that you leave out, and its field is no
+    longer searchable. An empty list removes all configurations. If you
+    don't specify a list, the existing configurations don't change.
+    """
 
 @dataclass(kw_only=True)
 class UpdateKnowledgeBaseOutput(_SerdeShape):
@@ -9304,6 +9828,57 @@ class UpdatePromptOutput(_SerdeShape):
     """The time at which the prompt was created."""
     updated_at: datetime
     """The time at which the prompt was last updated."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UpdateRetrievalInstructionInput(_SerdeShape):
+    """Dataclass for UpdateRetrievalInstructionInput structure."""
+
+    retrieval_instruction_id: str | None = ...
+    """The identifier of the retrieval instruction to update."""
+    instruction: RetrievalInstructionContent | None = ...
+    """
+    The replacement instruction content. This is a full replacement of all
+    four fields, not a patch. During UPDATING, Get continues to return the
+    previously-served content until the update review passes.
+    """
+    description: str | None = ...
+    """
+    A replacement description; applied together with the content when the
+    review passes. Omit to clear.
+    """
+
+@dataclass(kw_only=True)
+class UpdateRetrievalInstructionOutput(_SerdeShape):
+    """Dataclass for UpdateRetrievalInstructionOutput structure."""
+
+    retrieval_instruction_id: str
+    """The identifier of the retrieval instruction."""
+    retrieval_instruction_arn: str
+    """The ARN of the retrieval instruction."""
+    name: str
+    """The name of the retrieval instruction."""
+    status: str
+    """
+    Whether the instruction can be used. An update never lowers status.
+    Unchanged from the previous value on this response.
+    """
+    last_transition_status: str
+    """
+    Always UPDATING on this response. Poll GetRetrievalInstruction until
+    this member is neither CREATING nor UPDATING, then read the outcome from
+    it.
+    """
+    created_at: datetime
+    """When you created the retrieval instruction."""
+    updated_at: datetime
+    """When the retrieval instruction was last updated."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -9772,6 +10347,12 @@ CREATE_FLOW_VERSION: APIOperation[CreateFlowVersionInput, CreateFlowVersionOutpu
 CREATE_KNOWLEDGE_BASE: APIOperation[CreateKnowledgeBaseInput, CreateKnowledgeBaseOutput]
 CREATE_PROMPT: APIOperation[CreatePromptInput, CreatePromptOutput]
 CREATE_PROMPT_VERSION: APIOperation[CreatePromptVersionInput, CreatePromptVersionOutput]
+CREATE_RETRIEVAL_INSTRUCTION: APIOperation[
+    CreateRetrievalInstructionInput, CreateRetrievalInstructionOutput
+]
+CREATE_RETRIEVAL_INSTRUCTION_VERSION: APIOperation[
+    CreateRetrievalInstructionVersionInput, CreateRetrievalInstructionVersionOutput
+]
 CREATE_VPC_CONFIGURATION: APIOperation[
     CreateVpcConfigurationInput, CreateVpcConfigurationOutput
 ]
@@ -9792,6 +10373,9 @@ DELETE_KNOWLEDGE_BASE_DOCUMENTS: APIOperation[
 DELETE_PROMPT: APIOperation[DeletePromptInput, DeletePromptOutput]
 DELETE_RESOURCE_POLICY: APIOperation[
     DeleteResourcePolicyInput, DeleteResourcePolicyOutput
+]
+DELETE_RETRIEVAL_INSTRUCTION: APIOperation[
+    DeleteRetrievalInstructionInput, DeleteRetrievalInstructionOutput
 ]
 DELETE_VPC_CONFIGURATION: APIOperation[
     DeleteVpcConfigurationInput, DeleteVpcConfigurationOutput
@@ -9825,6 +10409,9 @@ GET_KNOWLEDGE_BASE_DOCUMENTS: APIOperation[
 ]
 GET_PROMPT: APIOperation[GetPromptInput, GetPromptOutput]
 GET_RESOURCE_POLICY: APIOperation[GetResourcePolicyInput, GetResourcePolicyOutput]
+GET_RETRIEVAL_INSTRUCTION: APIOperation[
+    GetRetrievalInstructionInput, GetRetrievalInstructionOutput
+]
 GET_VPC_CONFIGURATION: APIOperation[GetVpcConfigurationInput, GetVpcConfigurationOutput]
 INGEST_KNOWLEDGE_BASE_DOCUMENTS: APIOperation[
     IngestKnowledgeBaseDocumentsInput, IngestKnowledgeBaseDocumentsOutput
@@ -9851,6 +10438,12 @@ LIST_KNOWLEDGE_BASE_DOCUMENTS: APIOperation[
 ]
 LIST_KNOWLEDGE_BASES: APIOperation[ListKnowledgeBasesInput, ListKnowledgeBasesOutput]
 LIST_PROMPTS: APIOperation[ListPromptsInput, ListPromptsOutput]
+LIST_RETRIEVAL_INSTRUCTIONS: APIOperation[
+    ListRetrievalInstructionsInput, ListRetrievalInstructionsOutput
+]
+LIST_RETRIEVAL_INSTRUCTION_VERSIONS: APIOperation[
+    ListRetrievalInstructionVersionsInput, ListRetrievalInstructionVersionsOutput
+]
 LIST_TAGS_FOR_RESOURCE: APIOperation[
     ListTagsForResourceInput, ListTagsForResourceOutput
 ]
@@ -9880,6 +10473,9 @@ UPDATE_FLOW: APIOperation[UpdateFlowInput, UpdateFlowOutput]
 UPDATE_FLOW_ALIAS: APIOperation[UpdateFlowAliasInput, UpdateFlowAliasOutput]
 UPDATE_KNOWLEDGE_BASE: APIOperation[UpdateKnowledgeBaseInput, UpdateKnowledgeBaseOutput]
 UPDATE_PROMPT: APIOperation[UpdatePromptInput, UpdatePromptOutput]
+UPDATE_RETRIEVAL_INSTRUCTION: APIOperation[
+    UpdateRetrievalInstructionInput, UpdateRetrievalInstructionOutput
+]
 VALIDATE_FLOW_DEFINITION: APIOperation[
     ValidateFlowDefinitionInput, ValidateFlowDefinitionOutput
 ]

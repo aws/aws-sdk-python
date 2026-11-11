@@ -27,6 +27,8 @@ if TYPE_CHECKING:
         BatchGetItemOutput,
         BatchWriteItemInput,
         BatchWriteItemOutput,
+        CancelBulkOperationInput,
+        CancelBulkOperationOutput,
         CreateBackupInput,
         CreateBackupOutput,
         CreateGlobalTableInput,
@@ -43,6 +45,8 @@ if TYPE_CHECKING:
         DeleteTableOutput,
         DescribeBackupInput,
         DescribeBackupOutput,
+        DescribeBulkOperationInput,
+        DescribeBulkOperationOutput,
         DescribeContinuousBackupsInput,
         DescribeContinuousBackupsOutput,
         DescribeContributorInsightsInput,
@@ -85,6 +89,8 @@ if TYPE_CHECKING:
         ImportTableOutput,
         ListBackupsInput,
         ListBackupsOutput,
+        ListBulkOperationsInput,
+        ListBulkOperationsOutput,
         ListContributorInsightsInput,
         ListContributorInsightsOutput,
         ListExportsInput,
@@ -111,6 +117,8 @@ if TYPE_CHECKING:
         ScanOutput,
         SearchVectorsInput,
         SearchVectorsOutput,
+        StartBulkPutItemsInput,
+        StartBulkPutItemsOutput,
         TagResourceInput,
         TagResourceOutput,
         TransactGetItemsInput,
@@ -399,6 +407,29 @@ class DynamoDBClient(Client[DynamoDBConfig]):
             An instance of `BatchWriteItemOutput`.
         """
         return self._invoke(input, _models.BATCH_WRITE_ITEM, [], plugins)
+
+    def cancel_bulk_operation(
+        self, input: CancelBulkOperationInput, plugins: list[Plugin] | None = None
+    ) -> CancelBulkOperationOutput:
+        """
+        Cancels an in-progress bulk operation asynchronously. Cancellation
+        doesn't remove items that the operation has already written. Use
+        `DescribeBulkOperation` to monitor the operation until it reaches a
+        terminal status.
+
+        Args:
+            input:
+                An instance of `CancelBulkOperationInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `CancelBulkOperationOutput`.
+        """
+        return self._invoke(input, _models.CANCEL_BULK_OPERATION, [], plugins)
 
     def create_backup(
         self, input: CreateBackupInput, plugins: list[Plugin] | None = None
@@ -721,6 +752,26 @@ class DynamoDBClient(Client[DynamoDBConfig]):
             An instance of `DescribeBackupOutput`.
         """
         return self._invoke(input, _models.DESCRIBE_BACKUP, [], plugins)
+
+    def describe_bulk_operation(
+        self, input: DescribeBulkOperationInput, plugins: list[Plugin] | None = None
+    ) -> DescribeBulkOperationOutput:
+        """
+        Describes the specified bulk operation.
+
+        Args:
+            input:
+                An instance of `DescribeBulkOperationInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DescribeBulkOperationOutput`.
+        """
+        return self._invoke(input, _models.DESCRIBE_BULK_OPERATION, [], plugins)
 
     def describe_continuous_backups(
         self, input: DescribeContinuousBackupsInput, plugins: list[Plugin] | None = None
@@ -1372,6 +1423,31 @@ class DynamoDBClient(Client[DynamoDBConfig]):
         """
         return self._invoke(input, _models.LIST_BACKUPS, [], plugins)
 
+    def list_bulk_operations(
+        self,
+        input: ListBulkOperationsInput | None = None,
+        plugins: list[Plugin] | None = None,
+    ) -> ListBulkOperationsOutput:
+        """
+        Lists bulk operations that started within the past 90 days for the
+        current Amazon Web Services account and Amazon Web Services Region, with
+        the most recent operations first. Results are paginated. Use the
+        `NextToken` parameter to retrieve additional results.
+
+        Args:
+            input:
+                An instance of `ListBulkOperationsInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListBulkOperationsOutput`.
+        """
+        return self._invoke(input, _models.LIST_BULK_OPERATIONS, [], plugins)
+
     def list_contributor_insights(
         self,
         input: ListContributorInsightsInput | None = None,
@@ -1891,6 +1967,28 @@ class DynamoDBClient(Client[DynamoDBConfig]):
         """
         return self._invoke(input, _models.SEARCH_VECTORS, [], plugins)
 
+    def start_bulk_put_items(
+        self, input: StartBulkPutItemsInput, plugins: list[Plugin] | None = None
+    ) -> StartBulkPutItemsOutput:
+        """
+        Starts an asynchronous bulk operation that reads items from Amazon S3
+        and writes them to an existing DynamoDB table, so you can efficiently
+        load or migrate large datasets.
+
+        Args:
+            input:
+                An instance of `StartBulkPutItemsInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `StartBulkPutItemsOutput`.
+        """
+        return self._invoke(input, _models.START_BULK_PUT_ITEMS, [], plugins)
+
     def tag_resource(
         self, input: TagResourceInput, plugins: list[Plugin] | None = None
     ) -> TagResourceOutput:
@@ -2293,7 +2391,8 @@ class DynamoDBClient(Client[DynamoDBConfig]):
     ) -> UpdateTableOutput:
         """
         Modifies the provisioned throughput settings, global secondary indexes,
-        or DynamoDB Streams settings for a given table.
+        DynamoDB Streams settings, or global table replica settings for a given
+        table.
 
         You can only perform one of the following operations at once:
 
@@ -2305,11 +2404,35 @@ class DynamoDBClient(Client[DynamoDBConfig]):
           begins backfilling, you can use `UpdateTable` to perform other
           operations.
 
+        - Enable or disable disassociation protection for the local global table
+          replica.
+
+        - Disassociate the local global table replica and keep it as a
+          standalone regional table. The `Disassociate` action must be the only
+          replica update in the request. If the request includes any other
+          update, `UpdateTable` fails with a `ValidationException` and the
+          disassociation does not start.
+
         `UpdateTable` is an asynchronous operation; while it's executing, the
         table status changes from `ACTIVE` to `UPDATING`. While it's
-        `UPDATING`, you can't issue another `UpdateTable` request. When the
-        table returns to the `ACTIVE` state, the `UpdateTable` operation is
-        complete.
+        `UPDATING`, you can't issue another `UpdateTable` request. Use
+        `DescribeTable` to monitor the table's status.
+
+        To use this operation to disassociate a local replica, you must have the
+        `dynamodb:UpdateTable` and `dynamodb:DisassociateTableReplica` IAM
+        permissions on the local replica. Send disassociation and disassociation
+        protection requests to the replica's Region using credentials for the
+        account that owns the replica. For prerequisites and the procedure, see
+        [Disassociating a global table
+        replica](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables-disassociate.html)
+        in the *Amazon DynamoDB Developer Guide*.
+
+        To confirm successful disassociation, call `DescribeTable` in the
+        replica's Region and verify that `TableStatus` is `ACTIVE` and
+        `Replicas` is absent or empty. If `TableStatus` returns to `ACTIVE` but
+        the response still includes a `Replicas` list, the disassociation did
+        not complete. Check `ReplicaStatus` for a replication-permission or
+        encryption-access problem, resolve it, and retry.
 
         Args:
             input:

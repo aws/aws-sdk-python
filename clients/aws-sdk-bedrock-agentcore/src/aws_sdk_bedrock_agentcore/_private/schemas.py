@@ -251,6 +251,8 @@ _RS = "ResponseStream"
 _smithya = "smithy.api#streaming"
 _IARO = "InvokeAgentRuntimeOutput"
 _cIARRo = "com.amazonaws.bedrockagentcore#InvokeAgentRuntimeResponse"
+_sEU = "sessionEndpointUrl"
+_XABARSEU = "X-Amzn-Bedrock-AgentCore-Runtime-Session-Endpoint-Url"
 _res = "response"
 _smithyap = "smithy.api#default"
 _v = ""
@@ -692,6 +694,7 @@ _eTv = "evaluationTarget"
 _eRI = "evaluationReferenceInputs"
 _EEC = "EvaluationErrorCode"
 _EEM = "EvaluationErrorMessage"
+_EDN = "EvaluationDimensionName"
 _EA = "EvaluatorArn"
 _EN = "EvaluatorName"
 _EE = "EvaluationExplanation"
@@ -703,6 +706,7 @@ _oT = "outputTokens"
 _tT = "totalTokens"
 _ERC = "EvaluationResultContent"
 _eN = "evaluatorName"
+_eDN = "evaluationDimensionName"
 _la = "label"
 _tU = "tokenUsage"
 _eMr = "errorMessage"
@@ -788,6 +792,33 @@ _sCu = "subCategories"
 _FCCL = "FailureCategoryClusterList"
 _FARC = "FailureAnalysisResultContent"
 _fa = "failures"
+_ID = "InsightDescription"
+_IN = "InsightName"
+_RCEo = "RootCauseExplanation"
+_RCN = "RootCauseName"
+_FD = "FindingDescription"
+_FTI = "FindingTargetId"
+_FTT = "FindingTargetType"
+_SI_ = "SPAN_ID"
+_TI_ = "TRACE_ID"
+_SN_ = "SPAN_NAME"
+_SFe = "SessionFinding"
+_tIa = "targetId"
+_tTa = "targetType"
+_SFL = "SessionFindingList"
+_SS = "SampleSession"
+_lSA = "lastSeenAt"
+_fi = "findings"
+_ISSL = "InsightSampleSessionList"
+_SFu = "SuggestedFix"
+_IRC = "InsightRootCause"
+_sFu = "suggestedFix"
+_sSa = "sampleSessions"
+_IRCL = "InsightRootCauseList"
+_IT = "InsightType"
+_FAILURE = "FAILURE"
+_IR = "InsightResult"
+_IRL = "InsightResultList"
 _II = "InsightId"
 _I = "Insight"
 _iI = "insightId"
@@ -821,6 +852,7 @@ _ev = "evaluators"
 _in = "insights"
 _dSC = "dataSourceConfig"
 _oC = "outputConfig"
+_iR = "insightResults"
 _fAR = "failureAnalysisResult"
 _uIR = "userIntentResult"
 _eSR = "executionSummaryResult"
@@ -981,7 +1013,7 @@ _cSu = "customState"
 _reso = "resources"
 _au = "audiences"
 _AUT = "AuthorizationUrlType"
-_SS = "SessionStatus"
+_SSe = "SessionStatus"
 _GROTO = "GetResourceOauth2TokenOutput"
 _cGROTRo = "com.amazonaws.bedrockagentcore#GetResourceOauth2TokenResponse"
 _aU = "authorizationUrl"
@@ -1076,7 +1108,7 @@ _cCl = "clearContext"
 _pat = "paths"
 _cont = "content"
 _dPi = "directoryPath"
-_tIa = "taskId"
+_tIas = "taskId"
 _run = "runtime"
 _TNo = "ToolName"
 _EC_ = "EXECUTE_CODE"
@@ -1266,6 +1298,10 @@ _iSn = "inputSchema"
 _HHK = "HttpHeaderKey"
 _HHV = "HttpHeaderValue"
 _HHM = "HttpHeadersMap"
+_ICP = "IamCredentialProvider"
+_ser = "service"
+_reg = "region"
+_HRMOA = "HarnessRemoteMcpOutboundAuth"
 _HRMU = "HarnessRemoteMcpUrl"
 _HRMC = "HarnessRemoteMcpConfig"
 _he = "headers"
@@ -1383,8 +1419,36 @@ _hE = "hookEvent"
 _IHO = "InvokeHarnessOutput"
 _cIHRo = "com.amazonaws.bedrockagentcore#InvokeHarnessResponse"
 _IH = "InvokeHarness"
+_DN = "DomainName"
+_DL = "DomainList"
+_DFo = "DomainFilter"
+_inc = "include"
+_exc = "exclude"
+_PDF = "PublishedDateFilter"
+_pAu = "publishedAfter"
+_pB = "publishedBefore"
+_WSF = "WebSearchFilters"
+_dF = "domainFilter"
+_pDF = "publishedDateFilter"
+_WSI = "WebSearchId"
+_IWSI = "InvokeWebSearchInput"
+_wSI = "webSearchId"
+_sQe = "searchQuery"
+_WSR = "WebSearchResult"
+_tit = "title"
+_pAub = "publishedAt"
+_WSRL = "WebSearchResultList"
+_IWSO = "InvokeWebSearchOutput"
+_SUE = "ServiceUnavailableException"
+_rAS = "retryAfterSeconds"
+_IWS = "InvokeWebSearch"
 _MIe = "MemoryId"
-_SSe = "SensitiveString"
+_REA = "RecordExpiryAction"
+_REMOVE = "REMOVE"
+_REDD = "RecordExpiryDurationDays"
+_RES = "RecordExpirySpecification"
+_rEDD = "recordExpiryDurationDays"
+_SSen = "SensitiveString"
 _MC = "MemoryContent"
 _MSIe = "MemoryStrategyId"
 _MK = "MetadataKey"
@@ -1408,6 +1472,7 @@ _MRCIL = "MemoryRecordsCreateInputList"
 _BCMRI = "BatchCreateMemoryRecordsInput"
 _mIe = "memoryId"
 _rec = "records"
+_rES = "recordExpirySpecification"
 _MRI = "MemoryRecordId"
 _MRS = "MemoryRecordStatus"
 _SUCCEEDED = "SUCCEEDED"
@@ -1477,6 +1542,7 @@ _GEO = "GetEventOutput"
 _GE = "GetEvent"
 _GMRI = "GetMemoryRecordInput"
 _MRe = "MemoryRecord"
+_eAx = "expiresAt"
 _GMRO = "GetMemoryRecordOutput"
 _mRe = "memoryRecord"
 _GMR = "GetMemoryRecord"
@@ -1488,7 +1554,7 @@ _IDI = "IngestDataInput"
 _so = "source"
 _cTo = "contentTimestamp"
 _IDO = "IngestDataOutput"
-_ID = "IngestData"
+_IDn = "IngestData"
 _PTag = "PaginationToken"
 _LAI = "ListActorsInput"
 _LAO = "ListActorsOutput"
@@ -1512,7 +1578,7 @@ _FI = "FilterInput"
 _eMve = "eventMetadata"
 _LEI = "ListEventsInput"
 _iP = "includePayloads"
-_fi = "filter"
+_fil = "filter"
 _ELv = "EventList"
 _LEO = "ListEventsOutput"
 _even = "events"
@@ -1553,7 +1619,7 @@ _mRS = "memoryRecordSummaries"
 _LMR = "ListMemoryRecords"
 _EFC = "EventFilterCondition"
 _HE = "HAS_EVENTS"
-_SFe = "SessionFilter"
+_SFes = "SessionFilter"
 _eF = "eventFilter"
 _LSI = "ListSessionsInput"
 _SSes = "SessionSummary"
@@ -1562,7 +1628,6 @@ _LSO = "ListSessionsOutput"
 _sSess = "sessionSummaries"
 _LS = "ListSessions"
 _SCe = "SearchCriteria"
-_sQe = "searchQuery"
 _RMRI = "RetrieveMemoryRecordsInput"
 _sCe = "searchCriteria"
 _RMRO = "RetrieveMemoryRecordsOutput"
@@ -2292,9 +2357,10 @@ INVOKE_AGENT_RUNTIME_OUTPUT: StaticSchema = (
     n0,
     _IARO,
     {_sSI: _cIARRo, _smith: None},
-    (_rSI, _mSI, _mPV, _tI, _tP, _tS, _b, _cT, _res, _sC),
+    (_rSI, _sEU, _mSI, _mPV, _tI, _tP, _tS, _b, _cT, _res, _sC),
     (
         (SESSION_ID, {_sH: _XABARSI}),
+        (3, {_sH: _XABARSEU}),
         (SESSION_ID, {_sH: _MSI}),
         (3, {_sH: _MPV}),
         (3, {_sH: _XATI}),
@@ -4203,6 +4269,8 @@ EVALUATION_ERROR_CODE: StaticSchema = (3, n0, _EEC, 0)
 
 EVALUATION_ERROR_MESSAGE: StaticSchema = (3, n0, _EEM, 0)
 
+EVALUATION_DIMENSION_NAME: StaticSchema = (3, n0, _EDN, 0)
+
 EVALUATOR_ARN: StaticSchema = (3, n0, _EA, 0)
 
 EVALUATOR_NAME: StaticSchema = (3, n0, _EN, 0)
@@ -4227,11 +4295,12 @@ EVALUATION_RESULT_CONTENT: StaticSchema = (
     n0,
     _ERC,
     0,
-    (_eA, _eI, _eN, _ex, _con, _va, _la, _tU, _eMr, _eCr, _iRIF),
+    (_eA, _eI, _eN, _eDN, _ex, _con, _va, _la, _tU, _eMr, _eCr, _iRIF),
     (
         (EVALUATOR_ARN, 1),
         (EVALUATOR_ID, 1),
         (EVALUATOR_NAME, 1),
+        (EVALUATION_DIMENSION_NAME, 0),
         (EVALUATION_EXPLANATION, 0),
         (CONTEXT, 1),
         (10, 0),
@@ -4473,8 +4542,8 @@ EVALUATOR_SUMMARY: StaticSchema = (
     n0,
     _ESv,
     0,
-    (_eI, _sta, _tEo, _tF),
-    ((3, 0), (EVALUATOR_STATISTICS, 0), (7, 0), (7, 0)),
+    (_eI, _eDN, _sta, _tEo, _tF),
+    ((3, 0), (3, 0), (EVALUATOR_STATISTICS, 0), (7, 0), (7, 0)),
 )
 
 EVALUATOR_SUMMARY_LIST: StaticSchema = (
@@ -4607,6 +4676,109 @@ FAILURE_ANALYSIS_RESULT_CONTENT: StaticSchema = (
     ((FAILURE_CATEGORY_CLUSTER_LIST, 1),),
 )
 
+INSIGHT_DESCRIPTION: StaticSchema = (3, n0, _ID, 4)
+
+INSIGHT_NAME: StaticSchema = (3, n0, _IN, 4)
+
+ROOT_CAUSE_EXPLANATION: StaticSchema = (3, n0, _RCEo, 4)
+
+ROOT_CAUSE_NAME: StaticSchema = (3, n0, _RCN, 4)
+
+FINDING_DESCRIPTION: StaticSchema = (3, n0, _FD, 4)
+
+FINDING_TARGET_ID: StaticSchema = (3, n0, _FTI, 0)
+
+FINDING_TARGET_TYPE: StaticSchema = (
+    14,
+    n0,
+    _FTT,
+    0,
+    (_SI_, _TI_, _SN_),
+    ((-1, {_sVm: _SI_}), (-1, {_sVm: _TI_}), (-1, {_sVm: _SN_})),
+)
+
+SESSION_FINDING: StaticSchema = (
+    18,
+    n0,
+    _SFe,
+    0,
+    (_tIa, _tTa, _d, _ca, _co),
+    (
+        (FINDING_TARGET_ID, 0),
+        (FINDING_TARGET_TYPE, 0),
+        (FINDING_DESCRIPTION, 1),
+        (3, 0),
+        (10, 0),
+    ),
+)
+
+SESSION_FINDING_LIST: StaticSchema = (16, n0, _SFL, 0, (_m,), ((SESSION_FINDING, 0),))
+
+SAMPLE_SESSION: StaticSchema = (
+    18,
+    n0,
+    _SS,
+    0,
+    (_sIe, _lSA, _fi),
+    ((SESSION_ID, 1), (4, {_sF: _dt}), (SESSION_FINDING_LIST, 0)),
+)
+
+INSIGHT_SAMPLE_SESSION_LIST: StaticSchema = (
+    16,
+    n0,
+    _ISSL,
+    0,
+    (_m,),
+    ((SAMPLE_SESSION, 0),),
+)
+
+SUGGESTED_FIX: StaticSchema = (3, n0, _SFu, 4)
+
+INSIGHT_ROOT_CAUSE: StaticSchema = (
+    18,
+    n0,
+    _IRC,
+    0,
+    (_n, _ex, _aSC, _sFu, _sSa),
+    (
+        (ROOT_CAUSE_NAME, 1),
+        (ROOT_CAUSE_EXPLANATION, 1),
+        (7, 0),
+        (SUGGESTED_FIX, 0),
+        (INSIGHT_SAMPLE_SESSION_LIST, 0),
+    ),
+)
+
+INSIGHT_ROOT_CAUSE_LIST: StaticSchema = (
+    16,
+    n0,
+    _IRCL,
+    0,
+    (_m,),
+    ((INSIGHT_ROOT_CAUSE, 0),),
+)
+
+INSIGHT_TYPE: StaticSchema = (14, n0, _IT, 0, (_FAILURE,), ((-1, {_sVm: _FAILURE}),))
+
+INSIGHT_RESULT: StaticSchema = (
+    18,
+    n0,
+    _IR,
+    0,
+    (_ty, _n, _d, _cA, _aSC, _sSa, _rCo),
+    (
+        (INSIGHT_TYPE, 1),
+        (INSIGHT_NAME, 1),
+        (INSIGHT_DESCRIPTION, 1),
+        (4, {_sF: _dt, _s: None}),
+        (7, 0),
+        (INSIGHT_SAMPLE_SESSION_LIST, 0),
+        (INSIGHT_ROOT_CAUSE_LIST, 0),
+    ),
+)
+
+INSIGHT_RESULT_LIST: StaticSchema = (16, n0, _IRL, 0, (_m,), ((INSIGHT_RESULT, 0),))
+
 INSIGHT_ID: StaticSchema = (3, n0, _II, 0)
 
 INSIGHT: StaticSchema = (18, n0, _I, 0, (_iI,), ((INSIGHT_ID, 1),))
@@ -4716,6 +4888,7 @@ GET_BATCH_EVALUATION_OUTPUT: StaticSchema = (
         _dSC,
         _oC,
         _eRv,
+        _iR,
         _fAR,
         _uIR,
         _eSR,
@@ -4735,6 +4908,7 @@ GET_BATCH_EVALUATION_OUTPUT: StaticSchema = (
         (DATA_SOURCE_CONFIG, 0),
         (OUTPUT_CONFIG, 0),
         (EVALUATION_JOB_RESULTS, 0),
+        (INSIGHT_RESULT_LIST, 0),
         (FAILURE_ANALYSIS_RESULT_CONTENT, 0),
         (USER_INTENT_CLUSTERING_RESULT_CONTENT, 0),
         (EXECUTION_SUMMARY_CLUSTERING_RESULT_CONTENT, 0),
@@ -5637,7 +5811,7 @@ AUTHORIZATION_URL_TYPE: StaticSchema = (3, n0, _AUT, 4)
 SESSION_STATUS: StaticSchema = (
     14,
     n0,
-    _SS,
+    _SSe,
     0,
     (_IP, _FAILED),
     ((-1, {_sVm: _IP}), (-1, {_sVm: _FAILED})),
@@ -5985,7 +6159,7 @@ TOOL_ARGUMENTS: StaticSchema = (
     n0,
     _TA,
     0,
-    (_cod, _lan, _cCl, _com, _pa, _pat, _cont, _dPi, _tIa, _run),
+    (_cod, _lan, _cCl, _com, _pa, _pat, _cont, _dPi, _tIas, _run),
     (
         (MAX_LEN_STRING, 0),
         (PROGRAMMING_LANGUAGE, 0),
@@ -6103,7 +6277,7 @@ TOOL_RESULT_STRUCTURED_CONTENT: StaticSchema = (
     n0,
     _TRSC,
     0,
-    (_tIa, _tSa, _std, _stde, _eC, _eTxe),
+    (_tIas, _tSa, _std, _stde, _eC, _eTxe),
     ((3, 0), (TASK_STATUS, 0), (3, 0), (3, 0), (7, 0), (10, 0)),
 )
 
@@ -6633,6 +6807,24 @@ HTTP_HEADERS_MAP: StaticSchema = (
     ((HTTP_HEADER_KEY, 0), (HTTP_HEADER_VALUE, 0)),
 )
 
+IAM_CREDENTIAL_PROVIDER: StaticSchema = (
+    18,
+    n0,
+    _ICP,
+    0,
+    (_ser, _reg),
+    ((3, 1), (3, 0)),
+)
+
+HARNESS_REMOTE_MCP_OUTBOUND_AUTH: StaticSchema = (
+    19,
+    n0,
+    _HRMOA,
+    0,
+    (_aIw, _non),
+    ((IAM_CREDENTIAL_PROVIDER, 0), (-1, 0)),
+)
+
 HARNESS_REMOTE_MCP_URL: StaticSchema = (3, n0, _HRMU, 4)
 
 HARNESS_REMOTE_MCP_CONFIG: StaticSchema = (
@@ -6640,8 +6832,12 @@ HARNESS_REMOTE_MCP_CONFIG: StaticSchema = (
     n0,
     _HRMC,
     0,
-    (_url, _he),
-    ((HARNESS_REMOTE_MCP_URL, 1), (HTTP_HEADERS_MAP, 0)),
+    (_url, _he, _oA),
+    (
+        (HARNESS_REMOTE_MCP_URL, 1),
+        (HTTP_HEADERS_MAP, 0),
+        (HARNESS_REMOTE_MCP_OUTBOUND_AUTH, 0),
+    ),
 )
 
 HARNESS_TOOL_CONFIGURATION: StaticSchema = (
@@ -7018,9 +7214,128 @@ INVOKE_HARNESS: StaticOperationSchema = (
     ),
 )
 
+DOMAIN_NAME: StaticSchema = (3, n0, _DN, 0)
+
+DOMAIN_LIST: StaticSchema = (16, n0, _DL, 0, (_m,), ((DOMAIN_NAME, 0),))
+
+DOMAIN_FILTER: StaticSchema = (
+    18,
+    n0,
+    _DFo,
+    0,
+    (_inc, _exc),
+    ((DOMAIN_LIST, 0), (DOMAIN_LIST, 0)),
+)
+
+PUBLISHED_DATE_FILTER: StaticSchema = (
+    18,
+    n0,
+    _PDF,
+    0,
+    (_pAu, _pB),
+    ((DATE_TIMESTAMP, 0), (DATE_TIMESTAMP, 0)),
+)
+
+WEB_SEARCH_FILTERS: StaticSchema = (
+    18,
+    n0,
+    _WSF,
+    0,
+    (_dF, _pDF),
+    ((DOMAIN_FILTER, 0), (PUBLISHED_DATE_FILTER, 0)),
+)
+
+WEB_SEARCH_ID: StaticSchema = (3, n0, _WSI, 0)
+
+INVOKE_WEB_SEARCH_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IWSI,
+    {_smit: None},
+    (_wSI, _sQe, _mR, _f),
+    ((WEB_SEARCH_ID, 9), (3, 1), (7, 0), (WEB_SEARCH_FILTERS, 0)),
+)
+
+WEB_SEARCH_RESULT: StaticSchema = (
+    18,
+    n0,
+    _WSR,
+    0,
+    (_tit, _url, _te, _pAub),
+    ((3, 0), (3, 0), (3, 1), (DATE_TIMESTAMP, 0)),
+)
+
+WEB_SEARCH_RESULT_LIST: StaticSchema = (
+    16,
+    n0,
+    _WSRL,
+    0,
+    (_m,),
+    ((WEB_SEARCH_RESULT, 0),),
+)
+
+INVOKE_WEB_SEARCH_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IWSO,
+    {_smith: None},
+    (_resul,),
+    ((WEB_SEARCH_RESULT_LIST, 1),),
+)
+
+SERVICE_UNAVAILABLE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SUE,
+    {_sm: _se, _sE: 503},
+    (_mes, _rAS),
+    ((3, 1), (7, 0)),
+)
+
+INVOKE_WEB_SEARCH: StaticOperationSchema = (
+    23,
+    n0,
+    _IWS,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/web-search/{webSearchId}/invoke", "code": 200}
+        )
+    },
+    INVOKE_WEB_SEARCH_INPUT,
+    INVOKE_WEB_SEARCH_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_UNAVAILABLE_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
 MEMORY_ID: StaticSchema = (3, n0, _MIe, 0)
 
-SENSITIVE_STRING: StaticSchema = (3, n0, _SSe, 4)
+RECORD_EXPIRY_ACTION: StaticSchema = (
+    14,
+    n0,
+    _REA,
+    0,
+    (_REMOVE,),
+    ((-1, {_sVm: _REMOVE}),),
+)
+
+RECORD_EXPIRY_DURATION_DAYS: StaticSchema = (7, n0, _REDD, 0)
+
+RECORD_EXPIRY_SPECIFICATION: StaticSchema = (
+    19,
+    n0,
+    _RES,
+    0,
+    (_rEDD, _ac),
+    ((RECORD_EXPIRY_DURATION_DAYS, 0), (RECORD_EXPIRY_ACTION, 0)),
+)
+
+SENSITIVE_STRING: StaticSchema = (3, n0, _SSen, 4)
 
 MEMORY_CONTENT: StaticSchema = (19, n0, _MC, 0, (_te,), ((SENSITIVE_STRING, 0),))
 
@@ -7095,8 +7410,13 @@ BATCH_CREATE_MEMORY_RECORDS_INPUT: StaticSchema = (
     n0,
     _BCMRI,
     {_smit: None},
-    (_mIe, _rec, _cTl),
-    ((MEMORY_ID, 9), (MEMORY_RECORDS_CREATE_INPUT_LIST, 1), (3, 2)),
+    (_mIe, _rec, _cTl, _rES),
+    (
+        (MEMORY_ID, 9),
+        (MEMORY_RECORDS_CREATE_INPUT_LIST, 1),
+        (3, 2),
+        (RECORD_EXPIRY_SPECIFICATION, 0),
+    ),
 )
 
 MEMORY_RECORD_ID: StaticSchema = (3, n0, _MRI, 0)
@@ -7274,8 +7594,12 @@ BATCH_UPDATE_MEMORY_RECORDS_INPUT: StaticSchema = (
     n0,
     _BUMRI,
     {_smit: None},
-    (_mIe, _rec),
-    ((MEMORY_ID, 9), (MEMORY_RECORDS_UPDATE_INPUT_LIST, 1)),
+    (_mIe, _rec, _rES),
+    (
+        (MEMORY_ID, 9),
+        (MEMORY_RECORDS_UPDATE_INPUT_LIST, 1),
+        (RECORD_EXPIRY_SPECIFICATION, 0),
+    ),
 )
 
 BATCH_UPDATE_MEMORY_RECORDS_OUTPUT: StaticSchema = (
@@ -7613,14 +7937,16 @@ MEMORY_RECORD: StaticSchema = (
     n0,
     _MRe,
     0,
-    (_mRI, _cont, _mSIe, _na, _cA, _met),
+    (_mRI, _cont, _mSIe, _na, _cA, _tim, _met, _eAx),
     (
         (MEMORY_RECORD_ID, 1),
         (MEMORY_CONTENT, 1),
         (MEMORY_STRATEGY_ID, 1),
         (NAMESPACES_LIST, 1),
         (4, 1),
+        (4, 0),
         (MEMORY_RECORD_METADATA_MAP, 0),
+        (4, 0),
     ),
 )
 
@@ -7717,7 +8043,7 @@ INGEST_DATA_OUTPUT: StaticSchema = (
 INGEST_DATA: StaticOperationSchema = (
     23,
     n0,
-    _ID,
+    _IDn,
     {
         _smithy: MappingProxyType(
             {"code": 202, "method": "POST", "uri": "/memories/{memoryId}/ingest"}
@@ -7831,7 +8157,7 @@ LIST_EVENTS_INPUT: StaticSchema = (
     n0,
     _LEI,
     {_smit: None},
-    (_mIe, _sIe, _aI, _iP, _fi, _mR, _nT),
+    (_mIe, _sIe, _aI, _iP, _fil, _mR, _nT),
     (
         (MEMORY_ID, 9),
         (SESSION_ID, 9),
@@ -7902,7 +8228,7 @@ LIST_MEMORY_EXTRACTION_JOBS_INPUT: StaticSchema = (
     n0,
     _LMEJI,
     {_smit: None},
-    (_mIe, _mR, _fi, _nT),
+    (_mIe, _mR, _fil, _nT),
     (
         (MEMORY_ID, 9),
         (7, {_smithyap: 20}),
@@ -8055,7 +8381,7 @@ MEMORY_RECORD_SUMMARY: StaticSchema = (
     n0,
     _MRSe,
     0,
-    (_mRI, _cont, _mSIe, _na, _cA, _scor, _met),
+    (_mRI, _cont, _mSIe, _na, _cA, _scor, _tim, _met),
     (
         (MEMORY_RECORD_ID, 1),
         (MEMORY_CONTENT, 1),
@@ -8063,6 +8389,7 @@ MEMORY_RECORD_SUMMARY: StaticSchema = (
         (NAMESPACES_LIST, 1),
         (4, 1),
         (10, 0),
+        (4, 0),
         (MEMORY_RECORD_METADATA_MAP, 0),
     ),
 )
@@ -8109,14 +8436,21 @@ LIST_MEMORY_RECORDS: StaticOperationSchema = (
 
 EVENT_FILTER_CONDITION: StaticSchema = (14, n0, _EFC, 0, (_HE,), ((-1, {_sVm: _HE}),))
 
-SESSION_FILTER: StaticSchema = (18, n0, _SFe, 0, (_eF,), ((EVENT_FILTER_CONDITION, 0),))
+SESSION_FILTER: StaticSchema = (
+    18,
+    n0,
+    _SFes,
+    0,
+    (_eF,),
+    ((EVENT_FILTER_CONDITION, 0),),
+)
 
 LIST_SESSIONS_INPUT: StaticSchema = (
     18,
     n0,
     _LSI,
     {_smit: None},
-    (_mIe, _aI, _mR, _nT, _fi),
+    (_mIe, _aI, _mR, _nT, _fil),
     (
         (MEMORY_ID, 9),
         (ACTOR_ID, 9),

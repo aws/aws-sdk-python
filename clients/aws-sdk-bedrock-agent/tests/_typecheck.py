@@ -63,6 +63,10 @@ from aws_sdk_bedrock_agent.models import (
     CreatePromptOutput,
     CreatePromptVersionInput,
     CreatePromptVersionOutput,
+    CreateRetrievalInstructionInput,
+    CreateRetrievalInstructionOutput,
+    CreateRetrievalInstructionVersionInput,
+    CreateRetrievalInstructionVersionOutput,
     CreateVpcConfigurationInput,
     CreateVpcConfigurationOutput,
     CuratedQuery,
@@ -100,6 +104,8 @@ from aws_sdk_bedrock_agent.models import (
     DeletePromptOutput,
     DeleteResourcePolicyInput,
     DeleteResourcePolicyOutput,
+    DeleteRetrievalInstructionInput,
+    DeleteRetrievalInstructionOutput,
     DeleteVpcConfigurationInput,
     DeleteVpcConfigurationOutput,
     DeletionProtectionConfiguration,
@@ -162,6 +168,8 @@ from aws_sdk_bedrock_agent.models import (
     GetPromptOutput,
     GetResourcePolicyInput,
     GetResourcePolicyOutput,
+    GetRetrievalInstructionInput,
+    GetRetrievalInstructionOutput,
     GetVpcConfigurationInput,
     GetVpcConfigurationOutput,
     GuardrailConfiguration,
@@ -223,6 +231,10 @@ from aws_sdk_bedrock_agent.models import (
     ListKnowledgeBasesOutput,
     ListPromptsInput,
     ListPromptsOutput,
+    ListRetrievalInstructionVersionsInput,
+    ListRetrievalInstructionVersionsOutput,
+    ListRetrievalInstructionsInput,
+    ListRetrievalInstructionsOutput,
     ListTagsForResourceInput,
     ListTagsForResourceOutput,
     ListVpcConfigurationsInput,
@@ -240,6 +252,7 @@ from aws_sdk_bedrock_agent.models import (
     Message,
     MetadataAttribute,
     MetadataAttributeValue,
+    MetadataConfiguration,
     MetadataConfigurationForReranking,
     MismatchedNodeInputTypeFlowValidationDetails,
     MismatchedNodeOutputTypeFlowValidationDetails,
@@ -309,6 +322,10 @@ from aws_sdk_bedrock_agent.models import (
     RedshiftServerlessConfiguration,
     RetrievalFlowNodeConfiguration,
     RetrievalFlowNodeS3Configuration,
+    RetrievalInstructionContent,
+    RetrievalInstructionFailureReason,
+    RetrievalInstructionSummary,
+    RetrievalInstructionVersionSummary,
     S3Content,
     S3DataSourceConfiguration,
     S3Identifier,
@@ -377,6 +394,8 @@ from aws_sdk_bedrock_agent.models import (
     UpdateKnowledgeBaseOutput,
     UpdatePromptInput,
     UpdatePromptOutput,
+    UpdateRetrievalInstructionInput,
+    UpdateRetrievalInstructionOutput,
     UrlConfiguration,
     ValidateFlowDefinitionInput,
     ValidateFlowDefinitionOutput,
@@ -555,6 +574,20 @@ CreatePromptInput()
 CreatePromptOutput(name=_, id=_, arn=_, version=_, created_at=_, updated_at=_)
 CreatePromptVersionInput()
 CreatePromptVersionOutput(name=_, id=_, arn=_, version=_, created_at=_, updated_at=_)
+CreateRetrievalInstructionInput()
+CreateRetrievalInstructionOutput(
+    retrieval_instruction_id=_,
+    retrieval_instruction_arn=_,
+    name=_,
+    status=_,
+    last_transition_status=_,
+    created_at=_,
+    updated_at=_,
+)
+CreateRetrievalInstructionVersionInput()
+CreateRetrievalInstructionVersionOutput(
+    retrieval_instruction_id=_, retrieval_instruction_arn=_, version=_, created_at=_
+)
 CreateVpcConfigurationInput()
 CreateVpcConfigurationOutput(vpc_configuration_id=_, status=_)
 CuratedQuery(natural_language=_, sql=_)
@@ -600,6 +633,10 @@ DeletePromptInput()
 DeletePromptOutput(id=_)
 DeleteResourcePolicyInput()
 DeleteResourcePolicyOutput(resource_arn=_)
+DeleteRetrievalInstructionInput()
+DeleteRetrievalInstructionOutput(
+    retrieval_instruction_id=_, retrieval_instruction_arn=_
+)
 DeleteVpcConfigurationInput()
 DeleteVpcConfigurationOutput(vpc_configuration_id=_, status=_)
 DeletionProtectionConfiguration(deletion_protection_status=_)
@@ -677,6 +714,16 @@ GetPromptInput()
 GetPromptOutput(name=_, id=_, arn=_, version=_, created_at=_, updated_at=_)
 GetResourcePolicyInput()
 GetResourcePolicyOutput(resource_arn=_, policy=_, revision_id=_)
+GetRetrievalInstructionInput()
+GetRetrievalInstructionOutput(
+    retrieval_instruction_id=_,
+    retrieval_instruction_arn=_,
+    name=_,
+    status=_,
+    last_transition_status=_,
+    created_at=_,
+    updated_at=_,
+)
 GetVpcConfigurationInput()
 GetVpcConfigurationOutput(vpc_configuration=_)
 GuardrailConfiguration()
@@ -763,6 +810,10 @@ ListKnowledgeBasesInput()
 ListKnowledgeBasesOutput(knowledge_base_summaries=_)
 ListPromptsInput()
 ListPromptsOutput(prompt_summaries=_)
+ListRetrievalInstructionsInput()
+ListRetrievalInstructionsOutput(retrieval_instruction_summaries=_)
+ListRetrievalInstructionVersionsInput()
+ListRetrievalInstructionVersionsOutput(retrieval_instruction_version_summaries=_)
 ListTagsForResourceInput()
 ListTagsForResourceOutput()
 ListVpcConfigurationsInput()
@@ -782,6 +833,7 @@ MemoryConfiguration(enabled_memory_types=_)
 Message(role=_, content=_)
 MetadataAttribute(key=_, value=_)
 MetadataAttributeValue(type=_)
+MetadataConfiguration(name=_, type=_, searchability=_)
 MetadataConfigurationForReranking(selection_mode=_)
 MismatchedNodeInputTypeFlowValidationDetails(node=_, input=_, expected_type=_)
 MismatchedNodeOutputTypeFlowValidationDetails(node=_, output=_, expected_type=_)
@@ -870,6 +922,18 @@ RedshiftServerlessAuthConfiguration(type=_)
 RedshiftServerlessConfiguration(workgroup_arn=_, auth_configuration=_)
 RetrievalFlowNodeConfiguration(service_configuration=_)
 RetrievalFlowNodeS3Configuration()
+RetrievalInstructionContent()
+RetrievalInstructionFailureReason(code=_, message=_)
+RetrievalInstructionSummary(
+    retrieval_instruction_id=_,
+    retrieval_instruction_arn=_,
+    name=_,
+    status=_,
+    last_transition_status=_,
+    created_at=_,
+    updated_at=_,
+)
+RetrievalInstructionVersionSummary(version=_, created_at=_)
 S3Content(s3_location=_)
 S3DataSourceConfiguration(bucket_arn=_)
 S3Identifier()
@@ -953,6 +1017,16 @@ UpdateKnowledgeBaseInput()
 UpdateKnowledgeBaseOutput(knowledge_base=_)
 UpdatePromptInput()
 UpdatePromptOutput(name=_, id=_, arn=_, version=_, created_at=_, updated_at=_)
+UpdateRetrievalInstructionInput()
+UpdateRetrievalInstructionOutput(
+    retrieval_instruction_id=_,
+    retrieval_instruction_arn=_,
+    name=_,
+    status=_,
+    last_transition_status=_,
+    created_at=_,
+    updated_at=_,
+)
 UrlConfiguration()
 ValidateFlowDefinitionInput()
 ValidateFlowDefinitionOutput(validations=_)

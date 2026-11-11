@@ -44,6 +44,10 @@ if TYPE_CHECKING:
         CreatePromptOutput,
         CreatePromptVersionInput,
         CreatePromptVersionOutput,
+        CreateRetrievalInstructionInput,
+        CreateRetrievalInstructionOutput,
+        CreateRetrievalInstructionVersionInput,
+        CreateRetrievalInstructionVersionOutput,
         CreateVpcConfigurationInput,
         CreateVpcConfigurationOutput,
         DeleteAgentActionGroupInput,
@@ -70,6 +74,8 @@ if TYPE_CHECKING:
         DeletePromptOutput,
         DeleteResourcePolicyInput,
         DeleteResourcePolicyOutput,
+        DeleteRetrievalInstructionInput,
+        DeleteRetrievalInstructionOutput,
         DeleteVpcConfigurationInput,
         DeleteVpcConfigurationOutput,
         DisassociateAgentCollaboratorInput,
@@ -106,6 +112,8 @@ if TYPE_CHECKING:
         GetPromptOutput,
         GetResourcePolicyInput,
         GetResourcePolicyOutput,
+        GetRetrievalInstructionInput,
+        GetRetrievalInstructionOutput,
         GetVpcConfigurationInput,
         GetVpcConfigurationOutput,
         IngestKnowledgeBaseDocumentsInput,
@@ -138,6 +146,10 @@ if TYPE_CHECKING:
         ListKnowledgeBasesOutput,
         ListPromptsInput,
         ListPromptsOutput,
+        ListRetrievalInstructionVersionsInput,
+        ListRetrievalInstructionVersionsOutput,
+        ListRetrievalInstructionsInput,
+        ListRetrievalInstructionsOutput,
         ListTagsForResourceInput,
         ListTagsForResourceOutput,
         ListVpcConfigurationsInput,
@@ -176,6 +188,8 @@ if TYPE_CHECKING:
         UpdateKnowledgeBaseOutput,
         UpdatePromptInput,
         UpdatePromptOutput,
+        UpdateRetrievalInstructionInput,
+        UpdateRetrievalInstructionOutput,
         ValidateFlowDefinitionInput,
         ValidateFlowDefinitionOutput,
     )
@@ -581,6 +595,58 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         """
         return self._invoke(input, _models.CREATE_PROMPT_VERSION, [], plugins)
 
+    def create_retrieval_instruction(
+        self,
+        input: CreateRetrievalInstructionInput,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateRetrievalInstructionOutput:
+        """
+        Creates a new retrieval instruction. The retrieval instruction is usable
+        once its status becomes ACTIVE. Use GetRetrievalInstruction to check
+        whether it is ready.
+
+        Args:
+            input:
+                An instance of `CreateRetrievalInstructionInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `CreateRetrievalInstructionOutput`.
+        """
+        return self._invoke(input, _models.CREATE_RETRIEVAL_INSTRUCTION, [], plugins)
+
+    def create_retrieval_instruction_version(
+        self,
+        input: CreateRetrievalInstructionVersionInput,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateRetrievalInstructionVersionOutput:
+        """
+        Creates an immutable numbered version from the retrieval instruction's
+        current reviewed content. The service creates the version synchronously.
+
+        The service numbers versions from 1 and assigns them in order, never
+        reusing a number.
+
+        Args:
+            input:
+                An instance of `CreateRetrievalInstructionVersionInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `CreateRetrievalInstructionVersionOutput`.
+        """
+        return self._invoke(
+            input, _models.CREATE_RETRIEVAL_INSTRUCTION_VERSION, [], plugins
+        )
+
     def create_vpc_configuration(
         self, input: CreateVpcConfigurationInput, plugins: list[Plugin] | None = None
     ) -> CreateVpcConfigurationOutput:
@@ -862,6 +928,34 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
             An instance of `DeleteResourcePolicyOutput`.
         """
         return self._invoke(input, _models.DELETE_RESOURCE_POLICY, [], plugins)
+
+    def delete_retrieval_instruction(
+        self,
+        input: DeleteRetrievalInstructionInput,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteRetrievalInstructionOutput:
+        """
+        Deletes a retrieval instruction or a single version of it. Omit
+        retrievalInstructionVersion to delete the retrieval instruction itself;
+        the service rejects that request with ConflictException while the
+        retrieval instruction has versions or while lastTransitionStatus is
+        CREATING or UPDATING. Specify retrievalInstructionVersion to delete only
+        that version; the retrieval instruction and its other versions are
+        unaffected.
+
+        Args:
+            input:
+                An instance of `DeleteRetrievalInstructionInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DeleteRetrievalInstructionOutput`.
+        """
+        return self._invoke(input, _models.DELETE_RETRIEVAL_INSTRUCTION, [], plugins)
 
     def delete_vpc_configuration(
         self, input: DeleteVpcConfigurationInput, plugins: list[Plugin] | None = None
@@ -1254,6 +1348,27 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
         """
         return self._invoke(input, _models.GET_RESOURCE_POLICY, [], plugins)
 
+    def get_retrieval_instruction(
+        self, input: GetRetrievalInstructionInput, plugins: list[Plugin] | None = None
+    ) -> GetRetrievalInstructionOutput:
+        """
+        Gets a retrieval instruction. Also used to poll the terminal reporting
+        of an asynchronous create or update.
+
+        Args:
+            input:
+                An instance of `GetRetrievalInstructionInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `GetRetrievalInstructionOutput`.
+        """
+        return self._invoke(input, _models.GET_RETRIEVAL_INSTRUCTION, [], plugins)
+
     def get_vpc_configuration(
         self, input: GetVpcConfigurationInput, plugins: list[Plugin] | None = None
     ) -> GetVpcConfigurationOutput:
@@ -1608,6 +1723,56 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
             An instance of `ListPromptsOutput`.
         """
         return self._invoke(input, _models.LIST_PROMPTS, [], plugins)
+
+    def list_retrieval_instructions(
+        self,
+        input: ListRetrievalInstructionsInput | None = None,
+        plugins: list[Plugin] | None = None,
+    ) -> ListRetrievalInstructionsOutput:
+        """
+        Lists the retrieval instructions in the caller's account. Results are
+        paginated. Use the nextToken parameter to retrieve additional results.
+
+        Args:
+            input:
+                An instance of `ListRetrievalInstructionsInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListRetrievalInstructionsOutput`.
+        """
+        return self._invoke(input, _models.LIST_RETRIEVAL_INSTRUCTIONS, [], plugins)
+
+    def list_retrieval_instruction_versions(
+        self,
+        input: ListRetrievalInstructionVersionsInput,
+        plugins: list[Plugin] | None = None,
+    ) -> ListRetrievalInstructionVersionsOutput:
+        """
+        Lists the numbered versions of a retrieval instruction, newest first.
+        DRAFT is not listed; read it with GetRetrievalInstruction without
+        retrievalInstructionVersion. Results are paginated. Use the nextToken
+        parameter to retrieve additional results.
+
+        Args:
+            input:
+                An instance of `ListRetrievalInstructionVersionsInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListRetrievalInstructionVersionsOutput`.
+        """
+        return self._invoke(
+            input, _models.LIST_RETRIEVAL_INSTRUCTION_VERSIONS, [], plugins
+        )
 
     def list_tags_for_resource(
         self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
@@ -2038,6 +2203,32 @@ class BedrockAgentClient(Client[BedrockAgentConfig]):
             An instance of `UpdatePromptOutput`.
         """
         return self._invoke(input, _models.UPDATE_PROMPT, [], plugins)
+
+    def update_retrieval_instruction(
+        self,
+        input: UpdateRetrievalInstructionInput,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateRetrievalInstructionOutput:
+        """
+        Updates the content of a retrieval instruction. The update is processed
+        asynchronously; the stored content is a candidate until content review
+        passes, and the served content does not change while the update is in
+        flight. The service rejects the request with ConflictException while
+        lastTransitionStatus is CREATING or UPDATING.
+
+        Args:
+            input:
+                An instance of `UpdateRetrievalInstructionInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `UpdateRetrievalInstructionOutput`.
+        """
+        return self._invoke(input, _models.UPDATE_RETRIEVAL_INSTRUCTION, [], plugins)
 
     def validate_flow_definition(
         self, input: ValidateFlowDefinitionInput, plugins: list[Plugin] | None = None

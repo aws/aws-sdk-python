@@ -33,26 +33,30 @@ BDD = EndpointBdd(
         ((2, "booleanEquals", (1, (0, "PartitionResult"), "supportsDualStack"), True), None),  # 9: booleanEquals(PartitionResult#supportsDualStack, true)
         ((2, "stringEquals", "search-dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", (1, (0, "parsedEndpoint"), "authority")), None),  # 10: stringEquals("search-dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", parsedEndpoint#authority)
         ((2, "isSet", (0, "AccountIdEndpointMode")), None),  # 11: isSet(AccountIdEndpointMode)
-        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), "aws"), None),  # 12: stringEquals(PartitionResult#name, "aws")
-        ((2, "stringEquals", (0, "AccountIdEndpointMode"), "disabled"), None),  # 13: stringEquals(AccountIdEndpointMode, "disabled")
-        ((2, "isSet", (0, "ResourceArn")), None),  # 14: isSet(ResourceArn)
-        ((2, "aws.parseArn", (0, "ResourceArn")), "ParsedArn_ssa_2"),  # 15: ParsedArn_ssa_2 = aws.parseArn(ResourceArn)
-        ((2, "stringEquals", (1, (0, "ParsedArn_ssa_2"), "region"), (0, "Region")), None),  # 16: stringEquals(ParsedArn_ssa_2#region, Region)
-        ((2, "stringEquals", (1, (0, "ParsedArn_ssa_2"), "service"), "dynamodb"), None),  # 17: stringEquals(ParsedArn_ssa_2#service, "dynamodb")
-        ((2, "isValidHostLabel", (1, (0, "ParsedArn_ssa_2"), "region"), False), None),  # 18: isValidHostLabel(ParsedArn_ssa_2#region, false)
-        ((2, "isValidHostLabel", (1, (0, "ParsedArn_ssa_2"), "accountId"), False), None),  # 19: isValidHostLabel(ParsedArn_ssa_2#accountId, false)
-        ((2, "isSet", (0, "ResourceArnList")), None),  # 20: isSet(ResourceArnList)
-        ((1, (0, "ResourceArnList"), "[0]"), "FirstArn"),  # 21: FirstArn = ResourceArnList#[0]
-        ((2, "aws.parseArn", (0, "FirstArn")), "ParsedArn_ssa_1"),  # 22: ParsedArn_ssa_1 = aws.parseArn(FirstArn)
-        ((2, "stringEquals", (1, (0, "ParsedArn_ssa_1"), "region"), (0, "Region")), None),  # 23: stringEquals(ParsedArn_ssa_1#region, Region)
-        ((2, "stringEquals", (1, (0, "ParsedArn_ssa_1"), "service"), "dynamodb"), None),  # 24: stringEquals(ParsedArn_ssa_1#service, "dynamodb")
-        ((2, "isValidHostLabel", (1, (0, "ParsedArn_ssa_1"), "accountId"), False), None),  # 25: isValidHostLabel(ParsedArn_ssa_1#accountId, false)
-        ((2, "isValidHostLabel", (1, (0, "ParsedArn_ssa_1"), "region"), False), None),  # 26: isValidHostLabel(ParsedArn_ssa_1#region, false)
-        ((2, "isSet", (0, "AccountId")), None),  # 27: isSet(AccountId)
-        ((2, "stringEquals", (0, "AccountIdEndpointMode"), "required"), None),  # 28: stringEquals(AccountIdEndpointMode, "required")
-        ((2, "isValidHostLabel", (0, "AccountId"), False), None),  # 29: isValidHostLabel(AccountId, false)
-        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), "aws-us-gov"), None),  # 30: stringEquals(PartitionResult#name, "aws-us-gov")
-        ((2, "booleanEquals", (2, "coalesce", (0, "IsSearchOperation"), False), True), None),  # 31: booleanEquals(coalesce(IsSearchOperation, false), true)
+        ((2, "stringEquals", (0, "Region"), "us-gov-east-1"), None),  # 12: stringEquals(Region, "us-gov-east-1")
+        ((2, "stringEquals", (0, "Region"), "cn-north-1"), None),  # 13: stringEquals(Region, "cn-north-1")
+        ((2, "stringEquals", (0, "Region"), "cn-northwest-1"), None),  # 14: stringEquals(Region, "cn-northwest-1")
+        ((2, "stringEquals", (0, "Region"), "us-gov-west-1"), None),  # 15: stringEquals(Region, "us-gov-west-1")
+        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), "aws"), None),  # 16: stringEquals(PartitionResult#name, "aws")
+        ((2, "stringEquals", (0, "AccountIdEndpointMode"), "disabled"), None),  # 17: stringEquals(AccountIdEndpointMode, "disabled")
+        ((2, "isSet", (0, "ResourceArn")), None),  # 18: isSet(ResourceArn)
+        ((2, "aws.parseArn", (0, "ResourceArn")), "ParsedArn_ssa_2"),  # 19: ParsedArn_ssa_2 = aws.parseArn(ResourceArn)
+        ((2, "stringEquals", (1, (0, "ParsedArn_ssa_2"), "service"), "dynamodb"), None),  # 20: stringEquals(ParsedArn_ssa_2#service, "dynamodb")
+        ((2, "stringEquals", (1, (0, "ParsedArn_ssa_2"), "region"), (0, "Region")), None),  # 21: stringEquals(ParsedArn_ssa_2#region, Region)
+        ((2, "isValidHostLabel", (1, (0, "ParsedArn_ssa_2"), "accountId"), False), None),  # 22: isValidHostLabel(ParsedArn_ssa_2#accountId, false)
+        ((2, "isValidHostLabel", (1, (0, "ParsedArn_ssa_2"), "region"), False), None),  # 23: isValidHostLabel(ParsedArn_ssa_2#region, false)
+        ((2, "isSet", (0, "ResourceArnList")), None),  # 24: isSet(ResourceArnList)
+        ((1, (0, "ResourceArnList"), "[0]"), "FirstArn"),  # 25: FirstArn = ResourceArnList#[0]
+        ((2, "aws.parseArn", (0, "FirstArn")), "ParsedArn_ssa_1"),  # 26: ParsedArn_ssa_1 = aws.parseArn(FirstArn)
+        ((2, "stringEquals", (1, (0, "ParsedArn_ssa_1"), "region"), (0, "Region")), None),  # 27: stringEquals(ParsedArn_ssa_1#region, Region)
+        ((2, "stringEquals", (1, (0, "ParsedArn_ssa_1"), "service"), "dynamodb"), None),  # 28: stringEquals(ParsedArn_ssa_1#service, "dynamodb")
+        ((2, "isValidHostLabel", (1, (0, "ParsedArn_ssa_1"), "accountId"), False), None),  # 29: isValidHostLabel(ParsedArn_ssa_1#accountId, false)
+        ((2, "isValidHostLabel", (1, (0, "ParsedArn_ssa_1"), "region"), False), None),  # 30: isValidHostLabel(ParsedArn_ssa_1#region, false)
+        ((2, "isSet", (0, "AccountId")), None),  # 31: isSet(AccountId)
+        ((2, "stringEquals", (0, "AccountIdEndpointMode"), "required"), None),  # 32: stringEquals(AccountIdEndpointMode, "required")
+        ((2, "isValidHostLabel", (0, "AccountId"), False), None),  # 33: isValidHostLabel(AccountId, false)
+        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), "aws-us-gov"), None),  # 34: stringEquals(PartitionResult#name, "aws-us-gov")
+        ((2, "booleanEquals", (2, "coalesce", (0, "IsSearchOperation"), False), True), None),  # 35: booleanEquals(coalesce(IsSearchOperation, false), true)
     ),
     results=(
         None,  # 0: no match
@@ -62,7 +66,7 @@ BDD = EndpointBdd(
         (6, "{Endpoint}", None, ()),  # 4
         (5, "Invalid Configuration: FIPS and local endpoint are not supported"),  # 5
         (5, "Invalid Configuration: Dualstack and local endpoint are not supported"),  # 6
-        (6, "http://localhost:8000", (4, ("authSchemes",), (3, (4, ("signingRegion", "signingName", "name"), "us-east-1", "dynamodb", "sigv4"))), ()),  # 7
+        (6, "http://localhost:8000", (4, ("authSchemes",), (3, (4, ("name", "signingName", "signingRegion"), "sigv4", "dynamodb", "us-east-1"))), ()),  # 7
         (5, "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"),  # 8
         (6, "https://search-dynamodb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 9
         (6, "https://dynamodb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 10
@@ -72,17 +76,17 @@ BDD = EndpointBdd(
         (6, "https://search-dynamodb-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 14
         (6, "https://dynamodb-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 15
         (5, "FIPS is enabled but this partition does not support FIPS"),  # 16
-        (6, "https://{ParsedArn_ssa_2#accountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 17
-        (6, "https://{ParsedArn_ssa_2#accountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 18
-        (6, "https://{ParsedArn_ssa_1#accountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 19
-        (6, "https://{ParsedArn_ssa_1#accountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 20
-        (6, "https://{AccountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 21
-        (6, "https://{AccountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 22
-        (5, "Credentials-sourced account ID parameter is invalid"),  # 23
-        (5, "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"),  # 24
-        (5, "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"),  # 25
-        (6, "https://search-dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 26
-        (6, "https://dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 27
+        (5, "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region"),  # 17
+        (6, "https://search-dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 18
+        (6, "https://dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 19
+        (6, "https://{ParsedArn_ssa_2#accountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 20
+        (6, "https://{ParsedArn_ssa_2#accountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 21
+        (6, "https://{ParsedArn_ssa_1#accountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 22
+        (6, "https://{ParsedArn_ssa_1#accountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 23
+        (6, "https://{AccountId}.search-ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 24
+        (6, "https://{AccountId}.ddb.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 25
+        (5, "Credentials-sourced account ID parameter is invalid"),  # 26
+        (5, "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"),  # 27
         (5, "DualStack is enabled but this partition does not support DualStack"),  # 28
         (6, "https://{ParsedArn_ssa_2#accountId}.search-ddb.{Region}.{PartitionResult#dnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 29
         (6, "https://{ParsedArn_ssa_2#accountId}.ddb.{Region}.{PartitionResult#dnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 30
@@ -101,82 +105,90 @@ BDD = EndpointBdd(
         1, 4, 100_000_035,
         2, 100_000_001, 5,
         3, 100_000_002, 100_000_004,
-        1, 77, 7,
-        2, 61, 8,
-        3, 34, 9,
+        1, 85, 7,
+        2, 69, 8,
+        3, 38, 9,
         4, 10, 100_000_035,
         5, 100_000_007, 11,
-        11, 12, 69,
-        12, 14, 13,
-        28, 100_000_025, 69,
-        13, 33, 15,
-        14, 16, 21,
-        15, 17, 21,
-        16, 18, 21,
-        17, 19, 21,
-        18, 20, 21,
-        19, 32, 21,
-        20, 22, 28,
-        21, 23, 28,
-        22, 24, 28,
-        23, 25, 28,
-        24, 26, 28,
-        25, 27, 28,
-        26, 31, 28,
-        27, 29, 33,
-        29, 30, 100_000_023,
-        31, 100_000_033, 100_000_034,
-        31, 100_000_031, 100_000_032,
-        31, 100_000_029, 100_000_030,
-        28, 100_000_024, 69,
-        4, 35, 100_000_035,
-        5, 100_000_006, 36,
-        9, 37, 100_000_028,
-        11, 38, 60,
-        12, 40, 39,
-        28, 100_000_025, 60,
-        13, 59, 41,
-        14, 42, 47,
-        15, 43, 47,
-        16, 44, 47,
-        17, 45, 47,
-        18, 46, 47,
-        19, 58, 47,
-        20, 48, 54,
-        21, 49, 54,
-        22, 50, 54,
-        23, 51, 54,
-        24, 52, 54,
-        25, 53, 54,
-        26, 57, 54,
-        27, 55, 59,
-        29, 56, 100_000_023,
-        31, 100_000_021, 100_000_022,
-        31, 100_000_019, 100_000_020,
-        31, 100_000_017, 100_000_018,
-        28, 100_000_024, 60,
-        31, 100_000_026, 100_000_027,
-        3, 70, 62,
-        4, 63, 100_000_035,
-        5, 100_000_005, 64,
-        6, 65, 100_000_016,
-        11, 66, 67,
-        28, 100_000_008, 67,
-        30, 69, 68,
-        31, 100_000_014, 100_000_015,
-        31, 100_000_012, 100_000_013,
+        11, 12, 77,
+        12, 18, 13,
+        13, 18, 14,
+        14, 18, 15,
+        15, 18, 16,
+        16, 18, 17,
+        32, 100_000_017, 77,
+        17, 37, 19,
+        18, 20, 25,
+        19, 21, 25,
+        20, 22, 25,
+        21, 23, 25,
+        22, 24, 25,
+        23, 36, 25,
+        24, 26, 32,
+        25, 27, 32,
+        26, 28, 32,
+        27, 29, 32,
+        28, 30, 32,
+        29, 31, 32,
+        30, 35, 32,
+        31, 33, 37,
+        33, 34, 100_000_026,
+        35, 100_000_033, 100_000_034,
+        35, 100_000_031, 100_000_032,
+        35, 100_000_029, 100_000_030,
+        32, 100_000_027, 77,
+        4, 39, 100_000_035,
+        5, 100_000_006, 40,
+        9, 41, 100_000_028,
+        11, 42, 68,
+        12, 48, 43,
+        13, 48, 44,
+        14, 48, 45,
+        15, 48, 46,
+        16, 48, 47,
+        32, 100_000_017, 68,
+        17, 67, 49,
+        18, 50, 55,
+        19, 51, 55,
+        20, 52, 55,
+        21, 53, 55,
+        22, 54, 55,
+        23, 66, 55,
+        24, 56, 62,
+        25, 57, 62,
+        26, 58, 62,
+        27, 59, 62,
+        28, 60, 62,
+        29, 61, 62,
+        30, 65, 62,
+        31, 63, 67,
+        33, 64, 100_000_026,
+        35, 100_000_024, 100_000_025,
+        35, 100_000_022, 100_000_023,
+        35, 100_000_020, 100_000_021,
+        32, 100_000_027, 68,
+        35, 100_000_018, 100_000_019,
+        3, 78, 70,
         4, 71, 100_000_035,
         5, 100_000_005, 72,
-        6, 73, 100_000_011,
-        9, 74, 100_000_011,
-        11, 75, 76,
-        28, 100_000_008, 76,
-        31, 100_000_009, 100_000_010,
-        2, 100_000_001, 78,
-        3, 100_000_002, 79,
-        4, 80, 100_000_004,
-        7, 81, 100_000_004,
-        8, 100_000_003, 82,
+        6, 73, 100_000_016,
+        11, 74, 75,
+        32, 100_000_008, 75,
+        34, 77, 76,
+        35, 100_000_014, 100_000_015,
+        35, 100_000_012, 100_000_013,
+        4, 79, 100_000_035,
+        5, 100_000_005, 80,
+        6, 81, 100_000_011,
+        9, 82, 100_000_011,
+        11, 83, 84,
+        32, 100_000_008, 84,
+        35, 100_000_009, 100_000_010,
+        2, 100_000_001, 86,
+        3, 100_000_002, 87,
+        4, 88, 100_000_004,
+        7, 89, 100_000_004,
+        8, 100_000_003, 90,
         10, 100_000_003, 100_000_004,
     ),
 )
