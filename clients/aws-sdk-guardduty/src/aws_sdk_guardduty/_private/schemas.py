@@ -677,6 +677,7 @@ _FAC = "FeatureAdditionalConfiguration"
 _EAM = "EKS_ADDON_MANAGEMENT"
 _EFAM = "ECS_FARGATE_AGENT_MANAGEMENT"
 _EAM_ = "EC2_AGENT_MANAGEMENT"
+_RDR = "RDS_DATA_RISK"
 _FS = "FeatureStatus"
 _DAC = "DetectorAdditionalConfiguration"
 _DACe = "DetectorAdditionalConfigurations"
@@ -1289,12 +1290,19 @@ _aST = "additionalSequenceTypes"
 _Det = "Detection"
 _an = "anomaly"
 _seq = "sequence"
+_DRAV = "DetectionRuleAgentVersion"
 _DRCS = "DetectionRuleConfigurationStatus"
 _PROCESSING = "PROCESSING"
 _DRDS = "DetectionRuleDataSource"
 _CME = "CLOUDTRAIL_MANAGEMENT_EVENT"
 _CTME = "CloudTrailManagementEvent"
+_RMu = "RuntimeMonitoring"
 _DRD = "DetectionRuleDescription"
+_DRER = "DetectionRuleEc2Requirements"
+_MAV = "MinAgentVersion"
+_mAV = "minAgentVersion"
+_DREFR = "DetectionRuleEcsFargateRequirements"
+_DRERe = "DetectionRuleEksRequirements"
 _DRFC = "DetectionRuleFilterCondition"
 _EQUALS = "EQUALS"
 _CONTAINS = "CONTAINS"
@@ -1320,6 +1328,16 @@ _SRt = "StatusReason"
 _sRt = "statusReason"
 _DROCS = "DetectionRuleOrgConfigurationSummary"
 _DROCSL = "DetectionRuleOrgConfigurationSummaryList"
+_DRRP = "DetectionRuleRuntimePlatforms"
+_Ek = "Eks"
+_ek = "eks"
+_Ec = "Ec2"
+_ec = "ec2"
+_EF = "EcsFargate"
+_eF = "ecsFargate"
+_DRRMD = "DetectionRuleRuntimeMonitoringDetails"
+_Pla = "Platforms"
+_pla = "platforms"
 _DRSN = "DetectionRuleServiceName"
 _DRS = "DetectionRuleSeverity"
 _CRITICAL = "CRITICAL"
@@ -1715,6 +1733,8 @@ _SV = "SchemaVersion"
 _sVc = "schemaVersion"
 _AASA = "AssociatedAttackSequenceArn"
 _aASA = "associatedAttackSequenceArn"
+_CDRN = "CustomDetectionRuleName"
+_cDRN = "customDetectionRuleName"
 _Find = "Findings"
 _GBA = "GroupedByAccount"
 _GBD = "GroupedByDate"
@@ -1770,6 +1790,8 @@ _Lan = "Language"
 _la = "language"
 _Sch = "Schema"
 _sch = "schema"
+_RMD = "RuntimeMonitoringDetails"
+_rMD = "runtimeMonitoringDetails"
 _GCDRO = "GetCustomDetectionRuleOutput"
 _cGCDRRo = "com.amazonaws.guardduty#GetCustomDetectionRuleResponse"
 _Ru = "Rule"
@@ -2047,6 +2069,10 @@ _GTESe = "GetTrustedEntitySet"
 _UFs = "UsageFeature"
 _RDPP = "RDS_DBI_PROTECTION_PROVISIONED"
 _RDPS = "RDS_DBI_PROTECTION_SERVERLESS"
+_RDPL = "RDS_DBI_PROTECTION_LIMITLESS"
+_RDADPP = "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED"
+_RDADPS = "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS"
+_RDADPL = "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS"
 _UFL = "UsageFeatureList"
 _RLe = "ResourceList"
 _UC = "UsageCriteria"
@@ -4136,8 +4162,8 @@ FEATURE_ADDITIONAL_CONFIGURATION: StaticSchema = (
     n0,
     _FAC,
     0,
-    (_EAM, _EFAM, _EAM_),
-    ((-1, {_sV: _EAM}), (-1, {_sV: _EFAM}), (-1, {_sV: _EAM_})),
+    (_EAM, _EFAM, _EAM_, _RDR),
+    ((-1, {_sV: _EAM}), (-1, {_sV: _EFAM}), (-1, {_sV: _EAM_}), (-1, {_sV: _RDR})),
 )
 
 FEATURE_STATUS: StaticSchema = (
@@ -4605,8 +4631,8 @@ DESTINATION_PROPERTIES: StaticSchema = (
     n0,
     _DP,
     0,
-    (_DA, _KKA),
-    ((STRING, {_sN: _dA}), (STRING, {_sN: _kKA})),
+    (_DA, _KKA, _EBO),
+    ((STRING, {_sN: _dA}), (STRING, {_sN: _kKA}), (ACCOUNT_ID, {_sN: _eBO})),
 )
 
 DESTINATION_TYPE: StaticSchema = (14, n0, _DT, 0, (_S_,), ((-1, {_sV: _S_}),))
@@ -5755,8 +5781,8 @@ ORG_FEATURE_ADDITIONAL_CONFIGURATION: StaticSchema = (
     n0,
     _OFAC,
     0,
-    (_EAM, _EFAM, _EAM_),
-    ((-1, {_sV: _EAM}), (-1, {_sV: _EFAM}), (-1, {_sV: _EAM_})),
+    (_EAM, _EFAM, _EAM_, _RDR),
+    ((-1, {_sV: _EAM}), (-1, {_sV: _EFAM}), (-1, {_sV: _EAM_}), (-1, {_sV: _RDR})),
 )
 
 ORGANIZATION_ADDITIONAL_CONFIGURATION_RESULT: StaticSchema = (
@@ -6584,6 +6610,8 @@ DETECTION: StaticSchema = (
     ((ANOMALY, {_sN: _an}), (SEQUENCE, {_sN: _seq})),
 )
 
+DETECTION_RULE_AGENT_VERSION: StaticSchema = (3, n0, _DRAV, 0)
+
 DETECTION_RULE_CONFIGURATION_STATUS: StaticSchema = (
     14,
     n0,
@@ -6598,11 +6626,38 @@ DETECTION_RULE_DATA_SOURCE: StaticSchema = (
     n0,
     _DRDS,
     0,
-    (_CME,),
-    ((-1, {_sV: _CTME}),),
+    (_CME, _RM),
+    ((-1, {_sV: _CTME}), (-1, {_sV: _RMu})),
 )
 
 DETECTION_RULE_DESCRIPTION: StaticSchema = (3, n0, _DRD, 0)
+
+DETECTION_RULE_EC2_REQUIREMENTS: StaticSchema = (
+    18,
+    n0,
+    _DRER,
+    0,
+    (_MAV,),
+    ((DETECTION_RULE_AGENT_VERSION, {_sN: _mAV}),),
+)
+
+DETECTION_RULE_ECS_FARGATE_REQUIREMENTS: StaticSchema = (
+    18,
+    n0,
+    _DREFR,
+    0,
+    (_MAV,),
+    ((DETECTION_RULE_AGENT_VERSION, {_sN: _mAV}),),
+)
+
+DETECTION_RULE_EKS_REQUIREMENTS: StaticSchema = (
+    18,
+    n0,
+    _DRERe,
+    0,
+    (_MAV,),
+    ((DETECTION_RULE_AGENT_VERSION, {_sN: _mAV}),),
+)
 
 DETECTION_RULE_FILTER_CONDITION: StaticSchema = (
     14,
@@ -6708,6 +6763,28 @@ DETECTION_RULE_ORG_CONFIGURATION_SUMMARY_LIST: StaticSchema = (
     0,
     (_me,),
     ((DETECTION_RULE_ORG_CONFIGURATION_SUMMARY, 0),),
+)
+
+DETECTION_RULE_RUNTIME_PLATFORMS: StaticSchema = (
+    18,
+    n0,
+    _DRRP,
+    0,
+    (_Ek, _Ec, _EF),
+    (
+        (DETECTION_RULE_EKS_REQUIREMENTS, {_sN: _ek}),
+        (DETECTION_RULE_EC2_REQUIREMENTS, {_sN: _ec}),
+        (DETECTION_RULE_ECS_FARGATE_REQUIREMENTS, {_sN: _eF}),
+    ),
+)
+
+DETECTION_RULE_RUNTIME_MONITORING_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _DRRMD,
+    0,
+    (_Pla,),
+    ((DETECTION_RULE_RUNTIME_PLATFORMS, {_sN: _pla}),),
 )
 
 DETECTION_RULE_SERVICE_NAME: StaticSchema = (3, n0, _DRSN, 0)
@@ -7829,6 +7906,7 @@ FINDING: StaticSchema = (
         _T,
         _UAp,
         _AASA,
+        _CDRN,
     ),
     (
         (STRING, {_sN: _aIc, _sm: None}),
@@ -7847,6 +7925,7 @@ FINDING: StaticSchema = (
         (FINDING_TYPE, {_sN: _t, _sm: None}),
         (STRING, {_sN: _uAp, _sm: None}),
         (STRING, {_sN: _aASA}),
+        (STRING, {_sN: _cDRN}),
     ),
 )
 
@@ -8061,7 +8140,7 @@ RULE_DETAIL: StaticSchema = (
     n0,
     _RDule,
     0,
-    (_RI, _Ar, _N, _De, _Sev, _DSa, _Tac, _Tec, _Se, _Def, _Lan, _Sch, _CA, _UAp),
+    (_RI, _Ar, _N, _De, _Sev, _DSa, _Tac, _Tec, _Se, _Def, _Lan, _Sch, _RMD, _CA, _UAp),
     (
         (RULE_ID, {_sN: _rI, _sm: None}),
         (DETECTION_RULE_ARN, {_sN: _ar, _sm: None}),
@@ -8075,6 +8154,7 @@ RULE_DETAIL: StaticSchema = (
         (RULE_DEFINITION, {_sN: _def, _sm: None}),
         (RULE_LANGUAGE, {_sN: _la}),
         (RULE_SCHEMA, {_sN: _sch}),
+        (DETECTION_RULE_RUNTIME_MONITORING_DETAILS, {_sN: _rMD}),
         (TIMESTAMP, {_sN: _cA, _sm: None}),
         (TIMESTAMP, {_sN: _uAp}),
     ),
@@ -9523,6 +9603,10 @@ USAGE_FEATURE: StaticSchema = (
         _FRM,
         _RDPP,
         _RDPS,
+        _RDPL,
+        _RDADPP,
+        _RDADPS,
+        _RDADPL,
         _AP,
     ),
     (
@@ -9539,6 +9623,10 @@ USAGE_FEATURE: StaticSchema = (
         (-1, {_sV: _FRM}),
         (-1, {_sV: _RDPP}),
         (-1, {_sV: _RDPS}),
+        (-1, {_sV: _RDPL}),
+        (-1, {_sV: _RDADPP}),
+        (-1, {_sV: _RDADPS}),
+        (-1, {_sV: _RDADPL}),
         (-1, {_sV: _AP}),
     ),
 )

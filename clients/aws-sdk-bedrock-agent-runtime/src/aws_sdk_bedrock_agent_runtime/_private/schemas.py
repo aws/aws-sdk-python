@@ -209,9 +209,13 @@ _ACMI = "AgentCoreMemoryId"
 _ACMSI = "AgentCoreMemorySessionId"
 _ARSR = "AgenticRetrieveSourceRetriever"
 _id = "identifier"
-_ARFDED = "AgenticRetrieveFullDocExpansionDetails"
+_ARCED = "AgenticRetrieveCodeExecutionDocument"
 _dI = "documentId"
 _sR = "sourceRetriever"
+_ARCEDL = "AgenticRetrieveCodeExecutionDocumentList"
+_ARCEDg = "AgenticRetrieveCodeExecutionDetails"
+_do = "documents"
+_ARFDED = "AgenticRetrieveFullDocExpansionDetails"
 _ARMC = "AgenticRetrieveMessageContent"
 _ARMRD = "AgenticRetrieveMemoryRetrieveDetails"
 _iQ = "inputQuery"
@@ -226,7 +230,13 @@ _ARA = "AgenticRetrieveAction"
 _re = "retrieve"
 _fDE = "fullDocumentExpansion"
 _mR = "memoryRetrieve"
+_cE = "codeExecution"
 _ARAg = "AgenticRetrieveActions"
+_RII = "RetrievalInstructionId"
+_RIV = "RetrievalInstructionVersion"
+_ARAI = "AgenticRetrieveAppliedInstruction"
+_id_ = "id"
+_ver = "version"
 _ARBGC = "AgenticRetrieveBedrockGuardrailConfiguration"
 _gI = "guardrailId"
 _gV = "guardrailVersion"
@@ -279,9 +289,9 @@ _ci = "citations"
 _GA = "GuardrailAction"
 _INTERVENED = "INTERVENED"
 _ARGW = "AgenticRetrieveGuardrailWarning"
-_id_ = "id"
-_ver = "version"
 _ac = "action"
+_ARIC = "AgenticRetrieveInstructionConfiguration"
+_rII = "retrievalInstructionId"
 _ARMPM = "AgenticRetrieveMemoryPersistenceMode"
 _DEFAULT = "DEFAULT"
 _ARMMK = "AgenticRetrieveMemoryMetadataKey"
@@ -375,12 +385,14 @@ _FDE = "FULL_DOCUMENT_EXPANSION"
 _FDEu = "FullDocumentExpansion"
 _SHL = "SESSION_HISTORY_LOAD"
 _SHLe = "SessionHistoryLoad"
+_CE = "CODE_EXECUTION"
+_CEo = "CodeExecution"
 _UCs = "UserContext"
 _uI = "userId"
 _BGE = "BadGatewayException"
 _se = "server"
 _rN = "resourceName"
-_CE = "ConflictException"
+_CEon = "ConflictException"
 _DFE = "DependencyFailedException"
 _ISE = "InternalServerException"
 _rea = "reason"
@@ -401,6 +413,7 @@ _wa = "warnings"
 _fa = "failures"
 _rM = "retrievalMetadata"
 _rR = "retrievalResponse"
+_aIp = "appliedInstruction"
 _ARTE = "AgenticRetrieveTraceEvent"
 _ti = "timestamp"
 _at = "attributes"
@@ -416,7 +429,7 @@ _rNFE = "resourceNotFoundException"
 _sQEE = "serviceQuotaExceededException"
 _tEh = "throttlingException"
 _aDE = "accessDeniedException"
-_cE = "conflictException"
+_cEo = "conflictException"
 _dFE = "dependencyFailedException"
 _bGE = "badGatewayException"
 _ARSO = "AgenticRetrieveStreamOutput"
@@ -782,7 +795,7 @@ _FFE = "FlowFailureEvent"
 _eC = "errorCode"
 _eM = "errorMessage"
 _FECl = "FlowExecutionContent"
-_do = "document"
+_doc = "document"
 _NIN = "NodeInputName"
 _FIF = "FlowInputField"
 _FIFl = "FlowInputFields"
@@ -991,11 +1004,13 @@ _GQO = "GenerateQueryOutput"
 _cGQRo = "com.amazonaws.bedrockagentruntime#GenerateQueryResponse"
 _qu = "queries"
 _GQen = "GenerateQuery"
+_MIe = "MediaId"
 _DOF = "DocumentOutputFormat"
 _RAW = "RAW"
 _EXTRACTED = "EXTRACTED"
 _GDCI = "GetDocumentContentInput"
 _cGDCR = "com.amazonaws.bedrockagentruntime#GetDocumentContentRequest"
+_mIe = "mediaId"
 _oF = "outputFormat"
 _PU = "PresignedUrl"
 _GDCO = "GetDocumentContentOutput"
@@ -1031,7 +1046,7 @@ _dA = "documentAcl"
 _GIDA = "GetIngestedDocumentAcl"
 _BMC = "BedrockModelConfigurations"
 _ITn = "InputText"
-_MIe = "MemoryId"
+_MIem = "MemoryId"
 _PCC = "PromptCreationConfigurations"
 _pCTTI = "previousConversationTurnsToInclude"
 _ePTS = "excludePreviousThinkingSteps"
@@ -1446,6 +1461,7 @@ _ret = "retrievers"
 _aRC = "agenticRetrieveConfiguration"
 _pCo = "policyConfiguration"
 _mCemo = "memoryConfiguration"
+_rIC = "retrievalInstructionConfiguration"
 _gRe = "generateResponse"
 _KBRCn = "KnowledgeBaseRetrievalConfiguration"
 _vSC = "vectorSearchConfiguration"
@@ -2060,6 +2076,33 @@ AGENT_CORE_MEMORY_SESSION_ID: StaticSchema = (3, n0, _ACMSI, 0)
 
 AGENTIC_RETRIEVE_SOURCE_RETRIEVER: StaticSchema = (18, n0, _ARSR, 0, (_id,), ((3, 1),))
 
+AGENTIC_RETRIEVE_CODE_EXECUTION_DOCUMENT: StaticSchema = (
+    18,
+    n0,
+    _ARCED,
+    0,
+    (_dI, _sR),
+    ((3, 0), (AGENTIC_RETRIEVE_SOURCE_RETRIEVER, 0)),
+)
+
+AGENTIC_RETRIEVE_CODE_EXECUTION_DOCUMENT_LIST: StaticSchema = (
+    16,
+    n0,
+    _ARCEDL,
+    0,
+    (_me,),
+    ((AGENTIC_RETRIEVE_CODE_EXECUTION_DOCUMENT, 0),),
+)
+
+AGENTIC_RETRIEVE_CODE_EXECUTION_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ARCEDg,
+    0,
+    (_do,),
+    ((AGENTIC_RETRIEVE_CODE_EXECUTION_DOCUMENT_LIST, 0),),
+)
+
 AGENTIC_RETRIEVE_FULL_DOC_EXPANSION_DETAILS: StaticSchema = (
     18,
     n0,
@@ -2106,11 +2149,12 @@ AGENTIC_RETRIEVE_ACTION: StaticSchema = (
     n0,
     _ARA,
     0,
-    (_re, _fDE, _mR),
+    (_re, _fDE, _mR, _cE),
     (
         (AGENTIC_RETRIEVE_ACTION_DETAILS, 0),
         (AGENTIC_RETRIEVE_FULL_DOC_EXPANSION_DETAILS, 0),
         (AGENTIC_RETRIEVE_MEMORY_RETRIEVE_DETAILS, 0),
+        (AGENTIC_RETRIEVE_CODE_EXECUTION_DETAILS, 0),
     ),
 )
 
@@ -2121,6 +2165,19 @@ AGENTIC_RETRIEVE_ACTIONS: StaticSchema = (
     0,
     (_me,),
     ((AGENTIC_RETRIEVE_ACTION, 0),),
+)
+
+RETRIEVAL_INSTRUCTION_ID: StaticSchema = (3, n0, _RII, 0)
+
+RETRIEVAL_INSTRUCTION_VERSION: StaticSchema = (3, n0, _RIV, 0)
+
+AGENTIC_RETRIEVE_APPLIED_INSTRUCTION: StaticSchema = (
+    18,
+    n0,
+    _ARAI,
+    0,
+    (_id_, _ver),
+    ((RETRIEVAL_INSTRUCTION_ID, 1), (RETRIEVAL_INSTRUCTION_VERSION, 0)),
 )
 
 AGENTIC_RETRIEVE_BEDROCK_GUARDRAIL_CONFIGURATION: StaticSchema = (
@@ -2338,6 +2395,15 @@ AGENTIC_RETRIEVE_GUARDRAIL_WARNING: StaticSchema = (
     0,
     (_id_, _ver, _ac, _m),
     ((3, 1), (3, 1), (GUARDRAIL_ACTION, 1), (3, 0)),
+)
+
+AGENTIC_RETRIEVE_INSTRUCTION_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _ARIC,
+    0,
+    (_rII, _ver),
+    ((RETRIEVAL_INSTRUCTION_ID, 1), (RETRIEVAL_INSTRUCTION_VERSION, 0)),
 )
 
 AGENTIC_RETRIEVE_MEMORY_PERSISTENCE_MODE: StaticSchema = (
@@ -2639,13 +2705,14 @@ AGENTIC_RETRIEVE_STEP: StaticSchema = (
     n0,
     _ARSg,
     0,
-    (_PLANNING, _RETRIEVAL, _SR_, _FDE, _SHL),
+    (_PLANNING, _RETRIEVAL, _SR_, _FDE, _SHL, _CE),
     (
         (-1, {_sV: _Pl}),
         (-1, {_sV: _R}),
         (-1, {_sV: _SRp}),
         (-1, {_sV: _FDEu}),
         (-1, {_sV: _SHLe}),
+        (-1, {_sV: _CEo}),
     ),
 )
 
@@ -2663,7 +2730,7 @@ BAD_GATEWAY_EXCEPTION: StaticSchema = (
 CONFLICT_EXCEPTION: StaticSchema = (
     18,
     n0,
-    _CE,
+    _CEon,
     {_s: _c, _sE: 409},
     (_m,),
     ((NON_BLANK_STRING, 0),),
@@ -2761,7 +2828,7 @@ AGENTIC_RETRIEVE_TRACE_EVENT_ATTRIBUTES: StaticSchema = (
     n0,
     _ARTEA,
     0,
-    (_ste, _sta, _m, _act, _wa, _fa, _rM, _rR),
+    (_ste, _sta, _m, _act, _wa, _fa, _rM, _rR, _aIp),
     (
         (AGENTIC_RETRIEVE_STEP, 1),
         (AGENTIC_RETRIEVE_STATUS, 1),
@@ -2771,6 +2838,7 @@ AGENTIC_RETRIEVE_TRACE_EVENT_ATTRIBUTES: StaticSchema = (
         (AGENTIC_RETRIEVE_FAILURES, 0),
         (AGENTIC_RETRIEVE_SOURCE_METADATA_LIST, 0),
         (AGENTIC_RETRIEVE_TRACE_RESULTS, 0),
+        (AGENTIC_RETRIEVE_APPLIED_INSTRUCTION, 0),
     ),
 )
 
@@ -2797,7 +2865,7 @@ AGENTIC_RETRIEVE_STREAM_RESPONSE_OUTPUT: StaticSchema = (
     n0,
     _ARSRO,
     {_smith: None},
-    (_resu, _tE, _rE, _iSE, _vE, _rNFE, _sQEE, _tEh, _aDE, _cE, _dFE, _bGE),
+    (_resu, _tE, _rE, _iSE, _vE, _rNFE, _sQEE, _tEh, _aDE, _cEo, _dFE, _bGE),
     (
         (AGENTIC_RETRIEVE_RESULT_EVENT, 0),
         (AGENTIC_RETRIEVE_TRACE_EVENT, 0),
@@ -4062,7 +4130,7 @@ FLOW_FAILURE_EVENT: StaticSchema = (
     ((DATE_TIMESTAMP, 1), (FLOW_ERROR_CODE, 1), (3, 1)),
 )
 
-FLOW_EXECUTION_CONTENT: StaticSchema = (19, n0, _FECl, 4, (_do,), ((13, 0),))
+FLOW_EXECUTION_CONTENT: StaticSchema = (19, n0, _FECl, 4, (_doc,), ((13, 0),))
 
 NODE_INPUT_NAME: StaticSchema = (3, n0, _NIN, 0)
 
@@ -4155,7 +4223,7 @@ FLOW_NODE_INPUT_CATEGORY: StaticSchema = (
     ((-1, {_sV: _LCo}), (-1, {_sV: _RVTLSe}), (-1, {_sV: _ELx})),
 )
 
-NODE_EXECUTION_CONTENT: StaticSchema = (19, n0, _NECo, 4, (_do,), ((13, 0),))
+NODE_EXECUTION_CONTENT: StaticSchema = (19, n0, _NECo, 4, (_doc,), ((13, 0),))
 
 FLOW_CONTROL_NODE_TYPE: StaticSchema = (
     14,
@@ -4416,7 +4484,7 @@ LIST_FLOW_EXECUTIONS: StaticOperationSchema = (
 
 FLOW_EXECUTION_NAME: StaticSchema = (3, n0, _FEN, 0)
 
-FLOW_INPUT_CONTENT: StaticSchema = (19, n0, _FIC, 4, (_do,), ((13, 0),))
+FLOW_INPUT_CONTENT: StaticSchema = (19, n0, _FIC, 4, (_doc,), ((13, 0),))
 
 FLOW_INPUT: StaticSchema = (
     18,
@@ -4594,7 +4662,7 @@ FLOW_COMPLETION_EVENT: StaticSchema = (
     ((FLOW_COMPLETION_REASON, 1),),
 )
 
-FLOW_MULTI_TURN_INPUT_CONTENT: StaticSchema = (19, n0, _FMTIC, 0, (_do,), ((13, 0),))
+FLOW_MULTI_TURN_INPUT_CONTENT: StaticSchema = (19, n0, _FMTIC, 0, (_doc,), ((13, 0),))
 
 NODE_TYPE: StaticSchema = (
     14,
@@ -4622,7 +4690,7 @@ FLOW_MULTI_TURN_INPUT_REQUEST_EVENT: StaticSchema = (
     ((NODE_NAME, 1), (NODE_TYPE, 1), (FLOW_MULTI_TURN_INPUT_CONTENT, 1)),
 )
 
-FLOW_OUTPUT_CONTENT: StaticSchema = (19, n0, _FOC, 0, (_do,), ((13, 0),))
+FLOW_OUTPUT_CONTENT: StaticSchema = (19, n0, _FOC, 0, (_doc,), ((13, 0),))
 
 FLOW_OUTPUT_EVENT: StaticSchema = (
     18,
@@ -4673,7 +4741,7 @@ FLOW_TRACE_DEPENDENCY_EVENT: StaticSchema = (
     ((NODE_NAME, 1), (DATE_TIMESTAMP, 1), (TRACE_ELEMENTS, 1)),
 )
 
-FLOW_TRACE_NODE_INPUT_CONTENT: StaticSchema = (19, n0, _FTNIC, 4, (_do,), ((13, 0),))
+FLOW_TRACE_NODE_INPUT_CONTENT: StaticSchema = (19, n0, _FTNIC, 4, (_doc,), ((13, 0),))
 
 FLOW_TRACE_NODE_INPUT_EXECUTION_CHAIN_ITEM: StaticSchema = (
     18,
@@ -4736,7 +4804,7 @@ FLOW_TRACE_NODE_INPUT_EVENT: StaticSchema = (
     ((NODE_NAME, 1), (DATE_TIMESTAMP, 1), (FLOW_TRACE_NODE_INPUT_FIELDS, 1)),
 )
 
-FLOW_TRACE_NODE_OUTPUT_CONTENT: StaticSchema = (19, n0, _FTNOC, 0, (_do,), ((13, 0),))
+FLOW_TRACE_NODE_OUTPUT_CONTENT: StaticSchema = (19, n0, _FTNOC, 0, (_doc,), ((13, 0),))
 
 FLOW_TRACE_NODE_OUTPUT_NEXT: StaticSchema = (
     18,
@@ -4810,7 +4878,7 @@ FLOW_RESPONSE_STREAM: StaticSchema = (
     n0,
     _FRSl,
     {_smith: None},
-    (_fOE, _fCE, _fTE, _iSE, _vE, _rNFE, _sQEE, _tEh, _aDE, _cE, _dFE, _bGE, _fMTIRE),
+    (_fOE, _fCE, _fTE, _iSE, _vE, _rNFE, _sQEE, _tEh, _aDE, _cEo, _dFE, _bGE, _fMTIRE),
     (
         (FLOW_OUTPUT_EVENT, 0),
         (FLOW_COMPLETION_EVENT, 0),
@@ -4981,6 +5049,8 @@ GENERATE_QUERY: StaticOperationSchema = (
     ),
 )
 
+MEDIA_ID: StaticSchema = (3, n0, _MIe, 0)
+
 DOCUMENT_OUTPUT_FORMAT: StaticSchema = (
     14,
     n0,
@@ -4995,11 +5065,12 @@ GET_DOCUMENT_CONTENT_INPUT: StaticSchema = (
     n0,
     _GDCI,
     {_sSI: _cGDCR, _smithya: None},
-    (_kBI, _dSI, _dI, _oF, _uC),
+    (_kBI, _dSI, _dI, _mIe, _oF, _uC),
     (
         (KNOWLEDGE_BASE_IDENTIFIER, 9),
         (DATA_SOURCE_ID, 9),
         (DOCUMENT_ID, 9),
+        (MEDIA_ID, 0),
         (DOCUMENT_OUTPUT_FORMAT, 0),
         (USER_CONTEXT, 0),
     ),
@@ -5187,7 +5258,7 @@ BEDROCK_MODEL_CONFIGURATIONS: StaticSchema = (
 
 INPUT_TEXT: StaticSchema = (3, n0, _ITn, 4)
 
-MEMORY_ID: StaticSchema = (3, n0, _MIe, 0)
+MEMORY_ID: StaticSchema = (3, n0, _MIem, 0)
 
 PROMPT_CREATION_CONFIGURATIONS: StaticSchema = (
     18,
@@ -5554,7 +5625,7 @@ RESPONSE_STREAM: StaticSchema = (
         _sQEE,
         _tEh,
         _aDE,
-        _cE,
+        _cEo,
         _dFE,
         _bGE,
         _mNRE,
@@ -5775,7 +5846,7 @@ INLINE_AGENT_RESPONSE_STREAM: StaticSchema = (
     n0,
     _IARS,
     {_smith: None},
-    (_ch, _tra, _rCetu, _iSE, _vE, _rNFE, _sQEE, _tEh, _aDE, _cE, _dFE, _bGE, _fil),
+    (_ch, _tra, _rCetu, _iSE, _vE, _rNFE, _sQEE, _tEh, _aDE, _cEo, _dFE, _bGE, _fil),
     (
         (INLINE_AGENT_PAYLOAD_PART, 0),
         (INLINE_AGENT_TRACE_PART, 0),
@@ -6120,7 +6191,7 @@ RERANK_RESULT: StaticSchema = (
     n0,
     _RRer,
     0,
-    (_ind, _rSel, _do),
+    (_ind, _rSel, _doc),
     ((7, 1), (9, 1), (RERANK_DOCUMENT, 0)),
 )
 
@@ -6364,7 +6435,7 @@ RETRIEVE_AND_GENERATE_STREAM_RESPONSE_OUTPUT: StaticSchema = (
     n0,
     _RAGSRO,
     {_smith: None},
-    (_o, _cit, _gu, _iSE, _vE, _rNFE, _sQEE, _tEh, _aDE, _cE, _dFE, _bGE),
+    (_o, _cit, _gu, _iSE, _vE, _rNFE, _sQEE, _tEh, _aDE, _cEo, _dFE, _bGE),
     (
         (RETRIEVE_AND_GENERATE_OUTPUT_EVENT, 0),
         (CITATION_EVENT, 0),
@@ -7285,7 +7356,7 @@ AGENTIC_RETRIEVE_STREAM_INPUT: StaticSchema = (
     n0,
     _ARSI,
     {_sSI: _cARSRo, _smithya: None},
-    (_mes, _ret, _aRC, _pCo, _nT, _uC, _mCemo, _gRe),
+    (_mes, _ret, _aRC, _pCo, _nT, _uC, _mCemo, _rIC, _gRe),
     (
         (AGENTIC_RETRIEVE_MESSAGES, 1),
         (AGENTIC_RETRIEVERS, 1),
@@ -7294,6 +7365,7 @@ AGENTIC_RETRIEVE_STREAM_INPUT: StaticSchema = (
         (NEXT_TOKEN, 0),
         (USER_CONTEXT, 0),
         (AGENTIC_RETRIEVE_MEMORY_CONFIGURATION, 0),
+        (AGENTIC_RETRIEVE_INSTRUCTION_CONFIGURATION, 0),
         (2, {_smit: True}),
     ),
 )

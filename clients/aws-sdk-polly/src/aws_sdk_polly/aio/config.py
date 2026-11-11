@@ -61,6 +61,8 @@ if TYPE_CHECKING:
         ListLexiconsOutput,
         ListSpeechSynthesisTasksInput,
         ListSpeechSynthesisTasksOutput,
+        ListTagsForResourceInput,
+        ListTagsForResourceOutput,
         PutLexiconInput,
         PutLexiconOutput,
         StartSpeechSynthesisStreamInput,
@@ -69,6 +71,10 @@ if TYPE_CHECKING:
         StartSpeechSynthesisTaskOutput,
         SynthesizeSpeechInput,
         SynthesizeSpeechOutput,
+        TagResourceInput,
+        TagResourceOutput,
+        UntagResourceInput,
+        UntagResourceOutput,
     )
 
     _ServiceInterceptor = Union[
@@ -82,6 +88,7 @@ if TYPE_CHECKING:
         Interceptor[
             ListSpeechSynthesisTasksInput, ListSpeechSynthesisTasksOutput, Any, Any
         ],
+        Interceptor[ListTagsForResourceInput, ListTagsForResourceOutput, Any, Any],
         Interceptor[PutLexiconInput, PutLexiconOutput, Any, Any],
         Interceptor[
             StartSpeechSynthesisStreamInput, StartSpeechSynthesisStreamOutput, Any, Any
@@ -90,6 +97,8 @@ if TYPE_CHECKING:
             StartSpeechSynthesisTaskInput, StartSpeechSynthesisTaskOutput, Any, Any
         ],
         Interceptor[SynthesizeSpeechInput, SynthesizeSpeechOutput, Any, Any],
+        Interceptor[TagResourceInput, TagResourceOutput, Any, Any],
+        Interceptor[UntagResourceInput, UntagResourceOutput, Any, Any],
     ]
 else:
     _ServiceInterceptor = Any

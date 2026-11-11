@@ -117,6 +117,7 @@ _KSRAT = "KafkaSchemaRegistryAuthType"
 _BA = "BASIC_AUTH"
 _CCTA = "CLIENT_CERTIFICATE_TLS_AUTH"
 _SRCC = "SERVER_ROOT_CA_CERTIFICATE"
+_OA = "OAUTHBEARER_AUTH"
 _KSRAC = "KafkaSchemaRegistryAccessConfig"
 _KSRACL = "KafkaSchemaRegistryAccessConfigList"
 _SRERF = "SchemaRegistryEventRecordFormat"
@@ -325,7 +326,7 @@ _DRP = "DeleteResourcePolicy"
 _CT = "CheckpointToken"
 _CTl = "ClientToken"
 _DEA = "DurableExecutionArn"
-_OA = "OperationAction"
+_OAp = "OperationAction"
 _START = "START"
 _SUCCEED = "SUCCEED"
 _FAIL = "FAIL"
@@ -336,6 +337,7 @@ _CO = "CallbackOptions"
 _TS = "TimeoutSeconds"
 _HTS = "HeartbeatTimeoutSeconds"
 _TI = "TenantId"
+_XATI = "XAmznTraceId"
 _CIO = "ChainedInvokeOptions"
 _RCe = "ReplayChildren"
 _COo = "ContextOptions"
@@ -419,7 +421,6 @@ _EDI = "ExecutionDataIncluded"
 _OPu = "OutputPayload"
 _ES = "ExecutionStatus"
 _RUNNING = "RUNNING"
-_XATI = "XAmznTraceId"
 _TH = "TraceHeader"
 _VWLP = "VersionWithLatestPublished"
 _GDEO = "GetDurableExecutionOutput"
@@ -561,13 +562,22 @@ _End = "Endpoint"
 _EL = "EndpointLists"
 _Endp = "Endpoints"
 _SMES = "SelfManagedEventSource"
+_KESMCM = "KafkaEventSourceMappingConsumptionMode"
+_Str = "Stream"
 _SMKESC = "SelfManagedKafkaEventSourceConfig"
+_CM = "ConsumptionMode"
 _SAT = "SourceAccessType"
 _VS = "VPC_SUBNET"
 _VSG = "VPC_SECURITY_GROUP"
 _SSA = "SASL_SCRAM_512_AUTH"
 _SSA_ = "SASL_SCRAM_256_AUTH"
 _VH = "VIRTUAL_HOST"
+_OS_ = "OAUTHBEARER_SCOPE"
+_OA_ = "OAUTHBEARER_AUDIENCE"
+_OLC = "OAUTHBEARER_LOGICAL_CLUSTER"
+_OIP = "OAUTHBEARER_IDENTITY_POOL"
+_IA = "IAM_AUTH"
+_IOA = "IAM_OAUTHBEARER_AUTH"
 _SAC = "SourceAccessConfiguration"
 _SACo = "SourceAccessConfigurations"
 _ESP = "EventSourcePosition"
@@ -1037,11 +1047,11 @@ _BSl = "BlobStream"
 _smithyap = "smithy.api#streaming"
 _IAI = "InvokeAsyncInput"
 _cIAR = "com.amazonaws.lambda#InvokeAsyncRequest"
-_IA = "InvokeArgs"
+_IAn = "InvokeArgs"
 _HS = "HttpStatus"
 _IAO = "InvokeAsyncOutput"
 _cIARo = "com.amazonaws.lambda#InvokeAsyncResponse"
-_IAn = "InvokeAsync"
+_IAnv = "InvokeAsync"
 _RSIT = "ResponseStreamingInvocationType"
 _IWRSI = "InvokeWithResponseStreamInput"
 _cIWRSR = "com.amazonaws.lambda#InvokeWithResponseStreamRequest"
@@ -1685,8 +1695,8 @@ KAFKA_SCHEMA_REGISTRY_AUTH_TYPE: StaticSchema = (
     n0,
     _KSRAT,
     0,
-    (_BA, _CCTA, _SRCC),
-    ((-1, {_sV: _BA}), (-1, {_sV: _CCTA}), (-1, {_sV: _SRCC})),
+    (_BA, _CCTA, _SRCC, _OA),
+    ((-1, {_sV: _BA}), (-1, {_sV: _CCTA}), (-1, {_sV: _SRCC}), (-1, {_sV: _OA})),
 )
 
 KAFKA_SCHEMA_REGISTRY_ACCESS_CONFIG: StaticSchema = (
@@ -2730,7 +2740,7 @@ DURABLE_EXECUTION_ARN: StaticSchema = (3, n0, _DEA, 0)
 OPERATION_ACTION: StaticSchema = (
     14,
     n0,
-    _OA,
+    _OAp,
     0,
     (_START, _SUCCEED, _FAIL, _RETRY, _CANCEL),
     (
@@ -2755,13 +2765,15 @@ CALLBACK_OPTIONS: StaticSchema = (
 
 TENANT_ID: StaticSchema = (3, n0, _TI, 0)
 
+X_AMZN_TRACE_ID: StaticSchema = (3, n0, _XATI, 0)
+
 CHAINED_INVOKE_OPTIONS: StaticSchema = (
     18,
     n0,
     _CIO,
     0,
-    (_FN, _TI),
-    ((NAMESPACED_FUNCTION_NAME, 1), (TENANT_ID, 0)),
+    (_FN, _TI, _XATI),
+    ((NAMESPACED_FUNCTION_NAME, 1), (TENANT_ID, 0), (X_AMZN_TRACE_ID, 0)),
 )
 
 REPLAY_CHILDREN: StaticSchema = (2, n0, _RCe, 0)
@@ -3080,8 +3092,6 @@ EXECUTION_STATUS: StaticSchema = (
         (-1, {_sV: _STOPPED}),
     ),
 )
-
-X_AMZN_TRACE_ID: StaticSchema = (3, n0, _XATI, 0)
 
 TRACE_HEADER: StaticSchema = (18, n0, _TH, 0, (_XATI,), ((X_AMZN_TRACE_ID, 0),))
 
@@ -3806,13 +3816,26 @@ SELF_MANAGED_EVENT_SOURCE: StaticSchema = (
     ((ENDPOINTS, 0),),
 )
 
+KAFKA_EVENT_SOURCE_MAPPING_CONSUMPTION_MODE: StaticSchema = (
+    14,
+    n0,
+    _KESMCM,
+    0,
+    (_Str, _Qu),
+    ((-1, {_sV: _Str}), (-1, {_sV: _Qu})),
+)
+
 SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG: StaticSchema = (
     18,
     n0,
     _SMKESC,
     0,
-    (_CGI, _SRC),
-    ((URI, 0), (KAFKA_SCHEMA_REGISTRY_CONFIG, 0)),
+    (_CGI, _SRC, _CM),
+    (
+        (URI, 0),
+        (KAFKA_SCHEMA_REGISTRY_CONFIG, 0),
+        (KAFKA_EVENT_SOURCE_MAPPING_CONSUMPTION_MODE, 0),
+    ),
 )
 
 SOURCE_ACCESS_TYPE: StaticSchema = (
@@ -3820,7 +3843,23 @@ SOURCE_ACCESS_TYPE: StaticSchema = (
     n0,
     _SAT,
     0,
-    (_BA, _VS, _VSG, _SSA, _SSA_, _VH, _CCTA, _SRCC),
+    (
+        _BA,
+        _VS,
+        _VSG,
+        _SSA,
+        _SSA_,
+        _VH,
+        _CCTA,
+        _SRCC,
+        _OA,
+        _OS_,
+        _OA_,
+        _OLC,
+        _OIP,
+        _IA,
+        _IOA,
+    ),
     (
         (-1, {_sV: _BA}),
         (-1, {_sV: _VS}),
@@ -3830,6 +3869,13 @@ SOURCE_ACCESS_TYPE: StaticSchema = (
         (-1, {_sV: _VH}),
         (-1, {_sV: _CCTA}),
         (-1, {_sV: _SRCC}),
+        (-1, {_sV: _OA}),
+        (-1, {_sV: _OS_}),
+        (-1, {_sV: _OA_}),
+        (-1, {_sV: _OLC}),
+        (-1, {_sV: _OIP}),
+        (-1, {_sV: _IA}),
+        (-1, {_sV: _IOA}),
     ),
 )
 
@@ -6732,7 +6778,7 @@ INVOKE_ASYNC_INPUT: StaticSchema = (
     n0,
     _IAI,
     {_sSI: _cIAR, _sm: None},
-    (_FN, _IA),
+    (_FN, _IAn),
     ((NAMESPACED_FUNCTION_NAME, 9), (BLOB_STREAM, 17)),
 )
 
@@ -6750,7 +6796,7 @@ INVOKE_ASYNC_OUTPUT: StaticSchema = (
 INVOKE_ASYNC: StaticOperationSchema = (
     23,
     n0,
-    _IAn,
+    _IAnv,
     {
         _smithy: MappingProxyType(
             {
@@ -6881,6 +6927,9 @@ INVOKE_WITH_RESPONSE_STREAM: StaticOperationSchema = (
     INVOKE_WITH_RESPONSE_STREAM_INPUT,
     INVOKE_WITH_RESPONSE_STREAM_OUTPUT,
     (
+        CODE_ARTIFACT_USER_DELETED_EXCEPTION,
+        CODE_ARTIFACT_USER_FAILED_EXCEPTION,
+        CODE_ARTIFACT_USER_PENDING_EXCEPTION,
         EC2_ACCESS_DENIED_EXCEPTION,
         EC2_THROTTLED_EXCEPTION,
         EC2_UNEXPECTED_EXCEPTION,

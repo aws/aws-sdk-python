@@ -294,6 +294,8 @@ if TYPE_CHECKING:
         ListWorkloadIdentitiesOutput,
         PutResourcePolicyInput,
         PutResourcePolicyOutput,
+        ResetTokenVaultKeyMaterialInput,
+        ResetTokenVaultKeyMaterialOutput,
         RotatePaymentConnectorCredentialsInput,
         RotatePaymentConnectorCredentialsOutput,
         SetTokenVaultCMKInput,
@@ -3445,6 +3447,44 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
         """
         return self._invoke(input, _models.PUT_RESOURCE_POLICY, [], plugins)
 
+    def reset_token_vault_key_material(
+        self,
+        input: ResetTokenVaultKeyMaterialInput,
+        plugins: list[Plugin] | None = None,
+    ) -> ResetTokenVaultKeyMaterialOutput:
+        """
+        Resets the key material for a token vault whose customer managed KMS key
+        has been deleted, and re-encrypts the token vault with an Amazon Web
+        Services managed key so that you can use the token vault again.
+
+        Warning:
+            This operation can't be undone. The reset permanently deletes the
+            OAuth2 access tokens and refresh tokens stored in the token vault,
+            including tokens obtained through all supported flows. After the reset,
+            your agents must complete these flows again to get new tokens, and for
+            user-delegated flows your users must authorize access again. The reset
+            doesn't delete your credential providers or their configuration.
+
+        You can reset a token vault only if its customer managed key has been
+        deleted. If the key still exists, including when it's disabled or
+        scheduled for deletion, this operation returns a `ValidationException`.
+        To use the token vault again, enable the key or cancel its scheduled
+        deletion in KMS. To switch to a different key, use `SetTokenVaultCMK`.
+
+        Args:
+            input:
+                An instance of `ResetTokenVaultKeyMaterialInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ResetTokenVaultKeyMaterialOutput`.
+        """
+        return self._invoke(input, _models.RESET_TOKEN_VAULT_KEY_MATERIAL, [], plugins)
+
     def rotate_payment_connector_credentials(
         self,
         input: RotatePaymentConnectorCredentialsInput,
@@ -3850,6 +3890,11 @@ class BedrockAgentCoreControlClient(Client[BedrockAgentCoreControlConfig]):
     ) -> UpdateGatewayOutput:
         """
         Updates an existing gateway.
+
+        Replaces the entire gateway configuration. Any optional field that you
+        omit, including fields in `protocolConfiguration`, is reset. For
+        information about retrieving the current configuration, see
+        [GetGateway](https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetGateway.html).
 
         Args:
             input:

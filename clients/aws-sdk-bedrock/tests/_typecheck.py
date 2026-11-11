@@ -267,6 +267,8 @@ from aws_sdk_bedrock.models import (
     GuardrailContextualGroundingFilterConfig,
     GuardrailContextualGroundingPolicy,
     GuardrailContextualGroundingPolicyConfig,
+    GuardrailContextualGroundingTier,
+    GuardrailContextualGroundingTierConfig,
     GuardrailCrossRegionConfig,
     GuardrailCrossRegionDetails,
     GuardrailManagedWords,
@@ -890,6 +892,8 @@ GuardrailContextualGroundingFilter(type=_, threshold=_)
 GuardrailContextualGroundingFilterConfig(type=_, threshold=_)
 GuardrailContextualGroundingPolicy(filters=_)
 GuardrailContextualGroundingPolicyConfig(filters_config=_)
+GuardrailContextualGroundingTier(tier_name=_)
+GuardrailContextualGroundingTierConfig(tier_name=_)
 GuardrailCrossRegionConfig(guardrail_profile_identifier=_)
 GuardrailCrossRegionDetails()
 GuardrailManagedWords(type=_)

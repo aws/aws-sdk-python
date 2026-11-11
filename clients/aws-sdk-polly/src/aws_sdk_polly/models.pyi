@@ -308,6 +308,24 @@ class InvalidSsmlException(ServiceError, _SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class InvalidTagParameterException(ServiceError, _SerdeShape):
+    """
+    The resource ARN or a tag in the request isn't valid. Specify the ARN
+    of a supported resource in the Amazon Web Services account and Region of
+    the request. Tag keys can have a maximum length of 128 characters, and
+    tag values can have a maximum length of 256 characters. Correct the ARN
+    or the tags, and then try again.
+    """
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class InvalidTaskIdException(ServiceError, _SerdeShape):
     """
     The provided Task ID is not valid. Please provide a valid Task ID and
@@ -407,8 +425,9 @@ class LexiconAttributes(_SerdeShape):
 
     alphabet: str | None = ...
     """
-    Phonetic alphabet used in the lexicon. Valid values are `ipa` and
-    `x-sampa`.
+    Phonetic alphabet used in the lexicon. Valid values are `ipa`,
+    `x-sampa`, `x-amazon-pinyin`, `x-amazon-jyutping`, `x-amazon-pron-kana`,
+    and `x-amazon-yomigana`.
     """
     language_code: str | None = ...
     """
@@ -535,6 +554,31 @@ class ListSpeechSynthesisTasksOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class ListTagsForResourceInput(_SerdeShape):
+    """Dataclass for ListTagsForResourceInput structure."""
+
+    resource_arn: str | None = ...
+    """
+    The Amazon Resource Name (ARN) that identifies the resource for which to
+    list the tags. Currently, the only supported resource is an Amazon Polly
+    lexicon.
+    """
+
+@dataclass(kw_only=True)
+class ListTagsForResourceOutput(_SerdeShape):
+    """Dataclass for ListTagsForResourceOutput structure."""
+
+    tags: dict[str, str] | None = ...
+    """The tags for the resource."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class MarksNotSupportedForFormatException(ServiceError, _SerdeShape):
     """
     Speech marks are not supported for the `OutputFormat` selected. Speech
@@ -588,12 +632,21 @@ class PutLexiconInput(_SerdeShape):
 
     name: str | None = ...
     """
-    Name of the lexicon. The name must follow the regular express format
+    Name of the lexicon. The name must follow the regular expression format
     [0-9A-Za-z]{1,20}. That is, the name is a case-sensitive alphanumeric
     string up to 20 characters long.
     """
     content: str | None = ...
     """Content of the PLS lexicon as string data."""
+    tags: dict[str, str] | None = ...
+    """
+    The metadata that you apply to the lexicon to help you categorize and
+    organize it. Each tag consists of a key and an optional value, both of
+    which you define. Tag keys can have a maximum character length of 128
+    characters, and tag values can have a maximum length of 256 characters.
+    You can't replace the tags of an existing lexicon by overwriting it
+    with PutLexicon.
+    """
 
 @dataclass(kw_only=True)
 class PutLexiconOutput(_SerdeShape):
@@ -610,6 +663,29 @@ class PutLexiconOutput(_SerdeShape):
 class QuotaCode(UnknownEnumMixin, StrEnum):
     INPUT_STREAM_INBOUND_EVENT_TIMEOUT = "input-stream-inbound-event-timeout"
     INPUT_STREAM_TIMEOUT = "input-stream-timeout"
+
+@dataclass(kw_only=True)
+class ResourceNotFoundException(ServiceError, _SerdeShape):
+    """
+    Amazon Polly can't find the specified resource. Verify that the
+    resource exists in the Amazon Web Services account and Region of the
+    request and that its ARN is spelled correctly, and then try again.
+    """
+
+    resource_id: str
+    """The identifier of the resource that wasn't found."""
+    resource_type: str
+    """The type of the resource that wasn't found."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+class ResourceType(UnknownEnumMixin, StrEnum):
+    LEXICON = "lexicon"
 
 class ServiceCode(UnknownEnumMixin, StrEnum):
     POLLY = "polly"
@@ -797,7 +873,7 @@ class StartSpeechSynthesisStreamInput(_SerdeShape):
     """
     The voice to use in synthesis. To get a list of available voice IDs, use
     the
-    [DescribeVoices](https://docs.aws.amazon.com/polly/latest/API/API_DescribeVoices.html)
+    [DescribeVoices](https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
     operation.
     """
 
@@ -1141,6 +1217,34 @@ class SynthesizeSpeechOutput(_SerdeShape):
     optional.
     """
 
+@dataclass(kw_only=True)
+class TagResourceInput(_SerdeShape):
+    """Dataclass for TagResourceInput structure."""
+
+    resource_arn: str | None = ...
+    """
+    The Amazon Resource Name (ARN) of the resource to which to add tags.
+    Currently, the only supported resource is an Amazon Polly lexicon.
+    """
+    tags: dict[str, str] | None = ...
+    """
+    The tags to add to the resource, as key-value pairs. Tag keys can have a
+    maximum character length of 128 characters, and tag values can have a
+    maximum length of 256 characters.
+    """
+
+@dataclass(kw_only=True)
+class TagResourceOutput(_SerdeShape):
+    """Dataclass for TagResourceOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
 class TaskStatus(UnknownEnumMixin, StrEnum):
     SCHEDULED = "scheduled"
     IN_PROGRESS = "inProgress"
@@ -1214,10 +1318,28 @@ class ThrottlingReason(_SerdeShape):
     """The resource that caused the throttling."""
 
 @dataclass(kw_only=True)
+class TooManyTagsException(ServiceError, _SerdeShape):
+    """
+    The list of tags on the resource is over the limit. The maximum number
+    of tags that can be applied to a resource is 50. Remove unused tags or
+    reduce the number of tags in the request, and then try again.
+    """
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class UnsupportedPlsAlphabetException(ServiceError, _SerdeShape):
     """
     The alphabet specified by the lexicon is not a supported alphabet. Valid
-    values are `x-sampa` and `ipa`.
+    values are `ipa`, `x-sampa`, `x-amazon-pinyin`, `x-amazon-jyutping`,
+    `x-amazon-pron-kana`, and `x-amazon-yomigana`. Replace the unsupported
+    alphabet with one of the valid values and resubmit your request.
     """
 
     response_metadata: ResponseMetadata = ...
@@ -1235,6 +1357,30 @@ class UnsupportedPlsLanguageException(ServiceError, _SerdeShape):
     supported languages, see [Lexicon
     Attributes](https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html).
     """
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UntagResourceInput(_SerdeShape):
+    """Dataclass for UntagResourceInput structure."""
+
+    resource_arn: str | None = ...
+    """
+    The Amazon Resource Name (ARN) of the resource from which to remove
+    tags. Currently, the only supported resource is an Amazon Polly lexicon.
+    """
+    tag_keys: list[str] | None = ...
+    """The keys of the tags to be removed."""
+
+@dataclass(kw_only=True)
+class UntagResourceOutput(_SerdeShape):
+    """Dataclass for UntagResourceOutput structure."""
 
     response_metadata: ResponseMetadata = ...
     """
@@ -1418,6 +1564,16 @@ class VoiceId(UnknownEnumMixin, StrEnum):
     LENNART = "Lennart"
     LORENZO = "Lorenzo"
     TIFFANY = "Tiffany"
+    ARJUN = "Arjun"
+    CARLOS = "Carlos"
+    CAROLINA = "Carolina"
+    CURTIS = "Curtis"
+    HYUNDUK = "Hyunduk"
+    KENNETH = "Kenneth"
+    KIARA = "Kiara"
+    LEO = "Leo"
+    NATE = "Nate"
+    TINA = "Tina"
 
 DELETE_LEXICON: APIOperation[DeleteLexiconInput, DeleteLexiconOutput]
 DESCRIBE_VOICES: APIOperation[DescribeVoicesInput, DescribeVoicesOutput]
@@ -1429,6 +1585,9 @@ LIST_LEXICONS: APIOperation[ListLexiconsInput, ListLexiconsOutput]
 LIST_SPEECH_SYNTHESIS_TASKS: APIOperation[
     ListSpeechSynthesisTasksInput, ListSpeechSynthesisTasksOutput
 ]
+LIST_TAGS_FOR_RESOURCE: APIOperation[
+    ListTagsForResourceInput, ListTagsForResourceOutput
+]
 PUT_LEXICON: APIOperation[PutLexiconInput, PutLexiconOutput]
 START_SPEECH_SYNTHESIS_STREAM: APIOperation[
     StartSpeechSynthesisStreamInput, StartSpeechSynthesisStreamOutput
@@ -1437,3 +1596,5 @@ START_SPEECH_SYNTHESIS_TASK: APIOperation[
     StartSpeechSynthesisTaskInput, StartSpeechSynthesisTaskOutput
 ]
 SYNTHESIZE_SPEECH: APIOperation[SynthesizeSpeechInput, SynthesizeSpeechOutput]
+TAG_RESOURCE: APIOperation[TagResourceInput, TagResourceOutput]
+UNTAG_RESOURCE: APIOperation[UntagResourceInput, UntagResourceOutput]

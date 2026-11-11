@@ -6869,6 +6869,8 @@ class GuardrailContextualGroundingPolicy(_SerdeShape):
 
     filters: list[GuardrailContextualGroundingFilter]
     """The filter details for the guardrails contextual grounding policy."""
+    tier: GuardrailContextualGroundingTier | None = ...
+    """The tier that your guardrail uses for contextual grounding."""
 
 @dataclass(kw_only=True)
 class GuardrailContextualGroundingPolicyConfig(_SerdeShape):
@@ -6882,6 +6884,56 @@ class GuardrailContextualGroundingPolicyConfig(_SerdeShape):
     The filter configuration details for the guardrails contextual grounding
     policy.
     """
+    tier_config: GuardrailContextualGroundingTierConfig | None = ...
+    """The tier that your guardrail uses for contextual grounding."""
+
+@dataclass(kw_only=True)
+class GuardrailContextualGroundingTier(_SerdeShape):
+    """
+    Specifies the tier that your guardrail uses for contextual grounding
+    checks.
+    """
+
+    tier_name: str
+    """
+    The tier that your guardrail uses for contextual grounding. Valid values
+    include:
+
+    - `CLASSIC` tier -- Provides established contextual grounding
+      functionality supporting English, French, and Spanish languages.
+
+    - `STANDARD` tier -- Provides a more robust solution than the `CLASSIC`
+      tier, with support for reasoning, conversational content and more
+      comprehensive language support. This tier requires that your guardrail
+      use [cross-Region
+      inference](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html).
+    """
+
+@dataclass(kw_only=True)
+class GuardrailContextualGroundingTierConfig(_SerdeShape):
+    """
+    Specifies the tier that your guardrail uses for contextual grounding
+    checks.
+    """
+
+    tier_name: str
+    """
+    The tier that your guardrail uses for contextual grounding. Valid values
+    include:
+
+    - `CLASSIC` tier -- Provides established contextual grounding
+      functionality supporting English, French, and Spanish languages.
+
+    - `STANDARD` tier -- Provides a more robust solution than the `CLASSIC`
+      tier, with support for reasoning, conversational content and more
+      comprehensive language support. This tier requires that your guardrail
+      use [cross-Region
+      inference](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html).
+    """
+
+class GuardrailContextualGroundingTierName(UnknownEnumMixin, StrEnum):
+    CLASSIC = "CLASSIC"
+    STANDARD = "STANDARD"
 
 @dataclass(kw_only=True)
 class GuardrailCrossRegionConfig(_SerdeShape):

@@ -4,12 +4,16 @@ from typing import Any
 
 from aws_sdk_signin.models import (
     AccessToken,
+    CreateBearerTokenInput,
+    CreateBearerTokenOutput,
     CreateOAuth2TokenInput,
     CreateOAuth2TokenOutput,
     CreateOAuth2TokenRequestBody,
     CreateOAuth2TokenResponseBody,
     CreateOAuth2TokenWithIAMInput,
     CreateOAuth2TokenWithIAMOutput,
+    CreateOAuth2TokenWithTokenExchangeInput,
+    CreateOAuth2TokenWithTokenExchangeOutput,
     DeleteConsoleAuthorizationConfigurationInput,
     DeleteConsoleAuthorizationConfigurationOutput,
     DeleteResourcePermissionStatementInput,
@@ -40,6 +44,8 @@ from aws_sdk_signin.models import (
 _: Any = ...
 
 AccessToken(access_key_id=_, secret_access_key=_, session_token=_)
+CreateBearerTokenInput()
+CreateBearerTokenOutput(access_token=_, token_type=_, expires_in=_)
 CreateOAuth2TokenInput()
 CreateOAuth2TokenOutput(token_output=_)
 CreateOAuth2TokenRequestBody(client_id=_, grant_type=_)
@@ -48,6 +54,8 @@ CreateOAuth2TokenResponseBody(
 )
 CreateOAuth2TokenWithIAMInput()
 CreateOAuth2TokenWithIAMOutput(access_token=_, token_type=_, expires_in=_)
+CreateOAuth2TokenWithTokenExchangeInput()
+CreateOAuth2TokenWithTokenExchangeOutput(access_token=_, token_type=_, expires_in=_)
 DeleteConsoleAuthorizationConfigurationInput()
 DeleteConsoleAuthorizationConfigurationOutput(
     target_id=_, scope=_, console_authorization_enabled=_

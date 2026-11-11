@@ -289,6 +289,8 @@ class AgenticRetrieveAction(_SerdeShape):
     The details of a long-term memory retrieval that the agent chose to
     perform.
     """
+    code_execution: AgenticRetrieveCodeExecutionDetails | None = ...
+    """The details of code that the agent chose to run."""
 
 @dataclass(kw_only=True)
 class AgenticRetrieveActionDetails(_SerdeShape):
@@ -298,6 +300,22 @@ class AgenticRetrieveActionDetails(_SerdeShape):
     """The input query used for retrieval."""
     source_retrievers: list[AgenticRetrieveSourceRetriever]
     """The list of source retrievers targeted by this action."""
+
+@dataclass(kw_only=True)
+class AgenticRetrieveAppliedInstruction(_SerdeShape):
+    """
+    The retrieval instruction, identified by its ID and version, that was
+    applied to the request.
+    """
+
+    id: str
+    """The identifier of the retrieval instruction applied."""
+    version: str | None = ...
+    """
+    The version that was applied: a version number, or DRAFT. The service
+    reports this version whenever it reports appliedInstruction, including
+    DRAFT when the request did not specify a version.
+    """
 
 @dataclass(kw_only=True)
 class AgenticRetrieveBedrockGuardrailConfiguration(_SerdeShape):
@@ -339,6 +357,29 @@ class AgenticRetrieveCitationReference(_SerdeShape):
 
     result_index: int
     """Index into the results array on the same event."""
+
+@dataclass(kw_only=True)
+class AgenticRetrieveCodeExecutionDetails(_SerdeShape):
+    """
+    The details of code that the agent chose to run in an isolated sandbox.
+    The record includes the documents that the code reads. The corresponding
+    CodeExecution step reports the outcome.
+    """
+
+    documents: list[AgenticRetrieveCodeExecutionDocument] | None = ...
+    """
+    The documents that the code reads. This field is present when the code
+    reads documents.
+    """
+
+@dataclass(kw_only=True)
+class AgenticRetrieveCodeExecutionDocument(_SerdeShape):
+    """A document that a code execution action reads."""
+
+    document_id: str | None = ...
+    """The identifier of the document."""
+    source_retriever: AgenticRetrieveSourceRetriever | None = ...
+    """The source retriever associated with the document."""
 
 @dataclass(kw_only=True)
 class AgenticRetrieveConfiguration(_SerdeShape):
@@ -406,6 +447,25 @@ class AgenticRetrieveGuardrailWarning(_SerdeShape):
     """The action taken by the guardrail."""
     message: str | None = ...
     """A message describing the guardrail evaluation result."""
+
+@dataclass(kw_only=True)
+class AgenticRetrieveInstructionConfiguration(_SerdeShape):
+    """
+    The retrieval instruction, identified by its ID and optional version, to
+    apply to this request.
+    """
+
+    retrieval_instruction_id: str
+    """
+    The identifier of the retrieval instruction. The instruction must exist
+    in the caller's account and its status must be ACTIVE.
+    """
+    version: str | None = ...
+    """
+    The version of the retrieval instruction to apply: a version number, or
+    DRAFT for the instruction's current reviewed content. When omitted,
+    DRAFT is used. This default is permanent.
+    """
 
 @dataclass(kw_only=True)
 class AgenticRetrieveMemoryConfiguration(_SerdeShape):
@@ -860,6 +920,11 @@ class AgenticRetrieveStep(UnknownEnumMixin, StrEnum):
     The phase that restores prior session history from AgentCore Memory
     short-term memory, before the agent begins work.
     """
+    CODE_EXECUTION = "CodeExecution"
+    """
+    The phase that runs agent-generated code in an isolated sandbox. The
+    code can read documents retrieved earlier in the same request.
+    """
 
 @dataclass(kw_only=True)
 class AgenticRetrieveStreamInput(_SerdeShape):
@@ -886,6 +951,10 @@ class AgenticRetrieveStreamInput(_SerdeShape):
     The configuration for using an Amazon Bedrock AgentCore Memory resource
     with this retrieval.
     """
+    retrieval_instruction_configuration: (
+        AgenticRetrieveInstructionConfiguration | None
+    ) = ...
+    """A retrieval instruction to apply to this request."""
     generate_response: bool = ...
     """Whether to generate a response based on the retrieved results."""
 
@@ -1042,6 +1111,11 @@ class AgenticRetrieveTraceEventAttributes(_SerdeShape):
     """Metadata about the retrieval sources used."""
     retrieval_response: list[AgenticRetrieveTraceResultItem] | None = ...
     """The retrieval results from this step."""
+    applied_instruction: AgenticRetrieveAppliedInstruction | None = ...
+    """
+    The agent reports the retrieval instruction applied to this request on
+    the first planning step.
+    """
 
 @dataclass(kw_only=True)
 class AgenticRetrieveTraceResultItem(_SerdeShape):
@@ -3422,10 +3496,30 @@ class GetDocumentContentInput(_SerdeShape):
     """The unique identifier of the data source that contains the document."""
     document_id: str | None = ...
     """The unique identifier of the document to retrieve content for."""
+    media_id: str | None = ...
+    """
+    The unique identifier (in UUID format) of an image embedded in the
+    specified document. Set this parameter to the `_media_id` value in the
+    metadata of the corresponding `Retrieve` result. If you specify this
+    parameter, the response contains a pre-signed URL for the image instead
+    of the document, and you must omit `outputFormat` or set it to `RAW`.
+    """
     output_format: str | None = ...
     """
-    The output format for the document content. `RAW` returns the original
-    file. `EXTRACTED` returns parsed text as JSON. Defaults to `RAW`.
+    The output format for the content. You can specify one of the following
+    values:
+
+    RAW
+
+    : Returns the original document, or the selected image if you specify
+      `mediaId`.
+
+    EXTRACTED
+
+    : Returns parsed document text as JSON.
+
+    If you omit this parameter, the default is `RAW`. You can't use
+    `EXTRACTED` with `mediaId`.
     """
     user_context: UserContext | None = ...
     """
@@ -3440,20 +3534,18 @@ class GetDocumentContentOutput(_SerdeShape):
 
     mime_type: str
     """
-    The MIME type of the document content. For `RAW` format, this is the
-    original file type (for example, `application/pdf`). For `EXTRACTED`
+    The MIME type of the returned content. For `RAW` format, this is the
+    original file type (for example, `application/pdf`), or the image type
+    (for example, `image/png`) if you specify `mediaId`. For `EXTRACTED`
     format, this is always `application/json`.
     """
     presigned_url: str
     """
-    A pre-signed URL for downloading the document content. The URL expires
-    after 5 minutes.
+    A pre-signed URL for downloading the document content, or the selected
+    image if you specify `mediaId`. The URL expires after 5 minutes.
     """
     document_content_length: int | None = ...
-    """
-    The size of the document content in bytes available at the pre-signed
-    URL.
-    """
+    """The size, in bytes, of the content available at the pre-signed URL."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to

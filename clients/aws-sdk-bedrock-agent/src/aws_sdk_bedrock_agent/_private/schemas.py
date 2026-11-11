@@ -1540,10 +1540,17 @@ _rAo = "roleArn"
 _kBC = "knowledgeBaseConfiguration"
 _sCto = "storageConfiguration"
 _KBA = "KnowledgeBaseArn"
+_MKN = "MetadataKeyName"
+_SSe = "SearchableStatus"
+_FT = "FieldType"
+_MCe = "MetadataConfiguration"
+_sea = "searchability"
+_MCet = "MetadataConfigurations"
 _KBSn = "KnowledgeBaseStatus"
 _ACTIVE = "ACTIVE"
 _UU = "UPDATE_UNSUCCESSFUL"
 _kBA = "knowledgeBaseArn"
+_mCet = "metadataConfigurations"
 _CKBO = "CreateKnowledgeBaseOutput"
 _cCKBRo = "com.amazonaws.bedrockagent#CreateKnowledgeBaseResponse"
 _kB = "knowledgeBase"
@@ -1660,6 +1667,83 @@ _cPRPR = "com.amazonaws.bedrockagent#PutResourcePolicyRequest"
 _PRPO = "PutResourcePolicyOutput"
 _cPRPRo = "com.amazonaws.bedrockagent#PutResourcePolicyResponse"
 _PRP = "PutResourcePolicy"
+_RID = "RetrievalInstructionDescription"
+_RIFT = "RetrievalInstructionFieldText"
+_RIC = "RetrievalInstructionContent"
+_rG = "retrievalGuidance"
+_pe = "persona"
+_aF = "answerFormat"
+_aP = "answerPolicy"
+_RIN = "RetrievalInstructionName"
+_CRII = "CreateRetrievalInstructionInput"
+_cCRIR = "com.amazonaws.bedrockagent#CreateRetrievalInstructionRequest"
+_RILTS = "RetrievalInstructionLastTransitionStatus"
+_CS_ = "CREATE_SUCCESSFUL"
+_US = "UPDATE_SUCCESSFUL"
+_UF = "UPDATE_FAILED"
+_RIA = "RetrievalInstructionArn"
+_RII = "RetrievalInstructionId"
+_RIS = "RetrievalInstructionStatus"
+_INACTIVE = "INACTIVE"
+_CRIO = "CreateRetrievalInstructionOutput"
+_cCRIRo = "com.amazonaws.bedrockagent#CreateRetrievalInstructionResponse"
+_rII = "retrievalInstructionId"
+_rIA = "retrievalInstructionArn"
+_lTS = "lastTransitionStatus"
+_CRI = "CreateRetrievalInstruction"
+_CRIVI = "CreateRetrievalInstructionVersionInput"
+_cCRIVR = "com.amazonaws.bedrockagent#CreateRetrievalInstructionVersionRequest"
+_RINV = "RetrievalInstructionNumericalVersion"
+_CRIVO = "CreateRetrievalInstructionVersionOutput"
+_cCRIVRo = "com.amazonaws.bedrockagent#CreateRetrievalInstructionVersionResponse"
+_CRIV = "CreateRetrievalInstructionVersion"
+_DRII = "DeleteRetrievalInstructionInput"
+_cDRIR = "com.amazonaws.bedrockagent#DeleteRetrievalInstructionRequest"
+_rIV = "retrievalInstructionVersion"
+_DRIO = "DeleteRetrievalInstructionOutput"
+_cDRIRo = "com.amazonaws.bedrockagent#DeleteRetrievalInstructionResponse"
+_DRI = "DeleteRetrievalInstruction"
+_RIVS = "RetrievalInstructionVersionSelector"
+_GRII = "GetRetrievalInstructionInput"
+_cGRIR = "com.amazonaws.bedrockagent#GetRetrievalInstructionRequest"
+_RIFRC = "RetrievalInstructionFailureReasonCode"
+_CR_ = "CONTENT_REJECTED"
+_CE_ = "CLIENT_ERROR"
+_IE_ = "INTERNAL_ERROR"
+_RIFN = "RetrievalInstructionFieldName"
+_RG = "RETRIEVAL_GUIDANCE"
+_PERSONA = "PERSONA"
+_AF = "ANSWER_FORMAT"
+_AP = "ANSWER_POLICY"
+_RIFR = "RetrievalInstructionFailureReason"
+_RIFRe = "RetrievalInstructionFailureReasons"
+_GRIO = "GetRetrievalInstructionOutput"
+_cGRIRo = "com.amazonaws.bedrockagent#GetRetrievalInstructionResponse"
+_lTSR = "lastTransitionStatusReasons"
+_lV = "latestVersion"
+_GRI = "GetRetrievalInstruction"
+_RIMR = "RetrievalInstructionMaxResults"
+_LRII = "ListRetrievalInstructionsInput"
+_cLRIR = "com.amazonaws.bedrockagent#ListRetrievalInstructionsRequest"
+_RISe = "RetrievalInstructionSummary"
+_RISet = "RetrievalInstructionSummaries"
+_LRIO = "ListRetrievalInstructionsOutput"
+_cLRIRo = "com.amazonaws.bedrockagent#ListRetrievalInstructionsResponse"
+_rIS = "retrievalInstructionSummaries"
+_LRI = "ListRetrievalInstructions"
+_LRIVI = "ListRetrievalInstructionVersionsInput"
+_cLRIVR = "com.amazonaws.bedrockagent#ListRetrievalInstructionVersionsRequest"
+_RIVSe = "RetrievalInstructionVersionSummary"
+_RIVSet = "RetrievalInstructionVersionSummaries"
+_LRIVO = "ListRetrievalInstructionVersionsOutput"
+_cLRIVRo = "com.amazonaws.bedrockagent#ListRetrievalInstructionVersionsResponse"
+_rIVS = "retrievalInstructionVersionSummaries"
+_LRIV = "ListRetrievalInstructionVersions"
+_URII = "UpdateRetrievalInstructionInput"
+_cURIR = "com.amazonaws.bedrockagent#UpdateRetrievalInstructionRequest"
+_URIO = "UpdateRetrievalInstructionOutput"
+_cURIRo = "com.amazonaws.bedrockagent#UpdateRetrievalInstructionResponse"
+_URI = "UpdateRetrievalInstruction"
 _TRA = "TaggableResourcesArn"
 _LTFRI = "ListTagsForResourceInput"
 _cLTFRR = "com.amazonaws.bedrockagent#ListTagsForResourceRequest"
@@ -1672,7 +1756,7 @@ _TRO = "TagResourceOutput"
 _cTRRo = "com.amazonaws.bedrockagent#TagResourceResponse"
 _TR = "TagResource"
 _TKL = "TagKeyList"
-_URI = "UntagResourceInput"
+_URIn = "UntagResourceInput"
 _cURR = "com.amazonaws.bedrockagent#UntagResourceRequest"
 _tKa = "tagKeys"
 _URO = "UntagResourceOutput"
@@ -1740,7 +1824,7 @@ _GF = "GetFlow"
 _GFV = "GetFlowVersion"
 _VFD = "ValidateFlowDefinition"
 _CFr = "CreateFlow"
-_UF = "UpdateFlow"
+_UFp = "UpdateFlow"
 _ABABTL = "AmazonBedrockAgentBuildTimeLambda"
 _aw = "aws.auth#sigv4"
 _aws = "aws.api#service"
@@ -8221,6 +8305,44 @@ CREATE_KNOWLEDGE_BASE_INPUT: StaticSchema = (
 
 KNOWLEDGE_BASE_ARN: StaticSchema = (3, n0, _KBA, 0)
 
+METADATA_KEY_NAME: StaticSchema = (3, n0, _MKN, 4)
+
+SEARCHABLE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _SSe,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sV: _ENABLED}), (-1, {_sV: _DISABLED})),
+)
+
+FIELD_TYPE: StaticSchema = (
+    14,
+    n0,
+    _FT,
+    0,
+    (_STRING, _SL__),
+    ((-1, {_sV: _STRING}), (-1, {_sV: _SL__})),
+)
+
+METADATA_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _MCe,
+    0,
+    (_na, _t, _sea),
+    ((METADATA_KEY_NAME, 1), (FIELD_TYPE, 1), (SEARCHABLE_STATUS, 1)),
+)
+
+METADATA_CONFIGURATIONS: StaticSchema = (
+    16,
+    n0,
+    _MCet,
+    0,
+    (_me,),
+    ((METADATA_CONFIGURATION, 0),),
+)
+
 KNOWLEDGE_BASE_STATUS: StaticSchema = (
     14,
     n0,
@@ -8243,7 +8365,7 @@ KNOWLEDGE_BASE: StaticSchema = (
     n0,
     _KBn,
     0,
-    (_kBI, _na, _kBA, _d, _rAo, _kBC, _sCto, _sta, _cA, _uA, _fR),
+    (_kBI, _na, _kBA, _d, _rAo, _kBC, _sCto, _sta, _cA, _uA, _fR, _mCet),
     (
         (ID, 1),
         (NAME, 1),
@@ -8256,6 +8378,7 @@ KNOWLEDGE_BASE: StaticSchema = (
         (DATE_TIMESTAMP, 1),
         (DATE_TIMESTAMP, 1),
         (FAILURE_REASONS, 0),
+        (METADATA_CONFIGURATIONS, 0),
     ),
 )
 
@@ -8604,7 +8727,7 @@ UPDATE_KNOWLEDGE_BASE_INPUT: StaticSchema = (
     n0,
     _UKBI,
     {_sSI: _cUKBR, _smit: None},
-    (_kBI, _na, _d, _rAo, _kBC, _sCto),
+    (_kBI, _na, _d, _rAo, _kBC, _sCto, _mCet),
     (
         (ID, 9),
         (NAME, 1),
@@ -8612,6 +8735,7 @@ UPDATE_KNOWLEDGE_BASE_INPUT: StaticSchema = (
         (KNOWLEDGE_BASE_ROLE_ARN, 1),
         (KNOWLEDGE_BASE_CONFIGURATION, 1),
         (STORAGE_CONFIGURATION, 0),
+        (METADATA_CONFIGURATIONS, 0),
     ),
 )
 
@@ -9149,6 +9273,505 @@ PUT_RESOURCE_POLICY: StaticOperationSchema = (
     ),
 )
 
+RETRIEVAL_INSTRUCTION_DESCRIPTION: StaticSchema = (3, n0, _RID, 4)
+
+RETRIEVAL_INSTRUCTION_FIELD_TEXT: StaticSchema = (3, n0, _RIFT, 4)
+
+RETRIEVAL_INSTRUCTION_CONTENT: StaticSchema = (
+    18,
+    n0,
+    _RIC,
+    4,
+    (_rG, _pe, _aF, _aP),
+    (
+        (RETRIEVAL_INSTRUCTION_FIELD_TEXT, 0),
+        (RETRIEVAL_INSTRUCTION_FIELD_TEXT, 0),
+        (RETRIEVAL_INSTRUCTION_FIELD_TEXT, 0),
+        (RETRIEVAL_INSTRUCTION_FIELD_TEXT, 0),
+    ),
+)
+
+RETRIEVAL_INSTRUCTION_NAME: StaticSchema = (3, n0, _RIN, 4)
+
+CREATE_RETRIEVAL_INSTRUCTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CRII,
+    {_sSI: _cCRIR, _smit: None},
+    (_cT, _na, _in, _d, _cEKA, _ta),
+    (
+        (CLIENT_TOKEN, 2),
+        (RETRIEVAL_INSTRUCTION_NAME, 1),
+        (RETRIEVAL_INSTRUCTION_CONTENT, 1),
+        (RETRIEVAL_INSTRUCTION_DESCRIPTION, 0),
+        (KMS_KEY_ARN, 0),
+        (TAGS_MAP, 0),
+    ),
+)
+
+RETRIEVAL_INSTRUCTION_LAST_TRANSITION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _RILTS,
+    0,
+    (_CREATING, _UPDATING, _CS_, _CF, _US, _UF),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _UPDATING}),
+        (-1, {_sV: _CS_}),
+        (-1, {_sV: _CF}),
+        (-1, {_sV: _US}),
+        (-1, {_sV: _UF}),
+    ),
+)
+
+RETRIEVAL_INSTRUCTION_ARN: StaticSchema = (3, n0, _RIA, 0)
+
+RETRIEVAL_INSTRUCTION_ID: StaticSchema = (3, n0, _RII, 0)
+
+RETRIEVAL_INSTRUCTION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _RIS,
+    0,
+    (_ACTIVE, _INACTIVE),
+    ((-1, {_sV: _ACTIVE}), (-1, {_sV: _INACTIVE})),
+)
+
+CREATE_RETRIEVAL_INSTRUCTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CRIO,
+    {_sSI: _cCRIRo, _smith: None},
+    (_rII, _rIA, _na, _sta, _lTS, _cA, _uA),
+    (
+        (RETRIEVAL_INSTRUCTION_ID, 1),
+        (RETRIEVAL_INSTRUCTION_ARN, 1),
+        (RETRIEVAL_INSTRUCTION_NAME, 1),
+        (RETRIEVAL_INSTRUCTION_STATUS, 1),
+        (RETRIEVAL_INSTRUCTION_LAST_TRANSITION_STATUS, 1),
+        (DATE_TIMESTAMP, 1),
+        (DATE_TIMESTAMP, 1),
+    ),
+)
+
+CREATE_RETRIEVAL_INSTRUCTION: StaticOperationSchema = (
+    23,
+    n0,
+    _CRI,
+    {
+        _smithy: MappingProxyType(
+            {"code": 202, "method": "POST", "uri": "/retrievalinstructions/"}
+        )
+    },
+    CREATE_RETRIEVAL_INSTRUCTION_INPUT,
+    CREATE_RETRIEVAL_INSTRUCTION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+CREATE_RETRIEVAL_INSTRUCTION_VERSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CRIVI,
+    {_sSI: _cCRIVR, _smit: None},
+    (_rII, _d, _cT),
+    (
+        (RETRIEVAL_INSTRUCTION_ID, 9),
+        (RETRIEVAL_INSTRUCTION_DESCRIPTION, 0),
+        (CLIENT_TOKEN, 2),
+    ),
+)
+
+RETRIEVAL_INSTRUCTION_NUMERICAL_VERSION: StaticSchema = (3, n0, _RINV, 0)
+
+CREATE_RETRIEVAL_INSTRUCTION_VERSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CRIVO,
+    {_sSI: _cCRIVRo, _smith: None},
+    (_rII, _rIA, _ve, _cA, _d),
+    (
+        (RETRIEVAL_INSTRUCTION_ID, 1),
+        (RETRIEVAL_INSTRUCTION_ARN, 1),
+        (RETRIEVAL_INSTRUCTION_NUMERICAL_VERSION, 1),
+        (DATE_TIMESTAMP, 1),
+        (RETRIEVAL_INSTRUCTION_DESCRIPTION, 0),
+    ),
+)
+
+CREATE_RETRIEVAL_INSTRUCTION_VERSION: StaticOperationSchema = (
+    23,
+    n0,
+    _CRIV,
+    {
+        _smithy: MappingProxyType(
+            {
+                "code": 201,
+                "method": "POST",
+                "uri": "/retrievalinstructions/{retrievalInstructionId}/versions",
+            }
+        )
+    },
+    CREATE_RETRIEVAL_INSTRUCTION_VERSION_INPUT,
+    CREATE_RETRIEVAL_INSTRUCTION_VERSION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_RETRIEVAL_INSTRUCTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRII,
+    {_sSI: _cDRIR, _smit: None},
+    (_rII, _rIV),
+    (
+        (RETRIEVAL_INSTRUCTION_ID, 9),
+        (RETRIEVAL_INSTRUCTION_NUMERICAL_VERSION, {_sQ: _rIV}),
+    ),
+)
+
+DELETE_RETRIEVAL_INSTRUCTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DRIO,
+    {_sSI: _cDRIRo, _smith: None},
+    (_rII, _rIA, _ve),
+    (
+        (RETRIEVAL_INSTRUCTION_ID, 1),
+        (RETRIEVAL_INSTRUCTION_ARN, 1),
+        (RETRIEVAL_INSTRUCTION_NUMERICAL_VERSION, 0),
+    ),
+)
+
+DELETE_RETRIEVAL_INSTRUCTION: StaticOperationSchema = (
+    23,
+    n0,
+    _DRI,
+    {
+        _smithy: MappingProxyType(
+            {
+                "code": 200,
+                "method": "DELETE",
+                "uri": "/retrievalinstructions/{retrievalInstructionId}",
+            }
+        )
+    },
+    DELETE_RETRIEVAL_INSTRUCTION_INPUT,
+    DELETE_RETRIEVAL_INSTRUCTION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+RETRIEVAL_INSTRUCTION_VERSION_SELECTOR: StaticSchema = (3, n0, _RIVS, 0)
+
+GET_RETRIEVAL_INSTRUCTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRII,
+    {_sSI: _cGRIR, _smit: None},
+    (_rII, _rIV),
+    (
+        (RETRIEVAL_INSTRUCTION_ID, 9),
+        (RETRIEVAL_INSTRUCTION_VERSION_SELECTOR, {_sQ: _rIV}),
+    ),
+)
+
+RETRIEVAL_INSTRUCTION_FAILURE_REASON_CODE: StaticSchema = (
+    14,
+    n0,
+    _RIFRC,
+    0,
+    (_CR_, _CE_, _IE_),
+    ((-1, {_sV: _CR_}), (-1, {_sV: _CE_}), (-1, {_sV: _IE_})),
+)
+
+RETRIEVAL_INSTRUCTION_FIELD_NAME: StaticSchema = (
+    14,
+    n0,
+    _RIFN,
+    0,
+    (_RG, _PERSONA, _AF, _AP),
+    ((-1, {_sV: _RG}), (-1, {_sV: _PERSONA}), (-1, {_sV: _AF}), (-1, {_sV: _AP})),
+)
+
+RETRIEVAL_INSTRUCTION_FAILURE_REASON: StaticSchema = (
+    18,
+    n0,
+    _RIFR,
+    0,
+    (_fN, _cod, _m),
+    (
+        (RETRIEVAL_INSTRUCTION_FIELD_NAME, 0),
+        (RETRIEVAL_INSTRUCTION_FAILURE_REASON_CODE, 1),
+        (3, 1),
+    ),
+)
+
+RETRIEVAL_INSTRUCTION_FAILURE_REASONS: StaticSchema = (
+    16,
+    n0,
+    _RIFRe,
+    0,
+    (_me,),
+    ((RETRIEVAL_INSTRUCTION_FAILURE_REASON, 0),),
+)
+
+GET_RETRIEVAL_INSTRUCTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRIO,
+    {_sSI: _cGRIRo, _smith: None},
+    (_rII, _rIA, _na, _sta, _lTS, _in, _cA, _uA, _d, _cEKA, _lTSR, _ve, _lV),
+    (
+        (RETRIEVAL_INSTRUCTION_ID, 1),
+        (RETRIEVAL_INSTRUCTION_ARN, 1),
+        (RETRIEVAL_INSTRUCTION_NAME, 1),
+        (RETRIEVAL_INSTRUCTION_STATUS, 1),
+        (RETRIEVAL_INSTRUCTION_LAST_TRANSITION_STATUS, 1),
+        (RETRIEVAL_INSTRUCTION_CONTENT, 0),
+        (DATE_TIMESTAMP, 1),
+        (DATE_TIMESTAMP, 1),
+        (RETRIEVAL_INSTRUCTION_DESCRIPTION, 0),
+        (KMS_KEY_ARN, 0),
+        (RETRIEVAL_INSTRUCTION_FAILURE_REASONS, 0),
+        (RETRIEVAL_INSTRUCTION_VERSION_SELECTOR, 0),
+        (RETRIEVAL_INSTRUCTION_NUMERICAL_VERSION, 0),
+    ),
+)
+
+GET_RETRIEVAL_INSTRUCTION: StaticOperationSchema = (
+    23,
+    n0,
+    _GRI,
+    {
+        _smithy: MappingProxyType(
+            {
+                "code": 200,
+                "method": "GET",
+                "uri": "/retrievalinstructions/{retrievalInstructionId}",
+            }
+        )
+    },
+    GET_RETRIEVAL_INSTRUCTION_INPUT,
+    GET_RETRIEVAL_INSTRUCTION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+RETRIEVAL_INSTRUCTION_MAX_RESULTS: StaticSchema = (7, n0, _RIMR, 0)
+
+LIST_RETRIEVAL_INSTRUCTIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LRII,
+    {_sSI: _cLRIR, _smit: None},
+    (_sta, _mR, _nT),
+    (
+        (RETRIEVAL_INSTRUCTION_STATUS, {_sQ: _sta}),
+        (RETRIEVAL_INSTRUCTION_MAX_RESULTS, {_sQ: _mR}),
+        (NEXT_TOKEN, {_sQ: _nT}),
+    ),
+)
+
+RETRIEVAL_INSTRUCTION_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _RISe,
+    0,
+    (_rII, _rIA, _na, _sta, _lTS, _cA, _uA, _d),
+    (
+        (RETRIEVAL_INSTRUCTION_ID, 1),
+        (RETRIEVAL_INSTRUCTION_ARN, 1),
+        (RETRIEVAL_INSTRUCTION_NAME, 1),
+        (RETRIEVAL_INSTRUCTION_STATUS, 1),
+        (RETRIEVAL_INSTRUCTION_LAST_TRANSITION_STATUS, 1),
+        (DATE_TIMESTAMP, 1),
+        (DATE_TIMESTAMP, 1),
+        (RETRIEVAL_INSTRUCTION_DESCRIPTION, 0),
+    ),
+)
+
+RETRIEVAL_INSTRUCTION_SUMMARIES: StaticSchema = (
+    16,
+    n0,
+    _RISet,
+    0,
+    (_me,),
+    ((RETRIEVAL_INSTRUCTION_SUMMARY, 0),),
+)
+
+LIST_RETRIEVAL_INSTRUCTIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LRIO,
+    {_sSI: _cLRIRo, _smith: None},
+    (_rIS, _nT),
+    ((RETRIEVAL_INSTRUCTION_SUMMARIES, 1), (NEXT_TOKEN, 0)),
+)
+
+LIST_RETRIEVAL_INSTRUCTIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LRI,
+    {
+        _smithy: MappingProxyType(
+            {"code": 200, "method": "GET", "uri": "/retrievalinstructions/"}
+        )
+    },
+    LIST_RETRIEVAL_INSTRUCTIONS_INPUT,
+    LIST_RETRIEVAL_INSTRUCTIONS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+LIST_RETRIEVAL_INSTRUCTION_VERSIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LRIVI,
+    {_sSI: _cLRIVR, _smit: None},
+    (_rII, _mR, _nT),
+    (
+        (RETRIEVAL_INSTRUCTION_ID, 9),
+        (RETRIEVAL_INSTRUCTION_MAX_RESULTS, {_sQ: _mR}),
+        (NEXT_TOKEN, {_sQ: _nT}),
+    ),
+)
+
+RETRIEVAL_INSTRUCTION_VERSION_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _RIVSe,
+    0,
+    (_ve, _cA),
+    ((RETRIEVAL_INSTRUCTION_NUMERICAL_VERSION, 1), (DATE_TIMESTAMP, 1)),
+)
+
+RETRIEVAL_INSTRUCTION_VERSION_SUMMARIES: StaticSchema = (
+    16,
+    n0,
+    _RIVSet,
+    0,
+    (_me,),
+    ((RETRIEVAL_INSTRUCTION_VERSION_SUMMARY, 0),),
+)
+
+LIST_RETRIEVAL_INSTRUCTION_VERSIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LRIVO,
+    {_sSI: _cLRIVRo, _smith: None},
+    (_rIVS, _nT),
+    ((RETRIEVAL_INSTRUCTION_VERSION_SUMMARIES, 1), (NEXT_TOKEN, 0)),
+)
+
+LIST_RETRIEVAL_INSTRUCTION_VERSIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LRIV,
+    {
+        _smithy: MappingProxyType(
+            {
+                "code": 200,
+                "method": "GET",
+                "uri": "/retrievalinstructions/{retrievalInstructionId}/versions",
+            }
+        )
+    },
+    LIST_RETRIEVAL_INSTRUCTION_VERSIONS_INPUT,
+    LIST_RETRIEVAL_INSTRUCTION_VERSIONS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_RETRIEVAL_INSTRUCTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _URII,
+    {_sSI: _cURIR, _smit: None},
+    (_rII, _in, _d),
+    (
+        (RETRIEVAL_INSTRUCTION_ID, 9),
+        (RETRIEVAL_INSTRUCTION_CONTENT, 1),
+        (RETRIEVAL_INSTRUCTION_DESCRIPTION, 0),
+    ),
+)
+
+UPDATE_RETRIEVAL_INSTRUCTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _URIO,
+    {_sSI: _cURIRo, _smith: None},
+    (_rII, _rIA, _na, _sta, _lTS, _cA, _uA),
+    (
+        (RETRIEVAL_INSTRUCTION_ID, 1),
+        (RETRIEVAL_INSTRUCTION_ARN, 1),
+        (RETRIEVAL_INSTRUCTION_NAME, 1),
+        (RETRIEVAL_INSTRUCTION_STATUS, 1),
+        (RETRIEVAL_INSTRUCTION_LAST_TRANSITION_STATUS, 1),
+        (DATE_TIMESTAMP, 1),
+        (DATE_TIMESTAMP, 1),
+    ),
+)
+
+UPDATE_RETRIEVAL_INSTRUCTION: StaticOperationSchema = (
+    23,
+    n0,
+    _URI,
+    {
+        _smithy: MappingProxyType(
+            {
+                "code": 202,
+                "method": "PUT",
+                "uri": "/retrievalinstructions/{retrievalInstructionId}",
+            }
+        )
+    },
+    UPDATE_RETRIEVAL_INSTRUCTION_INPUT,
+    UPDATE_RETRIEVAL_INSTRUCTION_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
 TAGGABLE_RESOURCES_ARN: StaticSchema = (3, n0, _TRA, 0)
 
 LIST_TAGS_FOR_RESOURCE_INPUT: StaticSchema = (
@@ -9226,7 +9849,7 @@ TAG_KEY_LIST: StaticSchema = (16, n0, _TKL, 0, (_me,), ((TAG_KEY, 0),))
 UNTAG_RESOURCE_INPUT: StaticSchema = (
     18,
     n0,
-    _URI,
+    _URIn,
     {_sSI: _cURR, _smit: None},
     (_rAe, _tKa),
     ((TAGGABLE_RESOURCES_ARN, 9), (TAG_KEY_LIST, {_sQ: _tKa, _smi: None})),
@@ -9715,7 +10338,7 @@ CREATE_FLOW: StaticOperationSchema = (
 UPDATE_FLOW: StaticOperationSchema = (
     23,
     n0,
-    _UF,
+    _UFp,
     {
         _smithy: MappingProxyType(
             {"code": 200, "method": "PUT", "uri": "/flows/{flowIdentifier}/"}

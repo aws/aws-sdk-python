@@ -20,10 +20,14 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
+        CreateBearerTokenInput,
+        CreateBearerTokenOutput,
         CreateOAuth2TokenInput,
         CreateOAuth2TokenOutput,
         CreateOAuth2TokenWithIAMInput,
         CreateOAuth2TokenWithIAMOutput,
+        CreateOAuth2TokenWithTokenExchangeInput,
+        CreateOAuth2TokenWithTokenExchangeOutput,
         DeleteConsoleAuthorizationConfigurationInput,
         DeleteConsoleAuthorizationConfigurationOutput,
         DeleteResourcePermissionStatementInput,
@@ -50,39 +54,40 @@ logger = logging.getLogger(__name__)
 
 class SigninClient(Client[SigninConfig]):
     """
-    AWS Sign-In manages authentication for AWS services. This service
-    provides secure authentication flows for accessing AWS resources from
-    the console and developer tools.
+    AWS Sign-In manages authentication for AWS services. It implements OAuth
+    2.0, providing secure token exchange and refresh capabilities.
     """
 
     _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+
+    def create_bearer_token(
+        self, input: CreateBearerTokenInput, plugins: list[Plugin] | None = None
+    ) -> CreateBearerTokenOutput:
+        """
+        Creates a bearer token that represents your IAM credentials and can be
+        used to access a supported AWS service. By default, the token is valid
+        for 12 hours.
+
+        Args:
+            input:
+                An instance of `CreateBearerTokenInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `CreateBearerTokenOutput`.
+        """
+        return self._invoke(input, _models.CREATE_BEARER_TOKEN, [], plugins)
 
     def create_o_auth2_token(
         self, input: CreateOAuth2TokenInput, plugins: list[Plugin] | None = None
     ) -> CreateOAuth2TokenOutput:
         """
-        CreateOAuth2Token API Path: /v1/token Request Method: POST Content-Type:
-        application/json or application/x-www-form-urlencoded This API
-        implements OAuth 2.0 flows for AWS Sign-In CLI clients, supporting
-        both: 1. Authorization code redemption (grant_type=authorization_code) -
-        NOT idempotent 2. Token refresh (grant_type=refresh_token) - Idempotent
-        within token validity window The operation behavior is determined by the
-        grant_type parameter in the request body: **Authorization Code Flow
-        (NOT Idempotent):** - JSON or form-encoded body with client_id,
-        grant_type=authorization_code, code, redirect_uri, code_verifier -
-        Returns access_token, token_type, expires_in, refresh_token, and
-        id_token - Each authorization code can only be used ONCE for security
-        (prevents replay attacks) **Token Refresh Flow (Idempotent):** -
-        JSON or form-encoded body with client_id, grant_type=refresh_token,
-        refresh_token - Returns access_token, token_type, expires_in, and
-        refresh_token (no id_token) - Multiple calls with same refresh_token
-        return consistent results within validity window Authentication and
-        authorization: - Confidential clients: sigv4 signing required with
-        signin:ExchangeToken permissions - CLI clients (public): authn/authz
-        skipped based on client_id & grant_type Note: This operation cannot be
-        marked as @idempotent because it handles both idempotent (token
-        refresh) and non-idempotent (auth code redemption) flows in a single
-        endpoint.
+        Exchanges an authorization code or refresh token for an OAuth 2.0 access
+        token and refresh token.
 
         Args:
             input:
@@ -102,9 +107,8 @@ class SigninClient(Client[SigninConfig]):
         self, input: CreateOAuth2TokenWithIAMInput, plugins: list[Plugin] | None = None
     ) -> CreateOAuth2TokenWithIAMOutput:
         """
-        Grants permission to exchange client credentials for an OAuth 2.0 access
-        token scoped to a resource that can be used to access AWS services from
-        applications
+        Exchanges client credentials for an OAuth 2.0 access token scoped to a
+        resource, which you can use to access AWS services from applications.
 
         Args:
             input:
@@ -119,6 +123,31 @@ class SigninClient(Client[SigninConfig]):
             An instance of `CreateOAuth2TokenWithIAMOutput`.
         """
         return self._invoke(input, _models.CREATE_O_AUTH2_TOKEN_WITH_IAM, [], plugins)
+
+    def create_o_auth2_token_with_token_exchange(
+        self,
+        input: CreateOAuth2TokenWithTokenExchangeInput,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateOAuth2TokenWithTokenExchangeOutput:
+        """
+        Exchanges a supported token for an OAuth 2.0 access token scoped to a
+        resource, which you can use to access AWS services from applications.
+
+        Args:
+            input:
+                An instance of `CreateOAuth2TokenWithTokenExchangeInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `CreateOAuth2TokenWithTokenExchangeOutput`.
+        """
+        return self._invoke(
+            input, _models.CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE, [], plugins
+        )
 
     def delete_console_authorization_configuration(
         self,
@@ -222,14 +251,10 @@ class SigninClient(Client[SigninConfig]):
         plugins: list[Plugin] | None = None,
     ) -> IntrospectOAuth2TokenWithIAMOutput:
         """
-        Grants permission to inspect the metadata and state of an OAuth 2.0
-        access token or refresh token Implements RFC 7662 OAuth 2.0 Token
-        Introspection over a SigV4-authenticated endpoint. Inspects the metadata
-        of an access_token or refresh_token issued by AWS Sign-In and returns
-        the claims associated with it. Inactive token semantics (RFC 7662 §2.2):
-        when the supplied token is unknown, expired, revoked, malformed, or
-        owned by a different account, the response body is exactly { \"active\":
-        false } with all other claims omitted.
+        Inspects the metadata and active state of an OAuth 2.0 access token or
+        refresh token. Implements RFC 7662 OAuth 2.0 Token Introspection over a
+        SigV4-authenticated endpoint. Returns the claims associated with a token
+        issued by AWS Sign-In.
 
         Args:
             input:
@@ -326,12 +351,7 @@ class SigninClient(Client[SigninConfig]):
         self, input: RevokeOAuth2TokenWithIAMInput, plugins: list[Plugin] | None = None
     ) -> RevokeOAuth2TokenWithIAMOutput:
         """
-        Grants permission to revoke an OAuth 2.0 refresh token and its
-        associated refresh tokens Revokes a refresh_token issued by AWS Sign-In,
-        invalidating the entire token chain so that the refresh_token can no
-        longer be used to mint new access_tokens. Idempotency: revoking an
-        already-revoked, expired, or otherwise invalid token still returns 200
-        OK with an empty body. Only the refresh_token type is accepted.
+        Revokes an OAuth 2.0 refresh token and its associated token chain.
 
         Args:
             input:

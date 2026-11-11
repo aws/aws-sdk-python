@@ -12,16 +12,20 @@ from aws_sdk_bedrock_agent_runtime.models import (
     AgentCollaboratorOutputPayload,
     AgenticRetrieveAction,
     AgenticRetrieveActionDetails,
+    AgenticRetrieveAppliedInstruction,
     AgenticRetrieveBedrockGuardrailConfiguration,
     AgenticRetrieveBedrockRerankingConfiguration,
     AgenticRetrieveBedrockRerankingModelConfiguration,
     AgenticRetrieveCitation,
     AgenticRetrieveCitationReference,
+    AgenticRetrieveCodeExecutionDetails,
+    AgenticRetrieveCodeExecutionDocument,
     AgenticRetrieveConfiguration,
     AgenticRetrieveFailure,
     AgenticRetrieveFullDocExpansionDetails,
     AgenticRetrieveGeneratedResponse,
     AgenticRetrieveGuardrailWarning,
+    AgenticRetrieveInstructionConfiguration,
     AgenticRetrieveMemoryConfiguration,
     AgenticRetrieveMemoryMetadataFilter,
     AgenticRetrieveMemoryRetrievalConfig,
@@ -341,16 +345,20 @@ AgentCollaboratorInvocationOutput()
 AgentCollaboratorOutputPayload()
 AgenticRetrieveAction()
 AgenticRetrieveActionDetails(input_query=_, source_retrievers=_)
+AgenticRetrieveAppliedInstruction(id=_)
 AgenticRetrieveBedrockGuardrailConfiguration(guardrail_id=_, guardrail_version=_)
 AgenticRetrieveBedrockRerankingConfiguration(model_configuration=_)
 AgenticRetrieveBedrockRerankingModelConfiguration(model_arn=_)
 AgenticRetrieveCitation(start_index=_, end_index=_, references=_)
 AgenticRetrieveCitationReference(result_index=_)
+AgenticRetrieveCodeExecutionDetails()
+AgenticRetrieveCodeExecutionDocument()
 AgenticRetrieveConfiguration()
 AgenticRetrieveFailure(message=_)
 AgenticRetrieveFullDocExpansionDetails()
 AgenticRetrieveGeneratedResponse(answer=_)
 AgenticRetrieveGuardrailWarning(id=_, version=_, action=_)
+AgenticRetrieveInstructionConfiguration(retrieval_instruction_id=_)
 AgenticRetrieveMemoryConfiguration(memory_id=_)
 AgenticRetrieveMemoryMetadataFilter(left=_, operator=_)
 AgenticRetrieveMemoryRetrievalConfig()

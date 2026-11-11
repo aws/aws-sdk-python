@@ -1312,6 +1312,8 @@ _th = "threshold"
 _ac = "action"
 _ena = "enabled"
 _GCGFCu = "GuardrailContextualGroundingFiltersConfig"
+_GCGTN = "GuardrailContextualGroundingTierName"
+_GCGTC = "GuardrailContextualGroundingTierConfig"
 _GCGPC = "GuardrailContextualGroundingPolicyConfig"
 _GCRGPI = "GuardrailCrossRegionGuardrailProfileIdentifier"
 _GCRC = "GuardrailCrossRegionConfig"
@@ -1421,6 +1423,7 @@ _fi = "filters"
 _ti = "tier"
 _GCGF = "GuardrailContextualGroundingFilter"
 _GCGFu = "GuardrailContextualGroundingFilters"
+_GCGT = "GuardrailContextualGroundingTier"
 _GCGP = "GuardrailContextualGroundingPolicy"
 _GCRGPA = "GuardrailCrossRegionGuardrailProfileArn"
 _GCRGPIu = "GuardrailCrossRegionGuardrailProfileId"
@@ -8177,13 +8180,34 @@ GUARDRAIL_CONTEXTUAL_GROUNDING_FILTERS_CONFIG: StaticSchema = (
     ((GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER_CONFIG, 0),),
 )
 
+GUARDRAIL_CONTEXTUAL_GROUNDING_TIER_NAME: StaticSchema = (
+    14,
+    n0,
+    _GCGTN,
+    4,
+    (_CLASSIC, _STANDARD),
+    ((-1, {_sV: _CLASSIC}), (-1, {_sV: _STANDARD})),
+)
+
+GUARDRAIL_CONTEXTUAL_GROUNDING_TIER_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _GCGTC,
+    0,
+    (_tNi,),
+    ((GUARDRAIL_CONTEXTUAL_GROUNDING_TIER_NAME, 1),),
+)
+
 GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY_CONFIG: StaticSchema = (
     18,
     n0,
     _GCGPC,
     0,
-    (_fC,),
-    ((GUARDRAIL_CONTEXTUAL_GROUNDING_FILTERS_CONFIG, 1),),
+    (_fC, _tCi),
+    (
+        (GUARDRAIL_CONTEXTUAL_GROUNDING_FILTERS_CONFIG, 1),
+        (GUARDRAIL_CONTEXTUAL_GROUNDING_TIER_CONFIG, 0),
+    ),
 )
 
 GUARDRAIL_CROSS_REGION_GUARDRAIL_PROFILE_IDENTIFIER: StaticSchema = (3, n0, _GCRGPI, 0)
@@ -8721,13 +8745,25 @@ GUARDRAIL_CONTEXTUAL_GROUNDING_FILTERS: StaticSchema = (
     ((GUARDRAIL_CONTEXTUAL_GROUNDING_FILTER, 0),),
 )
 
+GUARDRAIL_CONTEXTUAL_GROUNDING_TIER: StaticSchema = (
+    18,
+    n0,
+    _GCGT,
+    0,
+    (_tNi,),
+    ((GUARDRAIL_CONTEXTUAL_GROUNDING_TIER_NAME, 1),),
+)
+
 GUARDRAIL_CONTEXTUAL_GROUNDING_POLICY: StaticSchema = (
     18,
     n0,
     _GCGP,
     0,
-    (_fi,),
-    ((GUARDRAIL_CONTEXTUAL_GROUNDING_FILTERS, 1),),
+    (_fi, _ti),
+    (
+        (GUARDRAIL_CONTEXTUAL_GROUNDING_FILTERS, 1),
+        (GUARDRAIL_CONTEXTUAL_GROUNDING_TIER, 0),
+    ),
 )
 
 GUARDRAIL_CROSS_REGION_GUARDRAIL_PROFILE_ARN: StaticSchema = (3, n0, _GCRGPA, 0)

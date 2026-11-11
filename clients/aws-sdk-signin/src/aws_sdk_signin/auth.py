@@ -15,6 +15,12 @@ class HTTPAuthSchemeResolver:
     ) -> list[_smithy_core_interfaces_auth_AuthOption]:
         auth_options: list[_smithy_core_interfaces_auth_AuthOption] = []
 
+        if auth_parameters.operation == "CreateBearerToken":
+            if (option := _generate_sigv4_option(auth_parameters)) is not None:
+                auth_options.append(option)
+
+            return auth_options
+
         if auth_parameters.operation == "CreateOAuth2Token":
             return auth_options
 
@@ -22,6 +28,9 @@ class HTTPAuthSchemeResolver:
             if (option := _generate_sigv4_option(auth_parameters)) is not None:
                 auth_options.append(option)
 
+            return auth_options
+
+        if auth_parameters.operation == "CreateOAuth2TokenWithTokenExchange":
             return auth_options
 
         if auth_parameters.operation == "IntrospectOAuth2TokenWithIAM":

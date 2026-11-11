@@ -44,10 +44,14 @@ from .auth import HTTPAuthSchemeResolver
 if TYPE_CHECKING:
     from smithy_core.interceptors import Interceptor
     from .models import (
+        CreateBearerTokenInput,
+        CreateBearerTokenOutput,
         CreateOAuth2TokenInput,
         CreateOAuth2TokenOutput,
         CreateOAuth2TokenWithIAMInput,
         CreateOAuth2TokenWithIAMOutput,
+        CreateOAuth2TokenWithTokenExchangeInput,
+        CreateOAuth2TokenWithTokenExchangeOutput,
         DeleteConsoleAuthorizationConfigurationInput,
         DeleteConsoleAuthorizationConfigurationOutput,
         DeleteResourcePermissionStatementInput,
@@ -69,9 +73,16 @@ if TYPE_CHECKING:
     )
 
     _ServiceInterceptor = Union[
+        Interceptor[CreateBearerTokenInput, CreateBearerTokenOutput, Any, Any],
         Interceptor[CreateOAuth2TokenInput, CreateOAuth2TokenOutput, Any, Any],
         Interceptor[
             CreateOAuth2TokenWithIAMInput, CreateOAuth2TokenWithIAMOutput, Any, Any
+        ],
+        Interceptor[
+            CreateOAuth2TokenWithTokenExchangeInput,
+            CreateOAuth2TokenWithTokenExchangeOutput,
+            Any,
+            Any,
         ],
         Interceptor[
             DeleteConsoleAuthorizationConfigurationInput,

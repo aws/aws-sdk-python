@@ -32,12 +32,18 @@ if TYPE_CHECKING:
         ListLexiconsOutput,
         ListSpeechSynthesisTasksInput,
         ListSpeechSynthesisTasksOutput,
+        ListTagsForResourceInput,
+        ListTagsForResourceOutput,
         PutLexiconInput,
         PutLexiconOutput,
         StartSpeechSynthesisTaskInput,
         StartSpeechSynthesisTaskOutput,
         SynthesizeSpeechInput,
         SynthesizeSpeechOutput,
+        TagResourceInput,
+        TagResourceOutput,
+        UntagResourceInput,
+        UntagResourceOutput,
     )
 
 
@@ -53,6 +59,12 @@ class PollyClient(Client[PollyConfig]):
     high-quality speech from plain text and Speech Synthesis Markup Language
     (SSML), along with managing pronunciations lexicons that enable you to
     get the best results for your application domain.
+
+    Authenticated API calls must be signed using the Signature Version 4
+    Signing Process. For more information, see [Signing Amazon Web Services
+    API
+    Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html)
+    in the *IAM User Guide*.
     """
 
     _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
@@ -217,6 +229,26 @@ class PollyClient(Client[PollyConfig]):
         """
         return self._invoke(input, _models.LIST_SPEECH_SYNTHESIS_TASKS, [], plugins)
 
+    def list_tags_for_resource(
+        self, input: ListTagsForResourceInput, plugins: list[Plugin] | None = None
+    ) -> ListTagsForResourceOutput:
+        """
+        Lists the tags for an Amazon Polly resource.
+
+        Args:
+            input:
+                An instance of `ListTagsForResourceInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListTagsForResourceOutput`.
+        """
+        return self._invoke(input, _models.LIST_TAGS_FOR_RESOURCE, [], plugins)
+
     def put_lexicon(
         self, input: PutLexiconInput, plugins: list[Plugin] | None = None
     ) -> PutLexiconOutput:
@@ -226,6 +258,12 @@ class PollyClient(Client[PollyConfig]):
         overwritten by the new lexicon. Lexicon operations have eventual
         consistency, therefore, it might take some time before the lexicon is
         available to the SynthesizeSpeech operation.
+
+        Overwriting a lexicon keeps its existing tags. You can specify tags only
+        when you create a lexicon. If you specify tags for a lexicon that
+        already exists, the request fails with a `ValidationException`. To
+        change the tags of an existing lexicon, use `TagResource` and
+        `UntagResource`.
 
         For more information, see [Managing
         Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
@@ -296,6 +334,49 @@ class PollyClient(Client[PollyConfig]):
             An instance of `SynthesizeSpeechOutput`.
         """
         return self._invoke(input, _models.SYNTHESIZE_SPEECH, [], plugins)
+
+    def tag_resource(
+        self, input: TagResourceInput, plugins: list[Plugin] | None = None
+    ) -> TagResourceOutput:
+        """
+        Adds specified tags to a resource with the specified ARN. Existing tags
+        on a resource are not changed if they are not specified in the request
+        parameters. If you specify a tag key that already exists on the
+        resource, the value in the request replaces the existing value.
+
+        Args:
+            input:
+                An instance of `TagResourceInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `TagResourceOutput`.
+        """
+        return self._invoke(input, _models.TAG_RESOURCE, [], plugins)
+
+    def untag_resource(
+        self, input: UntagResourceInput, plugins: list[Plugin] | None = None
+    ) -> UntagResourceOutput:
+        """
+        Deletes specified tags from a resource.
+
+        Args:
+            input:
+                An instance of `UntagResourceInput`.
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `UntagResourceOutput`.
+        """
+        return self._invoke(input, _models.UNTAG_RESOURCE, [], plugins)
 
     def _new_config(self) -> PollyConfig:
         return PollyConfig.resolve()

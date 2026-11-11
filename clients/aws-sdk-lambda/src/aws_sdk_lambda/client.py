@@ -215,9 +215,15 @@ class LambdaClient(Client[LambdaConfig]):
     Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) in
     the **Lambda Developer Guide**.
 
+    Lambda Event Functions, previously known as Lambda functions, run your
+    code in response to events and API calls. In the Lambda API, the Amazon
+    Web Services SDKs, and the CLI, Event Functions are still called
+    *functions*, for example in `CreateFunction` and `Invoke`. You don't
+    need to change any existing code.
+
     The *Lambda API Reference* provides information about each of the API
-    methods, including details about the parameters in each API request and
-    response.
+    methods for Lambda Event Functions, including details about the
+    parameters in each API request and response.
 
     You can use Software Development Kits (SDKs), Integrated Development
     Environment (IDE) Toolkits, and command line tools to access the API.
@@ -389,8 +395,8 @@ class LambdaClient(Client[LambdaConfig]):
         """
         Creates an
         [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html)
-        for a Lambda function version. Use aliases to provide clients with a
-        function identifier that you can update to invoke a different version.
+        for a Lambda Event Function version. Use aliases to provide clients with
+        a function identifier that you can update to invoke a different version.
 
         You can also map an alias to split invocation requests between two
         versions. Use the `RoutingConfig` parameter to specify a second version
@@ -415,7 +421,7 @@ class LambdaClient(Client[LambdaConfig]):
     ) -> CreateCapacityProviderOutput:
         """
         Creates a capacity provider that manages compute resources for Lambda
-        functions
+        Event Functions
 
         Args:
             input:
@@ -459,8 +465,8 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: CreateEventSourceMappingInput, plugins: list[Plugin] | None = None
     ) -> CreateEventSourceMappingOutput:
         """
-        Creates a mapping between an event source and an Lambda function. Lambda
-        reads items from the event source and invokes the function.
+        Creates a mapping between an event source and an Lambda Event Function.
+        Lambda reads items from the event source and invokes the function.
 
         For details about how to configure different event sources, see the
         following topics.
@@ -553,7 +559,8 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: CreateFunctionInput, plugins: list[Plugin] | None = None
     ) -> CreateFunctionOutput:
         """
-        Creates a Lambda function. To create a function, you need a [deployment
+        Creates a Lambda Event Function. To create a function, you need a
+        [deployment
         package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html)
         and an [execution
         role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role).
@@ -661,7 +668,7 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: DeleteAliasInput, plugins: list[Plugin] | None = None
     ) -> DeleteAliasOutput:
         """
-        Deletes a Lambda function
+        Deletes a Lambda Event Function
         [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 
         Args:
@@ -750,8 +757,8 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: DeleteFunctionInput, plugins: list[Plugin] | None = None
     ) -> DeleteFunctionOutput:
         """
-        Deletes a Lambda function. To delete a specific function version, use
-        the `Qualifier` parameter. Otherwise, all versions and aliases are
+        Deletes a Lambda Event Function. To delete a specific function version,
+        use the `Qualifier` parameter. Otherwise, all versions and aliases are
         deleted. This doesn't require the user to have explicit permissions for
         DeleteAlias.
 
@@ -806,7 +813,7 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: DeleteFunctionConcurrencyInput, plugins: list[Plugin] | None = None
     ) -> DeleteFunctionConcurrencyOutput:
         """
-        Removes a concurrent execution limit from a function.
+        Removes a concurrent execution limit from a Lambda Event Function.
 
         Args:
             input:
@@ -970,7 +977,7 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: GetAliasInput, plugins: list[Plugin] | None = None
     ) -> GetAliasOutput:
         """
-        Returns details about a Lambda function
+        Returns details about a Lambda Event Function
         [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 
         Args:
@@ -1137,10 +1144,10 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: GetFunctionInput, plugins: list[Plugin] | None = None
     ) -> GetFunctionOutput:
         """
-        Returns information about the function or function version, with a link
-        to download the deployment package that's valid for 10 minutes. If you
-        specify a function version, only details that are specific to that
-        version are returned.
+        Returns information about a Lambda Event Function or function version,
+        with a link to download the deployment package that's valid for 10
+        minutes. If you specify a function version, only details that are
+        specific to that version are returned.
 
         Args:
             input:
@@ -1206,9 +1213,10 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: GetFunctionConfigurationInput, plugins: list[Plugin] | None = None
     ) -> GetFunctionConfigurationOutput:
         """
-        Returns the version-specific settings of a Lambda function or version.
-        The output includes only options that can vary between versions of a
-        function. To modify these settings, use UpdateFunctionConfiguration.
+        Returns the version-specific settings of a Lambda Event Function or
+        version. The output includes only options that can vary between versions
+        of a function. To modify these settings, use
+        UpdateFunctionConfiguration.
 
         To get all of a function's details, including function-level settings,
         use GetFunction.
@@ -1487,9 +1495,9 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: InvokeInput, plugins: list[Plugin] | None = None
     ) -> InvokeOutput:
         """
-        Invokes a Lambda function. You can invoke a function synchronously (and
-        wait for the response), or asynchronously. By default, Lambda invokes
-        your function synchronously (i.e. the`InvocationType` is
+        Invokes a Lambda Event Function. You can invoke a function synchronously
+        (and wait for the response), or asynchronously. By default, Lambda
+        invokes your function synchronously (i.e. the`InvocationType` is
         `RequestResponse`). To invoke a function asynchronously, set
         `InvocationType` to `Event`. Lambda passes the `ClientContext` object to
         your function for synchronous invocations only.
@@ -1594,7 +1602,7 @@ class LambdaClient(Client[LambdaConfig]):
         """
         Returns a list of
         [aliases](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html)
-        for a Lambda function.
+        for a Lambda Event Function.
 
         Args:
             input:
@@ -1715,7 +1723,8 @@ class LambdaClient(Client[LambdaConfig]):
     ) -> ListFunctionEventInvokeConfigsOutput:
         """
         Retrieves a list of configurations for asynchronous invocation for a
-        function.
+        Lambda Event Function. To retrieve more configurations, use the `Marker`
+        parameter.
 
         To configure options for asynchronous invocation, use
         PutFunctionEventInvokeConfig.
@@ -1742,7 +1751,7 @@ class LambdaClient(Client[LambdaConfig]):
         plugins: list[Plugin] | None = None,
     ) -> ListFunctionsOutput:
         """
-        Returns a list of Lambda functions, with the version-specific
+        Returns a list of Lambda Event Functions, with the version-specific
         configuration of each. Lambda returns up to 50 functions per call.
 
         Set `FunctionVersion` to `ALL` to include all published versions of each
@@ -1947,9 +1956,9 @@ class LambdaClient(Client[LambdaConfig]):
     ) -> ListVersionsByFunctionOutput:
         """
         Returns a list of
-        [versions](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html),
-        with the version-specific configuration of each. Lambda returns up to 50
-        versions per call.
+        [versions](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)
+        of a Lambda Event Function, with the version-specific configuration of
+        each. Lambda returns up to 50 versions per call.
 
         Args:
             input:
@@ -1997,9 +2006,9 @@ class LambdaClient(Client[LambdaConfig]):
         """
         Creates a
         [version](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)
-        from the current code and configuration of a function. Use versions to
-        create a snapshot of your function code and configuration that doesn't
-        change.
+        from the current code and configuration of a Lambda Event Function. Use
+        versions to create a snapshot of your function code and configuration
+        that doesn't change.
 
         Lambda doesn't publish a version if the function's configuration and
         code haven't changed since the last version. Use UpdateFunctionCode or
@@ -2053,8 +2062,8 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: PutFunctionConcurrencyInput, plugins: list[Plugin] | None = None
     ) -> PutFunctionConcurrencyOutput:
         """
-        Sets the maximum number of simultaneous executions for a function, and
-        reserves capacity for that concurrency level.
+        Sets the maximum number of simultaneous executions for a Lambda Event
+        Function, and reserves capacity for that concurrency level.
 
         Concurrency settings apply to the function as a whole, including all
         published versions and the unpublished version. Reserving concurrency
@@ -2138,9 +2147,9 @@ class LambdaClient(Client[LambdaConfig]):
         plugins: list[Plugin] | None = None,
     ) -> PutFunctionRecursionConfigOutput:
         """
-        Sets your function's [recursive loop
+        Sets the [recursive loop
         detection](https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html)
-        configuration.
+        configuration for a Lambda Event Function.
 
         When you configure a Lambda function to output to the same service or
         resource that invokes the function, it's possible to create an infinite
@@ -2469,7 +2478,7 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: UpdateAliasInput, plugins: list[Plugin] | None = None
     ) -> UpdateAliasOutput:
         """
-        Updates the configuration of a Lambda function
+        Updates the configuration of a Lambda Event Function
         [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
 
         Args:
@@ -2626,9 +2635,9 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: UpdateFunctionCodeInput, plugins: list[Plugin] | None = None
     ) -> UpdateFunctionCodeOutput:
         """
-        Updates a Lambda function's code. If code signing is enabled for the
-        function, the code package must be signed by a trusted publisher. For
-        more information, see [Configuring code signing for
+        Updates a Lambda Event Function's code. If code signing is enabled for
+        the function, the code package must be signed by a trusted publisher.
+        For more information, see [Configuring code signing for
         Lambda](https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html).
 
         If the function's package type is `Image`, then you must specify the
@@ -2673,7 +2682,7 @@ class LambdaClient(Client[LambdaConfig]):
         plugins: list[Plugin] | None = None,
     ) -> UpdateFunctionConfigurationOutput:
         """
-        Modify the version-specific settings of a Lambda function.
+        Modifies the version-specific settings of a Lambda Event Function.
 
         When you update a function, Lambda provisions an instance of the
         function and its supporting resources. If your function connects to a
@@ -2739,7 +2748,7 @@ class LambdaClient(Client[LambdaConfig]):
         self, input: UpdateFunctionUrlConfigInput, plugins: list[Plugin] | None = None
     ) -> UpdateFunctionUrlConfigOutput:
         """
-        Updates the configuration for a Lambda function URL.
+        Updates the configuration for a function URL of a Lambda Event Function.
 
         Args:
             input:

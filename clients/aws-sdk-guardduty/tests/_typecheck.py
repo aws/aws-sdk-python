@@ -132,9 +132,14 @@ from aws_sdk_guardduty.models import (
     Destination,
     DestinationProperties,
     Detection,
+    DetectionRuleEc2Requirements,
+    DetectionRuleEcsFargateRequirements,
+    DetectionRuleEksRequirements,
     DetectionRuleFilter,
     DetectionRuleOrgConfiguration,
     DetectionRuleOrgConfigurationSummary,
+    DetectionRuleRuntimeMonitoringDetails,
+    DetectionRuleRuntimePlatforms,
     DetectorAdditionalConfiguration,
     DetectorAdditionalConfigurationResult,
     DetectorFeatureConfiguration,
@@ -616,9 +621,14 @@ DescribePublishingDestinationOutput()
 Destination()
 DestinationProperties()
 Detection()
+DetectionRuleEc2Requirements()
+DetectionRuleEcsFargateRequirements()
+DetectionRuleEksRequirements()
 DetectionRuleFilter()
 DetectionRuleOrgConfiguration()
 DetectionRuleOrgConfigurationSummary()
+DetectionRuleRuntimeMonitoringDetails()
+DetectionRuleRuntimePlatforms()
 DetectorAdditionalConfiguration()
 DetectorAdditionalConfigurationResult()
 DetectorFeatureConfiguration()

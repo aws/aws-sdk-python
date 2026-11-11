@@ -18,6 +18,20 @@ _IR = "INVALID_REQUEST"
 _RNF = "RESOURCE_NOT_FOUND"
 _CONFLICT = "CONFLICT"
 _SQE = "SERVICE_QUOTA_EXCEEDED"
+_OUGT = "OAUTH_UNSUPPORTED_GRANT_TYPE"
+_ugt = "unsupported_grant_type"
+_OIR = "OAUTH_INVALID_REQUEST"
+_ir = "invalid_request"
+_OIG = "OAUTH_INVALID_GRANT"
+_ig = "invalid_grant"
+_OIS = "OAUTH_INVALID_SCOPE"
+_is = "invalid_scope"
+_OIT = "OAUTH_INVALID_TARGET"
+_it = "invalid_target"
+_ORE = "OAUTH_RATE_EXCEEDED"
+_re = "rate_exceeded"
+_OSU = "OAUTH_SERVICE_UNAVAILABLE"
+_su = "service_unavailable"
 _ADE = "AccessDeniedException"
 _s = "smithy.api#error"
 _c = "client"
@@ -32,6 +46,7 @@ _sAK = "secretAccessKey"
 _sT = "sessionToken"
 _AI = "AccountId"
 _AC = "AuthorizationCode"
+_BTEI = "BearerTokenExpiresIn"
 _BTT = "BearerTokenType"
 _CCGT = "ClientCredentialsGrantType"
 _CI = "ClientId"
@@ -47,58 +62,86 @@ _CB = "ConditionBlock"
 _CE = "ConflictException"
 _sE = "smithy.api#httpError"
 _CPMR = "ConsolePermissionMaxResults"
+_TD = "TokenDuration"
+_R = "Resource"
+_CBTI = "CreateBearerTokenInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cCBTR = "com.amazonaws.signin#CreateBearerTokenRequest"
+_smit = "smithy.api#input"
+_gT = "grantType"
+_gt = "grant_type"
+_r = "resource"
+_dS = "durationSeconds"
+_d = "duration"
+_OAAT = "OAuthAccessToken"
+_CBTO = "CreateBearerTokenOutput"
+_cCBTRo = "com.amazonaws.signin#CreateBearerTokenResponse"
+_smith = "smithy.api#output"
+_aT = "accessToken"
+_at = "access_token"
+_tT = "tokenType"
+_tt = "token_type"
+_eI = "expiresIn"
+_ei = "expires_in"
+_ISE = "InternalServerException"
+_ser = "server"
+_TMRE = "TooManyRequestsError"
+_VE = "ValidationException"
+_CBT = "CreateBearerToken"
+_sCP = "smithy.rules#staticContextParams"
+_smithy = "smithy.api#http"
 _GT = "GrantType"
 _RU = "RedirectUri"
 _RT = "RefreshToken"
 _COATRB = "CreateOAuth2TokenRequestBody"
 _cI = "clientId"
-_gT = "grantType"
 _co = "code"
 _rU = "redirectUri"
 _cV = "codeVerifier"
 _rT = "refreshToken"
 _COATI = "CreateOAuth2TokenInput"
-_sSI = "smithy.synthetic#originalShapeId"
 _cCOATR = "com.amazonaws.signin#CreateOAuth2TokenRequest"
-_smit = "smithy.api#input"
 _tI = "tokenInput"
 _sP = "smithy.api#httpPayload"
 _EI = "ExpiresIn"
 _IT = "IdToken"
 _TT = "TokenType"
 _COATRBr = "CreateOAuth2TokenResponseBody"
-_aT = "accessToken"
-_tT = "tokenType"
-_eI = "expiresIn"
 _iT = "idToken"
 _COATO = "CreateOAuth2TokenOutput"
 _cCOATRo = "com.amazonaws.signin#CreateOAuth2TokenResponse"
-_smith = "smithy.api#output"
 _tO = "tokenOutput"
-_ISE = "InternalServerException"
-_ser = "server"
-_TMRE = "TooManyRequestsError"
-_VE = "ValidationException"
 _COAT = "CreateOAuth2Token"
-_sCP = "smithy.rules#staticContextParams"
-_smithy = "smithy.api#http"
 _COATWIAMI = "CreateOAuth2TokenWithIAMInput"
 _cCOATWIAMR = "com.amazonaws.signin#CreateOAuth2TokenWithIAMRequest"
-_gt = "grant_type"
-_r = "resource"
-_OAAT = "OAuthAccessToken"
 _TEI = "TokenExpiresIn"
 _COATWIAMO = "CreateOAuth2TokenWithIAMOutput"
 _cCOATWIAMRo = "com.amazonaws.signin#CreateOAuth2TokenWithIAMResponse"
-_at = "access_token"
-_tt = "token_type"
-_ei = "expires_in"
 _COATWIAM = "CreateOAuth2TokenWithIAM"
+_TEGT = "TokenExchangeGrantType"
+_S = "Scope"
+_ST = "SubjectToken"
+_STT = "SubjectTokenType"
+_COATWTEI = "CreateOAuth2TokenWithTokenExchangeInput"
+_cCOATWTER = "com.amazonaws.signin#CreateOAuth2TokenWithTokenExchangeRequest"
+_sTu = "subjectToken"
+_st = "subject_token"
+_sTT = "subjectTokenType"
+_stt = "subject_token_type"
+_sc = "scope"
+_IOAATT = "IssuedOAuthAccessTokenType"
+_COATWTEO = "CreateOAuth2TokenWithTokenExchangeOutput"
+_cCOATWTERo = "com.amazonaws.signin#CreateOAuth2TokenWithTokenExchangeResponse"
+_iTT = "issuedTokenType"
+_itt = "issued_token_type"
+_IGE = "InvalidGrantException"
+_ISEn = "InvalidScopeException"
+_SUE = "ServiceUnavailableException"
+_COATWTE = "CreateOAuth2TokenWithTokenExchange"
 _TI = "TargetId"
 _DCACI = "DeleteConsoleAuthorizationConfigurationInput"
 _tIa = "targetId"
 _DCACO = "DeleteConsoleAuthorizationConfigurationOutput"
-_sc = "scope"
 _cAE = "consoleAuthorizationEnabled"
 _RNFE = "ResourceNotFoundException"
 _DCAC = "DeleteConsoleAuthorizationConfiguration"
@@ -122,14 +165,13 @@ _E = "Effect"
 _p = "principal"
 _a = "action"
 _A = "Action"
-_R = "Resource"
 _con = "condition"
 _PSo = "PolicyStatements"
 _SRBP = "SigninResourceBasedPolicy"
 _ve = "version"
 _V = "Version"
-_st = "statement"
-_S = "Statement"
+_sta = "statement"
+_St = "Statement"
 _GRPO = "GetResourcePolicyOutput"
 _sRBP = "signinResourceBasedPolicy"
 _GRP = "GetResourcePolicy"
@@ -150,9 +192,9 @@ _ui = "user_id"
 _ex = "exp"
 _i = "iat"
 _n = "nbf"
-_su = "sub"
+_sub = "sub"
 _au = "aud"
-_is = "iss"
+_iss = "iss"
 _j = "jti"
 _aI = "accountId"
 _ai = "account_id"
@@ -204,7 +246,24 @@ O_AUTH2_ERROR_CODE: StaticSchema = (
     n0,
     _OAEC,
     0,
-    (_TE, _UCC, _IP, _AE, _SE, _IR, _RNF, _CONFLICT, _SQE),
+    (
+        _TE,
+        _UCC,
+        _IP,
+        _AE,
+        _SE,
+        _IR,
+        _RNF,
+        _CONFLICT,
+        _SQE,
+        _OUGT,
+        _OIR,
+        _OIG,
+        _OIS,
+        _OIT,
+        _ORE,
+        _OSU,
+    ),
     (
         (-1, {_sV: _TE}),
         (-1, {_sV: _UCC}),
@@ -215,6 +274,13 @@ O_AUTH2_ERROR_CODE: StaticSchema = (
         (-1, {_sV: _RNF}),
         (-1, {_sV: _CONFLICT}),
         (-1, {_sV: _SQE}),
+        (-1, {_sV: _ugt}),
+        (-1, {_sV: _ir}),
+        (-1, {_sV: _ig}),
+        (-1, {_sV: _is}),
+        (-1, {_sV: _it}),
+        (-1, {_sV: _re}),
+        (-1, {_sV: _su}),
     ),
 )
 
@@ -243,6 +309,8 @@ ACCESS_TOKEN: StaticSchema = (
 ACCOUNT_ID: StaticSchema = (3, n0, _AI, 0)
 
 AUTHORIZATION_CODE: StaticSchema = (3, n0, _AC, 0)
+
+BEARER_TOKEN_EXPIRES_IN: StaticSchema = (7, n0, _BTEI, 0)
 
 BEARER_TOKEN_TYPE: StaticSchema = (3, n0, _BTT, 0)
 
@@ -279,6 +347,85 @@ CONFLICT_EXCEPTION: StaticSchema = (
 )
 
 CONSOLE_PERMISSION_MAX_RESULTS: StaticSchema = (7, n0, _CPMR, 0)
+
+TOKEN_DURATION: StaticSchema = (7, n0, _TD, 0)
+
+RESOURCE: StaticSchema = (3, n0, _R, 0)
+
+CREATE_BEARER_TOKEN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CBTI,
+    {_sSI: _cCBTR, _smit: None},
+    (_gT, _r, _dS),
+    (
+        (CLIENT_CREDENTIALS_GRANT_TYPE, {_sN: _gt, _sm: None}),
+        (RESOURCE, 1),
+        (TOKEN_DURATION, {_sN: _d}),
+    ),
+)
+
+O_AUTH_ACCESS_TOKEN: StaticSchema = (3, n0, _OAAT, 4)
+
+CREATE_BEARER_TOKEN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CBTO,
+    {_sSI: _cCBTRo, _smith: None},
+    (_aT, _tT, _eI),
+    (
+        (O_AUTH_ACCESS_TOKEN, {_sN: _at, _sm: None}),
+        (BEARER_TOKEN_TYPE, {_sN: _tt, _sm: None}),
+        (BEARER_TOKEN_EXPIRES_IN, {_sN: _ei, _sm: None}),
+    ),
+)
+
+INTERNAL_SERVER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_s: _ser, _sE: 500},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
+)
+
+TOO_MANY_REQUESTS_ERROR: StaticSchema = (
+    18,
+    n0,
+    _TMRE,
+    {_s: _c, _sE: 429},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
+)
+
+VALIDATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _VE,
+    {_s: _c, _sE: 400},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
+)
+
+CREATE_BEARER_TOKEN: StaticOperationSchema = (
+    23,
+    n0,
+    _CBT,
+    {
+        _sCP: MappingProxyType({"IsOAuthEndpoint": MappingProxyType({"value": True})}),
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/v1/token?x-amz-token-request-type=bearer"}
+        ),
+    },
+    CREATE_BEARER_TOKEN_INPUT,
+    CREATE_BEARER_TOKEN_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
+)
 
 GRANT_TYPE: StaticSchema = (3, n0, _GT, 0)
 
@@ -341,33 +488,6 @@ CREATE_O_AUTH2_TOKEN_OUTPUT: StaticSchema = (
     ((CREATE_O_AUTH2_TOKEN_RESPONSE_BODY, 17),),
 )
 
-INTERNAL_SERVER_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _ISE,
-    {_s: _ser, _sE: 500},
-    (_e, _m),
-    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
-)
-
-TOO_MANY_REQUESTS_ERROR: StaticSchema = (
-    18,
-    n0,
-    _TMRE,
-    {_s: _c, _sE: 429},
-    (_e, _m),
-    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
-)
-
-VALIDATION_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _VE,
-    {_s: _c, _sE: 400},
-    (_e, _m),
-    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
-)
-
 CREATE_O_AUTH2_TOKEN: StaticOperationSchema = (
     23,
     n0,
@@ -392,10 +512,8 @@ CREATE_O_AUTH2_TOKEN_WITH_IAM_INPUT: StaticSchema = (
     _COATWIAMI,
     {_sSI: _cCOATWIAMR, _smit: None},
     (_gT, _r),
-    ((CLIENT_CREDENTIALS_GRANT_TYPE, {_sN: _gt, _sm: None}), (3, 1)),
+    ((CLIENT_CREDENTIALS_GRANT_TYPE, {_sN: _gt, _sm: None}), (RESOURCE, 1)),
 )
-
-O_AUTH_ACCESS_TOKEN: StaticSchema = (3, n0, _OAAT, 4)
 
 TOKEN_EXPIRES_IN: StaticSchema = (7, n0, _TEI, 0)
 
@@ -427,6 +545,97 @@ CREATE_O_AUTH2_TOKEN_WITH_IAM: StaticOperationSchema = (
     (
         ACCESS_DENIED_EXCEPTION,
         INTERNAL_SERVER_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+TOKEN_EXCHANGE_GRANT_TYPE: StaticSchema = (3, n0, _TEGT, 0)
+
+SCOPE: StaticSchema = (3, n0, _S, 0)
+
+SUBJECT_TOKEN: StaticSchema = (3, n0, _ST, 4)
+
+SUBJECT_TOKEN_TYPE: StaticSchema = (3, n0, _STT, 0)
+
+CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _COATWTEI,
+    {_sSI: _cCOATWTER, _smit: None},
+    (_gT, _sTu, _sTT, _r, _sc),
+    (
+        (TOKEN_EXCHANGE_GRANT_TYPE, {_sN: _gt, _sm: None}),
+        (SUBJECT_TOKEN, {_sN: _st}),
+        (SUBJECT_TOKEN_TYPE, {_sN: _stt}),
+        (RESOURCE, 0),
+        (SCOPE, 0),
+    ),
+)
+
+ISSUED_O_AUTH_ACCESS_TOKEN_TYPE: StaticSchema = (3, n0, _IOAATT, 0)
+
+CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _COATWTEO,
+    {_sSI: _cCOATWTERo, _smith: None},
+    (_aT, _iTT, _tT, _eI),
+    (
+        (O_AUTH_ACCESS_TOKEN, {_sN: _at, _sm: None}),
+        (ISSUED_O_AUTH_ACCESS_TOKEN_TYPE, {_sN: _itt}),
+        (BEARER_TOKEN_TYPE, {_sN: _tt, _sm: None}),
+        (TOKEN_EXPIRES_IN, {_sN: _ei, _sm: None}),
+    ),
+)
+
+INVALID_GRANT_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IGE,
+    {_s: _c, _sE: 400},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
+)
+
+INVALID_SCOPE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISEn,
+    {_s: _c, _sE: 400},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
+)
+
+SERVICE_UNAVAILABLE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SUE,
+    {_s: _ser, _sE: 503},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
+)
+
+CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE: StaticOperationSchema = (
+    23,
+    n0,
+    _COATWTE,
+    {
+        _sCP: MappingProxyType({"IsOAuthEndpoint": MappingProxyType({"value": True})}),
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/v1/token?x-amz-oauth-token-method=token-exchange",
+            }
+        ),
+    },
+    CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE_INPUT,
+    CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE_OUTPUT,
+    (
+        INTERNAL_SERVER_EXCEPTION,
+        INVALID_GRANT_EXCEPTION,
+        INVALID_SCOPE_EXCEPTION,
+        SERVICE_UNAVAILABLE_EXCEPTION,
         TOO_MANY_REQUESTS_ERROR,
         VALIDATION_EXCEPTION,
     ),
@@ -590,8 +799,8 @@ SIGNIN_RESOURCE_BASED_POLICY: StaticSchema = (
     n0,
     _SRBP,
     0,
-    (_ve, _st),
-    ((3, {_sN: _V}), (POLICY_STATEMENTS, {_sN: _S})),
+    (_ve, _sta),
+    ((3, {_sN: _V}), (POLICY_STATEMENTS, {_sN: _St})),
 )
 
 GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
@@ -641,7 +850,7 @@ INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_OUTPUT: StaticSchema = (
     n0,
     _IOATWIAMO,
     {_sSI: _cIOATWIAMRo, _smith: None},
-    (_ac, _cI, _uI, _tT, _ex, _i, _n, _su, _au, _is, _j, _aI, _sS, _r),
+    (_ac, _cI, _uI, _tT, _ex, _i, _n, _sub, _au, _iss, _j, _aI, _sS, _r),
     (
         (2, 1),
         (3, {_sN: _ci}),
@@ -650,13 +859,13 @@ INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_OUTPUT: StaticSchema = (
         (8, {_sN: _ex}),
         (8, {_sN: _i}),
         (8, {_sN: _n}),
-        (3, {_sN: _su}),
+        (3, {_sN: _sub}),
         (3, {_sN: _au}),
-        (3, {_sN: _is}),
+        (3, {_sN: _iss}),
         (3, {_sN: _j}),
         (ACCOUNT_ID, {_sN: _ai}),
         (3, {_sN: _ss}),
-        (3, {_sN: _r}),
+        (RESOURCE, {_sN: _r}),
     ),
 )
 
