@@ -2,11 +2,17 @@
 # SPDX-License-Identifier: Apache-2.0
 __version__ = "0.4.0"
 
-from .providers import ProfileAssumeRoleProvider
+from .providers import (
+    ProfileAssumeRoleProvider,
+    ProfileWebIdentityProvider,
+    WebIdentityTokenEnvProvider,
+)
 from .resolvers import (
     AssumeRoleConfigurationError,
     AssumeRoleCredentialsResolver,
     ProfileAssumeRoleCredentialsResolver,
+    WebIdentityConfigurationError,
+    WebIdentityCredentialsResolver,
 )
 
 __all__ = (
@@ -14,4 +20,8 @@ __all__ = (
     "AssumeRoleCredentialsResolver",
     "ProfileAssumeRoleCredentialsResolver",
     "ProfileAssumeRoleProvider",
+    "ProfileWebIdentityProvider",
+    "WebIdentityConfigurationError",
+    "WebIdentityCredentialsResolver",
+    "WebIdentityTokenEnvProvider",
 )

@@ -31,6 +31,7 @@ _EXTERNAL_ID = "external_id"
 _DURATION_SECONDS = "duration_seconds"
 _SOURCE_PROFILE = "source_profile"
 _CREDENTIAL_SOURCE = "credential_source"
+_WEB_IDENTITY_TOKEN_FILE = "web_identity_token_file"
 _REGION = "region"
 
 _CREDENTIAL_SOURCE_SLOTS = {
@@ -64,11 +65,22 @@ class AssumeRolePlan:
     source: StaticSource | CredentialSource | AssumeRolePlan
 
 
-def has_role_arn(config_file: MergedConfig | None, profile_name: str | None) -> bool:
+def is_assume_role_profile(
+    config_file: MergedConfig | None, profile_name: str | None
+) -> bool:
+    """Return whether the profile is configured for AssumeRole.
+
+    A profile with a role ARN and a web identity token file, but no source, is
+    configured for web identity instead.
+    """
+    if profile_name is None or config_file is None:
+        return False
+    if config_file.get(profile_name, _ROLE_ARN) is None:
+        return False
     return (
-        profile_name is not None
-        and config_file is not None
-        and config_file.get(profile_name, _ROLE_ARN) is not None
+        config_file.get(profile_name, _SOURCE_PROFILE) is not None
+        or config_file.get(profile_name, _CREDENTIAL_SOURCE) is not None
+        or not config_file.get(profile_name, _WEB_IDENTITY_TOKEN_FILE)
     )
 
 
@@ -226,7 +238,7 @@ def _plan_source_profile(
             "complete static credentials."
         )
 
-    if config_file.get(source_profile_name, _ROLE_ARN) is not None:
+    if is_assume_role_profile(config_file, source_profile_name):
         return _plan_assume_role(
             config_file, source_profile_name, (*visited, source_profile_name)
         )

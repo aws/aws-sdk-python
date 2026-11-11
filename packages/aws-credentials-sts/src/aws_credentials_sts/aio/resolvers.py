@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import asyncio
+import os
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 from smithy_aws_core.aio.config import AsyncAwsConfigOverrides
@@ -19,6 +21,9 @@ from smithy_aws_core.config.merged_config import MergedConfig
 from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
 from smithy_aws_core.identity.chain import StandardProvider
 from smithy_core.aio.interfaces.identity import AsyncIdentityResolver
+from smithy_core.auth import NoAuthResolver
+from smithy_core.exceptions import SmithyIdentityError
+from smithy_core.retries import StandardRetryStrategy
 from smithy_http.aio.interfaces import AsyncHTTPClient
 
 from .._assume_role import (
@@ -36,6 +41,14 @@ from .._assume_role import (
     resolve_sts_region,
     validate_profile,
 )
+from .._web_identity import (
+    DEFAULT_ROLE_SESSION_NAME,
+    MAX_RETRIES,
+    UNUSED_CREDENTIALS_MESSAGE,
+    read_token,
+    web_identity_input,
+)
+from .._web_identity import identity_from_response as web_identity_from_response
 
 if TYPE_CHECKING:
     from aws_sdk_sts.aio.client import AsyncSTSClient
@@ -192,3 +205,155 @@ class AsyncProfileAssumeRoleCredentialsResolver(
                 return first_resolver(setup.resolvers, source)
             case AssumeRolePlan():
                 return await self._build_assume_role(source)
+
+
+class _AsyncUnusedCredentialsResolver(
+    AsyncIdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
+):
+    """The credentials resolver for the STS client that calls AssumeRoleWithWebIdentity.
+
+    The call is never signed, so this is never asked for credentials. Setting it
+    keeps the STS client from building its own default credential chain, which
+    would include the web identity providers again.
+    """
+
+    async def get_identity(
+        self, *, properties: AWSIdentityProperties
+    ) -> AWSCredentialsIdentity:
+        raise SmithyIdentityError(UNUSED_CREDENTIALS_MESSAGE)
+
+
+class AsyncWebIdentityCredentialsResolver(
+    AsyncIdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
+):
+    """Resolves credentials with an STS AssumeRoleWithWebIdentity call.
+
+    The OIDC token is read from ``web_identity_token_file`` each time the credentials
+    are refreshed, so a token that is rotated on disk is picked up.
+
+    :param role_arn: The ARN of the role to assume.
+    :param web_identity_token_file: The path of the file that contains the OIDC
+        token. A relative path is relative to the process's working directory.
+    :param role_session_name: The name of the role session. When it isn't set, a
+        name generated once per process is used.
+    :param region: The region of the STS endpoint to call. When it isn't set, it's
+        taken from ``AWS_REGION`` or ``AWS_DEFAULT_REGION``, then ``us-east-1``.
+    :param http_client: The HTTP client to call STS with.
+    """
+
+    def __init__(
+        self,
+        *,
+        role_arn: str,
+        web_identity_token_file: str | os.PathLike[str],
+        role_session_name: str | None = None,
+        region: str | None = None,
+        http_client: AsyncHTTPClient | None = None,
+    ) -> None:
+        self._role_arn = role_arn
+        self._web_identity_token_file = Path(web_identity_token_file)
+        self._role_session_name = role_session_name or DEFAULT_ROLE_SESSION_NAME
+        self._region = region or resolve_sts_region()
+        self._http_client = http_client
+        self._credentials: AWSCredentialsIdentity | None = None
+        self._client: AsyncSTSClient | None = None
+        self._refresh_lock = asyncio.Lock()
+        # Wait between attempts the same way the SDK's standard retry strategy does.
+        self._backoff = StandardRetryStrategy().backoff_strategy
+
+    async def get_identity(
+        self,
+        *,
+        properties: AWSIdentityProperties,
+    ) -> AWSCredentialsIdentity:
+        """Return cached credentials if valid, otherwise call STS for new ones."""
+        if self._credentials is not None and not self._credentials.is_expired:
+            return self._credentials
+
+        async with self._refresh_lock:
+            if self._credentials is not None and not self._credentials.is_expired:
+                return self._credentials
+            self._credentials = await self._assume_role_with_web_identity()
+            return self._credentials
+
+    async def invalidate(self) -> None:
+        """Discard the cached credentials so the next call fetches new ones."""
+        async with self._refresh_lock:
+            self._credentials = None
+
+    async def _assume_role_with_web_identity(self) -> AWSCredentialsIdentity:
+        from aws_sdk_sts.aio.client import AsyncSTSClient
+        from aws_sdk_sts.aio.config import AsyncSTSConfig
+
+        overrides: AsyncAwsConfigOverrides = {
+            "region": self._region,
+            "aws_credentials_identity_resolver": _AsyncUnusedCredentialsResolver(),
+        }
+        # The call must be unsigned. The generated STS auth resolver doesn't
+        # recognize the operation, so it would otherwise be signed.
+        auth_scheme_resolver = NoAuthResolver()
+        if self._client is None and self._http_client is not None:
+            # CAUTION: never closed, since closing it would close the caller's transport.
+            overrides["transport"] = self._http_client
+            self._client = AsyncSTSClient(
+                config=await AsyncSTSConfig.resolve(
+                    **overrides, auth_scheme_resolver=auth_scheme_resolver
+                )
+            )
+        if self._client is not None:
+            return await self._call(self._client)
+        config = await AsyncSTSConfig.resolve(
+            **overrides, auth_scheme_resolver=auth_scheme_resolver
+        )
+        try:
+            async with AsyncSTSClient(config=config) as client:
+                return await self._call(client)
+        finally:
+            # The client closes its transport only after it sends a request. Close it
+            # here too, in case the token couldn't be read and nothing was sent.
+            if (close := getattr(config.transport, "close", None)) is not None:
+                await close()
+
+    async def _call(self, client: AsyncSTSClient) -> AWSCredentialsIdentity:
+        """Call STS, retrying the failures the web identity SEP requires.
+
+        A failure to read the token file and an ``ExpiredTokenException`` both read
+        the token again before retrying. An ``IDPCommunicationError`` retries the STS
+        call with the same token. Other errors are raised immediately.
+        """
+        from aws_sdk_sts.models import (
+            ExpiredTokenException,
+            IDPCommunicationErrorException,
+        )
+
+        token: str | None = None
+        for attempt in range(MAX_RETRIES + 1):
+            is_last_attempt = attempt == MAX_RETRIES
+            if token is None:
+                # Read the file in a thread so a slow disk doesn't block the loop.
+                token = await asyncio.to_thread(
+                    read_token,
+                    self._web_identity_token_file,
+                    is_last_attempt=is_last_attempt,
+                )
+            if token is not None:
+                try:
+                    response = await client.assume_role_with_web_identity(
+                        web_identity_input(
+                            role_arn=self._role_arn,
+                            role_session_name=self._role_session_name,
+                            web_identity_token=token,
+                        )
+                    )
+                except ExpiredTokenException:
+                    if is_last_attempt:
+                        raise
+                    token = None  # Read a fresh token before retrying.
+                except IDPCommunicationErrorException:
+                    if is_last_attempt:
+                        raise
+                else:
+                    return web_identity_from_response(response)
+            await asyncio.sleep(self._backoff.compute_next_backoff_delay(attempt + 1))
+
+        raise AssertionError("unreachable")
