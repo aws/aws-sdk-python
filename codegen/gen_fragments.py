@@ -13,10 +13,11 @@ import time
 import tomllib
 from pathlib import Path
 
+from gen_client import load_services
+
 CODEGEN_DIR = Path(__file__).resolve().parent
 REPO = CODEGEN_DIR.parent
 CLIENTS = REPO / "clients"
-MODELS = CODEGEN_DIR / "aws-models"
 POINTER = CODEGEN_DIR / "smithy-python.toml"
 SYNC_CHANGELOG = REPO / "CODEGEN_SYNC_CHANGELOG.md"
 SMITHY_PYTHON_COMMITS = "https://github.com/smithy-lang/smithy-python/commits"
@@ -65,7 +66,7 @@ def _description(previous: str, commit: str) -> str:
 
 
 def _generated_clients() -> list[str]:
-    return [f"aws-sdk-{model.stem}" for model in sorted(MODELS.glob("*.json"))]
+    return [f"aws-sdk-{service.slug}" for service in load_services()]
 
 
 def _write_fragment(name: str, commit: str, description: str) -> None:
