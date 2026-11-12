@@ -1,0 +1,63 @@
+{
+  "aws_credentials_cognito": {},
+  "aws_credentials_http": {},
+  "aws_credentials_http.aio": {},
+  "aws_credentials_http.aio.client": {
+    "AsyncHttpCredentialsClient": "class[async]"
+  },
+  "aws_credentials_http.aio.providers": {
+    "AsyncEcsContainerProvider": "class[async]"
+  },
+  "aws_credentials_http.aio.resolvers": {
+    "AsyncContainerCredentialsResolver": "class[async]"
+  },
+  "aws_credentials_http.client": {
+    "HttpCredentialsClient": "class"
+  },
+  "aws_credentials_http.providers": {
+    "EcsContainerProvider": "class"
+  },
+  "aws_credentials_http.resolvers": {
+    "ContainerCredentialsResolver": "class"
+  },
+  "aws_credentials_imds": {},
+  "aws_credentials_imds.aio": {},
+  "aws_credentials_imds.aio.client": {
+    "AsyncIMDSClient": "class[async]",
+    "AsyncIMDSTokenCache": "class[async]"
+  },
+  "aws_credentials_imds.aio.providers": {
+    "AsyncEc2InstanceMetadataProvider": "class[async]"
+  },
+  "aws_credentials_imds.aio.resolvers": {
+    "AsyncIMDSCredentialsResolver": "class[async]"
+  },
+  "aws_credentials_imds.client": {
+    "IMDSClient": "class",
+    "IMDSTokenCache": "class"
+  },
+  "aws_credentials_imds.providers": {
+    "Ec2InstanceMetadataProvider": "class"
+  },
+  "aws_credentials_imds.resolvers": {
+    "IMDSCredentialsResolver": "class"
+  },
+  "aws_credentials_login": {},
+  "aws_credentials_sso": {},
+  "aws_credentials_sts": {},
+  "aws_credentials_sts.aio": {},
+  "aws_credentials_sts.aio.providers": {
+    "AsyncProfileAssumeRoleProvider": "class[async]"
+  },
+  "aws_credentials_sts.aio.resolvers": {
+    "AsyncAssumeRoleCredentialsResolver": "class[async]",
+    "AsyncProfileAssumeRoleCredentialsResolver": "class[async]"
+  },
+  "aws_credentials_sts.providers": {
+    "ProfileAssumeRoleProvider": "class"
+  },
+  "aws_credentials_sts.resolvers": {
+    "AssumeRoleCredentialsResolver": "class",
+    "ProfileAssumeRoleCredentialsResolver": "class"
+  }
+}

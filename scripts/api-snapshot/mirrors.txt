@@ -1,0 +1,26 @@
+Dual-mode symbols (async in aio, sync twin outside):
+  aws_credentials_http/
+    aio/
+      client.py
+        AsyncHttpCredentialsClient  HttpCredentialsClient
+      providers.py
+        AsyncEcsContainerProvider  EcsContainerProvider
+      resolvers.py
+        AsyncContainerCredentialsResolver  ContainerCredentialsResolver
+  aws_credentials_imds/
+    aio/
+      client.py
+        AsyncIMDSClient      IMDSClient
+        AsyncIMDSTokenCache  IMDSTokenCache
+      providers.py
+        AsyncEc2InstanceMetadataProvider  Ec2InstanceMetadataProvider
+      resolvers.py
+        AsyncIMDSCredentialsResolver  IMDSCredentialsResolver
+  aws_credentials_sts/
+    aio/
+      providers.py
+        AsyncProfileAssumeRoleProvider  ProfileAssumeRoleProvider
+      resolvers.py
+        AsyncAssumeRoleCredentialsResolver         AssumeRoleCredentialsResolver
+        AsyncProfileAssumeRoleCredentialsResolver  ProfileAssumeRoleCredentialsResolver
+10 dual-mode symbol(s).
