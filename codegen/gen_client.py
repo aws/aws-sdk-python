@@ -17,6 +17,7 @@ import sys
 import tomllib
 from collections.abc import Iterator
 from contextlib import contextmanager
+from dataclasses import dataclass
 from pathlib import Path
 
 CODEGEN_DIR = Path(__file__).resolve().parent
@@ -50,6 +51,13 @@ CLIENTS_REQUIRING_BOTO3 = {
 }
 
 
+@dataclass(frozen=True)
+class Service:
+    model: Path
+    shape_id: str
+    slug: str
+
+
 def main() -> None:
     sys.stdout.reconfigure(line_buffering=True)
     parser = argparse.ArgumentParser()
@@ -62,27 +70,25 @@ def main() -> None:
     if args.batch_size < 1:
         sys.exit("--batch-size must be at least 1")
 
-    models = (
-        sorted(MODELS.glob("*.json"))
-        if args.all
-        else [resolve_model(n) for n in args.names]
+    services = (
+        load_services() if args.all else [_resolve_service(n) for n in args.names]
     )
-    if not models:
+    if not services:
         sys.exit("no clients selected")
 
     if args.pinned:
         with _pinned_codegen(_pinned_commit()) as gradle_args:
-            _generate(models, args.batch_size, gradle_args)
+            _generate(services, args.batch_size, gradle_args)
     else:
-        _generate(models, args.batch_size, [])
+        _generate(services, args.batch_size, [])
 
 
-def _generate(models: list[Path], batch_size: int, gradle_args: list[str]) -> None:
-    for start in range(0, len(models), batch_size):
-        batch = models[start : start + batch_size]
+def _generate(services: list[Service], batch_size: int, gradle_args: list[str]) -> None:
+    for start in range(0, len(services), batch_size):
+        batch = services[start : start + batch_size]
         _build(batch, gradle_args)
-        for model in batch:
-            _install_client(model.stem)
+        for service in batch:
+            _install_client(service.slug)
 
 
 def _pinned_commit() -> str:
@@ -153,38 +159,51 @@ def _smithy_python() -> Path:
     ).resolve()
 
 
-def resolve_model(name: str) -> Path:
-    key = name.strip()
-    for prefix in ("aws-sdk-", "aws_sdk_"):
-        if key.startswith(prefix):
-            key = key[len(prefix) :]
-            break
-    for cand in {key, key.replace("_", "-"), key.replace("-", "_")}:
-        model = MODELS / f"{cand}.json"
-        if model.exists():
-            return model
-    available = sorted(p.stem for p in MODELS.glob("*.json"))
-    sys.exit(f"no model for '{name}' in {MODELS}\navailable: {', '.join(available)}")
+def load_services() -> list[Service]:
+    return [_load_service(model) for model in sorted(MODELS.glob("*.json"))]
 
 
-def service_id(model: Path) -> str:
-    shapes = json.loads(model.read_text())["shapes"]
+def _load_service(model: Path) -> Service:
+    shapes = json.loads(model.read_text(encoding="utf-8"))["shapes"]
     services = [k for k, v in shapes.items() if v.get("type") == "service"]
     if len(services) != 1:
         sys.exit(
             f"expected exactly one service shape in {model.name}, found {services}"
         )
-    return services[0]
+    shape_id = services[0]
+    sdk_id = shapes[shape_id].get("traits", {}).get("aws.api#service", {}).get("sdkId")
+    if not isinstance(sdk_id, str):
+        sys.exit(f"{model.name}: {shape_id} has no aws.api#service sdkId")
+    slug = _sdk_id_slug(sdk_id)
+    if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug):
+        sys.exit(f"{model.name}: sdkId {sdk_id!r} does not form a valid package name")
+    if slug != model.stem:
+        sys.exit(f"{model.name}: sdkId {sdk_id!r} requires the name {slug}.json")
+    return Service(model, shape_id, slug)
 
 
-def _projection(model: Path) -> dict[str, object]:
-    slug = model.stem
+def _sdk_id_slug(sdk_id: str) -> str:
+    # split() rather than replace(" ", "-"): a run of whitespace, or any at either
+    # end, must not produce repeated or dangling hyphens.
+    return "-".join(sdk_id.lower().split())
+
+
+def _resolve_service(name: str) -> Service:
+    key = name.strip().lower().replace("_", "-").removeprefix("aws-sdk-")
+    model = MODELS / f"{key}.json"
+    if model.is_file():
+        return _load_service(model)
+    available = ", ".join(sorted(p.stem for p in MODELS.glob("*.json")))
+    sys.exit(f"no model for '{name}' in {MODELS}\navailable: {available}")
+
+
+def _projection(service: Service) -> dict[str, object]:
     return {
         "plugins": {
             "python-client-codegen": {
-                "service": service_id(model),
-                "module": _module(slug),
-                "moduleVersion": _client_version(slug),
+                "service": service.shape_id,
+                "module": _module(service.slug),
+                "moduleVersion": _client_version(service.slug),
             }
         },
     }
@@ -211,17 +230,18 @@ def _read_version(pyproject: Path) -> str:
         return tomllib.load(f)["project"]["version"]
 
 
-def _build(models: list[Path], gradle_args: list[str]) -> None:
+def _build(services: list[Service], gradle_args: list[str]) -> None:
     # Generated shape order depends on the loaded model set, so every build loads all
     # models, as the release build does; batch size then cannot affect output.
     build_config = {
         "version": "1.0",
         "imports": [str(MODELS)],
-        "projections": {m.stem: _projection(m) for m in models},
+        "projections": {s.slug: _projection(s) for s in services},
     }
     build_file = CODEGEN_DIR / "smithy-build.json"
     build_file.write_text(json.dumps(build_config, indent=4) + "\n")
-    print(f"generating {len(models)} client(s): {', '.join(m.stem for m in models)}")
+    slugs = ", ".join(s.slug for s in services)
+    print(f"generating {len(services)} client(s): {slugs}")
     subprocess.run(
         [
             str(CODEGEN_DIR / "gradlew"),
