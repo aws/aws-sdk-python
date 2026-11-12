@@ -34,7 +34,9 @@ from _common import (
 
 _SELECT = "D101,D102,D103,D106"
 _CONSTANT = re.compile(r"^[A-Z][A-Z0-9_]*$")
-_LOCATION = re.compile(r"^(?P<path>[^:]+):(?P<line>\d+):\d+: (?P<code>D\d+) ")
+_LOCATION = re.compile(
+    r"^(?P<path>[^:]+):(?P<line>\d+):\d+: (?P<message>(?P<code>D\d+) .*)"
+)
 
 
 def check() -> list[Finding]:
@@ -67,24 +69,27 @@ def _ruff_findings() -> list[Finding]:
                 str(package.src),
             ]
         )
-        findings.extend(
-            Finding(line)
-            for line in proc.stdout.splitlines()
-            if line.startswith(("/", "clients/", "packages/"))
-        )
+        for line in proc.stdout.splitlines():
+            if (match := _LOCATION.match(line)) is not None:
+                findings.append(
+                    Finding(
+                        match["message"],
+                        (ROOT / match["path"]).resolve(),
+                        int(match["line"]),
+                    )
+                )
     return findings
 
 
 def _inherits_docstring(finding: Finding) -> bool:
     """Whether a D102 method overrides one whose docstring editors and docs show."""
-    match = _LOCATION.match(finding.message)
-    if match is None or match["code"] != "D102":
+    if not finding.message.startswith("D102 ") or finding.path is None:
         return False
-    path = (ROOT / match["path"]).resolve()
+    path = finding.path
     module = next((m for m in runtime_modules() if m.path.resolve() == path), None)
     if module is None:
         return False
-    qualname = _method_qualname(module.tree, int(match["line"]))
+    qualname = _method_qualname(module.tree, finding.line)
     if qualname is None:
         return False
     for package in packages():

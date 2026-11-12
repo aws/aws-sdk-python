@@ -43,12 +43,15 @@ import inspect
 import re
 import sys
 from collections.abc import Iterator
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any, Literal
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 PACKAGES_DIR = ROOT / "packages"
+CLIENTS_DIR = ROOT / "clients"
+# Hand-written, though it lives beside the generated clients.
+METAPACKAGE_DIR = CLIENTS_DIR / "aws-sdk-python"
 DEFAULT_SRC_GLOBS = ("packages/*/src", "clients/*/src")
 AIO = "aio"
 
@@ -100,6 +103,7 @@ def main() -> int:
     findings, modules = _load([src.resolve() for src in src_dirs])
     findings.extend(_check_modules(modules))
     findings.extend(_check_parity(modules))
+    findings = [_soften(f) for f in findings]
 
     sys.stdout.write(dual_mode_tree(modules))
     if findings:
@@ -117,7 +121,8 @@ def main() -> int:
 def check(src_dirs: list[Path]) -> list[Finding]:
     """Checks all package source roots under the given src directories."""
     findings, modules = _load(src_dirs)
-    return findings + _check_modules(modules) + _check_parity(modules)
+    found = findings + _check_modules(modules) + _check_parity(modules)
+    return [_soften(f) for f in found]
 
 
 def dual_mode_report() -> str:
@@ -542,6 +547,13 @@ class _SyncChecker(_Checker):
                 node, "error", f"non-aio {kind} '{node.name}' must not be async"
             )
         bare = node.name.lstrip("_")
+        # A generated client's methods are modeled operations, named by the service.
+        if (
+            is_method
+            and _is_generated(self.module.path)
+            and self.module.name.endswith(".client")
+        ):
+            return
         if bare.startswith("async_") or bare.endswith("_async"):
             self._report(
                 node,
@@ -666,6 +678,17 @@ def _display_path(module: "_Module") -> tuple[str, ...]:
     if module.path.stem == "__init__":
         return (*(f"{p}/" for p in parts), "__init__.py")
     return (*(f"{p}/" for p in parts[:-1]), f"{parts[-1]}.py")
+
+
+def _is_generated(path: Path) -> bool:
+    return path.is_relative_to(CLIENTS_DIR) and not path.is_relative_to(METAPACKAGE_DIR)
+
+
+def _soften(finding: Finding) -> Finding:
+    """Codegen owns generated clients, and no aio naming finding crashes at runtime."""
+    if finding.severity == "error" and _is_generated(finding.path):
+        return replace(finding, severity="warning")
+    return finding
 
 
 if __name__ == "__main__":

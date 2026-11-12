@@ -28,6 +28,7 @@ class AsyncHttpCredentialsClient:
         self._retries = retries
 
     async def get_credentials(self, uri: URI, fields: Fields) -> dict[str, str]:
+        """Fetch the credentials document from the endpoint at ``uri``."""
         return await run_program_async(
             fetch_credentials(
                 send=lambda request, config: self._http_client.send(

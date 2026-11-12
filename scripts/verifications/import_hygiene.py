@@ -38,6 +38,7 @@ def check() -> list[Finding]:
                 Finding(
                     f"{module.name} fails to import alone: {error['type']}: {error['message']}",
                     module.path,
+                    crash=True,
                 )
             )
         if module.name not in imported:
@@ -54,6 +55,7 @@ def check() -> list[Finding]:
                         f"unguarded top-level import of optional dependency {imp.top}",
                         module.path,
                         imp.line,
+                        crash=True,
                     )
                 )
     return findings

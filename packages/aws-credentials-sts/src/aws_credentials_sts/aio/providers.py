@@ -66,7 +66,11 @@ class AsyncWebIdentityTokenEnvProvider:
         """Add a terminal resolver when the web identity variables are set."""
         if identity_type is not AWSCredentialsIdentity:
             return
-        if (config := env_config(setup)) is not None:
+        if (
+            config := env_config(
+                profile_name=setup.profile_name, region_override=setup.region_override
+            )
+        ) is not None:
             setup.add_terminal_resolver(_web_identity_resolver(config, setup))
 
 
@@ -89,7 +93,13 @@ class AsyncProfileWebIdentityProvider:
         """Add a terminal resolver when the active profile sets a token file."""
         if identity_type is not AWSCredentialsIdentity:
             return
-        if (config := profile_config(setup)) is not None:
+        if (
+            config := profile_config(
+                config_file=setup.config_file,
+                profile_name=setup.profile_name,
+                region_override=setup.region_override,
+            )
+        ) is not None:
             setup.add_terminal_resolver(_web_identity_resolver(config, setup))
 
 

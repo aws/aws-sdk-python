@@ -91,11 +91,16 @@ def _report(path: Path, root: str, stdout: str, stderr: str) -> list[Finding]:
         return [Finding(f"{root}: pyright failed: {stderr.strip()[-300:]}", path)]
     if not completeness.get("packageRootDirectory"):
         return [Finding(f"{root}: pyright did not resolve the installed package", path)]
-    score = completeness["completenessScore"]
-    if score >= 1:
-        return []
+    if not completeness.get("pyTypedPath"):
+        return [
+            Finding(f"{root}: no py.typed, so type checkers treat it as untyped", path)
+        ]
     counts = completeness["exportedSymbolCounts"]
     total = sum(counts.values())
+    # pyright scores an empty public surface 0, but nothing exported is nothing untyped.
+    score = completeness["completenessScore"] if total else 1
+    if score >= 1:
+        return []
     findings = [
         Finding(f"{root}: {score:.1%} of {total} exported symbols fully typed", path)
     ]

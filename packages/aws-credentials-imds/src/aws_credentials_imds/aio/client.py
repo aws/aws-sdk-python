@@ -19,6 +19,7 @@ class AsyncIMDSTokenCache:
         self._token: IMDSToken | None = None
 
     async def get_token(self) -> IMDSToken:
+        """Return the cached session token, refreshing it once it expires."""
         if self._should_refresh():
             await self._refresh()
         assert self._token is not None  # noqa: S101
@@ -52,6 +53,7 @@ class AsyncIMDSClient:
         )
 
     async def get(self, *, path: str) -> str:
+        """Fetch the instance metadata at ``path``."""
         token = await self._token_cache.get_token()
         return await run_program_async(
             fetch_metadata(

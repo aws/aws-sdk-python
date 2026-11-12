@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """IMDS rules shared by the sync and async clients, resolvers and providers."""
 
+import functools
 import json
 import os
 from collections.abc import Callable
@@ -20,12 +21,6 @@ from smithy_core.program import Program
 from smithy_core.retries import SimpleRetryStrategy
 from smithy_http import Field, Fields, HTTPRequest
 
-from . import __version__
-
-_USER_AGENT_FIELD = Field(
-    name="User-Agent",
-    values=[f"aws-sdk-python-imds-client/{__version__}"],
-)
 _TOKEN_PATH = "/latest/api/token"  # noqa: S105
 _METADATA_PATH_BASE = "/latest/meta-data/iam/security-credentials"
 
@@ -156,7 +151,7 @@ def fetch_token(
         destination=_endpoint_path(config.endpoint_uri, _TOKEN_PATH),
         fields=Fields(
             [
-                _USER_AGENT_FIELD,
+                _user_agent_field(),
                 Field(
                     name="x-aws-ec2-metadata-token-ttl-seconds",
                     values=[str(config.token_ttl)],
@@ -186,7 +181,10 @@ def fetch_metadata(
         method="GET",
         destination=_endpoint_path(config.endpoint_uri, path),
         fields=Fields(
-            [_USER_AGENT_FIELD, Field(name="x-aws-ec2-metadata-token", values=[token])]
+            [
+                _user_agent_field(),
+                Field(name="x-aws-ec2-metadata-token", values=[token]),
+            ]
         ),
     )
     response = yield lambda: send(request)
@@ -205,6 +203,16 @@ def resolve_credentials(
         profile = yield lambda: get(_METADATA_PATH_BASE)
     document: str = yield lambda: get(f"{_METADATA_PATH_BASE}/{profile}")
     return _parse_identity(json.loads(document))
+
+
+@functools.cache
+def _user_agent_field() -> Field:
+    # Deferred: the package __init__ imports this module, so a top-level import is a cycle.
+    from . import __version__
+
+    return Field(
+        name="User-Agent", values=[f"aws-sdk-python-imds-client/{__version__}"]
+    )
 
 
 def _endpoint_path(endpoint: URI, path: str) -> URI:

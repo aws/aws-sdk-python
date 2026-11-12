@@ -12,7 +12,15 @@ resolution constraint on every customer. Typing-only imports count as uses: type
 checkers in a customer's environment need the dependency installed too.
 """
 
-from _common import Finding, import_to_dists, is_stdlib, main, packages, runtime_modules
+from _common import (
+    METAPACKAGE,
+    Finding,
+    import_to_dists,
+    is_stdlib,
+    main,
+    packages,
+    runtime_modules,
+)
 from packaging.utils import canonicalize_name
 
 
@@ -50,6 +58,7 @@ def check() -> list[Finding]:
                             f"{package.dist}: import {top} maps to no installed distribution",
                             imp.module.path,
                             imp.line,
+                            crash=imp.context != "type_checking" and not imp.guarded,
                         )
                     )
                 continue
@@ -64,8 +73,12 @@ def check() -> list[Finding]:
                             f"without declaring it ({imp.context})",
                             imp.module.path,
                             imp.line,
+                            crash=imp.context != "type_checking" and not imp.guarded,
                         )
                     )
+        # The metapackage exists to install clients through its extras, not to import them.
+        if package.dir == METAPACKAGE:
+            continue
         for dist in sorted(declared - used):
             where = "dependencies" if dist in required else "optional-dependencies"
             findings.append(
