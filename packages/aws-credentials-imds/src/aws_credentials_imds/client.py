@@ -33,6 +33,7 @@ class IMDSTokenCache:
         self._token: IMDSToken | None = None
 
     def get_token(self) -> IMDSToken:
+        """Return the cached session token, refreshing it once it expires."""
         if self._should_refresh():
             self._refresh()
         assert self._token is not None  # noqa: S101
@@ -66,6 +67,7 @@ class IMDSClient:
         )
 
     def get(self, *, path: str) -> str:
+        """Fetch the instance metadata at ``path``."""
         token = self._token_cache.get_token()
         return run_program(
             fetch_metadata(

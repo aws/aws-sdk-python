@@ -10,7 +10,7 @@ BATCH_SIZE ?= 25
 .PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen clients fragments publish-codegen aio-check meta-package-check static-analysis test-unit test-functional test-integration \
 	check-imports check-conventions check-api check-dependencies check-packaging check-import-stability verify-venv api-snapshot \
 	canonical-imports dunder-all source-order dynamic-imports banned-imports docstrings declared-deps import-cycles \
-	dep-specifiers package-metadata version-consistency export-names exception-hierarchy secret-repr import-hygiene \
+	dep-specifiers package-metadata package-metadata-fix version-consistency export-names exception-hierarchy secret-repr import-hygiene \
 	import-deprecations import-side-effects import-cost wheel-contents type-completeness optional-deps lowest-bounds
 
 # Each client and package runs in its own .venv. Dependencies outside this repo,
@@ -19,6 +19,13 @@ PROJECTS := $(patsubst %/pyproject.toml,%,$(wildcard clients/*/pyproject.toml pa
 RUFF_VERSION := 0.15.22
 PYRIGHT_VERSION := 1.1.406
 UV_RUN = uv run --python $(PYTHON_VERSION) --project
+
+# The verifications import, build and inspect every client and package together,
+# so they share one venv holding all of them editable, plus the pinned tools.
+# CAUTION: defined before any rule, since make expands prerequisites as it reads each rule.
+VERIFY_VENV := .venv-verify
+VERIFY_STAMP := $(VERIFY_VENV)/.installed
+VERIFY = $(VERIFY_VENV)/bin/python scripts/verifications
 
 # Q Business is sunsetting; new application creation is unavailable.
 INTEGRATION_SKIP := clients/aws-sdk-qbusiness
@@ -33,8 +40,7 @@ static-analysis:
 		uvx ruff@$(RUFF_VERSION) format --check --config $$p/pyproject.toml $$dirs; \
 		$(UV_RUN) $$p $$group --with pyright==$(PYRIGHT_VERSION) pyright -p $$p $$dirs; \
 	done
-	# TODO: enable once smithy-python codegen passes the aio naming rules.
-	# $(MAKE) aio-check
+	$(MAKE) aio-check
 	$(MAKE) check-imports
 	$(MAKE) check-conventions
 	$(MAKE) check-api
@@ -105,44 +111,38 @@ meta-package-check:
 
 check-imports: ## Keeps the import graph explicit, acyclic, and free of test-only modules.
 	$(MAKE) canonical-imports
-#	$(MAKE) import-cycles # TODO: enable once it passes
-#	$(MAKE) dynamic-imports # TODO: enable once it passes
+	$(MAKE) import-cycles
+	$(MAKE) dynamic-imports
 	$(MAKE) banned-imports
 
 check-conventions: ## Holds shipped code to our ordering, docstring, error, and secret-handling conventions.
-#	$(MAKE) source-order # TODO: enable once it passes
-#	$(MAKE) docstrings # TODO: enable once it passes
+	$(MAKE) source-order
+	$(MAKE) docstrings
 	$(MAKE) exception-hierarchy
-#	$(MAKE) secret-repr # TODO: enable once it passes
+	$(MAKE) secret-repr
 
 check-api: ## Keeps the public API surface reviewed, typed, and exported under its own names.
 	$(MAKE) api-snapshot
 	$(MAKE) export-names
 	$(MAKE) dunder-all
-#	$(MAKE) type-completeness # TODO: enable once it passes
+	$(MAKE) type-completeness
 
 check-dependencies: ## Keeps declared dependencies honest for customers who install only some packages.
-#	$(MAKE) declared-deps # TODO: enable once it passes
+	$(MAKE) declared-deps
 	$(MAKE) dep-specifiers
 	$(MAKE) optional-deps
 	$(MAKE) lowest-bounds
 
 check-packaging: ## Keeps what we publish to PyPI consistent across packages.
-#	$(MAKE) package-metadata # TODO: enable once it passes
-#	$(MAKE) version-consistency # TODO: enable once it passes
-#	$(MAKE) wheel-contents # TODO: enable once it passes
+	$(MAKE) package-metadata
+	$(MAKE) version-consistency
+	$(MAKE) wheel-contents
 
 check-import-stability: ## Keeps importing our packages cheap and free of side effects.
 	$(MAKE) import-hygiene
 	$(MAKE) import-deprecations
 	$(MAKE) import-side-effects
 	$(MAKE) import-cost
-
-# The verifications import, build and inspect every client and package together,
-# so they share one venv holding all of them editable, plus the pinned tools.
-VERIFY_VENV := .venv-verify
-VERIFY_STAMP := $(VERIFY_VENV)/.installed
-VERIFY = $(VERIFY_VENV)/bin/python scripts/verifications
 
 $(VERIFY_STAMP): $(addsuffix /pyproject.toml,$(PROJECTS))
 	uv venv --allow-existing --quiet --python $(PYTHON_VERSION) $(VERIFY_VENV)
@@ -185,6 +185,9 @@ dep-specifiers: $(VERIFY_STAMP) ## Keeps packages co-installable and in-repo ver
 
 package-metadata: $(VERIFY_STAMP) ## Catches pyproject.toml drift between packages.
 	$(VERIFY)/package_metadata.py
+
+package-metadata-fix: $(VERIFY_STAMP) ## Repairs canonical classifiers and LICENSE files that package-metadata flags.
+	$(VERIFY)/package_metadata.py --fix
 
 version-consistency: $(VERIFY_STAMP) ## Keeps __version__ truthful for user agents and bug reports.
 	$(VERIFY)/version_consistency.py

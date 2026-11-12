@@ -54,6 +54,7 @@ def check() -> list[Finding]:
                 Finding(
                     f"{name} fails without extras: {error['type']}: {error['message']}",
                     module.path,
+                    crash=True,
                 )
             )
             continue

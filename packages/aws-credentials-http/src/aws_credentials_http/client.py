@@ -28,6 +28,7 @@ class HttpCredentialsClient:
         self._retries = retries
 
     def get_credentials(self, uri: URI, fields: Fields) -> dict[str, str]:
+        """Fetch the credentials document from the endpoint at ``uri``."""
         return run_program(
             fetch_credentials(
                 send=lambda request, config: self._http_client.send(

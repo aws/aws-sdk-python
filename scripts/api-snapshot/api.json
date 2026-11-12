@@ -47,17 +47,23 @@
   "aws_credentials_sts": {},
   "aws_credentials_sts.aio": {},
   "aws_credentials_sts.aio.providers": {
-    "AsyncProfileAssumeRoleProvider": "class[async]"
+    "AsyncProfileAssumeRoleProvider": "class[async]",
+    "AsyncProfileWebIdentityProvider": "class[async]",
+    "AsyncWebIdentityTokenEnvProvider": "class[async]"
   },
   "aws_credentials_sts.aio.resolvers": {
     "AsyncAssumeRoleCredentialsResolver": "class[async]",
-    "AsyncProfileAssumeRoleCredentialsResolver": "class[async]"
+    "AsyncProfileAssumeRoleCredentialsResolver": "class[async]",
+    "AsyncWebIdentityCredentialsResolver": "class[async]"
   },
   "aws_credentials_sts.providers": {
-    "ProfileAssumeRoleProvider": "class"
+    "ProfileAssumeRoleProvider": "class",
+    "ProfileWebIdentityProvider": "class",
+    "WebIdentityTokenEnvProvider": "class"
   },
   "aws_credentials_sts.resolvers": {
     "AssumeRoleCredentialsResolver": "class",
-    "ProfileAssumeRoleCredentialsResolver": "class"
+    "ProfileAssumeRoleCredentialsResolver": "class",
+    "WebIdentityCredentialsResolver": "class"
   }
 }

@@ -23,8 +23,7 @@ if TYPE_CHECKING:
         AssumeRoleWithWebIdentityInput,
         AssumeRoleWithWebIdentityOutput,
     )
-    from smithy_aws_core.aio.identity.chain.provider import AsyncChainSetup
-    from smithy_aws_core.identity.chain.provider import ChainSetup
+    from smithy_aws_core.config.merged_config import MergedConfig
     from smithy_core.interfaces.retries import RetryBackoffStrategy
 
 MAX_RETRIES = 3
@@ -79,14 +78,16 @@ class WebIdentityConfig:
     region: str
 
 
-def env_config(setup: ChainSetup | AsyncChainSetup) -> WebIdentityConfig | None:
+def env_config(
+    *, profile_name: str | None, region_override: str | None
+) -> WebIdentityConfig | None:
     """Read web identity settings from the environment, if they're complete.
 
     Returns None when either required variable is missing, so the chain moves on to
     the next source, or when a profile was selected explicitly, since that profile
     takes precedence over environment credentials.
     """
-    if setup.profile_name is not None:
+    if profile_name is not None:
         return None
 
     web_identity_token_file = os.getenv(_WEB_IDENTITY_TOKEN_FILE_ENV)
@@ -98,18 +99,21 @@ def env_config(setup: ChainSetup | AsyncChainSetup) -> WebIdentityConfig | None:
         role_arn=role_arn,
         web_identity_token_file=web_identity_token_file,
         role_session_name=os.getenv(_ROLE_SESSION_NAME_ENV) or None,
-        region=setup.region_override or resolve_sts_region(),
+        region=region_override or resolve_sts_region(),
     )
 
 
-def profile_config(setup: ChainSetup | AsyncChainSetup) -> WebIdentityConfig | None:
+def profile_config(
+    *,
+    config_file: MergedConfig | None,
+    profile_name: str | None,
+    region_override: str | None,
+) -> WebIdentityConfig | None:
     """Read web identity settings from the active profile, if it sets a token file.
 
     :raises WebIdentityConfigurationError: If the profile sets a token file but no
         role ARN.
     """
-    config_file = setup.config_file
-    profile_name = setup.profile_name
     if config_file is None or profile_name is None:
         return None
 
@@ -129,7 +133,7 @@ def profile_config(setup: ChainSetup | AsyncChainSetup) -> WebIdentityConfig | N
         role_arn=role_arn,
         web_identity_token_file=web_identity_token_file,
         role_session_name=config_file.get(profile_name, _ROLE_SESSION_NAME),
-        region=setup.region_override
+        region=region_override
         or resolve_sts_region(config_file=config_file, profile_name=profile_name),
     )
 

@@ -17,7 +17,14 @@ import re
 import sys
 from typing import Any
 
-from _common import Finding, main, members, packages, runtime_modules
+from _common import (
+    Finding,
+    is_generated,
+    main,
+    members,
+    packages,
+    runtime_modules,
+)
 
 _SECRET = re.compile(
     r"(^|_)(secret\w*|\w*token|password|passphrase|api_key|private_key)$", re.IGNORECASE
@@ -30,6 +37,9 @@ def check() -> list[Finding]:
     findings: list[Finding] = []
     seen: set[type] = set()
     for module in runtime_modules():
+        # Clients will follow the model's @sensitive trait instead of name patterns.
+        if is_generated(module.path):
+            continue
         try:
             loaded = importlib.import_module(module.name)
         except Exception:  # noqa: S112

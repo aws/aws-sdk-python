@@ -53,7 +53,13 @@ def _inspect(package: Package, wheel: str, names: set[str]) -> list[Finding]:
         if p.suffix in (".py", ".pyi") and "__pycache__" not in p.parts
     }
     for missing in sorted(expected - names):
-        findings.append(Finding(f"{wheel}: missing {missing}", package.src / missing))
+        findings.append(
+            Finding(
+                f"{wheel}: missing {missing}",
+                package.src / missing,
+                crash=missing.endswith(".py"),
+            )
+        )
     for root in package.roots:
         if f"{root}/py.typed" not in names:
             findings.append(

@@ -206,22 +206,6 @@ class AsyncProfileAssumeRoleCredentialsResolver(
                 return await self._build_assume_role(source)
 
 
-class _AsyncUnusedCredentialsResolver(
-    AsyncIdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
-):
-    """The credentials resolver for the STS client that calls AssumeRoleWithWebIdentity.
-
-    The call is never signed, so this is never asked for credentials. Setting it
-    keeps the STS client from building its own default credential chain, which
-    would include the web identity providers again.
-    """
-
-    async def get_identity(
-        self, *, properties: AWSIdentityProperties
-    ) -> AWSCredentialsIdentity:
-        raise SmithyIdentityError(UNUSED_CREDENTIALS_MESSAGE)
-
-
 class AsyncWebIdentityCredentialsResolver(
     AsyncIdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
 ):
@@ -331,3 +315,19 @@ class AsyncWebIdentityCredentialsResolver(
                 role_session_name=self._role_session_name,
             )
         )
+
+
+class _AsyncUnusedCredentialsResolver(
+    AsyncIdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
+):
+    """The credentials resolver for the STS client that calls AssumeRoleWithWebIdentity.
+
+    The call is never signed, so this is never asked for credentials. Setting it
+    keeps the STS client from building its own default credential chain, which
+    would include the web identity providers again.
+    """
+
+    async def get_identity(
+        self, *, properties: AWSIdentityProperties
+    ) -> AWSCredentialsIdentity:
+        raise SmithyIdentityError(UNUSED_CREDENTIALS_MESSAGE)

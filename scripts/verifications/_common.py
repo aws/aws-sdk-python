@@ -12,7 +12,7 @@ import sys
 import tomllib
 from collections.abc import Callable, Iterable, Iterator
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from types import ModuleType
 from typing import Any, Literal
@@ -28,6 +28,9 @@ PROBE = HERE / "_probe.py"
 # Matched with and without suffix, so a generated models.pyi stub counts too.
 MODEL_DATA = ("models", "_private/schemas")
 AIO = "aio"
+CLIENTS = ROOT / "clients"
+# Hand-written, though it lives beside the generated clients.
+METAPACKAGE = CLIENTS / "aws-sdk-python"
 
 type Severity = Literal["error", "warning", "info"]
 type Context = Literal["runtime", "type_checking", "deferred"]
@@ -39,6 +42,8 @@ class Finding:
     path: Path | None = None
     line: int = 0
     severity: Severity = "error"
+    # Whether the finding fails at runtime, which keeps it an error even in a generated client.
+    crash: bool = False
 
     def __str__(self) -> str:
         where = ""
@@ -237,6 +242,11 @@ class Module:
         return None
 
 
+def is_generated(path: Path) -> bool:
+    """Whether ``path`` belongs to a generated client."""
+    return path.is_relative_to(CLIENTS) and not path.is_relative_to(METAPACKAGE)
+
+
 def relative(path: Path) -> str:
     try:
         return str(path.relative_to(ROOT))
@@ -402,7 +412,7 @@ def tarjan(graph: dict[str, set[str]]) -> list[list[str]]:
 
 def main(title: str, check: Callable[[], list[Finding]]) -> None:
     """Runs one verification, prints its findings, and exits nonzero on any error."""
-    findings = check()
+    findings = [_soften(f) for f in check()]
     for finding in findings:
         sys.stdout.write(f"{finding}\n")
     sys.stdout.flush()
@@ -704,3 +714,15 @@ class _ImportCollector:
         if module:
             parts.append(module)
         return ".".join(parts)
+
+
+def _soften(finding: Finding) -> Finding:
+    """Codegen owns generated clients, so only their runtime failures block here."""
+    if (
+        finding.severity == "error"
+        and not finding.crash
+        and finding.path is not None
+        and is_generated(finding.path)
+    ):
+        return replace(finding, severity="warning")
+    return finding
