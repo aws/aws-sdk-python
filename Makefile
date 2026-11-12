@@ -8,7 +8,7 @@ SMITHY_PYTHON ?= ../smithy-python
 BATCH_SIZE ?= 25
 
 .PHONY: docs docs-serve docs-clean docs-install docs-lock venv gen clients fragments publish-codegen aio-check meta-package-check static-analysis test-unit test-functional test-integration \
-	check-imports check-conventions check-api check-dependencies check-packaging check-import-stability verify-venv \
+	check-imports check-conventions check-api check-dependencies check-packaging check-import-stability verify-venv api-snapshot \
 	canonical-imports dunder-all source-order dynamic-imports banned-imports docstrings declared-deps import-cycles \
 	dep-specifiers package-metadata version-consistency export-names exception-hierarchy secret-repr import-hygiene \
 	import-deprecations import-side-effects import-cost wheel-contents type-completeness optional-deps lowest-bounds
@@ -33,7 +33,7 @@ static-analysis:
 		uvx ruff@$(RUFF_VERSION) format --check --config $$p/pyproject.toml $$dirs; \
 		$(UV_RUN) $$p $$group --with pyright==$(PYRIGHT_VERSION) pyright -p $$p $$dirs; \
 	done
-	# TODO: enable once aws-credentials-sts passes the aio naming rules.
+	# TODO: enable once smithy-python codegen passes the aio naming rules.
 	# $(MAKE) aio-check
 	$(MAKE) check-imports
 	$(MAKE) check-conventions
@@ -95,8 +95,8 @@ $(eval $(filter-out gen,$(MAKECMDGOALS)):;@:)
 endif
 
 # Enforces aio naming and separation in package and client sources.
-aio-check:
-	uv run --no-project --python $(PYTHON_VERSION) python scripts/aio-naming/aio_naming.py
+aio-check: $(VERIFY_STAMP)
+	$(VERIFY_VENV)/bin/python scripts/aio-naming/aio_naming.py
 
 # Catches a client missing from aws-sdk-python's extras or in-repo sources, which
 # would otherwise resolve from PyPI and fail on any unpublished version bump.
@@ -115,7 +115,8 @@ check-conventions: ## Holds shipped code to our ordering, docstring, error, and 
 	$(MAKE) exception-hierarchy
 #	$(MAKE) secret-repr # TODO: enable once it passes
 
-check-api: ## Keeps the public API surface typed and exported under its own names.
+check-api: ## Keeps the public API surface reviewed, typed, and exported under its own names.
+	$(MAKE) api-snapshot
 	$(MAKE) export-names
 	$(MAKE) dunder-all
 #	$(MAKE) type-completeness # TODO: enable once it passes
@@ -149,6 +150,9 @@ $(VERIFY_STAMP): $(addsuffix /pyproject.toml,$(PROJECTS))
 		packaging==25.0 ruff==$(RUFF_VERSION) pyright==$(PYRIGHT_VERSION) \
 		$(foreach p,$(PROJECTS),-e $(p) -r $(p)/pyproject.toml)
 	touch $@
+
+api-snapshot: $(VERIFY_STAMP) ## Records the public API surface and dual-mode mirrors of each package and asserts no git diff.
+	$(VERIFY_VENV)/bin/python scripts/api-snapshot/api_snapshot.py
 
 verify-venv: $(VERIFY_STAMP) ## Installs every client and package into the shared verification venv.
 

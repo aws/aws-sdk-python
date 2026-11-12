@@ -1,0 +1,145 @@
+{
+  "aws_credentials_http": {
+    "ContainerCredentialsResolver": "rex-class",
+    "EcsContainerProvider": "rex-class",
+    "client": "rex-module",
+    "providers": "rex-module",
+    "resolvers": "rex-module"
+  },
+  "aws_credentials_http.aio": {
+    "AsyncContainerCredentialsResolver": "rex-class[async]",
+    "AsyncEcsContainerProvider": "rex-class[async]",
+    "client": "rex-module",
+    "providers": "rex-module",
+    "resolvers": "rex-module"
+  },
+  "aws_credentials_http.aio.client": {
+    "fetch_credentials": "rex-function"
+  },
+  "aws_credentials_http.aio.providers": {
+    "AsyncContainerCredentialsResolver": "rex-class[async]",
+    "is_configured": "rex-function"
+  },
+  "aws_credentials_http.aio.resolvers": {
+    "AsyncHttpCredentialsClient": "rex-class[async]",
+    "is_fresh": "rex-function",
+    "read_token_file": "rex-function",
+    "resolve_credentials": "rex-function"
+  },
+  "aws_credentials_http.client": {
+    "fetch_credentials": "rex-function"
+  },
+  "aws_credentials_http.providers": {
+    "ContainerCredentialsResolver": "rex-class",
+    "is_configured": "rex-function"
+  },
+  "aws_credentials_http.resolvers": {
+    "HttpCredentialsClient": "rex-class",
+    "is_fresh": "rex-function",
+    "read_token_file": "rex-function",
+    "resolve_credentials": "rex-function"
+  },
+  "aws_credentials_imds": {
+    "Ec2InstanceMetadataProvider": "rex-class",
+    "IMDSConfig": "rex-class",
+    "IMDSConfigurationError": "rex-exception",
+    "IMDSCredentialsResolver": "rex-class",
+    "client": "rex-module",
+    "providers": "rex-module",
+    "resolvers": "rex-module"
+  },
+  "aws_credentials_imds.aio": {
+    "AsyncEc2InstanceMetadataProvider": "rex-class[async]",
+    "AsyncIMDSClient": "rex-class[async]",
+    "AsyncIMDSCredentialsResolver": "rex-class[async]",
+    "AsyncIMDSTokenCache": "rex-class[async]",
+    "client": "rex-module",
+    "providers": "rex-module",
+    "resolvers": "rex-module"
+  },
+  "aws_credentials_imds.aio.client": {
+    "IMDSConfig": "rex-class",
+    "IMDSToken": "rex-class",
+    "fetch_metadata": "rex-function",
+    "fetch_token": "rex-function"
+  },
+  "aws_credentials_imds.aio.providers": {
+    "AsyncIMDSCredentialsResolver": "rex-class[async]",
+    "provider_config": "rex-function"
+  },
+  "aws_credentials_imds.aio.resolvers": {
+    "AsyncIMDSClient": "rex-class[async]",
+    "IMDSConfig": "rex-class",
+    "is_fresh": "rex-function",
+    "resolve_credentials": "rex-function"
+  },
+  "aws_credentials_imds.client": {
+    "IMDSConfig": "rex-class",
+    "IMDSConfigurationError": "rex-exception",
+    "IMDSToken": "rex-class",
+    "fetch_metadata": "rex-function",
+    "fetch_token": "rex-function"
+  },
+  "aws_credentials_imds.providers": {
+    "IMDSCredentialsResolver": "rex-class",
+    "provider_config": "rex-function"
+  },
+  "aws_credentials_imds.resolvers": {
+    "IMDSClient": "rex-class",
+    "IMDSConfig": "rex-class",
+    "is_fresh": "rex-function",
+    "resolve_credentials": "rex-function"
+  },
+  "aws_credentials_sts": {
+    "AssumeRoleConfigurationError": "rex-exception",
+    "AssumeRoleCredentialsResolver": "rex-class",
+    "ProfileAssumeRoleCredentialsResolver": "rex-class",
+    "ProfileAssumeRoleProvider": "rex-class",
+    "providers": "rex-module",
+    "resolvers": "rex-module"
+  },
+  "aws_credentials_sts.aio": {
+    "AsyncAssumeRoleCredentialsResolver": "rex-class[async]",
+    "AsyncProfileAssumeRoleCredentialsResolver": "rex-class[async]",
+    "AsyncProfileAssumeRoleProvider": "rex-class[async]",
+    "providers": "rex-module",
+    "resolvers": "rex-module"
+  },
+  "aws_credentials_sts.aio.providers": {
+    "AsyncProfileAssumeRoleCredentialsResolver": "rex-class[async]",
+    "has_role_arn": "rex-function"
+  },
+  "aws_credentials_sts.aio.resolvers": {
+    "AssumeRolePlan": "rex-class",
+    "CredentialSource": "rex-class",
+    "StaticSource": "rex-class",
+    "assume_role_input": "rex-function",
+    "default_session_name": "rex-function",
+    "find_provider": "rex-function",
+    "first_resolver": "rex-function",
+    "identity_from_response": "rex-function",
+    "plan_profile": "rex-function",
+    "require_provider": "rex-function",
+    "resolve_sts_region": "rex-function",
+    "validate_profile": "rex-function"
+  },
+  "aws_credentials_sts.providers": {
+    "ProfileAssumeRoleCredentialsResolver": "rex-class",
+    "has_role_arn": "rex-function"
+  },
+  "aws_credentials_sts.resolvers": {
+    "AssumeRoleConfigurationError": "rex-exception",
+    "AssumeRolePlan": "rex-class",
+    "CredentialSource": "rex-class",
+    "StaticSource": "rex-class",
+    "assume_role_input": "rex-function",
+    "default_session_name": "rex-function",
+    "find_provider": "rex-function",
+    "first_resolver": "rex-function",
+    "identity_from_response": "rex-function",
+    "plan_profile": "rex-function",
+    "require_provider": "rex-function",
+    "resolve_sts_region": "rex-function",
+    "validate_profile": "rex-function"
+  }
+}
