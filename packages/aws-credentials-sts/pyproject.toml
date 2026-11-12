@@ -39,9 +39,13 @@ dependencies = [
 
 [project.entry-points."smithy_aws_core.identity.chain_providers"]
 ProfileAssumeRole = "aws_credentials_sts.providers:ProfileAssumeRoleProvider"
+ProfileWebIdentity = "aws_credentials_sts.providers:ProfileWebIdentityProvider"
+WebIdentityTokenEnv = "aws_credentials_sts.providers:WebIdentityTokenEnvProvider"
 
 [project.entry-points."smithy_aws_core.aio.identity.chain_providers"]
 ProfileAssumeRole = "aws_credentials_sts.aio.providers:AsyncProfileAssumeRoleProvider"
+ProfileWebIdentity = "aws_credentials_sts.aio.providers:AsyncProfileWebIdentityProvider"
+WebIdentityTokenEnv = "aws_credentials_sts.aio.providers:AsyncWebIdentityTokenEnvProvider"
 
 [dependency-groups]
 test = [
