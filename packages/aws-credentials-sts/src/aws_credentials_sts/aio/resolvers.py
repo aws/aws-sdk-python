@@ -21,6 +21,7 @@ from smithy_aws_core.config.merged_config import MergedConfig
 from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
 from smithy_aws_core.identity.chain import StandardProvider
 from smithy_core.aio.interfaces.identity import AsyncIdentityResolver
+from smithy_core.aio.program import run_program_async
 from smithy_core.auth import NoAuthResolver
 from smithy_core.exceptions import SmithyIdentityError
 from smithy_core.retries import StandardRetryStrategy
@@ -43,12 +44,10 @@ from .._assume_role import (
 )
 from .._web_identity import (
     DEFAULT_ROLE_SESSION_NAME,
-    MAX_RETRIES,
     UNUSED_CREDENTIALS_MESSAGE,
+    fetch_web_identity_credentials,
     read_token,
-    web_identity_input,
 )
-from .._web_identity import identity_from_response as web_identity_from_response
 
 if TYPE_CHECKING:
     from aws_sdk_sts.aio.client import AsyncSTSClient
@@ -310,50 +309,25 @@ class AsyncWebIdentityCredentialsResolver(
                 return await self._call(client)
         finally:
             # The client closes its transport only after it sends a request. Close it
-            # here too, in case the token couldn't be read and nothing was sent.
+            # here too, in case the token couldn't be read and nothing was sent. The
+            # sync resolver doesn't need this: an unused urllib3 transport holds nothing
+            # that needs closing, but an aiohttp session must be closed even if it was
+            # never used.
             if (close := getattr(config.transport, "close", None)) is not None:
                 await close()
 
     async def _call(self, client: AsyncSTSClient) -> AWSCredentialsIdentity:
-        """Call STS, retrying the failures the web identity SEP requires.
-
-        A failure to read the token file and an ``ExpiredTokenException`` both read
-        the token again before retrying. An ``IDPCommunicationError`` retries the STS
-        call with the same token. Other errors are raised immediately.
-        """
-        from aws_sdk_sts.models import (
-            ExpiredTokenException,
-            IDPCommunicationErrorException,
-        )
-
-        token: str | None = None
-        for attempt in range(MAX_RETRIES + 1):
-            is_last_attempt = attempt == MAX_RETRIES
-            if token is None:
+        return await run_program_async(
+            fetch_web_identity_credentials(
                 # Read the file in a thread so a slow disk doesn't block the loop.
-                token = await asyncio.to_thread(
-                    read_token,
-                    self._web_identity_token_file,
-                    is_last_attempt=is_last_attempt,
-                )
-            if token is not None:
-                try:
-                    response = await client.assume_role_with_web_identity(
-                        web_identity_input(
-                            role_arn=self._role_arn,
-                            role_session_name=self._role_session_name,
-                            web_identity_token=token,
-                        )
-                    )
-                except ExpiredTokenException:
-                    if is_last_attempt:
-                        raise
-                    token = None  # Read a fresh token before retrying.
-                except IDPCommunicationErrorException:
-                    if is_last_attempt:
-                        raise
-                else:
-                    return web_identity_from_response(response)
-            await asyncio.sleep(self._backoff.compute_next_backoff_delay(attempt + 1))
-
-        raise AssertionError("unreachable")
+                read_token=lambda path, **kwargs: asyncio.to_thread(
+                    read_token, path, **kwargs
+                ),
+                call_sts=client.assume_role_with_web_identity,
+                sleep=asyncio.sleep,
+                backoff=self._backoff,
+                web_identity_token_file=self._web_identity_token_file,
+                role_arn=self._role_arn,
+                role_session_name=self._role_session_name,
+            )
+        )

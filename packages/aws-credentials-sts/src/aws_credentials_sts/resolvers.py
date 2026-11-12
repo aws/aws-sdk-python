@@ -21,6 +21,7 @@ from smithy_aws_core.identity.chain import StandardProvider
 from smithy_aws_core.identity.chain.provider import ChainIdentityProvider, ChainSetup
 from smithy_core.auth import NoAuthResolver
 from smithy_core.interfaces.identity import IdentityResolver
+from smithy_core.program import run_program
 from smithy_core.retries import StandardRetryStrategy
 from smithy_http.interfaces import HTTPClient
 
@@ -42,13 +43,11 @@ from ._assume_role import (
 )
 from ._web_identity import (
     DEFAULT_ROLE_SESSION_NAME,
-    MAX_RETRIES,
     UnusedCredentialsResolver,
     WebIdentityConfigurationError,
+    fetch_web_identity_credentials,
     read_token,
-    web_identity_input,
 )
-from ._web_identity import identity_from_response as web_identity_from_response
 
 if TYPE_CHECKING:
     from aws_sdk_sts.client import STSClient
@@ -296,42 +295,14 @@ class WebIdentityCredentialsResolver(
             return self._call(client)
 
     def _call(self, client: STSClient) -> AWSCredentialsIdentity:
-        """Call STS, retrying the failures the web identity SEP requires.
-
-        A failure to read the token file and an ``ExpiredTokenException`` both read
-        the token again before retrying. An ``IDPCommunicationError`` retries the STS
-        call with the same token. Other errors are raised immediately.
-        """
-        from aws_sdk_sts.models import (
-            ExpiredTokenException,
-            IDPCommunicationErrorException,
+        return run_program(
+            fetch_web_identity_credentials(
+                read_token=read_token,
+                call_sts=client.assume_role_with_web_identity,
+                sleep=time.sleep,
+                backoff=self._backoff,
+                web_identity_token_file=self._web_identity_token_file,
+                role_arn=self._role_arn,
+                role_session_name=self._role_session_name,
+            )
         )
-
-        token: str | None = None
-        for attempt in range(MAX_RETRIES + 1):
-            is_last_attempt = attempt == MAX_RETRIES
-            if token is None:
-                token = read_token(
-                    self._web_identity_token_file, is_last_attempt=is_last_attempt
-                )
-            if token is not None:
-                try:
-                    response = client.assume_role_with_web_identity(
-                        web_identity_input(
-                            role_arn=self._role_arn,
-                            role_session_name=self._role_session_name,
-                            web_identity_token=token,
-                        )
-                    )
-                except ExpiredTokenException:
-                    if is_last_attempt:
-                        raise
-                    token = None  # Read a fresh token before retrying.
-                except IDPCommunicationErrorException:
-                    if is_last_attempt:
-                        raise
-                else:
-                    return web_identity_from_response(response)
-            time.sleep(self._backoff.compute_next_backoff_delay(attempt + 1))
-
-        raise AssertionError("unreachable")
