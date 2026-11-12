@@ -95,6 +95,11 @@ def check() -> list[Finding]:
                     "PATH": f"{venv / 'bin'}:{os.environ['PATH']}",
                 },
             )
+            # Exit codes above 1 mean pyright stopped before checking anything.
+            if checked.returncode not in (0, 1):
+                output = (checked.stderr or checked.stdout).strip()[-500:]
+                rel = package.dir.relative_to(ROOT)
+                return [f"{rel} exited {checked.returncode}: {output}"]
             lines = checked.stdout.splitlines()
             return [line for line in lines if " - error: " in line]
 
