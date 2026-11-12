@@ -23,16 +23,22 @@ fun readVersion(file: File, regex: Regex): String =
         ?.firstNotNullOfOrNull { regex.find(it)?.groupValues?.get(1) }
         ?: error("cannot read ${regex.pattern} from $file; set SMITHY_PYTHON to a smithy-python checkout")
 
-val codegenVersion = readVersion(
-    smithyPython.resolve("codegen/build.gradle.kts"),
-    Regex("""version\s*=\s*"([^"]+)""""),
+val codegenVersion by extra(
+    readVersion(
+        smithyPython.resolve("codegen/build.gradle.kts"),
+        Regex("""version\s*=\s*"([^"]+)""""),
+    )
 )
-val smithyVersion = readVersion(
-    smithyPython.resolve("codegen/gradle/libs.versions.toml"),
-    Regex("""^smithy\s*=\s*"([^"]+)""""),
+val smithyVersion by extra(
+    readVersion(
+        smithyPython.resolve("codegen/gradle/libs.versions.toml"),
+        Regex("""^smithy\s*=\s*"([^"]+)""""),
+    )
 )
 
 dependencies {
+    smithyBuild(project(":integrations"))
+
     // The build plugin (`python-client-codegen`) and AWS customizations must be
     // on the smithy build classpath for the projection to resolve them.
     smithyBuild("software.amazon.smithy.python.codegen:core:$codegenVersion")

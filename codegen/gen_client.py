@@ -32,12 +32,11 @@ POINTER = CODEGEN_DIR / "smithy-python.toml"
 PINNED_DIR = CODEGEN_DIR / ".smithy-python"
 
 # Paths codegen never emits; they survive the pre-generation delete. A path codegen
-# does emit but that must differ from codegen output belongs in client-overlays.
+# does emit but that must differ from codegen output belongs in codegen/integrations,
+# or in client-overlays when the difference is one client's hand edit.
 KEEP = (
     ".changes",
     "CHANGELOG.md",
-    "LICENSE",
-    "NOTICE",
     "examples",
     "tests/integration",
 )
