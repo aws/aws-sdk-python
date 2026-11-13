@@ -15,6 +15,7 @@ from smithy_http.plugins import user_agent_plugin
 from . import models as _models
 from .checksums import flexible_checksums_plugin
 from .config import Plugin, S3Config
+from .head_errors import head_not_found_plugin
 from .user_agent import aws_user_agent_plugin
 
 from typing import TYPE_CHECKING
@@ -6486,7 +6487,7 @@ class S3Client(Client[S3Config]):
         return self._invoke(
             self._select_input(_models.HEAD_BUCKET, args, kwargs),
             _models.HEAD_BUCKET,
-            [],
+            [head_not_found_plugin],
             plugins,
         )
 
@@ -6681,7 +6682,7 @@ class S3Client(Client[S3Config]):
         return self._invoke(
             self._select_input(_models.HEAD_OBJECT, args, kwargs),
             _models.HEAD_OBJECT,
-            [],
+            [head_not_found_plugin],
             plugins,
         )
 
