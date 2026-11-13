@@ -1,1 +1,2 @@
 software.amazon.aws.sdk.python.codegen.AwsSdkPackageFilesIntegration
+software.amazon.aws.sdk.python.codegen.S3HeadNotFoundIntegration

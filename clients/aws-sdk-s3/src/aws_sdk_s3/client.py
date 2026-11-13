@@ -15,6 +15,7 @@ from smithy_http.plugins import user_agent_plugin
 from . import models as _models
 from .checksums import flexible_checksums_plugin
 from .config import Plugin, S3Config
+from .head_errors import head_not_found_plugin
 from .user_agent import aws_user_agent_plugin
 
 from typing import TYPE_CHECKING
@@ -287,6 +288,7 @@ class S3Client(Client[S3Config]):
     """
 
     _client_plugins = (
+        head_not_found_plugin,
         aws_user_agent_plugin,
         flexible_checksums_plugin,
         user_agent_plugin,
