@@ -21,6 +21,7 @@ from ..models import (
 )
 from .checksums import flexible_checksums_plugin
 from .config import AsyncS3Config, Plugin
+from .head_errors import head_not_found_plugin
 from .user_agent import aws_user_agent_plugin
 
 from typing import TYPE_CHECKING
@@ -6492,7 +6493,7 @@ class AsyncS3Client(AsyncClient[AsyncS3Config]):
         return await self._invoke(
             self._select_input(_models.HEAD_BUCKET, args, kwargs),
             _models.HEAD_BUCKET,
-            [],
+            [head_not_found_plugin],
             plugins,
         )
 
@@ -6687,7 +6688,7 @@ class AsyncS3Client(AsyncClient[AsyncS3Config]):
         return await self._invoke(
             self._select_input(_models.HEAD_OBJECT, args, kwargs),
             _models.HEAD_OBJECT,
-            [],
+            [head_not_found_plugin],
             plugins,
         )
 
