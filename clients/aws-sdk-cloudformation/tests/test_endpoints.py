@@ -6,7 +6,7 @@ from typing import Any
 from pytest import mark, param
 from smithy_aws_core.aio.identity.static import AsyncStaticCredentialsResolver
 from smithy_aws_core.endpoints import AWS_RULES_EXTENSION
-from smithy_aws_core.identity import AWSCredentialsIdentity
+from smithy_aws_core.identity.components import AWSCredentialsIdentity
 from smithy_core.aio.utils import close_async
 from smithy_core.endpoints import BddEndpointResolver
 from smithy_core.interceptors import Interceptor

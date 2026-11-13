@@ -192,6 +192,8 @@ class CreateSecretInput(_SerdeShape):
       existing version. Instead, use PutSecretValue to create a new version.
 
     This value becomes the `VersionId` of the new version.
+
+    This field is autopopulated if not provided.
     """
     description: str | None = ...
     """The description of the secret."""
@@ -1216,6 +1218,8 @@ class PutSecretValueInput(_SerdeShape):
       version. You can only create new versions to store new secret values.
 
     This value becomes the `VersionId` of the new version.
+
+    This field is autopopulated if not provided.
     """
     secret_binary: bytes | None = ...
     """
@@ -1487,6 +1491,8 @@ class RotateSecretInput(_SerdeShape):
     failures and retries during a rotation. We recommend that you generate a
     [UUID-type](https://wikipedia.org/wiki/Universally_unique_identifier)
     value to ensure uniqueness of your versions within the specified secret.
+
+    This field is autopopulated if not provided.
     """
     rotation_lambda_arn: str | None = ...
     """
@@ -1968,6 +1974,8 @@ class UpdateSecretInput(_SerdeShape):
     failures and retries during a rotation. We recommend that you generate a
     [UUID-type](https://wikipedia.org/wiki/Universally_unique_identifier)
     value to ensure uniqueness of your versions within the specified secret.
+
+    This field is autopopulated if not provided.
     """
     description: str | None = ...
     """The description of the secret."""

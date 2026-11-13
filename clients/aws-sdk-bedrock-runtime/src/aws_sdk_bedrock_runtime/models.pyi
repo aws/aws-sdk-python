@@ -4193,7 +4193,11 @@ class StartAsyncInvokeInput(_SerdeShape):
     """Dataclass for StartAsyncInvokeInput structure."""
 
     client_request_token: str | None = ...
-    """Specify idempotency token to ensure that requests are not duplicated."""
+    """
+    Specify idempotency token to ensure that requests are not duplicated.
+
+    This field is autopopulated if not provided.
+    """
     model_id: str | None = ...
     """The model to invoke."""
     model_input: Document | None = ...

@@ -4,8 +4,8 @@ import logging
 from typing import cast
 
 from smithy_aws_core.aio.identity.chain import AsyncIdentityChain
-from smithy_aws_core.config import ConfigSource
-from smithy_aws_core.identity import AWSCredentialsIdentity
+from smithy_aws_core.config.types import ConfigSource
+from smithy_aws_core.identity.components import AWSCredentialsIdentity
 from smithy_core.aio.client import AsyncClient
 from smithy_core.aio.eventstream import AsyncDuplexEventStream
 from smithy_http.aio.interfaces import AsyncHTTPClient

@@ -1068,6 +1068,8 @@ class StartPatientInsightsJobInput(_SerdeShape):
     """
     Unique, case-sensitive identifier that you provide to ensure the
     idempotency of the request.
+
+    This field is autopopulated if not provided.
     """
 
 @dataclass(kw_only=True)

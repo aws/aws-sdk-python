@@ -365,7 +365,10 @@ class DeleteResourcePermissionStatementInput(_SerdeShape):
     statement_id: str | None = ...
     """Unique identifier of the permission statement to delete"""
     client_token: str | None = ...
-    """Idempotency token for the request"""
+    """
+    Idempotency token for the request This field is autopopulated if not
+    provided.
+    """
 
 @dataclass(kw_only=True)
 class DeleteResourcePermissionStatementOutput(_SerdeShape):
@@ -683,7 +686,10 @@ class PutResourcePermissionStatementInput(_SerdeShape):
     excluded_principal: str | None = ...
     """Principal to exclude from the permission statement"""
     client_token: str | None = ...
-    """Idempotency token for the request"""
+    """
+    Idempotency token for the request This field is autopopulated if not
+    provided.
+    """
 
 @dataclass(kw_only=True)
 class PutResourcePermissionStatementOutput(_SerdeShape):

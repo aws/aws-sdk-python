@@ -13,11 +13,11 @@ from typing import (
 )
 
 from smithy_aws_core.aio.auth.sigv4 import AsyncSigV4AuthScheme
-from smithy_aws_core.aio.config import AsyncFileSystem
 from smithy_aws_core.aio.config.aws_config import (
     AsyncAwsConfig,
     AsyncAwsConfigOverrides,
 )
+from smithy_aws_core.aio.config.filesystem import AsyncFileSystem
 from smithy_aws_core.aio.protocols import AsyncRestXmlClientProtocol
 from smithy_aws_core.config.resolvers import (
     EndpointUriResolver,
@@ -26,7 +26,10 @@ from smithy_aws_core.config.resolvers import (
 )
 from smithy_aws_core.config.types import FieldSpec
 from smithy_aws_core.endpoints import AWS_RULES_EXTENSION
-from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
+from smithy_aws_core.identity.components import (
+    AWSCredentialsIdentity,
+    AWSIdentityProperties,
+)
 from smithy_core.aio.interfaces import AsyncEndpointResolver
 from smithy_core.aio.interfaces.auth import AsyncAuthScheme
 from smithy_core.aio.interfaces.identity import AsyncIdentityResolver
