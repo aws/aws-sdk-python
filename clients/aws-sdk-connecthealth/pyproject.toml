@@ -48,6 +48,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.pyright]
+extraPaths = ["src", "../../tests"]
 typeCheckingMode = "strict"
 reportPrivateUsage = false
 reportUnusedFunction = false
@@ -69,5 +70,6 @@ ignore = ["F841"]
 skip-magic-trailing-comma = true
 
 [tool.pytest.ini_options]
+pythonpath = ["../../tests"]
 python_classes = ["!Test"]
 asyncio_mode = "auto"

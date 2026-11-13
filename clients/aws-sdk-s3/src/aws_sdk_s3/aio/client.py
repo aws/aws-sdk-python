@@ -22,6 +22,7 @@ from ..models import (
 )
 from .checksums import flexible_checksums_plugin
 from .config import AsyncS3Config, Plugin
+from .head_errors import head_not_found_plugin
 from .user_agent import aws_user_agent_plugin
 
 from typing import TYPE_CHECKING
@@ -294,6 +295,7 @@ class AsyncS3Client(AsyncClient[AsyncS3Config]):
     """
 
     _client_plugins = (
+        head_not_found_plugin,
         aws_user_agent_plugin,
         flexible_checksums_plugin,
         user_agent_plugin,
