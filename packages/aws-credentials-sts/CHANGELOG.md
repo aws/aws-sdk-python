@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.5.0
+
+### Features
+* Added `WebIdentityCredentialsResolver` and `AsyncWebIdentityCredentialsResolver`, which resolve credentials with STS `AssumeRoleWithWebIdentity` from an OIDC token file, and the `WebIdentityTokenEnvProvider` and `ProfileWebIdentityProvider` chain providers (with `Async*` equivalents), so the default credential chain uses web identity configured by the `AWS_WEB_IDENTITY_TOKEN_FILE` and `AWS_ROLE_ARN` environment variables or a profile's `web_identity_token_file` and `role_arn`.
+
+### Bug fixes
+* The AssumeRole chain provider no longer claims a profile that sets `role_arn` and `web_identity_token_file` without `source_profile` or `credential_source`, so the profile resolves through web identity instead of failing.
+
 ## v0.4.0
 
 ### Dependencies
