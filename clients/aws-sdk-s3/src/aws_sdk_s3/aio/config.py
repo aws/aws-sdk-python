@@ -13,11 +13,11 @@ from typing import (
 )
 
 from smithy_aws_core.aio.auth.sigv4 import AsyncSigV4AuthScheme
-from smithy_aws_core.aio.config import AsyncFileSystem
 from smithy_aws_core.aio.config.aws_config import (
     AsyncAwsConfig,
     AsyncAwsConfigOverrides,
 )
+from smithy_aws_core.aio.config.filesystem import AsyncFileSystem
 from smithy_aws_core.aio.protocols import AsyncRestXmlClientProtocol
 from smithy_aws_core.config.resolvers import (
     EndpointUriResolver,
@@ -38,7 +38,10 @@ from smithy_aws_core.config.validators import (
     validate_response_checksum_validation,
 )
 from smithy_aws_core.endpoints import AWS_RULES_EXTENSION
-from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
+from smithy_aws_core.identity.components import (
+    AWSCredentialsIdentity,
+    AWSIdentityProperties,
+)
 from smithy_core.aio.interfaces import AsyncEndpointResolver
 from smithy_core.aio.interfaces.auth import AsyncAuthScheme
 from smithy_core.aio.interfaces.identity import AsyncIdentityResolver
@@ -641,6 +644,7 @@ class _AsyncS3ConfigOverrides(AsyncAwsConfigOverrides, total=False):
     use_dualstack_endpoint: bool | None
     request_checksum_calculation: RequestChecksumCalculation | None
     response_checksum_validation: ResponseChecksumValidation | None
+    disable_host_prefix_injection: bool | None
 
 
 @dataclass(kw_only=True, repr=False, init=False)
@@ -757,6 +761,12 @@ class AsyncS3Config(AsyncAwsConfig):
     end, and a mismatch raises ``ChecksumMismatchError``.
     """
 
+    disable_host_prefix_injection: bool | None = None
+    """
+    Whether to skip prepending operations' modeled host prefixes to the
+    endpoint host.
+    """
+
     _FIELDS: ClassVar[dict[str, FieldSpec]] = {
         "force_path_style": FieldSpec(default=None),
         "use_arn_region": FieldSpec(default=None, resolver=_resolve_use_arn_region),
@@ -790,6 +800,7 @@ class AsyncS3Config(AsyncAwsConfig):
             resolver=resolve_response_checksum_validation_program,
             validator=validate_response_checksum_validation,
         ),
+        "disable_host_prefix_injection": FieldSpec(default=None),
         **AsyncAwsConfig._FIELDS,
         "endpoint_uri": FieldSpec(
             default=None, resolver=EndpointUriResolver("s3").program

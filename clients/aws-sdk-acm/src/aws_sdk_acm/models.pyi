@@ -1055,6 +1055,8 @@ class CreateAcmeDomainValidationInput(_SerdeShape):
     """
     A unique, case-sensitive identifier to ensure idempotency of the
     request.
+
+    This field is autopopulated if not provided.
     """
     acme_endpoint_arn: str | None = ...
     """The Amazon Resource Name (ARN) of the ACME endpoint."""
@@ -1087,6 +1089,8 @@ class CreateAcmeEndpointInput(_SerdeShape):
     """
     A unique, case-sensitive identifier to ensure idempotency of the
     request.
+
+    This field is autopopulated if not provided.
     """
     authorization_behavior: str | None = ...
     """The authorization behavior for the ACME endpoint."""
@@ -1127,6 +1131,8 @@ class CreateAcmeExternalAccountBindingInput(_SerdeShape):
     """
     A unique, case-sensitive identifier to ensure idempotency of the
     request.
+
+    This field is autopopulated if not provided.
     """
     acme_endpoint_arn: str | None = ...
     """The Amazon Resource Name (ARN) of the ACME endpoint."""

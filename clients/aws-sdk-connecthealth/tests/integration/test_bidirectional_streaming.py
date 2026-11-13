@@ -38,13 +38,7 @@ from aws_sdk_connecthealth.models import (
 from smithy_core.aio.eventstream import AsyncDuplexEventStream
 from smithy_http.aio.crt import AWSCRTHTTPClient
 
-from . import (
-    AUDIO_FILE,
-    REGION,
-    ConnectHealthResources,
-    create_connecthealth_client,
-    streaming_endpoint_plugin,
-)
+from . import AUDIO_FILE, REGION, ConnectHealthResources, create_connecthealth_client
 
 SAMPLE_RATE = 16000
 BYTES_PER_SAMPLE = 2
@@ -169,7 +163,6 @@ async def test_start_medical_scribe_listening_session(
     async with await create_connecthealth_client(
         REGION, transport=AWSCRTHTTPClient()
     ) as client:
-        endpoint_plugin = streaming_endpoint_plugin(REGION)
         session_id = str(uuid.uuid4())
 
         stream = await client.start_medical_scribe_listening_session(
@@ -180,8 +173,7 @@ async def test_start_medical_scribe_listening_session(
                 language_code=MedicalScribeLanguageCode.EN_US,
                 media_sample_rate_hertz=SAMPLE_RATE,
                 media_encoding=MedicalScribeMediaEncoding.PCM,
-            ),
-            plugins=[endpoint_plugin],
+            )
         )
 
         results = await asyncio.gather(
@@ -198,8 +190,7 @@ async def test_start_medical_scribe_listening_session(
                 session_id=session_id,
                 domain_id=domain_id,
                 subscription_id=subscription_id,
-            ),
-            plugins=[endpoint_plugin],
+            )
         )
         assert isinstance(response, GetMedicalScribeListeningSessionOutput)
         details = response.medical_scribe_listening_session_details

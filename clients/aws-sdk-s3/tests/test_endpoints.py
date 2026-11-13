@@ -6,7 +6,7 @@ from typing import Any
 from pytest import mark, param
 from smithy_aws_core.aio.identity.static import AsyncStaticCredentialsResolver
 from smithy_aws_core.endpoints import AWS_RULES_EXTENSION
-from smithy_aws_core.identity import AWSCredentialsIdentity
+from smithy_aws_core.identity.components import AWSCredentialsIdentity
 from smithy_core.aio.utils import close_async
 from smithy_core.endpoints import BddEndpointResolver
 from smithy_core.interceptors import Interceptor
@@ -11720,10 +11720,6 @@ CLIENT_CASES = [
             }
         },
         id="WriteGetObjectResponse @ us-west-2",
-        marks=mark.xfail(
-            reason="Host labels in an endpoint trait's hostPrefix aren't serialized yet",
-            strict=True,
-        ),
     ),
     param(
         {"region": "us-west-2", "endpoint_uri": "https://my-endpoint.com"},
@@ -11747,10 +11743,6 @@ CLIENT_CASES = [
             }
         },
         id="WriteGetObjectResponse with custom endpoint",
-        marks=mark.xfail(
-            reason="Host labels in an endpoint trait's hostPrefix aren't serialized yet",
-            strict=True,
-        ),
     ),
     param(
         {"region": "us-east-1"},
@@ -11774,10 +11766,6 @@ CLIENT_CASES = [
             }
         },
         id="WriteGetObjectResponse @ us-east-1",
-        marks=mark.xfail(
-            reason="Host labels in an endpoint trait's hostPrefix aren't serialized yet",
-            strict=True,
-        ),
     ),
     param(
         {"region": "us-east-1", "use_fips_endpoint": True},
@@ -11801,10 +11789,6 @@ CLIENT_CASES = [
             }
         },
         id="WriteGetObjectResponse with fips",
-        marks=mark.xfail(
-            reason="Host labels in an endpoint trait's hostPrefix aren't serialized yet",
-            strict=True,
-        ),
     ),
     param(
         {"region": "us-east-1", "use_dualstack_endpoint": True},
@@ -11814,10 +11798,6 @@ CLIENT_CASES = [
         ),
         {"error": "S3 Object Lambda does not support Dual-stack"},
         id="WriteGetObjectResponse with dualstack",
-        marks=mark.xfail(
-            reason="Host labels in an endpoint trait's hostPrefix aren't serialized yet",
-            strict=True,
-        ),
     ),
     param(
         {"region": "us-east-1"},

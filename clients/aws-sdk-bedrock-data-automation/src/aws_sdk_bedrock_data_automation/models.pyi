@@ -267,7 +267,10 @@ class CopyBlueprintStageInput(_SerdeShape):
     target_stage: str | None = ...
     """Target stage to copy to"""
     client_token: str | None = ...
-    """Client token for idempotency"""
+    """
+    Client token for idempotency This field is autopopulated if not
+    provided.
+    """
 
 @dataclass(kw_only=True)
 class CopyBlueprintStageOutput(_SerdeShape):
@@ -294,7 +297,10 @@ class CreateBlueprintInput(_SerdeShape):
     schema: str | None = ...
     """Schema of the blueprint"""
     client_token: str | None = ...
-    """Client specified token used for idempotency checks"""
+    """
+    Client specified token used for idempotency checks This field is
+    autopopulated if not provided.
+    """
     encryption_configuration: EncryptionConfiguration | None = ...
     """KMS Encryption Configuration"""
     tags: list[Tag] | None = ...
@@ -321,7 +327,10 @@ class CreateBlueprintVersionInput(_SerdeShape):
     blueprint_arn: str | None = ...
     """ARN generated at the server side when a Blueprint is created"""
     client_token: str | None = ...
-    """Client specified token used for idempotency checks"""
+    """
+    Client specified token used for idempotency checks This field is
+    autopopulated if not provided.
+    """
 
 @dataclass(kw_only=True)
 class CreateBlueprintVersionOutput(_SerdeShape):
@@ -346,7 +355,10 @@ class CreateDataAutomationLibraryInput(_SerdeShape):
     library_description: str | None = ...
     """Description of the DataAutomationLibrary"""
     client_token: str | None = ...
-    """Client specified token used for idempotency checks"""
+    """
+    Client specified token used for idempotency checks This field is
+    autopopulated if not provided.
+    """
     encryption_configuration: EncryptionConfiguration | None = ...
     """KMS Encryption Configuration"""
     tags: list[Tag] | None = ...
@@ -391,7 +403,10 @@ class CreateDataAutomationProjectInput(_SerdeShape):
     ) = ...
     """DataAutomation Library configuration"""
     client_token: str | None = ...
-    """Client specified token used for idempotency checks"""
+    """
+    Client specified token used for idempotency checks This field is
+    autopopulated if not provided.
+    """
     encryption_configuration: EncryptionConfiguration | None = ...
     """KMS Encryption Configuration"""
     tags: list[Tag] | None = ...
@@ -1166,7 +1181,7 @@ class InvokeDataAutomationLibraryIngestionJobInput(_SerdeShape):
     library_arn: str | None = ...
     """ARN generated at the server side when a DataAutomationLibrary is created"""
     client_token: str | None = ...
-    """Idempotency token"""
+    """Idempotency token This field is autopopulated if not provided."""
     input_configuration: InputConfiguration | None = ...
     """Input configuration of DataAutomationLibraryIngestionJob request"""
     entity_type: str | None = ...
@@ -1796,7 +1811,10 @@ class UpdateDataAutomationLibraryInput(_SerdeShape):
     library_description: str | None = ...
     """Description of the DataAutomationLibrary"""
     client_token: str | None = ...
-    """Client specified token used for idempotency checks"""
+    """
+    Client specified token used for idempotency checks This field is
+    autopopulated if not provided.
+    """
 
 @dataclass(kw_only=True)
 class UpdateDataAutomationLibraryOutput(_SerdeShape):
