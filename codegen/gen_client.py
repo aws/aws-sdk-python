@@ -38,6 +38,7 @@ KEEP = (
     ".changes",
     "CHANGELOG.md",
     "examples",
+    "tests/functional",
     "tests/integration",
 )
 
