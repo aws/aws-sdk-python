@@ -83,8 +83,8 @@ tables in `us-east-1`:
 ```python
 import asyncio
 
-from aws_sdk_dynamodb.client import AsyncDynamoDBClient
-from aws_sdk_dynamodb.config import AsyncDynamoDBConfig
+from aws_sdk_dynamodb.aio.client import AsyncDynamoDBClient
+from aws_sdk_dynamodb.aio.config import AsyncDynamoDBConfig
 from aws_sdk_dynamodb.models import ListTablesInput
 
 

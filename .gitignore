@@ -1,6 +1,9 @@
 # macOS system files
 .DS_Store
 
+# IDE
+.idea/
+
 # Docs build artifacts
 site/
 docs/clients/
@@ -8,6 +11,7 @@ docs/clients/
 
 # Virtual environments
 .venv
+.venv-verify
 venv
 
 # Caches
@@ -23,3 +27,6 @@ dist/
 
 # scratch workspace
 /workspace
+
+# Codegen sync changelog text, read by `make clients`
+/CODEGEN_SYNC_CHANGELOG.md

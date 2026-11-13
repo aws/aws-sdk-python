@@ -13,28 +13,23 @@ repositories {
     mavenCentral()
 }
 
-// Read the codegen and smithy versions from the colocated smithy-python
-// checkout so this harness tracks whatever generator you build against,
-// rather than a literal that silently rots when smithy-python bumps.
-// Falls back to the last-known values if the checkout can't be read.
-val smithyPython = file(System.getenv("SMITHY_PYTHON") ?: "../smithy-python")
+// Read the codegen and smithy versions from the smithy-python checkout being built
+// against, so this harness tracks that generator instead of a literal that rots.
+val smithyPython = file(System.getenv("SMITHY_PYTHON") ?: "../../smithy-python")
 
-fun readVersion(file: File, regex: Regex, fallback: String): String =
-    if (file.exists()) {
-        file.readLines().firstNotNullOfOrNull { regex.find(it)?.groupValues?.get(1) } ?: fallback
-    } else {
-        fallback
-    }
+fun readVersion(file: File, regex: Regex): String =
+    file.takeIf { it.exists() }
+        ?.readLines()
+        ?.firstNotNullOfOrNull { regex.find(it)?.groupValues?.get(1) }
+        ?: error("cannot read ${regex.pattern} from $file; set SMITHY_PYTHON to a smithy-python checkout")
 
 val codegenVersion = readVersion(
     smithyPython.resolve("codegen/build.gradle.kts"),
     Regex("""version\s*=\s*"([^"]+)""""),
-    "0.5.1",
 )
 val smithyVersion = readVersion(
     smithyPython.resolve("codegen/gradle/libs.versions.toml"),
     Regex("""^smithy\s*=\s*"([^"]+)""""),
-    "1.73.0",
 )
 
 dependencies {

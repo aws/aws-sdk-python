@@ -3,9 +3,8 @@
 
 """Test output streaming blob handling."""
 
-from smithy_core.aio.utils import read_streaming_blob_async
-
 from aws_sdk_polly.models import SynthesizeSpeechInput, SynthesizeSpeechOutput
+from smithy_core.aio.utils import read_streaming_blob_async
 
 from . import (
     ENGINE,

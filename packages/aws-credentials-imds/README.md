@@ -48,11 +48,11 @@ The resolver can also be used on its own to fetch credentials directly:
 ```python
 import asyncio
 
-from aws_credentials_imds import IMDSCredentialsResolver
+from aws_credentials_imds.aio import AsyncIMDSCredentialsResolver
 
 
 async def main() -> None:
-    resolver = IMDSCredentialsResolver()
+    resolver = AsyncIMDSCredentialsResolver()
     identity = await resolver.get_identity(properties={})
 
 

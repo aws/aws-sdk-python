@@ -1,15 +1,13 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
-import json
-from datetime import UTC, datetime
-
 from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperties
-from smithy_core.aio.interfaces.identity import IdentityResolver
-from smithy_core.exceptions import SmithyIdentityError
-from smithy_http.aio.aiohttp import AIOHTTPClient
-from smithy_http.aio.interfaces import HTTPClient
+from smithy_core.interfaces.identity import IdentityResolver
+from smithy_core.program import run_program
+from smithy_http.interfaces import HTTPClient
+from smithy_http.urllib3 import Urllib3HTTPClient
 
-from .client import IMDSClient, IMDSConfig
+from ._imds import IMDSConfig, is_fresh, resolve_credentials
+from .client import IMDSClient
 
 
 class IMDSCredentialsResolver(
@@ -17,52 +15,39 @@ class IMDSCredentialsResolver(
 ):
     """Resolves AWS credentials from the EC2 Instance Metadata Service."""
 
-    _METADATA_PATH_BASE = "/latest/meta-data/iam/security-credentials"
-
     def __init__(
-        self, http_client: HTTPClient | None = None, config: IMDSConfig | None = None
+        self,
+        http_client: HTTPClient | None = None,
+        config: IMDSConfig | None = None,
     ):
-        self._http_client = http_client or AIOHTTPClient()
-        self._imds_client = IMDSClient(http_client=self._http_client, config=config)
         self._config = config or IMDSConfig()
-        self._credentials = None
+        # A caller-provided client is the caller's to close.
+        self._imds_client = (
+            IMDSClient(http_client=http_client, config=self._config)
+            if http_client is not None
+            else None
+        )
+        self._credentials: AWSCredentialsIdentity | None = None
 
-    async def get_identity(
+    def get_identity(
         self, *, properties: AWSIdentityProperties
     ) -> AWSCredentialsIdentity:
         """Return cached credentials if valid, otherwise fetch from IMDS."""
-        if (
-            self._credentials is not None
-            and self._credentials.expiration
-            and datetime.now(UTC) < self._credentials.expiration
-        ):
+        if self._credentials is not None and is_fresh(self._credentials):
             return self._credentials
-
-        profile = self._config.ec2_instance_profile_name
-        if profile is None:
-            profile = await self._imds_client.get(path=self._METADATA_PATH_BASE)
-
-        creds_str = await self._imds_client.get(
-            path=f"{self._METADATA_PATH_BASE}/{profile}"
-        )
-        creds = json.loads(creds_str)
-
-        access_key_id = creds.get("AccessKeyId")
-        secret_access_key = creds.get("SecretAccessKey")
-        session_token = creds.get("Token")
-        account_id = creds.get("AccountId")
-        expiration = creds.get("Expiration")
-        if expiration is not None:
-            expiration = datetime.fromisoformat(expiration).replace(tzinfo=UTC)
-
-        if access_key_id is None or secret_access_key is None:
-            raise SmithyIdentityError("AccessKeyId and SecretAccessKey are required")
-
-        self._credentials = AWSCredentialsIdentity(
-            access_key_id=access_key_id,
-            secret_access_key=secret_access_key,
-            session_token=session_token,
-            expiration=expiration,
-            account_id=account_id,
-        )
+        if self._imds_client is not None:
+            self._credentials = self._resolve(self._imds_client)
+        else:
+            with Urllib3HTTPClient() as http_client:
+                self._credentials = self._resolve(
+                    IMDSClient(http_client=http_client, config=self._config)
+                )
         return self._credentials
+
+    def _resolve(self, imds_client: IMDSClient) -> AWSCredentialsIdentity:
+        return run_program(
+            resolve_credentials(
+                get=lambda path: imds_client.get(path=path),
+                instance_profile_name=self._config.ec2_instance_profile_name,
+            )
+        )

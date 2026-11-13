@@ -30,22 +30,22 @@ import sys
 from typing import Any, AsyncGenerator, Tuple
 
 import sounddevice
-from smithy_aws_core.identity import EnvironmentCredentialsResolver
-from smithy_core.aio.interfaces.eventstream import EventPublisher, EventReceiver
-from smithy_http.aio.crt import AWSCRTHTTPClient
-
-from aws_sdk_transcribe_streaming.client import (
-    AsyncTranscribeStreamingClient,
-    StartStreamTranscriptionInput,
-)
-from aws_sdk_transcribe_streaming.config import AsyncTranscribeStreamingConfig
+from aws_sdk_transcribe_streaming.aio.client import AsyncTranscribeStreamingClient
+from aws_sdk_transcribe_streaming.aio.config import AsyncTranscribeStreamingConfig
 from aws_sdk_transcribe_streaming.models import (
     AudioEvent,
     AudioStream,
     AudioStreamAudioEvent,
+    StartStreamTranscriptionInput,
     TranscriptEvent,
     TranscriptResultStream,
 )
+from smithy_aws_core.aio.identity import AsyncEnvironmentCredentialsResolver
+from smithy_core.aio.interfaces.eventstream import (
+    AsyncEventPublisher,
+    AsyncEventReceiver,
+)
+from smithy_http.aio.crt import AWSCRTHTTPClient
 
 # Configuration
 AWS_REGION = "us-west-2"
@@ -82,7 +82,7 @@ async def mic_stream() -> AsyncGenerator[Tuple[bytes, Any], None]:
 
 
 class TranscriptResultStreamHandler:
-    def __init__(self, stream: EventReceiver[TranscriptResultStream]):
+    def __init__(self, stream: AsyncEventReceiver[TranscriptResultStream]):
         self.stream = stream
 
     async def handle_events(self):
@@ -105,7 +105,7 @@ class TranscriptResultStreamHandler:
                     print(alt.transcript)
 
 
-async def write_chunks(audio_stream: EventPublisher[AudioStream]):
+async def write_chunks(audio_stream: AsyncEventPublisher[AudioStream]):
     # This connects the raw audio chunks generator coming from the microphone
     # and passes them along to the transcription stream.
     async for chunk, _ in mic_stream():
@@ -120,7 +120,7 @@ async def main():
         config=await AsyncTranscribeStreamingConfig.resolve(
             endpoint_uri=ENDPOINT_URI,
             region=AWS_REGION,
-            aws_credentials_identity_resolver=EnvironmentCredentialsResolver(),
+            aws_credentials_identity_resolver=AsyncEnvironmentCredentialsResolver(),
             transport=AWSCRTHTTPClient(),
         )
     ) as client:

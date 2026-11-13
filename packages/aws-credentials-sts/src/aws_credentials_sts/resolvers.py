@@ -3,12 +3,11 @@
 
 from __future__ import annotations
 
-import asyncio
 import os
-import uuid
-from collections.abc import Callable
-from importlib import metadata
-from typing import TYPE_CHECKING, cast
+import threading
+import time
+from pathlib import Path
+from typing import TYPE_CHECKING
 
 from smithy_aws_core.config import AwsConfigOverrides
 from smithy_aws_core.config.merged_config import MergedConfig
@@ -18,67 +17,50 @@ from smithy_aws_core.identity import (
     AWSIdentityProperties,
     StaticCredentialsResolver,
 )
-from smithy_aws_core.identity.chain import (
-    ChainIdentityProvider,
-    ChainSetup,
-    StandardProvider,
+from smithy_aws_core.identity.chain import StandardProvider
+from smithy_aws_core.identity.chain.provider import ChainIdentityProvider, ChainSetup
+from smithy_core.auth import NoAuthResolver
+from smithy_core.interfaces.identity import IdentityResolver
+from smithy_core.program import run_program
+from smithy_core.retries import StandardRetryStrategy
+from smithy_http.interfaces import HTTPClient
+
+from ._assume_role import (
+    DEFAULT_STS_REGION,
+    AssumeRoleConfigurationError,
+    AssumeRolePlan,
+    CredentialSource,
+    StaticSource,
+    assume_role_input,
+    default_session_name,
+    find_provider,
+    first_resolver,
+    identity_from_response,
+    plan_profile,
+    require_provider,
+    resolve_sts_region,
+    validate_profile,
 )
-from smithy_core.aio.interfaces.identity import IdentityResolver
-from smithy_core.exceptions import SmithyError, SmithyIdentityError
-from smithy_http.aio.interfaces import HTTPClient
+from ._web_identity import (
+    DEFAULT_ROLE_SESSION_NAME,
+    UnusedCredentialsResolver,
+    WebIdentityConfigurationError,
+    fetch_web_identity_credentials,
+    read_token,
+)
 
 if TYPE_CHECKING:
-    from aws_sdk_sts.client import AsyncSTSClient
+    from aws_sdk_sts.client import STSClient
+
+__all__ = (
+    "AssumeRoleConfigurationError",
+    "AssumeRoleCredentialsResolver",
+    "ProfileAssumeRoleCredentialsResolver",
+    "WebIdentityConfigurationError",
+    "WebIdentityCredentialsResolver",
+)
 
 _CHAIN_PROVIDER_ENTRY_POINT_GROUP = "smithy_aws_core.identity.chain_providers"
-_DEFAULT_STS_REGION = "us-east-1"
-
-_ACCESS_KEY_ID = "aws_access_key_id"
-_SECRET_ACCESS_KEY = "aws_secret_access_key"  # noqa: S105
-_SESSION_TOKEN = "aws_session_token"  # noqa: S105
-_ACCOUNT_ID = "aws_account_id"
-_ROLE_ARN = "role_arn"
-_ROLE_SESSION_NAME = "role_session_name"
-_EXTERNAL_ID = "external_id"
-_DURATION_SECONDS = "duration_seconds"
-_SOURCE_PROFILE = "source_profile"
-_CREDENTIAL_SOURCE = "credential_source"
-_REGION = "region"
-
-_CREDENTIAL_SOURCE_SLOTS = {
-    "Environment": StandardProvider.ENVIRONMENT,
-    "EcsContainer": StandardProvider.ECS_CONTAINER,
-    "Ec2InstanceMetadata": StandardProvider.EC2_INSTANCE_METADATA,
-}
-
-
-class AssumeRoleConfigurationError(SmithyError):
-    """Raised when AssumeRole credential configuration is invalid."""
-
-
-def _account_id_from_arn(arn: str | None) -> str | None:
-    if arn is None:
-        return None
-    parts = arn.split(":")
-    return parts[4] if len(parts) >= 5 and parts[4] else None
-
-
-def _resolve_sts_region(
-    *,
-    config_file: MergedConfig | None = None,
-    profile_name: str | None = None,
-) -> str:
-    profile_region = (
-        config_file.get(profile_name, _REGION)
-        if config_file is not None and profile_name is not None
-        else None
-    )
-    return (
-        os.getenv("AWS_REGION")
-        or os.getenv("AWS_DEFAULT_REGION")
-        or profile_region
-        or _DEFAULT_STS_REGION
-    )
 
 
 class AssumeRoleCredentialsResolver(
@@ -99,18 +81,16 @@ class AssumeRoleCredentialsResolver(
     ) -> None:
         self._source_resolver = source_resolver
         self._role_arn = role_arn
-        self._role_session_name = (
-            role_session_name or f"aws-sdk-python-{uuid.uuid4().hex[:16]}"
-        )
+        self._role_session_name = role_session_name or default_session_name()
         self._external_id = external_id
         self._duration_seconds = duration_seconds
-        self._region = region or _DEFAULT_STS_REGION
+        self._region = region or DEFAULT_STS_REGION
         self._http_client = http_client
         self._credentials: AWSCredentialsIdentity | None = None
-        self._client: AsyncSTSClient | None = None
-        self._refresh_lock = asyncio.Lock()
+        self._client: STSClient | None = None
+        self._refresh_lock = threading.Lock()
 
-    async def get_identity(
+    def get_identity(
         self,
         *,
         properties: AWSIdentityProperties,
@@ -119,55 +99,39 @@ class AssumeRoleCredentialsResolver(
         if self._credentials is not None and not self._credentials.is_expired:
             return self._credentials
 
-        async with self._refresh_lock:
+        with self._refresh_lock:
             if self._credentials is not None and not self._credentials.is_expired:
                 return self._credentials
-            self._credentials = await self._assume_role()
+            self._credentials = self._assume_role()
             return self._credentials
 
-    async def _assume_role(self) -> AWSCredentialsIdentity:
-        from aws_sdk_sts.client import AsyncSTSClient
-        from aws_sdk_sts.config import AsyncSTSConfig
-        from aws_sdk_sts.models import AssumeRoleInput
+    def _assume_role(self) -> AWSCredentialsIdentity:
+        from aws_sdk_sts.client import STSClient
+        from aws_sdk_sts.config import STSConfig
 
-        if self._client is None:
-            overrides: AwsConfigOverrides = {
-                "aws_credentials_identity_resolver": self._source_resolver,
-                "region": self._region,
-            }
-            if self._http_client is not None:
-                overrides["transport"] = self._http_client
-            self._client = AsyncSTSClient(
-                config=await AsyncSTSConfig.resolve(**overrides)
-            )
+        overrides: AwsConfigOverrides = {
+            "aws_credentials_identity_resolver": self._source_resolver,
+            "region": self._region,
+        }
+        if self._client is None and self._http_client is not None:
+            # CAUTION: never closed, since closing it would close the caller's transport.
+            overrides["transport"] = self._http_client
+            self._client = STSClient(config=STSConfig.resolve(**overrides))
+        if self._client is not None:
+            return self._call(self._client)
+        with STSClient(config=STSConfig.resolve(**overrides)) as client:
+            return self._call(client)
 
-        response = await self._client.assume_role(
-            AssumeRoleInput(
+    def _call(self, client: STSClient) -> AWSCredentialsIdentity:
+        response = client.assume_role(
+            assume_role_input(
                 role_arn=self._role_arn,
                 role_session_name=self._role_session_name,
                 external_id=self._external_id,
                 duration_seconds=self._duration_seconds,
             )
         )
-
-        credentials = response.credentials
-        if credentials is None:
-            raise SmithyIdentityError(
-                "STS AssumeRole response did not contain credentials."
-            )
-
-        assumed_role_arn = (
-            response.assumed_role_user.arn
-            if response.assumed_role_user is not None
-            else None
-        )
-        return AWSCredentialsIdentity(
-            access_key_id=credentials.access_key_id,
-            secret_access_key=credentials.secret_access_key,
-            session_token=credentials.session_token,
-            expiration=credentials.expiration,
-            account_id=_account_id_from_arn(assumed_role_arn),
-        )
+        return identity_from_response(response)
 
 
 class ProfileAssumeRoleCredentialsResolver(
@@ -183,191 +147,162 @@ class ProfileAssumeRoleCredentialsResolver(
         region_override: str | None = None,
         http_client: HTTPClient | None = None,
     ) -> None:
-        if config_file.get_profile(profile_name) is None:
-            raise AssumeRoleConfigurationError(
-                f"Profile '{profile_name}' does not exist."
-            )
+        validate_profile(config_file, profile_name)
         self._profile_name = profile_name
         self._config_file = config_file
-        self._region = region_override or _resolve_sts_region(
+        self._region = region_override or resolve_sts_region(
             config_file=config_file, profile_name=profile_name
         )
         self._http_client = http_client
         self._delegate: AssumeRoleCredentialsResolver | None = None
-        self._setup_lock = asyncio.Lock()
+        self._setup_lock = threading.Lock()
 
-    async def get_identity(
+    def get_identity(
         self,
         *,
         properties: AWSIdentityProperties,
     ) -> AWSCredentialsIdentity:
         """Create delegate resolver if needed, then fetch assume role credentials."""
         if self._delegate is None:
-            async with self._setup_lock:
+            with self._setup_lock:
                 if self._delegate is None:
-                    self._delegate = await self._create_assume_role_resolver(
-                        profile_name=self._profile_name,
-                        visited=(self._profile_name,),
-                    )
-        return await self._delegate.get_identity(properties=properties)
+                    self._delegate = self._create_delegate()
+        return self._delegate.get_identity(properties=properties)
 
-    async def _create_assume_role_resolver(
-        self,
-        *,
-        profile_name: str,
-        visited: tuple[str, ...],
-    ) -> AssumeRoleCredentialsResolver:
-        config_file = self._config_file
-        role_arn = config_file.get(profile_name, _ROLE_ARN)
-        if role_arn is None:
-            raise AssumeRoleConfigurationError(
-                f"Profile '{profile_name}' does not define role_arn."
-            )
+    def _create_delegate(self) -> AssumeRoleCredentialsResolver:
+        return self._build_assume_role(
+            plan_profile(self._config_file, self._profile_name)
+        )
 
-        source_profile = config_file.get(profile_name, _SOURCE_PROFILE)
-        credential_source = config_file.get(profile_name, _CREDENTIAL_SOURCE)
-        if source_profile is not None and credential_source is not None:
-            raise AssumeRoleConfigurationError(
-                f"Profile '{profile_name}' cannot define both 'source_profile' and 'credential_source'."
-            )
-        elif source_profile is not None:
-            source_resolver = await self._create_resolver_from_source_profile(
-                source_profile,
-                visited,
-            )
-        elif credential_source is not None:
-            source_resolver = await self._create_resolver_from_credential_source(
-                credential_source,
-                self._region,
-            )
-        else:
-            raise AssumeRoleConfigurationError(
-                f"Profile '{profile_name}' must define either 'source_profile' or 'credential_source'."
-            )
+    def _find_provider(self, slot: StandardProvider) -> ChainIdentityProvider | None:
+        return find_provider(_CHAIN_PROVIDER_ENTRY_POINT_GROUP, slot)
 
+    def _build_assume_role(self, plan: AssumeRolePlan) -> AssumeRoleCredentialsResolver:
         return AssumeRoleCredentialsResolver(
-            source_resolver=source_resolver,
-            role_arn=role_arn,
-            role_session_name=config_file.get(profile_name, _ROLE_SESSION_NAME),
-            external_id=config_file.get(profile_name, _EXTERNAL_ID),
-            duration_seconds=self._parse_duration_seconds(profile_name),
+            source_resolver=self._build_source(plan.source),
+            role_arn=plan.role_arn,
+            role_session_name=plan.role_session_name,
+            external_id=plan.external_id,
+            duration_seconds=plan.duration_seconds,
             region=self._region,
             http_client=self._http_client,
         )
 
-    async def _create_resolver_from_source_profile(
-        self,
-        source_profile_name: str,
-        visited: tuple[str, ...],
+    def _build_source(
+        self, source: StaticSource | CredentialSource | AssumeRolePlan
     ) -> AWSCredentialsResolver:
-        config_file = self._config_file
-        is_direct_self_reference = (
-            len(visited) > 0 and source_profile_name == visited[-1]
-        )
-        if source_profile_name in visited and not is_direct_self_reference:
-            path = " -> ".join((*visited, source_profile_name))
-            raise AssumeRoleConfigurationError(
-                f"Circular source_profile reference: {path}."
-            )
+        match source:
+            case StaticSource(identity=identity):
+                return StaticCredentialsResolver(identity)
+            case CredentialSource():
+                provider = require_provider(self._find_provider(source.slot), source)
+                setup = ChainSetup(
+                    region_override=self._region, http_client=self._http_client
+                )
+                setup.set_current_provider(provider)
+                provider.setup(AWSCredentialsIdentity, setup)
+                return first_resolver(setup.resolvers, source)
+            case AssumeRolePlan():
+                return self._build_assume_role(source)
 
-        if config_file.get_profile(source_profile_name) is None:
-            raise AssumeRoleConfigurationError(
-                f"Source profile '{source_profile_name}' does not exist."
-            )
 
-        if any(
-            config_file.get(source_profile_name, key) is not None
-            for key in (_ACCESS_KEY_ID, _SECRET_ACCESS_KEY, _SESSION_TOKEN)
-        ):
-            return self._create_static_resolver(source_profile_name)
+class WebIdentityCredentialsResolver(
+    IdentityResolver[AWSCredentialsIdentity, AWSIdentityProperties]
+):
+    """Resolves credentials with an STS AssumeRoleWithWebIdentity call.
 
-        if is_direct_self_reference:
-            raise AssumeRoleConfigurationError(
-                f"Self-referencing profile '{source_profile_name}' must contain "
-                "complete static credentials."
-            )
+    The OIDC token is read from ``web_identity_token_file`` each time the credentials
+    are refreshed, so a token that is rotated on disk is picked up.
 
-        if config_file.get(source_profile_name, _ROLE_ARN) is not None:
-            return await self._create_assume_role_resolver(
-                profile_name=source_profile_name,
-                visited=(*visited, source_profile_name),
-            )
+    :param role_arn: The ARN of the role to assume.
+    :param web_identity_token_file: The path of the file that contains the OIDC
+        token. A relative path is relative to the process's working directory.
+    :param role_session_name: The name of the role session. When it isn't set, a
+        name generated once per process is used.
+    :param region: The region of the STS endpoint to call. When it isn't set, it's
+        taken from ``AWS_REGION`` or ``AWS_DEFAULT_REGION``, then ``us-east-1``.
+    :param http_client: The HTTP client to call STS with.
+    """
 
-        raise AssumeRoleConfigurationError(
-            f"Source profile '{source_profile_name}' has no supported credential source."
-        )
-
-    def _create_static_resolver(
+    def __init__(
         self,
-        profile_name: str,
-    ) -> AWSCredentialsResolver:
-        config_file = self._config_file
-        access_key_id = config_file.get(profile_name, _ACCESS_KEY_ID)
-        secret_access_key = config_file.get(profile_name, _SECRET_ACCESS_KEY)
-        if access_key_id is None or secret_access_key is None:
-            raise AssumeRoleConfigurationError(
-                f"Profile '{profile_name}' contains partial credentials."
-            )
+        *,
+        role_arn: str,
+        web_identity_token_file: str | os.PathLike[str],
+        role_session_name: str | None = None,
+        region: str | None = None,
+        http_client: HTTPClient | None = None,
+    ) -> None:
+        self._role_arn = role_arn
+        self._web_identity_token_file = Path(web_identity_token_file)
+        self._role_session_name = role_session_name or DEFAULT_ROLE_SESSION_NAME
+        self._region = region or resolve_sts_region()
+        self._http_client = http_client
+        self._credentials: AWSCredentialsIdentity | None = None
+        self._client: STSClient | None = None
+        self._refresh_lock = threading.Lock()
+        # Wait between attempts the same way the SDK's standard retry strategy does.
+        self._backoff = StandardRetryStrategy().backoff_strategy
 
-        return StaticCredentialsResolver(
-            AWSCredentialsIdentity(
-                access_key_id=access_key_id,
-                secret_access_key=secret_access_key,
-                session_token=config_file.get(profile_name, _SESSION_TOKEN),
-                account_id=config_file.get(profile_name, _ACCOUNT_ID),
+    def get_identity(
+        self,
+        *,
+        properties: AWSIdentityProperties,
+    ) -> AWSCredentialsIdentity:
+        """Return cached credentials if valid, otherwise call STS for new ones."""
+        # Read the cache once: invalidate() can clear it from another thread.
+        credentials = self._credentials
+        if credentials is not None and not credentials.is_expired:
+            return credentials
+
+        with self._refresh_lock:
+            if self._credentials is not None and not self._credentials.is_expired:
+                return self._credentials
+            self._credentials = self._assume_role_with_web_identity()
+            return self._credentials
+
+    def invalidate(self) -> None:
+        """Discard the cached credentials so the next call fetches new ones."""
+        with self._refresh_lock:
+            self._credentials = None
+
+    def _assume_role_with_web_identity(self) -> AWSCredentialsIdentity:
+        from aws_sdk_sts.client import STSClient
+        from aws_sdk_sts.config import STSConfig
+
+        overrides: AwsConfigOverrides = {
+            "region": self._region,
+            "aws_credentials_identity_resolver": UnusedCredentialsResolver(),
+        }
+        # The call must be unsigned. The generated STS auth resolver doesn't
+        # recognize the operation, so it would otherwise be signed.
+        auth_scheme_resolver = NoAuthResolver()
+        if self._client is None and self._http_client is not None:
+            # CAUTION: never closed, since closing it would close the caller's transport.
+            overrides["transport"] = self._http_client
+            self._client = STSClient(
+                config=STSConfig.resolve(
+                    **overrides, auth_scheme_resolver=auth_scheme_resolver
+                )
+            )
+        if self._client is not None:
+            return self._call(self._client)
+        with STSClient(
+            config=STSConfig.resolve(
+                **overrides, auth_scheme_resolver=auth_scheme_resolver
+            )
+        ) as client:
+            return self._call(client)
+
+    def _call(self, client: STSClient) -> AWSCredentialsIdentity:
+        return run_program(
+            fetch_web_identity_credentials(
+                read_token=read_token,
+                call_sts=client.assume_role_with_web_identity,
+                sleep=time.sleep,
+                backoff=self._backoff,
+                web_identity_token_file=self._web_identity_token_file,
+                role_arn=self._role_arn,
+                role_session_name=self._role_session_name,
             )
         )
-
-    async def _create_resolver_from_credential_source(
-        self,
-        credential_source: str,
-        region: str,
-    ) -> AWSCredentialsResolver:
-        slot = _CREDENTIAL_SOURCE_SLOTS.get(credential_source)
-        if slot is None:
-            raise AssumeRoleConfigurationError(
-                f"Unsupported 'credential_source': '{credential_source}'."
-            )
-
-        provider = self._find_provider(slot)
-        if provider is None:
-            raise AssumeRoleConfigurationError(
-                f"No provider is installed for credential source '{credential_source}'. Install '{slot.module_suggestion}'."
-            )
-
-        setup = ChainSetup(
-            region_override=region,
-            http_client=self._http_client,
-        )
-        setup.set_current_provider(provider)
-        await provider.setup(AWSCredentialsIdentity, setup)
-        if not setup.resolvers:
-            raise AssumeRoleConfigurationError(
-                f"'{credential_source}' credential source is not configured."
-            )
-        return cast(AWSCredentialsResolver, setup.resolvers[0])
-
-    def _find_provider(
-        self,
-        slot: StandardProvider,
-    ) -> ChainIdentityProvider | None:
-        for entry_point in metadata.entry_points(
-            group=_CHAIN_PROVIDER_ENTRY_POINT_GROUP
-        ):
-            if entry_point.name != slot.canonical_name:
-                continue
-            provider_factory = cast(
-                Callable[[], ChainIdentityProvider],
-                entry_point.load(),
-            )
-            return provider_factory()
-        return None
-
-    def _parse_duration_seconds(self, profile_name: str) -> int | None:
-        duration_seconds = self._config_file.get(profile_name, _DURATION_SECONDS)
-        if duration_seconds is None:
-            return None
-        try:
-            return int(duration_seconds)
-        except ValueError:
-            return None

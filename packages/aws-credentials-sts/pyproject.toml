@@ -13,24 +13,25 @@ classifiers = [
   "Development Status :: 2 - Pre-Alpha",
   "Intended Audience :: Developers",
   "Intended Audience :: System Administrators",
-  "Natural Language :: English",
   "License :: OSI Approved :: Apache Software License",
+  "Natural Language :: English",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
-  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: 3.15",
   "Programming Language :: Python :: Free Threading :: 2 - Beta",
+  "Programming Language :: Python :: Implementation :: CPython",
   "Topic :: Software Development :: Libraries",
 ]
 dependencies = [
   "aws-sdk-sts~=0.12.0",
-  "smithy-aws-core~=0.12.0",
-  "smithy-core~=0.9.0",
-  "smithy-http~=0.6.0",
+  "smithy-aws-core~=0.13.0",
+  "smithy-core~=0.10.0",
+  "smithy-http~=0.7.0",
 ]
 
 [project.urls]
@@ -39,6 +40,25 @@ dependencies = [
 
 [project.entry-points."smithy_aws_core.identity.chain_providers"]
 ProfileAssumeRole = "aws_credentials_sts.providers:ProfileAssumeRoleProvider"
+ProfileWebIdentity = "aws_credentials_sts.providers:ProfileWebIdentityProvider"
+WebIdentityTokenEnv = "aws_credentials_sts.providers:WebIdentityTokenEnvProvider"
+
+[project.entry-points."smithy_aws_core.aio.identity.chain_providers"]
+ProfileAssumeRole = "aws_credentials_sts.aio.providers:AsyncProfileAssumeRoleProvider"
+ProfileWebIdentity = "aws_credentials_sts.aio.providers:AsyncProfileWebIdentityProvider"
+WebIdentityTokenEnv = "aws_credentials_sts.aio.providers:AsyncWebIdentityTokenEnvProvider"
+
+[dependency-groups]
+test = [
+  "pytest>=9.0.1,<10.0.0",
+  "pytest-asyncio>=1.3.0,<1.4.0",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.uv.sources]
+aws-sdk-sts = { path = "../../clients/aws-sdk-sts", editable = true }
 
 [build-system]
 requires = ["hatchling"]

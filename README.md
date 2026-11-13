@@ -9,6 +9,8 @@
 >
 > **For production deployments, use [Boto3](https://github.com/boto/boto3)**: the established, generally available AWS SDK for Python with full coverage of all AWS services.
 
+[API Reference](https://docs.aws.amazon.com/sdk-for-python/v4/reference/) | [Developer Guide](https://docs.aws.amazon.com/sdk-for-python/v4/guide/welcome.html)
+
 This repository contains the next-generation AWS SDK for Python v4, rebuilt from
 the ground up with an async-first, modular architecture. These new clients allow
 you to interact with select AWS services using Python's native `async`/`await`
@@ -102,7 +104,7 @@ to verify your setup:
 ```python
 import asyncio
 
-from aws_sdk_sts.client import AsyncSTSClient
+from aws_sdk_sts.aio.client import AsyncSTSClient
 from aws_sdk_sts.models import GetCallerIdentityInput
 
 
@@ -128,8 +130,8 @@ python -m pip install "aws-sdk-bedrock-runtime[awscrt]"
 ```
 
 ```python
-from aws_sdk_bedrock_runtime.client import AsyncBedrockRuntimeClient
-from aws_sdk_bedrock_runtime.config import AsyncBedrockRuntimeConfig
+from aws_sdk_bedrock_runtime.aio.client import AsyncBedrockRuntimeClient
+from aws_sdk_bedrock_runtime.aio.config import AsyncBedrockRuntimeConfig
 from smithy_http.aio.crt import AWSCRTHTTPClient
 
 

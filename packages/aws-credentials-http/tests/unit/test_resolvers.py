@@ -4,7 +4,7 @@ import json
 import os
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from unittest.mock import AsyncMock, patch
+from unittest.mock import Mock, patch
 
 import pytest
 from aws_credentials_http import ContainerCredentialsResolver
@@ -20,11 +20,11 @@ DEFAULT_RESPONSE_DATA = {
 ISO8601 = "%Y-%m-%dT%H:%M:%SZ"
 
 
-def mock_http_client_response(status: int, body: bytes) -> AsyncMock:
-    http_client = AsyncMock()
-    response = AsyncMock()
+def mock_http_client_response(status: int, body: bytes) -> Mock:
+    http_client = Mock()
+    response = Mock()
     response.status = status
-    response.consume_body_async.return_value = body
+    response.body = body
     http_client.send.return_value = response
     return http_client
 
@@ -35,7 +35,7 @@ def _assert_expected_identity(identity: AWSCredentialsIdentity) -> None:
     assert identity.session_token == DEFAULT_RESPONSE_DATA["Token"]
 
 
-async def test_resolver_env_relative() -> None:
+def test_resolver_env_relative() -> None:
     response_body = json.dumps(DEFAULT_RESPONSE_DATA)
     http_client = mock_http_client_response(200, response_body.encode())
 
@@ -43,7 +43,7 @@ async def test_resolver_env_relative() -> None:
         os.environ, {ContainerCredentialsResolver.ENV_VAR: "/test"}, clear=True
     ):
         resolver = ContainerCredentialsResolver(http_client)
-        identity = await resolver.get_identity(properties={})
+        identity = resolver.get_identity(properties={})
 
     expected_url = URI(
         scheme="http",
@@ -55,7 +55,7 @@ async def test_resolver_env_relative() -> None:
     _assert_expected_identity(identity)
 
 
-async def test_resolver_env_full() -> None:
+def test_resolver_env_full() -> None:
     response_body = json.dumps(DEFAULT_RESPONSE_DATA)
     http_client = mock_http_client_response(200, response_body.encode())
 
@@ -65,7 +65,7 @@ async def test_resolver_env_full() -> None:
         clear=True,
     ):
         resolver = ContainerCredentialsResolver(http_client)
-        identity = await resolver.get_identity(properties={})
+        identity = resolver.get_identity(properties={})
 
     expected_url = URI(
         scheme="http",
@@ -78,7 +78,7 @@ async def test_resolver_env_full() -> None:
     _assert_expected_identity(identity)
 
 
-async def test_resolver_env_full_with_query() -> None:
+def test_resolver_env_full_with_query() -> None:
     response_body = json.dumps(DEFAULT_RESPONSE_DATA)
     http_client = mock_http_client_response(200, response_body.encode())
 
@@ -92,7 +92,7 @@ async def test_resolver_env_full_with_query() -> None:
         clear=True,
     ):
         resolver = ContainerCredentialsResolver(http_client)
-        identity = await resolver.get_identity(properties={})
+        identity = resolver.get_identity(properties={})
 
     expected_url = URI(
         scheme="http",
@@ -106,7 +106,7 @@ async def test_resolver_env_full_with_query() -> None:
     _assert_expected_identity(identity)
 
 
-async def test_resolver_env_token() -> None:
+def test_resolver_env_token() -> None:
     response_body = json.dumps(DEFAULT_RESPONSE_DATA)
     http_client = mock_http_client_response(200, response_body.encode())
 
@@ -119,7 +119,7 @@ async def test_resolver_env_token() -> None:
         clear=True,
     ):
         resolver = ContainerCredentialsResolver(http_client)
-        identity = await resolver.get_identity(properties={})
+        identity = resolver.get_identity(properties={})
 
     expected_url = URI(
         scheme="http",
@@ -135,7 +135,7 @@ async def test_resolver_env_token() -> None:
     _assert_expected_identity(identity)
 
 
-async def test_resolver_env_token_file(tmp_path: Path) -> None:
+def test_resolver_env_token_file(tmp_path: Path) -> None:
     response_body = json.dumps(DEFAULT_RESPONSE_DATA)
     http_client = mock_http_client_response(200, response_body.encode())
     token_file = tmp_path / "token_file"
@@ -150,7 +150,7 @@ async def test_resolver_env_token_file(tmp_path: Path) -> None:
         clear=True,
     ):
         resolver = ContainerCredentialsResolver(http_client)
-        identity = await resolver.get_identity(properties={})
+        identity = resolver.get_identity(properties={})
 
     expected_url = URI(
         scheme="http",
@@ -166,7 +166,7 @@ async def test_resolver_env_token_file(tmp_path: Path) -> None:
     _assert_expected_identity(identity)
 
 
-async def test_resolver_env_token_file_invalid_bytes(tmp_path: Path) -> None:
+def test_resolver_env_token_file_invalid_bytes(tmp_path: Path) -> None:
     response_body = json.dumps(DEFAULT_RESPONSE_DATA)
     http_client = mock_http_client_response(200, response_body.encode())
     token_file = tmp_path / "token_file"
@@ -184,10 +184,10 @@ async def test_resolver_env_token_file_invalid_bytes(tmp_path: Path) -> None:
         with pytest.raises(
             SmithyIdentityError, match="Unable to read valid utf-8 bytes from "
         ):
-            await resolver.get_identity(properties={})
+            resolver.get_identity(properties={})
 
 
-async def test_resolver_env_token_file_precedence(tmp_path: Path) -> None:
+def test_resolver_env_token_file_precedence(tmp_path: Path) -> None:
     response_body = json.dumps(DEFAULT_RESPONSE_DATA)
     http_client = mock_http_client_response(200, response_body.encode())
     token_file = tmp_path / "token_file"
@@ -203,7 +203,7 @@ async def test_resolver_env_token_file_precedence(tmp_path: Path) -> None:
         clear=True,
     ):
         resolver = ContainerCredentialsResolver(http_client)
-        identity = await resolver.get_identity(properties={})
+        identity = resolver.get_identity(properties={})
 
     expected_url = URI(
         scheme="http",
@@ -220,7 +220,7 @@ async def test_resolver_env_token_file_precedence(tmp_path: Path) -> None:
 
 
 @pytest.mark.parametrize("token", ["Bearer foo\r\nInjected: bar", "Bearer foo\nbar"])
-async def test_resolver_env_token_rejects_crlf(token: str) -> None:
+def test_resolver_env_token_rejects_crlf(token: str) -> None:
     response_body = json.dumps(DEFAULT_RESPONSE_DATA)
     http_client = mock_http_client_response(200, response_body.encode())
 
@@ -236,12 +236,12 @@ async def test_resolver_env_token_rejects_crlf(token: str) -> None:
         with pytest.raises(
             SmithyIdentityError, match="Auth token value is not a legal header value"
         ):
-            await resolver.get_identity(properties={})
+            resolver.get_identity(properties={})
 
     http_client.send.assert_not_called()
 
 
-async def test_resolver_env_token_file_rejects_crlf(tmp_path: Path) -> None:
+def test_resolver_env_token_file_rejects_crlf(tmp_path: Path) -> None:
     response_body = json.dumps(DEFAULT_RESPONSE_DATA)
     http_client = mock_http_client_response(200, response_body.encode())
     token_file = tmp_path / "token_file"
@@ -259,12 +259,12 @@ async def test_resolver_env_token_file_rejects_crlf(tmp_path: Path) -> None:
         with pytest.raises(
             SmithyIdentityError, match="Auth token value is not a legal header value"
         ):
-            await resolver.get_identity(properties={})
+            resolver.get_identity(properties={})
 
     http_client.send.assert_not_called()
 
 
-async def test_resolver_valid_credentials_reused() -> None:
+def test_resolver_valid_credentials_reused() -> None:
     response_data = dict(DEFAULT_RESPONSE_DATA)
     expiration = datetime.now(UTC) + timedelta(minutes=10)
     response_data["Expiration"] = expiration.strftime(ISO8601)
@@ -274,14 +274,14 @@ async def test_resolver_valid_credentials_reused() -> None:
         os.environ, {ContainerCredentialsResolver.ENV_VAR: "/test"}, clear=True
     ):
         resolver = ContainerCredentialsResolver(http_client)
-        identity_one = await resolver.get_identity(properties={})
-        identity_two = await resolver.get_identity(properties={})
+        identity_one = resolver.get_identity(properties={})
+        identity_two = resolver.get_identity(properties={})
 
     _assert_expected_identity(identity_one)
     assert identity_one is identity_two
 
 
-async def test_resolver_expired_credentials_refreshed() -> None:
+def test_resolver_expired_credentials_refreshed() -> None:
     response_data = dict(DEFAULT_RESPONSE_DATA)
     expiration = datetime.now(UTC) - timedelta(minutes=10)
     response_data["Expiration"] = expiration.strftime(ISO8601)
@@ -291,8 +291,8 @@ async def test_resolver_expired_credentials_refreshed() -> None:
         os.environ, {ContainerCredentialsResolver.ENV_VAR: "/test"}, clear=True
     ):
         resolver = ContainerCredentialsResolver(http_client)
-        identity_one = await resolver.get_identity(properties={})
-        identity_two = await resolver.get_identity(properties={})
+        identity_one = resolver.get_identity(properties={})
+        identity_two = resolver.get_identity(properties={})
 
     _assert_expected_identity(identity_one)
     assert identity_one.access_key_id == identity_two.access_key_id
@@ -301,11 +301,28 @@ async def test_resolver_expired_credentials_refreshed() -> None:
     assert identity_one is not identity_two
 
 
-async def test_resolver_missing_env() -> None:
+def test_resolver_missing_env() -> None:
     response_body = json.dumps(DEFAULT_RESPONSE_DATA)
     http_client = mock_http_client_response(200, response_body.encode())
 
     with patch.dict(os.environ, {}, clear=True):
         resolver = ContainerCredentialsResolver(http_client)
         with pytest.raises(SmithyIdentityError):
-            await resolver.get_identity(properties={})
+            resolver.get_identity(properties={})
+
+
+def test_resolver_closes_default_http_client() -> None:
+    http_client = mock_http_client_response(
+        200, json.dumps(DEFAULT_RESPONSE_DATA).encode()
+    )
+    with (
+        patch.dict(
+            os.environ, {ContainerCredentialsResolver.ENV_VAR: "/test"}, clear=True
+        ),
+        patch("aws_credentials_http.resolvers.Urllib3HTTPClient") as default_client,
+    ):
+        default_client.return_value.__enter__.return_value = http_client
+        identity = ContainerCredentialsResolver().get_identity(properties={})
+
+    _assert_expected_identity(identity)
+    default_client.return_value.__exit__.assert_called_once()

@@ -3,10 +3,10 @@
 from smithy_aws_core.interceptors.user_agent import UserAgentInterceptor
 
 from . import __version__
-from .config import AsyncSigninConfig
+from .config import SigninConfig
 
 
-def aws_user_agent_plugin(config: AsyncSigninConfig):
+def aws_user_agent_plugin(config: SigninConfig):
     config.interceptors.append(
         UserAgentInterceptor(
             ua_suffix=config.user_agent_extra,
